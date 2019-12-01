@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "tahadoapp"
+  },
+  "targets": {
+    "tahadoapp": {
+      "hosting": {
+        "oracle": [
+          "gcmdataexportpoc"
+        ]
+      }
+    }
+  }
+}

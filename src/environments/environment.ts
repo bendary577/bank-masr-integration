@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  apiHost: 'https://mte03-ohim-prod.hospitality.oracleindustry.com/Webclient',
   production: false
 };
 

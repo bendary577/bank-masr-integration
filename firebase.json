@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "target": "oracle",
+    "public": "dist/oracle-hospitality-frontend",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

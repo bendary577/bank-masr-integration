@@ -1,0 +1,41 @@
+<div class="main">
+    <ngx-datatable *ngIf="!loading" class="material" [rows]="dataSource" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+        [rowHeight]="50" [scrollbarV]="true" [sorts]="[{prop: 'Vendor', dir: 'desc'}]">
+        <ngx-datatable-column name="Vendor">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.Vendor}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="VendorAccount">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.VendorAccount}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Phone">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.Phone}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Email">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.Email}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="OrderVia">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.OrderVia}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="ChangedBy">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.ChangedBy}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="At">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.At}}
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+    <ngx-spinner></ngx-spinner>
+</div>
