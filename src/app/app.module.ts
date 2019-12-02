@@ -12,12 +12,14 @@ import { AngularMaterialModule } from './angular-material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { AddVendorComponent } from './components/add-vendor/add-vendor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    AddVendorComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +32,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     BrowserAnimationsModule
   ],
   providers: [CookieService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AddVendorComponent]
 })
 export class AppModule { }

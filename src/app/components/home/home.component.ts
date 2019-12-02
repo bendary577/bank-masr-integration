@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { VednorService } from 'src/app/services/vendor/vendor.service';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { AddVendorComponent } from '../add-vendor/add-vendor.component';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +10,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  displayedColumns: string[] = ['Vendor', 'VendorAccount', 'Phone', 'Email', 'OrderVia', 'ChangedBy', 'At'];
   loading = true;
-  @Input() dataSource = [
+  dataSource = [
     { Vendor: '	*******Purchasing Abu Dhabi********', VendorAccount: '', Phone: '', Email: '', OrderVia: 'Printout', ChangedBy: 'AMR.MOHAMAD', At: '11/19/2019' },
     { Vendor: '*******Purchasing Dubaii********', VendorAccount: '', Phone: '', Email: '', OrderVia: 'Printout', ChangedBy: 'AMR.MOHAMAD', At: '11/19/2019' },
     { Vendor: 'A to Z World Hospitality Supplies LLC', VendorAccount: '13956', Phone: '', Email: '', OrderVia: 'Printout', ChangedBy: 'MALAM', At: '5/26/2019' },
@@ -111,15 +113,49 @@ export class HomeComponent implements OnInit {
     { Vendor: 'Al Gurg Unilever LLC', VendorAccount: '13799', Phone: '', Email: '', OrderVia: 'Printout', ChangedBy: 'KAMRAN.ALI', At: '5/29/2019' },
     { Vendor: 'AL HASEEB COMPUTER NETWORKS', VendorAccount: '13885', Phone: '', Email: '', OrderVia: 'Printout', ChangedBy: 'KAMRAN.ALI', At: '4/10/2019' },
   ];
-  constructor(private spinner: NgxSpinnerService) {
-    this.spinner.show();
+  constructor(private spinner: NgxSpinnerService, private vendorService: VednorService,
+              public dialog: MatDialog, public snackBar: MatSnackBar) {
+    this.getData();
   }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.loading = false;
+
+  }
+
+  getData() {
+    this.spinner.show();
+    this.vendorService.getData().then((res: any) => {
+      console.log(res.data);
+      this.dataSource = res.data;
       this.spinner.hide();
-    }, 4000);
+      this.loading = false;
+    }).catch(err => {
+      console.error(err);
+      this.spinner.hide();
+      this.loading = false;
+    });
+  }
+
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddVendorComponent, {
+      width: '550px'
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if (res && res.id && res.name) {
+        this.spinner.show();
+        this.vendorService.addVendor(res).then(result => {
+          this.getData();
+        }).catch(err => {
+          this.spinner.hide();
+          this.snackBar.open('An Error has occurred.', null, {
+            duration: 200000,
+            horizontalPosition: 'right',
+          });
+        });
+      }
+    });
   }
 
 }

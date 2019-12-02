@@ -1,39 +1,57 @@
+<div class="header">
+    <button mat-flat-button (click)="openDialog()">Add vendor</button>
+</div>
 <div class="main">
-    <ngx-datatable *ngIf="!loading" class="material" [rows]="dataSource" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
-        [rowHeight]="50" [scrollbarV]="true" [sorts]="[{prop: 'Vendor', dir: 'desc'}]">
+    <ngx-datatable *ngIf="!loading" class="material" [rows]="dataSource" [columnMode]="'force'" [headerHeight]="50"
+        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [sorts]="[{prop: 'Vendor', dir: 'asc'}]">
         <ngx-datatable-column name="Vendor">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.Vendor}}
+                {{row.vendor}}
             </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="VendorAccount">
+        <ngx-datatable-column name="Customer Number">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.VendorAccount}}
+                {{row.customer_number}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Currency">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.currency}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Vendor Account">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.vendor_account}}
             </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="Phone">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.Phone}}
+                {{row.phone}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Fax">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.fax}}
             </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="Email">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.Email}}
+                {{row.email}}
             </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="OrderVia">
+        <ngx-datatable-column name="Order via">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.OrderVia}}
+                {{row.order_via}}
             </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="ChangedBy">
+        <ngx-datatable-column name="Changed by">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.ChangedBy}}
+                {{row.changed_by}}
             </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="At">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.At}}
+                {{row.at}}
             </ng-template>
         </ngx-datatable-column>
     </ngx-datatable>

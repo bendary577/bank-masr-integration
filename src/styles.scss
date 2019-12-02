@@ -13,3 +13,13 @@ body {
 @import "../node_modules/@swimlane/ngx-datatable/assets/app.css";
 @import "../node_modules/@swimlane/ngx-datatable/themes/material.css";
 @import "../node_modules/@swimlane/ngx-datatable/assets/icons.css";
+
+.mat-dialog-container {
+  background: white;
+  color: #424242;
+}
+
+.mat-snack-bar-container {
+  background: #c62828;
+  color: white;
+}

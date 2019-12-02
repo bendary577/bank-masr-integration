@@ -10,7 +10,10 @@ export class VednorService {
   constructor(private http: HttpClient) { }
 
   getData() {
-    const body = {};
-    this.http.post(Constants.VENDOR_URL, body);
+    return this.http.get(Constants.VENDOR_URL).toPromise();
+  }
+
+  addVendor(body) {
+    return this.http.post(Constants.ADD_VENDOR_URL, body).toPromise();
   }
 }

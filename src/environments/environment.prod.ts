@@ -1,4 +1,4 @@
 export const environment = {
-  apiHost: 'https://mte03-ohim-prod.hospitality.oracleindustry.com/Webclient',
+  apiHost: 'https://oracle-hospitality-prod.herokuapp.com',
   production: true
 };

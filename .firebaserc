@@ -6,7 +6,7 @@
     "tahadoapp": {
       "hosting": {
         "oracle": [
-          "gcmdataexportpoc"
+          "gcmdata-exportpoc"
         ]
       }
     }

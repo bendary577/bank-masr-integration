@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>New vendor</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form" class="my-form">
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Name" formControlName="name">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="ID" formControlName="id">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Taxes" value="Standard UAE" disabled>
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Vendor Group" value="GCS" disabled>
+            </mat-form-field>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button cdkFocusInitial (click)="onSaveClick()">Save</button>
+</div>
