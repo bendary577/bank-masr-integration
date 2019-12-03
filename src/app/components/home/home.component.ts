@@ -149,8 +149,8 @@ export class HomeComponent implements OnInit {
           this.getData();
         }).catch(err => {
           this.spinner.hide();
-          this.snackBar.open('An Error has occurred.', null, {
-            duration: 200000,
+          this.snackBar.open('An error has occurred.', null, {
+            duration: 2000,
             horizontalPosition: 'right',
           });
         });
