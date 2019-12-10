@@ -10,7 +10,10 @@ export class Constants {
     static USER_TOKEN = 'usertoken';
     static VENDOR_URL = environment.apiHost + '/getVendors';
     static ADD_VENDOR_URL = environment.apiHost + '/addVendor';
+    static GET_SUPPLIERS_URL = environment.apiHost + '/getSuppliers';
     static LOGIN_PAGE = 'login';
     static HOME_PAGE = 'home';
+    static SUPPLIERS_PAGE = 'suppliers';
+    static TABS_PAGE = 'tabs';
 
 }

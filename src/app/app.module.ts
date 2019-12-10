@@ -13,13 +13,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AddVendorComponent } from './components/add-vendor/add-vendor.component';
+import { TabsComponent } from './components/tabs/tabs.component';
+import { SuppliersComponent } from './components/suppliers/suppliers.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    AddVendorComponent
+    AddVendorComponent,
+    TabsComponent,
+    SuppliersComponent
   ],
   imports: [
     BrowserModule,

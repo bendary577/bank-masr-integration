@@ -20,6 +20,16 @@ body {
 }
 
 .mat-snack-bar-container {
-  background: #c62828;
+  background: #1976d3;
   color: white;
+}
+
+.mat-tab-label,
+.mat-tab-link {
+  color: #1976d3;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: #1976d3;
 }

@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.router.navigate([Constants.HOME_PAGE]);
+    this.router.navigate([Constants.TABS_PAGE]);
   }
 
 

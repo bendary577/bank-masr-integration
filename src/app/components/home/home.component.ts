@@ -114,18 +114,18 @@ export class HomeComponent implements OnInit {
     { Vendor: 'AL HASEEB COMPUTER NETWORKS', VendorAccount: '13885', Phone: '', Email: '', OrderVia: 'Printout', ChangedBy: 'KAMRAN.ALI', At: '4/10/2019' },
   ];
   constructor(private spinner: NgxSpinnerService, private vendorService: VednorService,
-              public dialog: MatDialog, public snackBar: MatSnackBar) {
-    this.getData();
+    public dialog: MatDialog, public snackBar: MatSnackBar) {
+
   }
 
   ngOnInit() {
-
+      this.getData();
   }
 
   getData() {
     this.spinner.show();
-    this.vendorService.getData().then((res: any) => {
-      console.log(res.data);
+    this.vendorService.getData().toPromise().then((res: any) => {
+      // console.log(res.data);
       this.dataSource = res.data;
       this.spinner.hide();
       this.loading = false;
