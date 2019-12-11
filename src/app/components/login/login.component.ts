@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Constants } from 'src/app/models/constants';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthService
+    private authenticationService: AuthService, public snackBar: MatSnackBar
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
@@ -46,6 +47,10 @@ export class LoginComponent implements OnInit {
 
     // stop here if form is invalid
     if (!this.isValid()) {
+      this.snackBar.open('Wrong Credentials.', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+      });
       return;
     }
 
