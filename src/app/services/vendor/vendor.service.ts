@@ -5,7 +5,8 @@ import { Cacheable } from 'ngx-cacheable';
 @Injectable({
   providedIn: 'root'
 })
-export class VednorService {
+export class VendorService {
+  vendorAccountIDS = [];
 
   constructor(private http: HttpClient) { }
 

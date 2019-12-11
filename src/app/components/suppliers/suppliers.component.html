@@ -1,7 +1,8 @@
-
+<div class="header">
+</div>
 <div class="main">
     <ngx-datatable *ngIf="!loading" class="material" [rows]="dataSource" [columnMode]="'force'" [headerHeight]="50"
-        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [sorts]="[{prop: 'Supplier', dir: 'asc'}]">
+        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true" [sorts]="[{prop: 'Supplier', dir: 'asc'}]">
         <ngx-datatable-column name="Supplier">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.Supplier}}
@@ -10,6 +11,12 @@
         <ngx-datatable-column name="SupplierNumber">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.SupplierNumber}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Symphony" [minWidth]="200">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <button mat-flat-button *ngIf="row.exists" disabled="true" class="button-disabled">Supplier exists</button>
+                <button mat-flat-button *ngIf="!row.exists" [class.spinner]="row.loading" [disabled]="row.loading" (click)="submit(row)">Submit to Symphony</button>
             </ng-template>
         </ngx-datatable-column>
     </ngx-datatable>
