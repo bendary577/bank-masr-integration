@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -15,7 +14,18 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { AddVendorComponent } from './components/add-vendor/add-vendor.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { SuppliersComponent } from './components/suppliers/suppliers.component';
-
+import {
+  MatToolbarModule,
+  MatIconModule,
+  MatSidenavModule,
+  MatListModule,
+  MatButtonModule,
+  MatPaginatorModule
+} from '@angular/material';
+import {SidenavResponsive} from "./components/sidenav/sidenav-responsive";
+import {ConfigurationComponent} from "./components/setting/configuration/configuration.component";
+import {MatExpansionModule} from '@angular/material/expansion';
+import {UsersComponent} from "./components/setting/users/users.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +33,11 @@ import { SuppliersComponent } from './components/suppliers/suppliers.component';
     HomeComponent,
     AddVendorComponent,
     TabsComponent,
-    SuppliersComponent
+    SuppliersComponent,
+    SidenavResponsive,
+    ConfigurationComponent,
+    UsersComponent
+
   ],
   imports: [
     BrowserModule,
@@ -33,7 +47,14 @@ import { SuppliersComponent } from './components/suppliers/suppliers.component';
     NgxDatatableModule,
     NgxSpinnerModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule,
+    MatExpansionModule,
+    MatPaginatorModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

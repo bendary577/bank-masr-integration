@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      username: ['', Validators.required,Validators.email],
       password: ['', Validators.required]
     });
 
@@ -61,7 +61,8 @@ export class LoginComponent implements OnInit {
   isValid() {
     const username = this.loginForm.controls.username.value as string;
     const password = this.loginForm.controls.password.value as string;
-
+    const domainName= username.split("@");
+    if(domainName.length>0)
     if (username.trim() === 'Admin' && password.trim() === 'Entact123') {
       return true;
     } else {

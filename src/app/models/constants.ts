@@ -13,7 +13,11 @@ export class Constants {
     static GET_SUPPLIERS_URL = environment.apiHost + '/getSuppliers';
     static LOGIN_PAGE = 'login';
     static HOME_PAGE = 'home';
+    static SIDE_NAV = 'sidenav';
     static SUPPLIERS_PAGE = 'suppliers';
     static TABS_PAGE = 'tabs';
+    static SETTING = 'setting';
+    static ACCOUNT_CONFIGURATION = 'configuration';
+    static USERS_CONFIGURATION = 'users';
 
 }
