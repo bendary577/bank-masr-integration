@@ -14,6 +14,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { AddVendorComponent } from './components/add-vendor/add-vendor.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { SuppliersComponent } from './components/suppliers/suppliers.component';
+
+
 import {
   MatToolbarModule,
   MatIconModule,
@@ -21,6 +23,7 @@ import {
   MatListModule,
   MatButtonModule,
   MatPaginatorModule
+
 } from '@angular/material';
 import {SidenavResponsive} from "./components/sidenav/sidenav-responsive";
 import {ConfigurationComponent} from "./components/setting/configuration/configuration.component";
@@ -31,6 +34,7 @@ import { ApprovedInvoiceComponent } from './components/approved-invoice/approved
 import { InvoiceService } from './services/invoice/invoice.service';
 import { SyncJobComponent } from './components/sync-job/sync-job.component';
 import {HttpModule} from "@angular/http";
+import { AlertsService } from 'angular-alert-module';
 
 @NgModule({
   declarations: [
@@ -66,7 +70,7 @@ import {HttpModule} from "@angular/http";
     MatExpansionModule,
     MatPaginatorModule
   ],
-  providers: [CookieService, AuthService, InvoiceService],
+  providers: [CookieService, AuthService, InvoiceService, AlertsService],
   bootstrap: [AppComponent],
   entryComponents: [AddVendorComponent]
 })

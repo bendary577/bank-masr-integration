@@ -3,6 +3,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { MatSnackBar } from '@angular/material';
 import { SupplierService } from 'src/app/services/supplier/supplier.service';
 import { VendorService } from 'src/app/services/vendor/vendor.service';
+import { AlertsService } from 'angular-alert-module';
+
 
 @Component({
   selector: 'app-suppliers',
@@ -11,19 +13,19 @@ import { VendorService } from 'src/app/services/vendor/vendor.service';
 })
 export class SuppliersComponent implements OnInit {
   loading = true;
+  success = null;
   dataSource = [];
   constructor(private spinner: NgxSpinnerService, private supplierService: SupplierService,
-    private vendorService: VendorService,
-    public snackBar: MatSnackBar,
-    private zone: NgZone) {
+    private vendorService: VendorService, private alerts: AlertsService,
+    public snackBar: MatSnackBar) {
 
   }
 
   ngOnInit() {
-    this.getData();
+    this.getSuppliersDB();
   }
 
-  getData() {
+  getSuppliersDB() {
     this.spinner.show();
     this.supplierService.getSuppliersDB().toPromise().then((res: any) => {
       // console.log(res.items);
@@ -46,26 +48,19 @@ export class SuppliersComponent implements OnInit {
     });
   }
 
-  submit(row) {
-    row.loading = true;
-    const supplierName = row.Supplier;
-    const supplierNumber = row.SupplierNumber;
-    const body = {
-      name: supplierName,
-      vendorAccount: supplierNumber
-    };
-    this.vendorService.addVendor(body).then(result => {
-      this.zone.run(_ => {
-        row.exists = true;
-        row.loading = false;
-      });
+  getSuppliersSyncJob() {
+    this.spinner.show();
+    this.supplierService.getSuppliers().toPromise().then((res: any) => {
+      this.success = res.success;
+      this.spinner.hide();
+      this.loading = false;
     }).catch(err => {
-      row.loading = false;
-      this.snackBar.open('An error has occurred.', null, {
-        duration: 2000,
-        horizontalPosition: 'right',
-      });
+      console.error(err);
+      this.spinner.hide();
+      this.loading = false;
     });
   }
+
+
 
 }

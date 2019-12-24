@@ -11,6 +11,7 @@ import { InvoiceService } from 'src/app/services/invoice/invoice.service';
 })
 export class ApprovedInvoiceComponent implements OnInit {
   loading = true;
+  success = null;
   approvedInvoices = [];
 
   constructor(private spinner: NgxSpinnerService, private invoiceService: InvoiceService,
@@ -27,6 +28,19 @@ export class ApprovedInvoiceComponent implements OnInit {
       console.log(res.data);
       this.approvedInvoices = res.data;
      
+      this.spinner.hide();
+      this.loading = false;
+    }).catch(err => {
+      console.error(err);
+      this.spinner.hide();
+      this.loading = false;
+    });
+  }
+
+  getApprovedInvoicesSyncJob() {
+    this.spinner.show();
+    this.invoiceService.getApprovedInvoices().toPromise().then((res: any) => {
+      this.success = res.success;
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {

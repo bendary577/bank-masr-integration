@@ -1,6 +1,15 @@
 
 <div class="header">
-    <button mat-flat-button (click)="addSuppliers()">Add Suppliers</button>
+    <div *ngIf="success" class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Success!</strong> Getting suppliers from Fusion to MyInventory Done.
+    </div>
+
+    <div *ngIf="!success" class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Danger!</strong> Getting suppliers from Fusion to MyInventory failed.
+          </div>
+    <button mat-flat-button (click)="getSuppliersSyncJob()">Get Suppliers</button>
 </div>
 <br>
 <div class="main">
@@ -11,9 +20,9 @@
                 {{row.supplier}}
             </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="SupplierNumber">
+        <ngx-datatable-column name="SupplierID">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.supplierNumber}}
+                {{row.supplierId}}
             </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="SupplierStatus">
@@ -23,16 +32,10 @@
         </ngx-datatable-column>
         <ngx-datatable-column name="SupplierNumber">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.creationDate}}
+                {{row.supplierNumber}}
             </ng-template>
         </ngx-datatable-column>
 
-        <!-- <ngx-datatable-column name="Symphony" [minWidth]="200">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                <button mat-flat-button *ngIf="row.exists" disabled="true" class="button-disabled">Supplier exists</button>
-                <button mat-flat-button *ngIf="!row.exists" [class.spinner]="row.loading" [disabled]="row.loading" (click)="submit(row)">Submit to Symphony</button>
-            </ng-template>
-        </ngx-datatable-column> -->
     </ngx-datatable>
     <ngx-spinner></ngx-spinner>
 </div>

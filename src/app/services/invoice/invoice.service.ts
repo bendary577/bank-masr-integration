@@ -13,4 +13,8 @@ export class InvoiceService {
   getApprovedInvoices() {
     return this.http.get(Constants.GET_APPROVED_INVOICES_URL);
   }
+
+  getApprovedInvoicesDB() {
+    return this.http.get(Constants.GET_APPROVED_INVOICES_DB_URL);
+  }
 }

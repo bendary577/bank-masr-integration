@@ -14,6 +14,7 @@ export class Constants {
     static LOGIN = environment.apiHost + '/login';
     static GET_SUPPLIERS_DB_URL = environment.apiHost + '/getSuppliersDB';
     static GET_APPROVED_INVOICES_URL = environment.apiHost + '/getApprovedInvoices';
+    static GET_APPROVED_INVOICES_DB_URL = environment.apiHost + '/getApprovedInvoicesDB';
     static LOGIN_PAGE = 'login';
     static HOME_PAGE = 'home';
     static SIDE_NAV = 'sidenav';
