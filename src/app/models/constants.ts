@@ -17,5 +17,6 @@ export class Constants {
     static HOME_PAGE = 'home';
     static SUPPLIERS_PAGE = 'suppliers';
     static TABS_PAGE = 'tabs';
+    static END_POINT = '/getSuppliers'
 
 }

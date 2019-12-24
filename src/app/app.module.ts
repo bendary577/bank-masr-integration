@@ -20,6 +20,7 @@ import { SuppliersComponent } from './components/suppliers/suppliers.component';
 import { AuthService } from './services/auth/auth.service';
 import { ApprovedInvoiceComponent } from './components/approved-invoice/approved-invoice.component';
 import { InvoiceService } from './services/invoice/invoice.service';
+import { SyncJobComponent } from './components/sync-job/sync-job.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { InvoiceService } from './services/invoice/invoice.service';
     AddVendorComponent,
     TabsComponent,
     SuppliersComponent,
-    ApprovedInvoiceComponent
+    ApprovedInvoiceComponent,
+    SyncJobComponent
   ],
   imports: [
     BrowserModule,
