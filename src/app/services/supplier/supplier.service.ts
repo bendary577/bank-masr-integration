@@ -13,4 +13,8 @@ export class SupplierService {
   getSuppliers() {
     return this.http.get(Constants.GET_SUPPLIERS_URL + '?limit=100');
   }
+
+  getSuppliersDB() {
+    return this.http.get(Constants.GET_SUPPLIERS_DB_URL);
+  }
 }

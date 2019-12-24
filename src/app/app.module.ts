@@ -19,7 +19,7 @@ import { TabsComponent } from './components/tabs/tabs.component';
 import { SuppliersComponent } from './components/suppliers/suppliers.component';
 import { AuthService } from './services/auth/auth.service';
 import { ApprovedInvoiceComponent } from './components/approved-invoice/approved-invoice.component';
-import { InvoicesService } from './services/invoices/invoices.service';
+import { InvoiceService } from './services/invoice/invoice.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,7 @@ import { InvoicesService } from './services/invoices/invoices.service';
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [CookieService, AuthService, InvoicesService],
+  providers: [CookieService, AuthService, InvoiceService],
   bootstrap: [AppComponent],
   entryComponents: [AddVendorComponent]
 })

@@ -25,7 +25,7 @@ export class SuppliersComponent implements OnInit {
 
   getData() {
     this.spinner.show();
-    this.supplierService.getSuppliers().toPromise().then((res: any) => {
+    this.supplierService.getSuppliersDB().toPromise().then((res: any) => {
       // console.log(res.items);
       this.dataSource = res.items;
       for (const element of this.dataSource) {
