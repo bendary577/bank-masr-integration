@@ -1,0 +1,55 @@
+<div class="header">
+</div>
+
+<div class="main">
+    <ngx-datatable *ngIf="!loading" class="material" [rows]="approvedInvoices" [columnMode]="'force'" [headerHeight]="50"
+        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'Vendor', dir: 'asc'}]">
+        <ngx-datatable-column name="Invoice No">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.invoice_no}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Vendor">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.vendor}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Cost Center">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.cost_center}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="status">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.status}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Invoice Dateone">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.invoice_date}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Net">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.net}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Gross">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.gross}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Created By">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.created_by}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Changed At">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.changed_at}}
+            </ng-template>
+        </ngx-datatable-column>
+    
+    </ngx-datatable>
+    <ngx-spinner></ngx-spinner>
+</div>
