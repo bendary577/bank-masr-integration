@@ -1,0 +1,54 @@
+
+<div class="main">
+
+  <mat-accordion multi>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Oracle
+        </mat-panel-title>
+        <mat-panel-description>
+
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+      <input matInput placeholder="User Name">
+    </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Password">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Company">
+      </mat-form-field>
+      <mat-action-row>
+        <button mat-button color="primary" >Update</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Fusion
+        </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-form-field>
+          <input matInput placeholder="User Name">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Password">
+        </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Company">
+      </mat-form-field>
+
+        <mat-action-row>
+          <button mat-button color="primary" >Update</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion >
+</div>

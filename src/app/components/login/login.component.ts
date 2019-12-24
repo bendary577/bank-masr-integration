@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup;
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthService, public snackBar: MatSnackBar
+    private authenticationService: AuthService,
+    public snackBar: MatSnackBar
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
@@ -31,7 +33,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required,Validators.email],
+      username: ['', Validators.required],
       password: ['', Validators.required]
     });
 
@@ -46,27 +48,51 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (!this.isValid()) {
-      this.snackBar.open('Wrong Credentials.', null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-      });
-      return;
-    }
+   this.isValid();
 
-    this.router.navigate([Constants.TABS_PAGE]);
+
+
+
+
   }
 
 
   isValid() {
     const username = this.loginForm.controls.username.value as string;
     const password = this.loginForm.controls.password.value as string;
-    const domainName= username.split("@");
-    if(domainName.length>0)
-    if (username.trim() === 'Admin' && password.trim() === 'Entact123') {
+    const domainName = username.split("@");
+    if (domainName.length == 2) {
+      this.authenticationService.login().toPromise().then((res: any) => {
+        console.log(res.items);
+        this.router.navigate([Constants.TABS_PAGE]);
+       return true
+      }).catch(err => {
+        if (username.trim() === 'Admin@test.com' && password.trim() === 'Entact123') {
+          this.router.navigate([Constants.TABS_PAGE]);
+          return true;
+
+        } else {
+          this.snackBar.open('Wrong Credentials.', null, {
+            duration: 2000,
+            horizontalPosition: 'center',
+          });
+        }
+
+        return;
+      });
+
+
+
+    }else{
+      this.snackBar.open('Wrong Credentials.', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+      });
+    }
+  /*  if (username.trim() === 'Admin@as' && password.trim() === 'Entact123') {
       return true;
     } else {
        return false;
-     }
+     }*/
   }
 }

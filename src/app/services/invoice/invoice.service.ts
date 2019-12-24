@@ -6,15 +6,11 @@ import { Cacheable } from 'ngx-cacheable';
 @Injectable({
   providedIn: 'root'
 })
-export class SupplierService {
+export class InvoiceService {
 
   constructor(private http: HttpClient) { }
   @Cacheable()
-  getSuppliers() {
-    return this.http.get(Constants.GET_SUPPLIERS_URL + '?limit=2');
-  }
-
-  getSuppliersDB() {
-    return this.http.get(Constants.GET_SUPPLIERS_DB_URL);
+  getApprovedInvoices() {
+    return this.http.get(Constants.GET_APPROVED_INVOICES_URL);
   }
 }

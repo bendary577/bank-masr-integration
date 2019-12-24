@@ -26,6 +26,12 @@ import {SidenavResponsive} from "./components/sidenav/sidenav-responsive";
 import {ConfigurationComponent} from "./components/setting/configuration/configuration.component";
 import {MatExpansionModule} from '@angular/material/expansion';
 import {UsersComponent} from "./components/setting/users/users.component";
+import { AuthService } from './services/auth/auth.service';
+import { ApprovedInvoiceComponent } from './components/approved-invoice/approved-invoice.component';
+import { InvoiceService } from './services/invoice/invoice.service';
+import { SyncJobComponent } from './components/sync-job/sync-job.component';
+import {HttpModule} from "@angular/http";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,13 +42,17 @@ import {UsersComponent} from "./components/setting/users/users.component";
     SuppliersComponent,
     SidenavResponsive,
     ConfigurationComponent,
-    UsersComponent
+    UsersComponent,
 
+    SuppliersComponent,
+    ApprovedInvoiceComponent,
+    SyncJobComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
+
     AngularMaterialModule,
     NgxDatatableModule,
     NgxSpinnerModule,
@@ -56,7 +66,7 @@ import {UsersComponent} from "./components/setting/users/users.component";
     MatExpansionModule,
     MatPaginatorModule
   ],
-  providers: [CookieService],
+  providers: [CookieService, AuthService, InvoiceService],
   bootstrap: [AppComponent],
   entryComponents: [AddVendorComponent]
 })

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Constants } from 'src/app/models/constants';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Headers } from '@angular/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from 'src/app/models/User';
 import { CookieService } from 'ngx-cookie-service';
@@ -9,10 +10,13 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root'
 })
 export class AuthService {
+  private BASE_URL = 'http://localhost:5000/auth';
+  private headers: Headers = new Headers({'Content-Type': 'application/json'});
+
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
-  constructor(private http: HttpClient, private cookie: CookieService) {
+  constructor( private httpClient: HttpClient, private cookie: CookieService,) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -49,10 +53,10 @@ export class AuthService {
   //   formData.append('dfPassword_p', 'Mic@8000');
   //   formData.append('hdPassword', 'Mic@8000');
   //   this.http.post(Constants.LOGIN_URL, formData, httpOptions).subscribe((response: any) => {
-
+  //
   //     console.log('response.headers.keys(); ', response.headers.keys());
   //     console.log('response.body ', response.body);
-
+  //
   //   }, error => {
   //     console.error('error', error);
   //     console.error('error.error', error.error);
@@ -60,8 +64,10 @@ export class AuthService {
   //     console.error(' this.cookieValue = this.cookieService.get', this.cookie.get('JSESSIONID'));
   //   });
   // }
-  login() {
+    login() {
 
+     return this.httpClient.get(Constants.LOGIN );
+   // return  true;
     // let casper = require('casper').create();
     // casper.start('http://casperjs.org/');
 
