@@ -1,13 +1,4 @@
 <div class="header">
-        <div *ngIf="success" class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>Success!</strong> Getting apprved invoices from MyInventory to Fusion Done.
-        </div>
-    
-        <div *ngIf="!success" class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>Danger!</strong> Getting apprved invoices from MyInventory to Fusion failed.
-        </div>
         <button mat-flat-button (click)="getApprovedInvoicesSyncJob()">Get Apprved Invoices</button>
 </div>
 <br>
@@ -16,7 +7,7 @@
         [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'vendor', dir: 'asc'}]">
         <ngx-datatable-column name="Invoice No">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.invoice_no}}
+                {{row.invoiceNo}}
             </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="Vendor">
@@ -26,7 +17,7 @@
         </ngx-datatable-column>
         <ngx-datatable-column name="Cost Center">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.cost_center}}
+                {{row.costCenter}}
             </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="status">
@@ -34,7 +25,7 @@
                 {{row.status}}
             </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Invoice Dateone">
+        <ngx-datatable-column name="Invoice Date">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.invoice_date}}
             </ng-template>
@@ -56,12 +47,7 @@
         </ngx-datatable-column>
         <ngx-datatable-column name="Created By">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.created_by}}
-            </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Changed At">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.changed_at}}
+                {{row.createdBy}}
             </ng-template>
         </ngx-datatable-column>
     

@@ -52,6 +52,20 @@ export class SuppliersComponent implements OnInit {
     this.spinner.show();
     this.supplierService.getSuppliers().toPromise().then((res: any) => {
       this.success = res.success;
+      this.getSuppliersDB();
+
+      if (this.success){
+        this.snackBar.open('Sync Suppliers Successfully', null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+        });
+      }
+      else{
+        this.snackBar.open('Sync Suppliers Failed', null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+        });
+      }
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {

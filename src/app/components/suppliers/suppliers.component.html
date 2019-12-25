@@ -1,14 +1,5 @@
 
 <div class="header">
-    <div *ngIf="success" class="alert alert-success alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>Success!</strong> Getting suppliers from Fusion to MyInventory Done.
-    </div>
-
-    <div *ngIf="!success" class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>Danger!</strong> Getting suppliers from Fusion to MyInventory failed.
-          </div>
     <button mat-flat-button (click)="getSuppliersSyncJob()">Get Suppliers</button>
 </div>
 <br>
