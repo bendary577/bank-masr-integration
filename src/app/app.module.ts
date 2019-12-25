@@ -22,7 +22,7 @@ import {
   MatSidenavModule,
   MatListModule,
   MatButtonModule,
-  MatPaginatorModule
+  MatPaginatorModule, MatDatepickerModule
 
 } from '@angular/material';
 import {SidenavResponsive} from "./components/sidenav/sidenav-responsive";
@@ -35,6 +35,7 @@ import { InvoiceService } from './services/invoice/invoice.service';
 import { SyncJobComponent } from './components/sync-job/sync-job.component';
 import {HttpModule} from "@angular/http";
 import { AlertsService } from 'angular-alert-module';
+import {SyncJobsconfigComponent} from "./components/setting/syncJob/syncJobsconfig.component";
 
 @NgModule({
   declarations: [
@@ -47,10 +48,11 @@ import { AlertsService } from 'angular-alert-module';
     SidenavResponsive,
     ConfigurationComponent,
     UsersComponent,
-
     SuppliersComponent,
     ApprovedInvoiceComponent,
-    SyncJobComponent
+    SyncJobComponent,
+    SyncJobsconfigComponent
+
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,8 @@ import { AlertsService } from 'angular-alert-module';
     MatButtonModule,
     MatIconModule,
     MatExpansionModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDatepickerModule
   ],
   providers: [CookieService, AuthService, InvoiceService, AlertsService],
   bootstrap: [AppComponent],

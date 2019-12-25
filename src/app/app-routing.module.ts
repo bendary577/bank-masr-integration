@@ -8,6 +8,7 @@ import { SuppliersComponent } from './components/suppliers/suppliers.component';
 import {SidenavResponsive} from "./components/sidenav/sidenav-responsive";
 import {ConfigurationComponent} from "./components/setting/configuration/configuration.component";
 import {UsersComponent} from "./components/setting/users/users.component";
+import {SyncJobsconfigComponent} from "./components/setting/syncJob/syncJobsconfig.component";
 
 
 const routes: Routes = [
@@ -23,11 +24,11 @@ const routes: Routes = [
   { path: Constants.SIDE_NAV, component: SidenavResponsive },
   { path: Constants.SETTING, component:UsersComponent/* ConfigurationComponent*/,
     children: [
-
       { path: Constants.USERS_CONFIGURATION, component: UsersComponent },
 
 
     ] },
+  { path: Constants.SYNC_JOBS, component: SyncJobsconfigComponent },
 
 ];
 

@@ -24,5 +24,7 @@ export class Constants {
     static SETTING = 'setting';
     static ACCOUNT_CONFIGURATION = 'configuration';
     static USERS_CONFIGURATION = 'users';
+    static SYNC_JOBS = 'syncjobs';
+
 
 }

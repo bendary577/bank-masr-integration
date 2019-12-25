@@ -8,15 +8,12 @@ import {User} from "../../../models/user";
  * @title Basic expansion panel
  */
 @Component({
-  selector: 'users-config',
-  templateUrl: 'users.component.html',
-  styleUrls: ['users.component.scss'],
+  selector: 'syncJob-config',
+  templateUrl: 'syncJobsconfig.component.html',
+  styleUrls: ['syncJobsconfig.component.scss'],
 })
 
-export class UsersComponent implements OnInit {
-  loading = true;
-  success = null;
-  usersList = [];
+export class SyncJobsconfigComponent implements OnInit {
   displayedColumns: string[] = ['firstName', 'username', 'lastName'];
   dataSource = new MatTableDataSource<User>(ELEMENT_DATA);
 
@@ -35,10 +32,9 @@ MatExpansionPanel['decorators'][0].args[0].animations = [
     transition('expanded <=> collapsed, void => collapsed',
       animate(EXPANSION_PANEL_ANIMATION_TIMING)),
   ])];
-
 const ELEMENT_DATA: User[] = [
-  {id:0,password:"",firstName:"ziad", username: 'zizo', lastName:'mohamed',token:""},
-  {id:0,password:"",firstName:"ahmed", username: 'Hydrogen', lastName:'',token:""},
+  {id:0,password:"",firstName:"asdasdasdas", username: 'Hydrogen', lastName:'asdasdas',token:""},
+  {id:0,password:"",firstName:"", username: 'Hydrogen', lastName:'',token:""},
   {id:0,password:"",firstName:"", username: 'Hydrogen', lastName:'',token:""},
   {id:0,password:"",firstName:"", username: 'Hydrogen', lastName:'',token:""},
   {id:0,password:"",firstName:"", username: 'Hydrogen', lastName:'',token:""},

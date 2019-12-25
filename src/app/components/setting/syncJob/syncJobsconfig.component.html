@@ -1,0 +1,26 @@
+
+<div class="main">
+  <h3>Sync Jobs config</h3>
+  <div class="example-container mat-elevation-z8" style="margin: 20px;">
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Vendors
+      </mat-panel-title>
+      <mat-panel-description>
+        getting vendors
+
+      </mat-panel-description>
+      <mat-icon>settings_input_component</mat-icon>
+    </mat-expansion-panel-header>
+
+    <mat-datepicker #picker></mat-datepicker>
+
+    <mat-action-row>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+  </div>
+</div>

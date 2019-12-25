@@ -3,7 +3,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { MatSnackBar } from '@angular/material';
 import { SupplierService } from 'src/app/services/supplier/supplier.service';
 import { VendorService } from 'src/app/services/vendor/vendor.service';
-import { AlertsService } from 'angular-alert-module';
+
 
 
 @Component({
@@ -16,7 +16,7 @@ export class SuppliersComponent implements OnInit {
   success = null;
   dataSource = [];
   constructor(private spinner: NgxSpinnerService, private supplierService: SupplierService,
-    private vendorService: VendorService, private alerts: AlertsService,
+    private vendorService: VendorService,
     public snackBar: MatSnackBar) {
 
   }

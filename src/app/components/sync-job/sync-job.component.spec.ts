@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SyncJobComponent } from './sync-job.component';
 
-describe('SyncJobComponent', () => {
+describe('SyncJobsconfigComponent', () => {
   let component: SyncJobComponent;
   let fixture: ComponentFixture<SyncJobComponent>;
 
