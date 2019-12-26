@@ -36,6 +36,8 @@ import { SyncJobComponent } from './components/sync-job/sync-job.component';
 import {HttpModule} from "@angular/http";
 import { AlertsService } from 'angular-alert-module';
 import {SyncJobsconfigComponent} from "./components/setting/syncJob/syncJobsconfig.component";
+import { BookedTransferComponent } from './components/booked-transfer/booked-transfer.component';
+import { BookedWasteComponent } from './components/booked-waste/booked-waste.component';
 
 @NgModule({
   declarations: [
@@ -51,8 +53,11 @@ import {SyncJobsconfigComponent} from "./components/setting/syncJob/syncJobsconf
     SuppliersComponent,
     ApprovedInvoiceComponent,
     SyncJobComponent,
-    SyncJobsconfigComponent
+    SyncJobsconfigComponent,
 
+    SyncJobComponent,
+    BookedTransferComponent,
+    BookedWasteComponent
   ],
   imports: [
     BrowserModule,

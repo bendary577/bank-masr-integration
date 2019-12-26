@@ -46,12 +46,14 @@ export class ApprovedInvoiceComponent implements OnInit {
         this.snackBar.open('Sync Approved Invoices Successfully', null, {
           duration: 2000,
           horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
         });
       }
       else{
         this.snackBar.open('Sync Approved Invoices Failed' + res.message , null, {
           duration: 2000,
           horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
         });
       }
       this.spinner.hide();

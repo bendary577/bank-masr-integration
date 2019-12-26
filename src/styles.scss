@@ -42,3 +42,13 @@ body {
   overflow: hidden !important;
   padding-bottom: 48px;
 }
+
+.my-snack-bar-success {
+  background-color: seagreen;
+  color:white;
+}
+
+.my-snack-bar-fail {
+  background-color: rgb(114, 12, 17);
+  color: white;
+}
