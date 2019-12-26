@@ -17,9 +17,13 @@
   /* Make sure the toolbar will stay on top of the content as it scrolls past. */
   z-index: 2!important;
 }
+.mat-icon.mat-warn {
+  color: #ffffff;
 
+}
 h1.example-app-name {
-  margin-left: 8px;
+  margin-left: 10px;
+  color: whitesmoke!important;
 }
 
   .mat-sidenav{
