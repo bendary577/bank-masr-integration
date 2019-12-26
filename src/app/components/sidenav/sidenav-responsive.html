@@ -3,12 +3,13 @@
   <h1 class="example-app-name">Oracle Integration System</h1>
 </mat-toolbar>
 
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches"
-     [style.top.px]="shouldRun?64:0">
+<div class="example-container" [class.example-is-mobile]="(mobileQuery.matches&&!shouldRun)  "
+     [class.example-containerpc]="(mobileQuery.matches&&shouldRun)"
+     >
 
 
   <mat-sidenav-container class="example-sidenav-container"
-                         [style.marginTop.px]="mobileQuery.matches ? 64 : 0"
+                         [style.marginTop.px]="mobileQuery.matches&&shouldRun ? 0 : 64"
                          >
 
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"

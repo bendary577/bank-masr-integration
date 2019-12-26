@@ -7,13 +7,18 @@
   left: 0;
   right: 0;
 }
-.example-container.example-is-mobile  {
+.example-is-mobile  {
+  top: 0px !important;
+}
+.example-containerpc  {
   top: 56px !important;
 }
+
 .example-is-mobile ,.example-toolbar {
   box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
   position: fixed!important;
   background-color: #3F51B5;
+  top:0 !important;
   /* Make sure the toolbar will stay on top of the content as it scrolls past. */
   z-index: 2!important;
 }
