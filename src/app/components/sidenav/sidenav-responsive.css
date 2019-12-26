@@ -7,7 +7,9 @@
   left: 0;
   right: 0;
 }
-
+.example-container.example-is-mobile  {
+  top: 56px !important;
+}
 .example-is-mobile ,.example-toolbar {
   box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
   position: fixed!important;
@@ -19,10 +21,20 @@
 h1.example-app-name {
   margin-left: 8px;
 }
-.mat-sidenav{
+
+  .mat-sidenav{
   width: 20%;
+    top: 0px!important;
   background-color: #fff;
   box-shadow: 6px 0 6px rgba(0,0,0,.1);
+}
+@media only screen and (max-width: 812px) {
+  .mat-sidenav {
+    width: 50%;
+    top: 56px!important;
+    background-color: #fff;
+    box-shadow: 6px 0 6px rgba(0, 0, 0, .1);
+  }
 }
 .example-sidenav-container {
 
@@ -34,5 +46,5 @@ h1.example-app-name {
 .example-is-mobile .example-sidenav-container {
   /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
      `<body>` to be our scrolling element for mobile layouts. */
-  flex: 1 0 auto;
+  margin-top: 0px !important;
 }

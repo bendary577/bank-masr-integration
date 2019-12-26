@@ -22,12 +22,13 @@ const routes: Routes = [
   },
   { path: Constants.LOGIN_PAGE, component: LoginComponent },
   { path: Constants.SIDE_NAV, component: SidenavResponsive },
-  { path: Constants.SETTING, component:UsersComponent/* ConfigurationComponent*/,
+  { path: Constants.SETTING, component:/*UsersComponent*/ ConfigurationComponent,
     children: [
-      { path: Constants.USERS_CONFIGURATION, component: UsersComponent },
+
 
 
     ] },
+  { path: Constants.USERS_CONFIGURATION, component: UsersComponent },
   { path: Constants.SYNC_JOBS, component: SyncJobsconfigComponent },
 
 ];

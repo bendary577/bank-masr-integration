@@ -9,16 +9,63 @@
         Vendors
       </mat-panel-title>
       <mat-panel-description>
-        getting vendors
+        Getting vendors
 
       </mat-panel-description>
       <mat-icon>settings_input_component</mat-icon>
     </mat-expansion-panel-header>
-
+    <mat-form-field>
+      <input matInput placeholder="Date" [matDatepicker]="picker" (focus)="picker.open()" readonly>
+    </mat-form-field>
     <mat-datepicker #picker></mat-datepicker>
 
     <mat-action-row>
-      <button mat-button color="primary" (click)="nextStep()">Next</button>
+      <button mat-button color="primary" (click)="nextStep()">Update</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+    <mat-accordion class="example-headers-align">
+  <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Suppliers
+      </mat-panel-title>
+      <mat-panel-description>
+        Getting Suppliers
+
+      </mat-panel-description>
+      <mat-icon>settings_input_component</mat-icon>
+    </mat-expansion-panel-header>
+    <mat-form-field>
+      <input matInput placeholder="Date" [matDatepicker]="pickerr" (focus)="pickerr.open()" readonly>
+    </mat-form-field>
+    <mat-datepicker #pickerr></mat-datepicker>
+
+
+    <mat-action-row>
+      <button mat-button color="primary" (click)="nextStep()">Update</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+    <mat-accordion class="example-headers-align">
+  <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Approved Invoices
+      </mat-panel-title>
+      <mat-panel-description>
+        Getting Approved Invoices
+
+      </mat-panel-description>
+      <mat-icon>settings_input_component</mat-icon>
+    </mat-expansion-panel-header>
+    <mat-form-field>
+      <input matInput placeholder="Date" [matDatepicker]="pickerdialog" (focus)="pickerdialog.open()" readonly>
+    </mat-form-field>
+    <mat-datepicker #pickerdialog></mat-datepicker>
+
+    <mat-action-row>
+      <button mat-button color="primary" (click)="nextStep()">Update</button>
     </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>

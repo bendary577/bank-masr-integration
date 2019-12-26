@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Constants } from 'src/app/models/constants';
 import { MatSnackBar } from '@angular/material';
+import {SidenavResponsive} from "../sidenav/sidenav-responsive";
 
 @Component({
   selector: 'app-login',
@@ -17,21 +18,24 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-
+  side :SidenavResponsive;
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar, side :SidenavResponsive
   ) {
+    this.side=side;
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
     }
+    this.side.shouldRun=false;
   }
 
   ngOnInit() {
+
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -65,10 +69,16 @@ export class LoginComponent implements OnInit {
       this.authenticationService.login().toPromise().then((res: any) => {
         console.log(res.items);
         this.router.navigate([Constants.TABS_PAGE]);
+        this.side.setshouldRun(true);
+
+
+        console.log(this.side.getshouldRun);
        return true
       }).catch(err => {
         if (username.trim() === 'Admin@test.com' && password.trim() === 'Entact123') {
           this.router.navigate([Constants.TABS_PAGE]);
+          this.side.setshouldRun(true);
+
           return true;
 
         } else {

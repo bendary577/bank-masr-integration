@@ -18,15 +18,14 @@ export class ApprovedInvoiceComponent implements OnInit {
     public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    console.log("invoices")
     this.getApprovedInvoices()
   }
 
   getApprovedInvoices() {
     this.spinner.show();
-    this.invoiceService.getApprovedInvoices().toPromise().then((res: any) => {
-      console.log(res.data);
-      this.approvedInvoices = res.data;
+    this.invoiceService.getApprovedInvoicesDB().toPromise().then((res: any) => {
+      console.log(res.items);
+      this.approvedInvoices = res.items;
      
       this.spinner.hide();
       this.loading = false;
@@ -41,6 +40,20 @@ export class ApprovedInvoiceComponent implements OnInit {
     this.spinner.show();
     this.invoiceService.getApprovedInvoices().toPromise().then((res: any) => {
       this.success = res.success;
+      console.log(res.message)
+      this.getApprovedInvoices();
+      if (this.success){
+        this.snackBar.open('Sync Approved Invoices Successfully', null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+        });
+      }
+      else{
+        this.snackBar.open('Sync Approved Invoices Failed' + res.message , null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+        });
+      }
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {

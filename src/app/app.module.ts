@@ -22,7 +22,7 @@ import {
   MatSidenavModule,
   MatListModule,
   MatButtonModule,
-  MatPaginatorModule, MatDatepickerModule
+  MatPaginatorModule, MatDatepickerModule, MatNativeDateModule
 
 } from '@angular/material';
 import {SidenavResponsive} from "./components/sidenav/sidenav-responsive";
@@ -71,7 +71,8 @@ import {SyncJobsconfigComponent} from "./components/setting/syncJob/syncJobsconf
     MatIconModule,
     MatExpansionModule,
     MatPaginatorModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [CookieService, AuthService, InvoiceService, AlertsService],
   bootstrap: [AppComponent],

@@ -14,6 +14,7 @@ export class SidenavResponsive implements OnDestroy,OnInit {
 
   private _mobileQueryListener: () => void;
 
+  shouldRun: boolean=false;
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, location: Location) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -21,17 +22,29 @@ export class SidenavResponsive implements OnDestroy,OnInit {
 
     console.info(location.path());
 
-    this.shouldRun = location.path() !== "/login"&&location.path() !=="/";
+
+   this.shouldRun = location.path() !== "/login"&&location.path() !=="/";
   }
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-  shouldRun = true;
+
 
   ngOnInit(): void {
 
+  }
+/*  public set setshouldRun(shouldRun:boolean){
+    this.shouldRun=shouldRun;
+  }*/
+  public get getshouldRun(){
+    return this.shouldRun;
+  }
+
+
+  setshouldRun(shouldRun: boolean) {
+    this.shouldRun=shouldRun;
   }
 }
 
