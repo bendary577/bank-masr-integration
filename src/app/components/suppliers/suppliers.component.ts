@@ -58,12 +58,14 @@ export class SuppliersComponent implements OnInit {
         this.snackBar.open('Sync Suppliers Successfully', null, {
           duration: 2000,
           horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
         });
       }
       else{
         this.snackBar.open('Sync Suppliers Failed', null, {
           duration: 2000,
           horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
         });
       }
       this.spinner.hide();

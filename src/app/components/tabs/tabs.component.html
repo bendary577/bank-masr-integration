@@ -1,24 +1,32 @@
 <mat-tab-group>
-    <!-- <mat-tab label="Sync Job">
+
+    <mat-tab label="Approved Invoices">
         <ng-template matTabContent>
-            <app-sync-job></app-sync-job>
+            <app-approved-invoice></app-approved-invoice>
         </ng-template>
-    </mat-tab> -->
+    </mat-tab>
+
+    <mat-tab label="Booked Transfer">
+        <ng-template matTabContent>
+            <app-booked-transfer></app-booked-transfer>
+        </ng-template>
+    </mat-tab>
+
+    <mat-tab label="Booked Waste">
+        <ng-template matTabContent>
+            <app-booked-waste></app-booked-waste>
+        </ng-template>
+    </mat-tab>
+
     <mat-tab label="Suppliers">
-            <ng-template matTabContent>
-                <app-suppliers></app-suppliers>
-            </ng-template>
+        <ng-template matTabContent>
+            <app-suppliers></app-suppliers>
+        </ng-template>
     </mat-tab>
 
     <mat-tab label="Vendors">
         <ng-template matTabContent>
             <app-home></app-home>
-        </ng-template>
-    </mat-tab>
-
-    <mat-tab label="Approved Invoices">
-        <ng-template matTabContent>
-            <app-approved-invoice></app-approved-invoice>
         </ng-template>
     </mat-tab>
     
