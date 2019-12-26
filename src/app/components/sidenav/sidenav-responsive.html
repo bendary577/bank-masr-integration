@@ -19,6 +19,8 @@
         <a mat-list-item  routerLink="/syncjobs">Sync Jobs</a>
         <a mat-list-item  routerLink="/users">Users </a>
         <a mat-list-item  routerLink="/tabs">Sync Jobs Data </a>
+        <a mat-list-item  *ngFor="let type of syncJobTypes" routerLink="/syncjobs">{{type}}</a>
+       
       </mat-nav-list>
 
 

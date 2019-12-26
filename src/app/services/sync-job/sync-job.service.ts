@@ -16,4 +16,8 @@ export class SyncJobService {
   getSuppliersDB() {
     return this.http.get(Constants.GET_SUPPLIERS_DB_URL);
   }
+
+  getSyncJobTypesDB() {
+    return this.http.get(Constants.GET_SYNC_JOB_TYPES_URL);
+  }
 }
