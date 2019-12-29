@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Update Duration Configuartion</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form" class="my-form">
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+
+                    <mat-select placeholder="Duration" formControlName="duration">
+                      <mat-option value="Daily">Daily</mat-option>
+                      <mat-option value="Weekly">Weekly</mat-option>
+                      <mat-option value="Monthly">Monthly</mat-option>
+                    </mat-select>
+            </mat-form-field>
+        </div>
+
+
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button cdkFocusInitial (click)="onSaveClick()">Save</button>
+</div>

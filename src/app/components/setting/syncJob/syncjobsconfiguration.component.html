@@ -1,0 +1,22 @@
+
+<div class="main">
+    <h3>Sync Jobs Configuration</h3>
+<div class="example-container mat-elevation-z8" style="margin: 20px;">
+
+
+<table mdbTable>
+    <thead>
+      <tr>
+        <th>Sync Job Type</th>
+        <th>Empty</th>
+        <th>Setting</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr mdbTableCol *ngFor="let type of syncJobTypes">
+        <td>{{type.name}}</td>
+        <td><button mat-raised-button color="primary" (click)="openschedulerDialog(type)">scheduler</button></td>
+        <td><button mat-raised-button color="primary" (click)="openDialog(type)">Setting</button></td>
+      </tr>
+    </tbody>
+  </table>

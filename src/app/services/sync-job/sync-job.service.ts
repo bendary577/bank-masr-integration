@@ -21,4 +21,8 @@ export class SyncJobService {
   getSyncJobTypesDB() {
     return this.http.get<SyncJobType[]>(Constants.GET_SYNC_JOB_TYPES_URL);
   }
+
+  addSyncJobTypeConfig(SyncJobType:SyncJobType){
+    return this.http.put(Constants.UPDATE_SYNC_JOB_TYPES_URL , SyncJobType).toPromise();
+  }
 }

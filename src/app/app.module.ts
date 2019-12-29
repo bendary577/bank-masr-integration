@@ -22,7 +22,7 @@ import {
   MatSidenavModule,
   MatListModule,
   MatButtonModule,
-  MatPaginatorModule, MatDatepickerModule, MatNativeDateModule
+  MatPaginatorModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule
 
 } from '@angular/material';
 import {SidenavResponsive} from "./components/sidenav/sidenav-responsive";
@@ -38,6 +38,8 @@ import { AlertsService } from 'angular-alert-module';
 import {SyncJobsconfigComponent} from "./components/setting/syncJob/syncJobsconfig.component";
 import { BookedTransferComponent } from './components/booked-transfer/booked-transfer.component';
 import { BookedWasteComponent } from './components/booked-waste/booked-waste.component';
+import { SuppliersConfiguartionComponent } from './components/suppliers-configuartion/suppliers-configuartion.component';
+import { SchedulerConfigurationComponent } from './components/scheduler-configuration/scheduler-configuration.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { BookedWasteComponent } from './components/booked-waste/booked-waste.com
 
     SyncJobComponent,
     BookedTransferComponent,
-    BookedWasteComponent
+    BookedWasteComponent,
+    SuppliersConfiguartionComponent,
+    SchedulerConfigurationComponent
   ],
   imports: [
     BrowserModule,
@@ -77,10 +81,11 @@ import { BookedWasteComponent } from './components/booked-waste/booked-waste.com
     MatExpansionModule,
     MatPaginatorModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSelectModule
   ],
   providers: [CookieService, AuthService, InvoiceService, AlertsService],
   bootstrap: [AppComponent],
-  entryComponents: [AddVendorComponent]
+  entryComponents: [AddVendorComponent, SuppliersConfiguartionComponent, SchedulerConfigurationComponent]
 })
 export class AppModule { }

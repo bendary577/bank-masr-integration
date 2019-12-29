@@ -12,7 +12,9 @@ export class Constants {
     static ADD_VENDOR_URL = environment.apiHost + '/addVendor';
     static GET_SUPPLIERS_URL = environment.apiHost + '/getSuppliers';
     static LOGIN = environment.apiHost + '/login';
+
     static GET_SYNC_JOB_TYPES_URL = environment.apiHost + '/getSyncJobTypes';
+    static UPDATE_SYNC_JOB_TYPES_URL = environment.apiHost + '/updateSyncJobTypes';
     static GET_SUPPLIERS_DB_URL = environment.apiHost + '/getSuppliersDB';
     static GET_APPROVED_INVOICES_URL = environment.apiHost + '/getApprovedInvoices';
     static GET_APPROVED_INVOICES_DB_URL = environment.apiHost + '/getApprovedInvoicesDB';
@@ -20,6 +22,7 @@ export class Constants {
     static GET_BOOKED_TRANSFER_DB_URL = environment.apiHost + '/getBookedTransferDB';
     static GET_BOOKED_WASTE_URL = environment.apiHost + '/getBookedWaste';
     static GET_BOOKED_WASTE_DB_URL = environment.apiHost + '/getBookedWasteDB';
+
     static LOGIN_PAGE = 'login';
     static HOME_PAGE = 'home';
     static SIDE_NAV = 'sidenav';
