@@ -1,6 +1,8 @@
 import {MediaMatcher} from '@angular/cdk/layout';
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import { Location } from '@angular/common';
+import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
+import { SyncJobType } from 'src/app/models/SyncJobType';
 
 
 /** @title Responsive sidenav */
@@ -11,11 +13,12 @@ import { Location } from '@angular/common';
 })
 export class SidenavResponsive implements OnDestroy,OnInit {
   mobileQuery: MediaQueryList;
+  syncJobTypes: SyncJobType[] = [];
 
   private _mobileQueryListener: () => void;
 
   shouldRun: boolean=false;
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, location: Location) {
+  constructor(private syncJobService: SyncJobService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, location: Location) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -33,7 +36,16 @@ export class SidenavResponsive implements OnDestroy,OnInit {
 
 
   ngOnInit(): void {
+    this.getSyncJobTypes()
+  }
 
+  getSyncJobTypes(){
+    this.syncJobService.getSyncJobTypesDB().toPromise().then((res: any) => {
+      this.syncJobTypes = res[0].syncJobTypes;
+      console.log(this.syncJobTypes)
+    }).catch(err => {
+      console.error(err);
+    });
   }
 /*  public set setshouldRun(shouldRun:boolean){
     this.shouldRun=shouldRun;
@@ -46,6 +58,8 @@ export class SidenavResponsive implements OnDestroy,OnInit {
   setshouldRun(shouldRun: boolean) {
     this.shouldRun=shouldRun;
   }
+
+  
 }
 
 

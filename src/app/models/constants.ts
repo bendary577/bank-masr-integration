@@ -24,6 +24,7 @@ export class Constants {
     static HOME_PAGE = 'home';
     static SIDE_NAV = 'sidenav';
     static SUPPLIERS_PAGE = 'suppliers';
+    static APPROVED_INVOICES_PAGE = 'approvedInvoices';
     static TABS_PAGE = 'tabs';
     static END_POINT = '/getSuppliers';
     static SETTING = 'setting';

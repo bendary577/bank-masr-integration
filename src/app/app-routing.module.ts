@@ -9,6 +9,7 @@ import { SidenavResponsive } from './components/sidenav/sidenav-responsive';
 import { ConfigurationComponent } from './components/setting/configuration/configuration.component';
 import { UsersComponent } from './components/setting/users/users.component';
 import { SyncJobsconfigComponent } from './components/setting/syncJob/syncJobsconfig.component';
+import { ApprovedInvoiceComponent } from './components/approved-invoice/approved-invoice.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,10 @@ const routes: Routes = [
   },
   { path: Constants.USERS_CONFIGURATION, component: UsersComponent },
   { path: Constants.SYNC_JOBS, component: SyncJobsconfigComponent },
+
+  { path: Constants.SUPPLIERS_PAGE, component: SuppliersComponent },
+  { path: Constants.APPROVED_INVOICES_PAGE, component: ApprovedInvoiceComponent },
+
 
 ];
 
