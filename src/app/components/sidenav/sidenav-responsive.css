@@ -11,7 +11,7 @@
   top: 0px !important;
 }
 .example-containerpc  {
-  top: 56px !important;
+  top: 0px !important;
 }
 
 .example-is-mobile ,.example-toolbar {
@@ -30,7 +30,12 @@ h1.example-app-name {
   margin-left: 10px;
   color: whitesmoke!important;
 }
-
+@media (max-width: 599px)
+{
+.mat-toolbar-row, .mat-toolbar-single-row {
+   height: 64px !important;
+}
+}
   .mat-sidenav{
   width: 20%;
     top: 0px!important;
