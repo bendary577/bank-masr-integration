@@ -12,6 +12,7 @@ export class Constants {
     static ADD_VENDOR_URL = environment.apiHost + '/addVendor';
     static GET_SUPPLIERS_URL = environment.apiHost + '/getSuppliers';
     static LOGIN = environment.apiHost + '/login';
+    static GET_SYNC_JOB_TYPES_URL = environment.apiHost + '/getSyncJobTypes';
     static GET_SUPPLIERS_DB_URL = environment.apiHost + '/getSuppliersDB';
     static GET_APPROVED_INVOICES_URL = environment.apiHost + '/getApprovedInvoices';
     static GET_APPROVED_INVOICES_DB_URL = environment.apiHost + '/getApprovedInvoicesDB';
