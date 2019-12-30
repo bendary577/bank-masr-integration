@@ -28,6 +28,8 @@ export class SchedulerConfigurationComponent implements OnInit {
   ngOnInit() {
     this.form = this.formBuilder.group({
       duration: ['', Validators.required],
+      from: ['', Validators.required],
+      to: ['', Validators.required]
     });
   }
 }
