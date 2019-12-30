@@ -3,6 +3,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { MatSnackBar } from '@angular/material';
 import { SupplierService } from 'src/app/services/supplier/supplier.service';
 import { VendorService } from 'src/app/services/vendor/vendor.service';
+import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 
 
 
@@ -14,15 +15,36 @@ import { VendorService } from 'src/app/services/vendor/vendor.service';
 export class SuppliersComponent implements OnInit {
   loading = true;
   success = null;
+  jobs = [];
   dataSource = [];
+  
   constructor(private spinner: NgxSpinnerService, private supplierService: SupplierService,
-    private vendorService: VendorService,
+    private vendorService: VendorService, private syncJobService: SyncJobService,
     public snackBar: MatSnackBar) {
 
   }
 
   ngOnInit() {
     this.getSuppliersDB();
+    this.getSyncJobs("Get Suppliers");
+  }
+
+  runWorker() {
+
+    if (typeof Worker !== 'undefined') {
+      // Create a new
+      const worker = new Worker('./app.worker', { type: 'module' });
+      worker.onmessage = ({ data }) => {
+        console.log(`page got message: ${data}`);
+      };
+      worker.postMessage('hello');
+    } else {
+      console.log("no data");
+
+      // Web Workers are not supported in this environment.
+      // You should add a fallback so that your program still executes correctly.
+    }
+
   }
 
   getSuppliersDB() {
@@ -48,11 +70,13 @@ export class SuppliersComponent implements OnInit {
     });
   }
 
+
   getSuppliersSyncJob() {
     this.spinner.show();
     this.supplierService.getSuppliers().toPromise().then((res: any) => {
       this.success = res.success;
       this.getSuppliersDB();
+      this.getSyncJobs("Get Suppliers");
 
       if (this.success){
         this.snackBar.open('Sync Suppliers Successfully', null, {
@@ -68,6 +92,20 @@ export class SuppliersComponent implements OnInit {
           panelClass:"my-snack-bar-fail"
         });
       }
+      this.spinner.hide();
+      this.loading = false;
+    }).catch(err => {
+      console.error(err);
+      this.spinner.hide();
+      this.loading = false;
+    });
+  }
+
+  getSyncJobs(syncJobTypeName:String) {
+    this.spinner.show();
+    this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
+      console.log(res);
+      this.jobs = res;
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {

@@ -22,7 +22,7 @@ import {
   MatSidenavModule,
   MatListModule,
   MatButtonModule,
-  MatPaginatorModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule
+  MatPaginatorModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule, MatCheckboxModule
 
 } from '@angular/material';
 import {SidenavResponsive} from "./components/sidenav/sidenav-responsive";
@@ -84,7 +84,8 @@ import { ApprovedInvoiceConfigurationComponent } from './components/approved-inv
     MatPaginatorModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule
   ],
   providers: [CookieService, AuthService, InvoiceService, AlertsService],
   bootstrap: [AppComponent],

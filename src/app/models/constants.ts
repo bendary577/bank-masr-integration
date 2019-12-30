@@ -14,10 +14,15 @@ export class Constants {
     static LOGIN = environment.apiHost + '/login';
 
     static GET_SYNC_JOB_TYPES_URL = environment.apiHost + '/getSyncJobTypes';
-    static UPDATE_SYNC_JOB_TYPES_URL = environment.apiHost + '/updateSyncJobTypes';
+    static UPDATE_SYNC_JOB_TYPES_URL = environment.apiHost + '/updateSyncJobTypesConfiguration';
+    static GET_SYNC_JOBS_URL = environment.apiHost + '/getSyncJobs';
+
+
     static GET_SUPPLIERS_DB_URL = environment.apiHost + '/getSuppliersDB';
     static GET_APPROVED_INVOICES_URL = environment.apiHost + '/getApprovedInvoices';
     static GET_APPROVED_INVOICES_DB_URL = environment.apiHost + '/getApprovedInvoicesDB';
+    static GET_COST_CENTER_URL = environment.apiHost + '/getCostCenter';
+
     static GET_BOOKED_TRANSFER_URL = environment.apiHost + '/getBookedTransfer';
     static GET_BOOKED_TRANSFER_DB_URL = environment.apiHost + '/getBookedTransferDB';
     static GET_BOOKED_WASTE_URL = environment.apiHost + '/getBookedWaste';

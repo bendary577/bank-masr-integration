@@ -3,6 +3,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { VendorService } from 'src/app/services/vendor/vendor.service';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { InvoiceService } from 'src/app/services/invoice/invoice.service';
+import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 
 @Component({
   selector: 'app-approved-invoice',
@@ -12,13 +13,16 @@ import { InvoiceService } from 'src/app/services/invoice/invoice.service';
 export class ApprovedInvoiceComponent implements OnInit {
   loading = true;
   success = null;
+  jobs = [];
   approvedInvoices = [];
 
   constructor(private spinner: NgxSpinnerService, private invoiceService: InvoiceService,
+    private syncJobService:SyncJobService,
     public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.getApprovedInvoices()
+    this.getApprovedInvoices();
+    this.getSyncJobs("Get Approved Invoices");
   }
 
   getApprovedInvoices() {
@@ -42,6 +46,8 @@ export class ApprovedInvoiceComponent implements OnInit {
       this.success = res.success;
       console.log(res.message)
       this.getApprovedInvoices();
+      this.getSyncJobs("Get Approved Invoices");
+      
       if (this.success){
         this.snackBar.open('Sync Approved Invoices Successfully', null, {
           duration: 2000,
@@ -65,5 +71,18 @@ export class ApprovedInvoiceComponent implements OnInit {
     });
   }
 
+  getSyncJobs(syncJobTypeName:String) {
+    this.spinner.show();
+    this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
+      console.log(res);
+      this.jobs = res;
+      this.spinner.hide();
+      this.loading = false;
+    }).catch(err => {
+      console.error(err);
+      this.spinner.hide();
+      this.loading = false;
+    });
+  }
 
 }

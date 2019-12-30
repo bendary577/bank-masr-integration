@@ -1,5 +1,8 @@
 <div class="header">
-        <button mat-flat-button (click)="getApprovedInvoicesSyncJob()">Sync Apprved Invoices</button>
+    <select class="custom-select">
+        <option value="" *ngFor="let job of jobs">{{job.creation_date}} - {{job.status}}</option>
+     </select>
+    <button mat-flat-button (click)="getApprovedInvoicesSyncJob()">Sync Apprved Invoices Now</button>
 </div>
 <br>
 <div class="main">

@@ -1,8 +1,13 @@
 
 <div class="header">
-    <button mat-flat-button (click)="getSuppliersSyncJob()">Sync Suppliers</button>
+    <select class="custom-select">
+        <option value="" *ngFor="let job of jobs">{{job.creation_date}} - {{job.status}}</option>
+     </select>
+
+    <button mat-flat-button (click)="getSuppliersSyncJob()">Sync Suppliers Now</button>
 </div>
 <br>
+
 <div class="main">
     <ngx-datatable *ngIf="!loading" class="material" [rows]="dataSource" [columnMode]="'force'" [headerHeight]="50"
         [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true" [sorts]="[{prop: 'Supplier', dir: 'asc'}]">

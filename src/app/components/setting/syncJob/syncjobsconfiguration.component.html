@@ -4,11 +4,11 @@
 <div class="example-container mat-elevation-z8" style="margin: 20px;">
 
 
-<table mdbTable>
+<!-- <table mdbTable>
     <thead>
       <tr>
         <th>Sync Job Type</th>
-        <th>Empty</th>
+        <th>scheduler</th>
         <th>Setting</th>
       </tr>
     </thead>
@@ -19,4 +19,28 @@
         <td><button mat-raised-button color="primary" (click)="openDialog(type)">Setting</button></td>
       </tr>
     </tbody>
-  </table>
+  </table> -->
+
+
+    <div class="main">
+      <ngx-datatable *ngIf="!loading" class="material" [rows]="syncJobTypes" [columnMode]="'force'" [headerHeight]="50"
+          [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true" [sorts]="[{prop: 'Supplier', dir: 'asc'}]">
+          <ngx-datatable-column name="Sync Job Type">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.name}}
+              </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="scheduler">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <button mat-raised-button color="primary" (click)="openschedulerDialog(row)">scheduler</button>
+              </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Setting">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <button mat-raised-button color="primary" (click)="openDialog(row)">Setting</button>
+              </ng-template>
+          </ngx-datatable-column>
+  
+      </ngx-datatable>
+      <ngx-spinner></ngx-spinner>
+  </div>
