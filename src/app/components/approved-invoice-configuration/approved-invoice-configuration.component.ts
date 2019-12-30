@@ -4,16 +4,16 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AddVendorComponent } from '../add-vendor/add-vendor.component';
 
 @Component({
-  selector: 'app-suppliers-configuartion',
-  templateUrl: './suppliers-configuartion.component.html',
-  styleUrls: ['./suppliers-configuartion.component.scss']
+  selector: 'app-approved-invoice-configuration',
+  templateUrl: './approved-invoice-configuration.component.html',
+  styleUrls: ['./approved-invoice-configuration.component.scss']
 })
-export class SuppliersConfiguartionComponent implements OnInit {
+export class ApprovedInvoiceConfigurationComponent implements OnInit {
 
   formSupplier: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder, public dialogRef: MatDialogRef<SuppliersConfiguartionComponent>) { 
+  constructor(private formBuilder: FormBuilder, public dialogRef: MatDialogRef<ApprovedInvoiceConfigurationComponent>) { 
   }
 
   onNoClick(): void {
@@ -23,15 +23,13 @@ export class SuppliersConfiguartionComponent implements OnInit {
   onSaveClick(): void {
     this.dialogRef.close({
       name: this.formSupplier.controls.name.value,
-      limit: this.formSupplier.controls.limit.value
-
     });
   }
 
   ngOnInit() {
     this.formSupplier = this.formBuilder.group({
-      name: ['', Validators.required],
-      limit: ['']
+      name: ['', Validators.required]
     });
   }
+
 }

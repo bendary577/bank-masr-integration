@@ -40,6 +40,7 @@ import { BookedTransferComponent } from './components/booked-transfer/booked-tra
 import { BookedWasteComponent } from './components/booked-waste/booked-waste.component';
 import { SuppliersConfiguartionComponent } from './components/suppliers-configuartion/suppliers-configuartion.component';
 import { SchedulerConfigurationComponent } from './components/scheduler-configuration/scheduler-configuration.component';
+import { ApprovedInvoiceConfigurationComponent } from './components/approved-invoice-configuration/approved-invoice-configuration.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { SchedulerConfigurationComponent } from './components/scheduler-configur
     BookedTransferComponent,
     BookedWasteComponent,
     SuppliersConfiguartionComponent,
-    SchedulerConfigurationComponent
+    SchedulerConfigurationComponent,
+    ApprovedInvoiceConfigurationComponent
   ],
   imports: [
     BrowserModule,
@@ -86,6 +88,7 @@ import { SchedulerConfigurationComponent } from './components/scheduler-configur
   ],
   providers: [CookieService, AuthService, InvoiceService, AlertsService],
   bootstrap: [AppComponent],
-  entryComponents: [AddVendorComponent, SuppliersConfiguartionComponent, SchedulerConfigurationComponent]
+  entryComponents: [AddVendorComponent, SuppliersConfiguartionComponent, SchedulerConfigurationComponent,
+  ApprovedInvoiceConfigurationComponent]
 })
 export class AppModule { }
