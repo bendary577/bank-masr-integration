@@ -37,6 +37,7 @@ export class Constants {
     static SUPPLIERS_PAGE = 'suppliers';
     static APPROVED_INVOICES_PAGE = 'approvedInvoices';
     static BOOKED_TRANSFER_PAGE = 'bookedTransfers';
+    static BOOKED_TRANSFER_DETAILS_PAGE = 'bookedTransfersDetails';
 
     static TABS_PAGE = 'tabs';
     static END_POINT = '/getSuppliers';

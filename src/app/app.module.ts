@@ -46,6 +46,7 @@ import { SuppliersConfiguartionComponent } from './components/suppliers-configua
 import { SchedulerConfigurationComponent } from './components/scheduler-configuration/scheduler-configuration.component';
 import { ApprovedInvoiceConfigurationComponent } from './components/approved-invoice-configuration/approved-invoice-configuration.component';
 import { BookedTransferDetailsComponent } from './components/booked-transfer-details/booked-transfer-details.component';
+import { ErrorComponentComponent } from './components/error-component/error-component.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { BookedTransferDetailsComponent } from './components/booked-transfer-det
     SuppliersConfiguartionComponent,
     SchedulerConfigurationComponent,
     ApprovedInvoiceConfigurationComponent,
-    BookedTransferDetailsComponent
+    BookedTransferDetailsComponent,
+    ErrorComponentComponent
   ],
   imports: [
     BrowserModule,

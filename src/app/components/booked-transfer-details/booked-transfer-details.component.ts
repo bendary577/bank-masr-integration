@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-booked-transfer-details',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookedTransferDetailsComponent implements OnInit {
 
-  constructor() { }
+  transferDetails = []
+
+  constructor(private route:ActivatedRoute) { }
 
   ngOnInit() {
+    this.transferDetails = this.route.snapshot.params["transfer"];
+    console.log(this.transferDetails);
   }
 
 }

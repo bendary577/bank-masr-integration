@@ -11,6 +11,8 @@ import { UsersComponent } from './components/setting/users/users.component';
 import { SyncJobsconfigComponent } from './components/setting/syncJob/syncJobsconfig.component';
 import { ApprovedInvoiceComponent } from './components/approved-invoice/approved-invoice.component';
 import { BookedTransferComponent } from './components/booked-transfer/booked-transfer.component';
+import { BookedTransferDetailsComponent } from './components/booked-transfer-details/booked-transfer-details.component';
+import { ErrorComponentComponent } from './components/error-component/error-component.component';
 
 
 const routes: Routes = [
@@ -23,22 +25,23 @@ const routes: Routes = [
       { path: Constants.SUPPLIERS_PAGE, component: SuppliersComponent }
     ]
   },
-  { path: Constants.LOGIN_PAGE, component: LoginComponent },
   { path: Constants.SIDE_NAV, component: SidenavResponsive },
   {
     path: Constants.SETTING, component: ConfigurationComponent,
-    children: [
-
-
-
-    ]
+    children: []
   },
   { path: Constants.USERS_CONFIGURATION, component: UsersComponent },
   { path: Constants.SYNC_JOBS, component: SyncJobsconfigComponent },
 
+  // Pages
+  { path: Constants.LOGIN_PAGE, component: LoginComponent },
   { path: Constants.SUPPLIERS_PAGE, component: SuppliersComponent },
   { path: Constants.APPROVED_INVOICES_PAGE, component: ApprovedInvoiceComponent },
-  { path: Constants.BOOKED_TRANSFER_PAGE, component: BookedTransferComponent }
+  { path: Constants.BOOKED_TRANSFER_PAGE, component: BookedTransferComponent },
+  { path: Constants.BOOKED_TRANSFER_DETAILS_PAGE + "/:transfer", component: BookedTransferDetailsComponent },
+
+  // Error Page
+  {path:'**', component: ErrorComponentComponent}
 
 ];
 
