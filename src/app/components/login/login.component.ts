@@ -1,10 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Constants } from 'src/app/models/constants';
 import { MatSnackBar } from '@angular/material';
-import {SidenavResponsive} from "../sidenav/sidenav-responsive";
+import { SidenavResponsive } from "../sidenav/sidenav-responsive";
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -19,21 +19,21 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  side :SidenavResponsive;
+  side: SidenavResponsive;
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthService,
-    public snackBar: MatSnackBar, side :SidenavResponsive,
+    public snackBar: MatSnackBar, side: SidenavResponsive,
     private spinner: NgxSpinnerService
   ) {
-    this.side=side;
+    this.side = side;
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
     }
-    this.side.shouldRun=false;
+    this.side.shouldRun = false;
   }
 
   ngOnInit() {
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-   this.isValid();
+    this.isValid();
 
 
 
@@ -74,19 +74,19 @@ export class LoginComponent implements OnInit {
         console.log(res.items);
         this.spinner.hide();
         this.loading = false;
-        
+
         this.router.navigate([Constants.TABS_PAGE]);
         this.side.setshouldRun(true);
 
 
         console.log(this.side.getshouldRun);
-       return true
+        return true
       }).catch(err => {
         if (username.trim() === 'Admin@test.com' && password.trim() === 'Entact123') {
           this.spinner.hide();
           this.loading = false;
 
-          this.router.navigate([Constants.TABS_PAGE]);
+          this.router.navigate([Constants.SUPPLIERS_PAGE]);
           this.side.setshouldRun(true);
 
           return true;
@@ -106,16 +106,16 @@ export class LoginComponent implements OnInit {
 
 
 
-    }else{
+    } else {
       this.snackBar.open('Wrong Credentials.', null, {
         duration: 2000,
         horizontalPosition: 'center',
       });
     }
-  /*  if (username.trim() === 'Admin@as' && password.trim() === 'Entact123') {
-      return true;
-    } else {
-       return false;
-     }*/
+    /*  if (username.trim() === 'Admin@as' && password.trim() === 'Entact123') {
+        return true;
+      } else {
+         return false;
+       }*/
   }
 }

@@ -17,7 +17,7 @@ export class SuppliersComponent implements OnInit {
   success = null;
   jobs = [];
   dataSource = [];
-  
+
   constructor(private spinner: NgxSpinnerService, private supplierService: SupplierService,
     private vendorService: VendorService, private syncJobService: SyncJobService,
     public snackBar: MatSnackBar) {
@@ -27,24 +27,6 @@ export class SuppliersComponent implements OnInit {
   ngOnInit() {
     this.getSuppliersDB();
     this.getSyncJobs("Get Suppliers");
-  }
-
-  runWorker() {
-
-    if (typeof Worker !== 'undefined') {
-      // Create a new
-      const worker = new Worker('./app.worker', { type: 'module' });
-      worker.onmessage = ({ data }) => {
-        console.log(`page got message: ${data}`);
-      };
-      worker.postMessage('hello');
-    } else {
-      console.log("no data");
-
-      // Web Workers are not supported in this environment.
-      // You should add a fallback so that your program still executes correctly.
-    }
-
   }
 
   getSuppliersDB() {
@@ -78,18 +60,18 @@ export class SuppliersComponent implements OnInit {
       this.getSuppliersDB();
       this.getSyncJobs("Get Suppliers");
 
-      if (this.success){
+      if (this.success) {
         this.snackBar.open('Sync Suppliers Successfully', null, {
           duration: 2000,
           horizontalPosition: 'center',
-          panelClass:"my-snack-bar-success"
+          panelClass: "my-snack-bar-success"
         });
       }
-      else{
+      else {
         this.snackBar.open(res.message, null, {
           duration: 2000,
           horizontalPosition: 'center',
-          panelClass:"my-snack-bar-fail"
+          panelClass: "my-snack-bar-fail"
         });
       }
       this.spinner.hide();
@@ -101,7 +83,7 @@ export class SuppliersComponent implements OnInit {
     });
   }
 
-  getSyncJobs(syncJobTypeName:String) {
+  getSyncJobs(syncJobTypeName: String) {
     this.spinner.show();
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
       console.log(res);
