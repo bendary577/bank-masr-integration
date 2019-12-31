@@ -13,6 +13,9 @@ export class Constants {
     static GET_SUPPLIERS_URL = environment.apiHost + '/getSuppliers';
     static LOGIN = environment.apiHost + '/login';
 
+    static GET_SYNC_JOB_DATA = environment.apiHost + '/getSyncJobData';
+
+
     static GET_SYNC_JOB_TYPES_URL = environment.apiHost + '/getSyncJobTypes';
     static UPDATE_SYNC_JOB_TYPES_URL = environment.apiHost + '/updateSyncJobTypesConfiguration';
     static GET_SYNC_JOBS_URL = environment.apiHost + '/getSyncJobs';
@@ -33,6 +36,8 @@ export class Constants {
     static SIDE_NAV = 'sidenav';
     static SUPPLIERS_PAGE = 'suppliers';
     static APPROVED_INVOICES_PAGE = 'approvedInvoices';
+    static BOOKED_TRANSFER_PAGE = 'bookedTransfers';
+
     static TABS_PAGE = 'tabs';
     static END_POINT = '/getSuppliers';
     static SETTING = 'setting';

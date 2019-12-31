@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { AngularMaterialModule } from './angular-material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,8 +22,11 @@ import {
   MatSidenavModule,
   MatListModule,
   MatButtonModule,
-  MatPaginatorModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule, MatCheckboxModule
-
+  MatPaginatorModule,
+  MatDatepickerModule, 
+  MatNativeDateModule, 
+  MatSelectModule, 
+  MatCheckboxModule
 } from '@angular/material';
 import {SidenavResponsive} from "./components/sidenav/sidenav-responsive";
 import {ConfigurationComponent} from "./components/setting/configuration/configuration.component";
@@ -85,7 +88,9 @@ import { ApprovedInvoiceConfigurationComponent } from './components/approved-inv
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    BrowserModule,
+    FormsModule
   ],
   providers: [CookieService, AuthService, InvoiceService, AlertsService],
   bootstrap: [AppComponent],

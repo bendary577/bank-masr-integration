@@ -17,7 +17,12 @@ export class SuppliersComponent implements OnInit {
   success = null;
   jobs = [];
   dataSource = [];
+<<<<<<< HEAD
 
+=======
+  syncJobId = -1;
+  
+>>>>>>> 5d9a9264c75e5230b3741ad622194992ed1a8355
   constructor(private spinner: NgxSpinnerService, private supplierService: SupplierService,
     private vendorService: VendorService, private syncJobService: SyncJobService,
     public snackBar: MatSnackBar) {
@@ -88,6 +93,22 @@ export class SuppliersComponent implements OnInit {
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
       console.log(res);
       this.jobs = res;
+      this.spinner.hide();
+      this.loading = false;
+    }).catch(err => {
+      console.error(err);
+      this.spinner.hide();
+      this.loading = false;
+    });
+  }
+
+  getSyncJobData(syncJobId:String) {
+    console.log(syncJobId)
+    this.spinner.show();
+    this.syncJobService.getSyncJobData(syncJobId).toPromise().then((res: any) => {
+      console.log(res);
+      this.dataSource = res.items;
+
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {

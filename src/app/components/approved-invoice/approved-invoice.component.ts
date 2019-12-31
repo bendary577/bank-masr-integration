@@ -15,6 +15,8 @@ export class ApprovedInvoiceComponent implements OnInit {
   success = null;
   jobs = [];
   approvedInvoices = [];
+  syncJobId = -1;
+
 
   constructor(private spinner: NgxSpinnerService, private invoiceService: InvoiceService,
     private syncJobService:SyncJobService,
@@ -76,6 +78,21 @@ export class ApprovedInvoiceComponent implements OnInit {
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
       console.log(res);
       this.jobs = res;
+      this.spinner.hide();
+      this.loading = false;
+    }).catch(err => {
+      console.error(err);
+      this.spinner.hide();
+      this.loading = false;
+    });
+  }
+
+  getSyncJobData(syncJobId:String) {
+    console.log(syncJobId)
+    this.spinner.show();
+    this.syncJobService.getSyncJobData(syncJobId).toPromise().then((res: any) => {
+      this.approvedInvoices = res.items;
+
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {

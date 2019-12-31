@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatSnackBar } from '@angular/material';
 import { TransferService } from 'src/app/services/transfer/transfer.service';
+import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 
 @Component({
   selector: 'app-booked-transfer',
@@ -13,14 +14,18 @@ export class BookedTransferComponent implements OnInit {
   loading = true;
   success = null;
   bookedTransfer = [];
+  jobs = [];
+  syncJobId = -1;
 
   constructor(private spinner: NgxSpinnerService, private transferService: TransferService,
-    public snackBar: MatSnackBar) {
+    public snackBar: MatSnackBar, private syncJobService:SyncJobService,
+    ) {
 
   }
 
   ngOnInit() {
-    this.getBookedTransferDB()
+    this.getBookedTransferDB();
+    this.getSyncJobs("Get Booked Transfers");
   }
 
   getBookedTransferDB() {
@@ -58,6 +63,35 @@ export class BookedTransferComponent implements OnInit {
           panelClass:"my-snack-bar-fail"
         });
       }
+      this.spinner.hide();
+      this.loading = false;
+    }).catch(err => {
+      console.error(err);
+      this.spinner.hide();
+      this.loading = false;
+    });
+  }
+
+  getSyncJobs(syncJobTypeName:String) {
+    this.spinner.show();
+    this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
+      console.log(res);
+      this.jobs = res;
+      this.spinner.hide();
+      this.loading = false;
+    }).catch(err => {
+      console.error(err);
+      this.spinner.hide();
+      this.loading = false;
+    });
+  }
+
+  getSyncJobData(syncJobId:String) {
+    console.log(syncJobId)
+    this.spinner.show();
+    this.syncJobService.getSyncJobData(syncJobId).toPromise().then((res: any) => {
+      this.bookedTransfer = res.items;
+
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {

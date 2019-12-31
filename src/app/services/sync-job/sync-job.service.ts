@@ -32,4 +32,8 @@ export class SyncJobService {
   getSyncJobs(syncJobTypeName:String){
     return this.http.get<SyncJob[]>(Constants.GET_SYNC_JOBS_URL + '?typeName=' + syncJobTypeName);
   }
+
+  getSyncJobData(syncJobId:String){
+    return this.http.get<SyncJob[]>(Constants.GET_SYNC_JOB_DATA + '?syncJobId=' + syncJobId);
+  }
 }
