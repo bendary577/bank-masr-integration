@@ -29,24 +29,6 @@ export class SuppliersComponent implements OnInit {
     this.getSyncJobs("Get Suppliers");
   }
 
-  runWorker() {
-
-    if (typeof Worker !== 'undefined') {
-      // Create a new
-      const worker = new Worker('./app.worker', { type: 'module' });
-      worker.onmessage = ({ data }) => {
-        console.log(`page got message: ${data}`);
-      };
-      worker.postMessage('hello');
-    } else {
-      console.log("no data");
-
-      // Web Workers are not supported in this environment.
-      // You should add a fallback so that your program still executes correctly.
-    }
-
-  }
-
   getSuppliersDB() {
     this.spinner.show();
     this.supplierService.getSuppliersDB().toPromise().then((res: any) => {
