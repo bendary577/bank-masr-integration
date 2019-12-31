@@ -1,5 +1,7 @@
 <div class="header">
-    <select class="custom-select"  [(ngModel)]="syncJobId" (change)="getSyncJobData(syncJobId)">
+    <select class="custom-select" (change)="getSyncJobData($event.target.value)">
+        <option value="0" hidden selected disabled>Sync Job History </option>
+        
         <option value={{job.id}} *ngFor="let job of jobs">
             {{job.creation_date}} - {{job.status}}</option>
      </select>

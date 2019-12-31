@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ElementRef } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -26,7 +26,8 @@ import {
   MatDatepickerModule, 
   MatNativeDateModule, 
   MatSelectModule, 
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatSidenav
 } from '@angular/material';
 import {SidenavResponsive} from "./components/sidenav/sidenav-responsive";
 import {ConfigurationComponent} from "./components/setting/configuration/configuration.component";
@@ -44,6 +45,7 @@ import { BookedWasteComponent } from './components/booked-waste/booked-waste.com
 import { SuppliersConfiguartionComponent } from './components/suppliers-configuartion/suppliers-configuartion.component';
 import { SchedulerConfigurationComponent } from './components/scheduler-configuration/scheduler-configuration.component';
 import { ApprovedInvoiceConfigurationComponent } from './components/approved-invoice-configuration/approved-invoice-configuration.component';
+import { BookedTransferDetailsComponent } from './components/booked-transfer-details/booked-transfer-details.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,8 @@ import { ApprovedInvoiceConfigurationComponent } from './components/approved-inv
     BookedWasteComponent,
     SuppliersConfiguartionComponent,
     SchedulerConfigurationComponent,
-    ApprovedInvoiceConfigurationComponent
+    ApprovedInvoiceConfigurationComponent,
+    BookedTransferDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,13 @@
 
 <div class="header">
-    <select class="custom-select"  [(ngModel)]="syncJobId" (change)="getSyncJobData(syncJobId)">
-        <option value={{job.id}} *ngFor="let job of jobs">
-            {{job.creation_date}} - {{job.status}}</option>
-     </select>
+        <select class="custom-select" (change)="getSyncJobData($event.target.value)">
+            <option value="0" hidden selected disabled>Sync Job History </option>
+    
+            <option value={{job.id}} *ngFor="let job of jobs">
+                {{job.creation_date}} - {{job.status}}</option>
+         </select>
 
+    
     <button mat-flat-button (click)="getSuppliersSyncJob()">Sync Suppliers Now</button>
 </div>
 <br>

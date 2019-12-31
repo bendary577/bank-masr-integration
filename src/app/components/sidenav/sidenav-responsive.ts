@@ -3,6 +3,7 @@ import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import { Location } from '@angular/common';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJobType } from 'src/app/models/SyncJobType';
+import { MatSidenav } from '@angular/material';
 
 
 /** @title Responsive sidenav */
@@ -18,6 +19,7 @@ export class SidenavResponsive implements OnDestroy,OnInit {
   private _mobileQueryListener: () => void;
 
   shouldRun: boolean=false;
+  // private sidenav: MatSidenav, 
   constructor(private syncJobService: SyncJobService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, location: Location) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -37,6 +39,7 @@ export class SidenavResponsive implements OnDestroy,OnInit {
 
   ngOnInit(): void {
     this.getSyncJobTypes()
+    // this.sidenav.open()
   }
 
   getSyncJobTypes(){

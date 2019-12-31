@@ -17,7 +17,15 @@ export class SuppliersComponent implements OnInit {
   success = null;
   jobs = [];
   dataSource = [];
-  syncJobId = -1;
+  syncJobId = {
+    "id": "5e0b26285d9f127c2f1d9229",
+    "status": "Success",
+    "creation_date": "2019-12-31 10:42:48.460111",
+    "user_id": 12,
+    "sync_job_type_id": "[ObjectId('5e04b78f9a797a6247151b08')]",
+    "deleted": false
+  }
+
   constructor(private spinner: NgxSpinnerService, private supplierService: SupplierService,
     private vendorService: VendorService, private syncJobService: SyncJobService,
     public snackBar: MatSnackBar) {
