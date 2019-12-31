@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit {
         console.log(this.side.getshouldRun);
         return true
       }).catch(err => {
-        if (username.trim() === 'Admin@test.com' && password.trim() === 'Entact123') {
+        if (username.trim() === 'Admin@test.com' && password.trim() === 'Yazyad123') {
           this.spinner.hide();
           this.loading = false;
 
