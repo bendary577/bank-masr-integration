@@ -17,12 +17,7 @@ export class SuppliersComponent implements OnInit {
   success = null;
   jobs = [];
   dataSource = [];
-<<<<<<< HEAD
-
-=======
   syncJobId = -1;
-  
->>>>>>> 5d9a9264c75e5230b3741ad622194992ed1a8355
   constructor(private spinner: NgxSpinnerService, private supplierService: SupplierService,
     private vendorService: VendorService, private syncJobService: SyncJobService,
     public snackBar: MatSnackBar) {
@@ -102,7 +97,7 @@ export class SuppliersComponent implements OnInit {
     });
   }
 
-  getSyncJobData(syncJobId:String) {
+  getSyncJobData(syncJobId: String) {
     console.log(syncJobId)
     this.spinner.show();
     this.syncJobService.getSyncJobData(syncJobId).toPromise().then((res: any) => {
