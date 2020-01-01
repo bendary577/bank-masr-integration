@@ -12,21 +12,17 @@ import { SyncJobType } from 'src/app/models/SyncJobType';
   styleUrls: ['sidenav-responsive.css'],
 })
 export class SidenavResponsive implements OnDestroy,OnInit {
+  shouldRun: boolean=false;
+  selectedTab = "";
   mobileQuery: MediaQueryList;
   syncJobTypes: SyncJobType[] = [];
-
   private _mobileQueryListener: () => void;
-
-  shouldRun: boolean=false;
+  
   constructor(private syncJobService: SyncJobService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, location: Location) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
-
-    console.info(location.path());
-
-
-   this.shouldRun = location.path() !== "/login"&&location.path() !=="/";
+    this.shouldRun = location.path() !== "/login"&&location.path() !=="/";
   }
 
   ngOnDestroy(): void {

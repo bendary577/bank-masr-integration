@@ -13,6 +13,7 @@ import { ApprovedInvoiceComponent } from './components/approved-invoice/approved
 import { BookedTransferComponent } from './components/booked-transfer/booked-transfer.component';
 import { BookedTransferDetailsComponent } from './components/booked-transfer-details/booked-transfer-details.component';
 import { ErrorComponentComponent } from './components/error-component/error-component.component';
+import { CreditNoteComponent } from './components/credit-note/credit-note.component';
 
 
 const routes: Routes = [
@@ -39,6 +40,7 @@ const routes: Routes = [
   { path: Constants.APPROVED_INVOICES_PAGE, component: ApprovedInvoiceComponent },
   { path: Constants.BOOKED_TRANSFER_PAGE, component: BookedTransferComponent },
   { path: Constants.BOOKED_TRANSFER_DETAILS_PAGE + "/:transfer", component: BookedTransferDetailsComponent },
+  { path: Constants.CREDIT_NOTE_PAGE , component: CreditNoteComponent },
 
   // Error Page
   {path:'**', component: ErrorComponentComponent}

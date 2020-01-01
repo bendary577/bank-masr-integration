@@ -47,6 +47,7 @@ import { SchedulerConfigurationComponent } from './components/scheduler-configur
 import { ApprovedInvoiceConfigurationComponent } from './components/approved-invoice-configuration/approved-invoice-configuration.component';
 import { BookedTransferDetailsComponent } from './components/booked-transfer-details/booked-transfer-details.component';
 import { ErrorComponentComponent } from './components/error-component/error-component.component';
+import { CreditNoteComponent } from './components/credit-note/credit-note.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { ErrorComponentComponent } from './components/error-component/error-comp
     SchedulerConfigurationComponent,
     ApprovedInvoiceConfigurationComponent,
     BookedTransferDetailsComponent,
-    ErrorComponentComponent
+    ErrorComponentComponent,
+    CreditNoteComponent
   ],
   imports: [
     BrowserModule,

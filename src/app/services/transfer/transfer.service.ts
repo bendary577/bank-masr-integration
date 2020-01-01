@@ -18,4 +18,9 @@ export class TransferService {
   getBookedTransferDB() {
     return this.http.get(Constants.GET_BOOKED_TRANSFER_DB_URL);
   }
+  
+  @Cacheable()
+  getBookedTransferDetails(transferLink:String) {
+    return this.http.get(Constants.GET_BOOKED_TRANSFER_DETAILS_URL + '?transferLink=' + transferLink);
+  }
 }

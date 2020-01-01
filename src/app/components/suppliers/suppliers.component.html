@@ -11,10 +11,12 @@
     <button mat-flat-button (click)="getSuppliersSyncJob()">Sync Suppliers Now</button>
 </div>
 <br>
-
-<div class="main">
+<h1 class="message" [hidden]="dataSource.length"> There was no new data to sync in this job.</h1>
+<div class="main" [hidden]="!dataSource.length">
     <ngx-datatable *ngIf="!loading" class="material" [rows]="dataSource" [columnMode]="'force'" [headerHeight]="50"
-        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true" [sorts]="[{prop: 'Supplier', dir: 'asc'}]">
+        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true" 
+        [sorts]="[{prop: 'Supplier', dir: 'asc'}, {prop: 'supplierId', dir: 'asc'}, {prop: 'SupplierStatus', dir: 'asc'}, 
+        {prop: 'supplierNumber', dir: 'asc'}]">
         <ngx-datatable-column name="Supplier">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.supplier}}
@@ -25,12 +27,12 @@
                 {{row.supplierId}}
             </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="SupplierStatus">
+        <ngx-datatable-column name="Supplier Status">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.status}}
             </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="SupplierNumber">
+        <ngx-datatable-column name="Supplier Number">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.supplierNumber}}
             </ng-template>

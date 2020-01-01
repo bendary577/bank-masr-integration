@@ -26,8 +26,13 @@ export class Constants {
     static GET_APPROVED_INVOICES_DB_URL = environment.apiHost + '/getApprovedInvoicesDB';
     static GET_COST_CENTER_URL = environment.apiHost + '/getCostCenter';
 
+    static GET_CREDIT_NOTE_URL = environment.apiHost + '/getCreditNote';
+    static GET_CREDIT_NOTE_DB_URL = environment.apiHost + '/getCreditNoteDB';
+
     static GET_BOOKED_TRANSFER_URL = environment.apiHost + '/getBookedTransfer';
     static GET_BOOKED_TRANSFER_DB_URL = environment.apiHost + '/getBookedTransferDB';
+    static GET_BOOKED_TRANSFER_DETAILS_URL = environment.apiHost + '/getBookedTransferDetails';
+
     static GET_BOOKED_WASTE_URL = environment.apiHost + '/getBookedWaste';
     static GET_BOOKED_WASTE_DB_URL = environment.apiHost + '/getBookedWasteDB';
 
@@ -38,6 +43,7 @@ export class Constants {
     static APPROVED_INVOICES_PAGE = 'approvedInvoices';
     static BOOKED_TRANSFER_PAGE = 'bookedTransfers';
     static BOOKED_TRANSFER_DETAILS_PAGE = 'bookedTransfersDetails';
+    static CREDIT_NOTE_PAGE = 'creditNote';
 
     static TABS_PAGE = 'tabs';
     static END_POINT = '/getSuppliers';
