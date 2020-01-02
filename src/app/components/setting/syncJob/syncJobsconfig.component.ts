@@ -9,6 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SuppliersConfiguartionComponent } from '../../suppliers-configuartion/suppliers-configuartion.component';
 import { SchedulerConfigurationComponent } from '../../scheduler-configuration/scheduler-configuration.component';
 import { ApprovedInvoiceConfigurationComponent } from '../../approved-invoice-configuration/approved-invoice-configuration.component';
+import { Route } from '@angular/compiler/src/core';
 
 
 
@@ -29,7 +30,7 @@ export class SyncJobsconfigComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   constructor(private syncJobService: SyncJobService,  public dialog: MatDialog,
-     public snackBar: MatSnackBar, private spinner: NgxSpinnerService) {
+     public snackBar: MatSnackBar, private spinner: NgxSpinnerService, private route: Route) {
   }
 
   ngOnInit() {
@@ -51,6 +52,7 @@ export class SyncJobsconfigComponent implements OnInit {
 
   openDialog(syncJobType){
     if (syncJobType.name == "Get Suppliers"){
+
       this.openDialogSupplier(syncJobType);
     }
     else if (syncJobType.name == "Get Approved Invoices"){
