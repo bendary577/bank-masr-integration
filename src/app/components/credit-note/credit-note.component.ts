@@ -29,7 +29,7 @@ export class CreditNoteComponent implements OnInit {
 
   getCreditNote() {
     this.spinner.show();
-    this.creditNoteService.getCreditNoteDB().toPromise().then((res: any) => {
+    this.syncJobService.getSyncJobData("Get Credit Note").toPromise().then((res: any) => {
       console.log(res.items);
       this.creditNote = res.items;
      
@@ -89,7 +89,7 @@ export class CreditNoteComponent implements OnInit {
   getSyncJobData(syncJobId:String) {
     console.log(syncJobId)
     this.spinner.show();
-    this.syncJobService.getSyncJobData(syncJobId).toPromise().then((res: any) => {
+    this.syncJobService.getSyncJobDataById(syncJobId).toPromise().then((res: any) => {
       this.creditNote = res.items;
 
       this.spinner.hide();

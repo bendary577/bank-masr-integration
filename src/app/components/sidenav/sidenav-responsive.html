@@ -18,16 +18,16 @@
                    >
 
       <mat-nav-list>
-        <a mat-list-item  (click)="snav.toggle()" routerLink="/suppliers">Suppliers</a>
-        <a mat-list-item  (click)="snav.toggle()" routerLink="/bookedTransfers">Booked Transfer</a>
-        <a mat-list-item  (click)="snav.toggle()" routerLink="/approvedInvoices">Approved Invoices</a>
-        <a mat-list-item  (click)="snav.toggle()" routerLink="/creditNote">Credit Note</a>
+        <a mat-list-item  (click)="changeCurrentTab(' - Suppliers'); snav.toggle()" routerLink="/suppliers">Suppliers</a>
+        <a mat-list-item  (click)="changeCurrentTab(' - Booked Transfer'); snav.toggle()" routerLink="/bookedTransfers">Booked Transfer</a>
+        <a mat-list-item  (click)="changeCurrentTab(' - Approved Invoices'); snav.toggle()" routerLink="/approvedInvoices">Approved Invoices</a>
+        <a mat-list-item  (click)="changeCurrentTab(' - Credit Note'); snav.toggle()" routerLink="/creditNote">Credit Note</a>
 
 
         <ul class="Settings">Settings
-          <li><a mat-list-item  (click)="snav.toggle()" routerLink="/syncjobs">Sync Jobs Configuration</a></li>
-          <li><a mat-list-item  (click)="snav.toggle()" routerLink="/setting">General Settings</a></li>
-          <li><a mat-list-item  (click)="snav.toggle()" routerLink="/users">Users</a></li>
+          <li><a mat-list-item  (click)="changeCurrentTab(' - Sync Jobs Configuration'); snav.toggle()" routerLink="/syncjobs">Sync Jobs Configuration</a></li>
+          <li><a mat-list-item  (click)="changeCurrentTab(' - General Settings'); snav.toggle()" routerLink="/setting">General Settings</a></li>
+          <li><a mat-list-item  (click)="changeCurrentTab(' - Users'); snav.toggle()" routerLink="/users">Users</a></li>
         </ul>
 
       </mat-nav-list>

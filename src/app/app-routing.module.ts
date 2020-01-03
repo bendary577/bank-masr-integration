@@ -14,6 +14,8 @@ import { BookedTransferComponent } from './components/booked-transfer/booked-tra
 import { BookedTransferDetailsComponent } from './components/booked-transfer-details/booked-transfer-details.component';
 import { ErrorComponentComponent } from './components/error-component/error-component.component';
 import { CreditNoteComponent } from './components/credit-note/credit-note.component';
+import { SuppliersConfiguartionComponent } from './components/suppliers-configuartion/suppliers-configuartion.component';
+import { ApprovedInvoiceConfigurationComponent } from './components/approved-invoice-configuration/approved-invoice-configuration.component';
 
 
 const routes: Routes = [
@@ -37,10 +39,17 @@ const routes: Routes = [
   // Pages
   { path: Constants.LOGIN_PAGE, component: LoginComponent },
   { path: Constants.SUPPLIERS_PAGE, component: SuppliersComponent },
+  { path: Constants.SUPPLIERS_CONFIG_PAGE + "/:supplier", component: SuppliersConfiguartionComponent },
+
   { path: Constants.APPROVED_INVOICES_PAGE, component: ApprovedInvoiceComponent },
+  { path: Constants.APPROVED_INVOICES_CONFIG_PAGE + "/:invoice", component: ApprovedInvoiceConfigurationComponent },
+
   { path: Constants.BOOKED_TRANSFER_PAGE, component: BookedTransferComponent },
+  // { path: Constants.BOOKED_TRANSFER_CONFIG_PAGE, component: BookedTransferConfigurationComponent },
   { path: Constants.BOOKED_TRANSFER_DETAILS_PAGE + "/:transfer", component: BookedTransferDetailsComponent },
+
   { path: Constants.CREDIT_NOTE_PAGE , component: CreditNoteComponent },
+  // { path: Constants.CREDIT_NOTE_CONFIG_PAGE + "/:creditNote", component: CreditNoteConfigurationComponent },
 
   // Error Page
   {path:'**', component: ErrorComponentComponent}

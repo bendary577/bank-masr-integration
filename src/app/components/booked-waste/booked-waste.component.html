@@ -1,8 +1,23 @@
 <div class="header">
-    <button mat-flat-button (click)="getBookedTransferSyncJob()">Sync Booked Waste Now</button>
+    <button mat-flat-button (click)="getBookedWasteSyncJob()">Sync Booked Waste Now</button>
 </div>
 <br>
-<div class="main">
+<div [hidden]="bookedWaste.length">
+        <mat-card class="example-card">
+                <mat-card-header>
+                  <mat-card-title>No Data</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <p>
+                        There was no new data to sync in this job, You can sync booked transfer now from 
+                    <a  (click)="getBookedWasteSyncJob()">here</a>
+                  </p>
+                  
+                </mat-card-content>
+        </mat-card>
+        </div>
+
+<div class="main" [hidden]="!bookedWaste.length">
 
 <ngx-datatable *ngIf="!loading" class="material" [rows]="bookedWaste" [columnMode]="'force'" [headerHeight]="50"
     [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'wasteGroup', dir: 'asc'}]">

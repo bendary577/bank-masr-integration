@@ -13,7 +13,7 @@ import { SyncJobType } from 'src/app/models/SyncJobType';
 })
 export class SidenavResponsive implements OnDestroy,OnInit {
   shouldRun: boolean=false;
-  selectedTab = "";
+  selectedTab = " - Suppliers";
   mobileQuery: MediaQueryList;
   syncJobTypes: SyncJobType[] = [];
   private _mobileQueryListener: () => void;
@@ -31,6 +31,10 @@ export class SidenavResponsive implements OnDestroy,OnInit {
 
   ngOnInit(): void {
     this.getSyncJobTypes()
+  }
+
+  changeCurrentTab(cuurentTab){
+    this.selectedTab = cuurentTab;
   }
 
   getSyncJobTypes(){

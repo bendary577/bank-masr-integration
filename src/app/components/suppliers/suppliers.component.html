@@ -11,7 +11,21 @@
     <button mat-flat-button (click)="getSuppliersSyncJob()">Sync Suppliers Now</button>
 </div>
 <br>
-<h1 class="message" [hidden]="dataSource.length"> There was no new data to sync in this job.</h1>
+<div [hidden]="dataSource.length">
+        <mat-card class="example-card">
+                <mat-card-header>
+                  <mat-card-title>No Data</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <p>
+                        There was no new data to sync in this job, You can sync suppliers now from 
+                    <a  (click)="getSuppliersSyncJob()">here</a>
+                  </p>
+                  
+                </mat-card-content>
+        </mat-card>
+        </div>
+        
 <div class="main" [hidden]="!dataSource.length">
     <ngx-datatable *ngIf="!loading" class="material" [rows]="dataSource" [columnMode]="'force'" [headerHeight]="50"
         [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true" 

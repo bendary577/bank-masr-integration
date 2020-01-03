@@ -13,6 +13,7 @@ export class Constants {
     static GET_SUPPLIERS_URL = environment.apiHost + '/getSuppliers';
     static LOGIN = environment.apiHost + '/login';
 
+    static GET_SYNC_JOB_DATA_BY_ID = environment.apiHost + '/getSyncJobDataById';
     static GET_SYNC_JOB_DATA = environment.apiHost + '/getSyncJobData';
 
 
@@ -20,8 +21,8 @@ export class Constants {
     static UPDATE_SYNC_JOB_TYPES_URL = environment.apiHost + '/updateSyncJobTypesConfiguration';
     static GET_SYNC_JOBS_URL = environment.apiHost + '/getSyncJobs';
 
-
     static GET_SUPPLIERS_DB_URL = environment.apiHost + '/getSuppliersDB';
+    
     static GET_APPROVED_INVOICES_URL = environment.apiHost + '/getApprovedInvoices';
     static GET_APPROVED_INVOICES_DB_URL = environment.apiHost + '/getApprovedInvoicesDB';
     static GET_COST_CENTER_URL = environment.apiHost + '/getCostCenter';
@@ -39,11 +40,19 @@ export class Constants {
     static LOGIN_PAGE = 'login';
     static HOME_PAGE = 'home';
     static SIDE_NAV = 'sidenav';
+
     static SUPPLIERS_PAGE = 'suppliers';
+    static SUPPLIERS_CONFIG_PAGE = 'suppliersConfig';
+
     static APPROVED_INVOICES_PAGE = 'approvedInvoices';
+    static APPROVED_INVOICES_CONFIG_PAGE = 'approvedInvoicesConfig';
+
     static BOOKED_TRANSFER_PAGE = 'bookedTransfers';
+    static BOOKED_TRANSFER_CONFIG_PAGE = 'bookedTransfersConfig';
     static BOOKED_TRANSFER_DETAILS_PAGE = 'bookedTransfersDetails';
+
     static CREDIT_NOTE_PAGE = 'creditNote';
+    static CREDIT_NOTE_CONFIG_PAGE = 'creditNoteConfig';
 
     static TABS_PAGE = 'tabs';
     static END_POINT = '/getSuppliers';

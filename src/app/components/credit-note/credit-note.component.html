@@ -9,7 +9,22 @@
     <button mat-flat-button (click)="getCreditNoteSyncJob()">Sync Credit Note Now</button>
 </div>
 <br>
-<div class="main">
+<div [hidden]="creditNote.length">
+        <mat-card class="example-card">
+                <mat-card-header>
+                  <mat-card-title>No Data</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <p>
+                        There was no new data to sync in this job, You can sync credit note now from 
+                    <a  (click)="getCreditNoteSyncJob()">here</a>
+                  </p>
+                  
+                </mat-card-content>
+        </mat-card>
+        </div>
+
+<div class="main" [hidden]="!creditNote.length">
     <ngx-datatable *ngIf="!loading" class="material" [rows]="creditNote" [columnMode]="'force'" [headerHeight]="50"
         [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  
         [sorts]="[{prop: 'vendor', dir: 'asc'}, {prop: 'invoiceNo', dir: 'asc'}]">

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AddVendorComponent } from '../add-vendor/add-vendor.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-suppliers-configuartion',
@@ -13,7 +14,8 @@ export class SuppliersConfiguartionComponent implements OnInit {
   formSupplier: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder, public dialogRef: MatDialogRef<SuppliersConfiguartionComponent>) { 
+  constructor(private formBuilder: FormBuilder, public dialogRef: MatDialogRef<SuppliersConfiguartionComponent>,
+    private route:ActivatedRoute) { 
   }
 
   onNoClick(): void {

@@ -9,6 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SuppliersConfiguartionComponent } from '../../suppliers-configuartion/suppliers-configuartion.component';
 import { SchedulerConfigurationComponent } from '../../scheduler-configuration/scheduler-configuration.component';
 import { ApprovedInvoiceConfigurationComponent } from '../../approved-invoice-configuration/approved-invoice-configuration.component';
+import { Router } from '@angular/router';
 
 
 
@@ -29,7 +30,7 @@ export class SyncJobsconfigComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   constructor(private syncJobService: SyncJobService,  public dialog: MatDialog,
-     public snackBar: MatSnackBar, private spinner: NgxSpinnerService) {
+     public snackBar: MatSnackBar, private spinner: NgxSpinnerService, private router: Router) {
   }
 
   ngOnInit() {
@@ -53,9 +54,11 @@ export class SyncJobsconfigComponent implements OnInit {
     if (syncJobType.name == "Get Suppliers"){
 
       this.openDialogSupplier(syncJobType);
+      // this.router.navigate(['suppliersConfig', "syncJobType"]);
     }
     else if (syncJobType.name == "Get Approved Invoices"){
       this.openDialogApprovedInvoice(syncJobType);
+      // this.router.navigate(['approvedInvoicesConfig', syncJobType]);
     }
 
   }
@@ -73,8 +76,10 @@ export class SyncJobsconfigComponent implements OnInit {
 
         this.syncJobService.updateSyncJobTypeConfig(syncJobType).then(result => {
               console.log(result);
-        }).catch(err => {
-          this.spinner.hide();;
+              this.spinner.hide();
+        }
+        ).catch(err => {
+          this.spinner.hide();
           this.snackBar.open('An error has occurred.', null, {
             duration: 2000,
             horizontalPosition: 'right',
@@ -97,7 +102,7 @@ export class SyncJobsconfigComponent implements OnInit {
         // this.syncJobService.updateSyncJobTypeConfig(syncJobType).then(result => {
         //       console.log(result);
         // }).catch(err => {
-        //   this.spinner.hide();;
+        //   this.spinner.hide();
         //   this.snackBar.open('An error has occurred.', null, {
         //     duration: 2000,
         //     horizontalPosition: 'right',
@@ -120,8 +125,10 @@ export class SyncJobsconfigComponent implements OnInit {
 
         this.syncJobService.updateSyncJobTypeConfig(syncJobType).then(result => {
               console.log(result);
+              this.spinner.hide();
+
         }).catch(err => {
-          this.spinner.hide();;
+          this.spinner.hide();
           this.snackBar.open('An error has occurred.', null, {
             duration: 2000,
             horizontalPosition: 'right',

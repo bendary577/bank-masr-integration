@@ -39,7 +39,7 @@ export class SuppliersComponent implements OnInit {
 
   getSuppliersDB() {
     this.spinner.show();
-    this.supplierService.getSuppliersDB().toPromise().then((res: any) => {
+    this.syncJobService.getSyncJobData("Get Suppliers").toPromise().then((res: any) => {
       // console.log(res.items);
       this.dataSource = res.items;
       for (const element of this.dataSource) {
@@ -108,7 +108,7 @@ export class SuppliersComponent implements OnInit {
   getSyncJobData(syncJobId: String) {
     console.log(syncJobId)
     this.spinner.show();
-    this.syncJobService.getSyncJobData(syncJobId).toPromise().then((res: any) => {
+    this.syncJobService.getSyncJobDataById(syncJobId).toPromise().then((res: any) => {
       console.log(res);
       this.dataSource = res.items;
 
