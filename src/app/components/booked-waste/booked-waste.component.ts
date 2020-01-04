@@ -27,8 +27,7 @@ export class BookedWasteComponent implements OnInit {
   getBookedWasteDB() {
     this.spinner.show();
     this.syncJobService.getSyncJobData("Get Booked Waste").toPromise().then((res: any) => {
-      console.log(res.items);
-      this.bookedWaste = res.items;
+      this.bookedWaste = res;
       
       this.spinner.hide();
       this.loading = false;

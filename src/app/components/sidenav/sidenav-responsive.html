@@ -1,7 +1,7 @@
 <mat-toolbar  class="example-toolbar" *ngIf="shouldRun" >
 
   <button id="target" mat-icon-button (click)="snav.toggle()"><mat-icon  color="warn" >menu</mat-icon></button>
-  <h1 class="example-app-name">Oracle Integration System {{selectedTab}}</h1>
+  <h1 class="example-app-name">Oracle Integration System</h1>
 </mat-toolbar>
 
 <div class="example-container" [class.example-is-mobile]="(mobileQuery.matches&&!shouldRun)  "
@@ -18,16 +18,16 @@
                    >
 
       <mat-nav-list>
-        <a mat-list-item  (click)="changeCurrentTab(' - Suppliers'); snav.toggle()" routerLink="/suppliers">Suppliers</a>
-        <a mat-list-item  (click)="changeCurrentTab(' - Booked Transfer'); snav.toggle()" routerLink="/bookedTransfers">Booked Transfer</a>
-        <a mat-list-item  (click)="changeCurrentTab(' - Approved Invoices'); snav.toggle()" routerLink="/approvedInvoices">Approved Invoices</a>
-        <a mat-list-item  (click)="changeCurrentTab(' - Credit Note'); snav.toggle()" routerLink="/creditNote">Credit Note</a>
+        <a mat-list-item  (click)="changeCurrentTab('Suppliers'); snav.toggle()" routerLink="/suppliers">Suppliers</a>
+        <a mat-list-item  (click)="changeCurrentTab('Booked Transfer'); snav.toggle()" routerLink="/bookedTransfers">Booked Transfer</a>
+        <a mat-list-item  (click)="changeCurrentTab('Approved Invoices'); snav.toggle()" routerLink="/approvedInvoices">Approved Invoices</a>
+        <a mat-list-item  (click)="changeCurrentTab('Credit Note'); snav.toggle()" routerLink="/creditNote">Credit Note</a>
 
 
         <ul class="Settings">Settings
-          <li><a mat-list-item  (click)="changeCurrentTab(' - Sync Jobs Configuration'); snav.toggle()" routerLink="/syncjobs">Sync Jobs Configuration</a></li>
-          <li><a mat-list-item  (click)="changeCurrentTab(' - General Settings'); snav.toggle()" routerLink="/setting">General Settings</a></li>
-          <li><a mat-list-item  (click)="changeCurrentTab(' - Users'); snav.toggle()" routerLink="/users">Users</a></li>
+          <li><a mat-list-item  (click)="changeCurrentTab('Sync Jobs Configuration'); snav.toggle()" routerLink="/syncjobs">Sync Jobs Configuration</a></li>
+          <li><a mat-list-item  (click)="changeCurrentTab('General Settings'); snav.toggle()" routerLink="/setting">General Settings</a></li>
+          <li><a mat-list-item  (click)="changeCurrentTab('Users'); snav.toggle()" routerLink="/users">Users</a></li>
         </ul>
 
       </mat-nav-list>

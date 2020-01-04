@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AddVendorComponent } from '../add-vendor/add-vendor.component';
 import { ActivatedRoute } from '@angular/router';
+import { SupplierService } from 'src/app/services/supplier/supplier.service';
 
 @Component({
   selector: 'app-suppliers-configuartion',
@@ -13,27 +14,20 @@ export class SuppliersConfiguartionComponent implements OnInit {
 
   formSupplier: FormGroup;
   submitted = false;
+  limit = null;
+  category = null;
 
-  constructor(private formBuilder: FormBuilder, public dialogRef: MatDialogRef<SuppliersConfiguartionComponent>,
-    private route:ActivatedRoute) { 
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  onSaveClick(): void {
-    this.dialogRef.close({
-      name: this.formSupplier.controls.name.value,
-      limit: this.formSupplier.controls.limit.value
-
-    });
+  constructor(private route:ActivatedRoute, private supplierService: SupplierService) { 
   }
 
   ngOnInit() {
-    this.formSupplier = this.formBuilder.group({
-      name: ['', Validators.required],
-      limit: ['']
-    });
+    this.limit = this.route.snapshot.params["limit"];
+    this.category = this.route.snapshot.params["limcategoryit"];
   }
+
+  onSaveClick(){
+
+  }
+
+
 }

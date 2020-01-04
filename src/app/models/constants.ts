@@ -8,10 +8,12 @@ export class Constants {
     static KEEP_ME_SIGNED_IN = 'keep-me-signed-in';
     static USER_DATA = 'user_data';
     static USER_TOKEN = 'usertoken';
+    static CURRENT_TAB = 'Welcome';
+
+    static LOGIN = environment.apiHost + '/login';
+
     static VENDOR_URL = environment.apiHost + '/getVendors';
     static ADD_VENDOR_URL = environment.apiHost + '/addVendor';
-    static GET_SUPPLIERS_URL = environment.apiHost + '/getSuppliers';
-    static LOGIN = environment.apiHost + '/login';
 
     static GET_SYNC_JOB_DATA_BY_ID = environment.apiHost + '/getSyncJobDataById';
     static GET_SYNC_JOB_DATA = environment.apiHost + '/getSyncJobData';
@@ -21,6 +23,7 @@ export class Constants {
     static UPDATE_SYNC_JOB_TYPES_URL = environment.apiHost + '/updateSyncJobTypesConfiguration';
     static GET_SYNC_JOBS_URL = environment.apiHost + '/getSyncJobs';
 
+    static GET_SUPPLIERS_URL = environment.apiHost + '/getSuppliers';
     static GET_SUPPLIERS_DB_URL = environment.apiHost + '/getSuppliersDB';
     
     static GET_APPROVED_INVOICES_URL = environment.apiHost + '/getApprovedInvoices';

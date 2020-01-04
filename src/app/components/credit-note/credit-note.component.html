@@ -1,3 +1,5 @@
+<h3>Credit Note</h3>
+
 <div class="header">
     <select class="custom-select" (change)="getSyncJobData($event.target.value)">
         <option value="0" hidden selected disabled>Sync Job History </option>
@@ -29,49 +31,60 @@
         [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  
         [sorts]="[{prop: 'vendor', dir: 'asc'}, {prop: 'invoiceNo', dir: 'asc'}]">
 
-        <ngx-datatable-column name="Invoice No">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.invoiceNo}}
-            </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Vendor">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.vendor}}
-            </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Cost Center">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.costCenter}}
-            </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="status">
+        <ngx-datatable-column name="Status">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.status}}
             </ng-template>
         </ngx-datatable-column>
+        <ngx-datatable-column name="Reason">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.reason}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Invoice No">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.data.invoiceNo}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Vendor">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.data.vendor}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Cost Center">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.data.costCenter}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="status">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.data.status}}
+            </ng-template>
+        </ngx-datatable-column>
         <ngx-datatable-column name="Invoice Date">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.invoiceDate}}
+                {{row.data.invoiceDate}}
             </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="Net">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.net}}
+                {{row.data.net}}
             </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="Vat">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.vat}}
+                    {{row.data.vat}}
                 </ng-template>
             </ngx-datatable-column>
         <ngx-datatable-column name="Gross">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.gross}}
+                {{row.data.gross}}
             </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="Created By">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.createdBy}}
+                {{row.data.createdBy}}
             </ng-template>
         </ngx-datatable-column>
     

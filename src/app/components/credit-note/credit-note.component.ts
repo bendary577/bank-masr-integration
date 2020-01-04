@@ -30,8 +30,7 @@ export class CreditNoteComponent implements OnInit {
   getCreditNote() {
     this.spinner.show();
     this.syncJobService.getSyncJobData("Get Credit Note").toPromise().then((res: any) => {
-      console.log(res.items);
-      this.creditNote = res.items;
+      this.creditNote = res;
      
       this.spinner.hide();
       this.loading = false;

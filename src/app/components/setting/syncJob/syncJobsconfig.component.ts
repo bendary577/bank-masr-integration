@@ -37,14 +37,12 @@ export class SyncJobsconfigComponent implements OnInit {
 
     this.dataSource.paginator = this.paginator;
     this.getSyncJobTypes();
-    console.log(this.syncJobTypes[0])
   }
 
 
   getSyncJobTypes(){
     this.syncJobService.getSyncJobTypesDB().toPromise().then((res: any) => {
       this.syncJobTypes = res;
-      console.log(res[0])
     }).catch(err => {
       console.error(err);
     });
@@ -53,8 +51,8 @@ export class SyncJobsconfigComponent implements OnInit {
   openDialog(syncJobType){
     if (syncJobType.name == "Get Suppliers"){
 
-      this.openDialogSupplier(syncJobType);
-      // this.router.navigate(['suppliersConfig', "syncJobType"]);
+      // this.openDialogSupplier(syncJobType);
+      this.router.navigate(['suppliersConfig', syncJobType.configuration.limit, syncJobType.configuration.category]);
     }
     else if (syncJobType.name == "Get Approved Invoices"){
       this.openDialogApprovedInvoice(syncJobType);

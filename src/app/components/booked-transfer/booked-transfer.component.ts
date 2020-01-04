@@ -32,7 +32,7 @@ export class BookedTransferComponent implements OnInit {
   getBookedTransferDB() {
     this.spinner.show();
     this.syncJobService.getSyncJobData("Get Booked Transfers").toPromise().then((res: any) => {
-      this.bookedTransfer = res.items;
+      this.bookedTransfer = res;
       
       this.spinner.hide();
       this.loading = false;

@@ -3,6 +3,7 @@ import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import { Location } from '@angular/common';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJobType } from 'src/app/models/SyncJobType';
+import { Constants } from 'src/app/models/constants';
 
 
 /** @title Responsive sidenav */
@@ -13,7 +14,7 @@ import { SyncJobType } from 'src/app/models/SyncJobType';
 })
 export class SidenavResponsive implements OnDestroy,OnInit {
   shouldRun: boolean=false;
-  selectedTab = " - Suppliers";
+  selectedTab = Constants.CURRENT_TAB;
   mobileQuery: MediaQueryList;
   syncJobTypes: SyncJobType[] = [];
   private _mobileQueryListener: () => void;
@@ -34,6 +35,7 @@ export class SidenavResponsive implements OnDestroy,OnInit {
   }
 
   changeCurrentTab(cuurentTab){
+    Constants.CURRENT_TAB = cuurentTab
     this.selectedTab = cuurentTab;
   }
 

@@ -30,8 +30,7 @@ export class ApprovedInvoiceComponent implements OnInit {
   getApprovedInvoices() {
     this.spinner.show();
     this.syncJobService.getSyncJobData("Get Approved Invoices").toPromise().then((res: any) => {
-      console.log(res.items);
-      this.approvedInvoices = res.items;
+      this.approvedInvoices = res;
      
       this.spinner.hide();
       this.loading = false;

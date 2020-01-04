@@ -40,8 +40,7 @@ export class SuppliersComponent implements OnInit {
   getSuppliersDB() {
     this.spinner.show();
     this.syncJobService.getSyncJobData("Get Suppliers").toPromise().then((res: any) => {
-      // console.log(res.items);
-      this.dataSource = res.items;
+      this.dataSource = res;
       for (const element of this.dataSource) {
         if (this.vendorService.vendorAccountIDS.indexOf(element.SupplierNumber) !== -1) {
           element.exists = true;
