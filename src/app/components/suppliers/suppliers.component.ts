@@ -108,8 +108,7 @@ export class SuppliersComponent implements OnInit {
     console.log(syncJobId)
     this.spinner.show();
     this.syncJobService.getSyncJobDataById(syncJobId).toPromise().then((res: any) => {
-      console.log(res);
-      this.dataSource = res.items;
+      this.dataSource = res;
 
       this.spinner.hide();
       this.loading = false;

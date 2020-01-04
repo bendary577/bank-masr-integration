@@ -29,7 +29,6 @@ export class SyncJobService {
     return this.http.put(Constants.UPDATE_SYNC_JOB_TYPES_URL , SyncJobType).toPromise();
   }
 
-  @Cacheable()
   getSyncJobs(syncJobTypeName:String){
     return this.http.get<SyncJob[]>(Constants.GET_SYNC_JOBS_URL + '?typeName=' + syncJobTypeName);
   }

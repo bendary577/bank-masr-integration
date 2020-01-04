@@ -57,16 +57,14 @@ export class BookedTransferComponent implements OnInit {
           panelClass:"my-snack-bar-success"
         });
       }
-      else{
-        this.snackBar.open('Sync Booked Transfers Failed', null, {
-          duration: 2000,
-          horizontalPosition: 'center',
-          panelClass:"my-snack-bar-fail"
-        });
-      }
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
+      this.snackBar.open('Sync Booked Transfers Failed', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
       console.error(err);
       this.spinner.hide();
       this.loading = false;
@@ -91,7 +89,7 @@ export class BookedTransferComponent implements OnInit {
     console.log(syncJobId)
     this.spinner.show();
     this.syncJobService.getSyncJobDataById(syncJobId).toPromise().then((res: any) => {
-      this.bookedTransfer = res.items;
+      this.bookedTransfer = res;
 
       this.spinner.hide();
       this.loading = false;
