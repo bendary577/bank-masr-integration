@@ -4,7 +4,7 @@
     <button mat-flat-button (click)="getBookedWasteSyncJob()">Sync Booked Waste Now</button>
 </div>
 <br>
-<div [hidden]="bookedWaste.length">
+<div *ngIf="!bookedWaste.length">
         <mat-card class="example-card">
                 <mat-card-header>
                   <mat-card-title>No Data</mat-card-title>
@@ -19,7 +19,7 @@
         </mat-card>
         </div>
 
-<div class="main" [hidden]="!bookedWaste.length">
+<div class="main" *ngIf="bookedWaste.length">
 
 <ngx-datatable *ngIf="!loading" class="material" [rows]="bookedWaste" [columnMode]="'force'" [headerHeight]="50"
     [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'wasteGroup', dir: 'asc'}]">

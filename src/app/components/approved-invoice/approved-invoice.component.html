@@ -13,7 +13,9 @@
 <br>
 <div>
 
-<div [hidden]="approvedInvoices.length">
+<div>
+
+<div *ngIf="!approvedInvoices.length">
         <mat-card class="example-card">
                 <mat-card-header>
                   <mat-card-title>No Data</mat-card-title>
@@ -28,7 +30,7 @@
         </mat-card>
         </div>
 
-<div class="main" [hidden]="!approvedInvoices.length">
+<div class="main" *ngIf="approvedInvoices.length">
     <ngx-datatable *ngIf="!loading" class="material" [rows]="approvedInvoices" [columnMode]="'force'" [headerHeight]="50"
         [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'vendor', dir: 'asc'}, {prop: 'invoiceNo', dir: 'asc'}]">
 
@@ -91,6 +93,8 @@
     
     </ngx-datatable>
 </div>
-<ngx-spinner></ngx-spinner>
 
 <div>
+    <ngx-spinner></ngx-spinner>
+
+</div>

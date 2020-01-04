@@ -11,7 +11,8 @@
     <button mat-flat-button (click)="getCreditNoteSyncJob()">Sync Credit Note Now</button>
 </div>
 <br>
-<div [hidden]="creditNote.length">
+<div>
+    <div *ngIf="!creditNote.length">
         <mat-card class="example-card">
                 <mat-card-header>
                   <mat-card-title>No Data</mat-card-title>
@@ -26,7 +27,7 @@
         </mat-card>
         </div>
 
-<div class="main" [hidden]="!creditNote.length">
+<div class="main" *ngIf="creditNote.length">
     <ngx-datatable *ngIf="!loading" class="material" [rows]="creditNote" [columnMode]="'force'" [headerHeight]="50"
         [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  
         [sorts]="[{prop: 'vendor', dir: 'asc'}, {prop: 'invoiceNo', dir: 'asc'}]">
@@ -89,5 +90,6 @@
         </ngx-datatable-column>
     
     </ngx-datatable>
-    <ngx-spinner></ngx-spinner>
+</div>
+<ngx-spinner></ngx-spinner>
 </div>

@@ -1,7 +1,29 @@
 <h3>Booked Transfer Details</h3>
-<br>
 
-<div class="main">
+<div *ngIf="!transferDetails.length">
+    <br>
+    <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-title>No Data</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p>
+                    There was no details in this transfer. 
+                <a  (click)="back()">back</a>
+              </p>
+              
+            </mat-card-content>
+    </mat-card>
+    </div>
+    
+<div>
+
+<div class="main" *ngIf="transferDetails.length">
+
+    <div class="header">
+        <button mat-flat-button (click)="back()">Back</button>
+    </div>
+    <br>
 
 <ngx-datatable *ngIf="!loading" class="material" [rows]="transferDetails" [columnMode]="'force'" [headerHeight]="50"
     [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'status', dir: 'asc'}]">
@@ -48,5 +70,7 @@
         </ngx-datatable-column>
 
 </ngx-datatable>
+
+</div>
 <ngx-spinner></ngx-spinner>
 </div>

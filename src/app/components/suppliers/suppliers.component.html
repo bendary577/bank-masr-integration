@@ -12,7 +12,7 @@
     <button mat-flat-button (click)="getSuppliersSyncJob()">Sync Suppliers Now</button>
 </div>
 <br>
-<div [hidden]="dataSource.length">
+<div *ngIf="!dataSource.length">
         <mat-card class="example-card">
                 <mat-card-header>
                   <mat-card-title>No Data</mat-card-title>
@@ -33,7 +33,7 @@
     </mat-form-field>
     </div>        -->
         
-<div class="main" [hidden]="!dataSource.length">
+<div class="main" *ngIf="dataSource.length">
     <ngx-datatable *ngIf="!loading" class="material" [rows]="dataSource" [columnMode]="'force'" [headerHeight]="50"
         [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true" 
         [sorts]="[{prop: 'supplier', dir: 'asc'}, {prop: 'supplierId', dir: 'asc'}, {prop: 'supplierStatus', dir: 'asc'}, 
