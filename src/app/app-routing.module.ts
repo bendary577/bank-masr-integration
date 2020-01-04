@@ -39,10 +39,10 @@ const routes: Routes = [
   // Pages
   { path: Constants.LOGIN_PAGE, component: LoginComponent },
   { path: Constants.SUPPLIERS_PAGE, component: SuppliersComponent },
-  { path: Constants.SUPPLIERS_CONFIG_PAGE + "/:limit/:category" , component: SuppliersConfiguartionComponent },
+  { path: Constants.SUPPLIERS_CONFIG_PAGE, component: SuppliersConfiguartionComponent },
 
   { path: Constants.APPROVED_INVOICES_PAGE, component: ApprovedInvoiceComponent },
-  { path: Constants.APPROVED_INVOICES_CONFIG_PAGE + "/:invoice", component: ApprovedInvoiceConfigurationComponent },
+  { path: Constants.APPROVED_INVOICES_CONFIG_PAGE, component: ApprovedInvoiceConfigurationComponent },
 
   { path: Constants.BOOKED_TRANSFER_PAGE, component: BookedTransferComponent },
   // { path: Constants.BOOKED_TRANSFER_CONFIG_PAGE, component: BookedTransferConfigurationComponent },

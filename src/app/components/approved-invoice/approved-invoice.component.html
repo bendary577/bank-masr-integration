@@ -11,6 +11,8 @@
     <button mat-flat-button (click)="getApprovedInvoicesSyncJob()">Sync Apprved Invoices Now</button>
 </div>
 <br>
+<div>
+
 <div [hidden]="approvedInvoices.length">
         <mat-card class="example-card">
                 <mat-card-header>
@@ -43,27 +45,27 @@
         
         <ngx-datatable-column name="Invoice No">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.invoiceNo}}
+                {{row.data.invoiceNo}}
             </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="Vendor">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.vendor}}
+                {{row.data.vendor}}
             </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="Cost Center">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.costCenter}}
+                {{row.data.costCenter}}
             </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="status">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.status}}
+                {{row.data.status}}
             </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="Invoice Date">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.data.invoice_date}}
+                {{row.data.invoiceDate}}
             </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="Net">
@@ -88,5 +90,7 @@
         </ngx-datatable-column>
     
     </ngx-datatable>
-    <ngx-spinner></ngx-spinner>
 </div>
+<ngx-spinner></ngx-spinner>
+
+<div>

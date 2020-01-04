@@ -54,6 +54,9 @@ export class Constants {
     static BOOKED_TRANSFER_CONFIG_PAGE = 'bookedTransfersConfig';
     static BOOKED_TRANSFER_DETAILS_PAGE = 'bookedTransfersDetails';
 
+    static BOOKED_WASTE_PAGE = 'bookedWastes';
+    static BOOKED_WASTE_CONFIG_PAGE = 'bookedWastesConfig';
+
     static CREDIT_NOTE_PAGE = 'creditNote';
     static CREDIT_NOTE_CONFIG_PAGE = 'creditNoteConfig';
 

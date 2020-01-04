@@ -4,6 +4,8 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AddVendorComponent } from '../add-vendor/add-vendor.component';
 import { InvoiceService } from 'src/app/services/invoice/invoice.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
+import { Constants } from 'src/app/models/constants';
 
 @Component({
   selector: 'app-approved-invoice-configuration',
@@ -17,18 +19,12 @@ export class ApprovedInvoiceConfigurationComponent implements OnInit {
   loading = true;
   costCenters = [];
 
-  constructor(private formBuilder: FormBuilder, public dialogRef: MatDialogRef<ApprovedInvoiceConfigurationComponent>,
-    private spinner: NgxSpinnerService, private invoiceService:InvoiceService) { 
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
+  constructor(private formBuilder: FormBuilder,private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
+    private router:Router) { 
   }
 
   onSaveClick(): void {
-    this.dialogRef.close({
-      name: this.formSupplier.controls.name.value,
-    });
+    this.router.navigate([Constants.SYNC_JOBS]);
   }
 
   ngOnInit() {
@@ -42,7 +38,6 @@ export class ApprovedInvoiceConfigurationComponent implements OnInit {
     this.spinner.show();
     this.loading = true;
     this.invoiceService.getCostCenter().toPromise().then((res: any) => {
-      // console.log(res);
       this.costCenters = res.data;
 
       this.spinner.hide();
