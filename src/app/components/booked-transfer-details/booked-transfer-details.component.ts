@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TransferService } from 'src/app/services/transfer/transfer.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Constants } from 'src/app/models/constants';
 
 @Component({
   selector: 'app-booked-transfer-details',
@@ -14,12 +15,16 @@ export class BookedTransferDetailsComponent implements OnInit {
   transferDetails = [];
 
   constructor(private route:ActivatedRoute, private spinner: NgxSpinnerService,
-     private transferService: TransferService) { }
+     private transferService: TransferService, private router:Router) { }
 
   ngOnInit() {
     this.transferDetailsLink = this.route.snapshot.params["transfer"];
     console.log(this.transferDetailsLink);
     this.getBookedTransferDetails();
+  }
+
+  back(){
+    this.router.navigate([Constants.BOOKED_TRANSFER_PAGE]);
   }
 
   getBookedTransferDetails() {

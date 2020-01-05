@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatSnackBar } from '@angular/material';
 import { WasteService } from 'src/app/services/waste/waste.service';
+import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 
 @Component({
   selector: 'app-booked-waste',
@@ -15,19 +16,18 @@ export class BookedWasteComponent implements OnInit {
   bookedWaste = [];
 
   constructor(private spinner: NgxSpinnerService, private wasteService: WasteService,
-    public snackBar: MatSnackBar) {
+    public snackBar: MatSnackBar, private syncJobService:SyncJobService) {
 
   }
 
   ngOnInit() {
-    this.getBookedTransferDB()
+    this.getBookedWasteDB()
   }
 
-  getBookedTransferDB() {
+  getBookedWasteDB() {
     this.spinner.show();
-    this.wasteService.getBookedWasteDB().toPromise().then((res: any) => {
-      console.log(res.items);
-      this.bookedWaste = res.items;
+    this.syncJobService.getSyncJobData("Get Booked Waste").toPromise().then((res: any) => {
+      this.bookedWaste = res;
       
       this.spinner.hide();
       this.loading = false;
@@ -38,21 +38,21 @@ export class BookedWasteComponent implements OnInit {
     });
   }
 
-  getBookedTransferSyncJob() {
+  getBookedWasteSyncJob() {
     this.spinner.show();
     this.wasteService.getBookedWaste().toPromise().then((res: any) => {
       this.success = res.success;
-      this.getBookedTransferDB();
+      this.getBookedWasteDB();
 
       if (this.success){
-        this.snackBar.open('Sync Booked Transfers Successfully', null, {
+        this.snackBar.open('Sync Booked Waste Successfully', null, {
           duration: 2000,
           horizontalPosition: 'center',
           panelClass:"my-snack-bar-success"
         });
       }
       else{
-        this.snackBar.open('Sync Booked Transfers Failed', null, {
+        this.snackBar.open('Sync Booked Waste Failed', null, {
           duration: 2000,
           horizontalPosition: 'center',
           panelClass:"my-snack-bar-fail "

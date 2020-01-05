@@ -9,6 +9,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SuppliersConfiguartionComponent } from '../../suppliers-configuartion/suppliers-configuartion.component';
 import { SchedulerConfigurationComponent } from '../../scheduler-configuration/scheduler-configuration.component';
 import { ApprovedInvoiceConfigurationComponent } from '../../approved-invoice-configuration/approved-invoice-configuration.component';
+import { Router, NavigationExtras } from '@angular/router';
+import { Constants } from 'src/app/models/constants';
 
 
 
@@ -29,21 +31,19 @@ export class SyncJobsconfigComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   constructor(private syncJobService: SyncJobService,  public dialog: MatDialog,
-     public snackBar: MatSnackBar, private spinner: NgxSpinnerService) {
+     public snackBar: MatSnackBar, private spinner: NgxSpinnerService, private router: Router) {
   }
 
   ngOnInit() {
 
     this.dataSource.paginator = this.paginator;
     this.getSyncJobTypes();
-    console.log(this.syncJobTypes[0])
   }
 
 
   getSyncJobTypes(){
     this.syncJobService.getSyncJobTypesDB().toPromise().then((res: any) => {
       this.syncJobTypes = res;
-      console.log(res[0])
     }).catch(err => {
       console.error(err);
     });
@@ -51,14 +51,34 @@ export class SyncJobsconfigComponent implements OnInit {
 
   openDialog(syncJobType){
     if (syncJobType.name == "Get Suppliers"){
+      let navigationExtras: NavigationExtras = {
+        queryParams: 
+        {
+          "limit": syncJobType.configuration.limit,
+          "category": syncJobType.configuration.category
+        }
+      };
+    this.router.navigate([Constants.SUPPLIERS_CONFIG_PAGE], navigationExtras);
 
-      this.openDialogSupplier(syncJobType);
     }
     else if (syncJobType.name == "Get Approved Invoices"){
-      this.openDialogApprovedInvoice(syncJobType);
+      this.router.navigate([Constants.APPROVED_INVOICES_CONFIG_PAGE]);
+    }
+    else if (syncJobType.name == "Get Booked Transfers"){
+      this.router.navigate([Constants.BOOKED_TRANSFER_CONFIG_PAGE]);
+    }
+    else if (syncJobType.name == "Get Booked Waste"){
+      this.router.navigate([Constants.BOOKED_WASTE_CONFIG_PAGE]);
+    }
+    else if (syncJobType.name == "Get Credit Note"){
+      this.router.navigate([Constants.CREDIT_NOTE_CONFIG_PAGE]);
+    }
+    else{
+      // add snack bar
     }
 
   }
+
   openDialogSupplier(syncJobType){
     console.log(syncJobType);
     const dialogRef = this.dialog.open(SuppliersConfiguartionComponent, {
@@ -73,36 +93,15 @@ export class SyncJobsconfigComponent implements OnInit {
 
         this.syncJobService.updateSyncJobTypeConfig(syncJobType).then(result => {
               console.log(result);
-        }).catch(err => {
-          this.spinner.hide();;
+              this.spinner.hide();
+        }
+        ).catch(err => {
+          this.spinner.hide();
           this.snackBar.open('An error has occurred.', null, {
             duration: 2000,
             horizontalPosition: 'right',
           });
         });
-      }
-    });
-  }
-
-  openDialogApprovedInvoice(syncJobType){
-    const dialogRef = this.dialog.open(ApprovedInvoiceConfigurationComponent, {
-      width: '550px'
-    });
-
-    dialogRef.afterClosed().subscribe(res => {
-      if (res) {
-        // this.spinner.show();
-        // syncJobType.configuration.limit = res.limit;
-
-        // this.syncJobService.updateSyncJobTypeConfig(syncJobType).then(result => {
-        //       console.log(result);
-        // }).catch(err => {
-        //   this.spinner.hide();;
-        //   this.snackBar.open('An error has occurred.', null, {
-        //     duration: 2000,
-        //     horizontalPosition: 'right',
-        //   });
-        // });
       }
     });
   }
@@ -120,8 +119,10 @@ export class SyncJobsconfigComponent implements OnInit {
 
         this.syncJobService.updateSyncJobTypeConfig(syncJobType).then(result => {
               console.log(result);
+              this.spinner.hide();
+
         }).catch(err => {
-          this.spinner.hide();;
+          this.spinner.hide();
           this.snackBar.open('An error has occurred.', null, {
             duration: 2000,
             horizontalPosition: 'right',

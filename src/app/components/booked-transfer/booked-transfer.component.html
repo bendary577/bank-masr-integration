@@ -1,3 +1,4 @@
+<h3>Booked Transfer</h3>
 <div class="header">
     <select class="custom-select" (change)="getSyncJobData($event.target.value)">
         <option value="0" hidden selected disabled>Sync Job History </option>
@@ -9,62 +10,91 @@
     <button mat-flat-button (click)="getBookedTransferSyncJob()">Sync Booked Transfer Now</button>
 </div>
 <br>
-<div class="main">
 
-<ngx-datatable *ngIf="!loading" class="material" [rows]="bookedTransfer" [columnMode]="'force'" [headerHeight]="50"
-    [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'status', dir: 'asc'}]">
-    <ngx-datatable-column name="Details">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                <a (click)="showDetails(row.details_link)">Click here</a>
-            </ng-template>
-        </ngx-datatable-column>
+<div>
 
-    <ngx-datatable-column name="status">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.status}}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="From Cost Center">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.fromCostCenter}}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="To Cost Center">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.toCostCenter}}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Delivery Date">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.deliveryDate}}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Reference">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.reference}}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Changed By">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.changedBy}}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Created At">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.changedAt}}
-            </ng-template>
-        </ngx-datatable-column>
-    <ngx-datatable-column name="Created By">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.createdBy}}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Created At">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.createdAt}}
-        </ng-template>
-    </ngx-datatable-column>
-
-</ngx-datatable>
-<ngx-spinner></ngx-spinner>
+    <div *ngIf="!bookedTransfer.length">
+        <mat-card class="example-card">
+                <mat-card-header>
+                  <mat-card-title>No Data</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <p>
+                        There was no new data to sync in this job, You can sync booked transfer now from 
+                    <a  (click)="getBookedTransferSyncJob()">here</a>
+                  </p>
+                  
+                </mat-card-content>
+        </mat-card>
+        </div>
+        
+        <div class="main" *ngIf="bookedTransfer.length">  
+        <ngx-datatable *ngIf="!loading" class="material" [rows]="bookedTransfer" [columnMode]="'force'" [headerHeight]="50"
+            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'status', dir: 'asc'}]">
+            <ngx-datatable-column name="Status">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.status}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Reason">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.reason}}
+                </ng-template>
+            </ngx-datatable-column>
+        
+            <ngx-datatable-column name="Details">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <a (click)="showDetails(row.data.details_link)">Click here</a>
+                    </ng-template>
+                </ngx-datatable-column>
+        
+            <ngx-datatable-column name="status">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.status}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="From Cost Center">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.fromCostCenter}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="To Cost Center">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.toCostCenter}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Delivery Date">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.deliveryDate}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Reference">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.reference}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Changed By">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.changedBy}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Created At">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.changedAt}}
+                    </ng-template>
+                </ngx-datatable-column>
+            <ngx-datatable-column name="Created By">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.createdBy}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Created At">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.createdAt}}
+                </ng-template>
+            </ngx-datatable-column>
+        
+        </ngx-datatable>
+        </div>
+        <ngx-spinner></ngx-spinner>
 </div>

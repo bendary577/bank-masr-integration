@@ -29,9 +29,8 @@ export class CreditNoteComponent implements OnInit {
 
   getCreditNote() {
     this.spinner.show();
-    this.creditNoteService.getCreditNoteDB().toPromise().then((res: any) => {
-      console.log(res.items);
-      this.creditNote = res.items;
+    this.syncJobService.getSyncJobData("Get Credit Note").toPromise().then((res: any) => {
+      this.creditNote = res;
      
       this.spinner.hide();
       this.loading = false;
@@ -75,8 +74,8 @@ export class CreditNoteComponent implements OnInit {
   getSyncJobs(syncJobTypeName:String) {
     this.spinner.show();
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
-      console.log(res);
       this.jobs = res;
+      
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
@@ -89,8 +88,8 @@ export class CreditNoteComponent implements OnInit {
   getSyncJobData(syncJobId:String) {
     console.log(syncJobId)
     this.spinner.show();
-    this.syncJobService.getSyncJobData(syncJobId).toPromise().then((res: any) => {
-      this.creditNote = res.items;
+    this.syncJobService.getSyncJobDataById(syncJobId).toPromise().then((res: any) => {
+      this.creditNote = res;
 
       this.spinner.hide();
       this.loading = false;

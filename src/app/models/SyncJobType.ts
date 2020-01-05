@@ -1,8 +1,10 @@
+
 export class SyncJobType {
-    name: string;
-    description: string;
-    end_point: string;
-    creation_data:string;
-    configuration: string;
-    deleted: boolean;
+    public name: string;
+    public description: string;
+    public end_point: string;
+    public creation_data:string;
+    public configuration: object;
+    public duration: string
+    public deleted: boolean;
 }

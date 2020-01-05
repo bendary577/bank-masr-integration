@@ -23,6 +23,12 @@
     min-width: 161.59px;
   }
   
+  .example-card {
+    width: 50%;
+    margin: auto;
+    padding: 10px;
+  }
+  
   @keyframes spinner {
     to {
       transform: rotate(360deg);
