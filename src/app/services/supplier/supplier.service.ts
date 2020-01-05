@@ -17,4 +17,11 @@ export class SupplierService {
   getSuppliersDB() {
     return this.http.get(Constants.GET_SUPPLIERS_DB_URL);
   }
+
+  getSuppliersTaxes() {
+    return this.http.get(Constants.GET_SUPPLIERS_TAXES_URL);
+  }
+  getSuppliersGroups() {
+    return this.http.get(Constants.GET_SUPPLIERS_GROUPS_URL);
+  }
 }
