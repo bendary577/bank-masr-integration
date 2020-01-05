@@ -1,8 +1,8 @@
 export class SyncJobData {
-    name: string;
-    description: string;
-    end_point: string;
+    data: object;
+    status: string;
+    reason: string;
     creation_data:string;
-    configuration: string;
+    sync_job_id: string;
     deleted: boolean;
 }
