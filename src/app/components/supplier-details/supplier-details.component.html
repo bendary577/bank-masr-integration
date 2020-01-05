@@ -1,6 +1,6 @@
-<h3>Booked Transfer Details</h3>
+<h3>Supplier Details</h3>
 
-<div *ngIf="!transferDetails.length">
+<div *ngIf="!supplier.length">
     <br>
     <mat-card class="example-card">
             <mat-card-header>
@@ -8,7 +8,7 @@
             </mat-card-header>
             <mat-card-content>
               <p>
-                    There was no details in this transfer. 
+                    There was no details in this Supplier. 
                 <a  (click)="back()">back</a>
               </p>
               
@@ -18,54 +18,63 @@
     
 <div>
 
-<div class="main" *ngIf="transferDetails.length">
+<div class="main" *ngIf="supplier.length">
+
     <div class="header">
-
-    <button mat-flat-button (click)="back()">Back</button>
+        <button mat-flat-button (click)="back()">Back</button>
     </div>
-    <br>
-
-<ngx-datatable *ngIf="!loading" class="material" [rows]="transferDetails" [columnMode]="'force'" [headerHeight]="50"
+    <br>  
+<ngx-datatable *ngIf="!loading" class="material" [rows]="supplier" [columnMode]="'force'" [headerHeight]="50"
     [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'status', dir: 'asc'}]">
 
-    <ngx-datatable-column name="Item/Recipe_no.">
+    <ngx-datatable-column name="Customer Number">
         <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.recipeNo}}
+            {{row.customerNumber}}
         </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column name="Item">
+    <ngx-datatable-column name="Phone Number">
         <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.item}}
+            {{row.phoneNumber}}
         </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column name="Unit">
+    <ngx-datatable-column name="Email">
         <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.unit}}
+            {{row.email}}
         </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column name="qty">
+    <ngx-datatable-column name="Address">
         <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.qty}}
+            {{row.address}}
         </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column name="Par">
+    <ngx-datatable-column name="Line1">
         <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.par}}
+            {{row.line1}}
         </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column name="Price">
+    <ngx-datatable-column name="Line2">
         <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.price}}
+            {{row.line2}}
         </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column name="Total">
+    <ngx-datatable-column name="Line3">
         <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.total}}
+            {{row.line3}}
         </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column name="Reference">
+    <ngx-datatable-column name="Fax Country Code">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.faxCountryCode}}
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Fax Area Code">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.faxAreaCode}}
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Fax Number">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.reference}}
+                {{row.faxNumber}}
             </ng-template>
         </ngx-datatable-column>
 

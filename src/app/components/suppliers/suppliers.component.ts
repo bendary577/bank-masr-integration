@@ -4,6 +4,9 @@ import { MatSnackBar } from '@angular/material';
 import { SupplierService } from 'src/app/services/supplier/supplier.service';
 import { VendorService } from 'src/app/services/vendor/vendor.service';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
+import { Constants } from 'src/app/models/constants';
+import { Router } from '@angular/router';
+import { Data } from 'src/app/models/data';
 
 
 
@@ -28,7 +31,7 @@ export class SuppliersComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService, private supplierService: SupplierService,
     private vendorService: VendorService, private syncJobService: SyncJobService,
-    public snackBar: MatSnackBar) {
+    public snackBar: MatSnackBar, private router: Router, private data: Data) {
 
   }
 
@@ -93,7 +96,6 @@ export class SuppliersComponent implements OnInit {
   getSyncJobs(syncJobTypeName: String) {
     this.spinner.show();
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
-      console.log(res);
       this.jobs = res;
       this.spinner.hide();
       this.loading = false;
@@ -105,7 +107,6 @@ export class SuppliersComponent implements OnInit {
   }
 
   getSyncJobData(syncJobId: String) {
-    console.log(syncJobId)
     this.spinner.show();
     this.syncJobService.getSyncJobDataById(syncJobId).toPromise().then((res: any) => {
       this.dataSource = res;
@@ -117,6 +118,11 @@ export class SuppliersComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
     });
+  }
+
+  showDetails(syncJobData){
+    this.data.storage = syncJobData
+    this.router.navigate([Constants.SUPPLIERS_DETAILS_PAGE])
   }
 
 

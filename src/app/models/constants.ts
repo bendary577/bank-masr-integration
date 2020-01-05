@@ -25,6 +25,7 @@ export class Constants {
 
     static GET_SUPPLIERS_URL = environment.apiHost + '/getSuppliers';
     static GET_SUPPLIERS_DB_URL = environment.apiHost + '/getSuppliersDB';
+    static GET_SUPPLIERS_DETAILS_URL = environment.apiHost + '/getSuppliersDetails';
     
     static GET_APPROVED_INVOICES_URL = environment.apiHost + '/getApprovedInvoices';
     static GET_APPROVED_INVOICES_DB_URL = environment.apiHost + '/getApprovedInvoicesDB';
@@ -46,6 +47,7 @@ export class Constants {
 
     static SUPPLIERS_PAGE = 'suppliers';
     static SUPPLIERS_CONFIG_PAGE = 'suppliersConfig';
+    static SUPPLIERS_DETAILS_PAGE = 'suppliersDetails';
 
     static APPROVED_INVOICES_PAGE = 'approvedInvoices';
     static APPROVED_INVOICES_CONFIG_PAGE = 'approvedInvoicesConfig';

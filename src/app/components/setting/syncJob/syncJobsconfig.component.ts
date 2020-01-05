@@ -3,6 +3,7 @@ import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
 import {MatExpansionPanel, MatPaginator, MatTableDataSource, MatDialog, MatSnackBar} from "@angular/material";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {User} from "../../../models/user";
+import {Data} from "../../../models/data";
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -31,7 +32,8 @@ export class SyncJobsconfigComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   constructor(private syncJobService: SyncJobService,  public dialog: MatDialog,
-     public snackBar: MatSnackBar, private spinner: NgxSpinnerService, private router: Router) {
+     public snackBar: MatSnackBar, private spinner: NgxSpinnerService, private router: Router,
+     private data: Data ){
   }
 
   ngOnInit() {
@@ -51,15 +53,8 @@ export class SyncJobsconfigComponent implements OnInit {
 
   openDialog(syncJobType){
     if (syncJobType.name == "Get Suppliers"){
-      let navigationExtras: NavigationExtras = {
-        queryParams: 
-        {
-          "limit": syncJobType.configuration.limit,
-          "category": syncJobType.configuration.category
-        }
-      };
-    this.router.navigate([Constants.SUPPLIERS_CONFIG_PAGE], navigationExtras);
-
+      this.data.storage = syncJobType
+      this.router.navigate([Constants.SUPPLIERS_CONFIG_PAGE]);
     }
     else if (syncJobType.name == "Get Approved Invoices"){
       this.router.navigate([Constants.APPROVED_INVOICES_CONFIG_PAGE]);

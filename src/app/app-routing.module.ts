@@ -16,6 +16,7 @@ import { ErrorComponentComponent } from './components/error-component/error-comp
 import { CreditNoteComponent } from './components/credit-note/credit-note.component';
 import { SuppliersConfiguartionComponent } from './components/suppliers-configuartion/suppliers-configuartion.component';
 import { ApprovedInvoiceConfigurationComponent } from './components/approved-invoice-configuration/approved-invoice-configuration.component';
+import { SupplierDetailsComponent } from './components/supplier-details/supplier-details.component';
 
 
 const routes: Routes = [
@@ -40,6 +41,7 @@ const routes: Routes = [
   { path: Constants.LOGIN_PAGE, component: LoginComponent },
   { path: Constants.SUPPLIERS_PAGE, component: SuppliersComponent },
   { path: Constants.SUPPLIERS_CONFIG_PAGE, component: SuppliersConfiguartionComponent },
+  { path: Constants.SUPPLIERS_DETAILS_PAGE, component: SupplierDetailsComponent },
 
   { path: Constants.APPROVED_INVOICES_PAGE, component: ApprovedInvoiceComponent },
   { path: Constants.APPROVED_INVOICES_CONFIG_PAGE, component: ApprovedInvoiceConfigurationComponent },

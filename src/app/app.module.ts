@@ -49,6 +49,8 @@ import { ApprovedInvoiceConfigurationComponent } from './components/approved-inv
 import { BookedTransferDetailsComponent } from './components/booked-transfer-details/booked-transfer-details.component';
 import { ErrorComponentComponent } from './components/error-component/error-component.component';
 import { CreditNoteComponent } from './components/credit-note/credit-note.component';
+import { Data } from './models/data';
+import { SupplierDetailsComponent } from './components/supplier-details/supplier-details.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +76,8 @@ import { CreditNoteComponent } from './components/credit-note/credit-note.compon
     ApprovedInvoiceConfigurationComponent,
     BookedTransferDetailsComponent,
     ErrorComponentComponent,
-    CreditNoteComponent
+    CreditNoteComponent,
+    SupplierDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -101,7 +104,7 @@ import { CreditNoteComponent } from './components/credit-note/credit-note.compon
     BrowserModule,
     FormsModule
   ],
-  providers: [CookieService, AuthService, InvoiceService, AlertsService],
+  providers: [CookieService, AuthService, InvoiceService, AlertsService, Data],
   bootstrap: [AppComponent],
   entryComponents: [AddVendorComponent, SuppliersConfiguartionComponent, SchedulerConfigurationComponent,
   ApprovedInvoiceConfigurationComponent]

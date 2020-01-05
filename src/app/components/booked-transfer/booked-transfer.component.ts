@@ -101,7 +101,6 @@ export class BookedTransferComponent implements OnInit {
   }
 
   showDetails(transfer){
-    console.log(`show details ${transfer}`);
     this.router.navigate(['bookedTransfersDetails', transfer])
   }
 
