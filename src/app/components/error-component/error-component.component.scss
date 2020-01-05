@@ -29,14 +29,10 @@
     }
   }
   
-div.error-message {
-    height: 10em;
-    position: relative }
-div.error-message p, button {
-    margin: 0;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%) }
+  .example-card {
+    width: 50%;
+    margin: auto;
+    padding: 10px;
+  }
+  
   

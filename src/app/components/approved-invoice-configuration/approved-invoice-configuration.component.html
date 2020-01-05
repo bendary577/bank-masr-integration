@@ -1,36 +1,37 @@
-<h1 mat-dialog-title>Update Approved Invoice Configuartion</h1>
+<h3 mat-dialog-title>Update Approved Invoice Configuartion</h3>
 
-<div mat-dialog-content>
-    <form [formGroup]="formSupplier" class="my-form">
-
-        <div class="main">
-            <ngx-datatable *ngIf="!loading" class="material" [rows]="costCenters" [columnMode]="'force'" [headerHeight]="50"
-                [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'cost_center', dir: 'asc'}]">
-              
-                <ngx-datatable-column name="Cost Center">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.cost_center}}
-                    </ng-template>
-                </ngx-datatable-column>
-                
-                <ngx-datatable-column name="Business Unit">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-
-                        <mat-form-field>
-                            <mat-label>Business Unit</mat-label>
-                            <input matInput #last>
-                          </mat-form-field>
-
-                    </ng-template>
-                </ngx-datatable-column>         
-            </ngx-datatable>
-            <ngx-spinner></ngx-spinner>
-        </div>
-
-
-    </form>
+<div class="header">
+    <button mat-flat-button (click)="onSaveClick()">Save</button>
 </div>
-<div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button cdkFocusInitial (click)="onSaveClick()">Save</button>
+<br>
+
+<div class="main">
+    <ngx-datatable *ngIf="!loading" class="material" [rows]="costCenters" [columnMode]="'force'" [headerHeight]="50"
+        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'cost_center', dir: 'asc'}]">
+
+        <ngx-datatable-column name="">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <input type="checkbox" >
+                </ng-template>
+            </ngx-datatable-column>
+
+        <ngx-datatable-column name="Cost Center">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.cost_center}}
+            </ng-template>
+        </ngx-datatable-column>
+        
+        <ngx-datatable-column name="Business Unit">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+
+                <mat-form-field>
+                    <mat-label>Business Unit</mat-label>
+                    <input matInput #last>
+                    </mat-form-field>
+
+            </ng-template>
+        </ngx-datatable-column>         
+    </ngx-datatable>
+    <ngx-spinner></ngx-spinner>
 </div>
+

@@ -1,49 +1,77 @@
+<h3>Booked Waste</h3>
+
 <div class="header">
-    <button mat-flat-button (click)="getBookedTransferSyncJob()">Sync Booked Waste Now</button>
+    <button mat-flat-button (click)="getBookedWasteSyncJob()">Sync Booked Waste Now</button>
 </div>
 <br>
-<div class="main">
+<div *ngIf="!bookedWaste.length">
+        <mat-card class="example-card">
+                <mat-card-header>
+                  <mat-card-title>No Data</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <p>
+                        There was no new data to sync in this job, You can sync booked transfer now from 
+                    <a  (click)="getBookedWasteSyncJob()">here</a>
+                  </p>
+                  
+                </mat-card-content>
+        </mat-card>
+        </div>
+
+<div class="main" *ngIf="bookedWaste.length">
 
 <ngx-datatable *ngIf="!loading" class="material" [rows]="bookedWaste" [columnMode]="'force'" [headerHeight]="50"
     [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'wasteGroup', dir: 'asc'}]">
+    <ngx-datatable-column name="Status">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.status}}
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Reason">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.reason}}
+        </ng-template>
+    </ngx-datatable-column>
+    
     <ngx-datatable-column name="Waste Group">
         <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.wasteGroup}}
+            {{row.data.wasteGroup}}
         </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column name="Cost Center">
         <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.costCenter}}
+            {{row.data.costCenter}}
         </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column name="Waste Date">
         <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.wasteDate}}
+            {{row.data.wasteDate}}
         </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column name="Reference">
         <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.reference}}
+            {{row.data.reference}}
         </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column name="Changed By">
         <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.changedBy}}
+            {{row.data.changedBy}}
         </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column name="Created At">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.changedAt}}
+                {{row.data.changedAt}}
             </ng-template>
         </ngx-datatable-column>
     <ngx-datatable-column name="Created By">
         <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.createdBy}}
+            {{row.data.createdBy}}
         </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column name="Created At">
         <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.createdAt}}
+            {{row.data.createdAt}}
         </ng-template>
     </ngx-datatable-column>
 

@@ -31,8 +31,8 @@ export class BookedTransferComponent implements OnInit {
 
   getBookedTransferDB() {
     this.spinner.show();
-    this.transferService.getBookedTransferDB().toPromise().then((res: any) => {
-      this.bookedTransfer = res.items;
+    this.syncJobService.getSyncJobData("Get Booked Transfers").toPromise().then((res: any) => {
+      this.bookedTransfer = res;
       
       this.spinner.hide();
       this.loading = false;
@@ -57,16 +57,14 @@ export class BookedTransferComponent implements OnInit {
           panelClass:"my-snack-bar-success"
         });
       }
-      else{
-        this.snackBar.open('Sync Booked Transfers Failed', null, {
-          duration: 2000,
-          horizontalPosition: 'center',
-          panelClass:"my-snack-bar-fail"
-        });
-      }
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
+      this.snackBar.open('Sync Booked Transfers Failed', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
       console.error(err);
       this.spinner.hide();
       this.loading = false;
@@ -90,8 +88,8 @@ export class BookedTransferComponent implements OnInit {
   getSyncJobData(syncJobId:String) {
     console.log(syncJobId)
     this.spinner.show();
-    this.syncJobService.getSyncJobData(syncJobId).toPromise().then((res: any) => {
-      this.bookedTransfer = res.items;
+    this.syncJobService.getSyncJobDataById(syncJobId).toPromise().then((res: any) => {
+      this.bookedTransfer = res;
 
       this.spinner.hide();
       this.loading = false;

@@ -27,7 +27,8 @@ import {
   MatNativeDateModule, 
   MatSelectModule, 
   MatCheckboxModule,
-  MatSidenav
+  MatSidenav,
+  MatCardModule
 } from '@angular/material';
 import {SidenavResponsive} from "./components/sidenav/sidenav-responsive";
 import {ConfigurationComponent} from "./components/setting/configuration/configuration.component";
@@ -96,6 +97,7 @@ import { CreditNoteComponent } from './components/credit-note/credit-note.compon
     MatNativeDateModule,
     MatSelectModule,
     MatCheckboxModule,
+    MatCardModule,
     BrowserModule,
     FormsModule
   ],
