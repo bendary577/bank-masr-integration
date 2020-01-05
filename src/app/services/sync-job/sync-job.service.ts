@@ -25,6 +25,10 @@ export class SyncJobService {
     return this.http.get<SyncJobType[]>(Constants.GET_SYNC_JOB_TYPES_URL);
   }
 
+  getSyncJobTypeDB(syncJobTypeName:String) {
+    return this.http.get<SyncJobType>(Constants.GET_SYNC_JOB_TYPES_BY_NAME_URL + '?typeName=' + syncJobTypeName);
+  }
+
   updateSyncJobTypeConfig(SyncJobType:SyncJobType){
     return this.http.put(Constants.UPDATE_SYNC_JOB_TYPES_URL , SyncJobType).toPromise();
   }

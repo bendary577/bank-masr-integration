@@ -73,34 +73,6 @@ export class SyncJobsconfigComponent implements OnInit {
     }
 
   }
-
-  openDialogSupplier(syncJobType){
-    console.log(syncJobType);
-    const dialogRef = this.dialog.open(SuppliersConfiguartionComponent, {
-      width: '550px'
-    });
-
-    dialogRef.afterClosed().subscribe(res => {
-      if (res && res.name ) {
-        this.spinner.show();
-        syncJobType.configuration.limit = res.limit;
-        syncJobType.configuration.category = res.name;
-
-        this.syncJobService.updateSyncJobTypeConfig(syncJobType).then(result => {
-              console.log(result);
-              this.spinner.hide();
-        }
-        ).catch(err => {
-          this.spinner.hide();
-          this.snackBar.open('An error has occurred.', null, {
-            duration: 2000,
-            horizontalPosition: 'right',
-          });
-        });
-      }
-    });
-  }
-
     
   openschedulerDialog(syncJobType){
     const dialogRef = this.dialog.open(SchedulerConfigurationComponent, {
