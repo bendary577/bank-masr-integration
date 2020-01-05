@@ -21,6 +21,9 @@ export class SuppliersConfiguartionComponent implements OnInit {
   submitted = false;
   limit = null;
   category = null;
+  loading = true;
+  taxes = []
+  groups = []
 
   constructor(private formBuilder: FormBuilder, private route:ActivatedRoute,
     private spinner: NgxSpinnerService, public snackBar: MatSnackBar,
@@ -37,12 +40,46 @@ export class SuppliersConfiguartionComponent implements OnInit {
       limit: [this.limit , Validators.required],
       category: [this.category, Validators.required]
     });
+
+    this.getTaxes()
+    this.getGroups()
+  }
+
+  getTaxes() {
+    this.spinner.show();
+    this.loading = true;
+    this.supplierService.getSuppliersTaxes().toPromise().then((res: any) => {
+      this.taxes = res.data;
+
+      this.spinner.hide();
+      this.loading = false;
+    }).catch(err => {
+      console.error(err);
+      this.spinner.hide();
+      this.loading = false;
+    });
+  }
+
+  getGroups() {
+    this.spinner.show();
+    this.loading = true;
+    this.supplierService.getSuppliersGroups().toPromise().then((res: any) => {
+      this.groups = res.data;
+
+      this.spinner.hide();
+      this.loading = false;
+    }).catch(err => {
+      console.error(err);
+      this.spinner.hide();
+      this.loading = false;
+    });
   }
 
   onSaveClick(){
     this.data.storage["configuration"]["limit"] = this.supplierConfigForm.controls.limit.value as string;
     this.data.storage["configuration"]["category"] = this.supplierConfigForm.controls.category.value as string;
-
+    this.data.storage["configuration"]["taxes"] = this.supplierConfigForm.controls.taxes.value as string;
+    this.data.storage["configuration"]["groups"] = this.supplierConfigForm.controls.groups.value as string;
 
     this.syncJobService.updateSyncJobTypeConfig(this.data.storage).then(result => {
       console.log(result);

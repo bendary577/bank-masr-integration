@@ -12,6 +12,7 @@
     <button mat-flat-button (click)="getSuppliersSyncJob()">Sync Suppliers Now</button>
 </div>
 <br>
+<div>
 <div *ngIf="!dataSource.length">
         <mat-card class="example-card">
                 <mat-card-header>
@@ -26,12 +27,6 @@
                 </mat-card-content>
         </mat-card>
         </div>
-
-<!-- <div class="example-header">
-    <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
-    </div>        -->
         
 <div class="main" *ngIf="dataSource.length">
     <ngx-datatable *ngIf="!loading" class="material" [rows]="dataSource" [columnMode]="'force'" [headerHeight]="50"
@@ -76,5 +71,7 @@
         </ngx-datatable-column>
 
     </ngx-datatable>
-    <ngx-spinner></ngx-spinner>
+</div>
+<ngx-spinner></ngx-spinner>
+
 </div>
