@@ -8,6 +8,7 @@ import { Constants } from 'src/app/models/constants';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import {Data} from "../../models/data";
+import { SyncJobType } from 'src/app/models/SyncJobType';
 
 
 @Component({
@@ -16,7 +17,7 @@ import {Data} from "../../models/data";
   styleUrls: ['./suppliers-configuartion.component.scss']
 })
 export class SuppliersConfiguartionComponent implements OnInit {
-  syncJobType = null;
+  syncJobType: SyncJobType;
   supplierConfigForm: FormGroup;
   submitted = false;
   limit = null;
@@ -32,18 +33,20 @@ export class SuppliersConfiguartionComponent implements OnInit {
     private spinner: NgxSpinnerService, public snackBar: MatSnackBar,
     private syncJobService:SyncJobService, private data: Data,
     private router: Router,  private supplierService: SupplierService) { 
+      this.getSyncJobType();
+
+      this.supplierConfigForm = this.formBuilder.group({
+        // limit: [this.data.storage["configuration"]["limit"], Validators.required],
+        // category: [this.data.storage["configuration"]["category"], Validators.required],
+        limit: [this.syncJobType.configuration.limit],
+        category: [""],   
+        taxes: [""],
+        groups: [""]
+      });
 
   }
 
   ngOnInit() {
-    this.getSyncJobType();
-
-    this.supplierConfigForm = this.formBuilder.group({
-      limit: [this.data.storage["configuration"]["limit"], Validators.required],
-      category: [this.data.storage["configuration"]["category"], Validators.required],
-      taxes: [""],
-      groups: [""]
-    });
 
     this.getTaxes();
     this.getGroups();

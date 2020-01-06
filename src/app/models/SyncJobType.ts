@@ -7,4 +7,7 @@ export class SyncJobType {
     public configuration: object;
     public duration: string
     public deleted: boolean;
+
+    
+    public constructor() { }
 }
