@@ -17,6 +17,7 @@ import { CreditNoteComponent } from './components/credit-note/credit-note.compon
 import { SuppliersConfiguartionComponent } from './components/suppliers-configuartion/suppliers-configuartion.component';
 import { ApprovedInvoiceConfigurationComponent } from './components/approved-invoice-configuration/approved-invoice-configuration.component';
 import { SupplierDetailsComponent } from './components/supplier-details/supplier-details.component';
+import { ConsumptionsComponent } from './components/consumptions/consumptions.component';
 
 
 const routes: Routes = [
@@ -52,6 +53,8 @@ const routes: Routes = [
 
   { path: Constants.CREDIT_NOTE_PAGE , component: CreditNoteComponent },
   // { path: Constants.CREDIT_NOTE_CONFIG_PAGE + "/:creditNote", component: CreditNoteConfigurationComponent },
+
+  { path: Constants.CONSUMPTION_PAGE , component: ConsumptionsComponent },
 
   // Error Page
   {path:'**', component: ErrorComponentComponent}
