@@ -44,10 +44,16 @@ export class SyncJobsconfigComponent implements OnInit {
 
 
   getSyncJobTypes(){
+    this.spinner.show();
+
     this.syncJobService.getSyncJobTypesDB().toPromise().then((res: any) => {
       this.syncJobTypes = res;
+      this.spinner.hide();
+
     }).catch(err => {
       console.error(err);
+      this.spinner.hide();
+
     });
   }
 

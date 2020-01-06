@@ -49,4 +49,8 @@ export class ApprovedInvoiceConfigurationComponent implements OnInit {
     });
   }
 
+  onCancelClick(){
+    this.router.navigate([Constants.SYNC_JOBS]);
+  }
+
 }
