@@ -17,7 +17,7 @@ import { SyncJobType } from 'src/app/models/SyncJobType';
   styleUrls: ['./suppliers-configuartion.component.scss']
 })
 export class SuppliersConfiguartionComponent implements OnInit {
-  syncJobType: SyncJobType;
+  syncJobType = {};
   supplierConfigForm: FormGroup;
   submitted = false;
   limit = null;
@@ -33,20 +33,19 @@ export class SuppliersConfiguartionComponent implements OnInit {
     private spinner: NgxSpinnerService, public snackBar: MatSnackBar,
     private syncJobService:SyncJobService, private data: Data,
     private router: Router,  private supplierService: SupplierService) { 
-      this.getSyncJobType();
-
-      this.supplierConfigForm = this.formBuilder.group({
-        // limit: [this.data.storage["configuration"]["limit"], Validators.required],
-        // category: [this.data.storage["configuration"]["category"], Validators.required],
-        limit: [this.syncJobType.configuration.limit],
-        category: [""],   
-        taxes: [""],
-        groups: [""]
-      });
+      // this.getSyncJobType();
 
   }
 
   ngOnInit() {
+    this.supplierConfigForm = this.formBuilder.group({
+      limit: [this.data.storage["configuration"]["limit"], Validators.required],
+      category: [this.data.storage["configuration"]["category"], Validators.required],
+      // limit: [this.syncJobType.configuration.limit],
+      // category: [""],   
+      taxes: [""],
+      groups: [""]
+    });
 
     this.getTaxes();
     this.getGroups();
@@ -113,6 +112,10 @@ export class SuppliersConfiguartionComponent implements OnInit {
       this.router.navigate([Constants.SYNC_JOBS]);
     });
 
+  }
+
+  onCancelClick(){
+    this.router.navigate([Constants.SYNC_JOBS]);
   }
 
 }
