@@ -107,6 +107,8 @@ export class LoginComponent implements OnInit {
 
 
     } else {
+      this.spinner.hide();
+          this.loading = false;
       this.snackBar.open('Wrong Credentials.', null, {
         duration: 2000,
         horizontalPosition: 'center',

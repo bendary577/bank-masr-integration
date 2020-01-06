@@ -51,6 +51,7 @@ import { ErrorComponentComponent } from './components/error-component/error-comp
 import { CreditNoteComponent } from './components/credit-note/credit-note.component';
 import { Data } from './models/data';
 import { SupplierDetailsComponent } from './components/supplier-details/supplier-details.component';
+import { ConsumptionsComponent } from './components/consumptions/consumptions.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { SupplierDetailsComponent } from './components/supplier-details/supplier
     BookedTransferDetailsComponent,
     ErrorComponentComponent,
     CreditNoteComponent,
-    SupplierDetailsComponent
+    SupplierDetailsComponent,
+    ConsumptionsComponent
   ],
   imports: [
     BrowserModule,

@@ -20,6 +20,7 @@ export class Constants {
 
 
     static GET_SYNC_JOB_TYPES_URL = environment.apiHost + '/getSyncJobTypes';
+    static GET_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getSyncJobTypesByName';
     static UPDATE_SYNC_JOB_TYPES_URL = environment.apiHost + '/updateSyncJobTypesConfiguration';
     static GET_SYNC_JOBS_URL = environment.apiHost + '/getSyncJobs';
 
@@ -43,6 +44,10 @@ export class Constants {
     static GET_BOOKED_WASTE_URL = environment.apiHost + '/getBookedWaste';
     static GET_BOOKED_WASTE_DB_URL = environment.apiHost + '/getBookedWasteDB';
 
+    
+    static GET_CONSUMPTION_URL = environment.apiHost + '/getConsumption';
+    static GET_CONSUMPTION_DB_URL = environment.apiHost + 'getConsumptionDB';
+
     static LOGIN_PAGE = 'login';
     static HOME_PAGE = 'home';
     static SIDE_NAV = 'sidenav';
@@ -63,6 +68,9 @@ export class Constants {
 
     static CREDIT_NOTE_PAGE = 'creditNote';
     static CREDIT_NOTE_CONFIG_PAGE = 'creditNoteConfig';
+
+    static CONSUMPTION_PAGE = 'consumption';
+    static CONSUMPTION_CONFIG_PAGE = 'consumptionConfig';
 
     static TABS_PAGE = 'tabs';
     static END_POINT = '/getSuppliers';

@@ -8,6 +8,7 @@ import { Constants } from 'src/app/models/constants';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import {Data} from "../../models/data";
+import { SyncJobType } from 'src/app/models/SyncJobType';
 
 
 @Component({
@@ -16,12 +17,15 @@ import {Data} from "../../models/data";
   styleUrls: ['./suppliers-configuartion.component.scss']
 })
 export class SuppliersConfiguartionComponent implements OnInit {
-
+  syncJobType = {};
   supplierConfigForm: FormGroup;
   submitted = false;
   limit = null;
   category = null;
   loading = true;
+  taxesLoading = false;
+  groupsLoading = false;
+
   taxes = []
   groups = []
 
@@ -29,27 +33,31 @@ export class SuppliersConfiguartionComponent implements OnInit {
     private spinner: NgxSpinnerService, public snackBar: MatSnackBar,
     private syncJobService:SyncJobService, private data: Data,
     private router: Router,  private supplierService: SupplierService) { 
+      // this.getSyncJobType();
 
   }
 
   ngOnInit() {
-    this.limit =   this.data.storage["configuration"]["limit"];
-    this.category =   this.data.storage["configuration"]["category"];
-
     this.supplierConfigForm = this.formBuilder.group({
-      limit: [this.limit , Validators.required],
-      category: [this.category, Validators.required]
+      limit: [this.data.storage["configuration"]["limit"], Validators.required],
+      category: [this.data.storage["configuration"]["category"], Validators.required],
+      // limit: [this.syncJobType.configuration.limit],
+      // category: [""],   
+      taxes: [""],
+      groups: [""]
     });
 
-    this.getTaxes()
-    this.getGroups()
+    this.getTaxes();
+    this.getGroups();
   }
 
-  getTaxes() {
+  getSyncJobType(){
     this.spinner.show();
-    this.loading = true;
-    this.supplierService.getSuppliersTaxes().toPromise().then((res: any) => {
-      this.taxes = res.data;
+    this.syncJobService.getSyncJobTypeDB("Get Suppliers").toPromise().then((res: any) => {
+      console.log(res);
+      this.syncJobType = res;
+      this.limit =   res.configuration.limit;
+      this.category =   res.configuration.category;
 
       this.spinner.hide();
       this.loading = false;
@@ -57,21 +65,30 @@ export class SuppliersConfiguartionComponent implements OnInit {
       console.error(err);
       this.spinner.hide();
       this.loading = false;
+    });
+
+  }
+
+  getTaxes() {
+    this.taxesLoading = true;
+    this.supplierService.getSuppliersTaxes().toPromise().then((res: any) => {
+      this.taxes = res.data;
+      this.taxesLoading = false;
+
+    }).catch(err => {
+      console.error(err);
+      this.taxesLoading = false;
     });
   }
 
   getGroups() {
-    this.spinner.show();
-    this.loading = true;
+    this.groupsLoading = true;
     this.supplierService.getSuppliersGroups().toPromise().then((res: any) => {
       this.groups = res.data;
-
-      this.spinner.hide();
-      this.loading = false;
+      this.groupsLoading = false;
     }).catch(err => {
       console.error(err);
-      this.spinner.hide();
-      this.loading = false;
+      this.groupsLoading = false;
     });
   }
 
@@ -95,6 +112,10 @@ export class SuppliersConfiguartionComponent implements OnInit {
       this.router.navigate([Constants.SYNC_JOBS]);
     });
 
+  }
+
+  onCancelClick(){
+    this.router.navigate([Constants.SYNC_JOBS]);
   }
 
 }
