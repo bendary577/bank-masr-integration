@@ -22,8 +22,19 @@
         <a mat-list-item  (click)="changeCurrentTab('Booked Transfer'); snav.toggle()" routerLink="/bookedTransfers">Booked Transfer</a>
         <a mat-list-item  (click)="changeCurrentTab('Approved Invoices'); snav.toggle()" routerLink="/approvedInvoices">Approved Invoices</a>
         <a mat-list-item  (click)="changeCurrentTab('Credit Note'); snav.toggle()" routerLink="/creditNote">Credit Note</a>
-        <!-- <a mat-list-item  (click)="changeCurrentTab('Consumptions'); snav.toggle()" routerLink="/consumption">Consumptions</a> -->
+        <a mat-list-item  (click)="changeCurrentTab('Consumptions'); snav.toggle()" routerLink="/consumption">Consumptions</a>
 
+        <!-- <mat-tree class="Settings">
+          <mat-tree-node> <a mat-list-item  (click)="changeCurrentTab('Sync Jobs Configuration'); snav.toggle()" routerLink="/syncjobs">Sync Jobs Configuration</a></mat-tree-node>
+          <mat-tree-node><a mat-list-item  (click)="changeCurrentTab('General Settings'); snav.toggle()" routerLink="/setting">General Settings</a></mat-tree-node>
+          <mat-tree-node><a mat-list-item  (click)="changeCurrentTab('Users'); snav.toggle()" routerLink="/users">Users</a></mat-tree-node>
+        
+        </mat-tree> -->
+        <!-- <mat-tree>
+          <mat-tree-node> parent node </mat-tree-node>
+          <mat-tree-node> -- child node1 </mat-tree-node>
+          <mat-tree-node> -- child node2 </mat-tree-node>
+        </mat-tree> -->
         <ul class="Settings">Settings
           <li><a mat-list-item  (click)="changeCurrentTab('Sync Jobs Configuration'); snav.toggle()" routerLink="/syncjobs">Sync Jobs Configuration</a></li>
           <li><a mat-list-item  (click)="changeCurrentTab('General Settings'); snav.toggle()" routerLink="/setting">General Settings</a></li>

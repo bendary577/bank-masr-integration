@@ -28,7 +28,8 @@ import {
   MatSelectModule, 
   MatCheckboxModule,
   MatSidenav,
-  MatCardModule
+  MatCardModule,
+  MatRippleModule
 } from '@angular/material';
 import {SidenavResponsive} from "./components/sidenav/sidenav-responsive";
 import {ConfigurationComponent} from "./components/setting/configuration/configuration.component";
@@ -103,6 +104,7 @@ import { ConsumptionsComponent } from './components/consumptions/consumptions.co
     MatSelectModule,
     MatCheckboxModule,
     MatCardModule,
+    MatRippleModule,
     BrowserModule,
     FormsModule
   ],
