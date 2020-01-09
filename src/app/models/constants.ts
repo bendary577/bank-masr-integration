@@ -46,7 +46,7 @@ export class Constants {
     static GET_BOOKED_WASTE_DB_URL = environment.apiHost + '/getBookedWasteDB';
 
     
-    static GET_CONSUMPTION_URL = environment.apiHost + '/getConsumption';
+    static GET_CONSUMPTION_URL = environment.apiHost + '/getConsumptions';
     static GET_CONSUMPTION_DB_URL = environment.apiHost + 'getConsumptionDB';
 
     static LOGIN_PAGE = 'login';

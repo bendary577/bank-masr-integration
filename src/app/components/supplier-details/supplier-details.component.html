@@ -1,84 +1,66 @@
 <h3>Supplier Details</h3>
-
-<div *ngIf="!supplier.length">
-    <br>
-    <mat-card class="example-card">
-            <mat-card-header>
-              <mat-card-title>No Data</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <p>
-                    There was no details in this Supplier. 
-                <a  (click)="back()">back</a>
-              </p>
-              
-            </mat-card-content>
-    </mat-card>
-    </div>
     
 <div>
 
-<div class="main" *ngIf="supplier.length">
+<div class="main" >
 
     <div class="header">
         <button mat-flat-button (click)="back()">Back</button>
     </div>
-    <br>  
-<ngx-datatable *ngIf="!loading" class="material" [rows]="supplier" [columnMode]="'force'" [headerHeight]="50"
-    [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'status', dir: 'asc'}]">
+<br> 
 
-    <ngx-datatable-column name="Customer Number">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.customerNumber}}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Phone Number">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.phoneNumber}}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Email">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.email}}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Address">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.address}}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Line1">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.line1}}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Line2">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.line2}}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Line3">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.line3}}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Fax Country Code">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.faxCountryCode}}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Fax Area Code">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.faxAreaCode}}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Fax Number">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.faxNumber}}
-            </ng-template>
-        </ngx-datatable-column>
 
-</ngx-datatable>
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>Supplier Info</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-list>
+            <mat-list-item >
+                <span class="key">Customer Number: </span>
+                <li class="value" *ngIf="supplier.customerNumber">{{supplier.customerNumber}}</li>
+                <li class="value" *ngIf="!supplier.customerNumber">No Info</li>
+            </mat-list-item>
+            <mat-list-item >
+                <span class="key">Phone Number: </span>
+                <li class="value" *ngIf="supplier.phoneNumber">{{supplier.phoneNumber}}</li>
+                <li class="value" *ngIf="!supplier.phoneNumber">No Info</li>
+            </mat-list-item>
+            <mat-list-item >
+                <span class="key">Email: </span>
+                <li class="value" *ngIf="supplier.email">{{supplier.email}}</li>
+                <li class="value" *ngIf="!supplier.email">No Info</li>
+            </mat-list-item>
+            <mat-list-item >
+                <span class="key">Address: </span>
+                <li class="value" *ngIf="supplier.address">{{supplier.address}}</li>
+                <li class="value" *ngIf="!supplier.address">No Info</li>
+            </mat-list-item>
+            <mat-list-item >
+                <span class="key">Line 1: </span>
+                <li class="value" *ngIf="supplier.line1">{{supplier.line1}}</li>
+                <li class="value" *ngIf="!supplier.line1">No Info</li>
+            </mat-list-item>
+            <mat-list-item >
+                <span class="key">Line 2: </span>
+                <li class="value" *ngIf="supplier.line2">{{supplier.line2}}</li>
+                <li class="value" *ngIf="!supplier.line2">No Info</li>
+            </mat-list-item>
+            <mat-list-item >
+                <span class="key">Payment Terms: </span>
+                <li class="value" *ngIf="supplier.line2">{{supplier.paymentTerms}}</li>
+                <li class="value" *ngIf="!supplier.line2">No Info</li>
+            </mat-list-item>
+            <mat-list-item >
+                <span class="key">Fax Number: </span>
+                <li class="value" *ngIf="supplier.faxNumber">{{supplier.faxNumber}}</li>
+                <li class="value" *ngIf="!supplier.faxNumber">No Info</li>
+            </mat-list-item>      
+        </mat-list>
+        
+        
+    </mat-card-content>
+</mat-card>
 
 </div>
 <ngx-spinner></ngx-spinner>
