@@ -6,6 +6,8 @@ import { Constants } from 'src/app/models/constants';
 import { MatSnackBar } from '@angular/material';
 import { SidenavResponsive } from "../sidenav/sidenav-responsive";
 import { NgxSpinnerService } from 'ngx-spinner';
+import {User} from "../../models/user";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -14,12 +16,13 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 
 export class LoginComponent implements OnInit {
-
+  public user:User;
   public loginForm: FormGroup;
   loading = false;
   submitted = false;
   returnUrl: string;
   side: SidenavResponsive;
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -30,7 +33,7 @@ export class LoginComponent implements OnInit {
   ) {
     this.side = side;
     // redirect to home if already logged in
-    if (this.authenticationService.currentUserValue) {
+    if (localStorage.getItem('auth_token')) {
       this.router.navigate(['/']);
     }
     this.side.shouldRun = false;
@@ -42,6 +45,7 @@ export class LoginComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+
 
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
@@ -65,13 +69,37 @@ export class LoginComponent implements OnInit {
 
   isValid() {
     this.spinner.show();
-
     const username = this.loginForm.controls.username.value as string;
     const password = this.loginForm.controls.password.value as string;
     const domainName = username.split("@");
+
+
+
     if (domainName.length == 2) {
-      this.authenticationService.login().toPromise().then((res: any) => {
+      this.user= new User();
+      this.user.name="auth";
+      this.user.username=username;
+      this.user.password=password;
+      const creation_date = Date() as string;
+      const deleted = false;
+      const domain = domainName[domainName.length-1];
+      this.user.domain=domain;
+/*      this.authenticationService.login(this.user).subscribe(result => {
+          // Handle result
+          console.log(result)
+          localStorage.setItem('currentUser', '');
+        },
+        error => {
+          console.log(error)
+        },
+        () => {
+          // 'onCompleted' callback.
+          // No errors, route to new page here
+        });*/
+      this.authenticationService.login(this.user).toPromise().then((res: any) => {
         console.log(res.items);
+        localStorage.setItem('auth_token',res.auth_token);
+
         this.spinner.hide();
         this.loading = false;
 

@@ -13,17 +13,16 @@ export class AuthService {
   private BASE_URL = 'http://localhost:5000/auth';
   private headers: Headers = new Headers({'Content-Type': 'application/json'});
 
-  private currentUserSubject: BehaviorSubject<User>;
-  public currentUser: Observable<User>;
+
 
   constructor( private httpClient: HttpClient, private cookie: CookieService,) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-    this.currentUser = this.currentUserSubject.asObservable();
+   /* this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUser = this.currentUserSubject.asObservable();*/
   }
 
-  public get currentUserValue(): User {
+/*  public get currentUserValue(): User {
     return this.currentUserSubject.value;
-  }
+  }*/
 
   // login() {
   //   const formData = new FormData();
@@ -64,9 +63,9 @@ export class AuthService {
   //     console.error(' this.cookieValue = this.cookieService.get', this.cookie.get('JSESSIONID'));
   //   });
   // }
-    login() {
-
-     return this.httpClient.get(Constants.LOGIN );
+    login(user) {
+      //return this.httpClient.post(`${this.apiURL}/customers/`,customer);
+     return this.httpClient.post(Constants.LOGINAUTH,user );
    // return  true;
     // let casper = require('casper').create();
     // casper.start('http://casperjs.org/');

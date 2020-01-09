@@ -10,6 +10,7 @@ export class Constants {
     static USER_TOKEN = 'usertoken';
     static CURRENT_TAB = 'Welcome';
 
+    static LOGINAUTH = environment.apiHost + '/auth/login';
     static LOGIN = environment.apiHost + '/login';
 
     static VENDOR_URL = environment.apiHost + '/getVendors';

@@ -18,12 +18,12 @@ export class UsersComponent implements OnInit {
   success = null;
   usersList = [];
   displayedColumns: string[] = ['firstName', 'username', 'lastName'];
-  dataSource = new MatTableDataSource<User>(ELEMENT_DATA);
+ // dataSource = new MatTableDataSource<User>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
+   // this.dataSource.paginator = this.paginator;
   }
   panelOpenState = true;
 }
@@ -37,6 +37,7 @@ MatExpansionPanel['decorators'][0].args[0].animations = [
   ])];
 
 const ELEMENT_DATA: User[] = [
+/*
   {id:0,password:"",firstName:"Admin", username: 'Admin', lastName:'test',token:""},
   {id:0,password:"",firstName:"ahmed", username: 'Hydrogen', lastName:'',token:""},
   {id:0,password:"",firstName:"mostafa", username: 'test', lastName:'',token:""},
@@ -47,5 +48,6 @@ const ELEMENT_DATA: User[] = [
   {id:0,password:"",firstName:"", username: 'Hydrogen', lastName:'',token:""},
   {id:0,password:"",firstName:"", username: 'Hydrogen', lastName:'',token:""},
   {id:0,password:"",firstName:"", username: 'Hydrogen', lastName:'',token:""},
+*/
 
 ];
