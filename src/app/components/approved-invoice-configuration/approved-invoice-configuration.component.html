@@ -12,7 +12,7 @@
 
         <ngx-datatable-column name="Include">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input type="checkbox" >
+                    <input type="checkbox" (click)="addRow(row)">
                 </ng-template>
             </ngx-datatable-column>
 
@@ -27,7 +27,8 @@
 
                 <mat-form-field>
                     <mat-label>Business Unit</mat-label>
-                    <input matInput #last>
+                    <!-- [disabled]="row.disabled"  -->
+                    <input matInput #last [(ngModel)]="row.business_unit" >
                     </mat-form-field>
 
             </ng-template>

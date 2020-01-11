@@ -18,6 +18,7 @@ export class ApprovedInvoiceConfigurationComponent implements OnInit {
   submitted = false;
   loading = true;
   costCenters = [];
+  selectedCostCenters = [];
 
   constructor(private formBuilder: FormBuilder,private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
     private router:Router) { 
@@ -32,6 +33,15 @@ export class ApprovedInvoiceConfigurationComponent implements OnInit {
     this.formSupplier = this.formBuilder.group({
       name: ['', Validators.required]
     });
+  }
+
+  addRow(row){
+    this.selectedCostCenters.push(row)
+    console.log(this.selectedCostCenters)
+  }
+
+  changeBusinessUnit(row){
+    console.log(this.selectedCostCenters)
   }
 
   getCostCenter() {

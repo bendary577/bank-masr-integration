@@ -58,24 +58,28 @@ export class SyncJobsconfigComponent implements OnInit {
   }
 
   openDialog(syncJobType){
-    if (syncJobType.name == "Get Suppliers"){
+    if (syncJobType.name == "Suppliers"){
       this.data.storage = syncJobType
       this.router.navigate([Constants.SUPPLIERS_CONFIG_PAGE]);
     }
-    else if (syncJobType.name == "Get Approved Invoices"){
+    else if (syncJobType.name == "Approved Invoices"){
       this.router.navigate([Constants.APPROVED_INVOICES_CONFIG_PAGE]);
     }
-    else if (syncJobType.name == "Get Booked Transfers"){
-      this.router.navigate([Constants.BOOKED_TRANSFER_CONFIG_PAGE]);
-    }
-    else if (syncJobType.name == "Get Booked Waste"){
+    // else if (syncJobType.name == "Booked Transfers"){
+    //   this.router.navigate([Constants.BOOKED_TRANSFER_CONFIG_PAGE]);
+    // }
+    else if (syncJobType.name == "Booked Waste"){
       this.router.navigate([Constants.BOOKED_WASTE_CONFIG_PAGE]);
     }
-    else if (syncJobType.name == "Get Credit Note"){
+    else if (syncJobType.name == "Credit Note"){
       this.router.navigate([Constants.CREDIT_NOTE_CONFIG_PAGE]);
     }
     else{
-      // add snack bar
+      this.snackBar.open("This sync job has not configuration yet.", null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass: "my-snack-bar-fail"
+      });
     }
 
   }

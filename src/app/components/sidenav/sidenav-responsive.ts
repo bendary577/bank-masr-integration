@@ -45,8 +45,6 @@ export class SidenavResponsive implements OnDestroy,OnInit {
   getSyncJobTypes(){
     this.syncJobService.getSyncJobTypesDB().toPromise().then((res: any) => {
       this.syncJobTypes = res;
-      console.log("types")
-      console.log(this.syncJobTypes)
     }).catch(err => {
       console.error(err);
     });
