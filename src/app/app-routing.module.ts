@@ -18,6 +18,7 @@ import { SuppliersConfiguartionComponent } from './components/suppliers-configua
 import { ApprovedInvoiceConfigurationComponent } from './components/approved-invoice-configuration/approved-invoice-configuration.component';
 import { SupplierDetailsComponent } from './components/supplier-details/supplier-details.component';
 import { ConsumptionsComponent } from './components/consumptions/consumptions.component';
+import { CreditNoteConfigurationComponent } from './components/credit-note-configuration/credit-note-configuration.component';
 
 
 const routes: Routes = [
@@ -52,7 +53,7 @@ const routes: Routes = [
   { path: Constants.BOOKED_TRANSFER_DETAILS_PAGE + "/:transfer", component: BookedTransferDetailsComponent },
 
   { path: Constants.CREDIT_NOTE_PAGE , component: CreditNoteComponent },
-  // { path: Constants.CREDIT_NOTE_CONFIG_PAGE + "/:creditNote", component: CreditNoteConfigurationComponent },
+  { path: Constants.CREDIT_NOTE_CONFIG_PAGE, component: CreditNoteConfigurationComponent },
 
   { path: Constants.CONSUMPTION_PAGE , component: ConsumptionsComponent },
 

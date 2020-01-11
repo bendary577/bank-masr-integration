@@ -26,12 +26,12 @@ export class BookedTransferComponent implements OnInit {
 
   ngOnInit() {
     this.getBookedTransferDB();
-    this.getSyncJobs("Get Booked Transfers");
+    this.getSyncJobs("Booked Transfers");
   }
 
   getBookedTransferDB() {
     this.spinner.show();
-    this.syncJobService.getSyncJobData("Get Booked Transfers").toPromise().then((res: any) => {
+    this.syncJobService.getSyncJobData("Booked Transfers").toPromise().then((res: any) => {
       this.bookedTransfer = res;
       
       this.spinner.hide();
@@ -48,7 +48,7 @@ export class BookedTransferComponent implements OnInit {
     this.transferService.getBookedTransfer().toPromise().then((res: any) => {
       this.success = res.success;
       this.getBookedTransferDB();
-      this.getSyncJobs("Get Booked Transfers");
+      this.getSyncJobs("Booked Transfers");
 
       if (this.success){
         this.snackBar.open('Sync Booked Transfers Successfully', null, {

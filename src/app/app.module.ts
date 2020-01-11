@@ -53,6 +53,7 @@ import { CreditNoteComponent } from './components/credit-note/credit-note.compon
 import { Data } from './models/data';
 import { SupplierDetailsComponent } from './components/supplier-details/supplier-details.component';
 import { ConsumptionsComponent } from './components/consumptions/consumptions.component';
+import { CreditNoteConfigurationComponent } from './components/credit-note-configuration/credit-note-configuration.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { ConsumptionsComponent } from './components/consumptions/consumptions.co
     ErrorComponentComponent,
     CreditNoteComponent,
     SupplierDetailsComponent,
-    ConsumptionsComponent
+    ConsumptionsComponent,
+    CreditNoteConfigurationComponent
   ],
   imports: [
     BrowserModule,

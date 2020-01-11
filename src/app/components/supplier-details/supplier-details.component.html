@@ -4,7 +4,7 @@
 
 <div class="main" >
 
-    <div class="header">
+    <div class="back">
         <button mat-flat-button (click)="back()">Back</button>
     </div>
 <br> 
@@ -32,6 +32,16 @@
                 <li class="value" *ngIf="!supplier.email">No Info</li>
             </mat-list-item>
             <mat-list-item >
+                <span class="key">Contact First Name: </span>
+                <li class="value" *ngIf="supplier.contactFirstName">{{supplier.contactFirstName}}</li>
+                <li class="value" *ngIf="!supplier.contactFirstName">No Info</li>
+            </mat-list-item>
+            <mat-list-item >
+                <span class="key">Contact Last Name: </span>
+                <li class="value" *ngIf="supplier.contactLastName">{{supplier.contactLastName}}</li>
+                <li class="value" *ngIf="!supplier.contactLastName">No Info</li>
+            </mat-list-item>      
+            <mat-list-item >
                 <span class="key">Address: </span>
                 <li class="value" *ngIf="supplier.address">{{supplier.address}}</li>
                 <li class="value" *ngIf="!supplier.address">No Info</li>
@@ -47,9 +57,14 @@
                 <li class="value" *ngIf="!supplier.line2">No Info</li>
             </mat-list-item>
             <mat-list-item >
+                <span class="key">Postal Code: </span>
+                <li class="value" *ngIf="supplier.postalCode">{{supplier.postalCode}}</li>
+                <li class="value" *ngIf="!supplier.postalCode">No Info</li>
+            </mat-list-item>
+            <mat-list-item >
                 <span class="key">Payment Terms: </span>
-                <li class="value" *ngIf="supplier.line2">{{supplier.paymentTerms}}</li>
-                <li class="value" *ngIf="!supplier.line2">No Info</li>
+                <li class="value" *ngIf="supplier.paymentTerms">{{supplier.paymentTerms}}</li>
+                <li class="value" *ngIf="!supplier.paymentTerms">No Info</li>
             </mat-list-item>
             <mat-list-item >
                 <span class="key">Fax Number: </span>
@@ -57,7 +72,6 @@
                 <li class="value" *ngIf="!supplier.faxNumber">No Info</li>
             </mat-list-item>      
         </mat-list>
-        
         
     </mat-card-content>
 </mat-card>

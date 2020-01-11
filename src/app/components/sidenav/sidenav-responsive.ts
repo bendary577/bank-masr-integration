@@ -4,6 +4,9 @@ import { Location } from '@angular/common';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { Constants } from 'src/app/models/constants';
+import {FlatTreeControl} from '@angular/cdk/tree';
+import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
+
 
 
 /** @title Responsive sidenav */
@@ -41,7 +44,8 @@ export class SidenavResponsive implements OnDestroy,OnInit {
 
   getSyncJobTypes(){
     this.syncJobService.getSyncJobTypesDB().toPromise().then((res: any) => {
-      this.syncJobTypes = res[0].syncJobTypes;
+      this.syncJobTypes = res;
+      console.log("types")
       console.log(this.syncJobTypes)
     }).catch(err => {
       console.error(err);

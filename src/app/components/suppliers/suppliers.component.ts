@@ -37,12 +37,12 @@ export class SuppliersComponent implements OnInit {
 
   ngOnInit() {
     this.getSuppliersDB();
-    this.getSyncJobs("Get Suppliers");
+    this.getSyncJobs("Suppliers");
   }
 
   getSuppliersDB() {
     this.spinner.show();
-    this.syncJobService.getSyncJobData("Get Suppliers").toPromise().then((res: any) => {
+    this.syncJobService.getSyncJobData("Suppliers").toPromise().then((res: any) => {
       this.dataSource = res;
       for (const element of this.dataSource) {
         if (this.vendorService.vendorAccountIDS.indexOf(element.SupplierNumber) !== -1) {
@@ -68,7 +68,7 @@ export class SuppliersComponent implements OnInit {
     this.supplierService.getSuppliers().toPromise().then((res: any) => {
       this.success = res.success;
       this.getSuppliersDB();
-      this.getSyncJobs("Get Suppliers");
+      this.getSyncJobs("Suppliers");
 
       if (this.success) {
         this.snackBar.open('Sync Suppliers Successfully', null, {

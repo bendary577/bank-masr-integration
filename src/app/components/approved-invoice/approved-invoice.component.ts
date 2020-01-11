@@ -24,12 +24,12 @@ export class ApprovedInvoiceComponent implements OnInit {
 
   ngOnInit() {
     this.getApprovedInvoices();
-    this.getSyncJobs("Get Approved Invoices");
+    this.getSyncJobs("Approved Invoices");
   }
 
   getApprovedInvoices() {
     this.spinner.show();
-    this.syncJobService.getSyncJobData("Get Approved Invoices").toPromise().then((res: any) => {
+    this.syncJobService.getSyncJobData("Approved Invoices").toPromise().then((res: any) => {
       this.approvedInvoices = res;
      
       this.spinner.hide();
@@ -47,7 +47,7 @@ export class ApprovedInvoiceComponent implements OnInit {
       this.success = res.success;
       console.log(res.message)
       this.getApprovedInvoices();
-      this.getSyncJobs("Get Approved Invoices");
+      this.getSyncJobs("Approved Invoices");
       
       if (this.success){
         this.snackBar.open('Sync Approved Invoices Successfully', null, {
