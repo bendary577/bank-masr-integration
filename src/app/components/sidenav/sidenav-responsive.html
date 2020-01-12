@@ -44,7 +44,9 @@
           <li><a mat-list-item  (click)="changeCurrentTab('General Settings'); snav.toggle()" routerLink="/setting">General Settings</a></li>
           <li><a mat-list-item  (click)="changeCurrentTab('Users'); snav.toggle()" routerLink="/users">Users</a></li>
         </ul>
-
+        <mat-list-item  >
+          <a mat-list-item  (click)="snav.toggle(); Logout()" >Logout</a>
+        </mat-list-item>
       </mat-nav-list>
 
     </mat-sidenav>

@@ -23,11 +23,11 @@ export class AuthGuardService implements CanActivate {
         return false;
       }
       res(true);
-    },error1 => {
+    },error1 => {sid
       rej(false);
     })
     }) as boolean;*/
-    this.routerd.navigate([Constants.LOGIN_PAGE]);
+    this.routerd.navigate(["/"]);
     return false;
   }
 
@@ -52,12 +52,12 @@ export class AuthGuardService implements CanActivate {
       }).catch((error: any) => {
         localStorage.setItem('token', '');
         localStorage.setItem('user', '');
-        this.routerd.navigate([Constants.LOGIN_PAGE]);
+      this.routerd.navigate(["/"]);
         return true;
       });
     } else {
 
-    this.routerd.navigate([Constants.LOGIN_PAGE]);
+    this.routerd.navigate(["/"]);
     return false
   }
   }

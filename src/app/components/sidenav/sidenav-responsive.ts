@@ -6,6 +6,8 @@ import { SyncJobType } from 'src/app/models/SyncJobType';
 import { Constants } from 'src/app/models/constants';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
+import {Router} from "@angular/router";
+import {interval} from "rxjs";
 
 
 
@@ -22,7 +24,8 @@ export class SidenavResponsive implements OnDestroy,OnInit {
   syncJobTypes: SyncJobType[] = [];
   private _mobileQueryListener: () => void;
   
-  constructor(private syncJobService: SyncJobService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, location: Location) {
+  constructor(private syncJobService: SyncJobService, changeDetectorRef: ChangeDetectorRef,
+              private router: Router, media: MediaMatcher, location: Location) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -40,6 +43,16 @@ export class SidenavResponsive implements OnDestroy,OnInit {
   changeCurrentTab(cuurentTab){
     Constants.CURRENT_TAB = cuurentTab
     this.selectedTab = cuurentTab;
+  }
+  Logout(){
+    // localStorage.setItem("auth-token","");
+    // localStorage.setItem("user","");
+    localStorage.removeItem("auth-token");
+    localStorage.removeItem("user");
+    localStorage.clear();
+    this.router.navigate(["/"]);
+
+
   }
 
   getSyncJobTypes(){

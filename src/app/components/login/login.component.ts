@@ -33,10 +33,11 @@ export class LoginComponent implements OnInit {
   ) {
     this.side = side;
     // redirect to home if already logged in
+    this.side.shouldRun = false;
+
     if (localStorage.getItem('auth_token')) {
       this.router.navigate([Constants.SUPPLIERS_PAGE]);
     }
-    this.side.shouldRun = false;
   }
 
   ngOnInit() {
