@@ -80,5 +80,11 @@ export class AuthService {
 
     // casper.run();
   }
+  checkToken(){
+    const headers = new HttpHeaders({'h1':'v1','h2':'v2'});
+    let token = localStorage.getItem('auth_token');
+      return this.httpClient.get(Constants.CHECKAUTH,{ headers: new HttpHeaders({'Authorization': 'Bearer ' + token})
+      })
+  }
 
 }

@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     this.side = side;
     // redirect to home if already logged in
     if (localStorage.getItem('auth_token')) {
-      this.router.navigate(['/']);
+      this.router.navigate([Constants.SUPPLIERS_PAGE]);
     }
     this.side.shouldRun = false;
   }
@@ -99,17 +99,19 @@ export class LoginComponent implements OnInit {
       this.authenticationService.login(this.user).toPromise().then((res: any) => {
         console.log(res.items);
         localStorage.setItem('auth_token',res.auth_token);
-
+        localStorage.setItem('user',JSON.stringify(this.user));
         this.spinner.hide();
         this.loading = false;
-
-        this.router.navigate([Constants.TABS_PAGE]);
         this.side.setshouldRun(true);
+        this.router.navigate([Constants.SUPPLIERS_PAGE]);
+
 
 
         console.log(this.side.getshouldRun);
         return true
       }).catch(err => {
+        localStorage.setItem('auth_token','');
+        localStorage.setItem('user','');
         if (username.trim() === 'Admin@test.com' && password.trim() === 'Yazyad123') {
           this.spinner.hide();
           this.loading = false;

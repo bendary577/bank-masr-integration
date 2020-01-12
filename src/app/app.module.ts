@@ -54,6 +54,7 @@ import { Data } from './models/data';
 import { SupplierDetailsComponent } from './components/supplier-details/supplier-details.component';
 import { ConsumptionsComponent } from './components/consumptions/consumptions.component';
 import { CreditNoteConfigurationComponent } from './components/credit-note-configuration/credit-note-configuration.component';
+import {AuthGuardService} from "./guards/AuthGuardService";
 
 @NgModule({
   declarations: [
@@ -88,7 +89,7 @@ import { CreditNoteConfigurationComponent } from './components/credit-note-confi
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-
+    HttpModule,
     AngularMaterialModule,
     NgxDatatableModule,
     NgxSpinnerModule,
@@ -110,7 +111,7 @@ import { CreditNoteConfigurationComponent } from './components/credit-note-confi
     BrowserModule,
     FormsModule
   ],
-  providers: [CookieService, AuthService, InvoiceService, AlertsService, Data],
+  providers: [CookieService, AuthService, InvoiceService, AlertsService, Data,AuthGuardService],
   bootstrap: [AppComponent],
   entryComponents: [AddVendorComponent, SuppliersConfiguartionComponent, SchedulerConfigurationComponent,
   ApprovedInvoiceConfigurationComponent]

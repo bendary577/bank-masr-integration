@@ -19,43 +19,44 @@ import { ApprovedInvoiceConfigurationComponent } from './components/approved-inv
 import { SupplierDetailsComponent } from './components/supplier-details/supplier-details.component';
 import { ConsumptionsComponent } from './components/consumptions/consumptions.component';
 import { CreditNoteConfigurationComponent } from './components/credit-note-configuration/credit-note-configuration.component';
+import {AuthGuardService} from "./guards/AuthGuardService";
 
 
 const routes: Routes = [
-  { path: '', redirectTo: Constants.LOGIN_PAGE, pathMatch: 'full' },
+  { path: '', redirectTo: Constants.LOGIN_PAGE, pathMatch: 'full'},
   {
-    path: Constants.TABS_PAGE, component: TabsComponent,
+    path: Constants.TABS_PAGE, component: TabsComponent,canActivate:[AuthGuardService],
     children: [
-      { path: '', redirectTo: Constants.HOME_PAGE, pathMatch: 'full' },
-      { path: Constants.HOME_PAGE, component: HomeComponent },
-      { path: Constants.SUPPLIERS_PAGE, component: SuppliersComponent }
+      { path: '', redirectTo: Constants.HOME_PAGE, pathMatch: 'full' ,canActivate:[AuthGuardService]},
+      { path: Constants.HOME_PAGE, component: HomeComponent,canActivate:[AuthGuardService] },
+      { path: Constants.SUPPLIERS_PAGE, component: SuppliersComponent ,canActivate:[AuthGuardService]}
     ]
   },
-  { path: Constants.SIDE_NAV, component: SidenavResponsive },
+  { path: Constants.SIDE_NAV, component: SidenavResponsive,canActivate:[AuthGuardService] },
   {
-    path: Constants.SETTING, component: ConfigurationComponent,
+    path: Constants.SETTING, component: ConfigurationComponent,canActivate:[AuthGuardService],
     children: []
   },
-  { path: Constants.USERS_CONFIGURATION, component: UsersComponent },
-  { path: Constants.SYNC_JOBS, component: SyncJobsconfigComponent },
+  { path: Constants.USERS_CONFIGURATION, component: UsersComponent,canActivate:[AuthGuardService] },
+  { path: Constants.SYNC_JOBS, component: SyncJobsconfigComponent ,canActivate:[AuthGuardService]},
 
   // Pages
-  { path: Constants.LOGIN_PAGE, component: LoginComponent },
-  { path: Constants.SUPPLIERS_PAGE, component: SuppliersComponent },
-  { path: Constants.SUPPLIERS_CONFIG_PAGE, component: SuppliersConfiguartionComponent },
-  { path: Constants.SUPPLIERS_DETAILS_PAGE, component: SupplierDetailsComponent },
+  { path: Constants.LOGIN_PAGE, component: LoginComponent},
+  { path: Constants.SUPPLIERS_PAGE, component: SuppliersComponent,canActivate:[AuthGuardService] },
+  { path: Constants.SUPPLIERS_CONFIG_PAGE, component: SuppliersConfiguartionComponent,canActivate:[AuthGuardService] },
+  { path: Constants.SUPPLIERS_DETAILS_PAGE, component: SupplierDetailsComponent,canActivate:[AuthGuardService] },
 
-  { path: Constants.APPROVED_INVOICES_PAGE, component: ApprovedInvoiceComponent },
-  { path: Constants.APPROVED_INVOICES_CONFIG_PAGE, component: ApprovedInvoiceConfigurationComponent },
+  { path: Constants.APPROVED_INVOICES_PAGE, component: ApprovedInvoiceComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.APPROVED_INVOICES_CONFIG_PAGE, component: ApprovedInvoiceConfigurationComponent ,canActivate:[AuthGuardService]},
 
-  { path: Constants.BOOKED_TRANSFER_PAGE, component: BookedTransferComponent },
+  { path: Constants.BOOKED_TRANSFER_PAGE, component: BookedTransferComponent,canActivate:[AuthGuardService] },
   // { path: Constants.BOOKED_TRANSFER_CONFIG_PAGE, component: BookedTransferConfigurationComponent },
-  { path: Constants.BOOKED_TRANSFER_DETAILS_PAGE + "/:transfer", component: BookedTransferDetailsComponent },
+  { path: Constants.BOOKED_TRANSFER_DETAILS_PAGE + "/:transfer", component: BookedTransferDetailsComponent,canActivate:[AuthGuardService] },
 
-  { path: Constants.CREDIT_NOTE_PAGE , component: CreditNoteComponent },
-  { path: Constants.CREDIT_NOTE_CONFIG_PAGE, component: CreditNoteConfigurationComponent },
+  { path: Constants.CREDIT_NOTE_PAGE , component: CreditNoteComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.CREDIT_NOTE_CONFIG_PAGE, component: CreditNoteConfigurationComponent ,canActivate:[AuthGuardService]},
 
-  { path: Constants.CONSUMPTION_PAGE , component: ConsumptionsComponent },
+  { path: Constants.CONSUMPTION_PAGE , component: ConsumptionsComponent ,canActivate:[AuthGuardService]},
 
   // Error Page
   {path:'**', component: ErrorComponentComponent}
@@ -63,6 +64,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
+
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })

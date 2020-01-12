@@ -11,6 +11,7 @@ export class Constants {
     static CURRENT_TAB = 'Welcome';
 
     static LOGINAUTH = environment.apiHost + '/auth/login';
+    static CHECKAUTH = environment.apiHost +'/auth/getAccessToken';
     static LOGIN = environment.apiHost + '/login';
 
     static VENDOR_URL = environment.apiHost + '/getVendors';
