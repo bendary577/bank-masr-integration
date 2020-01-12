@@ -63,17 +63,19 @@ export class SyncJobsconfigComponent implements OnInit {
       this.router.navigate([Constants.SUPPLIERS_CONFIG_PAGE]);
     }
     else if (syncJobType.name == "Approved Invoices"){
+      this.data.storage = syncJobType
       this.router.navigate([Constants.APPROVED_INVOICES_CONFIG_PAGE]);
+    }
+    else if (syncJobType.name == "Credit Note"){
+      this.data.storage = syncJobType
+      this.router.navigate([Constants.CREDIT_NOTE_CONFIG_PAGE]);
     }
     // else if (syncJobType.name == "Booked Transfers"){
     //   this.router.navigate([Constants.BOOKED_TRANSFER_CONFIG_PAGE]);
     // }
-    else if (syncJobType.name == "Booked Waste"){
-      this.router.navigate([Constants.BOOKED_WASTE_CONFIG_PAGE]);
-    }
-    else if (syncJobType.name == "Credit Note"){
-      this.router.navigate([Constants.CREDIT_NOTE_CONFIG_PAGE]);
-    }
+    // else if (syncJobType.name == "Booked Waste"){
+    //   this.router.navigate([Constants.BOOKED_WASTE_CONFIG_PAGE]);
+    // }
     else{
       this.snackBar.open("This sync job has not configuration yet.", null, {
         duration: 2000,
