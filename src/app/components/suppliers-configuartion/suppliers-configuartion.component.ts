@@ -33,7 +33,6 @@ export class SuppliersConfiguartionComponent implements OnInit {
     private spinner: NgxSpinnerService, public snackBar: MatSnackBar,
     private syncJobService:SyncJobService, private data: Data,
     private router: Router,  private supplierService: SupplierService) { 
-      // this.getSyncJobType();
 
   }
 
