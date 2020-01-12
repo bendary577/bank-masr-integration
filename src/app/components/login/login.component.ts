@@ -112,24 +112,16 @@ export class LoginComponent implements OnInit {
       }).catch(err => {
         localStorage.setItem('auth_token','');
         localStorage.setItem('user','');
-        if (username.trim() === 'Admin@test.com' && password.trim() === 'Yazyad123') {
-          this.spinner.hide();
-          this.loading = false;
+        this.spinner.hide();
+        this.loading = false;
+        this.snackBar.open('Wrong Credentials.', null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+        });
 
-          this.router.navigate([Constants.SUPPLIERS_PAGE]);
-          this.side.setshouldRun(true);
 
-          return true;
 
-        } else {
-          this.spinner.hide();
-          this.loading = false;
 
-          this.snackBar.open('Wrong Credentials.', null, {
-            duration: 2000,
-            horizontalPosition: 'center',
-          });
-        }
 
         return;
       });
