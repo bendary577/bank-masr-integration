@@ -15,24 +15,18 @@ import { Data } from 'src/app/models/data';
   styleUrls: ['./approved-invoice-configuration.component.scss']
 })
 export class ApprovedInvoiceConfigurationComponent implements OnInit {
-
-  formSupplier: FormGroup;
   submitted = false;
   loading = true;
   costCenters = [];
   selectedCostCenters = [];
 
-  constructor(private formBuilder: FormBuilder,private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
+  constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
     private router:Router, public snackBar: MatSnackBar, private syncJobService:SyncJobService,
     private data: Data) { 
   }
 
   ngOnInit() {
     this.getCostCenter();
-    this.formSupplier = this.formBuilder.group({
-      name: ['', Validators.required]
-    });
-    console.log(this.data.storage)
   }
 
   onSaveClick(): void {
