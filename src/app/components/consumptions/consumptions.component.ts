@@ -29,24 +29,26 @@ export class ConsumptionsComponent implements OnInit {
   getConsumptionsJob() {
     this.spinner.show();
     this.consumptionsService.getConsumptions().toPromise().then((res: any) => {
-      this.success = res.success;
+      // this.success = res.success;
+      this.consumptions = res;
+
       // this.getSuppliersDB();
       // this.getSyncJobs("Get Suppliers");
 
-      if (this.success) {
-        this.snackBar.open('Sync Consumptions Successfully', null, {
-          duration: 2000,
-          horizontalPosition: 'center',
-          panelClass: "my-snack-bar-success"
-        });
-      }
-      else {
-        this.snackBar.open(res.message, null, {
-          duration: 2000,
-          horizontalPosition: 'center',
-          panelClass: "my-snack-bar-fail"
-        });
-      }
+      // if (this.success) {
+      //   this.snackBar.open('Sync Consumptions Successfully', null, {
+      //     duration: 2000,
+      //     horizontalPosition: 'center',
+      //     panelClass: "my-snack-bar-success"
+      //   });
+      // }
+      // else {
+      //   this.snackBar.open(res.message, null, {
+      //     duration: 2000,
+      //     horizontalPosition: 'center',
+      //     panelClass: "my-snack-bar-fail"
+      //   });
+      // }
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
