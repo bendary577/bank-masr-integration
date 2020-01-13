@@ -104,6 +104,7 @@ export class LoginComponent implements OnInit {
         this.spinner.hide();
         this.loading = false;
         this.side.setshouldRun(true);
+        this.side.shouldRun = true;
         this.router.navigate([Constants.SUPPLIERS_PAGE]);
 
 

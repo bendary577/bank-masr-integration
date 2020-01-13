@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ElementRef } from '@angular/core';
+import {NgModule, ElementRef, ChangeDetectorRef} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -111,7 +111,7 @@ import {AuthGuardService} from "./guards/AuthGuardService";
     BrowserModule,
     FormsModule
   ],
-  providers: [CookieService, AuthService, InvoiceService, AlertsService, Data,AuthGuardService],
+  providers: [CookieService, AuthService, InvoiceService, AlertsService, Data,AuthGuardService,SidenavResponsive],
   bootstrap: [AppComponent],
   entryComponents: [AddVendorComponent, SuppliersConfiguartionComponent, SchedulerConfigurationComponent,
   ApprovedInvoiceConfigurationComponent]

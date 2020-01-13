@@ -1,12 +1,12 @@
 import {MediaMatcher} from '@angular/cdk/layout';
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Injectable, OnDestroy, OnInit} from '@angular/core';
 import { Location } from '@angular/common';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { Constants } from 'src/app/models/constants';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
-import {Router} from "@angular/router";
+import {NavigationEnd, Router} from "@angular/router";
 import {interval} from "rxjs";
 
 
@@ -30,6 +30,15 @@ export class SidenavResponsive implements OnDestroy,OnInit {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
     this.shouldRun = location.path() !== "/login"&&location.path() !=="/";
+    router.events.subscribe((val) => {
+      // see also
+      if(val instanceof NavigationEnd) {
+        if (val.url == "/" || val.url == "/login")
+          this.shouldRun = false;
+        else
+          this.shouldRun = true;
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -41,7 +50,7 @@ export class SidenavResponsive implements OnDestroy,OnInit {
   }
 
   changeCurrentTab(cuurentTab){
-    Constants.CURRENT_TAB = cuurentTab
+    Constants.CURRENT_TAB = cuurentTab;
     this.selectedTab = cuurentTab;
   }
   Logout(){
