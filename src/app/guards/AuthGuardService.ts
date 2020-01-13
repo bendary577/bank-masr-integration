@@ -2,15 +2,18 @@ import { Injectable } from '@angular/core';
 import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 import { Constants } from '../models/constants';
 import {AuthService} from "../services/auth/auth.service";
+import {SidenavResponsive} from "../components/sidenav/sidenav-responsive";
 
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
   auth_service:AuthService;
   routerd: Router;
+  side :SidenavResponsive;
   constructor(private router: Router,auth_service:AuthService) {
     this.routerd =router;
     this.auth_service=auth_service;
+
   }
 
 
@@ -42,6 +45,7 @@ export class AuthGuardService implements CanActivate {
           .join('/');
 
         console.log(url);
+
 /*        if(state.url!=url)
           return false;
         else*/

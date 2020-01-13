@@ -59,7 +59,7 @@ const routes: Routes = [
   { path: Constants.CONSUMPTION_PAGE , component: ConsumptionsComponent ,canActivate:[AuthGuardService]},
 
   // Error Page
-  {path:'**', component: ErrorComponentComponent}
+  {path:'**', component: ErrorComponentComponent,canActivate:[AuthGuardService]}
 
 ];
 
