@@ -73,3 +73,8 @@ h1.example-app-name {
   position: relative;
   height: inherit;
 }
+
+
+mat-expansion-panel-header{
+  font-size: large;
+}

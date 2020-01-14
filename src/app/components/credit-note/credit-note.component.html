@@ -8,7 +8,7 @@
             {{job.creation_date}} - {{job.status}}</option>
     </select> 
      
-    <button mat-flat-button (click)="getCreditNoteSyncJob()">Sync Credit Note Now</button>
+    <button mat-flat-button (click)="getCreditNoteSyncJob()">Sync Credit Notes Now</button>
 </div>
 <br>
 <div *ngIf="selectedJob">
@@ -34,7 +34,7 @@
             </mat-list-item>
             <mat-list-item *ngIf="!creditNote.length"> 
             <span>
-                There was no new data to sync in this job, You can sync credit note now from   
+                There was no new data to sync in this job, You can sync credit notes now from   
                 <a (click)="getCreditNoteSyncJob()">here</a>
             </span>
             </mat-list-item>
@@ -51,7 +51,7 @@
                 </mat-card-header>
                 <mat-card-content>
                   <p>
-                        There was no new data to sync in this job, You can sync credit note now from 
+                        There was no new data to sync in this job, You can sync credit notes now from 
                     <a  (click)="getCreditNoteSyncJob()">here</a>
                   </p>
                   

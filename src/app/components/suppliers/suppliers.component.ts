@@ -33,6 +33,7 @@ export class SuppliersComponent implements OnInit {
   ngOnInit() {
     this.getSuppliersDB();
     this.getSyncJobs("Suppliers");
+    // this.getSyncJobData();
   }
 
   getSuppliersDB() {
@@ -60,7 +61,7 @@ export class SuppliersComponent implements OnInit {
 
   getSuppliersSyncJob() {
     this.spinner.show();
-    this.supplierService.getSuppliers().toPromise().then((res: any) => {
+     this.supplierService.getSuppliers().toPromise().then((res: any) => {
       this.success = res.success;
       this.getSuppliersDB();
       this.getSyncJobs("Suppliers");
@@ -103,7 +104,7 @@ export class SuppliersComponent implements OnInit {
     });
   }
 
-  getSyncJobData(syncJob: SyncJob) {
+  getSyncJobData() {
     this.spinner.show();
     this.syncJobService.getSyncJobDataById(this.selectedJob["id"]).toPromise().then((res: any) => {
       this.dataSource = res;
