@@ -18,28 +18,23 @@
                    >
 
       <mat-nav-list>
-        
-      <mat-list-item  *ngFor="let type of syncJobTypes">
-        <a mat-list-item (click)="snav.toggle()" routerLink={{type.end_point}}>{{type.name}}</a>
-      </mat-list-item>
-        <!-- <a mat-list-item  (click)="changeCurrentTab('Suppliers'); snav.toggle()" routerLink="/suppliers">Suppliers</a>
-        <a mat-list-item  (click)="changeCurrentTab('Booked Transfer'); snav.toggle()" routerLink="/bookedTransfers">Booked Transfer</a>
-        <a mat-list-item  (click)="changeCurrentTab('Approved Invoices'); snav.toggle()" routerLink="/approvedInvoices">Approved Invoices</a>
-        <a mat-list-item  (click)="changeCurrentTab('Credit Note'); snav.toggle()" routerLink="/creditNote">Credit Note</a>
-        <a mat-list-item  (click)="changeCurrentTab('Consumptions'); snav.toggle()" routerLink="/consumption">Consumptions</a> -->
+        <mat-list-item  *ngFor="let type of syncJobTypes">
+          <a mat-list-item (click)="snav.toggle()" routerLink={{type.end_point}}>{{type.name}}</a>
+        </mat-list-item>
 
-        <!-- <mat-tree class="Settings">
-          <mat-tree-node> <a mat-list-item  (click)="changeCurrentTab('Sync Jobs Configuration'); snav.toggle()" routerLink="/syncjobs">Sync Jobs Configuration</a></mat-tree-node>
-          <mat-tree-node><a mat-list-item  (click)="changeCurrentTab('General Settings'); snav.toggle()" routerLink="/setting">General Settings</a></mat-tree-node>
-          <mat-tree-node><a mat-list-item  (click)="changeCurrentTab('Users'); snav.toggle()" routerLink="/users">Users</a></mat-tree-node>
-        
-        </mat-tree> -->
-        <!-- <mat-tree>
-          <mat-tree-node> parent node </mat-tree-node>
-          <mat-tree-node> -- child node1 </mat-tree-node>
-          <mat-tree-node> -- child node2 </mat-tree-node>
-        </mat-tree> -->
-        <ul class="Settings"> Settings
+        <!-- <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
+          <mat-expansion-panel-header>
+            Settings
+          </mat-expansion-panel-header>
+          <mat-nav-list dense>
+            <a mat-list-item (click)="snav.toggle()" routerLink="/syncjobs">Sync Jobs Configuration</a>
+            <a mat-list-item (click)="snav.toggle()" routerLink="/setting">General Settings</a>
+            <a mat-list-item (click)="snav.toggle()" routerLink="/users">Users</a>
+          </mat-nav-list>
+        </mat-expansion-panel> -->
+
+ 
+<ul class="Settings"> Settings
           <li><a mat-list-item  (click)="changeCurrentTab('Sync Jobs Configuration'); snav.toggle()" routerLink="/syncjobs">Sync Jobs Configuration</a></li>
           <li><a mat-list-item  (click)="changeCurrentTab('General Settings'); snav.toggle()" routerLink="/setting">General Settings</a></li>
           <li><a mat-list-item  (click)="changeCurrentTab('Users'); snav.toggle()" routerLink="/users">Users</a></li>
@@ -47,12 +42,12 @@
         <mat-list-item  >
           <a mat-list-item  (click)="snav.toggle(); Logout()" >Logout</a>
         </mat-list-item>
+
       </mat-nav-list>
 
     </mat-sidenav>
 
     <mat-sidenav-content>
-<!--      <p *ngFor="let content of fillerContent">{{content}}</p>-->
       <router-outlet></router-outlet>
 
     </mat-sidenav-content>

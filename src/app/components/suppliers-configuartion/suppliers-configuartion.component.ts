@@ -39,9 +39,7 @@ export class SuppliersConfiguartionComponent implements OnInit {
   ngOnInit() {
     this.supplierConfigForm = this.formBuilder.group({
       limit: [this.data.storage["configuration"]["limit"], Validators.required],
-      category: [this.data.storage["configuration"]["category"], Validators.required],
-      // limit: [this.syncJobType.configuration.limit],
-      // category: [""],   
+      procurementBU: [this.data.storage["configuration"]["procurementBU"], Validators.required],
       taxes: [""],
       groups: [""]
     });

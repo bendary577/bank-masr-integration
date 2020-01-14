@@ -63,3 +63,13 @@ h1.example-app-name {
      `<body>` to be our scrolling element for mobile layouts. */
   margin-top: 0px !important;
 }
+
+ .mat-list-item .mat-list-item-content .mat-list-item-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 12px;
+  position: relative;
+  height: inherit;
+}
