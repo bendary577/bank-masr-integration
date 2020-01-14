@@ -1,21 +1,52 @@
 <h3>Approved Invoices</h3>
 
 <div class="header">
-    <select class="custom-select" (change)="getSyncJobData($event.target.value)">
-        <option value="0" hidden selected disabled>Sync Job History </option>
-        
-        <option value={{job.id}} *ngFor="let job of jobs">
+    <span class="history"> Sync Job History </span>
+
+    <select class="custom-select" (change)="getSyncJobData($event.target.value)" [(ngModel)]="selectedJob">
+        <option [ngValue]="job" *ngFor="let job of jobs">
             {{job.creation_date}} - {{job.status}}</option>
-     </select>
+    </select> 
      
-    <button mat-flat-button (click)="getApprovedInvoicesSyncJob()">Sync Apprved Invoices Now</button>
+    <button mat-flat-button (click)="getApprovedInvoicesSyncJob()">Sync Approved Invoices Now</button>
 </div>
 <br>
-<div>
+<div *ngIf="selectedJob">
+    <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-title class="title">Sync Details</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+            <mat-list-item>      
+                <span class="key">Sync status: </span>
+                <span class="value" *ngIf="selectedJob.status">{{selectedJob.status}}</span>
+                <span class="value" *ngIf="!selectedJob.status">No Info</span>
+            </mat-list-item>
+            <mat-list-item>      
+                <span class="key">Start Date: </span>
+                <span class="value" *ngIf="selectedJob.creation_date">{{selectedJob.creation_date}}</span>
+                <span class="value" *ngIf="!selectedJob.creation_date">No Info</span>
+            </mat-list-item>
+            <mat-list-item>      
+                <span class="key">End Date: </span>
+                <span class="value" *ngIf="selectedJob.end_date">{{selectedJob.end_date}}</span>
+                <span class="value" *ngIf="!selectedJob.end_date">No Info</span>
+            </mat-list-item>
+            <mat-list-item *ngIf="!approvedInvoices.length"> 
+            <span>
+                There was no new data to sync in this job, You can sync approved invoices now from  <a (click)="getApprovedInvoicesSyncJob()">here</a>
+            </span>
+            </mat-list-item>
+            </mat-card-content>
+    </mat-card>
+    </div>
+    <br>
 
 <div>
 
-<div *ngIf="!approvedInvoices.length">
+<div>
+
+<div *ngIf="!selectedJob">
         <mat-card class="example-card">
                 <mat-card-header>
                   <mat-card-title>No Data</mat-card-title>

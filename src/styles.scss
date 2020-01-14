@@ -58,7 +58,23 @@ select {
   height: 30px;
   margin: 5px 0;
   position: absolute;
+  left: 150px;
+}
+
+.history{
+  margin: 5px 0;
+  position: absolute;
+  font-weight: bold;
   left: 15px;
+}
+
+title{ 
+  text-align: center;
+  font-weight: bold;
+
+}
+mat-card-header{
+  background-color: #f2efef!important;
 }
 
 h3{
@@ -67,7 +83,9 @@ h3{
   font-weight: bolder;
 }
 
+
 button {
+  // color: white;
   background-color: #1976d3;
 } 
 .back {
@@ -77,16 +95,17 @@ button {
 }
 
 a:hover {
-  color: blue;
-}
-
-
-a:link {
-  color: red;
+  color: rgb(191, 212, 1);
 }
 
 a:visited {
-  color: red;
+  color: rgb(15, 117, 37);
+}
+
+a{
+  color: blue;
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 span.italic {

@@ -1,15 +1,47 @@
 <h3>Credit Notes</h3>
 
 <div class="header">
-    <select class="custom-select" (change)="getSyncJobData($event.target.value)">
-        <option value="0" hidden selected disabled>Sync Job History </option>
-        
-        <option value={{job.id}} *ngFor="let job of jobs">
+    <span class="history"> Sync Job History </span>
+
+    <select class="custom-select" (change)="getSyncJobData($event.target.value)" [(ngModel)]="selectedJob">
+        <option [ngValue]="job" *ngFor="let job of jobs">
             {{job.creation_date}} - {{job.status}}</option>
-     </select>
+    </select> 
      
     <button mat-flat-button (click)="getCreditNoteSyncJob()">Sync Credit Note Now</button>
 </div>
+<br>
+<div *ngIf="selectedJob">
+    <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-title class="title">Sync Details</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+            <mat-list-item>      
+                <span class="key">Sync status: </span>
+                <span class="value" *ngIf="selectedJob.status">{{selectedJob.status}}</span>
+                <span class="value" *ngIf="!selectedJob.status">No Info</span>
+            </mat-list-item>
+            <mat-list-item>      
+                <span class="key">Start Date: </span>
+                <span class="value" *ngIf="selectedJob.creation_date">{{selectedJob.creation_date}}</span>
+                <span class="value" *ngIf="!selectedJob.creation_date">No Info</span>
+            </mat-list-item>
+            <mat-list-item>      
+                <span class="key">End Date: </span>
+                <span class="value" *ngIf="selectedJob.end_date">{{selectedJob.end_date}}</span>
+                <span class="value" *ngIf="!selectedJob.end_date">No Info</span>
+            </mat-list-item>
+            <mat-list-item *ngIf="!creditNote.length"> 
+            <span>
+                There was no new data to sync in this job, You can sync credit note now from   
+                <a (click)="getCreditNoteSyncJob()">here</a>
+            </span>
+            </mat-list-item>
+            </mat-card-content>
+    </mat-card>
+    </div>
+    <br>
 <br>
 <div>
     <div *ngIf="!creditNote.length">

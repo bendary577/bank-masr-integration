@@ -1,21 +1,19 @@
 <h3>Suppliers</h3>
 
 <div class="header">
-    <select class="custom-select" (change)="getSyncJobData($event.target.value)" [(ngModel)]="selectedJob">
-        <option value="0" hidden selected disabled>Sync Job History </option>
+    <span class="history"> Sync Job History </span>
 
+    <select class="custom-select" (change)="getSyncJobData($event.target.value)" [(ngModel)]="selectedJob">
         <option [ngValue]="job" *ngFor="let job of jobs">
             {{job.creation_date}} - {{job.status}}</option>
     </select> 
-
-    
     <button mat-flat-button (click)="getSuppliersSyncJob()">Sync Suppliers Now</button>
 </div>
 <br>
 <div *ngIf="selectedJob">
     <mat-card class="example-card">
             <mat-card-header>
-              <mat-card-title>Sync Details</mat-card-title>
+              <mat-card-title class="title">Sync Details</mat-card-title>
             </mat-card-header>
             <mat-card-content>
             <mat-list-item>      
@@ -33,13 +31,18 @@
                 <span class="value" *ngIf="selectedJob.end_date">{{selectedJob.end_date}}</span>
                 <span class="value" *ngIf="!selectedJob.end_date">No Info</span>
             </mat-list-item>
+            <mat-list-item *ngIf="!dataSource.length"> 
+            <span>
+                There was no new data to sync in this job, You can sync suppliers now from <a (click)="getSuppliersSyncJob()">here</a>
+            </span>
+            </mat-list-item>
             </mat-card-content>
     </mat-card>
     </div>
     <br>
 
 <div>
-<div *ngIf="!dataSource.length">
+<div *ngIf="!selectedJob">
         <mat-card class="example-card">
                 <mat-card-header>
                   <mat-card-title>No Data</mat-card-title>

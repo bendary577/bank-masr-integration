@@ -4,6 +4,7 @@ import { VendorService } from 'src/app/services/vendor/vendor.service';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { InvoiceService } from 'src/app/services/invoice/invoice.service';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
+import { SyncJob } from 'src/app/models/SyncJob';
 
 @Component({
   selector: 'app-approved-invoice',
@@ -15,6 +16,7 @@ export class ApprovedInvoiceComponent implements OnInit {
   success = null;
   jobs = [];
   approvedInvoices = [];
+  selectedJob :SyncJob = null;
   syncJobId = -1;
 
 
@@ -77,6 +79,8 @@ export class ApprovedInvoiceComponent implements OnInit {
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
       console.log(res);
       this.jobs = res;
+      this.selectedJob = this.jobs[0]
+
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {

@@ -3,6 +3,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { CreditNoteService } from 'src/app/services/creditNote/credit-note.service';
+import { SyncJob } from 'src/app/models/SyncJob';
 
 @Component({
   selector: 'app-credit-note',
@@ -15,6 +16,7 @@ export class CreditNoteComponent implements OnInit {
   success = null;
   jobs = [];
   creditNote = [];
+  selectedJob :SyncJob = null;
   syncJobId = -1;
 
 
@@ -75,6 +77,7 @@ export class CreditNoteComponent implements OnInit {
     this.spinner.show();
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
       this.jobs = res;
+      this.selectedJob = this.jobs[0]
       
       this.spinner.hide();
       this.loading = false;
