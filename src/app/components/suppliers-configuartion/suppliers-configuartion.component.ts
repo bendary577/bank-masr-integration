@@ -40,8 +40,8 @@ export class SuppliersConfiguartionComponent implements OnInit {
     this.supplierConfigForm = this.formBuilder.group({
       limit: [this.data.storage["configuration"]["limit"], Validators.required],
       procurementBU: [this.data.storage["configuration"]["procurementBU"], Validators.required],
-      taxes: [""],
-      groups: [""]
+      taxes: [this.data.storage["configuration"]["taxes"]],
+      groups: [this.data.storage["configuration"]["groups"]]
     });
 
     this.getTaxes();
@@ -91,7 +91,7 @@ export class SuppliersConfiguartionComponent implements OnInit {
 
   onSaveClick(){
     this.data.storage["configuration"]["limit"] = this.supplierConfigForm.controls.limit.value as string;
-    this.data.storage["configuration"]["category"] = this.supplierConfigForm.controls.category.value as string;
+    this.data.storage["configuration"]["procurementBU"] = this.supplierConfigForm.controls.procurementBU.value as string;
     this.data.storage["configuration"]["taxes"] = this.supplierConfigForm.controls.taxes.value as string;
     this.data.storage["configuration"]["groups"] = this.supplierConfigForm.controls.groups.value as string;
 

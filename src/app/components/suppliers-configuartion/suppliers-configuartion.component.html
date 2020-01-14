@@ -21,7 +21,7 @@
 
                 <div class="form-group">
                     <mat-form-field>
-                        <mat-select id="taxes" name="taxes" placeholder="Taxes" formControlName="taxes">
+                        <mat-select id="taxes" name="taxes" placeholder="taxes" formControlName="taxes">
                           <mat-option *ngFor="let tax of taxes" value={{tax.taxes}}>{{tax.taxes}}</mat-option>
                         </mat-select>
                         <div class="loader" *ngIf="taxesLoading"></div>

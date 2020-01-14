@@ -1,4 +1,5 @@
 export class SyncJob {
+    id: string;
     status: string;
     creation_date: string;
     user_id: string;

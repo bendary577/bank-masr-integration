@@ -18,6 +18,7 @@ export class ApprovedInvoiceConfigurationComponent implements OnInit {
   submitted = false;
   loading = true;
   costCenters = [];
+  businessUnits = [];
   selectedCostCenters = [];
 
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
@@ -26,6 +27,7 @@ export class ApprovedInvoiceConfigurationComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getBusinessUnits()
     this.getCostCenter();
   }
 
@@ -46,14 +48,12 @@ export class ApprovedInvoiceConfigurationComponent implements OnInit {
     });
   }
 
-
-  addRow(row){
-    this.selectedCostCenters.push(row)
-    console.log(this.selectedCostCenters)
-  }
-
-  changeBusinessUnit(row){
-    console.log(this.selectedCostCenters)
+  getBusinessUnits() {
+    this.invoiceService.getBisinessUnits().toPromise().then((res: any) => {
+      this.businessUnits = res.data.items;
+    }).catch(err => {
+      console.error(err);
+    });
   }
 
   getCostCenter() {

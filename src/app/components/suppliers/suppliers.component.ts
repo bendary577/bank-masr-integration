@@ -7,6 +7,7 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { Constants } from 'src/app/models/constants';
 import { Router } from '@angular/router';
 import { Data } from 'src/app/models/data';
+import { SyncJob } from 'src/app/models/SyncJob';
 
 
 
@@ -20,14 +21,8 @@ export class SuppliersComponent implements OnInit {
   success = null;
   jobs = [];
   dataSource = [];
-  syncJobId = {
-    "id": "5e0b26285d9f127c2f1d9229",
-    "status": "Success",
-    "creation_date": "2019-12-31 10:42:48.460111",
-    "user_id": 12,
-    "sync_job_type_id": "[ObjectId('5e04b78f9a797a6247151b08')]",
-    "deleted": false
-  }
+  selectedJob :SyncJob = null;
+
 
   constructor(private spinner: NgxSpinnerService, private supplierService: SupplierService,
     private vendorService: VendorService, private syncJobService: SyncJobService,
@@ -106,9 +101,9 @@ export class SuppliersComponent implements OnInit {
     });
   }
 
-  getSyncJobData(syncJobId: String) {
+  getSyncJobData(syncJob: SyncJob) {
     this.spinner.show();
-    this.syncJobService.getSyncJobDataById(syncJobId).toPromise().then((res: any) => {
+    this.syncJobService.getSyncJobDataById(this.selectedJob["id"]).toPromise().then((res: any) => {
       this.dataSource = res;
 
       this.spinner.hide();

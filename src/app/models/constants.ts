@@ -48,7 +48,10 @@ export class Constants {
 
     
     static GET_CONSUMPTION_URL = environment.apiHost + '/getConsumptions';
-    static GET_CONSUMPTION_DB_URL = environment.apiHost + 'getConsumptionDB';
+    static GET_CONSUMPTION_DB_URL = environment.apiHost + '/getConsumptionDB';
+
+    static GET_BUSINESS_UNITS_URL = environment.apiHost + '/getBusinessUnits';
+
 
     static LOGIN_PAGE = 'login';
     static HOME_PAGE = 'home';

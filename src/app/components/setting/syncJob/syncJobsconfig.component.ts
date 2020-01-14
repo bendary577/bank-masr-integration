@@ -66,7 +66,7 @@ export class SyncJobsconfigComponent implements OnInit {
     }
     else if (syncJobType.name == Constants.CREDIT_NOTE_SYNC){
       this.data.storage = syncJobType
-      this.router.navigate([Constants.CREDIT_NOTE_CONFIG_PAGE]);
+      this.router.navigate([Constants.APPROVED_INVOICES_CONFIG_PAGE]);
     }
     // else if (syncJobType.name == "Booked Transfers"){
     //   this.router.navigate([Constants.BOOKED_TRANSFER_CONFIG_PAGE]);
@@ -119,17 +119,5 @@ MatExpansionPanel['decorators'][0].args[0].animations = [
       animate(EXPANSION_PANEL_ANIMATION_TIMING)),
   ])];
 const ELEMENT_DATA: User[] = [
-/*
-  {id:0,password:"",firstName:"asdasdasdas", username: 'Hydrogen', lastName:'asdasdas',token:""},
-  {id:0,password:"",firstName:"", username: 'Hydrogen', lastName:'',token:""},
-  {id:0,password:"",firstName:"", username: 'Hydrogen', lastName:'',token:""},
-  {id:0,password:"",firstName:"", username: 'Hydrogen', lastName:'',token:""},
-  {id:0,password:"",firstName:"", username: 'Hydrogen', lastName:'',token:""},
-  {id:0,password:"",firstName:"", username: 'Hydrogen', lastName:'',token:""},
-  {id:0,password:"",firstName:"", username: 'Hydrogen', lastName:'',token:""},
-  {id:0,password:"",firstName:"", username: 'Hydrogen', lastName:'',token:""},
-  {id:0,password:"",firstName:"", username: 'Hydrogen', lastName:'',token:""},
-  {id:0,password:"",firstName:"", username: 'Hydrogen', lastName:'',token:""},
-*/
 
 ];

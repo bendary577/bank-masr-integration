@@ -21,5 +21,9 @@ export class InvoiceService {
   getCostCenter() {
     return this.http.get(Constants.GET_COST_CENTER_URL);
   }
+
+  getBisinessUnits() {
+    return this.http.get(Constants.GET_BUSINESS_UNITS_URL);
+  }
   
 }
