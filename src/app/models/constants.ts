@@ -36,8 +36,8 @@ export class Constants {
     static GET_APPROVED_INVOICES_DB_URL = environment.apiHost + '/getApprovedInvoicesDB';
     static GET_COST_CENTER_URL = environment.apiHost + '/getCostCenter';
 
-    static GET_CREDIT_NOTE_URL = environment.apiHost + '/getCreditNote';
-    static GET_CREDIT_NOTE_DB_URL = environment.apiHost + '/getCreditNoteDB';
+    static GET_CREDIT_NOTE_URL = environment.apiHost + '/getCreditNotes';
+    static GET_CREDIT_NOTE_DB_URL = environment.apiHost + '/getCreditNotesDB';
 
     static GET_BOOKED_TRANSFER_URL = environment.apiHost + '/getBookedTransfer';
     static GET_BOOKED_TRANSFER_DB_URL = environment.apiHost + '/getBookedTransferDB';
@@ -57,19 +57,23 @@ export class Constants {
     static SUPPLIERS_PAGE = 'suppliers';
     static SUPPLIERS_CONFIG_PAGE = 'suppliersConfig';
     static SUPPLIERS_DETAILS_PAGE = 'suppliersDetails';
+    static SUPPLIERS_SYNC = 'Suppliers';
 
     static APPROVED_INVOICES_PAGE = 'approvedInvoices';
     static APPROVED_INVOICES_CONFIG_PAGE = 'approvedInvoicesConfig';
+    static APPROVED_INVOICES_SYNC = 'Approved Invoices';
 
     static BOOKED_TRANSFER_PAGE = 'bookedTransfers';
     static BOOKED_TRANSFER_CONFIG_PAGE = 'bookedTransfersConfig';
     static BOOKED_TRANSFER_DETAILS_PAGE = 'bookedTransfersDetails';
+    static BOOKED_TRANSFER_SYNC = 'Booked Transfers';
 
     static BOOKED_WASTE_PAGE = 'bookedWastes';
     static BOOKED_WASTE_CONFIG_PAGE = 'bookedWastesConfig';
 
-    static CREDIT_NOTE_PAGE = 'creditNote';
-    static CREDIT_NOTE_CONFIG_PAGE = 'creditNoteConfig';
+    static CREDIT_NOTE_PAGE = 'creditNotes';
+    static CREDIT_NOTE_CONFIG_PAGE = 'creditNotesConfig';
+    static CREDIT_NOTE_SYNC = 'Credit Notes';
 
     static CONSUMPTION_PAGE = 'consumption';
     static CONSUMPTION_CONFIG_PAGE = 'consumptionConfig';

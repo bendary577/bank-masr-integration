@@ -24,12 +24,12 @@ export class CreditNoteComponent implements OnInit {
 
   ngOnInit() {
     this.getCreditNote();
-    this.getSyncJobs("Credit Note");
+    this.getSyncJobs("Credit Notes");
   }
 
   getCreditNote() {
     this.spinner.show();
-    this.syncJobService.getSyncJobData("Credit Note").toPromise().then((res: any) => {
+    this.syncJobService.getSyncJobData("Credit Notes").toPromise().then((res: any) => {
       this.creditNote = res;
      
       this.spinner.hide();
@@ -46,17 +46,17 @@ export class CreditNoteComponent implements OnInit {
     this.creditNoteService.getCreditNote().toPromise().then((res: any) => {
       this.success = res.success;
       this.getCreditNote();
-      this.getSyncJobs("Credit Note");
+      this.getSyncJobs("Credit Notes");
       
       if (this.success){
-        this.snackBar.open('Sync Credit Note Successfully', null, {
+        this.snackBar.open('Sync Credit Notes Successfully', null, {
           duration: 2000,
           horizontalPosition: 'center',
           panelClass:"my-snack-bar-success"
         });
       }
       else{
-        this.snackBar.open('Sync Credit Note Failed' + res.message , null, {
+        this.snackBar.open('Sync Credit Notes Failed' + res.message , null, {
           duration: 2000,
           horizontalPosition: 'center',
           panelClass:"my-snack-bar-fail"

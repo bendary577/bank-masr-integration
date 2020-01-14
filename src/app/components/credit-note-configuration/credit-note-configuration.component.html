@@ -1,12 +1,22 @@
 <h3 mat-dialog-title>Update Approved Invoice Configuartion</h3>
 
-<div class="back">
-    <button mat-flat-button (click)="onSaveClick()">Save</button>
-    <button mat-flat-button (click)="onCancelClick()">Cancel</button>
-</div>
-<br>
 
-<div class="main">
+
+<div *ngIf="!costCenters.length">
+    <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>Error</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+                Error happend while fetching cost centers, make sure you have cost centers.
+          </p>
+          
+        </mat-card-content>
+</mat-card>
+</div>
+
+<div class="main" *ngIf="costCenters.length">
     <ngx-datatable *ngIf="!loading" class="material" [rows]="costCenters" [columnMode]="'force'" [headerHeight]="50"
         [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'cost_center', dir: 'asc'}]">
 
@@ -34,5 +44,12 @@
         </ngx-datatable-column>         
     </ngx-datatable>
     <ngx-spinner></ngx-spinner>
+</div>
+
+<br>
+
+<div class="back">
+    <button mat-flat-button (click)="onSaveClick()">Save</button>
+    <button mat-flat-button (click)="onCancelClick()">Cancel</button>
 </div>
 

@@ -1,5 +1,5 @@
 
-import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatExpansionPanel, MatPaginator, MatTableDataSource, MatDialog, MatSnackBar} from "@angular/material";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {User} from "../../../models/user";
@@ -7,10 +7,8 @@ import {Data} from "../../../models/data";
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { SuppliersConfiguartionComponent } from '../../suppliers-configuartion/suppliers-configuartion.component';
 import { SchedulerConfigurationComponent } from '../../scheduler-configuration/scheduler-configuration.component';
-import { ApprovedInvoiceConfigurationComponent } from '../../approved-invoice-configuration/approved-invoice-configuration.component';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router } from '@angular/router';
 import { Constants } from 'src/app/models/constants';
 
 
@@ -58,15 +56,15 @@ export class SyncJobsconfigComponent implements OnInit {
   }
 
   openDialog(syncJobType){
-    if (syncJobType.name == "Suppliers"){
+    if (syncJobType.name == Constants.SUPPLIERS_SYNC){
       this.data.storage = syncJobType
       this.router.navigate([Constants.SUPPLIERS_CONFIG_PAGE]);
     }
-    else if (syncJobType.name == "Approved Invoices"){
+    else if (syncJobType.name == Constants.APPROVED_INVOICES_SYNC){
       this.data.storage = syncJobType
       this.router.navigate([Constants.APPROVED_INVOICES_CONFIG_PAGE]);
     }
-    else if (syncJobType.name == "Credit Note"){
+    else if (syncJobType.name == Constants.CREDIT_NOTE_SYNC){
       this.data.storage = syncJobType
       this.router.navigate([Constants.CREDIT_NOTE_CONFIG_PAGE]);
     }
@@ -110,8 +108,6 @@ export class SyncJobsconfigComponent implements OnInit {
       }
     });
   }
-
-
   panelOpenState = true;
 }
 const EXPANSION_PANEL_ANIMATION_TIMING = '500ms cubic-bezier(0.4,0.0,0.2,1)';
