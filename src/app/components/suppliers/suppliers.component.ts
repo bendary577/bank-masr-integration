@@ -83,6 +83,8 @@ export class SuppliersComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
+      this.getSuppliersDB();
+      this.getSyncJobs("Suppliers");
       this.snackBar.open(err.error.message , null, {
         duration: 2000,
         horizontalPosition: 'center',
@@ -110,6 +112,7 @@ export class SuppliersComponent implements OnInit {
 
   getSyncJobData() {
     this.spinner.show();
+
     this.syncJobService.getSyncJobDataById(this.selectedJob["id"]).toPromise().then((res: any) => {
       this.dataSource = res;
 

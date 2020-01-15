@@ -52,14 +52,14 @@ export class CreditNoteComponent implements OnInit {
       
       if (this.success){
         this.snackBar.open('Sync Credit Notes Successfully', null, {
-          duration: 2000,
+          duration: 3000,
           horizontalPosition: 'center',
           panelClass:"my-snack-bar-success"
         });
       }
       else{
         this.snackBar.open(res.message , null, {
-          duration: 2000,
+          duration: 3000,
           horizontalPosition: 'center',
           panelClass:"my-snack-bar-fail"
         });
@@ -67,8 +67,10 @@ export class CreditNoteComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
+      this.getCreditNote();
+      this.getSyncJobs("Credit Notes");
       this.snackBar.open(err.error.message , null, {
-        duration: 2000,
+        duration: 3000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
@@ -92,10 +94,9 @@ export class CreditNoteComponent implements OnInit {
     });
   }
 
-  getSyncJobData(syncJobId:String) {
-    console.log(syncJobId)
+  getSyncJobData() {
     this.spinner.show();
-    this.syncJobService.getSyncJobDataById(syncJobId).toPromise().then((res: any) => {
+    this.syncJobService.getSyncJobDataById(this.selectedJob["id"]).toPromise().then((res: any) => {
       this.creditNote = res;
 
       this.spinner.hide();
