@@ -52,6 +52,10 @@ export class Constants {
 
     static GET_BUSINESS_UNITS_URL = environment.apiHost + '/getBusinessUnits';
 
+    static GET_OVER_GROUPS_URL = environment.apiHost + '/getOverGroups';
+    static MAP_ITEM_GROUPS_URL = environment.apiHost + '/mapItemGroups';
+    static GET_JOURNALS_URL = environment.apiHost + '/getJournals';
+
 
     static LOGIN_PAGE = 'login';
     static HOME_PAGE = 'home';
@@ -78,8 +82,15 @@ export class Constants {
     static CREDIT_NOTE_CONFIG_PAGE = 'creditNotesConfig';
     static CREDIT_NOTE_SYNC = 'Credit Notes';
 
-    static CONSUMPTION_PAGE = 'consumption';
-    static CONSUMPTION_CONFIG_PAGE = 'consumptionConfig';
+    static CONSUMPTION_PAGE = 'Consumptions';
+
+    static CONSUMPTIONS_SYNC = 'Consumptions';
+    static TRANSFERS_SYNC = 'Transfers';
+    static ADJUSTMENTS_SYNC = 'Adjustments';
+    static JOURNALS_SYNC = 'Journals';
+
+    static JOURNALS_PAGE = 'Journals';
+    static JOURNALS_CONFIG_PAGE = 'journalsConfig';
 
     static TABS_PAGE = 'tabs';
     static END_POINT = '/getSuppliers';

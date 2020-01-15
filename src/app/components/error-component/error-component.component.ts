@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Constants } from 'src/app/models/constants';
+
 
 @Component({
   selector: 'app-error-component',
@@ -14,7 +16,7 @@ export class ErrorComponentComponent implements OnInit {
   }
 
   back(){
-    this.router.navigate(['home']);
+    this.router.navigate([Constants.SUPPLIERS_PAGE]);
   }
 
 }

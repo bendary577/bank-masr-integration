@@ -40,14 +40,16 @@
                 </ngx-datatable-column>         
             </ngx-datatable>
         </div>
+
+        <br>
+        <div class="back">
+            <button mat-flat-button (click)="onSaveClick()">Save</button>
+            <button mat-flat-button (click)="onCancelClick()">Cancel</button>
+        </div>
         
     </div>
     <ngx-spinner></ngx-spinner>
 
 </div>
-<br>
-<div class="back">
-    <button mat-flat-button (click)="onSaveClick()">Save</button>
-    <button mat-flat-button (click)="onCancelClick()">Cancel</button>
-</div>
+
 

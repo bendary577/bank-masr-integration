@@ -1,0 +1,58 @@
+
+<h3>Journals</h3>
+
+
+<div class="header">
+        <select class="custom-select" (change)="getSyncJobData($event.target.value)">
+            <option value="0" hidden selected disabled>Sync Job History </option>
+    
+            <option value={{job.id}} *ngFor="let job of jobs">
+                {{job.creation_date}} - {{job.status}}</option>
+         </select>
+
+    
+    <button mat-flat-button (click)="getJournalsJob()">Sync Journals Now</button>
+</div>
+<br>
+<div>
+<div>
+    <div *ngIf="!journals.length">
+        <mat-card class="example-card">
+                <mat-card-header>
+                  <mat-card-title>No Data</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <p>
+                        There was no new data to sync in this job, You can sync consumptions now from 
+                    <a  (click)="getJournalsJob()">here</a>
+                  </p>
+                  
+                </mat-card-content>
+        </mat-card>
+        </div>
+            
+    <div class="main" *ngIf="journals.length">
+        <ngx-datatable *ngIf="!loading" class="material" [rows]="journals" [columnMode]="'force'" [headerHeight]="50"
+            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'majorGroup', dir: 'asc'}]">
+
+            <ngx-datatable-column name="Major Group">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.over_group}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Total Cost">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.cost}}
+                </ng-template>
+            </ngx-datatable-column>
+        
+        </ngx-datatable>
+    </div>
+
+</div>
+
+<ngx-spinner></ngx-spinner>
+
+</div>
+
+

@@ -56,24 +56,20 @@ export class SyncJobsconfigComponent implements OnInit {
   }
 
   openDialog(syncJobType){
+    this.data.storage = syncJobType
+
     if (syncJobType.name == Constants.SUPPLIERS_SYNC){
-      this.data.storage = syncJobType
       this.router.navigate([Constants.SUPPLIERS_CONFIG_PAGE]);
     }
     else if (syncJobType.name == Constants.APPROVED_INVOICES_SYNC){
-      this.data.storage = syncJobType
       this.router.navigate([Constants.APPROVED_INVOICES_CONFIG_PAGE]);
     }
     else if (syncJobType.name == Constants.CREDIT_NOTE_SYNC){
-      this.data.storage = syncJobType
       this.router.navigate([Constants.APPROVED_INVOICES_CONFIG_PAGE]);
     }
-    // else if (syncJobType.name == "Booked Transfers"){
-    //   this.router.navigate([Constants.BOOKED_TRANSFER_CONFIG_PAGE]);
-    // }
-    // else if (syncJobType.name == "Booked Waste"){
-    //   this.router.navigate([Constants.BOOKED_WASTE_CONFIG_PAGE]);
-    // }
+    else if (syncJobType.name == Constants.JOURNALS_SYNC){
+      this.router.navigate([Constants.JOURNALS_CONFIG_PAGE]);
+    }
     else{
       this.snackBar.open("This sync job has not configuration yet.", null, {
         duration: 2000,

@@ -68,7 +68,11 @@ export class ApprovedInvoiceComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
-      console.error(err);
+      this.snackBar.open(err.error.message , null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
       this.spinner.hide();
       this.loading = false;
     });

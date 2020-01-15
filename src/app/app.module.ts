@@ -55,6 +55,8 @@ import { SupplierDetailsComponent } from './components/supplier-details/supplier
 import { ConsumptionsComponent } from './components/consumptions/consumptions.component';
 import { CreditNoteConfigurationComponent } from './components/credit-note-configuration/credit-note-configuration.component';
 import {AuthGuardService} from "./guards/AuthGuardService";
+import { JournalConfigurationComponent } from './components/journal-configuration/journal-configuration.component';
+import { JournalsComponent } from './components/journals/journals.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +85,9 @@ import {AuthGuardService} from "./guards/AuthGuardService";
     CreditNoteComponent,
     SupplierDetailsComponent,
     ConsumptionsComponent,
-    CreditNoteConfigurationComponent
+    CreditNoteConfigurationComponent,
+    JournalConfigurationComponent,
+    JournalsComponent
   ],
   imports: [
     BrowserModule,
