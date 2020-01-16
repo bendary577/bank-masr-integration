@@ -15,8 +15,12 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
   styleUrls: ['./journal-configuration.component.scss']
 })
 export class JournalConfigurationComponent implements OnInit {
-  submitted = false;
-  loading = true;
+  save_loading = false;
+  cost_loading = true;
+  group_loading = true;
+  item_loading = true;
+
+
   costCenters = [];
   overGroups = [];
   selectedCostCenters = [];
@@ -26,7 +30,7 @@ export class JournalConfigurationComponent implements OnInit {
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
     private journalService:JournalService, private syncJobService:SyncJobService,
     private router:Router, public snackBar: MatSnackBar, private data: Data) { 
-      this.mappedItems = data.storage["configuration"]["itemGroups"]
+      // this.mappedItems = data.storage["configuration"]["itemGroups"]
 
   }
 
@@ -37,42 +41,43 @@ export class JournalConfigurationComponent implements OnInit {
 
   getCostCenter() {
     this.spinner.show();
-    this.loading = true;
+    this.cost_loading = true;
     this.invoiceService.getCostCenter().toPromise().then((res: any) => {
       this.costCenters = res.data;
 
       this.spinner.hide();
-      this.loading = false;
+      this.cost_loading = false;
     }).catch(err => {
       console.error(err);
       this.spinner.hide();
-      this.loading = false;
+      this.cost_loading = false;
     });
   }
 
   getOverGroups() {
     this.spinner.show();
-    this.loading = true;
+    this.group_loading = true;
     this.journalService.getOverGroups().toPromise().then((res: any) => {
+
       this.overGroups = res.data;
 
       this.spinner.hide();
-      this.loading = false;
+      this.group_loading = false;
     }).catch(err => {
       console.error(err);
       this.spinner.hide();
-      this.loading = false;
+      this.group_loading = false;
     });
   }
 
   mapItemGroups(){
     this.spinner.show();
-    this.loading = true;
+    this.item_loading = true;
     this.journalService.mapItemGroups().toPromise().then((res: any) => {
       this.mappedItems = res.data;
 
       this.spinner.hide();
-      this.loading = false;
+      this.item_loading = false;
 
       this.snackBar.open(res.message, null, {
         duration: 2000,
@@ -82,7 +87,7 @@ export class JournalConfigurationComponent implements OnInit {
     }).catch(err => {
       console.error(err);
       this.spinner.hide();
-      this.loading = false;
+      this.item_loading = false;
 
       this.snackBar.open(err.message, null, {
         duration: 2000,
@@ -94,7 +99,7 @@ export class JournalConfigurationComponent implements OnInit {
 
   onSaveClick(): void {
     this.spinner.show();
-    this.loading = true;
+    this.save_loading = true;
 
     let that = this;
     this.costCenters.forEach(function (costCenter) {
@@ -121,7 +126,7 @@ export class JournalConfigurationComponent implements OnInit {
         panelClass:"my-snack-bar-success"
       });
       this.spinner.hide();
-      this.loading = false;
+      this.save_loading = false;
     }
     ).catch(err => {
       this.snackBar.open('An error has occurred.', null, {
@@ -131,7 +136,7 @@ export class JournalConfigurationComponent implements OnInit {
 
       });
       this.spinner.hide();
-      this.loading = false;
+      this.save_loading = false;
 
     });
 

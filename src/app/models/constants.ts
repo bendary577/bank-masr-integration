@@ -89,7 +89,7 @@ export class Constants {
     static ADJUSTMENTS_SYNC = 'Adjustments';
     static JOURNALS_SYNC = 'Journals';
 
-    static JOURNALS_PAGE = 'Journals';
+    static JOURNALS_PAGE = 'journals';
     static JOURNALS_CONFIG_PAGE = 'journalsConfig';
 
     static TABS_PAGE = 'tabs';

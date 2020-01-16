@@ -6,7 +6,7 @@
     <span class="history"> Sync Job History </span>
 
         <select class="custom-select" (change)="getSyncJobData($event.target.value)">
-            <option value="0" hidden selected disabled>Sync Job History </option>
+            <!-- <option value="0" hidden selected disabled>Sync Job History </option> -->
     
             <option value={{job.id}} *ngFor="let job of jobs">
                 {{job.creation_date}} - {{job.status}}</option>
@@ -35,16 +35,36 @@
             
     <div class="main" *ngIf="journals.length">
         <ngx-datatable *ngIf="!loading" class="material" [rows]="journals" [columnMode]="'force'" [headerHeight]="50"
-            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'majorGroup', dir: 'asc'}]">
+            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'costCenter', dir: 'asc'}, {prop: 'overGroup', dir: 'asc'}]">
 
-            <ngx-datatable-column name="Major Group">
+            <ngx-datatable-column name="Cost Center">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.over_group}}
+                    {{row.costCenter}}
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Total Cost">
+            <ngx-datatable-column name="Over Group">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.cost}}
+                    {{row.overGroup}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Total Waste">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.totalWaste}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Total Actual Usage">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.totalActualUsage}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Total Variance">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.totalVariance}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Total Net Transfers">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.totalNetTransfers}}
                 </ng-template>
             </ngx-datatable-column>
         

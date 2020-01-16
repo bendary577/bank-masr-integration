@@ -28,14 +28,26 @@ export class JournalsComponent implements OnInit {
   getJournalsJob() {
     this.spinner.show();
     this.journalService.getJournals().toPromise().then((res: any) => {
-      this.journals = res;
+      this.journals = res.data;
 
       this.spinner.hide();
       this.loading = false;
+
+      this.snackBar.open(res.message, null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-success"
+      });
     }).catch(err => {
       console.error(err);
       this.spinner.hide();
       this.loading = false;
+
+      this.snackBar.open(err.error.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
     });
   }
 }
