@@ -26,6 +26,7 @@ export class JournalConfigurationComponent implements OnInit {
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
     private journalService:JournalService, private syncJobService:SyncJobService,
     private router:Router, public snackBar: MatSnackBar, private data: Data) { 
+      this.mappedItems = data.storage["configuration"]["itemGroups"]
 
   }
 
@@ -92,6 +93,9 @@ export class JournalConfigurationComponent implements OnInit {
   }
 
   onSaveClick(): void {
+    this.spinner.show();
+    this.loading = true;
+
     let that = this;
     this.costCenters.forEach(function (costCenter) {
       if (costCenter.checked){
@@ -111,17 +115,27 @@ export class JournalConfigurationComponent implements OnInit {
 
     this.syncJobService.updateSyncJobTypeConfig(this.data.storage).then(result => {
       console.log(result);
+      this.snackBar.open('Save configuration successfully.', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-success"
+      });
       this.spinner.hide();
-      // this.router.navigate([Constants.SYNC_JOBS]);
+      this.loading = false;
     }
     ).catch(err => {
-      this.spinner.hide();
       this.snackBar.open('An error has occurred.', null, {
         duration: 2000,
-        horizontalPosition: 'right',
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+
       });
-      // this.router.navigate([Constants.SYNC_JOBS]);
+      this.spinner.hide();
+      this.loading = false;
+
     });
+
+
   }
 
   onCancelClick(){

@@ -4,9 +4,9 @@
 
 <div class="main" >
 
-    <div class="back">
+    <!-- <div class="back">
         <button mat-flat-button (click)="back()">Back</button>
-    </div>
+    </div> -->
 <br> 
 
 
@@ -70,7 +70,11 @@
                 <span class="key">Fax Number: </span>
                 <li class="value" *ngIf="supplier.faxNumber">{{supplier.faxNumber}}</li>
                 <li class="value" *ngIf="!supplier.faxNumber">No Info</li>
-            </mat-list-item>      
+            </mat-list-item>  
+            
+            <div class="card-back">
+                <button mat-flat-button (click)="back()">Back</button>
+            </div>
         </mat-list>
         
     </mat-card-content>

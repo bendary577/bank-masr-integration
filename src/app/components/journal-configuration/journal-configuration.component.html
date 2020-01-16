@@ -23,7 +23,7 @@
                     </mat-card-header>
                     <mat-card-content>                                  
                         <section class="example-section" name="Cost Center" *ngFor="let center of costCenters">
-                            <mat-checkbox class="example-margin" [(ngModel)]="center.checked">{{center.cost_center}}</mat-checkbox>
+                            <mat-checkbox class="example-margin" [(ngModel)]="center.checked" *ngIf="center.cost_center">{{center.cost_center}}</mat-checkbox>
                         </section>
                    </mat-card-content>
             </mat-card>
@@ -57,6 +57,32 @@
                    </mat-card-content>
             </mat-card>
         </div>
+
+        <br>
+
+        <div class="main" *ngIf="mappedItems.length">
+          <ngx-datatable *ngIf="!loading" class="material" [rows]="mappedItems" [columnMode]="'force'" [headerHeight]="50"
+              [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[]">
+      
+              <ngx-datatable-column name="Item Group">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.item_group}}
+                  </ng-template>
+              </ngx-datatable-column>
+              
+              <ngx-datatable-column name="Major Group">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.major_group}}
+                </ng-template>
+            </ngx-datatable-column>  
+              
+              <ngx-datatable-column name="Over Group">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.over_group}}
+                </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+      </div>
 
         <br>
 

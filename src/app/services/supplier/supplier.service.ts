@@ -3,6 +3,7 @@ import { Constants } from 'src/app/models/constants';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Cacheable } from 'ngx-cacheable';
 import { timeout, catchError } from 'rxjs/operators';
+import { Connection } from '@angular/http';
 
 
 @Injectable({
@@ -14,13 +15,14 @@ export class SupplierService {
   @Cacheable()
   getSuppliers() {
     // , { headers: new HttpHeaders({ timeout: `${360000}` }) }
-    return this.http.get(Constants.GET_SUPPLIERS_URL + '?limit=2').pipe(
-      timeout(360000),
-      catchError(e => {
-        // do something on a timeout
-        return [];
-      })
-    );
+    return this.http.get(Constants.GET_SUPPLIERS_URL + '?limit=2', { headers: new HttpHeaders({ timeout: `${360000}` })});
+    // .pipe(
+    //   timeout(360000),
+    //   catchError(e => {
+    //     // do something on a timeout
+    //     return [];
+    //   })
+    // );
   }
 
   getSuppliersDB() {

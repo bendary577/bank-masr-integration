@@ -47,8 +47,7 @@ export class ApprovedInvoiceComponent implements OnInit {
     this.spinner.show();
     this.invoiceService.getApprovedInvoices().toPromise().then((res: any) => {
       this.success = res.success;
-      this.getApprovedInvoices();
-      this.getSyncJobs("Approved Invoices");
+
       
       if (this.success){
         this.snackBar.open('Sync Approved Invoices Successfully', null, {
@@ -64,11 +63,11 @@ export class ApprovedInvoiceComponent implements OnInit {
           panelClass:"my-snack-bar-fail"
         });
       }
+
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
-      this.getApprovedInvoices();
-      this.getSyncJobs("Approved Invoices");
+
       this.snackBar.open(err.error.message , null, {
         duration: 3000,
         horizontalPosition: 'center',
@@ -76,7 +75,11 @@ export class ApprovedInvoiceComponent implements OnInit {
       });
       this.spinner.hide();
       this.loading = false;
+
     });
+
+    this.getApprovedInvoices();
+    this.getSyncJobs("Approved Invoices");
   }
 
   getSyncJobs(syncJobTypeName:String) {
