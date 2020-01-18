@@ -26,13 +26,11 @@ export class SyncJobComponent implements OnInit {
     if (this.endPoint == "/getSuppliers"){
       this.spinner.show();
       this.syncJobService.getSuppliersSyncJob().toPromise().then((res: any) => {
-        console.log(res.items);
         this.dataSource = res.items;
-        
+
         this.spinner.hide();
         this.loading = false;
       }).catch(err => {
-        console.error(err);
         this.spinner.hide();
         this.loading = false;
       });

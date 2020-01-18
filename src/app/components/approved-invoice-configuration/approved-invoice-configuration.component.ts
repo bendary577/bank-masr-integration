@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { AddVendorComponent } from '../add-vendor/add-vendor.component';
+import { MatSnackBar } from '@angular/material';
 import { InvoiceService } from 'src/app/services/invoice/invoice.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { Constants } from 'src/app/models/constants';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { Data } from 'src/app/models/data';
+import { SyncJobType } from 'src/app/models/SyncJobType';
 
 @Component({
   selector: 'app-approved-invoice-configuration',
@@ -15,8 +14,10 @@ import { Data } from 'src/app/models/data';
   styleUrls: ['./approved-invoice-configuration.component.scss']
 })
 export class ApprovedInvoiceConfigurationComponent implements OnInit {
+  syncJobType: SyncJobType;
   submitted = false;
   loading = true;
+  costCenterLoding = true;
   costCenters = [];
   businessUnits = [];
   selectedCostCenters = [];
@@ -27,14 +28,27 @@ export class ApprovedInvoiceConfigurationComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getSyncJobType();
     this.getBusinessUnits()
     this.getCostCenter();
   }
 
+  getSyncJobType(){
+    this.loading = true;
+    this.syncJobService.getSyncJobTypeDB(Constants.APPROVED_INVOICES_SYNC).toPromise().then((res: any) => {
+      this.syncJobType = res;
+      this.loading = false;
+    }).catch(err => {
+      console.error(err);
+      this.loading = false;
+    });
+  }
+
   onSaveClick(): void {
-    this.data.storage["configuration"]["costCenters"] = this.costCenters
-    this.syncJobService.updateSyncJobTypeConfig(this.data.storage).then(result => {
-      console.log(result);
+    this.spinner.show();
+
+    this.syncJobType.configuration["costCenters"]  = this.costCenters    
+    this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.spinner.hide();
       this.router.navigate([Constants.SYNC_JOBS]);
     }
@@ -57,17 +71,17 @@ export class ApprovedInvoiceConfigurationComponent implements OnInit {
   }
 
   getCostCenter() {
+    this.costCenterLoding = true;
     this.spinner.show();
-    this.loading = true;
     this.invoiceService.getCostCenter().toPromise().then((res: any) => {
       this.costCenters = res.data;
 
       this.spinner.hide();
-      this.loading = false;
+      this.costCenterLoding = false;
     }).catch(err => {
       console.error(err);
       this.spinner.hide();
-      this.loading = false;
+      this.costCenterLoding = false;
     });
   }
 

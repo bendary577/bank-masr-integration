@@ -5,6 +5,7 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { Constants } from 'src/app/models/constants';
 import { Router } from '@angular/router';
 import { JournalService } from 'src/app/services/journal/journal.service';
+import { SyncJob } from 'src/app/models/SyncJob';
 
 @Component({
   selector: 'app-journals',
@@ -17,19 +18,22 @@ export class JournalsComponent implements OnInit {
   success = null;
   jobs = [];
   journals = [];
+  selectedJob :SyncJob = null;
+
 
   constructor(private spinner: NgxSpinnerService,
     private journalService: JournalService, private syncJobService: SyncJobService,
     public snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit() {
+    this.getJournals();
+    this.getSyncJobs(Constants.JOURNALS_SYNC);
   }
 
-  getJournalsJob() {
+  getJournalsJobSyncJob() {
+    let user = localStorage.getItem('user');
     this.spinner.show();
-    this.journalService.getJournals().toPromise().then((res: any) => {
-      this.journals = res.data;
-
+    this.journalService.getJournals(user).toPromise().then((res: any) => {
       this.spinner.hide();
       this.loading = false;
 
@@ -38,8 +42,10 @@ export class JournalsComponent implements OnInit {
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-success"
       });
+
+      this.getJournals();
+      this.getSyncJobs(Constants.JOURNALS_SYNC);
     }).catch(err => {
-      console.error(err);
       this.spinner.hide();
       this.loading = false;
 
@@ -49,5 +55,48 @@ export class JournalsComponent implements OnInit {
         panelClass:"my-snack-bar-fail"
       });
     });
+
   }
+
+  getJournals() {
+    this.spinner.show();
+    this.syncJobService.getSyncJobData(Constants.JOURNALS_SYNC).toPromise().then((res: any) => {
+      this.journals = res;
+
+      this.spinner.hide();
+      this.loading = false;
+    }).catch(err => {
+      this.spinner.hide();
+      this.loading = false;
+    });
+  }
+
+  getSyncJobs(syncJobTypeName:String) {
+    this.spinner.show();
+    this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
+      this.jobs = res;
+      this.selectedJob = this.jobs[0];
+
+      this.spinner.hide();
+      this.loading = false;
+    }).catch(err => {
+      this.spinner.hide();
+      this.loading = false;
+    });
+  }
+
+  getSyncJobData() {
+    this.spinner.show();
+
+    this.syncJobService.getSyncJobDataById(this.selectedJob["id"]).toPromise().then((res: any) => {
+      this.journals = res;
+
+      this.spinner.hide();
+      this.loading = false;
+    }).catch(err => {
+      this.spinner.hide();
+      this.loading = false;
+    });
+  }
+
 }

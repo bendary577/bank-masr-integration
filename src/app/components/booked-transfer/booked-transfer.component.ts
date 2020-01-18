@@ -33,7 +33,7 @@ export class BookedTransferComponent implements OnInit {
     this.spinner.show();
     this.syncJobService.getSyncJobData("Booked Transfers").toPromise().then((res: any) => {
       this.bookedTransfer = res;
-      
+
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
@@ -74,7 +74,6 @@ export class BookedTransferComponent implements OnInit {
   getSyncJobs(syncJobTypeName:String) {
     this.spinner.show();
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
-      console.log(res);
       this.jobs = res;
       this.spinner.hide();
       this.loading = false;
@@ -86,7 +85,6 @@ export class BookedTransferComponent implements OnInit {
   }
 
   getSyncJobData(syncJobId:String) {
-    console.log(syncJobId)
     this.spinner.show();
     this.syncJobService.getSyncJobDataById(syncJobId).toPromise().then((res: any) => {
       this.bookedTransfer = res;

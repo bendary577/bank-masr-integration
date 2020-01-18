@@ -43,7 +43,6 @@ import {HttpModule} from "@angular/http";
 import { AlertsService } from 'angular-alert-module';
 import {SyncJobsconfigComponent} from "./components/setting/syncJob/syncJobsconfig.component";
 import { BookedTransferComponent } from './components/booked-transfer/booked-transfer.component';
-import { BookedWasteComponent } from './components/booked-waste/booked-waste.component';
 import { SuppliersConfiguartionComponent } from './components/suppliers-configuartion/suppliers-configuartion.component';
 import { SchedulerConfigurationComponent } from './components/scheduler-configuration/scheduler-configuration.component';
 import { ApprovedInvoiceConfigurationComponent } from './components/approved-invoice-configuration/approved-invoice-configuration.component';
@@ -52,8 +51,6 @@ import { ErrorComponentComponent } from './components/error-component/error-comp
 import { CreditNoteComponent } from './components/credit-note/credit-note.component';
 import { Data } from './models/data';
 import { SupplierDetailsComponent } from './components/supplier-details/supplier-details.component';
-import { ConsumptionsComponent } from './components/consumptions/consumptions.component';
-import { CreditNoteConfigurationComponent } from './components/credit-note-configuration/credit-note-configuration.component';
 import {AuthGuardService} from "./guards/AuthGuardService";
 import { JournalConfigurationComponent } from './components/journal-configuration/journal-configuration.component';
 import { JournalsComponent } from './components/journals/journals.component';
@@ -76,7 +73,6 @@ import { JournalsComponent } from './components/journals/journals.component';
 
     SyncJobComponent,
     BookedTransferComponent,
-    BookedWasteComponent,
     SuppliersConfiguartionComponent,
     SchedulerConfigurationComponent,
     ApprovedInvoiceConfigurationComponent,
@@ -84,8 +80,6 @@ import { JournalsComponent } from './components/journals/journals.component';
     ErrorComponentComponent,
     CreditNoteComponent,
     SupplierDetailsComponent,
-    ConsumptionsComponent,
-    CreditNoteConfigurationComponent,
     JournalConfigurationComponent,
     JournalsComponent
   ],

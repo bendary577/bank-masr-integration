@@ -5,17 +5,44 @@
 <div class="header">
     <span class="history"> Sync Job History </span>
 
-        <select class="custom-select" (change)="getSyncJobData($event.target.value)">
-            <!-- <option value="0" hidden selected disabled>Sync Job History </option> -->
-    
-            <option value={{job.id}} *ngFor="let job of jobs">
-                {{job.creation_date}} - {{job.status}}</option>
-         </select>
-
-    
-    <button mat-flat-button (click)="getJournalsJob()">Sync Journals Now</button>
+    <select class="custom-select" (change)="getSyncJobData($event.target.value)" [(ngModel)]="selectedJob">
+        <option [ngValue]="job" *ngFor="let job of jobs">
+            {{job.creation_date}} - {{job.status}}</option>
+    </select> 
+    <button mat-flat-button (click)="getJournalsJobSyncJob()">Sync Journals Now</button>
 </div>
 <br>
+<div *ngIf="selectedJob">
+    <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-title class="title">Sync Details</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+            <mat-list-item>      
+                <span class="key">Sync status: </span>
+                <span class="value" *ngIf="selectedJob.status">{{selectedJob.status}}</span>
+                <span class="value" *ngIf="!selectedJob.status">No Info</span>
+            </mat-list-item>
+            <mat-list-item>      
+                <span class="key">Start Date: </span>
+                <span class="value" *ngIf="selectedJob.creation_date">{{selectedJob.creation_date}}</span>
+                <span class="value" *ngIf="!selectedJob.creation_date">No Info</span>
+            </mat-list-item>
+            <mat-list-item>      
+                <span class="key">End Date: </span>
+                <span class="value" *ngIf="selectedJob.end_date">{{selectedJob.end_date}}</span>
+                <span class="value" *ngIf="!selectedJob.end_date">No Info</span>
+            </mat-list-item>
+            <mat-list-item *ngIf="!journals.length"> 
+            <span>
+                There was no new data to sync in this job, You can sync journals now from <a (click)="getJournalsJobSyncJob()">here</a>
+            </span>
+            </mat-list-item>
+            </mat-card-content>
+    </mat-card>
+    </div>
+    <br>
+
 <div>
 <div>
     <div *ngIf="!journals.length">
@@ -26,7 +53,7 @@
                 <mat-card-content>
                   <p>
                         There was no new data to sync in this job, You can sync consumptions now from 
-                    <a  (click)="getJournalsJob()">here</a>
+                    <a  (click)="getJournalsJobSyncJob()">here</a>
                   </p>
                   
                 </mat-card-content>
@@ -39,32 +66,32 @@
 
             <ngx-datatable-column name="Cost Center">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.costCenter}}
+                    {{row.data.costCenter}}
                 </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column name="Over Group">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.overGroup}}
+                    {{row.data.overGroup}}
                 </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column name="Total Waste">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.totalWaste}}
+                    {{row.data.totalWaste}}
                 </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column name="Total Actual Usage">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.totalActualUsage}}
+                    {{row.data.totalActualUsage}}
                 </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column name="Total Variance">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.totalVariance}}
+                    {{row.data.totalVariance}}
                 </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column name="Total Net Transfers">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.totalNetTransfers}}
+                    {{row.data.totalNetTransfers}}
                 </ng-template>
             </ngx-datatable-column>
         

@@ -79,7 +79,7 @@ export class SyncJobsconfigComponent implements OnInit {
     }
 
   }
-    
+
   openschedulerDialog(syncJobType){
     const dialogRef = this.dialog.open(SchedulerConfigurationComponent, {
       width: '550px'
@@ -91,7 +91,6 @@ export class SyncJobsconfigComponent implements OnInit {
         syncJobType.duration = res.duration;
 
         this.syncJobService.updateSyncJobTypeConfig(syncJobType).then(result => {
-              console.log(result);
               this.spinner.hide();
 
         }).catch(err => {

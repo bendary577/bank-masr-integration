@@ -19,7 +19,6 @@ export class BookedTransferDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.transferDetailsLink = this.route.snapshot.params["transfer"];
-    console.log(this.transferDetailsLink);
     this.getBookedTransferDetails();
   }
 
@@ -32,7 +31,6 @@ export class BookedTransferDetailsComponent implements OnInit {
 
     this.transferService.getBookedTransferDetails(this.transferDetailsLink).toPromise().then((res: any) => {
       this.transferDetails = res.details;
-      console.log(this.transferDetails);
 
       this.spinner.hide();
       this.loading = false;

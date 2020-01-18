@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit {
   getData() {
     this.spinner.show();
     this.vendorService.getData().toPromise().then((res: any) => {
-      // console.log(res.data);
       this.dataSource = res.data;
       this.vendorService.vendorAccountIDS = [];
       for (const element of this.dataSource) {

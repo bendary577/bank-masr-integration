@@ -15,8 +15,16 @@
     height: 5vh;
   }
   
+  .card-back {
+    text-align: center;
+    padding: 4px 16px 4px 16px;
+    height: 5vh;
+  }
+  
   button {
-    background-color: #1976d3;
+    color:white;
+    background-color: #3f51b5;
+    margin-right: 10px
   }
 
   .example-card {

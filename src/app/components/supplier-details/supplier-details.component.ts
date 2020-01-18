@@ -25,7 +25,6 @@ export class SupplierDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.supplier = this.data.storage["data"]
-    console.log(this.supplier)
   }
 
   back(){

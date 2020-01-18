@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { Constants } from './models/constants';
 import { LoginComponent } from './components/login/login.component';
-import { TabsComponent } from './components/tabs/tabs.component';
-import { HomeComponent } from './components/home/home.component';
 import { SuppliersComponent } from './components/suppliers/suppliers.component';
 import { SidenavResponsive } from './components/sidenav/sidenav-responsive';
 import { ConfigurationComponent } from './components/setting/configuration/configuration.component';
@@ -17,8 +15,6 @@ import { CreditNoteComponent } from './components/credit-note/credit-note.compon
 import { SuppliersConfiguartionComponent } from './components/suppliers-configuartion/suppliers-configuartion.component';
 import { ApprovedInvoiceConfigurationComponent } from './components/approved-invoice-configuration/approved-invoice-configuration.component';
 import { SupplierDetailsComponent } from './components/supplier-details/supplier-details.component';
-import { ConsumptionsComponent } from './components/consumptions/consumptions.component';
-import { CreditNoteConfigurationComponent } from './components/credit-note-configuration/credit-note-configuration.component';
 import {AuthGuardService} from "./guards/AuthGuardService";
 import { JournalConfigurationComponent } from './components/journal-configuration/journal-configuration.component';
 import { JournalsComponent } from './components/journals/journals.component';
@@ -26,14 +22,6 @@ import { JournalsComponent } from './components/journals/journals.component';
 
 const routes: Routes = [
   { path: '', redirectTo: Constants.LOGIN_PAGE, pathMatch: 'full'},
-  // {
-    // path: Constants.TABS_PAGE, component: TabsComponent,canActivate:[AuthGuardService],
-    // children: [
-    //   { path: '', redirectTo: Constants.HOME_PAGE, pathMatch: 'full' ,canActivate:[AuthGuardService]},
-    //   { path: Constants.HOME_PAGE, component: HomeComponent,canActivate:[AuthGuardService] },
-    //   { path: Constants.SUPPLIERS_PAGE, component: SuppliersComponent ,canActivate:[AuthGuardService]}
-    // ]
-  // },
   { path: Constants.SIDE_NAV, component: SidenavResponsive,canActivate:[AuthGuardService] },
   {
     path: Constants.SETTING, component: ConfigurationComponent,canActivate:[AuthGuardService],
@@ -55,9 +43,6 @@ const routes: Routes = [
   { path: Constants.BOOKED_TRANSFER_DETAILS_PAGE + "/:transfer", component: BookedTransferDetailsComponent,canActivate:[AuthGuardService] },
 
   { path: Constants.CREDIT_NOTE_PAGE , component: CreditNoteComponent ,canActivate:[AuthGuardService]},
-  { path: Constants.CREDIT_NOTE_CONFIG_PAGE, component: CreditNoteConfigurationComponent ,canActivate:[AuthGuardService]},
-
-  { path: Constants.CONSUMPTION_PAGE , component: ConsumptionsComponent ,canActivate:[AuthGuardService]},
   
   { path: Constants.JOURNALS_PAGE , component: JournalsComponent ,canActivate:[AuthGuardService]},
   { path: Constants.JOURNALS_CONFIG_PAGE , component: JournalConfigurationComponent ,canActivate:[AuthGuardService]},

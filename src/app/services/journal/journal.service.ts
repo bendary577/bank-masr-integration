@@ -17,7 +17,7 @@ export class JournalService {
     return this.http.get(Constants.MAP_ITEM_GROUPS_URL);
   }
 
-  getJournals() {
+  getJournals(user) {
     return this.http.get(Constants.GET_JOURNALS_URL);
   }
 

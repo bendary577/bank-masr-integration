@@ -44,7 +44,6 @@ export class AuthGuardService implements CanActivate {
           .map(v => v.url.map(segment => segment.toString()).join('/'))
           .join('/');
 
-        console.log(url);
 
 /*        if(state.url!=url)
           return false;

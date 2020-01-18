@@ -7,6 +7,8 @@ import { Constants } from 'src/app/models/constants';
 import { Data } from 'src/app/models/data';
 import { JournalService } from 'src/app/services/journal/journal.service';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 
 
 @Component({
@@ -19,7 +21,9 @@ export class JournalConfigurationComponent implements OnInit {
   cost_loading = true;
   group_loading = true;
   item_loading = true;
+  syncTypeLoading = true
 
+  syncJobType = {};
 
   costCenters = [];
   overGroups = [];
@@ -27,14 +31,28 @@ export class JournalConfigurationComponent implements OnInit {
   selectedOverGroups = [];
   mappedItems = [];
 
+  AccountSettingsForm: FormGroup;
+
+
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
     private journalService:JournalService, private syncJobService:SyncJobService,
-    private router:Router, public snackBar: MatSnackBar, private data: Data) { 
+    private router:Router, public snackBar: MatSnackBar, private data: Data,
+    private formBuilder: FormBuilder) {
       // this.mappedItems = data.storage["configuration"]["itemGroups"]
 
   }
 
   ngOnInit() {
+    this.AccountSettingsForm = this.formBuilder.group({
+      company: ["", Validators.required],
+      departmentId: ["", Validators.required],
+      accountId: [""],
+      intercompany: [""],
+      productId: [""],
+      future2Id: [""]
+    });
+
+    this.getSyncJobType();
     this.getCostCenter();
     this.getOverGroups();
   }
@@ -97,6 +115,23 @@ export class JournalConfigurationComponent implements OnInit {
     });
   }
 
+  getSyncJobType(){
+    this.item_loading = true;
+    this.spinner.show();
+    this.syncJobService.getSyncJobTypeDB("Journals").toPromise().then((res: any) => {
+      this.syncJobType = res;
+      this.mappedItems =   res.configuration.itemGroups;
+
+      this.spinner.hide();
+      this.item_loading = false;
+    }).catch(err => {
+      console.error(err);
+      this.spinner.hide();
+      this.item_loading = false;
+    });
+
+  }
+
   onSaveClick(): void {
     this.spinner.show();
     this.save_loading = true;
@@ -113,13 +148,12 @@ export class JournalConfigurationComponent implements OnInit {
         that.selectedOverGroups.push(overGroup.over_group)
       }
     });
-    
+
 
     this.data.storage["configuration"]["costCenters"] = this.selectedCostCenters;
     this.data.storage["configuration"]["overGroups"] = this.selectedOverGroups;
 
     this.syncJobService.updateSyncJobTypeConfig(this.data.storage).then(result => {
-      console.log(result);
       this.snackBar.open('Save configuration successfully.', null, {
         duration: 2000,
         horizontalPosition: 'center',

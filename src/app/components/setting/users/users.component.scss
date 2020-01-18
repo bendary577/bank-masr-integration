@@ -12,15 +12,20 @@ h3{
 
 .header {
   text-align: end;
-  padding: 10px 16px 15px 16px;
+  padding: 4px 16px 4px 16px;
   height: 5vh;
 }
 
 button {
-
-  background-color: #3F51B5;
+  color:white;
+  background-color: #3f51b5;
 }
 
+.header-btn {
+  text-align: end;
+  padding: 4px 16px 4px 16px;
+  height: 5vh;
+}
 .example-container {
   height: 400px;
   overflow: auto;
