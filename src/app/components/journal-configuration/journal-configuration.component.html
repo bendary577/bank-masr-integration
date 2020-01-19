@@ -1,6 +1,7 @@
 <h3 mat-dialog-title>Update Journals Configuartion</h3>
 
 <div>
+  <div>
     <div *ngIf="!cost_loading && !group_loading">
 
         <div *ngIf="!costCenters.length">
@@ -26,9 +27,9 @@
                           <mat-checkbox class="example-margin" [(ngModel)]="center.checked" *ngIf="center.cost_center">{{center.cost_center}}</mat-checkbox>
                       </section>
 
-                      <div class="card-back">
+                      <!-- <div class="card-back">
                         <button mat-flat-button (click)="onSaveClick()">Save</button>
-                      </div>
+                      </div> -->
                  </mat-card-content>
           </mat-card>
       </div>
@@ -57,9 +58,9 @@
                         <section class="example-section" name="Over Group" *ngFor="let group of overGroups">
                             <mat-checkbox class="example-margin"  [(ngModel)]="group.checked">{{group.over_group}}</mat-checkbox>
                         </section>
-                        <div class="card-back">
+                        <!-- <div class="card-back">
                           <button mat-flat-button (click)="onSaveClick()">Save</button>
-                        </div>
+                        </div> -->
                    </mat-card-content>
             </mat-card>
         </div>
@@ -104,10 +105,10 @@
                               <input matInput id="future2" name="future2" placeholder="Future 2	Id" formControlName="future2Id">
                           </mat-form-field>
                       </div>
-
+<!-- 
                       <div class="card-back">
                         <button mat-flat-button (click)="onSaveClick()">Save</button>
-                      </div>
+                      </div> -->
                   </form>
                  </mat-card-content>
           </mat-card>
@@ -123,7 +124,7 @@
 
           </mat-expansion-panel-header>
           <div class="main" *ngIf="mappedItems.length">
-            <ngx-datatable *ngIf="!loading" class="material" [rows]="mappedItems" [columnMode]="'force'" [headerHeight]="50"
+            <ngx-datatable *ngIf="!item_loading" class="material" [rows]="mappedItems" [columnMode]="'force'" [headerHeight]="50"
                 [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[]">
         
                 <ngx-datatable-column name="Item Group">
@@ -152,7 +153,7 @@
         <br>
 
         <div class="card-back">
-            <button mat-flat-button (click)="onSaveClick()">Save All</button>
+            <button mat-flat-button (click)="onSaveClick()">Save</button>
             <button mat-flat-button (click)="onCancelClick()">Cancel</button>
           </div>
           <div class="card-back">
@@ -160,8 +161,9 @@
           </div>
                
     </div>
-    <ngx-spinner></ngx-spinner>
 
+    <ngx-spinner></ngx-spinner>
+  </div>
 </div>
 
 

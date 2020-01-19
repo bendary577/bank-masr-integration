@@ -110,23 +110,20 @@ export class JournalConfigurationComponent implements OnInit {
       this.snackBar.open(err.message, null, {
         duration: 2000,
         horizontalPosition: 'center',
-        panelClass: "my-snack-bar-success"
+        panelClass: "my-snack-bar-fail"
       });
     });
   }
 
   getSyncJobType(){
     this.item_loading = true;
-    this.spinner.show();
     this.syncJobService.getSyncJobTypeDB("Journals").toPromise().then((res: any) => {
       this.syncJobType = res;
       this.mappedItems =   res.configuration.itemGroups;
 
-      this.spinner.hide();
       this.item_loading = false;
     }).catch(err => {
       console.error(err);
-      this.spinner.hide();
       this.item_loading = false;
     });
 

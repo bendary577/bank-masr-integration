@@ -64,6 +64,10 @@ export class ApprovedInvoiceComponent implements OnInit {
         });
       }
 
+      
+    this.getApprovedInvoices();
+    this.getSyncJobs("Approved Invoices");
+
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
@@ -78,8 +82,6 @@ export class ApprovedInvoiceComponent implements OnInit {
 
     });
 
-    this.getApprovedInvoices();
-    this.getSyncJobs("Approved Invoices");
   }
 
   getSyncJobs(syncJobTypeName:String) {

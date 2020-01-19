@@ -34,6 +34,9 @@ export class JournalsComponent implements OnInit {
     let user = localStorage.getItem('user');
     this.spinner.show();
     this.journalService.getJournals(user).toPromise().then((res: any) => {
+      this.getJournals();
+      this.getSyncJobs(Constants.JOURNALS_SYNC);
+      
       this.spinner.hide();
       this.loading = false;
 
@@ -43,8 +46,6 @@ export class JournalsComponent implements OnInit {
         panelClass:"my-snack-bar-success"
       });
 
-      this.getJournals();
-      this.getSyncJobs(Constants.JOURNALS_SYNC);
     }).catch(err => {
       this.spinner.hide();
       this.loading = false;
