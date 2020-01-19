@@ -33,7 +33,7 @@
                 
                 <div >
                     <mat-form-field>
-                        <mat-select id="group" name="group" placeholder="Groups" [(ngModel)]="syncJobType.configuration.taxes">
+                        <mat-select id="group" name="group" placeholder="Groups" [(ngModel)]="syncJobType.configuration.groups">
                           <mat-option *ngFor="let group of groups" value={{group.vendor_group}}>{{group.vendor_group}}</mat-option>
                         </mat-select>
                         <div class="loader" *ngIf="groupsLoading"></div>
