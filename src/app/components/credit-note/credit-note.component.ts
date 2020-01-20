@@ -67,7 +67,6 @@ export class CreditNoteComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
-      this.getCreditNote();
       this.getSyncJobs("Credit Notes");
       this.snackBar.open(err.error.message , null, {
         duration: 3000,
