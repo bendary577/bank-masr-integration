@@ -9,6 +9,7 @@ import { Cacheable } from 'ngx-cacheable';
 export class JournalService {
   constructor(private http: HttpClient) { }
 
+  @Cacheable()
   getOverGroups() {
     return this.http.get(Constants.GET_OVER_GROUPS_URL);
   }
@@ -16,7 +17,8 @@ export class JournalService {
   mapItemGroups() {
     return this.http.get(Constants.MAP_ITEM_GROUPS_URL);
   }
-
+  
+  @Cacheable()
   getJournals(user) {
     return this.http.get(Constants.GET_JOURNALS_URL);
   }

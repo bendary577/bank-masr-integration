@@ -8,6 +8,7 @@ import { Data } from 'src/app/models/data';
 import { JournalService } from 'src/app/services/journal/journal.service';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { SyncJobType } from 'src/app/models/SyncJobType';
 
 
 
@@ -17,13 +18,14 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./journal-configuration.component.scss']
 })
 export class JournalConfigurationComponent implements OnInit {
+  loading = true;
   save_loading = false;
   cost_loading = true;
   group_loading = true;
   item_loading = true;
   syncTypeLoading = true
 
-  syncJobType = {};
+  syncJobType: SyncJobType;
 
   costCenters = [];
   overGroups = [];
@@ -43,16 +45,16 @@ export class JournalConfigurationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.AccountSettingsForm = this.formBuilder.group({
-      company: ["", Validators.required],
-      departmentId: ["", Validators.required],
-      accountId: [""],
-      intercompany: [""],
-      productId: [""],
-      future2Id: [""]
-    });
-
     this.getSyncJobType();
+    // this.AccountSettingsForm = this.formBuilder.group({
+    //   company: ["", Validators.required],
+    //   departmentId: ["", Validators.required],
+    //   accountId: ["", Validators.required],
+    //   intercompany: ["", Validators.required],
+    //   productId: ["", Validators.required],
+    //   future2Id: ["", Validators.required],
+    //   groupIdStarting: ["", Validators.required]
+    // });
     this.getCostCenter();
     this.getOverGroups();
   }
@@ -116,15 +118,16 @@ export class JournalConfigurationComponent implements OnInit {
   }
 
   getSyncJobType(){
-    this.item_loading = true;
+    this.loading = true;
     this.syncJobService.getSyncJobTypeDB("Journals").toPromise().then((res: any) => {
       this.syncJobType = res;
+      console.log(res)
       this.mappedItems =   res.configuration.itemGroups;
 
-      this.item_loading = false;
+      this.loading = false;
     }).catch(err => {
       console.error(err);
-      this.item_loading = false;
+      this.loading = false;
     });
 
   }
@@ -147,10 +150,19 @@ export class JournalConfigurationComponent implements OnInit {
     });
 
 
-    this.data.storage["configuration"]["costCenters"] = this.selectedCostCenters;
-    this.data.storage["configuration"]["overGroups"] = this.selectedOverGroups;
+    this.syncJobType.configuration["costCenters"] = this.selectedCostCenters;
+    this.syncJobType.configuration["overGroups"] = this.selectedOverGroups;
 
-    this.syncJobService.updateSyncJobTypeConfig(this.data.storage).then(result => {
+    // this.syncJobType.configuration["accountSettings"]["company"] = this.AccountSettingsForm.controls.company.value as string;
+    // this.syncJobType.configuration["accountSettings"]["departmentId"] = this.AccountSettingsForm.controls.departmentId.value as string;
+    // this.syncJobType.configuration["accountSettings"]["accountId"] = this.AccountSettingsForm.controls.accountId.value as string;
+    // this.syncJobType.configuration["accountSettings"]["intercompany"] = this.AccountSettingsForm.controls.intercompany.value as string;
+    // this.syncJobType.configuration["accountSettings"]["productId"] = this.AccountSettingsForm.controls.productId.value as string;
+    // this.syncJobType.configuration["accountSettings"]["future2Id"] = this.AccountSettingsForm.controls.future2Id.value as string;
+    // this.syncJobType.configuration["accountSettings"]["groupIdStarting"] = this.AccountSettingsForm.controls.groupIdStarting.value as string;
+
+
+    this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.snackBar.open('Save configuration successfully.', null, {
         duration: 2000,
         horizontalPosition: 'center',

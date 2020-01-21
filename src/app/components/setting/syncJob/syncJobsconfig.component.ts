@@ -70,6 +70,9 @@ export class SyncJobsconfigComponent implements OnInit {
     else if (syncJobType.name == Constants.JOURNALS_SYNC){
       this.router.navigate([Constants.JOURNALS_CONFIG_PAGE]);
     }
+    else if (syncJobType.name == Constants.BOOKED_TRANSFER_SYNC){
+      this.router.navigate([Constants.BOOKED_TRANSFER_PAGE]);
+    }
     else{
       this.snackBar.open("This sync job has not configuration yet.", null, {
         duration: 2000,

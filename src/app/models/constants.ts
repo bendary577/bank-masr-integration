@@ -51,7 +51,7 @@ export class Constants {
     static GET_BUSINESS_UNITS_URL = environment.apiHost + '/getBusinessUnits';
 
     static GET_OVER_GROUPS_URL = environment.apiHost + '/getOverGroups';
-    static MAP_ITEM_GROUPS_URL = environment.apiHost + '/mapItemGroups';
+    static MAP_ITEM_GROUPS_URL = environment.apiHost + '/mapItems';
     static GET_JOURNALS_URL = environment.apiHost + '/getJournals';
 
 

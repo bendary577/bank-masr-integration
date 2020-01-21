@@ -17,7 +17,8 @@ export class InvoiceService {
   getApprovedInvoicesDB() {
     return this.http.get(Constants.GET_APPROVED_INVOICES_DB_URL);
   }
-
+  
+  @Cacheable()
   getCostCenter() {
     return this.http.get(Constants.GET_COST_CENTER_URL);
   }

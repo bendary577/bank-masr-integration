@@ -64,6 +64,17 @@
         <ngx-datatable *ngIf="!loading" class="material" [rows]="journals" [columnMode]="'force'" [headerHeight]="50"
             [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'journalBatch', dir: 'asc'}]">
             
+            <ngx-datatable-column name="Status">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.status}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Reason">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.reason}}
+                </ng-template>
+            </ngx-datatable-column>
+
             <ngx-datatable-column name="Journal Batch">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.data.journalBatch}}
@@ -157,6 +168,11 @@
             <ngx-datatable-column name="Entered Credit">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.data.enteredCredit}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Group Id">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.groupId}}
                 </ng-template>
             </ngx-datatable-column>
         

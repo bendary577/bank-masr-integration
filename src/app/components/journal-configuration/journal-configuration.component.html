@@ -67,48 +67,51 @@
 
         <br>
 
-        <div>
+        <div *ngIf="!loading">
           <mat-card class="example-card">
                   <mat-card-header>
                     <mat-card-title>Accounting Settings</mat-card-title>
                   </mat-card-header>
                   <mat-card-content>                                  
-                    <form [formGroup]="AccountSettingsForm" class="my-form">
+                    <form >
 
-                      <div class="form-group">
+                      <div>
                           <mat-form-field class="example-full-width">
-                              <input matInput id="company" name="company" placeholder="Company Id" formControlName="company">
+                              <input matInput id="company" name="company" placeholder="Company Id" 
+                              [(ngModel)]="syncJobType.name" >
                           </mat-form-field>
                       </div>
-                      <div class="form-group">
+                      <div >
                           <mat-form-field class="example-full-width">
-                              <input matInput id="department" name="department" placeholder="Department	Id" formControlName="departmentId">
+                              <input matInput id="department" name="department" placeholder="Department	Id" >
                           </mat-form-field>
                       </div>
-                      <div class="form-group">
+                      <div >
                           <mat-form-field class="example-full-width">
-                              <input matInput id="account" name="account" placeholder="account" formControlName="accountId">
+                              <input matInput id="account" name="account" placeholder="account" >
                           </mat-form-field>
                       </div>
-                      <div class="form-group">
+                      <div >
                           <mat-form-field class="example-full-width">
-                              <input matInput id="Intercompany" name="Intercompany" placeholder="Intercompany	Id" formControlName="intercompany">
+                              <input matInput id="Intercompany" name="Intercompany" placeholder="Intercompany	Id" >
                           </mat-form-field>
                       </div>                             
-                      <div class="form-group">
+                      <div >
                         <mat-form-field class="example-full-width">
-                            <input matInput id="Product" name="Product" placeholder="Company Id" formControlName="productId">
+                            <input matInput id="Product" name="Product" placeholder="Company Id" >
                         </mat-form-field>
                       </div>
-                      <div class="form-group">
+                      <div>
                           <mat-form-field class="example-full-width">
-                              <input matInput id="future2" name="future2" placeholder="Future 2	Id" formControlName="future2Id">
+                              <input matInput id="future2" name="future2" placeholder="Future 2	Id" >
                           </mat-form-field>
                       </div>
-<!-- 
-                      <div class="card-back">
-                        <button mat-flat-button (click)="onSaveClick()">Save</button>
-                      </div> -->
+                      <div>
+                        <mat-form-field class="example-full-width">
+                            <input matInput id="groupIdStarting" name="groupIdStarting" placeholder="Group Id Starting From" formControlName="groupIdStarting">
+                        </mat-form-field>
+                      </div>
+
                   </form>
                  </mat-card-content>
           </mat-card>

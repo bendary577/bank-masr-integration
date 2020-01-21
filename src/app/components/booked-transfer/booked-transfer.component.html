@@ -1,6 +1,8 @@
 <h3>Booked Transfer</h3>
 <div class="header">
     <select class="custom-select" (change)="getSyncJobData($event.target.value)">
+        <span class="history"> Sync Job History </span>
+
         <option value="0" hidden selected disabled>Sync Job History </option>
         
         <option value={{job.id}} *ngFor="let job of jobs">
