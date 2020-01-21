@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material';
 import { TransferService } from 'src/app/services/transfer/transfer.service';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { Router } from '@angular/router';
+import { SyncJob } from 'src/app/models/SyncJob';
 
 @Component({
   selector: 'app-booked-transfer',
@@ -17,6 +18,8 @@ export class BookedTransferComponent implements OnInit {
   bookedTransfer = [];
   jobs = [];
   syncJobId = -1;
+  selectedJob :SyncJob = null;
+
 
   constructor(private spinner: NgxSpinnerService, private transferService: TransferService,
     public snackBar: MatSnackBar, private syncJobService:SyncJobService, private router:Router
@@ -75,6 +78,8 @@ export class BookedTransferComponent implements OnInit {
     this.spinner.show();
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
       this.jobs = res;
+      this.selectedJob = this.jobs[0];
+
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
@@ -86,7 +91,7 @@ export class BookedTransferComponent implements OnInit {
 
   getSyncJobData(syncJobId:String) {
     this.spinner.show();
-    this.syncJobService.getSyncJobDataById(syncJobId).toPromise().then((res: any) => {
+    this.syncJobService.getSyncJobDataById(this.selectedJob["id"]).toPromise().then((res: any) => {
       this.bookedTransfer = res;
 
       this.spinner.hide();

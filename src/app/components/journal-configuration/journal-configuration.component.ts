@@ -80,6 +80,7 @@ export class JournalConfigurationComponent implements OnInit {
     this.journalService.getOverGroups().toPromise().then((res: any) => {
 
       this.overGroups = res.data;
+      console.log(this.overGroups)
 
       this.spinner.hide();
       this.group_loading = false;
@@ -95,6 +96,7 @@ export class JournalConfigurationComponent implements OnInit {
     this.item_loading = true;
     this.journalService.mapItemGroups().toPromise().then((res: any) => {
       this.mappedItems = res.data;
+      console.log(res)
 
       this.spinner.hide();
       this.item_loading = false;
@@ -121,8 +123,7 @@ export class JournalConfigurationComponent implements OnInit {
     this.loading = true;
     this.syncJobService.getSyncJobTypeDB("Journals").toPromise().then((res: any) => {
       this.syncJobType = res;
-      console.log(res)
-      this.mappedItems =   res.configuration.itemGroups;
+      this.mappedItems = res.configuration.items;
 
       this.loading = false;
     }).catch(err => {
@@ -139,7 +140,7 @@ export class JournalConfigurationComponent implements OnInit {
     let that = this;
     this.costCenters.forEach(function (costCenter) {
       if (costCenter.checked){
-        that.selectedCostCenters.push(costCenter.cost_center)
+        that.selectedCostCenters.push(costCenter)
       }
     });
 

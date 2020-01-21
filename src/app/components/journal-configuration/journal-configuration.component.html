@@ -2,139 +2,83 @@
 
 <div>
   <div>
-    <div *ngIf="!cost_loading && !group_loading">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Included over groups
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+          <div *ngIf="overGroups.length">
+            <section class="example-section" name="Over Group" *ngFor="let group of overGroups">
+              <mat-checkbox class="example-margin"  [(ngModel)]="group.checked">{{group.over_group}}</mat-checkbox>
+            </section>
+          </div>           
+    </mat-expansion-panel>
 
-        <div *ngIf="!costCenters.length">
-          <mat-card class="example-card">
-                  <mat-card-header>
-                    <mat-card-title>Error</mat-card-title>
-                  </mat-card-header>
-                  <mat-card-content>
-                    <p>
-                          Error happend while fetching cost centers, make sure you have cost centers.
-                    </p>
-                    
-                  </mat-card-content>
-          </mat-card>
-      </div>
-      <div *ngIf="costCenters.length">
-          <mat-card class="example-card">
-                  <mat-card-header>
-                    <mat-card-title>Cost Centers (Locations)</mat-card-title>
-                  </mat-card-header>
-                  <mat-card-content>                                  
-                      <section class="example-section" name="Cost Center" *ngFor="let center of costCenters">
-                          <mat-checkbox class="example-margin" [(ngModel)]="center.checked" *ngIf="center.cost_center">{{center.cost_center}}</mat-checkbox>
-                      </section>
 
-                      <!-- <div class="card-back">
-                        <button mat-flat-button (click)="onSaveClick()">Save</button>
-                      </div> -->
-                 </mat-card-content>
-          </mat-card>
-      </div>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Cost Centers Mapping To Locations
+        </mat-panel-title>
+
+          </mat-expansion-panel-header>
+
+          <div class="main">
+            <ngx-datatable  class="material" [rows]="costCenters" [columnMode]="'force'" [headerHeight]="50"
+                [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[]">
         
-        <br>
+                <ngx-datatable-column name="Cost Center">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.cost_center">{{row.cost_center}}</mat-checkbox>
+                    </ng-template>
+                </ngx-datatable-column>
 
-        <div *ngIf="!overGroups.length">
-            <mat-card class="example-card">
-                    <mat-card-header>
-                      <mat-card-title>Error</mat-card-title>
-                    </mat-card-header>
-                    <mat-card-content>
-                      <p>
-                            Error happend while fetching over groups, make sure you have over groups.
-                      </p>
-                      
-                    </mat-card-content>
-            </mat-card>
-        </div>
-        <div *ngIf="overGroups.length">
-            <mat-card class="example-card">
-                    <mat-card-header>
-                      <mat-card-title>Over groups</mat-card-title>
-                    </mat-card-header>
-                    <mat-card-content>                                  
-                        <section class="example-section" name="Over Group" *ngFor="let group of overGroups">
-                            <mat-checkbox class="example-margin"  [(ngModel)]="group.checked">{{group.over_group}}</mat-checkbox>
-                        </section>
-                        <!-- <div class="card-back">
-                          <button mat-flat-button (click)="onSaveClick()">Save</button>
-                        </div> -->
-                   </mat-card-content>
-            </mat-card>
+                <ngx-datatable-column name="Company">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <input matInput id="Company" name="Company" placeholder="Company Id"  [(ngModel)]="row.Company">
+                  </ng-template>
+              </ngx-datatable-column>
+                
+                <ngx-datatable-column name="Department Id">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <input matInput id="department" name="department" placeholder="department Id"  [(ngModel)]="row.department">
+                  </ng-template>
+              </ngx-datatable-column>  
+                
+                <ngx-datatable-column name="Location">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <input matInput id="location" name="location" placeholder="location Id"  [(ngModel)]="row.location">
+                  </ng-template>
+              </ngx-datatable-column>
+            </ngx-datatable>
         </div>
 
-        <br>
+        </mat-expansion-panel>
 
-        <div *ngIf="!loading">
-          <mat-card class="example-card">
-                  <mat-card-header>
-                    <mat-card-title>Accounting Settings</mat-card-title>
-                  </mat-card-header>
-                  <mat-card-content>                                  
-                    <form >
-
-                      <div>
-                          <mat-form-field class="example-full-width">
-                              <input matInput id="company" name="company" placeholder="Company Id" 
-                              [(ngModel)]="syncJobType.name" >
-                          </mat-form-field>
-                      </div>
-                      <div >
-                          <mat-form-field class="example-full-width">
-                              <input matInput id="department" name="department" placeholder="Department	Id" >
-                          </mat-form-field>
-                      </div>
-                      <div >
-                          <mat-form-field class="example-full-width">
-                              <input matInput id="account" name="account" placeholder="account" >
-                          </mat-form-field>
-                      </div>
-                      <div >
-                          <mat-form-field class="example-full-width">
-                              <input matInput id="Intercompany" name="Intercompany" placeholder="Intercompany	Id" >
-                          </mat-form-field>
-                      </div>                             
-                      <div >
-                        <mat-form-field class="example-full-width">
-                            <input matInput id="Product" name="Product" placeholder="Company Id" >
-                        </mat-form-field>
-                      </div>
-                      <div>
-                          <mat-form-field class="example-full-width">
-                              <input matInput id="future2" name="future2" placeholder="Future 2	Id" >
-                          </mat-form-field>
-                      </div>
-                      <div>
-                        <mat-form-field class="example-full-width">
-                            <input matInput id="groupIdStarting" name="groupIdStarting" placeholder="Group Id Starting From" formControlName="groupIdStarting">
-                        </mat-form-field>
-                      </div>
-
-                  </form>
-                 </mat-card-content>
-          </mat-card>
-      </div>
-
-      <br>
 
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Items Group
+              Items And Groups Mangment
             </mat-panel-title>
 
           </mat-expansion-panel-header>
           <div class="main" *ngIf="mappedItems.length">
-            <ngx-datatable *ngIf="!item_loading" class="material" [rows]="mappedItems" [columnMode]="'force'" [headerHeight]="50"
+            <ngx-datatable  class="material" [rows]="mappedItems" [columnMode]="'force'" [headerHeight]="50"
                 [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[]">
         
                 <ngx-datatable-column name="Item Group">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.item_group}}
+                        {{row.item}}
                     </ng-template>
                 </ngx-datatable-column>
+
+                <ngx-datatable-column name="Item Group">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.item_group}}
+                  </ng-template>
+              </ngx-datatable-column>
                 
                 <ngx-datatable-column name="Major Group">
                   <ng-template let-row="row" ngx-datatable-cell-template>
@@ -152,9 +96,6 @@
 
         </mat-expansion-panel>
 
-
-        <br>
-
         <div class="card-back">
             <button mat-flat-button (click)="onSaveClick()">Save</button>
             <button mat-flat-button (click)="onCancelClick()">Cancel</button>
@@ -167,6 +108,6 @@
 
     <ngx-spinner></ngx-spinner>
   </div>
-</div>
+
 
 
