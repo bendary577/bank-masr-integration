@@ -63,6 +63,9 @@ export class BookedTransferComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
+      this.getBookedTransferDB();
+      this.getSyncJobs("Booked Transfers");
+      
       this.snackBar.open('Sync Booked Transfers Failed', null, {
         duration: 2000,
         horizontalPosition: 'center',

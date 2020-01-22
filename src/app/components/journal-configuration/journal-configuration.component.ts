@@ -38,23 +38,12 @@ export class JournalConfigurationComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
     private journalService:JournalService, private syncJobService:SyncJobService,
-    private router:Router, public snackBar: MatSnackBar, private data: Data,
-    private formBuilder: FormBuilder) {
-      // this.mappedItems = data.storage["configuration"]["itemGroups"]
+    private router:Router, public snackBar: MatSnackBar) {
 
   }
 
   ngOnInit() {
     this.getSyncJobType();
-    // this.AccountSettingsForm = this.formBuilder.group({
-    //   company: ["", Validators.required],
-    //   departmentId: ["", Validators.required],
-    //   accountId: ["", Validators.required],
-    //   intercompany: ["", Validators.required],
-    //   productId: ["", Validators.required],
-    //   future2Id: ["", Validators.required],
-    //   groupIdStarting: ["", Validators.required]
-    // });
     this.getCostCenter();
     this.getOverGroups();
   }
@@ -153,15 +142,6 @@ export class JournalConfigurationComponent implements OnInit {
 
     this.syncJobType.configuration["costCenters"] = this.selectedCostCenters;
     this.syncJobType.configuration["overGroups"] = this.selectedOverGroups;
-
-    // this.syncJobType.configuration["accountSettings"]["company"] = this.AccountSettingsForm.controls.company.value as string;
-    // this.syncJobType.configuration["accountSettings"]["departmentId"] = this.AccountSettingsForm.controls.departmentId.value as string;
-    // this.syncJobType.configuration["accountSettings"]["accountId"] = this.AccountSettingsForm.controls.accountId.value as string;
-    // this.syncJobType.configuration["accountSettings"]["intercompany"] = this.AccountSettingsForm.controls.intercompany.value as string;
-    // this.syncJobType.configuration["accountSettings"]["productId"] = this.AccountSettingsForm.controls.productId.value as string;
-    // this.syncJobType.configuration["accountSettings"]["future2Id"] = this.AccountSettingsForm.controls.future2Id.value as string;
-    // this.syncJobType.configuration["accountSettings"]["groupIdStarting"] = this.AccountSettingsForm.controls.groupIdStarting.value as string;
-
 
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.snackBar.open('Save configuration successfully.', null, {
