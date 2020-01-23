@@ -47,7 +47,6 @@ export class CreditNoteComponent implements OnInit {
     this.spinner.show();
     this.creditNoteService.getCreditNote().toPromise().then((res: any) => {
       this.success = res.success;
-      // this.getCreditNote();
       this.getSyncJobs("Credit Notes");
       
       if (this.success){

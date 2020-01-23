@@ -120,10 +120,6 @@ export class JournalConfigurationComponent implements OnInit {
       this.syncJobType = res;
       this.costCenters = this.syncJobType.configuration["costCenters"];
       this.overGroups = this.syncJobType.configuration["overGroups"];
-
-      console.log(this.syncJobType)
-      console.log(this.overGroups)
-
       this.mappedItems = res.configuration.items;
 
       this.loading = false;
@@ -151,9 +147,12 @@ export class JournalConfigurationComponent implements OnInit {
       }
     });
 
-
-    this.syncJobType.configuration["costCenters"] = this.selectedCostCenters;
-    this.syncJobType.configuration["overGroups"] = this.selectedOverGroups;
+    if (this.selectedCostCenters.length != 0) {
+      this.syncJobType.configuration["costCenters"] = this.selectedCostCenters;
+    }
+    if(this.selectedOverGroups.length != 0){
+      this.syncJobType.configuration["overGroups"] = this.selectedOverGroups;
+    }
 
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.snackBar.open('Save configuration successfully.', null, {

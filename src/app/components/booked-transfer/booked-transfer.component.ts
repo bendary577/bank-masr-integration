@@ -50,7 +50,6 @@ export class BookedTransferComponent implements OnInit {
     this.spinner.show();
     this.transferService.getBookedTransfer().toPromise().then((res: any) => {
       this.success = res.success;
-      // this.getBookedTransferDB();
       this.getSyncJobs("Booked Transfers");
 
       if (this.success){
@@ -63,7 +62,6 @@ export class BookedTransferComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
-      this.getBookedTransferDB();
       this.getSyncJobs("Booked Transfers");
       
       this.snackBar.open('Sync Booked Transfers Failed', null, {

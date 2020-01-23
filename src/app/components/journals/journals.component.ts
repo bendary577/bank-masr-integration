@@ -34,7 +34,6 @@ export class JournalsComponent implements OnInit {
     let user = localStorage.getItem('user');
     this.spinner.show();
     this.journalService.getJournals(user).toPromise().then((res: any) => {
-      // this.getJournals();
       this.getSyncJobs(Constants.JOURNALS_SYNC);
       
       this.spinner.hide();
@@ -50,7 +49,15 @@ export class JournalsComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
 
-      this.snackBar.open(err.error.message , null, {
+      let msg = "";
+      if (err.error.message){
+        msg = err.error.message ;
+      }
+      else{
+        msg = "Failed to sync Approved Invoices completely!"
+      }
+
+      this.snackBar.open(msg , null, {
         duration: 3000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
