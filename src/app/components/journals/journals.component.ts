@@ -23,7 +23,7 @@ export class JournalsComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService,
     private journalService: JournalService, private syncJobService: SyncJobService,
-    public snackBar: MatSnackBar, private router: Router) { }
+    public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getJournals();
@@ -34,7 +34,7 @@ export class JournalsComponent implements OnInit {
     let user = localStorage.getItem('user');
     this.spinner.show();
     this.journalService.getJournals(user).toPromise().then((res: any) => {
-      this.getJournals();
+      // this.getJournals();
       this.getSyncJobs(Constants.JOURNALS_SYNC);
       
       this.spinner.hide();
@@ -77,6 +77,7 @@ export class JournalsComponent implements OnInit {
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
       this.jobs = res;
       this.selectedJob = this.jobs[0];
+      this.getSyncJobData();
 
       this.spinner.hide();
       this.loading = false;

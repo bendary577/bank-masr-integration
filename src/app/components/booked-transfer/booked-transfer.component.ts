@@ -50,7 +50,7 @@ export class BookedTransferComponent implements OnInit {
     this.spinner.show();
     this.transferService.getBookedTransfer().toPromise().then((res: any) => {
       this.success = res.success;
-      this.getBookedTransferDB();
+      // this.getBookedTransferDB();
       this.getSyncJobs("Booked Transfers");
 
       if (this.success){
@@ -82,6 +82,7 @@ export class BookedTransferComponent implements OnInit {
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
       this.jobs = res;
       this.selectedJob = this.jobs[0];
+      this.getSyncJobData();
 
       this.spinner.hide();
       this.loading = false;
@@ -92,7 +93,7 @@ export class BookedTransferComponent implements OnInit {
     });
   }
 
-  getSyncJobData(syncJobId:String) {
+  getSyncJobData() {
     this.spinner.show();
     this.syncJobService.getSyncJobDataById(this.selectedJob["id"]).toPromise().then((res: any) => {
       this.bookedTransfer = res;

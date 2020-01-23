@@ -60,12 +60,12 @@ export class SuppliersComponent implements OnInit {
 
 
   getSuppliersSyncJob() {
-    let user = localStorage.getItem('user');
     this.spinner.show();
      this.supplierService.getSuppliers().toPromise().then((res: any) => {
       this.success = res.success;
-      this.getSuppliersDB();
+      // this.getSuppliersDB();
       this.getSyncJobs("Suppliers");
+      // this.getSyncJobData();
 
       if (this.success) {
         this.snackBar.open('Sync Suppliers Successfully', null, {
@@ -101,6 +101,7 @@ export class SuppliersComponent implements OnInit {
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
       this.jobs = res;
       this.selectedJob = this.jobs[0]
+      this.getSyncJobData();
 
       this.spinner.hide();
       this.loading = false;

@@ -1,26 +1,45 @@
 <h3 mat-dialog-title>Update Journals Configuartion</h3>
 
 <div>
-  <div>
-    <!-- <mat-expansion-panel>
+  <div *ngIf="!loading">
+    <mat-expansion-panel >
       <mat-expansion-panel-header>
         <mat-panel-title>
           Predifined Configurations
         </mat-panel-title>
       </mat-expansion-panel-header>
-        <form class="my-form">
-          <div>
-              <input matInput placeholder="Group Starting Number" type="text">
-          </div>
-          <div class="form-group">
-                  <input matInput placeholder="Source Name" type="text">
-          </div>
-          <div class="form-group">
-                <input matInput placeholder="Category Name" type="text">
-        </div>
 
-      </form>        
-    </mat-expansion-panel> -->
+      <div class="container" *ngIf="!loading">
+        <form  class="my-form">
+            <div >
+                <mat-form-field class="example-full-width">
+                    <input matInput id="group" name="group" placeholder="Group starting number"  
+                    [(ngModel)]="syncJobType.configuration.accountSettings.groupIdStarting">
+                </mat-form-field>
+            </div>
+            <div >
+                <mat-form-field class="example-full-width">
+                    <input matInput id="source" name="source" placeholder="Source"  
+                    [(ngModel)]="syncJobType.configuration.accountSettings.source">
+                </mat-form-field>
+            </div>
+            <div >
+              <mat-form-field class="example-full-width">
+                  <input matInput id="category" name="category" placeholder="Category" 
+                   [(ngModel)]="syncJobType.configuration.accountSettings.category">
+              </mat-form-field>
+          </div>
+                  
+
+            <div class="form-group">
+                <div class="button-wrapper">
+                    <button mat-flat-button color="primary"  (click)="onSaveClick()">Save</button>
+                </div>
+            </div>
+        </form>
+</div>
+        
+    </mat-expansion-panel>
 
 
     <mat-expansion-panel>
@@ -45,7 +64,7 @@
 
           </mat-expansion-panel-header>
 
-          <div class="main">
+          <div class="main" *ngIf="costCenters.length">
             <ngx-datatable  class="material" [rows]="costCenters" [columnMode]="'force'" [headerHeight]="50"
                 [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[]">
 
@@ -58,7 +77,7 @@
 
                 <ngx-datatable-column name="Currency">
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput  placeholder="Currency"  [(ngModel)]="row.currency" value="522">
+                    <input matInput  placeholder="Currency"  [(ngModel)]="row.currency">
                   </ng-template>
               </ngx-datatable-column>
 
@@ -123,7 +142,7 @@
             </mat-panel-title>
 
           </mat-expansion-panel-header>
-          <div class="main" *ngIf="mappedItems.length">
+          <div class="main" *ngIf="mappedItems?.length > 0">
             <ngx-datatable  class="material" [rows]="mappedItems" [columnMode]="'force'" [headerHeight]="50"
                 [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[]">
         

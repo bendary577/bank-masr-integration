@@ -47,7 +47,7 @@ export class CreditNoteComponent implements OnInit {
     this.spinner.show();
     this.creditNoteService.getCreditNote().toPromise().then((res: any) => {
       this.success = res.success;
-      this.getCreditNote();
+      // this.getCreditNote();
       this.getSyncJobs("Credit Notes");
       
       if (this.success){
@@ -83,6 +83,7 @@ export class CreditNoteComponent implements OnInit {
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
       this.jobs = res;
       this.selectedJob = this.jobs[0]
+      this.getSyncJobData();
       
       this.spinner.hide();
       this.loading = false;

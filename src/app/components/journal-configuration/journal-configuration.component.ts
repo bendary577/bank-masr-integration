@@ -31,7 +31,7 @@ export class JournalConfigurationComponent implements OnInit {
   overGroups = [];
   selectedCostCenters = [];
   selectedOverGroups = [];
-  mappedItems = [];
+  mappedItems:[] = [];
 
   AccountSettingsForm: FormGroup;
 
@@ -39,13 +39,19 @@ export class JournalConfigurationComponent implements OnInit {
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
     private journalService:JournalService, private syncJobService:SyncJobService,
     private router:Router, public snackBar: MatSnackBar) {
-
+      this.costCenters = [];
+      this.overGroups = [];
+      this.mappedItems = [];
   }
 
   ngOnInit() {
     this.getSyncJobType();
     this.getCostCenter();
     this.getOverGroups();
+
+    console.log(this.costCenters)
+    console.log(this.overGroups)
+
   }
 
   getCostCenter() {
@@ -112,6 +118,12 @@ export class JournalConfigurationComponent implements OnInit {
     this.loading = true;
     this.syncJobService.getSyncJobTypeDB("Journals").toPromise().then((res: any) => {
       this.syncJobType = res;
+      this.costCenters = this.syncJobType.configuration["costCenters"];
+      this.overGroups = this.syncJobType.configuration["overGroups"];
+
+      console.log(this.syncJobType)
+      console.log(this.overGroups)
+
       this.mappedItems = res.configuration.items;
 
       this.loading = false;
