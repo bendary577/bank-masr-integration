@@ -54,6 +54,7 @@ import { SupplierDetailsComponent } from './components/supplier-details/supplier
 import {AuthGuardService} from "./guards/AuthGuardService";
 import { JournalConfigurationComponent } from './components/journal-configuration/journal-configuration.component';
 import { JournalsComponent } from './components/journals/journals.component';
+import { PosSalesComponent } from './components/pos-sales/pos-sales.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { JournalsComponent } from './components/journals/journals.component';
     CreditNoteComponent,
     SupplierDetailsComponent,
     JournalConfigurationComponent,
-    JournalsComponent
+    JournalsComponent,
+    PosSalesComponent
   ],
   imports: [
     BrowserModule,

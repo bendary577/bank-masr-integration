@@ -18,6 +18,7 @@ import { SupplierDetailsComponent } from './components/supplier-details/supplier
 import {AuthGuardService} from "./guards/AuthGuardService";
 import { JournalConfigurationComponent } from './components/journal-configuration/journal-configuration.component';
 import { JournalsComponent } from './components/journals/journals.component';
+import { PosSalesComponent } from './components/pos-sales/pos-sales.component';
 
 
 const routes: Routes = [
@@ -46,6 +47,8 @@ const routes: Routes = [
   
   { path: Constants.JOURNALS_PAGE , component: JournalsComponent ,canActivate:[AuthGuardService]},
   { path: Constants.JOURNALS_CONFIG_PAGE , component: JournalConfigurationComponent ,canActivate:[AuthGuardService]},
+
+  { path: Constants.POS_SALES_PAGE , component: PosSalesComponent ,canActivate:[AuthGuardService]},
 
   // Error Page
   {path:'**', component: ErrorComponentComponent,canActivate:[AuthGuardService]}

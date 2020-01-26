@@ -54,6 +54,8 @@ export class Constants {
     static MAP_ITEM_GROUPS_URL = environment.apiHost + '/mapItems';
     static GET_JOURNALS_URL = environment.apiHost + '/getJournals';
 
+    static GET_POS_SALES_URL = environment.apiHost + '/getPOSSales';
+
 
     static LOGIN_PAGE = 'login';
     static HOME_PAGE = 'home';
@@ -80,8 +82,6 @@ export class Constants {
     static CREDIT_NOTE_CONFIG_PAGE = 'creditNotesConfig';
     static CREDIT_NOTE_SYNC = 'Credit Notes';
 
-    static CONSUMPTION_PAGE = 'Consumptions';
-
     static CONSUMPTIONS_SYNC = 'Consumptions';
     static TRANSFERS_SYNC = 'Transfers';
     static ADJUSTMENTS_SYNC = 'Adjustments';
@@ -89,6 +89,9 @@ export class Constants {
 
     static JOURNALS_PAGE = 'journals';
     static JOURNALS_CONFIG_PAGE = 'journalsConfig';
+
+    static POS_SALES_PAGE = 'posSales';
+    static POS_SALES_SYNC = 'POS Sales';
 
     static TABS_PAGE = 'tabs';
     static END_POINT = '/getSuppliers';

@@ -5,35 +5,48 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { Constants } from 'src/app/models/constants';
 import { JournalService } from 'src/app/services/journal/journal.service';
 import { SyncJob } from 'src/app/models/SyncJob';
+import { PosSalesService } from 'src/app/services/posSales/pos-sales.service';
 
 @Component({
-  selector: 'app-journals',
-  templateUrl: './journals.component.html',
-  styleUrls: ['./journals.component.scss']
+  selector: 'app-pos-sales',
+  templateUrl: './pos-sales.component.html',
+  styleUrls: ['./pos-sales.component.scss']
 })
-export class JournalsComponent implements OnInit {
+export class PosSalesComponent implements OnInit {
 
   loading = true;
   success = null;
   jobs = [];
-  journals = [];
+  posSales = [];
   selectedJob :SyncJob = null;
 
 
   constructor(private spinner: NgxSpinnerService,
     private journalService: JournalService, private syncJobService: SyncJobService,
-    public snackBar: MatSnackBar) { }
+    public snackBar: MatSnackBar, private posSalesService:PosSalesService) { }
 
   ngOnInit() {
-    this.getJournals();
-    this.getSyncJobs(Constants.JOURNALS_SYNC);
+    this.getPOSSales();
+    this.getSyncJobs(Constants.POS_SALES_SYNC);
   }
 
-  getJournalsJobSyncJob() {
-    let user = localStorage.getItem('user');
+  getPOSSales() {
     this.spinner.show();
-    this.journalService.getJournals().toPromise().then((res: any) => {
-      this.getSyncJobs(Constants.JOURNALS_SYNC);
+    this.syncJobService.getSyncJobData(Constants.POS_SALES_SYNC).toPromise().then((res: any) => {
+      this.posSales = res;
+
+      this.spinner.hide();
+      this.loading = false;
+    }).catch(err => {
+      this.spinner.hide();
+      this.loading = false;
+    });
+  }
+
+  getPOSSalesSyncJob() {
+    this.spinner.show();
+    this.posSalesService.getPOSSales().toPromise().then((res: any) => {
+      this.getSyncJobs(Constants.POS_SALES_SYNC);
       
       this.spinner.hide();
       this.loading = false;
@@ -65,19 +78,6 @@ export class JournalsComponent implements OnInit {
 
   }
 
-  getJournals() {
-    this.spinner.show();
-    this.syncJobService.getSyncJobData(Constants.JOURNALS_SYNC).toPromise().then((res: any) => {
-      this.journals = res;
-
-      this.spinner.hide();
-      this.loading = false;
-    }).catch(err => {
-      this.spinner.hide();
-      this.loading = false;
-    });
-  }
-
   getSyncJobs(syncJobTypeName:String) {
     this.spinner.show();
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
@@ -93,11 +93,12 @@ export class JournalsComponent implements OnInit {
     });
   }
 
+  
   getSyncJobData() {
     this.spinner.show();
 
     this.syncJobService.getSyncJobDataById(this.selectedJob["id"]).toPromise().then((res: any) => {
-      this.journals = res;
+      this.posSales = res;
 
       this.spinner.hide();
       this.loading = false;
@@ -106,5 +107,4 @@ export class JournalsComponent implements OnInit {
       this.loading = false;
     });
   }
-
 }

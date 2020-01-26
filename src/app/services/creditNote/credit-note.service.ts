@@ -1,22 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Constants } from 'src/app/models/constants';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Cacheable } from 'ngx-cacheable';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CreditNoteService {
+  token = localStorage.getItem('auth_token');
 
   constructor(private http : HttpClient) { }
 
   @Cacheable()
   getCreditNote() {
-    return this.http.get(Constants.GET_CREDIT_NOTE_URL);
+    return this.http.get(Constants.GET_CREDIT_NOTE_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
   getCreditNoteDB() {
-    return this.http.get(Constants.GET_CREDIT_NOTE_DB_URL);
+    return this.http.get(Constants.GET_CREDIT_NOTE_DB_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
 }

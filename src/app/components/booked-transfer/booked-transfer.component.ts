@@ -28,7 +28,6 @@ export class BookedTransferComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getBookedTransferDB();
     this.getSyncJobs("Booked Transfers");
   }
 

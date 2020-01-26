@@ -2,29 +2,29 @@ import { Injectable } from '@angular/core';
 import { Constants } from 'src/app/models/constants';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Cacheable } from 'ngx-cacheable';
-import { timeout, catchError } from 'rxjs/operators';
-import { Connection } from '@angular/http';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class SupplierService {
+  token = localStorage.getItem('auth_token');
 
   constructor(private http: HttpClient) { }
   @Cacheable()
   getSuppliers() {
-    return this.http.get(Constants.GET_SUPPLIERS_URL + '?limit=2', { headers: new HttpHeaders({ timeout: `${360000}` })});
+    return this.http.get(Constants.GET_SUPPLIERS_URL + '?limit=2',
+     { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
   getSuppliersDB() {
-    return this.http.get(Constants.GET_SUPPLIERS_DB_URL);
+    return this.http.get(Constants.GET_SUPPLIERS_DB_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
   getSuppliersTaxes() {
-    return this.http.get(Constants.GET_SUPPLIERS_TAXES_URL);
+    return this.http.get(Constants.GET_SUPPLIERS_TAXES_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
   getSuppliersGroups() {
-    return this.http.get(Constants.GET_SUPPLIERS_GROUPS_URL);
+    return this.http.get(Constants.GET_SUPPLIERS_GROUPS_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 }

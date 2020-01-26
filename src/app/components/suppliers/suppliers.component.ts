@@ -31,9 +31,7 @@ export class SuppliersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getSuppliersDB();
     this.getSyncJobs("Suppliers");
-    // this.getSyncJobData();
   }
 
   getSuppliersDB() {
@@ -60,12 +58,14 @@ export class SuppliersComponent implements OnInit {
 
 
   getSuppliersSyncJob() {
+    let user = localStorage.getItem('auth_token');
+    console.log("user")
+    console.log(user)
+
     this.spinner.show();
      this.supplierService.getSuppliers().toPromise().then((res: any) => {
       this.success = res.success;
-      // this.getSuppliersDB();
       this.getSyncJobs("Suppliers");
-      // this.getSyncJobData();
 
       if (this.success) {
         this.snackBar.open('Sync Suppliers Successfully', null, {
