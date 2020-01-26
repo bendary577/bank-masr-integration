@@ -49,9 +49,6 @@ export class JournalConfigurationComponent implements OnInit {
     this.getCostCenter();
     this.getOverGroups();
 
-    console.log(this.costCenters)
-    console.log(this.overGroups)
-
   }
 
   getCostCenter() {
@@ -75,8 +72,7 @@ export class JournalConfigurationComponent implements OnInit {
     this.journalService.getOverGroups().toPromise().then((res: any) => {
 
       this.overGroups = res.data;
-      console.log(this.overGroups)
-
+      
       this.spinner.hide();
       this.group_loading = false;
     }).catch(err => {

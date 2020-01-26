@@ -25,7 +25,6 @@ export class CreditNoteComponent implements OnInit {
     public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.getCreditNote();
     this.getSyncJobs("Credit Notes");
   }
 
@@ -82,8 +81,9 @@ export class CreditNoteComponent implements OnInit {
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
       this.jobs = res;
       this.selectedJob = this.jobs[0]
-      this.getSyncJobData();
-      
+      if (this.jobs.length > 0){
+        this.getSyncJobData();
+      }
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {

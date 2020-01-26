@@ -26,7 +26,6 @@ export class PosSalesComponent implements OnInit {
     public snackBar: MatSnackBar, private posSalesService:PosSalesService) { }
 
   ngOnInit() {
-    this.getPOSSales();
     this.getSyncJobs(Constants.POS_SALES_SYNC);
   }
 
@@ -83,8 +82,9 @@ export class PosSalesComponent implements OnInit {
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
       this.jobs = res;
       this.selectedJob = this.jobs[0];
-      this.getSyncJobData();
-
+      if (this.jobs.length > 0){
+        this.getSyncJobData();
+      }
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
