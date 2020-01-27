@@ -21,15 +21,16 @@ export class SchedulerConfigurationComponent implements OnInit {
 
   onSaveClick(): void {
     this.dialogRef.close({
-      duration: this.form.controls.duration.value
+      duration: this.form.controls.duration.value,
+      time: this.form.controls.time.value
     });
   }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
       duration: ['', Validators.required],
-      from: ['', Validators.required],
-      to: ['', Validators.required]
+      time: ['', Validators.required]
+      // to: ['', Validators.required]
     });
   }
 

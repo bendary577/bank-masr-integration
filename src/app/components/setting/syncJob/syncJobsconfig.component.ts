@@ -95,6 +95,8 @@ export class SyncJobsconfigComponent implements OnInit {
       if (res && res.duration) {
         this.spinner.show();
         syncJobType.duration = res.duration;
+        syncJobType.time = res.time;
+        console.log(syncJobType)
 
         this.syncJobService.updateSyncJobTypeConfig(syncJobType).then(result => {
               this.spinner.hide();
