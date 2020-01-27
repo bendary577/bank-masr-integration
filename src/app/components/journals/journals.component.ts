@@ -30,7 +30,6 @@ export class JournalsComponent implements OnInit {
   }
 
   getJournalsJobSyncJob() {
-    let user = localStorage.getItem('user');
     this.spinner.show();
     this.journalService.getJournals().toPromise().then((res: any) => {
       this.getSyncJobs(Constants.JOURNALS_SYNC);
@@ -45,6 +44,7 @@ export class JournalsComponent implements OnInit {
       });
 
     }).catch(err => {
+      this.getSyncJobs(Constants.JOURNALS_SYNC);
       this.spinner.hide();
       this.loading = false;
 
