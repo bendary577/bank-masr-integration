@@ -56,6 +56,8 @@ export class Constants {
 
     static GET_POS_SALES_URL = environment.apiHost + '/getPOSSales';
 
+    static GET_CURRENT_DAYS_URL = environment.apiHost + '/getCurrentDays';
+
 
     static LOGIN_PAGE = 'login';
     static HOME_PAGE = 'home';

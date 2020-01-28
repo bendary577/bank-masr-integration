@@ -94,8 +94,10 @@ export class SyncJobsconfigComponent implements OnInit {
     dialogRef.afterClosed().subscribe(res => {
       if (res && res.duration) {
         this.spinner.show();
-        syncJobType.duration = res.duration;
-        syncJobType.time = res.time;
+        syncJobType.configuration.duration = res.duration;
+        syncJobType.configuration.day = res.day;
+        syncJobType.configuration.dayName = res.dayName;
+        syncJobType.configuration.hour = res.hour;
         console.log(syncJobType)
 
         this.syncJobService.updateSyncJobTypeConfig(syncJobType).then(result => {

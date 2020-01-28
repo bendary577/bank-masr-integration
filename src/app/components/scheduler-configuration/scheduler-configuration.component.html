@@ -1,25 +1,45 @@
 <h1 mat-dialog-title>Update Duration Configuartion</h1>
 <div mat-dialog-content>
-    <form [formGroup]="form" class="my-form">
-        <div class="form-group">
-            <mat-form-field class="example-full-width">
-
-                    <mat-select placeholder="Duration" formControlName="duration">
+    <div class="container" *ngIf="!loading">
+        <form  class="my-form">
+            <div>
+                <mat-form-field class="example-full-width">
+                    <mat-select placeholder="Duration" name="duration" [(ngModel)]="duration">
                       <mat-option value="Daily">Daily</mat-option>
                       <mat-option value="Weekly">Weekly</mat-option>
                       <mat-option value="Monthly">Monthly</mat-option>
                     </mat-select>
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-                <mat-select placeholder="Time" formControlName="time">
-                    <mat-option value={{hour}} *ngFor="let hour of [1,2,3,4,5,6,7,8,9,10,11,12]">{{hour}}</mat-option>
-                  </mat-select>
-            </mat-form-field>
-        </div>
+                </mat-form-field>
+            </div>
+            <div *ngIf="duration == 'Daily'">
+                <mat-form-field>
+                    <mat-select placeholder="Hour" name="hour" [(ngModel)]="hour">
+                        <mat-option value={{hour}} *ngFor="let hour of hours">
+                            {{hour}}</mat-option>
+                      </mat-select>
+                </mat-form-field>  
+            </div>
+            <div *ngIf="duration == 'Weekly'">
+                <mat-form-field>
+                    <mat-select placeholder="Day Name" name="dayName" [(ngModel)]="dayName">
+                        <mat-option value={{name}} *ngFor="let name of daysName">
+                            {{name}}</mat-option>
+                      </mat-select>
+                </mat-form-field>  
+            </div>
+            <div *ngIf="duration == 'Monthly'">
+                <mat-form-field>
+                    <mat-select placeholder="Day" name="day" [(ngModel)]="day">
+                        <mat-option value={{day}} *ngFor="let day of days">
+                            {{day}}</mat-option>
+                      </mat-select>
+                </mat-form-field>  
+            </div>
+        </form>
+    </div>
 
+    <ngx-spinner></ngx-spinner>
 
-    </form>
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
