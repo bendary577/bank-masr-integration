@@ -20,15 +20,17 @@ export class AddVendorComponent implements OnInit {
   onSaveClick(): void {
     this.dialogRef.close({
       name: this.form.controls.name.value,
-      vendorAccount: this.form.controls.vendorAccount.value
+      username: this.form.controls.username.value,
+      password: this.form.controls.password.value,
     });
   }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
-      vendorAccount: ['', Validators.required]
-    });
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+        });
   }
 
 }

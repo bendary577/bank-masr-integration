@@ -47,7 +47,6 @@ export class SchedulerConfigurationComponent implements OnInit {
   getCurrentDays(){
     this.loading = true;
     this.spinner.show();
-    // setInterval(() => {
       this.schedulerService.getCurrentDays().toPromise().then((res: any) => {
         this.days = res.data;
         this.loading = false;
@@ -58,9 +57,7 @@ export class SchedulerConfigurationComponent implements OnInit {
         this.loading = false;
         this.spinner.hide();
   
-      });
-    // },5000)
-  
+      });  
    
   }
 
