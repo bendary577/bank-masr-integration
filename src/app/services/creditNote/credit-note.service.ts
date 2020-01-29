@@ -11,7 +11,6 @@ export class CreditNoteService {
 
   constructor(private http : HttpClient) { }
 
-  @Cacheable()
   getCreditNote() {
     return this.http.get(Constants.GET_CREDIT_NOTE_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }

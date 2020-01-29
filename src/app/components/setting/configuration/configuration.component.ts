@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {MatExpansionPanel, MatSnackBar} from "@angular/material";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -16,20 +16,26 @@ import { AccountService } from 'src/app/services/account/account.service';
   styleUrls: ['configuration.component.scss'],
 })
 
-export class ConfigurationComponent {
+export class ConfigurationComponent  implements OnInit{
   loading = true;
   account: Account;
   newAccount: Account;
+  panelOpenState = true;
 
   constructor(private spinner: NgxSpinnerService, private syncJobService:SyncJobService,
     public snackBar: MatSnackBar, public accountService: AccountService) { }
 
-  panelOpenState = true;
+  ngOnInit() {
+    this.getAccount();
+  }
 
   getAccount() {
+    this.loading = true;
     this.spinner.show();
     this.accountService.getAccount().toPromise().then((res: any) => {
       this.account = res;
+      console.log(this.account["account_credentials"])
+
      
       this.spinner.hide();
       this.loading = false;
@@ -41,6 +47,7 @@ export class ConfigurationComponent {
   }
 
   addAccount() {
+    this.loading = true;
     this.spinner.show();
     this.accountService.addAccount(this.newAccount).then((res: any) => {
       this.account = res;
@@ -51,6 +58,33 @@ export class ConfigurationComponent {
       console.error(err);
       this.spinner.hide();
       this.loading = false;
+    });
+  }
+
+  updateAccount() {
+    this.loading = true;
+    this.spinner.show();
+    this.accountService.updateAccount(this.account).then((res: any) => {     
+      this.spinner.hide();
+      this.loading = false;
+
+      this.snackBar.open(res.message, null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-success"
+      });
+
+    }).catch(err => {
+      console.error(err);
+      this.spinner.hide();
+      this.loading = false;
+
+      this.snackBar.open(err.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+
     });
   }
 
