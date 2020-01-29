@@ -5,7 +5,7 @@
 <div class="header">
     <span class="history"> Sync Job History </span>
 
-    <select class="custom-select" (change)="getSyncJobData($event.target.value)" [(ngModel)]="selectedJob">
+    <select class="custom-select" (change)="getSyncJobData()" [(ngModel)]="selectedJob">
         <option [ngValue]="job" *ngFor="let job of jobs">
             {{job.creation_date}} - {{job.status}}</option>
     </select> 

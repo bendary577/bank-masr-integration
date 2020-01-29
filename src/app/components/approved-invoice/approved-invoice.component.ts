@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { VendorService } from 'src/app/services/vendor/vendor.service';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { InvoiceService } from 'src/app/services/invoice/invoice.service';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';

@@ -10,6 +10,7 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
+import { AccountSyncType } from 'src/app/models/AccountSyncType';
 
 
 
@@ -26,7 +27,7 @@ export class JournalConfigurationComponent implements OnInit {
   item_loading = true;
   syncTypeLoading = true
 
-  syncJobType: SyncJobType;
+  syncJobType: AccountSyncType;
 
   costCenters = [];
   overGroups = [];

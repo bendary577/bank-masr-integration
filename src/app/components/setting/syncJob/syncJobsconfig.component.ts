@@ -27,6 +27,7 @@ export class SyncJobsconfigComponent implements OnInit {
   displayedColumns: string[] = ['firstName', 'username', 'lastName'];
   dataSource = new MatTableDataSource<User>(ELEMENT_DATA);
   syncJobTypes: SyncJobType[] = [];
+  loading = true
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   constructor(private syncJobService: SyncJobService,  public dialog: MatDialog,
@@ -42,16 +43,19 @@ export class SyncJobsconfigComponent implements OnInit {
 
 
   getSyncJobTypes(){
+    this.loading = true
     this.spinner.show();
 
     this.syncJobService.getSyncJobTypesDB().toPromise().then((res: any) => {
       this.syncJobTypes = res;
       this.spinner.hide();
+      this.loading = false
+
 
     }).catch(err => {
       console.error(err);
       this.spinner.hide();
-
+      this.loading = false
     });
   }
 

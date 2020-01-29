@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Constants } from 'src/app/models/constants';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Cacheable } from 'ngx-cacheable';
+import { Constants } from 'src/app/models/constants';
+
 
 @Injectable({
   providedIn: 'root'
