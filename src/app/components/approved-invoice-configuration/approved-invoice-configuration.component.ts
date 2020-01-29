@@ -7,6 +7,7 @@ import { Constants } from 'src/app/models/constants';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { Data } from 'src/app/models/data';
 import { SyncJobType } from 'src/app/models/SyncJobType';
+import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 
 @Component({
   selector: 'app-approved-invoice-configuration',
@@ -24,7 +25,7 @@ export class ApprovedInvoiceConfigurationComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
     private router:Router, public snackBar: MatSnackBar, private syncJobService:SyncJobService,
-    private data: Data) { 
+    private data: Data, private accSyncTypeService:AccSyncTypeService) { 
   }
 
   ngOnInit() {
@@ -35,11 +36,15 @@ export class ApprovedInvoiceConfigurationComponent implements OnInit {
 
   getSyncJobType(){
     this.loading = true;
-    this.syncJobService.getSyncJobTypeDB(Constants.APPROVED_INVOICES_SYNC).toPromise().then((res: any) => {
+    this.spinner.show();
+    this.accSyncTypeService.getAccSyncJobType(Constants.APPROVED_INVOICES_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
+
+      this.spinner.hide();
       this.loading = false;
     }).catch(err => {
       console.error(err);
+      this.spinner.hide();
       this.loading = false;
     });
   }

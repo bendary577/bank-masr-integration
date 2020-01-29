@@ -14,7 +14,11 @@ export class Constants {
     static CHECKAUTH = environment.apiHost +'/auth/getAccessToken';
     static LOGIN = environment.apiHost + '/login';
 
+    static GET_ACCOUNT = environment.apiHost + '/auth/getAccount';
+    static ADD_ACCOUNT = environment.apiHost + '/auth/addAccount';
+
     static GET_USERS = environment.apiHost + '/auth/getUsers';
+    static ADD_USER = environment.apiHost + '/auth/addUser';
 
     static VENDOR_URL = environment.apiHost + '/getVendors';
     static ADD_VENDOR_URL = environment.apiHost + '/addVendor';
@@ -25,6 +29,8 @@ export class Constants {
 
     static GET_SYNC_JOB_TYPES_URL = environment.apiHost + '/getSyncJobTypes';
     static GET_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getSyncJobTypesByName';
+    static GET_ACC_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getAccSyncJobTypesByName';
+
     static UPDATE_SYNC_JOB_TYPES_URL = environment.apiHost + '/updateSyncJobTypesConfiguration';
     static GET_SYNC_JOBS_URL = environment.apiHost + '/getSyncJobs';
 

@@ -9,6 +9,7 @@ import { JournalService } from 'src/app/services/journal/journal.service';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SyncJobType } from 'src/app/models/SyncJobType';
+import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 
 
 
@@ -37,7 +38,7 @@ export class JournalConfigurationComponent implements OnInit {
 
 
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
-    private journalService:JournalService, private syncJobService:SyncJobService,
+    private journalService:JournalService, private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService,
     private router:Router, public snackBar: MatSnackBar) {
       this.costCenters = [];
       this.overGroups = [];
@@ -112,7 +113,7 @@ export class JournalConfigurationComponent implements OnInit {
 
   getSyncJobType(){
     this.loading = true;
-    this.syncJobService.getSyncJobTypeDB("Journals").toPromise().then((res: any) => {
+    this.accSyncTypeService.getAccSyncJobType(Constants.JOURNALS_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
       this.costCenters = this.syncJobType.configuration["costCenters"];
       this.overGroups = this.syncJobType.configuration["overGroups"];
@@ -125,6 +126,7 @@ export class JournalConfigurationComponent implements OnInit {
     });
 
   }
+
 
   onSaveClick(): void {
     this.spinner.show();

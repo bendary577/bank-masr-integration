@@ -13,7 +13,7 @@ export class SupplierService {
   constructor(private http: HttpClient) { }
   @Cacheable()
   getSuppliers() {
-    return this.http.get(Constants.GET_SUPPLIERS_URL + '?limit=2',
+    return this.http.get(Constants.GET_SUPPLIERS_URL,
      { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 

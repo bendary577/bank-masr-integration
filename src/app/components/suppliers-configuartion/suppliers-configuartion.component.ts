@@ -8,6 +8,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import {Data} from "../../models/data";
 import { SyncJobType } from 'src/app/models/SyncJobType';
+import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { SyncJobType } from 'src/app/models/SyncJobType';
   styleUrls: ['./suppliers-configuartion.component.scss']
 })
 export class SuppliersConfiguartionComponent implements OnInit {
-  syncJobType: SyncJobType;
+  syncJobType;
   submitted = false;
   loading = true;
   taxesLoading = false;
@@ -28,7 +29,7 @@ export class SuppliersConfiguartionComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private route:ActivatedRoute,
     private spinner: NgxSpinnerService, public snackBar: MatSnackBar,
     private syncJobService:SyncJobService, private data: Data,
-    private router: Router,  private supplierService: SupplierService) {
+    private router: Router,  private supplierService: SupplierService, private accSyncTypeService:AccSyncTypeService) {
 
   }
 
@@ -41,7 +42,7 @@ export class SuppliersConfiguartionComponent implements OnInit {
   getSyncJobType(){
     this.loading = true;
     this.spinner.show();
-    this.syncJobService.getSyncJobTypeDB(Constants.SUPPLIERS_SYNC).toPromise().then((res: any) => {
+    this.accSyncTypeService.getAccSyncJobType(Constants.SUPPLIERS_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
 
       this.spinner.hide();

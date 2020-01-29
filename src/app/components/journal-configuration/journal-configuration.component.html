@@ -42,7 +42,7 @@
           Included Over Groups
         </mat-panel-title>
       </mat-expansion-panel-header>
-          <div *ngIf="overGroups.length">
+          <div *ngIf="overGroups?.length > 0">
             <section class="example-section" name="Over Group" *ngFor="let group of overGroups">
               <mat-checkbox class="example-margin"  [(ngModel)]="group.checked">{{group.over_group}}</mat-checkbox>
             </section>
@@ -58,7 +58,7 @@
 
           </mat-expansion-panel-header>
 
-          <div class="main" *ngIf="costCenters.length">
+          <div class="main" *ngIf="costCenters?.length > 0">
             <ngx-datatable  class="material" [rows]="costCenters" [columnMode]="'force'" [headerHeight]="50"
                 [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[]">
 

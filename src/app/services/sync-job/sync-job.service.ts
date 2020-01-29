@@ -29,7 +29,7 @@ export class SyncJobService {
     return this.http.get<SyncJobType>(Constants.GET_SYNC_JOB_TYPES_BY_NAME_URL + '?typeName=' + syncJobTypeName, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
-  updateSyncJobTypeConfig(SyncJobType:SyncJobType){
+  updateSyncJobTypeConfig(SyncJobType){
     return this.http.put(Constants.UPDATE_SYNC_JOB_TYPES_URL , SyncJobType, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})}).toPromise();
   }
 
