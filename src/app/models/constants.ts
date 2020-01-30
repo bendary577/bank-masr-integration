@@ -14,8 +14,9 @@ export class Constants {
     static CHECKAUTH = environment.apiHost +'/auth/getAccessToken';
     static LOGIN = environment.apiHost + '/login';
 
-    static GET_ACCOUNT = environment.apiHost + '/auth/getAccount';
-    static ADD_ACCOUNT = environment.apiHost + '/auth/addAccount';
+    static GET_ACCOUNT = environment.apiHost + '/getAccount';
+    static ADD_ACCOUNT = environment.apiHost + '/addAccount';
+    static UPDATE_ACCOUNT = environment.apiHost + '/updateAccount';
 
     static GET_USERS = environment.apiHost + '/auth/getUsers';
     static ADD_USER = environment.apiHost + '/auth/addUser';
@@ -54,7 +55,8 @@ export class Constants {
     static GET_BOOKED_WASTE_URL = environment.apiHost + '/getBookedWaste';
     static GET_BOOKED_WASTE_DB_URL = environment.apiHost + '/getBookedWasteDB';
 
-    static GET_BUSINESS_UNITS_URL = environment.apiHost + '/getBusinessUnits';
+    static GET_BUSINESS_UNITS_URL = environment.apiHost + '/getBusinessUnits'; 
+    static GET_PAYMENT_METHODS_URL = environment.apiHost + '/getPaymentMethods';
 
     static GET_OVER_GROUPS_URL = environment.apiHost + '/getOverGroups';
     static MAP_ITEM_GROUPS_URL = environment.apiHost + '/mapItems';

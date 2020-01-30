@@ -1,12 +1,19 @@
 
-<div class="main">
+<div class="main" *ngIf="!loading">
   <h3>General Settings</h3>
 
+  <div class="header">
+    <button mat-flat-button (click)="updateAccount()">Update</button>
+</div>
+<br>
+<div>
   <mat-accordion multi>
+
+    <!-- Oracle Hospitality Inventory Management -->
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Oracle
+          Oracle Hospitality Inventory Management
         </mat-panel-title>
         <mat-panel-description>
 
@@ -14,43 +21,68 @@
       </mat-expansion-panel-header>
 
       <mat-form-field>
-      <input matInput placeholder="User Name">
+      <input matInput placeholder="Username" [(ngModel)]="account.account_credentials.HospitalityOHIM.username">
     </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Password">
+        <input matInput placeholder="Password" [(ngModel)]="account.account_credentials.HospitalityOHIM.password">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Company">
+        <input matInput placeholder="Company" [(ngModel)]="account.account_credentials.HospitalityOHIM.company">
       </mat-form-field>
-      <mat-action-row>
-        <button mat-button color="primary" >Update</button>
-      </mat-action-row>
+      <!-- <mat-action-row>
+        <button mat-button color="primary" (click)="updateAccount()">Update</button>
+      </mat-action-row> -->
     </mat-expansion-panel>
-    
-    <mat-expansion-panel (opened)="panelOpenState = true"
-                         (closed)="panelOpenState = false">
+
+
+    <!-- Oracle Hospitality Reporting and Analytics -->
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Fusion
+          Oracle Hospitality Reporting and Analytics
         </mat-panel-title>
         </mat-expansion-panel-header>
 
         <mat-form-field>
-          <input matInput placeholder="User Name">
+          <input matInput placeholder="Username" [(ngModel)]="account.account_credentials.HospitalityOHRA.username">
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="Password">
+          <input matInput placeholder="Password" [(ngModel)]="account.account_credentials.HospitalityOHRA.password">
         </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Company">
+        <input matInput placeholder="Company" [(ngModel)]="account.account_credentials.HospitalityOHRA.company">
       </mat-form-field>
 
-        <mat-action-row>
+        <!-- <mat-action-row>
           <button mat-button color="primary" >Update</button>
-        </mat-action-row>
+        </mat-action-row> -->
     </mat-expansion-panel>
+
+    <!-- Oracle Fusion -->
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+<mat-expansion-panel-header>
+<mat-panel-title>
+Oracle Fusion
+</mat-panel-title>
+</mat-expansion-panel-header>
+
+<mat-form-field>
+<input matInput placeholder="Username" [(ngModel)]="account.account_credentials.Fusion.username">
+</mat-form-field>
+
+<mat-form-field>
+<input matInput placeholder="Password" [(ngModel)]="account.account_credentials.Fusion.password">
+</mat-form-field>
+
+<!-- <mat-action-row>
+<button mat-button color="primary" >Update</button>
+</mat-action-row> -->
+</mat-expansion-panel>
+
   </mat-accordion >
+  <ngx-spinner></ngx-spinner>
+  </div>
 </div>

@@ -4,7 +4,7 @@ export class SyncJobType {
     public description: string;
     public end_point: string;
     public creation_data:string;
-    public configuration: object;
+    public configuration: any;
     public duration: string
     public deleted: boolean;
 

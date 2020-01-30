@@ -18,4 +18,8 @@ export class AccountService {
   addAccount(account){
     return this.http.post(Constants.ADD_ACCOUNT , account, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})}).toPromise();
   }
+
+  updateAccount(account){
+    return this.http.put(Constants.UPDATE_ACCOUNT , account, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})}).toPromise();
+  }
 }

@@ -4,7 +4,7 @@
 
 export const environment = {
  apiHost: 'http://127.0.0.1:5000',
-  // apiHost: 'http://34.70.236.151:5000',
+  // apiHost: 'http://35.232.232.20:5000',
  //  apiHost: 'https://oracle-hospitality-prod.herokuapp.com',
 
   production: false
