@@ -82,7 +82,7 @@ export class SuppliersComponent implements OnInit {
     }).catch(err => {
       this.getSuppliersDB();
       this.getSyncJobs("Suppliers");
-      this.snackBar.open(err.error.message , null, {
+      this.snackBar.open(err.message , null, {
         duration: 2000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
