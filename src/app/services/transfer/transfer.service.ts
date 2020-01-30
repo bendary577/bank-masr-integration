@@ -11,7 +11,6 @@ export class TransferService {
 
   constructor(private http: HttpClient) { }
 
-  @Cacheable()
   getBookedTransfer() {
     return this.http.get(Constants.GET_BOOKED_TRANSFER_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }

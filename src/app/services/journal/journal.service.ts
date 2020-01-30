@@ -20,7 +20,6 @@ export class JournalService {
     return this.http.get(Constants.MAP_ITEM_GROUPS_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
   
-  @Cacheable()
   getJournals() {
     return this.http.get(Constants.GET_JOURNALS_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
