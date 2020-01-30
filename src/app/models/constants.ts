@@ -55,7 +55,8 @@ export class Constants {
     static GET_BOOKED_WASTE_URL = environment.apiHost + '/getBookedWaste';
     static GET_BOOKED_WASTE_DB_URL = environment.apiHost + '/getBookedWasteDB';
 
-    static GET_BUSINESS_UNITS_URL = environment.apiHost + '/getBusinessUnits';
+    static GET_BUSINESS_UNITS_URL = environment.apiHost + '/getBusinessUnits'; 
+    static GET_PAYMENT_METHODS_URL = environment.apiHost + '/getPaymentMethods';
 
     static GET_OVER_GROUPS_URL = environment.apiHost + '/getOverGroups';
     static MAP_ITEM_GROUPS_URL = environment.apiHost + '/mapItems';

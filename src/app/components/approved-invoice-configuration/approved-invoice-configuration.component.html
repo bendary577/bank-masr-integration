@@ -1,57 +1,105 @@
 <h3 mat-dialog-title>Update Approved Invoice Configuartion</h3>
 
 <div>
-    <div  *ngIf="!loading">
-        <div *ngIf="!costCenterLoding">
-            <div *ngIf="!costCenters.length">
-                <mat-card class="example-card">
-                        <mat-card-header>
-                          <mat-card-title>Error</mat-card-title>
-                        </mat-card-header>
-                        <mat-card-content>
-                          <p>
-                                Error happend while fetching cost centers, make sure you have cost centers.
-                          </p>
-                          
-                        </mat-card-content>
-                </mat-card>
-            </div>
-            
-            <div class="main" *ngIf="costCenters.length">
-                <ngx-datatable *ngIf="!loading" class="material" [rows]="costCenters" [columnMode]="'force'" [headerHeight]="50"
-                    [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'cost_center', dir: 'asc'}]">
-            
-                    <ngx-datatable-column name="Cost Center">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.cost_center}}
-                        </ng-template>
-                    </ngx-datatable-column>
+    <!-- Predifined Configurations -->
+    <mat-expansion-panel >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Predifined Configurations
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+  
+        <div class="container" *ngIf="!loading">
+          <form  class="my-form">
+              <div >
+                  <mat-form-field class="example-full-width">
+                    <mat-select matInput id="timePeriod" name="timePeriod" placeholder="Time Period"  
+                    [(ngModel)]="syncJobType.configuration.timePeriod">
+                       <!-- <mat-option *ngFor="let timePeriod of timePeriods" value={{timePeriod}}>{{timePeriod}}</mat-option> -->
+                       <mat-option value="All">All</mat-option>
+                       <mat-option value="CurrentYear">Current Year</mat-option>
+                       <mat-option value="MonthBefore">Last Month</mat-option>
+                       <mat-option value="YearBefore">Last Year</mat-option>
+                       <mat-option value="UserDefined">User-defined</mat-option>
+                     </mat-select>
+
+                  </mat-form-field>
+              </div>
+              <div >
+                  <mat-form-field class="example-full-width">
+                    <mat-select id="paymentMethod" name="paymentMethod" placeholder="PaymentMethod" 
+                     [(ngModel)]="syncJobType.configuration.paymentMethod">
+                        <mat-option *ngFor="let paymentMethod of PaymentMethods" value={{paymentMethod.PaymentMethodName}}>{{paymentMethod.PaymentMethodName}}</mat-option>
+                      </mat-select>
+                      <!-- <div class="loader" *ngIf="groupsLoading"></div> -->
+                  </mat-form-field>
+              </div>
+          </form>
+  </div>
+          
+      </mat-expansion-panel>
+
+      <!-- Cost Centers -->
+      <mat-expansion-panel >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Cost Centers Mapping To Business Units
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+            <div  *ngIf="!loading">
+                <div *ngIf="!costCenterLoding">
+                    <div *ngIf="!costCenters.length">
+                        <mat-card class="example-card">
+                                <mat-card-header>
+                                  <mat-card-title>Error</mat-card-title>
+                                </mat-card-header>
+                                <mat-card-content>
+                                  <p>
+                                        Error happend while fetching cost centers, make sure you have cost centers.
+                                  </p>
+                                  
+                                </mat-card-content>
+                        </mat-card>
+                    </div>
                     
-                    <ngx-datatable-column name="Business Unit">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div class="main" *ngIf="costCenters.length">
+                        <ngx-datatable *ngIf="!loading" class="material" [rows]="costCenters" [columnMode]="'force'" [headerHeight]="50"
+                            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'cost_center', dir: 'asc'}]">
+                    
+                            <ngx-datatable-column name="Cost Center">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    {{row.cost_center}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            
+                            <ngx-datatable-column name="Business Unit">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                    
+                                    <mat-form-field>
+                                        <mat-select id="businessUnit" name="businessUnit" placeholder="businessUnit" [(ngModel)]="row.business_unit">
+                                            <mat-option *ngFor="let businessUnit of businessUnits" value={{businessUnit.BusinessUnitName}}>
+                                                {{businessUnit.BusinessUnitName}}</mat-option>
+                                          </mat-select>
+                                        </mat-form-field>  
+                                </ng-template>
+                            </ngx-datatable-column>         
+                        </ngx-datatable>
+                    </div>
             
-                            <mat-form-field>
-                                <mat-select id="businessUnit" name="businessUnit" placeholder="businessUnit" [(ngModel)]="row.business_unit">
-                                    <mat-option *ngFor="let businessUnit of businessUnits" value={{businessUnit.BusinessUnitName}}>
-                                        {{businessUnit.BusinessUnitName}}</mat-option>
-                                  </mat-select>
-                                </mat-form-field>  
-                        </ng-template>
-                    </ngx-datatable-column>         
-                </ngx-datatable>
+                    <br>
+        
+                </div>     
             </div>
-    
-            <br>
+      </mat-expansion-panel>
+      <br>
 
-            <div class="card-back">
-                <button mat-flat-button (click)="onSaveClick()">Save</button>
-                <button mat-flat-button (click)="onCancelClick()">Cancel</button>
-            </div>
-            <ngx-spinner></ngx-spinner>
-        </div>     
+      <div class="card-back">
+        <button mat-flat-button (click)="onSaveClick()">Save</button>
+        <button mat-flat-button (click)="onCancelClick()">Cancel</button>
     </div>
-    <ngx-spinner></ngx-spinner>
-
+      <ngx-spinner></ngx-spinner>
 </div>
+
 
 

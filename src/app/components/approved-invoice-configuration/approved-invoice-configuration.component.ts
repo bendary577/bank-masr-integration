@@ -21,7 +21,9 @@ export class ApprovedInvoiceConfigurationComponent implements OnInit {
   costCenterLoding = true;
   costCenters = [];
   businessUnits = [];
+  PaymentMethods = [];
   selectedCostCenters = [];
+  timePeriods = ["All", "Current Year", "Last Month", "Last Year", "User-defined"];
 
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
     private router:Router, public snackBar: MatSnackBar, private syncJobService:SyncJobService,
@@ -31,27 +33,24 @@ export class ApprovedInvoiceConfigurationComponent implements OnInit {
   ngOnInit() {
     this.getSyncJobType();
     this.getBusinessUnits()
+    this.getPaymentMethods();
     this.getCostCenter();
   }
 
   getSyncJobType(){
     this.loading = true;
-    this.spinner.show();
     this.accSyncTypeService.getAccSyncJobType(Constants.APPROVED_INVOICES_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
-
-      this.spinner.hide();
       this.loading = false;
     }).catch(err => {
       console.error(err);
-      this.spinner.hide();
       this.loading = false;
     });
   }
 
   onSaveClick(): void {
     this.spinner.show();
-
+    
     this.syncJobType.configuration["costCenters"]  = this.costCenters    
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.spinner.hide();
@@ -70,6 +69,14 @@ export class ApprovedInvoiceConfigurationComponent implements OnInit {
   getBusinessUnits() {
     this.invoiceService.getBisinessUnits().toPromise().then((res: any) => {
       this.businessUnits = res.data.items;
+    }).catch(err => {
+      console.error(err);
+    });
+  }
+
+  getPaymentMethods() {
+    this.invoiceService.getPaymentMethods().toPromise().then((res: any) => {
+      this.PaymentMethods = res.data.items;
     }).catch(err => {
       console.error(err);
     });
