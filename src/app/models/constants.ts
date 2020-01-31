@@ -68,6 +68,7 @@ export class Constants {
 
 
     static LOGIN_PAGE = 'login';
+    static WELCOME_PAGE = 'welcomePage';
     static HOME_PAGE = 'home';
     static SIDE_NAV = 'sidenav';
 

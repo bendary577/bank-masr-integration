@@ -12,11 +12,11 @@ import { SyncJob } from 'src/app/models/SyncJob';
 })
 export class ApprovedInvoiceComponent implements OnInit {
   loading = true;
+  getInvoicesLoading = false;
   success = null;
   jobs = [];
   approvedInvoices = [];
   selectedJob :SyncJob = null;
-  syncJobId = -1;
 
 
   constructor(private spinner: NgxSpinnerService, private invoiceService: InvoiceService,
@@ -29,16 +29,17 @@ export class ApprovedInvoiceComponent implements OnInit {
   }
 
   getApprovedInvoices() {
+    this.getInvoicesLoading = true;
     this.spinner.show();
     this.syncJobService.getSyncJobData("Approved Invoices").toPromise().then((res: any) => {
       this.approvedInvoices = res;
 
       this.spinner.hide();
-      this.loading = false;
+      this.getInvoicesLoading = false;
     }).catch(err => {
       console.error(err);
       this.spinner.hide();
-      this.loading = false;
+      this.getInvoicesLoading = false;
     });
   }
 

@@ -14,6 +14,18 @@
     padding: 4px 16px 4px 16px;
     height: 5vh;
   }
+
+  #myProgress {
+    width: 50%;
+    margin: auto;
+    background-color: #ddd;
+  }
+  
+  #myBar {
+    width: 0%;
+    height: 30px;
+    background-color: blue;
+  }
   
   button {
     color:white;

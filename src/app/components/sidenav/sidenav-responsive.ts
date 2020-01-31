@@ -1,13 +1,10 @@
 import {MediaMatcher} from '@angular/cdk/layout';
-import {ChangeDetectorRef, Component, Injectable, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import { Location } from '@angular/common';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { Constants } from 'src/app/models/constants';
-import {FlatTreeControl} from '@angular/cdk/tree';
-import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {NavigationEnd, Router} from "@angular/router";
-import {interval} from "rxjs";
 
 
 
@@ -46,7 +43,10 @@ export class SidenavResponsive implements OnDestroy,OnInit {
   }
 
   ngOnInit(): void {
-    this.getSyncJobTypes()
+    if (this.shouldRun == true){
+      this.getSyncJobTypes();
+    }
+    
   }
 
   changeCurrentTab(cuurentTab){
@@ -54,14 +54,12 @@ export class SidenavResponsive implements OnDestroy,OnInit {
     this.selectedTab = cuurentTab;
   }
   Logout(){
-    // localStorage.setItem("auth-token","");
-    // localStorage.setItem("user","");
+    localStorage.setItem("auth-token","");
+    localStorage.setItem("user","");
     localStorage.removeItem("auth-token");
     localStorage.removeItem("user");
     localStorage.clear();
     this.router.navigate(["/"]);
-
-
   }
 
   getSyncJobTypes(){

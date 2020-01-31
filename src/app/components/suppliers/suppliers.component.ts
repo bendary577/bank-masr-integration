@@ -58,6 +58,7 @@ export class SuppliersComponent implements OnInit {
 
 
   getSuppliersSyncJob() {
+    this.loading = true
     this.spinner.show();
      this.supplierService.getSuppliers().toPromise().then((res: any) => {
       this.success = res.success;

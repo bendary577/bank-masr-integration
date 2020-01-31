@@ -14,7 +14,7 @@ export class AuthService {
   constructor( private http: HttpClient, private cookie: CookieService) {}
 
   login(user) {
-    return this.http.post(Constants.LOGINAUTH,user );
+    return this.http.post(Constants.LOGINAUTH, user);
   }
 
   checkToken(){

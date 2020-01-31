@@ -55,7 +55,7 @@ export class UsersComponent implements OnInit {
       if (res) {
         this.spinner.show();
         this.authService.addUser(res).toPromise().then(result => {
-          console.log(res)
+          this.getUsers()
         }).catch(err => {
           this.spinner.hide();
           this.snackBar.open('An error has occurred.', null, {

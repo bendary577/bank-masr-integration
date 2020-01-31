@@ -14,6 +14,7 @@ import { SyncJob } from 'src/app/models/SyncJob';
 export class JournalsComponent implements OnInit {
 
   loading = true;
+  getJournalsLoding = false;
   success = null;
   jobs = [];
   journals = [];
@@ -30,12 +31,11 @@ export class JournalsComponent implements OnInit {
   }
 
   getJournalsJobSyncJob() {
-    this.spinner.show();
+    this.getJournalsLoding = true;
     this.journalService.getJournals().toPromise().then((res: any) => {
       this.getSyncJobs(Constants.JOURNALS_SYNC);
       
-      this.spinner.hide();
-      this.loading = false;
+      this.getJournalsLoding = false;
 
       this.snackBar.open(res.message, null, {
         duration: 2000,
@@ -45,8 +45,7 @@ export class JournalsComponent implements OnInit {
 
     }).catch(err => {
       this.getSyncJobs(Constants.JOURNALS_SYNC);
-      this.spinner.hide();
-      this.loading = false;
+      this.getJournalsLoding = false;
 
       let msg = "";
       if (err.error.message){
@@ -66,14 +65,12 @@ export class JournalsComponent implements OnInit {
   }
 
   getJournals() {
-    this.spinner.show();
+    this.loading = true;
     this.syncJobService.getSyncJobData(Constants.JOURNALS_SYNC).toPromise().then((res: any) => {
       this.journals = res;
 
-      this.spinner.hide();
       this.loading = false;
     }).catch(err => {
-      this.spinner.hide();
       this.loading = false;
     });
   }
