@@ -12,10 +12,12 @@ export class CreditNoteService {
   constructor(private http : HttpClient) { }
 
   getCreditNote() {
+    this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_CREDIT_NOTE_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
   getCreditNoteDB() {
+    this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_CREDIT_NOTE_DB_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 

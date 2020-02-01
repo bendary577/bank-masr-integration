@@ -10,8 +10,6 @@ export class VendorService {
 
   constructor(private http: HttpClient) { }
 
-
-  @Cacheable()
   getData() {
     return this.http.get(Constants.VENDOR_URL);
   }

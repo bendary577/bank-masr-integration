@@ -1,9 +1,24 @@
 
 <div class="main">
     <h3>Sync Jobs Configuration</h3>
-<div class="example-container mat-elevation-z8" style="margin: 20px;">
+</div>
 
-    <div class="main">
+
+<div *ngIf="!syncJobTypes.length">
+  <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title>No Data</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+                  There was no sync job types role given to this account, please contact support team.
+            </p>
+            
+          </mat-card-content>
+  </mat-card>
+  </div>
+
+    <div class="main" *ngIf="syncJobTypes.length">
       <ngx-datatable *ngIf="!loading" class="material" [rows]="syncJobTypes" [columnMode]="'force'" [headerHeight]="50"
           [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true" [sorts]="[{prop: 'Supplier', dir: 'asc'}]">
           
@@ -25,4 +40,4 @@
   
       </ngx-datatable>
       <ngx-spinner></ngx-spinner>
-  </div>
+</div>

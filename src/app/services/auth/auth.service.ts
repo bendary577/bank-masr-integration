@@ -21,12 +21,13 @@ export class AuthService {
     return this.http.get(Constants.CHECKAUTH,{ headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})})
   }
 
-  @Cacheable()
   getUsers(){
+    this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_USERS,{ headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
   addUser(user){
+    this.token = localStorage.getItem('auth_token');
     return this.http.post(Constants.ADD_USER, user,{ headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 

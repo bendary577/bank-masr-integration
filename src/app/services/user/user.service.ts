@@ -13,6 +13,7 @@ export class UserService {
 
 
   addUser(user){
+    this.token = localStorage.getItem('auth_token');
     return this.http.post(Constants.ADD_USER , user, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})}).toPromise();
   }
 }

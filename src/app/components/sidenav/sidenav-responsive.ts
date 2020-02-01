@@ -53,9 +53,8 @@ export class SidenavResponsive implements OnDestroy,OnInit {
     Constants.CURRENT_TAB = cuurentTab;
     this.selectedTab = cuurentTab;
   }
+
   Logout(){
-    localStorage.setItem("auth-token","");
-    localStorage.setItem("user","");
     localStorage.removeItem("auth-token");
     localStorage.removeItem("user");
     localStorage.clear();

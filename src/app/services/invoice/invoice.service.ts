@@ -12,22 +12,25 @@ export class InvoiceService {
   constructor(private http: HttpClient) { }
 
   getApprovedInvoices() {
+    this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_APPROVED_INVOICES_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
-  getApprovedInvoicesDB() {
+  getApprovedInvoicesDB() {this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_APPROVED_INVOICES_DB_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
   
-  @Cacheable()
   getCostCenter() {
+    this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_COST_CENTER_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
   getBisinessUnits() {
+    this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_BUSINESS_UNITS_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
   getPaymentMethods() {
+    this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_PAYMENT_METHODS_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
   

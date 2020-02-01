@@ -12,15 +12,17 @@ export class TransferService {
   constructor(private http: HttpClient) { }
 
   getBookedTransfer() {
+    this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_BOOKED_TRANSFER_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
   getBookedTransferDB() {
+    this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_BOOKED_TRANSFER_DB_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
   
-  @Cacheable()
   getBookedTransferDetails(transferLink:String) {
+    this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_BOOKED_TRANSFER_DETAILS_URL + '?transferLink=' + transferLink, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 }
