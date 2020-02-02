@@ -38,26 +38,20 @@ export class AuthGuardService implements CanActivate {
 
     if (localStorage.getItem('auth_token')) {
 
-     // return true;
-    return await  this.auth_service.checkToken().toPromise().then((res: any) => {
-        let url =route.pathFromRoot
-          .map(v => v.url.map(segment => segment.toString()).join('/'))
-          .join('/');
+     return true;
+    // return await  this.auth_service.checkToken().toPromise().then((res: any) => {
+    //     let url =route.pathFromRoot
+    //       .map(v => v.url.map(segment => segment.toString()).join('/'))
+    //       .join('/');
 
+    //     return true;
 
-/*        if(state.url!=url)
-          return false;
-        else*/
-          //this.router.navigate([url]);
-
-        return true;
-
-      }).catch((error: any) => {
-        localStorage.setItem('token', '');
-        localStorage.setItem('user', '');
-      this.routerd.navigate(["/"]);
-        return true;
-      });
+    //   }).catch((error: any) => {
+    //     localStorage.setItem('token', '');
+    //     localStorage.setItem('user', '');
+    //   this.routerd.navigate(["/"]);
+    //     return true;
+    //   });
     } else {
 
     this.routerd.navigate(["/"]);

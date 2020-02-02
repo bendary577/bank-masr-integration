@@ -7,7 +7,6 @@ import { MatSnackBar } from '@angular/material';
 import { SidenavResponsive } from "../sidenav/sidenav-responsive";
 import { NgxSpinnerService } from 'ngx-spinner';
 import {User} from "../../models/user";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -36,7 +35,7 @@ export class LoginComponent implements OnInit {
     this.side.shouldRun = false;
 
     if (localStorage.getItem('auth_token')) {
-      this.router.navigate([Constants.SUPPLIERS_PAGE]);
+      this.router.navigate([Constants.WELCOME_PAGE]);
     }
   }
 
@@ -52,12 +51,9 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
   }
 
-  // convenience getter for easy access to form fields
-  // get f() { return this.loginForm.controls; }
 
   onSubmit() {
     this.submitted = true;
-    // stop here if form is invalid
     this.isValid();
   }
 
@@ -73,20 +69,19 @@ export class LoginComponent implements OnInit {
       this.user.name="auth";
       this.user.username=username;
       this.user.password=password;
-      const creation_date = Date() as string;
-      const deleted = false;
       const domain = domainName[domainName.length-1];
       this.user.domain=domain;
 
       this.authenticationService.login(this.user).toPromise().then((res: any) => {
         localStorage.setItem('auth_token',res.auth_token);
+        console.log(res.auth_token)
         localStorage.setItem('user',JSON.stringify(this.user));
         this.spinner.hide();
         this.loading = false;
         this.side.setshouldRun(true);
         this.side.shouldRun = true;
-        this.router.navigate([Constants.SUPPLIERS_PAGE]);
-        return true
+        this.side.getSyncJobTypes();
+        this.router.navigate([Constants.WELCOME_PAGE]);
       }).catch(err => {
         localStorage.setItem('auth_token','');
         localStorage.setItem('user','');
@@ -107,10 +102,5 @@ export class LoginComponent implements OnInit {
         horizontalPosition: 'center',
       });
     }
-    /*  if (username.trim() === 'Admin@as' && password.trim() === 'Entact123') {
-        return true;
-      } else {
-         return false;
-       }*/
   }
 }

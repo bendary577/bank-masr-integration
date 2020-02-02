@@ -11,8 +11,8 @@ export class SchedulerService {
 
   constructor(private http: HttpClient) { }
 
-  @Cacheable()
   getCurrentDays() {
+    this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_CURRENT_DAYS_URL);
   }
 

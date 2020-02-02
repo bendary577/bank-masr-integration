@@ -14,24 +14,21 @@
     padding: 4px 16px 4px 16px;
     height: 5vh;
   }
-
-  #myProgress {
-    width: 50%;
-    margin: auto;
-    background-color: #ddd;
-  }
-  
-  #myBar {
-    width: 0%;
-    height: 30px;
-    background-color: blue;
-  }
   
   button {
-    color:white;
-    background-color: #3f51b5;
+    background-color: #1976d3;
   }
-
+  .button-disabled {
+    background-color: #9ac7f3 !important;
+    min-width: 161.59px;
+  }
+  
+  @keyframes spinner {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
   .example-card {
     width: 50%;
     margin: auto;

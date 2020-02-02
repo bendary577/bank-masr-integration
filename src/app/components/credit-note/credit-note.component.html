@@ -11,6 +11,10 @@
     <button mat-flat-button (click)="getCreditNoteSyncJob()">Sync Credit Notes Now</button>
 </div>
 <br>
+<div id="myProgress" >
+    <mat-progress-bar mode="indeterminate" *ngIf="getCreditNoteLoading" ></mat-progress-bar>
+</div>
+<br>
 <div *ngIf="selectedJob">
     <mat-card class="example-card">
             <mat-card-header>
@@ -44,7 +48,7 @@
     <br>
 <br>
 <div>
-    <div *ngIf="!creditNote.length && !selectedJob">
+    <div *ngIf="!selectedJob">
         <mat-card class="example-card">
                 <mat-card-header>
                   <mat-card-title>No Data</mat-card-title>
@@ -123,5 +127,4 @@
     
     </ngx-datatable>
 </div>
-<ngx-spinner></ngx-spinner>
 </div>

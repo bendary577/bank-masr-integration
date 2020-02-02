@@ -14,6 +14,7 @@ import { SyncJob } from 'src/app/models/SyncJob';
 export class BookedTransferComponent implements OnInit {
 
   loading = true;
+  getTransfersLoading = false;
   success = null;
   bookedTransfer = [];
   jobs = [];
@@ -46,6 +47,7 @@ export class BookedTransferComponent implements OnInit {
   }
 
   getBookedTransferSyncJob() {
+    this.getTransfersLoading = true;
     this.spinner.show();
     this.transferService.getBookedTransfer().toPromise().then((res: any) => {
       this.success = res.success;
@@ -59,7 +61,7 @@ export class BookedTransferComponent implements OnInit {
         });
       }
       this.spinner.hide();
-      this.loading = false;
+      this.getTransfersLoading = false;
     }).catch(err => {
       this.getSyncJobs("Booked Transfers");
       
@@ -70,7 +72,7 @@ export class BookedTransferComponent implements OnInit {
       });
       console.error(err);
       this.spinner.hide();
-      this.loading = false;
+      this.getTransfersLoading = false;
     });
   }
 

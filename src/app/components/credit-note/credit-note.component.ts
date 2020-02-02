@@ -13,6 +13,7 @@ import { SyncJob } from 'src/app/models/SyncJob';
 export class CreditNoteComponent implements OnInit {
 
   loading = true;
+  getCreditNoteLoading = false;
   success = null;
   jobs = [];
   creditNote = [];
@@ -43,6 +44,7 @@ export class CreditNoteComponent implements OnInit {
   }
 
   getCreditNoteSyncJob() {
+    this.getCreditNoteLoading = true;
     this.spinner.show();
     this.creditNoteService.getCreditNote().toPromise().then((res: any) => {
       this.success = res.success;
@@ -63,7 +65,7 @@ export class CreditNoteComponent implements OnInit {
         });
       }
       this.spinner.hide();
-      this.loading = false;
+      this.getCreditNoteLoading = false;
     }).catch(err => {
       this.getSyncJobs("Credit Notes");
       this.snackBar.open(err.error.message , null, {
@@ -72,7 +74,7 @@ export class CreditNoteComponent implements OnInit {
         panelClass:"my-snack-bar-fail"
       });
       this.spinner.hide();
-      this.loading = false;
+      this.getCreditNoteLoading = false;
     });
   }
 

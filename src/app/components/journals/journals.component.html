@@ -11,6 +11,12 @@
     </select> 
     <button mat-flat-button (click)="getJournalsJobSyncJob()">Sync Journals Now</button>
 </div>
+
+<br>
+<div id="myProgress" >
+    <mat-progress-bar mode="indeterminate" *ngIf="getJournalsLoding" ></mat-progress-bar>
+</div>
+
 <br>
 <div *ngIf="selectedJob">
     <mat-card class="example-card">
@@ -61,7 +67,7 @@
         </div>
             
     <div class="main" *ngIf="journals.length">
-        <ngx-datatable *ngIf="!loading" class="material" [rows]="journals" [columnMode]="'force'" [headerHeight]="50"
+        <ngx-datatable class="material" [rows]="journals" [columnMode]="'force'" [headerHeight]="50"
             [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'journalBatch', dir: 'asc'}]">
             
             <ngx-datatable-column name="Status">
@@ -180,9 +186,6 @@
     </div>
 
 </div>
-
-<ngx-spinner></ngx-spinner>
-
 </div>
 
 

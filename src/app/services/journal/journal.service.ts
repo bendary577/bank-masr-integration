@@ -11,17 +11,18 @@ export class JournalService {
 
   constructor(private http: HttpClient) { }
 
-  @Cacheable()
   getOverGroups() {
+    this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_OVER_GROUPS_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
   mapItemGroups() {
+    this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.MAP_ITEM_GROUPS_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
   
-  @Cacheable()
   getJournals() {
+    this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_JOURNALS_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 

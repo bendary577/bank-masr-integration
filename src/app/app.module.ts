@@ -27,9 +27,9 @@ import {
   MatNativeDateModule, 
   MatSelectModule, 
   MatCheckboxModule,
-  MatSidenav,
   MatCardModule,
-  MatRippleModule
+  MatRippleModule,
+  MatProgressBarModule
 } from '@angular/material';
 import {SidenavResponsive} from "./components/sidenav/sidenav-responsive";
 import {ConfigurationComponent} from "./components/setting/configuration/configuration.component";
@@ -55,6 +55,7 @@ import {AuthGuardService} from "./guards/AuthGuardService";
 import { JournalConfigurationComponent } from './components/journal-configuration/journal-configuration.component';
 import { JournalsComponent } from './components/journals/journals.component';
 import { PosSalesComponent } from './components/pos-sales/pos-sales.component';
+import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { PosSalesComponent } from './components/pos-sales/pos-sales.component';
     SupplierDetailsComponent,
     JournalConfigurationComponent,
     JournalsComponent,
-    PosSalesComponent
+    PosSalesComponent,
+    WelcomePageComponent
   ],
   imports: [
     BrowserModule,
@@ -109,7 +111,8 @@ import { PosSalesComponent } from './components/pos-sales/pos-sales.component';
     MatCardModule,
     MatRippleModule,
     BrowserModule,
-    FormsModule
+    FormsModule,
+    MatProgressBarModule
   ],
   providers: [CookieService, AuthService, InvoiceService, AlertsService, Data,AuthGuardService,SidenavResponsive],
   bootstrap: [AppComponent],

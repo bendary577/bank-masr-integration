@@ -12,11 +12,11 @@ import { SyncJob } from 'src/app/models/SyncJob';
 })
 export class ApprovedInvoiceComponent implements OnInit {
   loading = true;
+  getInvoicesLoading = false;
   success = null;
   jobs = [];
   approvedInvoices = [];
   selectedJob :SyncJob = null;
-  syncJobId = -1;
 
 
   constructor(private spinner: NgxSpinnerService, private invoiceService: InvoiceService,
@@ -29,16 +29,17 @@ export class ApprovedInvoiceComponent implements OnInit {
   }
 
   getApprovedInvoices() {
+    this.getInvoicesLoading = true;
     this.spinner.show();
     this.syncJobService.getSyncJobData("Approved Invoices").toPromise().then((res: any) => {
       this.approvedInvoices = res;
 
       this.spinner.hide();
-      this.loading = false;
+      this.getInvoicesLoading = false;
     }).catch(err => {
       console.error(err);
       this.spinner.hide();
-      this.loading = false;
+      this.getInvoicesLoading = false;
     });
   }
 
@@ -48,28 +49,19 @@ export class ApprovedInvoiceComponent implements OnInit {
       this.success = res.success;
       this.getSyncJobs("Approved Invoices");
   
-      if (this.success){
-        this.snackBar.open('Sync Approved Invoices Successfully', null, {
-          duration: 2000,
-          horizontalPosition: 'center',
-          panelClass:"my-snack-bar-success"
-        });
-      }
-      else{
-        this.snackBar.open( res.message , null, {
-          duration: 2000,
-          horizontalPosition: 'center',
-          panelClass:"my-snack-bar-fail"
-        });
-      }
+      this.snackBar.open('Sync Approved Invoices Successfully', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-success"
+      });
 
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
       this.getSyncJobs("Approved Invoices");
       let msg = "";
-      if (err.error.message){
-        msg = err.error.message ;
+      if (err.message){
+        msg = err.message ;
       }
       else{
         msg = "Failed to sync Approved Invoices completely!"

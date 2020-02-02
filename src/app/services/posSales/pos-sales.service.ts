@@ -11,8 +11,8 @@ export class PosSalesService {
 
   constructor(private http: HttpClient) { }
 
-  @Cacheable()
   getPOSSales() {
+    this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_POS_SALES_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
