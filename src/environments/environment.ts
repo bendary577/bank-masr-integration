@@ -3,8 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-//  apiHost: 'http://127.0.0.1:5000',
-  apiHost: 'http://35.232.232.20:5000',
+ apiHost: 'http://127.0.0.1:5000',
+  //  apiHost: 'http://35.232.234.90:5000',
+
+  // apiHost: 'http://35.232.232.20:5000',
  //  apiHost: 'https://oracle-hospitality-prod.herokuapp.com',
 
   production: false

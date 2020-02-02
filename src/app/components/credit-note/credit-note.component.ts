@@ -29,7 +29,7 @@ export class CreditNoteComponent implements OnInit {
     this.getSyncJobs("Credit Notes");
   }
 
-  getCreditNote() {
+  getCreditNoteDB() {
     this.spinner.show();
     this.syncJobService.getSyncJobData("Credit Notes").toPromise().then((res: any) => {
       this.creditNote = res;
@@ -45,7 +45,6 @@ export class CreditNoteComponent implements OnInit {
 
   getCreditNoteSyncJob() {
     this.getCreditNoteLoading = true;
-    this.spinner.show();
     this.creditNoteService.getCreditNote().toPromise().then((res: any) => {
       this.success = res.success;
       this.getSyncJobs("Credit Notes");
@@ -64,7 +63,6 @@ export class CreditNoteComponent implements OnInit {
           panelClass:"my-snack-bar-fail"
         });
       }
-      this.spinner.hide();
       this.getCreditNoteLoading = false;
     }).catch(err => {
       this.getSyncJobs("Credit Notes");
@@ -73,7 +71,6 @@ export class CreditNoteComponent implements OnInit {
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
-      this.spinner.hide();
       this.getCreditNoteLoading = false;
     });
   }

@@ -24,7 +24,7 @@
                         <mat-select id="taxes" name="taxes" placeholder="taxes" [(ngModel)]="syncJobType.configuration.taxes">
                           <mat-option *ngFor="let tax of taxes" value={{tax.taxes}}>{{tax.taxes}}</mat-option>
                         </mat-select>
-                        <div class="loader" *ngIf="taxesLoading"></div>
+                        <div class="loader" *ngIf="getTaxsLoading"></div>
 
                     </mat-form-field>
                     <button mat-flat-button color="primary" (click)="getTaxes()">Refresh Taxes</button>
@@ -36,7 +36,7 @@
                         <mat-select id="group" name="group" placeholder="Groups" [(ngModel)]="syncJobType.configuration.groups">
                           <mat-option *ngFor="let group of groups" value={{group.vendor_group}}>{{group.vendor_group}}</mat-option>
                         </mat-select>
-                        <div class="loader" *ngIf="groupsLoading"></div>
+                        <div class="loader" *ngIf="getGroupsLoading"></div>
                     </mat-form-field>
                     <button mat-flat-button color="primary" (click)="getGroups()">Refresh Groups</button>
                     

@@ -26,7 +26,6 @@ export class JournalsComponent implements OnInit {
     public snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.getJournals();
     this.getSyncJobs(Constants.JOURNALS_SYNC);
   }
 
@@ -64,7 +63,7 @@ export class JournalsComponent implements OnInit {
 
   }
 
-  getJournals() {
+  getJournalsDB() {
     this.loading = true;
     this.syncJobService.getSyncJobData(Constants.JOURNALS_SYNC).toPromise().then((res: any) => {
       this.journals = res;

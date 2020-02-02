@@ -48,7 +48,6 @@ export class BookedTransferComponent implements OnInit {
 
   getBookedTransferSyncJob() {
     this.getTransfersLoading = true;
-    this.spinner.show();
     this.transferService.getBookedTransfer().toPromise().then((res: any) => {
       this.success = res.success;
       this.getSyncJobs("Booked Transfers");
@@ -60,7 +59,6 @@ export class BookedTransferComponent implements OnInit {
           panelClass:"my-snack-bar-success"
         });
       }
-      this.spinner.hide();
       this.getTransfersLoading = false;
     }).catch(err => {
       this.getSyncJobs("Booked Transfers");
@@ -70,8 +68,6 @@ export class BookedTransferComponent implements OnInit {
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
-      console.error(err);
-      this.spinner.hide();
       this.getTransfersLoading = false;
     });
   }
