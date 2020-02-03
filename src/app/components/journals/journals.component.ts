@@ -46,15 +46,7 @@ export class JournalsComponent implements OnInit {
       this.getSyncJobs(Constants.JOURNALS_SYNC);
       this.getJournalsLoding = false;
 
-      let msg = "";
-      if (err.error.message){
-        msg = err.error.message ;
-      }
-      else{
-        msg = "Failed to sync Approved Invoices completely!"
-      }
-
-      this.snackBar.open(msg , null, {
+      this.snackBar.open(err.error.message , null, {
         duration: 3000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"

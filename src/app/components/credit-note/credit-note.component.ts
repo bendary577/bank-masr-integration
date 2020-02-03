@@ -56,13 +56,6 @@ export class CreditNoteComponent implements OnInit {
           panelClass:"my-snack-bar-success"
         });
       }
-      else{
-        this.snackBar.open(res.message , null, {
-          duration: 3000,
-          horizontalPosition: 'center',
-          panelClass:"my-snack-bar-fail"
-        });
-      }
       this.getCreditNoteLoading = false;
     }).catch(err => {
       this.getSyncJobs("Credit Notes");

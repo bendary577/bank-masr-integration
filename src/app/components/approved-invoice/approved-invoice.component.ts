@@ -58,14 +58,8 @@ export class ApprovedInvoiceComponent implements OnInit {
       this.getInvoicesLoading = false;
     }).catch(err => {
       this.getSyncJobs("Approved Invoices");
-      let msg = "";
-      if (err.message){
-        msg = err.message ;
-      }
-      else{
-        msg = "Failed to sync Approved Invoices completely!"
-      }
-      this.snackBar.open(msg , null, {
+      console.error(err);
+      this.snackBar.open(err.error.message , null, {
         duration: 3000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
