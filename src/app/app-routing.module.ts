@@ -20,6 +20,7 @@ import { JournalConfigurationComponent } from './components/journal-configuratio
 import { JournalsComponent } from './components/journals/journals.component';
 import { PosSalesComponent } from './components/pos-sales/pos-sales.component';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
+import { PosSalesConfigurationComponent } from './pos-sales-configuration/pos-sales-configuration.component';
 
 
 const routes: Routes = [
@@ -51,6 +52,7 @@ const routes: Routes = [
   { path: Constants.JOURNALS_CONFIG_PAGE , component: JournalConfigurationComponent ,canActivate:[AuthGuardService]},
 
   { path: Constants.POS_SALES_PAGE , component: PosSalesComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.POS_SALES_CONFIG_PAGE , component: PosSalesConfigurationComponent ,canActivate:[AuthGuardService]},
 
   // Error Page
   {path:'**', component: ErrorComponentComponent,canActivate:[AuthGuardService]}

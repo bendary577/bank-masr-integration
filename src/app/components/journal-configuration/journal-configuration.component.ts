@@ -4,11 +4,9 @@ import { InvoiceService } from 'src/app/services/invoice/invoice.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { Constants } from 'src/app/models/constants';
-import { Data } from 'src/app/models/data';
 import { JournalService } from 'src/app/services/journal/journal.service';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { SyncJobType } from 'src/app/models/SyncJobType';
+import { FormGroup } from '@angular/forms';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 import { AccountSyncType } from 'src/app/models/AccountSyncType';
 
@@ -125,7 +123,6 @@ export class JournalConfigurationComponent implements OnInit {
       console.error(err);
       this.loading = false;
     });
-
   }
 
 

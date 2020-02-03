@@ -58,6 +58,7 @@ import { PosSalesComponent } from './components/pos-sales/pos-sales.component';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { PosSalesConfigurationComponent } from './pos-sales-configuration/pos-sales-configuration.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     JournalConfigurationComponent,
     JournalsComponent,
     PosSalesComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
+    PosSalesConfigurationComponent
   ],
   imports: [
     BrowserModule,

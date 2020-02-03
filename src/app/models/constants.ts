@@ -63,6 +63,7 @@ export class Constants {
     static GET_JOURNALS_URL = environment.apiHost + '/getJournals';
 
     static GET_POS_SALES_URL = environment.apiHost + '/getPOSSales';
+    static GET_POS_SALES_TENDERS_URL = environment.apiHost + '/getTenders';
 
     static GET_CURRENT_DAYS_URL = environment.apiHost + '/getCurrentDays';
 
@@ -103,6 +104,8 @@ export class Constants {
 
     static POS_SALES_PAGE = 'posSales';
     static POS_SALES_SYNC = 'POS Sales';
+    static POS_SALES_CONFIG_PAGE = 'posSalesConfig';
+
 
     static TABS_PAGE = 'tabs';
     static END_POINT = '/getSuppliers';
