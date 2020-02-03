@@ -48,7 +48,6 @@ export class PosSalesComponent implements OnInit {
     this.posSalesService.getPOSSales().toPromise().then((res: any) => {
       this.getSyncJobs(Constants.POS_SALES_SYNC);
       this.getPosSalesLoading = false;
-
       this.snackBar.open(res.message, null, {
         duration: 2000,
         horizontalPosition: 'center',

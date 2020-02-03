@@ -41,7 +41,7 @@
             </mat-list-item>
             <mat-list-item *ngIf="!posSales.length"> 
             <span>
-                There was no new data to sync in this job, You can sync journals now from <a (click)="getPOSSalesSyncJob()">here</a>
+                There was no new data to sync in this job, You can sync POS sales now from <a (click)="getPOSSalesSyncJob()">here</a>
             </span>
             </mat-list-item>
             </mat-card-content>
@@ -51,14 +51,14 @@
 
 <div>
 <div>
-    <div *ngIf="!posSales.length">
+    <div *ngIf="!jobs.length">
         <mat-card class="example-card">
                 <mat-card-header>
                   <mat-card-title>No Data</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
                   <p>
-                        There was no new data to sync in this job, You can sync consumptions now from 
+                        There was no new data to sync in this job, You can sync POS sales now from 
                     <a  (click)="getPOSSalesSyncJob()">here</a>
                   </p>
                   
@@ -67,9 +67,8 @@
         </div>
             
     <div class="main" *ngIf="posSales.length">
-        <ngx-datatable *ngIf="!loading" class="material" [rows]="posSales" [columnMode]="'force'" [headerHeight]="50"
-            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'journalBatch', dir: 'asc'}]">
-            
+        <ngx-datatable class="material" [rows]="posSales" [columnMode]="'force'" [headerHeight]="50"
+            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'cost_center', dir: 'asc'}]">
             <ngx-datatable-column name="Status">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.status}}
@@ -81,110 +80,48 @@
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="Journal Batch">
+            <ngx-datatable-column name="Cost Center">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.journalBatch}}
+                    {{row.data.cost_center}}
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Description">
+            <ngx-datatable-column name="Sales Net VAT">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.description}}
+                    {{row.data.sales_net_vat}}
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Journal">
+            <ngx-datatable-column name="Gross Sales">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.journal}}
+                    {{row.data.gross_sales}}
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Journal Description">
+            <ngx-datatable-column name="Sales Discounts">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.journalDescription}}
+                    {{row.data.sales_discount}}
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Ledger">
+            <ngx-datatable-column name="Sales Service Charge">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.ledger}}
+                    {{row.data.sales_service_charge}}
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Accounting Date">
+            <ngx-datatable-column name="Sales Tax">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.accountingDate}}
+                    {{row.data.sales_tax}}
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Source">
+            <ngx-datatable-column name="Sales Tender Type">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.source}}
+                    {{row.data.sales_tender.tender_type}}
                 </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Category">
+            </ngx-datatable-column> 
+            <ngx-datatable-column name="Sales Tender total">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.category}}
+                    {{row.data.sales_tender.total}}
                 </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Company">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.company}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Department">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.department}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Location">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.location}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Project">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.project}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Account">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.account}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Intercompany">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.intercompany}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Product">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.product}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Future 2">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.future2}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Currency">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.currency}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Entered Debit">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.enteredDebit}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Entered Credit">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.enteredCredit}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Group Id">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.groupId}}
-                </ng-template>
-            </ngx-datatable-column>
-        
+            </ngx-datatable-column>     
         </ngx-datatable>
     </div>
-
 </div>
 
 <ngx-spinner></ngx-spinner>

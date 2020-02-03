@@ -63,6 +63,11 @@ export class SuppliersConfiguartionComponent implements OnInit {
 
     }).catch(err => {
       console.error(err);
+      this.snackBar.open(err.error.message, null, {
+        duration: 2000,
+        horizontalPosition: 'right',
+      });
+      
       this.getTaxsLoading = false;
     });
   }
@@ -74,6 +79,11 @@ export class SuppliersConfiguartionComponent implements OnInit {
       this.getGroupsLoading = false;
     }).catch(err => {
       console.error(err);
+      this.snackBar.open(err.error.message, null, {
+        duration: 2000,
+        horizontalPosition: 'right',
+      });
+      
       this.getGroupsLoading = false;
     });
   }
@@ -91,7 +101,6 @@ export class SuppliersConfiguartionComponent implements OnInit {
         duration: 2000,
         horizontalPosition: 'right',
       });
-      // this.router.navigate([Constants.SYNC_JOBS]);
     });
   }
 

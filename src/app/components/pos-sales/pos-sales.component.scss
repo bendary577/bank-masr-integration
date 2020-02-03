@@ -55,3 +55,16 @@
   .custom-select select {
     width:80%;
   }
+
+  #myProgress {
+    width: 50%;
+    margin: auto;
+    background-color: #ddd;
+  }
+  
+  #myBar {
+    width: 0%;
+    height: 30px;
+    background-color: blue;
+  }
+  
