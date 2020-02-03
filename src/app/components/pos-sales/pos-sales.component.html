@@ -10,6 +10,12 @@
     </select> 
     <button mat-flat-button (click)="getPOSSalesSyncJob()">Sync POS Sales Now</button>
 </div>
+
+<br>
+<div id="myProgress" >
+    <mat-progress-bar mode="indeterminate" *ngIf="getPosSalesLoading" ></mat-progress-bar>
+</div>
+
 <br>
 
 <div *ngIf="selectedJob">
