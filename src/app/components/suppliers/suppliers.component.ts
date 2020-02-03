@@ -18,6 +18,7 @@ import { SyncJob } from 'src/app/models/SyncJob';
 })
 export class SuppliersComponent implements OnInit {
   loading = true;
+  getSuppliersLoading = false;
   success = null;
   jobs = [];
   dataSource = [];
@@ -58,8 +59,7 @@ export class SuppliersComponent implements OnInit {
 
 
   getSuppliersSyncJob() {
-    this.loading = true
-    this.spinner.show();
+    this.getSuppliersLoading = true
      this.supplierService.getSuppliers().toPromise().then((res: any) => {
       this.success = res.success;
       this.getSyncJobs("Suppliers");
@@ -71,25 +71,15 @@ export class SuppliersComponent implements OnInit {
           panelClass: "my-snack-bar-success"
         });
       }
-      else {
-        this.snackBar.open(res.message, null, {
-          duration: 2000,
-          horizontalPosition: 'center',
-          panelClass: "my-snack-bar-fail"
-        });
-      }
-      this.spinner.hide();
-      this.loading = false;
+      this.getSuppliersLoading = false;
     }).catch(err => {
-      this.getSuppliersDB();
       this.getSyncJobs("Suppliers");
-      this.snackBar.open(err.message , null, {
+      this.snackBar.open(err.error.message , null, {
         duration: 2000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
-      this.spinner.hide();
-      this.loading = false;
+      this.getSuppliersLoading = false;
     });
   }
 

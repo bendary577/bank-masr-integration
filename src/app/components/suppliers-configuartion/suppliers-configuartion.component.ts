@@ -20,8 +20,9 @@ export class SuppliersConfiguartionComponent implements OnInit {
   syncJobType;
   submitted = false;
   loading = true;
-  taxesLoading = false;
-  groupsLoading = false;
+
+  getTaxsLoading = false;
+  getGroupsLoading = false;
 
   taxes = []
   groups = []
@@ -55,25 +56,25 @@ export class SuppliersConfiguartionComponent implements OnInit {
   }
 
   getTaxes() {
-    this.taxesLoading = true;
+    this.getTaxsLoading = true;
     this.supplierService.getSuppliersTaxes().toPromise().then((res: any) => {
       this.taxes = res.data;
-      this.taxesLoading = false;
+      this.getTaxsLoading = false;
 
     }).catch(err => {
       console.error(err);
-      this.taxesLoading = false;
+      this.getTaxsLoading = false;
     });
   }
 
   getGroups() {
-    this.groupsLoading = true;
+    this.getGroupsLoading = true;
     this.supplierService.getSuppliersGroups().toPromise().then((res: any) => {
       this.groups = res.data;
-      this.groupsLoading = false;
+      this.getGroupsLoading = false;
     }).catch(err => {
       console.error(err);
-      this.groupsLoading = false;
+      this.getGroupsLoading = false;
     });
   }
 

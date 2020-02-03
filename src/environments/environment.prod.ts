@@ -1,4 +1,4 @@
 export const environment = {
-  apiHost: 'https://oracle-hospitality-prod.herokuapp.com',
+  apiHost: 'http://127.0.0.1:5000',
   production: true
 };

@@ -24,27 +24,27 @@ export class ApprovedInvoiceComponent implements OnInit {
     public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.getApprovedInvoices();
     this.getSyncJobs("Approved Invoices");
   }
 
-  getApprovedInvoices() {
-    this.getInvoicesLoading = true;
+  getApprovedInvoicesDB() {
+    this.loading = true;
     this.spinner.show();
+
     this.syncJobService.getSyncJobData("Approved Invoices").toPromise().then((res: any) => {
       this.approvedInvoices = res;
 
+      this.loading = false;
       this.spinner.hide();
-      this.getInvoicesLoading = false;
     }).catch(err => {
       console.error(err);
+      this.loading = false;
       this.spinner.hide();
-      this.getInvoicesLoading = false;
     });
   }
 
   getApprovedInvoicesSyncJob() {
-    this.spinner.show();
+    this.getInvoicesLoading = true
     this.invoiceService.getApprovedInvoices().toPromise().then((res: any) => {
       this.success = res.success;
       this.getSyncJobs("Approved Invoices");
@@ -55,8 +55,7 @@ export class ApprovedInvoiceComponent implements OnInit {
         panelClass:"my-snack-bar-success"
       });
 
-      this.spinner.hide();
-      this.loading = false;
+      this.getInvoicesLoading = false;
     }).catch(err => {
       this.getSyncJobs("Approved Invoices");
       let msg = "";
@@ -71,14 +70,13 @@ export class ApprovedInvoiceComponent implements OnInit {
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
-      this.spinner.hide();
-      this.loading = false;
+      this.getInvoicesLoading = false;
 
     });
-
   }
 
   getSyncJobs(syncJobTypeName:String) {
+    this.loading = true;
     this.spinner.show();
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
       this.jobs = res;
@@ -96,6 +94,7 @@ export class ApprovedInvoiceComponent implements OnInit {
   }
 
   getSyncJobData() {
+    this.loading = true;
     this.spinner.show();
 
     this.syncJobService.getSyncJobDataById(this.selectedJob["id"]).toPromise().then((res: any) => {

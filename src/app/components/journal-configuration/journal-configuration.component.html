@@ -13,10 +13,16 @@
         <form  class="my-form">
             <div >
                 <mat-form-field class="example-full-width">
-                    <input matInput id="group" name="group" placeholder="Group starting number"  
-                    [(ngModel)]="syncJobType.configuration.accountSettings.groupIdStarting">
+                    <input matInput id="group" name="group" placeholder="Journal group starting number"  
+                    [(ngModel)]="syncJobType.configuration.accountSettings.journalGroupIdStarting">
                 </mat-form-field>
             </div>
+            <div >
+              <mat-form-field class="example-full-width">
+                  <input matInput id="transferGroup" name="transferGroup" placeholder="Transfer group starting number"  
+                  [(ngModel)]="syncJobType.configuration.accountSettings.transferGroupIdStarting">
+              </mat-form-field>
+          </div>
             <div >
                 <mat-form-field class="example-full-width">
                     <input matInput id="source" name="source" placeholder="Source"  
@@ -29,6 +35,19 @@
                    [(ngModel)]="syncJobType.configuration.accountSettings.category">
               </mat-form-field>
           </div>
+
+          <div >
+            <mat-form-field class="example-full-width">
+                <input matInput id="ledgerId" name="ledgerId" placeholder="Ledger Id"  
+                [(ngModel)]="syncJobType.configuration.accountSettings.ledgerId">
+            </mat-form-field>
+        </div>
+        <div >
+          <mat-form-field class="example-full-width">
+              <input matInput id="ledgerName" name="ledgerName" placeholder="Ledger Name" 
+               [(ngModel)]="syncJobType.configuration.accountSettings.ledgerName">
+          </mat-form-field>
+      </div>
                 
         </form>
 </div>
@@ -140,7 +159,7 @@
             <ngx-datatable  class="material" [rows]="mappedItems" [columnMode]="'force'" [headerHeight]="50"
                 [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[]">
         
-                <ngx-datatable-column name="Item Group">
+                <ngx-datatable-column name="Item">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{row.item}}
                     </ng-template>

@@ -11,7 +11,7 @@
 </div>
 <br>
 <div id="myProgress">
-    <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+    <mat-progress-bar mode="indeterminate" *ngIf="getSuppliersLoading"></mat-progress-bar>
 </div>
 <br>
 <div *ngIf="selectedJob">
@@ -33,6 +33,11 @@
             <mat-list-item>      
                 <span class="key">End Date: </span>
                 <span class="value" *ngIf="selectedJob.end_date">{{selectedJob.end_date}}</span>
+                <span class="value" *ngIf="!selectedJob.end_date">No Info</span>
+            </mat-list-item>
+            <mat-list-item>      
+                <span class="key">User: </span>
+                <span class="value" *ngIf="selectedJob.end_date">{{selectedJob.user_id}}</span>
                 <span class="value" *ngIf="!selectedJob.end_date">No Info</span>
             </mat-list-item>
             <mat-list-item *ngIf="!dataSource.length"> 
@@ -106,5 +111,6 @@
 
     </ngx-datatable>
 </div>
+<ngx-spinner></ngx-spinner>
 
 </div>

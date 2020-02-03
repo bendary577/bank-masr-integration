@@ -15,6 +15,7 @@ import { PosSalesService } from 'src/app/services/posSales/pos-sales.service';
 export class PosSalesComponent implements OnInit {
 
   loading = true;
+  getPosSalesLoading = false;
   success = null;
   jobs = [];
   posSales = [];
@@ -43,12 +44,10 @@ export class PosSalesComponent implements OnInit {
   }
 
   getPOSSalesSyncJob() {
-    this.spinner.show();
+    this.getPosSalesLoading = true;
     this.posSalesService.getPOSSales().toPromise().then((res: any) => {
       this.getSyncJobs(Constants.POS_SALES_SYNC);
-      
-      this.spinner.hide();
-      this.loading = false;
+      this.getPosSalesLoading = false;
 
       this.snackBar.open(res.message, null, {
         duration: 2000,
@@ -57,8 +56,7 @@ export class PosSalesComponent implements OnInit {
       });
 
     }).catch(err => {
-      this.spinner.hide();
-      this.loading = false;
+      this.getPosSalesLoading = false;
 
       let msg = "";
       if (err.error.message){
