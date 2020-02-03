@@ -57,6 +57,8 @@ import { JournalsComponent } from './components/journals/journals.component';
 import { PosSalesComponent } from './components/pos-sales/pos-sales.component';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -114,7 +116,7 @@ import { WelcomePageComponent } from './components/welcome-page/welcome-page.com
     FormsModule,
     MatProgressBarModule
   ],
-  providers: [CookieService, AuthService, InvoiceService, AlertsService, Data,AuthGuardService,SidenavResponsive],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, CookieService, AuthService, InvoiceService, AlertsService, Data,AuthGuardService,SidenavResponsive],
   bootstrap: [AppComponent],
   entryComponents: [AddVendorComponent, SuppliersConfiguartionComponent, SchedulerConfigurationComponent,
   ApprovedInvoiceConfigurationComponent]
