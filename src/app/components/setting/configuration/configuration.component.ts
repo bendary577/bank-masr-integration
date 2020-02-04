@@ -22,6 +22,7 @@ export class ConfigurationComponent  implements OnInit{
   account: Account;
   newAccount: Account;
   panelOpenState = true;
+  addRole = false;
 
   constructor(private spinner: NgxSpinnerService, private syncJobService:SyncJobService,
     public snackBar: MatSnackBar, public accountService: AccountService, public dialog: MatDialog) { }
