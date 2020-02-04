@@ -59,6 +59,7 @@ import { WelcomePageComponent } from './components/welcome-page/welcome-page.com
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { PosSalesConfigurationComponent } from './pos-sales-configuration/pos-sales-configuration.component';
+import { AddAccountComponent } from './components/add-account/add-account.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { PosSalesConfigurationComponent } from './pos-sales-configuration/pos-sa
     JournalsComponent,
     PosSalesComponent,
     WelcomePageComponent,
-    PosSalesConfigurationComponent
+    PosSalesConfigurationComponent,
+    AddAccountComponent
   ],
   imports: [
     BrowserModule,
@@ -120,7 +122,7 @@ import { PosSalesConfigurationComponent } from './pos-sales-configuration/pos-sa
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, CookieService, AuthService, InvoiceService, AlertsService, Data,AuthGuardService,SidenavResponsive],
   bootstrap: [AppComponent],
-  entryComponents: [AddVendorComponent, SuppliersConfiguartionComponent, SchedulerConfigurationComponent,
+  entryComponents: [AddVendorComponent, AddAccountComponent, SuppliersConfiguartionComponent, SchedulerConfigurationComponent,
   ApprovedInvoiceConfigurationComponent]
 })
 export class AppModule { }

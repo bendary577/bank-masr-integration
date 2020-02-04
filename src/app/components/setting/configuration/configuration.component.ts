@@ -1,11 +1,12 @@
 
 import { Component, OnInit } from '@angular/core';
-import {MatExpansionPanel, MatSnackBar} from "@angular/material";
+import {MatExpansionPanel, MatSnackBar, MatDialog} from "@angular/material";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { Account } from 'src/app/models/Account';
 import { AccountService } from 'src/app/services/account/account.service';
+import { AddAccountComponent } from '../../add-account/add-account.component';
 
 /**
  * @title Basic expansion panel
@@ -23,7 +24,7 @@ export class ConfigurationComponent  implements OnInit{
   panelOpenState = true;
 
   constructor(private spinner: NgxSpinnerService, private syncJobService:SyncJobService,
-    public snackBar: MatSnackBar, public accountService: AccountService) { }
+    public snackBar: MatSnackBar, public accountService: AccountService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.getAccount();
@@ -39,10 +40,35 @@ export class ConfigurationComponent  implements OnInit{
      
       this.spinner.hide();
       this.loading = false;
-    }).catch(err => {
+    }).catch(err => {''
       console.error(err);
       this.spinner.hide();
       this.loading = false;
+    });
+  }
+
+  addAccountDialog(){
+    const dialogRef = this.dialog.open(AddAccountComponent, {
+      width: '550px'
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        console.log(res)
+        // this.newAccount.name = res.name;
+        // this.newAccount.domain = res.domain;
+        // this.newAccount.account_credentials = res.accountCredentials;
+        // console.log(this.newAccount)
+        this.spinner.show();
+        this.accountService.addAccount(res).then(result => {
+        }).catch(err => {
+          this.spinner.hide();
+          this.snackBar.open('An error has occurred.', null, {
+            duration: 2000,
+            horizontalPosition: 'right',
+          });
+        });
+      }
     });
   }
 

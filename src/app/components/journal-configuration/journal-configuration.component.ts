@@ -56,28 +56,32 @@ export class JournalConfigurationComponent implements OnInit {
     this.cost_loading = true;
     this.invoiceService.getCostCenter().toPromise().then((res: any) => {
       this.costCenters = res.data;
-
       this.spinner.hide();
       this.cost_loading = false;
     }).catch(err => {
       console.error(err);
+      this.snackBar.open(err.error.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
       this.spinner.hide();
       this.cost_loading = false;
     });
   }
 
   getOverGroups() {
-    this.spinner.show();
     this.group_loading = true;
     this.journalService.getOverGroups().toPromise().then((res: any) => {
-
       this.overGroups = res.data;
-      
-      this.spinner.hide();
       this.group_loading = false;
     }).catch(err => {
       console.error(err);
-      this.spinner.hide();
+      this.snackBar.open(err.error.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
       this.group_loading = false;
     });
   }

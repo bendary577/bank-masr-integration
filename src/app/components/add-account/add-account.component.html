@@ -1,0 +1,69 @@
+<h1 mat-dialog-title>New Account</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form" class="my-form">
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Account Name" formControlName="name">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Account Domain" formControlName="domain">
+            </mat-form-field>
+        </div>
+
+        <span>Oracle Inventory Cradintaials </span>
+
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Oracle Inventory username" formControlName="usernameOHIM">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Oracle Inventory password" formControlName="passwordOHIM">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Oracle Inventory company" formControlName="companyOHIM">
+            </mat-form-field>
+        </div>
+
+        <span>Oracle Reports Cradintaials </span>
+
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Oracle Reports username" formControlName="usernameOHRA">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Oracle Reports password" formControlName="passwordOHRA">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Oracle Reports company" formControlName="companyOHRA">
+            </mat-form-field>
+        </div>
+
+        <span>Fusion Cradintaials </span>
+
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Fusion username" formControlName="usernameFusion">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Fusion password" formControlName="passwordFusion">
+            </mat-form-field>
+        </div>
+
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button cdkFocusInitial (click)="onSaveClick()">Save</button>
+</div>
