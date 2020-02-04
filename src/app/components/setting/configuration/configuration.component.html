@@ -27,14 +27,15 @@
     </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Password" [(ngModel)]="account.account_credentials.HospitalityOHIM.password">
+        <input id="inventoryPassword" type="password" placeholder="Password" matInput showHideInput
+         [(ngModel)]="account.account_credentials.HospitalityOHIM.password">
+         <i matSuffix class="material-icons" showHideTrigger="mysecretpassword"
+         [showHideStatus]="{ materialIcon: true, id: 'mysecretpassword' }"></i>
+
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="Company" [(ngModel)]="account.account_credentials.HospitalityOHIM.company">
       </mat-form-field>
-      <!-- <mat-action-row>
-        <button mat-button color="primary" (click)="updateAccount()">Update</button>
-      </mat-action-row> -->
     </mat-expansion-panel>
 
 
@@ -51,16 +52,17 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="Password" [(ngModel)]="account.account_credentials.HospitalityOHRA.password">
+          <input id="reportsPassword" type="password" placeholder="Password" matInput showHideInput
+          [(ngModel)]="account.account_credentials.HospitalityOHRA.password">
+          <i matSuffix class="material-icons" showHideTrigger="mysecretpassword"
+          [showHideStatus]="{ materialIcon: true, id: 'mysecretpassword' }"></i>
+
         </mat-form-field>
 
       <mat-form-field>
         <input matInput placeholder="Company" [(ngModel)]="account.account_credentials.HospitalityOHRA.company">
       </mat-form-field>
 
-        <!-- <mat-action-row>
-          <button mat-button color="primary" >Update</button>
-        </mat-action-row> -->
     </mat-expansion-panel>
 
     <!-- Oracle Fusion -->
@@ -76,12 +78,12 @@ Oracle Fusion
 </mat-form-field>
 
 <mat-form-field>
-<input matInput placeholder="Password" [(ngModel)]="account.account_credentials.Fusion.password">
-</mat-form-field>
 
-<!-- <mat-action-row>
-<button mat-button color="primary" >Update</button>
-</mat-action-row> -->
+  <input id="fusionPassword" type="password" placeholder="Password" matInput showHideInput
+  [(ngModel)]="account.account_credentials.Fusion.password">
+  <i matSuffix class="material-icons" showHideTrigger="mysecretpassword"
+  [showHideStatus]="{ materialIcon: true, id: 'mysecretpassword' }"></i>
+</mat-form-field>
 </mat-expansion-panel>
 
   </mat-accordion >

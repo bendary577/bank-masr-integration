@@ -14,6 +14,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { AddVendorComponent } from './components/add-vendor/add-vendor.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { SuppliersComponent } from './components/suppliers/suppliers.component';
+import { ShowHidePasswordModule } from 'ngx-show-hide-password';
+
 
 
 import {
@@ -118,7 +120,8 @@ import { AddAccountComponent } from './components/add-account/add-account.compon
     MatRippleModule,
     BrowserModule,
     FormsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    ShowHidePasswordModule,
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, CookieService, AuthService, InvoiceService, AlertsService, Data,AuthGuardService,SidenavResponsive],
   bootstrap: [AppComponent],

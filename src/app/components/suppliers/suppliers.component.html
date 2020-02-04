@@ -10,8 +10,9 @@
     <button mat-flat-button (click)="getSuppliersSyncJob()">Sync Suppliers Now</button>
 </div>
 <br>
+
 <div id="myProgress">
-    <mat-progress-bar mode="indeterminate" *ngIf="getSuppliersLoading"></mat-progress-bar>
+    <mat-progress-bar mode="indeterminate" *ngIf="staticgetSuppliersLoading"></mat-progress-bar>
 </div>
 <br>
 <div *ngIf="selectedJob">

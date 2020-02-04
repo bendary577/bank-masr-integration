@@ -13,12 +13,13 @@ import { SyncJob } from 'src/app/models/SyncJob';
 export class CreditNoteComponent implements OnInit {
 
   loading = true;
-  getCreditNoteLoading = false;
+  static getCreditNoteLoading = false;
   success = null;
   jobs = [];
   creditNote = [];
   selectedJob :SyncJob = null;
   syncJobId = -1;
+  state = "";
 
 
   constructor(private spinner: NgxSpinnerService, private creditNoteService: CreditNoteService,
@@ -27,6 +28,14 @@ export class CreditNoteComponent implements OnInit {
 
   ngOnInit() {
     this.getSyncJobs("Credit Notes");
+    this.state = localStorage.getItem('getCreditNoteLoading');
+
+    if (this.state == "true"){
+      CreditNoteComponent.getCreditNoteLoading = true;
+    }
+    else{
+      CreditNoteComponent.getCreditNoteLoading = false;
+    }
   }
 
   getCreditNoteDB() {
@@ -43,8 +52,14 @@ export class CreditNoteComponent implements OnInit {
     });
   }
 
+  get staticgetCreditNoteLoading() {
+    return CreditNoteComponent.getCreditNoteLoading ;
+  }
+
   getCreditNoteSyncJob() {
-    this.getCreditNoteLoading = true;
+    localStorage.setItem('getCreditNoteLoading', "true");
+    CreditNoteComponent.getCreditNoteLoading = true;
+
     this.creditNoteService.getCreditNote().toPromise().then((res: any) => {
       this.success = res.success;
       this.getSyncJobs("Credit Notes");
@@ -56,15 +71,23 @@ export class CreditNoteComponent implements OnInit {
           panelClass:"my-snack-bar-success"
         });
       }
-      this.getCreditNoteLoading = false;
+
+      localStorage.setItem('getCreditNoteLoading', "false");
+      CreditNoteComponent.getCreditNoteLoading = false;
     }).catch(err => {
       this.getSyncJobs("Credit Notes");
+
+      localStorage.setItem('getCreditNoteLoading', "false");
+      CreditNoteComponent.getCreditNoteLoading = false;
+      
       this.snackBar.open(err.error.message , null, {
         duration: 3000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
-      this.getCreditNoteLoading = false;
+
+      localStorage.setItem('getCreditNoteLoading', "false");
+      CreditNoteComponent.getCreditNoteLoading = false;
     });
   }
 

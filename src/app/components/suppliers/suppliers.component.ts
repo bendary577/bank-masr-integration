@@ -18,11 +18,12 @@ import { SyncJob } from 'src/app/models/SyncJob';
 })
 export class SuppliersComponent implements OnInit {
   loading = true;
-  getSuppliersLoading = false;
+  static getSuppliersLoading = false;
   success = null;
   jobs = [];
   dataSource = [];
   selectedJob :SyncJob = null;
+  state = "";
 
 
   constructor(private spinner: NgxSpinnerService, private supplierService: SupplierService,
@@ -33,6 +34,13 @@ export class SuppliersComponent implements OnInit {
 
   ngOnInit() {
     this.getSyncJobs("Suppliers");
+    this.state = localStorage.getItem('getSuppliersLoading');
+    if (this.state == "true"){
+      SuppliersComponent.getSuppliersLoading = true;
+    }
+    else{
+      SuppliersComponent.getSuppliersLoading = false;
+    }
   }
 
   getSuppliersDB() {
@@ -57,29 +65,40 @@ export class SuppliersComponent implements OnInit {
     });
   }
 
+  get staticgetSuppliersLoading() {
+    return SuppliersComponent.getSuppliersLoading ;
+  }
+
 
   getSuppliersSyncJob() {
-    this.getSuppliersLoading = true
+    localStorage.setItem('getSuppliersLoading', "true");
+    SuppliersComponent.getSuppliersLoading = true
      this.supplierService.getSuppliers().toPromise().then((res: any) => {
       this.success = res.success;
       this.getSyncJobs("Suppliers");
 
-      if (this.success) {
-        this.snackBar.open('Sync Suppliers Successfully', null, {
-          duration: 2000,
-          horizontalPosition: 'center',
-          panelClass: "my-snack-bar-success"
-        });
-      }
-      this.getSuppliersLoading = false;
+      SuppliersComponent.getSuppliersLoading = false;
+      localStorage.setItem('getSuppliersLoading', "false");
+
+      this.snackBar.open('Sync Suppliers Successfully', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass: "my-snack-bar-success"
+      });
+
     }).catch(err => {
       this.getSyncJobs("Suppliers");
+
+      SuppliersComponent.getSuppliersLoading = false;
+      localStorage.setItem('getSuppliersLoading', "false");
+
       this.snackBar.open(err.error.message , null, {
         duration: 2000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
-      this.getSuppliersLoading = false;
+
+
     });
   }
 

@@ -14,12 +14,13 @@ import { SyncJob } from 'src/app/models/SyncJob';
 export class BookedTransferComponent implements OnInit {
 
   loading = true;
-  getTransfersLoading = false;
+  static getTransfersLoading = false;
   success = null;
   bookedTransfer = [];
   jobs = [];
   syncJobId = -1;
   selectedJob :SyncJob = null;
+  state = "";
 
 
   constructor(private spinner: NgxSpinnerService, private transferService: TransferService,
@@ -30,6 +31,14 @@ export class BookedTransferComponent implements OnInit {
 
   ngOnInit() {
     this.getSyncJobs("Booked Transfers");
+    this.state = localStorage.getItem('getTransfersLoading');
+
+    if (this.state == "true"){
+      BookedTransferComponent.getTransfersLoading = true;
+    }
+    else{
+      BookedTransferComponent.getTransfersLoading = false;
+    }
   }
 
   getBookedTransferDB() {
@@ -46,8 +55,14 @@ export class BookedTransferComponent implements OnInit {
     });
   }
 
+  get staticgetTransfersLoading() {
+    return BookedTransferComponent.getTransfersLoading ;
+  }
+
   getBookedTransferSyncJob() {
-    this.getTransfersLoading = true;
+    localStorage.setItem('getTransfersLoading', "true");
+    BookedTransferComponent.getTransfersLoading = true;
+
     this.transferService.getBookedTransfer().toPromise().then((res: any) => {
       this.success = res.success;
       this.getSyncJobs("Booked Transfers");
@@ -59,16 +74,21 @@ export class BookedTransferComponent implements OnInit {
           panelClass:"my-snack-bar-success"
         });
       }
-      this.getTransfersLoading = false;
+
+      localStorage.setItem('getTransfersLoading', "false");
+      BookedTransferComponent.getTransfersLoading = false;
     }).catch(err => {
       this.getSyncJobs("Booked Transfers");
+
+      localStorage.setItem('getTransfersLoading', "false");
+      BookedTransferComponent.getTransfersLoading = false;
       
       this.snackBar.open(err.error.message, null, {
         duration: 2000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
-      this.getTransfersLoading = false;
+
     });
   }
 

@@ -12,11 +12,12 @@ import { SyncJob } from 'src/app/models/SyncJob';
 })
 export class ApprovedInvoiceComponent implements OnInit {
   loading = true;
-  getInvoicesLoading = false;
+  static getInvoicesLoading = false;
   success = null;
   jobs = [];
   approvedInvoices = [];
   selectedJob :SyncJob = null;
+  state = "";
 
 
   constructor(private spinner: NgxSpinnerService, private invoiceService: InvoiceService,
@@ -25,6 +26,14 @@ export class ApprovedInvoiceComponent implements OnInit {
 
   ngOnInit() {
     this.getSyncJobs("Approved Invoices");
+    this.state = localStorage.getItem('getInvoicesLoading');
+
+    if (this.state == "true"){
+      ApprovedInvoiceComponent.getInvoicesLoading = true;
+    }
+    else{
+      ApprovedInvoiceComponent.getInvoicesLoading = false;
+    }
   }
 
   getApprovedInvoicesDB() {
@@ -43,8 +52,13 @@ export class ApprovedInvoiceComponent implements OnInit {
     });
   }
 
+  get staticgetInvoicesLoading() {
+    return ApprovedInvoiceComponent.getInvoicesLoading ;
+  }
+
   getApprovedInvoicesSyncJob() {
-    this.getInvoicesLoading = true
+    localStorage.setItem('getInvoicesLoading', "true");
+    ApprovedInvoiceComponent.getInvoicesLoading = true
     this.invoiceService.getApprovedInvoices().toPromise().then((res: any) => {
       this.success = res.success;
       this.getSyncJobs("Approved Invoices");
@@ -55,16 +69,19 @@ export class ApprovedInvoiceComponent implements OnInit {
         panelClass:"my-snack-bar-success"
       });
 
-      this.getInvoicesLoading = false;
+      localStorage.setItem('getInvoicesLoading', "false");
+      ApprovedInvoiceComponent.getInvoicesLoading = false;
     }).catch(err => {
       this.getSyncJobs("Approved Invoices");
-      console.error(err);
+      
+      localStorage.setItem('getInvoicesLoading', "false");
+      ApprovedInvoiceComponent.getInvoicesLoading = false;
+
       this.snackBar.open(err.error.message , null, {
         duration: 3000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
-      this.getInvoicesLoading = false;
 
     });
   }

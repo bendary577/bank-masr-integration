@@ -20,6 +20,7 @@ export class PosSalesComponent implements OnInit {
   jobs = [];
   posSales = [];
   selectedJob :SyncJob = null;
+  state = "";
 
 
   constructor(private spinner: NgxSpinnerService,
@@ -28,6 +29,12 @@ export class PosSalesComponent implements OnInit {
 
   ngOnInit() {
     this.getSyncJobs(Constants.POS_SALES_SYNC);
+    if (this.state == "true"){
+      this.getPosSalesLoading = true;
+    }
+    else{
+      this.getPosSalesLoading = false;
+    }
   }
 
   getPOSSales() {

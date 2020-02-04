@@ -14,11 +14,12 @@ import { SyncJob } from 'src/app/models/SyncJob';
 export class JournalsComponent implements OnInit {
 
   loading = true;
-  getJournalsLoding = false;
+  static getJournalsLoding = false;
   success = null;
   jobs = [];
   journals = [];
   selectedJob :SyncJob = null;
+  state = "";
 
 
   constructor(private spinner: NgxSpinnerService,
@@ -27,14 +28,29 @@ export class JournalsComponent implements OnInit {
 
   ngOnInit() {
     this.getSyncJobs(Constants.JOURNALS_SYNC);
+    this.state = localStorage.getItem('getJournalsLoding');
+
+    if (this.state == "true"){
+      JournalsComponent.getJournalsLoding = true;
+    }
+    else{
+      JournalsComponent.getJournalsLoding = false;
+    }
+  }
+
+  get staticgetJournalsLoding() {
+    return JournalsComponent.getJournalsLoding ;
   }
 
   getJournalsJobSyncJob() {
-    this.getJournalsLoding = true;
+    localStorage.setItem('getJournalsLoding', "true");
+    JournalsComponent.getJournalsLoding = true;
+
     this.journalService.getJournals().toPromise().then((res: any) => {
       this.getSyncJobs(Constants.JOURNALS_SYNC);
       
-      this.getJournalsLoding = false;
+      localStorage.setItem('getJournalsLoding', "false");
+      JournalsComponent.getJournalsLoding = false;
 
       this.snackBar.open(res.message, null, {
         duration: 2000,
@@ -44,7 +60,9 @@ export class JournalsComponent implements OnInit {
 
     }).catch(err => {
       this.getSyncJobs(Constants.JOURNALS_SYNC);
-      this.getJournalsLoding = false;
+
+      localStorage.setItem('getJournalsLoding', "false");
+      JournalsComponent.getJournalsLoding = false;
 
       this.snackBar.open(err.error.message , null, {
         duration: 3000,

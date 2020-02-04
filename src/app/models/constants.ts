@@ -113,6 +113,4 @@ export class Constants {
     static ACCOUNT_CONFIGURATION = 'configuration';
     static USERS_CONFIGURATION = 'users';
     static SYNC_JOBS = 'syncjobs';
-
-
 }
