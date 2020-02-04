@@ -36,8 +36,6 @@ export class SyncJobsconfigComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.dataSource.paginator = this.paginator;
     this.getSyncJobTypes();
   }
 
@@ -78,7 +76,7 @@ export class SyncJobsconfigComponent implements OnInit {
       this.router.navigate([Constants.JOURNALS_CONFIG_PAGE]);
     }
     else if (syncJobType.name == Constants.POS_SALES_SYNC){
-      this.router.navigate([Constants.POS_SALES_CONFIG_PAGE]);
+      this.router.navigate([Constants.JOURNALS_CONFIG_PAGE]);
     }
     else{
       this.snackBar.open("This sync job has not configuration yet.", null, {

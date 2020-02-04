@@ -35,6 +35,9 @@ export class JournalConfigurationComponent implements OnInit {
 
   AccountSettingsForm: FormGroup;
 
+  columns = []
+
+
 
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
     private journalService:JournalService, private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService,
@@ -42,6 +45,7 @@ export class JournalConfigurationComponent implements OnInit {
       this.costCenters = [];
       this.overGroups = [];
       this.mappedItems = [];
+    
   }
 
   ngOnInit() {
@@ -49,6 +53,28 @@ export class JournalConfigurationComponent implements OnInit {
     this.getCostCenter();
     this.getOverGroups();
 
+    this.columns = [
+      {
+        prop: 'selected',
+        name: '',
+        sortable: false,
+        canAutoResize: false,
+        draggable: false,
+        resizable: false,
+        headerCheckboxable: true,
+        checkboxable: true,
+        width: 30
+      },
+      { prop: 'name' },
+      { prop: 'gender' },
+      { prop: 'company' },
+    ]
+
+  }
+
+
+  onSelect(row) {
+    console.log(row)
   }
 
   getCostCenter() {

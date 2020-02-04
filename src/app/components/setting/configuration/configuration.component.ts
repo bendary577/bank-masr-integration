@@ -55,12 +55,11 @@ export class ConfigurationComponent  implements OnInit{
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         console.log(res)
-        // this.newAccount.name = res.name;
-        // this.newAccount.domain = res.domain;
-        // this.newAccount.account_credentials = res.accountCredentials;
-        // console.log(this.newAccount)
+
         this.spinner.show();
         this.accountService.addAccount(res).then(result => {
+          this.spinner.hide();
+
         }).catch(err => {
           this.spinner.hide();
           this.snackBar.open('An error has occurred.', null, {

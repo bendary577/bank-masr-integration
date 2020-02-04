@@ -53,7 +53,7 @@ export class BookedTransferComponent implements OnInit {
       this.getSyncJobs("Booked Transfers");
 
       if (this.success){
-        this.snackBar.open('Sync Booked Transfers Successfully', null, {
+        this.snackBar.open(res.message, null, {
           duration: 2000,
           horizontalPosition: 'center',
           panelClass:"my-snack-bar-success"
@@ -63,7 +63,7 @@ export class BookedTransferComponent implements OnInit {
     }).catch(err => {
       this.getSyncJobs("Booked Transfers");
       
-      this.snackBar.open('Sync Booked Transfers Failed', null, {
+      this.snackBar.open(err.error.message, null, {
         duration: 2000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
