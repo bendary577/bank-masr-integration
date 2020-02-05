@@ -39,7 +39,7 @@ export class PosSalesConfigurationComponent implements OnInit {
 
   getSyncJobType(){
     this.loading = true;
-    this.accSyncTypeService.getAccSyncJobType(Constants.JOURNALS_SYNC).toPromise().then((res: any) => {
+    this.accSyncTypeService.getAccSyncJobType(Constants.POS_SALES_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
       this.tenders = this.syncJobType.configuration["tenders"];
 
