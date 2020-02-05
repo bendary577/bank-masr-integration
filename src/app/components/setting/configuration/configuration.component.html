@@ -27,10 +27,10 @@
     </mat-form-field>
 
       <mat-form-field>
-        <input id="inventoryPassword" type="password" placeholder="Password" matInput showHideInput
+        <input id="inventoryPassword" type="password" placeholder="Password" matInput 
          [(ngModel)]="account.account_credentials.HospitalityOHIM.password">
-         <i matSuffix class="material-icons" showHideTrigger="mysecretpassword"
-         [showHideStatus]="{ materialIcon: true, id: 'mysecretpassword' }"></i>
+         <!-- <i matSuffix class="material-icons" showHideTrigger="mysecretpassword"
+         [showHideStatus]="{ materialIcon: true, id: 'mysecretpassword' }"></i> -->
 
       </mat-form-field>
       <mat-form-field>
@@ -52,11 +52,11 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input id="reportsPassword" type="password" placeholder="Password" matInput showHideInput
+          <input id="reportsPassword" type="password" placeholder="Password" matInput 
           [(ngModel)]="account.account_credentials.HospitalityOHRA.password">
-          <i matSuffix class="material-icons" showHideTrigger="mysecretpassword"
+          <!-- <i matSuffix class="material-icons" showHideTrigger="mysecretpassword"
           [showHideStatus]="{ materialIcon: true, id: 'mysecretpassword' }"></i>
-
+ -->
         </mat-form-field>
 
       <mat-form-field>
@@ -79,10 +79,11 @@ Oracle Fusion
 
 <mat-form-field>
 
-  <input id="fusionPassword" type="password" placeholder="Password" matInput showHideInput
+  <input id="fusionPassword" type="password" placeholder="Password" matInput 
   [(ngModel)]="account.account_credentials.Fusion.password">
-  <i matSuffix class="material-icons" showHideTrigger="mysecretpassword"
+  <!-- <i matSuffix class="material-icons" showHideTrigger="mysecretpassword"
   [showHideStatus]="{ materialIcon: true, id: 'mysecretpassword' }"></i>
+   -->
 </mat-form-field>
 </mat-expansion-panel>
 
