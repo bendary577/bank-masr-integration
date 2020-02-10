@@ -9,7 +9,6 @@ import { UsersComponent } from './components/setting/users/users.component';
 import { SyncJobsconfigComponent } from './components/setting/syncJob/syncJobsconfig.component';
 import { ApprovedInvoiceComponent } from './components/approved-invoice/approved-invoice.component';
 import { BookedTransferComponent } from './components/booked-transfer/booked-transfer.component';
-import { BookedTransferDetailsComponent } from './components/booked-transfer-details/booked-transfer-details.component';
 import { ErrorComponentComponent } from './components/error-component/error-component.component';
 import { CreditNoteComponent } from './components/credit-note/credit-note.component';
 import { SuppliersConfiguartionComponent } from './components/suppliers-configuartion/suppliers-configuartion.component';
