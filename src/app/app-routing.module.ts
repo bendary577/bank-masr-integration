@@ -18,8 +18,8 @@ import {AuthGuardService} from "./guards/AuthGuardService";
 import { JournalConfigurationComponent } from './components/journal-configuration/journal-configuration.component';
 import { JournalsComponent } from './components/journals/journals.component';
 import { PosSalesComponent } from './components/pos-sales/pos-sales.component';
-import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 import { PosSalesConfigurationComponent } from './pos-sales-configuration/pos-sales-configuration.component';
+import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 
 
 const routes: Routes = [
@@ -36,11 +36,11 @@ const routes: Routes = [
   { path: Constants.LOGIN_PAGE, component: LoginComponent},
   { path: Constants.WELCOME_PAGE, component: WelcomePageComponent,canActivate:[AuthGuardService]},
 
-  { path: Constants.SUPPLIERS_PAGE, component: SuppliersComponent,canActivate:[AuthGuardService] },
+  { path: Constants.SUPPLIERS_PAGE, component: SuppliersComponent },
   { path: Constants.SUPPLIERS_CONFIG_PAGE, component: SuppliersConfiguartionComponent,canActivate:[AuthGuardService] },
   { path: Constants.SUPPLIERS_DETAILS_PAGE, component: SupplierDetailsComponent,canActivate:[AuthGuardService] },
 
-  { path: Constants.APPROVED_INVOICES_PAGE, component: ApprovedInvoiceComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.APPROVED_INVOICES_PAGE, component: ApprovedInvoiceComponent},
   { path: Constants.APPROVED_INVOICES_CONFIG_PAGE, component: ApprovedInvoiceConfigurationComponent ,canActivate:[AuthGuardService]},
 
   { path: Constants.BOOKED_TRANSFER_PAGE, component: BookedTransferComponent,canActivate:[AuthGuardService] },
