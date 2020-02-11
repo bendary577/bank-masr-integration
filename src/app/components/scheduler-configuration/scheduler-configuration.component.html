@@ -1,10 +1,10 @@
 <h1 mat-dialog-title>Update Duration Configuartion</h1>
 <div mat-dialog-content>
-    <div class="container">
+    <div class="container" *ngIf="!loading">
         <form  class="my-form">
             <div>
                 <mat-form-field class="example-full-width">
-                    <mat-select placeholder="Duration" name="duration" [(ngModel)]="duration">
+                    <mat-select placeholder="Duration" name="duration" [(ngModel)]="syncJobType.configuration.duration">
                       <mat-option value="Daily">Daily</mat-option>
                       <mat-option value="Weekly">Weekly</mat-option>
                       <mat-option value="Monthly">Monthly</mat-option>
@@ -12,17 +12,17 @@
                 </mat-form-field>
             </div>
 
-            <div *ngIf="duration == 'Weekly'">
+            <div *ngIf="syncJobType.configuration.duration == 'Weekly'">
                 <mat-form-field>
-                    <mat-select placeholder="Day Name" name="dayName" [(ngModel)]="dayName">
+                    <mat-select placeholder="Day Name" name="dayName" [(ngModel)]="syncJobType.configuration.dayName">
                         <mat-option value={{name}} *ngFor="let name of daysName">
                             {{name}}</mat-option>
                       </mat-select>
                 </mat-form-field>  
             </div>
-            <div *ngIf="duration == 'Monthly'">
+            <div *ngIf="syncJobType.configuration.duration == 'Monthly'">
                 <mat-form-field>
-                    <mat-select placeholder="Day" name="day" [(ngModel)]="day">
+                    <mat-select placeholder="Day" name="day" [(ngModel)]="syncJobType.configuration.day">
                         <mat-option value={{day}} *ngFor="let day of days">
                             {{day}}</mat-option>
                       </mat-select>
@@ -30,7 +30,7 @@
             </div>
             <div>
                 <mat-form-field>
-                    <input matInput type="time" id="appt" name="appt" min="01:00" max="23:59" [(ngModel)]="hour">
+                    <input matInput type="time" id="appt" name="appt" min="01:00" max="23:59" [(ngModel)]="syncJobType.configuration.hour">
 
                 </mat-form-field>  
             </div>

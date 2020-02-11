@@ -4,6 +4,10 @@ import { FormGroup } from '@angular/forms';
 import { AddVendorComponent } from '../add-vendor/add-vendor.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SchedulerService } from 'src/app/services/scheduler/scheduler.service';
+import { Constants } from 'src/app/models/constants';
+import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
+import { SyncJobType } from 'src/app/models/SyncJobType';
+
 
 @Component({
   selector: 'app-scheduler-configuration',
@@ -14,18 +18,15 @@ export class SchedulerConfigurationComponent implements OnInit {
 
   public form: FormGroup;
   submitted = false;
-  duration = "Daily";
-  hour: number;
-  day = "1";
-  dayName = "Sunday";
   loading = true;
+  syncJobType: SyncJobType;
 
   hours = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
   days = []
   daysName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
   constructor(public dialogRef: MatDialogRef<AddVendorComponent>, private spinner: NgxSpinnerService,
-    public schedulerService: SchedulerService) { }
+    public schedulerService: SchedulerService, private accSyncTypeService:AccSyncTypeService) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -33,32 +34,38 @@ export class SchedulerConfigurationComponent implements OnInit {
 
   onSaveClick(): void {
     this.dialogRef.close({
-      duration: this.duration,
-      day: this.day,
-      dayName: this.dayName,
-      hour: this.hour
+      duration: this.syncJobType.configuration.duration,
+      day: this.syncJobType.configuration.day,
+      dayName: this.syncJobType.configuration.dayName,
+      hour: this.syncJobType.configuration.hour
     });
   }
 
   ngOnInit() {
     this.getCurrentDays()
+    this.getSyncJobType()
+  }
+
+  getSyncJobType(){
+    this.loading = true;
+    this.accSyncTypeService.getAccSyncJobType(Constants.SYNC_TYPE_SCHEDULER).toPromise().then((res: any) => {
+      this.syncJobType = res;
+      this.loading = false;
+    }).catch(err => {
+      console.error(err);
+      this.loading = false;
+    });
   }
 
   getCurrentDays(){
-    this.loading = true;
     this.spinner.show();
       this.schedulerService.getCurrentDays().toPromise().then((res: any) => {
         this.days = res.data;
-        this.loading = false;
         this.spinner.hide();
   
       }).catch(err => {
         console.error(err);
-        this.loading = false;
         this.spinner.hide();
-  
-      });  
-   
+      });
   }
-
 }

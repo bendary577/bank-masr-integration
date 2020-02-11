@@ -89,6 +89,9 @@ export class SyncJobsconfigComponent implements OnInit {
   }
 
   openschedulerDialog(syncJobType){
+    Constants.SYNC_TYPE_SCHEDULER = syncJobType.name
+    console.log(Constants.SYNC_TYPE_SCHEDULER )
+
     const dialogRef = this.dialog.open(SchedulerConfigurationComponent, {
       width: '550px'
     });
