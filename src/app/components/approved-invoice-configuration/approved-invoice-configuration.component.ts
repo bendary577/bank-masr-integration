@@ -23,7 +23,7 @@ export class ApprovedInvoiceConfigurationComponent implements OnInit {
   businessUnits = [];
   PaymentMethods = [];
   selectedCostCenters = [];
-  timePeriods = ["All", "Current Year", "Last Month", "Last Year", "User-defined"];
+  timePeriods = ["All", "Current Year", "Current Month", "Last Month", "Last Year", "User-defined"];
 
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
     private router:Router, public snackBar: MatSnackBar, private syncJobService:SyncJobService,
