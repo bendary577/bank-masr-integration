@@ -36,8 +36,6 @@ export class ConfigurationComponent  implements OnInit{
     this.spinner.show();
     this.accountService.getAccount().toPromise().then((res: any) => {
       this.account = res;
-      console.log(this.account["account_credentials"])
-
      
       this.spinner.hide();
       this.loading = false;
