@@ -74,7 +74,6 @@ export class LoginComponent implements OnInit {
 
       this.authenticationService.login(this.user).toPromise().then((res: any) => {
         localStorage.setItem('auth_token',res.auth_token);
-        console.log(res.auth_token)
         localStorage.setItem('user',JSON.stringify(this.user));
         this.spinner.hide();
         this.loading = false;

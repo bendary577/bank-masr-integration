@@ -53,8 +53,6 @@ export class ConfigurationComponent  implements OnInit{
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        console.log(res)
-
         this.spinner.show();
         this.accountService.addAccount(res).then(result => {
           this.spinner.hide();

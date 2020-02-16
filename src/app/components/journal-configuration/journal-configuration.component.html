@@ -48,7 +48,20 @@
                [(ngModel)]="syncJobType.configuration.accountSettings.ledgerName">
           </mat-form-field>
       </div>
-                
+      <div >
+        <mat-form-field class="example-full-width">
+            <input matInput id="legalEntityIdentifier" name="legalEntityIdentifier"
+             placeholder="Legal Entity Identifier" 
+            [(ngModel)]="syncJobType.configuration.accountSettings.legalEntityIdentifier">
+        </mat-form-field>
+      </div>
+      <div >
+        <mat-form-field class="example-full-width">
+            <input matInput id="accountingPeriodName" name="accountingPeriodName"
+             placeholder="Accounting Period Name" 
+            [(ngModel)]="syncJobType.configuration.accountSettings.accountingPeriodName">
+        </mat-form-field>
+    </div>         
         </form>
 </div>
         

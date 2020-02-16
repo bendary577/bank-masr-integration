@@ -90,8 +90,6 @@ export class SyncJobsconfigComponent implements OnInit {
 
   openschedulerDialog(syncJobType){
     Constants.SYNC_TYPE_SCHEDULER = syncJobType.name
-    console.log(Constants.SYNC_TYPE_SCHEDULER )
-
     const dialogRef = this.dialog.open(SchedulerConfigurationComponent, {
       width: '550px'
     });
@@ -103,7 +101,6 @@ export class SyncJobsconfigComponent implements OnInit {
         syncJobType.configuration.day = res.day;
         syncJobType.configuration.dayName = res.dayName;
         syncJobType.configuration.hour = res.hour;
-        console.log(syncJobType)
 
         this.syncJobService.updateSyncJobTypeConfig(syncJobType).then(result => {
               this.spinner.hide();

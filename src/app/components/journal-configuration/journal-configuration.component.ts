@@ -72,11 +72,6 @@ export class JournalConfigurationComponent implements OnInit {
 
   }
 
-
-  onSelect(row) {
-    console.log(row)
-  }
-
   getCostCenter() {
     this.spinner.show();
     this.cost_loading = true;
@@ -117,7 +112,6 @@ export class JournalConfigurationComponent implements OnInit {
     this.item_loading = true;
     this.journalService.mapItemGroups().toPromise().then((res: any) => {
       this.mappedItems = res.data;
-      console.log(res)
 
       this.spinner.hide();
       this.item_loading = false;
