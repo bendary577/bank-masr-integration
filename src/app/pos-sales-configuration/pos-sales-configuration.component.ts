@@ -23,7 +23,6 @@ export class PosSalesConfigurationComponent implements OnInit {
   loading = true;
   save_loading = false;
   tender_loading = true;
-  tenders = [];
   selectedTender = [];
 
   syncJobType: AccountSyncType;  
@@ -34,52 +33,22 @@ export class PosSalesConfigurationComponent implements OnInit {
 
   ngOnInit() {
     this.getSyncJobType();
-    // this.getSyncJobType();
   }
 
   getSyncJobType(){
     this.loading = true;
     this.accSyncTypeService.getAccSyncJobType(Constants.POS_SALES_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
-      this.tenders = this.syncJobType.configuration["tenders"];
-
       this.loading = false;
     }).catch(err => {
       console.error(err);
       this.loading = false;
     });
   }
-
-  getTenders() {
-    this.spinner.show();
-    this.tender_loading = true;
-    this.salesService.getTenders().toPromise().then((res: any) => {
-      this.tenders = res.data;
-
-      this.spinner.hide();
-      this.tender_loading = false;
-    }).catch(err => {
-      console.error(err);
-      this.spinner.hide();
-      this.tender_loading = false;
-    });
-  }
-
   
   onSaveClick(): void {
     this.spinner.show();
     this.save_loading = true;
-
-    let that = this;
-    this.tenders.forEach(function (costCenter) {
-      if (costCenter.checked){
-        that.selectedTender.push(costCenter)
-      }
-    });
-
-    if(this.selectedTender.length != 0){
-      this.syncJobType.configuration["tenders"] = this.selectedTender;
-    }
 
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.snackBar.open('Save configuration successfully.', null, {
@@ -95,19 +64,14 @@ export class PosSalesConfigurationComponent implements OnInit {
         duration: 2000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
-
       });
       this.spinner.hide();
       this.save_loading = false;
-
     });
-
-
   }
 
   onCancelClick(){
     this.router.navigate([Constants.SYNC_JOBS]);
   }
-
 
 }
