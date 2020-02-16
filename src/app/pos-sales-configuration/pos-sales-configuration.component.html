@@ -23,9 +23,16 @@
                 </div>
                 <div >
                     <mat-form-field class="example-full-width">
-                        <input matInput id="source" name="source" placeholder="Source"  
-                        [(ngModel)]="syncJobType.configuration.accountSettings.source">
+                        <input matInput id="sourceId" name="sourceId" placeholder="Source Id"  
+                        [(ngModel)]="syncJobType.configuration.accountSettings.sourceId">
                     </mat-form-field>
+                </div>
+    
+                <div >
+                  <mat-form-field class="example-full-width">
+                      <input matInput id="sourceId" name="sourceId" placeholder="Source Name"  
+                      [(ngModel)]="syncJobType.configuration.accountSettings.source">
+                  </mat-form-field>
                 </div>
                 <div >
                     <mat-form-field class="example-full-width">
