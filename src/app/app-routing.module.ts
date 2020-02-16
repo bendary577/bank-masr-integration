@@ -36,7 +36,7 @@ const routes: Routes = [
   { path: Constants.LOGIN_PAGE, component: LoginComponent},
   { path: Constants.WELCOME_PAGE, component: WelcomePageComponent,canActivate:[AuthGuardService]},
 
-  { path: Constants.SUPPLIERS_PAGE, component: SuppliersComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.SUPPLIERS_PAGE, component: SuppliersComponent,canActivate:[AuthGuardService]},
   { path: Constants.SUPPLIERS_CONFIG_PAGE, component: SuppliersConfiguartionComponent,canActivate:[AuthGuardService] },
   { path: Constants.SUPPLIERS_DETAILS_PAGE, component: SupplierDetailsComponent,canActivate:[AuthGuardService] },
 
