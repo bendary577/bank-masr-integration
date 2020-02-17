@@ -20,9 +20,9 @@ export class InvoiceService {
     return this.http.get(Constants.GET_APPROVED_INVOICES_DB_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
   
-  getCostCenter() {
+  getCostCenter(syncJobType) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get(Constants.GET_COST_CENTER_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
+    return this.http.get(Constants.GET_COST_CENTER_URL+ '?syncJobType=' + syncJobType, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
   getBisinessUnits() {
