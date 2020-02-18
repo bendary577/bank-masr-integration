@@ -80,6 +80,7 @@ export class Constants {
 
     static APPROVED_INVOICES_PAGE = 'approvedInvoices';
     static APPROVED_INVOICES_CONFIG_PAGE = 'approvedInvoicesConfig';
+    static APPROVED_INVOICES_SUN_CONFIG_PAGE = 'approvedInvoicesSunConfig';
     static APPROVED_INVOICES_SYNC = 'Approved Invoices';
 
     static BOOKED_TRANSFER_PAGE = 'bookedTransfers';

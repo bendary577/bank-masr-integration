@@ -7,6 +7,8 @@ import { MatSnackBar } from '@angular/material';
 import { SidenavResponsive } from "../sidenav/sidenav-responsive";
 import { NgxSpinnerService } from 'ngx-spinner';
 import {User} from "../../models/user";
+import { AccountService } from 'src/app/services/account/account.service';
+import { Account } from 'src/app/models/Account';
 
 @Component({
   selector: 'app-login',
@@ -21,12 +23,14 @@ export class LoginComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   side: SidenavResponsive;
+  account:Account;
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthService,
+    private accountService: AccountService,
     public snackBar: MatSnackBar, side: SidenavResponsive,
     private spinner: NgxSpinnerService
   ) {
@@ -75,6 +79,15 @@ export class LoginComponent implements OnInit {
       this.authenticationService.login(this.user).toPromise().then((res: any) => {
         localStorage.setItem('auth_token',res.auth_token);
         localStorage.setItem('user',JSON.stringify(this.user));
+
+        this.accountService.getAccount().toPromise().then((res: any) => {
+          this.account = res;
+          localStorage.setItem('accountERD',JSON.stringify(this.account.erd));
+
+        }).catch(err => {''
+          console.error(err);
+        });
+
         this.spinner.hide();
         this.loading = false;
         this.side.setshouldRun(true);

@@ -33,9 +33,8 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
 
   ngOnInit() {
     this.getSyncJobType();
-    this.getBusinessUnits()
-    this.getPaymentMethods();
-    this.getCostCenter();
+    // this.getBusinessUnits()
+    // this.getCostCenter();
   }
 
   getSyncJobType(){
@@ -70,14 +69,6 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
   getBusinessUnits() {
     this.invoiceService.getBisinessUnits().toPromise().then((res: any) => {
       this.businessUnits = res.data.items;
-    }).catch(err => {
-      console.error(err);
-    });
-  }
-
-  getPaymentMethods() {
-    this.invoiceService.getPaymentMethods().toPromise().then((res: any) => {
-      this.PaymentMethods = res.data.items;
     }).catch(err => {
       console.error(err);
     });

@@ -1,11 +1,11 @@
 <h3 mat-dialog-title>Update Approved Invoice Configuartion</h3>
 
 <div>
-    <!-- Predifined Configurations -->
+    <!-- Oracle Hospitality Configurations -->
     <mat-expansion-panel >
         <mat-expansion-panel-header>
           <mat-panel-title>
-            Predifined Configurations
+            Oracle Hospitality Configurations
           </mat-panel-title>
         </mat-expansion-panel-header>
   
@@ -25,19 +25,74 @@
 
                   </mat-form-field>
               </div>
-              <div >
-                  <mat-form-field class="example-full-width">
-                    <mat-select id="paymentMethod" name="paymentMethod" placeholder="Payment Method" 
-                     [(ngModel)]="syncJobType.configuration.paymentMethod">
-                        <mat-option *ngFor="let paymentMethod of PaymentMethods" value={{paymentMethod.PaymentMethodName}}>{{paymentMethod.PaymentMethodName}}</mat-option>
-                      </mat-select>
-                      <!-- <div class="loader" *ngIf="groupsLoading"></div> -->
-                  </mat-form-field>
-              </div>
           </form>
   </div>
           
       </mat-expansion-panel>
+
+          <!-- Infor Sun System Configurations -->
+    <mat-expansion-panel >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Infor Sun System
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="container" *ngIf="!loading">
+        <form  class="my-form">
+            <div >
+                <mat-form-field class="example-full-width">
+                  <mat-select matInput id="postingType" name="postingType" placeholder="Posting Type"  
+                  [(ngModel)]="syncJobType.configuration.postingType">
+                     <mat-option value="0">0</mat-option>
+                     <mat-option value="1">1</mat-option>
+                     <mat-option value="2">2</mat-option>
+                   </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div >
+              <mat-form-field class="example-full-width">
+                <input matInput id="businessUnit" name="businessUnit" placeholder="Business Unit"  
+                [(ngModel)]="syncJobType.configuration.businessUnit">
+            </mat-form-field>
+          </div>
+
+            <div >
+                <mat-form-field class="example-full-width">
+                  <input matInput id="accountCode" name="accountCode" placeholder="Account Code"  
+                  [(ngModel)]="syncJobType.configuration.accountCode">
+              </mat-form-field>
+           </div>
+           <div >
+            <mat-form-field class="example-full-width">
+              <input matInput id="journalSource" name="journalSource" placeholder="Journal Source"  
+              [(ngModel)]="syncJobType.configuration.journalSource">
+          </mat-form-field>
+        </div>
+          <div >
+              <mat-form-field class="example-full-width">
+                <input matInput id="journalType" name="journalType" placeholder="Journal Type"  
+                [(ngModel)]="syncJobType.configuration.journalType">
+            </mat-form-field>
+         </div>
+         <div >
+          <mat-form-field class="example-full-width">
+            <input matInput id="transactionReference" name="transactionReference" placeholder="Transaction Reference"  
+            [(ngModel)]="syncJobType.configuration.transactionReference">
+        </mat-form-field>
+     </div>
+      <div >
+        <mat-form-field class="example-full-width">
+          <input matInput id="currencyCode" name="currencyCode" placeholder="Currency Code"  
+          [(ngModel)]="syncJobType.configuration.currencyCode">
+      </mat-form-field>
+     </div>
+
+        </form>
+</div>
+        
+    </mat-expansion-panel>
 
       <!-- Cost Centers -->
       <mat-expansion-panel >

@@ -10,6 +10,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SchedulerConfigurationComponent } from '../../scheduler-configuration/scheduler-configuration.component';
 import { Router } from '@angular/router';
 import { Constants } from 'src/app/models/constants';
+import { AccountService } from 'src/app/services/account/account.service';
+import { Account } from 'src/app/models/Account';
 
 
 
@@ -27,16 +29,30 @@ export class SyncJobsconfigComponent implements OnInit {
   displayedColumns: string[] = ['firstName', 'username', 'lastName'];
   dataSource = new MatTableDataSource<User>(ELEMENT_DATA);
   syncJobTypes: SyncJobType[] = [];
-  loading = true
+  loading = true;
+  account:Account;
+
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   constructor(private syncJobService: SyncJobService,  public dialog: MatDialog,
      public snackBar: MatSnackBar, private spinner: NgxSpinnerService, private router: Router,
-     private data: Data ){
+     private data: Data, private accountService: AccountService){
   }
 
   ngOnInit() {
     this.getSyncJobTypes();
+    this.getAccount();
+  }
+
+  getAccount(){
+    this.accountService.getAccount().toPromise().then((res: any) => {
+      this.account = res;
+      localStorage.setItem('accountERD',JSON.stringify(this.account.erd));
+
+    }).catch(err => {''
+      console.error(err);
+    });
+
   }
 
 
@@ -61,22 +77,52 @@ export class SyncJobsconfigComponent implements OnInit {
     this.data.storage = syncJobType
 
     if (syncJobType.name == Constants.SUPPLIERS_SYNC){
-      this.router.navigate([Constants.SUPPLIERS_CONFIG_PAGE]);
+      if (this.account.erd == "SUN"){
+        this.router.navigate([Constants.SUPPLIERS_CONFIG_PAGE]);
+      }
+      else{
+        this.router.navigate([Constants.SUPPLIERS_CONFIG_PAGE]);
+      }
     }
     else if (syncJobType.name == Constants.APPROVED_INVOICES_SYNC){
-      this.router.navigate([Constants.APPROVED_INVOICES_CONFIG_PAGE]);
+      if (this.account.erd == "SUN"){
+        this.router.navigate([Constants.APPROVED_INVOICES_SUN_CONFIG_PAGE]);
+      }
+      else{
+        this.router.navigate([Constants.APPROVED_INVOICES_CONFIG_PAGE]);
+      }
     }
     else if (syncJobType.name == Constants.CREDIT_NOTE_SYNC){
-      this.router.navigate([Constants.APPROVED_INVOICES_CONFIG_PAGE]);
+      if (this.account.erd == "SUN"){
+        this.router.navigate([Constants.APPROVED_INVOICES_SUN_CONFIG_PAGE]);
+      }
+      else{
+        this.router.navigate([Constants.APPROVED_INVOICES_CONFIG_PAGE]);
+      }
     }
     else if (syncJobType.name == Constants.JOURNALS_SYNC){
-      this.router.navigate([Constants.JOURNALS_CONFIG_PAGE]);
+      if (this.account.erd == "SUN"){
+        this.router.navigate([Constants.SUPPLIERS_CONFIG_PAGE]);
+      }
+      else{
+        this.router.navigate([Constants.JOURNALS_CONFIG_PAGE]);
+      }
     }
     else if (syncJobType.name == Constants.BOOKED_TRANSFER_SYNC){
-      this.router.navigate([Constants.JOURNALS_CONFIG_PAGE]);
+      if (this.account.erd == "SUN"){
+        this.router.navigate([Constants.SUPPLIERS_CONFIG_PAGE]);
+      }
+      else{
+        this.router.navigate([Constants.JOURNALS_CONFIG_PAGE]);
+      }
     }
     else if (syncJobType.name == Constants.POS_SALES_SYNC){
-      this.router.navigate([Constants.POS_SALES_CONFIG_PAGE]);
+      if (this.account.erd == "SUN"){
+        this.router.navigate([Constants.SUPPLIERS_CONFIG_PAGE]);
+      }
+      else{
+        this.router.navigate([Constants.POS_SALES_CONFIG_PAGE]);
+      }
     }
     else{
       this.snackBar.open("This sync job has not configuration yet.", null, {
