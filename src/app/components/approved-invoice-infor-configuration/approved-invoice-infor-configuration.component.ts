@@ -10,11 +10,12 @@ import { SyncJobType } from 'src/app/models/SyncJobType';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 
 @Component({
-  selector: 'app-approved-invoice-configuration',
-  templateUrl: './approved-invoice-configuration.component.html',
-  styleUrls: ['./approved-invoice-configuration.component.scss']
+  selector: 'app-approved-invoice-infor-configuration',
+  templateUrl: './approved-invoice-infor-configuration.component.html',
+  styleUrls: ['./approved-invoice-infor-configuration.component.scss']
 })
-export class ApprovedInvoiceConfigurationComponent implements OnInit {
+export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
+
   syncJobType: SyncJobType;
   submitted = false;
   loading = true;
@@ -100,5 +101,6 @@ export class ApprovedInvoiceConfigurationComponent implements OnInit {
   onCancelClick(){
     this.router.navigate([Constants.SYNC_JOBS]);
   }
+
 
 }

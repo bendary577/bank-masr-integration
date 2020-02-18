@@ -62,6 +62,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AddAccountComponent } from './components/add-account/add-account.component';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 import { PosSalesConfigurationComponent } from './pos-sales-configuration/pos-sales-configuration.component';
+import { ApprovedInvoiceInforConfigurationComponent } from './components/approved-invoice-infor-configuration/approved-invoice-infor-configuration.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { PosSalesConfigurationComponent } from './pos-sales-configuration/pos-sa
     PosSalesComponent,
     WelcomePageComponent,
     PosSalesConfigurationComponent,
-    AddAccountComponent
+    AddAccountComponent,
+    ApprovedInvoiceInforConfigurationComponent
   ],
   imports: [
     BrowserModule,
