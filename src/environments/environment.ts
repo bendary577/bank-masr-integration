@@ -11,7 +11,7 @@ export const environment = {
   // apiHost: 'http://35.232.234.90/server',
 
   // Development Server
-  apiHost: 'http://10.128.0.9/server',
+  apiHost: 'http://34.67.96.240/server',
 
   // Development Server Heroku
   //  apiHost: 'https://oracle-hospitality-prod.herokuapp.com',
