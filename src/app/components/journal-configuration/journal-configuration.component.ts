@@ -9,6 +9,7 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { FormGroup } from '@angular/forms';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 import { AccountSyncType } from 'src/app/models/AccountSyncType';
+import { CostCenter } from 'src/app/models/CostCenter';
 
 
 
@@ -27,7 +28,7 @@ export class JournalConfigurationComponent implements OnInit {
 
   syncJobType: AccountSyncType;
 
-  costCenters = [];
+  costCenters: CostCenter[] = [];
   overGroups = [];
   selectedCostCenters = [];
   selectedOverGroups = [];
@@ -36,22 +37,16 @@ export class JournalConfigurationComponent implements OnInit {
   AccountSettingsForm: FormGroup;
 
   columns = []
-
-
-
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
     private journalService:JournalService, private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService,
     private router:Router, public snackBar: MatSnackBar) {
-      this.costCenters = [];
-      this.overGroups = [];
-      this.mappedItems = [];
     
   }
 
   ngOnInit() {
     this.getSyncJobType();
     this.getCostCenter();
-    this.getOverGroups();
+    // this.getOverGroups();
 
     this.columns = [
       {
@@ -76,7 +71,7 @@ export class JournalConfigurationComponent implements OnInit {
     this.spinner.show();
     this.cost_loading = true;
     this.invoiceService.getCostCenter(Constants.JOURNALS_SYNC).toPromise().then((res: any) => {
-      this.costCenters = res.data;
+      this.costCenters = res.costCenters;
       this.spinner.hide();
       this.cost_loading = false;
     }).catch(err => {

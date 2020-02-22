@@ -30,13 +30,18 @@
             </mat-list-item>
             <mat-list-item>      
                 <span class="key">Start Date: </span>
-                <span class="value" *ngIf="selectedJob.creation_date">{{selectedJob.creationDate}}</span>
-                <span class="value" *ngIf="!selectedJob.creation_date">No Info</span>
+                <span class="value" *ngIf="selectedJob.creationDate">{{selectedJob.creationDate}}</span>
+                <span class="value" *ngIf="!selectedJob.creationDate">No Info</span>
             </mat-list-item>
             <mat-list-item>      
                 <span class="key">End Date: </span>
-                <span class="value" *ngIf="selectedJob.end_date">{{selectedJob.endDate}}</span>
-                <span class="value" *ngIf="!selectedJob.end_date">No Info</span>
+                <span class="value" *ngIf="selectedJob.endDate">{{selectedJob.endDate}}</span>
+                <span class="value" *ngIf="!selectedJob.endDate">No Info</span>
+            </mat-list-item>
+            <mat-list-item>      
+                <span class="key">Reason: </span>
+                <span class="value" *ngIf="selectedJob.reason">{{selectedJob.reason}}</span>
+                <span class="value" *ngIf="!selectedJob.reason">No Info</span>
             </mat-list-item>
             <mat-list-item *ngIf="!approvedInvoices.length"> 
             <span>
