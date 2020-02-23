@@ -21,6 +21,7 @@ import { PosSalesComponent } from './components/pos-sales/pos-sales.component';
 import { PosSalesConfigurationComponent } from './pos-sales-configuration/pos-sales-configuration.component';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 import { ApprovedInvoiceInforConfigurationComponent } from './components/approved-invoice-infor-configuration/approved-invoice-infor-configuration.component';
+import { JournalsInforConfigurationsComponent } from './components/journals-infor-configurations/journals-infor-configurations.component';
 
 
 const routes: Routes = [
@@ -51,6 +52,7 @@ const routes: Routes = [
   
   { path: Constants.JOURNALS_PAGE , component: JournalsComponent  },
   { path: Constants.JOURNALS_CONFIG_PAGE , component: JournalConfigurationComponent  },
+  { path: Constants.JOURNALS_SUN_CONFIG_PAGE , component: JournalsInforConfigurationsComponent  },
 
   { path: Constants.POS_SALES_PAGE , component: PosSalesComponent  },
   { path: Constants.POS_SALES_CONFIG_PAGE , component: PosSalesConfigurationComponent  },

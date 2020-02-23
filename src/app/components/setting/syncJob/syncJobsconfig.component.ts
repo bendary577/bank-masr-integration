@@ -102,7 +102,7 @@ export class SyncJobsconfigComponent implements OnInit {
     }
     else if (syncJobType.name == Constants.JOURNALS_SYNC){
       if (this.account.erd == "SUN"){
-        this.router.navigate([Constants.SUPPLIERS_CONFIG_PAGE]);
+        this.router.navigate([Constants.JOURNALS_SUN_CONFIG_PAGE]);
       }
       else{
         this.router.navigate([Constants.JOURNALS_CONFIG_PAGE]);
@@ -110,7 +110,7 @@ export class SyncJobsconfigComponent implements OnInit {
     }
     else if (syncJobType.name == Constants.BOOKED_TRANSFER_SYNC){
       if (this.account.erd == "SUN"){
-        this.router.navigate([Constants.SUPPLIERS_CONFIG_PAGE]);
+        this.router.navigate([Constants.JOURNALS_SUN_CONFIG_PAGE]);
       }
       else{
         this.router.navigate([Constants.JOURNALS_CONFIG_PAGE]);
