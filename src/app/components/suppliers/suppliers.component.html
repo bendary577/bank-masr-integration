@@ -36,6 +36,11 @@
                 <span class="value" *ngIf="selectedJob.endDate">{{selectedJob.endDate}}</span>
                 <span class="value" *ngIf="!selectedJob.endDate">No Info</span>
             </mat-list-item>
+            <mat-list-item>      
+                <span class="key">Reason: </span>
+                <span class="value" *ngIf="selectedJob.reason">{{selectedJob.reason}}</span>
+                <span class="value" *ngIf="!selectedJob.reason">No Info</span>
+            </mat-list-item>
             <!-- <mat-list-item>      
                 <span class="key">User: </span>
                 <span class="value" *ngIf="selectedJob.end_date">{{selectedJob.user_id}}</span>

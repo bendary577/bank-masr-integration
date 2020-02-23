@@ -63,6 +63,7 @@ import { AddAccountComponent } from './components/add-account/add-account.compon
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 import { PosSalesConfigurationComponent } from './pos-sales-configuration/pos-sales-configuration.component';
 import { ApprovedInvoiceInforConfigurationComponent } from './components/approved-invoice-infor-configuration/approved-invoice-infor-configuration.component';
+import { JournalsInforConfigurationsComponent } from './components/journals-infor-configurations/journals-infor-configurations.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { ApprovedInvoiceInforConfigurationComponent } from './components/approve
     WelcomePageComponent,
     PosSalesConfigurationComponent,
     AddAccountComponent,
-    ApprovedInvoiceInforConfigurationComponent
+    ApprovedInvoiceInforConfigurationComponent,
+    JournalsInforConfigurationsComponent
   ],
   imports: [
     BrowserModule,

@@ -18,9 +18,6 @@
                    >
 
       <mat-nav-list>
-        <!-- <mat-list-item  *ngFor="let type of syncJobTypes">
-          <a mat-list-item (click)="snav.toggle()" routerLink={{type.end_point}}>{{type.name}}</a>
-        </mat-list-item> -->
 
         <mat-expansion-panel [class.mat-elevation-z0]="true" dense [expanded]="true">
           <mat-expansion-panel-header>
@@ -42,12 +39,6 @@
           </mat-nav-list>
         </mat-expansion-panel>
 
-<!--  
-        <ul class="Settings"> Settings
-          <li><a mat-list-item  (click)="changeCurrentTab('Sync Jobs Configuration'); snav.toggle()" routerLink="/syncjobs">Sync Jobs Configuration</a></li>
-          <li><a mat-list-item  (click)="changeCurrentTab('General Settings'); snav.toggle()" routerLink="/setting">General Settings</a></li>
-          <li><a mat-list-item  (click)="changeCurrentTab('Users'); snav.toggle()" routerLink="/users">Users</a></li>
-        </ul> -->
         <mat-list-item>
           <a mat-list-item  (click)="snav.toggle(); Logout()" >Logout</a>
         </mat-list-item>
