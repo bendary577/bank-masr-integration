@@ -63,7 +63,7 @@ export class ApprovedInvoiceComponent implements OnInit {
       this.success = res.success;
       this.getSyncJobs("Approved Invoices");
   
-      this.snackBar.open('Sync Approved Invoices Successfully', null, {
+      this.snackBar.open(res.message, null, {
         duration: 2000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-success"

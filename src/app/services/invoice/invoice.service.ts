@@ -20,6 +20,7 @@ export class InvoiceService {
     return this.http.get(Constants.GET_APPROVED_INVOICES_DB_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
   
+  @Cacheable()
   getCostCenter(syncJobTypeName) {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_COST_CENTER_URL+ '?syncTypeName=' + syncJobTypeName
