@@ -26,36 +26,36 @@ import { JournalsInforConfigurationsComponent } from './components/journals-info
 
 const routes: Routes = [
   { path: '', redirectTo: Constants.LOGIN_PAGE, pathMatch: 'full'},
-  { path: Constants.SIDE_NAV, component: SidenavResponsive  },
+  { path: Constants.SIDE_NAV, component: SidenavResponsive  ,canActivate:[AuthGuardService]},
   {
     path: Constants.SETTING, component: ConfigurationComponent ,
     children: []
   },
-  { path: Constants.USERS_CONFIGURATION, component: UsersComponent  },
-  { path: Constants.SYNC_JOBS, component: SyncJobsconfigComponent  },
+  { path: Constants.USERS_CONFIGURATION, component: UsersComponent,canActivate:[AuthGuardService]},
+  { path: Constants.SYNC_JOBS, component: SyncJobsconfigComponent  , canActivate:[AuthGuardService]},
 
   // Pages
   { path: Constants.LOGIN_PAGE, component: LoginComponent},
-  { path: Constants.WELCOME_PAGE, component: WelcomePageComponent },
+  { path: Constants.WELCOME_PAGE, component: WelcomePageComponent , canActivate:[AuthGuardService]},
 
-  { path: Constants.SUPPLIERS_PAGE, component: SuppliersComponent },
-  { path: Constants.SUPPLIERS_CONFIG_PAGE, component: SuppliersConfiguartionComponent  },
-  { path: Constants.SUPPLIERS_DETAILS_PAGE, component: SupplierDetailsComponent  },
+  { path: Constants.SUPPLIERS_PAGE, component: SuppliersComponent , canActivate:[AuthGuardService]},
+  { path: Constants.SUPPLIERS_CONFIG_PAGE, component: SuppliersConfiguartionComponent  , canActivate:[AuthGuardService]},
+  { path: Constants.SUPPLIERS_DETAILS_PAGE, component: SupplierDetailsComponent  , canActivate:[AuthGuardService]},
 
-  { path: Constants.APPROVED_INVOICES_PAGE, component: ApprovedInvoiceComponent },
-  { path: Constants.APPROVED_INVOICES_CONFIG_PAGE, component: ApprovedInvoiceConfigurationComponent  },
-  { path: Constants.APPROVED_INVOICES_SUN_CONFIG_PAGE, component: ApprovedInvoiceInforConfigurationComponent  },
+  { path: Constants.APPROVED_INVOICES_PAGE, component: ApprovedInvoiceComponent , canActivate:[AuthGuardService]},
+  { path: Constants.APPROVED_INVOICES_CONFIG_PAGE, component: ApprovedInvoiceConfigurationComponent  , canActivate:[AuthGuardService]},
+  { path: Constants.APPROVED_INVOICES_SUN_CONFIG_PAGE, component: ApprovedInvoiceInforConfigurationComponent  , canActivate:[AuthGuardService]},
 
-  { path: Constants.BOOKED_TRANSFER_PAGE, component: BookedTransferComponent  },
+  { path: Constants.BOOKED_TRANSFER_PAGE, component: BookedTransferComponent  , canActivate:[AuthGuardService]},
 
-  { path: Constants.CREDIT_NOTE_PAGE , component: CreditNoteComponent  },
+  { path: Constants.CREDIT_NOTE_PAGE , component: CreditNoteComponent  , canActivate:[AuthGuardService]},
   
-  { path: Constants.JOURNALS_PAGE , component: JournalsComponent  },
-  { path: Constants.JOURNALS_CONFIG_PAGE , component: JournalConfigurationComponent  },
-  { path: Constants.JOURNALS_SUN_CONFIG_PAGE , component: JournalsInforConfigurationsComponent  },
+  { path: Constants.JOURNALS_PAGE , component: JournalsComponent  , canActivate:[AuthGuardService]},
+  { path: Constants.JOURNALS_CONFIG_PAGE , component: JournalConfigurationComponent  , canActivate:[AuthGuardService]},
+  { path: Constants.JOURNALS_SUN_CONFIG_PAGE , component: JournalsInforConfigurationsComponent  , canActivate:[AuthGuardService]},
 
-  { path: Constants.POS_SALES_PAGE , component: PosSalesComponent  },
-  { path: Constants.POS_SALES_CONFIG_PAGE , component: PosSalesConfigurationComponent  },
+  { path: Constants.POS_SALES_PAGE , component: PosSalesComponent  , canActivate:[AuthGuardService]},
+  { path: Constants.POS_SALES_CONFIG_PAGE , component: PosSalesConfigurationComponent  , canActivate:[AuthGuardService]},
 
   // Error Page
   {path:'**', component: ErrorComponentComponent }
