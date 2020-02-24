@@ -64,6 +64,7 @@ import { WelcomePageComponent } from './components/welcome-page/welcome-page.com
 import { PosSalesConfigurationComponent } from './pos-sales-configuration/pos-sales-configuration.component';
 import { ApprovedInvoiceInforConfigurationComponent } from './components/approved-invoice-infor-configuration/approved-invoice-infor-configuration.component';
 import { JournalsInforConfigurationsComponent } from './components/journals-infor-configurations/journals-infor-configurations.component';
+import { SuppliersInforConfigurationComponent } from './components/suppliers-infor-configuration/suppliers-infor-configuration.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,8 @@ import { JournalsInforConfigurationsComponent } from './components/journals-info
     PosSalesConfigurationComponent,
     AddAccountComponent,
     ApprovedInvoiceInforConfigurationComponent,
-    JournalsInforConfigurationsComponent
+    JournalsInforConfigurationsComponent,
+    SuppliersInforConfigurationComponent
   ],
   imports: [
     BrowserModule,

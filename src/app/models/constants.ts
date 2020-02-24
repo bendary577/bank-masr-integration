@@ -75,6 +75,7 @@ export class Constants {
 
     static SUPPLIERS_PAGE = 'suppliers';
     static SUPPLIERS_CONFIG_PAGE = 'suppliersConfig';
+    static SUPPLIERS_SUN_CONFIG_PAGE = 'suppliersSunConfig';
     static SUPPLIERS_DETAILS_PAGE = 'suppliersDetails';
     static SUPPLIERS_SYNC = 'Suppliers';
 

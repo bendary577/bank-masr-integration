@@ -78,7 +78,7 @@ export class SyncJobsconfigComponent implements OnInit {
 
     if (syncJobType.name == Constants.SUPPLIERS_SYNC){
       if (this.account.erd == "SUN"){
-        this.router.navigate([Constants.SUPPLIERS_CONFIG_PAGE]);
+        this.router.navigate([Constants.SUPPLIERS_SUN_CONFIG_PAGE]);
       }
       else{
         this.router.navigate([Constants.SUPPLIERS_CONFIG_PAGE]);
