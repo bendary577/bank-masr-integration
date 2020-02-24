@@ -163,7 +163,7 @@ export class JournalConfigurationComponent implements OnInit {
 
     this.overGroups.forEach(function (overGroup) {
       if (overGroup.checked){
-        that.selectedOverGroups.push(overGroup.over_group)
+        that.selectedOverGroups.push(overGroup)
       }
     });
 
