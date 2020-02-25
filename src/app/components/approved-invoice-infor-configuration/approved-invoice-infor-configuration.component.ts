@@ -25,7 +25,7 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
   PaymentMethods = [];
   selectedCostCenters = [];
   timePeriods = ["All", "Current Year", "Current Month", "Last Month", "Last Year", "User-defined"];
-
+  analysis = []
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
     private router:Router, public snackBar: MatSnackBar, private syncJobService:SyncJobService,
     private data: Data, private accSyncTypeService:AccSyncTypeService) { 
@@ -41,6 +41,8 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
     this.loading = true;
     this.accSyncTypeService.getAccSyncJobType(Constants.APPROVED_INVOICES_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
+      this.analysis = this.syncJobType.configuration["analysis"];
+      console.log(this.analysis);
       this.loading = false;
     }).catch(err => {
       console.error(err);

@@ -80,24 +80,23 @@ export class SuppliersComponent implements OnInit {
       SuppliersComponent.getSuppliersLoading = false;
       localStorage.setItem('getSuppliersLoading', "false");
 
-      this.snackBar.open('Sync Suppliers Successfully', null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass: "my-snack-bar-success"
-      });
+      if (this.success){
+        this.snackBar.open(res.message , null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass: "my-snack-bar-success"
+        });
+      }
+      else{
+        this.snackBar.open(res.message , null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+      }
+
 
     }).catch(err => {
-      this.getSyncJobs("Suppliers");
-
-      SuppliersComponent.getSuppliersLoading = false;
-      localStorage.setItem('getSuppliersLoading', "false");
-
-      this.snackBar.open(err.error.message , null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-
 
     });
   }

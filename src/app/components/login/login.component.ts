@@ -77,7 +77,9 @@ export class LoginComponent implements OnInit {
       // this.user.domain=domain;
 
       this.authenticationService.login(this.user).toPromise().then((res: any) => {
-        localStorage.setItem('auth_token',res.auth_token);
+        localStorage.setItem('auth_token',res.access_token);
+        localStorage.setItem('refresh_token',res.refresh_token);
+
         localStorage.setItem('user',JSON.stringify(this.user));
 
         this.accountService.getAccount().toPromise().then((res: any) => {

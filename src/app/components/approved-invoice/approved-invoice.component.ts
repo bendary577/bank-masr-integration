@@ -61,28 +61,25 @@ export class ApprovedInvoiceComponent implements OnInit {
     ApprovedInvoiceComponent.getInvoicesLoading = true
     this.invoiceService.getApprovedInvoices().toPromise().then((res: any) => {
       this.success = res.success;
+      if (this.success){
+        this.snackBar.open(res.message, null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
+        });
+      }
+      else{
+        this.snackBar.open(res.message , null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+      }
       this.getSyncJobs("Approved Invoices");
   
-      this.snackBar.open(res.message, null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-success"
-      });
-
       localStorage.setItem('getInvoicesLoading', "false");
       ApprovedInvoiceComponent.getInvoicesLoading = false;
     }).catch(err => {
-      this.getSyncJobs("Approved Invoices");
-      
-      localStorage.setItem('getInvoicesLoading', "false");
-      ApprovedInvoiceComponent.getInvoicesLoading = false;
-
-      this.snackBar.open(err.error.message , null, {
-        duration: 3000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-
     });
   }
 
