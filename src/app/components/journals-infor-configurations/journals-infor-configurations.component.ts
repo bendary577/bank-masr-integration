@@ -46,8 +46,8 @@ export class JournalsInforConfigurationsComponent implements OnInit {
 
   ngOnInit() {
     this.getSyncJobType();
-    this.getCostCenter();
-    // this.getOverGroups();
+    // this.getCostCenter();
+    this.getOverGroups();
 
     this.columns = [
       {
@@ -92,14 +92,22 @@ export class JournalsInforConfigurationsComponent implements OnInit {
     this.journalService.getOverGroups().toPromise().then((res: any) => {
       this.overGroups = res.data;
       this.group_loading = false;
+      if (res.success){
+        this.snackBar.open(res.message , null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
+        });
+      }
+      else{
+        this.snackBar.open(res.message , null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+      }
     }).catch(err => {
       console.error(err);
-      this.snackBar.open(err.error.message , null, {
-        duration: 3000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-      this.group_loading = false;
     });
   }
 
@@ -150,6 +158,8 @@ export class JournalsInforConfigurationsComponent implements OnInit {
     this.spinner.show();
     this.save_loading = true;
 
+    console.log(this.overGroups)
+
     let that = this;
     this.costCenters.forEach(function (costCenter) {
       if (costCenter.checked){
@@ -157,18 +167,18 @@ export class JournalsInforConfigurationsComponent implements OnInit {
       }
     });
 
-    // this.overGroups.forEach(function (overGroup) {
-    //   if (overGroup.checked){
-    //     that.selectedOverGroups.push(overGroup.over_group)
-    //   }
-    // });
+    this.overGroups.forEach(function (overGroup) {
+      if (overGroup.checked){
+        that.selectedOverGroups.push(overGroup)
+      }
+    });
 
     if (this.selectedCostCenters.length != 0) {
       this.syncJobType.configuration["costCenters"] = this.selectedCostCenters;
     }
-    // if(this.selectedOverGroups.length != 0){
-    //   this.syncJobType.configuration["overGroups"] = this.selectedOverGroups;
-    // }
+    if(this.selectedOverGroups.length != 0){
+      this.syncJobType.configuration["overGroups"] = this.selectedOverGroups;
+    }
 
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.snackBar.open('Save configuration successfully.', null, {
