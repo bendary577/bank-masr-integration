@@ -33,6 +33,7 @@ export class JournalsInforConfigurationsComponent implements OnInit {
   selectedCostCenters = [];
   selectedOverGroups = [];
   mappedItems:[] = [];
+  analysis = [];
 
   AccountSettingsForm: FormGroup;
 
@@ -144,6 +145,7 @@ export class JournalsInforConfigurationsComponent implements OnInit {
       this.syncJobType = res;
       this.costCenters = this.syncJobType.configuration["costCenters"];
       this.overGroups = this.syncJobType.configuration["overGroups"];
+      this.analysis = this.syncJobType.configuration["analysis"];
       this.mappedItems = res.configuration.items;
 
       this.loading = false;

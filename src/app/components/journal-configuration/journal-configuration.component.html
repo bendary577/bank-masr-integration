@@ -90,12 +90,6 @@
 
           </mat-expansion-panel-header>
 
-          <!-- [columns]="columns"
-          [selected]="selectedCostCenters"
-          [selectionType]="'checkbox'"
-          [selectAllRowsOnPage]="false"
-          (select)='onSelect($event)' -->
-
           <div class="main" *ngIf="costCenters?.length > 0">
             <ngx-datatable  class="material" [rows]="costCenters" [columnMode]="'force'" [headerHeight]="50"
                 [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[]" >

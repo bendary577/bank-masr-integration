@@ -65,6 +65,9 @@ import { PosSalesConfigurationComponent } from './pos-sales-configuration/pos-sa
 import { ApprovedInvoiceInforConfigurationComponent } from './components/approved-invoice-infor-configuration/approved-invoice-infor-configuration.component';
 import { JournalsInforConfigurationsComponent } from './components/journals-infor-configurations/journals-infor-configurations.component';
 import { SuppliersInforConfigurationComponent } from './components/suppliers-infor-configuration/suppliers-infor-configuration.component';
+import { BookedTransferInforComponent } from './components/booked-transfer-infor/booked-transfer-infor.component';
+import { BookedTransferInforConfigurationComponent } from './components/booked-transfer-infor-configuration/booked-transfer-infor-configuration.component';
+import { JournalInforComponent } from './components/journal-infor/journal-infor.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +102,10 @@ import { SuppliersInforConfigurationComponent } from './components/suppliers-inf
     AddAccountComponent,
     ApprovedInvoiceInforConfigurationComponent,
     JournalsInforConfigurationsComponent,
-    SuppliersInforConfigurationComponent
+    SuppliersInforConfigurationComponent,
+    BookedTransferInforComponent,
+    BookedTransferInforConfigurationComponent,
+    JournalInforComponent
   ],
   imports: [
     BrowserModule,

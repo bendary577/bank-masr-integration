@@ -85,6 +85,7 @@ export class Constants {
     static APPROVED_INVOICES_SYNC = 'Approved Invoices';
 
     static BOOKED_TRANSFER_PAGE = 'bookedTransfers';
+    static BOOKED_TRANSFER_INFOR_PAGE = 'bookedTransfersSun';
     static BOOKED_TRANSFER_CONFIG_PAGE = 'bookedTransfersConfig';
     static BOOKED_TRANSFER_DETAILS_PAGE = 'bookedTransfersDetails';
     static BOOKED_TRANSFER_SYNC = 'Booked Transfers';
