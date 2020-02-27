@@ -52,23 +52,22 @@ export class JournalInforComponent implements OnInit {
       localStorage.setItem('getJournalsLoding', "false");
       JournalInforComponent.getJournalsLoding = false;
 
-      this.snackBar.open(res.message, null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-success"
-      });
-
+      if (res.success){
+        this.snackBar.open(res.message, null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
+        });
+      }
+      else{
+        this.snackBar.open(res.message.message , null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+      }
     }).catch(err => {
-      this.getSyncJobs(Constants.JOURNALS_SYNC);
-
-      localStorage.setItem('getJournalsLoding', "false");
-      JournalInforComponent.getJournalsLoding = false;
-
-      this.snackBar.open(err.error.message , null, {
-        duration: 3000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
+        console.log(err);
     });
 
   }
