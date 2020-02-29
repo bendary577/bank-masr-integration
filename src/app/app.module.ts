@@ -68,6 +68,7 @@ import { SuppliersInforConfigurationComponent } from './components/suppliers-inf
 import { BookedTransferInforComponent } from './components/booked-transfer-infor/booked-transfer-infor.component';
 import { BookedTransferInforConfigurationComponent } from './components/booked-transfer-infor-configuration/booked-transfer-infor-configuration.component';
 import { JournalInforComponent } from './components/journal-infor/journal-infor.component';
+import { JournalsInforComponent } from './components/journals-infor/journals-infor.component';
 
 @NgModule({
   declarations: [
@@ -105,7 +106,8 @@ import { JournalInforComponent } from './components/journal-infor/journal-infor.
     SuppliersInforConfigurationComponent,
     BookedTransferInforComponent,
     BookedTransferInforConfigurationComponent,
-    JournalInforComponent
+    JournalInforComponent,
+    JournalsInforComponent
   ],
   imports: [
     BrowserModule,

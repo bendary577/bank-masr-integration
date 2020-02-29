@@ -103,6 +103,7 @@ export class Constants {
     static JOURNALS_SYNC = 'Journals';
 
     static JOURNALS_PAGE = 'journals';
+    static JOURNALS_INFOR_PAGE = 'journalsSun';
     static JOURNALS_CONFIG_PAGE = 'journalsConfig';
     static JOURNALS_SUN_CONFIG_PAGE = 'journalsSunConfig';
 

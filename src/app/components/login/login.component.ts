@@ -73,21 +73,13 @@ export class LoginComponent implements OnInit {
       this.user.name="auth";
       this.user.username=username;
       this.user.password=password;
-      // const domain = domainName[domainName.length-1];
-      // this.user.domain=domain;
 
       this.authenticationService.login(this.user).toPromise().then((res: any) => {
         localStorage.setItem('auth_token',res.access_token);
         localStorage.setItem('refresh_token',res.refresh_token);
-
         localStorage.setItem('user',JSON.stringify(this.user));
 
-        this.accountService.getAccount().toPromise().then((res: any) => {
-          this.account = res;
-
-        }).catch(err => {''
-          console.error(err);
-        });
+        this.getAccount();
 
         this.spinner.hide();
         this.loading = false;
@@ -106,14 +98,16 @@ export class LoginComponent implements OnInit {
         });
         return;
       });
+  }
 
-    // } else {
-    //   this.spinner.hide();
-    //       this.loading = false;
-    //   this.snackBar.open('Wrong Credentials.', null, {
-    //     duration: 2000,
-    //     horizontalPosition: 'center',
-    //   });
-    // }
+  getAccount(){
+    this.accountService.getAccount().toPromise().then((res: any) => {
+      this.account = res;
+      localStorage.setItem('accountERD', this.account.erd);
+
+    }).catch(err => {''
+      console.error(err);
+    });
+
   }
 }

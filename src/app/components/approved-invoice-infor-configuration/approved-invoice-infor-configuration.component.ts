@@ -33,8 +33,7 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
 
   ngOnInit() {
     this.getSyncJobType();
-    // this.getBusinessUnits()
-    // this.getCostCenter();
+    this.getCostCenter();
   }
 
   getSyncJobType(){
@@ -42,7 +41,6 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
     this.accSyncTypeService.getAccSyncJobType(Constants.APPROVED_INVOICES_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
       this.analysis = this.syncJobType.configuration["analysis"];
-      console.log(this.analysis);
       this.loading = false;
     }).catch(err => {
       console.error(err);
@@ -52,8 +50,15 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
 
   onSaveClick(): void {
     this.spinner.show();
+
+    let that = this;
+    this.costCenters.forEach(function (costCenter) {
+      if (costCenter.accountCode){
+        that.selectedCostCenters.push(costCenter)
+      }
+    });
     
-    this.syncJobType.configuration["costCenters"]  = this.costCenters    
+    this.syncJobType.configuration["costCenters"]  = this.selectedCostCenters    
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.spinner.hide();
       this.router.navigate([Constants.SYNC_JOBS]);
@@ -67,15 +72,6 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
       this.router.navigate([Constants.SYNC_JOBS]);
     });
   }
-
-  getBusinessUnits() {
-    this.invoiceService.getBisinessUnits().toPromise().then((res: any) => {
-      this.businessUnits = res.data.items;
-    }).catch(err => {
-      console.error(err);
-    });
-  }
-
   getCostCenter() {
     this.costCenterLoding = true;
     this.spinner.show();

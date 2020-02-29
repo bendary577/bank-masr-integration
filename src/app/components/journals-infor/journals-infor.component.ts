@@ -7,11 +7,11 @@ import { JournalService } from 'src/app/services/journal/journal.service';
 import { SyncJob } from 'src/app/models/SyncJob';
 
 @Component({
-  selector: 'app-journal-infor',
-  templateUrl: './journal-infor.component.html',
-  styleUrls: ['./journal-infor.component.scss']
+  selector: 'app-journals-infor',
+  templateUrl: './journals-infor.component.html',
+  styleUrls: ['./journals-infor.component.scss']
 })
-export class JournalInforComponent implements OnInit {
+export class JournalsInforComponent implements OnInit {
 
   loading = true;
   static getJournalsLoding = false;
@@ -31,26 +31,26 @@ export class JournalInforComponent implements OnInit {
     this.state = localStorage.getItem('getJournalsLoding');
 
     if (this.state == "true"){
-      JournalInforComponent.getJournalsLoding = true;
+      JournalsInforComponent.getJournalsLoding = true;
     }
     else{
-      JournalInforComponent.getJournalsLoding = false;
+      JournalsInforComponent.getJournalsLoding = false;
     }
   }
 
   get staticgetJournalsLoding() {
-    return JournalInforComponent.getJournalsLoding ;
+    return JournalsInforComponent.getJournalsLoding ;
   }
 
   getJournalsJobSyncJob() {
     localStorage.setItem('getJournalsLoding', "true");
-    JournalInforComponent.getJournalsLoding = true;
+    JournalsInforComponent.getJournalsLoding = true;
 
     this.journalService.getJournals().toPromise().then((res: any) => {
       this.getSyncJobs(Constants.JOURNALS_SYNC);
       
       localStorage.setItem('getJournalsLoding', "false");
-      JournalInforComponent.getJournalsLoding = false;
+      JournalsInforComponent.getJournalsLoding = false;
 
       if (res.success){
         this.snackBar.open(res.message, null, {
@@ -60,28 +60,17 @@ export class JournalInforComponent implements OnInit {
         });
       }
       else{
-        console.log(res.message.message)
         this.snackBar.open(res.message.message , null, {
           duration: 3000,
           horizontalPosition: 'center',
           panelClass:"my-snack-bar-fail"
         });
       }
+
     }).catch(err => {
-        console.log(err);
+
     });
 
-  }
-
-  getJournalsDB() {
-    this.loading = true;
-    this.syncJobService.getSyncJobData(Constants.JOURNALS_SYNC).toPromise().then((res: any) => {
-      this.journals = res;
-
-      this.loading = false;
-    }).catch(err => {
-      this.loading = false;
-    });
   }
 
   getSyncJobs(syncJobTypeName:String) {
@@ -113,4 +102,5 @@ export class JournalInforComponent implements OnInit {
       this.loading = false;
     });
   }
+
 }

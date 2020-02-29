@@ -24,6 +24,7 @@ import { ApprovedInvoiceInforConfigurationComponent } from './components/approve
 import { JournalsInforConfigurationsComponent } from './components/journals-infor-configurations/journals-infor-configurations.component';
 import { SuppliersInforConfigurationComponent } from './components/suppliers-infor-configuration/suppliers-infor-configuration.component';
 import { BookedTransferInforComponent } from './components/booked-transfer-infor/booked-transfer-infor.component';
+import { JournalInforComponent } from './components/journal-infor/journal-infor.component';
 
 
 const routes: Routes = [
@@ -55,6 +56,7 @@ const routes: Routes = [
   { path: Constants.CREDIT_NOTE_PAGE , component: CreditNoteComponent  , canActivate:[AuthGuardService]},
   
   { path: Constants.JOURNALS_PAGE , component: JournalsComponent  , canActivate:[AuthGuardService]},
+  { path: Constants.JOURNALS_INFOR_PAGE , component: JournalInforComponent  , canActivate:[AuthGuardService]},
   { path: Constants.JOURNALS_CONFIG_PAGE , component: JournalConfigurationComponent  , canActivate:[AuthGuardService]},
   { path: Constants.JOURNALS_SUN_CONFIG_PAGE , component: JournalsInforConfigurationsComponent  , canActivate:[AuthGuardService]},
 
