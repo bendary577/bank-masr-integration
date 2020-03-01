@@ -18,8 +18,8 @@ export class Constants {
     static ADD_ACCOUNT = environment.apiHost + '/addAccount';
     static UPDATE_ACCOUNT = environment.apiHost + '/updateAccount';
 
-    static GET_USERS = environment.apiHost + '/auth/getUsers';
-    static ADD_USER = environment.apiHost + '/auth/addUser';
+    static GET_USERS = environment.apiHost + '/getUsers';
+    static ADD_USER = environment.apiHost + '/addUser';
 
     static VENDOR_URL = environment.apiHost + '/getVendors';
     static ADD_VENDOR_URL = environment.apiHost + '/addVendor';
