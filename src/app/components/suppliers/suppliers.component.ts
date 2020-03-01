@@ -43,27 +43,6 @@ export class SuppliersComponent implements OnInit {
     }
   }
 
-  getSuppliersDB() {
-    this.spinner.show();
-    this.syncJobService.getSyncJobData("Suppliers").toPromise().then((res: any) => {
-      this.dataSource = res;
-      for (const element of this.dataSource) {
-        if (this.vendorService.vendorAccountIDS.indexOf(element.SupplierNumber) !== -1) {
-          element.exists = true;
-          element.loading = false;
-        } else {
-          element.exists = false;
-          element.loading = false;
-        }
-      }
-      this.spinner.hide();
-      this.loading = false;
-    }).catch(err => {
-      console.error(err);
-      this.spinner.hide();
-      this.loading = false;
-    });
-  }
 
   get staticgetSuppliersLoading() {
     return SuppliersComponent.getSuppliersLoading ;
@@ -97,7 +76,14 @@ export class SuppliersComponent implements OnInit {
 
 
     }).catch(err => {
+      SuppliersComponent.getSuppliersLoading = false;
+      localStorage.setItem('getSuppliersLoading', "false");
 
+      this.snackBar.open(err.message , null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
     });
   }
 
