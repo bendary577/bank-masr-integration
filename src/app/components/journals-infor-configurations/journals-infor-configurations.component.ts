@@ -21,7 +21,6 @@ import { CostCenter } from 'src/app/models/CostCenter';
 export class JournalsInforConfigurationsComponent implements OnInit {
   loading = true;
   save_loading = false;
-  cost_loading = true;
   group_loading = true;
   item_loading = true;
   syncTypeLoading = true
@@ -47,7 +46,6 @@ export class JournalsInforConfigurationsComponent implements OnInit {
 
   ngOnInit() {
     this.getSyncJobType();
-    // this.getCostCenter();
     this.getOverGroups();
 
     this.columns = [
@@ -69,30 +67,14 @@ export class JournalsInforConfigurationsComponent implements OnInit {
 
   }
 
-  getCostCenter() {
-    this.spinner.show();
-    this.cost_loading = true;
-    this.invoiceService.getCostCenter(Constants.JOURNALS_SYNC).toPromise().then((res: any) => {
-      this.costCenters = res.costCenters;
-      this.spinner.hide();
-      this.cost_loading = false;
-    }).catch(err => {
-      console.error(err);
-      this.snackBar.open(err.error.message , null, {
-        duration: 3000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-      this.spinner.hide();
-      this.cost_loading = false;
-    });
-  }
-
   getOverGroups() {
     this.group_loading = true;
+    this.spinner.show();
     this.journalService.getOverGroups().toPromise().then((res: any) => {
       this.overGroups = res.data;
       this.group_loading = false;
+      this.spinner.hide();
+
       if (res.success){
         this.snackBar.open(res.message , null, {
           duration: 3000,
