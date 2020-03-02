@@ -68,7 +68,8 @@ import { SuppliersInforConfigurationComponent } from './components/suppliers-inf
 import { BookedTransferInforComponent } from './components/booked-transfer-infor/booked-transfer-infor.component';
 import { BookedTransferInforConfigurationComponent } from './components/booked-transfer-infor-configuration/booked-transfer-infor-configuration.component';
 import { JournalInforComponent } from './components/journal-infor/journal-infor.component';
-import { JournalsInforComponent } from './components/journals-infor/journals-infor.component';
+import { ApprovedInvoicesInforComponent } from './components/approved-invoices-infor/approved-invoices-infor.component';
+import { CreditNotesInforComponent } from './components/credit-notes-infor/credit-notes-infor.component';
 
 @NgModule({
   declarations: [
@@ -107,7 +108,8 @@ import { JournalsInforComponent } from './components/journals-infor/journals-inf
     BookedTransferInforComponent,
     BookedTransferInforConfigurationComponent,
     JournalInforComponent,
-    JournalsInforComponent
+    ApprovedInvoicesInforComponent,
+    CreditNotesInforComponent,
   ],
   imports: [
     BrowserModule,

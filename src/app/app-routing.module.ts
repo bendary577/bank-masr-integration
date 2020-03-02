@@ -25,6 +25,8 @@ import { JournalsInforConfigurationsComponent } from './components/journals-info
 import { SuppliersInforConfigurationComponent } from './components/suppliers-infor-configuration/suppliers-infor-configuration.component';
 import { BookedTransferInforComponent } from './components/booked-transfer-infor/booked-transfer-infor.component';
 import { JournalInforComponent } from './components/journal-infor/journal-infor.component';
+import { BookedTransferInforConfigurationComponent } from './components/booked-transfer-infor-configuration/booked-transfer-infor-configuration.component';
+import { ApprovedInvoicesInforComponent } from './components/approved-invoices-infor/approved-invoices-infor.component';
 
 
 const routes: Routes = [
@@ -47,11 +49,14 @@ const routes: Routes = [
   { path: Constants.SUPPLIERS_DETAILS_PAGE, component: SupplierDetailsComponent  , canActivate:[AuthGuardService]},
 
   { path: Constants.APPROVED_INVOICES_PAGE, component: ApprovedInvoiceComponent , canActivate:[AuthGuardService]},
+  { path: Constants.APPROVED_INVOICES_INFOR_PAGE, component:  ApprovedInvoicesInforComponent, canActivate:[AuthGuardService]},
   { path: Constants.APPROVED_INVOICES_CONFIG_PAGE, component: ApprovedInvoiceConfigurationComponent  , canActivate:[AuthGuardService]},
   { path: Constants.APPROVED_INVOICES_SUN_CONFIG_PAGE, component: ApprovedInvoiceInforConfigurationComponent  , canActivate:[AuthGuardService]},
 
   { path: Constants.BOOKED_TRANSFER_PAGE, component: BookedTransferComponent  , canActivate:[AuthGuardService]},
   { path: Constants.BOOKED_TRANSFER_INFOR_PAGE, component: BookedTransferInforComponent  , canActivate:[AuthGuardService]},
+  { path: Constants.BOOKED_TRANSFER_INFOR_CONFIG_PAGE, component: BookedTransferInforConfigurationComponent  , canActivate:[AuthGuardService]},
+
 
   { path: Constants.CREDIT_NOTE_PAGE , component: CreditNoteComponent  , canActivate:[AuthGuardService]},
   

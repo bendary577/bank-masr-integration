@@ -6,11 +6,11 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJob } from 'src/app/models/SyncJob';
 
 @Component({
-  selector: 'app-approved-invoice',
-  templateUrl: './approved-invoice.component.html',
-  styleUrls: ['./approved-invoice.component.scss']
+  selector: 'app-approved-invoices-infor',
+  templateUrl: './approved-invoices-infor.component.html',
+  styleUrls: ['./approved-invoices-infor.component.scss']
 })
-export class ApprovedInvoiceComponent implements OnInit {
+export class ApprovedInvoicesInforComponent implements OnInit {
   loading = true;
   static getInvoicesLoading = false;
   success = null;
@@ -29,10 +29,10 @@ export class ApprovedInvoiceComponent implements OnInit {
     this.state = localStorage.getItem('getInvoicesLoading');
 
     if (this.state == "true"){
-      ApprovedInvoiceComponent.getInvoicesLoading = true;
+      ApprovedInvoicesInforComponent.getInvoicesLoading = true;
     }
     else{
-      ApprovedInvoiceComponent.getInvoicesLoading = false;
+      ApprovedInvoicesInforComponent.getInvoicesLoading = false;
     }
   }
 
@@ -53,12 +53,12 @@ export class ApprovedInvoiceComponent implements OnInit {
   }
 
   get staticgetInvoicesLoading() {
-    return ApprovedInvoiceComponent.getInvoicesLoading ;
+    return ApprovedInvoicesInforComponent.getInvoicesLoading ;
   }
 
   getApprovedInvoicesSyncJob() {
     localStorage.setItem('getInvoicesLoading', "true");
-    ApprovedInvoiceComponent.getInvoicesLoading = true
+    ApprovedInvoicesInforComponent.getInvoicesLoading = true
     this.invoiceService.getApprovedInvoices().toPromise().then((res: any) => {
       this.success = res.success;
       if (this.success){
@@ -78,10 +78,10 @@ export class ApprovedInvoiceComponent implements OnInit {
       this.getSyncJobs("Approved Invoices");
   
       localStorage.setItem('getInvoicesLoading', "false");
-      ApprovedInvoiceComponent.getInvoicesLoading = false;
+      ApprovedInvoicesInforComponent.getInvoicesLoading = false;
     }).catch(err => {
       localStorage.setItem('getInvoicesLoading', "false");
-      ApprovedInvoiceComponent.getInvoicesLoading = false;
+      ApprovedInvoicesInforComponent.getInvoicesLoading = false;
 
       this.snackBar.open(err.message.message , null, {
         duration: 3000,
@@ -125,5 +125,4 @@ export class ApprovedInvoiceComponent implements OnInit {
       this.loading = false;
     });
   }
-
 }

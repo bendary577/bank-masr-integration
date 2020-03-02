@@ -1,4 +1,4 @@
-<h3>Booked Transfer</h3>
+<h3>Approved Invoices</h3>
 
 <div class="header">
     <span class="history"> Sync Job History </span>
@@ -7,12 +7,13 @@
         <option [ngValue]="job" *ngFor="let job of jobs">
             {{job.creationDate}} - {{job.status}}</option>
     </select> 
-    <button mat-flat-button (click)="getBookedTransferSyncJob()">Sync Booked Transfer Now</button>
+     
+    <button mat-flat-button (click)="getApprovedInvoicesSyncJob()">Sync Approved Invoices Now</button>
 </div>
 
 <br>
 <div id="myProgress" >
-    <mat-progress-bar mode="indeterminate" *ngIf="staticgetTransfersLoading" ></mat-progress-bar>
+    <mat-progress-bar mode="indeterminate" *ngIf="staticgetInvoicesLoading" ></mat-progress-bar>
 </div>
 
 <br>
@@ -42,37 +43,38 @@
                 <span class="value" *ngIf="selectedJob.reason">{{selectedJob.reason}}</span>
                 <span class="value" *ngIf="!selectedJob.reason">No Info</span>
             </mat-list-item>
-            <mat-list-item *ngIf="!bookedTransfer.length"> 
+            <mat-list-item *ngIf="!approvedInvoices.length"> 
             <span>
-                There was no new data to sync in this job, You can sync booked transfers now from <a (click)="getBookedTransferSyncJob()">here</a>
+                There was no new data to sync in this job, You can sync approved invoices now from  <a (click)="getApprovedInvoicesSyncJob()">here</a>
             </span>
             </mat-list-item>
             </mat-card-content>
     </mat-card>
-</div>
-
-<br>
+    </div>
+    <br>
 
 <div>
 
-    <div *ngIf="!jobs.length">
+<div>
+
+<div *ngIf="!jobs.length">
         <mat-card class="example-card">
                 <mat-card-header>
-                    <mat-card-title>No Data</mat-card-title>
+                  <mat-card-title>No Data</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                    <p>
-                        There was no new data to sync in this job, You can sync booked transfer now from 
-                    <a  (click)="getBookedTransferSyncJob()">here</a>
-                    </p>
-                    
+                  <p>
+                        There was no new data to sync in this job, You can sync approved invoices now from 
+                    <a  (click)="getApprovedInvoicesSyncJob()">here</a>
+                  </p>
+                  
                 </mat-card-content>
         </mat-card>
-    </div>
-    
-    <div class="main" *ngIf="bookedTransfer.length">  
-    <ngx-datatable  class="material" [rows]="bookedTransfer" [columnMode]="'force'" [headerHeight]="50"
-        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'status', dir: 'asc'}]">
+        </div>
+
+<div class="main" *ngIf="approvedInvoices.length">
+    <ngx-datatable class="material" [rows]="approvedInvoices" [columnMode]="'force'" [headerHeight]="50"
+        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'from', dir: 'asc'}, {prop: 'invoiceNo', dir: 'asc'}]">
 
         <ngx-datatable-column name="Status">
             <ng-template let-row="row" ngx-datatable-cell-template>
@@ -90,26 +92,58 @@
                 {{row.data.description}}
             </ng-template>
         </ngx-datatable-column>
-
-        <ngx-datatable-column name="Transfer Total">
+        
+        <ngx-datatable-column name="Invoice No">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.data.invoiceNo}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Vendor">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.data.from}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Cost Center">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.data.to}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="status">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.data.status}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Invoice Date">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.data.invoiceDate}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Net">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.data.net}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Vat">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.vat}}
+                </ng-template>
+            </ngx-datatable-column>
+        <ngx-datatable-column name="Gross">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.data.total}}
             </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="From Cost Center">
+        <ngx-datatable-column name="Created By">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.data.from_cost_center}}
+                {{row.data.createdBy}}
             </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="To Cost Center">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.data.to_cost_center}}
-            </ng-template>
-        </ngx-datatable-column>
-
-     
+    
+    
     </ngx-datatable>
-    </div>
+</div>
+
+<div>
     <ngx-spinner></ngx-spinner>
 
 </div>

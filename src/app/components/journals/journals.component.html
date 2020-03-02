@@ -39,6 +39,11 @@
                 <span class="value" *ngIf="selectedJob.endDate">{{selectedJob.endDate}}</span>
                 <span class="value" *ngIf="!selectedJob.endDate">No Info</span>
             </mat-list-item>
+            <mat-list-item>      
+                <span class="key">Reason: </span>
+                <span class="value" *ngIf="selectedJob.reason">{{selectedJob.reason}}</span>
+                <span class="value" *ngIf="!selectedJob.reason">No Info</span>
+            </mat-list-item>
             <mat-list-item *ngIf="!journals.length"> 
             <span>
                 There was no new data to sync in this job, You can sync journals now from <a (click)="getJournalsJobSyncJob()">here</a>

@@ -80,6 +80,7 @@ export class Constants {
     static SUPPLIERS_SYNC = 'Suppliers';
 
     static APPROVED_INVOICES_PAGE = 'approvedInvoices';
+    static APPROVED_INVOICES_INFOR_PAGE = 'approvedInvoicesSun';
     static APPROVED_INVOICES_CONFIG_PAGE = 'approvedInvoicesConfig';
     static APPROVED_INVOICES_SUN_CONFIG_PAGE = 'approvedInvoicesSunConfig';
     static APPROVED_INVOICES_SYNC = 'Approved Invoices';
@@ -87,6 +88,7 @@ export class Constants {
     static BOOKED_TRANSFER_PAGE = 'bookedTransfers';
     static BOOKED_TRANSFER_INFOR_PAGE = 'bookedTransfersSun';
     static BOOKED_TRANSFER_CONFIG_PAGE = 'bookedTransfersConfig';
+    static BOOKED_TRANSFER_INFOR_CONFIG_PAGE = 'bookedTransfersSunConfig';
     static BOOKED_TRANSFER_DETAILS_PAGE = 'bookedTransfersDetails';
     static BOOKED_TRANSFER_SYNC = 'Booked Transfers';
 
