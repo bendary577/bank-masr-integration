@@ -75,6 +75,27 @@
         
     </mat-expansion-panel>
 
+    <mat-expansion-panel >
+      <mat-expansion-panel-header>
+      <mat-panel-title>
+          Waste Configurations
+      </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="container" *ngIf="!loading">
+          <form  class="my-form">
+              <div >
+                  <mat-form-field class="example-full-width">
+                      <input matInput id="inventoryAccount" name="inventoryAccount" placeholder="Inventory Account"  
+                      [(ngModel)]="syncJobType.configuration.accountSettings.inventoryAccount">
+                  </mat-form-field>
+              </div>
+
+          </form>
+      </div>
+      
+  </mat-expansion-panel>
+
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
@@ -98,6 +119,20 @@
                   <input matInput  placeholder="Product"  [(ngModel)]="row.product">
                 </ng-template>
             </ngx-datatable-column>  
+
+            
+            <ngx-datatable-column name="Inventory Account">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <input matInput  placeholder="Inventory Account"  [(ngModel)]="row.inventoryAccount">
+              </ng-template>
+          </ngx-datatable-column>  
+
+          
+          <ngx-datatable-column name="Expenses Account">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <input matInput  placeholder="Expenses Account"  [(ngModel)]="row.expensesAccount">
+            </ng-template>
+        </ngx-datatable-column>  
 
         </ngx-datatable>
           </div>
@@ -183,54 +218,54 @@
         </mat-expansion-panel>
 
 
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Items And Groups Mangment
-            </mat-panel-title>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Items And Groups Mangment
+        </mat-panel-title>
 
-          </mat-expansion-panel-header>
-          <div class="main" *ngIf="mappedItems?.length > 0">
-            <ngx-datatable  class="material" [rows]="mappedItems" [columnMode]="'force'" [headerHeight]="50"
-                [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[]">
-        
-                <ngx-datatable-column name="Item">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.item}}
-                    </ng-template>
-                </ngx-datatable-column>
+      </mat-expansion-panel-header>
+      <div class="main" *ngIf="mappedItems?.length > 0">
+        <ngx-datatable  class="material" [rows]="mappedItems" [columnMode]="'force'" [headerHeight]="50"
+            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[]">
+    
+            <ngx-datatable-column name="Item">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.item}}
+                </ng-template>
+            </ngx-datatable-column>
 
-                <ngx-datatable-column name="Item Group">
-                  <ng-template let-row="row" ngx-datatable-cell-template>
-                      {{row.item_group}}
-                  </ng-template>
-              </ngx-datatable-column>
-                
-                <ngx-datatable-column name="Major Group">
-                  <ng-template let-row="row" ngx-datatable-cell-template>
-                      {{row.major_group}}
-                  </ng-template>
-              </ngx-datatable-column>  
-                
-                <ngx-datatable-column name="Over Group">
-                  <ng-template let-row="row" ngx-datatable-cell-template>
-                      {{row.over_group}}
-                  </ng-template>
-              </ngx-datatable-column>
-            </ngx-datatable>
-        </div>
+            <ngx-datatable-column name="Item Group">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{row.item_group}}
+              </ng-template>
+          </ngx-datatable-column>
+            
+            <ngx-datatable-column name="Major Group">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{row.major_group}}
+              </ng-template>
+          </ngx-datatable-column>  
+            
+            <ngx-datatable-column name="Over Group">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{row.over_group}}
+              </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+    </div>
 
-        </mat-expansion-panel>
+    </mat-expansion-panel>
 
-        <br>
+    <br>
 
-        <div class="card-back">
-            <button mat-flat-button (click)="onSaveClick()">Save</button>
-            <button mat-flat-button (click)="onCancelClick()">Cancel</button>
-          </div>
-          <div class="card-back">
-            <button mat-flat-button (click)="mapItemGroups()">Map Item Group</button>
-          </div>
+    <div class="card-back">
+        <button mat-flat-button (click)="onSaveClick()">Save</button>
+        <button mat-flat-button (click)="onCancelClick()">Cancel</button>
+      </div>
+      <div class="card-back">
+        <button mat-flat-button (click)="mapItemGroups()">Map Item Group</button>
+    </div>
                
     </div>
 

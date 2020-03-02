@@ -87,6 +87,36 @@
     </div>
             
         </mat-expansion-panel>
+
+        
+        <mat-expansion-panel >
+            <mat-expansion-panel-header>
+            <mat-panel-title>
+                Cash Shortage/Surplus POS Configurations
+            </mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <div class="container" *ngIf="!loading">
+                <form  class="my-form">
+                    <div >
+                        <mat-form-field class="example-full-width">
+                            <input matInput id="cashShortagePOS" name="cashShortagePOS" placeholder="Cash Shortage POS Account"  
+                            [(ngModel)]="syncJobType.configuration.accountSettings.cashShortagePOS">
+                        </mat-form-field>
+                    </div>
+                    <div >
+                        <mat-form-field class="example-full-width">
+                            <input matInput id="cashSurplusPOS" name="cashSurplusPOS" placeholder="Cash Surplus POS Account"  
+                            [(ngModel)]="syncJobType.configuration.accountSettings.cashSurplusPOS">
+                        </mat-form-field>
+                    </div>
+    
+                </form>
+            </div>
+            
+        </mat-expansion-panel>
+
+        
         <br>
         <div class="card-back">
             <button mat-flat-button (click)="onSaveClick()">Save</button>
