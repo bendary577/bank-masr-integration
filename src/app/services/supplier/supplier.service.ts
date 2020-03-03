@@ -22,11 +22,13 @@ export class SupplierService {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_SUPPLIERS_DB_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
-
+  @Cacheable()
   getSuppliersTaxes() {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_SUPPLIERS_TAXES_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
+  
+  @Cacheable()
   getSuppliersGroups() {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_SUPPLIERS_GROUPS_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
