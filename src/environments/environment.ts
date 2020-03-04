@@ -4,10 +4,10 @@
 
 export const environment = {
 
- apiHost: 'http://127.0.0.1:5000/server',
+//  apiHost: 'http://127.0.0.1:5000/server',
 
  // Production Server
-  // apiHost: 'http://34.68.46.207/server',
+  apiHost: 'http://34.68.46.207/server',
 
   // Development Server
   // apiHost: 'http://34.67.96.240/server',

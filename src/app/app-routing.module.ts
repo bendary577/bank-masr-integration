@@ -18,8 +18,10 @@ import {AuthGuardService} from "./guards/AuthGuardService";
 import { JournalConfigurationComponent } from './components/journal-configuration/journal-configuration.component';
 import { JournalsComponent } from './components/journals/journals.component';
 import { PosSalesComponent } from './components/pos-sales/pos-sales.component';
-import { PosSalesConfigurationComponent } from './pos-sales-configuration/pos-sales-configuration.component';
+import { PosSalesConfigurationComponent } from './components/pos-sales-configuration/pos-sales-configuration.component';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
+import { WastageComponent } from './components/wastage/wastage.component';
+import { WastageConfigurationComponent } from './components/wastage-configuration/wastage-configuration.component';
 
 
 const routes: Routes = [
@@ -52,6 +54,11 @@ const routes: Routes = [
 
   { path: Constants.POS_SALES_PAGE , component: PosSalesComponent ,canActivate:[AuthGuardService]},
   { path: Constants.POS_SALES_CONFIG_PAGE , component: PosSalesConfigurationComponent ,canActivate:[AuthGuardService]},
+
+  
+  { path: Constants.WASTARGE_PAGE , component: WastageComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.WASTARGE_CONFIG_PAGE , component: WastageConfigurationComponent ,canActivate:[AuthGuardService]},
+
 
   // Error Page
   {path:'**', component: ErrorComponentComponent,canActivate:[AuthGuardService]}

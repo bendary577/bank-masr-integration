@@ -6,25 +6,27 @@ import { Constants } from 'src/app/models/constants';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 import { AccountSyncType } from 'src/app/models/AccountSyncType';
-import { PosSalesService } from '../services/posSales/pos-sales.service';
-
-
+import { WastageService } from 'src/app/services/wastage/wastage.service';
+import { JournalService } from 'src/app/services/journal/journal.service';
 
 @Component({
-  selector: 'app-pos-sales-configuration',
-  templateUrl: './pos-sales-configuration.component.html',
-  styleUrls: ['./pos-sales-configuration.component.scss']
+  selector: 'app-wastage-configuration',
+  templateUrl: './wastage-configuration.component.html',
+  styleUrls: ['./wastage-configuration.component.scss']
 })
-export class PosSalesConfigurationComponent implements OnInit {
+export class WastageConfigurationComponent implements OnInit {
 
-  loading = true;
-  save_loading = false;
-  tender_loading = true;
+  syncJobTypeloading = true;
+  saveLoading = false;
+  groupLoading = true;
+  tenderLoading = true;
   selectedTender = [];
+  overGroups = [];
 
   syncJobType: AccountSyncType;  
 
-  constructor(private spinner: NgxSpinnerService, private salesService:PosSalesService,
+  constructor(private spinner: NgxSpinnerService, private wasteService:WastageService,
+    private journalService:JournalService,
      private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService,
     private router:Router, public snackBar: MatSnackBar) { }
 
@@ -33,19 +35,36 @@ export class PosSalesConfigurationComponent implements OnInit {
   }
 
   getSyncJobType(){
-    this.loading = true;
-    this.accSyncTypeService.getAccSyncJobType(Constants.POS_SALES_SYNC).toPromise().then((res: any) => {
+    this.syncJobTypeloading = true;
+    this.accSyncTypeService.getAccSyncJobType(Constants.WASTARGE_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
-      this.loading = false;
+      this.syncJobTypeloading = false;
     }).catch(err => {
       console.error(err);
-      this.loading = false;
+      this.syncJobTypeloading = false;
+    });
+  }
+
+  
+  getOverGroups() {
+    this.groupLoading = true;
+    this.journalService.getOverGroups().toPromise().then((res: any) => {
+      this.overGroups = res.data;
+      this.groupLoading = false;
+    }).catch(err => {
+      console.error(err);
+      this.snackBar.open(err.error.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+      this.groupLoading = false;
     });
   }
   
   onSaveClick(): void {
     this.spinner.show();
-    this.save_loading = true;
+    this.saveLoading = true;
 
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.snackBar.open('Save configuration successfully.', null, {
@@ -54,7 +73,7 @@ export class PosSalesConfigurationComponent implements OnInit {
         panelClass:"my-snack-bar-success"
       });
       this.spinner.hide();
-      this.save_loading = false;
+      this.saveLoading = false;
     }
     ).catch(err => {
       this.snackBar.open('An error has occurred.', null, {
@@ -63,7 +82,7 @@ export class PosSalesConfigurationComponent implements OnInit {
         panelClass:"my-snack-bar-fail"
       });
       this.spinner.hide();
-      this.save_loading = false;
+      this.saveLoading = false;
     });
   }
 

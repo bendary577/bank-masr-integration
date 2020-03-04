@@ -61,7 +61,9 @@ import { PosSalesComponent } from './components/pos-sales/pos-sales.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AddAccountComponent } from './components/add-account/add-account.component';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
-import { PosSalesConfigurationComponent } from './pos-sales-configuration/pos-sales-configuration.component';
+import { PosSalesConfigurationComponent } from './components/pos-sales-configuration/pos-sales-configuration.component';
+import { WastageComponent } from './components/wastage/wastage.component';
+import { WastageConfigurationComponent } from './components/wastage-configuration/wastage-configuration.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +95,9 @@ import { PosSalesConfigurationComponent } from './pos-sales-configuration/pos-sa
     PosSalesComponent,
     WelcomePageComponent,
     PosSalesConfigurationComponent,
-    AddAccountComponent
+    AddAccountComponent,
+    WastageComponent,
+    WastageConfigurationComponent
   ],
   imports: [
     BrowserModule,
