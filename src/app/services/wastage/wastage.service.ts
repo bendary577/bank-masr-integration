@@ -17,4 +17,10 @@ export class WastageService {
     return this.http.get(Constants.GET_WASTE_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
+  getwasteGroups(){
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get(Constants.GET_WASTE_GROUPS_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
+  }
+
+  
 }

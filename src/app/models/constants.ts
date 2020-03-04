@@ -36,24 +36,20 @@ export class Constants {
     static GET_SYNC_JOBS_URL = environment.apiHost + '/getSyncJobs';
 
     static GET_SUPPLIERS_URL = environment.apiHost + '/getSuppliers';
-    static GET_SUPPLIERS_DB_URL = environment.apiHost + '/getSuppliersDB';
     static GET_SUPPLIERS_DETAILS_URL = environment.apiHost + '/getSuppliersDetails';
     static GET_SUPPLIERS_TAXES_URL = environment.apiHost + '/getSupplierTaxes';
     static GET_SUPPLIERS_GROUPS_URL = environment.apiHost + '/getSupplierGroups';
     
     static GET_APPROVED_INVOICES_URL = environment.apiHost + '/getApprovedInvoices';
-    static GET_APPROVED_INVOICES_DB_URL = environment.apiHost + '/getApprovedInvoicesDB';
     static GET_COST_CENTER_URL = environment.apiHost + '/getCostCenter';
 
     static GET_CREDIT_NOTE_URL = environment.apiHost + '/getCreditNotes';
-    static GET_CREDIT_NOTE_DB_URL = environment.apiHost + '/getCreditNotesDB';
 
     static GET_BOOKED_TRANSFER_URL = environment.apiHost + '/getBookedTransfer';
-    static GET_BOOKED_TRANSFER_DB_URL = environment.apiHost + '/getBookedTransferDB';
     static GET_BOOKED_TRANSFER_DETAILS_URL = environment.apiHost + '/getBookedTransferDetails';
 
-    static GET_WASTE_URL = environment.apiHost + '/getBookedWaste';
-    static GET_WASTE_DB_URL = environment.apiHost + '/getBookedWasteDB';
+    static GET_WASTE_GROUPS_URL = environment.apiHost + '/getWasteGroups';
+    static GET_WASTE_URL = environment.apiHost + '/getWastage';
 
     static GET_BUSINESS_UNITS_URL = environment.apiHost + '/getBusinessUnits'; 
     static GET_PAYMENT_METHODS_URL = environment.apiHost + '/getPaymentMethods';

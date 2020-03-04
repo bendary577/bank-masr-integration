@@ -19,9 +19,11 @@ export class WastageConfigurationComponent implements OnInit {
   syncJobTypeloading = true;
   saveLoading = false;
   groupLoading = true;
-  tenderLoading = true;
+  wasteLoading = true;
   selectedTender = [];
   overGroups = [];
+  wasteGroups = [];
+  selectedWasteGroups = [];
 
   syncJobType: AccountSyncType;  
 
@@ -32,6 +34,7 @@ export class WastageConfigurationComponent implements OnInit {
 
   ngOnInit() {
     this.getSyncJobType();
+    this.getWasteGroups();
   }
 
   getSyncJobType(){
@@ -49,7 +52,7 @@ export class WastageConfigurationComponent implements OnInit {
   getOverGroups() {
     this.groupLoading = true;
     this.journalService.getOverGroups().toPromise().then((res: any) => {
-      this.overGroups = res.data;
+      this.wasteGroups = res.data;
       this.groupLoading = false;
     }).catch(err => {
       console.error(err);
@@ -61,10 +64,42 @@ export class WastageConfigurationComponent implements OnInit {
       this.groupLoading = false;
     });
   }
+
+  getWasteGroups() {
+    this.wasteLoading = true;
+    this.spinner.show();
+    this.wasteService.getwasteGroups().toPromise().then((res: any) => {
+      this.wasteGroups = res.data;
+
+      this.wasteLoading = false;
+      this.spinner.hide();
+    }).catch(err => {
+      console.error(err);
+      this.snackBar.open(err.error.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+      this.wasteLoading = false;
+      this.spinner.hide();
+    });
+  }
   
+
   onSaveClick(): void {
     this.spinner.show();
     this.saveLoading = true;
+
+    let that = this;
+    this.wasteGroups.forEach(function (wasteGroup) {
+      if (wasteGroup.checked){
+        that.selectedWasteGroups.push(wasteGroup)
+      }
+    });
+
+    if (this.selectedWasteGroups.length != 0) {
+      this.syncJobType.configuration["wasteGroups"] = this.selectedWasteGroups;
+    }
 
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.snackBar.open('Save configuration successfully.', null, {

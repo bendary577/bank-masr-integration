@@ -78,6 +78,9 @@ export class SyncJobsconfigComponent implements OnInit {
     else if (syncJobType.name == Constants.POS_SALES_SYNC){
       this.router.navigate([Constants.POS_SALES_CONFIG_PAGE]);
     }
+    else if (syncJobType.name == Constants.WASTARGE_SYNC){
+      this.router.navigate([Constants.WASTARGE_CONFIG_PAGE]);
+    }
     else{
       this.snackBar.open("This sync job has not configuration yet.", null, {
         duration: 2000,
