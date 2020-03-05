@@ -18,16 +18,13 @@ export class SupplierService {
      { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
-  getSuppliersDB() {
-    this.token = localStorage.getItem('auth_token');
-    return this.http.get(Constants.GET_SUPPLIERS_DB_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
-  }
+
   @Cacheable()
   getSuppliersTaxes() {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_SUPPLIERS_TAXES_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
-  
+
   @Cacheable()
   getSuppliersGroups() {
     this.token = localStorage.getItem('auth_token');

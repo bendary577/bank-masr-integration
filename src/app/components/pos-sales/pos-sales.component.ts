@@ -3,7 +3,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { MatSnackBar } from '@angular/material';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { Constants } from 'src/app/models/constants';
-import { JournalService } from 'src/app/services/journal/journal.service';
 import { SyncJob } from 'src/app/models/SyncJob';
 import { PosSalesService } from 'src/app/services/posSales/pos-sales.service';
 
@@ -15,7 +14,7 @@ import { PosSalesService } from 'src/app/services/posSales/pos-sales.service';
 export class PosSalesComponent implements OnInit {
 
   loading = true;
-  getPosSalesLoading = false;
+  static getPosSalesLoading = false;
   success = null;
   jobs = [];
   posSales = [];
@@ -23,18 +22,22 @@ export class PosSalesComponent implements OnInit {
   state = "";
 
 
-  constructor(private spinner: NgxSpinnerService,
-    private journalService: JournalService, private syncJobService: SyncJobService,
+  constructor(private spinner: NgxSpinnerService, private syncJobService: SyncJobService,
     public snackBar: MatSnackBar, private posSalesService:PosSalesService) { }
 
   ngOnInit() {
     this.getSyncJobs(Constants.POS_SALES_SYNC);
+    this.state = localStorage.getItem('getPosSalesLoading');
     if (this.state == "true"){
-      this.getPosSalesLoading = true;
+      PosSalesComponent.getPosSalesLoading = true;
     }
     else{
-      this.getPosSalesLoading = false;
+      PosSalesComponent.getPosSalesLoading = false;
     }
+  }
+
+  get staticgetPosSalesLoading() {
+    return PosSalesComponent.getPosSalesLoading ;
   }
 
   getPOSSales() {
@@ -51,10 +54,13 @@ export class PosSalesComponent implements OnInit {
   }
 
   getPOSSalesSyncJob() {
-    this.getPosSalesLoading = true;
+    localStorage.setItem('getPosSalesLoading', "true");
+    PosSalesComponent.getPosSalesLoading = true;
     this.posSalesService.getPOSSales().toPromise().then((res: any) => {
       this.getSyncJobs(Constants.POS_SALES_SYNC);
-      this.getPosSalesLoading = false;
+
+      localStorage.setItem('getPosSalesLoading', "false");
+      PosSalesComponent.getPosSalesLoading = false;
       this.snackBar.open(res.message, null, {
         duration: 2000,
         horizontalPosition: 'center',
@@ -62,7 +68,9 @@ export class PosSalesComponent implements OnInit {
       });
 
     }).catch(err => {
-      this.getPosSalesLoading = false;
+      localStorage.setItem('getPosSalesLoading', "false");
+
+      PosSalesComponent.getPosSalesLoading = false;
 
       let msg = "";
       if (err.error.message){

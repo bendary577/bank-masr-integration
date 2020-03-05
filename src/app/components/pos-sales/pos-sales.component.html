@@ -13,7 +13,7 @@
 
 <br>
 <div id="myProgress" >
-    <mat-progress-bar mode="indeterminate" *ngIf="getPosSalesLoading" ></mat-progress-bar>
+    <mat-progress-bar mode="indeterminate" *ngIf="staticgetPosSalesLoading" ></mat-progress-bar>
 </div>
 
 <br>
@@ -145,9 +145,14 @@
                     {{row.data.project}}
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Account">
+            <ngx-datatable-column name="Account Credit">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.account}}
+                    {{row.data.accountCredit}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Account Debit">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.accountDebit}}
                 </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column name="Intercompany">

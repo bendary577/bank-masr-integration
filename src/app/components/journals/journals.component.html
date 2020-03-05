@@ -146,9 +146,14 @@
                     {{row.data.project}}
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Account">
+            <ngx-datatable-column name="Account Credit">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.account}}
+                    {{row.data.accountCredit}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Account Debit">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.accountDebit}}
                 </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column name="Intercompany">

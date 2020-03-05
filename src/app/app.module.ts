@@ -70,6 +70,9 @@ import { BookedTransferInforConfigurationComponent } from './components/booked-t
 import { JournalInforComponent } from './components/journal-infor/journal-infor.component';
 import { ApprovedInvoicesInforComponent } from './components/approved-invoices-infor/approved-invoices-infor.component';
 import { CreditNotesInforComponent } from './components/credit-notes-infor/credit-notes-infor.component';
+import { PosSalesConfigurationComponent } from './components/pos-sales-configuration/pos-sales-configuration.component';
+import { WastageComponent } from './components/wastage/wastage.component';
+import { WastageConfigurationComponent } from './components/wastage-configuration/wastage-configuration.component';
 
 @NgModule({
   declarations: [
@@ -110,6 +113,9 @@ import { CreditNotesInforComponent } from './components/credit-notes-infor/credi
     JournalInforComponent,
     ApprovedInvoicesInforComponent,
     CreditNotesInforComponent,
+    AddAccountComponent,
+    WastageComponent,
+    WastageConfigurationComponent
   ],
   imports: [
     BrowserModule,
