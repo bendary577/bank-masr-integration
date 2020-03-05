@@ -95,10 +95,28 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
           <div *ngIf="overGroups?.length > 0">
-            <section class="example-section" name="Over Group" *ngFor="let group of overGroups">
-              <mat-checkbox class="example-margin"  [(ngModel)]="group.checked">{{group.over_group}}</mat-checkbox>
-            </section>
-          </div>           
+
+            <ngx-datatable  class="material" [rows]="overGroups" [columnMode]="'force'" [headerHeight]="50"
+            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[]" >
+
+              <ngx-datatable-column name="Over Group">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.over_group">{{row.over_group}}</mat-checkbox>
+                  </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Inventory Account">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <input matInput  placeholder="Inventory Account"  [(ngModel)]="row.inventoryAccount">
+                </ng-template>
+              </ngx-datatable-column>  
+              <ngx-datatable-column name="Expenses Account">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <input matInput  placeholder="Expenses Account"  [(ngModel)]="row.expensesAccount">
+                </ng-template>
+              </ngx-datatable-column>  
+
+        </ngx-datatable>
+          </div>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
