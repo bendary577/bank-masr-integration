@@ -70,7 +70,7 @@ export class JournalConfigurationComponent implements OnInit {
 
   getOverGroups() {
     this.group_loading = true;
-    this.journalService.getOverGroups().toPromise().then((res: any) => {
+    this.journalService.getOverGroups(Constants.JOURNALS_SYNC).toPromise().then((res: any) => {
       this.overGroups = res.data;
       this.group_loading = false;
     }).catch(err => {

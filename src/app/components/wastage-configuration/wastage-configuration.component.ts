@@ -24,6 +24,7 @@ export class WastageConfigurationComponent implements OnInit {
   overGroups = [];
   wasteGroups = [];
   selectedWasteGroups = [];
+  selectedOverGroups = [];
 
   syncJobType: AccountSyncType;  
 
@@ -35,6 +36,7 @@ export class WastageConfigurationComponent implements OnInit {
   ngOnInit() {
     this.getSyncJobType();
     this.getWasteGroups();
+    this.getOverGroups();
   }
 
   getSyncJobType(){
@@ -51,8 +53,8 @@ export class WastageConfigurationComponent implements OnInit {
   
   getOverGroups() {
     this.groupLoading = true;
-    this.journalService.getOverGroups().toPromise().then((res: any) => {
-      this.wasteGroups = res.data;
+    this.journalService.getOverGroups(Constants.WASTARGE_SYNC).toPromise().then((res: any) => {
+      this.overGroups = res.data;
       this.groupLoading = false;
     }).catch(err => {
       console.error(err);
@@ -97,8 +99,17 @@ export class WastageConfigurationComponent implements OnInit {
       }
     });
 
+    this.overGroups.forEach(function (overGroup) {
+      if (overGroup.checked){
+        that.selectedOverGroups.push(overGroup)
+      }
+    });
+
     if (this.selectedWasteGroups.length != 0) {
       this.syncJobType.configuration["wasteGroups"] = this.selectedWasteGroups;
+    }
+    if(this.selectedOverGroups.length != 0){
+      this.syncJobType.configuration["overGroups"] = this.selectedOverGroups;
     }
 
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
