@@ -11,9 +11,8 @@ export class JournalService {
 
   constructor(private http: HttpClient) { }
 
-  getOverGroups(syncJobType) {
   @Cacheable()
-  getOverGroups() {
+  getOverGroups(syncJobType) {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_OVER_GROUPS_URL+ '?syncJobType=' + syncJobType, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
