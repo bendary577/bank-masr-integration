@@ -18,13 +18,16 @@ import {AuthGuardService} from "./guards/AuthGuardService";
 import { JournalConfigurationComponent } from './components/journal-configuration/journal-configuration.component';
 import { JournalsComponent } from './components/journals/journals.component';
 import { PosSalesComponent } from './components/pos-sales/pos-sales.component';
-import { PosSalesConfigurationComponent } from './pos-sales-configuration/pos-sales-configuration.component';
+import { PosSalesConfigurationComponent } from './components/pos-sales-configuration/pos-sales-configuration.component';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 import { ApprovedInvoiceInforConfigurationComponent } from './components/approved-invoice-infor-configuration/approved-invoice-infor-configuration.component';
 import { JournalsInforConfigurationsComponent } from './components/journals-infor-configurations/journals-infor-configurations.component';
 import { SuppliersInforConfigurationComponent } from './components/suppliers-infor-configuration/suppliers-infor-configuration.component';
 import { BookedTransferInforComponent } from './components/booked-transfer-infor/booked-transfer-infor.component';
 import { JournalInforComponent } from './components/journal-infor/journal-infor.component';
+import { WastageComponent } from './components/wastage/wastage.component';
+import { WastageConfigurationComponent } from './components/wastage-configuration/wastage-configuration.component';
+import { CostCenterLocationMappingComponent } from './components/setting/cost-center-location-mapping/cost-center-location-mapping.component';
 
 
 const routes: Routes = [
@@ -36,6 +39,9 @@ const routes: Routes = [
   },
   { path: Constants.USERS_CONFIGURATION, component: UsersComponent,canActivate:[AuthGuardService]},
   { path: Constants.SYNC_JOBS, component: SyncJobsconfigComponent  , canActivate:[AuthGuardService]},
+  { path: Constants.USERS_CONFIGURATION, component: UsersComponent,canActivate:[AuthGuardService] },
+  { path: Constants.SYNC_JOBS, component: SyncJobsconfigComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.COST_CENTER_LOCATION_MAPPING, component: CostCenterLocationMappingComponent ,canActivate:[AuthGuardService]},
 
   // Pages
   { path: Constants.LOGIN_PAGE, component: LoginComponent},
@@ -54,7 +60,7 @@ const routes: Routes = [
   { path: Constants.BOOKED_TRANSFER_INFOR_PAGE, component: BookedTransferInforComponent  , canActivate:[AuthGuardService]},
 
   { path: Constants.CREDIT_NOTE_PAGE , component: CreditNoteComponent  , canActivate:[AuthGuardService]},
-  
+
   { path: Constants.JOURNALS_PAGE , component: JournalsComponent  , canActivate:[AuthGuardService]},
   { path: Constants.JOURNALS_INFOR_PAGE , component: JournalInforComponent  , canActivate:[AuthGuardService]},
   { path: Constants.JOURNALS_CONFIG_PAGE , component: JournalConfigurationComponent  , canActivate:[AuthGuardService]},
@@ -62,6 +68,11 @@ const routes: Routes = [
 
   { path: Constants.POS_SALES_PAGE , component: PosSalesComponent  , canActivate:[AuthGuardService]},
   { path: Constants.POS_SALES_CONFIG_PAGE , component: PosSalesConfigurationComponent  , canActivate:[AuthGuardService]},
+
+
+  { path: Constants.WASTARGE_PAGE , component: WastageComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.WASTARGE_CONFIG_PAGE , component: WastageConfigurationComponent ,canActivate:[AuthGuardService]},
+
 
   // Error Page
   {path:'**', component: ErrorComponentComponent }

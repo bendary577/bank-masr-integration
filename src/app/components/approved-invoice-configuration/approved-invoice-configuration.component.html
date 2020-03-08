@@ -78,7 +78,9 @@
                     
                                     <mat-form-field>
                                         <mat-select id="businessUnit" name="businessUnit" placeholder="businessUnit" [(ngModel)]="row.business_unit">
-                                            <mat-option *ngFor="let businessUnit of businessUnits" value={{businessUnit.BusinessUnitName}}>
+                                          <mat-option value=""></mat-option>
+  
+                                          <mat-option *ngFor="let businessUnit of businessUnits" value={{businessUnit.BusinessUnitName}}>
                                                 {{businessUnit.BusinessUnitName}}</mat-option>
                                           </mat-select>
                                         </mat-form-field>  

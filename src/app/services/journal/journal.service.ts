@@ -21,7 +21,7 @@ export class JournalService {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.MAP_ITEM_GROUPS_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
-  
+
   getJournals() {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_JOURNALS_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});

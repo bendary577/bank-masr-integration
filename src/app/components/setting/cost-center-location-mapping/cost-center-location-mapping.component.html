@@ -1,0 +1,63 @@
+<h3 mat-dialog-title>Cost Center Location Mapping</h3>
+
+<div>
+      <!-- Cost Centers -->
+      <mat-expansion-panel >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Cost Center To Location Mapping
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+            <div  *ngIf="!loading">
+                <div *ngIf="!costCenterLoding">
+                    <div *ngIf="!costCenters.length">
+                        <mat-card class="example-card">
+                                <mat-card-header>
+                                  <mat-card-title>Error</mat-card-title>
+                                </mat-card-header>
+                                <mat-card-content>
+                                  <p>
+                                        Error happend while fetching cost centers, make sure you have cost centers.
+                                  </p>
+                                  
+                                </mat-card-content>
+                        </mat-card>
+                    </div>
+                    
+                    <div class="main" *ngIf="costCenters.length">
+                        <ngx-datatable *ngIf="!loading" class="material" [rows]="costCenters" [columnMode]="'force'" [headerHeight]="50"
+                            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'cost_center', dir: 'asc'}]">
+                    
+                            <ngx-datatable-column name="Cost Center">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    {{row.cost_center}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            
+            
+                            <ngx-datatable-column name="Location">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                  <input matInput  placeholder="Location"  [(ngModel)]="row.locationName">
+                                </ng-template>
+                            </ngx-datatable-column>  
+                        
+                        </ngx-datatable>
+                    </div>
+            
+                    <br>
+        
+                </div>     
+            </div>
+      </mat-expansion-panel>
+      <br>
+
+      <div class="card-back">
+        <button mat-flat-button (click)="onSaveClick()">Save</button>
+        <button mat-flat-button (click)="onCancelClick()">Cancel</button>
+    </div>
+      <ngx-spinner></ngx-spinner>
+</div>
+
+
+

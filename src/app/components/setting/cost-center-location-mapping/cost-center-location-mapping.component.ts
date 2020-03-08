@@ -5,92 +5,96 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { Constants } from 'src/app/models/constants';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
-import { Data } from 'src/app/models/data';
-import { SyncJobType } from 'src/app/models/SyncJobType';
+import { AccountSyncType } from 'src/app/models/AccountSyncType';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 
 @Component({
-  selector: 'app-approved-invoice-configuration',
-  templateUrl: './approved-invoice-configuration.component.html',
-  styleUrls: ['./approved-invoice-configuration.component.scss']
+  selector: 'app-cost-center-location-mapping',
+  templateUrl: './cost-center-location-mapping.component.html',
+  styleUrls: ['./cost-center-location-mapping.component.scss']
 })
-export class ApprovedInvoiceConfigurationComponent implements OnInit {
-  syncJobType: SyncJobType;
-  submitted = false;
-  loading = true;
+export class CostCenterLocationMappingComponent implements OnInit {
   costCenterLoding = true;
+  save_loading = false;
+  loading = false;
   costCenters = [];
-  businessUnits = [];
-  PaymentMethods = [];
   selectedCostCenters = [];
-  timePeriods = ["All", "Current Year", "Current Month", "Last Month", "Last Year", "User-defined"];
+  syncJobType: AccountSyncType;
 
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
     private router:Router, public snackBar: MatSnackBar, private syncJobService:SyncJobService,
-    private data: Data, private accSyncTypeService:AccSyncTypeService) {
+    private accSyncTypeService:AccSyncTypeService) { 
   }
 
   ngOnInit() {
-    this.getSyncJobType();
-    this.getBusinessUnits()
-    this.getPaymentMethods();
     this.getCostCenter();
+    this.getSyncJobType();
   }
 
   getSyncJobType(){
     this.loading = true;
-    this.accSyncTypeService.getAccSyncJobType(Constants.APPROVED_INVOICES_SYNC).toPromise().then((res: any) => {
+    this.accSyncTypeService.getAccSyncJobType(Constants.JOURNALS_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
+      this.costCenters = this.syncJobType.configuration["costCenterLocationMapping"];
+
       this.loading = false;
     }).catch(err => {
       console.error(err);
       this.loading = false;
     });
   }
+
 
   onSaveClick(): void {
     this.spinner.show();
+    this.save_loading = true;
 
-    this.syncJobType.configuration["costCenters"]  = this.costCenters
+    let that = this;
+    this.costCenters.forEach(function (costCenter) {
+      if (costCenter.locationName){
+        that.selectedCostCenters.push(costCenter)
+      }
+    });
+
+    if (this.selectedCostCenters.length != 0) {
+      this.syncJobType.configuration["costCenterLocationMapping"] = this.selectedCostCenters;
+    }
+
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
+      this.snackBar.open('Save configuration successfully.', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-success"
+      });
       this.spinner.hide();
-      this.router.navigate([Constants.SYNC_JOBS]);
+      this.save_loading = false;
     }
     ).catch(err => {
-      this.spinner.hide();
       this.snackBar.open('An error has occurred.', null, {
         duration: 2000,
-        horizontalPosition: 'right',
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+
       });
-      this.router.navigate([Constants.SYNC_JOBS]);
+      this.spinner.hide();
+      this.save_loading = false;
+
     });
+
   }
 
-  getBusinessUnits() {
-    this.invoiceService.getBisinessUnits().toPromise().then((res: any) => {
-      this.businessUnits = res.data.items;
-    }).catch(err => {
-      console.error(err);
-    });
-  }
-
-  getPaymentMethods() {
-    this.invoiceService.getPaymentMethods().toPromise().then((res: any) => {
-      this.PaymentMethods = res.data.items;
-    }).catch(err => {
-      console.error(err);
-    });
-  }
 
   getCostCenter() {
     this.costCenterLoding = true;
     this.spinner.show();
-    this.invoiceService.getCostCenter(Constants.APPROVED_INVOICES_SYNC).toPromise().then((res: any) => {
-      this.costCenters = res.costCenters;
+    
+    this.invoiceService.getCostCenter(Constants.JOURNALS_SYNC).toPromise().then((res: any) => {
+      this.costCenters = res.data;
 
       this.spinner.hide();
       this.costCenterLoding = false;
     }).catch(err => {
+      this.costCenters = [];
       console.error(err);
       this.spinner.hide();
       this.costCenterLoding = false;
@@ -100,5 +104,4 @@ export class ApprovedInvoiceConfigurationComponent implements OnInit {
   onCancelClick(){
     this.router.navigate([Constants.SYNC_JOBS]);
   }
-
 }

@@ -40,31 +40,13 @@ export class JournalConfigurationComponent implements OnInit {
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
     private journalService:JournalService, private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService,
     private router:Router, public snackBar: MatSnackBar) {
-    
+
   }
 
   ngOnInit() {
     this.getSyncJobType();
     this.getCostCenter();
-    // this.getOverGroups();
-
-    this.columns = [
-      {
-        prop: 'selected',
-        name: '',
-        sortable: false,
-        canAutoResize: false,
-        draggable: false,
-        resizable: false,
-        headerCheckboxable: true,
-        checkboxable: true,
-        width: 30
-      },
-      { prop: 'name' },
-      { prop: 'gender' },
-      { prop: 'company' },
-    ]
-
+    this.getOverGroups();
   }
 
   getCostCenter() {
@@ -88,7 +70,7 @@ export class JournalConfigurationComponent implements OnInit {
 
   getOverGroups() {
     this.group_loading = true;
-    this.journalService.getOverGroups().toPromise().then((res: any) => {
+    this.journalService.getOverGroups(Constants.JOURNALS_SYNC).toPromise().then((res: any) => {
       this.overGroups = res.data;
       this.group_loading = false;
     }).catch(err => {
@@ -158,7 +140,7 @@ export class JournalConfigurationComponent implements OnInit {
 
     this.overGroups.forEach(function (overGroup) {
       if (overGroup.checked){
-        that.selectedOverGroups.push(overGroup.over_group)
+        that.selectedOverGroups.push(overGroup)
       }
     });
 

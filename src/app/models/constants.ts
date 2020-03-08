@@ -33,34 +33,31 @@ export class Constants {
     static GET_ACC_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getAccSyncJobTypesByName';
 
     static UPDATE_SYNC_JOB_TYPES_URL = environment.apiHost + '/updateSyncJobTypesConfiguration';
+    static UPDATE_COST_CENTER_LOCATION_MAPPING_URL = environment.apiHost + '/updateCostCenterLocationMapping';
     static GET_SYNC_JOBS_URL = environment.apiHost + '/getSyncJobs';
 
     static GET_SUPPLIERS_URL = environment.apiHost + '/getSuppliers';
-    static GET_SUPPLIERS_DB_URL = environment.apiHost + '/getSuppliersDB';
     static GET_SUPPLIERS_DETAILS_URL = environment.apiHost + '/getSuppliersDetails';
     static GET_SUPPLIERS_TAXES_URL = environment.apiHost + '/getSupplierTaxes';
     static GET_SUPPLIERS_GROUPS_URL = environment.apiHost + '/getSupplierGroups';
-    
+
     static GET_APPROVED_INVOICES_URL = environment.apiHost + '/getApprovedInvoices';
-    static GET_APPROVED_INVOICES_DB_URL = environment.apiHost + '/getApprovedInvoicesDB';
     static GET_COST_CENTER_URL = environment.apiHost + '/getCostCenter';
 
     static GET_CREDIT_NOTE_URL = environment.apiHost + '/getCreditNotes';
-    static GET_CREDIT_NOTE_DB_URL = environment.apiHost + '/getCreditNotesDB';
 
     static GET_BOOKED_TRANSFER_URL = environment.apiHost + '/getBookedTransfer';
-    static GET_BOOKED_TRANSFER_DB_URL = environment.apiHost + '/getBookedTransferDB';
     static GET_BOOKED_TRANSFER_DETAILS_URL = environment.apiHost + '/getBookedTransferDetails';
 
-    static GET_BOOKED_WASTE_URL = environment.apiHost + '/getBookedWaste';
-    static GET_BOOKED_WASTE_DB_URL = environment.apiHost + '/getBookedWasteDB';
+    static GET_WASTE_GROUPS_URL = environment.apiHost + '/getWasteGroups';
+    static GET_WASTE_URL = environment.apiHost + '/getWastage';
 
-    static GET_BUSINESS_UNITS_URL = environment.apiHost + '/getBusinessUnits'; 
+    static GET_BUSINESS_UNITS_URL = environment.apiHost + '/getBusinessUnits';
     static GET_PAYMENT_METHODS_URL = environment.apiHost + '/getPaymentMethods';
 
     static GET_OVER_GROUPS_URL = environment.apiHost + '/getOverGroups';
     static MAP_ITEM_GROUPS_URL = environment.apiHost + '/mapItems';
-    static GET_JOURNALS_URL = environment.apiHost + '/getJournals';
+    static GET_JOURNALS_URL = environment.apiHost + '/getConsumptions';
 
     static GET_POS_SALES_URL = environment.apiHost + '/getPOSSales';
     static GET_POS_SALES_TENDERS_URL = environment.apiHost + '/getTenders';
@@ -90,9 +87,6 @@ export class Constants {
     static BOOKED_TRANSFER_DETAILS_PAGE = 'bookedTransfersDetails';
     static BOOKED_TRANSFER_SYNC = 'Booked Transfers';
 
-    static BOOKED_WASTE_PAGE = 'bookedWastes';
-    static BOOKED_WASTE_CONFIG_PAGE = 'bookedWastesConfig';
-
     static CREDIT_NOTE_PAGE = 'creditNotes';
     static CREDIT_NOTE_CONFIG_PAGE = 'creditNotesConfig';
     static CREDIT_NOTE_SYNC = 'Credit Notes';
@@ -100,6 +94,10 @@ export class Constants {
     static CONSUMPTIONS_SYNC = 'Consumptions';
     static TRANSFERS_SYNC = 'Transfers';
     static ADJUSTMENTS_SYNC = 'Adjustments';
+
+    static JOURNALS_SYNC = 'Consumptions';
+    static JOURNALS_PAGE = 'consumptions';
+    static JOURNALS_CONFIG_PAGE = 'consumptionsConfig';
     static JOURNALS_SYNC = 'Journals';
 
     static JOURNALS_PAGE = 'journals';
@@ -111,11 +109,15 @@ export class Constants {
     static POS_SALES_SYNC = 'POS Sales';
     static POS_SALES_CONFIG_PAGE = 'posSalesConfig';
 
+    static WASTARGE_PAGE = 'wastage';
+    static WASTARGE_SYNC = 'Wastage';
+    static WASTARGE_CONFIG_PAGE = 'wastageConfig';
 
     static TABS_PAGE = 'tabs';
     static END_POINT = '/getSuppliers';
     static SETTING = 'setting';
     static ACCOUNT_CONFIGURATION = 'configuration';
+    static COST_CENTER_LOCATION_MAPPING = 'costCenterLocationMapping';
     static USERS_CONFIGURATION = 'users';
     static SYNC_JOBS = 'syncjobs';
 

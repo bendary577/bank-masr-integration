@@ -25,9 +25,9 @@ import {
   MatListModule,
   MatButtonModule,
   MatPaginatorModule,
-  MatDatepickerModule, 
-  MatNativeDateModule, 
-  MatSelectModule, 
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatSelectModule,
   MatCheckboxModule,
   MatCardModule,
   MatRippleModule,
@@ -69,6 +69,10 @@ import { BookedTransferInforComponent } from './components/booked-transfer-infor
 import { BookedTransferInforConfigurationComponent } from './components/booked-transfer-infor-configuration/booked-transfer-infor-configuration.component';
 import { JournalInforComponent } from './components/journal-infor/journal-infor.component';
 import { JournalsInforComponent } from './components/journals-infor/journals-infor.component';
+import { PosSalesConfigurationComponent } from './components/pos-sales-configuration/pos-sales-configuration.component';
+import { WastageComponent } from './components/wastage/wastage.component';
+import { WastageConfigurationComponent } from './components/wastage-configuration/wastage-configuration.component';
+import { CostCenterLocationMappingComponent } from './components/setting/cost-center-location-mapping/cost-center-location-mapping.component';
 
 @NgModule({
   declarations: [
@@ -108,6 +112,10 @@ import { JournalsInforComponent } from './components/journals-infor/journals-inf
     BookedTransferInforConfigurationComponent,
     JournalInforComponent,
     JournalsInforComponent
+    AddAccountComponent,
+    WastageComponent,
+    WastageConfigurationComponent,
+    CostCenterLocationMappingComponent
   ],
   imports: [
     BrowserModule,

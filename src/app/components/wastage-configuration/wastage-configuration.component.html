@@ -1,0 +1,142 @@
+<h3 mat-dialog-title>Update Wastage Configuartion</h3>
+
+
+<div>
+    <div *ngIf="!wasteLoading">
+
+        <mat-expansion-panel >
+            <mat-expansion-panel-header>
+            <mat-panel-title>
+                Predifined Configurations
+            </mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <div class="container" *ngIf="!wasteLoading">
+            <form  class="my-form">
+            <!-- Import Journal Info -->
+
+                <div >
+                    <mat-form-field class="example-full-width">
+                        <input matInput id="salesGroup" name="salesGroup" placeholder="Wastage group starting number"  
+                        [(ngModel)]="syncJobType.configuration.accountSettings.wastageGroupIdStarting">
+                    </mat-form-field>
+                </div>
+                <div >
+                    <mat-form-field class="example-full-width">
+                        <input matInput id="sourceId" name="sourceId" placeholder="Source Id"  
+                        [(ngModel)]="syncJobType.configuration.accountSettings.sourceId">
+                    </mat-form-field>
+                </div>
+    
+                <div >
+                  <mat-form-field class="example-full-width">
+                      <input matInput id="sourceName" name="sourceName" placeholder="Source Name"  
+                      [(ngModel)]="syncJobType.configuration.accountSettings.source">
+                  </mat-form-field>
+                </div>
+                <div >
+                    <mat-form-field class="example-full-width">
+                        <input matInput id="category" name="category" placeholder="Category" 
+                        [(ngModel)]="syncJobType.configuration.accountSettings.category">
+                    </mat-form-field>
+                </div>
+    
+                <div >
+                <mat-form-field class="example-full-width">
+                    <input matInput id="ledgerId" name="ledgerId" placeholder="Ledger Id"  
+                    [(ngModel)]="syncJobType.configuration.accountSettings.ledgerId">
+                </mat-form-field>
+            </div>
+            <div >
+                <mat-form-field class="example-full-width">
+                    <input matInput id="ledgerName" name="ledgerName" placeholder="Ledger Name" 
+                    [(ngModel)]="syncJobType.configuration.accountSettings.ledgerName">
+                </mat-form-field>
+            </div>
+            <div >
+                <mat-form-field class="example-full-width">
+                    <input matInput id="legalEntityIdentifier" name="legalEntityIdentifier"
+                     placeholder="Legal Entity Identifier" 
+                    [(ngModel)]="syncJobType.configuration.accountSettings.legalEntityIdentifier">
+                </mat-form-field>
+            </div>
+            <div >
+                <mat-form-field class="example-full-width">
+                    <input matInput id="accountingPeriodName" name="accountingPeriodName"
+                     placeholder="Accounting Period Name" 
+                    [(ngModel)]="syncJobType.configuration.accountSettings.accountingPeriodName">
+                </mat-form-field>
+            </div>
+                    
+            </form>
+    </div>
+            
+        </mat-expansion-panel>
+
+        
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Watsage And Over Groups Mapping
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+            <div *ngIf="overGroups?.length > 0">
+  
+              <ngx-datatable  class="material" [rows]="overGroups" [columnMode]="'force'" [headerHeight]="50"
+              [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[]" >
+  
+                <ngx-datatable-column name="Over Group">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.over_group">{{row.over_group}}</mat-checkbox>
+                    </ng-template>
+                </ngx-datatable-column>
+
+              <ngx-datatable-column name="Credit Account">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <input matInput  placeholder="Credit Account"  [(ngModel)]="row.wasteAccountCredit">
+                </ng-template>
+            </ngx-datatable-column>  
+  
+            
+            <ngx-datatable-column name="Debit Account">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <input matInput  placeholder="Debit Account"  [(ngModel)]="row.wasteAccountDebit">
+              </ng-template>
+          </ngx-datatable-column>  
+  
+          </ngx-datatable>
+            </div>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Watse Groups
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+            <div *ngIf="wasteGroups?.length > 0">
+  
+              <ngx-datatable  class="material" [rows]="wasteGroups" [columnMode]="'force'" [headerHeight]="50"
+              [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[]" >
+  
+                <ngx-datatable-column name="Waste Group">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.waste_group">{{row.waste_group}}</mat-checkbox>
+                    </ng-template>
+                </ngx-datatable-column>
+  
+          </ngx-datatable>
+            </div>
+      </mat-expansion-panel> 
+        
+      
+        <br>
+        <div class="card-back">
+            <button mat-flat-button (click)="onSaveClick()">Save</button>
+            <button mat-flat-button (click)="onCancelClick()">Cancel</button>
+        </div>
+  
+    </div>
+      <ngx-spinner></ngx-spinner>
+</div>
+  

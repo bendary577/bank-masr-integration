@@ -16,10 +16,6 @@ export class InvoiceService {
     return this.http.get(Constants.GET_APPROVED_INVOICES_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
-  getApprovedInvoicesDB() {this.token = localStorage.getItem('auth_token');
-    return this.http.get(Constants.GET_APPROVED_INVOICES_DB_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
-  }
-  
   @Cacheable()
   getCostCenter(syncJobTypeName) {
     this.token = localStorage.getItem('auth_token');
@@ -35,5 +31,5 @@ export class InvoiceService {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_PAYMENT_METHODS_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
-  
+
 }
