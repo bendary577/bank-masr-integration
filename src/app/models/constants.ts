@@ -33,6 +33,7 @@ export class Constants {
     static GET_ACC_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getAccSyncJobTypesByName';
 
     static UPDATE_SYNC_JOB_TYPES_URL = environment.apiHost + '/updateSyncJobTypesConfiguration';
+    static UPDATE_COST_CENTER_LOCATION_MAPPING_URL = environment.apiHost + '/updateCostCenterLocationMapping';
     static GET_SYNC_JOBS_URL = environment.apiHost + '/getSyncJobs';
 
     static GET_SUPPLIERS_URL = environment.apiHost + '/getSuppliers';
@@ -56,7 +57,7 @@ export class Constants {
 
     static GET_OVER_GROUPS_URL = environment.apiHost + '/getOverGroups';
     static MAP_ITEM_GROUPS_URL = environment.apiHost + '/mapItems';
-    static GET_JOURNALS_URL = environment.apiHost + '/getJournals';
+    static GET_JOURNALS_URL = environment.apiHost + '/getConsumptions';
 
     static GET_POS_SALES_URL = environment.apiHost + '/getPOSSales';
     static GET_POS_SALES_TENDERS_URL = environment.apiHost + '/getTenders';
@@ -91,9 +92,9 @@ export class Constants {
     static TRANSFERS_SYNC = 'Transfers';
     static ADJUSTMENTS_SYNC = 'Adjustments';
     
-    static JOURNALS_SYNC = 'Journals';
-    static JOURNALS_PAGE = 'journals';
-    static JOURNALS_CONFIG_PAGE = 'journalsConfig';
+    static JOURNALS_SYNC = 'Consumptions';
+    static JOURNALS_PAGE = 'consumptions';
+    static JOURNALS_CONFIG_PAGE = 'consumptionsConfig';
 
     static POS_SALES_PAGE = 'posSales';
     static POS_SALES_SYNC = 'POS Sales';

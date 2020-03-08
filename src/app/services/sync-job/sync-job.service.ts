@@ -33,6 +33,11 @@ export class SyncJobService {
     return this.http.put(Constants.UPDATE_SYNC_JOB_TYPES_URL , SyncJobType, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})}).toPromise();
   }
 
+  updateCostCenterLocationMapping(costCenters){
+    this.token = localStorage.getItem('auth_token');
+    return this.http.put(Constants.UPDATE_COST_CENTER_LOCATION_MAPPING_URL , costCenters, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})}).toPromise();
+  }
+
   getSyncJobs(syncJobTypeName:String){
     this.token = localStorage.getItem('auth_token');
     return this.http.get<SyncJob[]>(Constants.GET_SYNC_JOBS_URL + '?typeName=' + syncJobTypeName, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});

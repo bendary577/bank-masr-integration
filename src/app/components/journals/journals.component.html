@@ -1,5 +1,5 @@
 
-<h3>Journals</h3>
+<h3>Consumptions</h3>
 
 
 <div class="header">
@@ -9,7 +9,7 @@
         <option [ngValue]="job" *ngFor="let job of jobs">
             {{job.creation_date}} - {{job.status}}</option>
     </select> 
-    <button mat-flat-button (click)="getJournalsJobSyncJob()">Sync Journals Now</button>
+    <button mat-flat-button (click)="getJournalsJobSyncJob()">Sync Consumptions Now</button>
 </div>
 
 <br>
@@ -41,7 +41,7 @@
             </mat-list-item>
             <mat-list-item *ngIf="!journals.length"> 
             <span>
-                There was no new data to sync in this job, You can sync journals now from <a (click)="getJournalsJobSyncJob()">here</a>
+                There was no new data to sync in this job, You can sync consumptions now from <a (click)="getJournalsJobSyncJob()">here</a>
             </span>
             </mat-list-item>
             </mat-card-content>
