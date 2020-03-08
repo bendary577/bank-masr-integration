@@ -61,7 +61,6 @@ import { PosSalesComponent } from './components/pos-sales/pos-sales.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AddAccountComponent } from './components/add-account/add-account.component';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
-import { PosSalesConfigurationComponent } from './pos-sales-configuration/pos-sales-configuration.component';
 import { ApprovedInvoiceInforConfigurationComponent } from './components/approved-invoice-infor-configuration/approved-invoice-infor-configuration.component';
 import { JournalsInforConfigurationsComponent } from './components/journals-infor-configurations/journals-infor-configurations.component';
 import { SuppliersInforConfigurationComponent } from './components/suppliers-infor-configuration/suppliers-infor-configuration.component';
@@ -69,10 +68,10 @@ import { BookedTransferInforComponent } from './components/booked-transfer-infor
 import { BookedTransferInforConfigurationComponent } from './components/booked-transfer-infor-configuration/booked-transfer-infor-configuration.component';
 import { JournalInforComponent } from './components/journal-infor/journal-infor.component';
 import { JournalsInforComponent } from './components/journals-infor/journals-infor.component';
-import { PosSalesConfigurationComponent } from './components/pos-sales-configuration/pos-sales-configuration.component';
 import { WastageComponent } from './components/wastage/wastage.component';
 import { WastageConfigurationComponent } from './components/wastage-configuration/wastage-configuration.component';
 import { CostCenterLocationMappingComponent } from './components/setting/cost-center-location-mapping/cost-center-location-mapping.component';
+import { PosSalesConfigurationComponent } from './components/pos-sales-configuration/pos-sales-configuration.component';
 
 @NgModule({
   declarations: [
@@ -111,8 +110,7 @@ import { CostCenterLocationMappingComponent } from './components/setting/cost-ce
     BookedTransferInforComponent,
     BookedTransferInforConfigurationComponent,
     JournalInforComponent,
-    JournalsInforComponent
-    AddAccountComponent,
+    JournalsInforComponent,
     WastageComponent,
     WastageConfigurationComponent,
     CostCenterLocationMappingComponent
