@@ -68,6 +68,8 @@ export class PosSalesComponent implements OnInit {
       });
 
     }).catch(err => {
+      this.getSyncJobs(Constants.POS_SALES_SYNC);
+
       localStorage.setItem('getPosSalesLoading', "false");
 
       PosSalesComponent.getPosSalesLoading = false;

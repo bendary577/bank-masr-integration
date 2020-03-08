@@ -21,7 +21,12 @@ export class PosSalesConfigurationComponent implements OnInit {
   save_loading = false;
   tender_loading = true;
   selectedTender = [];
-
+  // tenders = [
+  //   {"checked": false, "tender": "Cash", "account": ""},
+  //   {"checked": false, "tender": "Visa", "account": ""},
+  //   {"checked": false, "tender": "Master", "account": ""},
+  // ];
+  tenders = []
   syncJobType: AccountSyncType;  
 
   constructor(private spinner: NgxSpinnerService, private salesService:PosSalesService,
@@ -36,6 +41,7 @@ export class PosSalesConfigurationComponent implements OnInit {
     this.loading = true;
     this.accSyncTypeService.getAccSyncJobType(Constants.POS_SALES_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
+      this.tenders = this.syncJobType.configuration["tenders"];
       this.loading = false;
     }).catch(err => {
       console.error(err);
@@ -46,6 +52,17 @@ export class PosSalesConfigurationComponent implements OnInit {
   onSaveClick(): void {
     this.spinner.show();
     this.save_loading = true;
+
+    let that = this;
+    this.tenders.forEach(function (tender) {
+      if (tender.checked){
+        that.selectedTender.push(tender)
+      }
+    });
+
+    if (this.selectedTender.length != 0) {
+      this.syncJobType.configuration["tenders"] = this.selectedTender;
+    }
 
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.snackBar.open('Save configuration successfully.', null, {

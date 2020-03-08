@@ -5,7 +5,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { Constants } from 'src/app/models/constants';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
-import { Data } from 'src/app/models/data';
 import { AccountSyncType } from 'src/app/models/AccountSyncType';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 
