@@ -8,6 +8,14 @@
             <!-- <h2>Update Supplier Configuartion</h2> -->
             <form  class="my-form">
 
+                
+                <div >
+                    <mat-form-field class="example-full-width">
+                      <input matInput id="businessUnit" name="businessUnit" placeholder="Business Unit"  
+                      [(ngModel)]="syncJobType.configuration.businessUnit">
+                  </mat-form-field>
+                </div>
+
                 <div >
                     <mat-form-field>
                         <mat-select id="taxes" name="taxes" placeholder="taxes" [(ngModel)]="syncJobType.configuration.taxes">

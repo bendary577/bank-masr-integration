@@ -23,21 +23,21 @@
       </mat-expansion-panel-header>
 
       <mat-form-field>
-      <input matInput placeholder="Username" [(ngModel)]="account.account_credentials.HospitalityOHIM.username">
+      <input matInput placeholder="Username" [(ngModel)]="account.accountCredentials.HospitalityOHIM.username">
     </mat-form-field>
 
       <mat-form-field>
         <input id="mysecretpassword" type="password" placeholder="Password" matInput showHideInput
-        [(ngModel)]="account.account_credentials.HospitalityOHIM.password">
+        [(ngModel)]="account.accountCredentials.HospitalityOHIM.password">
 <!-- 
         <input id="inventoryPassword" type="password" placeholder="Password" matInput  showHideInput
-         [(ngModel)]="account.account_credentials.HospitalityOHIM.password"> -->
+         [(ngModel)]="account.accountCredentials.HospitalityOHIM.password"> -->
          <i matSuffix class="material-icons" showHideTrigger="mysecretpassword"
          [showHideStatus]="{ materialIcon: true, id: 'mysecretpassword' }"></i>
 
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Company" [(ngModel)]="account.account_credentials.HospitalityOHIM.company">
+        <input matInput placeholder="Company" [(ngModel)]="account.accountCredentials.HospitalityOHIM.company">
       </mat-form-field>
     </mat-expansion-panel>
 
@@ -51,19 +51,19 @@
         </mat-expansion-panel-header>
 
         <mat-form-field>
-          <input matInput placeholder="Username" [(ngModel)]="account.account_credentials.HospitalityOHRA.username">
+          <input matInput placeholder="Username" [(ngModel)]="account.accountCredentials.HospitalityOHRA.username">
         </mat-form-field>
 
         <mat-form-field>
           <input id="reportsPassword" type="password" placeholder="Password" matInput  showHideInput
-          [(ngModel)]="account.account_credentials.HospitalityOHRA.password">
+          [(ngModel)]="account.accountCredentials.HospitalityOHRA.password">
           <i matSuffix class="material-icons" showHideTrigger="reportsPassword"
           [showHideStatus]="{ materialIcon: true, id: 'reportsPassword' }"></i>
 
         </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Company" [(ngModel)]="account.account_credentials.HospitalityOHRA.company">
+        <input matInput placeholder="Company" [(ngModel)]="account.accountCredentials.HospitalityOHRA.company">
       </mat-form-field>
 
     </mat-expansion-panel>
@@ -77,13 +77,13 @@ Oracle Fusion
 </mat-expansion-panel-header>
 
 <mat-form-field>
-<input matInput placeholder="Username" [(ngModel)]="account.account_credentials.Fusion.username">
+<input matInput placeholder="Username" [(ngModel)]="account.accountCredentials.Fusion.username">
 </mat-form-field>
 
 <mat-form-field>
 
   <input id="fusionPassword" type="password" placeholder="Password" matInput showHideInput
-  [(ngModel)]="account.account_credentials.Fusion.password">
+  [(ngModel)]="account.accountCredentials.Fusion.password">
   <i matSuffix class="material-icons" showHideTrigger="fusionPassword"
   [showHideStatus]="{ materialIcon: true, id: 'fusionPassword' }"></i>
   

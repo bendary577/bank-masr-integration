@@ -20,14 +20,16 @@ import { JournalsComponent } from './components/journals/journals.component';
 import { PosSalesComponent } from './components/pos-sales/pos-sales.component';
 import { PosSalesConfigurationComponent } from './components/pos-sales-configuration/pos-sales-configuration.component';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
+import { WastageComponent } from './components/wastage/wastage.component';
+import { WastageConfigurationComponent } from './components/wastage-configuration/wastage-configuration.component';
 import { ApprovedInvoiceInforConfigurationComponent } from './components/approved-invoice-infor-configuration/approved-invoice-infor-configuration.component';
 import { JournalsInforConfigurationsComponent } from './components/journals-infor-configurations/journals-infor-configurations.component';
 import { SuppliersInforConfigurationComponent } from './components/suppliers-infor-configuration/suppliers-infor-configuration.component';
 import { BookedTransferInforComponent } from './components/booked-transfer-infor/booked-transfer-infor.component';
 import { JournalInforComponent } from './components/journal-infor/journal-infor.component';
-import { WastageComponent } from './components/wastage/wastage.component';
-import { WastageConfigurationComponent } from './components/wastage-configuration/wastage-configuration.component';
 import { CostCenterLocationMappingComponent } from './components/setting/cost-center-location-mapping/cost-center-location-mapping.component';
+import { BookedTransferInforConfigurationComponent } from './components/booked-transfer-infor-configuration/booked-transfer-infor-configuration.component';
+import { ApprovedInvoicesInforComponent } from './components/approved-invoices-infor/approved-invoices-infor.component';
 
 
 const routes: Routes = [
@@ -53,11 +55,14 @@ const routes: Routes = [
   { path: Constants.SUPPLIERS_DETAILS_PAGE, component: SupplierDetailsComponent  , canActivate:[AuthGuardService]},
 
   { path: Constants.APPROVED_INVOICES_PAGE, component: ApprovedInvoiceComponent , canActivate:[AuthGuardService]},
+  { path: Constants.APPROVED_INVOICES_INFOR_PAGE, component:  ApprovedInvoicesInforComponent, canActivate:[AuthGuardService]},
   { path: Constants.APPROVED_INVOICES_CONFIG_PAGE, component: ApprovedInvoiceConfigurationComponent  , canActivate:[AuthGuardService]},
   { path: Constants.APPROVED_INVOICES_SUN_CONFIG_PAGE, component: ApprovedInvoiceInforConfigurationComponent  , canActivate:[AuthGuardService]},
 
   { path: Constants.BOOKED_TRANSFER_PAGE, component: BookedTransferComponent  , canActivate:[AuthGuardService]},
   { path: Constants.BOOKED_TRANSFER_INFOR_PAGE, component: BookedTransferInforComponent  , canActivate:[AuthGuardService]},
+  { path: Constants.BOOKED_TRANSFER_INFOR_CONFIG_PAGE, component: BookedTransferInforConfigurationComponent  , canActivate:[AuthGuardService]},
+
 
   { path: Constants.CREDIT_NOTE_PAGE , component: CreditNoteComponent  , canActivate:[AuthGuardService]},
 

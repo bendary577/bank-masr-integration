@@ -68,6 +68,8 @@ import { BookedTransferInforComponent } from './components/booked-transfer-infor
 import { BookedTransferInforConfigurationComponent } from './components/booked-transfer-infor-configuration/booked-transfer-infor-configuration.component';
 import { JournalInforComponent } from './components/journal-infor/journal-infor.component';
 import { JournalsInforComponent } from './components/journals-infor/journals-infor.component';
+import { ApprovedInvoicesInforComponent } from './components/approved-invoices-infor/approved-invoices-infor.component';
+import { CreditNotesInforComponent } from './components/credit-notes-infor/credit-notes-infor.component';
 import { WastageComponent } from './components/wastage/wastage.component';
 import { WastageConfigurationComponent } from './components/wastage-configuration/wastage-configuration.component';
 import { CostCenterLocationMappingComponent } from './components/setting/cost-center-location-mapping/cost-center-location-mapping.component';
@@ -111,9 +113,13 @@ import { PosSalesConfigurationComponent } from './components/pos-sales-configura
     BookedTransferInforConfigurationComponent,
     JournalInforComponent,
     JournalsInforComponent,
+    ApprovedInvoicesInforComponent,
+    CreditNotesInforComponent,
+    AddAccountComponent,
     WastageComponent,
     WastageConfigurationComponent,
-    CostCenterLocationMappingComponent
+    CostCenterLocationMappingComponent,
+    WastageConfigurationComponent
   ],
   imports: [
     BrowserModule,
