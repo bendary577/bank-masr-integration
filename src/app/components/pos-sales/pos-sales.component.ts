@@ -77,7 +77,7 @@ export class PosSalesComponent implements OnInit {
         msg = err.error.message ;
       }
       else{
-        msg = "Failed to sync Approved Invoices completely!"
+        msg = "Failed to sync POS sales completely!"
       }
 
       this.snackBar.open(msg , null, {
