@@ -22,6 +22,7 @@ import { PosSalesConfigurationComponent } from './components/pos-sales-configura
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 import { WastageComponent } from './components/wastage/wastage.component';
 import { WastageConfigurationComponent } from './components/wastage-configuration/wastage-configuration.component';
+import { CostCenterLocationMappingComponent } from './components/setting/cost-center-location-mapping/cost-center-location-mapping.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
   },
   { path: Constants.USERS_CONFIGURATION, component: UsersComponent,canActivate:[AuthGuardService] },
   { path: Constants.SYNC_JOBS, component: SyncJobsconfigComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.COST_CENTER_LOCATION_MAPPING, component: CostCenterLocationMappingComponent ,canActivate:[AuthGuardService]},
 
   // Pages
   { path: Constants.LOGIN_PAGE, component: LoginComponent},

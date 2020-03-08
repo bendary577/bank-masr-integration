@@ -64,6 +64,7 @@ import { WelcomePageComponent } from './components/welcome-page/welcome-page.com
 import { PosSalesConfigurationComponent } from './components/pos-sales-configuration/pos-sales-configuration.component';
 import { WastageComponent } from './components/wastage/wastage.component';
 import { WastageConfigurationComponent } from './components/wastage-configuration/wastage-configuration.component';
+import { CostCenterLocationMappingComponent } from './components/setting/cost-center-location-mapping/cost-center-location-mapping.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,8 @@ import { WastageConfigurationComponent } from './components/wastage-configuratio
     PosSalesConfigurationComponent,
     AddAccountComponent,
     WastageComponent,
-    WastageConfigurationComponent
+    WastageConfigurationComponent,
+    CostCenterLocationMappingComponent
   ],
   imports: [
     BrowserModule,

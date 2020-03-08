@@ -160,6 +160,12 @@
                   </ng-template>
               </ngx-datatable-column>
 
+              <ngx-datatable-column name="Location Name">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <input matInput placeholder="Location Name"  [(ngModel)]="row.locationName">
+                </ng-template>
+            </ngx-datatable-column>
+
               <ngx-datatable-column name="Project">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                   <input matInput placeholder="Project"  [(ngModel)]="row.project">

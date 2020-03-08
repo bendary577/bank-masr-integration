@@ -107,6 +107,7 @@ export class Constants {
     static END_POINT = '/getSuppliers';
     static SETTING = 'setting';
     static ACCOUNT_CONFIGURATION = 'configuration';
+    static COST_CENTER_LOCATION_MAPPING = 'costCenterLocationMapping';
     static USERS_CONFIGURATION = 'users';
     static SYNC_JOBS = 'syncjobs';
 
