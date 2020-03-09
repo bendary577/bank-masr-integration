@@ -49,24 +49,6 @@ export class JournalsInforConfigurationsComponent implements OnInit {
     this.getSyncJobType();
     // this.getCostCenter();
     this.getOverGroups();
-
-    this.columns = [
-      {
-        prop: 'selected',
-        name: '',
-        sortable: false,
-        canAutoResize: false,
-        draggable: false,
-        resizable: false,
-        headerCheckboxable: true,
-        checkboxable: true,
-        width: 30
-      },
-      { prop: 'name' },
-      { prop: 'gender' },
-      { prop: 'company' },
-    ]
-
   }
 
   getCostCenter() {

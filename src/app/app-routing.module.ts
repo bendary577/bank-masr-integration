@@ -30,6 +30,8 @@ import { JournalInforComponent } from './components/journal-infor/journal-infor.
 import { CostCenterLocationMappingComponent } from './components/setting/cost-center-location-mapping/cost-center-location-mapping.component';
 import { BookedTransferInforConfigurationComponent } from './components/booked-transfer-infor-configuration/booked-transfer-infor-configuration.component';
 import { ApprovedInvoicesInforComponent } from './components/approved-invoices-infor/approved-invoices-infor.component';
+import { WastageInforConfigurationComponent } from './components/wastage-infor-configuration/wastage-infor-configuration.component';
+import { WastageInforComponent } from './components/wastage-infor/wastage-infor.component';
 
 
 const routes: Routes = [
@@ -76,7 +78,9 @@ const routes: Routes = [
 
 
   { path: Constants.WASTARGE_PAGE , component: WastageComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.WASTARGE_INFOR_PAGE , component: WastageInforComponent ,canActivate:[AuthGuardService]},
   { path: Constants.WASTARGE_CONFIG_PAGE , component: WastageConfigurationComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.WASTARGE_INFOR_CONFIG_PAGE , component: WastageInforConfigurationComponent ,canActivate:[AuthGuardService]},
 
 
   // Error Page

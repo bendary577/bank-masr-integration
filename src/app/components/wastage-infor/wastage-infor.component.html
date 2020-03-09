@@ -5,7 +5,7 @@
 
     <select class="custom-select" (change)="getSyncJobData()" [(ngModel)]="selectedJob">
         <option [ngValue]="job" *ngFor="let job of jobs">
-            {{job.creation_date}} - {{job.status}}</option>
+            {{job.creationDate}} - {{job.status}}</option>
     </select> 
      
     <button mat-flat-button (click)="getWastageSyncJob()">Sync Wastage Now</button>

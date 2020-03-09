@@ -22,6 +22,7 @@ export class WastageInforConfigurationComponent implements OnInit {
   selectedTender = [];
   overGroups = [];
   wasteGroups = [];
+  analysis = [];
   selectedWasteGroups = [];
   selectedOverGroups = [];
 
@@ -42,6 +43,7 @@ export class WastageInforConfigurationComponent implements OnInit {
     this.syncJobTypeloading = true;
     this.accSyncTypeService.getAccSyncJobType(Constants.WASTARGE_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
+      this.analysis = this.syncJobType.configuration["analysis"];
       this.syncJobTypeloading = false;
     }).catch(err => {
       console.error(err);

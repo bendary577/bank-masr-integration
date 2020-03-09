@@ -47,30 +47,28 @@ export class WastageInforComponent implements OnInit {
 
     this.wastageService.getWastage().toPromise().then((res: any) => {
       this.success = res.success;
-      this.getSyncJobs(Constants.WASTARGE_SYNC);
-      
       if (this.success){
-        this.snackBar.open('Sync Wastage Successfully', null, {
+        this.snackBar.open(res.message , null, {
           duration: 3000,
           horizontalPosition: 'center',
           panelClass:"my-snack-bar-success"
         });
       }
-
+      else{
+        this.snackBar.open(res.message , null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+      }
+      
+      this.getSyncJobs(Constants.WASTARGE_SYNC);
+    
       localStorage.setItem('getWastageLoading', "false");
       WastageInforComponent.getWastageLoading = false;
     }).catch(err => {
       this.getSyncJobs(Constants.WASTARGE_SYNC);
-
-      localStorage.setItem('getWastageLoading', "false");
-      WastageInforComponent.getWastageLoading = false;
       
-      this.snackBar.open(err.error.message , null, {
-        duration: 3000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-
       localStorage.setItem('getWastageLoading', "false");
       WastageInforComponent.getWastageLoading = false;
     });
