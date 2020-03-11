@@ -28,11 +28,11 @@
 
       <mat-form-field>
         <!-- showHideInput -->
-        <input type="password" placeholder="Password" matInput 
+        <input [id]="accountCredential.username" type="password" placeholder="Password" matInput 
         [(ngModel)]="accountCredential.password">
 
-         <!-- <i matSuffix class="material-icons" showHideTrigger="mysecretpassword"
-         [showHideStatus]="{ materialIcon: true, attr.id: 'mysecretpassword' }"></i> -->
+         <!-- <i matSuffix class="material-icons" showHideTrigger="accountCredential.username"
+         [showHideStatus]="{ materialIcon: true, id: accountCredential.username }"></i> -->
 
       </mat-form-field>
       <mat-form-field>
