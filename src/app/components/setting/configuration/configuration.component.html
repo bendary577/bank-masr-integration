@@ -12,10 +12,10 @@
   <mat-accordion multi>
 
     <!-- Oracle Hospitality Inventory Management -->
-    <mat-expansion-panel>
+    <mat-expansion-panel *ngFor="let accountCredential of accountCredentials">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Oracle Hospitality Inventory Management
+          {{accountCredential.account}}
         </mat-panel-title>
         <mat-panel-description>
 
@@ -23,72 +23,22 @@
       </mat-expansion-panel-header>
 
       <mat-form-field>
-      <input matInput placeholder="Username" [(ngModel)]="account.accountCredentials.HospitalityOHIM.username">
+      <input matInput placeholder="Username" [(ngModel)]="accountCredential.username">
     </mat-form-field>
 
       <mat-form-field>
-        <input id="mysecretpassword" type="password" placeholder="Password" matInput showHideInput
-        [(ngModel)]="account.accountCredentials.HospitalityOHIM.password">
-<!-- 
-        <input id="inventoryPassword" type="password" placeholder="Password" matInput  showHideInput
-         [(ngModel)]="account.accountCredentials.HospitalityOHIM.password"> -->
-         <i matSuffix class="material-icons" showHideTrigger="mysecretpassword"
-         [showHideStatus]="{ materialIcon: true, id: 'mysecretpassword' }"></i>
+        <!-- showHideInput -->
+        <input type="password" placeholder="Password" matInput 
+        [(ngModel)]="accountCredential.password">
+
+         <!-- <i matSuffix class="material-icons" showHideTrigger="mysecretpassword"
+         [showHideStatus]="{ materialIcon: true, attr.id: 'mysecretpassword' }"></i> -->
 
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Company" [(ngModel)]="account.accountCredentials.HospitalityOHIM.company">
+        <input matInput placeholder="Company" [(ngModel)]="accountCredential.company">
       </mat-form-field>
     </mat-expansion-panel>
-
-
-    <!-- Oracle Hospitality Reporting and Analytics -->
-    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Oracle Hospitality Reporting and Analytics
-        </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <mat-form-field>
-          <input matInput placeholder="Username" [(ngModel)]="account.accountCredentials.HospitalityOHRA.username">
-        </mat-form-field>
-
-        <mat-form-field>
-          <input id="reportsPassword" type="password" placeholder="Password" matInput  showHideInput
-          [(ngModel)]="account.accountCredentials.HospitalityOHRA.password">
-          <i matSuffix class="material-icons" showHideTrigger="reportsPassword"
-          [showHideStatus]="{ materialIcon: true, id: 'reportsPassword' }"></i>
-
-        </mat-form-field>
-
-      <mat-form-field>
-        <input matInput placeholder="Company" [(ngModel)]="account.accountCredentials.HospitalityOHRA.company">
-      </mat-form-field>
-
-    </mat-expansion-panel>
-
-    <!-- Oracle Fusion -->
-    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-<mat-expansion-panel-header>
-<mat-panel-title>
-Oracle Fusion
-</mat-panel-title>
-</mat-expansion-panel-header>
-
-<mat-form-field>
-<input matInput placeholder="Username" [(ngModel)]="account.accountCredentials.Fusion.username">
-</mat-form-field>
-
-<mat-form-field>
-
-  <input id="fusionPassword" type="password" placeholder="Password" matInput showHideInput
-  [(ngModel)]="account.accountCredentials.Fusion.password">
-  <i matSuffix class="material-icons" showHideTrigger="fusionPassword"
-  [showHideStatus]="{ materialIcon: true, id: 'fusionPassword' }"></i>
-  
-</mat-form-field>
-</mat-expansion-panel>
 
   </mat-accordion >
   <ngx-spinner></ngx-spinner>

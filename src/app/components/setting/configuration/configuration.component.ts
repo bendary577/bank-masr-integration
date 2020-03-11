@@ -21,6 +21,7 @@ export class ConfigurationComponent  implements OnInit{
   loading = true;
   account: Account;
   newAccount: Account;
+  accountCredentials = [];
   panelOpenState = true;
   addRole = false;
 
@@ -35,7 +36,8 @@ export class ConfigurationComponent  implements OnInit{
     this.loading = true;
     this.spinner.show();
     this.accountService.getAccount().toPromise().then((res: any) => {
-      this.account = res;     
+      this.account = res;
+      this.accountCredentials = this.account.accountCredentials;
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {''
