@@ -89,7 +89,7 @@ export class CostCenterLocationMappingComponent implements OnInit {
     this.spinner.show();
     
     this.invoiceService.getCostCenter(Constants.JOURNALS_SYNC).toPromise().then((res: any) => {
-      this.costCenters = res.data;
+      this.costCenters = res.costCenters;
 
       this.spinner.hide();
       this.costCenterLoding = false;

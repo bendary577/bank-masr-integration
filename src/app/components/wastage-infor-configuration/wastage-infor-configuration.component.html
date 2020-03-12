@@ -1,6 +1,9 @@
-<h3 mat-dialog-title>Update Journals Configuartion</h3>
+<h3 mat-dialog-title>Update Wastage Configuartion</h3>
+
 
 <div>
+    <div *ngIf="!wasteLoading">
+
         <!-- Infor Sun System Configurations -->
         <mat-expansion-panel >
               <mat-expansion-panel-header>
@@ -15,10 +18,10 @@
                         <mat-form-field class="example-full-width">
                           <mat-select matInput id="postingType" name="postingType" placeholder="Posting Type"  
                           [(ngModel)]="syncJobType.configuration.postingType">
-                             <mat-option value="0">0</mat-option>
-                             <mat-option value="1">1</mat-option>
-                             <mat-option value="2">2</mat-option>
-                           </mat-select>
+                              <mat-option value="0">0</mat-option>
+                              <mat-option value="1">1</mat-option>
+                              <mat-option value="2">2</mat-option>
+                            </mat-select>
                         </mat-form-field>
                     </div>
         
@@ -28,7 +31,7 @@
                         [(ngModel)]="syncJobType.configuration.businessUnit">
                     </mat-form-field>
                   </div>
-                   <div >
+                    <div >
                     <mat-form-field class="example-full-width">
                       <input matInput id="journalSource" name="journalSource" placeholder="Journal Source"  
                       [(ngModel)]="syncJobType.configuration.journalSource">
@@ -39,19 +42,19 @@
                         <input matInput id="journalType" name="journalType" placeholder="Journal Type"  
                         [(ngModel)]="syncJobType.configuration.journalType">
                     </mat-form-field>
-                 </div>
-                 <div >
+                  </div>
+                  <div >
                   <mat-form-field class="example-full-width">
                     <input matInput id="transactionReference" name="transactionReference" placeholder="Transaction Reference"  
                     [(ngModel)]="syncJobType.configuration.transactionReference">
                 </mat-form-field>
-             </div>
+              </div>
               <div >
                 <mat-form-field class="example-full-width">
                   <input matInput id="currencyCode" name="currencyCode" placeholder="Currency Code"  
                   [(ngModel)]="syncJobType.configuration.currencyCode">
               </mat-form-field>
-             </div>
+              </div>
         
                 </form>
         </div>
@@ -87,92 +90,68 @@
 
         </mat-expansion-panel>
 
-                    
-  <div *ngIf="!loading">
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Included Over Groups
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-          <div *ngIf="overGroups?.length > 0">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Watsage And Over Groups Mapping
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+              <div *ngIf="overGroups?.length > 0">
 
-            <ngx-datatable  class="material" [rows]="overGroups" [columnMode]="'force'" [headerHeight]="50"
-            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[]" >
+                <ngx-datatable  class="material" [rows]="overGroups" [columnMode]="'force'" [headerHeight]="50"
+                [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[]" >
 
-              <ngx-datatable-column name="Over Group">
+                  <ngx-datatable-column name="Over Group">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.overGroup">{{row.overGroup}}</mat-checkbox>
+                      </ng-template>
+                  </ngx-datatable-column>
+
+                <ngx-datatable-column name="Credit Account">
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.overGroup">{{row.overGroup}}</mat-checkbox>
+                    <input matInput  placeholder="Credit Account"  [(ngModel)]="row.wasteAccountCredit">
                   </ng-template>
-              </ngx-datatable-column>
-              <ngx-datatable-column name="Inventory Account">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                  <input matInput  placeholder="Inventory Account"  [(ngModel)]="row.inventoryAccount">
-                </ng-template>
-              </ngx-datatable-column>  
-              <ngx-datatable-column name="Expenses Account">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                  <input matInput  placeholder="Expenses Account"  [(ngModel)]="row.expensesAccount">
-                </ng-template>
               </ngx-datatable-column>  
 
-        </ngx-datatable>
-          </div>
-    </mat-expansion-panel>
-
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Items And Groups Mangment
-        </mat-panel-title>
-
-      </mat-expansion-panel-header>
-      <div class="main" *ngIf="mappedItems?.length > 0">
-        <ngx-datatable  class="material" [rows]="mappedItems" [columnMode]="'force'" [headerHeight]="50"
-            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[]">
-    
-            <ngx-datatable-column name="Item">
+              
+              <ngx-datatable-column name="Debit Account">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.item}}
+                  <input matInput  placeholder="Debit Account"  [(ngModel)]="row.wasteAccountDebit">
                 </ng-template>
-            </ngx-datatable-column>
+            </ngx-datatable-column>  
 
-            <ngx-datatable-column name="Item Group">
-              <ng-template let-row="row" ngx-datatable-cell-template>
-                  {{row.itemGroup}}
-              </ng-template>
-          </ngx-datatable-column>
-            
-            <ngx-datatable-column name="Major Group">
-              <ng-template let-row="row" ngx-datatable-cell-template>
-                  {{row.majorGroup}}
-              </ng-template>
-          </ngx-datatable-column>  
-            
-            <ngx-datatable-column name="Over Group">
-              <ng-template let-row="row" ngx-datatable-cell-template>
-                  {{row.overGroup}}
-              </ng-template>
-          </ngx-datatable-column>
-        </ngx-datatable>
+            </ngx-datatable>
+              </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Watse Groups
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+              <div *ngIf="wasteGroups?.length > 0">
+
+                <ngx-datatable  class="material" [rows]="wasteGroups" [columnMode]="'force'" [headerHeight]="50"
+                [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[]" >
+
+                  <ngx-datatable-column name="Waste Group">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.wasteGroup">{{row.wasteGroup}}</mat-checkbox>
+                      </ng-template>
+                  </ngx-datatable-column>
+
+            </ngx-datatable>
+              </div>
+        </mat-expansion-panel> 
+        
+        <br>
+        <div class="card-back">
+            <button mat-flat-button (click)="onSaveClick()">Save</button>
+            <button mat-flat-button (click)="onCancelClick()">Cancel</button>
+        </div>
+  
     </div>
-
-    </mat-expansion-panel>
-
-    <br>
-
-    <div class="card-back">
-        <button mat-flat-button (click)="onSaveClick()">Save</button>
-        <button mat-flat-button (click)="onCancelClick()">Cancel</button>
-      </div>
-      <div class="card-back">
-        <button mat-flat-button (click)="mapItemGroups()">Map Item Group</button>
-      </div>
-               
-    </div>
-
-    <ngx-spinner></ngx-spinner>
-  </div>
-
-
-
+      <ngx-spinner></ngx-spinner>
+</div>
+  
