@@ -109,6 +109,7 @@ export class Constants {
     static POS_SALES_CONFIG_PAGE = 'posSalesConfig';
 
     static WASTARGE_PAGE = 'wastage';
+    static WASTARGE_INFOR_PAGE = 'wastageSun';
     static WASTARGE_SYNC = 'Wastage';
     static WASTARGE_CONFIG_PAGE = 'wastageConfig';
 
