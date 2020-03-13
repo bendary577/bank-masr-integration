@@ -33,7 +33,7 @@ export class CostCenterLocationMappingComponent implements OnInit {
 
   getSyncJobType(){
     this.loading = true;
-    this.accSyncTypeService.getAccSyncJobType(Constants.JOURNALS_SYNC).toPromise().then((res: any) => {
+    this.accSyncTypeService.getAccSyncJobType(Constants.CONSUMPTION_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
       this.costCenters = this.syncJobType.configuration["costCenterLocationMapping"];
 
@@ -88,7 +88,7 @@ export class CostCenterLocationMappingComponent implements OnInit {
     this.costCenterLoding = true;
     this.spinner.show();
     
-    this.invoiceService.getCostCenter(Constants.JOURNALS_SYNC).toPromise().then((res: any) => {
+    this.invoiceService.getCostCenter(Constants.CONSUMPTION_SYNC).toPromise().then((res: any) => {
       this.costCenters = res.costCenters;
 
       this.spinner.hide();

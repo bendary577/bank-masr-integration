@@ -24,22 +24,24 @@ export class AddAccountComponent implements OnInit {
     this.dialogRef.close({
       name: this.form.controls.name.value,
       domain: this.form.controls.domain.value,
-      accountCredentials: {
-        "HospitalityOHIM": {
+      accountCredentials: [
+         {"account": "HospitalityOHIM",
           "username": this.form.controls.usernameOHIM.value,
           "password": this.form.controls.passwordOHIM.value,
           "company": this.form.controls.companyOHIM.value
         },
-        "HospitalityOHRA": {
+        {
+          "account": "HospitalityOHRA",
           "username": this.form.controls.usernameOHRA.value,
           "password": this.form.controls.passwordOHRA.value,
           "company": this.form.controls.companyOHRA.value
         },
-        "Fusion": {
+        {
+          "account": "Fusion",
           "username": this.form.controls.usernameFusion.value,
           "password": this.form.controls.passwordFusion.value
         }
-      }
+      ]
     });
   }
 

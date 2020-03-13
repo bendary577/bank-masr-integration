@@ -28,15 +28,18 @@
 
       <mat-form-field>
         <!-- showHideInput -->
-        <input [id]="accountCredential.username" type="password" placeholder="Password" matInput 
-        [(ngModel)]="accountCredential.password">
+        <input id={{accountCredential.username}} type="password" placeholder="Password" matInput 
+        [(ngModel)]="accountCredential.password" >
 
-         <!-- <i matSuffix class="material-icons" showHideTrigger="accountCredential.username"
+         <!-- <i matSuffix class="material-icons" showHideTrigger={{accountCredential.username}}
          [showHideStatus]="{ materialIcon: true, id: accountCredential.username }"></i> -->
 
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="Company" [(ngModel)]="accountCredential.company">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Link" [(ngModel)]="accountCredential.link">
       </mat-form-field>
     </mat-expansion-panel>
 

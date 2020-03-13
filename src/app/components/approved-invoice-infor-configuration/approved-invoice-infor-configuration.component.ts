@@ -41,6 +41,7 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
     this.accSyncTypeService.getAccSyncJobType(Constants.APPROVED_INVOICES_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
       this.analysis = this.syncJobType.configuration["analysis"];
+      this.costCenters = this.syncJobType.configuration["costCenters"];
       this.loading = false;
     }).catch(err => {
       console.error(err);
@@ -54,6 +55,7 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
     let that = this;
     this.costCenters.forEach(function (costCenter) {
       if (costCenter.accountCode){
+        costCenter.checked = true;
         that.selectedCostCenters.push(costCenter)
       }
     });
@@ -82,6 +84,7 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
       this.costCenterLoding = false;
     }).catch(err => {
       console.error(err);
+      this.costCenters = [];
       this.spinner.hide();
       this.costCenterLoding = false;
     });

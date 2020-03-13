@@ -52,7 +52,7 @@ export class JournalConfigurationComponent implements OnInit {
   getCostCenter() {
     this.spinner.show();
     this.cost_loading = true;
-    this.invoiceService.getCostCenter(Constants.JOURNALS_SYNC).toPromise().then((res: any) => {
+    this.invoiceService.getCostCenter(Constants.CONSUMPTION_SYNC).toPromise().then((res: any) => {
       this.costCenters = res.costCenters;
       this.spinner.hide();
       this.cost_loading = false;
@@ -70,7 +70,7 @@ export class JournalConfigurationComponent implements OnInit {
 
   getOverGroups() {
     this.group_loading = true;
-    this.journalService.getOverGroups(Constants.JOURNALS_SYNC).toPromise().then((res: any) => {
+    this.journalService.getOverGroups(Constants.CONSUMPTION_SYNC).toPromise().then((res: any) => {
       this.overGroups = res.data;
       this.group_loading = false;
     }).catch(err => {
@@ -113,7 +113,7 @@ export class JournalConfigurationComponent implements OnInit {
 
   getSyncJobType(){
     this.loading = true;
-    this.accSyncTypeService.getAccSyncJobType(Constants.JOURNALS_SYNC).toPromise().then((res: any) => {
+    this.accSyncTypeService.getAccSyncJobType(Constants.CONSUMPTION_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
       this.costCenters = this.syncJobType.configuration["costCenters"];
       this.overGroups = this.syncJobType.configuration["overGroups"];

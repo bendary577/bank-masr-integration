@@ -27,7 +27,7 @@ export class JournalInforComponent implements OnInit {
     public snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.getSyncJobs(Constants.JOURNALS_SYNC);
+    this.getSyncJobs(Constants.CONSUMPTION_SYNC);
     this.state = localStorage.getItem('getJournalsLoding');
 
     if (this.state == "true"){
@@ -47,7 +47,7 @@ export class JournalInforComponent implements OnInit {
     JournalInforComponent.getJournalsLoding = true;
 
     this.journalService.getJournals().toPromise().then((res: any) => {
-      this.getSyncJobs(Constants.JOURNALS_SYNC);
+      this.getSyncJobs(Constants.CONSUMPTION_SYNC);
       
       localStorage.setItem('getJournalsLoding', "false");
       JournalInforComponent.getJournalsLoding = false;
@@ -75,7 +75,7 @@ export class JournalInforComponent implements OnInit {
 
   getJournalsDB() {
     this.loading = true;
-    this.syncJobService.getSyncJobData(Constants.JOURNALS_SYNC).toPromise().then((res: any) => {
+    this.syncJobService.getSyncJobData(Constants.CONSUMPTION_SYNC).toPromise().then((res: any) => {
       this.journals = res;
 
       this.loading = false;

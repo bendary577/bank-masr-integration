@@ -55,14 +55,21 @@ export class ConfigurationComponent  implements OnInit{
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.spinner.show();
-        this.accountService.addAccount(res).then(result => {
+        this.accountService.addAccount(res).then((res: any) => {     
           this.spinner.hide();
-
-        }).catch(err => {
-          this.spinner.hide();
-          this.snackBar.open('An error has occurred.', null, {
+          this.snackBar.open(res.message, null, {
             duration: 2000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
+            panelClass:"my-snack-bar-success"
+          });
+    
+        }).catch(err => {
+          console.error(err);
+          this.spinner.hide();
+          this.snackBar.open(err.message , null, {
+            duration: 3000,
+            horizontalPosition: 'center',
+            panelClass:"my-snack-bar-fail"
           });
         });
       }
@@ -70,17 +77,20 @@ export class ConfigurationComponent  implements OnInit{
   }
 
   addAccount() {
-    this.loading = true;
-    this.spinner.show();
-    this.accountService.addAccount(this.newAccount).then((res: any) => {
-      this.account = res;
-     
-      this.spinner.hide();
-      this.loading = false;
+    this.accountService.addAccount(this.newAccount).then((res: any) => {     
+      this.snackBar.open(res.message, null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-success"
+      });
+
     }).catch(err => {
       console.error(err);
-      this.spinner.hide();
-      this.loading = false;
+      this.snackBar.open(err.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
     });
   }
 
@@ -91,7 +101,7 @@ export class ConfigurationComponent  implements OnInit{
       this.spinner.hide();
       this.loading = false;
 
-      this.snackBar.open(res.message, null, {
+      this.snackBar.open("Update account information successfully.", null, {
         duration: 2000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-success"

@@ -90,12 +90,12 @@ export class SyncJobsconfigComponent implements OnInit {
         this.router.navigate([Constants.APPROVED_INVOICES_CONFIG_PAGE]);
       }
     }
-    else if (syncJobType.name == Constants.JOURNALS_SYNC){
+    else if (syncJobType.name == Constants.CONSUMPTION_SYNC){
       if (this.accountERD == "SUN"){
-        this.router.navigate([Constants.JOURNALS_SUN_CONFIG_PAGE]);
+        this.router.navigate([Constants.CONSUMPTION_SUN_CONFIG_PAGE]);
       }
       else{
-        this.router.navigate([Constants.JOURNALS_CONFIG_PAGE]);
+        this.router.navigate([Constants.CONSUMPTION_CONFIG_PAGE]);
       }
     }
     else if (syncJobType.name == Constants.BOOKED_TRANSFER_SYNC){
@@ -103,7 +103,7 @@ export class SyncJobsconfigComponent implements OnInit {
         this.router.navigate([Constants.BOOKED_TRANSFER_INFOR_CONFIG_PAGE]);
       }
       else{
-        this.router.navigate([Constants.JOURNALS_CONFIG_PAGE]);
+        this.router.navigate([Constants.CONSUMPTION_CONFIG_PAGE]);
       }
     }
     else if (syncJobType.name == Constants.POS_SALES_SYNC){

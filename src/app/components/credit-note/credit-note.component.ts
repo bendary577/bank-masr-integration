@@ -17,7 +17,7 @@ export class CreditNoteComponent implements OnInit {
   success = null;
   jobs = [];
   creditNote = [];
-  selectedJob :SyncJob = null;
+  selectedJob :SyncJob;
   syncJobId = -1;
   state = "";
 

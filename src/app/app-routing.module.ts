@@ -32,6 +32,7 @@ import { BookedTransferInforConfigurationComponent } from './components/booked-t
 import { ApprovedInvoicesInforComponent } from './components/approved-invoices-infor/approved-invoices-infor.component';
 import { WastageInforConfigurationComponent } from './components/wastage-infor-configuration/wastage-infor-configuration.component';
 import { WastageInforComponent } from './components/wastage-infor/wastage-infor.component';
+import { CreditNotesInforComponent } from './components/credit-notes-infor/credit-notes-infor.component';
 
 
 const routes: Routes = [
@@ -65,13 +66,14 @@ const routes: Routes = [
   { path: Constants.BOOKED_TRANSFER_INFOR_PAGE, component: BookedTransferInforComponent  , canActivate:[AuthGuardService]},
   { path: Constants.BOOKED_TRANSFER_INFOR_CONFIG_PAGE, component: BookedTransferInforConfigurationComponent  , canActivate:[AuthGuardService]},
 
-
   { path: Constants.CREDIT_NOTE_PAGE , component: CreditNoteComponent  , canActivate:[AuthGuardService]},
+  { path: Constants.CREDIT_NOTE_INFOR_PAGE , component: CreditNotesInforComponent  , canActivate:[AuthGuardService]},
 
-  { path: Constants.JOURNALS_PAGE , component: JournalsComponent  , canActivate:[AuthGuardService]},
-  { path: Constants.JOURNALS_INFOR_PAGE , component: JournalInforComponent  , canActivate:[AuthGuardService]},
-  { path: Constants.JOURNALS_CONFIG_PAGE , component: JournalConfigurationComponent  , canActivate:[AuthGuardService]},
-  { path: Constants.JOURNALS_SUN_CONFIG_PAGE , component: JournalsInforConfigurationsComponent  , canActivate:[AuthGuardService]},
+
+  { path: Constants.CONSUMPTION_PAGE , component: JournalsComponent  , canActivate:[AuthGuardService]},
+  { path: Constants.CONSUMPTION_INFOR_PAGE , component: JournalInforComponent  , canActivate:[AuthGuardService]},
+  { path: Constants.CONSUMPTION_CONFIG_PAGE , component: JournalConfigurationComponent  , canActivate:[AuthGuardService]},
+  { path: Constants.CONSUMPTION_SUN_CONFIG_PAGE , component: JournalsInforConfigurationsComponent  , canActivate:[AuthGuardService]},
 
   { path: Constants.POS_SALES_PAGE , component: PosSalesComponent  , canActivate:[AuthGuardService]},
   { path: Constants.POS_SALES_CONFIG_PAGE , component: PosSalesConfigurationComponent  , canActivate:[AuthGuardService]},

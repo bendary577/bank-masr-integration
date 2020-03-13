@@ -57,7 +57,7 @@ export class Constants {
 
     static GET_OVER_GROUPS_URL = environment.apiHost + '/getOverGroups';
     static MAP_ITEM_GROUPS_URL = environment.apiHost + '/mapItems';
-    static GET_JOURNALS_URL = environment.apiHost + '/getConsumptions';
+    static GET_JOURNALS_URL = environment.apiHost + '/getConsumption';
 
     static GET_POS_SALES_URL = environment.apiHost + '/getPOSSales';
     static GET_POS_SALES_TENDERS_URL = environment.apiHost + '/getTenders';
@@ -82,6 +82,11 @@ export class Constants {
     static APPROVED_INVOICES_SUN_CONFIG_PAGE = 'approvedInvoicesSunConfig';
     static APPROVED_INVOICES_SYNC = 'Approved Invoices';
 
+    static CREDIT_NOTE_PAGE = 'creditNotes';
+    static CREDIT_NOTE_INFOR_PAGE = 'creditNotesSun';
+    static CREDIT_NOTE_CONFIG_PAGE = 'creditNotesConfig';
+    static CREDIT_NOTE_SYNC = 'Credit Notes';
+
     static BOOKED_TRANSFER_PAGE = 'bookedTransfers';
     static BOOKED_TRANSFER_INFOR_PAGE = 'bookedTransfersSun';
     static BOOKED_TRANSFER_CONFIG_PAGE = 'bookedTransfersConfig';
@@ -89,20 +94,11 @@ export class Constants {
     static BOOKED_TRANSFER_DETAILS_PAGE = 'bookedTransfersDetails';
     static BOOKED_TRANSFER_SYNC = 'Booked Transfers';
 
-    static CREDIT_NOTE_PAGE = 'creditNotes';
-    static CREDIT_NOTE_CONFIG_PAGE = 'creditNotesConfig';
-    static CREDIT_NOTE_SYNC = 'Credit Notes';
-
-    static CONSUMPTIONS_SYNC = 'Consumptions';
-    static TRANSFERS_SYNC = 'Transfers';
-    static ADJUSTMENTS_SYNC = 'Adjustments';
-
-    static JOURNALS_SYNC = 'Consumptions';
-    static JOURNALS_PAGE = 'consumptions';
-    static JOURNALS_CONFIG_PAGE = 'consumptionsConfig';
-
-    static JOURNALS_INFOR_PAGE = 'journalsSun';
-    static JOURNALS_SUN_CONFIG_PAGE = 'journalsSunConfig';
+    static CONSUMPTION_SYNC = 'Consumption';
+    static CONSUMPTION_PAGE = 'consumption';
+    static CONSUMPTION_CONFIG_PAGE = 'consumptionConfig';
+    static CONSUMPTION_INFOR_PAGE = 'consumptionSun';
+    static CONSUMPTION_SUN_CONFIG_PAGE = 'consumptionSunConfig';
 
     static POS_SALES_PAGE = 'posSales';
     static POS_SALES_SYNC = 'POS Sales';
@@ -121,7 +117,6 @@ export class Constants {
     static COST_CENTER_LOCATION_MAPPING = 'costCenterLocationMapping';
     static USERS_CONFIGURATION = 'users';
     static SYNC_JOBS = 'syncjobs';
-
 
     static SYNC_TYPE_SCHEDULER = "Suppliers";
 }

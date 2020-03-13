@@ -62,13 +62,24 @@ export class SuppliersInforConfigurationComponent implements OnInit {
       this.taxes = res.data;
       this.getTaxsLoading = false;
 
+      if (res.success){
+        this.snackBar.open(res.message, null, {
+          duration: 2000,
+          horizontalPosition: 'right',
+        });
+      }
+      else{
+        this.snackBar.open(res.message, null, {
+          duration: 2000,
+          horizontalPosition: 'right',
+        });
+      }
+
     }).catch(err => {
-      console.error(err);
       this.snackBar.open(err.error.message, null, {
         duration: 2000,
         horizontalPosition: 'right',
       });
-      
       this.getTaxsLoading = false;
     });
   }
@@ -78,6 +89,19 @@ export class SuppliersInforConfigurationComponent implements OnInit {
     this.supplierService.getSuppliersGroups().toPromise().then((res: any) => {
       this.groups = res.data;
       this.getGroupsLoading = false;
+      if (res.success){
+        this.snackBar.open(res.message, null, {
+          duration: 2000,
+          horizontalPosition: 'right',
+        });
+      }
+      else{
+        this.snackBar.open(res.message, null, {
+          duration: 2000,
+          horizontalPosition: 'right',
+        });
+      }
+      
     }).catch(err => {
       console.error(err);
       this.snackBar.open(err.error.message, null, {
