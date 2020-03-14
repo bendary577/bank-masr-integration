@@ -69,6 +69,15 @@ export class JournalInforComponent implements OnInit {
       }
     }).catch(err => {
         console.log(err);
+        localStorage.setItem('getJournalsLoding', "false");
+        JournalInforComponent.getJournalsLoding = false;
+        console.log(err.message)
+
+        this.snackBar.open(err.message , null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
     });
 
   }
