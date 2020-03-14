@@ -103,11 +103,21 @@ export class JournalsInforConfigurationsComponent implements OnInit {
       this.spinner.hide();
       this.item_loading = false;
 
-      this.snackBar.open(res.message, null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass: "my-snack-bar-success"
-      });
+      if (res.success){
+        this.snackBar.open(res.message, null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass: "my-snack-bar-success"
+        });
+      }
+      else{
+        this.snackBar.open(res.message, null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass: "my-snack-bar-fail"
+        });
+      }
+
     }).catch(err => {
       console.error(err);
       this.spinner.hide();
