@@ -125,7 +125,7 @@
 
             <div  *ngIf="!loading">
                 <div *ngIf="!costCenterLoding">
-                    <div *ngIf="!costCenters.length">
+                    <div  *ngIf="costCenters?.length == 0">
                         <mat-card class="example-card">
                                 <mat-card-header>
                                   <mat-card-title>Error</mat-card-title>
@@ -139,7 +139,7 @@
                         </mat-card>
                     </div>
                     
-                    <div class="main" *ngIf="costCenters.length">
+                    <div class="main" *ngIf="costCenters?.length > 0">
                         <ngx-datatable *ngIf="!loading" class="material" [rows]="costCenters" [columnMode]="'force'" [headerHeight]="50"
                             [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'cost_center', dir: 'asc'}]">
                     
@@ -157,12 +157,10 @@
                           </ngx-datatable-column>
 
                         </ngx-datatable>
-                    </div>
-            
-                    <br>
-        
-                </div>     
+                    </div>        
+            </div>     
             </div>
+
       </mat-expansion-panel>
       <br>
 

@@ -71,10 +71,12 @@ export class JournalsInforConfigurationsComponent implements OnInit {
   }
 
   getOverGroups() {
+    this.spinner.show();
     this.group_loading = true;
     this.journalService.getOverGroups(Constants.CONSUMPTION_SYNC).toPromise().then((res: any) => {
       this.overGroups = res.data;
       this.group_loading = false;
+      this.spinner.hide();
       if (res.success){
         this.snackBar.open(res.message , null, {
           duration: 3000,
@@ -91,6 +93,7 @@ export class JournalsInforConfigurationsComponent implements OnInit {
       }
     }).catch(err => {
       console.error(err);
+      this.spinner.hide();
     });
   }
 
