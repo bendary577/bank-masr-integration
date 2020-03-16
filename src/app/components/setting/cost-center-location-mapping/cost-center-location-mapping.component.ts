@@ -52,7 +52,8 @@ export class CostCenterLocationMappingComponent implements OnInit {
     let that = this;
     this.costCenters.forEach(function (costCenter) {
       if (costCenter.locationName){
-        that.selectedCostCenters.push(costCenter)
+        costCenter.checked = true;
+        that.selectedCostCenters.push(costCenter);
       }
     });
 

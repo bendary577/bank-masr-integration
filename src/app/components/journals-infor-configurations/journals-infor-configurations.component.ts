@@ -93,6 +93,7 @@ export class JournalsInforConfigurationsComponent implements OnInit {
       }
     }).catch(err => {
       console.error(err);
+      this.group_loading = false;
       this.spinner.hide();
     });
   }

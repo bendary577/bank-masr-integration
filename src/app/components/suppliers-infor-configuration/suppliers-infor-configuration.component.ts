@@ -61,25 +61,29 @@ export class SuppliersInforConfigurationComponent implements OnInit {
     this.supplierService.getSuppliersTaxes().toPromise().then((res: any) => {
       this.taxes = res.data;
       this.getTaxsLoading = false;
-
       if (res.success){
         this.snackBar.open(res.message, null, {
           duration: 2000,
-          horizontalPosition: 'right',
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
         });
       }
       else{
-        this.snackBar.open(res.message, null, {
-          duration: 2000,
-          horizontalPosition: 'right',
+        this.snackBar.open(res.message , null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
         });
       }
 
     }).catch(err => {
-      this.snackBar.open(err.error.message, null, {
-        duration: 2000,
-        horizontalPosition: 'right',
+      console.error(err);
+      this.snackBar.open(err.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
       });
+      
       this.getTaxsLoading = false;
     });
   }
@@ -92,21 +96,25 @@ export class SuppliersInforConfigurationComponent implements OnInit {
       if (res.success){
         this.snackBar.open(res.message, null, {
           duration: 2000,
-          horizontalPosition: 'right',
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
         });
       }
       else{
-        this.snackBar.open(res.message, null, {
-          duration: 2000,
-          horizontalPosition: 'right',
+        this.snackBar.open(res.message , null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
         });
       }
-      
+
     }).catch(err => {
       console.error(err);
-      this.snackBar.open(err.error.message, null, {
-        duration: 2000,
-        horizontalPosition: 'right',
+
+      this.snackBar.open(err.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
       });
       
       this.getGroupsLoading = false;

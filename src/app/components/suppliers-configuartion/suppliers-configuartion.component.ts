@@ -60,12 +60,27 @@ export class SuppliersConfiguartionComponent implements OnInit {
     this.supplierService.getSuppliersTaxes().toPromise().then((res: any) => {
       this.taxes = res.data;
       this.getTaxsLoading = false;
+      if (res.success){
+        this.snackBar.open(res.message, null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
+        });
+      }
+      else{
+        this.snackBar.open(res.message , null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+      }
 
     }).catch(err => {
       console.error(err);
-      this.snackBar.open(err.error.message, null, {
-        duration: 2000,
-        horizontalPosition: 'right',
+      this.snackBar.open(err.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
       });
       
       this.getTaxsLoading = false;
@@ -77,11 +92,28 @@ export class SuppliersConfiguartionComponent implements OnInit {
     this.supplierService.getSuppliersGroups().toPromise().then((res: any) => {
       this.groups = res.data;
       this.getGroupsLoading = false;
+      if (res.success){
+        this.snackBar.open(res.message, null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
+        });
+      }
+      else{
+        this.snackBar.open(res.message , null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+      }
+
     }).catch(err => {
       console.error(err);
-      this.snackBar.open(err.error.message, null, {
-        duration: 2000,
-        horizontalPosition: 'right',
+
+      this.snackBar.open(err.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
       });
       
       this.getGroupsLoading = false;

@@ -3,6 +3,34 @@
 
 <div>
     <div *ngIf="!wasteLoading">
+            <!-- Oracle Hospitality Configurations -->
+            <mat-expansion-panel >
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Oracle Hospitality Configurations
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+        
+              <div class="container" *ngIf="!syncJobTypeloading">
+                <form  class="my-form">
+                    <div >
+                        <mat-form-field class="example-full-width">
+                          <mat-select matInput id="timePeriod" name="timePeriod" placeholder="Business Dates"  
+                          [(ngModel)]="syncJobType.configuration.timePeriod">
+                             <mat-option value="Most Recent">Most Recent</mat-option>
+                             <mat-option value="Financial Week to Date">Financial Week to Date</mat-option>
+                             <mat-option value="Past 7 Days">Past 7 Days</mat-option>
+                             <mat-option value="Today">Today</mat-option>
+                             <mat-option value="Month to Date">Month to Date</mat-option>
+                             <mat-option value="Last Month">Last Month</mat-option>
+                             <mat-option value="Financial Period to Date">Financial Period to Date</mat-option>
+                           </mat-select>
+      
+                        </mat-form-field>
+                    </div>
+                </form>
+        </div>        
+        </mat-expansion-panel>
 
         <!-- Infor Sun System Configurations -->
         <mat-expansion-panel >
@@ -12,7 +40,7 @@
                 </mat-panel-title>
               </mat-expansion-panel-header>
         
-              <div class="container" *ngIf="!loading">
+              <div class="container" *ngIf="!syncJobTypeloading">
                 <form  class="my-form">
                     <div >
                         <mat-form-field class="example-full-width">
