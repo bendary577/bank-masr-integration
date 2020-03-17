@@ -33,6 +33,7 @@ import { ApprovedInvoicesInforComponent } from './components/approved-invoices-i
 import { WastageInforConfigurationComponent } from './components/wastage-infor-configuration/wastage-infor-configuration.component';
 import { WastageInforComponent } from './components/wastage-infor/wastage-infor.component';
 import { CreditNotesInforComponent } from './components/credit-notes-infor/credit-notes-infor.component';
+import { CreditNotesInforConfigurationComponent } from './components/credit-notes-infor-configuration/credit-notes-infor-configuration.component';
 
 
 const routes: Routes = [
@@ -42,8 +43,6 @@ const routes: Routes = [
     path: Constants.SETTING, component: ConfigurationComponent ,
     children: []
   },
-  { path: Constants.USERS_CONFIGURATION, component: UsersComponent,canActivate:[AuthGuardService]},
-  { path: Constants.SYNC_JOBS, component: SyncJobsconfigComponent  , canActivate:[AuthGuardService]},
   { path: Constants.USERS_CONFIGURATION, component: UsersComponent,canActivate:[AuthGuardService] },
   { path: Constants.SYNC_JOBS, component: SyncJobsconfigComponent ,canActivate:[AuthGuardService]},
   { path: Constants.COST_CENTER_LOCATION_MAPPING, component: CostCenterLocationMappingComponent ,canActivate:[AuthGuardService]},
@@ -68,7 +67,7 @@ const routes: Routes = [
 
   { path: Constants.CREDIT_NOTE_PAGE , component: CreditNoteComponent  , canActivate:[AuthGuardService]},
   { path: Constants.CREDIT_NOTE_INFOR_PAGE , component: CreditNotesInforComponent  , canActivate:[AuthGuardService]},
-
+  { path: Constants.CREDIT_NOTE_INFOR_CONFIG_PAGE , component: CreditNotesInforConfigurationComponent  , canActivate:[AuthGuardService]},
 
   { path: Constants.CONSUMPTION_PAGE , component: JournalsComponent  , canActivate:[AuthGuardService]},
   { path: Constants.CONSUMPTION_INFOR_PAGE , component: JournalInforComponent  , canActivate:[AuthGuardService]},

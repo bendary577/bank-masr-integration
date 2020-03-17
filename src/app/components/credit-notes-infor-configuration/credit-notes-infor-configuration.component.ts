@@ -10,11 +10,11 @@ import { SyncJobType } from 'src/app/models/SyncJobType';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 
 @Component({
-  selector: 'app-approved-invoice-infor-configuration',
-  templateUrl: './approved-invoice-infor-configuration.component.html',
-  styleUrls: ['./approved-invoice-infor-configuration.component.scss']
+  selector: 'app-credit-notes-infor-configuration',
+  templateUrl: './credit-notes-infor-configuration.component.html',
+  styleUrls: ['./credit-notes-infor-configuration.component.scss']
 })
-export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
+export class CreditNotesInforConfigurationComponent implements OnInit {
 
   syncJobType: SyncJobType;
   submitted = false;
@@ -27,20 +27,17 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
   timePeriods = ["All", "Current Year", "Current Month", "Last Month", "Last Year", "User-defined"];
   analysis = []
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
-    private router:Router, public snackBar: MatSnackBar, private syncJobService:SyncJobService,
-    private data: Data, private accSyncTypeService:AccSyncTypeService) { 
+    private router:Router, public snackBar: MatSnackBar, private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService) { 
   }
 
   ngOnInit() {
     this.getSyncJobType();
-    this.getCostCenter();
   }
 
   getSyncJobType(){
     this.loading = true;
-    this.accSyncTypeService.getAccSyncJobType(Constants.APPROVED_INVOICES_SYNC).toPromise().then((res: any) => {
+    this.accSyncTypeService.getAccSyncJobType(Constants.CREDIT_NOTE_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
-      this.costCenters = this.syncJobType.configuration["costCenters"];
       this.analysis = this.syncJobType.configuration["analysis"];
       this.loading = false;
     }).catch(err => {
@@ -51,23 +48,13 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
 
   onSaveClick(): void {
     this.spinner.show();
-
-    let that = this;
-    this.costCenters.forEach(function (costCenter) {
-      if (costCenter.accountCode){
-        costCenter.checked = true;
-        that.selectedCostCenters.push(costCenter)
-      }
-    });
-    
-    this.syncJobType.configuration["costCenters"]  = this.selectedCostCenters    
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.spinner.hide();
       this.router.navigate([Constants.SYNC_JOBS]);
     }
     ).catch(err => {
       this.spinner.hide();
-      
+
       this.snackBar.open(err.error.message , null, {
         duration: 3000,
         horizontalPosition: 'center',
@@ -77,25 +64,10 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
       this.router.navigate([Constants.SYNC_JOBS]);
     });
   }
-  getCostCenter() {
-    this.costCenterLoding = true;
-    this.spinner.show();
-    this.invoiceService.getCostCenter(Constants.APPROVED_INVOICES_SYNC).toPromise().then((res: any) => {
-      this.costCenters = res.costCenters;
 
-      this.spinner.hide();
-      this.costCenterLoding = false;
-    }).catch(err => {
-      console.error(err);
-      this.costCenters = [];
-      this.spinner.hide();
-      this.costCenterLoding = false;
-    });
-  }
 
   onCancelClick(){
     this.router.navigate([Constants.SYNC_JOBS]);
   }
-
 
 }

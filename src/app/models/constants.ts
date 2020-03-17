@@ -85,6 +85,7 @@ export class Constants {
     static CREDIT_NOTE_PAGE = 'creditNotes';
     static CREDIT_NOTE_INFOR_PAGE = 'creditNotesSun';
     static CREDIT_NOTE_CONFIG_PAGE = 'creditNotesConfig';
+    static CREDIT_NOTE_INFOR_CONFIG_PAGE = 'creditNotesSunConfig';
     static CREDIT_NOTE_SYNC = 'Credit Notes';
 
     static BOOKED_TRANSFER_PAGE = 'bookedTransfers';

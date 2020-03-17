@@ -84,7 +84,7 @@ export class SyncJobsconfigComponent implements OnInit {
     }
     else if (syncJobType.name == Constants.CREDIT_NOTE_SYNC){
       if (this.accountERD == "SUN"){
-        this.router.navigate([Constants.APPROVED_INVOICES_SUN_CONFIG_PAGE]);
+        this.router.navigate([Constants.CREDIT_NOTE_INFOR_CONFIG_PAGE]);
       }
       else{
         this.router.navigate([Constants.APPROVED_INVOICES_CONFIG_PAGE]);

@@ -75,6 +75,7 @@ import { CostCenterLocationMappingComponent } from './components/setting/cost-ce
 import { PosSalesConfigurationComponent } from './components/pos-sales-configuration/pos-sales-configuration.component';
 import { WastageInforComponent } from './components/wastage-infor/wastage-infor.component';
 import { WastageInforConfigurationComponent } from './components/wastage-infor-configuration/wastage-infor-configuration.component';
+import { CreditNotesInforConfigurationComponent } from './components/credit-notes-infor-configuration/credit-notes-infor-configuration.component';
 
 @NgModule({
   declarations: [
@@ -122,7 +123,8 @@ import { WastageInforConfigurationComponent } from './components/wastage-infor-c
     CostCenterLocationMappingComponent,
     WastageConfigurationComponent,
     WastageInforComponent,
-    WastageInforConfigurationComponent
+    WastageInforConfigurationComponent,
+    CreditNotesInforConfigurationComponent
   ],
   imports: [
     BrowserModule,
