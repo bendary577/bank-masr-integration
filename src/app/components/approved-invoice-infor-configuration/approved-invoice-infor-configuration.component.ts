@@ -40,8 +40,21 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
     this.loading = true;
     this.accSyncTypeService.getAccSyncJobType(Constants.APPROVED_INVOICES_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
-      this.analysis = this.syncJobType.configuration["analysis"];
       this.costCenters = this.syncJobType.configuration["costCenters"];
+      this.analysis = this.syncJobType.configuration["analysis"];
+
+      // if (this.analysis.length == 0){
+      //   this.analysis = [{"checked":false,"number":"1","codeElement":"","refrence":"Tax"},
+      //   {"checked":true,"number":"2","codeElement":"","refrence":"Tax"},
+      //   {"checked":false,"number":"3","codeElement":"","refrence":"Tax"},
+      //   {"checked":false,"number":"4","codeElement":"","refrence":"Tax"},
+      //   {"checked":false,"number":"5","codeElement":"","refrence":"Tax"},
+      //   {"checked":true,"number":"6","codeElement":"","refrence":"Tax"},
+      //   {"checked":false,"number":"7","codeElement":"","refrence":"Tax"},
+      //   {"checked":false,"number":"8","codeElement":"","refrence":"Tax"},
+      //   {"checked":false,"number":"9","codeElement":"","refrence":"Tax"},
+      //   {"checked":false,"number":"10","codeElement":"","refrence":"Tax"}]
+      // }
       this.loading = false;
     }).catch(err => {
       console.error(err);

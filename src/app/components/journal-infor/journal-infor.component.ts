@@ -60,7 +60,7 @@ export class JournalInforComponent implements OnInit {
         });
       }
       else{
-        console.log(res.message.message)
+        console.log(res.message)
         this.snackBar.open(res.message.message , null, {
           duration: 3000,
           horizontalPosition: 'center',
