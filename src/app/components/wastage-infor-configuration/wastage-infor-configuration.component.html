@@ -71,6 +71,13 @@
                         [(ngModel)]="syncJobType.configuration.journalType">
                     </mat-form-field>
                   </div>
+                  <div>
+                    <mat-form-field class="example-full-width">
+                      <input matInput id="suspenseAccount" name="suspenseAccount" placeholder="Suspense Account"  
+                      [(ngModel)]="syncJobType.configuration.suspenseAccount">
+                  </mat-form-field>
+                  </div>
+
                   <div >
                     <mat-form-field class="example-full-width">
                       <input matInput id="currencyCode" name="currencyCode" placeholder="Currency Code"  
