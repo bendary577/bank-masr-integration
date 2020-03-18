@@ -76,6 +76,7 @@ import { PosSalesConfigurationComponent } from './components/pos-sales-configura
 import { WastageInforComponent } from './components/wastage-infor/wastage-infor.component';
 import { WastageInforConfigurationComponent } from './components/wastage-infor-configuration/wastage-infor-configuration.component';
 import { CreditNotesInforConfigurationComponent } from './components/credit-notes-infor-configuration/credit-notes-infor-configuration.component';
+import { BasicConfiguartionsComponent } from './components/basic-configuartions/basic-configuartions.component';
 
 @NgModule({
   declarations: [
@@ -124,7 +125,8 @@ import { CreditNotesInforConfigurationComponent } from './components/credit-note
     WastageConfigurationComponent,
     WastageInforComponent,
     WastageInforConfigurationComponent,
-    CreditNotesInforConfigurationComponent
+    CreditNotesInforConfigurationComponent,
+    BasicConfiguartionsComponent
   ],
   imports: [
     BrowserModule,
