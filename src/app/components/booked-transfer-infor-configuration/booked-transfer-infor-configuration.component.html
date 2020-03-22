@@ -1,6 +1,35 @@
 <h3 mat-dialog-title>Update Transfer Configuartion</h3>
 
 <div>
+      <!-- Oracle Hospitality Configurations -->
+      <mat-expansion-panel >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Oracle Hospitality Configurations
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+  
+<div class="container" *ngIf="!loading">
+    <form  class="my-form">
+        <div >
+            <mat-form-field class="example-full-width">
+              <mat-select matInput id="timePeriod" name="timePeriod" placeholder="Time Period"  
+              [(ngModel)]="syncJobType.configuration.timePeriod">
+                  <mat-option value="All">All</mat-option>
+                  <mat-option value="Today">Today</mat-option>
+                  <mat-option value="Yesterday">Yesterday</mat-option>
+                  <mat-option value="Current Month">Current Month</mat-option>
+                  <mat-option value="Last Month">Last Month</mat-option>
+                  <mat-option value="Current Year">Current Year</mat-option>
+                  <mat-option value="Last Year">Last Year</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+  </form>
+  </div>
+          
+      </mat-expansion-panel>
+
             <!-- Infor Sun System Configurations -->
             <mat-expansion-panel >
               <mat-expansion-panel-header>
