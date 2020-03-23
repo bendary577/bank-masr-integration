@@ -79,8 +79,6 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('refresh_token',res.refresh_token);
         localStorage.setItem('user',JSON.stringify(this.user));
 
-        this.getAccount();
-
         this.spinner.hide();
         this.loading = false;
         this.side.setshouldRun(true);
@@ -100,14 +98,4 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  getAccount(){
-    this.accountService.getAccount().toPromise().then((res: any) => {
-      this.account = res;
-      localStorage.setItem('accountERD', this.account.erd);
-
-    }).catch(err => {''
-      console.error(err);
-    });
-
-  }
 }
