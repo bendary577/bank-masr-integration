@@ -28,7 +28,7 @@ export class BasicConfiguartionsComponent implements OnInit {
   analysis = []
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
     private router:Router, public snackBar: MatSnackBar, private syncJobService:SyncJobService,
-    private data: Data, private accSyncTypeService:AccSyncTypeService) { 
+    private data: Data, private accSyncTypeService:AccSyncTypeService) {
   }
 
 
@@ -39,7 +39,7 @@ export class BasicConfiguartionsComponent implements OnInit {
   getCostCenter() {
     this.costCenterLoding = true;
     this.spinner.show();
-    this.invoiceService.getCostCenter(Constants.APPROVED_INVOICES_SYNC).toPromise().then((res: any) => {
+    this.invoiceService.getCostCenter(Constants.APPROVED_INVOICES_SYNC, false).toPromise().then((res: any) => {
       this.costCenters = res.costCenters;
 
       this.spinner.hide();
@@ -62,15 +62,15 @@ export class BasicConfiguartionsComponent implements OnInit {
         that.selectedCostCenters.push(costCenter)
       }
     });
-    
-    this.syncJobType.configuration["costCenters"]  = this.selectedCostCenters    
+
+    this.syncJobType.configuration["costCenters"]  = this.selectedCostCenters
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.spinner.hide();
       this.router.navigate([Constants.SYNC_JOBS]);
     }
     ).catch(err => {
       this.spinner.hide();
-      
+
       this.snackBar.open(err.error.message , null, {
         duration: 3000,
         horizontalPosition: 'center',

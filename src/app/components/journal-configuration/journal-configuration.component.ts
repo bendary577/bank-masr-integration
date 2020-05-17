@@ -52,7 +52,7 @@ export class JournalConfigurationComponent implements OnInit {
   getCostCenter() {
     this.spinner.show();
     this.cost_loading = true;
-    this.invoiceService.getCostCenter(Constants.CONSUMPTION_SYNC).toPromise().then((res: any) => {
+    this.invoiceService.getCostCenter(Constants.CONSUMPTION_SYNC, false).toPromise().then((res: any) => {
       this.costCenters = res.costCenters;
       this.spinner.hide();
       this.cost_loading = false;

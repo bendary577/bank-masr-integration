@@ -17,9 +17,9 @@ export class InvoiceService {
   }
 
   @Cacheable()
-  getCostCenter(syncJobTypeName) {
+  getCostCenter(syncJobTypeName, toLocation) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get(Constants.GET_COST_CENTER_URL+ '?syncTypeName=' + syncJobTypeName
+    return this.http.get(Constants.GET_COST_CENTER_URL+ '?syncTypeName=' + syncJobTypeName + '&toLocation=' + toLocation
     , { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
