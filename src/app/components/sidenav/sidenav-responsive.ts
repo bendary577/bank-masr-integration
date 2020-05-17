@@ -66,6 +66,9 @@ export class SidenavResponsive implements OnDestroy,OnInit {
       this.syncJobTypes = res;
     }).catch(err => {
       console.error(err);
+      if (err.status == 401){
+        this.Logout();
+      }
     });
   }
 /*  public set setshouldRun(shouldRun:boolean){

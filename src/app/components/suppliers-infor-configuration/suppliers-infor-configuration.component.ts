@@ -7,7 +7,6 @@ import { Constants } from 'src/app/models/constants';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import {Data} from "../../models/data";
-import { SyncJobType } from 'src/app/models/SyncJobType';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 
 

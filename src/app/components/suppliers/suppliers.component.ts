@@ -8,6 +8,7 @@ import { Constants } from 'src/app/models/constants';
 import { Router } from '@angular/router';
 import { Data } from 'src/app/models/data';
 import { SyncJob } from 'src/app/models/SyncJob';
+import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 
 
 
@@ -28,7 +29,7 @@ export class SuppliersComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService, private supplierService: SupplierService,
     private vendorService: VendorService, private syncJobService: SyncJobService,
-    public snackBar: MatSnackBar, private router: Router, private data: Data) {
+    public snackBar: MatSnackBar, private router: Router, private data: Data, private sidenav: SidenavResponsive) {
 
   }
 
@@ -101,6 +102,10 @@ export class SuppliersComponent implements OnInit {
       console.error(err);
       this.spinner.hide();
       this.loading = false;
+
+      if (err.status == 401){
+        this.sidenav.Logout();
+      }
     });
   }
 

@@ -23,7 +23,7 @@ export class CostCenterLocationMappingComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
     private router:Router, public snackBar: MatSnackBar, private syncJobService:SyncJobService,
-    private accSyncTypeService:AccSyncTypeService) { 
+    private accSyncTypeService:AccSyncTypeService) {
   }
 
   ngOnInit() {
@@ -88,8 +88,8 @@ export class CostCenterLocationMappingComponent implements OnInit {
   getCostCenter() {
     this.costCenterLoding = true;
     this.spinner.show();
-    
-    this.invoiceService.getCostCenter(Constants.CONSUMPTION_SYNC).toPromise().then((res: any) => {
+
+    this.invoiceService.getCostCenter(Constants.CONSUMPTION_SYNC, true).toPromise().then((res: any) => {
       this.costCenters = res.costCenters;
 
       this.spinner.hide();

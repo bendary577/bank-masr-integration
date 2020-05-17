@@ -79,17 +79,18 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('refresh_token',res.refresh_token);
         localStorage.setItem('user',JSON.stringify(this.user));
 
-        this.getAccount();
-
         this.spinner.hide();
         this.loading = false;
         this.side.setshouldRun(true);
         this.side.shouldRun = true;
         this.side.getSyncJobTypes();
+        this.saveAccountERD();
         this.router.navigate([Constants.WELCOME_PAGE]);
       }).catch(err => {
         localStorage.setItem('auth_token','');
         localStorage.setItem('user','');
+        localStorage.setItem('accountERD','');
+
         this.spinner.hide();
         this.loading = false;
         this.snackBar.open('Wrong Credentials.', null, {
@@ -100,14 +101,13 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  getAccount(){
+  saveAccountERD() {
     this.accountService.getAccount().toPromise().then((res: any) => {
       this.account = res;
-      localStorage.setItem('accountERD', this.account.erd);
-
+      localStorage.setItem('accountERD',res.erd);
     }).catch(err => {''
       console.error(err);
     });
-
   }
+
 }
