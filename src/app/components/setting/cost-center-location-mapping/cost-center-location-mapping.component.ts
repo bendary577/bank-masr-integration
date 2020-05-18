@@ -101,8 +101,4 @@ export class CostCenterLocationMappingComponent implements OnInit {
       this.costCenterLoding = false;
     });
   }
-
-  onCancelClick(){
-    this.router.navigate([Constants.SYNC_JOBS]);
-  }
 }
