@@ -5,49 +5,51 @@
 
     <select class="custom-select" (change)="getSyncJobData()" [(ngModel)]="selectedJob">
         <option [ngValue]="job" *ngFor="let job of jobs">
-            {{job.creationDate}} - {{job.status}}</option>
-    </select> 
+            {{job.creationDate}} - {{job.status}}
+            <p *ngIf="job.rowsFetched == 0">- No new data fetched.</p>
+          </option>
+    </select>
     <button mat-flat-button (click)="getBookedTransferSyncJob()">Sync Booked Transfer Now</button>
 </div>
 
 <br>
-<div id="myProgress" >
-    <mat-progress-bar mode="indeterminate" *ngIf="staticgetTransfersLoading" ></mat-progress-bar>
+<div id="myProgress">
+    <mat-progress-bar mode="indeterminate" *ngIf="staticgetTransfersLoading"></mat-progress-bar>
 </div>
 
 <br>
 <div *ngIf="selectedJob">
     <mat-card class="example-card">
-            <mat-card-header>
-              <mat-card-title class="title">Sync Details</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-            <mat-list-item>      
+        <mat-card-header>
+            <mat-card-title class="title">Sync Details</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-list-item>
                 <span class="key">Sync status: </span>
                 <span class="value" *ngIf="selectedJob.status">{{selectedJob.status}}</span>
                 <span class="value" *ngIf="!selectedJob.status">No Info</span>
             </mat-list-item>
-            <mat-list-item>      
+            <mat-list-item>
                 <span class="key">Start Date: </span>
                 <span class="value" *ngIf="selectedJob.creationDate">{{selectedJob.creationDate}}</span>
                 <span class="value" *ngIf="!selectedJob.creationDate">No Info</span>
             </mat-list-item>
-            <mat-list-item>      
+            <mat-list-item>
                 <span class="key">End Date: </span>
                 <span class="value" *ngIf="selectedJob.endDate">{{selectedJob.endDate}}</span>
                 <span class="value" *ngIf="!selectedJob.endDate">No Info</span>
             </mat-list-item>
-            <mat-list-item>      
+            <mat-list-item>
                 <span class="key">Reason: </span>
                 <span class="value" *ngIf="selectedJob.reason">{{selectedJob.reason}}</span>
                 <span class="value" *ngIf="!selectedJob.reason">No Info</span>
             </mat-list-item>
-            <mat-list-item *ngIf="!bookedTransfer.length"> 
-            <span>
+            <mat-list-item *ngIf="!bookedTransfer.length">
+                <span>
                 There was no new data to sync in this job, You can sync booked transfers now from <a (click)="getBookedTransferSyncJob()">here</a>
             </span>
             </mat-list-item>
-            </mat-card-content>
+        </mat-card-content>
     </mat-card>
 </div>
 
@@ -57,74 +59,73 @@
 
     <div *ngIf="!jobs.length">
         <mat-card class="example-card">
-                <mat-card-header>
-                    <mat-card-title>No Data</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <p>
-                        There was no new data to sync in this job, You can sync booked transfer now from 
-                    <a  (click)="getBookedTransferSyncJob()">here</a>
-                    </p>
-                    
-                </mat-card-content>
+            <mat-card-header>
+                <mat-card-title>No Data</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p>
+                    There was no new data to sync in this job, You can sync booked transfer now from
+                    <a (click)="getBookedTransferSyncJob()">here</a>
+                </p>
+
+            </mat-card-content>
         </mat-card>
     </div>
-    
-    <div class="main" *ngIf="bookedTransfer.length">  
-    <ngx-datatable  class="material" [rows]="bookedTransfer" [columnMode]="'force'" [headerHeight]="50"
-        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[{prop: 'status', dir: 'asc'}]">
 
-        <ngx-datatable-column name="Status">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.status}}
-            </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Reason">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.reason}}
-            </ng-template>
-        </ngx-datatable-column>
+    <div class="main" *ngIf="bookedTransfer.length">
+        <ngx-datatable class="material" [rows]="bookedTransfer" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[{prop: 'status', dir: 'asc'}]">
 
-        <ngx-datatable-column name="Description">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.data.description}}
-            </ng-template>
-        </ngx-datatable-column>
+            <ngx-datatable-column name="Status">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.status}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Reason">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.reason}}
+                </ng-template>
+            </ngx-datatable-column>
 
-        <ngx-datatable-column name="Transfer Total Credit">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.data.totalCr}}
-            </ng-template>
-        </ngx-datatable-column>
+            <ngx-datatable-column name="Description">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.description}}
+                </ng-template>
+            </ngx-datatable-column>
 
-        <ngx-datatable-column name="Transfer TotalDebit">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.data.totalDr}}
-            </ng-template>
-        </ngx-datatable-column>
+            <ngx-datatable-column name="Transfer Total Credit">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.totalCr}}
+                </ng-template>
+            </ngx-datatable-column>
 
-        <ngx-datatable-column name="From Cost Center">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.data.from_cost_center}}
-            </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Account Code">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.data.from_account_code}}
-            </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="To Cost Center">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.data.to_cost_center}}
-            </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Account Code">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.data.to_account_code}}
-            </ng-template>
-        </ngx-datatable-column>
-     
-    </ngx-datatable>
+            <ngx-datatable-column name="Transfer TotalDebit">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.totalDr}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="From Cost Center">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.from_cost_center}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Account Code">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.from_account_code}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="To Cost Center">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.to_cost_center}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Account Code">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.to_account_code}}
+                </ng-template>
+            </ngx-datatable-column>
+
+        </ngx-datatable>
     </div>
     <ngx-spinner></ngx-spinner>
 
