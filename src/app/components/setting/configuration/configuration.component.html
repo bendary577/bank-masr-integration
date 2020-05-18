@@ -1,49 +1,47 @@
-
 <div class="main" *ngIf="!loading">
-  <h3>General Settings</h3>
+    <h3>General Settings</h3>
 
-  <div class="header">
-    <button mat-flat-button (click)="addAccountDialog()">Add Account</button>
+    <div class="header">
+        <!-- <button mat-flat-button (click)="addAccountDialog()">Add Account</button> -->
 
-    <button mat-flat-button (click)="updateAccount()">Update Account</button>
-</div>
-<br>
-<div>
-  <mat-accordion multi>
+        <button mat-flat-button (click)="updateAccount()">Update Account</button>
+    </div>
+    <br>
+    <div>
+        <mat-accordion multi>
 
-    <!-- Oracle Hospitality Inventory Management -->
-    <mat-expansion-panel *ngFor="let accountCredential of accountCredentials">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{accountCredential.account}}
-        </mat-panel-title>
-        <mat-panel-description>
+            <!-- Oracle Hospitality Inventory Management -->
+            <mat-expansion-panel *ngFor="let accountCredential of accountCredentials">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{accountCredential.account}}
+                    </mat-panel-title>
+                    <mat-panel-description>
 
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
 
-      <mat-form-field>
-      <input matInput placeholder="Username" [(ngModel)]="accountCredential.username">
-    </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Username" [(ngModel)]="accountCredential.username">
+                </mat-form-field>
 
-      <mat-form-field>
-        <!-- showHideInput -->
-        <input id={{accountCredential.username}} type="password" placeholder="Password" matInput 
-        [(ngModel)]="accountCredential.password" >
+                <mat-form-field>
+                    <!-- showHideInput -->
+                    <input id={{accountCredential.username}} type="password" placeholder="Password" matInput [(ngModel)]="accountCredential.password">
 
-         <!-- <i matSuffix class="material-icons" showHideTrigger={{accountCredential.username}}
+                    <!-- <i matSuffix class="material-icons" showHideTrigger={{accountCredential.username}}
          [showHideStatus]="{ materialIcon: true, id: accountCredential.username }"></i> -->
 
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Company" [(ngModel)]="accountCredential.company">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Link" [(ngModel)]="accountCredential.link">
-      </mat-form-field>
-    </mat-expansion-panel>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Company" [(ngModel)]="accountCredential.company">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Link" [(ngModel)]="accountCredential.link">
+                </mat-form-field>
+            </mat-expansion-panel>
 
-  </mat-accordion >
-  <ngx-spinner></ngx-spinner>
-  </div>
+        </mat-accordion>
+        <ngx-spinner></ngx-spinner>
+    </div>
 </div>
