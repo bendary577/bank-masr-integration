@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Constants } from 'src/app/models/constants';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Cacheable } from 'ngx-cacheable';
 
 
 @Injectable({
@@ -11,6 +12,7 @@ export class AccSyncTypeService {
 
   constructor(private http: HttpClient) { }
 
+  @Cacheable()
   getAccSyncJobType(syncJobTypeName:String) {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_ACC_SYNC_JOB_TYPES_BY_NAME_URL + '?typeName=' + syncJobTypeName

@@ -39,7 +39,6 @@ export class SyncJobService {
     return this.http.put(Constants.UPDATE_COST_CENTER_MAPPING_URL , costCenters, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})}).toPromise();
   }
 
-  @Cacheable()
   getSyncJobs(syncJobTypeName:String){
     this.token = localStorage.getItem('auth_token');
     return this.http.get<SyncJob[]>(Constants.GET_SYNC_JOBS_URL + '?typeName=' + syncJobTypeName, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
