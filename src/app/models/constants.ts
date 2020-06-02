@@ -65,8 +65,9 @@ export class Constants {
     static GET_CURRENT_DAYS_URL = environment.apiHost + '/getCurrentDays';
 
 
-  // General Settings
-    static UPDATE_OVER_GROUPS_URL = environment.apiHost + '/updateOverGroups';
+    // General Settings
+    static GET_GENERAL_SETTINGS_URL = environment.apiHost + '/getGeneralSettings';
+    static UPDATE_GENERAL_SETTINGS_URL = environment.apiHost + '/updateGeneralSettings';
 
 
     static LOGIN_PAGE = 'login';

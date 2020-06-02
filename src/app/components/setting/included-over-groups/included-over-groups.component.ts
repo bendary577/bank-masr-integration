@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { JournalService } from 'src/app/services/journal/journal.service';
-import { Constants } from 'src/app/models/constants';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 import { Response } from 'src/app/models/Response';
+import { GeneralSettings } from 'src/app/models/GeneralSettings';
+import { OverGroup } from 'src/app/models/OverGroup';
+
 
 @Component({
   selector: 'app-included-over-groups',
@@ -14,14 +16,25 @@ import { Response } from 'src/app/models/Response';
 export class IncludedOverGroupsComponent implements OnInit {
   groupLoading = true;
   saveLoading = true;
+
+  generalSettings: GeneralSettings;
   overGroups = [];
-  selectedOverGroups = [];
+  selectedOverGroups: Array<OverGroup> = [];
 
   constructor(private journalService:JournalService, public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService) { }
 
   ngOnInit() {
+    this.getGeneralSettings();
     this.getOverGroups();
+  }
+
+  getGeneralSettings(){
+    this.generalSettingsService.getGeneralSettings().then((res: Response) => {
+      this.generalSettings = res.data as GeneralSettings;
+    }).catch(err => {
+      console.error(err);
+    });
   }
 
   getOverGroups() {
@@ -57,7 +70,8 @@ export class IncludedOverGroupsComponent implements OnInit {
 
 
     if(this.selectedOverGroups.length != 0){
-      this.generalSettingsService.updateOverGroups(this.selectedOverGroups).then(result => {
+      this.generalSettings.overGroups = this.selectedOverGroups;
+      this.generalSettingsService.updateGeneralSettings(this.generalSettings).then(result => {
         const response = result as Response;
         if (response.success){
           this.snackBar.open('Save configuration successfully.', null, {
@@ -84,6 +98,8 @@ export class IncludedOverGroupsComponent implements OnInit {
         this.spinner.hide();
         this.saveLoading = false;
       });
+    }else{
+      this.spinner.hide();
     }
 
   }
