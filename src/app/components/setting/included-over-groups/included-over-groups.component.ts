@@ -6,6 +6,7 @@ import { GeneralSettingsService } from 'src/app/services/generalSettings/general
 import { Response } from 'src/app/models/Response';
 import { GeneralSettings } from 'src/app/models/GeneralSettings';
 import { OverGroup } from 'src/app/models/OverGroup';
+import { Item } from 'src/app/models/Item';
 
 
 @Component({
@@ -16,10 +17,13 @@ import { OverGroup } from 'src/app/models/OverGroup';
 export class IncludedOverGroupsComponent implements OnInit {
   groupLoading = true;
   saveLoading = true;
+  itemLoading = true;
 
   generalSettings: GeneralSettings;
-  overGroups = [];
+  overGroups: Array<OverGroup> = [];
   selectedOverGroups: Array<OverGroup> = [];
+
+  mappedItems: Array<Item> = [];
 
   constructor(private journalService:JournalService, public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService) { }
@@ -32,6 +36,8 @@ export class IncludedOverGroupsComponent implements OnInit {
   getGeneralSettings(){
     this.generalSettingsService.getGeneralSettings().then((res: Response) => {
       this.generalSettings = res.data as GeneralSettings;
+      this.mappedItems = this.generalSettings.items;
+
     }).catch(err => {
       console.error(err);
     });
@@ -53,6 +59,43 @@ export class IncludedOverGroupsComponent implements OnInit {
       });
       this.groupLoading = false;
       this.spinner.hide();
+    });
+  }
+
+  mapItemGroups(){
+    this.spinner.show();
+    this.itemLoading = true;
+    this.journalService.mapItemGroups().toPromise().then((res: any) => {
+      this.mappedItems = res.data;
+
+      this.spinner.hide();
+      this.itemLoading = false;
+
+      if (res.success){
+        this.snackBar.open(res.message, null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass: "my-snack-bar-success"
+        });
+      }
+      else{
+        this.snackBar.open(res.message, null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass: "my-snack-bar-fail"
+        });
+      }
+
+    }).catch(err => {
+      console.error(err);
+      this.spinner.hide();
+      this.itemLoading = false;
+
+      this.snackBar.open(err.message, null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass: "my-snack-bar-fail"
+      });
     });
   }
 

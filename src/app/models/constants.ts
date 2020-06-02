@@ -33,7 +33,7 @@ export class Constants {
     static GET_ACC_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getAccSyncJobTypesByName';
 
     static UPDATE_SYNC_JOB_TYPES_URL = environment.apiHost + '/updateSyncJobTypesConfiguration';
-    static UPDATE_COST_CENTER_LOCATION_MAPPING_URL = environment.apiHost + '/updateCostCenterLocationMapping';
+    static UPDATE_COST_CENTER_MAPPING_URL = environment.apiHost + '/updateCostCenterLocationMapping';
     static GET_SYNC_JOBS_URL = environment.apiHost + '/getSyncJobs';
 
     static GET_SUPPLIERS_URL = environment.apiHost + '/getSuppliers';
@@ -120,6 +120,7 @@ export class Constants {
     static END_POINT = '/getSuppliers';
     static SETTING = 'setting';
     static ACCOUNT_CONFIGURATION = 'configuration';
+    static COST_CENTER_ACCOUNT_MAPPING = 'costCenterAccountMapping';
     static COST_CENTER_LOCATION_MAPPING = 'costCenterLocationMapping';
     static INCLUDED_OVER_GROUPS = 'includedOverGroups';
     static USERS_CONFIGURATION = 'users';

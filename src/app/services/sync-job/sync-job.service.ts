@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { SyncJob } from 'src/app/models/SyncJob';
 import { SyncJobData } from 'src/app/models/SyncJobData';
+import { Cacheable } from 'ngx-cacheable';
 
 @Injectable({
   providedIn: 'root'
@@ -35,9 +36,10 @@ export class SyncJobService {
 
   updateCostCenterLocationMapping(costCenters){
     this.token = localStorage.getItem('auth_token');
-    return this.http.put(Constants.UPDATE_COST_CENTER_LOCATION_MAPPING_URL , costCenters, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})}).toPromise();
+    return this.http.put(Constants.UPDATE_COST_CENTER_MAPPING_URL , costCenters, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})}).toPromise();
   }
 
+  @Cacheable()
   getSyncJobs(syncJobTypeName:String){
     this.token = localStorage.getItem('auth_token');
     return this.http.get<SyncJob[]>(Constants.GET_SYNC_JOBS_URL + '?typeName=' + syncJobTypeName, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});

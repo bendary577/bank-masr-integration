@@ -1,0 +1,32 @@
+.ngx-datatable.scroll-vertical {
+    height: 100vh;
+    width: 100%;
+}
+
+.main {
+    text-align: center;
+    padding: 4px 16px 4px 16px;
+    height: 95vh;
+}
+
+.header {
+    text-align: end;
+    padding: 4px 16px 4px 16px;
+    height: 5vh;
+}
+
+button {
+    color: white;
+    background-color: #3f51b5;
+    margin-right: 10px
+}
+
+.example-card {
+    width: 50%;
+    margin: auto;
+    padding: 10px;
+}
+
+// #app-journal-configuration .ngx-datatable.material {
+//   box-shadow: none;
+// }

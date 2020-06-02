@@ -32,10 +32,48 @@
             </ngx-datatable>
         </div>
     </mat-expansion-panel>
-    <br>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Items And Groups Mangment
+            </mat-panel-title>
+
+        </mat-expansion-panel-header>
+        <div class="main" *ngIf="mappedItems?.length > 0">
+            <ngx-datatable class="material" [rows]="mappedItems" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[]">
+
+                <ngx-datatable-column name="Item">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.item}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Item Group">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.itemGroup}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Major Group">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.majorGroup}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Over Group">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.overGroup}}
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </div>
+
+    </mat-expansion-panel>
 
     <div class="card-back">
         <button mat-flat-button (click)="onSaveClick()">Save</button>
+        <button mat-flat-button (click)="mapItemGroups()">Map Item Group</button>
     </div>
     <ngx-spinner></ngx-spinner>
 </div>

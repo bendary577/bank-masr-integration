@@ -21,18 +21,9 @@ import { CostCenter } from 'src/app/models/CostCenter';
 export class JournalsInforConfigurationsComponent implements OnInit {
   loading = true;
   save_loading = false;
-  cost_loading = true;
-  group_loading = true;
-  item_loading = true;
   syncTypeLoading = true
 
   syncJobType: AccountSyncType;
-
-  costCenters: CostCenter[] = [];
-  overGroups = [];
-  selectedCostCenters = [];
-  selectedOverGroups = [];
-  mappedItems:[] = [];
   analysis = [];
 
   AccountSettingsForm: FormGroup;
@@ -41,113 +32,25 @@ export class JournalsInforConfigurationsComponent implements OnInit {
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
     private journalService:JournalService, private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService,
     private router:Router, public snackBar: MatSnackBar) {
-      this.costCenters = [];
-      this.overGroups = [];
   }
 
   ngOnInit() {
     this.getSyncJobType();
-    // this.getCostCenter();
-    this.getOverGroups();
-  }
-
-  getCostCenter() {
-    this.spinner.show();
-    this.cost_loading = true;
-    this.invoiceService.getCostCenter(Constants.CONSUMPTION_SYNC, false).toPromise().then((res: any) => {
-      this.costCenters = res.costCenters;
-      this.spinner.hide();
-      this.cost_loading = false;
-    }).catch(err => {
-      console.error(err);
-      this.snackBar.open(err.error.message , null, {
-        duration: 3000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-      this.spinner.hide();
-      this.cost_loading = false;
-    });
-  }
-
-  getOverGroups() {
-    this.spinner.show();
-    this.group_loading = true;
-    this.journalService.getOverGroups(Constants.CONSUMPTION_SYNC).toPromise().then((res: any) => {
-      this.overGroups = res.data;
-      this.group_loading = false;
-      this.spinner.hide();
-      if (res.success){
-        this.snackBar.open(res.message , null, {
-          duration: 3000,
-          horizontalPosition: 'center',
-          panelClass:"my-snack-bar-success"
-        });
-      }
-      else{
-        this.snackBar.open(res.message , null, {
-          duration: 3000,
-          horizontalPosition: 'center',
-          panelClass:"my-snack-bar-fail"
-        });
-      }
-    }).catch(err => {
-      console.error(err);
-      this.group_loading = false;
-      this.spinner.hide();
-    });
-  }
-
-  mapItemGroups(){
-    this.spinner.show();
-    this.item_loading = true;
-    this.journalService.mapItemGroups().toPromise().then((res: any) => {
-      this.mappedItems = res.data;
-
-      this.spinner.hide();
-      this.item_loading = false;
-
-      if (res.success){
-        this.snackBar.open(res.message, null, {
-          duration: 2000,
-          horizontalPosition: 'center',
-          panelClass: "my-snack-bar-success"
-        });
-      }
-      else{
-        this.snackBar.open(res.message, null, {
-          duration: 2000,
-          horizontalPosition: 'center',
-          panelClass: "my-snack-bar-fail"
-        });
-      }
-
-    }).catch(err => {
-      console.error(err);
-      this.spinner.hide();
-      this.item_loading = false;
-
-      this.snackBar.open(err.message, null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass: "my-snack-bar-fail"
-      });
-    });
   }
 
   getSyncJobType(){
     this.loading = true;
+    this.spinner.show();
     this.accSyncTypeService.getAccSyncJobType(Constants.CONSUMPTION_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
-      this.costCenters = this.syncJobType.configuration["costCenters"];
-      this.overGroups = this.syncJobType.configuration["overGroups"];
       this.analysis = this.syncJobType.configuration["analysis"];
-      this.mappedItems = res.configuration.items;
 
       this.loading = false;
+      this.spinner.hide();
     }).catch(err => {
       console.error(err);
       this.loading = false;
+      this.spinner.hide();
     });
   }
 
@@ -155,28 +58,6 @@ export class JournalsInforConfigurationsComponent implements OnInit {
   onSaveClick(): void {
     this.spinner.show();
     this.save_loading = true;
-
-    console.log(this.overGroups)
-
-    let that = this;
-    this.costCenters.forEach(function (costCenter) {
-      if (costCenter.checked){
-        that.selectedCostCenters.push(costCenter)
-      }
-    });
-
-    this.overGroups.forEach(function (overGroup) {
-      if (overGroup.checked){
-        that.selectedOverGroups.push(overGroup)
-      }
-    });
-
-    if (this.selectedCostCenters.length != 0) {
-      this.syncJobType.configuration["costCenters"] = this.selectedCostCenters;
-    }
-    if(this.selectedOverGroups.length != 0){
-      this.syncJobType.configuration["overGroups"] = this.selectedOverGroups;
-    }
 
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.snackBar.open('Save configuration successfully.', null, {

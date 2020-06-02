@@ -1,18 +1,18 @@
-import { Component, OnInit, NgZone } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
-import { InvoiceService } from 'src/app/services/invoice/invoice.service';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { Component, OnInit } from '@angular/core';
+import { Response } from 'src/app/models/Response';
 import { GeneralSettings } from 'src/app/models/GeneralSettings';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
-import { Response } from 'src/app/models/Response';
-import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { InvoiceService } from 'src/app/services/invoice/invoice.service';
 
 @Component({
-  selector: 'app-cost-center-location-mapping',
-  templateUrl: './cost-center-location-mapping.component.html',
-  styleUrls: ['./cost-center-location-mapping.component.scss']
+  selector: 'app-cost-center-account-mapping',
+  templateUrl: './cost-center-account-mapping.component.html',
+  styleUrls: ['./cost-center-account-mapping.component.scss']
 })
-export class CostCenterLocationMappingComponent implements OnInit {
+export class CostCenterAccountMappingComponent implements OnInit {
+
   costCenterLoding = true;
   saveLoading = false;
   loading = false;
@@ -23,8 +23,7 @@ export class CostCenterLocationMappingComponent implements OnInit {
   generalSettings: GeneralSettings;
 
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
-    public snackBar: MatSnackBar, private route: ActivatedRoute,
-    private generalSettingsService:GeneralSettingsService, private zone:NgZone) {
+    public snackBar: MatSnackBar,private generalSettingsService:GeneralSettingsService) {
   }
 
   ngOnInit() {
@@ -48,14 +47,14 @@ export class CostCenterLocationMappingComponent implements OnInit {
 
     let that = this;
     this.costCenters.forEach(function (costCenter) {
-      if (costCenter.locationName){
+      if (costCenter.accountCode && costCenter.costCenterReference){
         costCenter.checked = true;
         that.selectedCostCenters.push(costCenter);
       }
     });
 
     if(this.selectedCostCenters.length != 0){
-      this.generalSettings.costCenterLocationMapping = this.selectedCostCenters;
+      this.generalSettings.costCenterAccountMapping = this.selectedCostCenters;
 
       this.generalSettingsService.updateGeneralSettings(this.generalSettings).then(result => {
         const response = result as Response;
@@ -94,7 +93,7 @@ export class CostCenterLocationMappingComponent implements OnInit {
     this.costCenterLoding = true;
     this.spinner.show();
 
-    this.invoiceService.getCostCenter("", true).toPromise().then((res: any) => {
+    this.invoiceService.getCostCenter("", false).toPromise().then((res: any) => {
       this.costCenters = res.costCenters;
 
       this.spinner.hide();

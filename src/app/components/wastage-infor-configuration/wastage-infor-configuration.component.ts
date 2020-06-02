@@ -20,13 +20,11 @@ export class WastageInforConfigurationComponent implements OnInit {
   groupLoading = true;
   wasteLoading = true;
   selectedTender = [];
-  overGroups = [];
   wasteGroups = [];
   analysis = [];
   selectedWasteGroups = [];
-  selectedOverGroups = [];
 
-  syncJobType: AccountSyncType;  
+  syncJobType: AccountSyncType;
 
   constructor(private spinner: NgxSpinnerService, private wasteService:WastageService,
     private journalService:JournalService,
@@ -36,7 +34,6 @@ export class WastageInforConfigurationComponent implements OnInit {
   ngOnInit() {
     this.getSyncJobType();
     this.getWasteGroups();
-    this.getOverGroups();
   }
 
   getSyncJobType(){
@@ -48,23 +45,6 @@ export class WastageInforConfigurationComponent implements OnInit {
     }).catch(err => {
       console.error(err);
       this.syncJobTypeloading = false;
-    });
-  }
-
-  
-  getOverGroups() {
-    this.groupLoading = true;
-    this.journalService.getOverGroups(Constants.WASTARGE_SYNC).toPromise().then((res: any) => {
-      this.overGroups = res.data;
-      this.groupLoading = false;
-    }).catch(err => {
-      console.error(err);
-      this.snackBar.open(err.error.message , null, {
-        duration: 3000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-      this.groupLoading = false;
     });
   }
 
@@ -87,7 +67,7 @@ export class WastageInforConfigurationComponent implements OnInit {
       this.spinner.hide();
     });
   }
-  
+
 
   onSaveClick(): void {
     this.spinner.show();
@@ -100,17 +80,8 @@ export class WastageInforConfigurationComponent implements OnInit {
       }
     });
 
-    this.overGroups.forEach(function (overGroup) {
-      if (overGroup.checked){
-        that.selectedOverGroups.push(overGroup)
-      }
-    });
-
     if (this.selectedWasteGroups.length != 0) {
       this.syncJobType.configuration["wasteGroups"] = this.selectedWasteGroups;
-    }
-    if(this.selectedOverGroups.length != 0){
-      this.syncJobType.configuration["overGroups"] = this.selectedOverGroups;
     }
 
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {

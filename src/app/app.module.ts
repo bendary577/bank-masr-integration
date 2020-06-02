@@ -78,6 +78,7 @@ import { WastageInforConfigurationComponent } from './components/wastage-infor-c
 import { CreditNotesInforConfigurationComponent } from './components/credit-notes-infor-configuration/credit-notes-infor-configuration.component';
 import { BasicConfiguartionsComponent } from './components/basic-configuartions/basic-configuartions.component';
 import { IncludedOverGroupsComponent } from './components/setting/included-over-groups/included-over-groups.component';
+import { CostCenterAccountMappingComponent } from './components/setting/cost-center-account-mapping/cost-center-account-mapping.component';
 
 @NgModule({
   declarations: [
@@ -128,7 +129,8 @@ import { IncludedOverGroupsComponent } from './components/setting/included-over-
     WastageInforConfigurationComponent,
     CreditNotesInforConfigurationComponent,
     BasicConfiguartionsComponent,
-    IncludedOverGroupsComponent
+    IncludedOverGroupsComponent,
+    CostCenterAccountMappingComponent
   ],
   imports: [
     BrowserModule,
