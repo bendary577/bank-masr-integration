@@ -7,6 +7,9 @@ import { Constants } from 'src/app/models/constants';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { AccountSyncType } from 'src/app/models/AccountSyncType';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
+import { GeneralSettings } from 'src/app/models/GeneralSettings';
+import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
+import { Response } from 'src/app/models/Response';
 
 @Component({
   selector: 'app-cost-center-location-mapping',
@@ -15,39 +18,36 @@ import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.s
 })
 export class CostCenterLocationMappingComponent implements OnInit {
   costCenterLoding = true;
-  save_loading = false;
+  saveLoading = false;
   loading = false;
   costCenters = [];
   selectedCostCenters = [];
-  syncJobType: AccountSyncType;
+
+  generalSettings: GeneralSettings;
 
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
-    private router:Router, public snackBar: MatSnackBar, private syncJobService:SyncJobService,
-    private accSyncTypeService:AccSyncTypeService) {
+    public snackBar: MatSnackBar, private syncJobService:SyncJobService,
+    private generalSettingsService:GeneralSettingsService) {
   }
 
   ngOnInit() {
     this.getCostCenter();
-    this.getSyncJobType();
+    this.getGeneralSettings();
   }
 
-  getSyncJobType(){
-    this.loading = true;
-    this.accSyncTypeService.getAccSyncJobType(Constants.CONSUMPTION_SYNC).toPromise().then((res: any) => {
-      this.syncJobType = res;
-      this.costCenters = this.syncJobType.configuration["costCenterLocationMapping"];
-
-      this.loading = false;
+  getGeneralSettings(){
+    this.generalSettingsService.getGeneralSettings().then((res: Response) => {
+      this.generalSettings = res.data as GeneralSettings;
     }).catch(err => {
       console.error(err);
-      this.loading = false;
     });
   }
 
 
   onSaveClick(): void {
     this.spinner.show();
-    this.save_loading = true;
+    this.saveLoading = true;
+    this.selectedCostCenters = [];
 
     let that = this;
     this.costCenters.forEach(function (costCenter) {
@@ -57,31 +57,38 @@ export class CostCenterLocationMappingComponent implements OnInit {
       }
     });
 
-    if (this.selectedCostCenters.length != 0) {
-      this.syncJobType.configuration["costCenterLocationMapping"] = this.selectedCostCenters;
-    }
-
-    this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
-      this.snackBar.open('Save configuration successfully.', null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-success"
+    if(this.selectedCostCenters.length != 0){
+      this.generalSettings.costCenterLocationMapping = this.selectedCostCenters;
+      this.generalSettingsService.updateGeneralSettings(this.generalSettings).then(result => {
+        const response = result as Response;
+        if (response.success){
+          this.snackBar.open('Save configuration successfully.', null, {
+            duration: 2000,
+            horizontalPosition: 'center',
+            panelClass:"my-snack-bar-success"
+          });
+        }else{
+          this.snackBar.open('An error has occurred.', null, {
+            duration: 2000,
+            horizontalPosition: 'center',
+            panelClass:"my-snack-bar-fail"
+          });
+        }
+        this.spinner.hide();
+        this.saveLoading = false;
+      }
+      ).catch(err => {
+        this.snackBar.open('An error has occurred.', null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+        this.spinner.hide();
+        this.saveLoading = false;
       });
+    }else{
       this.spinner.hide();
-      this.save_loading = false;
     }
-    ).catch(err => {
-      this.snackBar.open('An error has occurred.', null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-
-      });
-      this.spinner.hide();
-      this.save_loading = false;
-
-    });
-
   }
 
 
@@ -89,7 +96,7 @@ export class CostCenterLocationMappingComponent implements OnInit {
     this.costCenterLoding = true;
     this.spinner.show();
 
-    this.invoiceService.getCostCenter(Constants.CONSUMPTION_SYNC, true).toPromise().then((res: any) => {
+    this.invoiceService.getCostCenter("", true).toPromise().then((res: any) => {
       this.costCenters = res.costCenters;
 
       this.spinner.hide();
