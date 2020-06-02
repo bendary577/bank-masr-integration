@@ -77,6 +77,7 @@ import { WastageInforComponent } from './components/wastage-infor/wastage-infor.
 import { WastageInforConfigurationComponent } from './components/wastage-infor-configuration/wastage-infor-configuration.component';
 import { CreditNotesInforConfigurationComponent } from './components/credit-notes-infor-configuration/credit-notes-infor-configuration.component';
 import { BasicConfiguartionsComponent } from './components/basic-configuartions/basic-configuartions.component';
+import { IncludedOverGroupsComponent } from './components/setting/included-over-groups/included-over-groups.component';
 
 @NgModule({
   declarations: [
@@ -126,7 +127,8 @@ import { BasicConfiguartionsComponent } from './components/basic-configuartions/
     WastageInforComponent,
     WastageInforConfigurationComponent,
     CreditNotesInforConfigurationComponent,
-    BasicConfiguartionsComponent
+    BasicConfiguartionsComponent,
+    IncludedOverGroupsComponent
   ],
   imports: [
     BrowserModule,

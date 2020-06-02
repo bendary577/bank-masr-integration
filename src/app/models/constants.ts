@@ -65,6 +65,10 @@ export class Constants {
     static GET_CURRENT_DAYS_URL = environment.apiHost + '/getCurrentDays';
 
 
+  // General Settings
+    static UPDATE_OVER_GROUPS_URL = environment.apiHost + '/updateOverGroups';
+
+
     static LOGIN_PAGE = 'login';
     static WELCOME_PAGE = 'welcomePage';
     static HOME_PAGE = 'home';
@@ -116,6 +120,7 @@ export class Constants {
     static SETTING = 'setting';
     static ACCOUNT_CONFIGURATION = 'configuration';
     static COST_CENTER_LOCATION_MAPPING = 'costCenterLocationMapping';
+    static INCLUDED_OVER_GROUPS = 'includedOverGroups';
     static USERS_CONFIGURATION = 'users';
     static SYNC_JOBS = 'syncjobs';
 
