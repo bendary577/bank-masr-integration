@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { FormGroup } from '@angular/forms';
-import { AddVendorComponent } from '../add-vendor/add-vendor.component';
+import { AddUserComponent } from '../add-vendor/add-vendor.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SchedulerService } from 'src/app/services/scheduler/scheduler.service';
 import { Constants } from 'src/app/models/constants';
@@ -25,7 +25,7 @@ export class SchedulerConfigurationComponent implements OnInit {
   days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
   daysName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
-  constructor(public dialogRef: MatDialogRef<AddVendorComponent>, private spinner: NgxSpinnerService,
+  constructor(public dialogRef: MatDialogRef<AddUserComponent>, private spinner: NgxSpinnerService,
     public schedulerService: SchedulerService, private accSyncTypeService:AccSyncTypeService) { }
 
   onNoClick(): void {
@@ -61,7 +61,7 @@ export class SchedulerConfigurationComponent implements OnInit {
       this.schedulerService.getCurrentDays().toPromise().then((res: any) => {
         this.days = res.data;
         this.spinner.hide();
-  
+
       }).catch(err => {
         console.error(err);
         this.spinner.hide();

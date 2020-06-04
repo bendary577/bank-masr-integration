@@ -3,7 +3,6 @@ import {NgModule, ElementRef, ChangeDetectorRef} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { HomeComponent } from './components/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
@@ -11,8 +10,6 @@ import { AngularMaterialModule } from './angular-material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { AddVendorComponent } from './components/add-vendor/add-vendor.component';
-import { TabsComponent } from './components/tabs/tabs.component';
 import { SuppliersComponent } from './components/suppliers/suppliers.component';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 
@@ -38,24 +35,18 @@ import {ConfigurationComponent} from "./components/setting/configuration/configu
 import {MatExpansionModule} from '@angular/material/expansion';
 import {UsersComponent} from "./components/setting/users/users.component";
 import { AuthService } from './services/auth/auth.service';
-import { ApprovedInvoiceComponent } from './components/approved-invoice/approved-invoice.component';
 import { InvoiceService } from './services/invoice/invoice.service';
 import { SyncJobComponent } from './components/sync-job/sync-job.component';
 import {HttpModule} from "@angular/http";
 import { AlertsService } from 'angular-alert-module';
 import {SyncJobsconfigComponent} from "./components/setting/syncJob/syncJobsconfig.component";
-import { BookedTransferComponent } from './components/booked-transfer/booked-transfer.component';
 import { SuppliersConfiguartionComponent } from './components/suppliers-configuartion/suppliers-configuartion.component';
 import { SchedulerConfigurationComponent } from './components/scheduler-configuration/scheduler-configuration.component';
-import { ApprovedInvoiceConfigurationComponent } from './components/approved-invoice-configuration/approved-invoice-configuration.component';
 import { BookedTransferDetailsComponent } from './components/booked-transfer-details/booked-transfer-details.component';
 import { ErrorComponentComponent } from './components/error-component/error-component.component';
-import { CreditNoteComponent } from './components/credit-note/credit-note.component';
 import { Data } from './models/data';
 import { SupplierDetailsComponent } from './components/supplier-details/supplier-details.component';
 import {AuthGuardService} from "./guards/AuthGuardService";
-import { JournalConfigurationComponent } from './components/journal-configuration/journal-configuration.component';
-import { JournalsComponent } from './components/journals/journals.component';
 import { PosSalesComponent } from './components/pos-sales/pos-sales.component';
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
@@ -69,8 +60,6 @@ import { BookedTransferInforConfigurationComponent } from './components/booked-t
 import { JournalInforComponent } from './components/journal-infor/journal-infor.component';
 import { ApprovedInvoicesInforComponent } from './components/approved-invoices-infor/approved-invoices-infor.component';
 import { CreditNotesInforComponent } from './components/credit-notes-infor/credit-notes-infor.component';
-import { WastageComponent } from './components/wastage/wastage.component';
-import { WastageConfigurationComponent } from './components/wastage-configuration/wastage-configuration.component';
 import { CostCenterLocationMappingComponent } from './components/setting/cost-center-location-mapping/cost-center-location-mapping.component';
 import { PosSalesConfigurationComponent } from './components/pos-sales-configuration/pos-sales-configuration.component';
 import { WastageInforComponent } from './components/wastage-infor/wastage-infor.component';
@@ -79,34 +68,25 @@ import { CreditNotesInforConfigurationComponent } from './components/credit-note
 import { BasicConfiguartionsComponent } from './components/basic-configuartions/basic-configuartions.component';
 import { IncludedOverGroupsComponent } from './components/setting/included-over-groups/included-over-groups.component';
 import { CostCenterAccountMappingComponent } from './components/setting/cost-center-account-mapping/cost-center-account-mapping.component';
+import { AddUserComponent } from './components/add-vendor/add-vendor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
-    AddVendorComponent,
-    TabsComponent,
     SuppliersComponent,
     SidenavResponsive,
     ConfigurationComponent,
     UsersComponent,
-    SuppliersComponent,
-    ApprovedInvoiceComponent,
     SyncJobComponent,
     SyncJobsconfigComponent,
-
+    AddUserComponent,
     SyncJobComponent,
-    BookedTransferComponent,
     SuppliersConfiguartionComponent,
     SchedulerConfigurationComponent,
-    ApprovedInvoiceConfigurationComponent,
     BookedTransferDetailsComponent,
     ErrorComponentComponent,
-    CreditNoteComponent,
     SupplierDetailsComponent,
-    JournalConfigurationComponent,
-    JournalsComponent,
     PosSalesComponent,
     WelcomePageComponent,
     PosSalesConfigurationComponent,
@@ -121,10 +101,7 @@ import { CostCenterAccountMappingComponent } from './components/setting/cost-cen
     ApprovedInvoicesInforComponent,
     CreditNotesInforComponent,
     AddAccountComponent,
-    WastageComponent,
-    WastageConfigurationComponent,
     CostCenterLocationMappingComponent,
-    WastageConfigurationComponent,
     WastageInforComponent,
     WastageInforConfigurationComponent,
     CreditNotesInforConfigurationComponent,
@@ -162,7 +139,6 @@ import { CostCenterAccountMappingComponent } from './components/setting/cost-cen
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, CookieService, AuthService, InvoiceService, AlertsService, Data,AuthGuardService,SidenavResponsive],
   bootstrap: [AppComponent],
-  entryComponents: [AddVendorComponent, AddAccountComponent, SuppliersConfiguartionComponent, SchedulerConfigurationComponent,
-  ApprovedInvoiceConfigurationComponent]
+  entryComponents: [AddUserComponent, AddAccountComponent, SuppliersConfiguartionComponent, SchedulerConfigurationComponent]
 })
 export class AppModule { }

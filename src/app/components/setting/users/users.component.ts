@@ -5,7 +5,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 import {User} from "../../../models/user";
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { AddVendorComponent } from '../../add-vendor/add-vendor.component';
+import { AddUserComponent } from '../../add-vendor/add-vendor.component';
 
 /**
  * @title Basic expansion panel
@@ -47,7 +47,7 @@ export class UsersComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(AddVendorComponent, {
+    const dialogRef = this.dialog.open(AddUserComponent, {
       width: '550px'
     });
 

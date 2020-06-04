@@ -7,11 +7,11 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
   templateUrl: './add-vendor.component.html',
   styleUrls: ['./add-vendor.component.scss']
 })
-export class AddVendorComponent implements OnInit {
+export class AddUserComponent implements OnInit {
   public form: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder, public dialogRef: MatDialogRef<AddVendorComponent>) { }
+  constructor(private formBuilder: FormBuilder, public dialogRef: MatDialogRef<AddUserComponent>) { }
 
   onNoClick(): void {
     this.dialogRef.close();
