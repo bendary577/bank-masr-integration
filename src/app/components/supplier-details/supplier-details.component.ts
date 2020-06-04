@@ -15,7 +15,7 @@ export class SupplierDetailsComponent implements OnInit {
   supplier :any;
 
 
-  constructor(private spinner: NgxSpinnerService,public snackBar: MatSnackBar,
+  constructor(public snackBar: MatSnackBar,
     private router: Router, private data: Data) {
 
   }

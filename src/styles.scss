@@ -1,128 +1,128 @@
 /* You can add global styles to this file, and also import other style files */
 
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "../node_modules/@swimlane/ngx-datatable/assets/app.css";
 @import "../node_modules/@swimlane/ngx-datatable/themes/material.css";
 @import "../node_modules/@swimlane/ngx-datatable/assets/icons.css";
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .mat-dialog-container {
-  background: white;
-  color: #424242;
+    background: white;
+    color: #424242;
 }
 
 .mat-snack-bar-container {
-  background: #c62828;
-  color: white;
+    background: #c62828;
+    color: white;
 }
 
 .mat-tab-label,
 .mat-tab-link {
-  color: #1976d3;
+    color: #1976d3;
 }
 
 .mat-tab-group.mat-primary .mat-ink-bar,
 .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-  background-color: #1976d3;
+    background-color: #1976d3;
 }
 
 .mat-tab-body.mat-tab-body-active {
-  overflow-y: hidden !important;
+    overflow-y: hidden !important;
 }
 
 .mat-tab-body-content {
-  overflow: hidden !important;
-  padding-bottom: 48px;
+    overflow: hidden !important;
+    padding-bottom: 48px;
 }
 
 .my-snack-bar-success {
-  background-color: seagreen;
-  color:white;
+    background-color: seagreen;
+    color: white;
 }
 
 .my-snack-bar-fail {
-  background-color: rgb(114, 12, 17);
-  color: white;
+    background-color: rgb(114, 12, 17);
+    color: white;
 }
 
 select {
-  width: 30%;
-  height: 30px;
-  margin: 5px 0;
-  position: absolute;
-  left: 150px;
+    width: 30%;
+    height: 30px;
+    margin: 5px 0;
+    position: absolute;
+    left: 150px;
 }
 
-.history{
-  margin: 5px 0;
-  position: absolute;
-  font-weight: bold;
-  left: 15px;
+.history {
+    margin: 5px 0;
+    position: absolute;
+    font-weight: bold;
+    left: 15px;
 }
 
-title{ 
-  text-align: center;
-  font-weight: bold;
-
-}
-mat-card-header{
-  background-color: #f2efef!important;
+title {
+    text-align: center;
+    font-weight: bold;
 }
 
-h3{
-  background-color: #3F51B5!important;
-  padding: 15px;
-  font-weight: bolder;
+mat-card-header {
+    background-color: #f2efef!important;
 }
 
+h3 {
+    background-color: #3F51B5!important;
+    padding: 15px;
+    font-weight: bolder;
+}
 
 .card-back {
-  text-align: center;
-  padding: 4px 16px 4px 16px;
-  height: 5vh;
+    text-align: center;
+    padding: 4px 16px 4px 16px;
+    height: 5vh;
 }
 
 button {
-  color:white;
-  background-color: #3f51b5;
-  margin-right: 10px
+    color: white;
+    background-color: #3f51b5;
+    margin-right: 10px
 }
 
 .back {
-  text-align: left;
-  padding: 4px 16px 4px 16px;
-  height: 5vh;
+    text-align: left;
+    padding: 4px 16px 4px 16px;
+    height: 5vh;
 }
+
 .card-back {
-  text-align: center;
-  padding: 4px 16px 4px 16px;
-  height: 5vh;
+    text-align: center;
+    padding: 4px 16px 4px 16px;
+    height: 5vh;
 }
 
 a:hover {
-  color: rgb(191, 212, 1);
+    color: rgb(191, 212, 1);
 }
 
 a:visited {
-  color: rgb(15, 117, 37);
+    color: rgb(15, 117, 37);
 }
 
-a{
-  color: blue;
-  font-weight: bold;
-  text-decoration: underline;
+a {
+    color: blue;
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 span.italic {
-  font-style: italic;
-  color: red;
-  font-size: 12px;
+    font-style: italic;
+    color: red;
+    font-size: 12px;
 }

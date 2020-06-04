@@ -20,7 +20,7 @@ export class SidenavResponsive implements OnDestroy,OnInit {
   mobileQuery: MediaQueryList;
   syncJobTypes: SyncJobType[] = [];
   private _mobileQueryListener: () => void;
-  
+
   constructor(private syncJobService: SyncJobService, changeDetectorRef: ChangeDetectorRef,
               private router: Router, media: MediaMatcher, location: Location) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -46,7 +46,7 @@ export class SidenavResponsive implements OnDestroy,OnInit {
     if (this.shouldRun == true){
       this.getSyncJobTypes();
     }
-    
+
   }
 
   changeCurrentTab(cuurentTab){
@@ -83,7 +83,7 @@ export class SidenavResponsive implements OnDestroy,OnInit {
     this.shouldRun=shouldRun;
   }
 
-  
+
 }
 
 

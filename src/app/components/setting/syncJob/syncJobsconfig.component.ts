@@ -2,7 +2,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatExpansionPanel, MatPaginator, MatTableDataSource, MatDialog, MatSnackBar} from "@angular/material";
 import {animate, state, style, transition, trigger} from "@angular/animations";
-import {User} from "../../../models/user";
+import {User} from "../../../models/User";
 import {Data} from "../../../models/data";
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJobType } from 'src/app/models/SyncJobType';

@@ -48,7 +48,7 @@ export class JournalInforComponent implements OnInit {
 
     this.journalService.getJournals().toPromise().then((res: any) => {
       this.getSyncJobs(Constants.CONSUMPTION_SYNC);
-      
+
       localStorage.setItem('getJournalsLoding', "false");
       JournalInforComponent.getJournalsLoding = false;
 

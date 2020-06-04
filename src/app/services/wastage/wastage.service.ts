@@ -22,5 +22,5 @@ export class WastageService {
     return this.http.get(Constants.GET_WASTE_GROUPS_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
-  
+
 }

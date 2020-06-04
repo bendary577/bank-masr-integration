@@ -61,14 +61,14 @@ export class WastageInforComponent implements OnInit {
           panelClass:"my-snack-bar-fail"
         });
       }
-      
+
       this.getSyncJobs(Constants.WASTARGE_SYNC);
-    
+
       localStorage.setItem('getWastageLoading', "false");
       WastageInforComponent.getWastageLoading = false;
     }).catch(err => {
       this.getSyncJobs(Constants.WASTARGE_SYNC);
-      
+
       localStorage.setItem('getWastageLoading', "false");
       WastageInforComponent.getWastageLoading = false;
     });

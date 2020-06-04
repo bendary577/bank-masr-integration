@@ -3,7 +3,7 @@ import { Constants } from 'src/app/models/constants';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { Cacheable } from 'ngx-cacheable';
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -24,12 +24,12 @@ export class AuthService {
       'Authorization': 'Basic '+auth
     })
   };
-    return this.http.post(Constants.LOGINAUTH + "?grant_type=password&username=" + user.username + 
+    return this.http.post(Constants.LOGINAUTH + "?grant_type=password&username=" + user.username +
     "&password=" + user.password + "&clientid=web-client",{},httpOptions);
   }
 
   checkToken(){
-  
+
     return this.http.get(Constants.CHECKAUTH,{ headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})})
   }
 

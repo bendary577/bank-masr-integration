@@ -107,7 +107,7 @@ export class PosSalesComponent implements OnInit {
     });
   }
 
-  
+
   getSyncJobData() {
     this.spinner.show();
 

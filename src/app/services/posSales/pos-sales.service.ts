@@ -21,6 +21,6 @@ export class PosSalesService {
     return this.http.get(Constants.GET_POS_SALES_TENDERS_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
-  
+
 
 }

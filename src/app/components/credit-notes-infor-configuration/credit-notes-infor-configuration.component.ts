@@ -27,7 +27,7 @@ export class CreditNotesInforConfigurationComponent implements OnInit {
   timePeriods = ["All", "Current Year", "Current Month", "Last Month", "Last Year", "User-defined"];
   analysis = []
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
-    private router:Router, public snackBar: MatSnackBar, private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService) { 
+    private router:Router, public snackBar: MatSnackBar, private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService) {
   }
 
   ngOnInit() {

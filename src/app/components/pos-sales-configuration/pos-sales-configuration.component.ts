@@ -27,7 +27,7 @@ export class PosSalesConfigurationComponent implements OnInit {
   //   {"checked": false, "tender": "Master", "account": ""},
   // ];
   tenders = []
-  syncJobType: AccountSyncType;  
+  syncJobType: AccountSyncType;
 
   constructor(private spinner: NgxSpinnerService, private salesService:PosSalesService,
      private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService,
@@ -48,7 +48,7 @@ export class PosSalesConfigurationComponent implements OnInit {
       this.loading = false;
     });
   }
-  
+
   onSaveClick(): void {
     this.spinner.show();
     this.save_loading = true;

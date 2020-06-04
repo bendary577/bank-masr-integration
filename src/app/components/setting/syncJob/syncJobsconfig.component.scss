@@ -1,52 +1,53 @@
 .ngx-datatable.scroll-vertical {
-  height: 100vh;
-  width: 100%;
+    height: 100vh;
+    width: 100%;
 }
 
-h3{
-  background-color: #3F51B5!important;
-  padding: 24px;
-  font-weight: bolder;
+h3 {
+    background-color: #3F51B5!important;
+    padding: 24px;
+    font-weight: bolder;
 }
 
 .header {
-  text-align: end;
-  padding: 10px 16px 15px 16px;
-  height: 5vh;
+    text-align: end;
+    padding: 10px 16px 15px 16px;
+    height: 5vh;
 }
 
 button {
-  background-color: #1976d3;
+    background-color: #1976d3;
 }
 
 .example-container {
-  height: 700px;
-  overflow: auto;
+    height: 700px;
+    overflow: auto;
 }
 
 table {
-  width: 100%;
+    width: 100%;
 }
-mat-expansion-panel{
-  margin-bottom: 10px;
 
+mat-expansion-panel {
+    margin-bottom: 10px;
 }
+
 .example-headers-align .mat-expansion-panel-header-title,
 .example-headers-align .mat-expansion-panel-header-description {
-  flex-basis: 0;
+    flex-basis: 0;
 }
 
 .example-headers-align .mat-expansion-panel-header-description {
-  justify-content: space-between;
-  align-items: center;
+    justify-content: space-between;
+    align-items: center;
 }
 
 mat-form-field {
-  margin-right: 12px;
+    margin-right: 12px;
 }
 
 .example-card {
-  width: 50%;
-  margin: auto;
-  padding: 10px;
+    width: 50%;
+    margin: auto;
+    padding: 10px;
 }

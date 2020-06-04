@@ -82,7 +82,7 @@ export class SuppliersInforConfigurationComponent implements OnInit {
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
-      
+
       this.getTaxsLoading = false;
     });
   }
@@ -115,7 +115,7 @@ export class SuppliersInforConfigurationComponent implements OnInit {
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
-      
+
       this.getGroupsLoading = false;
     });
   }
