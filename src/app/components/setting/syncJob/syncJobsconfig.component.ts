@@ -2,7 +2,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatExpansionPanel, MatPaginator, MatTableDataSource, MatDialog, MatSnackBar} from "@angular/material";
 import {animate, state, style, transition, trigger} from "@angular/animations";
-import {User} from "../../../models/user";
+import {User} from "../../../models/User";
 import {Data} from "../../../models/data";
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJobType } from 'src/app/models/SyncJobType';
@@ -33,7 +33,7 @@ export class SyncJobsconfigComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   constructor(private syncJobService: SyncJobService,  public dialog: MatDialog,
      public snackBar: MatSnackBar, private spinner: NgxSpinnerService, private router: Router,
-     private data: Data, private accountService: AccountService){
+     private data: Data, private accountService: AccountService) {
   }
 
   ngOnInit() {
@@ -42,7 +42,7 @@ export class SyncJobsconfigComponent implements OnInit {
   }
 
 
-  getSyncJobTypes(){
+  getSyncJobTypes() {
     this.loading = true
     this.spinner.show();
 
@@ -59,21 +59,21 @@ export class SyncJobsconfigComponent implements OnInit {
     });
   }
 
-  openDialog(syncJobType){
+  openDialog(syncJobType) {
     this.data.storage = syncJobType
 
-    if (syncJobType.name == Constants.SUPPLIERS_SYNC){
-      if (this.accountERD == "SUN"){
+    if (syncJobType.name == Constants.SUPPLIERS_SYNC) {
+      if (this.accountERD == "SUN") {
         this.router.navigate([Constants.SUPPLIERS_SUN_CONFIG_PAGE]);
       }
       else{
         this.router.navigate([Constants.SUPPLIERS_CONFIG_PAGE]);
       }
     }
-    else if (syncJobType.name == Constants.APPROVED_INVOICES_SYNC){
+    else if (syncJobType.name == Constants.APPROVED_INVOICES_SYNC) {
       console.log(this.accountERD);
 
-      if (this.accountERD == "SUN"){
+      if (this.accountERD == "SUN") {
         console.log("here");
 
         this.router.navigate([Constants.APPROVED_INVOICES_SUN_CONFIG_PAGE]);
@@ -82,40 +82,40 @@ export class SyncJobsconfigComponent implements OnInit {
         this.router.navigate([Constants.APPROVED_INVOICES_CONFIG_PAGE]);
       }
     }
-    else if (syncJobType.name == Constants.CREDIT_NOTE_SYNC){
-      if (this.accountERD == "SUN"){
+    else if (syncJobType.name == Constants.CREDIT_NOTE_SYNC) {
+      if (this.accountERD == "SUN") {
         this.router.navigate([Constants.CREDIT_NOTE_INFOR_CONFIG_PAGE]);
       }
       else{
         this.router.navigate([Constants.APPROVED_INVOICES_CONFIG_PAGE]);
       }
     }
-    else if (syncJobType.name == Constants.CONSUMPTION_SYNC){
-      if (this.accountERD == "SUN"){
+    else if (syncJobType.name == Constants.CONSUMPTION_SYNC) {
+      if (this.accountERD == "SUN") {
         this.router.navigate([Constants.CONSUMPTION_SUN_CONFIG_PAGE]);
       }
       else{
         this.router.navigate([Constants.CONSUMPTION_CONFIG_PAGE]);
       }
     }
-    else if (syncJobType.name == Constants.BOOKED_TRANSFER_SYNC){
-      if (this.accountERD == "SUN"){
+    else if (syncJobType.name == Constants.BOOKED_TRANSFER_SYNC) {
+      if (this.accountERD == "SUN") {
         this.router.navigate([Constants.BOOKED_TRANSFER_INFOR_CONFIG_PAGE]);
       }
       else{
         this.router.navigate([Constants.CONSUMPTION_CONFIG_PAGE]);
       }
     }
-    else if (syncJobType.name == Constants.POS_SALES_SYNC){
-      if (this.accountERD == "SUN"){
+    else if (syncJobType.name == Constants.POS_SALES_SYNC) {
+      if (this.accountERD == "SUN") {
         this.router.navigate([Constants.SUPPLIERS_CONFIG_PAGE]);
       }
       else{
         this.router.navigate([Constants.POS_SALES_CONFIG_PAGE]);
       }
     }
-    else if (syncJobType.name == Constants.WASTARGE_SYNC){
-      if (this.accountERD == "SUN"){
+    else if (syncJobType.name == Constants.WASTARGE_SYNC) {
+      if (this.accountERD == "SUN") {
         this.router.navigate([Constants.WASTARGE_INFOR_CONFIG_PAGE]);
       }
       else{
@@ -132,7 +132,7 @@ export class SyncJobsconfigComponent implements OnInit {
 
   }
 
-  openschedulerDialog(syncJobType){
+  openschedulerDialog(syncJobType) {
     Constants.SYNC_TYPE_SCHEDULER = syncJobType.name
     const dialogRef = this.dialog.open(SchedulerConfigurationComponent, {
       width: '550px'

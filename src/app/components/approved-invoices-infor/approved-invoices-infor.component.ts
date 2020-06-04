@@ -28,7 +28,7 @@ export class ApprovedInvoicesInforComponent implements OnInit {
     this.getSyncJobs("Approved Invoices");
     this.state = localStorage.getItem('getInvoicesLoading');
 
-    if (this.state == "true"){
+    if (this.state == "true") {
       ApprovedInvoicesInforComponent.getInvoicesLoading = true;
     }
     else{
@@ -61,7 +61,7 @@ export class ApprovedInvoicesInforComponent implements OnInit {
     ApprovedInvoicesInforComponent.getInvoicesLoading = true
     this.invoiceService.getApprovedInvoices().toPromise().then((res: any) => {
       this.success = res.success;
-      if (this.success){
+      if (this.success) {
         this.snackBar.open(res.message, null, {
           duration: 2000,
           horizontalPosition: 'center',
@@ -76,7 +76,7 @@ export class ApprovedInvoicesInforComponent implements OnInit {
         });
       }
       this.getSyncJobs("Approved Invoices");
-  
+
       localStorage.setItem('getInvoicesLoading', "false");
       ApprovedInvoicesInforComponent.getInvoicesLoading = false;
     }).catch(err => {
@@ -92,13 +92,13 @@ export class ApprovedInvoicesInforComponent implements OnInit {
     });
   }
 
-  getSyncJobs(syncJobTypeName:String) {
+  getSyncJobs(syncJobTypeName: string) {
     this.loading = true;
     this.spinner.show();
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
       this.jobs = res;
       this.selectedJob = this.jobs[0]
-      if (this.jobs.length > 0){
+      if (this.jobs.length > 0) {
         this.getSyncJobData();
       }
       this.spinner.hide();

@@ -13,10 +13,11 @@ export class TransferService {
 
   getBookedTransfer() {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get(Constants.GET_BOOKED_TRANSFER_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
+    return this.http.get(Constants.GET_BOOKED_TRANSFER_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
-  getBookedTransferDetails(transferLink:String) {
+  getBookedTransferDetails(transferLink: string) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get(Constants.GET_BOOKED_TRANSFER_DETAILS_URL + '?transferLink=' + transferLink, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
+    return this.http.get(Constants.GET_BOOKED_TRANSFER_DETAILS_URL + '?transferLink=' + transferLink,
+     { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 }

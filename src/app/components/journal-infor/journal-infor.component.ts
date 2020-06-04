@@ -30,7 +30,7 @@ export class JournalInforComponent implements OnInit {
     this.getSyncJobs(Constants.CONSUMPTION_SYNC);
     this.state = localStorage.getItem('getJournalsLoding');
 
-    if (this.state == "true"){
+    if (this.state == "true") {
       JournalInforComponent.getJournalsLoding = true;
     }
     else{
@@ -48,11 +48,11 @@ export class JournalInforComponent implements OnInit {
 
     this.journalService.getJournals().toPromise().then((res: any) => {
       this.getSyncJobs(Constants.CONSUMPTION_SYNC);
-      
+
       localStorage.setItem('getJournalsLoding', "false");
       JournalInforComponent.getJournalsLoding = false;
 
-      if (res.success){
+      if (res.success) {
         this.snackBar.open(res.message, null, {
           duration: 2000,
           horizontalPosition: 'center',
@@ -93,12 +93,12 @@ export class JournalInforComponent implements OnInit {
     });
   }
 
-  getSyncJobs(syncJobTypeName:String) {
+  getSyncJobs(syncJobTypeName: string) {
     this.spinner.show();
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
       this.jobs = res;
       this.selectedJob = this.jobs[0];
-      if (this.jobs.length > 0){
+      if (this.jobs.length > 0) {
         this.getSyncJobData();
       }
       this.spinner.hide();

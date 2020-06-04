@@ -45,7 +45,7 @@ export class SchedulerConfigurationComponent implements OnInit {
     this.getSyncJobType()
   }
 
-  getSyncJobType(){
+  getSyncJobType() {
     this.loading = true;
     this.accSyncTypeService.getAccSyncJobType(Constants.SYNC_TYPE_SCHEDULER).toPromise().then((res: any) => {
       this.syncJobType = res;
@@ -56,7 +56,7 @@ export class SchedulerConfigurationComponent implements OnInit {
     });
   }
 
-  getCurrentDays(){
+  getCurrentDays() {
     this.spinner.show();
       this.schedulerService.getCurrentDays().toPromise().then((res: any) => {
         this.days = res.data;

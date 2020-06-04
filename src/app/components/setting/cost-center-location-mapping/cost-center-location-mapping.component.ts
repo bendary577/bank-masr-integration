@@ -32,7 +32,7 @@ export class CostCenterLocationMappingComponent implements OnInit {
     this.getGeneralSettings();
   }
 
-  getGeneralSettings(){
+  getGeneralSettings() {
     this.generalSettingsService.getGeneralSettings().then((res: Response) => {
       this.generalSettings = res.data as GeneralSettings;
     }).catch(err => {
@@ -48,18 +48,18 @@ export class CostCenterLocationMappingComponent implements OnInit {
 
     let that = this;
     this.costCenters.forEach(function (costCenter) {
-      if (costCenter.locationName){
+      if (costCenter.locationName) {
         costCenter.checked = true;
         that.selectedCostCenters.push(costCenter);
       }
     });
 
-    if(this.selectedCostCenters.length != 0){
+    if(this.selectedCostCenters.length != 0) {
       this.generalSettings.costCenterLocationMapping = this.selectedCostCenters;
 
       this.generalSettingsService.updateGeneralSettings(this.generalSettings).then(result => {
         const response = result as Response;
-        if (response.success){
+        if (response.success) {
           this.snackBar.open('Save configuration successfully.', null, {
             duration: 2000,
             horizontalPosition: 'center',

@@ -15,7 +15,7 @@ export class SupplierDetailsComponent implements OnInit {
   supplier :any;
 
 
-  constructor(private spinner: NgxSpinnerService,public snackBar: MatSnackBar,
+  constructor(public snackBar: MatSnackBar,
     private router: Router, private data: Data) {
 
   }
@@ -24,7 +24,7 @@ export class SupplierDetailsComponent implements OnInit {
     this.supplier = this.data.storage["data"]
   }
 
-  back(){
+  back() {
     this.router.navigate([Constants.SUPPLIERS_PAGE]);
   }
 }

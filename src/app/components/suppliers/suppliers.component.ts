@@ -36,7 +36,7 @@ export class SuppliersComponent implements OnInit {
   ngOnInit() {
     this.getSyncJobs("Suppliers");
     this.state = localStorage.getItem('getSuppliersLoading');
-    if (this.state == "true"){
+    if (this.state == "true") {
       SuppliersComponent.getSuppliersLoading = true;
     }
     else{
@@ -60,7 +60,7 @@ export class SuppliersComponent implements OnInit {
       SuppliersComponent.getSuppliersLoading = false;
       localStorage.setItem('getSuppliersLoading', "false");
 
-      if (this.success){
+      if (this.success) {
         this.snackBar.open(res.message , null, {
           duration: 2000,
           horizontalPosition: 'center',
@@ -88,12 +88,12 @@ export class SuppliersComponent implements OnInit {
     });
   }
 
-  getSyncJobs(syncJobTypeName: String) {
+  getSyncJobs(syncJobTypeName: string) {
     this.spinner.show();
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
       this.jobs = res;
       this.selectedJob = this.jobs[0]
-      if (this.jobs.length > 0){
+      if (this.jobs.length > 0) {
         this.getSyncJobData();
       }
       this.spinner.hide();
@@ -103,7 +103,7 @@ export class SuppliersComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
 
-      if (err.status == 401){
+      if (err.status == 401) {
         this.sidenav.Logout();
       }
     });
@@ -124,9 +124,9 @@ export class SuppliersComponent implements OnInit {
     });
   }
 
-  showDetails(syncJobData){
+  showDetails(syncJobData) {
     this.data.storage = syncJobData
-    this.router.navigate([Constants.SUPPLIERS_DETAILS_PAGE])
+    this.router.navigate([Constants.SUPPLIERS_DETAILS_PAGE]);
   }
 
 

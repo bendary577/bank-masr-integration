@@ -27,14 +27,14 @@ export class CreditNotesInforConfigurationComponent implements OnInit {
   timePeriods = ["All", "Current Year", "Current Month", "Last Month", "Last Year", "User-defined"];
   analysis = []
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
-    private router:Router, public snackBar: MatSnackBar, private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService) { 
+    private router:Router, public snackBar: MatSnackBar, private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService) {
   }
 
   ngOnInit() {
     this.getSyncJobType();
   }
 
-  getSyncJobType(){
+  getSyncJobType() {
     this.loading = true;
     this.accSyncTypeService.getAccSyncJobType(Constants.CREDIT_NOTE_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
@@ -66,7 +66,7 @@ export class CreditNotesInforConfigurationComponent implements OnInit {
   }
 
 
-  onCancelClick(){
+  onCancelClick() {
     this.router.navigate([Constants.SYNC_JOBS]);
   }
 

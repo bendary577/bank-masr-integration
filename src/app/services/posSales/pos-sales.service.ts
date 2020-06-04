@@ -13,14 +13,14 @@ export class PosSalesService {
 
   getPOSSales() {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get(Constants.GET_POS_SALES_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
+    return this.http.get(Constants.GET_POS_SALES_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
   getTenders() {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get(Constants.GET_POS_SALES_TENDERS_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
+    return this.http.get(Constants.GET_POS_SALES_TENDERS_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
-  
+
 
 }

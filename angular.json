@@ -116,11 +116,11 @@
                     "builder": "@angular-devkit/build-angular:protractor",
                     "options": {
                         "protractorConfig": "e2e/protractor.conf.js",
-                        "devServerTarget": "oracle-hospitality-frontend:serve"
+                        "devServerTarget": "oracle-hospitality-frontend: serve"
                     },
                     "configurations": {
                         "production": {
-                            "devServerTarget": "oracle-hospitality-frontend:serve:production"
+                            "devServerTarget": "oracle-hospitality-frontend: serve:production"
                         }
                     }
                 }

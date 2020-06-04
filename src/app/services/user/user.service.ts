@@ -9,11 +9,11 @@ import { Cacheable } from 'ngx-cacheable';
 export class UserService {
   token = localStorage.getItem('auth_token');
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
 
-  addUser(user){
+  addUser(user) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.post(Constants.ADD_USER , user, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})}).toPromise();
+    return this.http.post(Constants.ADD_USER , user, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
 }

@@ -13,9 +13,9 @@ export class AccSyncTypeService {
   constructor(private http: HttpClient) { }
 
   @Cacheable()
-  getAccSyncJobType(syncJobTypeName:String) {
+  getAccSyncJobType(syncJobTypeName: string) {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_ACC_SYNC_JOB_TYPES_BY_NAME_URL + '?typeName=' + syncJobTypeName
-     , { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
+     , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 }

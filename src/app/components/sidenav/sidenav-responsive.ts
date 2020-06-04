@@ -20,7 +20,7 @@ export class SidenavResponsive implements OnDestroy,OnInit {
   mobileQuery: MediaQueryList;
   syncJobTypes: SyncJobType[] = [];
   private _mobileQueryListener: () => void;
-  
+
   constructor(private syncJobService: SyncJobService, changeDetectorRef: ChangeDetectorRef,
               private router: Router, media: MediaMatcher, location: Location) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -43,38 +43,38 @@ export class SidenavResponsive implements OnDestroy,OnInit {
   }
 
   ngOnInit(): void {
-    if (this.shouldRun == true){
+    if (this.shouldRun == true) {
       this.getSyncJobTypes();
     }
-    
+
   }
 
-  changeCurrentTab(cuurentTab){
+  changeCurrentTab(cuurentTab) {
     Constants.CURRENT_TAB = cuurentTab;
     this.selectedTab = cuurentTab;
   }
 
-  Logout(){
+  Logout() {
     localStorage.removeItem("auth-token");
     localStorage.removeItem("user");
     localStorage.clear();
     this.router.navigate(["/"]);
   }
 
-  getSyncJobTypes(){
+  getSyncJobTypes() {
     this.syncJobService.getSyncJobTypesDB().toPromise().then((res: any) => {
       this.syncJobTypes = res;
     }).catch(err => {
       console.error(err);
-      if (err.status == 401){
+      if (err.status == 401) {
         this.Logout();
       }
     });
   }
-/*  public set setshouldRun(shouldRun:boolean){
+/*  public set setshouldRun(shouldRun:boolean) {
     this.shouldRun=shouldRun;
   }*/
-  public get getshouldRun(){
+  public get getshouldRun() {
     return this.shouldRun;
   }
 
@@ -83,7 +83,7 @@ export class SidenavResponsive implements OnDestroy,OnInit {
     this.shouldRun=shouldRun;
   }
 
-  
+
 }
 
 

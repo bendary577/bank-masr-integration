@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
-import { Constants } from '../models/constants';
 import {AuthService} from "../services/auth/auth.service";
 import {SidenavResponsive} from "../components/sidenav/sidenav-responsive";
 
@@ -21,7 +20,7 @@ export class AuthGuardService implements CanActivate {
 /*    return await new Promise(async (res, rej) => {
     await this.angularfireAuth.authState.subscribe(user => {
 
-      if(!user || !user.uid){
+      if(!user || !user.uid) {
         this.router.navigate(['']);
         return false;
       }
@@ -41,7 +40,7 @@ export class AuthGuardService implements CanActivate {
      return true;
     // return await  this.auth_service.checkToken().toPromise().then((res: any) => {
     //     let url =route.pathFromRoot
-    //       .map(v => v.url.map(segment => segment.toString()).join('/'))
+    //       .map(v => v.url.map(segment => segment.tostring()).join('/'))
     //       .join('/');
 
     //     return true;
@@ -55,7 +54,7 @@ export class AuthGuardService implements CanActivate {
     } else {
 
     this.routerd.navigate(["/"]);
-    return false
+    return false;
   }
   }
 

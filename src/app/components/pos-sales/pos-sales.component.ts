@@ -28,7 +28,7 @@ export class PosSalesComponent implements OnInit {
   ngOnInit() {
     this.getSyncJobs(Constants.POS_SALES_SYNC);
     this.state = localStorage.getItem('getPosSalesLoading');
-    if (this.state == "true"){
+    if (this.state == "true") {
       PosSalesComponent.getPosSalesLoading = true;
     }
     else{
@@ -75,7 +75,7 @@ export class PosSalesComponent implements OnInit {
       PosSalesComponent.getPosSalesLoading = false;
 
       let msg = "";
-      if (err.error.message){
+      if (err.error.message) {
         msg = err.error.message ;
       }
       else{
@@ -91,12 +91,12 @@ export class PosSalesComponent implements OnInit {
 
   }
 
-  getSyncJobs(syncJobTypeName:String) {
+  getSyncJobs(syncJobTypeName: string) {
     this.spinner.show();
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
       this.jobs = res;
       this.selectedJob = this.jobs[0];
-      if (this.jobs.length > 0){
+      if (this.jobs.length > 0) {
         this.getSyncJobData();
       }
       this.spinner.hide();
@@ -107,7 +107,7 @@ export class PosSalesComponent implements OnInit {
     });
   }
 
-  
+
   getSyncJobData() {
     this.spinner.show();
 

@@ -40,7 +40,7 @@ export class SuppliersInforConfigurationComponent implements OnInit {
     this.getGroups();
   }
 
-  getSyncJobType(){
+  getSyncJobType() {
     this.loading = true;
     this.spinner.show();
     this.accSyncTypeService.getAccSyncJobType(Constants.SUPPLIERS_SYNC).toPromise().then((res: any) => {
@@ -60,7 +60,7 @@ export class SuppliersInforConfigurationComponent implements OnInit {
     this.supplierService.getSuppliersTaxes().toPromise().then((res: any) => {
       this.taxes = res.data;
       this.getTaxsLoading = false;
-      if (res.success){
+      if (res.success) {
         this.snackBar.open(res.message, null, {
           duration: 2000,
           horizontalPosition: 'center',
@@ -82,7 +82,7 @@ export class SuppliersInforConfigurationComponent implements OnInit {
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
-      
+
       this.getTaxsLoading = false;
     });
   }
@@ -92,7 +92,7 @@ export class SuppliersInforConfigurationComponent implements OnInit {
     this.supplierService.getSuppliersGroups().toPromise().then((res: any) => {
       this.groups = res.data;
       this.getGroupsLoading = false;
-      if (res.success){
+      if (res.success) {
         this.snackBar.open(res.message, null, {
           duration: 2000,
           horizontalPosition: 'center',
@@ -115,12 +115,12 @@ export class SuppliersInforConfigurationComponent implements OnInit {
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
-      
+
       this.getGroupsLoading = false;
     });
   }
 
-  onSaveClick(){
+  onSaveClick() {
     this.spinner.show();
 
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
@@ -136,7 +136,7 @@ export class SuppliersInforConfigurationComponent implements OnInit {
     });
   }
 
-  onCancelClick(){
+  onCancelClick() {
     this.router.navigate([Constants.SYNC_JOBS]);
   }
 

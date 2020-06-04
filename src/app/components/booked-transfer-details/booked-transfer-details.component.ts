@@ -22,7 +22,7 @@ export class BookedTransferDetailsComponent implements OnInit {
     this.getBookedTransferDetails();
   }
 
-  back(){
+  back() {
     this.router.navigate([Constants.BOOKED_TRANSFER_PAGE]);
   }
 

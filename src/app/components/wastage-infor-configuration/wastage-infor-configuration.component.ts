@@ -7,7 +7,6 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 import { AccountSyncType } from 'src/app/models/AccountSyncType';
 import { WastageService } from 'src/app/services/wastage/wastage.service';
-import { JournalService } from 'src/app/services/journal/journal.service';
 
 @Component({
   selector: 'app-wastage-infor-configuration',
@@ -26,17 +25,16 @@ export class WastageInforConfigurationComponent implements OnInit {
 
   syncJobType: AccountSyncType;
 
-  constructor(private spinner: NgxSpinnerService, private wasteService:WastageService,
-    private journalService:JournalService,
-     private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService,
-    private router:Router, public snackBar: MatSnackBar) { }
+  constructor(private spinner: NgxSpinnerService, private wasteService: WastageService,
+     private syncJobService:SyncJobService, private accSyncTypeService: AccSyncTypeService,
+     private router:Router, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getSyncJobType();
     this.getWasteGroups();
   }
 
-  getSyncJobType(){
+  getSyncJobType() {
     this.syncJobTypeloading = true;
     this.accSyncTypeService.getAccSyncJobType(Constants.WASTARGE_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
@@ -75,7 +73,7 @@ export class WastageInforConfigurationComponent implements OnInit {
 
     let that = this;
     this.wasteGroups.forEach(function (wasteGroup) {
-      if (wasteGroup.checked){
+      if (wasteGroup.checked) {
         that.selectedWasteGroups.push(wasteGroup)
       }
     });
@@ -104,7 +102,7 @@ export class WastageInforConfigurationComponent implements OnInit {
     });
   }
 
-  onCancelClick(){
+  onCancelClick() {
     this.router.navigate([Constants.SYNC_JOBS]);
   }
 

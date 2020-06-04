@@ -30,7 +30,7 @@ export class CreditNotesInforComponent implements OnInit {
     this.getSyncJobs("Credit Notes");
     this.state = localStorage.getItem('getCreditNoteLoading');
 
-    if (this.state == "true"){
+    if (this.state == "true") {
       CreditNotesInforComponent.getCreditNoteLoading = true;
     }
     else{
@@ -42,7 +42,7 @@ export class CreditNotesInforComponent implements OnInit {
     this.spinner.show();
     this.syncJobService.getSyncJobData("Credit Notes").toPromise().then((res: any) => {
       this.creditNote = res;
-     
+
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
@@ -63,8 +63,8 @@ export class CreditNotesInforComponent implements OnInit {
     this.creditNoteService.getCreditNote().toPromise().then((res: any) => {
       this.success = res.success;
       this.getSyncJobs("Credit Notes");
-      
-      if (this.success){
+
+      if (this.success) {
         this.snackBar.open('Sync Credit Notes Successfully', null, {
           duration: 3000,
           horizontalPosition: 'center',
@@ -79,7 +79,7 @@ export class CreditNotesInforComponent implements OnInit {
 
       localStorage.setItem('getCreditNoteLoading', "false");
       CreditNotesInforComponent.getCreditNoteLoading = false;
-      
+
       this.snackBar.open(err.error.message , null, {
         duration: 3000,
         horizontalPosition: 'center',
@@ -91,12 +91,12 @@ export class CreditNotesInforComponent implements OnInit {
     });
   }
 
-  getSyncJobs(syncJobTypeName:String) {
+  getSyncJobs(syncJobTypeName: string) {
     this.spinner.show();
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
       this.jobs = res;
       this.selectedJob = this.jobs[0]
-      if (this.jobs.length > 0){
+      if (this.jobs.length > 0) {
         this.getSyncJobData();
       }
       this.spinner.hide();

@@ -42,7 +42,7 @@ export class BookedTransferInforConfigurationComponent implements OnInit {
     this.getSyncJobType();
   }
 
-  getSyncJobType(){
+  getSyncJobType() {
     this.loading = true;
     this.accSyncTypeService.getAccSyncJobType(Constants.BOOKED_TRANSFER_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
@@ -86,7 +86,7 @@ export class BookedTransferInforConfigurationComponent implements OnInit {
     });
   }
 
-  onCancelClick(){
+  onCancelClick() {
     this.router.navigate([Constants.SYNC_JOBS]);
   }
 

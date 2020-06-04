@@ -33,7 +33,7 @@ export class IncludedOverGroupsComponent implements OnInit {
     this.getOverGroups();
   }
 
-  getGeneralSettings(){
+  getGeneralSettings() {
     this.generalSettingsService.getGeneralSettings().then((res: Response) => {
       this.generalSettings = res.data as GeneralSettings;
       this.mappedItems = this.generalSettings.items;
@@ -62,7 +62,7 @@ export class IncludedOverGroupsComponent implements OnInit {
     });
   }
 
-  mapItemGroups(){
+  mapItemGroups() {
     this.spinner.show();
     this.itemLoading = true;
     this.journalService.mapItemGroups().toPromise().then((res: any) => {
@@ -71,7 +71,7 @@ export class IncludedOverGroupsComponent implements OnInit {
       this.spinner.hide();
       this.itemLoading = false;
 
-      if (res.success){
+      if (res.success) {
         this.snackBar.open(res.message, null, {
           duration: 2000,
           horizontalPosition: 'center',
@@ -106,17 +106,17 @@ export class IncludedOverGroupsComponent implements OnInit {
 
     let that = this;
     this.overGroups.forEach(function (overGroup) {
-      if (overGroup.checked){
+      if (overGroup.checked) {
         that.selectedOverGroups.push(overGroup)
       }
     });
 
 
-    if(this.selectedOverGroups.length != 0){
+    if(this.selectedOverGroups.length != 0) {
       this.generalSettings.overGroups = this.selectedOverGroups;
       this.generalSettingsService.updateGeneralSettings(this.generalSettings).then(result => {
         const response = result as Response;
-        if (response.success){
+        if (response.success) {
           this.snackBar.open('Save configuration successfully.', null, {
             duration: 2000,
             horizontalPosition: 'center',

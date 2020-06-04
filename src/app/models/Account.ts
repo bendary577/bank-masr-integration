@@ -4,7 +4,7 @@ export class Account {
     public domain: string;
     public erd: string;
     public accountCredentials: any;
-    public creationDate:string;
+    public creationDate: string;
     public deleted: boolean;
 
     public constructor() { }

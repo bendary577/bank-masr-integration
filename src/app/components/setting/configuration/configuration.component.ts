@@ -47,7 +47,7 @@ export class ConfigurationComponent  implements OnInit{
     });
   }
 
-  addAccountDialog(){
+  addAccountDialog() {
     const dialogRef = this.dialog.open(AddAccountComponent, {
       width: '550px'
     });

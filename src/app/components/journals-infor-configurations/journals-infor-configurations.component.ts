@@ -38,7 +38,7 @@ export class JournalsInforConfigurationsComponent implements OnInit {
     this.getSyncJobType();
   }
 
-  getSyncJobType(){
+  getSyncJobType() {
     this.loading = true;
     this.spinner.show();
     this.accSyncTypeService.getAccSyncJobType(Constants.CONSUMPTION_SYNC).toPromise().then((res: any) => {
@@ -83,7 +83,7 @@ export class JournalsInforConfigurationsComponent implements OnInit {
 
   }
 
-  onCancelClick(){
+  onCancelClick() {
     this.router.navigate([Constants.SYNC_JOBS]);
   }
 

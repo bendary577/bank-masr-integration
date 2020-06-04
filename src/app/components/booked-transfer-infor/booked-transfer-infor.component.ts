@@ -34,7 +34,7 @@ export class BookedTransferInforComponent implements OnInit {
     this.getSyncJobs("Booked Transfers");
     this.state = localStorage.getItem('getTransfersLoading');
 
-    if (this.state == "true"){
+    if (this.state == "true") {
       BookedTransferInforComponent.getTransfersLoading = true;
     }
     else{
@@ -68,7 +68,7 @@ export class BookedTransferInforComponent implements OnInit {
       this.success = res.success;
       this.getSyncJobs("Booked Transfers");
 
-      if (this.success){
+      if (this.success) {
         this.snackBar.open(res.message, null, {
           duration: 2000,
           horizontalPosition: 'center',
@@ -83,7 +83,7 @@ export class BookedTransferInforComponent implements OnInit {
 
       localStorage.setItem('getTransfersLoading', "false");
       BookedTransferInforComponent.getTransfersLoading = false;
-      
+
       this.snackBar.open(err.error.message, null, {
         duration: 2000,
         horizontalPosition: 'center',
@@ -93,12 +93,12 @@ export class BookedTransferInforComponent implements OnInit {
     });
   }
 
-  getSyncJobs(syncJobTypeName:String) {
+  getSyncJobs(syncJobTypeName: string) {
     this.spinner.show();
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
       this.jobs = res;
       this.selectedJob = this.jobs[0];
-      if (this.jobs.length > 0){
+      if (this.jobs.length > 0) {
         this.getSyncJobData();
       }
 
@@ -125,7 +125,7 @@ export class BookedTransferInforComponent implements OnInit {
     });
   }
 
-  showDetails(transfer){
+  showDetails(transfer) {
     this.router.navigate(['bookedTransfersDetails', transfer])
   }
 

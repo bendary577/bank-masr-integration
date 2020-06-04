@@ -10,13 +10,14 @@ export class GeneralSettingsService {
 
   constructor(private http: HttpClient) { }
 
-  getGeneralSettings(){
+  getGeneralSettings() {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get(Constants.GET_GENERAL_SETTINGS_URL , { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})}).toPromise();
+    return this.http.get(Constants.GET_GENERAL_SETTINGS_URL , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
 
-  updateGeneralSettings(generalSettings){
+  updateGeneralSettings(generalSettings) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.put(Constants.UPDATE_GENERAL_SETTINGS_URL , generalSettings, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})}).toPromise();
+    return this.http.put(Constants.UPDATE_GENERAL_SETTINGS_URL , generalSettings,
+       { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
 }

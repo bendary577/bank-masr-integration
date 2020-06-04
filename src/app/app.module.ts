@@ -36,7 +36,6 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {UsersComponent} from "./components/setting/users/users.component";
 import { AuthService } from './services/auth/auth.service';
 import { InvoiceService } from './services/invoice/invoice.service';
-import { SyncJobComponent } from './components/sync-job/sync-job.component';
 import {HttpModule} from "@angular/http";
 import { AlertsService } from 'angular-alert-module';
 import {SyncJobsconfigComponent} from "./components/setting/syncJob/syncJobsconfig.component";
@@ -44,7 +43,6 @@ import { SuppliersConfiguartionComponent } from './components/suppliers-configua
 import { SchedulerConfigurationComponent } from './components/scheduler-configuration/scheduler-configuration.component';
 import { BookedTransferDetailsComponent } from './components/booked-transfer-details/booked-transfer-details.component';
 import { ErrorComponentComponent } from './components/error-component/error-component.component';
-import { Data } from './models/data';
 import { SupplierDetailsComponent } from './components/supplier-details/supplier-details.component';
 import {AuthGuardService} from "./guards/AuthGuardService";
 import { PosSalesComponent } from './components/pos-sales/pos-sales.component';
@@ -69,6 +67,7 @@ import { BasicConfiguartionsComponent } from './components/basic-configuartions/
 import { IncludedOverGroupsComponent } from './components/setting/included-over-groups/included-over-groups.component';
 import { CostCenterAccountMappingComponent } from './components/setting/cost-center-account-mapping/cost-center-account-mapping.component';
 import { AddUserComponent } from './components/add-vendor/add-vendor.component';
+import { Data } from './models/data';
 
 @NgModule({
   declarations: [
@@ -78,10 +77,8 @@ import { AddUserComponent } from './components/add-vendor/add-vendor.component';
     SidenavResponsive,
     ConfigurationComponent,
     UsersComponent,
-    SyncJobComponent,
     SyncJobsconfigComponent,
     AddUserComponent,
-    SyncJobComponent,
     SuppliersConfiguartionComponent,
     SchedulerConfigurationComponent,
     BookedTransferDetailsComponent,
@@ -137,7 +134,7 @@ import { AddUserComponent } from './components/add-vendor/add-vendor.component';
     MatProgressBarModule,
     ShowHidePasswordModule,
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, CookieService, AuthService, InvoiceService, AlertsService, Data,AuthGuardService,SidenavResponsive],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, CookieService, AuthService, InvoiceService, AlertsService,Data, AuthGuardService,SidenavResponsive],
   bootstrap: [AppComponent],
   entryComponents: [AddUserComponent, AddAccountComponent, SuppliersConfiguartionComponent, SchedulerConfigurationComponent]
 })

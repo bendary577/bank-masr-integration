@@ -9,11 +9,11 @@ import { Cacheable } from 'ngx-cacheable';
 export class CreditNoteService {
   token = localStorage.getItem('auth_token');
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   getCreditNote() {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get(Constants.GET_CREDIT_NOTE_URL, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
+    return this.http.get(Constants.GET_CREDIT_NOTE_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
 

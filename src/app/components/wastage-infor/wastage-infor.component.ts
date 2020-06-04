@@ -19,7 +19,7 @@ export class WastageInforComponent implements OnInit {
   jobs = [];
   wastage = [];
   selectedJob :SyncJob = null;
-  state = "";
+  state = '';
 
 
   constructor(private spinner: NgxSpinnerService, public dialog: MatDialog, public snackBar: MatSnackBar,
@@ -29,7 +29,7 @@ export class WastageInforComponent implements OnInit {
     this.getSyncJobs(Constants.WASTARGE_SYNC);
     this.state = localStorage.getItem('getWastageLoading');
 
-    if (this.state == "true"){
+    if (this.state === "true") {
       WastageInforComponent.getWastageLoading = true;
     }
     else{
@@ -47,7 +47,7 @@ export class WastageInforComponent implements OnInit {
 
     this.wastageService.getWastage().toPromise().then((res: any) => {
       this.success = res.success;
-      if (this.success){
+      if (this.success) {
         this.snackBar.open(res.message , null, {
           duration: 3000,
           horizontalPosition: 'center',
@@ -61,25 +61,25 @@ export class WastageInforComponent implements OnInit {
           panelClass:"my-snack-bar-fail"
         });
       }
-      
+
       this.getSyncJobs(Constants.WASTARGE_SYNC);
-    
+
       localStorage.setItem('getWastageLoading', "false");
       WastageInforComponent.getWastageLoading = false;
     }).catch(err => {
       this.getSyncJobs(Constants.WASTARGE_SYNC);
-      
+
       localStorage.setItem('getWastageLoading', "false");
       WastageInforComponent.getWastageLoading = false;
     });
   }
 
-  getSyncJobs(syncJobTypeName:String) {
+  getSyncJobs(syncJobTypeName: string) {
     this.spinner.show();
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
       this.jobs = res;
       this.selectedJob = this.jobs[0]
-      if (this.jobs.length > 0){
+      if (this.jobs.length > 0) {
         this.getSyncJobData();
       }
       this.spinner.hide();

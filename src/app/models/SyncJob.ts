@@ -6,6 +6,6 @@ export class SyncJob {
     endDate: string;
     userId: string;
     accountId: string;
-    syncJobTypeId:string;
+    syncJobTypeId: string;
     deleted: string;
 }

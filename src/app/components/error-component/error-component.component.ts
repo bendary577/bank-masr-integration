@@ -15,7 +15,7 @@ export class ErrorComponentComponent implements OnInit {
   ngOnInit() {
   }
 
-  back(){
+  back() {
     this.router.navigate([Constants.SUPPLIERS_PAGE]);
   }
 
