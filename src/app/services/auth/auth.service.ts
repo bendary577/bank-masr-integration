@@ -3,7 +3,7 @@ import { Constants } from 'src/app/models/constants';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { Cacheable } from 'ngx-cacheable';
-import { User } from 'src/app/models/User';
+import { User } from 'src/app/models/user';
 
 @Injectable({
   providedIn: 'root'

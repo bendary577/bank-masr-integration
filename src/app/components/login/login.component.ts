@@ -6,7 +6,7 @@ import { Constants } from 'src/app/models/constants';
 import { MatSnackBar } from '@angular/material';
 import { SidenavResponsive } from "../sidenav/sidenav-responsive";
 import { NgxSpinnerService } from 'ngx-spinner';
-import {User} from "../../models/User";
+import {User} from "../../models/user";
 import { AccountService } from 'src/app/services/account/account.service';
 import { Account } from 'src/app/models/Account';
 

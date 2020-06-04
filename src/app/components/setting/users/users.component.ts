@@ -2,7 +2,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatExpansionPanel, MatPaginator, MatTableDataSource, MatSnackBar, MatDialog} from "@angular/material";
 import {animate, state, style, transition, trigger} from "@angular/animations";
-import {User} from "../../../models/User";
+import {User} from "../../../models/user";
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { AddUserComponent } from '../../add-vendor/add-vendor.component';
