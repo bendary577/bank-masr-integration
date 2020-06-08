@@ -20,6 +20,7 @@ export class BookedTransferInforConfigurationComponent implements OnInit {
   loading = true;
   save_loading = false;
   syncTypeLoading = true
+  groupLoading = true;
 
   syncJobType: AccountSyncType;
 
@@ -32,7 +33,7 @@ export class BookedTransferInforConfigurationComponent implements OnInit {
 
   AccountSettingsForm: FormGroup;
 
-  constructor(private spinner: NgxSpinnerService, private syncJobService:SyncJobService,
+  constructor(private spinner: NgxSpinnerService, private syncJobService:SyncJobService, private journalService:JournalService,
     private accSyncTypeService:AccSyncTypeService, private router:Router, public snackBar: MatSnackBar) {
       this.costCenters = [];
       this.overGroups = [];
@@ -40,6 +41,7 @@ export class BookedTransferInforConfigurationComponent implements OnInit {
 
   ngOnInit() {
     this.getSyncJobType();
+    this.getOverGroups();
   }
 
   getSyncJobType() {
@@ -58,10 +60,43 @@ export class BookedTransferInforConfigurationComponent implements OnInit {
     });
   }
 
+  getOverGroups() {
+    this.groupLoading = true;
+    this.spinner.show();
+    this.journalService.getOverGroups(Constants.BOOKED_TRANSFER_SYNC).toPromise().then((res: any) => {
+      this.overGroups = res.data;
+      this.groupLoading = false;
+      this.spinner.hide();
+    }).catch(err => {
+      console.error(err);
+      this.snackBar.open(err.error.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+      this.groupLoading = false;
+      this.spinner.hide();
+    });
+  }
+
 
   onSaveClick(): void {
     this.spinner.show();
     this.save_loading = true;
+
+    // Check if there is overgroup mapping
+    if (this.overGroups.length != 0){
+      let that = this;
+      this.overGroups.forEach(function (overGroup) {
+        if (overGroup.checked) {
+          that.selectedOverGroups.push(overGroup)
+        }
+      });
+
+      if (this.selectedOverGroups.length != 0){
+        this.syncJobType.configuration["overGroups"] = this.selectedOverGroups;
+      }
+    }
 
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.snackBar.open('Save configuration successfully.', null, {
