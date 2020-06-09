@@ -22,6 +22,8 @@ export class BookedTransferInforConfigurationComponent implements OnInit {
   syncTypeLoading = true
   groupLoading = true;
 
+  uniqueOverGroupMapping = false;
+
   syncJobType: AccountSyncType;
 
   costCenters: CostCenter[] = [];
@@ -41,7 +43,6 @@ export class BookedTransferInforConfigurationComponent implements OnInit {
 
   ngOnInit() {
     this.getSyncJobType();
-    this.getOverGroups();
   }
 
   getSyncJobType() {
@@ -52,6 +53,11 @@ export class BookedTransferInforConfigurationComponent implements OnInit {
       this.overGroups = this.syncJobType.configuration["overGroups"];
       this.analysis = this.syncJobType.configuration["analysis"];
       this.mappedItems = res.configuration.items;
+      this.uniqueOverGroupMapping = this.syncJobType.configuration["uniqueOverGroupMapping"];
+
+      if (this.uniqueOverGroupMapping){
+        this.getOverGroups();
+      }
 
       this.loading = false;
     }).catch(err => {
