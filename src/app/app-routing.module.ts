@@ -28,6 +28,8 @@ import { CreditNotesInforComponent } from './components/credit-notes-infor/credi
 import { CreditNotesInforConfigurationComponent } from './components/credit-notes-infor-configuration/credit-notes-infor-configuration.component';
 import { IncludedOverGroupsComponent } from './components/setting/included-over-groups/included-over-groups.component';
 import { CostCenterAccountMappingComponent } from './components/setting/cost-center-account-mapping/cost-center-account-mapping.component';
+import { PosSalesInforConfigurationComponent } from './components/pos-sales-infor-configuration/pos-sales-infor-configuration.component';
+import { PosSalesInforComponent } from './components/pos-sales-infor/pos-sales-infor.component';
 
 
 const routes: Routes = [
@@ -64,8 +66,8 @@ const routes: Routes = [
   { path: Constants.CONSUMPTION_INFOR_PAGE , component: JournalInforComponent  , canActivate:[AuthGuardService]},
   { path: Constants.CONSUMPTION_SUN_CONFIG_PAGE , component: JournalsInforConfigurationsComponent  , canActivate:[AuthGuardService]},
 
-  { path: Constants.POS_SALES_PAGE , component: PosSalesComponent  , canActivate:[AuthGuardService]},
-  { path: Constants.POS_SALES_CONFIG_PAGE , component: PosSalesConfigurationComponent  , canActivate:[AuthGuardService]},
+  { path: Constants.POS_SALES_INFOR_PAGE , component: PosSalesInforComponent  , canActivate:[AuthGuardService]},
+  { path: Constants.POS_SALES_INFOR_CONFIG_PAGE , component: PosSalesInforConfigurationComponent  , canActivate:[AuthGuardService]},
 
 
   { path: Constants.WASTARGE_INFOR_PAGE , component: WastageInforComponent ,canActivate:[AuthGuardService]},

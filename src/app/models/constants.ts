@@ -107,8 +107,10 @@ export class Constants {
     static CONSUMPTION_SUN_CONFIG_PAGE = 'consumptionSunConfig';
 
     static POS_SALES_PAGE = 'posSales';
+    static POS_SALES_INFOR_PAGE = 'posSalesSun';
     static POS_SALES_SYNC = 'POS Sales';
     static POS_SALES_CONFIG_PAGE = 'posSalesConfig';
+    static POS_SALES_INFOR_CONFIG_PAGE = 'posSalesSunConfig';
 
     static WASTARGE_PAGE = 'wastage';
     static WASTARGE_INFOR_PAGE = 'wastageSun';

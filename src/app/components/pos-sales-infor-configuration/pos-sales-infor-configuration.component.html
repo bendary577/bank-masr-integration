@@ -1,7 +1,9 @@
-<h3 mat-dialog-title>Update Consumption Configuartion</h3>
+<h3 mat-dialog-title>Update POS Sales Configuartion</h3>
+
 
 <div>
     <div *ngIf="!loading">
+
         <!-- Oracle Hospitality Configurations -->
         <mat-expansion-panel>
             <mat-expansion-panel-header>
@@ -24,6 +26,52 @@
                                 <mat-option value="Financial Period to Date">Financial Period to Date</mat-option>
                             </mat-select>
 
+                        </mat-form-field>
+                    </div>
+                </form>
+            </div>
+
+        </mat-expansion-panel>
+
+        <!-- Cash Shortage/Surplus POS Configurations -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Cash Shortage/Surplus POS Configurations
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="container" *ngIf="!loading">
+                <form class="my-form">
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <input matInput id="cashShortagePOS" name="cashShortagePOS" placeholder="Cash Shortage POS Account" [(ngModel)]="syncJobType.configuration.cashShortagePOS">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <input matInput id="cashSurplusPOS" name="cashSurplusPOS" placeholder="Cash Surplus POS Account" [(ngModel)]="syncJobType.configuration.cashSurplusPOS">
+                        </mat-form-field>
+                    </div>
+
+                </form>
+            </div>
+
+        </mat-expansion-panel>
+
+        <!-- Revenue Configurations -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Revenue Configurations
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="container" *ngIf="!loading">
+                <form class="my-form">
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <input matInput id="revenue" name="revenue" placeholder="Revenue Account" [(ngModel)]="syncJobType.configuration.revenue">
                         </mat-form-field>
                     </div>
                 </form>
@@ -56,11 +104,7 @@
                             <input matInput id="businessUnit" name="businessUnit" placeholder="Business Unit" [(ngModel)]="syncJobType.configuration.businessUnit">
                         </mat-form-field>
                     </div>
-                    <!-- <div>
-                        <mat-form-field class="example-full-width">
-                            <input matInput id="journalSource" name="journalSource" placeholder="Journal Source" [(ngModel)]="syncJobType.configuration.journalSource">
-                        </mat-form-field>
-                    </div> -->
+
                     <div>
                         <mat-form-field class="example-full-width">
                             <input matInput id="journalType" name="journalType" placeholder="Journal Type" [(ngModel)]="syncJobType.configuration.journalType">
@@ -144,14 +188,38 @@
 
         </mat-expansion-panel>
 
-        <br>
+        <!-- Tenders Mapping -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Tenders Mapping
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div *ngIf="tenders?.length > 0">
 
+                <ngx-datatable class="material" [rows]="tenders" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[]">
+
+                    <ngx-datatable-column name="Tender">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.tender">{{row.tender}}</mat-checkbox>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Account">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <input matInput placeholder="Account" [(ngModel)]="row.account">
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                </ngx-datatable>
+            </div>
+        </mat-expansion-panel>
+
+        <br>
         <div class="card-back">
             <button mat-flat-button (click)="onSaveClick()">Save</button>
-            <button mat-flat-button (click)="onCancelClick()">Cancel</button>
         </div>
 
     </div>
-
     <ngx-spinner></ngx-spinner>
 </div>

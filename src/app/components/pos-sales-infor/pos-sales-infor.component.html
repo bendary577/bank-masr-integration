@@ -1,5 +1,4 @@
-<h3>
-    Consumption</h3>
+<h3>POS Sales</h3>
 
 
 <div class="header">
@@ -7,19 +6,18 @@
 
     <select class="custom-select" (change)="getSyncJobData()" [(ngModel)]="selectedJob">
         <option [ngValue]="job" *ngFor="let job of jobs">
-            {{job.creationDate}} - {{job.status}}
-            <p *ngIf="job.rowsFetched == 0">- No new data fetched.</p>
-          </option>
+            {{job.creationDate}} - {{job.status}}</option>
     </select>
-    <button mat-flat-button (click)="getJournalsJobSyncJob()">Sync consumption Now</button>
+    <button mat-flat-button (click)="getPOSSalesSyncJob()">Sync POS Sales Now</button>
 </div>
 
 <br>
 <div id="myProgress">
-    <mat-progress-bar mode="indeterminate" *ngIf="staticgetJournalsLoding"></mat-progress-bar>
+    <mat-progress-bar mode="indeterminate" *ngIf="staticgetPosSalesLoading"></mat-progress-bar>
 </div>
 
 <br>
+
 <div *ngIf="selectedJob">
     <mat-card class="example-card">
         <mat-card-header>
@@ -46,9 +44,9 @@
                 <span class="value" *ngIf="selectedJob.reason">{{selectedJob.reason}}</span>
                 <span class="value" *ngIf="!selectedJob.reason">No Info</span>
             </mat-list-item>
-            <mat-list-item *ngIf="!journals.length">
+            <mat-list-item *ngIf="!posSales.length">
                 <span>
-                There was no new data to sync in this job, You can sync journals now from <a (click)="getJournalsJobSyncJob()">here</a>
+                There was no new data to sync in this job, You can sync POS sales now from <a (click)="getPOSSalesSyncJob()">here</a>
             </span>
             </mat-list-item>
         </mat-card-content>
@@ -65,18 +63,16 @@
                 </mat-card-header>
                 <mat-card-content>
                     <p>
-                        There was no new data to sync in this job, You can sync consumptions now from
-                        <a (click)="getJournalsJobSyncJob()">here</a>
+                        There was no new data to sync in this job, You can sync POS sales now from
+                        <a (click)="getPOSSalesSyncJob()">here</a>
                     </p>
 
                 </mat-card-content>
             </mat-card>
         </div>
 
-        <div class="main" *ngIf="journals.length">
-            <ngx-datatable class="material" [rows]="journals" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[{prop: 'journalBatch', dir: 'asc'}]">
-
-
+        <div class="main" *ngIf="posSales.length">
+            <ngx-datatable class="material" [rows]="posSales" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[{prop: 'cost_center', dir: 'asc'}]">
                 <ngx-datatable-column name="Status">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{row.status}}
@@ -104,13 +100,13 @@
                     </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="Consumption Total Credit">
+                <ngx-datatable-column name="Sales Total Credit">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{row.data.totalCr}}
                     </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="Consumption Total Debit">
+                <ngx-datatable-column name="Sales Total Debit">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{row.data.totalDr}}
                     </ng-template>
@@ -137,10 +133,11 @@
                     </ng-template>
                 </ngx-datatable-column>
 
+
             </ngx-datatable>
         </div>
-
     </div>
+
     <ngx-spinner></ngx-spinner>
 
 </div>

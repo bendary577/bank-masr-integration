@@ -68,6 +68,8 @@ import { IncludedOverGroupsComponent } from './components/setting/included-over-
 import { CostCenterAccountMappingComponent } from './components/setting/cost-center-account-mapping/cost-center-account-mapping.component';
 import { AddUserComponent } from './components/add-vendor/add-vendor.component';
 import { Data } from './models/data';
+import { PosSalesInforComponent } from './components/pos-sales-infor/pos-sales-infor.component';
+import { PosSalesInforConfigurationComponent } from './components/pos-sales-infor-configuration/pos-sales-infor-configuration.component';
 
 @NgModule({
   declarations: [
@@ -104,7 +106,9 @@ import { Data } from './models/data';
     CreditNotesInforConfigurationComponent,
     BasicConfiguartionsComponent,
     IncludedOverGroupsComponent,
-    CostCenterAccountMappingComponent
+    CostCenterAccountMappingComponent,
+    PosSalesInforComponent,
+    PosSalesInforConfigurationComponent
   ],
   imports: [
     BrowserModule,
