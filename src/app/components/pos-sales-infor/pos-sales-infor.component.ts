@@ -63,7 +63,7 @@ export class PosSalesInforComponent implements OnInit {
       localStorage.setItem('getPosSalesLoading', "false");
       PosSalesInforComponent.getPosSalesLoading = false;
 
-      if (res.success) {
+      if (res.status) {
         this.snackBar.open(res.message, null, {
           duration: 2000,
           horizontalPosition: 'center',
