@@ -25,11 +25,11 @@ export class PosSalesService {
 
   addTender(tenders: Tender[], id:string) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.post(Constants.ADD_POS_SALES_TENDER_URL + "?id=" + id, tenders, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
+    return this.http.post(Constants.ADD_POS_SALES_TENDER_URL + "?syncJobTypeId=" + id, tenders, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
   addMajorGroup(majorGroups: MajorGroup[], id:string) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.post(Constants.ADD_POS_SALES_MAJOR_GROUP_URL + "?id=" + id, majorGroups, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
+    return this.http.post(Constants.ADD_POS_SALES_MAJOR_GROUP_URL + "?syncJobTypeId=" + id, majorGroups, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 }

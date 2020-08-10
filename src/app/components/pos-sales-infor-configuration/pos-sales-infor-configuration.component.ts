@@ -22,17 +22,11 @@ export class PosSalesInforConfigurationComponent implements OnInit {
   save_loading = false;
   analysis = [];
 
-  // newMajorGroup = {
-  //   checked: false ,majorGroup: "", account: ""
-  // };
   newMajorGroup ;
   majorGroups = []
   selectedMajorGroup = [];
   majorGroup_loading = true;
 
-  // newTender = {
-  //   checked: false ,tender: "", account: ""
-  // };
   newTender ;
   tenders = []
   selectedTender = [];
@@ -53,6 +47,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
     this.accSyncTypeService.getAccSyncJobType(Constants.POS_SALES_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
       this.tenders = this.syncJobType.configuration["tenders"];
+      this.majorGroups = this.syncJobType.configuration["majorGroups"];
       this.analysis = this.syncJobType.configuration["analysis"];
 
       if (this.tenders.length == 0){
@@ -133,9 +128,16 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
         this.tenders.push(this.newTender);
 
-        this.salesService.addTender(this.tenders, this.syncJobType.syncJobTypeId).toPromise().then(result => {
+        this.salesService.addTender(this.tenders, this.syncJobType.id).toPromise().then(result => {
           this.spinner.hide();
           this.loading = false;
+
+          this.snackBar.open(result["message"], null, {
+            duration: 2000,
+            horizontalPosition: 'right',
+            panelClass:"my-snack-bar-success"
+          });
+
         }).catch(err => {
           this.spinner.hide();
           this.loading = false;
@@ -166,7 +168,13 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
         this.majorGroups.push(this.newMajorGroup);
 
-        this.salesService.addMajorGroup(this.majorGroups, this.syncJobType.syncJobTypeId).toPromise().then(result => {
+        this.salesService.addMajorGroup(this.majorGroups, this.syncJobType.id).toPromise().then(result => {
+          this.snackBar.open(result["message"], null, {
+            duration: 2000,
+            horizontalPosition: 'right',
+            panelClass:"my-snack-bar-success"
+          });
+
           this.spinner.hide();
           this.loading = false;
         }).catch(err => {
