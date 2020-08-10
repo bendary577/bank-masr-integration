@@ -79,6 +79,26 @@
 
         </mat-expansion-panel>
 
+        <!-- Tax Configurations -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Tax Configurations
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="container" *ngIf="!loading">
+                <form class="my-form">
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <input matInput id="vatOut" name="vatOut" placeholder="Vat Account" [(ngModel)]="syncJobType.configuration.vatOut">
+                        </mat-form-field>
+                    </div>
+                </form>
+            </div>
+
+        </mat-expansion-panel>
+
         <!-- Infor Sun System Configurations -->
         <mat-expansion-panel>
             <mat-expansion-panel-header>
