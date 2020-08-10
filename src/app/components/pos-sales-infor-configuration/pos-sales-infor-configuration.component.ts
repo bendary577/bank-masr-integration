@@ -68,29 +68,9 @@ export class PosSalesInforConfigurationComponent implements OnInit {
   onSaveClick(): void {
     this.spinner.show();
     this.save_loading = true;
-    this.selectedTender = [];
 
-    let that = this;
-    this.tenders.forEach(function (tender) {
-      if (tender.checked) {
-        that.selectedTender.push(tender)
-      }
-    });
-
-    if (this.selectedTender.length != 0) {
-      this.syncJobType.configuration["tenders"] = this.selectedTender;
-    }
-
-    // Save Selected Major Groups
-    this.majorGroups.forEach(function (majorGroup) {
-      if (majorGroup.checked) {
-        that.selectedMajorGroup.push(majorGroup)
-      }
-    });
-
-    if (this.selectedTender.length != 0) {
-      this.syncJobType.configuration["majorGroups"] = this.selectedMajorGroup;
-    }
+    this.syncJobType["tenders"] = this.tenders
+    this.syncJobType["majorGroups"] = this.majorGroups
 
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.snackBar.open('Save configuration successfully.', null, {
