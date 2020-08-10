@@ -195,7 +195,12 @@
                     Tenders Mapping
                 </mat-panel-title>
             </mat-expansion-panel-header>
-            <div *ngIf="tenders?.length > 0">
+
+            <div class="back" style="margin-bottom: 15px;">
+                <button mat-flat-button (click)="openTenderDialog()">Add</button>
+            </div>
+
+            <div *ngIf="tenders?.length > 0 && !loading">
 
                 <ngx-datatable class="material" [rows]="tenders" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[]">
 
@@ -214,6 +219,39 @@
                 </ngx-datatable>
             </div>
         </mat-expansion-panel>
+
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Major Group Mapping
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="back" style="margin-bottom: 15px;">
+                <button mat-flat-button (click)="openMajorGroupDialog()">Add</button>
+            </div>
+
+            <div *ngIf="majorGroups?.length > 0">
+
+                <ngx-datatable class="material" [rows]="majorGroups" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[]">
+
+                    <ngx-datatable-column name="Major Group">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.majorGroup">{{row.majorGroup}}</mat-checkbox>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Account">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <input matInput placeholder="Account" [(ngModel)]="row.account">
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                </ngx-datatable>
+            </div>
+        </mat-expansion-panel>
+
+
 
         <br>
         <div class="card-back">

@@ -70,6 +70,8 @@ import { AddUserComponent } from './components/add-vendor/add-vendor.component';
 import { Data } from './models/data';
 import { PosSalesInforComponent } from './components/pos-sales-infor/pos-sales-infor.component';
 import { PosSalesInforConfigurationComponent } from './components/pos-sales-infor-configuration/pos-sales-infor-configuration.component';
+import { AddMajorGroupComponent } from './components/addMajorGroup/add-major-group.component';
+import { AddTenderComponent } from './components/add-tender/add-tender.component';
 
 @NgModule({
   declarations: [
@@ -108,7 +110,9 @@ import { PosSalesInforConfigurationComponent } from './components/pos-sales-info
     IncludedOverGroupsComponent,
     CostCenterAccountMappingComponent,
     PosSalesInforComponent,
-    PosSalesInforConfigurationComponent
+    PosSalesInforConfigurationComponent,
+    AddMajorGroupComponent,
+    AddTenderComponent
   ],
   imports: [
     BrowserModule,
@@ -140,6 +144,6 @@ import { PosSalesInforConfigurationComponent } from './components/pos-sales-info
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, CookieService, AuthService, InvoiceService, AlertsService,Data, AuthGuardService,SidenavResponsive],
   bootstrap: [AppComponent],
-  entryComponents: [AddUserComponent, AddAccountComponent, SuppliersConfiguartionComponent, SchedulerConfigurationComponent]
+  entryComponents: [AddUserComponent, AddAccountComponent, AddMajorGroupComponent, AddTenderComponent,SuppliersConfiguartionComponent, SchedulerConfigurationComponent]
 })
 export class AppModule { }
