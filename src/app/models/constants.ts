@@ -66,6 +66,7 @@ export class Constants {
 
     static GET_CURRENT_DAYS_URL = environment.apiHost + '/getCurrentDays';
 
+    static GET_BOOKED_PRODUCTION_URL = environment.apiHost + '/getBookedProduction';
 
     // General Settings
     static GET_GENERAL_SETTINGS_URL = environment.apiHost + '/getGeneralSettings';
@@ -119,6 +120,10 @@ export class Constants {
     static WASTARGE_SYNC = 'Wastage';
     static WASTARGE_CONFIG_PAGE = 'wastageConfig';
     static WASTARGE_INFOR_CONFIG_PAGE = 'wastageSunConfig';
+
+    static BOOKED_PRODUCTION_INFOR_PAGE = 'bookedProductionSun';
+    static BOOKED_PRODUCTION_INFOR_CONFIG_PAGE = 'bookedProductionSunConfig';
+    static BOOKED_PRODUCTION_SYNC = 'Booked Production';
 
     static TABS_PAGE = 'tabs';
     static END_POINT = '/getSuppliers';
