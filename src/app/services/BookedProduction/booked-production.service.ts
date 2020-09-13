@@ -11,7 +11,7 @@ export class BookedProductionService {
 
   constructor(private http: HttpClient) { }
 
-  getCreditNote() {
+  getBookedProduction() {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_BOOKED_PRODUCTION_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }

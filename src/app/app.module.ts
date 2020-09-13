@@ -72,6 +72,7 @@ import { PosSalesInforComponent } from './components/pos-sales-infor/pos-sales-i
 import { PosSalesInforConfigurationComponent } from './components/pos-sales-infor-configuration/pos-sales-infor-configuration.component';
 import { AddMajorGroupComponent } from './components/addMajorGroup/add-major-group.component';
 import { AddTenderComponent } from './components/add-tender/add-tender.component';
+import { BookedProductionComponent } from './components/BookedProduction/booked-production/booked-production.component';
 
 @NgModule({
   declarations: [
@@ -112,7 +113,8 @@ import { AddTenderComponent } from './components/add-tender/add-tender.component
     PosSalesInforComponent,
     PosSalesInforConfigurationComponent,
     AddMajorGroupComponent,
-    AddTenderComponent
+    AddTenderComponent,
+    BookedProductionComponent
   ],
   imports: [
     BrowserModule,
