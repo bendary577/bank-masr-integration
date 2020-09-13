@@ -8,7 +8,7 @@
     <select class="custom-select" (change)="getSyncJobData()" [(ngModel)]="selectedJob">
         <option [ngValue]="job" *ngFor="let job of jobs">
             {{job.creationDate}} - {{job.status}}
-            <p *ngIf="job.rowsFetched == 0">- No new data fetched.</p>
+            <p *ngIf="job.rowsFetched == 0 &&  job.status != 'Running'">- No new data fetched.</p>
           </option>
     </select>
     <button mat-flat-button (click)="getJournalsJobSyncJob()">Sync consumption Now</button>
