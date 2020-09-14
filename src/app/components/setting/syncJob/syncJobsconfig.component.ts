@@ -122,6 +122,14 @@ export class SyncJobsconfigComponent implements OnInit {
         this.router.navigate([Constants.WASTARGE_CONFIG_PAGE]);
       }
     }
+    else if (syncJobType.name == Constants.BOOKED_PRODUCTION_SYNC) {
+      if (this.accountERD == "SUN") {
+        this.router.navigate([Constants.BOOKED_PRODUCTION_INFOR_CONFIG_PAGE]);
+      }
+      else{
+        this.router.navigate([Constants.BOOKED_PRODUCTION_CONFIG_PAGE]);
+      }
+    }
     else{
       this.snackBar.open("This sync job has not configuration yet.", null, {
         duration: 2000,

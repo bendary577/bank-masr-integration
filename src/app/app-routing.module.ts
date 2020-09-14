@@ -30,6 +30,8 @@ import { IncludedOverGroupsComponent } from './components/setting/included-over-
 import { CostCenterAccountMappingComponent } from './components/setting/cost-center-account-mapping/cost-center-account-mapping.component';
 import { PosSalesInforConfigurationComponent } from './components/pos-sales-infor-configuration/pos-sales-infor-configuration.component';
 import { PosSalesInforComponent } from './components/pos-sales-infor/pos-sales-infor.component';
+import { BookedProductionComponent } from './components/BookedProduction/booked-production/booked-production.component';
+import { BookedProductionConfigurationComponent } from './components/BookedProductionConfiguration/booked-production-configuration/booked-production-configuration.component';
 
 
 const routes: Routes = [
@@ -69,10 +71,11 @@ const routes: Routes = [
   { path: Constants.POS_SALES_INFOR_PAGE , component: PosSalesInforComponent  , canActivate:[AuthGuardService]},
   { path: Constants.POS_SALES_INFOR_CONFIG_PAGE , component: PosSalesInforConfigurationComponent  , canActivate:[AuthGuardService]},
 
-
   { path: Constants.WASTARGE_INFOR_PAGE , component: WastageInforComponent ,canActivate:[AuthGuardService]},
   { path: Constants.WASTARGE_INFOR_CONFIG_PAGE , component: WastageInforConfigurationComponent ,canActivate:[AuthGuardService]},
 
+  { path: Constants.BOOKED_PRODUCTION_INFOR_PAGE , component: BookedProductionComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.BOOKED_PRODUCTION_INFOR_CONFIG_PAGE , component: BookedProductionConfigurationComponent ,canActivate:[AuthGuardService]},
 
   // Error Page
   {path:'**', component: ErrorComponentComponent }

@@ -45,7 +45,7 @@ export class BookedProductionConfigurationComponent implements OnInit {
 
   getSyncJobType() {
     this.loading = true;
-    this.accSyncTypeService.getAccSyncJobType(Constants.BOOKED_TRANSFER_SYNC).toPromise().then((res: any) => {
+    this.accSyncTypeService.getAccSyncJobType(Constants.BOOKED_PRODUCTION_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
       this.costCenters = this.syncJobType.configuration["costCenters"];
       this.overGroups = this.syncJobType.configuration["overGroups"];

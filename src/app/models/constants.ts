@@ -122,6 +122,7 @@ export class Constants {
     static WASTARGE_INFOR_CONFIG_PAGE = 'wastageSunConfig';
 
     static BOOKED_PRODUCTION_INFOR_PAGE = 'bookedProductionSun';
+    static BOOKED_PRODUCTION_CONFIG_PAGE = 'bookedProductionConfig';
     static BOOKED_PRODUCTION_INFOR_CONFIG_PAGE = 'bookedProductionSunConfig';
     static BOOKED_PRODUCTION_SYNC = 'Booked Production';
 
