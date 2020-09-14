@@ -67,6 +67,11 @@
                 </div>
                 <div>
                     <mat-form-field class="example-full-width">
+                        <input matInput id="expensesAccount" name="expensesAccount" placeholder="Expenses Account" [(ngModel)]="syncJobType.configuration.expensesAccount">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
                         <input matInput id="suspenseAccount" name="suspenseAccount" placeholder="Suspense Account" [(ngModel)]="syncJobType.configuration.suspenseAccount">
                     </mat-form-field>
                 </div>
