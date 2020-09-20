@@ -15,7 +15,7 @@ import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.s
   styleUrls: ['./credit-notes-infor-configuration.component.scss']
 })
 export class CreditNotesInforConfigurationComponent implements OnInit {
-
+  userDefinedFlag = false;
   syncJobType: SyncJobType;
   submitted = false;
   loading = true;
@@ -38,6 +38,9 @@ export class CreditNotesInforConfigurationComponent implements OnInit {
     this.loading = true;
     this.accSyncTypeService.getAccSyncJobType(Constants.CREDIT_NOTE_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
+      if(this.syncJobType.configuration.timePeriod == "UserDefined"){
+        this.userDefinedFlag = true;
+      }
       this.analysis = this.syncJobType.configuration["analysis"];
       this.loading = false;
     }).catch(err => {
@@ -48,6 +51,7 @@ export class CreditNotesInforConfigurationComponent implements OnInit {
 
   onSaveClick(): void {
     this.spinner.show();
+    console.log ("Date", this.syncJobType.configuration.toDate)
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.spinner.hide();
       this.router.navigate([Constants.SYNC_JOBS]);
@@ -68,6 +72,15 @@ export class CreditNotesInforConfigurationComponent implements OnInit {
 
   onCancelClick() {
     this.router.navigate([Constants.SYNC_JOBS]);
+  }
+
+  chooseTimePeriod(){
+    console.log(this.syncJobType.configuration.timePeriod)
+    if(this.syncJobType.configuration.timePeriod == "UserDefined"){
+      this.userDefinedFlag = true;
+    }else{
+      this.userDefinedFlag = false;
+    }
   }
 
 }

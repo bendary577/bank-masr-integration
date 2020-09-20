@@ -17,6 +17,8 @@ import { CostCenter } from 'src/app/models/CostCenter';
   styleUrls: ['./booked-transfer-infor-configuration.component.scss']
 })
 export class BookedTransferInforConfigurationComponent implements OnInit {
+  userDefinedFlag = false;
+
   loading = true;
   save_loading = false;
   syncTypeLoading = true
@@ -49,6 +51,9 @@ export class BookedTransferInforConfigurationComponent implements OnInit {
     this.loading = true;
     this.accSyncTypeService.getAccSyncJobType(Constants.BOOKED_TRANSFER_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
+      if(this.syncJobType.configuration.timePeriod == "UserDefined"){
+        this.userDefinedFlag = true;
+      }
       this.costCenters = this.syncJobType.configuration["costCenters"];
       this.overGroups = this.syncJobType.configuration["overGroups"];
       this.analysis = this.syncJobType.configuration["analysis"];
@@ -129,6 +134,15 @@ export class BookedTransferInforConfigurationComponent implements OnInit {
 
   onCancelClick() {
     this.router.navigate([Constants.SYNC_JOBS]);
+  }
+
+  chooseTimePeriod(){
+    console.log(this.syncJobType.configuration.timePeriod)
+    if(this.syncJobType.configuration.timePeriod == "UserDefined"){
+      this.userDefinedFlag = true;
+    }else{
+      this.userDefinedFlag = false;
+    }
   }
 
 }

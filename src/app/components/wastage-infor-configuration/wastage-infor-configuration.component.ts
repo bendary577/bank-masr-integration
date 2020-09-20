@@ -14,6 +14,8 @@ import { WastageService } from 'src/app/services/wastage/wastage.service';
   styleUrls: ['./wastage-infor-configuration.component.scss']
 })
 export class WastageInforConfigurationComponent implements OnInit {
+  userDefinedFlag = false;
+
   syncJobTypeloading = true;
   saveLoading = false;
   groupLoading = true;
@@ -38,6 +40,9 @@ export class WastageInforConfigurationComponent implements OnInit {
     this.syncJobTypeloading = true;
     this.accSyncTypeService.getAccSyncJobType(Constants.WASTARGE_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
+      if(this.syncJobType.configuration.timePeriod == "UserDefined"){
+        this.userDefinedFlag = true;
+      }
       this.analysis = this.syncJobType.configuration["analysis"];
       this.syncJobTypeloading = false;
     }).catch(err => {
@@ -104,6 +109,15 @@ export class WastageInforConfigurationComponent implements OnInit {
 
   onCancelClick() {
     this.router.navigate([Constants.SYNC_JOBS]);
+  }
+
+  chooseTimePeriod(){
+    console.log(this.syncJobType.configuration.timePeriod)
+    if(this.syncJobType.configuration.timePeriod == "UserDefined"){
+      this.userDefinedFlag = true;
+    }else{
+      this.userDefinedFlag = false;
+    }
   }
 
 }

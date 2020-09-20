@@ -14,6 +14,7 @@ import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.s
   styleUrls: ['./approved-invoice-infor-configuration.component.scss']
 })
 export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
+  userDefinedFlag = false;
 
   syncJobType: SyncJobType;
   submitted = false;
@@ -35,6 +36,9 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
     this.loading = true;
     this.accSyncTypeService.getAccSyncJobType(Constants.APPROVED_INVOICES_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
+      if(this.syncJobType.configuration.timePeriod == "UserDefined"){
+        this.userDefinedFlag = true;
+      }
       this.analysis = this.syncJobType.configuration["analysis"];
       this.loading = false;
     }).catch(err => {
@@ -66,5 +70,12 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
     this.router.navigate([Constants.SYNC_JOBS]);
   }
 
-
+  chooseTimePeriod(){
+    console.log(this.syncJobType.configuration.timePeriod)
+    if(this.syncJobType.configuration.timePeriod == "UserDefined"){
+      this.userDefinedFlag = true;
+    }else{
+      this.userDefinedFlag = false;
+    }
+  }
 }
