@@ -112,7 +112,6 @@ export class WastageInforConfigurationComponent implements OnInit {
   }
 
   chooseTimePeriod(){
-    console.log(this.syncJobType.configuration.timePeriod)
     if(this.syncJobType.configuration.timePeriod == "UserDefined"){
       this.userDefinedFlag = true;
     }else{

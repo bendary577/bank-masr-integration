@@ -9,8 +9,6 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { FormGroup } from '@angular/forms';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 import { AccountSyncType } from 'src/app/models/AccountSyncType';
-import { CostCenter } from 'src/app/models/CostCenter';
-
 
 
 @Component({
@@ -19,6 +17,7 @@ import { CostCenter } from 'src/app/models/CostCenter';
   styleUrls: ['./journals-infor-configurations.component.scss']
 })
 export class JournalsInforConfigurationsComponent implements OnInit {
+  userDefinedFlag = false;
   loading = true;
   save_loading = false;
   syncTypeLoading = true
@@ -43,6 +42,9 @@ export class JournalsInforConfigurationsComponent implements OnInit {
     this.spinner.show();
     this.accSyncTypeService.getAccSyncJobType(Constants.CONSUMPTION_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
+      if(this.syncJobType.configuration.timePeriod == "UserDefined"){
+        this.userDefinedFlag = true;
+      }
       this.analysis = this.syncJobType.configuration["analysis"];
 
       this.loading = false;
@@ -88,4 +90,11 @@ export class JournalsInforConfigurationsComponent implements OnInit {
     this.router.navigate([Constants.SYNC_JOBS]);
   }
 
+  chooseTimePeriod(){
+    if(this.syncJobType.configuration.timePeriod == "UserDefined"){
+      this.userDefinedFlag = true;
+    }else{
+      this.userDefinedFlag = false;
+    }
+  }
 }
