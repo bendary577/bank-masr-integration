@@ -84,6 +84,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
       });
       this.spinner.hide();
       this.save_loading = false;
+      this.router.navigate([Constants.SYNC_JOBS]);
     }
     ).catch(err => {
       this.snackBar.open('An error has occurred.', null, {
@@ -161,6 +162,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
           this.spinner.hide();
           this.loading = false;
+          
         }).catch(err => {
           this.spinner.hide();
           this.loading = false;

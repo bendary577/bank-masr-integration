@@ -95,6 +95,7 @@ export class WastageInforConfigurationComponent implements OnInit {
       });
       this.spinner.hide();
       this.saveLoading = false;
+      this.router.navigate([Constants.SYNC_JOBS]);
     }
     ).catch(err => {
       this.snackBar.open('An error has occurred.', null, {
