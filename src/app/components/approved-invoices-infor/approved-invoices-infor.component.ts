@@ -68,13 +68,7 @@ export class ApprovedInvoicesInforComponent implements OnInit {
           panelClass:"my-snack-bar-success"
         });
       }
-      else{
-        this.snackBar.open(res.message , null, {
-          duration: 3000,
-          horizontalPosition: 'center',
-          panelClass:"my-snack-bar-fail"
-        });
-      }
+
       this.getSyncJobs("Approved Invoices");
 
       localStorage.setItem('getInvoicesLoading', "false");
@@ -83,7 +77,7 @@ export class ApprovedInvoicesInforComponent implements OnInit {
       localStorage.setItem('getInvoicesLoading', "false");
       ApprovedInvoicesInforComponent.getInvoicesLoading = false;
 
-      this.snackBar.open(err.message.message , null, {
+      this.snackBar.open(err.error.message , null, {
         duration: 3000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
