@@ -17,6 +17,7 @@ import { AddMajorGroupComponent } from '../addMajorGroup/add-major-group.compone
   styleUrls: ['./pos-sales-infor-configuration.component.scss']
 })
 export class PosSalesInforConfigurationComponent implements OnInit {
+  userDefinedFlag = false;
 
   loading = true;
   save_loading = false;
@@ -46,6 +47,9 @@ export class PosSalesInforConfigurationComponent implements OnInit {
     this.loading = true;
     this.accSyncTypeService.getAccSyncJobType(Constants.POS_SALES_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
+      if(this.syncJobType.configuration.timePeriod == "UserDefined"){
+        this.userDefinedFlag = true;
+      }
       this.tenders = this.syncJobType.configuration["tenders"];
       this.majorGroups = this.syncJobType.configuration["majorGroups"];
       this.analysis = this.syncJobType.configuration["analysis"];
@@ -80,6 +84,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
       });
       this.spinner.hide();
       this.save_loading = false;
+      this.router.navigate([Constants.SYNC_JOBS]);
     }
     ).catch(err => {
       this.snackBar.open('An error has occurred.', null, {
@@ -157,6 +162,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
           this.spinner.hide();
           this.loading = false;
+          
         }).catch(err => {
           this.spinner.hide();
           this.loading = false;
@@ -175,4 +181,11 @@ export class PosSalesInforConfigurationComponent implements OnInit {
     this.router.navigate([Constants.SYNC_JOBS]);
   }
 
+  chooseTimePeriod(){
+    if(this.syncJobType.configuration.timePeriod == "UserDefined"){
+      this.userDefinedFlag = true;
+    }else{
+      this.userDefinedFlag = false;
+    }
+  }
 }

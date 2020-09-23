@@ -24,6 +24,11 @@
         </mat-card-header>
         <mat-card-content>
             <mat-list-item>
+                <span class="key">Sync Number: </span>
+                <span class="value" *ngIf="selectedJob.id">{{selectedJob.id}}</span>
+                <span class="value" *ngIf="!selectedJob.id">No Info</span>
+            </mat-list-item>
+            <mat-list-item>
                 <span class="key">Sync status: </span>
                 <span class="value" *ngIf="selectedJob.status">{{selectedJob.status}}</span>
                 <span class="value" *ngIf="!selectedJob.status">No Info</span>

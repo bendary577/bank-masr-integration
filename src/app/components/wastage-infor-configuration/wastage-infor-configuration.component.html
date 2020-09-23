@@ -15,17 +15,28 @@
                 <form class="my-form">
                     <div>
                         <mat-form-field class="example-full-width">
-                            <mat-select matInput id="timePeriod" name="timePeriod" placeholder="Business Dates" [(ngModel)]="syncJobType.configuration.timePeriod">
-                                <mat-option value="Most Recent">Most Recent</mat-option>
-                                <mat-option value="Financial Week to Date">Financial Week to Date</mat-option>
-                                <mat-option value="Past 7 Days">Past 7 Days</mat-option>
+                            <mat-select matInput id="timePeriod" name="timePeriod" placeholder="Time Period" 
+                            (selectionChange)="chooseTimePeriod()" [(ngModel)]="syncJobType.configuration.timePeriod">
+                                <mat-option value="All">All</mat-option>
                                 <mat-option value="Today">Today</mat-option>
                                 <mat-option value="Yesterday">Yesterday</mat-option>
-                                <mat-option value="Month to Date">Month to Date</mat-option>
+                                <mat-option value="Current Month">Current Month</mat-option>
                                 <mat-option value="Last Month">Last Month</mat-option>
-                                <mat-option value="Financial Period to Date">Financial Period to Date</mat-option>
+                                <mat-option value="Current Year">Current Year</mat-option>
+                                <mat-option value="Last Year">Last Year</mat-option>
+                                <mat-option value="UserDefined">User-defined</mat-option>
                             </mat-select>
-
+                        </mat-form-field>
+                    </div>
+                    <div *ngIf="userDefinedFlag">
+                        <p>From</p>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Start Date" type="date" name="fromDate" id="fromDate" [(ngModel)]="syncJobType.configuration.fromDate">
+                        </mat-form-field>
+                
+                        <p>To</p>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="End Date" type="date" name="toDate" id="toDate" [(ngModel)]="syncJobType.configuration.toDate">
                         </mat-form-field>
                     </div>
                 </form>
@@ -57,11 +68,7 @@
                             <input matInput id="businessUnit" name="businessUnit" placeholder="Business Unit" [(ngModel)]="syncJobType.configuration.businessUnit">
                         </mat-form-field>
                     </div>
-                    <!-- <div>
-                        <mat-form-field class="example-full-width">
-                            <input matInput id="journalSource" name="journalSource" placeholder="Journal Source" [(ngModel)]="syncJobType.configuration.journalSource">
-                        </mat-form-field>
-                    </div> -->
+
                     <div>
                         <mat-form-field class="example-full-width">
                             <input matInput id="journalType" name="journalType" placeholder="Journal Type" [(ngModel)]="syncJobType.configuration.journalType">
@@ -168,7 +175,6 @@
         <br>
         <div class="card-back">
             <button mat-flat-button (click)="onSaveClick()">Save</button>
-            <button mat-flat-button (click)="onCancelClick()">Cancel</button>
         </div>
 
     </div>

@@ -24,6 +24,11 @@
         </mat-card-header>
         <mat-card-content>
             <mat-list-item>
+                <span class="key">Sync Number: </span>
+                <span class="value" *ngIf="selectedJob.id">{{selectedJob.id}}</span>
+                <span class="value" *ngIf="!selectedJob.id">No Info</span>
+            </mat-list-item>
+            <mat-list-item>
                 <span class="key">Sync status: </span>
                 <span class="value" *ngIf="selectedJob.status">{{selectedJob.status}}</span>
                 <span class="value" *ngIf="!selectedJob.status">No Info</span>
@@ -106,7 +111,12 @@
                     {{row.data.transactionDate}}
                 </ng-template>
             </ngx-datatable-column>
-
+            
+            <ngx-datatable-column name="Gross">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.totalCr}}
+                </ng-template>
+            </ngx-datatable-column>
             <ngx-datatable-column name="Invoice No">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.data.invoiceNo}}
@@ -140,11 +150,6 @@
             <ngx-datatable-column name="Invoice Date">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.data.invoiceDate}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Gross">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.totalCr}}
                 </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column name="Created By">
