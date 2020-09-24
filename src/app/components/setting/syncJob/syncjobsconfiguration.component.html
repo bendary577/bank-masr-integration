@@ -2,7 +2,13 @@
 <div class="main">
     <h3>Sync Jobs Configuration</h3>
 </div>
+<div class="header">
+  <div class="header-btn">
+      <button mat-raised-button color="primary" (click)="clearSyncJobData()">CLear Sync Data</button>
+  </div>
+</div>
 
+<br>
 <div>
   <div *ngIf="!syncJobTypes.length">
     <mat-card class="example-card">

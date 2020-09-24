@@ -11,6 +11,8 @@ import { SchedulerConfigurationComponent } from '../../scheduler-configuration/s
 import { Router } from '@angular/router';
 import { Constants } from 'src/app/models/constants';
 import { AccountService } from 'src/app/services/account/account.service';
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
 
 
 /**
@@ -33,7 +35,7 @@ export class SyncJobsconfigComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   constructor(private syncJobService: SyncJobService,  public dialog: MatDialog,
      public snackBar: MatSnackBar, private spinner: NgxSpinnerService, private router: Router,
-     private data: Data, private accountService: AccountService) {
+     private data: Data, private sidNav: SidenavResponsive) {
   }
 
   ngOnInit() {
@@ -138,6 +140,34 @@ export class SyncJobsconfigComponent implements OnInit {
       });
     }
 
+  }
+
+  clearSyncJobData(){
+    this.spinner.show();
+
+    this.syncJobService.clearSyncJobData().toPromise().then((res: any) => {
+      this.spinner.hide();
+    }).catch(err => {
+      let message = "";
+      if(err.status === 401){
+         message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
+
+      this.snackBar.open(message , null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+
+      this.spinner.hide();
+    });
   }
 
   openschedulerDialog(syncJobType) {
