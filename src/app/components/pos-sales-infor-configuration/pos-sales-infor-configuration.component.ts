@@ -11,6 +11,8 @@ import { AddTenderComponent } from '../add-tender/add-tender.component';
 import { AddMajorGroupComponent } from '../addMajorGroup/add-major-group.component';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
+import { AddTaxComponent } from '../add-tax/add-tax.component';
+import { Tax } from 'src/app/models/Tax';
 
 
 @Component({
@@ -30,8 +32,12 @@ export class PosSalesInforConfigurationComponent implements OnInit {
   selectedMajorGroup = [];
   majorGroup_loading = true;
 
-  newTender ;
-  tenders = []
+  newTender ;  
+  tenders = [];
+
+  newTax;
+  taxes = [];
+
   selectedTender = [];
   tender_loading = false;
 
@@ -53,6 +59,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
       if(this.syncJobType.configuration.timePeriod == "UserDefined"){
         this.userDefinedFlag = true;
       }
+      this.taxes = this.syncJobType.configuration["taxes"];
       this.tenders = this.syncJobType.configuration["tenders"];
       this.majorGroups = this.syncJobType.configuration["majorGroups"];
       this.analysis = this.syncJobType.configuration["analysis"];
@@ -93,8 +100,9 @@ export class PosSalesInforConfigurationComponent implements OnInit {
     this.spinner.show();
     this.save_loading = true;
 
-    this.syncJobType["tenders"] = this.tenders
-    this.syncJobType["majorGroups"] = this.majorGroups
+    this.syncJobType["configuration"]["taxes"] = this.taxes;
+    this.syncJobType["configuration"]["tenders"] = this.tenders;
+    this.syncJobType["configuration"]["majorGroups"] = this.majorGroups;
 
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.snackBar.open('Save configuration successfully.', null, {
@@ -109,8 +117,8 @@ export class PosSalesInforConfigurationComponent implements OnInit {
     ).catch(err => {
       let message = "";
       if(err.status === 401){
-         message = ErrorMessages.SESSION_EXPIRED;
- this.sidNav.Logout();
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){
@@ -119,7 +127,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
         message = ErrorMessages.FAILED_TO_SYNC;
       }
 
-      this.snackBar.open(err.error.message , null, {
+      this.snackBar.open(message , null, {
         duration: 3000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
@@ -164,8 +172,8 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
           let message = "";
           if(err.status === 401){
-             message = ErrorMessages.SESSION_EXPIRED;
- this.sidNav.Logout();
+            message = ErrorMessages.SESSION_EXPIRED;
+            this.sidNav.Logout();
           } else if (err.error.message){
             message = err.error.message;
           } else if (err.message){
@@ -174,7 +182,61 @@ export class PosSalesInforConfigurationComponent implements OnInit {
             message = ErrorMessages.FAILED_TO_SYNC;
           }
     
-          this.snackBar.open(err.error.message , null, {
+          this.snackBar.open(message , null, {
+            duration: 3000,
+            horizontalPosition: 'right',
+            panelClass:"my-snack-bar-fail"
+          });
+        });
+      }
+    });
+  }
+
+  openTaxDialog(){
+    const dialogRef = this.dialog.open(AddTaxComponent, {
+      width: '550px'
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.spinner.show();
+        this.loading = true;
+        this.newTax = {};
+        this.newTax.checked = false;
+        this.newTax.tax = res.name;
+        this.newTax.account = res.account;
+
+        this.taxes.push(this.newTax);
+
+        this.salesService.addTax(this.taxes, this.syncJobType.id).toPromise().then(result => {
+          this.spinner.hide();
+          this.loading = false;
+
+          this.snackBar.open(result["message"], null, {
+            duration: 2000,
+            horizontalPosition: 'right',
+            panelClass:"my-snack-bar-success"
+          });
+
+        }).catch(err => {
+          this.spinner.hide();
+          this.loading = false;
+
+          this.tenders.pop();
+
+          let message = "";
+          if(err.status === 401){
+            message = ErrorMessages.SESSION_EXPIRED;
+            this.sidNav.Logout();
+          } else if (err.error.message){
+            message = err.error.message;
+          } else if (err.message){
+            message = err.message;
+          } else {
+            message = ErrorMessages.FAILED_TO_SYNC;
+          }
+    
+          this.snackBar.open(message , null, {
             duration: 3000,
             horizontalPosition: 'right',
             panelClass:"my-snack-bar-fail"
@@ -218,7 +280,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
           let message = "";
           if(err.status === 401){
              message = ErrorMessages.SESSION_EXPIRED;
- this.sidNav.Logout();
+            this.sidNav.Logout();
           } else if (err.error.message){
             message = err.error.message;
           } else if (err.message){
@@ -227,7 +289,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
             message = 'Can not add major group now, please try again.';
           }
     
-          this.snackBar.open(err.error.message , null, {
+          this.snackBar.open(message , null, {
             duration: 3000,
             horizontalPosition: 'right',
             panelClass:"my-snack-bar-fail"

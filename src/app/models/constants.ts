@@ -63,6 +63,7 @@ export class Constants {
     static GET_POS_SALES_URL = environment.apiHost + '/getPOSSales';
     static GET_POS_SALES_TENDERS_URL = environment.apiHost + '/getTenders';
     static ADD_POS_SALES_TENDER_URL = environment.apiHost + '/addTender';
+    static ADD_POS_SALES_TAX_URL = environment.apiHost + '/addTax';
     static ADD_POS_SALES_MAJOR_GROUP_URL = environment.apiHost + '/addMajorGroup';
 
     static GET_CURRENT_DAYS_URL = environment.apiHost + '/getCurrentDays';

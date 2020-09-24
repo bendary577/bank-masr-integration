@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Constants } from 'src/app/models/constants';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Cacheable } from 'ngx-cacheable';
 import { Tender } from 'src/app/models/Tender';
 import { MajorGroup } from 'src/app/models/MajorGroup';
+import { Tax } from 'src/app/models/Tax';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,11 @@ export class PosSalesService {
   addTender(tenders: Tender[], id:string) {
     this.token = localStorage.getItem('auth_token');
     return this.http.post(Constants.ADD_POS_SALES_TENDER_URL + "?syncJobTypeId=" + id, tenders, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
+  }
+
+  addTax(taxs: Tax[], id:string) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.post(Constants.ADD_POS_SALES_TAX_URL + "?syncJobTypeId=" + id, taxs, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
   addMajorGroup(majorGroups: MajorGroup[], id:string) {

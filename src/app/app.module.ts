@@ -74,6 +74,7 @@ import { AddMajorGroupComponent } from './components/addMajorGroup/add-major-gro
 import { AddTenderComponent } from './components/add-tender/add-tender.component';
 import { BookedProductionComponent } from './components/BookedProduction/booked-production/booked-production.component';
 import { BookedProductionConfigurationComponent } from './components/BookedProductionConfiguration/booked-production-configuration/booked-production-configuration.component';
+import { AddTaxComponent } from './components/add-tax/add-tax.component';
 
 @NgModule({
   declarations: [
@@ -116,7 +117,8 @@ import { BookedProductionConfigurationComponent } from './components/BookedProdu
     AddMajorGroupComponent,
     AddTenderComponent,
     BookedProductionComponent,
-    BookedProductionConfigurationComponent
+    BookedProductionConfigurationComponent,
+    AddTaxComponent
   ],
   imports: [
     BrowserModule,
@@ -148,6 +150,6 @@ import { BookedProductionConfigurationComponent } from './components/BookedProdu
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, CookieService, AuthService, InvoiceService, AlertsService,Data, AuthGuardService,SidenavResponsive],
   bootstrap: [AppComponent],
-  entryComponents: [AddUserComponent, AddAccountComponent, AddMajorGroupComponent, AddTenderComponent,SuppliersConfiguartionComponent, SchedulerConfigurationComponent]
+  entryComponents: [AddUserComponent, AddAccountComponent, AddMajorGroupComponent, AddTenderComponent, AddTaxComponent, SuppliersConfiguartionComponent, SchedulerConfigurationComponent]
 })
 export class AppModule { }

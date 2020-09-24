@@ -95,7 +95,7 @@
         </mat-expansion-panel> -->
 
         <!-- Tax Configurations -->
-        <mat-expansion-panel>
+        <!-- <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     Tax Configurations
@@ -112,7 +112,7 @@
                 </form>
             </div>
 
-        </mat-expansion-panel>
+        </mat-expansion-panel> -->
 
         <!-- Infor Sun System Configurations -->
         <mat-expansion-panel>
@@ -242,6 +242,38 @@
                     <ngx-datatable-column name="Tender">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                             <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.tender">{{row.tender}}</mat-checkbox>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Account">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <input matInput placeholder="Account" [(ngModel)]="row.account">
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                </ngx-datatable>
+            </div>
+        </mat-expansion-panel>
+
+        <!-- Taxes Mapping -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Taxes Mapping
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="back" style="margin-bottom: 15px;">
+                <button mat-flat-button (click)="openTaxDialog()">Add</button>
+            </div>
+
+            <div *ngIf="taxes?.length > 0 && !loading">
+
+                <ngx-datatable class="material" [rows]="taxes" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[]">
+
+                    <ngx-datatable-column name="tax">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.tax">{{row.tax}}</mat-checkbox>
                         </ng-template>
                     </ngx-datatable-column>
 
