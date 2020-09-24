@@ -10,6 +10,7 @@ import { FormGroup } from '@angular/forms';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 import { AccountSyncType } from 'src/app/models/AccountSyncType';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class JournalsInforConfigurationsComponent implements OnInit {
   AccountSettingsForm: FormGroup;
 
   columns = []
-  constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
+  constructor(private spinner: NgxSpinnerService, private sidNav: SidenavResponsive,
     private journalService:JournalService, private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService,
     private router:Router, public snackBar: MatSnackBar) {
   }
@@ -75,7 +76,8 @@ export class JournalsInforConfigurationsComponent implements OnInit {
     ).catch(err => {
       let message = "";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
+         message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){

@@ -5,6 +5,7 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { CreditNoteService } from 'src/app/services/creditNote/credit-note.service';
 import { SyncJob } from 'src/app/models/SyncJob';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 
 @Component({
   selector: 'app-credit-notes-infor',
@@ -24,7 +25,7 @@ export class CreditNotesInforComponent implements OnInit {
 
 
   constructor(private spinner: NgxSpinnerService, private creditNoteService: CreditNoteService,
-    private syncJobService:SyncJobService,
+    private syncJobService:SyncJobService, private sidNav: SidenavResponsive,
     public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -49,7 +50,8 @@ export class CreditNotesInforComponent implements OnInit {
     }).catch(err => {
       let message = "";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
+         message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){
@@ -99,7 +101,8 @@ export class CreditNotesInforComponent implements OnInit {
 
       let message = "";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
+         message = ErrorMessages.SESSION_EXPIRED;
+ this.sidNav.Logout();
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){
@@ -132,7 +135,8 @@ export class CreditNotesInforComponent implements OnInit {
     }).catch(err => {
       let message = "";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
+         message = ErrorMessages.SESSION_EXPIRED;
+ this.sidNav.Logout();
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){
@@ -161,7 +165,8 @@ export class CreditNotesInforComponent implements OnInit {
     }).catch(err => {
       let message = "";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
+         message = ErrorMessages.SESSION_EXPIRED;
+ this.sidNav.Logout();
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){

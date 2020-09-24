@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { JournalService } from 'src/app/services/journal/journal.service';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
 
 @Component({
   selector: 'app-booked-production-configuration',
@@ -38,7 +39,8 @@ export class BookedProductionConfigurationComponent implements OnInit {
   AccountSettingsForm: FormGroup;
 
   constructor(private spinner: NgxSpinnerService, private syncJobService:SyncJobService,  private journalService:JournalService,
-    private accSyncTypeService:AccSyncTypeService, private router:Router, public snackBar: MatSnackBar) {
+    private accSyncTypeService:AccSyncTypeService, private router:Router, public snackBar: MatSnackBar,
+    private sidNav: SidenavResponsive) {
       this.costCenters = [];
       this.overGroups = [];
   }
@@ -68,7 +70,8 @@ export class BookedProductionConfigurationComponent implements OnInit {
     }).catch(err => {
       let message = "";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
+         message = ErrorMessages.SESSION_EXPIRED;
+ this.sidNav.Logout();
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){
@@ -97,7 +100,8 @@ export class BookedProductionConfigurationComponent implements OnInit {
     }).catch(err => {
       let message = "";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
+         message = ErrorMessages.SESSION_EXPIRED;
+ this.sidNav.Logout();
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){
@@ -135,7 +139,8 @@ export class BookedProductionConfigurationComponent implements OnInit {
     ).catch(err => {
       let message = "";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
+         message = ErrorMessages.SESSION_EXPIRED;
+ this.sidNav.Logout();
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){

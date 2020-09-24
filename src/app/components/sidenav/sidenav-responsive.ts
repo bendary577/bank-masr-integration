@@ -69,7 +69,7 @@ export class SidenavResponsive implements OnDestroy,OnInit {
     }).catch(err => {
       let message = "Error happend, Please try again.";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
+         message = ErrorMessages.SESSION_EXPIRED;
         this.Logout();
 
       } else if (err.error.message){

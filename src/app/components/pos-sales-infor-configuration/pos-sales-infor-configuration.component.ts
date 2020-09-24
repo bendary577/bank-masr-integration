@@ -10,6 +10,7 @@ import { PosSalesService } from '../../services/posSales/pos-sales.service';
 import { AddTenderComponent } from '../add-tender/add-tender.component';
 import { AddMajorGroupComponent } from '../addMajorGroup/add-major-group.component';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 
 
 @Component({
@@ -37,6 +38,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
   syncJobType: AccountSyncType;
 
   constructor(private spinner: NgxSpinnerService, private salesService:PosSalesService,
+    private sidNav: SidenavResponsive,
      private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService,
     private router:Router, public snackBar: MatSnackBar, public dialog: MatDialog) { }
 
@@ -67,7 +69,8 @@ export class PosSalesInforConfigurationComponent implements OnInit {
     }).catch(err => {
       let message = "";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
+         message = ErrorMessages.SESSION_EXPIRED;
+ this.sidNav.Logout();
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){
@@ -106,7 +109,8 @@ export class PosSalesInforConfigurationComponent implements OnInit {
     ).catch(err => {
       let message = "";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
+         message = ErrorMessages.SESSION_EXPIRED;
+ this.sidNav.Logout();
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){
@@ -160,7 +164,8 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
           let message = "";
           if(err.status === 401){
-            message = ErrorMessages.SESSION_EXPIRED;
+             message = ErrorMessages.SESSION_EXPIRED;
+ this.sidNav.Logout();
           } else if (err.error.message){
             message = err.error.message;
           } else if (err.message){
@@ -212,7 +217,8 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
           let message = "";
           if(err.status === 401){
-            message = ErrorMessages.SESSION_EXPIRED;
+             message = ErrorMessages.SESSION_EXPIRED;
+ this.sidNav.Logout();
           } else if (err.error.message){
             message = err.error.message;
           } else if (err.message){

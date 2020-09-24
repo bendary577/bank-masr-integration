@@ -24,8 +24,8 @@ export class WastageInforComponent implements OnInit {
   state = '';
 
 
-  constructor(private spinner: NgxSpinnerService, public dialog: MatDialog, public snackBar: MatSnackBar, private sidenav: SidenavResponsive,
-    private syncJobService:SyncJobService, private wastageService:WastageService, private sideNavBar: SidenavResponsive) { }
+  constructor(private spinner: NgxSpinnerService, public dialog: MatDialog, public snackBar: MatSnackBar, private sidNav: SidenavResponsive,
+    private syncJobService:SyncJobService, private wastageService:WastageService) { }
 
   ngOnInit() {
     this.getSyncJobs(Constants.WASTARGE_SYNC);
@@ -73,8 +73,8 @@ export class WastageInforComponent implements OnInit {
 
       let message = "Error happend, Please try again.";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
-        this.sideNavBar.Logout();
+         message = ErrorMessages.SESSION_EXPIRED;
+ this.sidNav.Logout();
 
       } else if (err.error.message){
         message = err.error.message;
@@ -106,8 +106,8 @@ export class WastageInforComponent implements OnInit {
     }).catch(err => {
       let message = "Error happend, Please try again.";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
-        this.sidenav.Logout();
+         message = ErrorMessages.SESSION_EXPIRED;
+ this.sidNav.Logout();
 
       } else if (err.error.message){
         message = err.error.message;
@@ -136,8 +136,8 @@ export class WastageInforComponent implements OnInit {
     }).catch(err => {
       let message = "Error happend, Please try again.";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
-        this.sidenav.Logout();
+         message = ErrorMessages.SESSION_EXPIRED;
+ this.sidNav.Logout();
 
       } else if (err.error.message){
         message = err.error.message;

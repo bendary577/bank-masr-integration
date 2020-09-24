@@ -10,6 +10,7 @@ import {Data} from "../../models/data";
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class SuppliersConfiguartionComponent implements OnInit {
   taxes = []
   groups = []
 
-  constructor(private formBuilder: FormBuilder, private route:ActivatedRoute,
+  constructor(private formBuilder: FormBuilder, private sidNav: SidenavResponsive,
     private spinner: NgxSpinnerService, public snackBar: MatSnackBar,
     private syncJobService:SyncJobService, private data: Data,
     private router: Router,  private supplierService: SupplierService, private accSyncTypeService:AccSyncTypeService) {
@@ -52,7 +53,8 @@ export class SuppliersConfiguartionComponent implements OnInit {
     }).catch(err => {
       let message = "Error happend, Please try again.";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
+         message = ErrorMessages.SESSION_EXPIRED;
+ this.sidNav.Logout();
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){

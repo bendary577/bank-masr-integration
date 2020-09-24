@@ -6,6 +6,7 @@ import { Constants } from 'src/app/models/constants';
 import { JournalService } from 'src/app/services/journal/journal.service';
 import { SyncJob } from 'src/app/models/SyncJob';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 
 @Component({
   selector: 'app-journal-infor',
@@ -23,7 +24,7 @@ export class JournalInforComponent implements OnInit {
   state = "";
 
 
-  constructor(private spinner: NgxSpinnerService,
+  constructor(private spinner: NgxSpinnerService, private sidNav: SidenavResponsive,
     private journalService: JournalService, private syncJobService: SyncJobService,
     public snackBar: MatSnackBar) { }
 
@@ -75,7 +76,8 @@ export class JournalInforComponent implements OnInit {
         
         let message = "";
         if(err.status === 401){
-          message = ErrorMessages.SESSION_EXPIRED;
+           message = ErrorMessages.SESSION_EXPIRED;
+ this.sidNav.Logout();
         } else if (err.error.message){
           message = err.error.message;
         } else if (err.message){

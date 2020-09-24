@@ -8,6 +8,7 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 
 @Component({
   selector: 'app-basic-configuartions',
@@ -28,7 +29,7 @@ export class BasicConfiguartionsComponent implements OnInit {
   analysis = []
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
     private router:Router, public snackBar: MatSnackBar, private syncJobService:SyncJobService,
-     private accSyncTypeService:AccSyncTypeService) {
+    private sidNav: SidenavResponsive) {
   }
 
 
@@ -49,7 +50,9 @@ export class BasicConfiguartionsComponent implements OnInit {
       
       let message = "";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
+         message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
+
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){

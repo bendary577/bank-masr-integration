@@ -36,7 +36,7 @@ export class WastageInforConfigurationComponent implements OnInit {
   constructor(private spinner: NgxSpinnerService, private sidNavBar: SidenavResponsive,
      private wasteService: WastageService, private journalService:JournalService,
      private syncJobService:SyncJobService, private accSyncTypeService: AccSyncTypeService,
-     private router:Router, public snackBar: MatSnackBar) { }
+     private router:Router, public snackBar: MatSnackBar, private sidNav: SidenavResponsive) { }
 
   ngOnInit() {
     this.getSyncJobType();
@@ -74,8 +74,8 @@ export class WastageInforConfigurationComponent implements OnInit {
     }).catch(err => {
       let message = "Error happend, Please try again.";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
-        this.sidNavBar.Logout();
+         message = ErrorMessages.SESSION_EXPIRED;
+          this.sidNav.Logout();
 
       } else if (err.error.message){
         message = err.error.message;

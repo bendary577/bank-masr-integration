@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Constants } from 'src/app/models/constants';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { MatSnackBar } from '@angular/material';
+import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 
 @Component({
   selector: 'app-booked-transfer-details',
@@ -16,7 +17,7 @@ export class BookedTransferDetailsComponent implements OnInit {
   transferDetailsLink = "";
   transferDetails = [];
 
-  constructor(private route:ActivatedRoute, private spinner: NgxSpinnerService,
+  constructor(private route:ActivatedRoute, private spinner: NgxSpinnerService, private sidNav: SidenavResponsive,
      private transferService: TransferService, private router:Router, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -40,13 +41,12 @@ export class BookedTransferDetailsComponent implements OnInit {
 
       let message = "";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
+         message = ErrorMessages.SESSION_EXPIRED;
+         this.sidNav.Logout();
       } else if (err.error.message){
-        message = err.error.message;
+        message = err.message;
       } else if (err.message){
         message = err.message;
-      } else {
-        message = ErrorMessages.FAILED_TO_SYNC;
       }
 
       this.snackBar.open(err.error.message , null, {

@@ -29,8 +29,8 @@ export class SuppliersComponent implements OnInit {
 
 
   constructor(private spinner: NgxSpinnerService, private supplierService: SupplierService,
-    private syncJobService: SyncJobService,
-    public snackBar: MatSnackBar, private router: Router, private data: Data, private sidenav: SidenavResponsive) {
+    private syncJobService: SyncJobService, 
+    public snackBar: MatSnackBar, private router: Router, private data: Data, private sidNav: SidenavResponsive) {
 
   }
 
@@ -83,7 +83,8 @@ export class SuppliersComponent implements OnInit {
       console.log(err);
       let message = "";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
+         message = ErrorMessages.SESSION_EXPIRED;
+          this.sidNav.Logout();
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){
@@ -116,8 +117,8 @@ export class SuppliersComponent implements OnInit {
 
       let message = "Error happend, Please try again.";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
-        this.sidenav.Logout();
+         message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
 
       } else if (err.error.message){
         message = err.error.message;
@@ -144,7 +145,8 @@ export class SuppliersComponent implements OnInit {
     }).catch(err => {
       let message = "Error happend, Please try again.";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
+         message = ErrorMessages.SESSION_EXPIRED;
+ this.sidNav.Logout();
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){

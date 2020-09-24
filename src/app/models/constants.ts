@@ -26,6 +26,7 @@ export class Constants {
 
     static GET_SYNC_JOB_DATA_BY_ID = environment.apiHost + '/getSyncJobDataById';
     static GET_SYNC_JOB_DATA = environment.apiHost + '/getSyncJobData';
+    static CLEAR_SYNC_JOB_DATA = environment.apiHost + '/clearSyncJobData';
 
 
     static GET_SYNC_JOB_TYPES_URL = environment.apiHost + '/getSyncJobTypes';

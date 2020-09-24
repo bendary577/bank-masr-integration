@@ -5,6 +5,7 @@ import { InvoiceService } from 'src/app/services/invoice/invoice.service';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJob } from 'src/app/models/SyncJob';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 
 @Component({
   selector: 'app-approved-invoices-infor',
@@ -22,7 +23,7 @@ export class ApprovedInvoicesInforComponent implements OnInit {
 
 
   constructor(private spinner: NgxSpinnerService, private invoiceService: InvoiceService,
-    private syncJobService:SyncJobService,
+    private syncJobService:SyncJobService, private sidNav: SidenavResponsive,
     public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -82,7 +83,9 @@ export class ApprovedInvoicesInforComponent implements OnInit {
       console.log(err);
       let message = "";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
+         message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
+
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){
@@ -115,7 +118,8 @@ export class ApprovedInvoicesInforComponent implements OnInit {
 
       let message = "";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
+         message = ErrorMessages.SESSION_EXPIRED;
+         this.sidNav.Logout();
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){
@@ -149,7 +153,9 @@ export class ApprovedInvoicesInforComponent implements OnInit {
 
       let message = "";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
+         message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
+
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){

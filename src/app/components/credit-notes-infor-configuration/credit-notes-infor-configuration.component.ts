@@ -9,6 +9,7 @@ import { Data } from 'src/app/models/data';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 
 @Component({
   selector: 'app-credit-notes-infor-configuration',
@@ -27,7 +28,7 @@ export class CreditNotesInforConfigurationComponent implements OnInit {
   selectedCostCenters = [];
   timePeriods = ["All", "Current Year", "Current Month", "Last Month", "Last Year", "User-defined"];
   analysis = []
-  constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
+  constructor(private spinner: NgxSpinnerService, private sidNav: SidenavResponsive,
     private router:Router, public snackBar: MatSnackBar, private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService) {
   }
 
@@ -61,7 +62,8 @@ export class CreditNotesInforConfigurationComponent implements OnInit {
       this.spinner.hide();
       let message = "";
       if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
+         message = ErrorMessages.SESSION_EXPIRED;
+ this.sidNav.Logout();
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){
