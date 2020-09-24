@@ -53,6 +53,7 @@ export class WastageInforConfigurationComponent implements OnInit {
         this.userDefinedFlag = true;
       }
       this.analysis = this.syncJobType.configuration["analysis"];
+      this.overGroups = this.syncJobType.configuration["overGroups"];
       this.uniqueOverGroupMapping = this.syncJobType.configuration["uniqueOverGroupMapping"];
 
       if (this.uniqueOverGroupMapping){
