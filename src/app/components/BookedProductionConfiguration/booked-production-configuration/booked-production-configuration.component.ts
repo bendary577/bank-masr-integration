@@ -8,6 +8,7 @@ import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.s
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
+import { JournalService } from 'src/app/services/journal/journal.service';
 
 @Component({
   selector: 'app-booked-production-configuration',
@@ -35,7 +36,7 @@ export class BookedProductionConfigurationComponent implements OnInit {
 
   AccountSettingsForm: FormGroup;
 
-  constructor(private spinner: NgxSpinnerService, private syncJobService:SyncJobService,
+  constructor(private spinner: NgxSpinnerService, private syncJobService:SyncJobService,  private journalService:JournalService,
     private accSyncTypeService:AccSyncTypeService, private router:Router, public snackBar: MatSnackBar) {
       this.costCenters = [];
       this.overGroups = [];
@@ -57,10 +58,34 @@ export class BookedProductionConfigurationComponent implements OnInit {
       this.analysis = this.syncJobType.configuration["analysis"];
       this.mappedItems = res.configuration.items;
       this.uniqueOverGroupMapping = this.syncJobType.configuration["uniqueOverGroupMapping"];
+      
+      if (this.uniqueOverGroupMapping){
+        this.getOverGroups();
+      }
+
       this.loading = false;
     }).catch(err => {
       console.error(err);
       this.loading = false;
+    });
+  }
+
+  getOverGroups() {
+    this.groupLoading = true;
+    this.spinner.show();
+    this.journalService.getOverGroups(Constants.BOOKED_PRODUCTION_SYNC).toPromise().then((res: any) => {
+      this.overGroups = res.data;
+      this.groupLoading = false;
+      this.spinner.hide();
+    }).catch(err => {
+      console.error(err);
+      this.snackBar.open(err.error.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+      this.groupLoading = false;
+      this.spinner.hide();
     });
   }
 

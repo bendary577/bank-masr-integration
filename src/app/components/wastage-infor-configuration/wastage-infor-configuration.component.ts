@@ -7,6 +7,7 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 import { AccountSyncType } from 'src/app/models/AccountSyncType';
 import { WastageService } from 'src/app/services/wastage/wastage.service';
+import { JournalService } from 'src/app/services/journal/journal.service';
 
 @Component({
   selector: 'app-wastage-infor-configuration',
@@ -22,12 +23,16 @@ export class WastageInforConfigurationComponent implements OnInit {
   wasteLoading = true;
   selectedTender = [];
   wasteGroups = [];
+  overGroups = [];
+
   analysis = [];
   selectedWasteGroups = [];
+  uniqueOverGroupMapping = false;
 
   syncJobType: AccountSyncType;
 
   constructor(private spinner: NgxSpinnerService, private wasteService: WastageService,
+    private journalService:JournalService,
      private syncJobService:SyncJobService, private accSyncTypeService: AccSyncTypeService,
      private router:Router, public snackBar: MatSnackBar) { }
 
@@ -44,10 +49,35 @@ export class WastageInforConfigurationComponent implements OnInit {
         this.userDefinedFlag = true;
       }
       this.analysis = this.syncJobType.configuration["analysis"];
+      this.uniqueOverGroupMapping = this.syncJobType.configuration["uniqueOverGroupMapping"];
+      
+      if (this.uniqueOverGroupMapping){
+        this.getOverGroups();
+      }
+      
       this.syncJobTypeloading = false;
     }).catch(err => {
       console.error(err);
       this.syncJobTypeloading = false;
+    });
+  }
+
+  getOverGroups() {
+    this.groupLoading = true;
+    this.spinner.show();
+    this.journalService.getOverGroups(Constants.WASTARGE_SYNC).toPromise().then((res: any) => {
+      this.overGroups = res.data;
+      this.groupLoading = false;
+      this.spinner.hide();
+    }).catch(err => {
+      console.error(err);
+      this.snackBar.open(err.error.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+      this.groupLoading = false;
+      this.spinner.hide();
     });
   }
 
