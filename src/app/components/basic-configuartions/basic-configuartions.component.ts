@@ -7,6 +7,7 @@ import { Constants } from 'src/app/models/constants';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
 
 @Component({
   selector: 'app-basic-configuartions',
@@ -45,6 +46,24 @@ export class BasicConfiguartionsComponent implements OnInit {
       this.costCenterLoding = false;
     }).catch(err => {
       console.error(err);
+      
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
+
+      this.snackBar.open(message , null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+
       this.costCenters = [];
       this.spinner.hide();
       this.costCenterLoding = false;

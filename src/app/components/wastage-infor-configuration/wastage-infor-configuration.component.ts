@@ -8,6 +8,8 @@ import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.s
 import { AccountSyncType } from 'src/app/models/AccountSyncType';
 import { WastageService } from 'src/app/services/wastage/wastage.service';
 import { JournalService } from 'src/app/services/journal/journal.service';
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 
 @Component({
   selector: 'app-wastage-infor-configuration',
@@ -31,8 +33,8 @@ export class WastageInforConfigurationComponent implements OnInit {
 
   syncJobType: AccountSyncType;
 
-  constructor(private spinner: NgxSpinnerService, private wasteService: WastageService,
-    private journalService:JournalService,
+  constructor(private spinner: NgxSpinnerService, private sidNavBar: SidenavResponsive,
+     private wasteService: WastageService, private journalService:JournalService,
      private syncJobService:SyncJobService, private accSyncTypeService: AccSyncTypeService,
      private router:Router, public snackBar: MatSnackBar) { }
 
@@ -70,12 +72,23 @@ export class WastageInforConfigurationComponent implements OnInit {
       this.groupLoading = false;
       this.spinner.hide();
     }).catch(err => {
-      console.error(err);
-      this.snackBar.open(err.error.message , null, {
+      let message = "Error happend, Please try again.";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNavBar.Logout();
+
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      }
+
+      this.snackBar.open(message , null, {
         duration: 3000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
+      
       this.groupLoading = false;
       this.spinner.hide();
     });

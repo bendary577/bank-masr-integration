@@ -5,6 +5,7 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { Constants } from 'src/app/models/constants';
 import { JournalService } from 'src/app/services/journal/journal.service';
 import { SyncJob } from 'src/app/models/SyncJob';
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
 
 @Component({
   selector: 'app-journal-infor',
@@ -71,13 +72,23 @@ export class JournalInforComponent implements OnInit {
         console.log(err);
         localStorage.setItem('getJournalsLoding', "false");
         JournalInforComponent.getJournalsLoding = false;
-        console.log(err.message)
-
-        this.snackBar.open(err.message , null, {
+        
+        let message = "";
+        if(err.status === 401){
+          message = ErrorMessages.SESSION_EXPIRED;
+        } else if (err.error.message){
+          message = err.error.message;
+        } else if (err.message){
+          message = err.message;
+        } else {
+          message = ErrorMessages.FAILED_TO_SYNC;
+        }
+  
+        this.snackBar.open(err.error.message , null, {
           duration: 3000,
           horizontalPosition: 'center',
           panelClass:"my-snack-bar-fail"
-        });
+        });        
     });
 
   }

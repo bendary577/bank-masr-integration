@@ -5,6 +5,8 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { Constants } from 'src/app/models/constants';
 import {NavigationEnd, Router} from "@angular/router";
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { MatSnackBar } from '@angular/material';
 
 
 
@@ -22,7 +24,7 @@ export class SidenavResponsive implements OnDestroy,OnInit {
   private _mobileQueryListener: () => void;
 
   constructor(private syncJobService: SyncJobService, changeDetectorRef: ChangeDetectorRef,
-              private router: Router, media: MediaMatcher, location: Location) {
+              private router: Router, media: MediaMatcher, location: Location,  public snackBar: MatSnackBar) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -65,10 +67,22 @@ export class SidenavResponsive implements OnDestroy,OnInit {
     this.syncJobService.getSyncJobTypesDB().toPromise().then((res: any) => {
       this.syncJobTypes = res;
     }).catch(err => {
-      console.error(err);
-      if (err.status == 401) {
+      let message = "Error happend, Please try again.";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
         this.Logout();
+
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
       }
+
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
+      });
     });
   }
 /*  public set setshouldRun(shouldRun:boolean) {

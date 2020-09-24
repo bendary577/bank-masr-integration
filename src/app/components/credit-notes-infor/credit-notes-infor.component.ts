@@ -4,6 +4,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { CreditNoteService } from 'src/app/services/creditNote/credit-note.service';
 import { SyncJob } from 'src/app/models/SyncJob';
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
 
 @Component({
   selector: 'app-credit-notes-infor',
@@ -46,7 +47,23 @@ export class CreditNotesInforComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
-      console.error(err);
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
+
+      this.snackBar.open(err.error.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+
       this.spinner.hide();
       this.loading = false;
     });
@@ -80,6 +97,17 @@ export class CreditNotesInforComponent implements OnInit {
       localStorage.setItem('getCreditNoteLoading', "false");
       CreditNotesInforComponent.getCreditNoteLoading = false;
 
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
+
       this.snackBar.open(err.error.message , null, {
         duration: 3000,
         horizontalPosition: 'center',
@@ -102,7 +130,22 @@ export class CreditNotesInforComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
-      console.error(err);
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
+      this.snackBar.open(err.error.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+
       this.spinner.hide();
       this.loading = false;
     });
@@ -116,7 +159,23 @@ export class CreditNotesInforComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
-      console.error(err);
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
+
+      this.snackBar.open(err.error.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+      
       this.spinner.hide();
       this.loading = false;
     });

@@ -9,6 +9,7 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { FormGroup } from '@angular/forms';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 import { AccountSyncType } from 'src/app/models/AccountSyncType';
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
 
 
 @Component({
@@ -72,12 +73,23 @@ export class JournalsInforConfigurationsComponent implements OnInit {
       this.router.navigate([Constants.SYNC_JOBS]);
     }
     ).catch(err => {
-      this.snackBar.open('An error has occurred.', null, {
-        duration: 2000,
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
+
+      this.snackBar.open(err.error.message , null, {
+        duration: 3000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
-
       });
+      
       this.spinner.hide();
       this.save_loading = false;
 

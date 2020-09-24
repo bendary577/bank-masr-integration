@@ -5,6 +5,8 @@ import { Constants } from 'src/app/models/constants';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { WastageService } from 'src/app/services/wastage/wastage.service';
 import { SyncJob } from 'src/app/models/SyncJob';
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 
 @Component({
   selector: 'app-wastage-infor',
@@ -22,8 +24,8 @@ export class WastageInforComponent implements OnInit {
   state = '';
 
 
-  constructor(private spinner: NgxSpinnerService, public dialog: MatDialog, public snackBar: MatSnackBar,
-    private syncJobService:SyncJobService, private wastageService:WastageService) { }
+  constructor(private spinner: NgxSpinnerService, public dialog: MatDialog, public snackBar: MatSnackBar, private sidenav: SidenavResponsive,
+    private syncJobService:SyncJobService, private wastageService:WastageService, private sideNavBar: SidenavResponsive) { }
 
   ngOnInit() {
     this.getSyncJobs(Constants.WASTARGE_SYNC);
@@ -69,6 +71,23 @@ export class WastageInforComponent implements OnInit {
     }).catch(err => {
       this.getSyncJobs(Constants.WASTARGE_SYNC);
 
+      let message = "Error happend, Please try again.";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sideNavBar.Logout();
+
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      }
+
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+
       localStorage.setItem('getWastageLoading', "false");
       WastageInforComponent.getWastageLoading = false;
     });
@@ -85,7 +104,23 @@ export class WastageInforComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
-      console.error(err);
+      let message = "Error happend, Please try again.";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidenav.Logout();
+
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      }
+
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+
       this.spinner.hide();
       this.loading = false;
     });
@@ -99,7 +134,23 @@ export class WastageInforComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
-      console.error(err);
+      let message = "Error happend, Please try again.";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidenav.Logout();
+
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      }
+
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+
       this.spinner.hide();
       this.loading = false;
     });

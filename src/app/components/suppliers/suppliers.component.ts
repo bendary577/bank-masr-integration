@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { Data } from 'src/app/models/data';
 import { SyncJob } from 'src/app/models/SyncJob';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
 
 
 
@@ -28,7 +29,7 @@ export class SuppliersComponent implements OnInit {
 
 
   constructor(private spinner: NgxSpinnerService, private supplierService: SupplierService,
-    private vendorService: VendorService, private syncJobService: SyncJobService,
+    private syncJobService: SyncJobService,
     public snackBar: MatSnackBar, private router: Router, private data: Data, private sidenav: SidenavResponsive) {
 
   }
@@ -79,8 +80,19 @@ export class SuppliersComponent implements OnInit {
     }).catch(err => {
       SuppliersComponent.getSuppliersLoading = false;
       localStorage.setItem('getSuppliersLoading', "false");
+      console.log(err);
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
 
-      this.snackBar.open(err.message , null, {
+      this.snackBar.open(message , null, {
         duration: 2000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
@@ -99,13 +111,25 @@ export class SuppliersComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
-      console.error(err);
       this.spinner.hide();
       this.loading = false;
 
-      if (err.status == 401) {
+      let message = "Error happend, Please try again.";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
         this.sidenav.Logout();
+
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
       }
+
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
+      });
     });
   }
 
@@ -118,7 +142,22 @@ export class SuppliersComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
-      console.error(err);
+      let message = "Error happend, Please try again.";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
+      });
+      
       this.spinner.hide();
       this.loading = false;
     });

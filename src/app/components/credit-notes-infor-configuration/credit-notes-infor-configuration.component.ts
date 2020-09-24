@@ -8,6 +8,7 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { Data } from 'src/app/models/data';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
 
 @Component({
   selector: 'app-credit-notes-infor-configuration',
@@ -58,6 +59,16 @@ export class CreditNotesInforConfigurationComponent implements OnInit {
     }
     ).catch(err => {
       this.spinner.hide();
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
 
       this.snackBar.open(err.error.message , null, {
         duration: 3000,

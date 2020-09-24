@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { BookedProductionService } from 'src/app/services/BookedProduction/booked-production.service';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJob } from 'src/app/models/SyncJob';
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
 
 @Component({
   selector: 'app-booked-production',
@@ -50,7 +51,23 @@ export class BookedProductionComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
-      console.error(err);
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
+
+      this.snackBar.open(err.error.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+
       this.spinner.hide();
       this.loading = false;
     });

@@ -9,6 +9,7 @@ import { AccountSyncType } from 'src/app/models/AccountSyncType';
 import { PosSalesService } from '../../services/posSales/pos-sales.service';
 import { AddTenderComponent } from '../add-tender/add-tender.component';
 import { AddMajorGroupComponent } from '../addMajorGroup/add-major-group.component';
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
 
 
 @Component({
@@ -64,7 +65,23 @@ export class PosSalesInforConfigurationComponent implements OnInit {
       }
       this.loading = false;
     }).catch(err => {
-      console.error(err);
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
+
+      this.snackBar.open(err.error.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+
       this.loading = false;
     });
   }
@@ -87,11 +104,23 @@ export class PosSalesInforConfigurationComponent implements OnInit {
       this.router.navigate([Constants.SYNC_JOBS]);
     }
     ).catch(err => {
-      this.snackBar.open('An error has occurred.', null, {
-        duration: 2000,
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
+
+      this.snackBar.open(err.error.message , null, {
+        duration: 3000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
+
       this.spinner.hide();
       this.save_loading = false;
     });
@@ -128,9 +157,22 @@ export class PosSalesInforConfigurationComponent implements OnInit {
           this.loading = false;
 
           this.tenders.pop();
-          this.snackBar.open('Can not add tender now, please try again.', null, {
-            duration: 2000,
+
+          let message = "";
+          if(err.status === 401){
+            message = ErrorMessages.SESSION_EXPIRED;
+          } else if (err.error.message){
+            message = err.error.message;
+          } else if (err.message){
+            message = err.message;
+          } else {
+            message = ErrorMessages.FAILED_TO_SYNC;
+          }
+    
+          this.snackBar.open(err.error.message , null, {
+            duration: 3000,
             horizontalPosition: 'right',
+            panelClass:"my-snack-bar-fail"
           });
         });
       }
@@ -166,11 +208,23 @@ export class PosSalesInforConfigurationComponent implements OnInit {
         }).catch(err => {
           this.spinner.hide();
           this.loading = false;
-
           this.majorGroups.pop();
-          this.snackBar.open('Can not add major group now, please try again.', null, {
-            duration: 2000,
+
+          let message = "";
+          if(err.status === 401){
+            message = ErrorMessages.SESSION_EXPIRED;
+          } else if (err.error.message){
+            message = err.error.message;
+          } else if (err.message){
+            message = err.message;
+          } else {
+            message = 'Can not add major group now, please try again.';
+          }
+    
+          this.snackBar.open(err.error.message , null, {
+            duration: 3000,
             horizontalPosition: 'right',
+            panelClass:"my-snack-bar-fail"
           });
         });
       }

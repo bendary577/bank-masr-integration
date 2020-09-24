@@ -9,6 +9,7 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import {Data} from "../../models/data";
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
 
 
 @Component({
@@ -49,7 +50,22 @@ export class SuppliersConfiguartionComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
-      console.error(err);
+      let message = "Error happend, Please try again.";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
+      this.snackBar.open(err.error.message , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
+      });
+      
       this.spinner.hide();
       this.loading = false;
     });

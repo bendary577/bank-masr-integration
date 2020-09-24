@@ -4,6 +4,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { InvoiceService } from 'src/app/services/invoice/invoice.service';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJob } from 'src/app/models/SyncJob';
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
 
 @Component({
   selector: 'app-approved-invoices-infor',
@@ -61,6 +62,8 @@ export class ApprovedInvoicesInforComponent implements OnInit {
     ApprovedInvoicesInforComponent.getInvoicesLoading = true
     this.invoiceService.getApprovedInvoices().toPromise().then((res: any) => {
       this.success = res.success;
+      console.log(res);
+
       if (this.success) {
         this.snackBar.open(res.message, null, {
           duration: 2000,
@@ -76,13 +79,23 @@ export class ApprovedInvoicesInforComponent implements OnInit {
     }).catch(err => {
       localStorage.setItem('getInvoicesLoading', "false");
       ApprovedInvoicesInforComponent.getInvoicesLoading = false;
+      console.log(err);
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
 
-      this.snackBar.open(err.error.message , null, {
-        duration: 3000,
+      this.snackBar.open(message , null, {
+        duration: 2000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
-
     });
   }
 
@@ -99,6 +112,24 @@ export class ApprovedInvoicesInforComponent implements OnInit {
       this.loading = false;
     }).catch(err => {
       console.error(err);
+
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
+
+      this.snackBar.open(message , null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+
       this.spinner.hide();
       this.loading = false;
     });
@@ -115,6 +146,24 @@ export class ApprovedInvoicesInforComponent implements OnInit {
       this.loading = false;
     }).catch(err => {
       console.error(err);
+
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
+      
+      this.snackBar.open(message , null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+
       this.spinner.hide();
       this.loading = false;
     });

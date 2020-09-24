@@ -7,6 +7,7 @@ import { Constants } from 'src/app/models/constants';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
 
 @Component({
   selector: 'app-approved-invoice-infor-configuration',
@@ -43,6 +44,24 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
       this.loading = false;
     }).catch(err => {
       console.error(err);
+
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+      } else if (err.message){
+        message = err.message;
+      } else if (err.error.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
+
+      this.snackBar.open(message , null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+
       this.loading = false;
     });
   }
@@ -56,8 +75,18 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
     ).catch(err => {
       this.spinner.hide();
 
-      this.snackBar.open(err.error.message , null, {
-        duration: 3000,
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
+      this.snackBar.open(message , null, {
+        duration: 2000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });

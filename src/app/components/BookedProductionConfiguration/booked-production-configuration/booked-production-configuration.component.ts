@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { JournalService } from 'src/app/services/journal/journal.service';
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
 
 @Component({
   selector: 'app-booked-production-configuration',
@@ -65,7 +66,23 @@ export class BookedProductionConfigurationComponent implements OnInit {
 
       this.loading = false;
     }).catch(err => {
-      console.error(err);
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
+
+      this.snackBar.open(err.error.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+
       this.loading = false;
     });
   }
@@ -78,12 +95,23 @@ export class BookedProductionConfigurationComponent implements OnInit {
       this.groupLoading = false;
       this.spinner.hide();
     }).catch(err => {
-      console.error(err);
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
+
       this.snackBar.open(err.error.message , null, {
         duration: 3000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
+
       this.groupLoading = false;
       this.spinner.hide();
     });
@@ -105,12 +133,23 @@ export class BookedProductionConfigurationComponent implements OnInit {
       this.router.navigate([Constants.SYNC_JOBS]);
     }
     ).catch(err => {
-      this.snackBar.open('An error has occurred.', null, {
-        duration: 2000,
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
+
+      this.snackBar.open(err.error.message , null, {
+        duration: 3000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
-
       });
+
       this.spinner.hide();
       this.save_loading = false;
     });

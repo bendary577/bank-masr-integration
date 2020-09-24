@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TransferService } from 'src/app/services/transfer/transfer.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Constants } from 'src/app/models/constants';
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-booked-transfer-details',
@@ -15,7 +17,7 @@ export class BookedTransferDetailsComponent implements OnInit {
   transferDetails = [];
 
   constructor(private route:ActivatedRoute, private spinner: NgxSpinnerService,
-     private transferService: TransferService, private router:Router) { }
+     private transferService: TransferService, private router:Router, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.transferDetailsLink = this.route.snapshot.params["transfer"];
@@ -35,7 +37,24 @@ export class BookedTransferDetailsComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
-      console.error(err);
+
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
+
+      this.snackBar.open(err.error.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+      
       this.spinner.hide();
       this.loading = false;
     });
