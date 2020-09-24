@@ -29,6 +29,8 @@ export class WastageInforConfigurationComponent implements OnInit {
 
   analysis = [];
   selectedWasteGroups = [];
+  selectedOverGroups = [];
+
   uniqueOverGroupMapping = false;
 
   syncJobType: AccountSyncType;
@@ -52,11 +54,11 @@ export class WastageInforConfigurationComponent implements OnInit {
       }
       this.analysis = this.syncJobType.configuration["analysis"];
       this.uniqueOverGroupMapping = this.syncJobType.configuration["uniqueOverGroupMapping"];
-      
+
       if (this.uniqueOverGroupMapping){
         this.getOverGroups();
       }
-      
+
       this.syncJobTypeloading = false;
     }).catch(err => {
       console.error(err);
@@ -88,7 +90,7 @@ export class WastageInforConfigurationComponent implements OnInit {
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
-      
+
       this.groupLoading = false;
       this.spinner.hide();
     });
@@ -119,6 +121,8 @@ export class WastageInforConfigurationComponent implements OnInit {
     this.spinner.show();
     this.saveLoading = true;
 
+    this.selectedWasteGroups = [];
+    this.selectedOverGroups = [];
     let that = this;
     this.wasteGroups.forEach(function (wasteGroup) {
       if (wasteGroup.checked) {
@@ -128,6 +132,20 @@ export class WastageInforConfigurationComponent implements OnInit {
 
     if (this.selectedWasteGroups.length != 0) {
       this.syncJobType.configuration["wasteGroups"] = this.selectedWasteGroups;
+    }
+
+    // Check if there is overgroup mapping
+    if (this.overGroups.length != 0){
+      let that = this;
+      this.overGroups.forEach(function (overGroup) {
+        if (overGroup.checked) {
+          that.selectedOverGroups.push(overGroup)
+        }
+      });
+
+      if (this.selectedOverGroups.length != 0){
+        this.syncJobType.configuration["overGroups"] = this.selectedOverGroups;
+      }
     }
 
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
