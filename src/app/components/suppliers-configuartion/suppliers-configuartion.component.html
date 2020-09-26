@@ -3,56 +3,56 @@
 <br>
 <div class="content" role="main">
 
-<mat-card class="example-card" *ngIf="!loading">
-    <div class="container">
+    <mat-card class="example-card" *ngIf="!loading">
+        <div class="container">
             <h2>Update Supplier Configuartion</h2>
-            <form  class="my-form">
-                <div >
+            <form class="my-form">
+                <div>
                     <mat-form-field class="example-full-width">
-                        <input matInput id="limit" name="limit" placeholder="Supplier limit"  [(ngModel)]="syncJobType.configuration.limit">
+                        <input matInput id="limit" name="limit" placeholder="Supplier limit" [(ngModel)]="syncJobType.configuration.limit">
                     </mat-form-field>
                 </div>
-                <div >
+                <div>
                     <mat-form-field class="example-full-width">
-                        <input matInput id="procurementBU" name="procurementBU" placeholder="Supplier procurementBU"  [(ngModel)]="syncJobType.configuration.procurementBU">
+                        <input matInput id="procurementBU" name="procurementBU" placeholder="Supplier procurementBU" [(ngModel)]="syncJobType.configuration.procurementBU">
                     </mat-form-field>
-                    <span class="italic">*used to sync only specific category of suppliers.</span> 
+                    <span class="italic">*used to sync only specific category of suppliers.</span>
                 </div>
 
-                <div >
+                <div>
                     <mat-form-field>
-                        <mat-select id="taxes" name="taxes" placeholder="taxes" [(ngModel)]="syncJobType.configuration.taxes">
-                          <mat-option *ngFor="let tax of taxes" value={{tax.taxes}}>{{tax.taxes}}</mat-option>
+                        <mat-select id="taxes" name="taxes" placeholder="taxes" [(ngModel)]="syncJobType.configuration.vendorTaxes">
+                            <mat-option *ngFor="let tax of taxes" value={{tax.taxes}}>{{tax.taxes}}</mat-option>
                         </mat-select>
                         <div class="loader" *ngIf="getTaxsLoading"></div>
 
                     </mat-form-field>
                     <button mat-flat-button color="primary" (click)="getTaxes()">Refresh Taxes</button>
-                    
+
                 </div>
-                
-                <div >
+
+                <div>
                     <mat-form-field>
                         <mat-select id="group" name="group" placeholder="Groups" [(ngModel)]="syncJobType.configuration.groups">
-                          <mat-option *ngFor="let group of groups" value={{group.vendor_group}}>{{group.vendor_group}}</mat-option>
+                            <mat-option *ngFor="let group of groups" value={{group.vendor_group}}>{{group.vendor_group}}</mat-option>
                         </mat-select>
                         <div class="loader" *ngIf="getGroupsLoading"></div>
                     </mat-form-field>
                     <button mat-flat-button color="primary" (click)="getGroups()">Refresh Groups</button>
-                    
+
 
                 </div>
-                        
+
                 <div class="form-group">
                     <div class="button-wrapper">
-                        <button mat-flat-button color="primary"  (click)="onSaveClick()">Save</button>
-                        <button mat-flat-button color="primary"  (click)="onCancelClick()">Cancel</button>
+                        <button mat-flat-button color="primary" (click)="onSaveClick()">Save</button>
+                        <button mat-flat-button color="primary" (click)="onCancelClick()">Cancel</button>
                     </div>
                 </div>
             </form>
-    </div> 
-</mat-card>
-<br>
-<ngx-spinner></ngx-spinner>
+        </div>
+    </mat-card>
+    <br>
+    <ngx-spinner></ngx-spinner>
 
 </div>
