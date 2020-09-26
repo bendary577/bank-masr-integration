@@ -9,6 +9,7 @@ import { SyncJobType } from 'src/app/models/SyncJobType';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
+import { JournalService } from 'src/app/services/journal/journal.service';
 
 @Component({
   selector: 'app-approved-invoice-infor-configuration',
@@ -21,11 +22,17 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
   syncJobType: SyncJobType;
   submitted = false;
   loading = true;
+  groupLoading = true;
+
   businessUnits = [];
   PaymentMethods = [];
   timePeriods = ["All", "Current Year", "Current Month", "Last Month", "Last Year", "User-defined"];
-  analysis = []
-  constructor(private spinner: NgxSpinnerService,
+  analysis = [];
+  overGroups = [];
+  selectedOverGroups = [];
+  uniqueOverGroupMapping = false;
+
+  constructor(private spinner: NgxSpinnerService, private journalService:JournalService,
     private router:Router, public snackBar: MatSnackBar, private syncJobService:SyncJobService,
      private accSyncTypeService:AccSyncTypeService, private sidNav: SidenavResponsive) {
   }
@@ -42,6 +49,12 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
         this.userDefinedFlag = true;
       }
       this.analysis = this.syncJobType.configuration["analysis"];
+      this.overGroups = this.syncJobType.configuration["overGroups"];
+      this.uniqueOverGroupMapping = this.syncJobType.configuration["uniqueOverGroupMapping"];
+
+      if (this.uniqueOverGroupMapping){
+        this.getOverGroups();
+      }
       this.loading = false;
     }).catch(err => {
       console.error(err);
@@ -68,8 +81,55 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
     });
   }
 
+  getOverGroups() {
+    this.groupLoading = true;
+    this.spinner.show();
+    this.journalService.getOverGroups(Constants.APPROVED_INVOICES_SYNC).toPromise().then((res: any) => {
+      this.overGroups = res.data;
+      this.groupLoading = false;
+      this.spinner.hide();
+    }).catch(err => {
+      let message = "Error happend, Please try again.";
+      if(err.status === 401){
+         message = ErrorMessages.SESSION_EXPIRED;
+          this.sidNav.Logout();
+
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      }
+
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+
+      this.groupLoading = false;
+      this.spinner.hide();
+    });
+  }
+
   onSaveClick(): void {
     this.spinner.show();
+
+    this.selectedOverGroups = [];
+    let that = this;
+    // Check if there is overgroup mapping
+    if (this.overGroups.length != 0){
+      let that = this;
+      this.overGroups.forEach(function (overGroup) {
+        if (overGroup.checked) {
+          that.selectedOverGroups.push(overGroup)
+        }
+      });
+
+      if (this.selectedOverGroups.length != 0){
+        this.syncJobType.configuration["overGroups"] = this.selectedOverGroups;
+      }
+    }
+
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.spinner.hide();
       this.router.navigate([Constants.SYNC_JOBS]);

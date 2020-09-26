@@ -29,7 +29,7 @@ export class SuppliersComponent implements OnInit {
 
 
   constructor(private spinner: NgxSpinnerService, private supplierService: SupplierService,
-    private syncJobService: SyncJobService, 
+    private syncJobService: SyncJobService,
     public snackBar: MatSnackBar, private router: Router, private data: Data, private sidNav: SidenavResponsive) {
 
   }
@@ -78,6 +78,7 @@ export class SuppliersComponent implements OnInit {
 
 
     }).catch(err => {
+      this.getSyncJobs("Suppliers");
       SuppliersComponent.getSuppliersLoading = false;
       localStorage.setItem('getSuppliersLoading', "false");
       console.log(err);
@@ -159,7 +160,7 @@ export class SuppliersComponent implements OnInit {
         horizontalPosition: 'right',
         panelClass:"my-snack-bar-fail"
       });
-      
+
       this.spinner.hide();
       this.loading = false;
     });

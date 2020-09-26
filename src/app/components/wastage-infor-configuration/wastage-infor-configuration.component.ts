@@ -35,7 +35,7 @@ export class WastageInforConfigurationComponent implements OnInit {
 
   syncJobType: AccountSyncType;
 
-  constructor(private spinner: NgxSpinnerService, private sidNavBar: SidenavResponsive,
+  constructor(private spinner: NgxSpinnerService,
      private wasteService: WastageService, private journalService:JournalService,
      private syncJobService:SyncJobService, private accSyncTypeService: AccSyncTypeService,
      private router:Router, public snackBar: MatSnackBar, private sidNav: SidenavResponsive) { }
