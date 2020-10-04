@@ -33,12 +33,21 @@
          [showHideStatus]="{ materialIcon: true, id: accountCredential.username }"></i> -->
 
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field  *ngIf="accountCredential.account != 'Sun'">
                     <input matInput placeholder="Company" [(ngModel)]="accountCredential.company">
-                </mat-form-field>
-                <mat-form-field>
+                </mat-form-field >
+                <mat-form-field *ngIf="accountCredential.account != 'Sun'">
                     <input matInput placeholder="Link" [(ngModel)]="accountCredential.link">
                 </mat-form-field>
+
+                <!-- Sun System Connect -->
+                <mat-form-field *ngIf="accountCredential.account == 'Sun'">
+                    <input matInput placeholder="Host IP" [(ngModel)]="accountCredential.host">
+                </mat-form-field>
+                <mat-form-field *ngIf="accountCredential.account == 'Sun'">
+                    <input matInput placeholder="Port" [(ngModel)]="accountCredential.port">
+                </mat-form-field>
+
             </mat-expansion-panel>
 
         </mat-accordion>
