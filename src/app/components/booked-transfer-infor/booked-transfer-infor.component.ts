@@ -5,6 +5,8 @@ import { TransferService } from 'src/app/services/transfer/transfer.service';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { Router } from '@angular/router';
 import { SyncJob } from 'src/app/models/SyncJob';
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 
 @Component({
   selector: 'app-booked-transfer-infor',
@@ -16,7 +18,6 @@ export class BookedTransferInforComponent implements OnInit {
 
   loading = true;
   static getTransfersLoading = false;
-  success = null;
   bookedTransfer = [];
   jobs = [];
   syncJobId = -1;
@@ -25,7 +26,8 @@ export class BookedTransferInforComponent implements OnInit {
 
 
   constructor(private spinner: NgxSpinnerService, private transferService: TransferService,
-    public snackBar: MatSnackBar, private syncJobService:SyncJobService, private router:Router
+    public snackBar: MatSnackBar, private syncJobService:SyncJobService, private router:Router,
+    private sidNav: SidenavResponsive
     ) {
 
   }
@@ -42,20 +44,6 @@ export class BookedTransferInforComponent implements OnInit {
     }
   }
 
-  getBookedTransferDB() {
-    this.spinner.show();
-    this.syncJobService.getSyncJobData("Booked Transfers").toPromise().then((res: any) => {
-      this.bookedTransfer = res;
-
-      this.spinner.hide();
-      this.loading = false;
-    }).catch(err => {
-      console.error(err);
-      this.spinner.hide();
-      this.loading = false;
-    });
-  }
-
   get staticgetTransfersLoading() {
     return BookedTransferInforComponent.getTransfersLoading ;
   }
@@ -65,10 +53,9 @@ export class BookedTransferInforComponent implements OnInit {
     BookedTransferInforComponent.getTransfersLoading = true;
 
     this.transferService.getBookedTransfer().toPromise().then((res: any) => {
-      this.success = res.success;
       this.getSyncJobs("Booked Transfers");
 
-      if (this.success) {
+      if (res.success) {
         this.snackBar.open(res.message, null, {
           duration: 2000,
           horizontalPosition: 'center',
@@ -79,17 +66,28 @@ export class BookedTransferInforComponent implements OnInit {
       localStorage.setItem('getTransfersLoading', "false");
       BookedTransferInforComponent.getTransfersLoading = false;
     }).catch(err => {
-      this.getSyncJobs("Booked Transfers");
-
       localStorage.setItem('getTransfersLoading', "false");
       BookedTransferInforComponent.getTransfersLoading = false;
 
-      this.snackBar.open(err.error.message, null, {
+      let message = "";
+      if(err.status === 401){
+         message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SYNC;
+      }
+
+      this.snackBar.open(message, null, {
         duration: 2000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
 
+      this.getSyncJobs("Booked Transfers");
     });
   }
 

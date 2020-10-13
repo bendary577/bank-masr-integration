@@ -14,6 +14,20 @@
                 <form class="my-form">
                     <div>
                         <mat-form-field class="example-full-width">
+                            <mat-select matInput id="consumptionBasedOnType" name="consumptionBasedOnType" placeholder="Consumption based on" 
+                             [(ngModel)]="syncJobType.configuration.consumptionBasedOnType">
+                                <mat-option value="Cost Center">Cost Center</mat-option>
+                                <mat-option value="Location">Location</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </form>
+            </div>
+
+            <div class="container" *ngIf="!loading">
+                <form class="my-form">
+                    <div>
+                        <mat-form-field class="example-full-width">
                             <mat-select matInput id="timePeriod" name="timePeriod" placeholder="Business Dates" 
                             (selectionChange)="chooseTimePeriod()" [(ngModel)]="syncJobType.configuration.timePeriod">
                                 <mat-option value="Most Recent">Most Recent</mat-option>

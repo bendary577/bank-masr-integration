@@ -76,8 +76,8 @@ export class JournalInforComponent implements OnInit {
         
         let message = "";
         if(err.status === 401){
-           message = ErrorMessages.SESSION_EXPIRED;
- this.sidNav.Logout();
+          message = ErrorMessages.SESSION_EXPIRED;
+          this.sidNav.Logout();
         } else if (err.error.message){
           message = err.error.message;
         } else if (err.message){
