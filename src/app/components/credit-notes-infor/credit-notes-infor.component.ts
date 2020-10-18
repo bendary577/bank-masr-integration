@@ -6,6 +6,7 @@ import { CreditNoteService } from 'src/app/services/creditNote/credit-note.servi
 import { SyncJob } from 'src/app/models/SyncJob';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
+import { ExcelService } from 'src/app/services/excel/excel.service';
 
 @Component({
   selector: 'app-credit-notes-infor',
@@ -25,7 +26,7 @@ export class CreditNotesInforComponent implements OnInit {
 
 
   constructor(private spinner: NgxSpinnerService, private creditNoteService: CreditNoteService,
-    private syncJobService:SyncJobService, private sidNav: SidenavResponsive,
+    private syncJobService:SyncJobService, private sidNav: SidenavResponsive, private excelService: ExcelService,
     public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -101,8 +102,8 @@ export class CreditNotesInforComponent implements OnInit {
 
       let message = "";
       if(err.status === 401){
-         message = ErrorMessages.SESSION_EXPIRED;
- this.sidNav.Logout();
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){
@@ -135,8 +136,8 @@ export class CreditNotesInforComponent implements OnInit {
     }).catch(err => {
       let message = "";
       if(err.status === 401){
-         message = ErrorMessages.SESSION_EXPIRED;
- this.sidNav.Logout();
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){
@@ -165,8 +166,8 @@ export class CreditNotesInforComponent implements OnInit {
     }).catch(err => {
       let message = "";
       if(err.status === 401){
-         message = ErrorMessages.SESSION_EXPIRED;
- this.sidNav.Logout();
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){
@@ -184,5 +185,12 @@ export class CreditNotesInforComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
     });
+  }
+
+  exportAsXLSX():void {
+    for (let index = 0; index < this.creditNote.length; index++) {
+      this.creditNote[index] = Object.assign(this.creditNote[index], this.creditNote[index]["data"]); 
+    }
+    this.excelService.exportAsExcelFile(this.creditNote, 'creditNotes');
   }
 }

@@ -75,6 +75,7 @@ import { AddTenderComponent } from './components/add-tender/add-tender.component
 import { BookedProductionComponent } from './components/BookedProduction/booked-production/booked-production.component';
 import { BookedProductionConfigurationComponent } from './components/BookedProductionConfiguration/booked-production-configuration/booked-production-configuration.component';
 import { AddTaxComponent } from './components/add-tax/add-tax.component';
+import { ExcelService } from './services/excel/excel.service';
 
 @NgModule({
   declarations: [
@@ -148,7 +149,15 @@ import { AddTaxComponent } from './components/add-tax/add-tax.component';
     MatProgressBarModule,
     ShowHidePasswordModule,
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, CookieService, AuthService, InvoiceService, AlertsService,Data, AuthGuardService,SidenavResponsive],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, 
+    CookieService, 
+    AuthService, 
+    InvoiceService, 
+    AlertsService, 
+    Data, 
+    AuthGuardService, 
+    SidenavResponsive,
+    ExcelService],
   bootstrap: [AppComponent],
   entryComponents: [AddUserComponent, AddAccountComponent, AddMajorGroupComponent, AddTenderComponent, AddTaxComponent, SuppliersConfiguartionComponent, SchedulerConfigurationComponent]
 })

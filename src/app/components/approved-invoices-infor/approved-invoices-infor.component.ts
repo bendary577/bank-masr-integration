@@ -6,6 +6,7 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJob } from 'src/app/models/SyncJob';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
+import { ExcelService } from 'src/app/services/excel/excel.service';
 
 @Component({
   selector: 'app-approved-invoices-infor',
@@ -23,7 +24,7 @@ export class ApprovedInvoicesInforComponent implements OnInit {
 
 
   constructor(private spinner: NgxSpinnerService, private invoiceService: InvoiceService,
-    private syncJobService:SyncJobService, private sidNav: SidenavResponsive,
+    private syncJobService:SyncJobService, private sidNav: SidenavResponsive, private excelService: ExcelService,
     public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -173,5 +174,12 @@ export class ApprovedInvoicesInforComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
     });
+  }
+
+  exportAsXLSX():void {
+    for (let index = 0; index < this.approvedInvoices.length; index++) {
+      this.approvedInvoices[index] =  this.approvedInvoices[index]["data"]
+    }
+    this.excelService.exportAsExcelFile(this.approvedInvoices, 'approvedInvoices');
   }
 }
