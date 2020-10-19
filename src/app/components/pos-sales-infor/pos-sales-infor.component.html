@@ -8,6 +8,7 @@
         <option [ngValue]="job" *ngFor="let job of jobs">
             {{job.creationDate}} - {{job.status}}</option>
     </select>
+    <button mat-flat-button (click)="exportToXLSX()">Export to Excel</button>
     <button mat-flat-button (click)="getPOSSalesSyncJob()">Sync POS Sales Now</button>
 </div>
 

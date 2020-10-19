@@ -139,4 +139,15 @@ export class Constants {
     static SYNC_JOBS = 'syncjobs';
 
     static SYNC_TYPE_SCHEDULER = "Suppliers";
+
+
+    //////////////////////////////////////////////// Export To Excel //////////////////////////////////////////////
+
+    static EXPORT_APPROVED_INVOICES = environment.apiHost + '/invoices/export/excel';
+    static EXPORT_CREDIT_NOTES = environment.apiHost + '/invoices/export/excel';
+    static EXPORT_BOOKED_TRANSFERS = environment.apiHost + '/transfers/export/excel';
+    static EXPORT_BOOKED_PRODUCTION = environment.apiHost + '/bookedProduction/export/excel';
+    static EXPORT_CONSUMPTION = environment.apiHost + '/consumption/export/excel';
+    static EXPORT_WATAGE = environment.apiHost + '/wastage/export/excel';
+    static EXPORT_SALES = environment.apiHost + '/sales/export/excel';
 }

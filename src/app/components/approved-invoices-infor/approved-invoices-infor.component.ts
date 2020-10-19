@@ -7,6 +7,7 @@ import { SyncJob } from 'src/app/models/SyncJob';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import { ExcelService } from 'src/app/services/excel/excel.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-approved-invoices-infor',
@@ -176,10 +177,27 @@ export class ApprovedInvoicesInforComponent implements OnInit {
     });
   }
 
-  exportAsXLSX():void {
-    for (let index = 0; index < this.approvedInvoices.length; index++) {
-      this.approvedInvoices[index] =  this.approvedInvoices[index]["data"]
-    }
-    this.excelService.exportAsExcelFile(this.approvedInvoices, 'approvedInvoices');
+  exportToXLSX():void {
+    this.excelService.exportInvoicesToExcel(this.selectedJob.id).subscribe(
+      res => {
+        const blob = new Blob([res], { type : 'application/vnd.ms.excel' });
+        const file = new File([blob], "ApprovedInvoices" + '.xlsx', { type: 'application/vnd.ms.excel' });
+        saveAs(file);
+
+        this.snackBar.open("Export Successfully", null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
+        });
+      },
+      err => {
+        console.error(err)
+        this.snackBar.open("Fail to export, Please try agian" , null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+      }
+  );
   }
 }

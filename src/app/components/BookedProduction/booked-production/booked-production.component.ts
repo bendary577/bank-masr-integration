@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Router } from '@angular/router';
 import { BookedProductionService } from 'src/app/services/BookedProduction/booked-production.service';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJob } from 'src/app/models/SyncJob';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
+import { ExcelService } from 'src/app/services/excel/excel.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-booked-production',
@@ -28,6 +29,7 @@ export class BookedProductionComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService, private bookedProductionService: BookedProductionService,
     public snackBar: MatSnackBar, private syncJobService:SyncJobService, private sidNav: SidenavResponsive,
+    private excelService: ExcelService
     ) {
 
   }
@@ -142,5 +144,29 @@ export class BookedProductionComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
     });
+  }
+
+  exportToXLSX():void {
+    this.excelService.exportBookedProductionToExcel(this.selectedJob.id).subscribe(
+      res => {
+        const blob = new Blob([res], { type : 'application/vnd.ms.excel' });
+        const file = new File([blob], "BookedProduction" + '.xlsx', { type: 'application/vnd.ms.excel' });
+        saveAs(file);
+
+        this.snackBar.open("Export Successfully", null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
+        });
+      },
+      err => {
+        console.error(err)
+        this.snackBar.open("Fail to export, Please try agian" , null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+      }
+   );
   }
 }

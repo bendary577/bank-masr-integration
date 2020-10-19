@@ -7,6 +7,8 @@ import { WastageService } from 'src/app/services/wastage/wastage.service';
 import { SyncJob } from 'src/app/models/SyncJob';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
+import { ExcelService } from 'src/app/services/excel/excel.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-wastage-infor',
@@ -25,7 +27,7 @@ export class WastageInforComponent implements OnInit {
 
 
   constructor(private spinner: NgxSpinnerService, public dialog: MatDialog, public snackBar: MatSnackBar, private sidNav: SidenavResponsive,
-    private syncJobService:SyncJobService, private wastageService:WastageService) { }
+    private syncJobService:SyncJobService, private wastageService:WastageService, private excelService: ExcelService) { }
 
   ngOnInit() {
     this.getSyncJobs(Constants.WASTARGE_SYNC);
@@ -136,8 +138,8 @@ export class WastageInforComponent implements OnInit {
     }).catch(err => {
       let message = "Error happend, Please try again.";
       if(err.status === 401){
-         message = ErrorMessages.SESSION_EXPIRED;
- this.sidNav.Logout();
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
 
       } else if (err.error.message){
         message = err.error.message;
@@ -154,6 +156,30 @@ export class WastageInforComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
     });
+  }
+
+  exportToXLSX():void {
+    this.excelService.exportWastageToExcel(this.selectedJob.id).subscribe(
+      res => {
+        const blob = new Blob([res], { type : 'application/vnd.ms.excel' });
+        const file = new File([blob], "Wastage" + '.xlsx', { type: 'application/vnd.ms.excel' });
+        saveAs(file);
+
+        this.snackBar.open("Export Successfully", null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
+        });
+      },
+      err => {
+        console.error(err)
+        this.snackBar.open("Fail to export, Please try agian" , null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+      }
+   );
   }
 
 }

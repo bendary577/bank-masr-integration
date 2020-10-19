@@ -5,7 +5,8 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { Constants } from 'src/app/models/constants';
 import { SyncJob } from 'src/app/models/SyncJob';
 import { PosSalesService } from 'src/app/services/posSales/pos-sales.service';
-import { Response } from 'src/app/models/Response';
+import { ExcelService } from 'src/app/services/excel/excel.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-pos-sales-infor',
@@ -24,7 +25,7 @@ export class PosSalesInforComponent implements OnInit {
 
 
   constructor(private spinner: NgxSpinnerService, private syncJobService: SyncJobService,
-    public snackBar: MatSnackBar, private posSalesService:PosSalesService) { }
+    public snackBar: MatSnackBar, private posSalesService:PosSalesService, private excelService: ExcelService) { }
 
   ngOnInit() {
     this.getSyncJobs(Constants.POS_SALES_SYNC);
@@ -132,5 +133,29 @@ export class PosSalesInforComponent implements OnInit {
       this.spinner.hide();
       this.loading = false;
     });
+  }
+
+  exportToXLSX():void {
+    this.excelService.exportSalesToExcel(this.selectedJob.id).subscribe(
+      res => {
+        const blob = new Blob([res], { type : 'application/vnd.ms.excel' });
+        const file = new File([blob], "Sales" + '.xlsx', { type: 'application/vnd.ms.excel' });
+        saveAs(file);
+
+        this.snackBar.open("Export Successfully", null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
+        });
+      },
+      err => {
+        console.error(err)
+        this.snackBar.open("Fail to export, Please try agian" , null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+      }
+   );
   }
 }
