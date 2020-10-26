@@ -151,6 +151,16 @@ export class Constants {
     static EXPORT_WATAGE = environment.apiHost + '/wastage/export/excel';
     static EXPORT_SALES = environment.apiHost + '/sales/export/excel';
 
+    //////////////////////////////////////////////// Export To CSV //////////////////////////////////////////////
+
+    static EXPORT_CSV_APPROVED_INVOICES = environment.apiHost + '/invoices/export/csv';
+    static EXPORT_CSV_CREDIT_NOTES = environment.apiHost + '/invoices/export/csv';
+    static EXPORT_CSV_BOOKED_TRANSFERS = environment.apiHost + '/transfers/export/csv';
+    static EXPORT_CSV_BOOKED_PRODUCTION = environment.apiHost + '/bookedProduction/export/csv';
+    static EXPORT_CSV_CONSUMPTION = environment.apiHost + '/consumption/export/csv';
+    static EXPORT_CSV_WATAGE = environment.apiHost + '/wastage/export/csv';
+    static EXPORT_CSV_SALES = environment.apiHost + '/sales/export/csv';
+
     //////////////////////////////////////////////// ERD //////////////////////////////////////////////
 
     static EXPORT_TO_SUN_ERD = 'ExportSun';

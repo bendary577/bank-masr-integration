@@ -158,4 +158,28 @@ export class PosSalesInforComponent implements OnInit {
       }
    );
   }
+
+  exportToCSV():void {
+    this.excelService.exportSalesToCSV(this.selectedJob.id).subscribe(
+      res => {
+        const blob = new Blob([res], { type : 'application/vnd.ms.excel' });
+        const file = new File([blob], "Sales" + '.txt', { type: 'application/vnd.ms.excel' });
+        saveAs(file);
+
+        this.snackBar.open("Export Successfully", null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
+        });
+      },
+      err => {
+        console.error(err)
+        this.snackBar.open("Fail to export, Please try agian" , null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+      }
+   );
+  }
 }
