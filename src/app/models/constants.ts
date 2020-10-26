@@ -150,4 +150,12 @@ export class Constants {
     static EXPORT_CONSUMPTION = environment.apiHost + '/consumption/export/excel';
     static EXPORT_WATAGE = environment.apiHost + '/wastage/export/excel';
     static EXPORT_SALES = environment.apiHost + '/sales/export/excel';
+
+    //////////////////////////////////////////////// ERD //////////////////////////////////////////////
+
+    static EXPORT_TO_SUN_ERD = 'ExportSun';
+    static SUN_ERD = 'Sun';
+    static FUSION_ERD = 'Fusion';
+
+    
 }

@@ -12,7 +12,20 @@
             </mat-form-field>
         </div>
 
-        <span>Oracle Inventory Credentials </span>
+        <span>Account ERD</span>
+
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <mat-select matInput id="erd" name="erd" placeholder="ERD" 
+                formControlName="erd" (selectionChange)="chooseERD()" >
+                    <mat-option value="Fusion">FUSION</mat-option>
+                    <mat-option value="Sun">Infor Sun System</mat-option>
+                    <mat-option value="ExportSun">Export Infor Sun System</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <span class="erdTitle">Oracle Inventory Credentials </span>
 
         <div class="form-group">
             <mat-form-field class="example-full-width">
@@ -30,7 +43,7 @@
             </mat-form-field>
         </div>
 
-        <span>Oracle Reports Credentials </span>
+        <span class="erdTitle">Oracle Reports Credentials </span>
 
         <div class="form-group">
             <mat-form-field class="example-full-width">
@@ -48,16 +61,40 @@
             </mat-form-field>
         </div>
 
-        <span>Fusion Credentials </span>
+        <span class="erdTitle" *ngIf="ERD=='Fusion'">Fusion Credentials </span>
 
-        <div class="form-group">
+        <div class="form-group" *ngIf="ERD=='Fusion'">
             <mat-form-field class="example-full-width">
                 <input matInput placeholder="Fusion username" formControlName="usernameFusion">
             </mat-form-field>
         </div>
-        <div class="form-group">
+        <div class="form-group" *ngIf="ERD=='Fusion'">
             <mat-form-field class="example-full-width">
                 <input matInput placeholder="Fusion password" formControlName="passwordFusion">
+            </mat-form-field>
+        </div>
+
+        
+        <span class="erdTitle" *ngIf="ERD=='ExportSun' || ERD=='Sun'">Sun Credentials </span>
+
+        <div class="form-group"  *ngIf="ERD=='ExportSun' || ERD=='Sun'">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Sun username" formControlName="usernameSun">
+            </mat-form-field>
+        </div>
+        <div class="form-group"  *ngIf="ERD=='ExportSun' || ERD=='Sun'">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Sun password" formControlName="passwordSun">
+            </mat-form-field>
+        </div>
+        <div class="form-group"  *ngIf="ERD=='ExportSun' || ERD=='Sun'">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Sun host" formControlName="hostSun">
+            </mat-form-field>
+        </div>
+        <div class="form-group"  *ngIf="ERD=='ExportSun' || ERD=='Sun'">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Sun port" formControlName="portSun">
             </mat-form-field>
         </div>
 

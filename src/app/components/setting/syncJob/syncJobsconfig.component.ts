@@ -10,7 +10,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SchedulerConfigurationComponent } from '../../scheduler-configuration/scheduler-configuration.component';
 import { Router } from '@angular/router';
 import { Constants } from 'src/app/models/constants';
-import { AccountService } from 'src/app/services/account/account.service';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
 
@@ -65,7 +64,7 @@ export class SyncJobsconfigComponent implements OnInit {
     this.data.storage = syncJobType
 
     if (syncJobType.name == Constants.SUPPLIERS_SYNC) {
-      if (this.accountERD == "SUN") {
+      if (this.accountERD == Constants.SUN_ERD || this.accountERD == Constants.EXPORT_TO_SUN_ERD ) {
         this.router.navigate([Constants.SUPPLIERS_SUN_CONFIG_PAGE]);
       }
       else{
@@ -75,7 +74,7 @@ export class SyncJobsconfigComponent implements OnInit {
     else if (syncJobType.name == Constants.APPROVED_INVOICES_SYNC) {
       console.log(this.accountERD);
 
-      if (this.accountERD == "SUN") {
+      if (this.accountERD == Constants.SUN_ERD || this.accountERD == Constants.EXPORT_TO_SUN_ERD) {
         console.log("here");
 
         this.router.navigate([Constants.APPROVED_INVOICES_SUN_CONFIG_PAGE]);
@@ -85,7 +84,7 @@ export class SyncJobsconfigComponent implements OnInit {
       }
     }
     else if (syncJobType.name == Constants.CREDIT_NOTE_SYNC) {
-      if (this.accountERD == "SUN") {
+      if (this.accountERD == Constants.SUN_ERD || this.accountERD == Constants.EXPORT_TO_SUN_ERD) {
         this.router.navigate([Constants.CREDIT_NOTE_INFOR_CONFIG_PAGE]);
       }
       else{
@@ -93,7 +92,7 @@ export class SyncJobsconfigComponent implements OnInit {
       }
     }
     else if (syncJobType.name == Constants.CONSUMPTION_SYNC) {
-      if (this.accountERD == "SUN") {
+      if (this.accountERD == Constants.SUN_ERD || this.accountERD == Constants.EXPORT_TO_SUN_ERD) {
         this.router.navigate([Constants.CONSUMPTION_SUN_CONFIG_PAGE]);
       }
       else{
@@ -101,7 +100,7 @@ export class SyncJobsconfigComponent implements OnInit {
       }
     }
     else if (syncJobType.name == Constants.BOOKED_TRANSFER_SYNC) {
-      if (this.accountERD == "SUN") {
+      if (this.accountERD == Constants.SUN_ERD || this.accountERD == Constants.EXPORT_TO_SUN_ERD) {
         this.router.navigate([Constants.BOOKED_TRANSFER_INFOR_CONFIG_PAGE]);
       }
       else{
@@ -109,7 +108,7 @@ export class SyncJobsconfigComponent implements OnInit {
       }
     }
     else if (syncJobType.name == Constants.POS_SALES_SYNC) {
-      if (this.accountERD == "SUN") {
+      if (this.accountERD == Constants.SUN_ERD || this.accountERD == Constants.EXPORT_TO_SUN_ERD) {
         this.router.navigate([Constants.POS_SALES_INFOR_CONFIG_PAGE]);
       }
       else{
@@ -117,7 +116,7 @@ export class SyncJobsconfigComponent implements OnInit {
       }
     }
     else if (syncJobType.name == Constants.WASTARGE_SYNC) {
-      if (this.accountERD == "SUN") {
+      if (this.accountERD == Constants.SUN_ERD || this.accountERD == Constants.EXPORT_TO_SUN_ERD) {
         this.router.navigate([Constants.WASTARGE_INFOR_CONFIG_PAGE]);
       }
       else{
@@ -125,7 +124,7 @@ export class SyncJobsconfigComponent implements OnInit {
       }
     }
     else if (syncJobType.name == Constants.BOOKED_PRODUCTION_SYNC) {
-      if (this.accountERD == "SUN") {
+      if (this.accountERD == Constants.SUN_ERD || this.accountERD == Constants.EXPORT_TO_SUN_ERD) {
         this.router.navigate([Constants.BOOKED_PRODUCTION_INFOR_CONFIG_PAGE]);
       }
       else{
