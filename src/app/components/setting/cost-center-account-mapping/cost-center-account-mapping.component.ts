@@ -43,18 +43,18 @@ export class CostCenterAccountMappingComponent implements OnInit {
   onSaveClick(): void {
     this.spinner.show();
     this.saveLoading = true;
-    this.selectedCostCenters = [];
+    // this.selectedCostCenters = [];
 
-    let that = this;
-    this.costCenters.forEach(function (costCenter) {
-      if (costCenter.accountCode && costCenter.costCenterReference) {
-        costCenter.checked = true;
-        that.selectedCostCenters.push(costCenter);
-      }
-    });
+    // let that = this;
+    // this.costCenters.forEach(function (costCenter) {
+    //   if (costCenter.accountCode && costCenter.costCenterReference) {
+    //     costCenter.checked = true;
+    //     that.selectedCostCenters.push(costCenter);
+    //   }
+    // });
 
-    if(this.selectedCostCenters.length != 0) {
-      this.generalSettings.costCenterAccountMapping = this.selectedCostCenters;
+    if(this.costCenters.length != 0) {
+      this.generalSettings.costCenterAccountMapping = this.costCenters;
 
       this.generalSettingsService.updateGeneralSettings(this.generalSettings).then(result => {
         const response = result as Response;
