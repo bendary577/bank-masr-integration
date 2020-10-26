@@ -57,4 +57,9 @@ export class ExcelService {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.EXPORT_BOOKED_PRODUCTION + '?syncJobId=' + syncJobID , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token}), responseType: 'blob'});
   }
+
+  exportSalesToCSV(syncJobID) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get(Constants.EXPORT_CSV_SALES + '?syncJobId=' + syncJobID , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token}), responseType: 'blob'});
+  }
 }
