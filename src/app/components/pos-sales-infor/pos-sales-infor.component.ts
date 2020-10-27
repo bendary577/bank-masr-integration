@@ -7,6 +7,7 @@ import { SyncJob } from 'src/app/models/SyncJob';
 import { PosSalesService } from 'src/app/services/posSales/pos-sales.service';
 import { ExcelService } from 'src/app/services/excel/excel.service';
 import { saveAs } from 'file-saver';
+import { CsvService } from 'src/app/services/csv/csv.service';
 
 @Component({
   selector: 'app-pos-sales-infor',
@@ -25,7 +26,8 @@ export class PosSalesInforComponent implements OnInit {
 
 
   constructor(private spinner: NgxSpinnerService, private syncJobService: SyncJobService,
-    public snackBar: MatSnackBar, private posSalesService:PosSalesService, private excelService: ExcelService) { }
+    public snackBar: MatSnackBar, private posSalesService:PosSalesService, private excelService: ExcelService,
+    private csvService: CsvService) { }
 
   ngOnInit() {
     this.getSyncJobs(Constants.POS_SALES_SYNC);
@@ -160,7 +162,7 @@ export class PosSalesInforComponent implements OnInit {
   }
 
   exportToCSV():void {
-    this.excelService.exportSalesToCSV(this.selectedJob.id).subscribe(
+    this.csvService.exportSalesToCSV(this.selectedJob.id).subscribe(
       res => {
         const blob = new Blob([res], { type : 'application/vnd.ms.excel' });
         const file = new File([blob], "Sales" + '.txt', { type: 'application/vnd.ms.excel' });

@@ -9,6 +9,7 @@ import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import { ExcelService } from 'src/app/services/excel/excel.service';
 import { saveAs } from 'file-saver';
+import { CsvService } from 'src/app/services/csv/csv.service';
 
 @Component({
   selector: 'app-booked-transfer-infor',
@@ -29,7 +30,7 @@ export class BookedTransferInforComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService, private transferService: TransferService,
     public snackBar: MatSnackBar, private syncJobService:SyncJobService, private router:Router,
-    private sidNav: SidenavResponsive, private excelService: ExcelService
+    private sidNav: SidenavResponsive, private excelService: ExcelService, private csvService: CsvService
     ) {
 
   }
@@ -134,6 +135,30 @@ export class BookedTransferInforComponent implements OnInit {
       res => {
         const blob = new Blob([res], { type : 'application/vnd.ms.excel' });
         const file = new File([blob], "Transfers" + '.xlsx', { type: 'application/vnd.ms.excel' });
+        saveAs(file);
+
+        this.snackBar.open("Export Successfully", null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
+        });
+      },
+      err => {
+        console.error(err)
+        this.snackBar.open("Fail to export, Please try agian" , null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+      }
+   );
+  }
+
+  exportToCSV():void {
+    this.csvService.exportTransfersToCSV(this.selectedJob.id).subscribe(
+      res => {
+        const blob = new Blob([res], { type : 'application/vnd.ms.excel' });
+        const file = new File([blob], "Transfers" + '.txt', { type: 'application/vnd.ms.excel' });
         saveAs(file);
 
         this.snackBar.open("Export Successfully", null, {

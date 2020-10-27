@@ -76,6 +76,7 @@ import { BookedProductionComponent } from './components/BookedProduction/booked-
 import { BookedProductionConfigurationComponent } from './components/BookedProductionConfiguration/booked-production-configuration/booked-production-configuration.component';
 import { AddTaxComponent } from './components/add-tax/add-tax.component';
 import { ExcelService } from './services/excel/excel.service';
+import { CsvService } from './services/csv/csv.service';
 
 @NgModule({
   declarations: [
@@ -157,7 +158,8 @@ import { ExcelService } from './services/excel/excel.service';
     Data, 
     AuthGuardService, 
     SidenavResponsive,
-    ExcelService],
+    ExcelService,
+  CsvService],
   bootstrap: [AppComponent],
   entryComponents: [AddUserComponent, AddAccountComponent, AddMajorGroupComponent, AddTenderComponent, AddTaxComponent, SuppliersConfiguartionComponent, SchedulerConfigurationComponent]
 })
