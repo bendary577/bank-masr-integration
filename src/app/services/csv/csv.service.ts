@@ -18,7 +18,10 @@ export class CsvService {
 
   exportSalesToCSV(syncJobID) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get(Constants.EXPORT_CSV_SALES + '?syncJobId=' + syncJobID , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token}), responseType: 'blob'});
+    return this.http.get<Blob>(Constants.EXPORT_CSV_SALES + '?syncJobId=' + syncJobID , 
+    { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token}),
+     observe: 'response',
+    responseType: 'blob' as 'json'});
   }
 
   exportTransfersToCSV(syncJobID) {
