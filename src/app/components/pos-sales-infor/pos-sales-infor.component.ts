@@ -164,13 +164,8 @@ export class PosSalesInforComponent implements OnInit {
   exportToCSV():void {
     this.csvService.exportSalesToCSV(this.selectedJob.id).subscribe(
       res => {
-        console.log("Export sales to CSV")
-        console.log({
-          header: res,
-          fileName: res.headers.get("content-disposition") 
-        });
-        const blob = new Blob([res.body], { type : 'application/vnd.ms.excel' });
-        const file = new File([blob], "sales" + '.txt', { type: 'application/vnd.ms.excel' });
+        const blob = new Blob([res.body], { type : 'application/vnd.ms.txt' });
+        const file = new File([blob], "sales" + '.txt', { type: 'application/vnd.ms.txt' });
         saveAs(file);
 
         this.snackBar.open("Export Successfully", null, {
