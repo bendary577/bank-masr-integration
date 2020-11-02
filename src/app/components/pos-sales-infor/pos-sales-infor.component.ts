@@ -165,7 +165,7 @@ export class PosSalesInforComponent implements OnInit {
     this.csvService.exportSalesToCSV(this.selectedJob.id).subscribe(
       res => {
         const blob = new Blob([res.body], { type : 'application/vnd.ms.txt' });
-        const file = new File([blob], "sales" + '.txt', { type: 'application/vnd.ms.txt' });
+        const file = new File([blob], "sales" + '.ndf', { type: 'application/vnd.ms.txt' });
         saveAs(file);
 
         this.snackBar.open("Export Successfully", null, {
