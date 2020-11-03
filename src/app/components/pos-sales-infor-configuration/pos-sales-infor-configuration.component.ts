@@ -13,6 +13,8 @@ import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import { AddTaxComponent } from '../add-tax/add-tax.component';
 import { Tax } from 'src/app/models/Tax';
+import { AddDiscountComponent } from '../add-discount/add-discount.component';
+import { AddRevenueCenterComponent } from '../add-revenue-center/add-revenue-center.component';
 
 
 @Component({
@@ -37,6 +39,12 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
   newTax;
   taxes = [];
+  
+  newDiscount;
+  discounts = [];
+
+  newRevenueCenter;
+  revenueCenters = [];
 
   selectedTender = [];
   tender_loading = false;
@@ -61,8 +69,13 @@ export class PosSalesInforConfigurationComponent implements OnInit {
       }
       this.taxes = this.syncJobType.configuration["taxes"];
       this.tenders = this.syncJobType.configuration["tenders"];
+      this.discounts = this.syncJobType.configuration["discounts"];
       this.majorGroups = this.syncJobType.configuration["majorGroups"];
       this.analysis = this.syncJobType.configuration["analysis"];
+      this.revenueCenters = this.syncJobType.configuration["revenueCenters"];
+      console.log({
+        revenueCenters: this.revenueCenters
+      });
 
       if (this.tenders.length == 0){
         this.tenders = [
@@ -76,8 +89,8 @@ export class PosSalesInforConfigurationComponent implements OnInit {
     }).catch(err => {
       let message = "";
       if(err.status === 401){
-         message = ErrorMessages.SESSION_EXPIRED;
- this.sidNav.Logout();
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){
@@ -102,7 +115,9 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
     this.syncJobType["configuration"]["taxes"] = this.taxes;
     this.syncJobType["configuration"]["tenders"] = this.tenders;
+    this.syncJobType["configuration"]["discounts"] = this.discounts;
     this.syncJobType["configuration"]["majorGroups"] = this.majorGroups;
+    this.syncJobType["configuration"]["revenueCenters"] = this.revenueCenters;
 
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.snackBar.open('Save configuration successfully.', null, {
@@ -298,6 +313,114 @@ export class PosSalesInforConfigurationComponent implements OnInit {
       }
     });
   }
+
+  openDiscountDialog(){
+    const dialogRef = this.dialog.open(AddDiscountComponent, {
+      width: '550px'
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        console.log(res)
+        this.spinner.show();
+        this.loading = true;
+        this.newDiscount = {};
+        this.newDiscount.checked = false;
+        this.newDiscount.discount = res.name;
+        this.newDiscount.account = res.account;
+
+        this.discounts.push(this.newDiscount);
+
+        this.salesService.addDiscount(this.discounts, this.syncJobType.id).toPromise().then(result => {
+          this.snackBar.open(result["message"], null, {
+            duration: 2000,
+            horizontalPosition: 'right',
+            panelClass:"my-snack-bar-success"
+          });
+
+          this.spinner.hide();
+          this.loading = false;
+          
+        }).catch(err => {
+          this.spinner.hide();
+          this.loading = false;
+          this.majorGroups.pop();
+
+          let message = "";
+          if(err.status === 401){
+             message = ErrorMessages.SESSION_EXPIRED;
+            this.sidNav.Logout();
+          } else if (err.error.message){
+            message = err.error.message;
+          } else if (err.message){
+            message = err.message;
+          } else {
+            message = 'Can not add discount now, please try again.';
+          }
+    
+          this.snackBar.open(message , null, {
+            duration: 3000,
+            horizontalPosition: 'right',
+            panelClass:"my-snack-bar-fail"
+          });
+        });
+      }
+    });
+  }
+
+  openRevenueCenterDialog(){
+    const dialogRef = this.dialog.open(AddRevenueCenterComponent, {
+      width: '550px'
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        console.log(res)
+        this.spinner.show();
+        this.loading = true;
+        this.newRevenueCenter = {};
+        this.newRevenueCenter.checked = false;
+        this.newRevenueCenter.revenueCenter = res.name;
+
+        this.revenueCenters.push(this.newRevenueCenter);
+
+        this.salesService.addRevenueCenter(this.revenueCenters, this.syncJobType.id).toPromise().then(result => {
+          this.snackBar.open(result["message"], null, {
+            duration: 2000,
+            horizontalPosition: 'right',
+            panelClass:"my-snack-bar-success"
+          });
+
+          this.spinner.hide();
+          this.loading = false;
+          
+        }).catch(err => {
+          this.spinner.hide();
+          this.loading = false;
+          this.majorGroups.pop();
+
+          let message = "";
+          if(err.status === 401){
+             message = ErrorMessages.SESSION_EXPIRED;
+            this.sidNav.Logout();
+          } else if (err.error.message){
+            message = err.error.message;
+          } else if (err.message){
+            message = err.message;
+          } else {
+            message = 'Can not add revenue center now, please try again.';
+          }
+    
+          this.snackBar.open(message , null, {
+            duration: 3000,
+            horizontalPosition: 'right',
+            panelClass:"my-snack-bar-fail"
+          });
+        });
+      }
+    });
+  }
+
 
   onCancelClick() {
     this.router.navigate([Constants.SYNC_JOBS]);

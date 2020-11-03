@@ -77,6 +77,8 @@ import { BookedProductionConfigurationComponent } from './components/BookedProdu
 import { AddTaxComponent } from './components/add-tax/add-tax.component';
 import { ExcelService } from './services/excel/excel.service';
 import { CsvService } from './services/csv/csv.service';
+import { AddDiscountComponent } from './components/add-discount/add-discount.component';
+import { AddRevenueCenterComponent } from './components/add-revenue-center/add-revenue-center.component';
 
 @NgModule({
   declarations: [
@@ -120,7 +122,9 @@ import { CsvService } from './services/csv/csv.service';
     AddTenderComponent,
     BookedProductionComponent,
     BookedProductionConfigurationComponent,
-    AddTaxComponent
+    AddTaxComponent,
+    AddDiscountComponent,
+    AddRevenueCenterComponent
   ],
   imports: [
     BrowserModule,
@@ -161,6 +165,6 @@ import { CsvService } from './services/csv/csv.service';
     ExcelService,
   CsvService],
   bootstrap: [AppComponent],
-  entryComponents: [AddUserComponent, AddAccountComponent, AddMajorGroupComponent, AddTenderComponent, AddTaxComponent, SuppliersConfiguartionComponent, SchedulerConfigurationComponent]
+  entryComponents: [AddUserComponent, AddAccountComponent, AddMajorGroupComponent, AddTenderComponent, AddTaxComponent, AddDiscountComponent, AddRevenueCenterComponent, SuppliersConfiguartionComponent, SchedulerConfigurationComponent]
 })
 export class AppModule { }

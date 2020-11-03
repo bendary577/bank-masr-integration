@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Tender } from 'src/app/models/Tender';
 import { MajorGroup } from 'src/app/models/MajorGroup';
 import { Tax } from 'src/app/models/Tax';
+import { Discount } from 'src/app/models/Discount';
+import { RevenueCenter } from 'src/app/models/RevenueCenter';
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +38,15 @@ export class PosSalesService {
   addMajorGroup(majorGroups: MajorGroup[], id:string) {
     this.token = localStorage.getItem('auth_token');
     return this.http.post(Constants.ADD_POS_SALES_MAJOR_GROUP_URL + "?syncJobTypeId=" + id, majorGroups, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
+  }
+
+  addDiscount(discounts: Discount[], id:string) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.post(Constants.ADD_POS_SALES_DISCOUNT_URL + "?syncJobTypeId=" + id, discounts, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
+  }
+
+  addRevenueCenter(revenueCenters: RevenueCenter[], id:string) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.post(Constants.ADD_POS_SALES_REVENUE_CENTER_URL + "?syncJobTypeId=" + id, revenueCenters, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 }
