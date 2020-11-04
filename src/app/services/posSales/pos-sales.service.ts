@@ -6,6 +6,7 @@ import { MajorGroup } from 'src/app/models/MajorGroup';
 import { Tax } from 'src/app/models/Tax';
 import { Discount } from 'src/app/models/Discount';
 import { RevenueCenter } from 'src/app/models/RevenueCenter';
+import { ServiceCharge } from 'src/app/models/ServiceCharge';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,11 @@ export class PosSalesService {
   addDiscount(discounts: Discount[], id:string) {
     this.token = localStorage.getItem('auth_token');
     return this.http.post(Constants.ADD_POS_SALES_DISCOUNT_URL + "?syncJobTypeId=" + id, discounts, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
+  }
+
+  addServiceCharge(serviceCharge: ServiceCharge[], id:string) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.post(Constants.ADD_POS_SALES_SERVICE_CHARGE_URL + "?syncJobTypeId=" + id, serviceCharge, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
   addRevenueCenter(revenueCenters: RevenueCenter[], id:string) {

@@ -12,9 +12,9 @@ import { AddMajorGroupComponent } from '../addMajorGroup/add-major-group.compone
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import { AddTaxComponent } from '../add-tax/add-tax.component';
-import { Tax } from 'src/app/models/Tax';
 import { AddDiscountComponent } from '../add-discount/add-discount.component';
 import { AddRevenueCenterComponent } from '../add-revenue-center/add-revenue-center.component';
+import { AddServiceChargeComponent } from '../add-service-charge/add-service-charge.component';
 
 
 @Component({
@@ -42,6 +42,9 @@ export class PosSalesInforConfigurationComponent implements OnInit {
   
   newDiscount;
   discounts = [];
+
+  newServiceCharge;
+  serviceCharges = [];
 
   newRevenueCenter;
   revenueCenters = [];
@@ -71,6 +74,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
       this.tenders = this.syncJobType.configuration["tenders"];
       this.discounts = this.syncJobType.configuration["discounts"];
       this.majorGroups = this.syncJobType.configuration["majorGroups"];
+      this.serviceCharges = this.syncJobType.configuration["serviceCharges"];
       this.analysis = this.syncJobType.configuration["analysis"];
       this.revenueCenters = this.syncJobType.configuration["revenueCenters"];
       console.log({
@@ -117,6 +121,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
     this.syncJobType["configuration"]["tenders"] = this.tenders;
     this.syncJobType["configuration"]["discounts"] = this.discounts;
     this.syncJobType["configuration"]["majorGroups"] = this.majorGroups;
+    this.syncJobType["configuration"]["serviceCharges"] = this.serviceCharges;
     this.syncJobType["configuration"]["revenueCenters"] = this.revenueCenters;
 
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
@@ -409,6 +414,60 @@ export class PosSalesInforConfigurationComponent implements OnInit {
             message = err.message;
           } else {
             message = 'Can not add revenue center now, please try again.';
+          }
+    
+          this.snackBar.open(message , null, {
+            duration: 3000,
+            horizontalPosition: 'right',
+            panelClass:"my-snack-bar-fail"
+          });
+        });
+      }
+    });
+  }
+
+  openServiceChargeDialog(){
+    const dialogRef = this.dialog.open(AddServiceChargeComponent, {
+      width: '550px'
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        console.log(res)
+        this.spinner.show();
+        this.loading = true;
+        this.newServiceCharge = {};
+        this.newServiceCharge.checked = false;
+        this.newServiceCharge.serviceCharge = res.name;
+        this.newServiceCharge.account = res.account;
+
+        this.serviceCharges.push(this.newServiceCharge);
+
+        this.salesService.addServiceCharge(this.serviceCharges, this.syncJobType.id).toPromise().then(result => {
+          this.snackBar.open(result["message"], null, {
+            duration: 2000,
+            horizontalPosition: 'right',
+            panelClass:"my-snack-bar-success"
+          });
+
+          this.spinner.hide();
+          this.loading = false;
+          
+        }).catch(err => {
+          this.spinner.hide();
+          this.loading = false;
+          this.majorGroups.pop();
+
+          let message = "";
+          if(err.status === 401){
+             message = ErrorMessages.SESSION_EXPIRED;
+            this.sidNav.Logout();
+          } else if (err.error.message){
+            message = err.error.message;
+          } else if (err.message){
+            message = err.message;
+          } else {
+            message = 'Can not add service charges now, please try again.';
           }
     
           this.snackBar.open(message , null, {
