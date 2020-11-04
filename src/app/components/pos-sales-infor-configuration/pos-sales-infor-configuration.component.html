@@ -227,7 +227,8 @@
 
             <div *ngIf="tenders?.length > 0 && !loading">
 
-                <ngx-datatable class="material" [rows]="tenders" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[]">
+                <ngx-datatable class="material" [rows]="tenders" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" 
+                [sorts]="[{prop: 'tender', dir: 'asc'}]">
 
                     <ngx-datatable-column name="Tender">
                         <ng-template let-row="row" ngx-datatable-cell-template>
@@ -259,7 +260,8 @@
 
             <div *ngIf="taxes?.length > 0 && !loading">
 
-                <ngx-datatable class="material" [rows]="taxes" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[]">
+                <ngx-datatable class="material" [rows]="taxes" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" 
+                [sorts]="[{prop: 'tax', dir: 'asc'}]">
 
                     <ngx-datatable-column name="tax">
                         <ng-template let-row="row" ngx-datatable-cell-template>
@@ -290,7 +292,8 @@
 
             <div *ngIf="majorGroups?.length > 0">
 
-                <ngx-datatable class="material" [rows]="majorGroups" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[]">
+                <ngx-datatable class="material" [rows]="majorGroups" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" 
+                [sorts]="[{prop: 'majorGroup', dir: 'asc'}]">
 
                     <ngx-datatable-column name="Major Group">
                         <ng-template let-row="row" ngx-datatable-cell-template>
