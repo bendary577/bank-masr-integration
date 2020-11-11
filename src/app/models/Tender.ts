@@ -2,7 +2,7 @@ export class Tender {
   tender: string;
   account: string;
   communicationRate: number;
-  analysisCode: string;
+  analysisCodeT5: string;
   checked: boolean;
 
   public constructor() { }

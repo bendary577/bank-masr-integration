@@ -2,7 +2,7 @@
 
 
 <div>
-    <div *ngIf="!loading">
+    <div *ngIf="!loading && syncJobType">
 
         <!-- Oracle Hospitality Configurations -->
         <mat-expansion-panel>
@@ -300,6 +300,19 @@
             <button mat-flat-button (click)="onSaveClick()">Save</button>
         </div>
 
+    </div>
+
+    <div *ngIf="!loading && !syncJobType">
+        <mat-card class="example-card">
+                <mat-card-header>
+                    <mat-card-title>Welcome</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>
+                        Can't Configure your sync right now, Please try again after few minutes.
+                    </p>
+                </mat-card-content>
+        </mat-card>
     </div>
     <ngx-spinner></ngx-spinner>
 </div>

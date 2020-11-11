@@ -34,7 +34,6 @@ export class PosSalesInforConfigurationComponent implements OnInit {
   selectedMajorGroup = [];
   majorGroup_loading = true;
 
-  newTender ;  
   tenders = [];
 
   newTax;
@@ -103,7 +102,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
         message = ErrorMessages.FAILED_TO_SYNC;
       }
 
-      this.snackBar.open(err.error.message , null, {
+      this.snackBar.open(message , null, {
         duration: 3000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
@@ -155,60 +154,6 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
       this.spinner.hide();
       this.save_loading = false;
-    });
-  }
-
-  openTenderDialog(){
-    const dialogRef = this.dialog.open(AddTenderComponent, {
-      width: '550px'
-    });
-
-    dialogRef.afterClosed().subscribe(res => {
-      if (res) {
-        this.spinner.show();
-        this.loading = true;
-        this.newTender = {};
-        this.newTender.checked = false;
-        this.newTender.tender = res.name;
-        this.newTender.account = res.account;
-
-        this.tenders.push(this.newTender);
-
-        this.salesService.addTender(this.tenders, this.syncJobType.id).toPromise().then(result => {
-          this.spinner.hide();
-          this.loading = false;
-
-          this.snackBar.open(result["message"], null, {
-            duration: 2000,
-            horizontalPosition: 'right',
-            panelClass:"my-snack-bar-success"
-          });
-
-        }).catch(err => {
-          this.spinner.hide();
-          this.loading = false;
-
-          this.tenders.pop();
-
-          let message = "";
-          if(err.status === 401){
-            message = ErrorMessages.SESSION_EXPIRED;
-            this.sidNav.Logout();
-          } else if (err.error.message){
-            message = err.error.message;
-          } else if (err.message){
-            message = err.message;
-          } else {
-            message = ErrorMessages.FAILED_TO_SYNC;
-          }
-    
-          this.snackBar.open(message , null, {
-            duration: 3000,
-            horizontalPosition: 'right',
-            panelClass:"my-snack-bar-fail"
-          });
-        });
-      }
     });
   }
 
