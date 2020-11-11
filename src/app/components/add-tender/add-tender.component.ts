@@ -23,8 +23,10 @@ export class AddTenderComponent implements OnInit {
     this.dialogRef.close({
       name: this.form.controls.name.value,
       account: this.form.controls.account.value,
-      analysisCodeT5: this.form.controls.analysisCodeT5.value,
-      communicationRate: this.form.controls.communicationRate.value
+      communicationTender: this.form.controls.communicationTender.value,
+      communicationAccount: this.form.controls.communicationAccount.value,
+      communicationRate: this.form.controls.communicationRate.value,
+      analysisCodeT5: this.form.controls.analysisCodeT5.value
     });
   }
 
@@ -32,8 +34,10 @@ export class AddTenderComponent implements OnInit {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
       account: ['', Validators.required],
+      communicationTender: [''],
+      communicationAccount: [''],
+      communicationRate: [0],
       analysisCodeT5: [''],
-      communicationRate: [0]
     });
   }
 }

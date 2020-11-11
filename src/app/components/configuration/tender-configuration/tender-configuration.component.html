@@ -19,15 +19,28 @@
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Analysis Code 5">
+        <ngx-datatable-column name="Communication Tender">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                <input matInput placeholder="Analysis Code 5" [(ngModel)]="row.analysisCodeT5">
+                <input matInput placeholder="Communication Tender" [(ngModel)]="row.communicationTender">
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Communication Account">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <input matInput placeholder="Communication Account" [(ngModel)]="row.communicationAccount">
             </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column name="Communication Rate">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 <input matInput placeholder="Communication Rate" [(ngModel)]="row.communicationRate">
+            </ng-template>
+        </ngx-datatable-column>
+
+        
+        <ngx-datatable-column name="Analysis Code 5">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <input matInput placeholder="Analysis Code 5" [(ngModel)]="row.analysisCodeT5">
             </ng-template>
         </ngx-datatable-column>
 

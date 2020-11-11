@@ -1,6 +1,8 @@
 export class Tender {
   tender: string;
   account: string;
+  communicationTender: string;
+  communicationAccount: string;
   communicationRate: number;
   analysisCodeT5: string;
   checked: boolean;

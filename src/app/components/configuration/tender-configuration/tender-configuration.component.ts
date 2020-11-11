@@ -39,8 +39,10 @@ export class TenderConfigurationComponent implements OnInit {
         this.newTender.checked = false;
         this.newTender.tender = res.name;
         this.newTender.account = res.account;
-        this.newTender.analysisCodeT5 = res.analysisCodeT5;
+        this.newTender.communicationTender = res.communicationTender;
+        this.newTender.communicationAccount = res.communicationAccount;
         this.newTender.communicationRate = res.communicationRate;
+        this.newTender.analysisCodeT5 = res.analysisCodeT5;
 
         this.tenders.push(this.newTender);
 
