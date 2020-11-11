@@ -80,6 +80,8 @@ import { CsvService } from './services/csv/csv.service';
 import { AddDiscountComponent } from './components/add-discount/add-discount.component';
 import { AddRevenueCenterComponent } from './components/add-revenue-center/add-revenue-center.component';
 import { AddServiceChargeComponent } from './components/add-service-charge/add-service-charge.component';
+import { AnalysisConfigurationComponent } from './components/configuration/analysis-configuration/analysis-configuration.component';
+import { InforSystemConfigurationComponent } from './components/configuration/infor-system-configuration/infor-system-configuration.component';
 
 @NgModule({
   declarations: [
@@ -126,7 +128,9 @@ import { AddServiceChargeComponent } from './components/add-service-charge/add-s
     AddTaxComponent,
     AddDiscountComponent,
     AddRevenueCenterComponent,
-    AddServiceChargeComponent
+    AddServiceChargeComponent,
+    AnalysisConfigurationComponent,
+    InforSystemConfigurationComponent
   ],
   imports: [
     BrowserModule,

@@ -49,52 +49,9 @@
                 Infor Sun System
             </mat-panel-title>
         </mat-expansion-panel-header>
-
-        <div class="container" *ngIf="!loading">
-            <form class="my-form">
-                <div>
-                    <mat-form-field class="example-full-width">
-                        <mat-select matInput id="postingType" name="postingType" placeholder="Posting Type" [(ngModel)]="syncJobType.configuration.postingType">
-                            <mat-option value="0">0</mat-option>
-                            <mat-option value="1">1</mat-option>
-                            <mat-option value="2">2</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-
-                <div>
-                    <mat-form-field class="example-full-width">
-                        <input matInput id="businessUnit" name="businessUnit" placeholder="Business Unit" [(ngModel)]="syncJobType.configuration.businessUnit">
-                    </mat-form-field>
-                </div>
-                <!-- <div >
-                    <mat-form-field class="example-full-width">
-                      <input matInput id="journalSource" name="journalSource" placeholder="Journal Source"
-                      [(ngModel)]="syncJobType.configuration.journalSource">
-                  </mat-form-field>
-                </div> -->
-                <div>
-                    <mat-form-field class="example-full-width">
-                        <input matInput id="journalType" name="journalType" placeholder="Journal Type" [(ngModel)]="syncJobType.configuration.journalType">
-                    </mat-form-field>
-                </div>
-
-                <div>
-                    <mat-form-field class="example-full-width">
-                        <input matInput id="currencyCode" name="currencyCode" placeholder="Currency Code" [(ngModel)]="syncJobType.configuration.currencyCode">
-                    </mat-form-field>
-                </div>
-                <div>
-                    <mat-form-field class="example-full-width">
-                        <input matInput id="suspenseAccount" name="suspenseAccount" placeholder="Suspense Account" [(ngModel)]="syncJobType.configuration.suspenseAccount">
-                    </mat-form-field>
-                </div>
-
-            </form>
-        </div>
-
+        <app-infor-system-configuration [syncJobType]=syncJobType></app-infor-system-configuration>
     </mat-expansion-panel>
-
+    
     <!-- Loction Ledger Analysis Configurations -->
     <mat-expansion-panel>
         <mat-expansion-panel-header>
