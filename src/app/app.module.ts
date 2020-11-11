@@ -82,6 +82,7 @@ import { AddRevenueCenterComponent } from './components/add-revenue-center/add-r
 import { AddServiceChargeComponent } from './components/add-service-charge/add-service-charge.component';
 import { AnalysisConfigurationComponent } from './components/configuration/analysis-configuration/analysis-configuration.component';
 import { InforSystemConfigurationComponent } from './components/configuration/infor-system-configuration/infor-system-configuration.component';
+import { TenderConfigurationComponent } from './components/configuration/tender-configuration/tender-configuration.component';
 
 @NgModule({
   declarations: [
@@ -130,7 +131,8 @@ import { InforSystemConfigurationComponent } from './components/configuration/in
     AddRevenueCenterComponent,
     AddServiceChargeComponent,
     AnalysisConfigurationComponent,
-    InforSystemConfigurationComponent
+    InforSystemConfigurationComponent,
+    TenderConfigurationComponent
   ],
   imports: [
     BrowserModule,

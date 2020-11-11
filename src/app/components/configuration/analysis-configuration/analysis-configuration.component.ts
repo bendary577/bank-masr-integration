@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { SyncJobType } from 'src/app/models/SyncJobType';
 
 @Component({
   selector: 'app-analysis-configuration',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./analysis-configuration.component.scss']
 })
 export class AnalysisConfigurationComponent implements OnInit {
+  @Input() analysis;
 
   constructor() { }
 

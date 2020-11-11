@@ -11,10 +11,6 @@ export class InforSystemConfigurationComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    console.log({
-      syncJobType: this.syncJobType
-    })
-  }
+  ngOnInit() {}
 
 }

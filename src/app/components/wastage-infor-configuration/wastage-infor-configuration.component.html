@@ -94,24 +94,7 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
 
-            <div class="main">
-                <ngx-datatable class="material" [rows]="analysis" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[]">
-
-                    <ngx-datatable-column name="Analysis">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.number">Analysis {{row.number}}</mat-checkbox>
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="Code Element">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <input matInput placeholder="Code Element" [(ngModel)]="row.codeElement">
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                </ngx-datatable>
-            </div>
-
+            <app-analysis-configuration [analysis]=analysis></app-analysis-configuration>
         </mat-expansion-panel>
 
         <mat-expansion-panel>
