@@ -39,9 +39,9 @@ export class AddTenderChildComponent implements OnInit {
   }
 
   addChild(){
-    if(!this.tender.childs || this.tender.childs == undefined){
-      this.tender.childs = [];
+    if(!this.tender.children || this.tender.children == undefined){
+      this.tender.children = [];
     }
-    this.tender.childs.push(this.form.controls.name.value);
+    this.tender.children.push(this.form.controls.name.value);
   }
 }
