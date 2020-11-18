@@ -5,6 +5,8 @@ export class Tender {
   communicationAccount: string;
   communicationRate: number;
   analysisCodeT5: string;
+
+  childs: string[];
   checked: boolean;
 
   public constructor() { }

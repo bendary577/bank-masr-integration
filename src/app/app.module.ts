@@ -83,6 +83,7 @@ import { AddServiceChargeComponent } from './components/add-service-charge/add-s
 import { AnalysisConfigurationComponent } from './components/configuration/analysis-configuration/analysis-configuration.component';
 import { InforSystemConfigurationComponent } from './components/configuration/infor-system-configuration/infor-system-configuration.component';
 import { TenderConfigurationComponent } from './components/configuration/tender-configuration/tender-configuration.component';
+import { AddTenderChildComponent } from './components/add-tender-child/add-tender-child.component';
 
 @NgModule({
   declarations: [
@@ -132,7 +133,8 @@ import { TenderConfigurationComponent } from './components/configuration/tender-
     AddServiceChargeComponent,
     AnalysisConfigurationComponent,
     InforSystemConfigurationComponent,
-    TenderConfigurationComponent
+    TenderConfigurationComponent,
+    AddTenderChildComponent
   ],
   imports: [
     BrowserModule,
@@ -173,6 +175,8 @@ import { TenderConfigurationComponent } from './components/configuration/tender-
     ExcelService,
   CsvService],
   bootstrap: [AppComponent],
-  entryComponents: [AddUserComponent, AddAccountComponent, AddMajorGroupComponent, AddTenderComponent, AddTaxComponent, AddDiscountComponent, AddRevenueCenterComponent, AddServiceChargeComponent, SuppliersConfiguartionComponent, SchedulerConfigurationComponent]
+  entryComponents: [AddUserComponent, AddAccountComponent, AddMajorGroupComponent, AddTenderComponent,
+     AddTaxComponent, AddDiscountComponent, AddRevenueCenterComponent, AddServiceChargeComponent,
+      SuppliersConfiguartionComponent, SchedulerConfigurationComponent, AddTenderChildComponent]
 })
 export class AppModule { }

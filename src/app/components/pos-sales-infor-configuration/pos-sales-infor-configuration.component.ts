@@ -76,9 +76,6 @@ export class PosSalesInforConfigurationComponent implements OnInit {
       this.serviceCharges = this.syncJobType.configuration["serviceCharges"];
       this.analysis = this.syncJobType.configuration["analysis"];
       this.revenueCenters = this.syncJobType.configuration["revenueCenters"];
-      console.log({
-        revenueCenters: this.revenueCenters
-      });
 
       if (this.tenders.length == 0){
         this.tenders = [
