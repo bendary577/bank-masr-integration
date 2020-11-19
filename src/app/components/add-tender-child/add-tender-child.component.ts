@@ -32,10 +32,6 @@ export class AddTenderChildComponent implements OnInit {
     });
 
     this.tender = this.data["tender"];
-
-    console.log({
-      afterTender: this.tender
-    })
   }
 
   addChild(){
