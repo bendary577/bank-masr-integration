@@ -9,7 +9,8 @@
             <p *ngIf="job.rowsFetched == 0 &&  job.status != 'Running'">- No new data fetched.</p>
           </option>
     </select>
-    <button mat-flat-button (click)="exportToXLSX()">Export to Excel</button>
+    <button mat-flat-button (click)="exportToCSV()" [disabled]="jobs.length == 0">Export to CSV</button>
+    <button mat-flat-button (click)="exportToXLSX()" [disabled]="jobs.length == 0">Export to Excel</button>
     <button mat-flat-button (click)="getWastageSyncJob()">Sync Wastage Now</button>
 </div>
 <br>
