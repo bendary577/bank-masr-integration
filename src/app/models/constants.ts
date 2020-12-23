@@ -72,6 +72,8 @@ export class Constants {
     static GET_CURRENT_DAYS_URL = environment.apiHost + '/getCurrentDays';
 
     static GET_BOOKED_PRODUCTION_URL = environment.apiHost + '/getBookedProduction';
+    
+    static GET_MENU_ITEMS_URL = environment.apiHost + '/GetSimphonyMenuItems';
 
     // General Settings
     static GET_GENERAL_SETTINGS_URL = environment.apiHost + '/getGeneralSettings';
@@ -130,6 +132,10 @@ export class Constants {
     static BOOKED_PRODUCTION_CONFIG_PAGE = 'bookedProductionConfig';
     static BOOKED_PRODUCTION_INFOR_CONFIG_PAGE = 'bookedProductionSunConfig';
     static BOOKED_PRODUCTION_SYNC = 'Booked Production';
+
+    static MENU_ITEMS_PAGE = 'menuItems';
+    static MENU_ITEMS_CONFIG_PAGE = 'menuItemsConfig';
+    static MENU_ITEMS_SYNC = 'Menu Items';
 
     static TABS_PAGE = 'tabs';
     static END_POINT = '/getSuppliers';

@@ -32,6 +32,7 @@ import { PosSalesInforConfigurationComponent } from './components/pos-sales-info
 import { PosSalesInforComponent } from './components/pos-sales-infor/pos-sales-infor.component';
 import { BookedProductionComponent } from './components/BookedProduction/booked-production/booked-production.component';
 import { BookedProductionConfigurationComponent } from './components/BookedProductionConfiguration/booked-production-configuration/booked-production-configuration.component';
+import { MenuItemsComponent } from './components/menu-items/menu-items.component';
 
 
 const routes: Routes = [
@@ -76,6 +77,8 @@ const routes: Routes = [
 
   { path: Constants.BOOKED_PRODUCTION_INFOR_PAGE , component: BookedProductionComponent ,canActivate:[AuthGuardService]},
   { path: Constants.BOOKED_PRODUCTION_INFOR_CONFIG_PAGE , component: BookedProductionConfigurationComponent ,canActivate:[AuthGuardService]},
+
+  { path: Constants.MENU_ITEMS_PAGE , component: MenuItemsComponent ,canActivate:[AuthGuardService]},
 
   // Error Page
   {path:'**', component: ErrorComponentComponent }

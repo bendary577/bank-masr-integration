@@ -84,6 +84,7 @@ import { AnalysisConfigurationComponent } from './components/configuration/analy
 import { InforSystemConfigurationComponent } from './components/configuration/infor-system-configuration/infor-system-configuration.component';
 import { TenderConfigurationComponent } from './components/configuration/tender-configuration/tender-configuration.component';
 import { AddTenderChildComponent } from './components/add-tender-child/add-tender-child.component';
+import { MenuItemsComponent } from './components/menu-items/menu-items.component';
 
 @NgModule({
   declarations: [
@@ -134,7 +135,8 @@ import { AddTenderChildComponent } from './components/add-tender-child/add-tende
     AnalysisConfigurationComponent,
     InforSystemConfigurationComponent,
     TenderConfigurationComponent,
-    AddTenderChildComponent
+    AddTenderChildComponent,
+    MenuItemsComponent
   ],
   imports: [
     BrowserModule,
