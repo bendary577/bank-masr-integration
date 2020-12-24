@@ -85,6 +85,7 @@ import { InforSystemConfigurationComponent } from './components/configuration/in
 import { TenderConfigurationComponent } from './components/configuration/tender-configuration/tender-configuration.component';
 import { AddTenderChildComponent } from './components/add-tender-child/add-tender-child.component';
 import { MenuItemsComponent } from './components/menu-items/menu-items.component';
+import { MenuItemsConfigurationComponent } from './components/menu-items-configuration/menu-items-configuration.component';
 
 @NgModule({
   declarations: [
@@ -136,7 +137,8 @@ import { MenuItemsComponent } from './components/menu-items/menu-items.component
     InforSystemConfigurationComponent,
     TenderConfigurationComponent,
     AddTenderChildComponent,
-    MenuItemsComponent
+    MenuItemsComponent,
+    MenuItemsConfigurationComponent
   ],
   imports: [
     BrowserModule,

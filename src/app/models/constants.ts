@@ -175,6 +175,5 @@ export class Constants {
     static EXPORT_TO_SUN_ERD = 'ExportSun';
     static SUN_ERD = 'Sun';
     static FUSION_ERD = 'Fusion';
-
-    
+    static SIMPHONY_ERD = 'Simphony';
 }

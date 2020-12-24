@@ -1,0 +1,55 @@
+<h3 mat-dialog-title>Update Menu Items Configuartion</h3>
+
+<div>
+
+    <div *ngIf="!loading && syncJobType">
+        <mat-expansion-panel >
+            <mat-expansion-panel-header>
+            <mat-panel-title>
+                Predifined Configurations
+            </mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <div class="container" *ngIf="!loading">
+                <form  class="my-form">
+                    <div >
+                        <mat-form-field class="example-full-width">
+                            <input matInput id="employeeNumber" name="employeeNumber" placeholder="Employee Number" 
+                            [(ngModel)]="syncJobType.configuration.employeeNumber">
+                        </mat-form-field>
+                    </div>
+                    <div >
+                        <mat-form-field class="example-full-width">
+                            <input matInput id="revenuCenter" name="revenuCenter"
+                            placeholder="Revenu Center" 
+                            [(ngModel)]="syncJobType.configuration.revenuCenter">
+                        </mat-form-field>
+                    </div>
+                </form>
+            </div>
+        </mat-expansion-panel>
+
+        <br>
+        <div class="card-back">
+            <button mat-flat-button (click)="onSaveClick()">Save</button>
+            <button mat-flat-button (click)="onCancelClick()">Cancel</button>
+        </div>
+  
+    </div>
+
+    <div *ngIf="!loading && !syncJobType">
+        <mat-card class="example-card">
+                <mat-card-header>
+                    <mat-card-title>Welcome</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>
+                        Can't Configure your sync right now, Please try again after few minutes.
+                    </p>
+                </mat-card-content>
+        </mat-card>
+    </div>
+
+      <ngx-spinner></ngx-spinner>
+</div>
+  
