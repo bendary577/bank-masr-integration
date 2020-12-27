@@ -1,0 +1,20 @@
+<div class="back" style="margin-bottom: 15px;">
+    <button mat-flat-button (click)="openInvokerDialog()">Add</button>
+</div>
+
+<div *ngIf="invokers?.length > 0">
+    <ngx-datatable class="material" [rows]="invokers" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" 
+    [sorts]="[{prop: 'username', dir: 'asc'}]">
+        <ngx-datatable-column name="Username">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <input matInput placeholder="Username" [(ngModel)]="row.username">
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Password">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <input matInput placeholder="Password" [(ngModel)]="row.password">
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+</div>

@@ -21,6 +21,8 @@ export class Constants {
     static GET_USERS = environment.apiHost + '/getUsers';
     static ADD_USER = environment.apiHost + '/addUser';
 
+    static ADD_INVOKER_USER = environment.apiHost + '/addInvokerUser';
+
     static VENDOR_URL = environment.apiHost + '/getVendors';
     static ADD_VENDOR_URL = environment.apiHost + '/addVendor';
 
@@ -73,7 +75,7 @@ export class Constants {
 
     static GET_BOOKED_PRODUCTION_URL = environment.apiHost + '/getBookedProduction';
     
-    static GET_MENU_ITEMS_URL = environment.apiHost + '/GetSimphonyMenuItems';
+    static GET_MENU_ITEMS_URL = environment.apiHost + '/SyncSimphonyMenuItems';
     static ADD_SIMPHONY_LOCATION_URL = environment.apiHost + '/addSimphonyLocation';
 
     // General Settings
