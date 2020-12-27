@@ -13,7 +13,6 @@ export class AddAccountComponent implements OnInit {
   public form: FormGroup;
   submitted = false;
   newAccount:Account;
-
   ERD: string;
 
   constructor(private formBuilder: FormBuilder, public dialogRef: MatDialogRef<AddAccountComponent>) { }
@@ -27,6 +26,7 @@ export class AddAccountComponent implements OnInit {
       name: this.form.controls.name.value,
       domain: this.form.controls.domain.value,
       erd: this.form.controls.erd.value,
+      locationQuota: this.form.controls.locationQuota.value,
       accountCredentials: [
          {"account": "HospitalityOHIM",
           "username": this.form.controls.usernameOHIM.value,
@@ -60,7 +60,7 @@ export class AddAccountComponent implements OnInit {
       name: ['', Validators.required],
       domain: ['', Validators.required],
       erd: ['', Validators.required],
-      
+      locationQuota: ['', Validators.required],
       usernameOHIM: ['', Validators.required],
       passwordOHIM: ['', Validators.required],
       companyOHIM: ['', Validators.required],
@@ -81,8 +81,5 @@ export class AddAccountComponent implements OnInit {
 
   chooseERD(){
     this.ERD = this.form.controls.erd.value ;
-    console.log({
-      ERD: this.ERD
-    })
   }
 }

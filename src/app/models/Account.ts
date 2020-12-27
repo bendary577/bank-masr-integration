@@ -4,6 +4,7 @@ export class Account {
     public domain: string;
     public erd: string;
     public accountCredentials: any;
+    public locationQuota: Number;
     public creationDate: string;
     public deleted: boolean;
 
