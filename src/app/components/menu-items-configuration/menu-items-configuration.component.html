@@ -6,7 +6,7 @@
         <mat-expansion-panel >
             <mat-expansion-panel-header>
             <mat-panel-title>
-                Predifined Configurations
+                Web Service Invoker Configurations
             </mat-panel-title>
             </mat-expansion-panel-header>
     
@@ -14,26 +14,29 @@
                 <form  class="my-form">
                     <div >
                         <mat-form-field class="example-full-width">
-                            <input matInput id="employeeNumber" name="employeeNumber" placeholder="Employee Number" 
-                            [(ngModel)]="syncJobType.configuration.employeeNumber">
+                            <input matInput id="username" name="username" placeholder="Username" 
+                            [(ngModel)]="syncJobType.configuration.username">
                         </mat-form-field>
                     </div>
                     <div >
                         <mat-form-field class="example-full-width">
-                            <input matInput id="revenueCenter" name="revenueCenter"
-                            placeholder="Revenue Center" 
-                            [(ngModel)]="syncJobType.configuration.revenueCenter">
-                        </mat-form-field>
-                    </div>
-                    <div >
-                        <mat-form-field class="example-full-width">
-                            <input matInput id="simphonyServer" name="simphonyServer"
-                            placeholder="Simphony Server" 
-                            [(ngModel)]="syncJobType.configuration.simphonyServer">
+                            <input matInput id="password" name="password"
+                            placeholder="password" 
+                            [(ngModel)]="syncJobType.configuration.password">
                         </mat-form-field>
                     </div>
                 </form>
             </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel >
+            <mat-expansion-panel-header>
+            <mat-panel-title>
+                Simphony Locations
+            </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-simphony-location-configuration [locations]=locations [syncJobType]=syncJobType *ngIf="!loading"></app-simphony-location-configuration>
+
         </mat-expansion-panel>
 
         <br>

@@ -74,6 +74,7 @@ export class Constants {
     static GET_BOOKED_PRODUCTION_URL = environment.apiHost + '/getBookedProduction';
     
     static GET_MENU_ITEMS_URL = environment.apiHost + '/GetSimphonyMenuItems';
+    static ADD_SIMPHONY_LOCATION_URL = environment.apiHost + '/addSimphonyLocation';
 
     // General Settings
     static GET_GENERAL_SETTINGS_URL = environment.apiHost + '/getGeneralSettings';

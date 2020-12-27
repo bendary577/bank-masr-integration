@@ -15,6 +15,7 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 export class MenuItemsConfigurationComponent implements OnInit {
   loading = true;
   syncJobType: AccountSyncType;
+  locations = [];
 
 
   constructor(private spinner: NgxSpinnerService, 
@@ -29,6 +30,8 @@ export class MenuItemsConfigurationComponent implements OnInit {
    this.loading = true;
    this.accSyncTypeService.getAccSyncJobType(Constants.MENU_ITEMS_SYNC).toPromise().then((res: any) => {
      this.syncJobType = res;
+     this.locations = this.syncJobType.configuration["simphonyLocations"];
+
      this.loading = false;
    }).catch(err => {
      console.error(err);

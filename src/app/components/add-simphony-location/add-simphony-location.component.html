@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>New Simphony Location</h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="form" class="my-form">
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Revenue Center ID" formControlName="revenueCenterID">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Revenue Center Name" formControlName="revenueCenterName">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Employee Number" formControlName="employeeNumber">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="http://192.168.1.1:8080" formControlName="simphonyServer">
+            </mat-form-field>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button cdkFocusInitial (click)="onSaveClick()">Save</button>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+</div>

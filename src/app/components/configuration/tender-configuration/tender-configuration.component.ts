@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { Tender } from 'src/app/models/Tender';

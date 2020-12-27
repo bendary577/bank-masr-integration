@@ -86,6 +86,8 @@ import { TenderConfigurationComponent } from './components/configuration/tender-
 import { AddTenderChildComponent } from './components/add-tender-child/add-tender-child.component';
 import { MenuItemsComponent } from './components/menu-items/menu-items.component';
 import { MenuItemsConfigurationComponent } from './components/menu-items-configuration/menu-items-configuration.component';
+import { AddSimphonyLocationComponent } from './components/add-simphony-location/add-simphony-location.component';
+import { SimphonyLocationConfigurationComponent } from './components/configuration/simphony-location-configuration/simphony-location-configuration.component';
 
 @NgModule({
   declarations: [
@@ -138,7 +140,9 @@ import { MenuItemsConfigurationComponent } from './components/menu-items-configu
     TenderConfigurationComponent,
     AddTenderChildComponent,
     MenuItemsComponent,
-    MenuItemsConfigurationComponent
+    MenuItemsConfigurationComponent,
+    AddSimphonyLocationComponent,
+    SimphonyLocationConfigurationComponent
   ],
   imports: [
     BrowserModule,
@@ -181,6 +185,7 @@ import { MenuItemsConfigurationComponent } from './components/menu-items-configu
   bootstrap: [AppComponent],
   entryComponents: [AddUserComponent, AddAccountComponent, AddMajorGroupComponent, AddTenderComponent,
      AddTaxComponent, AddDiscountComponent, AddRevenueCenterComponent, AddServiceChargeComponent,
-      SuppliersConfiguartionComponent, SchedulerConfigurationComponent, AddTenderChildComponent]
+      SuppliersConfiguartionComponent, SchedulerConfigurationComponent, AddTenderChildComponent, 
+      AddSimphonyLocationComponent]
 })
 export class AppModule { }
