@@ -6,9 +6,11 @@ export class CostCenter {
     future2: string;
     company: string;
     businessUnit: string;
-    account: string;
+    accountCode: string;
     product: string;
     interCompany: string;
     location: string;
+    locationName: string;
     currency: string;
+    costCenterReference: string;
 }

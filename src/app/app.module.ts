@@ -90,6 +90,7 @@ import { AddSimphonyLocationComponent } from './components/add-simphony-location
 import { SimphonyLocationConfigurationComponent } from './components/configuration/simphony-location-configuration/simphony-location-configuration.component';
 import { WebServiceInvokerConfigurationComponent } from './components/configuration/web-service-invoker-configuration/web-service-invoker-configuration.component';
 import { AddWebServiceInvokerComponent } from './components/add-web-service-invoker/add-web-service-invoker.component';
+import { AddLocationComponent } from './components/add-location/add-location.component';
 
 @NgModule({
   declarations: [
@@ -146,7 +147,8 @@ import { AddWebServiceInvokerComponent } from './components/add-web-service-invo
     AddSimphonyLocationComponent,
     SimphonyLocationConfigurationComponent,
     WebServiceInvokerConfigurationComponent,
-    AddWebServiceInvokerComponent
+    AddWebServiceInvokerComponent,
+    AddLocationComponent
   ],
   imports: [
     BrowserModule,
@@ -190,6 +192,6 @@ import { AddWebServiceInvokerComponent } from './components/add-web-service-invo
   entryComponents: [AddUserComponent, AddAccountComponent, AddMajorGroupComponent, AddTenderComponent,
      AddTaxComponent, AddDiscountComponent, AddRevenueCenterComponent, AddServiceChargeComponent,
       SuppliersConfiguartionComponent, SchedulerConfigurationComponent, AddTenderChildComponent, 
-      AddSimphonyLocationComponent, AddWebServiceInvokerComponent]
+      AddSimphonyLocationComponent, AddWebServiceInvokerComponent, AddLocationComponent]
 })
 export class AppModule { }

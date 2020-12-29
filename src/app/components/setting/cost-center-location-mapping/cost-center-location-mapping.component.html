@@ -1,4 +1,4 @@
-<h3 mat-dialog-title>Cost Center Location Mapping</h3>
+<h3 mat-dialog-title>Oracle Reporting and Analytics Locations</h3>
 
 
 <div>
@@ -6,38 +6,21 @@
     <mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>
-                Cost Center To Location Mapping
+                Included Oracle Reporting and Analytics Locations
             </mat-panel-title>
         </mat-expansion-panel-header>
 
+        <div class="back" style="margin-bottom: 15px;">
+            <button mat-flat-button (click)="openLocationDialog()">Add</button>
+        </div>        
+
         <div *ngIf="!loading">
-            <div *ngIf="!costCenterLoding">
-                <div *ngIf="costCenters?.length <= 0">
-                    <mat-card class="example-card">
-                        <mat-card-header>
-                            <mat-card-title>Error</mat-card-title>
-                        </mat-card-header>
-                        <mat-card-content>
-                            <p>
-                                Error happend while fetching cost centers, make sure you have cost centers.
-                            </p>
-
-                        </mat-card-content>
-                    </mat-card>
-                </div>
-
-                <div class="main" *ngIf="costCenters?.length > 0">
+                <div class="main" *ngIf="costCenters.length > 0">
                     <ngx-datatable *ngIf="!loading" class="material" [rows]="costCenters" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[{prop: 'costCenter', dir: 'asc'}]">
                         
                         <ngx-datatable-column name="">
                             <ng-template let-row="row" ngx-datatable-cell-template>
                                 <mat-checkbox class="example-margin" [(ngModel)]="row.checked"></mat-checkbox>
-                            </ng-template>
-                        </ngx-datatable-column>
-
-                        <ngx-datatable-column name="Cost Center">
-                            <ng-template let-row="row" ngx-datatable-cell-template>
-                                {{row.costCenter}}
                             </ng-template>
                         </ngx-datatable-column>
 
@@ -47,12 +30,19 @@
                             </ng-template>
                         </ngx-datatable-column>
 
+                        <ngx-datatable-column name="Account Code">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <input matInput placeholder="Account Code" [(ngModel)]="row.accountCode">
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Reference">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <input matInput placeholder="Reference" [(ngModel)]="row.costCenterReference">
+                            </ng-template>
+                        </ngx-datatable-column>
                     </ngx-datatable>
                 </div>
-
-                <br>
-
-            </div>
         </div>
     </mat-expansion-panel>
     <br>
