@@ -43,13 +43,13 @@
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Tender Childs Count">
+        <ngx-datatable-column name="Tender Childs Count" *ngIf="row?.children">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.children.length}}
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="View Tender Childs">
+        <ngx-datatable-column name="View Tender Childs" *ngIf="row?.children">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 <button mat-flat-button (click)="viewTenderChildsDialog(row)">View</button>
             </ng-template>

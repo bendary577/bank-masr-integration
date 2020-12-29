@@ -47,6 +47,7 @@ export class TenderConfigurationComponent implements OnInit {
         this.tenders.push(this.newTender);
 
         this.salesService.addTender(this.tenders, this.syncJobType.id).toPromise().then(result => {
+          this.newTender = new Tender();  
           this.loading = false;
 
           this.snackBar.open(result["message"], null, {
