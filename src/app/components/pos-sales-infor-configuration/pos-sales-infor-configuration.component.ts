@@ -53,6 +53,8 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
   syncJobType: AccountSyncType;
 
+  accountERD;
+
   constructor(private spinner: NgxSpinnerService, private salesService:PosSalesService,
     private sidNav: SidenavResponsive,
      private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService,
@@ -60,6 +62,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
   ngOnInit() {
     this.getSyncJobType();
+    this.accountERD = localStorage.getItem('accountERD');
   }
 
   getSyncJobType() {
