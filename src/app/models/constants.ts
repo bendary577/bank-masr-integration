@@ -31,6 +31,9 @@ export class Constants {
     static GET_SYNC_JOB_DATA = environment.apiHost + '/getSyncJobData';
     static CLEAR_SYNC_JOB_DATA = environment.apiHost + '/clearSyncJobData';
 
+    static GET_OPERATION_TYPES_URL = environment.apiHost + '/getOperationTypes';
+    static GET_OPERATION_TYPE_BY_NAME_URL = environment.apiHost + '/getOperationTypeByName';
+    static UPDATE_OPERATION_TYPE_URL = environment.apiHost + '/updateOperationType';
 
     static GET_SYNC_JOB_TYPES_URL = environment.apiHost + '/getSyncJobTypes';
     static GET_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getSyncJobTypesByName';
@@ -75,7 +78,7 @@ export class Constants {
     static GET_CURRENT_DAYS_URL = environment.apiHost + '/getCurrentDays';
 
     static GET_BOOKED_PRODUCTION_URL = environment.apiHost + '/getBookedProduction';
-    
+
     static GET_MENU_ITEMS_URL = environment.apiHost + '/SyncSimphonyMenuItems';
     static ADD_SIMPHONY_LOCATION_URL = environment.apiHost + '/addSimphonyLocation';
 
@@ -141,6 +144,10 @@ export class Constants {
     static MENU_ITEMS_CONFIG_PAGE = 'menuItemsConfig';
     static MENU_ITEMS_SYNC = 'Menu Items';
 
+    static CREATE_ORDER_PAGE = 'createCheck';
+    static CREATE_ORDER_CONFIG_PAGE = 'createCheckConfig';
+    static CREATE_ORDER_OPERATION = 'Create Check';
+
     static TABS_PAGE = 'tabs';
     static END_POINT = '/getSuppliers';
     static SETTING = 'setting';
@@ -150,7 +157,7 @@ export class Constants {
     static INCLUDED_OVER_GROUPS = 'includedOverGroups';
     static USERS_CONFIGURATION = 'users';
     static SYNC_JOBS = 'syncjobs';
-
+    static OPERATION_TYPES = 'operationTypesConfiguration';
     static SYNC_TYPE_SCHEDULER = "Suppliers";
 
 

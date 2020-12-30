@@ -91,6 +91,8 @@ import { SimphonyLocationConfigurationComponent } from './components/configurati
 import { WebServiceInvokerConfigurationComponent } from './components/configuration/web-service-invoker-configuration/web-service-invoker-configuration.component';
 import { AddWebServiceInvokerComponent } from './components/add-web-service-invoker/add-web-service-invoker.component';
 import { AddLocationComponent } from './components/add-location/add-location.component';
+import { OperationTypesConfigurationComponent } from './components/setting/operation-types-configuration/operation-types-configuration.component';
+import { CreateOrderConfigComponent } from './components/create-order-config/create-order-config.component';
 
 @NgModule({
   declarations: [
@@ -148,7 +150,9 @@ import { AddLocationComponent } from './components/add-location/add-location.com
     SimphonyLocationConfigurationComponent,
     WebServiceInvokerConfigurationComponent,
     AddWebServiceInvokerComponent,
-    AddLocationComponent
+    AddLocationComponent,
+    OperationTypesConfigurationComponent,
+    CreateOrderConfigComponent
   ],
   imports: [
     BrowserModule,

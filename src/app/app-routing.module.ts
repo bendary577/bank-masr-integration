@@ -34,6 +34,8 @@ import { BookedProductionComponent } from './components/BookedProduction/booked-
 import { BookedProductionConfigurationComponent } from './components/BookedProductionConfiguration/booked-production-configuration/booked-production-configuration.component';
 import { MenuItemsComponent } from './components/menu-items/menu-items.component';
 import { MenuItemsConfigurationComponent } from './components/menu-items-configuration/menu-items-configuration.component';
+import { OperationTypesConfigurationComponent } from './components/setting/operation-types-configuration/operation-types-configuration.component';
+import { CreateOrderConfigComponent } from './components/create-order-config/create-order-config.component';
 
 
 const routes: Routes = [
@@ -48,6 +50,7 @@ const routes: Routes = [
   { path: Constants.COST_CENTER_LOCATION_MAPPING, component: CostCenterLocationMappingComponent ,canActivate:[AuthGuardService]},
   { path: Constants.COST_CENTER_ACCOUNT_MAPPING, component: CostCenterAccountMappingComponent ,canActivate:[AuthGuardService]},
   { path: Constants.INCLUDED_OVER_GROUPS, component: IncludedOverGroupsComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.OPERATION_TYPES, component: OperationTypesConfigurationComponent ,canActivate:[AuthGuardService]},
 
   // Pages
   { path: Constants.LOGIN_PAGE, component: LoginComponent},
@@ -81,6 +84,9 @@ const routes: Routes = [
 
   { path: Constants.MENU_ITEMS_PAGE , component: MenuItemsComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MENU_ITEMS_CONFIG_PAGE , component: MenuItemsConfigurationComponent ,canActivate:[AuthGuardService]},
+
+  { path: Constants.CREATE_ORDER_PAGE , component: MenuItemsComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.CREATE_ORDER_CONFIG_PAGE , component: CreateOrderConfigComponent ,canActivate:[AuthGuardService]},
 
   // Error Page
   {path:'**', component: ErrorComponentComponent }
