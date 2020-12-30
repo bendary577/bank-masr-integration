@@ -17,6 +17,11 @@ export class UserService {
 
   addInvokerUser(user, syncJobTypeID : string) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.post(Constants.ADD_INVOKER_USER + "?syncJobTypeID=" + syncJobTypeID , user, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+    return this.http.post(Constants.ADD_INVOKER_USER + "?syncJobTypeId=" + syncJobTypeID , user, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
+  getInvokerUser(syncJobTypeID : string) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get(Constants.GET_INVOKER_USERS + "?syncJobTypeId=" + syncJobTypeID , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 }

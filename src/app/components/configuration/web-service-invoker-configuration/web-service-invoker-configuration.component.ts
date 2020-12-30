@@ -24,6 +24,13 @@ export class WebServiceInvokerConfigurationComponent implements OnInit {
      public dialog: MatDialog, public userService: UserService) { }
 
   ngOnInit() {
+    this.getInvokerUsers();
+  }
+
+  getInvokerUsers(){
+    this.userService.getInvokerUser(this.syncJobType.id).toPromise().then(result => {
+      this.invokers = result as User[];
+    }).catch(err => {});
   }
 
   openInvokerDialog(){
@@ -37,27 +44,31 @@ export class WebServiceInvokerConfigurationComponent implements OnInit {
         this.newInvoker.password = res.password;
 
         this.userService.addInvokerUser(this.newInvoker, this.syncJobType.id).toPromise().then(result => {
-          this.loading = false;
-
-          this.snackBar.open(result["message"], null, {
+          this.snackBar.open("Add web service invoker successfully.", null, {
             duration: 2000,
             horizontalPosition: 'right',
             panelClass:"my-snack-bar-success"
           });
-
+          
+          this.newInvoker = new User();
+          this.getInvokerUsers();
+          this.loading = false;
         }).catch(err => {
+          console.log(
+            {
+              err: err
+            }
+          )
           this.loading = false;
 
           let message = "";
           if(err.status === 401){
             message = ErrorMessages.SESSION_EXPIRED;
             this.sidNav.Logout();
-          } else if (err.error.message){
-            message = err.error.message;
-          } else if (err.message){
-            message = err.message;
+          } else if (err.error){
+            message = err.error;
           } else {
-            message = ErrorMessages.FAILED_TO_SYNC;
+            message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
           }
     
           this.snackBar.open(message , null, {

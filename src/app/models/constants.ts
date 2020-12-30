@@ -22,6 +22,7 @@ export class Constants {
     static ADD_USER = environment.apiHost + '/addUser';
 
     static ADD_INVOKER_USER = environment.apiHost + '/addInvokerUser';
+    static GET_INVOKER_USERS = environment.apiHost + '/getInvokerUser';
 
     static VENDOR_URL = environment.apiHost + '/getVendors';
     static ADD_VENDOR_URL = environment.apiHost + '/addVendor';
