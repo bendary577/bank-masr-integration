@@ -7,6 +7,7 @@ import { Response } from 'src/app/models/Response';
 import { GeneralSettings } from 'src/app/models/GeneralSettings';
 import { OverGroup } from 'src/app/models/OverGroup';
 import { Item } from 'src/app/models/Item';
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
 
 
 @Component({
@@ -34,12 +35,25 @@ export class IncludedOverGroupsComponent implements OnInit {
   }
 
   getGeneralSettings() {
-    this.generalSettingsService.getGeneralSettings().then((res: Response) => {
-      this.generalSettings = res.data as GeneralSettings;
+    this.generalSettingsService.getGeneralSettings().then((res) => {
+      this.generalSettings = res as GeneralSettings;
       this.mappedItems = this.generalSettings.items;
 
     }).catch(err => {
-      console.error(err);
+      let message = "";
+      if (err.error){
+        message = err.error;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
+      }
+
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
+      });
     });
   }
 

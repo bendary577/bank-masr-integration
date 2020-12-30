@@ -2,7 +2,7 @@
 
 
 <div>
-    <!-- Cost Centers -->
+    <!-- Oracle Cost Centers -->
     <mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>
@@ -45,6 +45,16 @@
                 </div>
         </div>
     </mat-expansion-panel>
+
+    <mat-expansion-panel >
+        <mat-expansion-panel-header>
+        <mat-panel-title>
+            Simphony Locations
+        </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-simphony-location-configuration [locations]=simphonyLocations *ngIf="!loading"></app-simphony-location-configuration>
+    </mat-expansion-panel>
+
     <br>
 
     <div class="card-back">

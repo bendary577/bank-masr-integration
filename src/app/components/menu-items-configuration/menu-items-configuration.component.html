@@ -12,17 +12,6 @@
             <app-web-service-invoker-configuration [syncJobType]=syncJobType *ngIf="!loading"></app-web-service-invoker-configuration>
 
         </mat-expansion-panel>
-
-        <mat-expansion-panel >
-            <mat-expansion-panel-header>
-            <mat-panel-title>
-                Simphony Locations
-            </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-simphony-location-configuration [locations]=locations [syncJobType]=syncJobType *ngIf="!loading"></app-simphony-location-configuration>
-
-        </mat-expansion-panel>
-
         <br>
         <div class="card-back">
             <button mat-flat-button (click)="onSaveClick()">Save</button>

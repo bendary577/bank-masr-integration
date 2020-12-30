@@ -20,6 +20,7 @@ export class CostCenterLocationMappingComponent implements OnInit {
 
   newLocation  : CostCenter = new CostCenter();
   costCenters = [];
+  simphonyLocations = [];
 
   generalSettings: GeneralSettings;
 
@@ -36,19 +37,35 @@ export class CostCenterLocationMappingComponent implements OnInit {
     this.loading = true;
     this.spinner.show();
 
-    this.generalSettingsService.getGeneralSettings().then((res: Response) => {
+    this.generalSettingsService.getGeneralSettings().then((res) => {
       this.loading = false;
       this.spinner.hide();
 
-      this.generalSettings = res.data as GeneralSettings;
+      this.generalSettings = res as GeneralSettings;
       if (this.generalSettings.locations){
         this.costCenters = this.generalSettings.locations;
+      }
+      if (this.generalSettings.simphonyLocations){
+        this.simphonyLocations = this.generalSettings.simphonyLocations;
       }
     }).catch(err => {
       this.loading = false;
       this.spinner.hide();
+      
+      let message = "";
+      if (err.error){
+        message = err.error;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = "Failed to get general settings.";
+      }
 
-      console.error(err);
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
+      });
     });
   }
 

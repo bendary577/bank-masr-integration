@@ -32,10 +32,23 @@ export class CostCenterAccountMappingComponent implements OnInit {
   }
 
   getGeneralSettings() {
-    this.generalSettingsService.getGeneralSettings().then((res: Response) => {
-      this.generalSettings = res.data as GeneralSettings;
+    this.generalSettingsService.getGeneralSettings().then((res) => {
+      this.generalSettings = res as GeneralSettings;
     }).catch(err => {
-      console.error(err);
+      let message = "";
+      if (err.error){
+        message = err.error;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = "Failed to get general settings.";
+      }
+
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
+      });
     });
   }
 
