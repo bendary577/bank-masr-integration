@@ -275,7 +275,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
         this.spinner.show();
         this.loading = true;
         this.newDiscount = {};
-        this.newDiscount.checked = false;
+        this.newDiscount.checked = true;
         this.newDiscount.discount = res.name;
         this.newDiscount.account = res.account;
 
