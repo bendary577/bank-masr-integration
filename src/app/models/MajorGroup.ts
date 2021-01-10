@@ -3,4 +3,7 @@ export class MajorGroup {
   checked: boolean;
   overGroup: string;
   majorGroup: string;
+  children: string[];
+
+  public constructor() { }
 }

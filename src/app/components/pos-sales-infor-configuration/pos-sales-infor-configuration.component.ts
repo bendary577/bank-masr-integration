@@ -15,6 +15,8 @@ import { AddTaxComponent } from '../add-tax/add-tax.component';
 import { AddDiscountComponent } from '../add-discount/add-discount.component';
 import { AddRevenueCenterComponent } from '../add-revenue-center/add-revenue-center.component';
 import { AddServiceChargeComponent } from '../add-service-charge/add-service-charge.component';
+import { MajorGroup } from 'src/app/models/MajorGroup';
+import { AddMajorGroupChildComponent } from '../addMajorGroupChild/add-major-group-child.component';
 
 
 @Component({
@@ -252,6 +254,47 @@ export class PosSalesInforConfigurationComponent implements OnInit {
             message = err.message;
           } else {
             message = 'Can not add major group now, please try again.';
+          }
+    
+          this.snackBar.open(message , null, {
+            duration: 3000,
+            horizontalPosition: 'right',
+            panelClass:"my-snack-bar-fail"
+          });
+        });
+      }
+    });
+  }
+
+  viewMajorGroupChildsDialog(majorGroup: MajorGroup){
+    const dialogRef = this.dialog.open(AddMajorGroupChildComponent, {
+      width: '550px',
+      data: {majorGroup: majorGroup}
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.loading = true;
+        this.salesService.addMajorGroup(this.majorGroups, this.syncJobType.id).toPromise().then(result => {
+          this.loading = false;
+          this.snackBar.open(result["message"], null, {
+            duration: 2000,
+            horizontalPosition: 'right',
+            panelClass:"my-snack-bar-success"
+          });
+
+        }).catch(err => {
+          this.loading = false;
+          let message = "";
+          if(err.status === 401){
+            message = ErrorMessages.SESSION_EXPIRED;
+            this.sidNav.Logout();
+          } else if (err.error.message){
+            message = err.error.message;
+          } else if (err.message){
+            message = err.message;
+          } else {
+            message = ErrorMessages.FAILED_TO_SYNC;
           }
     
           this.snackBar.open(message , null, {

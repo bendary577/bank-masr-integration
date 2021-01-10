@@ -93,6 +93,7 @@ import { AddWebServiceInvokerComponent } from './components/add-web-service-invo
 import { AddLocationComponent } from './components/add-location/add-location.component';
 import { OperationTypesConfigurationComponent } from './components/setting/operation-types-configuration/operation-types-configuration.component';
 import { CreateOrderConfigComponent } from './components/create-order-config/create-order-config.component';
+import { AddMajorGroupChildComponent } from './components/addMajorGroupChild/add-major-group-child.component';
 
 @NgModule({
   declarations: [
@@ -152,7 +153,8 @@ import { CreateOrderConfigComponent } from './components/create-order-config/cre
     AddWebServiceInvokerComponent,
     AddLocationComponent,
     OperationTypesConfigurationComponent,
-    CreateOrderConfigComponent
+    CreateOrderConfigComponent,
+    AddMajorGroupChildComponent
   ],
   imports: [
     BrowserModule,
@@ -196,6 +198,7 @@ import { CreateOrderConfigComponent } from './components/create-order-config/cre
   entryComponents: [AddUserComponent, AddAccountComponent, AddMajorGroupComponent, AddTenderComponent,
      AddTaxComponent, AddDiscountComponent, AddRevenueCenterComponent, AddServiceChargeComponent,
       SuppliersConfiguartionComponent, SchedulerConfigurationComponent, AddTenderChildComponent, 
-      AddSimphonyLocationComponent, AddWebServiceInvokerComponent, AddLocationComponent]
+      AddSimphonyLocationComponent, AddWebServiceInvokerComponent, AddLocationComponent,
+      AddMajorGroupChildComponent]
 })
 export class AppModule { }
