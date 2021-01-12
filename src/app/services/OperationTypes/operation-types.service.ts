@@ -11,7 +11,6 @@ export class OperationTypesService {
 
   constructor(private http: HttpClient) { }
 
-  // @Cacheable()
   getOperationTypes() {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_OPERATION_TYPES_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
@@ -20,5 +19,10 @@ export class OperationTypesService {
   getOperationTypesByName(operationName: string) {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_OPERATION_TYPE_BY_NAME_URL + "?operationName=" + operationName, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
+  updateOperationTypeConfig(operationType) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.put(Constants.UPDATE_OPERATION_TYPE_URL , operationType, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
 }

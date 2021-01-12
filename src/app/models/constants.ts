@@ -33,7 +33,7 @@ export class Constants {
 
     static GET_OPERATION_TYPES_URL = environment.apiHost + '/getOperationTypes';
     static GET_OPERATION_TYPE_BY_NAME_URL = environment.apiHost + '/getOperationTypeByName';
-    static UPDATE_OPERATION_TYPE_URL = environment.apiHost + '/updateOperationType';
+    static UPDATE_OPERATION_TYPE_URL = environment.apiHost + '/updateOperationTypeConfiguration';
 
     static GET_SYNC_JOB_TYPES_URL = environment.apiHost + '/getSyncJobTypes';
     static GET_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getSyncJobTypesByName';
