@@ -17,8 +17,8 @@ export class MenuItemsService {
     return this.http.get(Constants.GET_MENU_ITEMS_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
-  addSimphonyLocation(locations: SimphonyLocation[], id:string) {
+  addSimphonyLocation(locations: SimphonyLocation[]) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.post(Constants.ADD_SIMPHONY_LOCATION_URL + "?syncJobTypeId=" + id, locations, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
+    return this.http.post(Constants.ADD_SIMPHONY_LOCATION_URL, locations, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 }

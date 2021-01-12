@@ -43,7 +43,7 @@ export class SimphonyLocationConfigurationComponent implements OnInit {
 
         this.locations.push(this.newLocation);
 
-        this.simphonyService.addSimphonyLocation(this.locations, this.syncJobType.id).toPromise().then(result => {
+        this.simphonyService.addSimphonyLocation(this.locations).toPromise().then(result => {
           this.loading = false;
 
           this.snackBar.open(result["message"], null, {
