@@ -15,6 +15,11 @@
                     <div class="container" *ngIf="!loading">
                         <form class="my-form">
                             <div>
+                                <mat-checkbox id="exportFilePerLocation" name="exportFilePerLocation" class="example-margin" [(ngModel)]="syncJobType.configuration.exportFilePerLocation">Export files per location</mat-checkbox> 
+                            </div>
+                            <br>
+
+                            <div>
                                 <mat-form-field class="example-full-width">
                                     <input matInput id="recordType" name="recordType" placeholder="Record Type" [(ngModel)]="syncJobType.configuration.recordType">
                                 </mat-form-field>
@@ -47,12 +52,16 @@
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Oracle Hospitality Configurations
+                    Oracle Hospitality
                 </mat-panel-title>
             </mat-expansion-panel-header>
 
             <div class="container" *ngIf="!loading">
                 <form class="my-form">
+                    <div>
+                        <mat-checkbox id="tenderIncludeTax" name="tenderIncludeTax" class="example-margin" [(ngModel)]="syncJobType.configuration.tenderIncludeTax">Is tax included</mat-checkbox>
+                    </div>
+                    <br>
                     <div>
                         <mat-form-field class="example-full-width">
                             <mat-select matInput id="timePeriod" name="timePeriod" placeholder="Business Dates" 
@@ -97,11 +106,20 @@
 
         </mat-expansion-panel>
 
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Infor Sun System
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-infor-system-configuration [syncJobType]=syncJobType></app-infor-system-configuration>
+        </mat-expansion-panel>
+
         <!-- Cash Shortage/Surplus POS Configurations -->
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Cash Shortage/Surplus POS Configurations
+                    Cash Shortage/Surplus POS
                 </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -121,15 +139,6 @@
                 </form>
             </div>
 
-        </mat-expansion-panel>
-
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Infor Sun System
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-infor-system-configuration [syncJobType]=syncJobType></app-infor-system-configuration>
         </mat-expansion-panel>
 
         <!-- Loction Ledger Analysis Configurations -->
