@@ -8,6 +8,7 @@
                       <mat-option value="Daily">Daily</mat-option>
                       <mat-option value="Weekly">Weekly</mat-option>
                       <mat-option value="Monthly">Monthly</mat-option>
+                      <mat-option value="DailyPerMonth">Daily Per Month</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -20,7 +21,8 @@
                       </mat-select>
                 </mat-form-field>  
             </div>
-            <div *ngIf="syncJobType.configuration.duration == 'Monthly'">
+            <div *ngIf="syncJobType.configuration.duration == 'Monthly' || 
+            syncJobType.configuration.duration == 'DailyPerMonth' ">
                 <mat-form-field>
                     <mat-select placeholder="Day" name="day" [(ngModel)]="syncJobType.configuration.day">
                         <mat-option value={{day}} *ngFor="let day of days">
