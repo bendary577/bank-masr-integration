@@ -9,7 +9,7 @@
             {{job.creationDate}} - {{job.status}}</option>
     </select>
     <button mat-flat-button (click)="exportToCSV()" [disabled]="jobs.length == 0">Export to CSV</button>
-    <button mat-flat-button (click)="exportToXLSX()" [disabled]="jobs.length == 0">Export to Excel</button>
+    <button mat-flat-button (click)="generateSingleFile()" [disabled]="jobs.length == 0">Generate Single File</button>
     <button mat-flat-button (click)="getPOSSalesSyncJob()">Sync POS Sales Now</button>
 </div>
 

@@ -36,6 +36,7 @@ import { MenuItemsComponent } from './components/menu-items/menu-items.component
 import { MenuItemsConfigurationComponent } from './components/menu-items-configuration/menu-items-configuration.component';
 import { OperationTypesConfigurationComponent } from './components/setting/operation-types-configuration/operation-types-configuration.component';
 import { CreateOrderConfigComponent } from './components/create-order-config/create-order-config.component';
+import { SyncExportedFilesComponent } from './components/sync-exported-files/sync-exported-files.component';
 
 
 const routes: Routes = [
@@ -87,6 +88,8 @@ const routes: Routes = [
 
   { path: Constants.CREATE_ORDER_PAGE , component: MenuItemsComponent ,canActivate:[AuthGuardService]},
   { path: Constants.CREATE_ORDER_CONFIG_PAGE , component: CreateOrderConfigComponent ,canActivate:[AuthGuardService]},
+  
+  { path: Constants.EXPORTED_FILES_PAGE , component: SyncExportedFilesComponent ,canActivate:[AuthGuardService]},
 
   // Error Page
   {path:'**', component: ErrorComponentComponent }

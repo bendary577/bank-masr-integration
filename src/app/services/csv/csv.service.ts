@@ -24,6 +24,19 @@ export class CsvService {
     responseType: 'blob' as 'json'});
   }
 
+  generateSingleFile() {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get<Blob>(Constants.GENERATE_SINGLE_FILE_SALES , 
+    { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token}),
+     observe: 'response',
+    responseType: 'blob' as 'json'});
+  }
+
+  listSalesSyncFiles() {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get(Constants.LIST_SYNC_FILE_SALES , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
   exportTransfersToCSV(syncJobID) {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.EXPORT_CSV_BOOKED_TRANSFERS + '?syncJobId=' + syncJobID , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token}), responseType: 'blob'});

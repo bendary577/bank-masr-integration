@@ -159,8 +159,7 @@ export class Constants {
     static SYNC_JOBS = 'syncjobs';
     static OPERATION_TYPES = 'operationTypesConfiguration';
     static SYNC_TYPE_SCHEDULER = "Suppliers";
-
-
+    static EXPORTED_FILES_PAGE = 'exportedFiles';
     //////////////////////////////////////////////// Export To Excel //////////////////////////////////////////////
 
     static EXPORT_APPROVED_INVOICES = environment.apiHost + '/invoices/export/excel';
@@ -180,6 +179,8 @@ export class Constants {
     static EXPORT_CSV_CONSUMPTION = environment.apiHost + '/consumption/export/csv';
     static EXPORT_CSV_WATAGE = environment.apiHost + '/wastage/export/csv';
     static EXPORT_CSV_SALES = environment.apiHost + '/sales/export/csv';
+    static GENERATE_SINGLE_FILE_SALES = environment.apiHost + '/sales/export/generateSingleFile';
+    static LIST_SYNC_FILE_SALES = environment.apiHost + '/listSyncFiles';
 
     //////////////////////////////////////////////// ERD //////////////////////////////////////////////
 

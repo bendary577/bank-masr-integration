@@ -94,6 +94,7 @@ import { AddLocationComponent } from './components/add-location/add-location.com
 import { OperationTypesConfigurationComponent } from './components/setting/operation-types-configuration/operation-types-configuration.component';
 import { CreateOrderConfigComponent } from './components/create-order-config/create-order-config.component';
 import { AddMajorGroupChildComponent } from './components/addMajorGroupChild/add-major-group-child.component';
+import { SyncExportedFilesComponent } from './components/sync-exported-files/sync-exported-files.component';
 
 @NgModule({
   declarations: [
@@ -154,7 +155,8 @@ import { AddMajorGroupChildComponent } from './components/addMajorGroupChild/add
     AddLocationComponent,
     OperationTypesConfigurationComponent,
     CreateOrderConfigComponent,
-    AddMajorGroupChildComponent
+    AddMajorGroupChildComponent,
+    SyncExportedFilesComponent
   ],
   imports: [
     BrowserModule,

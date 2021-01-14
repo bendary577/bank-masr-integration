@@ -140,6 +140,11 @@ export class SyncJobsconfigComponent implements OnInit {
 
   }
 
+  openSyncFiles(syncJobType) {
+    this.data.storage = syncJobType
+    this.router.navigate([Constants.EXPORTED_FILES_PAGE]);
+  }
+
   clearSyncJobData(){
     this.spinner.show();
 

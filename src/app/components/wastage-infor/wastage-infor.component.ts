@@ -76,7 +76,7 @@ export class WastageInforComponent implements OnInit {
       let message = "Error happend, Please try again.";
       if(err.status === 401){
          message = ErrorMessages.SESSION_EXPIRED;
- this.sidNav.Logout();
+         this.sidNav.Logout();
 
       } else if (err.error.message){
         message = err.error.message;
@@ -108,8 +108,8 @@ export class WastageInforComponent implements OnInit {
     }).catch(err => {
       let message = "Error happend, Please try again.";
       if(err.status === 401){
-         message = ErrorMessages.SESSION_EXPIRED;
- this.sidNav.Logout();
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
 
       } else if (err.error.message){
         message = err.error.message;
