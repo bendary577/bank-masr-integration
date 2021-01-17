@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { CostCenter } from 'src/app/models/CostCenter';
+import { GeneralSettings } from 'src/app/models/GeneralSettings';
+import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 
 @Component({
   selector: 'app-add-tender',
@@ -12,8 +16,13 @@ export class AddTenderComponent implements OnInit {
   public form: FormGroup;
   submitted = false;
   newAccount:Account;
+  locations: CostCenter[] = [];
+  revenueCenters: string[] = [];
+  generalSettings: GeneralSettings;
 
-  constructor(private formBuilder: FormBuilder, public dialogRef: MatDialogRef<AddTenderComponent>) { }
+  constructor(private spinner: NgxSpinnerService, public snackBar: MatSnackBar,
+    private formBuilder: FormBuilder, public dialogRef: MatDialogRef<AddTenderComponent>,
+    private generalSettingsService: GeneralSettingsService) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -21,6 +30,9 @@ export class AddTenderComponent implements OnInit {
 
   onSaveClick(): void {
     this.dialogRef.close({
+      location: this.form.controls.location.value,
+      revenueCenter: this.form.controls.revenueCenter.value,
+
       name: this.form.controls.name.value,
       account: this.form.controls.account.value,
       communicationTender: this.form.controls.communicationTender.value,
@@ -31,7 +43,13 @@ export class AddTenderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getGeneralSettings();
+
     this.form = this.formBuilder.group({
+      location: ['', Validators.required],
+      revenueCenter: ['', Validators.required],
+
+
       name: ['', Validators.required],
       account: ['', Validators.required],
       communicationTender: [''],
@@ -40,4 +58,24 @@ export class AddTenderComponent implements OnInit {
       analysisCodeT5: [''],
     });
   }
+
+  getGeneralSettings() {
+    this.generalSettingsService.getGeneralSettings().then((res) => {
+
+      this.generalSettings = res as GeneralSettings;
+      if (this.generalSettings.locations){
+        this.locations = this.generalSettings.locations;
+      }
+      if (this.generalSettings.revenueCenters){
+        this.revenueCenters = this.generalSettings.revenueCenters;
+      }
+    }).catch(err => {
+      this.snackBar.open("Failed to get locations" , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
+      });
+    });
+  }
+
 }

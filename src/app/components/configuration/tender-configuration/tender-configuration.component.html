@@ -2,14 +2,25 @@
     <button mat-flat-button (click)="openTenderDialog()">Add</button>
 </div>
 
-<div *ngIf="tenders?.length > 0">
+<div *ngIf="tenders.length > 0">
 
     <ngx-datatable class="material" [rows]="tenders" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" 
-    [sorts]="[{prop: 'tender', dir: 'asc'}]">
-
+    [sortType]="'multi'">
         <ngx-datatable-column name="Tender">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.tender">{{row.tender}}</mat-checkbox>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Location">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <input matInput placeholder="Location" [(ngModel)]="row.costCenter.locationName" disabled>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Revenue Center">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <input matInput placeholder="Revenue Center" [(ngModel)]="row.revenueCenterName" disabled>
             </ng-template>
         </ngx-datatable-column>
 

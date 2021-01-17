@@ -45,9 +45,6 @@ export class PosSalesInforConfigurationComponent implements OnInit {
   newServiceCharge;
   serviceCharges = [];
 
-  newRevenueCenter;
-  revenueCenters = [];
-
   selectedTender = [];
   tender_loading = false;
 
@@ -74,17 +71,8 @@ export class PosSalesInforConfigurationComponent implements OnInit {
       this.discounts = this.syncJobType.configuration.salesConfiguration["discounts"];
       this.majorGroups = this.syncJobType.configuration.salesConfiguration["majorGroups"];
       this.serviceCharges = this.syncJobType.configuration.salesConfiguration["serviceCharges"];
-      this.analysis = this.syncJobType.configuration.salesConfiguration["analysis"];
-      this.revenueCenters = this.syncJobType.configuration.salesConfiguration["revenueCenters"];
-
-      if (this.tenders.length == 0){
-        this.tenders = [
-          {"checked": false, "tender": "Cash", "account": ""},
-          {"checked": false, "tender": "Visa", "account": ""},
-          {"checked": false, "tender": "Master", "account": ""},
-          {"checked": false, "tender": "Online Payment", "account": ""}
-        ];
-      }
+      this.analysis = this.syncJobType.configuration["analysis"];
+      // this.revenueCenters = this.syncJobType.configuration.salesConfiguration["revenueCenters"];
       this.loading = false;
     }).catch(err => {
       console.log({
@@ -121,7 +109,6 @@ export class PosSalesInforConfigurationComponent implements OnInit {
     this.syncJobType.configuration.salesConfiguration["discounts"] = this.discounts;
     this.syncJobType.configuration.salesConfiguration["majorGroups"] = this.majorGroups;
     this.syncJobType.configuration.salesConfiguration["serviceCharges"] = this.serviceCharges;
-    this.syncJobType.configuration.salesConfiguration["revenueCenters"] = this.revenueCenters;
 
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.snackBar.open('Save configuration successfully.', null, {
@@ -347,59 +334,6 @@ export class PosSalesInforConfigurationComponent implements OnInit {
             message = err.message;
           } else {
             message = 'Can not add discount now, please try again.';
-          }
-    
-          this.snackBar.open(message , null, {
-            duration: 3000,
-            horizontalPosition: 'right',
-            panelClass:"my-snack-bar-fail"
-          });
-        });
-      }
-    });
-  }
-
-  openRevenueCenterDialog(){
-    const dialogRef = this.dialog.open(AddRevenueCenterComponent, {
-      width: '550px'
-    });
-
-    dialogRef.afterClosed().subscribe(res => {
-      if (res) {
-        console.log(res)
-        this.spinner.show();
-        this.loading = true;
-        this.newRevenueCenter = {};
-        this.newRevenueCenter.checked = false;
-        this.newRevenueCenter.revenueCenter = res.name;
-
-        this.revenueCenters.push(this.newRevenueCenter);
-
-        this.salesService.addRevenueCenter(this.revenueCenters, this.syncJobType.id).toPromise().then(result => {
-          this.snackBar.open(result["message"], null, {
-            duration: 2000,
-            horizontalPosition: 'right',
-            panelClass:"my-snack-bar-success"
-          });
-
-          this.spinner.hide();
-          this.loading = false;
-          
-        }).catch(err => {
-          this.spinner.hide();
-          this.loading = false;
-          this.majorGroups.pop();
-
-          let message = "";
-          if(err.status === 401){
-             message = ErrorMessages.SESSION_EXPIRED;
-            this.sidNav.Logout();
-          } else if (err.error.message){
-            message = err.error.message;
-          } else if (err.message){
-            message = err.message;
-          } else {
-            message = 'Can not add revenue center now, please try again.';
           }
     
           this.snackBar.open(message , null, {
