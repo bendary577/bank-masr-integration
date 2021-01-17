@@ -4,49 +4,49 @@
 <div>
     <div *ngIf="!loading && syncJobType">
 
-        <!-- Oracle Hospitality Configurations -->
-        <mat-expansion-panel *ngIf="accountERD == 'ExportSun'">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Exported File
-                </mat-panel-title>
-            </mat-expansion-panel-header>
+                <!-- Oracle Hospitality Configurations -->
+                <mat-expansion-panel *ngIf="accountERD == 'ExportSun'">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Exported File
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+        
+                    <div class="container" *ngIf="!loading">
+                        <form class="my-form">
+                            <div>
+                                <mat-checkbox id="exportFilePerLocation" name="exportFilePerLocation" class="example-margin" [(ngModel)]="syncJobType.configuration.exportFilePerLocation">Export files per location</mat-checkbox> 
+                            </div>
+                            <br>
 
-            <div class="container" *ngIf="!loading">
-                <form class="my-form">
-                    <div>
-                        <mat-checkbox id="exportFilePerLocation" name="exportFilePerLocation" class="example-margin" [(ngModel)]="syncJobType.configuration.salesConfiguration.exportFilePerLocation">Export files per location</mat-checkbox> 
+                            <div>
+                                <mat-form-field class="example-full-width">
+                                    <input matInput id="recordType" name="recordType" placeholder="Record Type" [(ngModel)]="syncJobType.configuration.recordType">
+                                </mat-form-field>
+                            </div>
+
+                            <div>
+                                <mat-form-field class="example-full-width">
+                                    <input matInput id="conversionCode" name="conversionCode" placeholder="Conversion Code" [(ngModel)]="syncJobType.configuration.conversionCode">
+                                </mat-form-field>
+                            </div>
+
+                            <div>
+                                <mat-form-field class="example-full-width">
+                                    <input matInput id="conversionRate" name="conversionRate" placeholder="Conversion Rate" [(ngModel)]="syncJobType.configuration.conversionRate">
+                                </mat-form-field>
+                            </div>
+
+                            <div>
+                                <mat-form-field class="example-full-width">
+                                    <input matInput id="versionCode" name="versionCode" placeholder="Version Code" [(ngModel)]="syncJobType.configuration.versionCode">
+                                </mat-form-field>
+                            </div>
+            
+                        </form>
                     </div>
-                    <br>
-
-                    <div>
-                        <mat-form-field class="example-full-width">
-                            <input matInput id="recordType" name="recordType" placeholder="Record Type" [(ngModel)]="syncJobType.configuration.salesConfiguration.recordType">
-                        </mat-form-field>
-                    </div>
-
-                    <div>
-                        <mat-form-field class="example-full-width">
-                            <input matInput id="conversionCode" name="conversionCode" placeholder="Conversion Code" [(ngModel)]="syncJobType.configuration.salesConfiguration.conversionCode">
-                        </mat-form-field>
-                    </div>
-
-                    <div>
-                        <mat-form-field class="example-full-width">
-                            <input matInput id="conversionRate" name="conversionRate" placeholder="Conversion Rate" [(ngModel)]="syncJobType.configuration.salesConfiguration.conversionRate">
-                        </mat-form-field>
-                    </div>
-
-                    <div>
-                        <mat-form-field class="example-full-width">
-                            <input matInput id="versionCode" name="versionCode" placeholder="Version Code" [(ngModel)]="syncJobType.configuration.salesConfiguration.versionCode">
-                        </mat-form-field>
-                    </div>
-    
-                </form>
-            </div>
-
-        </mat-expansion-panel>
+        
+                </mat-expansion-panel>
 
         <!-- Oracle Hospitality Configurations -->
         <mat-expansion-panel>
@@ -55,7 +55,55 @@
                     Oracle Hospitality
                 </mat-panel-title>
             </mat-expansion-panel-header>
-            <app-ohra-configuration [syncJobType]=syncJobType></app-ohra-configuration>
+
+            <div class="container" *ngIf="!loading">
+                <form class="my-form">
+                    <div>
+                        <mat-checkbox id="tenderIncludeTax" name="tenderIncludeTax" class="example-margin" [(ngModel)]="syncJobType.configuration.tenderIncludeTax">Is tax included</mat-checkbox>
+                    </div>
+                    <br>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <mat-select matInput id="timePeriod" name="timePeriod" placeholder="Business Dates" 
+                            (selectionChange)="chooseTimePeriod()" [(ngModel)]="syncJobType.configuration.timePeriod">
+                                <mat-option value="Most Recent">Most Recent</mat-option>
+                                <mat-option value="Financial Week to Date">Financial Week to Date</mat-option>
+                                <mat-option value="Past 7 Days">Past 7 Days</mat-option>
+                                <mat-option value="Today">Today</mat-option>
+                                <mat-option value="Yesterday">Yesterday</mat-option>
+                                <mat-option value="Month to Date">Month to Date</mat-option>
+                                <mat-option value="Last Month">Last Month</mat-option>
+                                <mat-option value="Financial Period to Date">Financial Period to Date</mat-option>
+                                <mat-option value="UserDefined">User-defined</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div *ngIf="userDefinedFlag">
+                        <p>From</p>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Start Date" type="date" name="fromDate" id="fromDate" [(ngModel)]="syncJobType.configuration.fromDate">
+                        </mat-form-field>
+                
+                        <p>To</p>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="End Date" type="date" name="toDate" id="toDate" [(ngModel)]="syncJobType.configuration.toDate">
+                        </mat-form-field>
+                    </div>
+
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <mat-select matInput id="GrossDiscountSales" name="GrossDiscountSales" placeholder="Sync sales gross/gross less discount" 
+                            [(ngModel)]="syncJobType.configuration.grossDiscountSales">
+                                <mat-option value="Gross">Gross</mat-option>
+                                <mat-option value="Gross Less Discount">Gross Less Discount</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+    
+                </form>
+            </div>
+
         </mat-expansion-panel>
 
         <mat-expansion-panel>
@@ -79,12 +127,12 @@
                 <form class="my-form">
                     <div>
                         <mat-form-field class="example-full-width">
-                            <input matInput id="cashShortagePOS" name="cashShortagePOS" placeholder="Cash Shortage POS Account" [(ngModel)]="syncJobType.configuration.salesConfiguration.cashShortagePOS">
+                            <input matInput id="cashShortagePOS" name="cashShortagePOS" placeholder="Cash Shortage POS Account" [(ngModel)]="syncJobType.configuration.cashShortagePOS">
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field class="example-full-width">
-                            <input matInput id="cashSurplusPOS" name="cashSurplusPOS" placeholder="Cash Surplus POS Account" [(ngModel)]="syncJobType.configuration.salesConfiguration.cashSurplusPOS">
+                            <input matInput id="cashSurplusPOS" name="cashSurplusPOS" placeholder="Cash Surplus POS Account" [(ngModel)]="syncJobType.configuration.cashSurplusPOS">
                         </mat-form-field>
                     </div>
 
@@ -105,7 +153,7 @@
                 <form class="my-form">
                     <div>
                         <mat-form-field class="example-full-width">
-                            <mat-select matInput id="locationAnalysis" name="locationAnalysis" placeholder="Location Ledger Analysis" [(ngModel)]="syncJobType.configuration.salesConfiguration.locationAnalysis">
+                            <mat-select matInput id="locationAnalysis" name="locationAnalysis" placeholder="Location Ledger Analysis" [(ngModel)]="syncJobType.configuration.locationAnalysis">
                                 <mat-option value="1">1</mat-option>
                                 <mat-option value="2">2</mat-option>
                                 <mat-option value="3">3</mat-option>
@@ -158,11 +206,6 @@
                 <button mat-flat-button (click)="openTaxDialog()">Add</button>
             </div>
 
-            <div>
-                <mat-checkbox id="tenderIncludeTax" name="tenderIncludeTax" class="example-margin" [(ngModel)]="syncJobType.configuration.salesConfiguration.tenderIncludeTax">Is tax included</mat-checkbox>
-            </div>
-            <br>
-
             <div *ngIf="taxes?.length > 0 && !loading">
 
                 <ngx-datatable class="material" [rows]="taxes" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" 
@@ -193,16 +236,6 @@
             </mat-expansion-panel-header>
             <div class="back" style="margin-bottom: 15px;">
                 <button mat-flat-button (click)="openMajorGroupDialog()">Add</button>
-            </div>
-
-            <div>
-                <mat-form-field class="example-full-width">
-                    <mat-select matInput id="GrossDiscountSales" name="GrossDiscountSales" placeholder="Sync sales gross/gross less discount" 
-                    [(ngModel)]="syncJobType.configuration.salesConfiguration.grossDiscountSales">
-                        <mat-option value="Gross">Gross</mat-option>
-                        <mat-option value="Gross Less Discount">Gross Less Discount</mat-option>
-                    </mat-select>
-                </mat-form-field>
             </div>
 
             <div *ngIf="majorGroups?.length > 0">
@@ -247,7 +280,7 @@
             </mat-expansion-panel-header>
             <div class="back" style="margin-bottom: 15px;">
                 <button mat-flat-button (click)="openDiscountDialog()">Add</button>
-                <mat-checkbox class="example-margin" [(ngModel)]="syncJobType.configuration.salesConfiguration.majorGroupDiscount">Include Major Group Discount</mat-checkbox>
+                <mat-checkbox class="example-margin" [(ngModel)]="syncJobType.configuration.majorGroupDiscount">Include Major Group Discount</mat-checkbox>
             </div>
 
             <div *ngIf="discounts?.length > 0">

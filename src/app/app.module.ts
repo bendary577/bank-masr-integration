@@ -95,6 +95,7 @@ import { OperationTypesConfigurationComponent } from './components/setting/opera
 import { CreateOrderConfigComponent } from './components/create-order-config/create-order-config.component';
 import { AddMajorGroupChildComponent } from './components/addMajorGroupChild/add-major-group-child.component';
 import { SyncExportedFilesComponent } from './components/sync-exported-files/sync-exported-files.component';
+import { OhraConfigurationComponent } from './components/configuration/ohra-configuration/ohra-configuration.component';
 
 @NgModule({
   declarations: [
@@ -156,7 +157,8 @@ import { SyncExportedFilesComponent } from './components/sync-exported-files/syn
     OperationTypesConfigurationComponent,
     CreateOrderConfigComponent,
     AddMajorGroupChildComponent,
-    SyncExportedFilesComponent
+    SyncExportedFilesComponent,
+    OhraConfigurationComponent
   ],
   imports: [
     BrowserModule,

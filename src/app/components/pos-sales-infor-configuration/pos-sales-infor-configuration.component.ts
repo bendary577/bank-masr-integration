@@ -25,8 +25,6 @@ import { AddMajorGroupChildComponent } from '../addMajorGroupChild/add-major-gro
   styleUrls: ['./pos-sales-infor-configuration.component.scss']
 })
 export class PosSalesInforConfigurationComponent implements OnInit {
-  userDefinedFlag = false;
-
   loading = true;
   save_loading = false;
   analysis = [];
@@ -71,16 +69,13 @@ export class PosSalesInforConfigurationComponent implements OnInit {
     this.loading = true;
     this.accSyncTypeService.getAccSyncJobType(Constants.POS_SALES_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
-      if(this.syncJobType.configuration.timePeriod == "UserDefined"){
-        this.userDefinedFlag = true;
-      }
-      this.taxes = this.syncJobType.configuration["taxes"];
-      this.tenders = this.syncJobType.configuration["tenders"];
-      this.discounts = this.syncJobType.configuration["discounts"];
-      this.majorGroups = this.syncJobType.configuration["majorGroups"];
-      this.serviceCharges = this.syncJobType.configuration["serviceCharges"];
-      this.analysis = this.syncJobType.configuration["analysis"];
-      this.revenueCenters = this.syncJobType.configuration["revenueCenters"];
+      this.taxes = this.syncJobType.configuration.salesConfiguration["taxes"];
+      this.tenders = this.syncJobType.configuration.salesConfiguration["tenders"];
+      this.discounts = this.syncJobType.configuration.salesConfiguration["discounts"];
+      this.majorGroups = this.syncJobType.configuration.salesConfiguration["majorGroups"];
+      this.serviceCharges = this.syncJobType.configuration.salesConfiguration["serviceCharges"];
+      this.analysis = this.syncJobType.configuration.salesConfiguration["analysis"];
+      this.revenueCenters = this.syncJobType.configuration.salesConfiguration["revenueCenters"];
 
       if (this.tenders.length == 0){
         this.tenders = [
@@ -92,6 +87,9 @@ export class PosSalesInforConfigurationComponent implements OnInit {
       }
       this.loading = false;
     }).catch(err => {
+      console.log({
+        salesSynError: err
+      });
       let message = "";
       if(err.status === 401){
         message = ErrorMessages.SESSION_EXPIRED;
@@ -118,12 +116,12 @@ export class PosSalesInforConfigurationComponent implements OnInit {
     this.spinner.show();
     this.save_loading = true;
 
-    this.syncJobType["configuration"]["taxes"] = this.taxes;
-    this.syncJobType["configuration"]["tenders"] = this.tenders;
-    this.syncJobType["configuration"]["discounts"] = this.discounts;
-    this.syncJobType["configuration"]["majorGroups"] = this.majorGroups;
-    this.syncJobType["configuration"]["serviceCharges"] = this.serviceCharges;
-    this.syncJobType["configuration"]["revenueCenters"] = this.revenueCenters;
+    this.syncJobType.configuration.salesConfiguration["taxes"] = this.taxes;
+    this.syncJobType.configuration.salesConfiguration["tenders"] = this.tenders;
+    this.syncJobType.configuration.salesConfiguration["discounts"] = this.discounts;
+    this.syncJobType.configuration.salesConfiguration["majorGroups"] = this.majorGroups;
+    this.syncJobType.configuration.salesConfiguration["serviceCharges"] = this.serviceCharges;
+    this.syncJobType.configuration.salesConfiguration["revenueCenters"] = this.revenueCenters;
 
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.snackBar.open('Save configuration successfully.', null, {
@@ -473,11 +471,4 @@ export class PosSalesInforConfigurationComponent implements OnInit {
     this.router.navigate([Constants.SYNC_JOBS]);
   }
 
-  chooseTimePeriod(){
-    if(this.syncJobType.configuration.timePeriod == "UserDefined"){
-      this.userDefinedFlag = true;
-    }else{
-      this.userDefinedFlag = false;
-    }
-  }
 }
