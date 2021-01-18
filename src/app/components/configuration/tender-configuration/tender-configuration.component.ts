@@ -36,9 +36,12 @@ export class TenderConfigurationComponent implements OnInit {
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.loading = true;
-        this.newTender.checked = false;
+        this.newTender.checked = true;
         this.newTender.tender = res.name;
         this.newTender.account = res.account;
+        this.newTender.costCenter = res.location;
+        this.newTender.revenueCenter = res.revenueCenter;
+
         this.newTender.communicationTender = res.communicationTender;
         this.newTender.communicationAccount = res.communicationAccount;
         this.newTender.communicationRate = res.communicationRate;

@@ -4,19 +4,19 @@
         <div class="form-group">
             <mat-form-field class="example-full-width">
                 <mat-select matInput id="location" name="location" placeholder="Location" formControlName="location">
-                    <mat-option value={{rc}} *ngFor="let loc of locations">
+                    <mat-option [value]=loc *ngFor="let loc of locations">
                         {{loc.locationName}}</mat-option>
 
-                    <mat-option value="General">General</mat-option>
+                    <mat-option [value]=generalCostCenter>General</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
         <div class="form-group">
             <mat-form-field class="example-full-width">
                 <mat-select matInput id="revenueCenter" name="revenueCenter" placeholder="Revenue Center" formControlName="revenueCenter">
-                    <mat-option value={{rc}} *ngFor="let rc of revenueCenters">{{rc.revenueCenter}}</mat-option>
+                    <mat-option [value]=rc *ngFor="let rc of revenueCenters">{{rc.revenueCenter}}</mat-option>
 
-                    <mat-option value="General">General</mat-option>
+                    <mat-option [value]=generalRevenueCenter>General</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>

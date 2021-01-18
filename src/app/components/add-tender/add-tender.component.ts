@@ -4,6 +4,7 @@ import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CostCenter } from 'src/app/models/CostCenter';
 import { GeneralSettings } from 'src/app/models/GeneralSettings';
+import { RevenueCenter } from 'src/app/models/RevenueCenter';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 
 @Component({
@@ -20,7 +21,10 @@ export class AddTenderComponent implements OnInit {
   revenueCenters: string[] = [];
   generalSettings: GeneralSettings;
 
-  constructor(private spinner: NgxSpinnerService, public snackBar: MatSnackBar,
+  generalCostCenter: CostCenter = new CostCenter();
+  generalRevenueCenter: RevenueCenter = new RevenueCenter();
+
+  constructor(public snackBar: MatSnackBar,
     private formBuilder: FormBuilder, public dialogRef: MatDialogRef<AddTenderComponent>,
     private generalSettingsService: GeneralSettingsService) { }
 
@@ -43,6 +47,9 @@ export class AddTenderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.generalCostCenter.locationName = "General";
+    this.generalRevenueCenter.revenueCenter = "General";
+
     this.getGeneralSettings();
 
     this.form = this.formBuilder.group({
