@@ -1,11 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { CostCenter } from 'src/app/models/CostCenter';
 import { GeneralSettings } from 'src/app/models/GeneralSettings';
 import { RevenueCenter } from 'src/app/models/RevenueCenter';
-import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 
 @Component({
   selector: 'app-add-tender',
@@ -26,7 +24,7 @@ export class AddTenderComponent implements OnInit {
 
   constructor(public snackBar: MatSnackBar,
     private formBuilder: FormBuilder, public dialogRef: MatDialogRef<AddTenderComponent>,
-    private generalSettingsService: GeneralSettingsService) { }
+    @Inject(MAT_DIALOG_DATA) public data) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -50,12 +48,17 @@ export class AddTenderComponent implements OnInit {
     this.generalCostCenter.locationName = "General";
     this.generalRevenueCenter.revenueCenter = "General";
 
-    this.getGeneralSettings();
+    this.generalSettings = this.data["generalSettings"];
+    if (this.generalSettings.locations){
+      this.locations = this.generalSettings.locations;
+    }
+    if (this.generalSettings.revenueCenters){
+      this.revenueCenters = this.generalSettings.revenueCenters;
+    }
 
     this.form = this.formBuilder.group({
       location: ['', Validators.required],
       revenueCenter: ['', Validators.required],
-
 
       name: ['', Validators.required],
       account: ['', Validators.required],
@@ -65,24 +68,4 @@ export class AddTenderComponent implements OnInit {
       analysisCodeT5: [''],
     });
   }
-
-  getGeneralSettings() {
-    this.generalSettingsService.getGeneralSettings().then((res) => {
-
-      this.generalSettings = res as GeneralSettings;
-      if (this.generalSettings.locations){
-        this.locations = this.generalSettings.locations;
-      }
-      if (this.generalSettings.revenueCenters){
-        this.revenueCenters = this.generalSettings.revenueCenters;
-      }
-    }).catch(err => {
-      this.snackBar.open("Failed to get locations" , null, {
-        duration: 3000,
-        horizontalPosition: 'right',
-        panelClass:"my-snack-bar-fail"
-      });
-    });
-  }
-
 }

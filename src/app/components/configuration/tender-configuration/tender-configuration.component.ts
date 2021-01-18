@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { GeneralSettings } from 'src/app/models/GeneralSettings';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { Tender } from 'src/app/models/Tender';
 import { PosSalesService } from 'src/app/services/posSales/pos-sales.service';
@@ -15,22 +16,22 @@ import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
 })
 export class TenderConfigurationComponent implements OnInit {
   loading = false;
-
   newTender : Tender = new Tender();  
-  @Input() tenders: Tender[];
 
+  @Input() tenders: Tender[];
   @Input() syncJobType: SyncJobType;
+  @Input() generalSettings: GeneralSettings;
 
   constructor(private salesService:PosSalesService,
      private sidNav: SidenavResponsive,
      public snackBar: MatSnackBar, public dialog: MatDialog) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   openTenderDialog(){
     const dialogRef = this.dialog.open(AddTenderComponent, {
-      width: '550px'
+      width: '550px',
+      data: {generalSettings: this.generalSettings}
     });
 
     dialogRef.afterClosed().subscribe(res => {

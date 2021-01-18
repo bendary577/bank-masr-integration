@@ -7,16 +7,17 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 import { AccountSyncType } from 'src/app/models/AccountSyncType';
 import { PosSalesService } from '../../services/posSales/pos-sales.service';
-import { AddTenderComponent } from '../add-tender/add-tender.component';
 import { AddMajorGroupComponent } from '../addMajorGroup/add-major-group.component';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import { AddTaxComponent } from '../add-tax/add-tax.component';
 import { AddDiscountComponent } from '../add-discount/add-discount.component';
-import { AddRevenueCenterComponent } from '../add-revenue-center/add-revenue-center.component';
 import { AddServiceChargeComponent } from '../add-service-charge/add-service-charge.component';
 import { MajorGroup } from 'src/app/models/MajorGroup';
 import { AddMajorGroupChildComponent } from '../addMajorGroupChild/add-major-group-child.component';
+import { GeneralSettings } from 'src/app/models/GeneralSettings';
+import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
+import { ServiceCharge } from 'src/app/models/ServiceCharge';
 
 
 @Component({
@@ -42,7 +43,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
   newDiscount;
   discounts = [];
 
-  newServiceCharge;
+  newServiceCharge : ServiceCharge = new ServiceCharge();
   serviceCharges = [];
 
   selectedTender = [];
@@ -52,13 +53,16 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
   accountERD;
 
+  generalSettings: GeneralSettings;
+
   constructor(private spinner: NgxSpinnerService, private salesService:PosSalesService,
-    private sidNav: SidenavResponsive,
+    private sidNav: SidenavResponsive, private generalSettingsService: GeneralSettingsService,
      private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService,
     private router:Router, public snackBar: MatSnackBar, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.getSyncJobType();
+    this.getGeneralSettings();
     this.accountERD = localStorage.getItem('accountERD');
   }
 
@@ -97,6 +101,18 @@ export class PosSalesInforConfigurationComponent implements OnInit {
       });
 
       this.loading = false;
+    });
+  }
+
+  getGeneralSettings() {
+    this.generalSettingsService.getGeneralSettings().then((res) => {
+      this.generalSettings = res as GeneralSettings;
+    }).catch(err => {
+      this.snackBar.open("Failed to get general settings" , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
+      });
     });
   }
 
@@ -348,7 +364,8 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
   openServiceChargeDialog(){
     const dialogRef = this.dialog.open(AddServiceChargeComponent, {
-      width: '550px'
+      width: '550px',
+      data: {generalSettings: this.generalSettings}
     });
 
     dialogRef.afterClosed().subscribe(res => {
@@ -356,14 +373,18 @@ export class PosSalesInforConfigurationComponent implements OnInit {
         console.log(res)
         this.spinner.show();
         this.loading = true;
-        this.newServiceCharge = {};
-        this.newServiceCharge.checked = false;
+        this.newServiceCharge.checked = true;
         this.newServiceCharge.serviceCharge = res.name;
         this.newServiceCharge.account = res.account;
+
+        this.newServiceCharge.costCenter = res.location;
+        this.newServiceCharge.revenueCenter = res.revenueCenter;
 
         this.serviceCharges.push(this.newServiceCharge);
 
         this.salesService.addServiceCharge(this.serviceCharges, this.syncJobType.id).toPromise().then(result => {
+          this.newServiceCharge = new ServiceCharge()
+
           this.snackBar.open(result["message"], null, {
             duration: 2000,
             horizontalPosition: 'right',
@@ -377,7 +398,8 @@ export class PosSalesInforConfigurationComponent implements OnInit {
           this.spinner.hide();
           this.loading = false;
           this.majorGroups.pop();
-
+          this.newServiceCharge = new ServiceCharge();
+          
           let message = "";
           if(err.status === 401){
              message = ErrorMessages.SESSION_EXPIRED;
