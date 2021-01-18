@@ -30,7 +30,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
   save_loading = false;
   analysis = [];
 
-  newMajorGroup ;
+  newMajorGroup: MajorGroup = new MajorGroup();
   majorGroups = []
   selectedMajorGroup = [];
   majorGroup_loading = true;
@@ -223,7 +223,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
       if (res) {
         this.spinner.show();
         this.loading = true;
-        this.newMajorGroup = {};
+        this.newMajorGroup = new MajorGroup();
         this.newMajorGroup.checked = false;
         this.newMajorGroup.majorGroup = res.name;
         this.newMajorGroup.account = res.account;
