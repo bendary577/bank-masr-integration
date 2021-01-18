@@ -77,7 +77,7 @@
     </div>
 
     <div class="main" *ngIf="creditNote.length">
-        <ngx-datatable *ngIf="!loading" class="material" [rows]="creditNote" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[{prop: 'vendor', dir: 'asc'}, {prop: 'invoiceNo', dir: 'asc'}]">
+        <ngx-datatable *ngIf="!loading" class="material" [rows]="creditNote" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
 
 
             <ngx-datatable-column name="Status">
