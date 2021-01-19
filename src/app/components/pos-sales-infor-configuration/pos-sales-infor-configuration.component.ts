@@ -224,7 +224,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
         this.spinner.show();
         this.loading = true;
         this.newMajorGroup = new MajorGroup();
-        this.newMajorGroup.checked = false;
+        this.newMajorGroup.checked = true;
         this.newMajorGroup.majorGroup = res.name;
         this.newMajorGroup.account = res.account;
 

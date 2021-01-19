@@ -154,7 +154,8 @@
             <div class="back" style="margin-bottom: 20px;">
                 <button mat-flat-button (click)="openMajorGroupDialog()">Add</button>
                 <mat-checkbox class="example-margin" style="padding-right: 10px;" [(ngModel)]="syncJobType.configuration.salesConfiguration.MGDiscount" [disabled]="syncJobType.configuration.salesConfiguration.RVDiscount">Include Major Group Discount</mat-checkbox>
-                <mat-checkbox class="example-margin" [(ngModel)]="syncJobType.configuration.salesConfiguration.RVDiscount" [disabled]="syncJobType.configuration.salesConfiguration.MGDiscount">Include Revenue Center Discount</mat-checkbox>
+                <mat-checkbox class="example-margin" style="padding-right: 10px;" [(ngModel)]="syncJobType.configuration.salesConfiguration.RVDiscount" [disabled]="syncJobType.configuration.salesConfiguration.MGDiscount">Include Revenue Center Discount</mat-checkbox>
+                <mat-checkbox class="example-margin" [(ngModel)]="syncJobType.configuration.salesConfiguration.syncMG">Sync major groups or family groups.</mat-checkbox>
             </div>
 
             <div>

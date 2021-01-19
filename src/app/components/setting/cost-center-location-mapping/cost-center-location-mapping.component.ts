@@ -169,7 +169,6 @@ export class CostCenterLocationMappingComponent implements OnInit {
         if(!this.generalSettings.revenueCenters){
           this.generalSettings.revenueCenters = [];
         }
-        this.revenueCenters.push(this.newRevenueCenter);
         this.generalSettings.revenueCenters.push(this.newRevenueCenter);
 
         this.generalSettingsService.updateGeneralSettings(this.generalSettings).then(result => {
