@@ -97,6 +97,38 @@
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>
+                    Analysis Codes
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="container" *ngIf="!loading">
+                <form class="my-form">
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <mat-select matInput id="locationAnalysisCode" name="locationAnalysisCode" placeholder="Location Analysis Code" [(ngModel)]="syncJobType.configuration.locationAnalysisCode">
+                                <mat-option [value]=code *ngFor="let code of analysisCodes">{{code}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-select matInput id="tenderAnalysisCode" name="tenderAnalysisCode" placeholder="Tender Analysis Code" [(ngModel)]="syncJobType.configuration.tenderAnalysisCode">
+                                <mat-option [value]=code *ngFor="let code of analysisCodes">{{code}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-select matInput id="familyGroupAnalysisCode" name="familyGroupAnalysisCode" placeholder="Family Group Analysis Code" [(ngModel)]="syncJobType.configuration.familyGroupAnalysisCode">
+                                <mat-option [value]=code *ngFor="let code of analysisCodes">{{code}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </form>
+            </div>
+
+        </mat-expansion-panel>
+
+        <!-- Analysis Configurations -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
                     Analysis
                 </mat-panel-title>
             </mat-expansion-panel-header>

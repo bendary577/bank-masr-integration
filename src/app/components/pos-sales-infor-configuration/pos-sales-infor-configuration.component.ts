@@ -29,6 +29,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
   loading = true;
   save_loading = false;
   analysis = [];
+  analysisCodes = [1,2,3,4,5,6,7,8,9,10];
 
   newMajorGroup: MajorGroup = new MajorGroup();
   majorGroups = []
