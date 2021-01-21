@@ -95,6 +95,15 @@ import { OperationTypesConfigurationComponent } from './components/setting/opera
 import { CreateOrderConfigComponent } from './components/create-order-config/create-order-config.component';
 import { AddMajorGroupChildComponent } from './components/addMajorGroupChild/add-major-group-child.component';
 import { SyncExportedFilesComponent } from './components/sync-exported-files/sync-exported-files.component';
+import { ZealPaymentComponent } from './components/zeal-payment/zeal-payment.component';
+import { ZealPaymentConfigComponent } from './components/zeal-payment-config/zeal-payment-config.component';
+import { ZealVoucherComponent } from './components/zeal-voucher/zeal-voucher.component';
+import { PaymentVoucherConfigComponent } from './components/payment-voucher-config/payment-voucher-config.component';
+import { ZealVoucherConfigComponent } from './components/zeal-voucher-config/zeal-voucher-config.component';
+import { ZealPointsComponent } from './components/zeal-points/zeal-points.component';
+import { ZealPointsConfigComponent } from './components/zeal-points-config/zeal-points-config.component';
+import { ZealPaymentService } from './services/zealPayment/zeal-payment.service';
+import { OperationService } from './services/operation/operation.service';
 
 @NgModule({
   declarations: [
@@ -156,7 +165,14 @@ import { SyncExportedFilesComponent } from './components/sync-exported-files/syn
     OperationTypesConfigurationComponent,
     CreateOrderConfigComponent,
     AddMajorGroupChildComponent,
-    SyncExportedFilesComponent
+    SyncExportedFilesComponent,
+    ZealPaymentComponent,
+    ZealPaymentConfigComponent,
+    ZealVoucherComponent,
+    PaymentVoucherConfigComponent,
+    ZealVoucherConfigComponent,
+    ZealPointsComponent,
+    ZealPointsConfigComponent
   ],
   imports: [
     BrowserModule,
@@ -195,7 +211,8 @@ import { SyncExportedFilesComponent } from './components/sync-exported-files/syn
     AuthGuardService, 
     SidenavResponsive,
     ExcelService,
-  CsvService],
+  CsvService,
+  OperationService],
   bootstrap: [AppComponent],
   entryComponents: [AddUserComponent, AddAccountComponent, AddMajorGroupComponent, AddTenderComponent,
      AddTaxComponent, AddDiscountComponent, AddRevenueCenterComponent, AddServiceChargeComponent,

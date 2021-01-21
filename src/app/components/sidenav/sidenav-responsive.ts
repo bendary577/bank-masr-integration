@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { Constants } from 'src/app/models/constants';
-import {NavigationEnd, Router} from "@angular/router";
+import {NavigationEnd, Router} from '@angular/router';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { MatSnackBar } from '@angular/material';
 import { OperationTypesService } from 'src/app/services/OperationTypes/operation-types.service';
@@ -59,7 +59,7 @@ export class SidenavResponsive implements OnDestroy,OnInit {
   changeCurrentTab(cuurentTab) {
     Constants.CURRENT_TAB = cuurentTab;
     this.selectedTab = cuurentTab;
-  }
+  } 
 
   Logout() {
     localStorage.removeItem("auth-token");

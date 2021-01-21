@@ -48,6 +48,21 @@ export class OperationTypesConfigurationComponent implements OnInit {
     if (operationType.name == Constants.CREATE_ORDER_OPERATION) {
         this.router.navigate([Constants.CREATE_ORDER_CONFIG_PAGE]);
     }
+
+    if (operationType.name == Constants.ZEAL_PAYMENT_OPERATION) {
+      this.router.navigate([Constants.ZEAL_PAYMENT_CONFIG_PAGE]);
+    }
+    
+    console.log(Constants.ZEAL_VOUCHER_OPERATION)
+
+    if (operationType.name == Constants.ZEAL_VOUCHER_OPERATION) {
+    this.router.navigate([Constants.ZEAL_VOUCHER_CONFIG_PAGE]);
+    }
+
+    if (operationType.name == Constants.ZEAL_POINTS_OPERATION) {
+      this.router.navigate([Constants.ZEAL_POINTS_CONFIG_PAGE]);
+      }
+  
   }
 
 }

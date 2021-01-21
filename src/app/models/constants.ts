@@ -42,6 +42,9 @@ export class Constants {
     static UPDATE_SYNC_JOB_TYPES_URL = environment.apiHost + '/updateSyncJobTypesConfiguration';
     static UPDATE_COST_CENTER_MAPPING_URL = environment.apiHost + '/updateCostCenterLocationMapping';
     static GET_SYNC_JOBS_URL = environment.apiHost + '/getSyncJobs';
+    static GET_SYNC_JOBS_URL2 = environment.apiHost + '/getSyncJobs2';
+
+    static GET_OPERATION_URL = environment.apiHost + '/getOperation';
 
     static GET_SUPPLIERS_URL = environment.apiHost + '/getSuppliers';
     static GET_SUPPLIERS_DETAILS_URL = environment.apiHost + '/getSuppliersDetails';
@@ -58,6 +61,10 @@ export class Constants {
 
     static GET_WASTE_GROUPS_URL = environment.apiHost + '/getWasteGroups';
     static GET_WASTE_URL = environment.apiHost + '/getWastage';
+
+    static GET_ZEALPAYMENT_URL = environment.apiHost + '/zeal/zealPayment';
+    static GET_ZEALPOINTS_URL = environment.apiHost + '/zeal/zealPoints';
+    static GET_ZEALVOUCHER_URL = environment.apiHost + '/zeal/zealVoucher';
 
     static GET_BUSINESS_UNITS_URL = environment.apiHost + '/getBusinessUnits';
     static GET_PAYMENT_METHODS_URL = environment.apiHost + '/getPaymentMethods';
@@ -147,6 +154,18 @@ export class Constants {
     static CREATE_ORDER_PAGE = 'createCheck';
     static CREATE_ORDER_CONFIG_PAGE = 'createCheckConfig';
     static CREATE_ORDER_OPERATION = 'Create Check';
+
+    static ZEAL_PAYMENT_PAGE = 'zealPayment';
+    static ZEAL_PAYMENT_CONFIG_PAGE = 'zealPaymentCongfig';
+    static ZEAL_PAYMENT_OPERATION = 'Zeal Payment';
+
+    static ZEAL_VOUCHER_PAGE = 'zealVoucher';
+    static ZEAL_VOUCHER_CONFIG_PAGE = 'zealVoucherCongfig';
+    static ZEAL_VOUCHER_OPERATION = 'Zeal Voucher';
+
+    static ZEAL_POINTS_PAGE = 'zealPoints';
+    static ZEAL_POINTS_CONFIG_PAGE = 'zealPointsCongfig';
+    static ZEAL_POINTS_OPERATION = 'Zeal Points';
 
     static TABS_PAGE = 'tabs';
     static END_POINT = '/getSuppliers';

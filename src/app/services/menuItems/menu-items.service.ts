@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Constants } from 'src/app/models/constants';
 import { SimphonyLocation } from 'src/app/models/SimphonyLocation';
 
-@Injectable({
+@Injectable({ 
   providedIn: 'root'
 })
 export class MenuItemsService {

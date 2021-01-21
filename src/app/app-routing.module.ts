@@ -37,6 +37,11 @@ import { MenuItemsConfigurationComponent } from './components/menu-items-configu
 import { OperationTypesConfigurationComponent } from './components/setting/operation-types-configuration/operation-types-configuration.component';
 import { CreateOrderConfigComponent } from './components/create-order-config/create-order-config.component';
 import { SyncExportedFilesComponent } from './components/sync-exported-files/sync-exported-files.component';
+import { ZealPaymentComponent } from './components/zeal-payment/zeal-payment.component';
+import { ZealPaymentConfigComponent } from './components/zeal-payment-config/zeal-payment-config.component';
+import { ZealVoucherComponent } from './components/zeal-voucher/zeal-voucher.component';
+import { ZealVoucherConfigComponent } from './components/zeal-voucher-config/zeal-voucher-config.component';
+import { ZealPointsComponent } from './components/zeal-points/zeal-points.component';
 
 
 const routes: Routes = [
@@ -89,6 +94,15 @@ const routes: Routes = [
   { path: Constants.CREATE_ORDER_PAGE , component: MenuItemsComponent ,canActivate:[AuthGuardService]},
   { path: Constants.CREATE_ORDER_CONFIG_PAGE , component: CreateOrderConfigComponent ,canActivate:[AuthGuardService]},
   
+  { path: Constants.ZEAL_PAYMENT_PAGE , component: ZealPaymentComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.ZEAL_PAYMENT_CONFIG_PAGE , component: ZealPaymentConfigComponent ,canActivate:[AuthGuardService]},
+ 
+  { path: Constants.ZEAL_VOUCHER_PAGE , component: ZealVoucherComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.ZEAL_VOUCHER_CONFIG_PAGE , component: ZealVoucherConfigComponent ,canActivate:[AuthGuardService]},
+
+  { path: Constants.ZEAL_POINTS_PAGE , component: ZealPointsComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.ZEAL_POINTS_CONFIG_PAGE , component: ZealVoucherConfigComponent ,canActivate:[AuthGuardService]},
+
   { path: Constants.EXPORTED_FILES_PAGE , component: SyncExportedFilesComponent ,canActivate:[AuthGuardService]},
 
   // Error Page

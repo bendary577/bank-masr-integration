@@ -1,37 +1,54 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ZealPayment } from 'src/app/models/zeal-payment';
 import { MatSnackBar } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Constants } from 'src/app/models/constants';
 import { SyncJob } from 'src/app/models/SyncJob';
 import { MenuItemsService } from 'src/app/services/menuItems/menu-items.service';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
+import { MenuItemsComponent } from '../menu-items/menu-items.component';
+import { OperationService } from 'src/app/services/operation/operation.service';
 
-@Component({
-  selector: 'app-menu-items',
-  templateUrl: './menu-items.component.html',
-  styleUrls: ['./menu-items.component.scss']
+@Component({ 
+  selector: 'app-zeal-payment',
+  templateUrl: './zeal-payment.component.html',
+  styleUrls: ['./zeal-payment.component.scss']
 })
-export class MenuItemsComponent implements OnInit {
+export class ZealPaymentComponent implements OnInit {
 
+  zealPayments: ZealPayment[];
   loading = true;
   static getMenuItemsLoading = false;
   success = null;
   jobs = [];
+  operations = [];
   menuItems = [];
   selectedJob :SyncJob = null;
   state = "";
 
-  constructor(private spinner: NgxSpinnerService, private syncJobService: SyncJobService,
-    public snackBar: MatSnackBar, private menuItemService: MenuItemsService) { }
+  constructor(private operationService: OperationService,
+              private route: ActivatedRoute, private spinner: NgxSpinnerService, private syncJobService: SyncJobService,
+              public snackBar: MatSnackBar, private menuItemService: MenuItemsService) { }
 
   ngOnInit() {
-    this.getSyncJobs(Constants.MENU_ITEMS_SYNC);
-    this.state = localStorage.getItem('getMenuItemsLoading');
-    if (this.state == "true") {
-      MenuItemsComponent.getMenuItemsLoading = true;
-    } else {
-      MenuItemsComponent.getMenuItemsLoading = false;
-    }
+      this.zealPaymentHistory();
+      this.getSyncJobs(Constants.ZEAL_PAYMENT_OPERATION);
+      this.getOperations(Constants.ZEAL_PAYMENT_OPERATION);
+      this.state = localStorage.getItem('getMenuItemsLoading');
+      if (this.state == "true") {
+        MenuItemsComponent.getMenuItemsLoading = true;
+      } else {
+        MenuItemsComponent.getMenuItemsLoading = false;
+      }
+  }
+
+  zealPaymentHistory() {
+  //  this.zealPaymentService.zealPaymentHistory().subscribe(
+   //   data => {
+// this.zealPayments = data;
+   //   }
+   // );
   }
 
   get staticgetMenuItemsLoading() {
@@ -91,10 +108,26 @@ export class MenuItemsComponent implements OnInit {
 
   getSyncJobs(syncJobTypeName: string) {
     this.spinner.show();
-    this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
+    this.syncJobService.getSyncJobs2(syncJobTypeName).toPromise().then((res: any) => {
       this.jobs = res;
       this.selectedJob = this.jobs[0];
       if (this.jobs.length > 0) {
+        this.getSyncJobData();
+      }
+      this.spinner.hide();
+      this.loading = false;
+    }).catch(err => {
+      this.spinner.hide();
+      this.loading = false;
+    });
+  }
+
+  getOperations(opeartionTypeName: string) {
+    this.spinner.show();
+    this.operationService.getOperation(opeartionTypeName).toPromise().then((res: any) => {
+      this.operations = res;
+      // this.selectedJob = this.operations[0];
+      if (this.operations.length > 0) {
         this.getSyncJobData();
       }
       this.spinner.hide();
@@ -118,5 +151,4 @@ export class MenuItemsComponent implements OnInit {
       this.loading = false;
     });
   }
-
 }
