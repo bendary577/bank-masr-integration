@@ -34,10 +34,10 @@ export class SchedulerConfigurationComponent implements OnInit {
 
   onSaveClick(): void {
     this.dialogRef.close({
-      duration: this.syncJobType.configuration.duration,
-      day: this.syncJobType.configuration.day,
-      dayName: this.syncJobType.configuration.dayName,
-      hour: this.syncJobType.configuration.hour
+      duration: this.syncJobType.configuration.schedulerConfiguration.duration,
+      day: this.syncJobType.configuration.schedulerConfiguration.day,
+      dayName: this.syncJobType.configuration.schedulerConfiguration.dayName,
+      hour: this.syncJobType.configuration.schedulerConfiguration.hour
     });
   }
 
