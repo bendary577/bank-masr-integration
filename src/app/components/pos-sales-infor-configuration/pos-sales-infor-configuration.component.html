@@ -15,7 +15,7 @@
             <div class="container" *ngIf="!loading">
                 <form class="my-form">
                     <div>
-                        <mat-checkbox id="exportFilePerLocation" name="exportFilePerLocation" class="example-margin" [(ngModel)]="syncJobType.configuration.exportFilePerLocation">Export files per location</mat-checkbox> 
+                        <mat-checkbox id="exportFilePerLocation" name="exportFilePerLocation" class="example-margin" [(ngModel)]="syncJobType.configuration.exportFilePerLocation">Export files per location</mat-checkbox>
                     </div>
                     <br>
 
@@ -42,7 +42,7 @@
                             <input matInput id="versionCode" name="versionCode" placeholder="Version Code" [(ngModel)]="syncJobType.configuration.versionCode">
                         </mat-form-field>
                     </div>
-    
+
                 </form>
             </div>
 
@@ -203,8 +203,7 @@
 
             <div>
                 <mat-form-field class="example-full-width">
-                    <mat-select matInput id="GrossDiscountSales" name="GrossDiscountSales" placeholder="Sync sales gross/gross less discount" 
-                    [(ngModel)]="syncJobType.configuration.salesConfiguration.grossDiscountSales">
+                    <mat-select matInput id="GrossDiscountSales" name="GrossDiscountSales" placeholder="Sync sales gross/gross less discount" [(ngModel)]="syncJobType.configuration.salesConfiguration.grossDiscountSales">
                         <mat-option value="Gross">Gross</mat-option>
                         <mat-option value="Gross Less Discount">Gross Less Discount</mat-option>
                     </mat-select>
@@ -213,8 +212,7 @@
 
             <div *ngIf="majorGroups?.length > 0">
 
-                <ngx-datatable class="material" [rows]="majorGroups" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" 
-                [sortType]="'multi'">
+                <ngx-datatable class="material" [rows]="majorGroups" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
 
                     <ngx-datatable-column name="Major Group">
                         <ng-template let-row="row" ngx-datatable-cell-template>
@@ -239,7 +237,7 @@
                             {{row.children.length}}
                         </ng-template>
                     </ngx-datatable-column>
-            
+
                     <ngx-datatable-column name="Group Childs">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                             <button mat-flat-button (click)="viewMajorGroupChildsDialog(row)">View</button>
@@ -270,8 +268,7 @@
 
             <div *ngIf="!syncJobType.configuration.salesConfiguration.syncTotalDiscounts && discounts?.length > 0">
 
-                <ngx-datatable class="material" [rows]="discounts" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-                [sortType]="'multi'">
+                <ngx-datatable class="material" [rows]="discounts" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
 
                     <ngx-datatable-column name="Discount">
                         <ng-template let-row="row" ngx-datatable-cell-template>
@@ -309,8 +306,7 @@
 
             <div *ngIf="!syncJobType.configuration.salesConfiguration.syncTotalServiceCharge && serviceCharges?.length > 0">
 
-                <ngx-datatable class="material" [rows]="serviceCharges" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-                [sortType]="'multi'">
+                <ngx-datatable class="material" [rows]="serviceCharges" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
 
                     <ngx-datatable-column name="Service Charge">
                         <ng-template let-row="row" ngx-datatable-cell-template>
@@ -323,7 +319,7 @@
                             <input matInput placeholder="Location" [(ngModel)]="row.costCenter.locationName" disabled>
                         </ng-template>
                     </ngx-datatable-column>
-            
+
                     <ngx-datatable-column name="Revenue Center">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                             <input matInput placeholder="Revenue Center" [(ngModel)]="row.revenueCenter.revenueCenter" disabled>
@@ -349,14 +345,14 @@
 
     <div *ngIf="!loading && !syncJobType">
         <mat-card class="example-card">
-                <mat-card-header>
-                    <mat-card-title>Welcome</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <p>
-                        Can't Configure your sync right now, Please try again after few minutes.
-                    </p>
-                </mat-card-content>
+            <mat-card-header>
+                <mat-card-title>Welcome</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p>
+                    Can't Configure your sync right now, Please try again after few minutes.
+                </p>
+            </mat-card-content>
         </mat-card>
     </div>
     <ngx-spinner></ngx-spinner>
