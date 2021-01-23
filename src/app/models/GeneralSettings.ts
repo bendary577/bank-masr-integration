@@ -11,6 +11,7 @@ export class GeneralSettings {
   majorGroups: Array<MajorGroup>|any;
   overGroups: Array<OverGroup>|any;
   costCenterAccountMapping: Array<CostCenter>|any;
+  revenueCenters: Array<string>|any;
   locations: Array<CostCenter>|any;
   simphonyLocations: Array<SimphonyLocation>|any;
   creationDate: Date;

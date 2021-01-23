@@ -81,8 +81,7 @@
     </div>
 
     <div class="main" *ngIf="dataSource.length">
-        <ngx-datatable *ngIf="!loading" class="material" [rows]="dataSource" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[{prop: 'supplier', dir: 'asc'}, {prop: 'supplierId', dir: 'asc'}, {prop: 'supplierStatus', dir: 'asc'},
-        {prop: 'supplierNumber', dir: 'asc'}]">
+        <ngx-datatable *ngIf="!loading" class="material" [rows]="dataSource" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
             <ngx-datatable-column name="Status">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.status}}

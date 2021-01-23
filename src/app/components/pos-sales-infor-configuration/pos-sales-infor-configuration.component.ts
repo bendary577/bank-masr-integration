@@ -7,16 +7,17 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 import { AccountSyncType } from 'src/app/models/AccountSyncType';
 import { PosSalesService } from '../../services/posSales/pos-sales.service';
-import { AddTenderComponent } from '../add-tender/add-tender.component';
 import { AddMajorGroupComponent } from '../addMajorGroup/add-major-group.component';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import { AddTaxComponent } from '../add-tax/add-tax.component';
 import { AddDiscountComponent } from '../add-discount/add-discount.component';
-import { AddRevenueCenterComponent } from '../add-revenue-center/add-revenue-center.component';
 import { AddServiceChargeComponent } from '../add-service-charge/add-service-charge.component';
 import { MajorGroup } from 'src/app/models/MajorGroup';
 import { AddMajorGroupChildComponent } from '../addMajorGroupChild/add-major-group-child.component';
+import { GeneralSettings } from 'src/app/models/GeneralSettings';
+import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
+import { ServiceCharge } from 'src/app/models/ServiceCharge';
 
 
 @Component({
@@ -25,13 +26,12 @@ import { AddMajorGroupChildComponent } from '../addMajorGroupChild/add-major-gro
   styleUrls: ['./pos-sales-infor-configuration.component.scss']
 })
 export class PosSalesInforConfigurationComponent implements OnInit {
-  userDefinedFlag = false;
-
   loading = true;
   save_loading = false;
   analysis = [];
+  analysisCodes = ["1","2","3","4","5","6","7","8","9","10"];
 
-  newMajorGroup ;
+  newMajorGroup: MajorGroup = new MajorGroup();
   majorGroups = []
   selectedMajorGroup = [];
   majorGroup_loading = true;
@@ -40,15 +40,12 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
   newTax;
   taxes = [];
-  
+
   newDiscount;
   discounts = [];
 
-  newServiceCharge;
+  newServiceCharge : ServiceCharge = new ServiceCharge();
   serviceCharges = [];
-
-  newRevenueCenter;
-  revenueCenters = [];
 
   selectedTender = [];
   tender_loading = false;
@@ -57,13 +54,16 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
   accountERD;
 
+  generalSettings: GeneralSettings;
+
   constructor(private spinner: NgxSpinnerService, private salesService:PosSalesService,
-    private sidNav: SidenavResponsive,
+    private sidNav: SidenavResponsive, private generalSettingsService: GeneralSettingsService,
      private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService,
     private router:Router, public snackBar: MatSnackBar, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.getSyncJobType();
+    this.getGeneralSettings();
     this.accountERD = localStorage.getItem('accountERD');
   }
 
@@ -71,27 +71,18 @@ export class PosSalesInforConfigurationComponent implements OnInit {
     this.loading = true;
     this.accSyncTypeService.getAccSyncJobType(Constants.POS_SALES_SYNC).toPromise().then((res: any) => {
       this.syncJobType = res;
-      if(this.syncJobType.configuration.timePeriod == "UserDefined"){
-        this.userDefinedFlag = true;
-      }
-      this.taxes = this.syncJobType.configuration["taxes"];
-      this.tenders = this.syncJobType.configuration["tenders"];
-      this.discounts = this.syncJobType.configuration["discounts"];
-      this.majorGroups = this.syncJobType.configuration["majorGroups"];
-      this.serviceCharges = this.syncJobType.configuration["serviceCharges"];
+      this.taxes = this.syncJobType.configuration.salesConfiguration["taxes"];
+      this.tenders = this.syncJobType.configuration.salesConfiguration["tenders"];
+      this.discounts = this.syncJobType.configuration.salesConfiguration["discounts"];
+      this.majorGroups = this.syncJobType.configuration.salesConfiguration["majorGroups"];
+      this.serviceCharges = this.syncJobType.configuration.salesConfiguration["serviceCharges"];
       this.analysis = this.syncJobType.configuration["analysis"];
-      this.revenueCenters = this.syncJobType.configuration["revenueCenters"];
-
-      if (this.tenders.length == 0){
-        this.tenders = [
-          {"checked": false, "tender": "Cash", "account": ""},
-          {"checked": false, "tender": "Visa", "account": ""},
-          {"checked": false, "tender": "Master", "account": ""},
-          {"checked": false, "tender": "Online Payment", "account": ""}
-        ];
-      }
+      // this.revenueCenters = this.syncJobType.configuration.salesConfiguration["revenueCenters"];
       this.loading = false;
     }).catch(err => {
+      console.log({
+        salesSynError: err
+      });
       let message = "";
       if(err.status === 401){
         message = ErrorMessages.SESSION_EXPIRED;
@@ -114,16 +105,27 @@ export class PosSalesInforConfigurationComponent implements OnInit {
     });
   }
 
+  getGeneralSettings() {
+    this.generalSettingsService.getGeneralSettings().then((res) => {
+      this.generalSettings = res as GeneralSettings;
+    }).catch(err => {
+      this.snackBar.open("Failed to get general settings" , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
+      });
+    });
+  }
+
   onSaveClick(): void {
     this.spinner.show();
     this.save_loading = true;
 
-    this.syncJobType["configuration"]["taxes"] = this.taxes;
-    this.syncJobType["configuration"]["tenders"] = this.tenders;
-    this.syncJobType["configuration"]["discounts"] = this.discounts;
-    this.syncJobType["configuration"]["majorGroups"] = this.majorGroups;
-    this.syncJobType["configuration"]["serviceCharges"] = this.serviceCharges;
-    this.syncJobType["configuration"]["revenueCenters"] = this.revenueCenters;
+    this.syncJobType.configuration.salesConfiguration["taxes"] = this.taxes;
+    this.syncJobType.configuration.salesConfiguration["tenders"] = this.tenders;
+    this.syncJobType.configuration.salesConfiguration["discounts"] = this.discounts;
+    this.syncJobType.configuration.salesConfiguration["majorGroups"] = this.majorGroups;
+    this.syncJobType.configuration.salesConfiguration["serviceCharges"] = this.serviceCharges;
 
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.snackBar.open('Save configuration successfully.', null, {
@@ -202,7 +204,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
           } else {
             message = ErrorMessages.FAILED_TO_SYNC;
           }
-    
+
           this.snackBar.open(message , null, {
             duration: 3000,
             horizontalPosition: 'right',
@@ -222,8 +224,8 @@ export class PosSalesInforConfigurationComponent implements OnInit {
       if (res) {
         this.spinner.show();
         this.loading = true;
-        this.newMajorGroup = {};
-        this.newMajorGroup.checked = false;
+        this.newMajorGroup = new MajorGroup();
+        this.newMajorGroup.checked = true;
         this.newMajorGroup.majorGroup = res.name;
         this.newMajorGroup.account = res.account;
 
@@ -238,7 +240,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
           this.spinner.hide();
           this.loading = false;
-          
+
         }).catch(err => {
           this.spinner.hide();
           this.loading = false;
@@ -255,7 +257,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
           } else {
             message = 'Can not add major group now, please try again.';
           }
-    
+
           this.snackBar.open(message , null, {
             duration: 3000,
             horizontalPosition: 'right',
@@ -296,7 +298,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
           } else {
             message = ErrorMessages.FAILED_TO_SYNC;
           }
-    
+
           this.snackBar.open(message , null, {
             duration: 3000,
             horizontalPosition: 'right',
@@ -333,7 +335,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
           this.spinner.hide();
           this.loading = false;
-          
+
         }).catch(err => {
           this.spinner.hide();
           this.loading = false;
@@ -350,60 +352,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
           } else {
             message = 'Can not add discount now, please try again.';
           }
-    
-          this.snackBar.open(message , null, {
-            duration: 3000,
-            horizontalPosition: 'right',
-            panelClass:"my-snack-bar-fail"
-          });
-        });
-      }
-    });
-  }
 
-  openRevenueCenterDialog(){
-    const dialogRef = this.dialog.open(AddRevenueCenterComponent, {
-      width: '550px'
-    });
-
-    dialogRef.afterClosed().subscribe(res => {
-      if (res) {
-        console.log(res)
-        this.spinner.show();
-        this.loading = true;
-        this.newRevenueCenter = {};
-        this.newRevenueCenter.checked = false;
-        this.newRevenueCenter.revenueCenter = res.name;
-
-        this.revenueCenters.push(this.newRevenueCenter);
-
-        this.salesService.addRevenueCenter(this.revenueCenters, this.syncJobType.id).toPromise().then(result => {
-          this.snackBar.open(result["message"], null, {
-            duration: 2000,
-            horizontalPosition: 'right',
-            panelClass:"my-snack-bar-success"
-          });
-
-          this.spinner.hide();
-          this.loading = false;
-          
-        }).catch(err => {
-          this.spinner.hide();
-          this.loading = false;
-          this.majorGroups.pop();
-
-          let message = "";
-          if(err.status === 401){
-             message = ErrorMessages.SESSION_EXPIRED;
-            this.sidNav.Logout();
-          } else if (err.error.message){
-            message = err.error.message;
-          } else if (err.message){
-            message = err.message;
-          } else {
-            message = 'Can not add revenue center now, please try again.';
-          }
-    
           this.snackBar.open(message , null, {
             duration: 3000,
             horizontalPosition: 'right',
@@ -416,7 +365,8 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
   openServiceChargeDialog(){
     const dialogRef = this.dialog.open(AddServiceChargeComponent, {
-      width: '550px'
+      width: '550px',
+      data: {generalSettings: this.generalSettings}
     });
 
     dialogRef.afterClosed().subscribe(res => {
@@ -424,14 +374,18 @@ export class PosSalesInforConfigurationComponent implements OnInit {
         console.log(res)
         this.spinner.show();
         this.loading = true;
-        this.newServiceCharge = {};
-        this.newServiceCharge.checked = false;
+        this.newServiceCharge.checked = true;
         this.newServiceCharge.serviceCharge = res.name;
         this.newServiceCharge.account = res.account;
+
+        this.newServiceCharge.costCenter = res.location;
+        this.newServiceCharge.revenueCenter = res.revenueCenter;
 
         this.serviceCharges.push(this.newServiceCharge);
 
         this.salesService.addServiceCharge(this.serviceCharges, this.syncJobType.id).toPromise().then(result => {
+          this.newServiceCharge = new ServiceCharge()
+
           this.snackBar.open(result["message"], null, {
             duration: 2000,
             horizontalPosition: 'right',
@@ -440,11 +394,12 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
           this.spinner.hide();
           this.loading = false;
-          
+
         }).catch(err => {
           this.spinner.hide();
           this.loading = false;
           this.majorGroups.pop();
+          this.newServiceCharge = new ServiceCharge();
 
           let message = "";
           if(err.status === 401){
@@ -457,7 +412,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
           } else {
             message = 'Can not add service charges now, please try again.';
           }
-    
+
           this.snackBar.open(message , null, {
             duration: 3000,
             horizontalPosition: 'right',
@@ -473,11 +428,4 @@ export class PosSalesInforConfigurationComponent implements OnInit {
     this.router.navigate([Constants.SYNC_JOBS]);
   }
 
-  chooseTimePeriod(){
-    if(this.syncJobType.configuration.timePeriod == "UserDefined"){
-      this.userDefinedFlag = true;
-    }else{
-      this.userDefinedFlag = false;
-    }
-  }
 }
