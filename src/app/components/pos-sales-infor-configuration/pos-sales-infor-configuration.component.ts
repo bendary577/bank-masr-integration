@@ -29,7 +29,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
   loading = true;
   save_loading = false;
   analysis = [];
-  analysisCodes = [1,2,3,4,5,6,7,8,9,10];
+  analysisCodes = ["1","2","3","4","5","6","7","8","9","10"];
 
   newMajorGroup: MajorGroup = new MajorGroup();
   majorGroups = []
@@ -40,7 +40,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
   newTax;
   taxes = [];
-  
+
   newDiscount;
   discounts = [];
 
@@ -204,7 +204,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
           } else {
             message = ErrorMessages.FAILED_TO_SYNC;
           }
-    
+
           this.snackBar.open(message , null, {
             duration: 3000,
             horizontalPosition: 'right',
@@ -240,7 +240,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
           this.spinner.hide();
           this.loading = false;
-          
+
         }).catch(err => {
           this.spinner.hide();
           this.loading = false;
@@ -257,7 +257,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
           } else {
             message = 'Can not add major group now, please try again.';
           }
-    
+
           this.snackBar.open(message , null, {
             duration: 3000,
             horizontalPosition: 'right',
@@ -298,7 +298,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
           } else {
             message = ErrorMessages.FAILED_TO_SYNC;
           }
-    
+
           this.snackBar.open(message , null, {
             duration: 3000,
             horizontalPosition: 'right',
@@ -335,7 +335,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
           this.spinner.hide();
           this.loading = false;
-          
+
         }).catch(err => {
           this.spinner.hide();
           this.loading = false;
@@ -352,7 +352,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
           } else {
             message = 'Can not add discount now, please try again.';
           }
-    
+
           this.snackBar.open(message , null, {
             duration: 3000,
             horizontalPosition: 'right',
@@ -394,13 +394,13 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
           this.spinner.hide();
           this.loading = false;
-          
+
         }).catch(err => {
           this.spinner.hide();
           this.loading = false;
           this.majorGroups.pop();
           this.newServiceCharge = new ServiceCharge();
-          
+
           let message = "";
           if(err.status === 401){
              message = ErrorMessages.SESSION_EXPIRED;
@@ -412,7 +412,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
           } else {
             message = 'Can not add service charges now, please try again.';
           }
-    
+
           this.snackBar.open(message , null, {
             duration: 3000,
             horizontalPosition: 'right',
