@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Constants } from 'src/app/models/constants';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { SyncJobType } from 'src/app/models/SyncJobType'; 
+import { SyncJobType } from 'src/app/models/SyncJobType';
 import { SyncJob } from 'src/app/models/SyncJob';
 import { SyncJobData } from 'src/app/models/SyncJobData';
 import { Cacheable } from 'ngx-cacheable';
@@ -47,7 +47,7 @@ export class SyncJobService {
 
   getSyncJobs2(syncJobTypeName: string) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get<SyncJob[]>(Constants.GET_SYNC_JOBS_URL2 + '?typeName=' + syncJobTypeName,
+    return this.http.get<SyncJob[]>(Constants.GET_OPERATION_JOBS_URL + '?typeName=' + syncJobTypeName,
      { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
