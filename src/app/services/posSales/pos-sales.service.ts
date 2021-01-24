@@ -7,6 +7,7 @@ import { Tax } from 'src/app/models/Tax';
 import { Discount } from 'src/app/models/Discount';
 import { RevenueCenter } from 'src/app/models/RevenueCenter';
 import { ServiceCharge } from 'src/app/models/ServiceCharge';
+import { SalesStatistics } from 'src/app/models/SalesStatistics';
 
 @Injectable({
   providedIn: 'root'
@@ -54,5 +55,10 @@ export class PosSalesService {
   addRevenueCenter(revenueCenters: RevenueCenter[]) {
     this.token = localStorage.getItem('auth_token');
     return this.http.post(Constants.ADD_POS_SALES_REVENUE_CENTER_URL, revenueCenters, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
+  }
+
+  addSalesStatistics(statistics: SalesStatistics[], id:string) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.post(Constants.ADD_POS_SALES_STATISTICS_URL + "?syncJobTypeId=" + id, statistics, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 }

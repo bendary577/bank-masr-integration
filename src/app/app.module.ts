@@ -105,6 +105,7 @@ import { ZealPointsConfigComponent } from './components/zeal-points-config/zeal-
 import { ZealPaymentService } from './services/zealPayment/zeal-payment.service';
 import { OperationService } from './services/operation/operation.service';
 import { OhraConfigurationComponent } from './components/configuration/ohra-configuration/ohra-configuration.component';
+import { AddSalesStatisticsComponent } from './components/add-sales-statistics/add-sales-statistics.component';
 
 @NgModule({
   declarations: [
@@ -174,7 +175,8 @@ import { OhraConfigurationComponent } from './components/configuration/ohra-conf
     ZealVoucherConfigComponent,
     ZealPointsComponent,
     ZealPointsConfigComponent,
-    OhraConfigurationComponent
+    OhraConfigurationComponent,
+    AddSalesStatisticsComponent
   ],
   imports: [
     BrowserModule,
@@ -220,6 +222,6 @@ import { OhraConfigurationComponent } from './components/configuration/ohra-conf
      AddTaxComponent, AddDiscountComponent, AddRevenueCenterComponent, AddServiceChargeComponent,
       SuppliersConfiguartionComponent, SchedulerConfigurationComponent, AddTenderChildComponent,
       AddSimphonyLocationComponent, AddWebServiceInvokerComponent, AddLocationComponent,
-      AddMajorGroupChildComponent]
+      AddMajorGroupChildComponent, AddSalesStatisticsComponent]
 })
 export class AppModule { }

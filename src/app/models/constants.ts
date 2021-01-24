@@ -81,6 +81,7 @@ export class Constants {
     static ADD_POS_SALES_DISCOUNT_URL = environment.apiHost + '/addDiscount';
     static ADD_POS_SALES_SERVICE_CHARGE_URL = environment.apiHost + '/addServiceCharge';
     static ADD_POS_SALES_REVENUE_CENTER_URL = environment.apiHost + '/addRevenueCenter';
+    static ADD_POS_SALES_STATISTICS_URL = environment.apiHost + '/addSalesStatistics';
 
     static GET_CURRENT_DAYS_URL = environment.apiHost + '/getCurrentDays';
 
