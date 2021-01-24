@@ -1,5 +1,5 @@
 export class ZealPoints {
     id: number;
     code: String;
-    totalDue: String;
+    totalDue: Int16Array;
 }

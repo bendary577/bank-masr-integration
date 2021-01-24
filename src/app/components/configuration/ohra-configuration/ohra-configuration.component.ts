@@ -10,11 +10,10 @@ export class OhraConfigurationComponent implements OnInit {
   userDefinedFlag = false;
 
   @Input() syncJobType: SyncJobType;
-  
   constructor() { }
 
   ngOnInit() {
-    if(this.syncJobType.configuration.timePeriod == "UserDefined"){
+    if (this.syncJobType.configuration.timePeriod == "UserDefined"){
       this.userDefinedFlag = true;
     }
   }
@@ -22,7 +21,7 @@ export class OhraConfigurationComponent implements OnInit {
   chooseTimePeriod(){
     if(this.syncJobType.configuration.timePeriod == "UserDefined"){
       this.userDefinedFlag = true;
-    }else{
+    }else {
       this.userDefinedFlag = false;
     }
   }
