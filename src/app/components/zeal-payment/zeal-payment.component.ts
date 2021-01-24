@@ -108,7 +108,7 @@ export class ZealPaymentComponent implements OnInit {
 
   getSyncJobs(syncJobTypeName: string) {
     this.spinner.show();
-    this.syncJobService.getSyncJobs2(syncJobTypeName).toPromise().then((res: any) => {
+    this.syncJobService.getOperation(syncJobTypeName).toPromise().then((res: any) => {
       this.jobs = res;
       this.selectedJob = this.jobs[0];
       if (this.jobs.length > 0) {
