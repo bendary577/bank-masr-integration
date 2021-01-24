@@ -32,7 +32,7 @@ export class ZealPaymentComponent implements OnInit {
               public snackBar: MatSnackBar, private menuItemService: MenuItemsService) { }
 
   ngOnInit() {
-      this.zealPaymentHistory();
+
       this.getSyncJobs(Constants.ZEAL_PAYMENT_OPERATION);
       this.getOperations(Constants.ZEAL_PAYMENT_OPERATION);
       this.state = localStorage.getItem('getMenuItemsLoading');
@@ -42,15 +42,7 @@ export class ZealPaymentComponent implements OnInit {
         MenuItemsComponent.getMenuItemsLoading = false;
       }
   }
-
-  zealPaymentHistory() {
-  //  this.zealPaymentService.zealPaymentHistory().subscribe(
-   //   data => {
-// this.zealPayments = data;
-   //   }
-   // );
-  }
-
+  
   get staticgetMenuItemsLoading() {
     return MenuItemsComponent.getMenuItemsLoading ;
   }
