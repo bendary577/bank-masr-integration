@@ -82,7 +82,7 @@
         </div>
 
         <div class="main" *ngIf="journals.length">
-            <ngx-datatable class="material" [rows]="journals" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[{prop: 'journalBatch', dir: 'asc'}]">
+            <ngx-datatable class="material" [rows]="journals" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
 
 
                 <ngx-datatable-column name="Status">

@@ -42,7 +42,7 @@ export class Constants {
     static UPDATE_SYNC_JOB_TYPES_URL = environment.apiHost + '/updateSyncJobTypesConfiguration';
     static UPDATE_COST_CENTER_MAPPING_URL = environment.apiHost + '/updateCostCenterLocationMapping';
     static GET_SYNC_JOBS_URL = environment.apiHost + '/getSyncJobs';
-    static GET_SYNC_JOBS_URL2 = environment.apiHost + '/getSyncJobs2';
+    static GET_OPERATION_JOBS_URL = environment.apiHost + '/getOperationJobs';
 
     static GET_OPERATION_URL = environment.apiHost + '/getOperation';
 

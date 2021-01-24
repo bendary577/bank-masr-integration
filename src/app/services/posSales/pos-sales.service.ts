@@ -51,8 +51,8 @@ export class PosSalesService {
     return this.http.post(Constants.ADD_POS_SALES_SERVICE_CHARGE_URL + "?syncJobTypeId=" + id, serviceCharge, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
-  addRevenueCenter(revenueCenters: RevenueCenter[], id:string) {
+  addRevenueCenter(revenueCenters: RevenueCenter[]) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.post(Constants.ADD_POS_SALES_REVENUE_CENTER_URL + "?syncJobTypeId=" + id, revenueCenters, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
+    return this.http.post(Constants.ADD_POS_SALES_REVENUE_CENTER_URL, revenueCenters, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 }

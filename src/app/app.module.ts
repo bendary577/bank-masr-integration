@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {NgModule, ElementRef, ChangeDetectorRef} from '@angular/core';
+import {NgModule} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -104,6 +104,7 @@ import { ZealPointsComponent } from './components/zeal-points/zeal-points.compon
 import { ZealPointsConfigComponent } from './components/zeal-points-config/zeal-points-config.component';
 import { ZealPaymentService } from './services/zealPayment/zeal-payment.service';
 import { OperationService } from './services/operation/operation.service';
+import { OhraConfigurationComponent } from './components/configuration/ohra-configuration/ohra-configuration.component';
 
 @NgModule({
   declarations: [
@@ -172,7 +173,8 @@ import { OperationService } from './services/operation/operation.service';
     PaymentVoucherConfigComponent,
     ZealVoucherConfigComponent,
     ZealPointsComponent,
-    ZealPointsConfigComponent
+    ZealPointsConfigComponent,
+    OhraConfigurationComponent
   ],
   imports: [
     BrowserModule,
@@ -202,13 +204,13 @@ import { OperationService } from './services/operation/operation.service';
     MatProgressBarModule,
     ShowHidePasswordModule,
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, 
-    CookieService, 
-    AuthService, 
-    InvoiceService, 
-    AlertsService, 
-    Data, 
-    AuthGuardService, 
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},
+    CookieService,
+    AuthService,
+    InvoiceService,
+    AlertsService,
+    Data,
+    AuthGuardService,
     SidenavResponsive,
     ExcelService,
   CsvService,
@@ -216,7 +218,7 @@ import { OperationService } from './services/operation/operation.service';
   bootstrap: [AppComponent],
   entryComponents: [AddUserComponent, AddAccountComponent, AddMajorGroupComponent, AddTenderComponent,
      AddTaxComponent, AddDiscountComponent, AddRevenueCenterComponent, AddServiceChargeComponent,
-      SuppliersConfiguartionComponent, SchedulerConfigurationComponent, AddTenderChildComponent, 
+      SuppliersConfiguartionComponent, SchedulerConfigurationComponent, AddTenderChildComponent,
       AddSimphonyLocationComponent, AddWebServiceInvokerComponent, AddLocationComponent,
       AddMajorGroupChildComponent]
 })

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Constants } from 'src/app/models/constants';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { SyncJobType } from 'src/app/models/SyncJobType'; 
+import { SyncJobType } from 'src/app/models/SyncJobType';
 import { SyncJob } from 'src/app/models/SyncJob';
 import { SyncJobData } from 'src/app/models/SyncJobData';
 import { Cacheable } from 'ngx-cacheable';
@@ -21,22 +21,26 @@ export class SyncJobService {
 
   getSyncJobTypesDB() {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get<SyncJobType[]>(Constants.GET_SYNC_JOB_TYPES_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+    return this.http.get<SyncJobType[]>(Constants.GET_SYNC_JOB_TYPES_URL,
+       { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
   getSyncJobTypeDB(syncJobTypeName: string) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get<SyncJobType>(Constants.GET_SYNC_JOB_TYPES_BY_NAME_URL + '?typeName=' + syncJobTypeName, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+    return this.http.get<SyncJobType>(Constants.GET_SYNC_JOB_TYPES_BY_NAME_URL + '?typeName=' + syncJobTypeName,
+     { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
   updateSyncJobTypeConfig(syncJobType) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.put(Constants.UPDATE_SYNC_JOB_TYPES_URL , syncJobType, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+    return this.http.put(Constants.UPDATE_SYNC_JOB_TYPES_URL , syncJobType,
+       { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
 
   updateCostCenterLocationMapping(costCenters) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.put(Constants.UPDATE_COST_CENTER_MAPPING_URL , costCenters, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+    return this.http.put(Constants.UPDATE_COST_CENTER_MAPPING_URL , costCenters,
+       { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
 
   getSyncJobs(syncJobTypeName: string) {
@@ -47,7 +51,7 @@ export class SyncJobService {
 
   getOperation(syncJobTypeName: string) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get<SyncJob[]>(Constants.GET_OPERATION_URL + '?typeName=' + syncJobTypeName,
+    return this.http.get<SyncJob[]>(Constants.GET_OPERATION_JOBS_URL + '?typeName=' + syncJobTypeName,
      { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
