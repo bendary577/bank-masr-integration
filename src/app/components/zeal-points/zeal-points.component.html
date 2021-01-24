@@ -92,7 +92,7 @@
                     <span class="value" *ngIf="!selectedJob.reason">No Info</span>
                 </mat-list-item>
                 <mat-list-item *ngIf="!menuItems.length">
-                    <span> No operation to review.</span>
+                    <span> No data.</span>
                 </mat-list-item>
             </mat-card-content>
         </mat-card>
@@ -107,7 +107,7 @@
                     <mat-card-title>No Data</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                    <p>No data.</p>
+                    <p>No operations to show.</p>
                     </mat-card-content>
                 </mat-card>
         </div>
@@ -129,7 +129,7 @@
                         {{row.data.code}}
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Item Id">
+                <ngx-datatable-column name="Points Number">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{row.data.totalDue}}
                     </ng-template>

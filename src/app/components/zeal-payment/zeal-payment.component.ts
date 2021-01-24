@@ -104,7 +104,7 @@ export class ZealPaymentComponent implements OnInit {
       });
     });
 
-  }
+  } 
 
   getSyncJobs(syncJobTypeName: string) {
     this.spinner.show();
