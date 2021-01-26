@@ -1,5 +1,7 @@
 <div class="back" style="margin-bottom: 15px;">
     <button mat-flat-button (click)="openTenderDialog()">Add</button>
+    <mat-checkbox class="example-margin" 
+    [(ngModel)]="syncJobType.configuration.salesConfiguration.addTenderAnalysis">Add Tender Analysis</mat-checkbox>
 </div>
 
 <div *ngIf="tenders.length > 0">
