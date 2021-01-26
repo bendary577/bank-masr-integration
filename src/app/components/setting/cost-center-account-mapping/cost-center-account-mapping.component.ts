@@ -27,13 +27,22 @@ export class CostCenterAccountMappingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getCostCenter();
     this.getGeneralSettings();
   }
 
   getGeneralSettings() {
+    this.costCenterLoding = true;
+    this.spinner.show();
+
     this.generalSettingsService.getGeneralSettings().then((res) => {
       this.generalSettings = res as GeneralSettings;
+      this.costCenters = this.generalSettings.costCenterAccountMapping;
+      if(this.costCenters.length == 0){
+        this.getCostCenters();
+      }
+      
+      this.spinner.hide();
+      this.costCenterLoding = false;
     }).catch(err => {
       let message = "";
       if (err.error){
@@ -49,22 +58,29 @@ export class CostCenterAccountMappingComponent implements OnInit {
         horizontalPosition: 'right',
         panelClass:"my-snack-bar-fail"
       });
+      
+      this.spinner.hide();
+      this.costCenterLoding = false;
     });
   }
 
+  getCostCenters(){
+    this.costCenterLoding = true;
+    this.spinner.show();
+    this.invoiceService.getCostCenter("", false).toPromise().then((res: any) => {
+      this.costCenters = res.costCenters;
+      this.spinner.hide();
+      this.costCenterLoding = false;
+    }).catch(err => {
+      console.error(err);
+      this.spinner.hide();
+      this.costCenterLoding = false;
+    });
+  }
 
   onSaveClick(): void {
     this.spinner.show();
     this.saveLoading = true;
-    // this.selectedCostCenters = [];
-
-    // let that = this;
-    // this.costCenters.forEach(function (costCenter) {
-    //   if (costCenter.accountCode && costCenter.costCenterReference) {
-    //     costCenter.checked = true;
-    //     that.selectedCostCenters.push(costCenter);
-    //   }
-    // });
 
     if(this.costCenters.length != 0) {
       this.generalSettings.costCenterAccountMapping = this.costCenters;
@@ -102,20 +118,4 @@ export class CostCenterAccountMappingComponent implements OnInit {
   }
 
 
-  getCostCenter() {
-    this.costCenterLoding = true;
-    this.spinner.show();
-
-    this.invoiceService.getCostCenter("", false).toPromise().then((res: any) => {
-      this.costCenters = res.costCenters;
-
-      this.spinner.hide();
-      this.costCenterLoding = false;
-    }).catch(err => {
-      this.costCenters = [];
-      console.error(err);
-      this.spinner.hide();
-      this.costCenterLoding = false;
-    });
-  }
 }
