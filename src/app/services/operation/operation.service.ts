@@ -18,4 +18,9 @@ export class OperationService {
      { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
+  getOperationDataById(operationId: string) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get<Operation[]>(Constants.GET_OPERATION_DATA_BY_ID + '?operationId=' + operationId,
+    { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
 }

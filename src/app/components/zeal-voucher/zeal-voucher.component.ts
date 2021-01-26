@@ -23,19 +23,16 @@ export class ZealVoucherComponent implements OnInit {
   loading = true;
   static getMenuItemsLoading = false;
   success = null;
-  jobs = [];
+  operations = [];
   menuItems = [];
-  selectedJob: SyncJob = null;
-  selectedOp: Operation = null;
+  selectedOperation: Operation = null;
   state = "";
-  operations: [];
 
   constructor(private operationService: OperationService,
     private route: ActivatedRoute, private spinner: NgxSpinnerService, private syncJobService: SyncJobService,
     public snackBar: MatSnackBar, private menuItemService: MenuItemsService) { }
 
   ngOnInit() {
-      this.getSyncJobs(Constants.ZEAL_VOUCHER_OPERATION);
       this.getOperations(Constants.ZEAL_VOUCHER_OPERATION);
       this.state = localStorage.getItem('getMenuItemsLoading');
       if (this.state == "true") {
@@ -63,67 +60,13 @@ export class ZealVoucherComponent implements OnInit {
     });
   }
 
-  getMenuItemsSyncJob() {
-    localStorage.setItem('getMenuItemsLoading', "true");
-    MenuItemsComponent.getMenuItemsLoading = true;
-    this.menuItemService.getMenuItems().toPromise().then((res: any) => {
-      this.getSyncJobs(Constants.MENU_ITEMS_SYNC);
-
-      localStorage.setItem('getMenuItemsLoading', "false");
-      MenuItemsComponent.getMenuItemsLoading = false;
-      this.snackBar.open(res.message, null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-success"
-      });
-
-    }).catch(err => {
-      this.getSyncJobs(Constants.MENU_ITEMS_SYNC);
-
-      localStorage.setItem('getMenuItemsLoading', "false");
-
-      MenuItemsComponent.getMenuItemsLoading = false;
-
-      let msg = "";
-      if (err.error.message) {
-        msg = err.error.message ;
-      }
-      else{
-        msg = "Failed to sync Menu Items completely!"
-      }
-
-      this.snackBar.open(msg , null, {
-        duration: 3000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-    });
-
-  }
-
-  getSyncJobs(syncJobTypeName: string) {
-    this.spinner.show();
-    this.syncJobService.getSyncJobs2(syncJobTypeName).toPromise().then((res: any) => {
-      this.jobs = res;
-      this.selectedJob = this.jobs[0];
-      if (this.jobs.length > 0) {
-        this.getSyncJobData();
-      }
-      this.spinner.hide();
-      this.loading = false;
-    }).catch(err => {
-      this.spinner.hide();
-      this.loading = false;
-    });
-  }
-
   getOperations(opeartionTypeName: string) {
     this.spinner.show();
     this.operationService.getOperation(opeartionTypeName).toPromise().then((res: any) => {
       this.operations = res;
-  //    this.selectedOp = this.operations[0];
+      this.selectedOperation = this.operations[0];
       if (this.operations.length > 0) {
-        this.getSyncJobData();
+        this.getOperationData();
       }
       this.spinner.hide();
       this.loading = false;
@@ -133,10 +76,10 @@ export class ZealVoucherComponent implements OnInit {
     });
   }
 
-  getSyncJobData() {
+  getOperationData() {
     this.spinner.show();
 
-    this.syncJobService.getSyncJobDataById(this.selectedJob["id"]).toPromise().then((res: any) => {
+    this.operationService.getOperationDataById(this.selectedOperation["id"]).toPromise().then((res: any) => {
       this.menuItems = res;
 
       this.spinner.hide();
@@ -146,5 +89,4 @@ export class ZealVoucherComponent implements OnInit {
       this.loading = false;
     });
   }
-
 }
