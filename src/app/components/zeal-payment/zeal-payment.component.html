@@ -1,34 +1,17 @@
 <h3>Zeal Payment</h3>
 
-
 <div class="header">
     <span class="history"> Operation History .</span>
 
-    <select class="custom-select" (change)="getSyncJobData()" [(ngModel)]="selectedJob">
-        <option [ngValue]="job" *ngFor="let job of jobs">
-            {{job.creationDate}} - {{job.status}}</option>
+    <select class="custom-select" (change)="getOperationData()" [(ngModel)]="selectedOperation">
+        <option [ngValue]="operation" *ngFor="let operation of operations">
+            {{operation.creationDate}} - {{operation.status}}</option>
     </select>
-</div>
-
-<!--
-<div class="header">
-    <span class="history"> Operation History .</span>
-
-    <select class="custom-select" (change)="getSyncJobData()" [(ngModel)]="selectedJob">
-        <option [ngValue]="job" *ngFor="let job of operations">
-            {{job.creationDate}} - {{job.status}}</option>
-    </select>
-</div>
--->
-
-<br>
-<div id="myProgress">
-    <mat-progress-bar mode="indeterminate" *ngIf="staticgetMenuItemsLoading"></mat-progress-bar>
 </div>
 
 <br>
 
-<div *ngIf="selectedJob">
+<div *ngIf="selectedOperation">
     <mat-card class="example-card">
             <mat-card-header>
                 <mat-card-title class="title">Operation Details</mat-card-title>
@@ -36,28 +19,28 @@
             <mat-card-content>
                 <mat-list-item>
                     <span class="key">Operation Number: </span>
-                    <span class="value" *ngIf="selectedJob.id">{{selectedJob.id}}</span>
-                    <span class="value" *ngIf="!selectedJob.id">No Info</span>
+                    <span class="value" *ngIf="selectedOperation.id">{{selectedOperation.id}}</span>
+                    <span class="value" *ngIf="!selectedOperation.id">No Info</span>
                 </mat-list-item>
                 <mat-list-item>
                     <span class="key">Operation status: </span>
-                    <span class="value" *ngIf="selectedJob.status">{{selectedJob.status}}</span>
-                    <span class="value" *ngIf="!selectedJob.status">No Info</span>
+                    <span class="value" *ngIf="selectedOperation.status">{{selectedOperation.status}}</span>
+                    <span class="value" *ngIf="!selectedOperation.status">No Info</span>
                 </mat-list-item>
                 <mat-list-item>
                     <span class="key">Start Date: </span>
-                    <span class="value" *ngIf="selectedJob.creationDate">{{selectedJob.creationDate}}</span>
-                    <span class="value" *ngIf="!selectedJob.creationDate">No Info</span>
+                    <span class="value" *ngIf="selectedOperation.creationDate">{{selectedOperation.creationDate}}</span>
+                    <span class="value" *ngIf="!selectedOperation.creationDate">No Info</span>
                 </mat-list-item>
                 <mat-list-item>
                     <span class="key">End Date: </span>
-                    <span class="value" *ngIf="selectedJob.endDate">{{selectedJob.endDate}}</span>
-                    <span class="value" *ngIf="!selectedJob.endDate">No Info</span>
+                    <span class="value" *ngIf="selectedOperation.endDate">{{selectedOperation.endDate}}</span>
+                    <span class="value" *ngIf="!selectedOperation.endDate">No Info</span>
                 </mat-list-item>
                 <mat-list-item>
                     <span class="key">Reason: </span>
-                    <span class="value" *ngIf="selectedJob.reason">{{selectedJob.reason}}</span>
-                    <span class="value" *ngIf="!selectedJob.reason">No Info</span>
+                    <span class="value" *ngIf="selectedOperation.reason">{{selectedOperation.reason}}</span>
+                    <span class="value" *ngIf="!selectedOperation.reason">No Info</span>
                 </mat-list-item>
                 <mat-list-item *ngIf="!menuItems.length">
                     <span> No data.</span>
@@ -69,19 +52,21 @@
 
 <div>
     <div>
-        <div *ngIf="!jobs.length">
+        <div *ngIf="!operations.length">
             <mat-card class="example-card">
                 <mat-card-header>
                     <mat-card-title>No Data</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                    <p> No operation to view. </p>
+                    <p> No operation to show. </p>
                     </mat-card-content>
                 </mat-card>
         </div>
 
-        <div class="main" *ngIf="menuItems.length">
-            <ngx-datatable class="material" [rows]="menuItems" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[{prop: 'cost_center', dir: 'asc'}]">
+<br>
+
+        <div class="main" *ngIf="zealPayments.length">
+            <ngx-datatable class="material" [rows]="zealPayments" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[{prop: 'cost_center', dir: 'asc'}]">
                 <ngx-datatable-column name="Status">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{row.status}}
@@ -89,7 +74,7 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Reason">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.reason}}
+                        {{row.data.message}}
                     </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="QR Code">

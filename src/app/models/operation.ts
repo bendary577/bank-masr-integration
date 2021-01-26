@@ -6,6 +6,6 @@ export class Operation {
     endDate: string;
     userId: string;
     accountId: string;
-    syncJobTypeId: string;
+    operationypeId: string;
     deleted: string;
 }

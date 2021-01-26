@@ -45,6 +45,7 @@ export class Constants {
     static GET_OPERATION_JOBS_URL = environment.apiHost + '/getOperationJobs';
 
     static GET_OPERATION_URL = environment.apiHost + '/getOperation';
+    static GET_OPERATION_DATA_BY_ID = environment.apiHost + '/getOperationDataById';
 
     static GET_SUPPLIERS_URL = environment.apiHost + '/getSuppliers';
     static GET_SUPPLIERS_DETAILS_URL = environment.apiHost + '/getSuppliersDetails';
