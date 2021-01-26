@@ -31,14 +31,16 @@ export class IncludedOverGroupsComponent implements OnInit {
 
   ngOnInit() {
     this.getGeneralSettings();
-    this.getOverGroups();
   }
 
   getGeneralSettings() {
     this.generalSettingsService.getGeneralSettings().then((res) => {
       this.generalSettings = res as GeneralSettings;
+      this.overGroups = this.generalSettings.overGroups;
       this.mappedItems = this.generalSettings.items;
-
+      if(this.overGroups.length == 0){
+        this.getOverGroups();
+      }
     }).catch(err => {
       let message = "";
       if (err.error){
