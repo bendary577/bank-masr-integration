@@ -83,7 +83,8 @@ export class IncludedOverGroupsComponent implements OnInit {
     this.itemLoading = true;
     this.journalService.mapItemGroups().toPromise().then((res: any) => {
       this.mappedItems = res.data;
-
+      this.generalSettings.items = this.mappedItems;
+      
       this.spinner.hide();
       this.itemLoading = false;
 
