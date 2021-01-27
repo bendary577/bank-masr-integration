@@ -42,6 +42,7 @@ import { ZealPaymentConfigComponent } from './components/zeal-payment-config/zea
 import { ZealVoucherComponent } from './components/zeal-voucher/zeal-voucher.component';
 import { ZealVoucherConfigComponent } from './components/zeal-voucher-config/zeal-voucher-config.component';
 import { ZealPointsComponent } from './components/zeal-points/zeal-points.component';
+import { OperaPaymentConfigurationComponent } from './components/opera-payment-configuration/opera-payment-configuration.component';
 
 
 const routes: Routes = [
@@ -102,6 +103,8 @@ const routes: Routes = [
 
   { path: Constants.ZEAL_POINTS_PAGE , component: ZealPointsComponent ,canActivate:[AuthGuardService]},
   { path: Constants.ZEAL_POINTS_CONFIG_PAGE , component: ZealVoucherConfigComponent ,canActivate:[AuthGuardService]},
+
+  { path: Constants.OPERA_PAYMENT_CONFIG_PAGE , component: OperaPaymentConfigurationComponent ,canActivate:[AuthGuardService]},
 
   { path: Constants.EXPORTED_FILES_PAGE , component: SyncExportedFilesComponent ,canActivate:[AuthGuardService]},
 

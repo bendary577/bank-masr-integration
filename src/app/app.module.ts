@@ -106,6 +106,7 @@ import { ZealPaymentService } from './services/zealPayment/zeal-payment.service'
 import { OperationService } from './services/operation/operation.service';
 import { OhraConfigurationComponent } from './components/configuration/ohra-configuration/ohra-configuration.component';
 import { AddSalesStatisticsComponent } from './components/add-sales-statistics/add-sales-statistics.component';
+import { OperaPaymentConfigurationComponent } from './components/opera-payment-configuration/opera-payment-configuration.component';
 
 @NgModule({
   declarations: [
@@ -176,7 +177,8 @@ import { AddSalesStatisticsComponent } from './components/add-sales-statistics/a
     ZealPointsComponent,
     ZealPointsConfigComponent,
     OhraConfigurationComponent,
-    AddSalesStatisticsComponent
+    AddSalesStatisticsComponent,
+    OperaPaymentConfigurationComponent
   ],
   imports: [
     BrowserModule,
