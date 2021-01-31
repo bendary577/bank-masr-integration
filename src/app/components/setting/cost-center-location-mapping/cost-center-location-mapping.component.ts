@@ -172,7 +172,7 @@ export class CostCenterLocationMappingComponent implements OnInit {
         this.generalSettings.revenueCenters.push(this.newRevenueCenter);
 
         this.generalSettingsService.updateGeneralSettings(this.generalSettings).then(result => {
-          this.newLocation = new CostCenter();  
+          this.newRevenueCenter = new CostCenter();  
           this.loading = false;
 
           this.snackBar.open("Add revenue center successfully.", null, {

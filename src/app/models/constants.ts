@@ -179,6 +179,7 @@ export class Constants {
     static ACCOUNT_CONFIGURATION = 'configuration';
     static COST_CENTER_ACCOUNT_MAPPING = 'costCenterAccountMapping';
     static COST_CENTER_LOCATION_MAPPING = 'costCenterLocationMapping';
+    static SUPPLIERS_MAPPING = 'suppliersMapping';
     static INCLUDED_OVER_GROUPS = 'includedOverGroups';
     static USERS_CONFIGURATION = 'users';
     static SYNC_JOBS = 'syncjobs';

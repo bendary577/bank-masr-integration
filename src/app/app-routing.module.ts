@@ -43,6 +43,7 @@ import { ZealVoucherComponent } from './components/zeal-voucher/zeal-voucher.com
 import { ZealVoucherConfigComponent } from './components/zeal-voucher-config/zeal-voucher-config.component';
 import { ZealPointsComponent } from './components/zeal-points/zeal-points.component';
 import { OperaPaymentConfigurationComponent } from './components/opera-payment-configuration/opera-payment-configuration.component';
+import { SupplierMappingComponent } from './components/setting/supllier-mapping/supllier-mapping.component';
 
 
 const routes: Routes = [
@@ -58,6 +59,7 @@ const routes: Routes = [
   { path: Constants.COST_CENTER_ACCOUNT_MAPPING, component: CostCenterAccountMappingComponent ,canActivate:[AuthGuardService]},
   { path: Constants.INCLUDED_OVER_GROUPS, component: IncludedOverGroupsComponent ,canActivate:[AuthGuardService]},
   { path: Constants.OPERATION_TYPES, component: OperationTypesConfigurationComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.SUPPLIERS_MAPPING, component: SupplierMappingComponent ,canActivate:[AuthGuardService]},
 
   // Pages
   { path: Constants.LOGIN_PAGE, component: LoginComponent},
