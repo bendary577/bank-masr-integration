@@ -94,6 +94,7 @@ export class Constants {
     // General Settings
     static GET_GENERAL_SETTINGS_URL = environment.apiHost + '/getGeneralSettings';
     static UPDATE_GENERAL_SETTINGS_URL = environment.apiHost + '/updateGeneralSettings';
+    static FETCH_SUPPLIERS = environment.apiHost + '/getVendors';
 
 
     static LOGIN_PAGE = 'login';
@@ -174,7 +175,6 @@ export class Constants {
     static ZEAL_POINTS_OPERATION = 'Zeal Points';
 
     static TABS_PAGE = 'tabs';
-    static END_POINT = '/getSuppliers';
     static SETTING = 'setting';
     static ACCOUNT_CONFIGURATION = 'configuration';
     static COST_CENTER_ACCOUNT_MAPPING = 'costCenterAccountMapping';

@@ -1,7 +1,7 @@
 <h3 mat-dialog-title>Suppliers Account Mapping</h3>
-<!-- <div class="header">
-    <button mat-flat-button (click)="getCostCenters()">Fetch Suppliers</button>
-</div> -->
+<div class="header">
+    <button mat-flat-button (click)="getSuppliers()">Fetch Suppliers</button>
+</div>
 <br>
 <div>
     <!-- Suppliers -->
@@ -36,13 +36,13 @@
                     <ngx-datatable *ngIf="!loading" class="material" [rows]="suppliers" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
                         <ngx-datatable-column name="Supplier Name">
                             <ng-template let-row="row" ngx-datatable-cell-template>
-                                {{row.SupplierName}}
+                                {{row.supplierName}}
                             </ng-template>
                         </ngx-datatable-column>
 
                         <ngx-datatable-column name="Account Code">
                             <ng-template let-row="row" ngx-datatable-cell-template>
-                                <input matInput placeholder="Account Code" [(ngModel)]="row.AccountCode">
+                                <input matInput placeholder="Account Code" [(ngModel)]="row.accountCode">
                             </ng-template>
                         </ngx-datatable-column>
 

@@ -6,9 +6,9 @@ import { GeneralSettings } from 'src/app/models/GeneralSettings';
 import { Response } from 'src/app/models/Response';
 import { Supplier } from 'src/app/models/supplier';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
-import { AddRevenueCenterComponent } from '../../add-revenue-center/add-revenue-center.component';
 import { AddSupplierComponent } from '../../add-supplier/add-supplier.component';
 import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
+import { SupplierService } from '../../../services/supplier/supplier.service'
 
 @Component({
   selector: 'app-supllier-mapping',
@@ -17,14 +17,15 @@ import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
 })
 export class SupplierMappingComponent implements OnInit {
   suppliers: Supplier[];
-  newSupplier: Supplier;
+  newSupplier: Supplier = new Supplier();
   loading = false;
   suppliersLoding = true;
   saveLoading = false;
   generalSettings: GeneralSettings;
 
   constructor(private spinner: NgxSpinnerService, public snackBar: MatSnackBar,  public dialog: MatDialog,
-    private generalSettingsService:GeneralSettingsService, private sidNav: SidenavResponsive) {
+    private generalSettingsService:GeneralSettingsService, private sidNav: SidenavResponsive,
+    private supplierService: SupplierService) {
   }
 
   ngOnInit() {
@@ -71,8 +72,10 @@ export class SupplierMappingComponent implements OnInit {
         console.log(res)
         this.spinner.show();
         this.loading = true;
-        this.newSupplier.SupplierName = res.SupplierName;
-        this.newSupplier.AccountCode = res.AccountCode;
+
+        this.newSupplier = new Supplier();
+        this.newSupplier.supplierName = res.supplierName;
+        this.newSupplier.accountCode = res.accountCode;
 
         if(!this.generalSettings.suppliers){
           this.generalSettings.suppliers = [];
@@ -95,6 +98,8 @@ export class SupplierMappingComponent implements OnInit {
         }).catch(err => {
           this.spinner.hide();
           this.loading = false;
+
+          this.newSupplier = new Supplier();
           this.suppliers.pop();
 
           let message = "";
@@ -116,6 +121,17 @@ export class SupplierMappingComponent implements OnInit {
           });
         });
       }
+    });
+  }
+
+  getSuppliers(){
+    this.spinner.show();
+    this.supplierService.fetchSuppliers().toPromise().then((res: any) => {
+      this.suppliers = res;
+      this.spinner.hide();
+    }).catch(err => {
+      console.error(err);
+      this.spinner.hide();
     });
   }
 

@@ -1,6 +1,6 @@
 export class Supplier {
     supplierId: string;
-    SupplierName: string;
-    AccountCode: string;
+    supplierName: string;
+    accountCode: string;
 }
 
