@@ -24,9 +24,9 @@ export class CsvService {
     responseType: 'blob' as 'json'});
   }
 
-  generateSingleFile() {
+  generateSingleFile(syncJobTypeName: string) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get<Blob>(Constants.GENERATE_SINGLE_FILE_SALES , 
+    return this.http.get<Blob>(Constants.GENERATE_SINGLE_FILE_SALES + "?syncJobTypeName=" + syncJobTypeName , 
     { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token}),
      observe: 'response',
     responseType: 'blob' as 'json'});

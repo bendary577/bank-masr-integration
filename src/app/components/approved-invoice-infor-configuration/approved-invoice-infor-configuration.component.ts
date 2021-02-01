@@ -41,7 +41,6 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
   ngOnInit() {
     this.getSyncJobType();
     this.accountERD = localStorage.getItem('accountERD');
-
   }
 
   getSyncJobType() {

@@ -186,7 +186,7 @@ export class PosSalesInforComponent implements OnInit {
   }
 
   generateSingleFile():void {
-    this.csvService.generateSingleFile().subscribe(
+    this.csvService.generateSingleFile(Constants.POS_SALES_SYNC).subscribe(
       res => {
         const blob = new Blob([res.body], { type : 'application/vnd.ms.txt' });
         const file = new File([blob], "sales" + '.ndf', { type: 'application/vnd.ms.txt' });

@@ -8,6 +8,8 @@ import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import { ExcelService } from 'src/app/services/excel/excel.service';
 import { saveAs } from 'file-saver';
+import { Constants } from 'src/app/models/constants';
+import { CsvService } from 'src/app/services/csv/csv.service';
 
 @Component({
   selector: 'app-credit-notes-infor',
@@ -28,10 +30,10 @@ export class CreditNotesInforComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService, private creditNoteService: CreditNoteService,
     private syncJobService:SyncJobService, private sidNav: SidenavResponsive, private excelService: ExcelService,
-    public dialog: MatDialog, public snackBar: MatSnackBar) { }
+    public dialog: MatDialog, public snackBar: MatSnackBar, private csvService: CsvService) { }
 
   ngOnInit() {
-    this.getSyncJobs("Credit Notes");
+    this.getSyncJobs(Constants.CREDIT_NOTE_SYNC);
     this.state = localStorage.getItem('getCreditNoteLoading');
 
     if (this.state == "true") {
@@ -44,7 +46,7 @@ export class CreditNotesInforComponent implements OnInit {
 
   getCreditNoteDB() {
     this.spinner.show();
-    this.syncJobService.getSyncJobData("Credit Notes").toPromise().then((res: any) => {
+    this.syncJobService.getSyncJobData(Constants.CREDIT_NOTE_SYNC).toPromise().then((res: any) => {
       this.creditNote = res;
 
       this.spinner.hide();
@@ -210,5 +212,29 @@ export class CreditNotesInforComponent implements OnInit {
         });
       }
   );
+  }
+
+  generateSingleFile():void {
+    this.csvService.generateSingleFile(Constants.CREDIT_NOTE_SYNC).subscribe(
+      res => {
+        const blob = new Blob([res.body], { type : 'application/vnd.ms.txt' });
+        const file = new File([blob], "sales" + '.ndf', { type: 'application/vnd.ms.txt' });
+        saveAs(file);
+
+        this.snackBar.open("Export Successfully", null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
+        });
+      },
+      err => {
+        console.error(err)
+        this.snackBar.open("Fail to export, Please try agian" , null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+      }
+   );
   }
 }

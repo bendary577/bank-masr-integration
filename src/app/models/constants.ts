@@ -205,7 +205,7 @@ export class Constants {
     static EXPORT_CSV_CONSUMPTION = environment.apiHost + '/consumption/export/csv';
     static EXPORT_CSV_WATAGE = environment.apiHost + '/wastage/export/csv';
     static EXPORT_CSV_SALES = environment.apiHost + '/sales/export/csv';
-    static GENERATE_SINGLE_FILE_SALES = environment.apiHost + '/sales/export/generateSingleFile';
+    static GENERATE_SINGLE_FILE_SALES = environment.apiHost + '/generateSingleFile';
     static LIST_SYNC_FILE_SALES = environment.apiHost + '/listSyncFiles';
 
     //////////////////////////////////////////////// ERD //////////////////////////////////////////////
