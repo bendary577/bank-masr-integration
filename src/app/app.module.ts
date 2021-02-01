@@ -109,6 +109,7 @@ import { AddSalesStatisticsComponent } from './components/add-sales-statistics/a
 import { OperaPaymentConfigurationComponent } from './components/opera-payment-configuration/opera-payment-configuration.component';
 import { SupplierMappingComponent } from './components/setting/supllier-mapping/supllier-mapping.component';
 import { AddSupplierComponent } from './components/add-supplier/add-supplier.component';
+import { ExportedFileConfigurationComponent } from './components/configuration/exported-file-configuration/exported-file-configuration.component';
 
 @NgModule({
   declarations: [
@@ -182,7 +183,8 @@ import { AddSupplierComponent } from './components/add-supplier/add-supplier.com
     AddSalesStatisticsComponent,
     OperaPaymentConfigurationComponent,
     SupplierMappingComponent,
-    AddSupplierComponent
+    AddSupplierComponent,
+    ExportedFileConfigurationComponent
   ],
   imports: [
     BrowserModule,

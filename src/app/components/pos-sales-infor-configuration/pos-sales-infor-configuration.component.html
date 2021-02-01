@@ -11,41 +11,7 @@
                     Exported File
                 </mat-panel-title>
             </mat-expansion-panel-header>
-
-            <div class="container" *ngIf="!loading">
-                <form class="my-form">
-                    <div>
-                        <mat-checkbox id="exportFilePerLocation" name="exportFilePerLocation" class="example-margin" [(ngModel)]="syncJobType.configuration.exportFilePerLocation">Export files per location</mat-checkbox>
-                    </div>
-                    <br>
-
-                    <div>
-                        <mat-form-field class="example-full-width">
-                            <input matInput id="recordType" name="recordType" placeholder="Record Type" [(ngModel)]="syncJobType.configuration.recordType">
-                        </mat-form-field>
-                    </div>
-
-                    <div>
-                        <mat-form-field class="example-full-width">
-                            <input matInput id="conversionCode" name="conversionCode" placeholder="Conversion Code" [(ngModel)]="syncJobType.configuration.conversionCode">
-                        </mat-form-field>
-                    </div>
-
-                    <div>
-                        <mat-form-field class="example-full-width">
-                            <input matInput id="conversionRate" name="conversionRate" placeholder="Conversion Rate" [(ngModel)]="syncJobType.configuration.conversionRate">
-                        </mat-form-field>
-                    </div>
-
-                    <div>
-                        <mat-form-field class="example-full-width">
-                            <input matInput id="versionCode" name="versionCode" placeholder="Version Code" [(ngModel)]="syncJobType.configuration.versionCode">
-                        </mat-form-field>
-                    </div>
-
-                </form>
-            </div>
-
+            <app-exported-file-configuration [syncJobType]=syncJobType></app-exported-file-configuration>
         </mat-expansion-panel>
 
         <!-- Oracle Hospitality Configurations -->

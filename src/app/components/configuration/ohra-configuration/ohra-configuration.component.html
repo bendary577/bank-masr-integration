@@ -31,7 +31,7 @@
 
         <div *ngIf="syncJobType.name == 'Approved Invoices' || syncJobType.name == 'Credit Notes'">
             <mat-form-field class="example-full-width">
-                <mat-select matInput id="invoiceTypeIncluded" name="invoiceTypeIncluded" placeholder="Invoice Type Included" [(ngModel)]="syncJobType.configuration.invoiceTypeIncluded">
+                <mat-select matInput id="invoiceTypeIncluded" name="invoiceTypeIncluded" placeholder="Invoice Type Included" [(ngModel)]="syncJobType.configuration.invoiceConfiguration.invoiceTypeIncluded">
                     <mat-option value="Approved Invoice">Approved Invoices</mat-option>
                     <mat-option value="Account Payable">Account Payable</mat-option>
                     <mat-option value="Both">Both</mat-option>
