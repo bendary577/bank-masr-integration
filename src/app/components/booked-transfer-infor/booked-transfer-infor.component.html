@@ -11,7 +11,7 @@
     </select>
     <button mat-flat-button (click)="exportToCSV()" [disabled]="jobs.length == 0">Export to CSV</button>
     <button mat-flat-button (click)="exportToXLSX()" [disabled]="jobs.length == 0">Export to Excel</button>
-    <button mat-flat-button (click)="getBookedTransferSyncJob()">Sync Booked Transfer Now</button>
+    <button mat-flat-button (click)="getBookedTransferSyncJob()" [disabled]="staticgetTransfersLoading">Sync Booked Transfer Now</button>
 </div>
 
 <br>
