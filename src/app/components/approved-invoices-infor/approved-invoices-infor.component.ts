@@ -204,7 +204,7 @@ export class ApprovedInvoicesInforComponent implements OnInit {
   }
 
   exportToCSV():void {
-    this.csvService.exportSalesToCSV(this.selectedJob.id).subscribe(
+    this.csvService.exportSalesToCSV(this.selectedJob.id, Constants.APPROVED_INVOICES_SYNC).subscribe(
       res => {
         const blob = new Blob([res.body], { type : 'application/vnd.ms.txt' });
         const file = new File([blob], "sales" + '.ndf', { type: 'application/vnd.ms.txt' });

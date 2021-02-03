@@ -50,33 +50,21 @@
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Loction Ledger Analysis
+                    Analysis Codes
                 </mat-panel-title>
             </mat-expansion-panel-header>
 
             <div class="container" *ngIf="!loading">
                 <form class="my-form">
-
                     <div>
                         <mat-form-field class="example-full-width">
-                            <mat-select matInput id="locationAnalysis" name="locationAnalysis" placeholder="Location Ledger Analysis" [(ngModel)]="syncJobType.configuration.locationAnalysis">
-                                <mat-option value="1">1</mat-option>
-                                <mat-option value="2">2</mat-option>
-                                <mat-option value="3">3</mat-option>
-                                <mat-option value="4">4</mat-option>
-                                <mat-option value="5">5</mat-option>
-                                <mat-option value="6">6</mat-option>
-                                <mat-option value="7">7</mat-option>
-                                <mat-option value="8">8</mat-option>
-                                <mat-option value="9">9</mat-option>
-                                <mat-option value="10">10</mat-option>
+                            <mat-select matInput id="locationAnalysisCode" name="locationAnalysisCode" placeholder="Location Analysis Code" [(ngModel)]="syncJobType.configuration.locationAnalysisCode">
+                                <mat-option [value]=code *ngFor="let code of analysisCodes">{{code}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
-
                 </form>
             </div>
-
         </mat-expansion-panel>
 
         <!-- Analysis Configurations -->
