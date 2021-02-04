@@ -5,6 +5,7 @@ import { GeneralSettingsService } from 'src/app/services/generalSettings/general
 import { MatSnackBar } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { InvoiceService } from 'src/app/services/invoice/invoice.service';
+import { CostCenter } from 'src/app/models/CostCenter';
 
 @Component({
   selector: 'app-cost-center-account-mapping',
@@ -19,7 +20,8 @@ export class CostCenterAccountMappingComponent implements OnInit {
 
   costCenters = [];
   selectedCostCenters = [];
-
+  locations = [];
+  
   generalSettings: GeneralSettings;
 
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
@@ -36,6 +38,7 @@ export class CostCenterAccountMappingComponent implements OnInit {
 
     this.generalSettingsService.getGeneralSettings().then((res) => {
       this.generalSettings = res as GeneralSettings;
+      this.locations = this.generalSettings.locations;
       this.costCenters = this.generalSettings.costCenterAccountMapping;
       if(this.costCenters.length == 0){
         this.getCostCenters();
