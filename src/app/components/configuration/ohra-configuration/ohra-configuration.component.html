@@ -23,14 +23,9 @@
             <mat-form-field class="example-full-width">
                 <mat-select matInput id="timePeriod" name="timePeriod" placeholder="Business Dates" 
                 (selectionChange)="chooseTimePeriod()" [(ngModel)]="syncJobType.configuration.timePeriod">
-                    <mat-option value="Most Recent">Most Recent</mat-option>
-                    <mat-option value="Financial Week to Date">Financial Week to Date</mat-option>
-                    <mat-option value="Past 7 Days">Past 7 Days</mat-option>
                     <mat-option value="Today">Today</mat-option>
                     <mat-option value="Yesterday">Yesterday</mat-option>
-                    <mat-option value="Month to Date">Month to Date</mat-option>
                     <mat-option value="Last Month">Last Month</mat-option>
-                    <mat-option value="Financial Period to Date">Financial Period to Date</mat-option>
                     <mat-option value="UserDefined">User-defined</mat-option>
                 </mat-select>
             </mat-form-field>
