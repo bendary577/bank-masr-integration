@@ -231,7 +231,7 @@ export class ApprovedInvoicesInforComponent implements OnInit {
     this.csvService.generateSingleFile(Constants.APPROVED_INVOICES_SYNC).subscribe(
       res => {
         const blob = new Blob([res.body], { type : 'application/vnd.ms.txt' });
-        const file = new File([blob], "sales" + '.ndf', { type: 'application/vnd.ms.txt' });
+        const file = new File([blob], Constants.APPROVED_INVOICES_SYNC + '.ndf', { type: 'application/vnd.ms.txt' });
         saveAs(file);
 
         this.snackBar.open("Export Successfully", null, {

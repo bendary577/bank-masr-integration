@@ -2,7 +2,17 @@
 
 
 <div>
-    <div *ngIf="!wasteLoading">
+    <div *ngIf="!syncJobTypeloading">
+        <!-- Oracle Hospitality Configurations -->
+        <mat-expansion-panel *ngIf="accountERD == 'ExportSun'">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Exported File
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-exported-file-configuration [syncJobType]=syncJobType></app-exported-file-configuration>
+        </mat-expansion-panel>
+
         <!-- Oracle Hospitality Configurations -->
         <mat-expansion-panel>
             <mat-expansion-panel-header>
@@ -27,33 +37,21 @@
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Loction Ledger Analysis
+                    Analysis Codes
                 </mat-panel-title>
             </mat-expansion-panel-header>
 
-            <div class="container" *ngIf="!syncJobTypeloading">
+            <div class="container" *ngIf="!loading">
                 <form class="my-form">
-
                     <div>
                         <mat-form-field class="example-full-width">
-                            <mat-select matInput id="locationAnalysis" name="locationAnalysis" placeholder="Location Ledger Analysis" [(ngModel)]="syncJobType.configuration.locationAnalysis">
-                                <mat-option value="1">1</mat-option>
-                                <mat-option value="2">2</mat-option>
-                                <mat-option value="3">3</mat-option>
-                                <mat-option value="4">4</mat-option>
-                                <mat-option value="5">5</mat-option>
-                                <mat-option value="6">6</mat-option>
-                                <mat-option value="7">7</mat-option>
-                                <mat-option value="8">8</mat-option>
-                                <mat-option value="9">9</mat-option>
-                                <mat-option value="10">10</mat-option>
+                            <mat-select matInput id="locationAnalysisCode" name="locationAnalysisCode" placeholder="Location Analysis Code" [(ngModel)]="syncJobType.configuration.locationAnalysisCode">
+                                <mat-option [value]=code *ngFor="let code of analysisCodes">{{code}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
-
                 </form>
             </div>
-
         </mat-expansion-panel>
 
         <!-- Analysis Configurations -->
@@ -73,16 +71,17 @@
                     Watse Groups
                 </mat-panel-title>
             </mat-expansion-panel-header>
+            <div>
+                <button mat-flat-button (click)="getWasteGroups()">Fetch Wastage</button>
+            </div>
+            <br>
             <div *ngIf="wasteGroups?.length > 0">
-
                 <ngx-datatable class="material" [rows]="wasteGroups" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
-
                     <ngx-datatable-column name="Waste Group">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                             <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.wasteGroup">{{row.wasteGroup}}</mat-checkbox>
                         </ng-template>
                     </ngx-datatable-column>
-
                 </ngx-datatable>
             </div>
         </mat-expansion-panel>
