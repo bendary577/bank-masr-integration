@@ -107,6 +107,9 @@ import { OperationService } from './services/operation/operation.service';
 import { OhraConfigurationComponent } from './components/configuration/ohra-configuration/ohra-configuration.component';
 import { AddSalesStatisticsComponent } from './components/add-sales-statistics/add-sales-statistics.component';
 import { OperaPaymentConfigurationComponent } from './components/opera-payment-configuration/opera-payment-configuration.component';
+import { SupplierMappingComponent } from './components/setting/supllier-mapping/supllier-mapping.component';
+import { AddSupplierComponent } from './components/add-supplier/add-supplier.component';
+import { ExportedFileConfigurationComponent } from './components/configuration/exported-file-configuration/exported-file-configuration.component';
 
 @NgModule({
   declarations: [
@@ -178,7 +181,10 @@ import { OperaPaymentConfigurationComponent } from './components/opera-payment-c
     ZealPointsConfigComponent,
     OhraConfigurationComponent,
     AddSalesStatisticsComponent,
-    OperaPaymentConfigurationComponent
+    OperaPaymentConfigurationComponent,
+    SupplierMappingComponent,
+    AddSupplierComponent,
+    ExportedFileConfigurationComponent
   ],
   imports: [
     BrowserModule,
@@ -224,6 +230,6 @@ import { OperaPaymentConfigurationComponent } from './components/opera-payment-c
      AddTaxComponent, AddDiscountComponent, AddRevenueCenterComponent, AddServiceChargeComponent,
       SuppliersConfiguartionComponent, SchedulerConfigurationComponent, AddTenderChildComponent,
       AddSimphonyLocationComponent, AddWebServiceInvokerComponent, AddLocationComponent,
-      AddMajorGroupChildComponent, AddSalesStatisticsComponent]
+      AddMajorGroupChildComponent, AddSalesStatisticsComponent, AddSupplierComponent]
 })
 export class AppModule { }

@@ -94,6 +94,7 @@ export class Constants {
     // General Settings
     static GET_GENERAL_SETTINGS_URL = environment.apiHost + '/getGeneralSettings';
     static UPDATE_GENERAL_SETTINGS_URL = environment.apiHost + '/updateGeneralSettings';
+    static FETCH_SUPPLIERS = environment.apiHost + '/getVendors';
 
 
     static LOGIN_PAGE = 'login';
@@ -174,11 +175,11 @@ export class Constants {
     static ZEAL_POINTS_OPERATION = 'Zeal Points';
 
     static TABS_PAGE = 'tabs';
-    static END_POINT = '/getSuppliers';
     static SETTING = 'setting';
     static ACCOUNT_CONFIGURATION = 'configuration';
     static COST_CENTER_ACCOUNT_MAPPING = 'costCenterAccountMapping';
     static COST_CENTER_LOCATION_MAPPING = 'costCenterLocationMapping';
+    static SUPPLIERS_MAPPING = 'suppliersMapping';
     static INCLUDED_OVER_GROUPS = 'includedOverGroups';
     static USERS_CONFIGURATION = 'users';
     static SYNC_JOBS = 'syncjobs';
@@ -197,14 +198,9 @@ export class Constants {
 
     //////////////////////////////////////////////// Export To CSV //////////////////////////////////////////////
 
-    static EXPORT_CSV_APPROVED_INVOICES = environment.apiHost + '/invoices/export/csv';
-    static EXPORT_CSV_CREDIT_NOTES = environment.apiHost + '/invoices/export/csv';
-    static EXPORT_CSV_BOOKED_TRANSFERS = environment.apiHost + '/transfers/export/csv';
-    static EXPORT_CSV_BOOKED_PRODUCTION = environment.apiHost + '/bookedProduction/export/csv';
-    static EXPORT_CSV_CONSUMPTION = environment.apiHost + '/consumption/export/csv';
-    static EXPORT_CSV_WATAGE = environment.apiHost + '/wastage/export/csv';
-    static EXPORT_CSV_SALES = environment.apiHost + '/sales/export/csv';
-    static GENERATE_SINGLE_FILE_SALES = environment.apiHost + '/sales/export/generateSingleFile';
+    static EXPORT_Excel = environment.apiHost + '/export/excel';
+    static EXPORT_CSV = environment.apiHost + '/export/csv';
+    static GENERATE_SINGLE_FILE_SALES = environment.apiHost + '/generateSingleFile';
     static LIST_SYNC_FILE_SALES = environment.apiHost + '/listSyncFiles';
 
     //////////////////////////////////////////////// ERD //////////////////////////////////////////////

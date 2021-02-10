@@ -37,6 +37,8 @@ export class BookedProductionConfigurationComponent implements OnInit {
   analysis = [];
 
   AccountSettingsForm: FormGroup;
+  accountERD;
+  analysisCodes = ["1","2","3","4","5","6","7","8","9","10"];
 
   constructor(private spinner: NgxSpinnerService, private syncJobService:SyncJobService,  private journalService:JournalService,
     private accSyncTypeService:AccSyncTypeService, private router:Router, public snackBar: MatSnackBar,
@@ -47,6 +49,7 @@ export class BookedProductionConfigurationComponent implements OnInit {
 
   ngOnInit() {
     this.getSyncJobType();
+    this.accountERD = localStorage.getItem('accountERD');
   }
 
   getSyncJobType() {
@@ -70,8 +73,8 @@ export class BookedProductionConfigurationComponent implements OnInit {
     }).catch(err => {
       let message = "";
       if(err.status === 401){
-         message = ErrorMessages.SESSION_EXPIRED;
- this.sidNav.Logout();
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){
@@ -100,8 +103,8 @@ export class BookedProductionConfigurationComponent implements OnInit {
     }).catch(err => {
       let message = "";
       if(err.status === 401){
-         message = ErrorMessages.SESSION_EXPIRED;
- this.sidNav.Logout();
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){
@@ -139,8 +142,8 @@ export class BookedProductionConfigurationComponent implements OnInit {
     ).catch(err => {
       let message = "";
       if(err.status === 401){
-         message = ErrorMessages.SESSION_EXPIRED;
- this.sidNav.Logout();
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
       } else if (err.error.message){
         message = err.error.message;
       } else if (err.message){
@@ -162,13 +165,5 @@ export class BookedProductionConfigurationComponent implements OnInit {
 
   onCancelClick() {
     this.router.navigate([Constants.SYNC_JOBS]);
-  }
-
-  chooseTimePeriod(){
-    if(this.syncJobType.configuration.timePeriod == "UserDefined"){
-      this.userDefinedFlag = true;
-    }else{
-      this.userDefinedFlag = false;
-    }
   }
 }
