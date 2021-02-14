@@ -70,10 +70,10 @@
                 <ngx-datatable class="material" style="height: 200px;" [rows]="menuItems" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
                     <ngx-datatable-column name="Status">
                         <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.status}}
+                            {{row.data.status}}
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column name="Reason">
+                    <ngx-datatable-column name="Message">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                             {{row.data.message}}
                         </ng-template>
@@ -94,7 +94,7 @@
                 <ngx-datatable class="material" [rows]="menuItems" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
                     <ngx-datatable-column name="Item Object Id">
                         <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.data.id}}
+                            {{row.data.data2.itemObjectId}}
                         </ng-template>
                     </ngx-datatable-column>
                     <ngx-datatable-column name="Item Name">
