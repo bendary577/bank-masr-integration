@@ -27,7 +27,7 @@ export class ZealVoucherConfigComponent implements OnInit {
 
  getOperationType() {
    this.loading = true;
-   this.operationService.getOperationTypesByName(Constants.CREATE_ORDER_OPERATION).toPromise().then((res: any) => {
+   this.operationService.getOperationTypesByName(Constants.ZEAL_VOUCHER_OPERATION).toPromise().then((res: any) => {
      this.operationType = res;
 
      this.loading = false;

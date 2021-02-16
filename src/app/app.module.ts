@@ -100,8 +100,6 @@ import { ZealPaymentConfigComponent } from './components/zeal-payment-config/zea
 import { ZealVoucherComponent } from './components/zeal-voucher/zeal-voucher.component';
 import { PaymentVoucherConfigComponent } from './components/payment-voucher-config/payment-voucher-config.component';
 import { ZealVoucherConfigComponent } from './components/zeal-voucher-config/zeal-voucher-config.component';
-import { ZealPointsComponent } from './components/zeal-points/zeal-points.component';
-import { ZealPointsConfigComponent } from './components/zeal-points-config/zeal-points-config.component';
 import { ZealPaymentService } from './services/zealPayment/zeal-payment.service';
 import { OperationService } from './services/operation/operation.service';
 import { OhraConfigurationComponent } from './components/configuration/ohra-configuration/ohra-configuration.component';
@@ -110,6 +108,7 @@ import { OperaPaymentConfigurationComponent } from './components/opera-payment-c
 import { SupplierMappingComponent } from './components/setting/supllier-mapping/supllier-mapping.component';
 import { AddSupplierComponent } from './components/add-supplier/add-supplier.component';
 import { ExportedFileConfigurationComponent } from './components/configuration/exported-file-configuration/exported-file-configuration.component';
+import { CreateOrderComponent } from './components/create-order/create-order.component';
 
 @NgModule({
   declarations: [
@@ -170,6 +169,7 @@ import { ExportedFileConfigurationComponent } from './components/configuration/e
     AddLocationComponent,
     OperationTypesConfigurationComponent,
     CreateOrderConfigComponent,
+    CreateOrderComponent,
     AddMajorGroupChildComponent,
     SyncExportedFilesComponent,
     ZealPaymentComponent,
@@ -177,8 +177,6 @@ import { ExportedFileConfigurationComponent } from './components/configuration/e
     ZealVoucherComponent,
     PaymentVoucherConfigComponent,
     ZealVoucherConfigComponent,
-    ZealPointsComponent,
-    ZealPointsConfigComponent,
     OhraConfigurationComponent,
     AddSalesStatisticsComponent,
     OperaPaymentConfigurationComponent,

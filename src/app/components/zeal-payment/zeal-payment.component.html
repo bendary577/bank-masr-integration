@@ -42,7 +42,7 @@
                 <span class="value" *ngIf="selectedOperation.reason">{{selectedOperation.reason}}</span>
                 <span class="value" *ngIf="!selectedOperation.reason">No Info</span>
             </mat-list-item>
-            <mat-list-item *ngIf="!menuItems.length">
+            <mat-list-item *ngIf="!operationData.length">
                 <span> No data.</span>
             </mat-list-item>
         </mat-card-content>
@@ -63,8 +63,8 @@
             </mat-card>
         </div>
         <br>
-        <div class="main" *ngIf="zealPayments.length">
-            <ngx-datatable class="material"  style="height: 300px;" [rows]="zealPayments" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
+        <div class="main" *ngIf="operationData.length">
+            <ngx-datatable class="material"  style="height: 300px;" [rows]="operationData" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
                 <ngx-datatable-column name="Status">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{row.data.status}}
@@ -83,6 +83,11 @@
                 <ngx-datatable-column name="Total Price">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{row.data.totalDue}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Check Number">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.receiptNumber}}
                     </ng-template>
                 </ngx-datatable-column>
             </ngx-datatable>

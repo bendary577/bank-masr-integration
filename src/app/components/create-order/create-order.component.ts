@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ZealPoints } from 'src/app/models/zeal-points';
-import { ZealPaymentService } from 'src/app/services/zealPayment/zeal-payment.service';
 import { MatSnackBar } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Constants } from 'src/app/models/constants';
@@ -11,52 +9,33 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { MenuItemsComponent } from '../menu-items/menu-items.component';
 import { Operation } from 'src/app/models/operation';
 import { OperationService } from 'src/app/services/operation/operation.service';
-
+import { ZealVoucher } from 'src/app/models/zeal-voucher';
 @Component({
-  selector: 'app-zeal-points',
-  templateUrl: './zeal-points.component.html',
-  styleUrls: ['./zeal-points.component.scss']
+  selector: 'app-create-order',
+  templateUrl: './create-order.component.html',
+  styleUrls: ['./create-order.component.scss']
 })
-export class ZealPointsComponent implements OnInit {
+export class CreateOrderComponent implements OnInit {
 
-  zealPoints: ZealPoints[];
   loading = true;
   static getMenuItemsLoading = false;
   success = null;
   operations = [];
-  menuItems = [];
-  selectedOperation :Operation = null;
+  operationData = [];
+  data = [];
+  selectedOperation: Operation = null;
   state = "";
 
-    constructor(private operationService: OperationService,
-      private route: ActivatedRoute, private spinner: NgxSpinnerService, private syncJobService: SyncJobService,
-      public snackBar: MatSnackBar, private menuItemService: MenuItemsService) { }
-    
+  constructor(private operationService: OperationService,
+    private route: ActivatedRoute, private spinner: NgxSpinnerService, private syncJobService: SyncJobService,
+    public snackBar: MatSnackBar, private menuItemService: MenuItemsService) { }
+
   ngOnInit() {
-      this.getOperations(Constants.ZEAL_POINTS_OPERATION);
-      this.state = localStorage.getItem('getMenuItemsLoading');
-      if (this.state == "true") {
-        MenuItemsComponent.getMenuItemsLoading = true;
-      } else {
-        MenuItemsComponent.getMenuItemsLoading = false;
-      }
+      this.getOperations(Constants.CREATE_ORDER_OPERATION);
   }
 
   get staticgetMenuItemsLoading() {
     return MenuItemsComponent.getMenuItemsLoading ;
-  }
-
-  getMenuItems() {
-    this.spinner.show();
-    this.syncJobService.getSyncJobData(Constants.MENU_ITEMS_SYNC).toPromise().then((res: any) => {
-      this.menuItems = res;
-
-      this.spinner.hide();
-      this.loading = false;
-    }).catch(err => {
-      this.spinner.hide();
-      this.loading = false;
-    });
   }
 
   getOperations(opeartionTypeName: string) {
@@ -79,8 +58,12 @@ export class ZealPointsComponent implements OnInit {
     this.spinner.show();
 
     this.operationService.getOperationDataById(this.selectedOperation["id"]).toPromise().then((res: any) => {
-      this.menuItems = res;
+      this.operationData.push(res);
+      this.data = res["data"];
 
+      console.log({
+        operationData: this.operationData
+      });
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
@@ -88,5 +71,4 @@ export class ZealPointsComponent implements OnInit {
       this.loading = false;
     });
   }
-
 }

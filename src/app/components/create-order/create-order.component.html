@@ -1,4 +1,4 @@
-<h3>Zeal Voucher</h3>
+<h3>Create Order</h3>
 
 <div class="header">
     <span class="history"> Operation History </span>
@@ -40,9 +40,7 @@
                 <span class="value" *ngIf="selectedOperation.reason">{{selectedOperation.reason}}</span>
                 <span class="value" *ngIf="!selectedOperation.reason">No Info</span>
             </mat-list-item>
-            <mat-list-item *ngIf="!operationData.length">
-                <span> No data.</span>
-            </mat-list-item>
+
         </mat-card-content>
     </mat-card>
 </div>
@@ -65,51 +63,50 @@
 
         <div class="main" *ngIf="operationData.length">
             <div style="padding-bottom: 10px;">
-                <ngx-datatable class="material" style="height: 200px;" [rows]="operationData" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
+                <ngx-datatable class="material" style="height: 200px;" [rows]="operationData" [columnMode]="'force'"
+                    [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+                    [sortType]="'multi'">
                     <ngx-datatable-column name="Status">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                             {{row.data.status}}
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column name="Message">
+                    <ngx-datatable-column name="Order Type">
                         <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.data.message}}
+                            {{row.data.checkOrderType}}
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column name="QR Code">
+                    <ngx-datatable-column name="Info Lines">
                         <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.data.code}}
-                        </ng-template>
-                    </ngx-datatable-column>
-                    <ngx-datatable-column name="Check Number">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.data.checkNumber}}
+                            {{row.data.checkInfoLines.string}}
                         </ng-template>
                     </ngx-datatable-column>
                 </ngx-datatable>
             </div>
             <div>
-                <ngx-datatable class="material" [rows]="operationData" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
-                    <ngx-datatable-column name="Item Object Id">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.data.menuItems.itemObjectId}}
-                        </ng-template>
-                    </ngx-datatable-column>
-                    <ngx-datatable-column name="Item Name">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.data.menuItems.menuFirstName}}
-                        </ng-template>
-                    </ngx-datatable-column>
-                    <ngx-datatable-column name="Item Price">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.data.menuItems.menuItemPrice}}
-                        </ng-template>
-                    </ngx-datatable-column>
-                    <ngx-datatable-column name="Item Availability">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.data.menuItems.availability}}
-                        </ng-template>
-                    </ngx-datatable-column>
+
+                <ngx-datatable class="material" [rows]="data.menuItems" [columnMode]="'force'" [headerHeight]="50"
+                    [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
+                        <ngx-datatable-column name="Item Object Id">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.miObjectNum}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Item Name">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.menuFirstName}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Item Price">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.menuItemPrice}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Item Availability">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.availability}}
+                            </ng-template>
+                        </ngx-datatable-column>
                 </ngx-datatable>
             </div>
 

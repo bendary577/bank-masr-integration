@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ZealPointsComponent } from './zeal-points.component';
+import { CreateOrderComponent } from './create-order.component';
 
-describe('ZealPointsComponent', () => {
-  let component: ZealPointsComponent;
-  let fixture: ComponentFixture<ZealPointsComponent>;
+describe('CreateOrderComponent', () => {
+  let component: CreateOrderComponent;
+  let fixture: ComponentFixture<CreateOrderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ZealPointsComponent ]
+      declarations: [ CreateOrderComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ZealPointsComponent);
+    fixture = TestBed.createComponent(CreateOrderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

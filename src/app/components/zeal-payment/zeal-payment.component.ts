@@ -18,14 +18,12 @@ import { Operation } from 'src/app/models/operation';
 })
 export class ZealPaymentComponent implements OnInit {
 
-  zealPayments: ZealPayment[];
   loading = true;
   static getMenuItemsLoading = false;
   success = null;
-  jobs = [];
   operations = [];
-  menuItems = [];
-  selectedJob :SyncJob = null;
+  operationData = [];
+  data = [];
   selectedOperation: Operation = null;
   state = "";
 
@@ -35,30 +33,11 @@ export class ZealPaymentComponent implements OnInit {
 
   ngOnInit() {
       this.getOperations(Constants.ZEAL_PAYMENT_OPERATION);
-      this.state = localStorage.getItem('getMenuItemsLoading');
-      if (this.state == "true") {
-        MenuItemsComponent.getMenuItemsLoading = true;
-      } else {
-        MenuItemsComponent.getMenuItemsLoading = false;
-      }
   }
 
 
   get staticgetMenuItemsLoading() {
     return MenuItemsComponent.getMenuItemsLoading ;
-  }
-
-  getMenuItems() {
-    this.spinner.show();
-    this.syncJobService.getSyncJobData(Constants.MENU_ITEMS_SYNC).toPromise().then((res: any) => {
-      this.menuItems = res;
-
-      this.spinner.hide();
-      this.loading = false;
-    }).catch(err => {
-      this.spinner.hide();
-      this.loading = false;
-    });
   }
 
   getOperations(opeartionTypeName: string) {
@@ -81,8 +60,12 @@ export class ZealPaymentComponent implements OnInit {
     this.spinner.show();
 
     this.operationService.getOperationDataById(this.selectedOperation["id"]).toPromise().then((res: any) => {
-      this.zealPayments = res;
+      this.operationData = [res];
+      this.data = res["data"];
 
+      console.log({
+        operationData: this.operationData
+      });
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
