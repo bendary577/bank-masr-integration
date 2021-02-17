@@ -27,8 +27,7 @@ export class CreateOrderComponent implements OnInit {
   state = "";
 
   constructor(private operationService: OperationService,
-    private route: ActivatedRoute, private spinner: NgxSpinnerService, private syncJobService: SyncJobService,
-    public snackBar: MatSnackBar, private menuItemService: MenuItemsService) { }
+    private spinner: NgxSpinnerService, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
       this.getOperations(Constants.CREATE_ORDER_OPERATION);
@@ -42,6 +41,7 @@ export class CreateOrderComponent implements OnInit {
     this.spinner.show();
     this.operationService.getOperation(opeartionTypeName).toPromise().then((res: any) => {
       this.operations = res;
+
       this.selectedOperation = this.operations[0];
       if (this.operations.length > 0) {
         this.getOperationData();
@@ -56,14 +56,10 @@ export class CreateOrderComponent implements OnInit {
 
   getOperationData() {
     this.spinner.show();
-
     this.operationService.getOperationDataById(this.selectedOperation["id"]).toPromise().then((res: any) => {
-      this.operationData.push(res);
+      this.operationData = [res];
       this.data = res["data"];
 
-      console.log({
-        operationData: this.operationData
-      });
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {

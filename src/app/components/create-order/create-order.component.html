@@ -66,11 +66,27 @@
                 <ngx-datatable class="material" style="height: 200px;" [rows]="operationData" [columnMode]="'force'"
                     [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
                     [sortType]="'multi'">
-                    <ngx-datatable-column name="Status">
+                    <ngx-datatable-column name="Check ID">
                         <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.data.status}}
+                            {{row.data.checkId}}
                         </ng-template>
                     </ngx-datatable-column>
+                    <ngx-datatable-column name="Partial Amount">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.data.partialAmount}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Tax">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.data.tax}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Total Amount">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.data.totalAmount}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
                     <ngx-datatable-column name="Order Type">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                             {{row.data.checkOrderType}}
@@ -78,13 +94,12 @@
                     </ngx-datatable-column>
                     <ngx-datatable-column name="Info Lines">
                         <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.data.checkInfoLines.string}}
+                            {{row.data.checkInfoLines}}
                         </ng-template>
                     </ngx-datatable-column>
                 </ngx-datatable>
             </div>
             <div>
-
                 <ngx-datatable class="material" [rows]="data.menuItems" [columnMode]="'force'" [headerHeight]="50"
                     [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
                         <ngx-datatable-column name="Item Object Id">
@@ -102,9 +117,9 @@
                                 {{row.menuItemPrice}}
                             </ng-template>
                         </ngx-datatable-column>
-                        <ngx-datatable-column name="Item Availability">
+                        <ngx-datatable-column name="Quantity">
                             <ng-template let-row="row" ngx-datatable-cell-template>
-                                {{row.availability}}
+                                {{row.quantity}}
                             </ng-template>
                         </ngx-datatable-column>
                 </ngx-datatable>
