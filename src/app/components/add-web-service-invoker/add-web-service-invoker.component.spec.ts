@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { AddWebServiceInvokerComponent } from './add-web-service-invoker.component';
 
@@ -6,7 +6,7 @@ describe('AddWebServiceInvokerComponent', () => {
   let component: AddWebServiceInvokerComponent;
   let fixture: ComponentFixture<AddWebServiceInvokerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AddWebServiceInvokerComponent ]
     })
