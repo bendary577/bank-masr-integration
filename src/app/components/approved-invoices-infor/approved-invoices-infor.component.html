@@ -10,8 +10,8 @@
           </option>
     </select>
     <button mat-flat-button (click)="exportToCSV()" [disabled]="jobs.length == 0">Export to CSV</button>
-    <button mat-flat-button (click)="exportToXLSX()" [disabled]="jobs.length == 0">Export to Excel</button>
-    <button mat-flat-button (click)="getApprovedInvoicesSyncJob()">Sync Approved Invoices Now</button>
+    <button mat-flat-button (click)="generateSingleFile()" [disabled]="jobs.length == 0">Generate Single File</button>
+    <button mat-flat-button (click)="getApprovedInvoicesSyncJob()" [disabled]="staticgetInvoicesLoading">Sync Approved Invoices Now</button>
 </div>
 
 <br>
@@ -81,7 +81,7 @@
         </div>
 
         <div class="main" *ngIf="approvedInvoices.length">
-            <ngx-datatable class="material" [rows]="approvedInvoices" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[{prop: 'from', dir: 'asc'}, {prop: 'invoiceNo', dir: 'asc'}]">
+            <ngx-datatable class="material" [rows]="approvedInvoices" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
 
                 <ngx-datatable-column name="Status">
                     <ng-template let-row="row" ngx-datatable-cell-template>
@@ -164,9 +164,30 @@
                         {{row.data.invoiceDate}}
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Created By">
+                
+                <ngx-datatable-column name="T1">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.createdBy}}
+                        {{row.data.analysisCodeT1}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="T2">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.analysisCodeT2}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="T3">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.analysisCodeT3}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="T4">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.analysisCodeT4}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="T5">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.analysisCodeT5}}
                     </ng-template>
                 </ngx-datatable-column>
 

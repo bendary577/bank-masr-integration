@@ -1,0 +1,38 @@
+<div class="main">
+    <h3>Operation Types Configuration</h3>
+</div>
+
+<br>
+<div>
+    <div *ngIf="!operationTypes.length">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <mat-card-title>No Data</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p>
+                    There was no operation types role given to this account, please contact support team.
+                </p>
+ 
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="main" *ngIf="operationTypes.length">
+        <ngx-datatable class="material" *ngIf="!loading" [rows]="operationTypes" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
+
+            <ngx-datatable-column name="Operation Type">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.name}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Settings">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <button mat-raised-button color="primary" (click)="openDialog(row)">Settings</button>
+                </ng-template>
+            </ngx-datatable-column>
+
+        </ngx-datatable>
+    </div>
+    <ngx-spinner></ngx-spinner>
+</div>

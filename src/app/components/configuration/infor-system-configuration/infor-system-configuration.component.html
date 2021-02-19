@@ -4,7 +4,7 @@
     <form class="my-form">
         <div>
             <mat-form-field class="example-full-width">
-                <mat-select matInput id="postingType" name="postingType" placeholder="Posting Type" [(ngModel)]="syncJobType.configuration.postingType">
+                <mat-select matInput id="postingType" name="postingType" placeholder="Posting Type" [(ngModel)]="syncJobType.configuration.inforConfiguration.postingType">
                     <mat-option value="0">0</mat-option>
                     <mat-option value="1">1</mat-option>
                     <mat-option value="2">2</mat-option>
@@ -14,24 +14,24 @@
 
         <div>
             <mat-form-field class="example-full-width">
-                <input matInput id="businessUnit" name="businessUnit" placeholder="Business Unit" [(ngModel)]="syncJobType.configuration.businessUnit">
+                <input matInput id="businessUnit" name="businessUnit" placeholder="Business Unit" [(ngModel)]="syncJobType.configuration.inforConfiguration.businessUnit">
             </mat-form-field>
         </div>
 
         <div>
             <mat-form-field class="example-full-width">
-                <input matInput id="journalType" name="journalType" placeholder="Journal Type" [(ngModel)]="syncJobType.configuration.journalType">
+                <input matInput id="journalType" name="journalType" placeholder="Journal Type" [(ngModel)]="syncJobType.configuration.inforConfiguration.journalType">
             </mat-form-field>
         </div>
         <div>
             <mat-form-field class="example-full-width">
-                <input matInput id="currencyCode" name="currencyCode" placeholder="Currency Code" [(ngModel)]="syncJobType.configuration.currencyCode">
+                <input matInput id="currencyCode" name="currencyCode" placeholder="Currency Code" [(ngModel)]="syncJobType.configuration.inforConfiguration.currencyCode">
             </mat-form-field>
         </div>
 
         <div>
             <mat-form-field class="example-full-width">
-                <input matInput id="suspenseAccount" name="suspenseAccount" placeholder="Suspense Account" [(ngModel)]="syncJobType.configuration.suspenseAccount">
+                <input matInput id="suspenseAccount" name="suspenseAccount" placeholder="Suspense Account" [(ngModel)]="syncJobType.configuration.inforConfiguration.suspenseAccount">
             </mat-form-field>
         </div>
 

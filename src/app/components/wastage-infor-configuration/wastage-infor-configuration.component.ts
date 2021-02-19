@@ -34,6 +34,8 @@ export class WastageInforConfigurationComponent implements OnInit {
   uniqueOverGroupMapping = false;
 
   syncJobType: AccountSyncType;
+  accountERD;
+  analysisCodes = ["1","2","3","4","5","6","7","8","9","10"];
 
   constructor(private spinner: NgxSpinnerService,
      private wasteService: WastageService, private journalService:JournalService,
@@ -42,7 +44,7 @@ export class WastageInforConfigurationComponent implements OnInit {
 
   ngOnInit() {
     this.getSyncJobType();
-    this.getWasteGroups();
+    this.accountERD = localStorage.getItem('accountERD');
   }
 
   getSyncJobType() {
@@ -54,6 +56,7 @@ export class WastageInforConfigurationComponent implements OnInit {
       }
       this.analysis = this.syncJobType.configuration["analysis"];
       this.overGroups = this.syncJobType.configuration["overGroups"];
+      this.wasteGroups = this.syncJobType.configuration["wastageConfiguration"]["wasteGroups"];
       this.uniqueOverGroupMapping = this.syncJobType.configuration["uniqueOverGroupMapping"];
 
       if (this.uniqueOverGroupMapping){
@@ -121,19 +124,6 @@ export class WastageInforConfigurationComponent implements OnInit {
   onSaveClick(): void {
     this.spinner.show();
     this.saveLoading = true;
-
-    this.selectedWasteGroups = [];
-    this.selectedOverGroups = [];
-    let that = this;
-    this.wasteGroups.forEach(function (wasteGroup) {
-      if (wasteGroup.checked) {
-        that.selectedWasteGroups.push(wasteGroup)
-      }
-    });
-
-    if (this.selectedWasteGroups.length != 0) {
-      this.syncJobType.configuration["wasteGroups"] = this.selectedWasteGroups;
-    }
 
     // Check if there is overgroup mapping
     if (this.overGroups.length != 0){

@@ -10,8 +10,8 @@
           </option>
     </select>
     <button mat-flat-button (click)="exportToCSV()" [disabled]="jobs.length == 0">Export to CSV</button>
-    <button mat-flat-button (click)="exportToXLSX()" [disabled]="jobs.length == 0">Export to Excel</button>
-    <button mat-flat-button (click)="getWastageSyncJob()">Sync Wastage Now</button>
+    <button mat-flat-button (click)="generateSingleFile()" [disabled]="jobs.length == 0">Generate Single File</button>
+    <button mat-flat-button (click)="getWastageSyncJob()" [disabled]="staticgetWastageLoading">Sync Wastage Now</button>
 </div>
 <br>
 <div id="myProgress">
@@ -76,7 +76,7 @@
     </div>
 
     <div class="main" *ngIf="wastage.length">
-        <ngx-datatable class="material" [rows]="wastage" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[{prop: 'journalBatch', dir: 'asc'}]">
+        <ngx-datatable class="material" [rows]="wastage" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
 
 
             <ngx-datatable-column name="Status">

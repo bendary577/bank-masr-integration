@@ -8,6 +8,8 @@ import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import { ExcelService } from 'src/app/services/excel/excel.service';
 import { saveAs } from 'file-saver';
+import { Constants } from 'src/app/models/constants';
+import { CsvService } from 'src/app/services/csv/csv.service';
 
 @Component({
   selector: 'app-approved-invoices-infor',
@@ -26,7 +28,7 @@ export class ApprovedInvoicesInforComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService, private invoiceService: InvoiceService,
     private syncJobService:SyncJobService, private sidNav: SidenavResponsive, private excelService: ExcelService,
-    public dialog: MatDialog, public snackBar: MatSnackBar) { }
+    public dialog: MatDialog, public snackBar: MatSnackBar, private csvService: CsvService) { }
 
   ngOnInit() {
     this.getSyncJobs("Approved Invoices");
@@ -199,5 +201,53 @@ export class ApprovedInvoicesInforComponent implements OnInit {
         });
       }
   );
+  }
+
+  exportToCSV():void {
+    this.csvService.exportSalesToCSV(this.selectedJob.id, Constants.APPROVED_INVOICES_SYNC).subscribe(
+      res => {
+        const blob = new Blob([res.body], { type : 'application/vnd.ms.txt' });
+        const file = new File([blob], "sales" + '.ndf', { type: 'application/vnd.ms.txt' });
+        saveAs(file);
+
+        this.snackBar.open("Export Successfully", null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
+        });
+      },
+      err => {
+        console.error(err)
+        this.snackBar.open("Fail to export, Please try agian" , null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+      }
+   );
+  }
+
+  generateSingleFile():void {
+    this.csvService.generateSingleFile(Constants.APPROVED_INVOICES_SYNC).subscribe(
+      res => {
+        const blob = new Blob([res.body], { type : 'application/vnd.ms.txt' });
+        const file = new File([blob], Constants.APPROVED_INVOICES_SYNC + '.ndf', { type: 'application/vnd.ms.txt' });
+        saveAs(file);
+
+        this.snackBar.open("Export Successfully", null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
+        });
+      },
+      err => {
+        console.error(err)
+        this.snackBar.open("Fail to export, Please try agian" , null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+      }
+   );
   }
 }

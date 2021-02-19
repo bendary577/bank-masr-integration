@@ -28,15 +28,18 @@ export class JournalsInforConfigurationsComponent implements OnInit {
   analysis = [];
 
   AccountSettingsForm: FormGroup;
+  accountERD;
+  analysisCodes = ["1","2","3","4","5","6","7","8","9","10"];
 
   columns = []
   constructor(private spinner: NgxSpinnerService, private sidNav: SidenavResponsive,
-    private journalService:JournalService, private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService,
+    private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService,
     private router:Router, public snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
     this.getSyncJobType();
+    this.accountERD = localStorage.getItem('accountERD');
   }
 
   getSyncJobType() {

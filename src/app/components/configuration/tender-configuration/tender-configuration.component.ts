@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { GeneralSettings } from 'src/app/models/GeneralSettings';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { Tender } from 'src/app/models/Tender';
 import { PosSalesService } from 'src/app/services/posSales/pos-sales.service';
@@ -15,30 +16,33 @@ import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
 })
 export class TenderConfigurationComponent implements OnInit {
   loading = false;
-
   newTender : Tender = new Tender();  
-  @Input() tenders: Tender[];
 
+  @Input() tenders: Tender[];
   @Input() syncJobType: SyncJobType;
+  @Input() generalSettings: GeneralSettings;
 
   constructor(private salesService:PosSalesService,
      private sidNav: SidenavResponsive,
      public snackBar: MatSnackBar, public dialog: MatDialog) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   openTenderDialog(){
     const dialogRef = this.dialog.open(AddTenderComponent, {
-      width: '550px'
+      width: '550px',
+      data: {generalSettings: this.generalSettings}
     });
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.loading = true;
-        this.newTender.checked = false;
+        this.newTender.checked = true;
         this.newTender.tender = res.name;
         this.newTender.account = res.account;
+        this.newTender.costCenter = res.location;
+        this.newTender.revenueCenter = res.revenueCenter;
+
         this.newTender.communicationTender = res.communicationTender;
         this.newTender.communicationAccount = res.communicationAccount;
         this.newTender.communicationRate = res.communicationRate;
@@ -47,6 +51,7 @@ export class TenderConfigurationComponent implements OnInit {
         this.tenders.push(this.newTender);
 
         this.salesService.addTender(this.tenders, this.syncJobType.id).toPromise().then(result => {
+          this.newTender = new Tender();  
           this.loading = false;
 
           this.snackBar.open(result["message"], null, {

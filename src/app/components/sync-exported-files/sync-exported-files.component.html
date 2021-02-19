@@ -1,0 +1,27 @@
+<div class="header">
+    <button mat-flat-button (click)="openTenderDialog()">Download</button>
+</div>
+
+<div>
+    <ngx-datatable class="material" [loadingIndicator]="filesList.showLoading" [messages]="filesList.messages" 
+    [sortType]="'multi'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [rows]="filesList.usersData" 
+    [columnMode]="'force'" [selected]="filesList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
+    [displayCheck]="displayCheck" (activate)="onActivate($event)" (select)='onSelect($event)' [scrollbarH]="true">
+
+        <ngx-datatable-column [width]="100" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
+            <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+                <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
+            </ng-template>
+            <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
+                <input class="regular-checkbox" type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="File Name">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <mat-checkbox class="example-margin" >{{row}}</mat-checkbox>
+            </ng-template>
+        </ngx-datatable-column>
+
+    </ngx-datatable>
+</div>

@@ -1,0 +1,108 @@
+<h1 mat-dialog-title>Major Group Children</h1>
+<mat-dialog-content>
+    <div mat-dialog-content>
+        <form [formGroup]="form" class="my-form" style="margin: 0px auto 0px;">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Major Group Name" formControlName="name">
+                </mat-form-field>
+                <button mat-button cdkFocusInitial (click)="addChild()">Add</button>
+    
+        </form>
+    </div>
+    
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table-latitude">
+                     <caption>Major Group Children</caption>
+                      <thead>
+                          <th>Name</th>
+                    </thead>
+                    <tbody>
+                         <tr *ngFor="let row of majorGroup.children">
+                            <td style="text-align: center;">{{row}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div mat-dialog-content>
+        <form [formGroup]="rcForm" class="my-form" style="margin: 0px auto 0px;">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Revenue Center Name" formControlName="rcName">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Account Code" formControlName="rcAccountCode">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Discount Account" formControlName="rcDiscountAccount">
+                </mat-form-field>
+                
+                <button mat-button cdkFocusInitial (click)="addRevenueCenter()">Add</button>
+        </form>
+    </div>
+    
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table-latitude">
+                     <caption>Revenue Centers</caption>
+                      <thead>
+                          <th>Revenue Center Name</th>
+                          <th>Account Code</th>
+                          <th>Discount Accoun</th>
+                    </thead>
+                    <tbody>
+                         <tr *ngFor="let row of majorGroup.revenueCenters">
+                            <td style="text-align: center;">{{row.revenueCenter}}</td>
+                            <td style="text-align: center;">{{row.accountCode}}</td>
+                            <td style="text-align: center;">{{row.discountAccount}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div mat-dialog-content>
+        <form [formGroup]="fgForm" class="my-form" style="margin: 0px auto 0px;">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Family Group" formControlName="familyGroup">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Department Code" formControlName="departmentCode">
+                </mat-form-field>
+
+                <button mat-button cdkFocusInitial (click)="addFamilyGroup()">Add</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table-latitude">
+                     <caption>Family Groups</caption>
+                      <thead>
+                          <th>Family Group Name</th>
+                          <th>Department Code</th>
+                    </thead>
+                    <tbody>
+                         <tr *ngFor="let row of majorGroup.familyGroups">
+                            <td style="text-align: center;">{{row.familyGroup}}</td>
+                            <td style="text-align: center;">{{row.departmentCode}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div mat-dialog-actions>
+        <button mat-button cdkFocusInitial (click)="onSaveClick()">Save</button>
+        <button mat-button (click)="onNoClick()">Cancel</button>
+    </div>
+
+</mat-dialog-content>
+

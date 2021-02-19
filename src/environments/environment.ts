@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+<<<<<<< HEAD
 
   apiHost: 'http://localhost:8081/',
 
@@ -17,6 +18,12 @@ export const environment = {
   // Development Server Heroku
   //  apiHost: 'https://oracle-hospitality-prod.herokuapp.com',
 
+=======
+  // apiHost: 'http://localhost:8081',
+//  apiHost: 'http://130.211.219.76:8081',
+  // Dev Server
+  apiHost: 'http://34.122.155.73:8081',
+>>>>>>> 9b7da2c5512701d236c07f84539fb28ff55fce6a
   production: false
 };
 

@@ -12,15 +12,23 @@
             <app-web-service-invoker-configuration [syncJobType]=syncJobType *ngIf="!loading"></app-web-service-invoker-configuration>
 
         </mat-expansion-panel>
-
-        <mat-expansion-panel >
+        
+        <mat-expansion-panel>
             <mat-expansion-panel-header>
-            <mat-panel-title>
-                Simphony Locations
-            </mat-panel-title>
+                <mat-panel-title>
+                    General Configuration
+                </mat-panel-title>
             </mat-expansion-panel-header>
-            <app-simphony-location-configuration [locations]=locations [syncJobType]=syncJobType *ngIf="!loading"></app-simphony-location-configuration>
-
+            <div>
+                <mat-form-field class="example-full-width">
+                    <input matInput id="startIndex" name="startIndex" placeholder="Menu Item Start Index" [(ngModel)]="syncJobType.configuration.menuItemConfiguration.startIndex">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="example-full-width">
+                    <input matInput id="maxCount" name="maxCount" placeholder="Menu Item Max Count" [(ngModel)]="syncJobType.configuration.menuItemConfiguration.maxCount">
+                </mat-form-field>
+            </div>
         </mat-expansion-panel>
 
         <br>

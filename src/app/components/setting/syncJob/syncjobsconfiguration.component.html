@@ -26,7 +26,7 @@
   
       <div class="main" *ngIf="syncJobTypes.length">
         <ngx-datatable *ngIf="!loading" class="material" [rows]="syncJobTypes" [columnMode]="'force'" [headerHeight]="50"
-            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true" [sorts]="[{prop: 'Supplier', dir: 'asc'}]">
+            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true" [sortType]="'multi'">
             
             <ngx-datatable-column name="Sync Job Type">
                 <ng-template let-row="row" ngx-datatable-cell-template>
@@ -43,6 +43,11 @@
                   <button mat-raised-button color="primary" (click)="openDialog(row)">Settings</button>
                 </ng-template>
             </ngx-datatable-column>
+            <!-- <ngx-datatable-column name="Settings">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <button mat-raised-button color="primary" (click)="openSyncFiles(row)">Sync Generated Files</button>
+              </ng-template>
+          </ngx-datatable-column> -->
     
         </ngx-datatable>
   </div>

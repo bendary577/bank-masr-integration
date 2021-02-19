@@ -5,6 +5,7 @@ import { GeneralSettingsService } from 'src/app/services/generalSettings/general
 import { MatSnackBar } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { InvoiceService } from 'src/app/services/invoice/invoice.service';
+import { CostCenter } from 'src/app/models/CostCenter';
 
 @Component({
   selector: 'app-cost-center-account-mapping',
@@ -19,7 +20,8 @@ export class CostCenterAccountMappingComponent implements OnInit {
 
   costCenters = [];
   selectedCostCenters = [];
-
+  locations = [];
+  
   generalSettings: GeneralSettings;
 
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
@@ -27,31 +29,61 @@ export class CostCenterAccountMappingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getCostCenter();
     this.getGeneralSettings();
   }
 
   getGeneralSettings() {
-    this.generalSettingsService.getGeneralSettings().then((res: Response) => {
-      this.generalSettings = res.data as GeneralSettings;
+    this.costCenterLoding = true;
+    this.spinner.show();
+
+    this.generalSettingsService.getGeneralSettings().then((res) => {
+      this.generalSettings = res as GeneralSettings;
+      this.locations = this.generalSettings.locations;
+      this.costCenters = this.generalSettings.costCenterAccountMapping;
+      if(this.costCenters.length == 0){
+        this.getCostCenters();
+      }
+      
+      this.spinner.hide();
+      this.costCenterLoding = false;
     }).catch(err => {
-      console.error(err);
+      let message = "";
+      if (err.error){
+        message = err.error;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = "Failed to get general settings.";
+      }
+
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
+      });
+      
+      this.spinner.hide();
+      this.costCenterLoding = false;
     });
   }
 
+  getCostCenters(){
+    this.costCenterLoding = true;
+    this.spinner.show();
+    this.invoiceService.getCostCenter("", false).toPromise().then((res: any) => {
+      this.costCenters = res.costCenters;
+      this.spinner.hide();
+      this.costCenterLoding = false;
+    }).catch(err => {
+      console.error(err);
+      this.spinner.hide();
+      this.costCenterLoding = false;
+    });
+  }
 
   onSaveClick(): void {
     this.spinner.show();
     this.saveLoading = true;
-    // this.selectedCostCenters = [];
-
-    // let that = this;
-    // this.costCenters.forEach(function (costCenter) {
-    //   if (costCenter.accountCode && costCenter.costCenterReference) {
-    //     costCenter.checked = true;
-    //     that.selectedCostCenters.push(costCenter);
-    //   }
-    // });
 
     if(this.costCenters.length != 0) {
       this.generalSettings.costCenterAccountMapping = this.costCenters;
@@ -89,20 +121,4 @@ export class CostCenterAccountMappingComponent implements OnInit {
   }
 
 
-  getCostCenter() {
-    this.costCenterLoding = true;
-    this.spinner.show();
-
-    this.invoiceService.getCostCenter("", false).toPromise().then((res: any) => {
-      this.costCenters = res.costCenters;
-
-      this.spinner.hide();
-      this.costCenterLoding = false;
-    }).catch(err => {
-      this.costCenters = [];
-      console.error(err);
-      this.spinner.hide();
-      this.costCenterLoding = false;
-    });
-  }
 }

@@ -10,6 +10,7 @@ import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import { ExcelService } from 'src/app/services/excel/excel.service';
 import { saveAs } from 'file-saver';
 import { CsvService } from 'src/app/services/csv/csv.service';
+import { Constants } from 'src/app/models/constants';
 
 @Component({
   selector: 'app-booked-transfer-infor',
@@ -155,10 +156,11 @@ export class BookedTransferInforComponent implements OnInit {
   }
 
   exportToCSV():void {
-    this.csvService.exportTransfersToCSV(this.selectedJob.id).subscribe(
+    this.csvService.exportSalesToCSV(this.selectedJob.id, Constants.BOOKED_TRANSFER_SYNC).subscribe(
       res => {
-        const blob = new Blob([res], { type : 'application/vnd.ms.excel' });
-        const file = new File([blob], "Transfers" + '.txt', { type: 'application/vnd.ms.excel' });
+        const blob = new Blob([res.body], { type : 'application/vnd.ms.txt' });
+        const file = new File([blob], "Transfers" + '.ndf', { type: 'application/vnd.ms.txt' });
+
         saveAs(file);
 
         this.snackBar.open("Export Successfully", null, {

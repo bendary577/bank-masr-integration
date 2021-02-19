@@ -34,6 +34,16 @@ import { BookedProductionComponent } from './components/BookedProduction/booked-
 import { BookedProductionConfigurationComponent } from './components/BookedProductionConfiguration/booked-production-configuration/booked-production-configuration.component';
 import { MenuItemsComponent } from './components/menu-items/menu-items.component';
 import { MenuItemsConfigurationComponent } from './components/menu-items-configuration/menu-items-configuration.component';
+import { OperationTypesConfigurationComponent } from './components/setting/operation-types-configuration/operation-types-configuration.component';
+import { CreateOrderConfigComponent } from './components/create-order-config/create-order-config.component';
+import { SyncExportedFilesComponent } from './components/sync-exported-files/sync-exported-files.component';
+import { ZealPaymentComponent } from './components/zeal-payment/zeal-payment.component';
+import { ZealPaymentConfigComponent } from './components/zeal-payment-config/zeal-payment-config.component';
+import { ZealVoucherComponent } from './components/zeal-voucher/zeal-voucher.component';
+import { ZealVoucherConfigComponent } from './components/zeal-voucher-config/zeal-voucher-config.component';
+import { OperaPaymentConfigurationComponent } from './components/opera-payment-configuration/opera-payment-configuration.component';
+import { SupplierMappingComponent } from './components/setting/supllier-mapping/supllier-mapping.component';
+import { CreateOrderComponent } from './components/create-order/create-order.component';
 
 
 const routes: Routes = [
@@ -48,6 +58,8 @@ const routes: Routes = [
   { path: Constants.COST_CENTER_LOCATION_MAPPING, component: CostCenterLocationMappingComponent ,canActivate:[AuthGuardService]},
   { path: Constants.COST_CENTER_ACCOUNT_MAPPING, component: CostCenterAccountMappingComponent ,canActivate:[AuthGuardService]},
   { path: Constants.INCLUDED_OVER_GROUPS, component: IncludedOverGroupsComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.OPERATION_TYPES, component: OperationTypesConfigurationComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.SUPPLIERS_MAPPING, component: SupplierMappingComponent ,canActivate:[AuthGuardService]},
 
   // Pages
   { path: Constants.LOGIN_PAGE, component: LoginComponent},
@@ -81,6 +93,21 @@ const routes: Routes = [
 
   { path: Constants.MENU_ITEMS_PAGE , component: MenuItemsComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MENU_ITEMS_CONFIG_PAGE , component: MenuItemsConfigurationComponent ,canActivate:[AuthGuardService]},
+
+  { path: Constants.CREATE_ORDER_PAGE , component: CreateOrderComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.CREATE_ORDER_CONFIG_PAGE , component: CreateOrderConfigComponent ,canActivate:[AuthGuardService]},
+  
+  { path: Constants.ZEAL_PAYMENT_PAGE , component: ZealPaymentComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.ZEAL_PAYMENT_CONFIG_PAGE , component: ZealPaymentConfigComponent ,canActivate:[AuthGuardService]},
+ 
+  { path: Constants.ZEAL_VOUCHER_PAGE , component: ZealVoucherComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.ZEAL_VOUCHER_CONFIG_PAGE , component: ZealVoucherConfigComponent ,canActivate:[AuthGuardService]},
+
+  { path: Constants.ZEAL_POINTS_CONFIG_PAGE , component: ZealVoucherConfigComponent ,canActivate:[AuthGuardService]},
+
+  { path: Constants.OPERA_PAYMENT_CONFIG_PAGE , component: OperaPaymentConfigurationComponent ,canActivate:[AuthGuardService]},
+
+  { path: Constants.EXPORTED_FILES_PAGE , component: SyncExportedFilesComponent ,canActivate:[AuthGuardService]},
 
   // Error Page
   {path:'**', component: ErrorComponentComponent }

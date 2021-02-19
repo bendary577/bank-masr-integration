@@ -13,8 +13,8 @@
     </select>
 
     <button mat-flat-button (click)="exportToCSV()" [disabled]="jobs.length == 0">Export to CSV</button>
-    <button mat-flat-button (click)="exportToXLSX()" [disabled]="jobs.length == 0">Export to Excel</button>
-    <button mat-flat-button (click)="getJournalsJobSyncJob()">Sync consumption Now</button>
+    <button mat-flat-button (click)="generateSingleFile()" [disabled]="jobs.length == 0">Generate Single File</button>
+    <button mat-flat-button (click)="getJournalsJobSyncJob()" [disabled]="staticgetJournalsLoding">Sync consumption Now</button>
 </div>
 
 <br>
@@ -82,7 +82,7 @@
         </div>
 
         <div class="main" *ngIf="journals.length">
-            <ngx-datatable class="material" [rows]="journals" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[{prop: 'journalBatch', dir: 'asc'}]">
+            <ngx-datatable class="material" [rows]="journals" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
 
 
                 <ngx-datatable-column name="Status">
@@ -130,7 +130,7 @@
                     </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="From Cost Center">
+                <ngx-datatable-column name="Cost Center">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{row.data.fromCostCenter}}
                     </ng-template>
@@ -140,14 +140,9 @@
                         {{row.data.fromAccountCode}}
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="To Cost Center">
+                <ngx-datatable-column name="T1">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.toCostCenter}}
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Account Code">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.toAccountCode}}
+                        {{row.data.analysisCodeT1}}
                     </ng-template>
                 </ngx-datatable-column>
 

@@ -77,7 +77,7 @@
         </div>
 
         <div class="main" *ngIf="menuItems.length">
-            <ngx-datatable class="material" [rows]="menuItems" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[{prop: 'cost_center', dir: 'asc'}]">
+            <ngx-datatable class="material" [rows]="menuItems" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
                 <ngx-datatable-column name="Status">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{row.status}}
@@ -89,9 +89,9 @@
                     </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="Number">
+                <ngx-datatable-column name="Object Number">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.MiMasterObjNum}}
+                        {{row.data.miObjectNum}}
                     </ng-template>
                 </ngx-datatable-column>
 
@@ -115,7 +115,7 @@
 
                 <ngx-datatable-column name="Menu Item Availability">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.Availability}}
+                        {{row.data.availability}}
                     </ng-template>
                 </ngx-datatable-column>
             </ngx-datatable>

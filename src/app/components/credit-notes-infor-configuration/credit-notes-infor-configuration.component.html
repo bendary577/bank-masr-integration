@@ -3,55 +3,23 @@
 <div>
     <div *ngIf="!loading && syncJobType">
         <!-- Oracle Hospitality Configurations -->
+        <mat-expansion-panel *ngIf="accountERD == 'ExportSun'">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Exported File
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-exported-file-configuration [syncJobType]=syncJobType></app-exported-file-configuration>
+        </mat-expansion-panel>
+
+        <!-- Oracle Hospitality Configurations -->
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     Oracle Hospitality Configurations
                 </mat-panel-title>
             </mat-expansion-panel-header>
-
-            <div class="container" *ngIf="!loading">
-                <form class="my-form">
-                    <div>
-                        <mat-form-field class="example-full-width">
-                            <mat-select matInput id="timePeriod" name="timePeriod" placeholder="Time Period" 
-                            (selectionChange)="chooseTimePeriod()" [(ngModel)]="syncJobType.configuration.timePeriod">
-                                <mat-option value="All">All</mat-option>
-                                <mat-option value="Today">Today</mat-option>
-                                <mat-option value="Yesterday">Yesterday</mat-option>
-                                <mat-option value="Current Month">Current Month</mat-option>
-                                <mat-option value="Last Month">Last Month</mat-option>
-                                <mat-option value="Current Year">Current Year</mat-option>
-                                <mat-option value="Last Year">Last Year</mat-option>
-                                <mat-option value="UserDefined">User-defined</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                    <div *ngIf="userDefinedFlag">
-                        <p>From</p>
-                        <mat-form-field class="example-full-width">
-                            <input matInput placeholder="Start Date" type="date" name="fromDate" id="fromDate" [(ngModel)]="syncJobType.configuration.fromDate">
-                        </mat-form-field>
-                
-                        <p>To</p>
-                        <mat-form-field class="example-full-width">
-                            <input matInput placeholder="End Date" type="date" name="toDate" id="toDate" [(ngModel)]="syncJobType.configuration.toDate">
-                        </mat-form-field>
-                    </div>
-                    <br>
-                    <div>
-                        <mat-form-field class="example-full-width">
-                            <mat-select matInput id="invoiceTypeIncluded" name="invoiceTypeIncluded" placeholder="Invoice Type Included" [(ngModel)]="syncJobType.configuration.invoiceTypeIncluded">
-                                <mat-option value="Approved Invoice">Approved Invoices</mat-option>
-                                <mat-option value="Account Payable">Account Payable</mat-option>
-                                <mat-option value="Both">Both</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-
-                </form>
-            </div>
-
+            <app-infor-system-configuration [syncJobType]=syncJobType></app-infor-system-configuration>
         </mat-expansion-panel>
 
         <!-- Infor Sun System Configurations -->

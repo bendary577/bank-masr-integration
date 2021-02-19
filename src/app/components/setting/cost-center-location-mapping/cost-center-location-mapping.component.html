@@ -1,60 +1,94 @@
-<h3 mat-dialog-title>Cost Center Location Mapping</h3>
+<h3 mat-dialog-title>Oracle Reporting and Analytics Locations</h3>
 
 
 <div>
-    <!-- Cost Centers -->
+    <!-- Oracle Cost Centers -->
     <mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>
-                Cost Center To Location Mapping
+                Included Oracle Reporting and Analytics Locations
             </mat-panel-title>
         </mat-expansion-panel-header>
 
+        <div class="back" style="margin-bottom: 15px;">
+            <button mat-flat-button (click)="openLocationDialog()">Add</button>
+        </div>        
+
         <div *ngIf="!loading">
-            <div *ngIf="!costCenterLoding">
-                <div *ngIf="costCenters?.length <= 0">
-                    <mat-card class="example-card">
-                        <mat-card-header>
-                            <mat-card-title>Error</mat-card-title>
-                        </mat-card-header>
-                        <mat-card-content>
-                            <p>
-                                Error happend while fetching cost centers, make sure you have cost centers.
-                            </p>
-
-                        </mat-card-content>
-                    </mat-card>
-                </div>
-
-                <div class="main" *ngIf="costCenters?.length > 0">
-                    <ngx-datatable *ngIf="!loading" class="material" [rows]="costCenters" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[{prop: 'costCenter', dir: 'asc'}]">
-                        
-                        <ngx-datatable-column name="">
-                            <ng-template let-row="row" ngx-datatable-cell-template>
-                                <mat-checkbox class="example-margin" [(ngModel)]="row.checked"></mat-checkbox>
+                <div class="main">
+                    <ngx-datatable *ngIf="!loading" class="material" [rows]="locationsList.locationsData" 
+                    [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" 
+                    [sortType]="'multi'">
+                    
+                    <!-- <ngx-datatable class="material" [loadingIndicator]="locationsList.showLoading" [messages]="locationsList.messages" 
+                    [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+                     [rows]="locationsList.locationsData" [selected]="locationsList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
+                    [displayCheck]="displayCheck" (select)='onSelect($event)' [scrollbarH]="true">
+                
+                        <ngx-datatable-column [width]="100" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
+                            <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+                                <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
                             </ng-template>
-                        </ngx-datatable-column>
-
-                        <ngx-datatable-column name="Cost Center">
-                            <ng-template let-row="row" ngx-datatable-cell-template>
-                                {{row.costCenter}}
+                            <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
+                                <input class="regular-checkbox" type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
                             </ng-template>
-                        </ngx-datatable-column>
-
+                        </ngx-datatable-column> -->
+                    
+                    
                         <ngx-datatable-column name="Location">
                             <ng-template let-row="row" ngx-datatable-cell-template>
-                                <input matInput placeholder="Location" [(ngModel)]="row.locationName">
+                                <mat-checkbox class="example-margin" [(ngModel)]="row.checked">{{row.locationName}}</mat-checkbox>
+                                <!-- <input matInput placeholder="Location Name" [(ngModel)]="row.locationName"> -->
                             </ng-template>
                         </ngx-datatable-column>
 
+                        <ngx-datatable-column name="Account Code">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <input matInput placeholder="Account Code" [(ngModel)]="row.accountCode">
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Reference">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <input matInput placeholder="Reference" [(ngModel)]="row.costCenterReference">
+                            </ng-template>
+                        </ngx-datatable-column>
                     </ngx-datatable>
                 </div>
-
-                <br>
-
-            </div>
         </div>
     </mat-expansion-panel>
+
+    <mat-expansion-panel >
+        <mat-expansion-panel-header>
+        <mat-panel-title>
+            Simphony Locations
+        </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-simphony-location-configuration [locations]=simphonyLocations *ngIf="!loading"></app-simphony-location-configuration>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Revenu Centers Mapping
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="back" style="margin-bottom: 15px;">
+            <button mat-flat-button (click)="openRevenueCenterDialog()">Add</button>
+        </div>
+
+        <div *ngIf="revenueCenters?.length > 0">
+
+            <ngx-datatable class="material" [rows]="revenueCenters" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
+                <ngx-datatable-column name="Revenue Center Name">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.revenueCenter">{{row.revenueCenter}}</mat-checkbox>
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </div>
+    </mat-expansion-panel>
+
     <br>
 
     <div class="card-back">

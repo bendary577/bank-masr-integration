@@ -4,9 +4,10 @@ import { Location } from '@angular/common';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { Constants } from 'src/app/models/constants';
-import {NavigationEnd, Router} from "@angular/router";
+import {NavigationEnd, Router} from '@angular/router';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { MatSnackBar } from '@angular/material';
+import { OperationTypesService } from 'src/app/services/OperationTypes/operation-types.service';
 
 
 
@@ -21,10 +22,13 @@ export class SidenavResponsive implements OnDestroy,OnInit {
   selectedTab = Constants.CURRENT_TAB;
   mobileQuery: MediaQueryList;
   syncJobTypes: SyncJobType[] = [];
+  operationTypes: SyncJobType[] = [];
   private _mobileQueryListener: () => void;
 
   constructor(private syncJobService: SyncJobService, changeDetectorRef: ChangeDetectorRef,
-              private router: Router, media: MediaMatcher, location: Location,  public snackBar: MatSnackBar) {
+              private router: Router, media: MediaMatcher, location: Location,
+              public snackBar: MatSnackBar, public operationTypeService: OperationTypesService) {
+
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -47,6 +51,7 @@ export class SidenavResponsive implements OnDestroy,OnInit {
   ngOnInit(): void {
     if (this.shouldRun == true) {
       this.getSyncJobTypes();
+      this.getOperationTypes();
     }
 
   }
@@ -54,7 +59,7 @@ export class SidenavResponsive implements OnDestroy,OnInit {
   changeCurrentTab(cuurentTab) {
     Constants.CURRENT_TAB = cuurentTab;
     this.selectedTab = cuurentTab;
-  }
+  } 
 
   Logout() {
     localStorage.removeItem("auth-token");
@@ -85,6 +90,33 @@ export class SidenavResponsive implements OnDestroy,OnInit {
       });
     });
   }
+
+  getOperationTypes(): SyncJobType[] {
+    this.operationTypeService.getOperationTypes().toPromise().then((res: any) => {
+      this.operationTypes = res;
+      return this.operationTypeService;
+    }).catch(err => {
+      let message = "Error happend, Please try again.";
+      if(err.status === 401){
+         message = ErrorMessages.SESSION_EXPIRED;
+        this.Logout();
+
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      }
+
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
+      });
+      return this.operationTypes;
+    });
+    return this.operationTypes;
+  }
+
 /*  public set setshouldRun(shouldRun:boolean) {
     this.shouldRun=shouldRun;
   }*/
@@ -99,8 +131,3 @@ export class SidenavResponsive implements OnDestroy,OnInit {
 
 
 }
-
-
-/**  Copyright 2019 Google LLC. All Rights Reserved.
-    Use of this source code is governed by an MIT-style license that
-    can be found in the LICENSE file at http://angular.io/license */

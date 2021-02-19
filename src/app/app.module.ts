@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {NgModule, ElementRef, ChangeDetectorRef} from '@angular/core';
+import {NgModule} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -90,6 +90,25 @@ import { AddSimphonyLocationComponent } from './components/add-simphony-location
 import { SimphonyLocationConfigurationComponent } from './components/configuration/simphony-location-configuration/simphony-location-configuration.component';
 import { WebServiceInvokerConfigurationComponent } from './components/configuration/web-service-invoker-configuration/web-service-invoker-configuration.component';
 import { AddWebServiceInvokerComponent } from './components/add-web-service-invoker/add-web-service-invoker.component';
+import { AddLocationComponent } from './components/add-location/add-location.component';
+import { OperationTypesConfigurationComponent } from './components/setting/operation-types-configuration/operation-types-configuration.component';
+import { CreateOrderConfigComponent } from './components/create-order-config/create-order-config.component';
+import { AddMajorGroupChildComponent } from './components/addMajorGroupChild/add-major-group-child.component';
+import { SyncExportedFilesComponent } from './components/sync-exported-files/sync-exported-files.component';
+import { ZealPaymentComponent } from './components/zeal-payment/zeal-payment.component';
+import { ZealPaymentConfigComponent } from './components/zeal-payment-config/zeal-payment-config.component';
+import { ZealVoucherComponent } from './components/zeal-voucher/zeal-voucher.component';
+import { PaymentVoucherConfigComponent } from './components/payment-voucher-config/payment-voucher-config.component';
+import { ZealVoucherConfigComponent } from './components/zeal-voucher-config/zeal-voucher-config.component';
+import { ZealPaymentService } from './services/zealPayment/zeal-payment.service';
+import { OperationService } from './services/operation/operation.service';
+import { OhraConfigurationComponent } from './components/configuration/ohra-configuration/ohra-configuration.component';
+import { AddSalesStatisticsComponent } from './components/add-sales-statistics/add-sales-statistics.component';
+import { OperaPaymentConfigurationComponent } from './components/opera-payment-configuration/opera-payment-configuration.component';
+import { SupplierMappingComponent } from './components/setting/supllier-mapping/supllier-mapping.component';
+import { AddSupplierComponent } from './components/add-supplier/add-supplier.component';
+import { ExportedFileConfigurationComponent } from './components/configuration/exported-file-configuration/exported-file-configuration.component';
+import { CreateOrderComponent } from './components/create-order/create-order.component';
 
 @NgModule({
   declarations: [
@@ -146,7 +165,24 @@ import { AddWebServiceInvokerComponent } from './components/add-web-service-invo
     AddSimphonyLocationComponent,
     SimphonyLocationConfigurationComponent,
     WebServiceInvokerConfigurationComponent,
-    AddWebServiceInvokerComponent
+    AddWebServiceInvokerComponent,
+    AddLocationComponent,
+    OperationTypesConfigurationComponent,
+    CreateOrderConfigComponent,
+    CreateOrderComponent,
+    AddMajorGroupChildComponent,
+    SyncExportedFilesComponent,
+    ZealPaymentComponent,
+    ZealPaymentConfigComponent,
+    ZealVoucherComponent,
+    PaymentVoucherConfigComponent,
+    ZealVoucherConfigComponent,
+    OhraConfigurationComponent,
+    AddSalesStatisticsComponent,
+    OperaPaymentConfigurationComponent,
+    SupplierMappingComponent,
+    AddSupplierComponent,
+    ExportedFileConfigurationComponent
   ],
   imports: [
     BrowserModule,
@@ -176,20 +212,22 @@ import { AddWebServiceInvokerComponent } from './components/add-web-service-invo
     MatProgressBarModule,
     ShowHidePasswordModule,
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, 
-    CookieService, 
-    AuthService, 
-    InvoiceService, 
-    AlertsService, 
-    Data, 
-    AuthGuardService, 
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},
+    CookieService,
+    AuthService,
+    InvoiceService,
+    AlertsService,
+    Data,
+    AuthGuardService,
     SidenavResponsive,
     ExcelService,
-  CsvService],
+  CsvService,
+  OperationService],
   bootstrap: [AppComponent],
   entryComponents: [AddUserComponent, AddAccountComponent, AddMajorGroupComponent, AddTenderComponent,
      AddTaxComponent, AddDiscountComponent, AddRevenueCenterComponent, AddServiceChargeComponent,
-      SuppliersConfiguartionComponent, SchedulerConfigurationComponent, AddTenderChildComponent, 
-      AddSimphonyLocationComponent, AddWebServiceInvokerComponent]
+      SuppliersConfiguartionComponent, SchedulerConfigurationComponent, AddTenderChildComponent,
+      AddSimphonyLocationComponent, AddWebServiceInvokerComponent, AddLocationComponent,
+      AddMajorGroupChildComponent, AddSalesStatisticsComponent, AddSupplierComponent]
 })
 export class AppModule { }

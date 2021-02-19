@@ -49,7 +49,7 @@ export class ConfigurationComponent  implements OnInit{
 
   addAccountDialog() {
     const dialogRef = this.dialog.open(AddAccountComponent, {
-      width: '550px'
+      width: '850px'
     });
 
     dialogRef.afterClosed().subscribe(res => {

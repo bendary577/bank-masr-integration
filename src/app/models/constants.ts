@@ -22,6 +22,7 @@ export class Constants {
     static ADD_USER = environment.apiHost + '/addUser';
 
     static ADD_INVOKER_USER = environment.apiHost + '/addInvokerUser';
+    static GET_INVOKER_USERS = environment.apiHost + '/getInvokerUser';
 
     static VENDOR_URL = environment.apiHost + '/getVendors';
     static ADD_VENDOR_URL = environment.apiHost + '/addVendor';
@@ -30,6 +31,9 @@ export class Constants {
     static GET_SYNC_JOB_DATA = environment.apiHost + '/getSyncJobData';
     static CLEAR_SYNC_JOB_DATA = environment.apiHost + '/clearSyncJobData';
 
+    static GET_OPERATION_TYPES_URL = environment.apiHost + '/getOperationTypes';
+    static GET_OPERATION_TYPE_BY_NAME_URL = environment.apiHost + '/getOperationTypeByName';
+    static UPDATE_OPERATION_TYPE_URL = environment.apiHost + '/updateOperationTypeConfiguration';
 
     static GET_SYNC_JOB_TYPES_URL = environment.apiHost + '/getSyncJobTypes';
     static GET_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getSyncJobTypesByName';
@@ -38,6 +42,11 @@ export class Constants {
     static UPDATE_SYNC_JOB_TYPES_URL = environment.apiHost + '/updateSyncJobTypesConfiguration';
     static UPDATE_COST_CENTER_MAPPING_URL = environment.apiHost + '/updateCostCenterLocationMapping';
     static GET_SYNC_JOBS_URL = environment.apiHost + '/getSyncJobs';
+    static GET_OPERATION_JOBS_URL = environment.apiHost + '/getOperationJobs';
+
+    static GET_OPERATION_URL = environment.apiHost + '/getOperation';
+    static GET_OPERATION_DATA_BY_ID = environment.apiHost + '/getOperationDataById';
+
 
     static GET_SUPPLIERS_URL = environment.apiHost + '/getSuppliers';
     static GET_SUPPLIERS_DETAILS_URL = environment.apiHost + '/getSuppliersDetails';
@@ -55,6 +64,10 @@ export class Constants {
     static GET_WASTE_GROUPS_URL = environment.apiHost + '/getWasteGroups';
     static GET_WASTE_URL = environment.apiHost + '/getWastage';
 
+    static GET_ZEALPAYMENT_URL = environment.apiHost + '/zeal/zealPayment';
+    static GET_ZEALPOINTS_URL = environment.apiHost + '/zeal/zealPoints';
+    static GET_ZEALVOUCHER_URL = environment.apiHost + '/zeal/zealVoucher';
+
     static GET_BUSINESS_UNITS_URL = environment.apiHost + '/getBusinessUnits';
     static GET_PAYMENT_METHODS_URL = environment.apiHost + '/getPaymentMethods';
 
@@ -70,17 +83,19 @@ export class Constants {
     static ADD_POS_SALES_DISCOUNT_URL = environment.apiHost + '/addDiscount';
     static ADD_POS_SALES_SERVICE_CHARGE_URL = environment.apiHost + '/addServiceCharge';
     static ADD_POS_SALES_REVENUE_CENTER_URL = environment.apiHost + '/addRevenueCenter';
+    static ADD_POS_SALES_STATISTICS_URL = environment.apiHost + '/addSalesStatistics';
 
     static GET_CURRENT_DAYS_URL = environment.apiHost + '/getCurrentDays';
 
     static GET_BOOKED_PRODUCTION_URL = environment.apiHost + '/getBookedProduction';
-    
+
     static GET_MENU_ITEMS_URL = environment.apiHost + '/SyncSimphonyMenuItems';
     static ADD_SIMPHONY_LOCATION_URL = environment.apiHost + '/addSimphonyLocation';
 
     // General Settings
     static GET_GENERAL_SETTINGS_URL = environment.apiHost + '/getGeneralSettings';
     static UPDATE_GENERAL_SETTINGS_URL = environment.apiHost + '/updateGeneralSettings';
+    static FETCH_SUPPLIERS = environment.apiHost + '/getVendors';
 
 
     static LOGIN_PAGE = 'login';
@@ -140,19 +155,38 @@ export class Constants {
     static MENU_ITEMS_CONFIG_PAGE = 'menuItemsConfig';
     static MENU_ITEMS_SYNC = 'Menu Items';
 
+    static CREATE_ORDER_PAGE = 'createCheck';
+    static CREATE_ORDER_CONFIG_PAGE = 'createCheckConfig';
+    static CREATE_ORDER_OPERATION = 'Create Check';
+
+    static OPERA_PAYMENT_PAGE = 'operaPayment';
+    static OPERA_PAYMENT_CONFIG_PAGE = 'operaPaymentConfig';
+    static OPERA_PAYMENT_OPERATION = 'Opera Payment';
+
+    static ZEAL_PAYMENT_PAGE = 'zealPayment';
+    static ZEAL_PAYMENT_CONFIG_PAGE = 'zealPaymentCongfig';
+    static ZEAL_PAYMENT_OPERATION = 'Zeal Payment';
+
+    static ZEAL_VOUCHER_PAGE = 'zealVoucher';
+    static ZEAL_VOUCHER_CONFIG_PAGE = 'zealVoucherCongfig';
+    static ZEAL_VOUCHER_OPERATION = 'Zeal Voucher';
+
+    static ZEAL_POINTS_PAGE = 'zealPoints';
+    static ZEAL_POINTS_CONFIG_PAGE = 'zealPointsCongfig';
+    static ZEAL_POINTS_OPERATION = 'Zeal Points';
+
     static TABS_PAGE = 'tabs';
-    static END_POINT = '/getSuppliers';
     static SETTING = 'setting';
     static ACCOUNT_CONFIGURATION = 'configuration';
     static COST_CENTER_ACCOUNT_MAPPING = 'costCenterAccountMapping';
     static COST_CENTER_LOCATION_MAPPING = 'costCenterLocationMapping';
+    static SUPPLIERS_MAPPING = 'suppliersMapping';
     static INCLUDED_OVER_GROUPS = 'includedOverGroups';
     static USERS_CONFIGURATION = 'users';
     static SYNC_JOBS = 'syncjobs';
-
+    static OPERATION_TYPES = 'operationTypesConfiguration';
     static SYNC_TYPE_SCHEDULER = "Suppliers";
-
-
+    static EXPORTED_FILES_PAGE = 'exportedFiles';
     //////////////////////////////////////////////// Export To Excel //////////////////////////////////////////////
 
     static EXPORT_APPROVED_INVOICES = environment.apiHost + '/invoices/export/excel';
@@ -165,13 +199,10 @@ export class Constants {
 
     //////////////////////////////////////////////// Export To CSV //////////////////////////////////////////////
 
-    static EXPORT_CSV_APPROVED_INVOICES = environment.apiHost + '/invoices/export/csv';
-    static EXPORT_CSV_CREDIT_NOTES = environment.apiHost + '/invoices/export/csv';
-    static EXPORT_CSV_BOOKED_TRANSFERS = environment.apiHost + '/transfers/export/csv';
-    static EXPORT_CSV_BOOKED_PRODUCTION = environment.apiHost + '/bookedProduction/export/csv';
-    static EXPORT_CSV_CONSUMPTION = environment.apiHost + '/consumption/export/csv';
-    static EXPORT_CSV_WATAGE = environment.apiHost + '/wastage/export/csv';
-    static EXPORT_CSV_SALES = environment.apiHost + '/sales/export/csv';
+    static EXPORT_Excel = environment.apiHost + '/export/excel';
+    static EXPORT_CSV = environment.apiHost + '/export/csv';
+    static GENERATE_SINGLE_FILE_SALES = environment.apiHost + '/generateSingleFile';
+    static LIST_SYNC_FILE_SALES = environment.apiHost + '/listSyncFiles';
 
     //////////////////////////////////////////////// ERD //////////////////////////////////////////////
 

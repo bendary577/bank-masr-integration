@@ -18,6 +18,7 @@ import { JournalService } from 'src/app/services/journal/journal.service';
 })
 export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
   userDefinedFlag = false;
+  accountERD;
 
   syncJobType: SyncJobType;
   submitted = false;
@@ -26,7 +27,7 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
 
   businessUnits = [];
   PaymentMethods = [];
-  timePeriods = ["All", "Current Year", "Current Month", "Last Month", "Last Year", "User-defined"];
+  analysisCodes = ["1","2","3","4","5","6","7","8","9","10"];
   analysis = [];
   overGroups = [];
   selectedOverGroups = [];
@@ -39,6 +40,7 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
 
   ngOnInit() {
     this.getSyncJobType();
+    this.accountERD = localStorage.getItem('accountERD');
   }
 
   getSyncJobType() {

@@ -45,6 +45,12 @@ export class SyncJobService {
      { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
+  getSyncJobs2(syncJobTypeName: string) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get<SyncJob[]>(Constants.GET_OPERATION_JOBS_URL + '?typeName=' + syncJobTypeName,
+     { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
   getSyncJobDataById(syncJobId: string) {
     this.token = localStorage.getItem('auth_token');
     return this.http.get<SyncJob[]>(Constants.GET_SYNC_JOB_DATA_BY_ID + '?syncJobId=' + syncJobId,

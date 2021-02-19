@@ -8,6 +8,8 @@ import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
 import { ExcelService } from 'src/app/services/excel/excel.service';
 import { saveAs } from 'file-saver';
+import { Constants } from 'src/app/models/constants';
+import { CsvService } from 'src/app/services/csv/csv.service';
 
 @Component({
   selector: 'app-booked-production',
@@ -29,7 +31,7 @@ export class BookedProductionComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService, private bookedProductionService: BookedProductionService,
     public snackBar: MatSnackBar, private syncJobService:SyncJobService, private sidNav: SidenavResponsive,
-    private excelService: ExcelService
+    private excelService: ExcelService, private csvService: CsvService
     ) {
 
   }
@@ -151,6 +153,30 @@ export class BookedProductionComponent implements OnInit {
       res => {
         const blob = new Blob([res], { type : 'application/vnd.ms.excel' });
         const file = new File([blob], "BookedProduction" + '.xlsx', { type: 'application/vnd.ms.excel' });
+        saveAs(file);
+
+        this.snackBar.open("Export Successfully", null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
+        });
+      },
+      err => {
+        console.error(err)
+        this.snackBar.open("Fail to export, Please try agian" , null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+      }
+   );
+  }
+
+  generateSingleFile():void {
+    this.csvService.generateSingleFile(Constants.BOOKED_PRODUCTION_SYNC).subscribe(
+      res => {
+        const blob = new Blob([res.body], { type : 'application/vnd.ms.txt' });
+        const file = new File([blob], Constants.BOOKED_PRODUCTION_SYNC + '.ndf', { type: 'application/vnd.ms.txt' });
         saveAs(file);
 
         this.snackBar.open("Export Successfully", null, {

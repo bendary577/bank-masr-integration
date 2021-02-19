@@ -28,7 +28,18 @@ body {
 .mat-tab-link {
     color: #1976d3;
 }
-
+.divetable {
+    align-items: center;
+    height: 20px;
+    padding-bottom: 5%;
+//    border: 2px solid #5e5b5b;
+}
+.divetable2 {
+    align-items: center;
+    height: 15%;
+    margin-top: 5%;
+ //   border: 2px solid #7a7a7a;
+}
 .mat-tab-group.mat-primary .mat-ink-bar,
 .mat-tab-nav-bar.mat-primary .mat-ink-bar {
     background-color: #1976d3;

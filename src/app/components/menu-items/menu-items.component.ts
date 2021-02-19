@@ -21,17 +21,15 @@ export class MenuItemsComponent implements OnInit {
   selectedJob :SyncJob = null;
   state = "";
 
-
   constructor(private spinner: NgxSpinnerService, private syncJobService: SyncJobService,
-    public snackBar: MatSnackBar, private menuItemService:MenuItemsService) { }
+    public snackBar: MatSnackBar, private menuItemService: MenuItemsService) { }
 
   ngOnInit() {
     this.getSyncJobs(Constants.MENU_ITEMS_SYNC);
     this.state = localStorage.getItem('getMenuItemsLoading');
     if (this.state == "true") {
       MenuItemsComponent.getMenuItemsLoading = true;
-    }
-    else{
+    } else {
       MenuItemsComponent.getMenuItemsLoading = false;
     }
   }
@@ -106,7 +104,6 @@ export class MenuItemsComponent implements OnInit {
       this.loading = false;
     });
   }
-
 
   getSyncJobData() {
     this.spinner.show();

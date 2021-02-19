@@ -24,8 +24,6 @@ import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
 })
 
 export class SyncJobsconfigComponent implements OnInit {
-
-  displayedColumns: string[] = ['firstName', 'username', 'lastName'];
   dataSource = new MatTableDataSource<User>(ELEMENT_DATA);
   syncJobTypes: SyncJobType[] = [];
   loading = true;
@@ -75,8 +73,6 @@ export class SyncJobsconfigComponent implements OnInit {
       console.log(this.accountERD);
 
       if (this.accountERD == Constants.SUN_ERD || this.accountERD == Constants.EXPORT_TO_SUN_ERD) {
-        console.log("here");
-
         this.router.navigate([Constants.APPROVED_INVOICES_SUN_CONFIG_PAGE]);
       }
       else{
@@ -144,6 +140,11 @@ export class SyncJobsconfigComponent implements OnInit {
 
   }
 
+  openSyncFiles(syncJobType) {
+    this.data.storage = syncJobType
+    this.router.navigate([Constants.EXPORTED_FILES_PAGE]);
+  }
+
   clearSyncJobData(){
     this.spinner.show();
 
@@ -181,10 +182,10 @@ export class SyncJobsconfigComponent implements OnInit {
     dialogRef.afterClosed().subscribe(res => {
       if (res && res.duration) {
         this.spinner.show();
-        syncJobType.configuration.duration = res.duration;
-        syncJobType.configuration.day = res.day;
-        syncJobType.configuration.dayName = res.dayName;
-        syncJobType.configuration.hour = res.hour;
+        syncJobType.configuration.schedulerConfiguration.duration = res.duration;
+        syncJobType.configuration.schedulerConfiguration.day = res.day;
+        syncJobType.configuration.schedulerConfiguration.dayName = res.dayName;
+        syncJobType.configuration.schedulerConfiguration.hour = res.hour;
 
         this.syncJobService.updateSyncJobTypeConfig(syncJobType).then(result => {
               this.spinner.hide();

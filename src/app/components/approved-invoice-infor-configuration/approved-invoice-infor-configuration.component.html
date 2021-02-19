@@ -3,6 +3,16 @@
 <div>
     <div *ngIf="!loading && syncJobType">
         <!-- Oracle Hospitality Configurations -->
+        <mat-expansion-panel *ngIf="accountERD == 'ExportSun'">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Exported File
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-exported-file-configuration [syncJobType]=syncJobType></app-exported-file-configuration>
+        </mat-expansion-panel>
+
+        <!-- Oracle Hospitality Configurations -->
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -10,47 +20,7 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
 
-            <div class="container" *ngIf="!loading">
-                <form class="my-form">
-                    <div>
-                        <mat-form-field class="example-full-width">
-                            <mat-select matInput id="timePeriod" name="timePeriod" placeholder="Time Period" (selectionChange)="chooseTimePeriod()" [(ngModel)]="syncJobType.configuration.timePeriod">
-                                <mat-option value="All">All</mat-option>
-                                <mat-option value="Today">Today</mat-option>
-                                <mat-option value="Yesterday">Yesterday</mat-option>
-                                <mat-option value="Current Month">Current Month</mat-option>
-                                <mat-option value="Last Month">Last Month</mat-option>
-                                <mat-option value="Current Year">Current Year</mat-option>
-                                <mat-option value="Last Year">Last Year</mat-option>
-                                <mat-option value="UserDefined">User-defined</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                    <div *ngIf="userDefinedFlag">
-                        <p>From</p>
-                        <mat-form-field class="example-full-width">
-                            <input matInput placeholder="Start Date" type="date" name="fromDate" id="fromDate" [(ngModel)]="syncJobType.configuration.fromDate">
-                        </mat-form-field>
-
-                        <p>To</p>
-                        <mat-form-field class="example-full-width">
-                            <input matInput placeholder="End Date" type="date" name="toDate" id="toDate" [(ngModel)]="syncJobType.configuration.toDate">
-                        </mat-form-field>
-                    </div>
-
-                    <div>
-                        <mat-form-field class="example-full-width">
-                            <mat-select matInput id="invoiceTypeIncluded" name="invoiceTypeIncluded" placeholder="Invoice Type Included" [(ngModel)]="syncJobType.configuration.invoiceTypeIncluded">
-                                <mat-option value="Approved Invoice">Approved Invoices</mat-option>
-                                <mat-option value="Account Payable">Account Payable</mat-option>
-                                <mat-option value="Both">Both</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-
-                </form>
-            </div>
-
+            <app-ohra-configuration [syncJobType]=syncJobType></app-ohra-configuration>
         </mat-expansion-panel>
 
         <!-- Infor Sun System Configurations -->
@@ -73,26 +43,20 @@
 
             <div class="container" *ngIf="!loading">
                 <form class="my-form">
-
                     <div>
                         <mat-form-field class="example-full-width">
-                            <mat-select matInput id="locationAnalysis" name="locationAnalysis" placeholder="Location Ledger Analysis" [(ngModel)]="syncJobType.configuration.locationAnalysis">
-                                <mat-option value="1">1</mat-option>
-                                <mat-option value="2">2</mat-option>
-                                <mat-option value="3">3</mat-option>
-                                <mat-option value="4">4</mat-option>
-                                <mat-option value="5">5</mat-option>
-                                <mat-option value="6">6</mat-option>
-                                <mat-option value="7">7</mat-option>
-                                <mat-option value="8">8</mat-option>
-                                <mat-option value="9">9</mat-option>
-                                <mat-option value="10">10</mat-option>
+                            <mat-select matInput id="locationAnalysisCode" name="locationAnalysisCode" placeholder="Location Analysis Code" [(ngModel)]="syncJobType.configuration.locationAnalysisCode">
+                                <mat-option [value]=code *ngFor="let code of analysisCodes">{{code}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-select matInput id="familyGroupAnalysisCode" name="familyGroupAnalysisCode" placeholder="Family Group Analysis Code" [(ngModel)]="syncJobType.configuration.familyGroupAnalysisCode">
+                                <mat-option [value]=code *ngFor="let code of analysisCodes">{{code}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
                 </form>
             </div>
-
         </mat-expansion-panel>
         
         <!-- Analysis Configurations -->
@@ -114,7 +78,7 @@
             </mat-expansion-panel-header>
             <div *ngIf="overGroups?.length > 0">
 
-                <ngx-datatable class="material" [rows]="overGroups" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[]">
+                <ngx-datatable class="material" [rows]="overGroups" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
 
                     <ngx-datatable-column name="Over Group">
                         <ng-template let-row="row" ngx-datatable-cell-template>

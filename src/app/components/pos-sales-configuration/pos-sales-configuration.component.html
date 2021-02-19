@@ -131,7 +131,7 @@
                 <div *ngIf="tenders?.length > 0">
       
                   <ngx-datatable  class="material" [rows]="tenders" [columnMode]="'force'" [headerHeight]="50"
-                  [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sorts]="[]" >
+                  [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"  [scrollbarH]="true"  [sortType]="'multi'" >
       
                     <ngx-datatable-column name="Tender">
                         <ng-template let-row="row" ngx-datatable-cell-template>
