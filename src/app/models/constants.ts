@@ -187,6 +187,13 @@ export class Constants {
     static OPERATION_TYPES = 'operationTypesConfiguration';
     static SYNC_TYPE_SCHEDULER = "Suppliers";
     static EXPORTED_FILES_PAGE = 'exportedFiles';
+
+    //////////////////////////////////////////////// Manage Application  //////////////////////////////////////////////
+
+    static MANAGE_COMPANIES = 'manageCompanies';
+    static MANAGE_GROUPS = "manageGroups";
+    static MANAGE_USERS = 'manageUsers';
+
     //////////////////////////////////////////////// Export To Excel //////////////////////////////////////////////
 
     static EXPORT_APPROVED_INVOICES = environment.apiHost + '/invoices/export/excel';

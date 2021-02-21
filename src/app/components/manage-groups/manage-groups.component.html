@@ -1,0 +1,45 @@
+<h3 mat-dialog-title>Manage Groups</h3>
+
+<div class="main" >
+
+    <div class="back" style="margin-bottom: 15px;">
+        <button mat-flat-button (click)="openLocationDialog()">Add</button>
+        <button mat-flat-button (click)="openLocationDialog()">Delete</button>
+    </div>   
+
+
+    <ngx-datatable class="material" [loadingIndicator]="groupsList.showLoading" [messages]="groupsList.messages" 
+    [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+     [rows]="groupsList.locationsData" [selected]="groupsList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
+    [displayCheck]="displayCheck" (select)='onSelect($event)' [scrollbarH]="true">
+
+        <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
+        <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+        <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
+        </ng-template>
+
+        <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
+         <input class="regular-checkbox" type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
+        </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Name">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.name}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Status">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.deleted}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Creation Date">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.creationDate}}
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+</div>
+

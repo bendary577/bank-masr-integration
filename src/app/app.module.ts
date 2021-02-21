@@ -109,6 +109,9 @@ import { SupplierMappingComponent } from './components/setting/supllier-mapping/
 import { AddSupplierComponent } from './components/add-supplier/add-supplier.component';
 import { ExportedFileConfigurationComponent } from './components/configuration/exported-file-configuration/exported-file-configuration.component';
 import { CreateOrderComponent } from './components/create-order/create-order.component';
+import { ManageComaniesComponent } from './components/manage-comanies/manage-comanies.component';
+import { ManageGroupsComponent } from './components/manage-groups/manage-groups.component';
+import { ManageUsersComponent } from './components/manage-users/manage-users.component';
 
 @NgModule({
   declarations: [
@@ -182,7 +185,10 @@ import { CreateOrderComponent } from './components/create-order/create-order.com
     OperaPaymentConfigurationComponent,
     SupplierMappingComponent,
     AddSupplierComponent,
-    ExportedFileConfigurationComponent
+    ExportedFileConfigurationComponent,
+    ManageComaniesComponent,
+    ManageGroupsComponent,
+    ManageUsersComponent
   ],
   imports: [
     BrowserModule,

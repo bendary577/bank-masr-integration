@@ -44,6 +44,9 @@ import { ZealVoucherConfigComponent } from './components/zeal-voucher-config/zea
 import { OperaPaymentConfigurationComponent } from './components/opera-payment-configuration/opera-payment-configuration.component';
 import { SupplierMappingComponent } from './components/setting/supllier-mapping/supllier-mapping.component';
 import { CreateOrderComponent } from './components/create-order/create-order.component';
+import { ManageComaniesComponent } from './components/manage-comanies/manage-comanies.component';
+import { ManageGroupsComponent } from './components/manage-groups/manage-groups.component';
+import { ManageUsersComponent } from './components/manage-users/manage-users.component';
 
 
 const routes: Routes = [
@@ -60,6 +63,10 @@ const routes: Routes = [
   { path: Constants.INCLUDED_OVER_GROUPS, component: IncludedOverGroupsComponent ,canActivate:[AuthGuardService]},
   { path: Constants.OPERATION_TYPES, component: OperationTypesConfigurationComponent ,canActivate:[AuthGuardService]},
   { path: Constants.SUPPLIERS_MAPPING, component: SupplierMappingComponent ,canActivate:[AuthGuardService]},
+
+  { path: Constants.MANAGE_COMPANIES, component: ManageComaniesComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.MANAGE_GROUPS, component: ManageGroupsComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.MANAGE_USERS, component: ManageUsersComponent ,canActivate:[AuthGuardService]},
 
   // Pages
   { path: Constants.LOGIN_PAGE, component: LoginComponent},
