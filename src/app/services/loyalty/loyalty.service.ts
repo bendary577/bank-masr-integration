@@ -24,4 +24,22 @@ export class LoyaltyService {
     this.token = localStorage.getItem('auth_token');
     return this.http.put(Constants.Delete_APP_COMPANIES_URL, companies, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  getAppGroups(companyId: String) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get(Constants.GET_APP_GROUPS_URL + "?companyId=" + companyId, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
+  addAppGroups(group) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.post(Constants.ADD_APP_GROUP_URL, group, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+  }
+
+  deleteAppGroups(groups) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.put(Constants.Delete_APP_GROUPS_URL, groups, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+  }
+
 }

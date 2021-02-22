@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Data } from 'src/app/models/data';
+import { Company } from 'src/app/models/loyalty/Company';
+import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
 
 @Component({
   selector: 'app-manage-groups',
@@ -6,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manage-groups.component.scss']
 })
 export class ManageGroupsComponent implements OnInit {
-
+  company: Company = new Company();
   groupsList = {
     paginateData: true as boolean,
     offset: 0,
@@ -22,12 +26,13 @@ export class ManageGroupsComponent implements OnInit {
     pagesFilter: [10, 25, 50, 75, 100],
     showLoading: true,
     inputSearch: '' as string,
-    locationsData: [] 
+    groupsData: [] 
   };
 
-  constructor() { }
+  constructor( private loyaltyService: LoyaltyService, private router: Router, private data: Data) { }
 
   ngOnInit() {
+    this.company = this.data.storage;
     this.getGroups();
   }
 
@@ -37,6 +42,22 @@ export class ManageGroupsComponent implements OnInit {
   }
 
   getGroups(){
-    this.groupsList.showLoading = false;
+    this.groupsList.showLoading = true;
+    this.loyaltyService.getAppGroups(this.company.id).toPromise().then((res: any) => {
+      this.groupsList.groupsData = res;
+      this.groupsList.showLoading = false;
+    }).catch(err => {
+      this.groupsList.showLoading = false;
+    });
+  }
+
+  deleteCompanies(){
+    this.groupsList.showLoading = true;
+    this.loyaltyService.deleteAppGroups(this.groupsList.selected).then((res: any) => {
+      this.getGroups();
+      this.groupsList.showLoading = false;
+    }).catch(err => {
+      this.groupsList.showLoading = false;
+    });
   }
 }

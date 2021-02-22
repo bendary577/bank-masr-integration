@@ -199,6 +199,10 @@ export class Constants {
     static ADD_APP_COMPANY_URL = environment.apiHost + '/addApplicationCompany';
     static Delete_APP_COMPANIES_URL = environment.apiHost + '/deleteApplicationCompanies';
 
+    static GET_APP_GROUPS_URL = environment.apiHost + '/getApplicationGroups';
+    static ADD_APP_GROUP_URL = environment.apiHost + '/addApplicationGroup';
+    static Delete_APP_GROUPS_URL = environment.apiHost + '/deleteApplicationGroups';
+
     //////////////////////////////////////////////// Export To Excel //////////////////////////////////////////////
 
     static EXPORT_APPROVED_INVOICES = environment.apiHost + '/invoices/export/excel';

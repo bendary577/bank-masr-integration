@@ -85,7 +85,8 @@ export class ManageComaniesComponent implements OnInit {
         this.loading = true;
 
         this.newCompany.name = res.name;
-        this.newCompany.logoUrl = res.logoUrl;
+        this.newCompany.description = res.description;
+        this.newCompany.discountRate = res.discountRate;
         this.newCompany.deleted = false;
 
         this.companiesList.showLoading = true;

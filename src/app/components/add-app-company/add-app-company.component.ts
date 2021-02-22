@@ -29,6 +29,8 @@ export class AddAppCompanyComponent implements OnInit {
       this.dialogRef.close({
         name: this.form.controls.name.value,
         logoUrl: this.form.controls.logoUrl.value,
+        description: this.form.controls.description.value,
+        discountRate: this.form.controls.discountRate.value
       });
     }
   }
@@ -36,7 +38,9 @@ export class AddAppCompanyComponent implements OnInit {
   ngOnInit() {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
-      logoUrl: ['', Validators.required],
+      logoUrl: [''],
+      description: [''],
+      discountRate: ['', Validators.required]
     });
   }
 }

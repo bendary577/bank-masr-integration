@@ -1,8 +1,8 @@
 <div class="main" >
     <div class="header" style="margin-bottom: 15px;">
-        <button mat-flat-button (click)="openCompanyDialog()">Add</button>
-        <button mat-flat-button (click)="openCompanyDialog()" [disabled]="companiesList.selected.length > 1">Update</button>
-        <button mat-flat-button (click)="deleteCompanies()" [disabled]="companiesList.selected.length == 0">Delete</button>
+        <button mat-flat-button (click)="openCompanyDialog()">Add Group</button>
+        <button mat-flat-button (click)="openCompanyDialog()" [disabled]="companiesList.selected.length != 1">Update Group</button>
+        <button mat-flat-button (click)="deleteCompanies()" [disabled]="companiesList.selected.length == 0">Delete Groups</button>
     </div>   
 
     <ngx-datatable class="material" [loadingIndicator]="companiesList.showLoading" [messages]="companiesList.messages" 
@@ -23,6 +23,18 @@
         <ngx-datatable-column name="Name">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 <a class="comany-name" (click)="openCompany(row)">{{row.name}}</a>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Description">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.description}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Discount Rate">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.discountRate}}
             </ng-template>
         </ngx-datatable-column>
 
