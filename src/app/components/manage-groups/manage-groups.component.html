@@ -2,9 +2,10 @@
 
 <div class="main" >
 
-    <div class="back" style="margin-bottom: 15px;">
+    <div class="header" style="margin-bottom: 15px;">
         <button mat-flat-button (click)="openLocationDialog()">Add</button>
-        <button mat-flat-button (click)="openLocationDialog()">Delete</button>
+        <button mat-flat-button (click)="openCompanyDialog()" [disabled]="groupsList.selected.length > 1">Update</button>
+        <button mat-flat-button (click)="deleteCompanies()" [disabled]="groupsList.selected.length == 0">Delete</button>
     </div>   
 
 

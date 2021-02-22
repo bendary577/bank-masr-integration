@@ -13,7 +13,7 @@ export class ManageUsersComponent implements OnInit {
     messages: {
       emptyMessage: `
     <div >
-      <span class="classname">No Groups found</span>
+      <span class="classname">No users found</span>
     </div>
   `
     },

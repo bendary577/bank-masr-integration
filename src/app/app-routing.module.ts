@@ -47,6 +47,7 @@ import { CreateOrderComponent } from './components/create-order/create-order.com
 import { ManageComaniesComponent } from './components/manage-comanies/manage-comanies.component';
 import { ManageGroupsComponent } from './components/manage-groups/manage-groups.component';
 import { ManageUsersComponent } from './components/manage-users/manage-users.component';
+import { LoyaltyComponent } from './components/loyalty/loyalty.component';
 
 
 const routes: Routes = [
@@ -64,6 +65,9 @@ const routes: Routes = [
   { path: Constants.OPERATION_TYPES, component: OperationTypesConfigurationComponent ,canActivate:[AuthGuardService]},
   { path: Constants.SUPPLIERS_MAPPING, component: SupplierMappingComponent ,canActivate:[AuthGuardService]},
 
+
+  // Loyalty Views
+  { path: Constants.LOYALTY, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MANAGE_COMPANIES, component: ManageComaniesComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MANAGE_GROUPS, component: ManageGroupsComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MANAGE_USERS, component: ManageUsersComponent ,canActivate:[AuthGuardService]},

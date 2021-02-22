@@ -112,6 +112,8 @@ import { CreateOrderComponent } from './components/create-order/create-order.com
 import { ManageComaniesComponent } from './components/manage-comanies/manage-comanies.component';
 import { ManageGroupsComponent } from './components/manage-groups/manage-groups.component';
 import { ManageUsersComponent } from './components/manage-users/manage-users.component';
+import { LoyaltyComponent } from './components/loyalty/loyalty.component';
+import { AddAppCompanyComponent } from './components/add-app-company/add-app-company.component';
 
 @NgModule({
   declarations: [
@@ -188,7 +190,9 @@ import { ManageUsersComponent } from './components/manage-users/manage-users.com
     ExportedFileConfigurationComponent,
     ManageComaniesComponent,
     ManageGroupsComponent,
-    ManageUsersComponent
+    ManageUsersComponent,
+    LoyaltyComponent,
+    AddAppCompanyComponent
   ],
   imports: [
     BrowserModule,
@@ -234,6 +238,9 @@ import { ManageUsersComponent } from './components/manage-users/manage-users.com
      AddTaxComponent, AddDiscountComponent, AddRevenueCenterComponent, AddServiceChargeComponent,
       SuppliersConfiguartionComponent, SchedulerConfigurationComponent, AddTenderChildComponent,
       AddSimphonyLocationComponent, AddWebServiceInvokerComponent, AddLocationComponent,
-      AddMajorGroupChildComponent, AddSalesStatisticsComponent, AddSupplierComponent]
+      AddMajorGroupChildComponent, AddSalesStatisticsComponent, AddSupplierComponent,
+    // Loyalty
+    AddAppCompanyComponent
+    ]
 })
 export class AppModule { }

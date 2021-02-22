@@ -35,17 +35,11 @@
                     <mat-expansion-panel-header>
                         Application
                     </mat-expansion-panel-header>
-                    <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
-                        <mat-expansion-panel-header>
-                            Loyalty
-                        </mat-expansion-panel-header>
-                        <mat-nav-list dense>
-                            <a mat-list-item (click)="snav.toggle()" routerLink="/manageCompanies">Manage Companies</a>
-                            <a mat-list-item (click)="snav.toggle()" routerLink="/manageGroups">Manage Groups</a>
-                            <a mat-list-item (click)="snav.toggle()" routerLink="/manageUsers">Manage Users</a>
-                        </mat-nav-list>
-                    </mat-expansion-panel>
+                    <mat-nav-list dense>
+                        <a mat-list-item (click)="snav.toggle()" routerLink="/loyalty">Loyalty</a>
+                    </mat-nav-list>
                 </mat-expansion-panel>
+
 
                 <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
                     <mat-expansion-panel-header> 

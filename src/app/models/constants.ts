@@ -190,9 +190,14 @@ export class Constants {
 
     //////////////////////////////////////////////// Manage Application  //////////////////////////////////////////////
 
+    static LOYALTY = 'loyalty';
     static MANAGE_COMPANIES = 'manageCompanies';
     static MANAGE_GROUPS = "manageGroups";
     static MANAGE_USERS = 'manageUsers';
+
+    static GET_APP_COMPANIES_URL = environment.apiHost + '/getApplicationCompanies';
+    static ADD_APP_COMPANY_URL = environment.apiHost + '/addApplicationCompany';
+    static Delete_APP_COMPANIES_URL = environment.apiHost + '/deleteApplicationCompanies';
 
     //////////////////////////////////////////////// Export To Excel //////////////////////////////////////////////
 

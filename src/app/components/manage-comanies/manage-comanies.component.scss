@@ -1,1 +1,12 @@
-@import "../approved-invoices-infor/approved-invoices-infor.component.scss"
+@import "../approved-invoices-infor/approved-invoices-infor.component.scss";
+
+.comany-name{
+    color: black;
+    font-weight: normal;
+    text-decoration: blink;
+}
+
+.comany-name:hover {
+    text-decoration: underline;
+    font-weight: normal;
+}

@@ -79,3 +79,29 @@ button {
 .mat-form-field{
     padding-right: 10px;
 }
+
+.active-state{
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    // font-size: 13px;
+    color: #388E3C;
+}
+
+.inactive-state{
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    // font-size: 13px;
+    color: #666666;
+}
+.deleted-state{
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    // font-size: 13px;
+    color: #FC544B;
+}

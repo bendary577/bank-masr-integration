@@ -1,16 +1,13 @@
-<h3 mat-dialog-title>Manage Companies</h3>
-
 <div class="main" >
-
-    <div class="back" style="margin-bottom: 15px;">
-        <button mat-flat-button (click)="openLocationDialog()">Add</button>
-        <button mat-flat-button (click)="openLocationDialog()">Delete</button>
+    <div class="header" style="margin-bottom: 15px;">
+        <button mat-flat-button (click)="openCompanyDialog()">Add</button>
+        <button mat-flat-button (click)="openCompanyDialog()" [disabled]="companiesList.selected.length > 1">Update</button>
+        <button mat-flat-button (click)="deleteCompanies()" [disabled]="companiesList.selected.length == 0">Delete</button>
     </div>   
 
-
-    <ngx-datatable class="material" [loadingIndicator]="comapaniesList.showLoading" [messages]="comapaniesList.messages" 
+    <ngx-datatable class="material" [loadingIndicator]="companiesList.showLoading" [messages]="companiesList.messages" 
     [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-     [rows]="comapaniesList.locationsData" [selected]="comapaniesList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
+     [rows]="companiesList.companiesData" [selected]="companiesList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
     [displayCheck]="displayCheck" (select)='onSelect($event)' [scrollbarH]="true">
 
         <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
@@ -25,19 +22,20 @@
 
         <ngx-datatable-column name="Name">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.name}}
+                <a class="comany-name" (click)="openCompany(row)">{{row.name}}</a>
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Status">
+        <ngx-datatable-column name="State">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.deleted}}
+                <label *ngIf="!row.deleted" class="active-state">active</label>
+                <label *ngIf="row.deleted" class="deleted-state">deleted</label>
             </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column name="Creation Date">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.creationDate}}
+                {{row.creationDate | date: 'dd/MM/yyyy hh:mm:ss' }}
             </ng-template>
         </ngx-datatable-column>
     </ngx-datatable>
