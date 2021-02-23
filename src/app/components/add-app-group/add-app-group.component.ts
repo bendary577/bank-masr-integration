@@ -1,37 +1,34 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
-import { Company } from 'src/app/models/loyalty/Company';
+import { Group } from 'src/app/models/loyalty/Group';
 
 @Component({
-  selector: 'app-add-app-company',
-  templateUrl: './add-app-company.component.html',
-  styleUrls: ['./add-app-company.component.scss']
+  selector: 'app-add-app-group',
+  templateUrl: './add-app-group.component.html',
+  styleUrls: ['./add-app-group.component.scss']
 })
-export class AddAppCompanyComponent implements OnInit {
-
+export class AddAppGroupComponent implements OnInit {
   public form: FormGroup;
-  company: Company = new Company();
+  group: Group = new Group();
 
   constructor(private formBuilder: FormBuilder, public snackBar: MatSnackBar, 
-    public dialogRef: MatDialogRef<AddAppCompanyComponent>, 
+    public dialogRef: MatDialogRef<AddAppGroupComponent>, 
     @Inject(MAT_DIALOG_DATA) public data) { }
 
     
   ngOnInit() {
     if (this.data != null && this.data != undefined){
-      this.company = this.data["comapny"];
+      this.group = this.data["group"];
 
       this.form = this.formBuilder.group({
-        name: [this.company.name, Validators.required],
-        logoUrl: [this.company.logoUrl],
-        description: [this.company.description],
-        discountRate: [this.company.discountRate, Validators.required]
+        name: [this.group.name, Validators.required],
+        description: [this.group.description],
+        discountRate: [this.group.discountRate, Validators.required]
       });
     }else{
       this.form = this.formBuilder.group({
         name: ['', Validators.required],
-        logoUrl: [''],
         description: [''],
         discountRate: ['', Validators.required]
       });
@@ -52,10 +49,10 @@ export class AddAppCompanyComponent implements OnInit {
     }else{
       this.dialogRef.close({
         name: this.form.controls.name.value,
-        logoUrl: this.form.controls.logoUrl.value,
         description: this.form.controls.description.value,
         discountRate: this.form.controls.discountRate.value
       });
     }
   }
+
 }

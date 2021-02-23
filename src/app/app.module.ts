@@ -114,6 +114,7 @@ import { ManageGroupsComponent } from './components/manage-groups/manage-groups.
 import { ManageUsersComponent } from './components/manage-users/manage-users.component';
 import { LoyaltyComponent } from './components/loyalty/loyalty.component';
 import { AddAppCompanyComponent } from './components/add-app-company/add-app-company.component';
+import { AddAppGroupComponent } from './components/add-app-group/add-app-group.component';
 
 @NgModule({
   declarations: [
@@ -192,7 +193,8 @@ import { AddAppCompanyComponent } from './components/add-app-company/add-app-com
     ManageGroupsComponent,
     ManageUsersComponent,
     LoyaltyComponent,
-    AddAppCompanyComponent
+    AddAppCompanyComponent,
+    AddAppGroupComponent
   ],
   imports: [
     BrowserModule,
@@ -240,7 +242,7 @@ import { AddAppCompanyComponent } from './components/add-app-company/add-app-com
       AddSimphonyLocationComponent, AddWebServiceInvokerComponent, AddLocationComponent,
       AddMajorGroupChildComponent, AddSalesStatisticsComponent, AddSupplierComponent,
     // Loyalty
-    AddAppCompanyComponent
+    AddAppCompanyComponent, AddAppGroupComponent
     ]
 })
 export class AppModule { }

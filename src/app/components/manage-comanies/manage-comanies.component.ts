@@ -75,9 +75,9 @@ export class ManageComaniesComponent implements OnInit {
     });
   }
 
-  openCompanyDialog(){
+  addCompanyDialog(){
     const dialogRef = this.dialog.open(AddAppCompanyComponent, {
-      width: '550px'
+        width: '550px'
     });
 
     dialogRef.afterClosed().subscribe(res => {
@@ -90,7 +90,7 @@ export class ManageComaniesComponent implements OnInit {
         this.newCompany.deleted = false;
 
         this.companiesList.showLoading = true;
-        this.loyaltyService.addAppCompanies(this.newCompany).then(result => {
+        this.loyaltyService.addAppCompanies(this.newCompany, true).then(result => {
           this.loading = false;
           this.companiesList.showLoading = false;
           this.getCompanies();
@@ -98,6 +98,63 @@ export class ManageComaniesComponent implements OnInit {
           this.newCompany = new Company();
 
           this.snackBar.open("Add comapny successfully.", null, {
+            duration: 2000,
+            horizontalPosition: 'right',
+            panelClass:"my-snack-bar-success"
+          });
+
+        }).catch(err => {
+          this.loading = false;
+          this.companiesList.showLoading = false;
+
+          this.newCompany = new Company();
+
+          let message = "";
+          if(err.status === 401){
+            message = ErrorMessages.SESSION_EXPIRED;
+            this.sidNav.Logout();
+          } else if (err.error.message){
+            message = err.error.message;
+          } else if (err.message){
+            message = err.message;
+          } else {
+            message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
+          }
+    
+          this.snackBar.open(message , null, {
+            duration: 3000,
+            horizontalPosition: 'right',
+            panelClass:"my-snack-bar-fail"
+          });
+        });
+      }
+    });
+  }
+
+  updateCompanyDialog(){
+    const dialogRef = this.dialog.open(AddAppCompanyComponent, {
+      width: '550px',
+      data: {comapny: this.companiesList.selected[0]}
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.newCompany = this.companiesList.selected[0];
+
+        this.newCompany.name = res.name;
+        this.newCompany.description = res.description;
+        this.newCompany.discountRate = res.discountRate;
+        this.newCompany.deleted = false;
+
+        this.companiesList.showLoading = true;
+        this.loyaltyService.addAppCompanies(this.newCompany, false).then(result => {
+          this.loading = false;
+          this.companiesList.showLoading = false;
+          this.getCompanies();
+
+          this.newCompany = new Company();
+
+          this.snackBar.open("Comapny updated successfully.", null, {
             duration: 2000,
             horizontalPosition: 'right',
             panelClass:"my-snack-bar-success"

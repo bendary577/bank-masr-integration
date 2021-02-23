@@ -3,8 +3,8 @@
 <div class="main" >
 
     <div class="header" style="margin-bottom: 15px;">
-        <button mat-flat-button (click)="openLocationDialog()">Add</button>
-        <button mat-flat-button (click)="openCompanyDialog()" [disabled]="groupsList.selected.length != 1">Update</button>
+        <button mat-flat-button (click)="addGroupDialog()">Add</button>
+        <button mat-flat-button (click)="addGroupDialog()" [disabled]="groupsList.selected.length != 1">Update</button>
         <button mat-flat-button (click)="deleteCompanies()" [disabled]="groupsList.selected.length == 0">Delete</button>
     </div>   
 
@@ -38,19 +38,26 @@
 
         <ngx-datatable-column name="Discount Rate">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.discountRate}}
+                {{row.discountRate}} %
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Status">
+        <ngx-datatable-column name="State">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.deleted}}
+                <label *ngIf="!row.deleted" class="active-state">active</label>
+                <label *ngIf="row.deleted" class="deleted-state">deleted</label>
             </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column name="Creation Date">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.creationDate | date: 'dd/MM/yyyy hh:mm:ss' }}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Last Update">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.lastUpdate | date: 'dd/MM/yyyy hh:mm:ss' }}
             </ng-template>
         </ngx-datatable-column>
     </ngx-datatable>
