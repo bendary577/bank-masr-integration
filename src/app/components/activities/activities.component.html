@@ -1,0 +1,33 @@
+<div class="main" >
+    <ngx-datatable class="material" [loadingIndicator]="companiesList.showLoading" [messages]="companiesList.messages" 
+    [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+     [rows]="companiesList.companiesData" [selected]="companiesList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
+    [displayCheck]="displayCheck" (select)='onSelect($event)' [scrollbarH]="true">
+
+        <ngx-datatable-column name="Name">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <a class="comany-name" (click)="openCompany(row)">{{row.name}}</a>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Discount Rate">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.discountRate}} %
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="State">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <label *ngIf="!row.deleted" class="active-state">active</label>
+                <label *ngIf="row.deleted" class="deleted-state">deleted</label>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Creation Date">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.creationDate | date: 'dd/MM/yyyy hh:mm:ss' }}
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+</div>
+

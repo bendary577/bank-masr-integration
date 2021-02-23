@@ -115,6 +115,8 @@ import { ManageUsersComponent } from './components/manage-users/manage-users.com
 import { LoyaltyComponent } from './components/loyalty/loyalty.component';
 import { AddAppCompanyComponent } from './components/add-app-company/add-app-company.component';
 import { AddAppGroupComponent } from './components/add-app-group/add-app-group.component';
+import { AddAppUserComponent } from './components/add-app-user/add-app-user.component';
+import { ActivitiesComponent } from './components/activities/activities.component';
 
 @NgModule({
   declarations: [
@@ -194,7 +196,9 @@ import { AddAppGroupComponent } from './components/add-app-group/add-app-group.c
     ManageUsersComponent,
     LoyaltyComponent,
     AddAppCompanyComponent,
-    AddAppGroupComponent
+    AddAppGroupComponent,
+    AddAppUserComponent,
+    ActivitiesComponent
   ],
   imports: [
     BrowserModule,
@@ -242,7 +246,7 @@ import { AddAppGroupComponent } from './components/add-app-group/add-app-group.c
       AddSimphonyLocationComponent, AddWebServiceInvokerComponent, AddLocationComponent,
       AddMajorGroupChildComponent, AddSalesStatisticsComponent, AddSupplierComponent,
     // Loyalty
-    AddAppCompanyComponent, AddAppGroupComponent
+    AddAppCompanyComponent, AddAppGroupComponent, AddAppUserComponent
     ]
 })
 export class AppModule { }

@@ -1,14 +1,14 @@
 <div class="main" >
 
     <div class="header" style="margin-bottom: 15px;">
-        <button mat-flat-button (click)="openLocationDialog()">Add</button>
-        <button mat-flat-button (click)="openLocationDialog()">Update</button>
-        <button mat-flat-button (click)="openLocationDialog()">Delete</button>
+        <button mat-flat-button (click)="addUserDialog()">Add User</button>
+        <button mat-flat-button (click)="addGroupDialog()" [disabled]="usersList.selected.length != 1">Update User</button>
+        <button mat-flat-button (click)="deleteCompanies()" [disabled]="usersList.selected.length == 0">Delete Users</button>
     </div>   
 
     <ngx-datatable class="material" [loadingIndicator]="usersList.showLoading" [messages]="usersList.messages" 
     [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-     [rows]="usersList.locationsData" [selected]="usersList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
+     [rows]="usersList.usersData" [selected]="usersList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
     [displayCheck]="displayCheck" (select)='onSelect($event)' [scrollbarH]="true">
 
         <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
@@ -29,14 +29,22 @@
 
         <ngx-datatable-column name="Group">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.group}}
+                {{row.company.name}}
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Company">
+        <ngx-datatable-column name="Sub-Group">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.company}}
+                {{row.group.name}}
             </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Discount Rate">
+            <ng-template let-row="row" ngx-datatable-cell-template >
+                <label *ngIf="row.group.name == ''">{{row.company.discountRate}} %</label>
+                <label *ngIf="row.group.name != ''">{{row.group.discountRate}} %</label>
+            </ng-template>
+
         </ngx-datatable-column>
 
         <ngx-datatable-column name="State">

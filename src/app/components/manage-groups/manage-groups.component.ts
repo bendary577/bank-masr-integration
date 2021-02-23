@@ -64,11 +64,10 @@ export class ManageGroupsComponent implements OnInit {
         this.newGroup.name = res.name;
         this.newGroup.description = res.description;
         this.newGroup.discountRate = res.discountRate;
-        this.newGroup.company = this.company.id;
         this.newGroup.deleted = false;
 
         this.groupsList.showLoading = true;
-        this.loyaltyService.addAppGroups(this.newGroup, true).then(result => {
+        this.loyaltyService.addAppGroups(this.newGroup, this.company.id, true).then(result => {
           this.getGroups();
 
           this.newGroup = new Group();
@@ -106,7 +105,7 @@ export class ManageGroupsComponent implements OnInit {
   }
 
   getGroups(){
-    this.groupsList.showLoading = true;
+    this.groupsList.showLoading = true; 
     this.loyaltyService.getAppGroups(this.company.id).toPromise().then((res: any) => {
       this.groupsList.groupsData = res;
       this.groupsList.showLoading = false;

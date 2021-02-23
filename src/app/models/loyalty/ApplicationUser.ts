@@ -1,10 +1,12 @@
 import { Company } from "./Company";
+import { Group } from "./Group";
 
-export class Group {
+export class ApplicationUser {
     public id: string;
     public name: string;
-    public description: string;
-    public discountRate: string;
+
+    public group: Group;
+    public company: Company;
 
     public creationDate: string;
     public lastUpdate: string;

@@ -32,14 +32,26 @@ export class LoyaltyService {
     return this.http.get(Constants.GET_APP_GROUPS_URL + "?companyId=" + companyId, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
-  addAppGroups(group, addFlag) {
+  addAppGroups(group, company, addFlag) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.post(Constants.ADD_APP_GROUP_URL + "?addFlag=" + addFlag, group, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+    return this.http.post(Constants.ADD_APP_GROUP_URL + "?addFlag=" + addFlag + "&company=" + company, group, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
 
   deleteAppGroups(groups) {
     this.token = localStorage.getItem('auth_token');
     return this.http.put(Constants.Delete_APP_GROUPS_URL, groups, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  getAppUsers() {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get(Constants.GET_APP_USERS_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
+  addAppUsers(user, addFlag) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.post(Constants.ADD_APP_USER_URL + "?addFlag=" + addFlag , user, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
 
 }

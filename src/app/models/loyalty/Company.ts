@@ -1,3 +1,5 @@
+import { Group } from "./Group";
+
 export class Company {
     public id: string;
     public name: string;
@@ -5,6 +7,7 @@ export class Company {
     public accountID: string;
     public description: string;
     public discountRate: string;
+    public groups: Group[];
     public creationDate: string;
     public deleted: boolean;
 
