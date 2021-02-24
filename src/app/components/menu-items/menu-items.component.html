@@ -89,27 +89,27 @@
                     </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="Object Number">
+                <ngx-datatable-column name="Item Id">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.miObjectNum}}
+                        {{row.data.id}}
                     </ng-template>
                 </ngx-datatable-column>
 
                 <ngx-datatable-column name="First Name">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.menuFirstName}}
+                        {{row.data.firstName}}
                     </ng-template>
                 </ngx-datatable-column>
                 
                 <ngx-datatable-column name="Second Name">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.menuSecondName}}
+                        {{row.data.secondName}}
                     </ng-template>
                 </ngx-datatable-column>
 
                 <ngx-datatable-column name="Menu Item Price">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.menuItemPrice}}
+                        {{row.data.price}}
                     </ng-template>
                 </ngx-datatable-column>
 
@@ -118,6 +118,7 @@
                         {{row.data.availability}}
                     </ng-template>
                 </ngx-datatable-column>
+                
             </ngx-datatable>
         </div>
     </div>
