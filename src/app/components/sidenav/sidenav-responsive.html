@@ -13,7 +13,7 @@
 
             <mat-nav-list> 
 
-                <mat-expansion-panel [class.mat-elevation-z0]="true" dense  *ngIf="syncJobTypes.length > 0" [expanded]="true">
+                <!-- <mat-expansion-panel [class.mat-elevation-z0]="true" dense  *ngIf="syncJobTypes.length > 0" [expanded]="true">
                     <mat-expansion-panel-header>
                         Sync Job Types
                     </mat-expansion-panel-header>
@@ -29,7 +29,7 @@
                     <mat-nav-list dense *ngFor="let operation of operationTypes">
                         <a mat-list-item (click)="snav.toggle()" routerLink={{operation.endPoint}}>{{operation.name}}</a>
                     </mat-nav-list>
-                </mat-expansion-panel>
+                </mat-expansion-panel> -->
 
                 <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
                     <mat-expansion-panel-header>

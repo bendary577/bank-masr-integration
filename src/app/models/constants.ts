@@ -194,6 +194,7 @@ export class Constants {
     static MANAGE_COMPANIES = 'manageCompanies';
     static MANAGE_GROUPS = "manageGroups";
     static MANAGE_USERS = 'manageUsers';
+    static MANAGE_ACTIVITIES = 'managActivities';
 
     static GET_APP_COMPANIES_URL = environment.apiHost + '/getApplicationCompanies';
     static ADD_APP_COMPANY_URL = environment.apiHost + '/addApplicationCompany';

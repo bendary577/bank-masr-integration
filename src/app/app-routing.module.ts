@@ -48,6 +48,7 @@ import { ManageComaniesComponent } from './components/manage-comanies/manage-com
 import { ManageGroupsComponent } from './components/manage-groups/manage-groups.component';
 import { ManageUsersComponent } from './components/manage-users/manage-users.component';
 import { LoyaltyComponent } from './components/loyalty/loyalty.component';
+import { ActivitiesComponent } from './components/activities/activities.component';
 
 
 const routes: Routes = [
@@ -71,6 +72,7 @@ const routes: Routes = [
   { path: Constants.MANAGE_COMPANIES, component: ManageComaniesComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MANAGE_GROUPS, component: ManageGroupsComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MANAGE_USERS, component: ManageUsersComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.MANAGE_ACTIVITIES, component: ActivitiesComponent ,canActivate:[AuthGuardService]},
 
   // Pages
   { path: Constants.LOGIN_PAGE, component: LoginComponent},
