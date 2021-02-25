@@ -1,5 +1,15 @@
 <div class="container" *ngIf="!loading">
     <form class="my-form">
+        <div>
+            <mat-form-field class="example-full-width">
+                <mat-select matInput id="consumptionPerGroup" name="consumptionPerGroup" placeholder="Consumption per" 
+                 [(ngModel)]="syncJobType.configuration.consumptionPerGroup">
+                    <mat-option value="OverGroups">Over Groups</mat-option>
+                    <mat-option value="ItemGroups">Item Groups</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
         <div *ngIf="syncJobType.name == 'Approved Invoices' || syncJobType.name == 'Credit Notes'">
             <mat-form-field class="example-full-width">
                 <mat-select matInput id="invoiceTypeIncluded" name="invoiceTypeIncluded" placeholder="Invoice Type Included" [(ngModel)]="syncJobType.configuration.invoiceConfiguration.invoiceTypeIncluded">
