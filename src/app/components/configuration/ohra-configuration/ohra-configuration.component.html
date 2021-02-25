@@ -2,8 +2,8 @@
     <form class="my-form">
         <div>
             <mat-form-field class="example-full-width">
-                <mat-select matInput id="consumptionPerGroup" name="consumptionPerGroup" placeholder="Consumption per" 
-                 [(ngModel)]="syncJobType.configuration.consumptionPerGroup">
+                <mat-select matInput id="consumptionPerGroup" name="consumptionPerGroup" placeholder="Sync per" 
+                 [(ngModel)]="syncJobType.configuration.syncPerGroup">
                     <mat-option value="OverGroups">Over Groups</mat-option>
                     <mat-option value="ItemGroups">Item Groups</mat-option>
                 </mat-select>
@@ -19,6 +19,8 @@
                 </mat-select>
             </mat-form-field>
         </div>
+        <!-- oracle-hospitality-frontend -->
+
 
         <div *ngIf="syncJobType.name == 'Wastage'">
             <mat-form-field class="example-full-width">
