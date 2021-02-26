@@ -109,6 +109,14 @@ import { SupplierMappingComponent } from './components/setting/supllier-mapping/
 import { AddSupplierComponent } from './components/add-supplier/add-supplier.component';
 import { ExportedFileConfigurationComponent } from './components/configuration/exported-file-configuration/exported-file-configuration.component';
 import { CreateOrderComponent } from './components/create-order/create-order.component';
+import { ManageComaniesComponent } from './components/manage-comanies/manage-comanies.component';
+import { ManageGroupsComponent } from './components/manage-groups/manage-groups.component';
+import { ManageUsersComponent } from './components/manage-users/manage-users.component';
+import { LoyaltyComponent } from './components/loyalty/loyalty.component';
+import { AddAppCompanyComponent } from './components/add-app-company/add-app-company.component';
+import { AddAppGroupComponent } from './components/add-app-group/add-app-group.component';
+import { AddAppUserComponent } from './components/add-app-user/add-app-user.component';
+import { ActivitiesComponent } from './components/activities/activities.component';
 
 @NgModule({
   declarations: [
@@ -182,7 +190,15 @@ import { CreateOrderComponent } from './components/create-order/create-order.com
     OperaPaymentConfigurationComponent,
     SupplierMappingComponent,
     AddSupplierComponent,
-    ExportedFileConfigurationComponent
+    ExportedFileConfigurationComponent,
+    ManageComaniesComponent,
+    ManageGroupsComponent,
+    ManageUsersComponent,
+    LoyaltyComponent,
+    AddAppCompanyComponent,
+    AddAppGroupComponent,
+    AddAppUserComponent,
+    ActivitiesComponent
   ],
   imports: [
     BrowserModule,
@@ -228,6 +244,9 @@ import { CreateOrderComponent } from './components/create-order/create-order.com
      AddTaxComponent, AddDiscountComponent, AddRevenueCenterComponent, AddServiceChargeComponent,
       SuppliersConfiguartionComponent, SchedulerConfigurationComponent, AddTenderChildComponent,
       AddSimphonyLocationComponent, AddWebServiceInvokerComponent, AddLocationComponent,
-      AddMajorGroupChildComponent, AddSalesStatisticsComponent, AddSupplierComponent]
+      AddMajorGroupChildComponent, AddSalesStatisticsComponent, AddSupplierComponent,
+    // Loyalty
+    AddAppCompanyComponent, AddAppGroupComponent, AddAppUserComponent
+    ]
 })
 export class AppModule { }

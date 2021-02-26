@@ -4,11 +4,13 @@ import { Item } from './Item';
 import { MajorGroup } from './MajorGroup';
 import { SimphonyLocation } from './SimphonyLocation';
 import { Supplier } from './supplier';
+import { ItemGroup } from './ItemGroup';
 
 export class GeneralSettings {
   id: string;
   accountId: string;
   items: Array<Item>|any;
+  itemGroups: Array<ItemGroup>|any;
   majorGroups: Array<MajorGroup>|any;
   overGroups: Array<OverGroup>|any;
   costCenterAccountMapping: Array<CostCenter>|any;

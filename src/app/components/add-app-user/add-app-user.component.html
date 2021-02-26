@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>New User</h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="form" class="my-form">
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Name" formControlName="name">
+            </mat-form-field>
+        </div>
+
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <mat-select matInput id="companies" name="companies" placeholder="Group" formControlName="company">
+                    <mat-option [value]=c *ngFor="let c of companies">{{c.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <mat-select matInput id="groups" name="groups" placeholder="Sub-Group" formControlName="group">
+                    <mat-option [value]=g *ngFor="let g of groups">{{g.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button cdkFocusInitial (click)="onSaveClick()" >Save</button>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+</div>

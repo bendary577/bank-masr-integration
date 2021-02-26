@@ -187,6 +187,27 @@ export class Constants {
     static OPERATION_TYPES = 'operationTypesConfiguration';
     static SYNC_TYPE_SCHEDULER = "Suppliers";
     static EXPORTED_FILES_PAGE = 'exportedFiles';
+
+    //////////////////////////////////////////////// Manage Application  //////////////////////////////////////////////
+
+    static LOYALTY = 'loyalty';
+    static MANAGE_COMPANIES = 'manageCompanies';
+    static MANAGE_GROUPS = "manageGroups";
+    static MANAGE_USERS = 'manageUsers';
+    static MANAGE_ACTIVITIES = 'managActivities';
+
+    static GET_APP_COMPANIES_URL = environment.apiHost + '/getApplicationCompanies';
+    static ADD_APP_COMPANY_URL = environment.apiHost + '/addApplicationCompany';
+    static Delete_APP_COMPANIES_URL = environment.apiHost + '/deleteApplicationCompanies';
+
+    static GET_APP_GROUPS_URL = environment.apiHost + '/getApplicationGroups';
+    static ADD_APP_GROUP_URL = environment.apiHost + '/addApplicationGroup';
+    static Delete_APP_GROUPS_URL = environment.apiHost + '/deleteApplicationGroups';
+
+    static GET_APP_USERS_URL = environment.apiHost + '/getApplicationUsers';
+    static ADD_APP_USER_URL = environment.apiHost + '/addApplicationUser';
+    static Delete_APP_USERS_URL = environment.apiHost + '/deleteApplicationUsers';
+
     //////////////////////////////////////////////// Export To Excel //////////////////////////////////////////////
 
     static EXPORT_APPROVED_INVOICES = environment.apiHost + '/invoices/export/excel';
