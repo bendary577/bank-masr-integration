@@ -9,6 +9,7 @@ import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import { ExcelService } from 'src/app/services/excel/excel.service';
 import { saveAs } from 'file-saver';
+import { CsvService } from 'src/app/services/csv/csv.service';
 
 @Component({
   selector: 'app-wastage-infor',
@@ -27,7 +28,8 @@ export class WastageInforComponent implements OnInit {
 
 
   constructor(private spinner: NgxSpinnerService, public dialog: MatDialog, public snackBar: MatSnackBar, private sidNav: SidenavResponsive,
-    private syncJobService:SyncJobService, private wastageService:WastageService, private excelService: ExcelService) { }
+    private syncJobService:SyncJobService, private wastageService:WastageService, private excelService: ExcelService,
+    private csvService: CsvService) { }
 
   ngOnInit() {
     this.getSyncJobs(Constants.WASTARGE_SYNC);
@@ -163,6 +165,30 @@ export class WastageInforComponent implements OnInit {
       res => {
         const blob = new Blob([res], { type : 'application/vnd.ms.excel' });
         const file = new File([blob], "Wastage" + '.xlsx', { type: 'application/vnd.ms.excel' });
+        saveAs(file);
+
+        this.snackBar.open("Export Successfully", null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
+        });
+      },
+      err => {
+        console.error(err)
+        this.snackBar.open("Fail to export, Please try agian" , null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+      }
+   );
+  }
+
+  generateSingleFile():void {
+    this.csvService.generateSingleFile(Constants.WASTARGE_SYNC).subscribe(
+      res => {
+        const blob = new Blob([res.body], { type : 'application/vnd.ms.txt' });
+        const file = new File([blob], Constants.WASTARGE_SYNC + '.ndf', { type: 'application/vnd.ms.txt' });
         saveAs(file);
 
         this.snackBar.open("Export Successfully", null, {

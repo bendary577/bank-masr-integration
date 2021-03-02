@@ -11,7 +11,6 @@ import { User } from 'src/app/models/user';
 export class AuthService {
   token = localStorage.getItem('auth_token');
 
-
   constructor( private http: HttpClient, private cookie: CookieService) {}
 
   login(user:User) {
@@ -28,7 +27,6 @@ export class AuthService {
   }
 
   checkToken() {
-
     return this.http.get(Constants.CHECKAUTH,{ headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})})
   }
 

@@ -100,10 +100,23 @@ import { ZealPaymentConfigComponent } from './components/zeal-payment-config/zea
 import { ZealVoucherComponent } from './components/zeal-voucher/zeal-voucher.component';
 import { PaymentVoucherConfigComponent } from './components/payment-voucher-config/payment-voucher-config.component';
 import { ZealVoucherConfigComponent } from './components/zeal-voucher-config/zeal-voucher-config.component';
-import { ZealPointsComponent } from './components/zeal-points/zeal-points.component';
-import { ZealPointsConfigComponent } from './components/zeal-points-config/zeal-points-config.component';
 import { ZealPaymentService } from './services/zealPayment/zeal-payment.service';
 import { OperationService } from './services/operation/operation.service';
+import { OhraConfigurationComponent } from './components/configuration/ohra-configuration/ohra-configuration.component';
+import { AddSalesStatisticsComponent } from './components/add-sales-statistics/add-sales-statistics.component';
+import { OperaPaymentConfigurationComponent } from './components/opera-payment-configuration/opera-payment-configuration.component';
+import { SupplierMappingComponent } from './components/setting/supllier-mapping/supllier-mapping.component';
+import { AddSupplierComponent } from './components/add-supplier/add-supplier.component';
+import { ExportedFileConfigurationComponent } from './components/configuration/exported-file-configuration/exported-file-configuration.component';
+import { CreateOrderComponent } from './components/create-order/create-order.component';
+import { ManageComaniesComponent } from './components/manage-comanies/manage-comanies.component';
+import { ManageGroupsComponent } from './components/manage-groups/manage-groups.component';
+import { ManageUsersComponent } from './components/manage-users/manage-users.component';
+import { LoyaltyComponent } from './components/loyalty/loyalty.component';
+import { AddAppCompanyComponent } from './components/add-app-company/add-app-company.component';
+import { AddAppGroupComponent } from './components/add-app-group/add-app-group.component';
+import { AddAppUserComponent } from './components/add-app-user/add-app-user.component';
+import { ActivitiesComponent } from './components/activities/activities.component';
 
 @NgModule({
   declarations: [
@@ -164,6 +177,7 @@ import { OperationService } from './services/operation/operation.service';
     AddLocationComponent,
     OperationTypesConfigurationComponent,
     CreateOrderConfigComponent,
+    CreateOrderComponent,
     AddMajorGroupChildComponent,
     SyncExportedFilesComponent,
     ZealPaymentComponent,
@@ -171,8 +185,20 @@ import { OperationService } from './services/operation/operation.service';
     ZealVoucherComponent,
     PaymentVoucherConfigComponent,
     ZealVoucherConfigComponent,
-    ZealPointsComponent,
-    ZealPointsConfigComponent
+    OhraConfigurationComponent,
+    AddSalesStatisticsComponent,
+    OperaPaymentConfigurationComponent,
+    SupplierMappingComponent,
+    AddSupplierComponent,
+    ExportedFileConfigurationComponent,
+    ManageComaniesComponent,
+    ManageGroupsComponent,
+    ManageUsersComponent,
+    LoyaltyComponent,
+    AddAppCompanyComponent,
+    AddAppGroupComponent,
+    AddAppUserComponent,
+    ActivitiesComponent
   ],
   imports: [
     BrowserModule,
@@ -218,6 +244,9 @@ import { OperationService } from './services/operation/operation.service';
      AddTaxComponent, AddDiscountComponent, AddRevenueCenterComponent, AddServiceChargeComponent,
       SuppliersConfiguartionComponent, SchedulerConfigurationComponent, AddTenderChildComponent, 
       AddSimphonyLocationComponent, AddWebServiceInvokerComponent, AddLocationComponent,
-      AddMajorGroupChildComponent]
+      AddMajorGroupChildComponent, AddSalesStatisticsComponent, AddSupplierComponent,
+    // Loyalty
+    AddAppCompanyComponent, AddAppGroupComponent, AddAppUserComponent
+    ]
 })
 export class AppModule { }

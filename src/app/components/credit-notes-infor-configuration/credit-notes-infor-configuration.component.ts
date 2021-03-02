@@ -28,12 +28,15 @@ export class CreditNotesInforConfigurationComponent implements OnInit {
   selectedCostCenters = [];
   timePeriods = ["All", "Current Year", "Current Month", "Last Month", "Last Year", "User-defined"];
   analysis = []
+  accountERD;
+
   constructor(private spinner: NgxSpinnerService, private sidNav: SidenavResponsive,
     private router:Router, public snackBar: MatSnackBar, private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService) {
   }
 
   ngOnInit() {
     this.getSyncJobType();
+    this.accountERD = localStorage.getItem('accountERD');
   }
 
   getSyncJobType() {

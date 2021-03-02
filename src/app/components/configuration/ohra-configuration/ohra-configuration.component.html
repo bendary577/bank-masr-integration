@@ -2,16 +2,42 @@
     <form class="my-form">
         <div>
             <mat-form-field class="example-full-width">
+                <mat-select matInput id="consumptionPerGroup" name="consumptionPerGroup" placeholder="Sync per" 
+                 [(ngModel)]="syncJobType.configuration.syncPerGroup">
+                    <mat-option value="OverGroups">Over Groups</mat-option>
+                    <mat-option value="ItemGroups">Item Groups</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div *ngIf="syncJobType.name == 'Approved Invoices' || syncJobType.name == 'Credit Notes'">
+            <mat-form-field class="example-full-width">
+                <mat-select matInput id="invoiceTypeIncluded" name="invoiceTypeIncluded" placeholder="Invoice Type Included" [(ngModel)]="syncJobType.configuration.invoiceConfiguration.invoiceTypeIncluded">
+                    <mat-option value="Approved Invoice">Approved Invoices</mat-option>
+                    <mat-option value="Account Payable">Account Payable</mat-option>
+                    <mat-option value="Both">Both</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <!-- oracle-hospitality-frontend -->
+
+
+        <div *ngIf="syncJobType.name == 'Wastage'">
+            <mat-form-field class="example-full-width">
+                <mat-select matInput id="wasteReport" name="wasteReport" placeholder="Sync Waste from" [(ngModel)]="syncJobType.configuration.wastageConfiguration.wasteReport">
+                    <mat-option value="Waste Reports">Waste Reports</mat-option>
+                    <mat-option value="Inventory Booked Waste">Inventory Booked Waste</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width">
                 <mat-select matInput id="timePeriod" name="timePeriod" placeholder="Business Dates" 
                 (selectionChange)="chooseTimePeriod()" [(ngModel)]="syncJobType.configuration.timePeriod">
-                    <mat-option value="Most Recent">Most Recent</mat-option>
-                    <mat-option value="Financial Week to Date">Financial Week to Date</mat-option>
-                    <mat-option value="Past 7 Days">Past 7 Days</mat-option>
                     <mat-option value="Today">Today</mat-option>
                     <mat-option value="Yesterday">Yesterday</mat-option>
-                    <mat-option value="Month to Date">Month to Date</mat-option>
                     <mat-option value="Last Month">Last Month</mat-option>
-                    <mat-option value="Financial Period to Date">Financial Period to Date</mat-option>
                     <mat-option value="UserDefined">User-defined</mat-option>
                 </mat-select>
             </mat-form-field>
@@ -26,16 +52,6 @@
             <p style="font-family: fantasy;">To</p>
             <mat-form-field class="example-full-width">
                 <input matInput placeholder="End Date" type="date" name="toDate" id="toDate" [(ngModel)]="syncJobType.configuration.toDate">
-            </mat-form-field>
-        </div>
-
-        <div *ngIf="syncJobType.name == 'Approved Invoices' || syncJobType.name == 'Credit Notes'">
-            <mat-form-field class="example-full-width">
-                <mat-select matInput id="invoiceTypeIncluded" name="invoiceTypeIncluded" placeholder="Invoice Type Included" [(ngModel)]="syncJobType.configuration.invoiceTypeIncluded">
-                    <mat-option value="Approved Invoice">Approved Invoices</mat-option>
-                    <mat-option value="Account Payable">Account Payable</mat-option>
-                    <mat-option value="Both">Both</mat-option>
-                </mat-select>
             </mat-form-field>
         </div>
 

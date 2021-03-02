@@ -45,6 +45,8 @@ export class Constants {
     static GET_OPERATION_JOBS_URL = environment.apiHost + '/getOperationJobs';
 
     static GET_OPERATION_URL = environment.apiHost + '/getOperation';
+    static GET_OPERATION_DATA_BY_ID = environment.apiHost + '/getOperationDataById';
+
 
     static GET_SUPPLIERS_URL = environment.apiHost + '/getSuppliers';
     static GET_SUPPLIERS_DETAILS_URL = environment.apiHost + '/getSuppliersDetails';
@@ -81,6 +83,7 @@ export class Constants {
     static ADD_POS_SALES_DISCOUNT_URL = environment.apiHost + '/addDiscount';
     static ADD_POS_SALES_SERVICE_CHARGE_URL = environment.apiHost + '/addServiceCharge';
     static ADD_POS_SALES_REVENUE_CENTER_URL = environment.apiHost + '/addRevenueCenter';
+    static ADD_POS_SALES_STATISTICS_URL = environment.apiHost + '/addSalesStatistics';
 
     static GET_CURRENT_DAYS_URL = environment.apiHost + '/getCurrentDays';
 
@@ -92,6 +95,7 @@ export class Constants {
     // General Settings
     static GET_GENERAL_SETTINGS_URL = environment.apiHost + '/getGeneralSettings';
     static UPDATE_GENERAL_SETTINGS_URL = environment.apiHost + '/updateGeneralSettings';
+    static FETCH_SUPPLIERS = environment.apiHost + '/getVendors';
 
 
     static LOGIN_PAGE = 'login';
@@ -155,6 +159,10 @@ export class Constants {
     static CREATE_ORDER_CONFIG_PAGE = 'createCheckConfig';
     static CREATE_ORDER_OPERATION = 'Create Check';
 
+    static OPERA_PAYMENT_PAGE = 'operaPayment';
+    static OPERA_PAYMENT_CONFIG_PAGE = 'operaPaymentConfig';
+    static OPERA_PAYMENT_OPERATION = 'Opera Payment';
+
     static ZEAL_PAYMENT_PAGE = 'zealPayment';
     static ZEAL_PAYMENT_CONFIG_PAGE = 'zealPaymentCongfig';
     static ZEAL_PAYMENT_OPERATION = 'Zeal Payment';
@@ -168,17 +176,38 @@ export class Constants {
     static ZEAL_POINTS_OPERATION = 'Zeal Points';
 
     static TABS_PAGE = 'tabs';
-    static END_POINT = '/getSuppliers';
     static SETTING = 'setting';
     static ACCOUNT_CONFIGURATION = 'configuration';
     static COST_CENTER_ACCOUNT_MAPPING = 'costCenterAccountMapping';
     static COST_CENTER_LOCATION_MAPPING = 'costCenterLocationMapping';
+    static SUPPLIERS_MAPPING = 'suppliersMapping';
     static INCLUDED_OVER_GROUPS = 'includedOverGroups';
     static USERS_CONFIGURATION = 'users';
     static SYNC_JOBS = 'syncjobs';
     static OPERATION_TYPES = 'operationTypesConfiguration';
     static SYNC_TYPE_SCHEDULER = "Suppliers";
     static EXPORTED_FILES_PAGE = 'exportedFiles';
+
+    //////////////////////////////////////////////// Manage Application  //////////////////////////////////////////////
+
+    static LOYALTY = 'loyalty';
+    static MANAGE_COMPANIES = 'manageCompanies';
+    static MANAGE_GROUPS = "manageGroups";
+    static MANAGE_USERS = 'manageUsers';
+    static MANAGE_ACTIVITIES = 'managActivities';
+
+    static GET_APP_COMPANIES_URL = environment.apiHost + '/getApplicationCompanies';
+    static ADD_APP_COMPANY_URL = environment.apiHost + '/addApplicationCompany';
+    static Delete_APP_COMPANIES_URL = environment.apiHost + '/deleteApplicationCompanies';
+
+    static GET_APP_GROUPS_URL = environment.apiHost + '/getApplicationGroups';
+    static ADD_APP_GROUP_URL = environment.apiHost + '/addApplicationGroup';
+    static Delete_APP_GROUPS_URL = environment.apiHost + '/deleteApplicationGroups';
+
+    static GET_APP_USERS_URL = environment.apiHost + '/getApplicationUsers';
+    static ADD_APP_USER_URL = environment.apiHost + '/addApplicationUser';
+    static Delete_APP_USERS_URL = environment.apiHost + '/deleteApplicationUsers';
+
     //////////////////////////////////////////////// Export To Excel //////////////////////////////////////////////
 
     static EXPORT_APPROVED_INVOICES = environment.apiHost + '/invoices/export/excel';
@@ -191,14 +220,9 @@ export class Constants {
 
     //////////////////////////////////////////////// Export To CSV //////////////////////////////////////////////
 
-    static EXPORT_CSV_APPROVED_INVOICES = environment.apiHost + '/invoices/export/csv';
-    static EXPORT_CSV_CREDIT_NOTES = environment.apiHost + '/invoices/export/csv';
-    static EXPORT_CSV_BOOKED_TRANSFERS = environment.apiHost + '/transfers/export/csv';
-    static EXPORT_CSV_BOOKED_PRODUCTION = environment.apiHost + '/bookedProduction/export/csv';
-    static EXPORT_CSV_CONSUMPTION = environment.apiHost + '/consumption/export/csv';
-    static EXPORT_CSV_WATAGE = environment.apiHost + '/wastage/export/csv';
-    static EXPORT_CSV_SALES = environment.apiHost + '/sales/export/csv';
-    static GENERATE_SINGLE_FILE_SALES = environment.apiHost + '/sales/export/generateSingleFile';
+    static EXPORT_Excel = environment.apiHost + '/export/excel';
+    static EXPORT_CSV = environment.apiHost + '/export/csv';
+    static GENERATE_SINGLE_FILE_SALES = environment.apiHost + '/generateSingleFile';
     static LIST_SYNC_FILE_SALES = environment.apiHost + '/listSyncFiles';
 
     //////////////////////////////////////////////// ERD //////////////////////////////////////////////

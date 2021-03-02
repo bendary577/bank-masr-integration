@@ -18,6 +18,8 @@ import { AddMajorGroupChildComponent } from '../addMajorGroupChild/add-major-gro
 import { GeneralSettings } from 'src/app/models/GeneralSettings';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 import { ServiceCharge } from 'src/app/models/ServiceCharge';
+import { SalesStatistics } from 'src/app/models/SalesStatistics';
+import { AddSalesStatisticsComponent } from '../add-sales-statistics/add-sales-statistics.component';
 
 
 @Component({
@@ -30,6 +32,8 @@ export class PosSalesInforConfigurationComponent implements OnInit {
   save_loading = false;
   analysis = [];
   analysisCodes = ["1","2","3","4","5","6","7","8","9","10"];
+  statistics: SalesStatistics[] = [];
+  newStatistics : SalesStatistics = new SalesStatistics();
 
   newMajorGroup: MajorGroup = new MajorGroup();
   majorGroups = []
@@ -77,7 +81,8 @@ export class PosSalesInforConfigurationComponent implements OnInit {
       this.majorGroups = this.syncJobType.configuration.salesConfiguration["majorGroups"];
       this.serviceCharges = this.syncJobType.configuration.salesConfiguration["serviceCharges"];
       this.analysis = this.syncJobType.configuration["analysis"];
-      // this.revenueCenters = this.syncJobType.configuration.salesConfiguration["revenueCenters"];
+      this.statistics = this.syncJobType.configuration.salesConfiguration["statistics"];
+
       this.loading = false;
     }).catch(err => {
       console.log({
@@ -398,7 +403,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
         }).catch(err => {
           this.spinner.hide();
           this.loading = false;
-          this.majorGroups.pop();
+          this.serviceCharges.pop();
           this.newServiceCharge = new ServiceCharge();
 
           let message = "";
@@ -423,6 +428,65 @@ export class PosSalesInforConfigurationComponent implements OnInit {
     });
   }
 
+  openStatisticsDialog(){
+    const dialogRef = this.dialog.open(AddSalesStatisticsComponent, {
+      width: '550px',
+      data: {generalSettings: this.generalSettings}
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        console.log(res)
+        this.spinner.show();
+        this.loading = true;
+
+        this.newStatistics.checked = true;
+        this.newStatistics.NoChecksAccount = res.NoChecksAccount;
+        this.newStatistics.NoGuestAccount = res.NoGuestAccount;
+        this.newStatistics.NoTablesAccount = res.NoTablesAccount;
+        this.newStatistics.location = res.location;
+
+        this.statistics.push(this.newStatistics);
+
+        this.salesService.addSalesStatistics(this.statistics, this.syncJobType.id).toPromise().then(result => {
+          this.newStatistics = new SalesStatistics()
+
+          this.snackBar.open(result["message"], null, {
+            duration: 2000,
+            horizontalPosition: 'right',
+            panelClass:"my-snack-bar-success"
+          });
+
+          this.spinner.hide();
+          this.loading = false;
+
+        }).catch(err => {
+          this.spinner.hide();
+          this.loading = false;
+          this.statistics.pop();
+          this.newStatistics = new SalesStatistics();
+
+          let message = "";
+          if(err.status === 401){
+             message = ErrorMessages.SESSION_EXPIRED;
+            this.sidNav.Logout();
+          } else if (err.error.message){
+            message = err.error.message;
+          } else if (err.message){
+            message = err.message;
+          } else {
+            message = 'Can not add new statistic now, please try again.';
+          }
+
+          this.snackBar.open(message , null, {
+            duration: 3000,
+            horizontalPosition: 'right',
+            panelClass:"my-snack-bar-fail"
+          });
+        });
+      }
+    });
+  }
 
   onCancelClick() {
     this.router.navigate([Constants.SYNC_JOBS]);

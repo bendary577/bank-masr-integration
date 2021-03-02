@@ -31,9 +31,6 @@ export class OperationTypesConfigurationComponent implements OnInit {
 
     this.operationTypeService.getOperationTypes().toPromise().then((res: any) => {
       this.operationTypes = res;
-      console.log({
-        operationTypes: this.operationTypes
-      })
       this.spinner.hide();
       this.loading = false
 
@@ -61,8 +58,11 @@ export class OperationTypesConfigurationComponent implements OnInit {
 
     if (operationType.name == Constants.ZEAL_POINTS_OPERATION) {
       this.router.navigate([Constants.ZEAL_POINTS_CONFIG_PAGE]);
-      }
-  
+    }
+
+    if (operationType.name == Constants.OPERA_PAYMENT_OPERATION) {
+      this.router.navigate([Constants.OPERA_PAYMENT_CONFIG_PAGE]);
+    }
   }
 
 }

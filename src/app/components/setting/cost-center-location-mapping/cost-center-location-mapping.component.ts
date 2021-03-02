@@ -9,7 +9,6 @@ import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
 import { AddLocationComponent } from '../../add-location/add-location.component';
 import { CostCenter } from 'src/app/models/CostCenter';
 import { AddRevenueCenterComponent } from '../../add-revenue-center/add-revenue-center.component';
-import { PosSalesService } from 'src/app/services/posSales/pos-sales.service';
 
 @Component({
   selector: 'app-cost-center-location-mapping',
@@ -47,7 +46,7 @@ export class CostCenterLocationMappingComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService, public snackBar: MatSnackBar, 
     private generalSettingsService:GeneralSettingsService, private sidNav: SidenavResponsive,
-    public dialog: MatDialog, private salesService:PosSalesService) {
+    public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -172,7 +171,7 @@ export class CostCenterLocationMappingComponent implements OnInit {
         this.generalSettings.revenueCenters.push(this.newRevenueCenter);
 
         this.generalSettingsService.updateGeneralSettings(this.generalSettings).then(result => {
-          this.newLocation = new CostCenter();  
+          this.newRevenueCenter = new CostCenter();  
           this.loading = false;
 
           this.snackBar.open("Add revenue center successfully.", null, {

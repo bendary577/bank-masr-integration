@@ -30,4 +30,9 @@ export class SupplierService {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_SUPPLIERS_GROUPS_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
+
+  fetchSuppliers() {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get(Constants.FETCH_SUPPLIERS, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
 }
