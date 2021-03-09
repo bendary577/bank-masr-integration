@@ -58,6 +58,17 @@
 
                         <ngx-datatable-column name="Location">
                             <ng-template let-row="row" ngx-datatable-cell-template>
+                                <div *ngIf="row.location">
+                                    {{row.location.locationName}}
+                                </div>
+                                <div *ngIf="!row.location">
+                                    No Location
+                                </div>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Location">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
                                 <mat-select matInput id="location" name="location" placeholder="Location" [(ngModel)]="row.location">
                                     <mat-option [value]=loc *ngFor="let loc of locations">
                                         {{loc.locationName}}</mat-option>
