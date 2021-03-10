@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { AddMajorGroupComponent } from './add-major-group.component';
 
@@ -6,7 +6,7 @@ describe('AddMajorGroupComponent', () => {
   let component: AddMajorGroupComponent;
   let fixture: ComponentFixture<AddMajorGroupComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AddMajorGroupComponent ]
     })
