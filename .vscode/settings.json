@@ -1,7 +1,3 @@
 {
-<<<<<<< HEAD
-    "git.ignoreLimitWarning": true
-=======
     "tslint.enable": false
->>>>>>> 9b7da2c5512701d236c07f84539fb28ff55fce6a
 }
