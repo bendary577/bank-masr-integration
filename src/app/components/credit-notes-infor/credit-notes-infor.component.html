@@ -10,7 +10,7 @@
           </option>
     </select>
 
-    <button mat-flat-button (click)="exportToCSV()" [disabled]="jobs.length == 0">Export to CSV</button>
+    <!-- <button mat-flat-button (click)="exportToCSV()" [disabled]="jobs.length == 0">Export to CSV</button> -->
     <button mat-flat-button (click)="generateSingleFile()" [disabled]="jobs.length == 0">Generate Single File</button>
     <button mat-flat-button (click)="getCreditNoteSyncJob()" [disabled]="staticgetCreditNoteLoading">Sync Credit Notes Now</button>
 </div>

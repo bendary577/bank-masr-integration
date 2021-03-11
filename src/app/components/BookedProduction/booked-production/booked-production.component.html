@@ -9,7 +9,7 @@
             <p *ngIf="job.rowsFetched == 0">- No new data fetched.</p>
           </option>
     </select>
-    <button mat-flat-button (click)="exportToCSV()" [disabled]="jobs.length == 0">Export to CSV</button>
+    <!-- <button mat-flat-button (click)="exportToCSV()" [disabled]="jobs.length == 0">Export to CSV</button> -->
     <button mat-flat-button (click)="generateSingleFile()" [disabled]="jobs.length == 0">Generate Single File</button>
     <button mat-flat-button (click)="getBookedProductionSyncJob()" [disabled]="getBookedProductionLoading">Sync Booked Production Now</button>
 </div>

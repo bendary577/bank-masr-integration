@@ -96,7 +96,7 @@
     <ngx-datatable class="material" [loadingIndicator]="reportsList.showLoading" [messages]="reportsList.messages" 
     [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
      [rows]="reportsList.reportsData" [selected]="reportsList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
-    [displayCheck]="displayCheck" (select)='onSelect($event)' [scrollbarH]="true">
+     [scrollbarH]="true">
 
         <ngx-datatable-column name="Name">
             <ng-template let-row="row" ngx-datatable-cell-template>

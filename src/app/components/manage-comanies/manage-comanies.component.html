@@ -8,7 +8,7 @@
     <ngx-datatable class="material" [loadingIndicator]="companiesList.showLoading" [messages]="companiesList.messages" 
     [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
      [rows]="companiesList.companiesData" [selected]="companiesList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
-    [displayCheck]="displayCheck" (select)='onSelect($event)' [scrollbarH]="true">
+    (select)='onSelect($event)' [scrollbarH]="true">
 
         <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
         <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
