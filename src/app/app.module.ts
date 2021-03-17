@@ -117,6 +117,8 @@ import { AddAppCompanyComponent } from './components/add-app-company/add-app-com
 import { AddAppGroupComponent } from './components/add-app-group/add-app-group.component';
 import { AddAppUserComponent } from './components/add-app-user/add-app-user.component';
 import { ActivitiesComponent } from './components/activities/activities.component';
+import { WlsIntegrationConfigComponent } from './components/wls-integration-config/wls-integration-config.component';
+import { WlsIntegrationComponent } from './components/wls-integration/wls-integration.component';
 
 @NgModule({
   declarations: [
@@ -198,7 +200,9 @@ import { ActivitiesComponent } from './components/activities/activities.componen
     AddAppCompanyComponent,
     AddAppGroupComponent,
     AddAppUserComponent,
-    ActivitiesComponent
+    ActivitiesComponent,
+    WlsIntegrationConfigComponent,
+    WlsIntegrationComponent
   ],
   imports: [
     BrowserModule,

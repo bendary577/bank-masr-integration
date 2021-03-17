@@ -154,6 +154,10 @@ export class Constants {
     static MENU_ITEMS_PAGE = 'menuItems';
     static MENU_ITEMS_CONFIG_PAGE = 'menuItemsConfig';
     static MENU_ITEMS_SYNC = 'Menu Items';
+    
+    static RESERVATION_PAGE = '2wLsIntegration';
+    static RESERVATION_CONFIG_PAGE = '2wLsIntegration';
+    static RESERVATION_SYNC = '2wLsIntegration';
 
     static CREATE_ORDER_PAGE = 'createCheck';
     static CREATE_ORDER_CONFIG_PAGE = 'createCheckConfig';

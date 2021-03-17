@@ -1,0 +1,140 @@
+<h3>Menu Items</h3>
+
+
+<div class="header">
+    <span class="history"> Sync Job History </span>
+
+    <select class="custom-select" (change)="getSyncJobData()" [(ngModel)]="selectedJob">
+        <option [ngValue]="job" *ngFor="let job of jobs">
+            {{job.creationDate}} - {{job.status}}</option>
+    </select>
+    <button mat-flat-button (click)="getMenuItemsSyncJob()">Sync Reservation Now</button>
+</div>
+
+<br>
+
+<div *ngIf="selectedJob">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <mat-card-title class="title">Sync Details</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-list-item>
+                <span class="key">Sync Number: </span>
+                <span class="value" *ngIf="selectedJob.id">{{selectedJob.id}}</span>
+                <span class="value" *ngIf="!selectedJob.id">No Info</span>
+            </mat-list-item>
+            <mat-list-item>
+                <span class="key">Sync status: </span>
+                <span class="value" *ngIf="selectedJob.status">{{selectedJob.status}}</span>
+                <span class="value" *ngIf="!selectedJob.status">No Info</span>
+            </mat-list-item>
+            <mat-list-item>
+                <span class="key">Start Date: </span>
+                <span class="value" *ngIf="selectedJob.creationDate">{{selectedJob.creationDate}}</span>
+                <span class="value" *ngIf="!selectedJob.creationDate">No Info</span>
+            </mat-list-item>
+            <mat-list-item>
+                <span class="key">End Date: </span>
+                <span class="value" *ngIf="selectedJob.endDate">{{selectedJob.endDate}}</span>
+                <span class="value" *ngIf="!selectedJob.endDate">No Info</span>
+            </mat-list-item>
+            <mat-list-item>
+                <span class="key">Reason: </span>
+                <span class="value" *ngIf="selectedJob.reason">{{selectedJob.reason}}</span>
+                <span class="value" *ngIf="!selectedJob.reason">No Info</span>
+            </mat-list-item>
+            <mat-list-item *ngIf="!reservation.length">
+                <span>
+                There was no new data to sync in this job, You can sync Menu Items now from <a (click)="getMenuItemsSyncJob()">here</a>
+            </span>
+            </mat-list-item>
+        </mat-card-content>
+    </mat-card>
+</div>
+<br>
+
+<div>
+    <div>
+        <div *ngIf="!jobs.length">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <mat-card-title>No Data</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>
+                        There was no new data to sync in this job, You can sync Menu Items now from
+                        <a (click)="getMenuItemsSyncJob()">here</a>
+                    </p>
+
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="main" *ngIf="reservation.length">
+            <ngx-datatable class="material" [rows]="reservation" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
+                <!-- <ngx-datatable-column name="Status">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.status}}
+                    </ng-template>
+                </ngx-datatable-column> -->
+                <!-- <ngx-datatable-column name="Reason">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.reason}}
+                    </ng-template>
+                </ngx-datatable-column> -->
+
+                <ngx-datatable-column name="Guest ID">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.reservation.guestId}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Name">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.reservation.name}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Persons Number">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.reservation.personsNumber}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Start From">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.reservation.fromDate}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="End In">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.reservation.toDate}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Web Site">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.reservation.website}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Phone Number">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.reservation.phone}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="nationality">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.reservation.nationality}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+            </ngx-datatable>
+        </div>
+    </div>
+    <ngx-spinner></ngx-spinner>
+
+</div>

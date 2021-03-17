@@ -49,6 +49,8 @@ import { ManageGroupsComponent } from './components/manage-groups/manage-groups.
 import { ManageUsersComponent } from './components/manage-users/manage-users.component';
 import { LoyaltyComponent } from './components/loyalty/loyalty.component';
 import { ActivitiesComponent } from './components/activities/activities.component';
+import { WlsIntegrationComponent } from './components/wls-integration/wls-integration.component';
+import { WlsIntegrationConfigComponent } from './components/wls-integration-config/wls-integration-config.component';
 
 
 const routes: Routes = [
@@ -106,6 +108,9 @@ const routes: Routes = [
 
   { path: Constants.MENU_ITEMS_PAGE , component: MenuItemsComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MENU_ITEMS_CONFIG_PAGE , component: MenuItemsConfigurationComponent ,canActivate:[AuthGuardService]},
+
+  { path: Constants.RESERVATION_PAGE , component: WlsIntegrationComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.RESERVATION_CONFIG_PAGE , component: WlsIntegrationConfigComponent ,canActivate:[AuthGuardService]},
 
   { path: Constants.CREATE_ORDER_PAGE , component: CreateOrderComponent ,canActivate:[AuthGuardService]},
   { path: Constants.CREATE_ORDER_CONFIG_PAGE , component: CreateOrderConfigComponent ,canActivate:[AuthGuardService]},
