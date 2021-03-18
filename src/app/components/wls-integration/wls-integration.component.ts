@@ -7,48 +7,68 @@ import { MenuItemsService } from 'src/app/services/menuItems/menu-items.service'
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { MenuItemsComponent } from '../menu-items/menu-items.component';
 import { SyncJob } from 'src/app/models/SyncJob';
-
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap'; 
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DilogServiceService } from '../dialog/dilog-service.service';
 @Component({
   selector: 'app-wls-integration',
   templateUrl: './wls-integration.component.html',
   styleUrls: ['./wls-integration.component.scss']
 })
 export class WlsIntegrationComponent implements OnInit {
+  static getReservationLodign = false;
   loading = true;
   success = null;
   jobs = [];
   reservation = [];
   selectedJob :SyncJob = null;
   state = "";
+  transaction: any;
 
   constructor(private spinner: NgxSpinnerService, private syncJobService: SyncJobService,
-    public snackBar: MatSnackBar, private menuItemService: MenuItemsService) { }
+    public snackBar: MatSnackBar, private menuItemService: MenuItemsService,
+    public dialogService: DilogServiceService) { }
 
   ngOnInit() {
+    this.callTransactionService();
     this.getSyncJobs(Constants.RESERVATION_SYNC);
+    this.state = localStorage.getItem('getReservationLodign');
+    if (this.state == "true") {
+      WlsIntegrationComponent.getReservationLodign = true;
+    } else {
+      WlsIntegrationComponent.getReservationLodign = false;
+    }
   }
 
-  getMenuItemsSyncJob() {
-    // localStorage.setItem('getMenuItemsLoading', "true");
-    // MenuItemsComponent.getMenuItemsLoading = true;
-    // this.menuItemService.getMenuItems().toPromise().then((res: any) => {
-    //   this.getSyncJobs(Constants.MENU_ITEMS_SYNC);
+  openModal() {
+    this.dialogService.openModal(this.transaction);
+  }
+  
+  get staticgetMenuItemsLoading() {
+    return WlsIntegrationComponent.getReservationLodign ;
+  }
 
-    //   localStorage.setItem('getMenuItemsLoading', "false");
-    //   MenuItemsComponent.getMenuItemsLoading = false;
-    //   this.snackBar.open(res.message, null, {
-    //     duration: 2000,
-    //     horizontalPosition: 'center',
-    //     panelClass:"my-snack-bar-success"
-    //   });
+  callTransactionService(){
+    this.menuItemService.getTransaction().toPromise().then((res: any) => {
+      this.transaction = res;
+    });
+  }
 
+  getReservationSyncJob() {
+    localStorage.setItem('getReservationLodign', "true");
+    this.menuItemService.syncExcel().toPromise().then((res: any) => {
+
+      localStorage.setItem('getReservationLodign', "false");
+      this.snackBar.open(res.message, null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-success"
+      });
+    });    
     // }).catch(err => {
-    //   this.getSyncJobs(Constants.MENU_ITEMS_SYNC);
-
-    //   localStorage.setItem('getMenuItemsLoading', "false");
-
-    //   MenuItemsComponent.getMenuItemsLoading = false;
-
+    //   console.log("catch");
+      
+    //   localStorage.setItem('getReservationLodign', "false");
     //   let msg = "";
     //   if (err.error.message) {
     //     msg = err.error.message ;

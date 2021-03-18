@@ -119,6 +119,7 @@ import { AddAppUserComponent } from './components/add-app-user/add-app-user.comp
 import { ActivitiesComponent } from './components/activities/activities.component';
 import { WlsIntegrationConfigComponent } from './components/wls-integration-config/wls-integration-config.component';
 import { WlsIntegrationComponent } from './components/wls-integration/wls-integration.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -202,7 +203,8 @@ import { WlsIntegrationComponent } from './components/wls-integration/wls-integr
     AddAppUserComponent,
     ActivitiesComponent,
     WlsIntegrationConfigComponent,
-    WlsIntegrationComponent
+    WlsIntegrationComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -250,7 +252,7 @@ import { WlsIntegrationComponent } from './components/wls-integration/wls-integr
       AddSimphonyLocationComponent, AddWebServiceInvokerComponent, AddLocationComponent,
       AddMajorGroupChildComponent, AddSalesStatisticsComponent, AddSupplierComponent,
     // Loyalty
-    AddAppCompanyComponent, AddAppGroupComponent, AddAppUserComponent
+    AddAppCompanyComponent, AddAppGroupComponent, AddAppUserComponent, DialogComponent
     ]
 })
 export class AppModule { }

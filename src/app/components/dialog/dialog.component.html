@@ -1,0 +1,39 @@
+<div class="custom-dialog {{modalType}}">
+	<h2 mat-dialog-title>{{modalTitle}}</h2>
+	<mat-dialog-content>
+		<table>
+			<tr>
+				<th>purchaseCode</th>
+				<th>{{modalMessage.purchaseCode}}</th>
+			</tr>
+			<tr>
+				<th>customerCard </th>
+				<th>{{modalMessage.customerCard}}</th>
+			</tr>
+			<tr>
+				<th>attendantCard</th>
+				<th>{{modalMessage.attendantCard}}</th>
+			</tr>
+			<tr>
+				<th>hotelID</th>
+				<th>{{modalMessage.hotelID}}</th>
+			</tr>
+			<tr>
+				<th>transactionDate</th>
+				<th>{{modalMessage.transactionDate}}</th>
+			</tr>
+			<tr>
+				<th>transactionType</th>
+				<th>{{modalMessage.transactionType}}</th>
+			</tr>
+			<tr>
+				<th>transactionSource</th>
+				<th>{{modalMessage.transactionSource}}</th>
+			</tr>
+		</table>
+	</mat-dialog-content>
+
+	<mat-dialog-actions>
+		<button mat-raised-button color="warn" [mat-dialog-close]="true">Close</button>
+	</mat-dialog-actions>
+</div>

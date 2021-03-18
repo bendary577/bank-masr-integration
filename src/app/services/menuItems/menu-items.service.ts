@@ -17,6 +17,16 @@ export class MenuItemsService {
     return this.http.get(Constants.GET_MENU_ITEMS_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
+  syncExcel() {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.post(Constants.SYNC_EXCEL_URL, { });
+  }
+
+  getTransaction() {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get(Constants.Get_Transaction_URL, { });
+  }
+
   addSimphonyLocation(locations: SimphonyLocation[]) {
     this.token = localStorage.getItem('auth_token');
     return this.http.post(Constants.ADD_SIMPHONY_LOCATION_URL, locations, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
