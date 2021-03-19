@@ -120,6 +120,8 @@ import { ActivitiesComponent } from './components/activities/activities.componen
 import { WlsIntegrationConfigComponent } from './components/wls-integration-config/wls-integration-config.component';
 import { WlsIntegrationComponent } from './components/wls-integration/wls-integration.component';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
+
 
 @NgModule({
   declarations: [
@@ -233,6 +235,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
     FormsModule,
     MatProgressBarModule,
     ShowHidePasswordModule,
+    NgxJsonViewerModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, 
     CookieService, 
@@ -252,7 +255,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
       AddSimphonyLocationComponent, AddWebServiceInvokerComponent, AddLocationComponent,
       AddMajorGroupChildComponent, AddSalesStatisticsComponent, AddSupplierComponent,
     // Loyalty
-    AddAppCompanyComponent, AddAppGroupComponent, AddAppUserComponent, DialogComponent
+    AddAppCompanyComponent, AddAppGroupComponent, AddAppUserComponent, DialogComponent, 
     ]
 })
 export class AppModule { }

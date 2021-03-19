@@ -19,12 +19,12 @@ export class MenuItemsService {
 
   syncExcel() {
     this.token = localStorage.getItem('auth_token');
-    return this.http.post(Constants.SYNC_EXCEL_URL, { });
+    return this.http.post(Constants.SYNC_EXCEL_URL, null,{ headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
   getTransaction() {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get(Constants.Get_Transaction_URL, { });
+    return this.http.get(Constants.Get_Transaction_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
   addSimphonyLocation(locations: SimphonyLocation[]) {

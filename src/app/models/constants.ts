@@ -92,8 +92,8 @@ export class Constants {
     static GET_MENU_ITEMS_URL = environment.apiHost + '/SyncSimphonyMenuItems';
     static ADD_SIMPHONY_LOCATION_URL = environment.apiHost + '/addSimphonyLocation';
 
-    static SYNC_EXCEL_URL = environment.apiHost + '/reservation/syncExcel';
-    static Get_Transaction_URL = environment.apiHost + '/reservation/getTransaction';
+    static SYNC_EXCEL_URL = environment.apiHost + '/2wlsIntegration/syncExcel';
+    static Get_Transaction_URL = environment.apiHost + '/2wlsIntegration/getTransaction';
     
     // General Settings
     static GET_GENERAL_SETTINGS_URL = environment.apiHost + '/getGeneralSettings';

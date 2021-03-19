@@ -8,9 +8,14 @@
         <option [ngValue]="job" *ngFor="let job of jobs">
             {{job.creationDate}} - {{job.status}}</option>
     </select>
-    <button mat-flat-button (click)="openModal()">Call Transaction Service</button>
-    <button mat-flat-button (click)="getReservationSyncJob()">Sync Reservation Now</button>
+    <button mat-flat-button (click)="openModal()">Call 2wls</button>
+    <button mat-flat-button (click)="getReservationSyncJob()">Sync Reservation Data</button>
 
+</div>
+<br>
+
+<div id="myProgress">
+    <mat-progress-bar mode="indeterminate" *ngIf="staticgetReservationLoading"></mat-progress-bar>
 </div>
 
 <br>
