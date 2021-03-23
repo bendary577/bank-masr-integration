@@ -6,6 +6,7 @@ import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SyncJob } from 'src/app/models/SyncJob';
 import { NewBookingReportService } from 'src/app/services/newBookingReport/new-booking-report.service';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
+import { DilogServiceService } from '../dialog/dilog-service.service';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 
 @Component({
@@ -41,7 +42,8 @@ export class NewBookingReportComponent implements OnInit {
 
 
   constructor(private spinner: NgxSpinnerService, public snackBar: MatSnackBar,
-    private sidNav: SidenavResponsive, private syncJobService: SyncJobService,
+    private sidNav: SidenavResponsive, public dialogService: DilogServiceService,
+    private syncJobService: SyncJobService,
     private newBookingService: NewBookingReportService) { }
 
   ngOnInit(): void {
@@ -132,6 +134,10 @@ export class NewBookingReportComponent implements OnInit {
 
       this.newBookingList.showLoading = false;
     });
+  }
+
+  viewJSON(row){
+    this.dialogService.newBookingModal(row);
   }
 
 }

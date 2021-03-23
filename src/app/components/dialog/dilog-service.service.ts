@@ -11,7 +11,6 @@ export class DilogServiceService {
   openModal(transaction: any) {
     const dialogConfig = new MatDialogConfig();
 
-    // dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
         title:  "Transaction",
@@ -20,7 +19,18 @@ export class DilogServiceService {
     dialogConfig.minWidth = 400;
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {});
-  }}
-function DialogTemplateComponent(DialogTemplateComponent: any, dialogConfig: MatDialogConfig<any>) {
-  throw new Error('Function not implemented.');
+  }
+
+  newBookingModal(transaction: any) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+        title:  "New Booking",
+        message: transaction
+    };
+    dialogConfig.minWidth = 400;
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {});
+  }
 }
