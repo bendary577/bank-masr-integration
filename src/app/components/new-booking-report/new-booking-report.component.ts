@@ -86,7 +86,7 @@ export class NewBookingReportComponent implements OnInit {
     });
   }
 
-  syncNewBooking(){
+  async syncNewBooking(){
     this.newBookingList.showLoading = true;
 
     this.newBookingService.getNewBooking().toPromise().then((res: any) => {
