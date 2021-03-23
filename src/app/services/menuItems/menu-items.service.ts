@@ -19,7 +19,7 @@ export class MenuItemsService {
 
   syncExcel() {
     this.token = localStorage.getItem('auth_token');
-    return this.http.post(Constants.SYNC_EXCEL_URL, null,{ headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+    return this.http.post(Constants.SYNC_OPERA_RESERVATION_URL, null,{ headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
   getTransaction() {

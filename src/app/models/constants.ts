@@ -91,9 +91,6 @@ export class Constants {
 
     static GET_MENU_ITEMS_URL = environment.apiHost + '/SyncSimphonyMenuItems';
     static ADD_SIMPHONY_LOCATION_URL = environment.apiHost + '/addSimphonyLocation';
-
-    static SYNC_EXCEL_URL = environment.apiHost + '/2wlsIntegration/syncExcel';
-    static Get_Transaction_URL = environment.apiHost + '/2wlsIntegration/getTransaction';
     
     // General Settings
     static GET_GENERAL_SETTINGS_URL = environment.apiHost + '/getGeneralSettings';
@@ -157,10 +154,6 @@ export class Constants {
     static MENU_ITEMS_PAGE = 'menuItems';
     static MENU_ITEMS_CONFIG_PAGE = 'menuItemsConfig';
     static MENU_ITEMS_SYNC = 'Menu Items';
-    
-    static RESERVATION_PAGE = '2wLsIntegration';
-    static RESERVATION_CONFIG_PAGE = '2wLsIntegration';
-    static RESERVATION_SYNC = '2wLsIntegration';
 
     static CREATE_ORDER_PAGE = 'createCheck';
     static CREATE_ORDER_CONFIG_PAGE = 'createCheckConfig';
@@ -169,6 +162,25 @@ export class Constants {
     static OPERA_PAYMENT_PAGE = 'operaPayment';
     static OPERA_PAYMENT_CONFIG_PAGE = 'operaPaymentConfig';
     static OPERA_PAYMENT_OPERATION = 'Opera Payment';
+
+    //////////////////////////////////////////////// Opera Reports  ////////////////////////////////////////////////////////
+
+    //==> Reservation Report
+    static RESERVATION_PAGE = '2wLsIntegration';
+    static RESERVATION_CONFIG_PAGE = '2wLsIntegration';
+    static RESERVATION_SYNC = '2wLsIntegration';
+
+    static SYNC_OPERA_RESERVATION_URL = environment.apiHost + '/2wlsIntegration/syncExcel';
+    static Get_Transaction_URL = environment.apiHost + '/2wlsIntegration/getTransaction';
+
+    //==> New Booking Report
+    static NEW_BOOKING_REPORT_PAGE = 'newBookingReport';
+    static NEW_BOOKING_REPORT_CONFIG_PAGE = 'newBookingReportConfig';
+    static NEW_BOOKING_REPORT_SYNC = 'New Booking Report';
+
+    static SYNC_OPERA_NEW_BOOKING_URL = environment.apiHost + '/fetchNewBooking';
+
+    //////////////////////////////////////////////// Zeal Payment  /////////////////////////////////////////////////////////
 
     static ZEAL_PAYMENT_PAGE = 'zealPayment';
     static ZEAL_PAYMENT_CONFIG_PAGE = 'zealPaymentCongfig';
