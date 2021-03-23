@@ -121,6 +121,7 @@ import { WlsIntegrationConfigComponent } from './components/wls-integration-conf
 import { WlsIntegrationComponent } from './components/wls-integration/wls-integration.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import { NewBookingReportComponent } from './components/new-booking-report/new-booking-report.component';
 
 
 @NgModule({
@@ -206,7 +207,8 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
     ActivitiesComponent,
     WlsIntegrationConfigComponent,
     WlsIntegrationComponent,
-    DialogComponent
+    DialogComponent,
+    NewBookingReportComponent
   ],
   imports: [
     BrowserModule,

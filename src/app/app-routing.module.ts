@@ -51,6 +51,7 @@ import { LoyaltyComponent } from './components/loyalty/loyalty.component';
 import { ActivitiesComponent } from './components/activities/activities.component';
 import { WlsIntegrationComponent } from './components/wls-integration/wls-integration.component';
 import { WlsIntegrationConfigComponent } from './components/wls-integration-config/wls-integration-config.component';
+import { NewBookingReportComponent } from './components/new-booking-report/new-booking-report.component';
 
 
 const routes: Routes = [
@@ -126,6 +127,9 @@ const routes: Routes = [
   { path: Constants.OPERA_PAYMENT_CONFIG_PAGE , component: OperaPaymentConfigurationComponent ,canActivate:[AuthGuardService]},
 
   { path: Constants.EXPORTED_FILES_PAGE , component: SyncExportedFilesComponent ,canActivate:[AuthGuardService]},
+
+  { path: Constants.NEW_BOOKING_REPORT_PAGE , component: NewBookingReportComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.NEW_BOOKING_REPORT_CONFIG_PAGE , component: NewBookingReportComponent ,canActivate:[AuthGuardService]},
 
   // Error Page
   {path:'**', component: ErrorComponentComponent }

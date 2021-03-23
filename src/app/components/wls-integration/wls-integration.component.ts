@@ -12,7 +12,7 @@ import { DilogServiceService } from '../dialog/dilog-service.service';
   styleUrls: ['./wls-integration.component.scss']
 })
 export class WlsIntegrationComponent implements OnInit {
-  static getReservationLodign = false;
+  static getReservationLoding = false;
   loading = true;
   success = null;
   jobs = [];
@@ -29,9 +29,9 @@ export class WlsIntegrationComponent implements OnInit {
     this.getSyncJobs(Constants.RESERVATION_SYNC);
     this.state = localStorage.getItem('getReservationLodign');
     if (this.state == "true") {
-      WlsIntegrationComponent.getReservationLodign = true;
+      WlsIntegrationComponent.getReservationLoding = true;
     } else {
-      WlsIntegrationComponent.getReservationLodign = false;
+      WlsIntegrationComponent.getReservationLoding = false;
     }
   }
 
@@ -40,7 +40,7 @@ export class WlsIntegrationComponent implements OnInit {
   }
   
   get staticgetReservationLoading() {
-    return WlsIntegrationComponent.getReservationLodign ;
+    return WlsIntegrationComponent.getReservationLoding ;
   }
 
   callTransactionService(){
@@ -52,12 +52,12 @@ export class WlsIntegrationComponent implements OnInit {
 
   getReservationSyncJob() {
     localStorage.setItem('getReservationLodign', "true");
-    WlsIntegrationComponent.getReservationLodign = true;
+    WlsIntegrationComponent.getReservationLoding = true;
     this.menuItemService.syncExcel().toPromise().then((res: any) => {
       this.getSyncJobs(Constants.RESERVATION_SYNC);
 
       localStorage.setItem('getReservationLodign', "false");
-      WlsIntegrationComponent.getReservationLodign = false;
+      WlsIntegrationComponent.getReservationLoding = false;
       this.snackBar.open(res.message, null, {
         duration: 2000,
         horizontalPosition: 'center',
@@ -69,7 +69,7 @@ export class WlsIntegrationComponent implements OnInit {
 
       localStorage.setItem('getReservationLodign', "false");
 
-      WlsIntegrationComponent.getReservationLodign = false;
+      WlsIntegrationComponent.getReservationLoding = false;
 
       let msg = "";
       if (err.error.message) {
