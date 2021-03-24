@@ -1,7 +1,7 @@
 <mat-toolbar class="example-toolbar" *ngIf="shouldRun">
 
     <button id="target" mat-icon-button (click)="snav.toggle()"><mat-icon  color="warn" >menu</mat-icon></button>
-    <h1 class="example-app-name">Oracle Inventory Integrator</h1>
+    <h1 class="example-app-name">Opera Integration Platform</h1>
 </mat-toolbar>
 
 <div class="example-container" [class.example-is-mobile]="(mobileQuery.matches&&!shouldRun)  " [class.example-containerpc]="(!shouldRun)">
@@ -30,7 +30,7 @@
                         <a mat-list-item (click)="snav.toggle()" routerLink={{operation.endPoint}}>{{operation.name}}</a>
                     </mat-nav-list>
                 </mat-expansion-panel>
-
+<!-- 
                 <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
                     <mat-expansion-panel-header>
                         Applications
@@ -38,8 +38,7 @@
                     <mat-nav-list dense>
                         <a mat-list-item (click)="snav.toggle()" routerLink="/loyalty">Loyalty</a>
                     </mat-nav-list>
-                </mat-expansion-panel>
-
+                </mat-expansion-panel> -->
 
                 <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
                     <mat-expansion-panel-header> 

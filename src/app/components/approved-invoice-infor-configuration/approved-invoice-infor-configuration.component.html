@@ -54,6 +54,16 @@
                                 <mat-option [value]=code *ngFor="let code of analysisCodes">{{code}}</mat-option>
                             </mat-select>
                         </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-select matInput id="supplierCodeAnalysisCode" name="supplierCodeAnalysisCode" placeholder="Supplier Code Analysis Code" [(ngModel)]="syncJobType.configuration.supplierCodeAnalysisCode">
+                                <mat-option [value]=code *ngFor="let code of analysisCodes">{{code}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-select matInput id="taxesCodeAnalysisCode" name="taxesCodeAnalysisCode" placeholder="Taxes Code Analysis Code" [(ngModel)]="syncJobType.configuration.taxesCodeAnalysisCode">
+                                <mat-option [value]=code *ngFor="let code of analysisCodes">{{code}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
                     </div>
                 </form>
             </div>
@@ -91,7 +101,6 @@
                             <input matInput placeholder="Credit Account" [(ngModel)]="row.inventoryAccount">
                         </ng-template>
                     </ngx-datatable-column>
-
 
                     <ngx-datatable-column name="Debit Account">
                         <ng-template let-row="row" ngx-datatable-cell-template>

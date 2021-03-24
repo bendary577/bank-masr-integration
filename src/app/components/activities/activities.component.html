@@ -1,12 +1,124 @@
+<br>
+
+<div class="row">
+    <div class="column">
+        <mat-card class="stat-card">
+            <mat-card-content>
+                <h2>Top Users</h2>
+                <div class="row">
+                    <div class="column">
+                        <img  class="user-img" src="../../../assets/user2.jpg" alt="image">
+                        <p>Ahmed Mohamed</p>
+                    </div>                    
+                    <div class="column">
+                        <img  class="user-img" src="../../../assets/user1.jpg" alt="image">
+                        <p>Amr Mohamed</p>
+                    </div>
+                    <div class="column">
+                        <img  class="user-img" src="../../../assets/user3.jpg" alt="image">
+                        <p>Ali Mostafa</p>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="column">
+        <mat-card class="stat-card">
+            <mat-card-content>
+                <h2>Top Groups</h2>
+                <div class="row">
+                    <div class="column">
+                        <img  class="user-img" src="../../../assets/letter_o.png" alt="image">
+                        <p>Ovio</p>
+                    </div>                    
+                    <div class="column">
+                        <img  class="user-img" src="../../../assets/letter_a.png" alt="image">
+                        <p>Top Management</p>
+                    </div>
+                    <div class="column">
+                        <img  class="user-img" src="../../../assets/letter_a.png" alt="image">
+                        <p>Arab Aluminum</p>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="column">
+        <mat-card class="stat-card">
+            <mat-card-content>
+                <h2>Total Spend</h2>
+                <br>
+                
+                <form class="my-form">
+                    <div class="row">
+                        <div class="two-column" style="text-align: left;">
+                            <button class="filter-btn" mat-raised-button>Today</button>
+                            <button class="filter-btn" mat-raised-button>Last Week</button>
+                            <button class="filter-btn" mat-raised-button>Last Month</button>
+                        </div>
+                        <div class="two-column">
+                            <h3 *ngIf="filterBy=='Daily'" style="border-radius: 10px; text-align: center; height: auto;">
+                                <div>
+                                    Total spend
+                                </div>
+                                <div>
+                                    2450 EGP
+                                </div>
+                            </h3>
+
+                            <h3 *ngIf="filterBy=='Weekly'" style="border-radius: 10px; text-align: center; height: auto;">
+                                <div>
+                                    Total spend
+                                </div>
+                                <div>
+                                    4450 EGP
+                                </div>
+                            </h3>
+                            <h3 *ngIf="filterBy=='Monthly'" style="border-radius: 10px; text-align: center; height: auto;">
+                                <div>
+                                    Total spend
+                                </div>
+                                <div>
+                                    15250 EGP
+                                </div>
+                            </h3>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+
 <div class="main" >
-    <ngx-datatable class="material" [loadingIndicator]="companiesList.showLoading" [messages]="companiesList.messages" 
+    <ngx-datatable class="material" [loadingIndicator]="reportsList.showLoading" [messages]="reportsList.messages" 
     [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-     [rows]="companiesList.companiesData" [selected]="companiesList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
-    [displayCheck]="displayCheck" (select)='onSelect($event)' [scrollbarH]="true">
+     [rows]="reportsList.reportsData" [selected]="reportsList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
+     [scrollbarH]="true">
 
         <ngx-datatable-column name="Name">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                <a class="comany-name" (click)="openCompany(row)">{{row.name}}</a>
+                {{row.name}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Transaction Date">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.creationDate | date: 'dd/MM/yyyy hh:mm:ss' }}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Group">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.group}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Total Payment">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.amount}} EGP
             </ng-template>
         </ngx-datatable-column>
 
@@ -16,18 +128,12 @@
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="State">
+        <ngx-datatable-column name="After Discount">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                <label *ngIf="!row.deleted" class="active-state">active</label>
-                <label *ngIf="row.deleted" class="deleted-state">deleted</label>
+                {{row.amountAD}} EGP
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Creation Date">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.creationDate | date: 'dd/MM/yyyy hh:mm:ss' }}
-            </ng-template>
-        </ngx-datatable-column>
     </ngx-datatable>
 </div>
 

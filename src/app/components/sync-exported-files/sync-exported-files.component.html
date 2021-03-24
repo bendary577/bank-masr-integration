@@ -1,12 +1,12 @@
 <div class="header">
-    <button mat-flat-button (click)="openTenderDialog()">Download</button>
+    <!-- <button mat-flat-button (click)="openTenderDialog()">Download</button> -->
 </div>
 
 <div>
     <ngx-datatable class="material" [loadingIndicator]="filesList.showLoading" [messages]="filesList.messages" 
     [sortType]="'multi'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [rows]="filesList.usersData" 
     [columnMode]="'force'" [selected]="filesList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
-    [displayCheck]="displayCheck" (activate)="onActivate($event)" (select)='onSelect($event)' [scrollbarH]="true">
+     (select)='onSelect($event)' [scrollbarH]="true">
 
         <ngx-datatable-column [width]="100" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
             <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">

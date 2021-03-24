@@ -48,6 +48,10 @@ import { ManageComaniesComponent } from './components/manage-comanies/manage-com
 import { ManageGroupsComponent } from './components/manage-groups/manage-groups.component';
 import { ManageUsersComponent } from './components/manage-users/manage-users.component';
 import { LoyaltyComponent } from './components/loyalty/loyalty.component';
+import { ActivitiesComponent } from './components/activities/activities.component';
+import { WlsIntegrationComponent } from './components/wls-integration/wls-integration.component';
+import { WlsIntegrationConfigComponent } from './components/wls-integration-config/wls-integration-config.component';
+import { NewBookingReportComponent } from './components/new-booking-report/new-booking-report.component';
 
 
 const routes: Routes = [
@@ -71,6 +75,7 @@ const routes: Routes = [
   { path: Constants.MANAGE_COMPANIES, component: ManageComaniesComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MANAGE_GROUPS, component: ManageGroupsComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MANAGE_USERS, component: ManageUsersComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.MANAGE_ACTIVITIES, component: ActivitiesComponent ,canActivate:[AuthGuardService]},
 
   // Pages
   { path: Constants.LOGIN_PAGE, component: LoginComponent},
@@ -105,6 +110,9 @@ const routes: Routes = [
   { path: Constants.MENU_ITEMS_PAGE , component: MenuItemsComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MENU_ITEMS_CONFIG_PAGE , component: MenuItemsConfigurationComponent ,canActivate:[AuthGuardService]},
 
+  { path: Constants.RESERVATION_PAGE , component: WlsIntegrationComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.RESERVATION_CONFIG_PAGE , component: WlsIntegrationConfigComponent ,canActivate:[AuthGuardService]},
+
   { path: Constants.CREATE_ORDER_PAGE , component: CreateOrderComponent ,canActivate:[AuthGuardService]},
   { path: Constants.CREATE_ORDER_CONFIG_PAGE , component: CreateOrderConfigComponent ,canActivate:[AuthGuardService]},
   
@@ -120,6 +128,9 @@ const routes: Routes = [
 
   { path: Constants.EXPORTED_FILES_PAGE , component: SyncExportedFilesComponent ,canActivate:[AuthGuardService]},
 
+  { path: Constants.NEW_BOOKING_REPORT_PAGE , component: NewBookingReportComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.NEW_BOOKING_REPORT_CONFIG_PAGE , component: NewBookingReportComponent ,canActivate:[AuthGuardService]},
+
   // Error Page
   {path:'**', component: ErrorComponentComponent }
 
@@ -127,7 +138,7 @@ const routes: Routes = [
 
 @NgModule({
 
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

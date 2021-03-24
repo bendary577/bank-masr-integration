@@ -23,6 +23,7 @@ export class CreateOrderComponent implements OnInit {
   operations = [];
   operationData = [];
   data = [];
+  menuItems = [];
   selectedOperation: Operation = null;
   state = "";
 
@@ -59,7 +60,7 @@ export class CreateOrderComponent implements OnInit {
     this.operationService.getOperationDataById(this.selectedOperation["id"]).toPromise().then((res: any) => {
       this.operationData = [res];
       this.data = res["data"];
-
+      this.menuItems = this.data["menuItems"];
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {NgModule, ElementRef, ChangeDetectorRef} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -117,6 +117,12 @@ import { AddAppCompanyComponent } from './components/add-app-company/add-app-com
 import { AddAppGroupComponent } from './components/add-app-group/add-app-group.component';
 import { AddAppUserComponent } from './components/add-app-user/add-app-user.component';
 import { ActivitiesComponent } from './components/activities/activities.component';
+import { WlsIntegrationConfigComponent } from './components/wls-integration-config/wls-integration-config.component';
+import { WlsIntegrationComponent } from './components/wls-integration/wls-integration.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import { NewBookingReportComponent } from './components/new-booking-report/new-booking-report.component';
+
 
 @NgModule({
   declarations: [
@@ -198,7 +204,11 @@ import { ActivitiesComponent } from './components/activities/activities.componen
     AddAppCompanyComponent,
     AddAppGroupComponent,
     AddAppUserComponent,
-    ActivitiesComponent
+    ActivitiesComponent,
+    WlsIntegrationConfigComponent,
+    WlsIntegrationComponent,
+    DialogComponent,
+    NewBookingReportComponent
   ],
   imports: [
     BrowserModule,
@@ -227,14 +237,15 @@ import { ActivitiesComponent } from './components/activities/activities.componen
     FormsModule,
     MatProgressBarModule,
     ShowHidePasswordModule,
+    NgxJsonViewerModule
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},
-    CookieService,
-    AuthService,
-    InvoiceService,
-    AlertsService,
-    Data,
-    AuthGuardService,
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, 
+    CookieService, 
+    AuthService, 
+    InvoiceService, 
+    AlertsService, 
+    Data, 
+    AuthGuardService, 
     SidenavResponsive,
     ExcelService,
   CsvService,
@@ -242,11 +253,11 @@ import { ActivitiesComponent } from './components/activities/activities.componen
   bootstrap: [AppComponent],
   entryComponents: [AddUserComponent, AddAccountComponent, AddMajorGroupComponent, AddTenderComponent,
      AddTaxComponent, AddDiscountComponent, AddRevenueCenterComponent, AddServiceChargeComponent,
-      SuppliersConfiguartionComponent, SchedulerConfigurationComponent, AddTenderChildComponent,
+      SuppliersConfiguartionComponent, SchedulerConfigurationComponent, AddTenderChildComponent, 
       AddSimphonyLocationComponent, AddWebServiceInvokerComponent, AddLocationComponent,
       AddMajorGroupChildComponent, AddSalesStatisticsComponent, AddSupplierComponent,
     // Loyalty
-    AddAppCompanyComponent, AddAppGroupComponent, AddAppUserComponent
+    AddAppCompanyComponent, AddAppGroupComponent, AddAppUserComponent, DialogComponent, 
     ]
 })
 export class AppModule { }

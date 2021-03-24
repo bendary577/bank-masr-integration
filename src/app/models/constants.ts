@@ -91,7 +91,7 @@ export class Constants {
 
     static GET_MENU_ITEMS_URL = environment.apiHost + '/SyncSimphonyMenuItems';
     static ADD_SIMPHONY_LOCATION_URL = environment.apiHost + '/addSimphonyLocation';
-
+    
     // General Settings
     static GET_GENERAL_SETTINGS_URL = environment.apiHost + '/getGeneralSettings';
     static UPDATE_GENERAL_SETTINGS_URL = environment.apiHost + '/updateGeneralSettings';
@@ -163,6 +163,25 @@ export class Constants {
     static OPERA_PAYMENT_CONFIG_PAGE = 'operaPaymentConfig';
     static OPERA_PAYMENT_OPERATION = 'Opera Payment';
 
+    //////////////////////////////////////////////// Opera Reports  ////////////////////////////////////////////////////////
+
+    //==> Reservation Report
+    static RESERVATION_PAGE = '2wLsIntegration';
+    static RESERVATION_CONFIG_PAGE = '2wLsIntegration';
+    static RESERVATION_SYNC = '2wLsIntegration';
+
+    static SYNC_OPERA_RESERVATION_URL = environment.apiHost + '/2wlsIntegration/syncExcel';
+    static Get_Transaction_URL = environment.apiHost + '/2wlsIntegration/getTransaction';
+
+    //==> New Booking Report
+    static NEW_BOOKING_REPORT_PAGE = 'newBookingReport';
+    static NEW_BOOKING_REPORT_CONFIG_PAGE = 'newBookingReportConfig';
+    static NEW_BOOKING_REPORT_SYNC = 'New Booking Report';
+
+    static SYNC_OPERA_NEW_BOOKING_URL = environment.apiHost + '/fetchNewBooking';
+
+    //////////////////////////////////////////////// Zeal Payment  /////////////////////////////////////////////////////////
+
     static ZEAL_PAYMENT_PAGE = 'zealPayment';
     static ZEAL_PAYMENT_CONFIG_PAGE = 'zealPaymentCongfig';
     static ZEAL_PAYMENT_OPERATION = 'Zeal Payment';
@@ -194,6 +213,7 @@ export class Constants {
     static MANAGE_COMPANIES = 'manageCompanies';
     static MANAGE_GROUPS = "manageGroups";
     static MANAGE_USERS = 'manageUsers';
+    static MANAGE_ACTIVITIES = 'managActivities';
 
     static GET_APP_COMPANIES_URL = environment.apiHost + '/getApplicationCompanies';
     static ADD_APP_COMPANY_URL = environment.apiHost + '/addApplicationCompany';

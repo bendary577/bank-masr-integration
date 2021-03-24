@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { WastageInforComponent } from './wastage-infor.component';
 
@@ -6,7 +6,7 @@ describe('WastageInforComponent', () => {
   let component: WastageInforComponent;
   let fixture: ComponentFixture<WastageInforComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ WastageInforComponent ]
     })
