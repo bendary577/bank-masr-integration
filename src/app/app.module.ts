@@ -11,8 +11,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SuppliersComponent } from './components/suppliers/suppliers.component';
-import { ShowHidePasswordModule } from 'ngx-show-hide-password';
-
 
 
 import {
@@ -236,7 +234,6 @@ import { NewBookingReportComponent } from './components/new-booking-report/new-b
     BrowserModule,
     FormsModule,
     MatProgressBarModule,
-    ShowHidePasswordModule,
     NgxJsonViewerModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, 
