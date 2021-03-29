@@ -221,6 +221,7 @@ export class Constants {
     static OPERATION_TYPES = 'operationTypesConfiguration';
     static SYNC_TYPE_SCHEDULER = "Suppliers";
     static EXPORTED_FILES_PAGE = 'exportedFiles';
+    static OPERA_REPORT_MAP_TABLES = 'operaReportMapTables';
 
     //////////////////////////////////////////////// Manage Application  //////////////////////////////////////////////
 

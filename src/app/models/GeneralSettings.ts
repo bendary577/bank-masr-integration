@@ -5,6 +5,7 @@ import { MajorGroup } from './MajorGroup';
 import { SimphonyLocation } from './SimphonyLocation';
 import { Supplier } from './supplier';
 import { ItemGroup } from './ItemGroup';
+import { PaymentType } from './paymentTypes';
 
 export class GeneralSettings {
   id: string;
@@ -18,6 +19,7 @@ export class GeneralSettings {
   locations: Array<CostCenter>|any;
   simphonyLocations: Array<SimphonyLocation>|any;
   suppliers: Array<Supplier>|any;
+  paymentTypes: Array<PaymentType>|any;
   creationDate: Date;
   deleted: boolean;
 }

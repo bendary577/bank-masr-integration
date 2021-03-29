@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {NgModule, ElementRef, ChangeDetectorRef} from '@angular/core';
+import {NgModule} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -125,7 +125,7 @@ import { OccupancyUpdateReportComponent } from './components/occupancy-update-re
 import { NewBookingReportConfigComponent } from './components/new-booking-report-config/new-booking-report-config.component';
 import { CancelBookingReportConfigComponent } from './components/cancel-booking-report-config/cancel-booking-report-config.component';
 import { OccupancyUpdateReportConfigComponent } from './components/occupancy-update-report-config/occupancy-update-report-config.component';
-
+import { OperaReportMapTablesComponent } from './components/setting/opera-report-map-tables/opera-report-map-tables.component';
 
 @NgModule({
   declarations: [
@@ -216,7 +216,8 @@ import { OccupancyUpdateReportConfigComponent } from './components/occupancy-upd
     OccupancyUpdateReportComponent,
     NewBookingReportConfigComponent,
     CancelBookingReportConfigComponent,
-    OccupancyUpdateReportConfigComponent
+    OccupancyUpdateReportConfigComponent,
+    OperaReportMapTablesComponent
   ],
   imports: [
     BrowserModule,
