@@ -27,12 +27,6 @@
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Group">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.company.name}}
-            </ng-template>
-        </ngx-datatable-column>
-
         <ngx-datatable-column name="Sub-Group">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.group.name}}
@@ -41,10 +35,8 @@
 
         <ngx-datatable-column name="Discount Rate">
             <ng-template let-row="row" ngx-datatable-cell-template >
-                <label *ngIf="row.group.name == ''">{{row.company.discountRate}} %</label>
                 <label *ngIf="row.group.name != ''">{{row.group.discountRate}} %</label>
             </ng-template>
-
         </ngx-datatable-column>
 
         <ngx-datatable-column name="State">

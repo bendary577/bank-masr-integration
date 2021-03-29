@@ -5,7 +5,7 @@ import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser';
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import { AddAppUserComponent } from '../../components/add-app-user/add-app-user.component'  
-import { Company } from 'src/app/models/loyalty/Company';
+import { Group } from 'src/app/models/loyalty/Group';
 
 @Component({
   selector: 'app-manage-users',
@@ -15,7 +15,7 @@ import { Company } from 'src/app/models/loyalty/Company';
 export class ManageUsersComponent implements OnInit {
 
   newUser: ApplicationUser = new ApplicationUser();
-  companies: Company[];
+  groups: Group[];
 
   usersList = {
     paginateData: true as boolean,
@@ -40,7 +40,7 @@ export class ManageUsersComponent implements OnInit {
 
   ngOnInit() {
     this.getUsers();
-    this.getCompanies();
+    this.getGroups();
   }
 
   onSelect({selected}) {
@@ -58,26 +58,29 @@ export class ManageUsersComponent implements OnInit {
     });
   }
 
-  getCompanies(){
+  getGroups(){
     this.loyaltyService.getAppCompanies().toPromise().then((res: any) => {
-      this.companies = res;
+      this.groups = res;
+      console.log(res)
+
     }).catch(err => {
     });
+
   }
 
   addUserDialog(){
     const dialogRef = this.dialog.open(AddAppUserComponent, {
         width: '550px',
         data: {
-          companies: this.companies
+          groups: this.groups
         }
     });
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.newUser.name = res.name;
+        this.newUser.email = res.email;
         this.newUser.group = res.group;
-        this.newUser.company = res.company;
         this.newUser.deleted = false;
 
         this.usersList.showLoading = true;

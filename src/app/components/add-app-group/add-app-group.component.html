@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>New Sub-Group</h1>
+<h1 mat-dialog-title>New Group</h1>
 
 <div mat-dialog-content>
     <form [formGroup]="form" class="my-form">
@@ -19,6 +19,20 @@
                 <input matInput placeholder="Discount Rate" formControlName="discountRate">
             </mat-form-field>
         </div>
+
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <mat-select matInput id="groups" name="groups" placeholder="Group" formControlName="company">
+                    <mat-option [value]=c *ngFor="let c of groups">{{c.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        
+        <!-- <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Company logo link" formControlName="logoUrl">
+            </mat-form-field>
+        </div> -->
     </form>
 </div>
 <div mat-dialog-actions>

@@ -10,16 +10,14 @@
 
         <div class="form-group">
             <mat-form-field class="example-full-width">
-                <mat-select matInput id="companies" name="companies" placeholder="Group" formControlName="company">
-                    <mat-option [value]=c *ngFor="let c of companies">{{c.name}}</mat-option>
-                </mat-select>
+                <input matInput placeholder="Email" formControlName="email">
             </mat-form-field>
         </div>
 
         <div class="form-group">
             <mat-form-field class="example-full-width">
-                <mat-select matInput id="groups" name="groups" placeholder="Sub-Group" formControlName="group">
-                    <mat-option [value]=g *ngFor="let g of groups">{{g.name}}</mat-option>
+                <mat-select matInput id="groups" name="groups" placeholder="Group" formControlName="group">
+                    <mat-option [value]=c *ngFor="let c of groups">{{c.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>

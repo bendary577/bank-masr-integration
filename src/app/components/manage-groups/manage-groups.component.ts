@@ -16,7 +16,7 @@ import { SidenavResponsive } from '../sidenav/sidenav-responsive';
   styleUrls: ['./manage-groups.component.scss']
 })
 export class ManageGroupsComponent implements OnInit {
-  company: Company = new Company();
+  loading = false;
   newGroup: Group = new Group();
 
   groupsList = {
@@ -25,62 +25,92 @@ export class ManageGroupsComponent implements OnInit {
     messages: {
       emptyMessage: `
     <div >
-      <span class="classname">No Groups found</span>
+      <span style="font-size: 25px;text-alngign: center;">There are no groups yet.</span>
     </div>
   `
     },
     selected: [],
-    locationsCount: 0 as number,
+    groupsCount: 0 as number,
     pagesFilter: [10, 25, 50, 75, 100],
     showLoading: true,
     inputSearch: '' as string,
     groupsData: [] 
   };
 
-  constructor( private loyaltyService: LoyaltyService, private router: Router, private data: Data,
-    public dialog: MatDialog, public snackBar: MatSnackBar, private sidNav: SidenavResponsive) { }
+  constructor(public snackBar: MatSnackBar,
+    private sidNav: SidenavResponsive, public dialog: MatDialog,
+    private loyaltyService: LoyaltyService, private router: Router, private data: Data) { }
 
   ngOnInit() {
-    this.company = this.data.storage;
-    if(this.company == null || this.company == undefined){
-      this.router.navigate([Constants.LOYALTY]);
-    }else{
-      this.getGroups();
-    }
+    this.getGroups();
   }
 
   onSelect({selected}) {
     this.groupsList.selected.splice(0, this.groupsList.selected.length);
-    this.groupsList.selected.push(...selected);
+    this.groupsList.selected.push(selected);
   }
-  
-  addGroupDialog(){
+
+  openCompany(company: Company){
+    this.data.storage = company;
+    this.router.navigate([Constants.MANAGE_GROUPS]);
+  }
+
+  getGroups(){
+    this.groupsList.showLoading = true;
+    this.loyaltyService.getAppGroups().toPromise().then((res: any) => {
+      this.groupsList.groupsData = res;
+      this.groupsList.showLoading = false;
+    }).catch(err => {
+      this.groupsList.showLoading = false;
+    });
+  }
+
+  deleteCompanies(){
+    this.groupsList.showLoading = true;
+    this.loyaltyService.deleteAppGroups(this.groupsList.selected).then((res: any) => {
+      this.getGroups();
+      this.groupsList.showLoading = false;
+    }).catch(err => {
+      this.groupsList.showLoading = false;
+    });
+  }
+
+  addCompanyDialog(){
     const dialogRef = this.dialog.open(AddAppGroupComponent, {
-        width: '550px'
+        width: '550px',
+        data: {
+          companies: this.groupsList.groupsData
+        }
     });
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
+        this.loading = true;
+
         this.newGroup.name = res.name;
         this.newGroup.description = res.description;
         this.newGroup.discountRate = res.discountRate;
+        this.newGroup.parentGroupId = res.company.id;
         this.newGroup.deleted = false;
 
         this.groupsList.showLoading = true;
-        this.loyaltyService.addAppGroups(this.newGroup, this.company.id, true).then(result => {
-          this.getGroups();
-
-          this.newGroup = new Group();
+        this.loyaltyService.addAppGroups(this.newGroup, true).then(result => {
+          this.loading = false;
           this.groupsList.showLoading = false;
+          this.getGroups();
+          this.newGroup = new Company();
 
-          this.snackBar.open("Add sub-group successfully.", null, {
+          this.snackBar.open("Add comapny successfully.", null, {
             duration: 2000,
             horizontalPosition: 'right',
             panelClass:"my-snack-bar-success"
           });
+
         }).catch(err => {
-          this.newGroup = new Group();
+          this.loading = false;
           this.groupsList.showLoading = false;
+
+          this.newGroup = new Company();
 
           let message = "";
           if(err.status === 401){
@@ -104,23 +134,62 @@ export class ManageGroupsComponent implements OnInit {
     });
   }
 
-  getGroups(){
-    this.groupsList.showLoading = true; 
-    this.loyaltyService.getAppGroups(this.company.id).toPromise().then((res: any) => {
-      this.groupsList.groupsData = res;
-      this.groupsList.showLoading = false;
-    }).catch(err => {
-      this.groupsList.showLoading = false;
+  updateCompanyDialog(){
+    const dialogRef = this.dialog.open(AddAppGroupComponent, {
+      width: '550px',
+      data: {comapny: this.groupsList.selected[0],
+        companies: this.groupsList.groupsData
+      }
     });
-  }
 
-  deleteCompanies(){
-    this.groupsList.showLoading = true;
-    this.loyaltyService.deleteAppGroups(this.groupsList.selected).then((res: any) => {
-      this.getGroups();
-      this.groupsList.showLoading = false;
-    }).catch(err => {
-      this.groupsList.showLoading = false;
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.newGroup = this.groupsList.selected[0];
+
+        this.newGroup.name = res.name;
+        this.newGroup.description = res.description;
+        this.newGroup.discountRate = res.discountRate;
+        this.newGroup.deleted = false;
+
+        this.groupsList.showLoading = true;
+        this.loyaltyService.addAppGroups(this.newGroup, false).then(result => {
+          this.loading = false;
+          this.groupsList.showLoading = false;
+          this.getGroups();
+
+          this.newGroup = new Company();
+
+          this.snackBar.open("Comapny updated successfully.", null, {
+            duration: 2000,
+            horizontalPosition: 'right',
+            panelClass:"my-snack-bar-success"
+          });
+
+        }).catch(err => {
+          this.loading = false;
+          this.groupsList.showLoading = false;
+
+          this.newGroup = new Company();
+
+          let message = "";
+          if(err.status === 401){
+            message = ErrorMessages.SESSION_EXPIRED;
+            this.sidNav.Logout();
+          } else if (err.error.message){
+            message = err.error.message;
+          } else if (err.message){
+            message = err.message;
+          } else {
+            message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
+          }
+    
+          this.snackBar.open(message , null, {
+            duration: 3000,
+            horizontalPosition: 'right',
+            panelClass:"my-snack-bar-fail"
+          });
+        });
+      }
     });
   }
 }

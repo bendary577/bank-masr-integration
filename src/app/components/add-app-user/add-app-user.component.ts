@@ -16,24 +16,17 @@ export class AddAppUserComponent implements OnInit {
   selectedGroup: Group;
 
   groups: Group[] = [];
-  companies: Company[] = [];
 
   constructor(private formBuilder: FormBuilder, public snackBar: MatSnackBar, 
     public dialogRef: MatDialogRef<AddAppUserComponent>, 
     @Inject(MAT_DIALOG_DATA) public data) { }
-
-    
+ 
   ngOnInit() {
-    this.companies = this.data["companies"];
-    console.log(this.companies);
-
-    if(this.companies.length > 0 && this.companies[0].groups.length > 0){
-      this.groups = this.companies[0].groups;
-    }
+    this.groups = this.data["groups"];
 
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
-      company: [''],
+      email: ['', Validators.required],
       group: ['', Validators.required]
     });
   }
@@ -52,7 +45,7 @@ export class AddAppUserComponent implements OnInit {
     }else{
       this.dialogRef.close({
         name: this.form.controls.name.value,
-        company: this.form.controls.company.value,
+        email: this.form.controls.email.value,
         group: this.form.controls.group.value
       });
     }

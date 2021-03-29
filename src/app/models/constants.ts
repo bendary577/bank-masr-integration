@@ -215,9 +215,9 @@ export class Constants {
     static MANAGE_USERS = 'manageUsers';
     static MANAGE_ACTIVITIES = 'managActivities';
 
-    static GET_APP_COMPANIES_URL = environment.apiHost + '/getApplicationCompanies';
-    static ADD_APP_COMPANY_URL = environment.apiHost + '/addApplicationCompany';
-    static Delete_APP_COMPANIES_URL = environment.apiHost + '/deleteApplicationCompanies';
+    static GET_APP_COMPANIES_URL = environment.apiHost + '/getApplicationGroups';
+    static ADD_APP_COMPANY_URL = environment.apiHost + '/addApplicationGroup';
+    static Delete_APP_COMPANIES_URL = environment.apiHost + '/deleteApplicationGroups';
 
     static GET_APP_GROUPS_URL = environment.apiHost + '/getApplicationGroups';
     static ADD_APP_GROUP_URL = environment.apiHost + '/addApplicationGroup';
