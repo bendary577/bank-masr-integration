@@ -43,6 +43,38 @@
         </div>
     </mat-expansion-panel>
 
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Cancel Reason Mapping
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="back" style="margin-bottom: 15px;">
+            <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Reason Id" [(ngModel)]="newCancelReason.reasonId">
+            <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Reason Description" [(ngModel)]="newCancelReason.reasonDescription">
+            <button mat-flat-button (click)="add()">Add</button>
+        </div>
+
+        <div *ngIf="cancelReason?.length > 0">
+
+            <ngx-datatable class="material" [rows]="cancelReason" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
+
+                <ngx-datatable-column name="Reason Id">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.reasonId">{{row.typeId}}</mat-checkbox>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Reason Description">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <input matInput placeholder="Reason Description" [(ngModel)]="row.reasonDescription">
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </div>
+    </mat-expansion-panel>
+
     <br>
 
     <div class="card-back">

@@ -3,7 +3,8 @@ import { MatSnackBar } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { GeneralSettings } from 'src/app/models/GeneralSettings';
-import { PaymentType } from 'src/app/models/paymentTypes';
+import { CancelReason } from 'src/app/models/operaReports/CancelReason';
+import { PaymentType } from 'src/app/models/operaReports/paymentTypes';
 import { Response } from 'src/app/models/Response';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 
@@ -18,7 +19,10 @@ export class OperaReportMapTablesComponent implements OnInit {
 
   generalSettings: GeneralSettings;
   newPaymentType = new PaymentType();
+  newCancelReason = new CancelReason();
+
   paymentTypes = [];
+  cancelReason = [];
 
   constructor(public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService) { }

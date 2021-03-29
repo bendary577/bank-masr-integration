@@ -5,7 +5,7 @@ import { MajorGroup } from './MajorGroup';
 import { SimphonyLocation } from './SimphonyLocation';
 import { Supplier } from './supplier';
 import { ItemGroup } from './ItemGroup';
-import { PaymentType } from './paymentTypes';
+import { PaymentType } from './operaReports/paymentTypes';
 
 export class GeneralSettings {
   id: string;
