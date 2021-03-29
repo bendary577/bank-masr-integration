@@ -1,4 +1,4 @@
-<h3>New Booking Detailes</h3>
+<h3>Occupancy Update</h3>
 
 
 <div class="header">
@@ -8,8 +8,7 @@
         <option [ngValue]="job" *ngFor="let job of jobs">
             {{job.creationDate}} - {{job.status}}</option>
     </select>
-    <!-- <button mat-flat-button (click)="openModal()">Transfer New Booking Detailes</button> -->
-    <button mat-flat-button (click)="syncNewBooking()">Sync New Booking Data</button>
+    <button mat-flat-button (click)="syncNewBooking()">Sync Occupancy Update Data</button>
 
 </div>
 <br>
@@ -53,7 +52,7 @@
             </mat-list-item>
             <mat-list-item *ngIf="!newBookingList.newBookingData.length">
                 <span>
-                There was no new data to sync in this job, You can sync Booking Detailes now from <a (click)="syncNewBooking()">here</a>
+                There was no new data to sync in this job, You can sync Occupancy Update now from <a (click)="syncNewBooking()">here</a>
             </span>
             </mat-list-item>
         </mat-card-content>
@@ -70,7 +69,7 @@
                 </mat-card-header>
                 <mat-card-content>
                     <p>
-                        There was no new data to sync in this job, You can sync Booking Detailes now from
+                        There was no new data to sync in this job, You can sync Occupancy Update now from
                         <a (click)="syncNewBooking()">here</a>
                     </p>
                 </mat-card-content>
@@ -103,87 +102,33 @@
                 </ng-template>
             </ngx-datatable-column>
     
-            <ngx-datatable-column name="Booking No">
+            <ngx-datatable-column name="Update Date">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.bookingNo}}
+                    {{row.data.updateDate}}
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="Nationality Code">
+            <ngx-datatable-column name="Rooms Occupied">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.nationalityCode}}
+                    {{row.data.roomsOccupied}}
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="Arrival Date">
+            <ngx-datatable-column name="Rooms Available">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.checkInDate}}
+                    {{row.data.roomsAvailable}}
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="Departure Date">
+            <ngx-datatable-column name="Rooms Booked">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.checkOutDate}}
+                    {{row.data.roomsBooked}}
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="Number of Nights">
+            <ngx-datatable-column name="Rooms On Maintenance">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.totalDurationDays}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Room Number">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.allotedRoomNo}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Room Type">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.roomType}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Full Rate Amount">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.totalRoomRate}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Total Room">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.grandTotal}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Gender">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.gender}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Adults">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.noOfGuest}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Date Of Birth">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.dateOfBirth}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Payment Methods">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.paymentType}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Number Of Room">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.noOfRooms}}
+                    {{row.data.roomsOnMaintenance}}
                 </ng-template>
             </ngx-datatable-column>
 

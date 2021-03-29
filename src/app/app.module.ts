@@ -120,6 +120,8 @@ import { WlsIntegrationComponent } from './components/wls-integration/wls-integr
 import { DialogComponent } from './components/dialog/dialog.component';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { NewBookingReportComponent } from './components/new-booking-report/new-booking-report.component';
+import { CancelBookingReportComponent } from './components/cancel-booking-report/cancel-booking-report.component';
+import { OccupancyUpdateReportComponent } from './components/occupancy-update-report/occupancy-update-report.component';
 
 
 @NgModule({
@@ -206,7 +208,9 @@ import { NewBookingReportComponent } from './components/new-booking-report/new-b
     WlsIntegrationConfigComponent,
     WlsIntegrationComponent,
     DialogComponent,
-    NewBookingReportComponent
+    NewBookingReportComponent,
+    CancelBookingReportComponent,
+    OccupancyUpdateReportComponent
   ],
   imports: [
     BrowserModule,

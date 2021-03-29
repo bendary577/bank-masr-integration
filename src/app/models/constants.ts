@@ -17,6 +17,7 @@ export class Constants {
     static GET_ACCOUNT = environment.apiHost + '/getAccount';
     static ADD_ACCOUNT = environment.apiHost + '/addAccount';
     static UPDATE_ACCOUNT = environment.apiHost + '/updateAccount';
+    static UPDATE_ACCOUNT_SYNC_TYPES = environment.apiHost + '/updateAccountSyncTypes';
 
     static GET_USERS = environment.apiHost + '/getUsers';
     static ADD_USER = environment.apiHost + '/addUser';
@@ -179,6 +180,20 @@ export class Constants {
     static NEW_BOOKING_REPORT_SYNC = 'New Booking Report';
 
     static SYNC_OPERA_NEW_BOOKING_URL = environment.apiHost + '/fetchNewBooking';
+
+    //==> Cancel Booking Report
+    static CANCEL_BOOKING_REPORT_PAGE = 'cancelBookingReport';
+    static CANCEL_BOOKING_REPORT_CONFIG_PAGE = 'cancelBookingReportConfig';
+    static CANCEL_BOOKING_REPORT_SYNC = 'Cancel Booking Report';
+
+    static SYNC_OPERA_CANCEL_BOOKING_URL = environment.apiHost + '/fetchCancelBooking';
+
+    //==> Occupancy Update Report
+    static OCCUPANCY_UPDATE_REPORT_PAGE = 'occupancyUpdateReport';
+    static OCCUPANCY_UPDATE_REPORT_CONFIG_PAGE = 'occupancyUpdateReportConfig';
+    static OCCUPANCY_UPDATE_REPORT_SYNC = 'Occupancy Update Report';
+
+    static SYNC_OPERA_OCCUPANCY_UPDATE_URL = environment.apiHost + '/fetchoccupancyUpdate';
 
     //////////////////////////////////////////////// Zeal Payment  /////////////////////////////////////////////////////////
 

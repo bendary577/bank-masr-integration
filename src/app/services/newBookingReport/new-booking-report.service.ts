@@ -15,4 +15,9 @@ export class NewBookingReportService {
     return this.http.get(Constants.SYNC_OPERA_NEW_BOOKING_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
+  getCancelBooking() {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get(Constants.SYNC_OPERA_CANCEL_BOOKING_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
 }

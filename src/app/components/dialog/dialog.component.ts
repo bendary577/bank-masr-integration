@@ -6,15 +6,11 @@ import { MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./dialog.component.scss']
 })
 export class DialogComponent implements OnInit {
-
- 
   modalTitle: string;
   modalMessage: string;
   modalType:ModalType = ModalType.INFO;
 
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+  ngOnInit(): void {}
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.modalTitle = data.title;
