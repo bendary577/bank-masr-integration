@@ -23,13 +23,13 @@ export class OccupancyUpdateReportComponent implements OnInit {
   jobs = [];
   selectedJob :SyncJob = null;
 
-  newBookingList = {
+  occupancyUpdateList = {
     paginateData: true as boolean,
     offset: 0,
     messages: {
       emptyMessage: `
         <div >
-          <span style="font-size: 25px;text-align: center;">There are no new booking.</span>
+          <span style="font-size: 25px;text-align: center;">There are no Occupancy Update</span>
         </div>
       `
     },
@@ -38,7 +38,7 @@ export class OccupancyUpdateReportComponent implements OnInit {
     pagesFilter: [10, 25, 50, 75, 100],
     showLoading: false,
     inputSearch: '' as string,
-    newBookingData: [] 
+    occupancyUpdateData: [] 
   };
 
 
@@ -52,8 +52,8 @@ export class OccupancyUpdateReportComponent implements OnInit {
   }
 
   onSelect({selected}) {
-    this.newBookingList.selected.splice(0, this.newBookingList.selected.length);
-    this.newBookingList.selected.push(...selected);
+    this.occupancyUpdateList.selected.splice(0, this.occupancyUpdateList.selected.length);
+    this.occupancyUpdateList.selected.push(...selected);
   }
 
   get staticgetNewBookingLoading() {
@@ -80,7 +80,7 @@ export class OccupancyUpdateReportComponent implements OnInit {
     this.spinner.show();
 
     this.syncJobService.getSyncJobDataById(this.selectedJob["id"]).toPromise().then((res: any) => {
-      this.newBookingList.newBookingData = res;
+      this.occupancyUpdateList.occupancyUpdateData = res;
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
@@ -89,8 +89,8 @@ export class OccupancyUpdateReportComponent implements OnInit {
     });
   }
 
-  async syncNewBooking(){
-    this.newBookingList.showLoading = true;
+  async syncOccupancyUpdate(){
+    this.occupancyUpdateList.showLoading = true;
 
     this.newBookingService.getNewBooking().toPromise().then((res: any) => {
       this.success = res.success;
@@ -112,7 +112,7 @@ export class OccupancyUpdateReportComponent implements OnInit {
 
       this.getSyncJobs(Constants.OCCUPANCY_UPDATE_REPORT_SYNC);
 
-      this.newBookingList.showLoading = false;
+      this.occupancyUpdateList.showLoading = false;
     }).catch(err => {
       this.getSyncJobs(Constants.OCCUPANCY_UPDATE_REPORT_SYNC);
 
@@ -133,7 +133,7 @@ export class OccupancyUpdateReportComponent implements OnInit {
         panelClass:"my-snack-bar-fail"
       });
 
-      this.newBookingList.showLoading = false;
+      this.occupancyUpdateList.showLoading = false;
     });
   }
 

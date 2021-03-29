@@ -8,7 +8,7 @@
         <option [ngValue]="job" *ngFor="let job of jobs">
             {{job.creationDate}} - {{job.status}}</option>
     </select>
-    <button mat-flat-button (click)="syncNewBooking()">Sync Occupancy Update Data</button>
+    <button mat-flat-button (click)="syncOccupancyUpdate()">Sync Occupancy Update Data</button>
 
 </div>
 <br>
@@ -50,9 +50,9 @@
                 <span class="value" *ngIf="selectedJob.reason">{{selectedJob.reason}}</span>
                 <span class="value" *ngIf="!selectedJob.reason">No Info</span>
             </mat-list-item>
-            <mat-list-item *ngIf="!newBookingList.newBookingData.length">
+            <mat-list-item *ngIf="!occupancyUpdateList.occupancyUpdateData.length">
                 <span>
-                There was no new data to sync in this job, You can sync Occupancy Update now from <a (click)="syncNewBooking()">here</a>
+                There was no new data to sync in this job, You can sync Occupancy Update now from <a (click)="syncOccupancyUpdate()">here</a>
             </span>
             </mat-list-item>
         </mat-card-content>
@@ -70,7 +70,7 @@
                 <mat-card-content>
                     <p>
                         There was no new data to sync in this job, You can sync Occupancy Update now from
-                        <a (click)="syncNewBooking()">here</a>
+                        <a (click)="syncOccupancyUpdate()">here</a>
                     </p>
                 </mat-card-content>
             </mat-card>
@@ -79,10 +79,10 @@
         </div>
     </div>
 
-    <div *ngIf="jobs.length || newBookingList.showLoading">
-        <ngx-datatable style="max-width: 98%;" class="material" [loadingIndicator]="newBookingList.showLoading" [messages]="newBookingList.messages" 
+    <div *ngIf="jobs.length || occupancyUpdateList.showLoading">
+        <ngx-datatable style="max-width: 98%;" class="material" [loadingIndicator]="occupancyUpdateList.showLoading" [messages]="occupancyUpdateList.messages" 
         [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-         [rows]="newBookingList.newBookingData" [selected]="newBookingList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
+         [rows]="occupancyUpdateList.occupancyUpdateData" [selected]="occupancyUpdateList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
         (select)='onSelect($event)' [scrollbarH]="true">
     
             <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">

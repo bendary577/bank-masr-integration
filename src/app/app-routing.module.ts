@@ -53,6 +53,10 @@ import { WlsIntegrationComponent } from './components/wls-integration/wls-integr
 import { WlsIntegrationConfigComponent } from './components/wls-integration-config/wls-integration-config.component';
 import { NewBookingReportComponent } from './components/new-booking-report/new-booking-report.component';
 import { CancelBookingReportComponent } from './components/cancel-booking-report/cancel-booking-report.component';
+import { NewBookingReportConfigComponent } from './components/new-booking-report-config/new-booking-report-config.component';
+import { CancelBookingReportConfigComponent } from './components/cancel-booking-report-config/cancel-booking-report-config.component';
+import { OccupancyUpdateReportComponent } from './components/occupancy-update-report/occupancy-update-report.component';
+import { OccupancyUpdateReportConfigComponent } from './components/occupancy-update-report-config/occupancy-update-report-config.component';
 
 
 const routes: Routes = [
@@ -130,10 +134,13 @@ const routes: Routes = [
   { path: Constants.EXPORTED_FILES_PAGE , component: SyncExportedFilesComponent ,canActivate:[AuthGuardService]},
 
   { path: Constants.NEW_BOOKING_REPORT_PAGE , component: NewBookingReportComponent ,canActivate:[AuthGuardService]},
-  { path: Constants.NEW_BOOKING_REPORT_CONFIG_PAGE , component: NewBookingReportComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.NEW_BOOKING_REPORT_CONFIG_PAGE , component: NewBookingReportConfigComponent ,canActivate:[AuthGuardService]},
 
   { path: Constants.CANCEL_BOOKING_REPORT_PAGE , component: CancelBookingReportComponent ,canActivate:[AuthGuardService]},
-  { path: Constants.CANCEL_BOOKING_REPORT_CONFIG_PAGE , component: CancelBookingReportComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.CANCEL_BOOKING_REPORT_CONFIG_PAGE , component: CancelBookingReportConfigComponent ,canActivate:[AuthGuardService]},
+
+  { path: Constants.OCCUPANCY_UPDATE_REPORT_PAGE , component: OccupancyUpdateReportComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.OCCUPANCY_UPDATE_REPORT_CONFIG_PAGE , component: OccupancyUpdateReportConfigComponent ,canActivate:[AuthGuardService]},
 
   // Error Page
   {path:'**', component: ErrorComponentComponent }

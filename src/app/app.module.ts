@@ -122,6 +122,9 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { NewBookingReportComponent } from './components/new-booking-report/new-booking-report.component';
 import { CancelBookingReportComponent } from './components/cancel-booking-report/cancel-booking-report.component';
 import { OccupancyUpdateReportComponent } from './components/occupancy-update-report/occupancy-update-report.component';
+import { NewBookingReportConfigComponent } from './components/new-booking-report-config/new-booking-report-config.component';
+import { CancelBookingReportConfigComponent } from './components/cancel-booking-report-config/cancel-booking-report-config.component';
+import { OccupancyUpdateReportConfigComponent } from './components/occupancy-update-report-config/occupancy-update-report-config.component';
 
 
 @NgModule({
@@ -210,7 +213,10 @@ import { OccupancyUpdateReportComponent } from './components/occupancy-update-re
     DialogComponent,
     NewBookingReportComponent,
     CancelBookingReportComponent,
-    OccupancyUpdateReportComponent
+    OccupancyUpdateReportComponent,
+    NewBookingReportConfigComponent,
+    CancelBookingReportConfigComponent,
+    OccupancyUpdateReportConfigComponent
   ],
   imports: [
     BrowserModule,

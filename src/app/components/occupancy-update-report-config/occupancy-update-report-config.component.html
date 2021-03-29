@@ -1,0 +1,42 @@
+<h3 mat-dialog-title>Occupancy Update Configuartion</h3>
+
+<div>
+
+    <div *ngIf="!loading && syncJobType">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    General Configuration
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div>
+                <mat-form-field class="example-full-width">
+                    <input matInput id="filePath" name="filePath" placeholder="File Path" [(ngModel)]="syncJobType.configuration.bookingConfiguration.filePath">
+                </mat-form-field>
+            </div>
+        </mat-expansion-panel>
+
+        <br>
+        <div class="card-back">
+            <button mat-flat-button (click)="onSaveClick()">Save</button>
+            <button mat-flat-button (click)="onCancelClick()">Cancel</button>
+        </div>
+  
+    </div>
+
+    <div *ngIf="!loading && !syncJobType">
+        <mat-card class="example-card">
+                <mat-card-header>
+                    <mat-card-title>Welcome</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>
+                        Can't Configure your sync right now, Please try again after few minutes.
+                    </p>
+                </mat-card-content>
+        </mat-card>
+    </div>
+
+      <ngx-spinner></ngx-spinner>
+</div>
+  
