@@ -5,7 +5,7 @@ export class Group {
     public accountID: string;
     public description: string;
     public discountRate: string;
-    public parentGroupId : string;
+    public parentGroup : Group;
     public creationDate: string;
     public deleted: boolean;
 

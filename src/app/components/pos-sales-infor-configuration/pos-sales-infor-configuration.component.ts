@@ -276,6 +276,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
   viewMajorGroupChildsDialog(majorGroup: MajorGroup){
     const dialogRef = this.dialog.open(AddMajorGroupChildComponent, {
       width: '550px',
+      minHeight: '1000px',
       data: {majorGroup: majorGroup}
     });
 

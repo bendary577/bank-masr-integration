@@ -107,7 +107,6 @@ import { SupplierMappingComponent } from './components/setting/supllier-mapping/
 import { AddSupplierComponent } from './components/add-supplier/add-supplier.component';
 import { ExportedFileConfigurationComponent } from './components/configuration/exported-file-configuration/exported-file-configuration.component';
 import { CreateOrderComponent } from './components/create-order/create-order.component';
-import { ManageComaniesComponent } from './components/manage-comanies/manage-comanies.component';
 import { ManageGroupsComponent } from './components/manage-groups/manage-groups.component';
 import { ManageUsersComponent } from './components/manage-users/manage-users.component';
 import { LoyaltyComponent } from './components/loyalty/loyalty.component';
@@ -120,6 +119,7 @@ import { WlsIntegrationComponent } from './components/wls-integration/wls-integr
 import { DialogComponent } from './components/dialog/dialog.component';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { NewBookingReportComponent } from './components/new-booking-report/new-booking-report.component';
+import { ConsumptionMajorGroupChildComponent } from './components/consumption-major-group-child/consumption-major-group-child.component';
 
 
 @NgModule({
@@ -161,6 +161,7 @@ import { NewBookingReportComponent } from './components/new-booking-report/new-b
     PosSalesInforComponent,
     PosSalesInforConfigurationComponent,
     AddMajorGroupComponent,
+    ConsumptionMajorGroupChildComponent,
     AddTenderComponent,
     BookedProductionComponent,
     BookedProductionConfigurationComponent,
@@ -195,7 +196,6 @@ import { NewBookingReportComponent } from './components/new-booking-report/new-b
     SupplierMappingComponent,
     AddSupplierComponent,
     ExportedFileConfigurationComponent,
-    ManageComaniesComponent,
     ManageGroupsComponent,
     ManageUsersComponent,
     LoyaltyComponent,
@@ -248,7 +248,7 @@ import { NewBookingReportComponent } from './components/new-booking-report/new-b
   CsvService,
   OperationService],
   bootstrap: [AppComponent],
-  entryComponents: [AddUserComponent, AddAccountComponent, AddMajorGroupComponent, AddTenderComponent,
+  entryComponents: [AddUserComponent, AddAccountComponent, AddMajorGroupComponent,ConsumptionMajorGroupChildComponent, AddTenderComponent,
      AddTaxComponent, AddDiscountComponent, AddRevenueCenterComponent, AddServiceChargeComponent,
       SuppliersConfiguartionComponent, SchedulerConfigurationComponent, AddTenderChildComponent, 
       AddSimphonyLocationComponent, AddWebServiceInvokerComponent, AddLocationComponent,

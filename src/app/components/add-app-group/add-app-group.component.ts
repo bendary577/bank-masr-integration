@@ -1,9 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
-import { Company } from 'src/app/models/loyalty/Company';
 import { Group } from 'src/app/models/loyalty/Group';
-import { AddAppCompanyComponent } from '../add-app-company/add-app-company.component';
 
 @Component({
   selector: 'app-add-app-group',
@@ -20,24 +18,27 @@ export class AddAppGroupComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data) { }
     
   ngOnInit() {
-    if (this.data["comapny"] != null && this.data != undefined){
-      this.group = this.data["comapny"];
-      this.groups = this.data["companies"];
+    if (this.data["group"] != null && this.data != undefined){
+      this.group = this.data["group"];
+      this.groups = this.data["groups"];
+              console.log(this.group)
 
       this.form = this.formBuilder.group({
-        name: [this.group.name, Validators.required],
+        name: [this.group.name, Validators.required],        
         logoUrl: [this.group.logoUrl],
         description: [this.group.description],
+        parentGroup: [this.group.parentGroup],
         discountRate: [this.group.discountRate, Validators.required]
       });
+      console.log(this.group)
+
     }else{
-      console.log(this.data)
-      this.groups = this.data["companies"];
+      this.groups = this.data["groups"];
       this.form = this.formBuilder.group({
         name: ['', Validators.required],
         logoUrl: [''],
         description: [''],
-        company: [''],
+        parentGroup: Group,
         discountRate: ['', Validators.required]
       });
     }
@@ -60,7 +61,7 @@ export class AddAppGroupComponent implements OnInit {
         logoUrl: this.form.controls.logoUrl.value,
         description: this.form.controls.description.value,
         discountRate: this.form.controls.discountRate.value,
-        company: this.form.controls.company.value
+        parentGroup: this.form.controls.parentGroup.value
       });
     }
   }

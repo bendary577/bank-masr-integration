@@ -13,7 +13,7 @@ import { Group } from 'src/app/models/loyalty/Group';
   styleUrls: ['./manage-users.component.scss']
 })
 export class ManageUsersComponent implements OnInit {
-
+ 
   newUser: ApplicationUser = new ApplicationUser();
   groups: Group[];
 
@@ -59,10 +59,8 @@ export class ManageUsersComponent implements OnInit {
   }
 
   getGroups(){
-    this.loyaltyService.getAppCompanies().toPromise().then((res: any) => {
+    this.loyaltyService.getAppGroups().toPromise().then((res: any) => {
       this.groups = res;
-      console.log(res)
-
     }).catch(err => {
     });
 

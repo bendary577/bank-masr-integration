@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Constants } from 'src/app/models/constants';
 import { Data } from 'src/app/models/data';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
-import { Company } from 'src/app/models/loyalty/Company';
 import { Group } from 'src/app/models/loyalty/Group';
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
 import { AddAppGroupComponent } from '../add-app-group/add-app-group.component';
@@ -34,7 +33,7 @@ export class ManageGroupsComponent implements OnInit {
     pagesFilter: [10, 25, 50, 75, 100],
     showLoading: true,
     inputSearch: '' as string,
-    groupsData: [] 
+    groupsData: [] as Group[] 
   };
 
   constructor(public snackBar: MatSnackBar,
@@ -50,8 +49,8 @@ export class ManageGroupsComponent implements OnInit {
     this.groupsList.selected.push(selected);
   }
 
-  openCompany(company: Company){
-    this.data.storage = company;
+  openSupGroup(group: Group){
+    this.data.storage = group;
     this.router.navigate([Constants.MANAGE_GROUPS]);
   }
 
@@ -68,9 +67,11 @@ export class ManageGroupsComponent implements OnInit {
   deleteCompanies(){
     this.groupsList.showLoading = true;
     this.loyaltyService.deleteAppGroups(this.groupsList.selected).then((res: any) => {
+      console.log(this.groupsList.selected)
       this.getGroups();
       this.groupsList.showLoading = false;
     }).catch(err => {
+      console.log(this.groupsList.selected)
       this.groupsList.showLoading = false;
     });
   }
@@ -79,7 +80,7 @@ export class ManageGroupsComponent implements OnInit {
     const dialogRef = this.dialog.open(AddAppGroupComponent, {
         width: '550px',
         data: {
-          companies: this.groupsList.groupsData
+          groups: this.groupsList.groupsData
         }
     });
 
@@ -90,7 +91,7 @@ export class ManageGroupsComponent implements OnInit {
         this.newGroup.name = res.name;
         this.newGroup.description = res.description;
         this.newGroup.discountRate = res.discountRate;
-        this.newGroup.parentGroupId = res.company.id;
+        this.newGroup.parentGroup = res.parentGroup;
         this.newGroup.deleted = false;
 
         this.groupsList.showLoading = true;
@@ -98,7 +99,7 @@ export class ManageGroupsComponent implements OnInit {
           this.loading = false;
           this.groupsList.showLoading = false;
           this.getGroups();
-          this.newGroup = new Company();
+          this.newGroup = new Group();
 
           this.snackBar.open("Add comapny successfully.", null, {
             duration: 2000,
@@ -110,7 +111,7 @@ export class ManageGroupsComponent implements OnInit {
           this.loading = false;
           this.groupsList.showLoading = false;
 
-          this.newGroup = new Company();
+          this.newGroup = new Group();
 
           let message = "";
           if(err.status === 401){
@@ -137,15 +138,14 @@ export class ManageGroupsComponent implements OnInit {
   updateCompanyDialog(){
     const dialogRef = this.dialog.open(AddAppGroupComponent, {
       width: '550px',
-      data: {comapny: this.groupsList.selected[0],
-        companies: this.groupsList.groupsData
+      data: {group: this.groupsList.selected[0],
+        groups: this.groupsList.groupsData
       }
     });
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.newGroup = this.groupsList.selected[0];
-
         this.newGroup.name = res.name;
         this.newGroup.description = res.description;
         this.newGroup.discountRate = res.discountRate;
@@ -157,7 +157,7 @@ export class ManageGroupsComponent implements OnInit {
           this.groupsList.showLoading = false;
           this.getGroups();
 
-          this.newGroup = new Company();
+          this.newGroup = new Group();
 
           this.snackBar.open("Comapny updated successfully.", null, {
             duration: 2000,
@@ -169,7 +169,7 @@ export class ManageGroupsComponent implements OnInit {
           this.loading = false;
           this.groupsList.showLoading = false;
 
-          this.newGroup = new Company();
+          this.newGroup = new Group();
 
           let message = "";
           if(err.status === 401){

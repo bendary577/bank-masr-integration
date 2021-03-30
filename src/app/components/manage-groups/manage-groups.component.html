@@ -22,15 +22,15 @@
 
         <ngx-datatable-column name="Name">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                <a class="comany-name" (click)="    (row)">{{row.name}}</a>
+                <a class="group-name" (click)="openSupGroup(row)">{{row.name}}</a>
             </ng-template>
         </ngx-datatable-column>
 
-        <!-- <ngx-datatable-column name="Description">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.description}}
+        <ngx-datatable-column name="Parent Group" >
+            <ng-template let-row="row" ngx-datatable-cell-template >
+                <span *ngIf="row.parentGroup">{{row.parentGroup.name}}</span>
             </ng-template>
-        </ngx-datatable-column> -->
+        </ngx-datatable-column>
 
         <ngx-datatable-column name="Discount Rate">
             <ng-template let-row="row" ngx-datatable-cell-template>

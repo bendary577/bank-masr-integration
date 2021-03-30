@@ -12,35 +12,19 @@ export class LoyaltyService {
 
   getAppGroups() {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get(Constants.GET_APP_COMPANIES_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+    return this.http.get(Constants.GET_APP_GROUPS_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
-  addAppGroups(company, addFlag) {
+  addAppGroups(group, addFlag) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.post(Constants.ADD_APP_COMPANY_URL + "?addFlag=" + addFlag, company, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+    return this.http.post(Constants.ADD_APP_GROUP_URL + "?addFlag=" + addFlag, group, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
  
-  deleteAppGroups(companies) {
+  deleteAppGroups(groups) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.put(Constants.Delete_APP_COMPANIES_URL, companies, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+    return this.http.put(Constants.Delete_APP_GROUPS_URL, groups, {
+       headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
-
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  // getAppGroups(companyId: String) {
-  //   this.token = localStorage.getItem('auth_token');
-  //   return this.http.get(Constants.GET_APP_GROUPS_URL + "?companyId=" + companyId, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
-  // }
-
-  // addAppGroups(group, company, addFlag) {
-  //   this.token = localStorage.getItem('auth_token');
-  //   return this.http.post(Constants.ADD_APP_GROUP_URL + "?addFlag=" + addFlag + "&company=" + company, group, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
-  // }
-
-  // deleteAppGroups(groups) {
-  //   this.token = localStorage.getItem('auth_token');
-  //   return this.http.put(Constants.Delete_APP_GROUPS_URL, groups, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
-  // }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

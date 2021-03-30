@@ -74,6 +74,8 @@ export class Constants {
     static GET_OVER_GROUPS_URL = environment.apiHost + '/getOverGroups';
     static MAP_ITEM_GROUPS_URL = environment.apiHost + '/mapItems';
     static GET_JOURNALS_URL = environment.apiHost + '/getConsumption';
+    static ADD_JOURNAL_GROUP_URL = environment.apiHost + '/addConsumptionMajorGroup';
+
 
     static GET_POS_SALES_URL = environment.apiHost + '/getPOSSales';
     static GET_POS_SALES_TENDERS_URL = environment.apiHost + '/getTenders';
@@ -214,10 +216,6 @@ export class Constants {
     static MANAGE_GROUPS = "manageGroups";
     static MANAGE_USERS = 'manageUsers';
     static MANAGE_ACTIVITIES = 'managActivities';
-
-    static GET_APP_COMPANIES_URL = environment.apiHost + '/getApplicationGroups';
-    static ADD_APP_COMPANY_URL = environment.apiHost + '/addApplicationGroup';
-    static Delete_APP_COMPANIES_URL = environment.apiHost + '/deleteApplicationGroups';
 
     static GET_APP_GROUPS_URL = environment.apiHost + '/getApplicationGroups';
     static ADD_APP_GROUP_URL = environment.apiHost + '/addApplicationGroup';

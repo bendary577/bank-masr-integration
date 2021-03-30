@@ -16,13 +16,19 @@
 
         <div class="form-group">
             <mat-form-field class="example-full-width">
-                <input matInput placeholder="Discount Rate" formControlName="discountRate">
+                <input  matInput placeholder="Discount Rate" formControlName="discountRate">
             </mat-form-field>
         </div>
 
+        <!-- <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="logo" formControlName="logoUrl">
+            </mat-form-field>
+        </div> -->
+
         <div class="form-group">
             <mat-form-field class="example-full-width">
-                <mat-select matInput id="groups" name="groups" placeholder="Group" formControlName="company">
+                <mat-select matInput id="groups" name="groups" placeholder="Group" formControlName="parentGroup">
                     <mat-option [value]=c *ngFor="let c of groups">{{c.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
