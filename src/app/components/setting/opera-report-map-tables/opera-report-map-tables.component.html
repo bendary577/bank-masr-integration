@@ -10,7 +10,7 @@
 
         <div class="back" style="margin-bottom: 15px;">
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type Id" [(ngModel)]="newPaymentType.typeId">
-            <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Payment Method" [(ngModel)]="newPaymentType.paymentMethod">
+            <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Payment Method" [(ngModel)]="newPaymentType.paymentType">
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Payment Description" [(ngModel)]="newPaymentType.paymentDescription">
 
             <button mat-flat-button (click)="add()">Add</button>
@@ -28,7 +28,7 @@
 
                 <ngx-datatable-column name="Payment Method">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        <input matInput placeholder="Payment Method" [(ngModel)]="row.paymentMethod">
+                        <input matInput placeholder="Payment Method" [(ngModel)]="row.paymentType">
                     </ng-template>
                 </ngx-datatable-column>
 
@@ -53,12 +53,12 @@
         <div class="back" style="margin-bottom: 15px;">
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Reason Id" [(ngModel)]="newCancelReason.reasonId">
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Reason Description" [(ngModel)]="newCancelReason.reasonDescription">
-            <button mat-flat-button (click)="add()">Add</button>
+            <button mat-flat-button (click)="addCancelReason()">Add</button>
         </div>
 
-        <div *ngIf="cancelReason?.length > 0">
+        <div *ngIf="cancelReasons?.length > 0">
 
-            <ngx-datatable class="material" [rows]="cancelReason" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
+            <ngx-datatable class="material" [rows]="cancelReasons" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
 
                 <ngx-datatable-column name="Reason Id">
                     <ng-template let-row="row" ngx-datatable-cell-template>

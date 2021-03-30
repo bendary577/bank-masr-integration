@@ -22,7 +22,7 @@ export class OperaReportMapTablesComponent implements OnInit {
   newCancelReason = new CancelReason();
 
   paymentTypes = [];
-  cancelReason = [];
+  cancelReasons = [];
 
   constructor(public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService) { }
@@ -56,13 +56,28 @@ export class OperaReportMapTablesComponent implements OnInit {
   }
 
   add(){
-    if(this.newPaymentType.typeId && this.newPaymentType.paymentMethod && this.newPaymentType.paymentDescription){
+    if(this.newPaymentType.typeId && this.newPaymentType.paymentType && this.newPaymentType.paymentDescription){
       this.paymentTypes.push(this.newPaymentType);
       this.newPaymentType = new PaymentType();
 
       this.paymentTypes = [...this.paymentTypes];
     }else{
       this.snackBar.open('Please fill all payment type fields.', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+    }
+  }
+
+  addCancelReason(){
+    if(this.newCancelReason.reasonId && this.newCancelReason.reasonDescription){
+      this.cancelReasons.push(this.newCancelReason);
+      this.newCancelReason = new CancelReason();
+
+      this.cancelReasons = [...this.cancelReasons];
+    }else{
+      this.snackBar.open('Please fill all cancel reaseon fields.', null, {
         duration: 2000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
@@ -77,6 +92,10 @@ export class OperaReportMapTablesComponent implements OnInit {
     try {
       if(this.paymentTypes.length != 0) {
         this.generalSettings.paymentTypes = this.paymentTypes;
+      }
+
+      if(this.cancelReasons.length != 0) {
+        this.generalSettings.cancelReasons = this.cancelReasons;
       }
 
       this.generalSettingsService.updateGeneralSettings(this.generalSettings).then(result => {
