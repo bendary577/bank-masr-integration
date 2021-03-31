@@ -35,6 +35,46 @@
         </div>
     </div>
 
+
+    <div mat-dialog-content>
+        <form [formGroup]="ccForm" class="my-form" style="margin: 0px auto 0px;">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Cost Center Name" formControlName="ccName">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Location" formControlName="locationName">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Account Code" formControlName="ccAccountCode">
+                </mat-form-field>
+                
+                <button mat-button cdkFocusInitial (click)="addCostCenter()">Add</button>
+        </form>
+    </div>
+    
+    <br>
+
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table-latitude">
+                      <thead>
+                          <th style="margin-right: 10;">Cost Center Name</th>
+                          <th>Location</th>
+                          <th>Account Code</th>
+                    </thead>
+                    <tbody>
+                         <tr *ngFor="let row of majorGroup.costCenters">
+                            <td style="text-align: center;">{{row.costCenter}}</td>
+                            <td style="text-align: center;">{{row.locationName}}</td>
+                            <td style="text-align: center;">{{row.accountCode}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
     <div mat-dialog-content>
         <form [formGroup]="fgForm" class="my-form" style="margin: 0px auto 0px;">
                 <mat-form-field class="example-full-width">

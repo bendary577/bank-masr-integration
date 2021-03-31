@@ -33,8 +33,8 @@ export class JournalsInforConfigurationsComponent implements OnInit {
 
   AccountSettingsForm: FormGroup;
   accountERD;
-  analysisCodes = ["1","2","3","4","5","6","7","8","9","10"];
-
+  analysisCodes = [null, "1","2","3","4","5","6","7","8","9","10"];
+  familyCodes = [null, "1","2","3","4","5","6","7","8","9","10"];
   newMajorGroup: MajorGroup = new MajorGroup();
   majorGroups = []
 
