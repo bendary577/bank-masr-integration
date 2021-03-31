@@ -5,8 +5,7 @@ import { MajorGroup } from './MajorGroup';
 import { SimphonyLocation } from './SimphonyLocation';
 import { Supplier } from './supplier';
 import { ItemGroup } from './ItemGroup';
-import { PaymentType } from './operaReports/paymentTypes';
-import { CancelReason } from './operaReports/CancelReason';
+import { BookingType } from './operaReports/paymentTypes';
 
 export class GeneralSettings {
   id: string;
@@ -20,8 +19,20 @@ export class GeneralSettings {
   locations: Array<CostCenter>|any;
   simphonyLocations: Array<SimphonyLocation>|any;
   suppliers: Array<Supplier>|any;
-  paymentTypes: Array<PaymentType>|any;
-  cancelReasons: Array<CancelReason>|any;
+
+  // ==> OPERA Variables
+  cancelReasons: Array<BookingType>|any;
+
+  paymentTypes: Array<BookingType>|any;
+  roomTypes : Array<BookingType>|any;
+  nationalities: Array<BookingType>|any;
+
+  purposeOfVisit: Array<BookingType>|any;
+  genders: Array<BookingType>|any;
+  customerTypes: Array<BookingType>|any;
+  transactionTypes: Array<BookingType>|any;
+
+  // ==> END of OPERA Vribles
   creationDate: Date;
   deleted: boolean;
 }

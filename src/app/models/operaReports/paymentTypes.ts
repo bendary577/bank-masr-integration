@@ -1,7 +1,6 @@
-export class PaymentType {
+export class BookingType {
     checked: boolean;
     typeId: string;
-    paymentType: string;
-    paymentDescription: string;
+    type: string;
+    typeDescription: string;
   }
-  

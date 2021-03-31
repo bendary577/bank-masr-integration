@@ -3,8 +3,7 @@ import { MatSnackBar } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { GeneralSettings } from 'src/app/models/GeneralSettings';
-import { CancelReason } from 'src/app/models/operaReports/CancelReason';
-import { PaymentType } from 'src/app/models/operaReports/paymentTypes';
+import { BookingType } from 'src/app/models/operaReports/paymentTypes';
 import { Response } from 'src/app/models/Response';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 
@@ -18,8 +17,10 @@ export class OperaReportMapTablesComponent implements OnInit {
   saveLoading = true;
 
   generalSettings: GeneralSettings;
-  newPaymentType = new PaymentType();
-  newCancelReason = new CancelReason();
+  newPaymentType = new BookingType();
+  newCancelReason = new BookingType();
+  newRoomType = new BookingType();
+  newNationalities = new BookingType();
 
   purposeOfVisit = [];
   paymentTypes = [];
@@ -28,9 +29,9 @@ export class OperaReportMapTablesComponent implements OnInit {
   roomTypes = [];
   transactionTypes = [];
   nationalities = [];
-  
+
   cancelReasons = [];
-  
+
   constructor(public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService) { }
 
@@ -40,12 +41,14 @@ export class OperaReportMapTablesComponent implements OnInit {
 
   getGeneralSettings() {
     this.loading = true;
+    this.spinner.show();
+
     this.generalSettingsService.getGeneralSettings().then((res) => {
       this.generalSettings = res as GeneralSettings;
-      
+
       this.paymentTypes = this.generalSettings.paymentTypes;
       this.loading = false;
-
+      this.spinner.hide();
     }).catch(err => {
       let message = "";
       if (err.error){
@@ -63,13 +66,15 @@ export class OperaReportMapTablesComponent implements OnInit {
       });
 
       this.loading = false;
+      this.spinner.hide();
+
     });
   }
 
   add(){
-    if(this.newPaymentType.typeId && this.newPaymentType.paymentType && this.newPaymentType.paymentDescription){
+    if(this.newPaymentType.typeId && this.newPaymentType.type && this.newPaymentType.typeDescription){
       this.paymentTypes.push(this.newPaymentType);
-      this.newPaymentType = new PaymentType();
+      this.newPaymentType = new BookingType();
 
       this.paymentTypes = [...this.paymentTypes];
     }else{
@@ -82,13 +87,28 @@ export class OperaReportMapTablesComponent implements OnInit {
   }
 
   addCancelReason(){
-    if(this.newCancelReason.reasonId &&  this.newCancelReason.reason && this.newCancelReason.reasonDescription){
+    if(this.newCancelReason.type &&  this.newCancelReason.type && this.newCancelReason.typeDescription){
       this.cancelReasons.push(this.newCancelReason);
-      this.newCancelReason = new CancelReason();
+      this.newCancelReason = new BookingType();
 
       this.cancelReasons = [...this.cancelReasons];
     }else{
       this.snackBar.open('Please fill all cancel reaseon fields.', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+    }
+  }
+
+  addRoomType(){
+    if(this.newRoomType.typeId &&  this.newRoomType.type && this.newRoomType.typeDescription){
+      this.roomTypes.push(this.newRoomType);
+      this.newRoomType = new BookingType();
+
+      this.roomTypes = [...this.roomTypes];
+    }else{
+      this.snackBar.open('Please fill all room type fields.', null, {
         duration: 2000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
@@ -107,6 +127,30 @@ export class OperaReportMapTablesComponent implements OnInit {
 
       if(this.cancelReasons.length != 0) {
         this.generalSettings.cancelReasons = this.cancelReasons;
+      }
+
+      if(this.roomTypes.length != 0) {
+        this.generalSettings.roomTypes = this.roomTypes;
+      }
+
+      if(this.nationalities.length != 0) {
+        this.generalSettings.nationalities = this.nationalities;
+      }
+
+      if(this.purposeOfVisit.length != 0) {
+        this.generalSettings.purposeOfVisit = this.purposeOfVisit;
+      }
+
+      if(this.genders.length != 0) {
+        this.generalSettings.genders = this.genders;
+      }
+
+      if(this.customerTypes.length != 0) {
+        this.generalSettings.customerTypes = this.customerTypes;
+      }
+
+      if(this.transactionTypes.length != 0) {
+        this.generalSettings.transactionTypes = this.transactionTypes;
       }
 
       this.generalSettingsService.updateGeneralSettings(this.generalSettings).then(result => {
