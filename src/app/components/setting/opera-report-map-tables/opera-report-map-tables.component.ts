@@ -14,16 +14,23 @@ import { GeneralSettingsService } from 'src/app/services/generalSettings/general
   styleUrls: ['./opera-report-map-tables.component.scss']
 })
 export class OperaReportMapTablesComponent implements OnInit {
-  paymentTypesLoading = true;
+  loading = true;
   saveLoading = true;
 
   generalSettings: GeneralSettings;
   newPaymentType = new PaymentType();
   newCancelReason = new CancelReason();
 
+  purposeOfVisit = [];
   paymentTypes = [];
+  genders = [];
+  customerTypes = [];
+  roomTypes = [];
+  transactionTypes = [];
+  nationalities = [];
+  
   cancelReasons = [];
-
+  
   constructor(public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService) { }
 
@@ -32,10 +39,12 @@ export class OperaReportMapTablesComponent implements OnInit {
   }
 
   getGeneralSettings() {
+    this.loading = true;
     this.generalSettingsService.getGeneralSettings().then((res) => {
       this.generalSettings = res as GeneralSettings;
       
       this.paymentTypes = this.generalSettings.paymentTypes;
+      this.loading = false;
 
     }).catch(err => {
       let message = "";
@@ -52,6 +61,8 @@ export class OperaReportMapTablesComponent implements OnInit {
         horizontalPosition: 'right',
         panelClass:"my-snack-bar-fail"
       });
+
+      this.loading = false;
     });
   }
 
