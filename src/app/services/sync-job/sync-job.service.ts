@@ -72,4 +72,10 @@ export class SyncJobService {
     return this.http.get<boolean>(Constants.CLEAR_SYNC_JOB_DATA,
      { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
+
+  getSyncJobDataByBookingNo(bookingNo: string) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get<SyncJobData[]>(Constants.GET_SYNC_JOB_DATA_BY_BOOKING_NO + '?bookingNo=' + bookingNo,
+     { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
 }

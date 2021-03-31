@@ -58,6 +58,7 @@ import { CancelBookingReportConfigComponent } from './components/cancel-booking-
 import { OccupancyUpdateReportComponent } from './components/occupancy-update-report/occupancy-update-report.component';
 import { OccupancyUpdateReportConfigComponent } from './components/occupancy-update-report-config/occupancy-update-report-config.component';
 import { OperaReportMapTablesComponent } from './components/setting/opera-report-map-tables/opera-report-map-tables.component';
+import { OperaBookingDashBoardComponent } from './components/opera-booking-dash-board/opera-booking-dash-board.component';
 
 
 const routes: Routes = [
@@ -76,6 +77,8 @@ const routes: Routes = [
   { path: Constants.SUPPLIERS_MAPPING, component: SupplierMappingComponent ,canActivate:[AuthGuardService]},
   { path: Constants.OPERA_REPORT_MAP_TABLES, component: OperaReportMapTablesComponent ,canActivate:[AuthGuardService]},
 
+  // OPERA Views
+  { path: Constants.OPERA_BOOKING_DASHBOARD_PAGE, component: OperaBookingDashBoardComponent ,canActivate:[AuthGuardService]},
 
   // Loyalty Views
   { path: Constants.LOYALTY, component: LoyaltyComponent ,canActivate:[AuthGuardService]},

@@ -71,7 +71,7 @@ export class OperaReportMapTablesComponent implements OnInit {
   }
 
   addCancelReason(){
-    if(this.newCancelReason.reasonId && this.newCancelReason.reasonDescription){
+    if(this.newCancelReason.reasonId &&  this.newCancelReason.reason && this.newCancelReason.reasonDescription){
       this.cancelReasons.push(this.newCancelReason);
       this.newCancelReason = new CancelReason();
 

@@ -52,6 +52,7 @@
 
         <div class="back" style="margin-bottom: 15px;">
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Reason Id" [(ngModel)]="newCancelReason.reasonId">
+            <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Reason" [(ngModel)]="newCancelReason.reason">
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Reason Description" [(ngModel)]="newCancelReason.reasonDescription">
             <button mat-flat-button (click)="addCancelReason()">Add</button>
         </div>

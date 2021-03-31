@@ -31,6 +31,7 @@ export class Constants {
     static GET_SYNC_JOB_DATA_BY_ID = environment.apiHost + '/getSyncJobDataById';
     static GET_SYNC_JOB_DATA = environment.apiHost + '/getSyncJobData';
     static CLEAR_SYNC_JOB_DATA = environment.apiHost + '/clearSyncJobData';
+    static GET_SYNC_JOB_DATA_BY_BOOKING_NO = environment.apiHost + '/getSyncJobDataByBookingNo';
 
     static GET_OPERATION_TYPES_URL = environment.apiHost + '/getOperationTypes';
     static GET_OPERATION_TYPE_BY_NAME_URL = environment.apiHost + '/getOperationTypeByName';
@@ -194,6 +195,9 @@ export class Constants {
     static OCCUPANCY_UPDATE_REPORT_SYNC = 'Occupancy Update Report';
 
     static SYNC_OPERA_OCCUPANCY_UPDATE_URL = environment.apiHost + '/fetchoccupancyUpdate';
+
+    //==> Booking Dashboard
+    static OPERA_BOOKING_DASHBOARD_PAGE = 'operaBookingDashboard';
 
     //////////////////////////////////////////////// Zeal Payment  /////////////////////////////////////////////////////////
 

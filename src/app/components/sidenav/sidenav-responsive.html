@@ -33,6 +33,15 @@
 
                 <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
                     <mat-expansion-panel-header>
+                        Reports
+                    </mat-expansion-panel-header>
+                    <mat-nav-list dense>
+                        <a mat-list-item (click)="snav.toggle()" routerLink="/operaBookingDashboard">Booking Reports</a>
+                    </mat-nav-list>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
+                    <mat-expansion-panel-header>
                         Applications
                     </mat-expansion-panel-header>
                     <mat-nav-list dense>
