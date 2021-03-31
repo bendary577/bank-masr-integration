@@ -21,6 +21,10 @@ export class OperaReportMapTablesComponent implements OnInit {
   newCancelReason = new BookingType();
   newRoomType = new BookingType();
   newNationalities = new BookingType();
+  newPurposeOfVisit = new BookingType();
+  newGender = new BookingType();
+  newCustomerTypes = new BookingType();
+  newTransactionTypes = new BookingType();
 
   purposeOfVisit = [];
   paymentTypes = [];
@@ -46,7 +50,15 @@ export class OperaReportMapTablesComponent implements OnInit {
     this.generalSettingsService.getGeneralSettings().then((res) => {
       this.generalSettings = res as GeneralSettings;
 
+      this.cancelReasons = this.generalSettings.cancelReasons;
       this.paymentTypes = this.generalSettings.paymentTypes;
+      this.purposeOfVisit = this.generalSettings.purposeOfVisit;
+      this.genders = this.generalSettings.genders;
+      this.customerTypes = this.generalSettings.customerTypes;
+      this.roomTypes = this.generalSettings.roomTypes;
+      this.transactionTypes = this.generalSettings.transactionTypes;
+      this.nationalities = this.generalSettings.nationalities;
+
       this.loading = false;
       this.spinner.hide();
     }).catch(err => {
@@ -77,38 +89,45 @@ export class OperaReportMapTablesComponent implements OnInit {
       this.newPaymentType = new BookingType();
 
       this.paymentTypes = [...this.paymentTypes];
-    }else{
-      this.snackBar.open('Please fill all payment type fields.', null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-    }
-  }
 
-  addCancelReason(){
-    if(this.newCancelReason.type &&  this.newCancelReason.type && this.newCancelReason.typeDescription){
+    } else if(this.newCancelReason.type &&  this.newCancelReason.type && this.newCancelReason.typeDescription){
       this.cancelReasons.push(this.newCancelReason);
       this.newCancelReason = new BookingType();
 
       this.cancelReasons = [...this.cancelReasons];
-    }else{
-      this.snackBar.open('Please fill all cancel reaseon fields.', null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-    }
-  }
 
-  addRoomType(){
-    if(this.newRoomType.typeId &&  this.newRoomType.type && this.newRoomType.typeDescription){
+    } else if(this.newRoomType.type &&  this.newRoomType.type && this.newRoomType.typeDescription){
       this.roomTypes.push(this.newRoomType);
       this.newRoomType = new BookingType();
 
       this.roomTypes = [...this.roomTypes];
-    }else{
-      this.snackBar.open('Please fill all room type fields.', null, {
+
+    } else if(this.newCustomerTypes.type &&  this.newCustomerTypes.type && this.newCustomerTypes.typeDescription){
+      this.customerTypes.push(this.newCustomerTypes);
+      this.newCustomerTypes = new BookingType();
+
+      this.customerTypes = [...this.customerTypes];
+
+    } else if(this.newNationalities.type &&  this.newNationalities.type && this.newNationalities.typeDescription){
+      this.nationalities.push(this.newNationalities);
+      this.newNationalities = new BookingType();
+
+      this.nationalities = [...this.nationalities];
+
+    } else if(this.newPurposeOfVisit.type &&  this.newPurposeOfVisit.type && this.newPurposeOfVisit.typeDescription){
+      this.purposeOfVisit.push(this.newPurposeOfVisit);
+      this.newPurposeOfVisit = new BookingType();
+
+      this.purposeOfVisit = [...this.purposeOfVisit];
+
+    } else if(this.newGender.type &&  this.newGender.type && this.newGender.typeDescription){
+      this.genders.push(this.newGender);
+      this.newGender = new BookingType();
+
+      this.genders = [...this.genders];
+
+    } else{
+      this.snackBar.open('Please fill all type fields.', null, {
         duration: 2000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
