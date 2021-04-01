@@ -73,9 +73,9 @@ export class SyncJobService {
      { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
-  getSyncJobDataByBookingNo(bookingNo: string) {
+  getSyncJobDataByBookingNo(bookingNo: string, bookingStatus: string) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get<SyncJobData[]>(Constants.GET_SYNC_JOB_DATA_BY_BOOKING_NO + '?bookingNo=' + bookingNo,
+    return this.http.get<SyncJobData[]>(Constants.GET_SYNC_JOB_DATA_BY_BOOKING_NO + '?bookingNo=' + bookingNo + '&bookingStatus=' + bookingStatus,
      { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 }
