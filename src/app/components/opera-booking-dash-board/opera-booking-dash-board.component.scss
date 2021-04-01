@@ -1,1 +1,9 @@
 @import "../approved-invoices-infor/approved-invoices-infor.component.scss";
+
+.searchInput{
+    width: -webkit-fill-available;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
