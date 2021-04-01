@@ -126,6 +126,12 @@ export class OperaReportMapTablesComponent implements OnInit {
 
       this.genders = [...this.genders];
 
+    } else if(this.newTransactionTypes.type &&  this.newTransactionTypes.type && this.newTransactionTypes.typeDescription){
+      this.transactionTypes.push(this.newTransactionTypes);
+      this.newTransactionTypes = new BookingType();
+
+      this.transactionTypes = [...this.transactionTypes];
+
     } else{
       this.snackBar.open('Please fill all type fields.', null, {
         duration: 2000,
