@@ -91,6 +91,7 @@ export class CancelBookingReportComponent implements OnInit {
 
   async syncCancelBooking(){
     this.cancelBookingList.showLoading = true;
+    this.cancelBookingList.cancelBookingData = [];
 
     this.newBookingService.getCancelBooking().toPromise().then((res: any) => {
       this.success = res.success;

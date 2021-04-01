@@ -90,7 +90,8 @@ export class NewBookingReportComponent implements OnInit {
 
   async syncNewBooking(){
     this.newBookingList.showLoading = true;
-
+    this.newBookingList.newBookingData = [];
+    
     this.newBookingService.getNewBooking().toPromise().then((res: any) => {
       this.success = res.success;
 

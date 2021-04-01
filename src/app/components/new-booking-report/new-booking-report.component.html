@@ -102,6 +102,12 @@
                     <label *ngIf="row.data.cuFlag == '2'">UPDATE</label>
                 </ng-template>
             </ngx-datatable-column>
+
+            <ngx-datatable-column name="Transaction Id">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.transactionId}}
+                </ng-template>
+            </ngx-datatable-column>
     
             <ngx-datatable-column name="Booking No">
                 <ng-template let-row="row" ngx-datatable-cell-template>
@@ -166,6 +172,12 @@
             <ngx-datatable-column name="Adults">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.data.noOfGuest}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Purpose of Visit">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.purposeOfVisit}}
                 </ng-template>
             </ngx-datatable-column>
 
