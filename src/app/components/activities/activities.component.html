@@ -93,47 +93,49 @@
 </div>
 
 <div class="main" >
-    <ngx-datatable class="material" [loadingIndicator]="reportsList.showLoading" [messages]="reportsList.messages" 
+
+        <ngx-datatable class="material" [loadingIndicator]="transactionList.showLoading" [messages]="transactionList.messages" 
     [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-     [rows]="reportsList.reportsData" [selected]="reportsList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
+     [rows]="transactionList.transactionData" [selected]="transactionList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
      [scrollbarH]="true">
 
-        <ngx-datatable-column name="Name">
+        <ngx-datatable-column name="User Name">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.name}}
+                {{row.user.name}}
             </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column name="Transaction Date">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.creationDate | date: 'dd/MM/yyyy hh:mm:ss' }}
+                {{row.transactionDate | date: 'dd/MM/yyyy hh:mm:ss' }}
             </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column name="Group">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.group}}
+                {{row.group.name}}
             </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column name="Total Payment">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.amount}} EGP
+                {{row.totalPayment}} EGP
             </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column name="Discount Rate">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.discountRate}} %
+                {{row.discountRate | number : '1.2-2'}} %
             </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column name="After Discount">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.amountAD}} EGP
+                {{row.afterDiscount | number : '1.2-2'}} EGP
             </ng-template>
         </ngx-datatable-column>
 
     </ngx-datatable>
+
 </div>
 

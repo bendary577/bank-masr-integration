@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
+import { Constants } from 'src/app/models/constants';
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
+import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 
 @Component({
   selector: 'app-activities',
@@ -9,7 +14,7 @@ import { FormControl } from '@angular/forms';
 export class ActivitiesComponent implements OnInit {
   filterBy = "Daily";
   imagePath = './src/assets/user.png'
-  reportsList = {
+  transactionList = {
     paginateData: true as boolean,
     offset: 0,
     messages: {
@@ -20,72 +25,47 @@ export class ActivitiesComponent implements OnInit {
   `
     },
     selected: [],
-    reportssCount: 0 as number,
+    transactionCount: 0 as number,
     pagesFilter: [10, 25, 50, 75, 100],
     showLoading: true,
     inputSearch: '' as string,
-    reportsData: [] 
+    transactionData: [] 
   };
 
 
-  constructor() { }
+  constructor(public snackBar: MatSnackBar, private router: Router,
+    private sidNav: SidenavResponsive,private loyaltyService: LoyaltyService) { }
 
   ngOnInit() {
-    this.getReports();
+    this.getTransactions();
   }
 
-  getReports(){
-    this.reportsList.showLoading = false;
-    this.reportsList.reportsData = [
-      {
-        name: "Ahmed Mohamed",
-        group: "Ovio",
-        amount: 200,
-        discountRate: 10,
-        amountAD: 180,
-        creationDate: "2021-02-23T07:59:38.363+0000"
-      },
-      {
-        name: "Ahmed Mohamed",
-        group: "Ovio",
-        amount: 50,
-        discountRate: 10,
-        amountAD: 45,
-        creationDate: "2021-02-23T07:59:38.363+0000"
-      },
-      {
-        name: "Ahmed Mohamed",
-        group: "Ovio",
-        amount: 20,
-        discountRate: 10,
-        amountAD: 18,
-        creationDate: "2021-02-23T07:59:38.363+0000"
-      },
-      {
-        name: "Amr Mohamed",
-        group: "Arab Aluminum",
-        amount: 200,
-        discountRate: 5,
-        amountAD: 190,
-        creationDate: "2021-02-23T07:59:38.363+0000"
-      },
-      {
-        name: "Ahmed Mohamed",
-        group: "Ovio",
-        amount: 200,
-        discountRate: 10,
-        amountAD: 180,
-        creationDate: "2021-02-23T07:59:38.363+0000"
-      },
-      {
-        name: "Ali Mostafa",
-        group: "Top Management",
-        amount: 198.90,
-        discountRate: 25,
-        amountAD: 153.90,
-        creationDate: "2021-02-23T05:00:38.363+0000"
+  getTransactions(){
+
+    this.transactionList.showLoading = true;
+    this.loyaltyService.getTransactions( Constants.REDEEM_VOUCHER).toPromise().then((res: any) => {
+      this.transactionList.transactionData = res;
+      this.transactionList.showLoading = false;
+    }).catch(err => {
+      this.transactionList.showLoading = false;
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
       }
-  ];
+
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
+      });
+    });
   }
 
 }

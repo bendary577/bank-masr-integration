@@ -150,13 +150,13 @@ export class ManageGroupsComponent implements OnInit {
         this.newGroup.description = res.description;
         this.newGroup.discountRate = res.discountRate;
         this.newGroup.deleted = false;
+        console.log(this.groupsList.selected[0])
 
         this.groupsList.showLoading = true;
-        this.loyaltyService.addAppGroups(this.newGroup, false).then(result => {
+        this.loyaltyService.updateAppGroups(this.newGroup, false).then(result => {
           this.loading = false;
           this.groupsList.showLoading = false;
           this.getGroups();
-
           this.newGroup = new Group();
 
           this.snackBar.open("Comapny updated successfully.", null, {
@@ -191,5 +191,7 @@ export class ManageGroupsComponent implements OnInit {
         });
       }
     });
+
   }
+
 }

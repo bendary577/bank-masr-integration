@@ -216,14 +216,16 @@ export class Constants {
     static MANAGE_GROUPS = "manageGroups";
     static MANAGE_USERS = 'manageUsers';
     static MANAGE_ACTIVITIES = 'managActivities';
-
+    static REDEEM_VOUCHER = 'Redeem Voucher';
+    
     static GET_APP_GROUPS_URL = environment.apiHost + '/getApplicationGroups';
     static ADD_APP_GROUP_URL = environment.apiHost + '/addApplicationGroup';
     static Delete_APP_GROUPS_URL = environment.apiHost + '/deleteApplicationGroups';
-
+    static UPDATE_APP_GROUP_URL = environment.apiHost  + '/updateApplicationGroup'
     static GET_APP_USERS_URL = environment.apiHost + '/getApplicationUsers';
     static ADD_APP_USER_URL = environment.apiHost + '/addApplicationUser';
     static Delete_APP_USERS_URL = environment.apiHost + '/deleteApplicationUsers';
+    static GET_TRANSACTION_URL = environment.apiHost + '/transaction/getTransactions';
 
     //////////////////////////////////////////////// Export To Excel //////////////////////////////////////////////
 

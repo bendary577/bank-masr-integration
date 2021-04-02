@@ -20,7 +20,12 @@ export class LoyaltyService {
     return this.http.post(Constants.ADD_APP_GROUP_URL + "?addFlag=" + addFlag, group, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
  
-  deleteAppGroups(groups) {
+  updateAppGroups(group, addFlag) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.post(Constants.UPDATE_APP_GROUP_URL + "?addFlag=" + addFlag, group, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+  }
+  
+    deleteAppGroups(groups) {
     this.token = localStorage.getItem('auth_token');
     return this.http.put(Constants.Delete_APP_GROUPS_URL, groups, {
        headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
@@ -37,5 +42,11 @@ export class LoyaltyService {
     this.token = localStorage.getItem('auth_token');
     return this.http.post(Constants.ADD_APP_USER_URL + "?addFlag=" + addFlag , user, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
+  
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  getTransactions(transactionType) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get(Constants.GET_TRANSACTION_URL + "?transactionType=" + transactionType , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
 }

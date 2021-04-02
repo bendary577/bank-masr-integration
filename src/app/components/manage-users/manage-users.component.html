@@ -2,8 +2,8 @@
 
     <div class="header" style="margin-bottom: 15px;">
         <button mat-flat-button (click)="addUserDialog()">Add User</button>
-        <!-- <button mat-flat-button (click)="addGroupDialog()" [disabled]="usersList.selected.length != 1">Update User</button>
-        <button mat-flat-button (click)="deleteCompanies()" [disabled]="usersList.selected.length == 0">Delete Users</button> -->
+        <button mat-flat-button (click)="updateUserDialog()" [disabled]="usersList.selected.length != 1">Update User</button>
+        <!-- <button mat-flat-button (click)="deleteCompanies()" [disabled]="usersList.selected.length == 0">Delete Users</button> --> -->
     </div>   
 
     <ngx-datatable class="material" [loadingIndicator]="usersList.showLoading" [messages]="usersList.messages" 

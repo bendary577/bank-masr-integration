@@ -14,6 +14,7 @@ import { Group } from 'src/app/models/loyalty/Group';
 })
 export class ManageUsersComponent implements OnInit {
  
+  loading = false;
   newUser: ApplicationUser = new ApplicationUser();
   groups: Group[];
 
@@ -76,6 +77,8 @@ export class ManageUsersComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
+
+        this.loading = true;
         this.newUser.name = res.name;
         this.newUser.email = res.email;
         this.newUser.group = res.group;
@@ -83,6 +86,9 @@ export class ManageUsersComponent implements OnInit {
 
         this.usersList.showLoading = true;
         this.loyaltyService.addAppUsers(this.newUser, true).then(result => {
+
+          this.loading = true;
+
           this.getUsers();
 
           this.newUser = new ApplicationUser();
@@ -118,4 +124,62 @@ export class ManageUsersComponent implements OnInit {
       }
     });
   }
+
+  updateUserDialog(){
+    const dialogRef = this.dialog.open(AddAppUserComponent, {
+      width : '550px',
+      data: {
+        users : this.usersList.selected[0]
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if(res) {
+        this.loading = true;
+
+          this.newUser = this.usersList.selected[0];
+          this.newUser.name = res.name;
+          this.newUser.email = res.email;
+          this.newUser.group = res.group;
+          this.newUser.deleted = false ;
+
+          this.usersList.showLoading = true;
+          this.loyaltyService.addAppUsers(this.newUser, false).then(result => {
+            this.loading = false;
+            this.usersList.showLoading = false;
+            this.getGroups();
+            this.newUser = new ApplicationUser();
+
+            this.snackBar.open("User Updated successfully.", null, {
+              duration: 2000,
+              horizontalPosition: 'right',
+              panelClass : "my-snack-bar-success"
+            });
+          }).catch(err => {
+            this.loading = false;
+            this.usersList.showLoading = false;
+
+            this.newUser = new ApplicationUser();
+
+            let message = "";
+            if(err.status === 401){
+              message = ErrorMessages.SESSION_EXPIRED;
+              this.sidNav.Logout();
+            }else if(err.error.message){
+              message = err.error.message;
+            }else if(err.message){
+              message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+            }
+
+            this.snackBar.open(message , null, {
+              duration: 3000,
+              horizontalPosition: 'right',
+              panelClass:"my-snack-bar-fail"
+            });
+  
+          })
+      }
+    })
+  }
+
 }
