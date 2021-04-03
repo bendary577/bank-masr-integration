@@ -127,9 +127,11 @@ export class ManageUsersComponent implements OnInit {
 
   updateUserDialog(){
     const dialogRef = this.dialog.open(AddAppUserComponent, {
+      
       width : '550px',
       data: {
-        users : this.usersList.selected[0]
+        user : this.usersList.selected[0],
+        groups: this.groups
       }
     });
 
@@ -137,7 +139,7 @@ export class ManageUsersComponent implements OnInit {
       if(res) {
         this.loading = true;
 
-          this.newUser = this.usersList.selected[0];
+          this.newUser = this.usersList.selected[0][0];
           this.newUser.name = res.name;
           this.newUser.email = res.email;
           this.newUser.group = res.group;

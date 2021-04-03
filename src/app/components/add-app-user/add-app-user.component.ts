@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
+import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser';
 import { Company } from 'src/app/models/loyalty/Company';
 import { Group } from 'src/app/models/loyalty/Group';
 
@@ -11,7 +12,7 @@ import { Group } from 'src/app/models/loyalty/Group';
 })
 export class AddAppUserComponent implements OnInit {
   public form: FormGroup;
-
+  newUser = new ApplicationUser();
   selectedCompany: Company;
   selectedGroup: Group;
 
@@ -22,13 +23,24 @@ export class AddAppUserComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data) { }
  
   ngOnInit() {
-    this.groups = this.data["groups"];
+    if (this.data["user"] != null && this.data != undefined){
+      this.newUser = this.data["user"];
+      this.groups = this.data["groups"];
 
-    this.form = this.formBuilder.group({
+      this.form = this.formBuilder.group({
+        name: [this.newUser.name, Validators.required],        
+        email: [this.newUser.email],
+        group: [this.newUser.group, Validators.required]
+      });
+    }else{
+      this.groups = this.data["groups"];
+
+      this.form = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', Validators.required],
       group: ['', Validators.required]
-    });
+      });
+    }
   }
 
   onNoClick(): void {

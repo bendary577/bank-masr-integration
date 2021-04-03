@@ -1,8 +1,8 @@
 <div class="main" >
     <div class="header" style="margin-bottom: 15px;">
-        <button mat-flat-button (click)="addCompanyDialog()">Add Group</button>
-        <button mat-flat-button (click)="updateCompanyDialog()" [disabled]="groupsList.selected.length != 1">Update Group</button>
-        <button mat-flat-button (click)="deleteCompanies()" [disabled]="groupsList.selected.length == 0">Delete Groups</button>
+        <button mat-flat-button (click)="addGroupDialog()">Add Group</button>
+        <button mat-flat-button (click)="updateGroupDialog()" [disabled]="groupsList.selected.length != 1">Update Group</button>
+        <button mat-flat-button (click)="deleteGroups()" [disabled]="groupsList.selected.length == 0">Delete Groups</button>
     </div>   
 
     <ngx-datatable class="material" [loadingIndicator]="groupsList.showLoading" [messages]="groupsList.messages" 

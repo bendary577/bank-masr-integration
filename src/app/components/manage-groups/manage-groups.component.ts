@@ -64,9 +64,9 @@ export class ManageGroupsComponent implements OnInit {
     });
   }
 
-  deleteCompanies(){
+  deleteGroups(){
     this.groupsList.showLoading = true;
-    this.loyaltyService.deleteAppGroups(this.groupsList.selected).then((res: any) => {
+    this.loyaltyService.deleteAppGroups(this.groupsList.selected[0][0]).then((res: any) => {
       console.log(this.groupsList.selected)
       this.getGroups();
       this.groupsList.showLoading = false;
@@ -76,7 +76,7 @@ export class ManageGroupsComponent implements OnInit {
     });
   }
 
-  addCompanyDialog(){
+  addGroupDialog(){
     const dialogRef = this.dialog.open(AddAppGroupComponent, {
         width: '550px',
         data: {
@@ -135,25 +135,25 @@ export class ManageGroupsComponent implements OnInit {
     });
   }
 
-  updateCompanyDialog(){
+  updateGroupDialog(){
     const dialogRef = this.dialog.open(AddAppGroupComponent, {
       width: '550px',
-      data: {group: this.groupsList.selected[0],
+      data: {group: this.groupsList.selected[0][0],
         groups: this.groupsList.groupsData
       }
     });
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        this.newGroup = this.groupsList.selected[0];
+        this.newGroup = this.groupsList.selected[0][0];
         this.newGroup.name = res.name;
         this.newGroup.description = res.description;
         this.newGroup.discountRate = res.discountRate;
+        this.newGroup.parentGroup = res.parentGroup;
         this.newGroup.deleted = false;
-        console.log(this.groupsList.selected[0])
 
         this.groupsList.showLoading = true;
-        this.loyaltyService.updateAppGroups(this.newGroup, false).then(result => {
+        this.loyaltyService.addAppGroups(this.newGroup, false).then(result => {
           this.loading = false;
           this.groupsList.showLoading = false;
           this.getGroups();

@@ -226,6 +226,8 @@ export class Constants {
     static ADD_APP_USER_URL = environment.apiHost + '/addApplicationUser';
     static Delete_APP_USERS_URL = environment.apiHost + '/deleteApplicationUsers';
     static GET_TRANSACTION_URL = environment.apiHost + '/transaction/getTransactions';
+    static GET_TOP_USERS_URL = environment.apiHost + '/getTopUser';
+    static GET_TOP_Groups_URL = environment.apiHost + '/getTopGroups';
 
     //////////////////////////////////////////////// Export To Excel //////////////////////////////////////////////
 

@@ -21,7 +21,6 @@ export class AddAppGroupComponent implements OnInit {
     if (this.data["group"] != null && this.data != undefined){
       this.group = this.data["group"];
       this.groups = this.data["groups"];
-              console.log(this.group)
 
       this.form = this.formBuilder.group({
         name: [this.group.name, Validators.required],        
@@ -30,7 +29,6 @@ export class AddAppGroupComponent implements OnInit {
         parentGroup: [this.group.parentGroup],
         discountRate: [this.group.discountRate, Validators.required]
       });
-      console.log(this.group)
 
     }else{
       this.groups = this.data["groups"];

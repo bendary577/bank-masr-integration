@@ -5,19 +5,11 @@
         <mat-card class="stat-card">
             <mat-card-content>
                 <h2>Top Users</h2>
-                <div class="row">
-                    <div class="column">
+                <div class="row" >
+                    <div class="column" *ngFor="let user of users">
                         <img  class="user-img" src="../../../assets/user2.jpg" alt="image">
-                        <p>Ahmed Mohamed</p>
+                        <p>{{user.name}}</p>
                     </div>                    
-                    <div class="column">
-                        <img  class="user-img" src="../../../assets/user1.jpg" alt="image">
-                        <p>Amr Mohamed</p>
-                    </div>
-                    <div class="column">
-                        <img  class="user-img" src="../../../assets/user3.jpg" alt="image">
-                        <p>Ali Mostafa</p>
-                    </div>
                 </div>
             </mat-card-content>
         </mat-card>
@@ -28,18 +20,10 @@
             <mat-card-content>
                 <h2>Top Groups</h2>
                 <div class="row">
-                    <div class="column">
+                    <div class="column" *ngFor="let group of groups">
                         <img  class="user-img" src="../../../assets/letter_o.png" alt="image">
-                        <p>Ovio</p>
+                        <p>{{group.name}}</p>
                     </div>                    
-                    <div class="column">
-                        <img  class="user-img" src="../../../assets/letter_a.png" alt="image">
-                        <p>Top Management</p>
-                    </div>
-                    <div class="column">
-                        <img  class="user-img" src="../../../assets/letter_a.png" alt="image">
-                        <p>Arab Aluminum</p>
-                    </div>
                 </div>
             </mat-card-content>
         </mat-card>

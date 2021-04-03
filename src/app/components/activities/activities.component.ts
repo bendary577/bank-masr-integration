@@ -14,6 +14,8 @@ import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 export class ActivitiesComponent implements OnInit {
   filterBy = "Daily";
   imagePath = './src/assets/user.png'
+  users = [];
+  groups = [];
   transactionList = {
     paginateData: true as boolean,
     offset: 0,
@@ -38,6 +40,56 @@ export class ActivitiesComponent implements OnInit {
 
   ngOnInit() {
     this.getTransactions();
+    this.getTopUsers();
+    this.getTopGroups();
+  }
+
+  getTopUsers(){
+    this.loyaltyService.getTopUsers().toPromise().then((res: any) => {
+      this.users = res;
+    }).catch(err => {
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
+      }
+
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
+      });
+    });  
+  }
+
+  getTopGroups(){
+    this.loyaltyService.getTopGroups().toPromise().then((res: any) => {
+      this.groups = res;
+    }).catch(err => {
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
+      }
+
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
+      });
+    });  
   }
 
   getTransactions(){

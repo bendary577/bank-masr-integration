@@ -121,7 +121,6 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { NewBookingReportComponent } from './components/new-booking-report/new-booking-report.component';
 import { ConsumptionMajorGroupChildComponent } from './components/consumption-major-group-child/consumption-major-group-child.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -206,7 +205,7 @@ import { ConsumptionMajorGroupChildComponent } from './components/consumption-ma
     WlsIntegrationConfigComponent,
     WlsIntegrationComponent,
     DialogComponent,
-    NewBookingReportComponent
+    NewBookingReportComponent,
   ],
   imports: [
     BrowserModule,
@@ -235,6 +234,7 @@ import { ConsumptionMajorGroupChildComponent } from './components/consumption-ma
     FormsModule,
     MatProgressBarModule,
     NgxJsonViewerModule
+    
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, 
     CookieService, 
