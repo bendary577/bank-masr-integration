@@ -163,6 +163,31 @@ export class JournalInforComponent implements OnInit {
       }
    );
   }
+
+  exportToCSV():void {
+    this.csvService.exportSalesToCSV(this.selectedJob.id, Constants.CONSUMPTION_SYNC).subscribe(
+      res => {
+        const blob = new Blob([res.body], { type : 'application/vnd.ms.txt' });
+        const file = new File([blob], "consumption" + '.ndf', { type: 'application/vnd.ms.txt' });
+        saveAs(file);
+
+        this.snackBar.open("Export Successfully", null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
+        });
+      },
+      err => {
+        console.error(err)
+        this.snackBar.open("Fail to export, Please try agian" , null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+      }
+   );
+  }
+
   generateSingleFile():void {
     this.csvService.generateSingleFile(Constants.CONSUMPTION_SYNC).subscribe(
       res => {
