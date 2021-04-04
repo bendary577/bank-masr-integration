@@ -13,7 +13,9 @@ import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 })
 export class ActivitiesComponent implements OnInit {
   filterBy = "Daily";
-  imagePath = './src/assets/user.png'
+  imagePath = './src/assets/user.png';
+  totalSpendM: any;
+
   users = [];
   groups = [];
   transactionList = {
@@ -34,7 +36,6 @@ export class ActivitiesComponent implements OnInit {
     transactionData: [] 
   };
 
-
   constructor(public snackBar: MatSnackBar, private router: Router,
     private sidNav: SidenavResponsive,private loyaltyService: LoyaltyService) { }
 
@@ -42,6 +43,31 @@ export class ActivitiesComponent implements OnInit {
     this.getTransactions();
     this.getTopUsers();
     this.getTopGroups();
+    this.totalSpend("Today");
+  }
+
+  totalSpend(date){
+    this.loyaltyService.getTotalSpend(date).toPromise().then((res: any) => {
+      this.totalSpendM = res["totalSpend"];
+    }).catch(err => {
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
+      }
+
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
+      });
+    });  
   }
 
   getTopUsers(){

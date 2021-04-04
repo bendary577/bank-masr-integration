@@ -219,7 +219,9 @@ export class Constants {
     static REDEEM_VOUCHER = 'Redeem Voucher';
     
     static GET_APP_GROUPS_URL = environment.apiHost + '/getApplicationGroups';
+    static GET_ALL_APP_GROUPS_URL = environment.apiHost + '/getAllApplicationGroups';
     static ADD_APP_GROUP_URL = environment.apiHost + '/addApplicationGroup';
+    static ADD_APP_GROUPIMAGE_URL = environment.apiHost + '/addApplicationGroupImage';
     static Delete_APP_GROUPS_URL = environment.apiHost + '/deleteApplicationGroups';
     static UPDATE_APP_GROUP_URL = environment.apiHost  + '/updateApplicationGroup'
     static GET_APP_USERS_URL = environment.apiHost + '/getApplicationUsers';
@@ -228,6 +230,7 @@ export class Constants {
     static GET_TRANSACTION_URL = environment.apiHost + '/transaction/getTransactions';
     static GET_TOP_USERS_URL = environment.apiHost + '/getTopUser';
     static GET_TOP_Groups_URL = environment.apiHost + '/getTopGroups';
+    static GET_TOTAL_SPEND_URL = environment.apiHost + '/transaction/getTotalSpendTransactions';
 
     //////////////////////////////////////////////// Export To Excel //////////////////////////////////////////////
 

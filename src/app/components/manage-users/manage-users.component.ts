@@ -59,12 +59,21 @@ export class ManageUsersComponent implements OnInit {
     });
   }
 
+  deleteUsers(){
+    this.usersList.showLoading = true;
+    this.loyaltyService.deleteAppUsers(this.usersList.selected[0][0]).then((res: any) => {
+      this.getGroups();
+      this.usersList.showLoading = false;
+    }).catch(err => {
+      this.usersList.showLoading = false;
+    });
+  }
+
   getGroups(){
-    this.loyaltyService.getAppGroups().toPromise().then((res: any) => {
+    this.loyaltyService.getAllAppGroups().toPromise().then((res: any) => {
       this.groups = res;
     }).catch(err => {
     });
-
   }
 
   addUserDialog(){

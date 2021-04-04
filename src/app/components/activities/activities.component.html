@@ -38,34 +38,17 @@
                 <form class="my-form">
                     <div class="row">
                         <div class="two-column" style="text-align: left;">
-                            <button class="filter-btn" mat-raised-button>Today</button>
-                            <button class="filter-btn" mat-raised-button>Last Week</button>
-                            <button class="filter-btn" mat-raised-button>Last Month</button>
+                            <button class="filter-btn" (click)="totalSpend('Today')" mat-raised-button>Today</button>
+                            <button class="filter-btn" (click)="totalSpend('Last Week')" mat-raised-button>Last Week</button>
+                            <button class="filter-btn" (click)="totalSpend('Last Month')" mat-raised-button>Last Month</button>
                         </div>
                         <div class="two-column">
-                            <h3 *ngIf="filterBy=='Daily'" style="border-radius: 10px; text-align: center; height: auto;">
+                            <h3 style="border-radius: 10px; text-align: center; height: auto;">
                                 <div>
                                     Total spend
                                 </div>
                                 <div>
-                                    2450 EGP
-                                </div>
-                            </h3>
-
-                            <h3 *ngIf="filterBy=='Weekly'" style="border-radius: 10px; text-align: center; height: auto;">
-                                <div>
-                                    Total spend
-                                </div>
-                                <div>
-                                    4450 EGP
-                                </div>
-                            </h3>
-                            <h3 *ngIf="filterBy=='Monthly'" style="border-radius: 10px; text-align: center; height: auto;">
-                                <div>
-                                    Total spend
-                                </div>
-                                <div>
-                                    15250 EGP
+                                    {{totalSpendM | number : '1.2-2'}} EGP
                                 </div>
                             </h3>
                         </div>
