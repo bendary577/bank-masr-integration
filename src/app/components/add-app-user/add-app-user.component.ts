@@ -38,7 +38,7 @@ export class AddAppUserComponent implements OnInit {
 
       this.form = this.formBuilder.group({
       name: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
       group: ['', Validators.required]
       });
     }

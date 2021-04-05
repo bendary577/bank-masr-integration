@@ -63,7 +63,7 @@ export class ManageGroupsComponent implements OnInit {
   
   onSelect({selected}) {
     this.groupsList.selected.splice(0, this.groupsList.selected.length);
-    this.groupsList.selected.push(selected);
+    this.groupsList.selected.push(...selected);
   }
 
   openSupGroup(group: Group){
@@ -84,7 +84,7 @@ export class ManageGroupsComponent implements OnInit {
   }
 
   deleteGroups(){
-    this.loyaltyService.deleteAppGroups(this.groupsList.selected[0][0]).then((res: any) => {
+    this.loyaltyService.deleteAppGroups(this.groupsList.selected).then((res: any) => {
       if (this.data.storage != null && this.data.storage != undefined){
         this.group = this.data.storage
         this.getGroups(true, this.group);
@@ -116,17 +116,13 @@ export class ManageGroupsComponent implements OnInit {
         this.newGroup.deleted = false;
 
         this.groupsList.showLoading = true;
-<<<<<<< HEAD
-        this.loyaltyService.addAppGroups(this.newGroup, true).then(result => {
-=======
         this.loyaltyService.addAppGroups(this.newGroup, true).then((result: any) => {
           this.loyaltyService.addAppGroupsImage(res.image, result["id"]);
->>>>>>> 96cd024fc6ee13ba6d949907dd6983d9957ca46e
           this.loading = false;
           this.groupsList.showLoading = false;
           this.newGroup = new Group();
           this.getGroups(!this.inParent, this.group);
-          this.snackBar.open("Add comapny successfully.", null, {
+          this.snackBar.open("Add group successfully.", null, {
             duration: 2000,
             horizontalPosition: 'right',
             panelClass:"my-snack-bar-success"
@@ -161,13 +157,13 @@ export class ManageGroupsComponent implements OnInit {
   updateGroupDialog(){
     const dialogRef = this.dialog.open(AddAppGroupComponent, {
       width: '550px',
-      data: {group: this.groupsList.selected[0][0],
+      data: {group: this.groupsList.selected[0],
               inParent: this.inParent, parentGroup: this.parentGroup}
     });
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        this.newGroup = this.groupsList.selected[0][0];
+        this.newGroup = this.groupsList.selected[0];
         this.newGroup.name = res.name;
         this.newGroup.description = res.description;
         this.newGroup.discountRate = res.discountRate;
@@ -182,7 +178,7 @@ export class ManageGroupsComponent implements OnInit {
           this.groupsList.showLoading = false;
           this.getGroups(!this.inParent, this.group);
           this.newGroup = new Group();
-          this.snackBar.open("Comapny updated successfully.", null, {
+          this.snackBar.open("Group updated successfully.", null, {
             duration: 2000,
             horizontalPosition: 'right',
             panelClass:"my-snack-bar-success"

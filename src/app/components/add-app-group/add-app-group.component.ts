@@ -44,12 +44,12 @@ export class AddAppGroupComponent implements OnInit {
       });
     }else{
       this.form = this.formBuilder.group({
-        name: ['', Validators.required],
+        name: ['', [Validators.required]],
         logoUrl: [''],
         description: [''],
         parentGroup: this.parentGroup,
-        discountRate: ['', Validators.required],
-        discountId: ['', Validators.required],
+        discountRate: ['', [Validators.required, Validators.max(100), Validators.min(0), Validators.pattern("^[0-9]*$")]],
+        discountId: ['', [Validators.required,Validators.min(0),Validators.pattern("^[0-9]*$")]],
       });
     }
   }
@@ -63,10 +63,6 @@ export class AddAppGroupComponent implements OnInit {
 
   csvInputChange(fileInputEvent: any) {
   this.srcResult = fileInputEvent.target.files[0];
-<<<<<<< HEAD
-  console.log(fileInputEvent.target.files)
-=======
->>>>>>> 96cd024fc6ee13ba6d949907dd6983d9957ca46e
   }
 
   onNoClick(): void {

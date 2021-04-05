@@ -153,7 +153,7 @@ export class ManageUsersComponent implements OnInit {
       if(res) {
         this.loading = true;
 
-          this.newUser = this.usersList.selected[0][0];
+          this.newUser = this.usersList.selected[0];
           this.newUser.name = res.name;
           this.newUser.email = res.email;
           this.newUser.group = res.group;
