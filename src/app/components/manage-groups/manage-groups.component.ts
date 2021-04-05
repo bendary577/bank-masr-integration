@@ -101,8 +101,6 @@ export class ManageGroupsComponent implements OnInit {
         this.newGroup.deleted = false;
 
         this.groupsList.showLoading = true;
-        console.log(res.image)
-        this.loyaltyService.addAppGroupsImage(res.image);
         this.loyaltyService.addAppGroups(this.newGroup, true).then(result => {
           this.loading = false;
           this.groupsList.showLoading = false;

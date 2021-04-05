@@ -53,7 +53,8 @@ export class AddAppGroupComponent implements OnInit {
   }
 
   csvInputChange(fileInputEvent: any) {
-  this.srcResult = fileInputEvent.target.files;
+  this.srcResult = fileInputEvent.target.files[0];
+  console.log(fileInputEvent.target.files)
   }
 
   onNoClick(): void {

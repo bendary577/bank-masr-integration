@@ -6,6 +6,7 @@ export class Group {
     public description: string;
     public discountId: number;
     public discountRate: string;
+    public imageUrl: any;
     public parentGroup : Group;
     public creationDate: string;
     public deleted: boolean;
