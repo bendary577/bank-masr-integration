@@ -15,10 +15,8 @@ import { SidenavResponsive } from '../sidenav/sidenav-responsive';
   styleUrls: ['./occupancy-update-report.component.scss']
 })
 export class OccupancyUpdateReportComponent implements OnInit {
-
   success = false;
   loading = true;
-  static getOccupancyUpdateLoding = false;
   
   jobs = [];
   selectedJob :SyncJob = null;
@@ -56,10 +54,6 @@ export class OccupancyUpdateReportComponent implements OnInit {
     this.occupancyUpdateList.selected.push(...selected);
   }
 
-  get staticgetNewBookingLoading() {
-    return OccupancyUpdateReportComponent.getOccupancyUpdateLoding ;
-  }
-
   getSyncJobs(syncJobTypeName: string) {
     this.spinner.show();
     this.syncJobService.getSyncJobs(syncJobTypeName).toPromise().then((res: any) => {
@@ -91,8 +85,9 @@ export class OccupancyUpdateReportComponent implements OnInit {
 
   async syncOccupancyUpdate(){
     this.occupancyUpdateList.showLoading = true;
+    this.occupancyUpdateList.occupancyUpdateData = [];
 
-    this.newBookingService.getNewBooking().toPromise().then((res: any) => {
+    this.newBookingService.getOccupancyUpdates().toPromise().then((res: any) => {
       this.success = res.success;
 
       if (this.success) {

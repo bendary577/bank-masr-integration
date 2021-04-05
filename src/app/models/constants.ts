@@ -194,7 +194,7 @@ export class Constants {
     static OCCUPANCY_UPDATE_REPORT_CONFIG_PAGE = 'occupancyUpdateReportConfig';
     static OCCUPANCY_UPDATE_REPORT_SYNC = 'Occupancy Update Report';
 
-    static SYNC_OPERA_OCCUPANCY_UPDATE_URL = environment.apiHost + '/fetchoccupancyUpdate';
+    static SYNC_OPERA_OCCUPANCY_UPDATE_URL = environment.apiHost + '/fetchOccupancyUpdate';
 
     //==> Booking Dashboard
     static OPERA_BOOKING_DASHBOARD_PAGE = 'operaBookingDashboard';
