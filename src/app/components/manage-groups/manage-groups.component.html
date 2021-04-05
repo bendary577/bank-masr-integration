@@ -1,5 +1,6 @@
 <div class="main" >
     <div class="header" style="margin-bottom: 15px;">
+        <button mat-flat-button class="headerBack" (click)="backClicked()">Go Back</button>
         <button mat-flat-button (click)="addGroupDialog()">Add Group</button>
         <button mat-flat-button (click)="updateGroupDialog()" [disabled]="groupsList.selected.length != 1">Update Group</button>
         <button mat-flat-button (click)="deleteGroups()" [disabled]="groupsList.selected.length == 0">Delete Groups</button>
@@ -25,13 +26,7 @@
                 <a class="group-name" (click)="openSupGroup(row)">{{row.name}}</a>
             </ng-template>
         </ngx-datatable-column>
-
-        <!-- <ngx-datatable-column name="Parent Group" >
-            <ng-template let-row="row" ngx-datatable-cell-template >
-                <span *ngIf="row.parentGroup">{{row.parentGroup.name}}</span>
-            </ng-template>
-        </ngx-datatable-column> -->
-
+        
         <ngx-datatable-column name="Discount Rate">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.discountRate}} %

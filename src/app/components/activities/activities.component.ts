@@ -5,6 +5,7 @@ import { Constants } from 'src/app/models/constants';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-activities',
@@ -36,7 +37,7 @@ export class ActivitiesComponent implements OnInit {
     transactionData: [] 
   };
 
-  constructor(public snackBar: MatSnackBar, private router: Router,
+  constructor(public snackBar: MatSnackBar, private router: Router, private _location: Location,
     private sidNav: SidenavResponsive,private loyaltyService: LoyaltyService) { }
 
   ngOnInit() {
@@ -44,6 +45,10 @@ export class ActivitiesComponent implements OnInit {
     this.getTopUsers();
     this.getTopGroups();
     this.totalSpend("Today");
+  }
+ 
+  backClicked() {
+    this._location.back();
   }
 
   totalSpend(date){

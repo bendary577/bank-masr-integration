@@ -15,6 +15,7 @@ export class AddAppUserComponent implements OnInit {
   newUser = new ApplicationUser();
   selectedCompany: Company;
   selectedGroup: Group;
+  srcResult: any;
 
   groups: Group[] = [];
 
@@ -43,6 +44,10 @@ export class AddAppUserComponent implements OnInit {
     }
   }
 
+  csvInputChange(fileInputEvent: any) {
+    this.srcResult = fileInputEvent.target.files[0];
+    }
+  
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -58,7 +63,8 @@ export class AddAppUserComponent implements OnInit {
       this.dialogRef.close({
         name: this.form.controls.name.value,
         email: this.form.controls.email.value,
-        group: this.form.controls.group.value
+        group: this.form.controls.group.value,
+        image: this.srcResult,
       });
     }
   }

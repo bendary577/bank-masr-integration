@@ -222,6 +222,7 @@ export class Constants {
     static GET_ALL_APP_GROUPS_URL = environment.apiHost + '/getAllApplicationGroups';
     static ADD_APP_GROUP_URL = environment.apiHost + '/addApplicationGroup';
     static ADD_APP_GROUPIMAGE_URL = environment.apiHost + '/addApplicationGroupImage';
+    static ADD_APP_USERIMAGE_URL = environment.apiHost + '/addApplicationUserImage';
     static Delete_APP_GROUPS_URL = environment.apiHost + '/deleteApplicationGroups';
     static UPDATE_APP_GROUP_URL = environment.apiHost  + '/updateApplicationGroup'
     static GET_APP_USERS_URL = environment.apiHost + '/getApplicationUsers';

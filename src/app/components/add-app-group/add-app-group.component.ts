@@ -11,8 +11,9 @@ import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
 })
 export class AddAppGroupComponent implements OnInit {
   public form: FormGroup;
-  groups: [];
+  groups: Group[];
   group: Group = new Group();
+  parentGroup: Group;
   srcResult: any;
 
 
@@ -21,8 +22,17 @@ export class AddAppGroupComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data) { }
     
   ngOnInit() {
+    
+    if(this.data["inParent"] == true){
     this.getGroups(false, new Group);
-    if (this.data != null && this.data != undefined){
+    }
+
+    if (this.data["parentGroup"] != null && this.data != undefined){
+      this.parentGroup = this.data["parentGroup"];
+      console.log(this.parentGroup)
+    }
+
+    if (this.data["group"] != null && this.data != undefined){
       this.group = this.data["group"];
       this.form = this.formBuilder.group({
         name: [this.group.name, Validators.required],        
@@ -32,13 +42,12 @@ export class AddAppGroupComponent implements OnInit {
         parentGroup: [this.group.parentGroup],
         discountRate: [this.group.discountRate, Validators.required]
       });
-
     }else{
       this.form = this.formBuilder.group({
         name: ['', Validators.required],
         logoUrl: [''],
         description: [''],
-        parentGroup: Group,
+        parentGroup: this.parentGroup,
         discountRate: ['', Validators.required],
         discountId: ['', Validators.required],
       });
@@ -54,7 +63,10 @@ export class AddAppGroupComponent implements OnInit {
 
   csvInputChange(fileInputEvent: any) {
   this.srcResult = fileInputEvent.target.files[0];
+<<<<<<< HEAD
   console.log(fileInputEvent.target.files)
+=======
+>>>>>>> 96cd024fc6ee13ba6d949907dd6983d9957ca46e
   }
 
   onNoClick(): void {
@@ -77,7 +89,6 @@ export class AddAppGroupComponent implements OnInit {
         parentGroup: this.form.controls.parentGroup.value,
         image: this.srcResult,
         discountId: this.form.controls.discountId.value
-
       });
     }
   }

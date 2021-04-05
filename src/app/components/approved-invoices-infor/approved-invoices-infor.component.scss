@@ -10,10 +10,18 @@
 }
 
 .header {
+    padding-top: 10px;
     text-align: end;
     padding: 4px 16px 4px 16px;
     height: 5vh;
 }
+
+.headerBack {
+    float: right;
+    margin-left: 20px;
+    background-color: #7a97ce;
+}
+
 
 #myProgress {
     width: 50%;

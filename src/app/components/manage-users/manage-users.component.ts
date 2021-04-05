@@ -6,6 +6,7 @@ import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import { AddAppUserComponent } from '../../components/add-app-user/add-app-user.component'  
 import { Group } from 'src/app/models/loyalty/Group';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-manage-users',
@@ -36,14 +37,19 @@ export class ManageUsersComponent implements OnInit {
     usersData: [] 
   };
 
-  constructor(private loyaltyService: LoyaltyService, public dialog: MatDialog, public snackBar: MatSnackBar
-    , private sidNav: SidenavResponsive) { }
+  constructor(private loyaltyService: LoyaltyService, public dialog: MatDialog, private _location: Location,
+     public snackBar: MatSnackBar, private sidNav: SidenavResponsive) { }
 
   ngOnInit() {
     this.getUsers();
     this.getGroups();
   }
 
+    
+  backClicked() {
+    this._location.back();
+  }
+  
   onSelect({selected}) {
     this.usersList.selected.splice(0, this.usersList.selected.length);
     this.usersList.selected.push(...selected);
@@ -61,7 +67,7 @@ export class ManageUsersComponent implements OnInit {
 
   deleteUsers(){
     this.usersList.showLoading = true;
-    this.loyaltyService.deleteAppUsers(this.usersList.selected[0][0]).then((res: any) => {
+    this.loyaltyService.deleteAppUsers(this.usersList.selected).then((res: any) => {
       this.getGroups();
       this.usersList.showLoading = false;
     }).catch(err => {
@@ -95,22 +101,21 @@ export class ManageUsersComponent implements OnInit {
 
         this.usersList.showLoading = true;
         this.loyaltyService.addAppUsers(this.newUser, true).then(result => {
-
+          this.loyaltyService.addApplicationUserImage(res.image, result["id"]);
           this.loading = true;
-
           this.getUsers();
-
           this.newUser = new ApplicationUser();
           this.usersList.showLoading = false;
 
           this.snackBar.open("Add sub-group successfully.", null, {
             duration: 2000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'right',  
             panelClass:"my-snack-bar-success"
           });
         }).catch(err => {
           this.newUser = new ApplicationUser();
           this.usersList.showLoading = false;
+          this.getUsers();
 
           let message = "";
           if(err.status === 401){
@@ -156,6 +161,7 @@ export class ManageUsersComponent implements OnInit {
 
           this.usersList.showLoading = true;
           this.loyaltyService.addAppUsers(this.newUser, false).then(result => {
+            this.loyaltyService.addApplicationUserImage(res.image, result["id"]);
             this.loading = false;
             this.usersList.showLoading = false;
             this.getGroups();
