@@ -4,7 +4,10 @@
     <form [formGroup]="form" class="my-form">
         <div class="form-group">
             <mat-form-field class="example-full-width">
-                <input matInput placeholder="Name" formControlName="name">
+                <input matInput placeholder="Name" formControlName="name" required>
+                <mat-error *ngIf="form.controls.name.hasError('required')">
+                    Name is required.
+                  </mat-error>
             </mat-form-field>
         </div>
 
@@ -16,24 +19,41 @@
 
         <div class="form-group">
             <mat-form-field class="example-full-width">
-                <input  matInput placeholder="Discount Rate" formControlName="discountRate">
+                <input  matInput required max="100"  placeholder="Discount Rate" formControlName="discountRate" aria-label="%">
+                <mat-error *ngIf="form.controls.discountRate.hasError('required')">
+                    Discount Rate is required.
+                  </mat-error>
+                <mat-error *ngIf="form.controls.discountRate.hasError('max')">
+                   Value is greater than 100.
+                  </mat-error>
+                  <mat-error *ngIf="form.controls.discountRate.hasError('pattern')">
+                    Discount Rate is positive numbers.
+                  </mat-error>
             </mat-form-field>
+
         </div>
 
         <div class="form-group">
             <mat-form-field class="example-full-width">
                 <input  matInput placeholder="Discount Id" formControlName="discountId">
+                <mat-error *ngIf="form.controls.discountId.hasError('required')">
+                    Discount Id is required.
+                  </mat-error>
+                  <mat-error *ngIf="form.controls.discountId.hasError('pattern')">
+                    Discount Id is positive numbers.
+                  </mat-error>
             </mat-form-field>
         </div>
-        <div class="form-group">
+        <div class="form-group" [hidden]="!data.inParent">
             <mat-form-field class="example-full-width">
-                <mat-select matInput id="groups" name="groups" placeholder="Group" formControlName="parentGroup">
+                <mat-select matInput id="groups" name="groups" placeholder="Parent Group" formControlName="parentGroup">
+                    <mat-option></mat-option>
                     <mat-option [value]=c *ngFor="let c of groups">{{c.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
 
-        <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="csvInputChange($event)" accept=".jpg"/>
+        <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="csvInputChange($event)" accept=".jpg" />
         <button mat-flat-button color="primary" (click)="csvInput.click()">Choose Image</button>
     </form>
 </div>
