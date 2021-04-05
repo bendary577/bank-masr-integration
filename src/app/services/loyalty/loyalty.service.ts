@@ -26,10 +26,19 @@ export class LoyaltyService {
     return this.http.post(Constants.ADD_APP_GROUP_URL + "?addFlag=" + addFlag , group, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
   
-  addAppGroupsImage(image) {
+  addApplicationUserImage(image, userId) {
     this.token = localStorage.getItem('auth_token');
     const formData: FormData = new FormData();
     formData.append('image', image);
+    formData.append('userId', userId);
+    return this.http.post(Constants.ADD_APP_USERIMAGE_URL, formData, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+  }
+
+  addAppGroupsImage(image, groupId) {
+    this.token = localStorage.getItem('auth_token');
+    const formData: FormData = new FormData();
+    formData.append('image', image);
+    formData.append('groupId', groupId);
     return this.http.post(Constants.ADD_APP_GROUPIMAGE_URL, formData, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
   

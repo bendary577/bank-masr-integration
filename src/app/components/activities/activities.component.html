@@ -1,5 +1,9 @@
 <br>
 
+<div class="header" style="margin-bottom: 15px;">
+    <button mat-flat-button class="headerBack" (click)="backClicked()">Go Back</button>
+</div>   
+
 <div class="row">
     <div class="column">
         <mat-card class="stat-card">
@@ -7,7 +11,7 @@
                 <h2>Top Users</h2>
                 <div class="row" >
                     <div class="column" *ngFor="let user of users">
-                        <img  class="user-img" src="../../../assets/user2.jpg" alt="image">
+                        <img  class="user-img" src={{user.logoUrl}} alt="image">
                         <p>{{user.name}}</p>
                     </div>                    
                 </div>
@@ -21,7 +25,7 @@
                 <h2>Top Groups</h2>
                 <div class="row">
                     <div class="column" *ngFor="let group of groups">
-                        <img  class="user-img" src="../../../assets/letter_o.png" alt="image">
+                        <img  class="user-img" src={{group.logoUrl}} alt="image">
                         <p>{{group.name}}</p>
                     </div>                    
                 </div>

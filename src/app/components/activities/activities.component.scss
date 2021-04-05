@@ -1,5 +1,14 @@
 @import "../approved-invoices-infor/approved-invoices-infor.component.scss";
-  
+
+.header {
+  text-align: end;
+  padding: 4px 4px 4px 4px;
+  height: 4vh;
+}
+.headerBack {
+  float: right;
+  padding-left: 20px;
+}
 .stat-card{
   margin: 10px;
   height: 225px;

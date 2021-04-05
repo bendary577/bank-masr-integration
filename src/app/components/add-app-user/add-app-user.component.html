@@ -21,12 +21,9 @@
                 </mat-select>
             </mat-form-field>
         </div>
-<!-- 
-        <div class="tab-container" fxLayoutAlign="center center">
-            <button #buttonPicker="appFilePicker" mat-raised-button color="primary" appFilePicker [multiple]="_multiple" (filesChanged)="_onFilesChanged($event)" (filesReset)="_onReset()">
-                      Upload
-            </button>
-        </div> -->
+        
+        <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="csvInputChange($event)" accept=".jpg"/>
+        <button mat-flat-button color="primary" (click)="csvInput.click()">Choose Image</button>
 
     </form>
 </div>

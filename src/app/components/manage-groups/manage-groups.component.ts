@@ -8,6 +8,7 @@ import { Group } from 'src/app/models/loyalty/Group';
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
 import { AddAppGroupComponent } from '../add-app-group/add-app-group.component';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-manage-groups',
@@ -18,6 +19,8 @@ export class ManageGroupsComponent implements OnInit {
   loading = false;
   newGroup: Group = new Group();
   group: Group = new Group();
+  inParent: boolean;
+  parentGroup: Group;
   groupsList = {
     paginateData: true as boolean,
     offset: 0,
@@ -37,27 +40,37 @@ export class ManageGroupsComponent implements OnInit {
   };
 
   constructor(public snackBar: MatSnackBar,
-    private sidNav: SidenavResponsive, public dialog: MatDialog,
+    private sidNav: SidenavResponsive, public dialog: MatDialog, private _location: Location,
     private loyaltyService: LoyaltyService, private router: Router, private data: Data) { }
 
   ngOnInit() {
     if (this.data.storage != null && this.data.storage != undefined){
+      this.inParent = false;
       this.group = this.data.storage
       this.getGroups(true, this.group);
+      this.parentGroup = this.data.storage;
       this.data.storage = null;
     }else{
+      this.inParent = true;
       this.getGroups(false, this.group);
     }
   }
 
+  
+  backClicked() {
+    this._location.back();
+  }
+  
   onSelect({selected}) {
     this.groupsList.selected.splice(0, this.groupsList.selected.length);
     this.groupsList.selected.push(selected);
   }
 
   openSupGroup(group: Group){
+    if(this.inParent){
     this.data.storage = group;
     this.router.navigate([Constants.MANAGE_GROUPS]);
+    }
   }
 
   getGroups(isParent, group){
@@ -87,6 +100,8 @@ export class ManageGroupsComponent implements OnInit {
   addGroupDialog(){
     const dialogRef = this.dialog.open(AddAppGroupComponent, {
         width: '550px',
+        data: { inParent: this.inParent,
+                parentGroup: this.parentGroup}
     });
 
     dialogRef.afterClosed().subscribe(res => {
@@ -101,19 +116,12 @@ export class ManageGroupsComponent implements OnInit {
         this.newGroup.deleted = false;
 
         this.groupsList.showLoading = true;
-        console.log(res.image)
-        this.loyaltyService.addAppGroupsImage(res.image);
-        this.loyaltyService.addAppGroups(this.newGroup, true).then(result => {
+        this.loyaltyService.addAppGroups(this.newGroup, true).then((result: any) => {
+          this.loyaltyService.addAppGroupsImage(res.image, result["id"]);
           this.loading = false;
           this.groupsList.showLoading = false;
-          if (this.data.storage != null && this.data.storage != undefined){
-            this.group = this.data.storage
-            this.getGroups(true, this.group);
-          }else{
-            this.getGroups(false, this.group);
-          }
           this.newGroup = new Group();
-
+          this.getGroups(!this.inParent, this.group);
           this.snackBar.open("Add comapny successfully.", null, {
             duration: 2000,
             horizontalPosition: 'right',
@@ -123,9 +131,7 @@ export class ManageGroupsComponent implements OnInit {
         }).catch(err => {
           this.loading = false;
           this.groupsList.showLoading = false;
-
           this.newGroup = new Group();
-
           let message = "";
           if(err.status === 401){
             message = ErrorMessages.SESSION_EXPIRED;
@@ -152,7 +158,7 @@ export class ManageGroupsComponent implements OnInit {
     const dialogRef = this.dialog.open(AddAppGroupComponent, {
       width: '550px',
       data: {group: this.groupsList.selected[0][0],
-      }
+              inParent: this.inParent, parentGroup: this.parentGroup}
     });
 
     dialogRef.afterClosed().subscribe(res => {
@@ -167,14 +173,10 @@ export class ManageGroupsComponent implements OnInit {
 
         this.groupsList.showLoading = true;
         this.loyaltyService.addAppGroups(this.newGroup, false).then(result => {
+          this.loyaltyService.addAppGroupsImage(res.image, result["id"]);
           this.loading = false;
           this.groupsList.showLoading = false;
-          if (this.data.storage != null && this.data.storage != undefined){
-            this.group = this.data.storage
-            this.getGroups(true, this.group);
-          }else{
-            this.getGroups(false, this.group);
-          }
+          this.getGroups(!this.inParent, this.group);
           this.newGroup = new Group();
           this.snackBar.open("Comapny updated successfully.", null, {
             duration: 2000,
