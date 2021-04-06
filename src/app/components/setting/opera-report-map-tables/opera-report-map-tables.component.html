@@ -325,6 +325,46 @@
         </div>
     </mat-expansion-panel>
 
+    <!-- Expense Types -->
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Expense Types Mapping
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div *ngIf="!loading" class="back" style="margin-bottom: 15px;">
+            <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type Id" [(ngModel)]="newExpenseType.typeId">
+            <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type" [(ngModel)]="newExpenseType.type">
+            <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type Description" [(ngModel)]="newExpenseType.typeDescription">
+            <button mat-flat-button (click)="add()">Add</button>
+        </div>
+
+        <div *ngIf="expenseTypes?.length > 0">
+
+            <ngx-datatable class="material" [rows]="expenseTypes" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
+
+                <ngx-datatable-column name="Expense Type Id">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.typeId">{{row.typeId}}</mat-checkbox>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Expense Type">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <input matInput placeholder="Expense Type" [(ngModel)]="row.type">
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Expense Type Description">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <input matInput placeholder="Expense Type Description" [(ngModel)]="row.typeDescription">
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </div>
+    </mat-expansion-panel>
+
     <br>
 
     <div class="card-back">

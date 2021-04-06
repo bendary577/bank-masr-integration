@@ -25,6 +25,7 @@ export class OperaReportMapTablesComponent implements OnInit {
   newGender = new BookingType();
   newCustomerTypes = new BookingType();
   newTransactionTypes = new BookingType();
+  newExpenseType = new BookingType();
 
   purposeOfVisit = [];
   paymentTypes = [];
@@ -33,8 +34,8 @@ export class OperaReportMapTablesComponent implements OnInit {
   roomTypes = [];
   transactionTypes = [];
   nationalities = [];
-
   cancelReasons = [];
+  expenseTypes = [];
 
   constructor(public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService) { }
@@ -58,6 +59,7 @@ export class OperaReportMapTablesComponent implements OnInit {
       this.roomTypes = this.generalSettings.roomTypes;
       this.transactionTypes = this.generalSettings.transactionTypes;
       this.nationalities = this.generalSettings.nationalities;
+      this.expenseTypes = this.generalSettings.expenseTypes;
 
       this.loading = false;
       this.spinner.hide();
@@ -132,7 +134,13 @@ export class OperaReportMapTablesComponent implements OnInit {
 
       this.transactionTypes = [...this.transactionTypes];
 
-    } else{
+    } else if(this.newExpenseType.type &&  this.newExpenseType.type && this.newExpenseType.typeDescription){
+      this.expenseTypes.push(this.newExpenseType);
+      this.newExpenseType = new BookingType();
+
+      this.expenseTypes = [...this.expenseTypes];
+
+    } else {
       this.snackBar.open('Please fill all type fields.', null, {
         duration: 2000,
         horizontalPosition: 'center',
@@ -176,6 +184,10 @@ export class OperaReportMapTablesComponent implements OnInit {
 
       if(this.transactionTypes.length != 0) {
         this.generalSettings.transactionTypes = this.transactionTypes;
+      }
+
+      if(this.expenseTypes.length != 0) {
+        this.generalSettings.expenseTypes = this.expenseTypes;
       }
 
       this.generalSettingsService.updateGeneralSettings(this.generalSettings).then(result => {

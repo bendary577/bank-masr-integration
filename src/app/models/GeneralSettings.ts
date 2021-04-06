@@ -31,6 +31,7 @@ export class GeneralSettings {
   genders: Array<BookingType>|any;
   customerTypes: Array<BookingType>|any;
   transactionTypes: Array<BookingType>|any;
+  expenseTypes: Array<BookingType>|any;
 
   // ==> END of OPERA Vribles
   creationDate: Date;
