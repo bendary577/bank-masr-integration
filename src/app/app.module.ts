@@ -127,6 +127,8 @@ import { CancelBookingReportConfigComponent } from './components/cancel-booking-
 import { OccupancyUpdateReportConfigComponent } from './components/occupancy-update-report-config/occupancy-update-report-config.component';
 import { OperaReportMapTablesComponent } from './components/setting/opera-report-map-tables/opera-report-map-tables.component';
 import { OperaBookingDashBoardComponent } from './components/opera-booking-dash-board/opera-booking-dash-board.component';
+import { ExpensesDetailsReportComponent } from './components/expenses-details-report/expenses-details-report.component';
+import { ExpensesDetailsReportConfigComponent } from './components/expenses-details-report-config/expenses-details-report-config.component';
 
 @NgModule({
   declarations: [
@@ -219,7 +221,9 @@ import { OperaBookingDashBoardComponent } from './components/opera-booking-dash-
     CancelBookingReportConfigComponent,
     OccupancyUpdateReportConfigComponent,
     OperaReportMapTablesComponent,
-    OperaBookingDashBoardComponent
+    OperaBookingDashBoardComponent,
+    ExpensesDetailsReportComponent,
+    ExpensesDetailsReportConfigComponent
   ],
   imports: [
     BrowserModule,

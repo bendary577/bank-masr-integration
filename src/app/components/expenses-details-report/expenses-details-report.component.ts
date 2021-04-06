@@ -10,48 +10,47 @@ import { DilogServiceService } from '../dialog/dilog-service.service';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 
 @Component({
-  selector: 'app-cancel-booking-report',
-  templateUrl: './cancel-booking-report.component.html',
-  styleUrls: ['./cancel-booking-report.component.scss']
+  selector: 'app-expenses-details-report',
+  templateUrl: './expenses-details-report.component.html',
+  styleUrls: ['./expenses-details-report.component.scss']
 })
-export class CancelBookingReportComponent implements OnInit {
+export class ExpensesDetailsReportComponent implements OnInit {
   success = false;
   loading = true;
   
   jobs = [];
   selectedJob :SyncJob = null;
 
-  cancelBookingList = {
+  transactionList = {
     paginateData: true as boolean,
     offset: 0,
     messages: {
       emptyMessage: `
         <div >
-          <span style="font-size: 25px;text-align: center;">There are no cancel booking.</span>
+          <span style="font-size: 25px;text-align: center;">There are no expenses details.</span>
         </div>
       `
     },
     selected: [],
-    newBookingCount: 0 as number,
+    transactionCount: 0 as number,
     pagesFilter: [10, 25, 50, 75, 100],
     showLoading: false,
     inputSearch: '' as string,
-    cancelBookingData: [] 
+    transactionData: [] 
   };
 
 
   constructor(private spinner: NgxSpinnerService, public snackBar: MatSnackBar,
     private sidNav: SidenavResponsive, public dialogService: DilogServiceService,
-    private syncJobService: SyncJobService,
-    private newBookingService: NewBookingReportService) { }
+    private syncJobService: SyncJobService, private newBookingService: NewBookingReportService) { }
 
   ngOnInit(): void {
-    this.getSyncJobs(Constants.CANCEL_BOOKING_REPORT_SYNC);
+    this.getSyncJobs(Constants.EXPENSES_DETAILS_REPORT_SYNC);
   }
 
   onSelect({selected}) {
-    this.cancelBookingList.selected.splice(0, this.cancelBookingList.selected.length);
-    this.cancelBookingList.selected.push(...selected);
+    this.transactionList.selected.splice(0, this.transactionList.selected.length);
+    this.transactionList.selected.push(...selected);
   }
 
   getSyncJobs(syncJobTypeName: string) {
@@ -74,7 +73,7 @@ export class CancelBookingReportComponent implements OnInit {
     this.spinner.show();
 
     this.syncJobService.getSyncJobDataById(this.selectedJob["id"]).toPromise().then((res: any) => {
-      this.cancelBookingList.cancelBookingData = res;
+      this.transactionList.transactionData = res;
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
@@ -83,11 +82,11 @@ export class CancelBookingReportComponent implements OnInit {
     });
   }
 
-  async syncCancelBooking(){
-    this.cancelBookingList.showLoading = true;
-    this.cancelBookingList.cancelBookingData = [];
+  async syncExpensesDetails(){
+    this.transactionList.showLoading = true;
+    this.transactionList.transactionData = [];
 
-    this.newBookingService.getCancelBooking().toPromise().then((res: any) => {
+    this.newBookingService.getExpensesDetails().toPromise().then((res: any) => {
       this.success = res.success;
 
       if (this.success) {
@@ -105,11 +104,11 @@ export class CancelBookingReportComponent implements OnInit {
         });
       }
 
-      this.getSyncJobs(Constants.CANCEL_BOOKING_REPORT_SYNC);
+      this.getSyncJobs(Constants.EXPENSES_DETAILS_REPORT_SYNC);
 
-      this.cancelBookingList.showLoading = false;
+      this.transactionList.showLoading = false;
     }).catch(err => {
-      this.getSyncJobs(Constants.CANCEL_BOOKING_REPORT_SYNC);
+      this.getSyncJobs(Constants.EXPENSES_DETAILS_REPORT_SYNC);
 
       let message = "Error happend, Please try again.";
       if(err.status === 401){
@@ -128,12 +127,11 @@ export class CancelBookingReportComponent implements OnInit {
         panelClass:"my-snack-bar-fail"
       });
 
-      this.cancelBookingList.showLoading = false;
+      this.transactionList.showLoading = false;
     });
   }
 
   viewJSON(row){
     this.dialogService.newBookingModal(row);
   }
-
 }

@@ -196,6 +196,13 @@ export class Constants {
 
     static SYNC_OPERA_OCCUPANCY_UPDATE_URL = environment.apiHost + '/fetchOccupancyUpdate';
 
+    //==> Expenses Details Report
+    static EXPENSES_DETAILS_REPORT_PAGE = 'expensesDetailsReport';
+    static EXPENSES_DETAILS_REPORT_CONFIG_PAGE = 'expensesDetailsReportConfig';
+    static EXPENSES_DETAILS_REPORT_SYNC = 'Expenses Details Report';
+
+    static SYNC_OPERA_EXPENSES_DETAILS_URL = environment.apiHost + '/fetchExpensesDetails';
+
     //==> Booking Dashboard
     static OPERA_BOOKING_DASHBOARD_PAGE = 'operaBookingDashboard';
 

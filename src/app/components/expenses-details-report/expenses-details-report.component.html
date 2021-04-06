@@ -1,4 +1,4 @@
-<h3>Cancel Booking Detailes</h3>
+<h3>Expenses Details Detailes</h3>
 
 
 <div class="header">
@@ -8,9 +8,10 @@
         <option [ngValue]="job" *ngFor="let job of jobs">
             {{job.creationDate}} - {{job.status}}</option>
     </select>
-    <button mat-flat-button (click)="syncCancelBooking()">Sync Cancel Booking Data</button>
+    <button mat-flat-button (click)="syncExpensesDetails()">Sync Expenses Details</button>
 
 </div>
+
 <br>
 
 <div *ngIf="selectedJob">
@@ -44,9 +45,9 @@
                 <span class="value" *ngIf="selectedJob.reason">{{selectedJob.reason}}</span>
                 <span class="value" *ngIf="!selectedJob.reason">No Info</span>
             </mat-list-item>
-            <mat-list-item *ngIf="!cancelBookingList.cancelBookingData.length">
+            <mat-list-item *ngIf="!transactionList.transactionData.length">
                 <span>
-                There was no new data to sync in this job, You can sync Cancel Booking Detailes now from <a (click)="syncCancelBooking()">here</a>
+                There was no new data to sync in this job, You can sync Cancel Booking Detailes now from <a (click)="syncExpensesDetails()">here</a>
             </span>
             </mat-list-item>
         </mat-card-content>
@@ -63,8 +64,8 @@
                 </mat-card-header>
                 <mat-card-content>
                     <p>
-                        There was no new data to sync in this job, You can sync Booking Detailes now from
-                        <a (click)="syncCancelBooking()">here</a>
+                        There was no new data to sync in this job, You can sync Expenses Details now from
+                        <a (click)="syncExpensesDetails()">here</a>
                     </p>
                 </mat-card-content>
             </mat-card>
@@ -73,10 +74,10 @@
         </div>
     </div>
 
-    <div *ngIf="jobs.length || cancelBookingList.showLoading">
-        <ngx-datatable style="max-width: 98%;" class="material" [loadingIndicator]="cancelBookingList.showLoading" [messages]="cancelBookingList.messages" 
+    <div *ngIf="jobs.length || transactionList.showLoading">
+        <ngx-datatable style="max-width: 98%;" class="material" [loadingIndicator]="transactionList.showLoading" [messages]="transactionList.messages" 
         [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-         [rows]="cancelBookingList.cancelBookingData" [selected]="cancelBookingList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
+         [rows]="transactionList.transactionData" [selected]="transactionList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
         (select)='onSelect($event)' [scrollbarH]="true">
     
             <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
@@ -105,72 +106,6 @@
             <ngx-datatable-column name="Booking No">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.data.bookingNo}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Cancel Reason">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.cancelReason}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Cancel With Charges">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.cancelWithCharges}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Chargeable Days">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.chargeableDays}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Room Rent Type">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.roomRentType}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Daily Room Rate">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.dailyRoomRate}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Total Room Rate">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.totalRoomRate}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="VAT">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.vat}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Municipality Tax">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.municipalityTax}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Discount">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.discount}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Total Room">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.grandTotal}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Payment Methods">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.paymentType}}
                 </ng-template>
             </ngx-datatable-column>
 

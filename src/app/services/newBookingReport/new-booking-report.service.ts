@@ -24,4 +24,9 @@ export class NewBookingReportService {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.SYNC_OPERA_OCCUPANCY_UPDATE_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
+
+  getExpensesDetails() {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get(Constants.SYNC_OPERA_EXPENSES_DETAILS_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
 }

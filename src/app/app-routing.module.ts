@@ -59,6 +59,8 @@ import { OccupancyUpdateReportComponent } from './components/occupancy-update-re
 import { OccupancyUpdateReportConfigComponent } from './components/occupancy-update-report-config/occupancy-update-report-config.component';
 import { OperaReportMapTablesComponent } from './components/setting/opera-report-map-tables/opera-report-map-tables.component';
 import { OperaBookingDashBoardComponent } from './components/opera-booking-dash-board/opera-booking-dash-board.component';
+import { ExpensesDetailsReportComponent } from './components/expenses-details-report/expenses-details-report.component';
+import { ExpensesDetailsReportConfigComponent } from './components/expenses-details-report-config/expenses-details-report-config.component';
 
 
 const routes: Routes = [
@@ -146,6 +148,10 @@ const routes: Routes = [
 
   { path: Constants.OCCUPANCY_UPDATE_REPORT_PAGE , component: OccupancyUpdateReportComponent ,canActivate:[AuthGuardService]},
   { path: Constants.OCCUPANCY_UPDATE_REPORT_CONFIG_PAGE , component: OccupancyUpdateReportConfigComponent ,canActivate:[AuthGuardService]},
+
+
+  { path: Constants.EXPENSES_DETAILS_REPORT_PAGE , component: ExpensesDetailsReportComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.EXPENSES_DETAILS_REPORT_CONFIG_PAGE , component: ExpensesDetailsReportConfigComponent ,canActivate:[AuthGuardService]},
 
   // Error Page
   {path:'**', component: ErrorComponentComponent }

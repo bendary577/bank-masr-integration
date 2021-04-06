@@ -139,6 +139,9 @@ export class SyncJobsconfigComponent implements OnInit {
     else if (syncJobType.name == Constants.OCCUPANCY_UPDATE_REPORT_SYNC) {
       this.router.navigate([Constants.OCCUPANCY_UPDATE_REPORT_CONFIG_PAGE]);
     }
+    else if (syncJobType.name == Constants.EXPENSES_DETAILS_REPORT_SYNC) {
+      this.router.navigate([Constants.EXPENSES_DETAILS_REPORT_CONFIG_PAGE]);
+    }
     else{
       this.snackBar.open("This sync job has not configuration yet.", null, {
         duration: 2000,
