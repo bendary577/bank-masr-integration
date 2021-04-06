@@ -39,6 +39,10 @@ export class Constants {
     static GET_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getSyncJobTypesByName';
     static GET_ACC_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getAccSyncJobTypesByName';
 
+    static GET_APPLICATION_URL = environment.apiHost + '/getApplications';
+    // static GET_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getSyncJobTypesByName';
+    // static GET_ACC_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getAccSyncJobTypesByName';
+
     static UPDATE_SYNC_JOB_TYPES_URL = environment.apiHost + '/updateSyncJobTypesConfiguration';
     static UPDATE_COST_CENTER_MAPPING_URL = environment.apiHost + '/updateCostCenterLocationMapping';
     static GET_SYNC_JOBS_URL = environment.apiHost + '/getSyncJobs';
@@ -46,7 +50,6 @@ export class Constants {
 
     static GET_OPERATION_URL = environment.apiHost + '/getOperation';
     static GET_OPERATION_DATA_BY_ID = environment.apiHost + '/getOperationDataById';
-
 
     static GET_SUPPLIERS_URL = environment.apiHost + '/getSuppliers';
     static GET_SUPPLIERS_DETAILS_URL = environment.apiHost + '/getSuppliersDetails';
@@ -211,7 +214,7 @@ export class Constants {
 
     //////////////////////////////////////////////// Manage Application  //////////////////////////////////////////////
 
-    static LOYALTY = 'loyalty';
+    static GET_LOYALTY_PAGE = 'loyalty';
     static MANAGE_COMPANIES = 'manageCompanies';
     static MANAGE_GROUPS = "manageGroups";
     static MANAGE_USERS = 'manageUsers';
