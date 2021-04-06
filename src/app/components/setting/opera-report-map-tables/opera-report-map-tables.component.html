@@ -11,9 +11,9 @@
         </mat-expansion-panel-header>
 
         <div *ngIf="!loading" class="back" style="margin-bottom: 15px;">
-            <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Nationality Id" [(ngModel)]="newCancelReason.typeId">
-            <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Nationality" [(ngModel)]="newCancelReason.type">
-            <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Nationality Description" [(ngModel)]="newCancelReason.typeDescription">
+            <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Reason Id" [(ngModel)]="newCancelReason.typeId">
+            <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Reason" [(ngModel)]="newCancelReason.type">
+            <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Reason Description" [(ngModel)]="newCancelReason.typeDescription">
             <button mat-flat-button (click)="add()">Add</button>
         </div>
 
