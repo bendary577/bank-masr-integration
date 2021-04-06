@@ -35,7 +35,7 @@
 
         <div class="form-group">
             <mat-form-field class="example-full-width">
-                <input  matInput placeholder="Discount Id" formControlName="discountId">
+                <input  matInput required placeholder="Discount Id" formControlName="discountId">
                 <mat-error *ngIf="form.controls.discountId.hasError('required')">
                     Discount Id is required.
                   </mat-error>

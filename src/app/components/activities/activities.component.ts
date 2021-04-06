@@ -16,7 +16,7 @@ export class ActivitiesComponent implements OnInit {
   filterBy = "Daily";
   imagePath = './src/assets/user.png';
   totalSpendM: any;
-
+  totalSpendLoading = false;
   users = [];
   groups = [];
   transactionList = {
@@ -52,9 +52,12 @@ export class ActivitiesComponent implements OnInit {
   }
 
   totalSpend(date){
+    this.totalSpendLoading = true;
     this.loyaltyService.getTotalSpend(date).toPromise().then((res: any) => {
+      this.totalSpendLoading = false;
       this.totalSpendM = res["totalSpend"];
     }).catch(err => {
+      this.totalSpendLoading = false;
       let message = "";
       if(err.status === 401){
         message = ErrorMessages.SESSION_EXPIRED;
