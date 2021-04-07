@@ -1,10 +1,10 @@
 <div class="main" >
 
     <div class="header" style="margin-bottom: 15px;">
-        <button mat-flat-button class="headerBack" (click)="backClicked()">Go Back</button>
         <button mat-flat-button (click)="addUserDialog()">Add User</button>
         <button mat-flat-button (click)="updateUserDialog()" [disabled]="usersList.selected.length != 1">Update User</button>
-        <button mat-flat-button (click)="deleteUsers()" [disabled]="usersList.selected.length == 0">Delete Users</button>
+        <button mat-flat-button (click)="deleteUsers('true')" [disabled]="usersList.selected.length == 0">Delete Users</button>
+        <button mat-flat-button (click)="deleteUsers('false')" [disabled]="usersList.selected.length != 1">Restore Users</button>
     </div>   
 
     <ngx-datatable class="material" [loadingIndicator]="usersList.showLoading" [messages]="usersList.messages" 

@@ -16,11 +16,8 @@ import {Location} from '@angular/common';
   styleUrls: ['./manage-groups.component.scss']
 })
 export class ManageGroupsComponent implements OnInit {
-  loading = false;
   newGroup: Group = new Group();
-  group: Group = new Group();
-  inParent: boolean;
-  parentGroup: Group;
+  parentGroup: Group = new Group();
   groupsList = {
     paginateData: true as boolean,
     offset: 0,
@@ -41,18 +38,17 @@ export class ManageGroupsComponent implements OnInit {
 
   constructor(public snackBar: MatSnackBar,
     private sidNav: SidenavResponsive, public dialog: MatDialog, private _location: Location,
-    private loyaltyService: LoyaltyService, private router: Router, private data: Data) { }
+    private loyaltyService: LoyaltyService, private router: Router, public data: Data) { }
 
   ngOnInit() {
+    console.log(this.data.inParent)
     if (this.data.storage != null && this.data.storage != undefined){
-      this.inParent = false;
-      this.group = this.data.storage
-      this.getGroups(true, this.group);
+      this.data.inParent = false;
       this.parentGroup = this.data.storage;
-      this.data.storage = null;
+      this.getGroups(this.data.inParent, this.parentGroup);
     }else{
-      this.inParent = true;
-      this.getGroups(false, this.group);
+      this.data.inParent = true;
+      this.getGroups(this.data.inParent, this.parentGroup);
     }
   }
 
@@ -67,10 +63,8 @@ export class ManageGroupsComponent implements OnInit {
   }
 
   openSupGroup(group: Group){
-    if(this.inParent){
     this.data.storage = group;
     this.router.navigate([Constants.MANAGE_GROUPS]);
-    }
   }
 
   getGroups(isParent, group){
@@ -83,31 +77,43 @@ export class ManageGroupsComponent implements OnInit {
     });
   }
 
-  deleteGroups(){
-    this.loyaltyService.deleteAppGroups(this.groupsList.selected).then((res: any) => {
-      if (this.data.storage != null && this.data.storage != undefined){
-        this.group = this.data.storage
-        this.getGroups(true, this.group);
+  deleteGroups(flage){
+    this.groupsList.showLoading = true;
+    this.loyaltyService.deleteAppGroups(flage, this.groupsList.selected).then((res: any) => {
+      if (this.data.inParent){
+        this.getGroups(this.data.inParent, this.parentGroup);
       }else{
-        this.getGroups(false, this.group);
+        this.parentGroup = this.data.storage
+        this.getGroups(this.data.inParent, this.parentGroup);
       }
       this.groupsList.showLoading = false;
+      this.groupsList.selected = [];
+      this.snackBar.open("Groups deleted successfully.", null, {
+        duration: 2000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-success"
+      });
     }).catch(err => {
+      this.getGroups(this.data.inParent, this.parentGroup);
+      this.groupsList.selected = [];
       this.groupsList.showLoading = false;
+      this.snackBar.open("Can't delete Group.", null, {
+        duration: 2000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-success"
+      });
     });
   }
 
   addGroupDialog(){
     const dialogRef = this.dialog.open(AddAppGroupComponent, {
         width: '550px',
-        data: { inParent: this.inParent,
+        data: { inParent: this.data.inParent,
                 parentGroup: this.parentGroup}
     });
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        this.loading = true;
-
         this.newGroup.name = res.name;
         this.newGroup.description = res.description;
         this.newGroup.discountRate = res.discountRate;
@@ -116,22 +122,45 @@ export class ManageGroupsComponent implements OnInit {
         this.newGroup.deleted = false;
 
         this.groupsList.showLoading = true;
-        this.loyaltyService.addAppGroups(this.newGroup, true).then((result: any) => {
-          this.loyaltyService.addAppGroupsImage(res.image, result["id"]);
-          this.loading = false;
-          this.groupsList.showLoading = false;
-          this.newGroup = new Group();
-          this.getGroups(!this.inParent, this.group);
-          this.snackBar.open("Add group successfully.", null, {
-            duration: 2000,
-            horizontalPosition: 'right',
-            panelClass:"my-snack-bar-success"
-          });
 
+        this.loyaltyService.addAppGroups(this.newGroup, true).then((result: any) => {
+          this.loyaltyService.addAppGroupsImage(res.image, result["id"]).then((result: any) =>{
+            this.groupsList.showLoading = false;
+            this.groupsList.selected = [];
+            this.newGroup = new Group();
+            this.getGroups(this.data.inParent, this.parentGroup);
+            this.snackBar.open("Add group successfully.", null, {
+              duration: 2000,
+              horizontalPosition: 'right',
+              panelClass:"my-snack-bar-success"
+            });
+          }).catch(err => {
+            this.groupsList.showLoading = false;
+            this.groupsList.selected = [];
+            this.newGroup = new Group();
+            this.getGroups(this.data.inParent, this.parentGroup);
+            let message = "";
+            if(err.status === 401){
+              message = ErrorMessages.SESSION_EXPIRED;
+              this.sidNav.Logout();
+            } else if (err.error.message){
+              message = err.error.message;
+            } else if (err.message){
+              message = err.message;
+            } else {
+              message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
+            }
+            this.snackBar.open(message , null, {
+              duration: 3000,
+              horizontalPosition: 'right',
+              panelClass:"my-snack-bar-fail"
+            });
+          });
         }).catch(err => {
-          this.loading = false;
           this.groupsList.showLoading = false;
+          this.groupsList.selected = [];
           this.newGroup = new Group();
+          this.getGroups(this.data.inParent, this.parentGroup);
           let message = "";
           if(err.status === 401){
             message = ErrorMessages.SESSION_EXPIRED;
@@ -143,7 +172,6 @@ export class ManageGroupsComponent implements OnInit {
           } else {
             message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
           }
-    
           this.snackBar.open(message , null, {
             duration: 3000,
             horizontalPosition: 'right',
@@ -158,7 +186,7 @@ export class ManageGroupsComponent implements OnInit {
     const dialogRef = this.dialog.open(AddAppGroupComponent, {
       width: '550px',
       data: {group: this.groupsList.selected[0],
-              inParent: this.inParent, parentGroup: this.parentGroup}
+              inParent: this.data.inParent, parentGroup: this.parentGroup}
     });
 
     dialogRef.afterClosed().subscribe(res => {
@@ -172,24 +200,45 @@ export class ManageGroupsComponent implements OnInit {
         this.newGroup.deleted = false;
 
         this.groupsList.showLoading = true;
-        this.loyaltyService.addAppGroups(this.newGroup, false).then(result => {
-          this.loyaltyService.addAppGroupsImage(res.image, result["id"]);
-          this.loading = false;
-          this.groupsList.showLoading = false;
-          this.getGroups(!this.inParent, this.group);
-          this.newGroup = new Group();
-          this.snackBar.open("Group updated successfully.", null, {
-            duration: 2000,
-            horizontalPosition: 'right',
-            panelClass:"my-snack-bar-success"
+        this.loyaltyService.addAppGroups(this.newGroup, false).then((result: any) => {
+          this.loyaltyService.addAppGroupsImage(res.image, result["id"]).then((result: any) => {
+            this.groupsList.showLoading = false;
+            this.groupsList.selected = [];
+            this.getGroups(this.data.inParent, this.parentGroup);
+            this.newGroup = new Group();
+            this.snackBar.open("Group updated successfully.", null, {
+              duration: 2000,
+              horizontalPosition: 'right',
+              panelClass:"my-snack-bar-success"
+            });
+  
+          }).catch(err => {
+            this.groupsList.showLoading = false;
+            this.groupsList.selected = [];
+            this.newGroup = new Group();
+            this.getGroups(this.data.inParent, this.parentGroup);
+            let message = "";
+            if(err.status === 401){
+              message = ErrorMessages.SESSION_EXPIRED;
+              this.sidNav.Logout();
+            } else if (err.error.message){
+              message = err.error.message;
+            } else if (err.message){
+              message = err.message;
+            } else {
+              message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
+            }
+            this.snackBar.open(message , null, {
+              duration: 3000,
+              horizontalPosition: 'right',
+              panelClass:"my-snack-bar-fail"
+            });
           });
-
         }).catch(err => {
-          this.loading = false;
           this.groupsList.showLoading = false;
-
+          this.groupsList.selected = [];
           this.newGroup = new Group();
-
+          this.getGroups(this.data.inParent, this.parentGroup);
           let message = "";
           if(err.status === 401){
             message = ErrorMessages.SESSION_EXPIRED;
@@ -201,7 +250,6 @@ export class ManageGroupsComponent implements OnInit {
           } else {
             message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
           }
-    
           this.snackBar.open(message , null, {
             duration: 3000,
             horizontalPosition: 'right',

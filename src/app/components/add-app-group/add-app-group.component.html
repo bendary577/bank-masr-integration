@@ -4,9 +4,12 @@
     <form [formGroup]="form" class="my-form">
         <div class="form-group">
             <mat-form-field class="example-full-width">
-                <input matInput placeholder="Name" formControlName="name" required>
+                <input matInput placeholder="Name" formControlName="name" required maxlength="10">
                 <mat-error *ngIf="form.controls.name.hasError('required')">
                     Name is required.
+                  </mat-error>
+                  <mat-error *ngIf="form.controls.name.hasError('maxlength')">
+                    Name is to long.
                   </mat-error>
             </mat-form-field>
         </div>
@@ -53,8 +56,13 @@
             </mat-form-field>
         </div>
 
-        <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="csvInputChange($event)" accept=".jpg" />
-        <button mat-flat-button color="primary" (click)="csvInput.click()">Choose Image</button>
+        <div class="form-group" style="padding-top: 5%;">
+            <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="csvInputChange($event)" accept=".jpg" />
+            <button class="form-button" mat-flat-button color="primary" (click)="csvInput.click()" >
+                <img class="form-b-img" src="../../../assets/photos.png">
+                Choose Image</button>
+         </div>
+
     </form>
 </div>
 <div mat-dialog-actions>

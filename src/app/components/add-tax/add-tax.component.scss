@@ -1,1 +1,12 @@
-@import "../add-account/add-account.component.scss"
+@import "../add-account/add-account.component.scss";
+
+.form-button{
+    background-color: rgb(114, 127, 145);
+    width: 35%;
+}
+.form-b-img{
+    width: 20%;
+    height: 20%;
+    padding: 5% 5% 0% 0%;
+    float: left;
+}

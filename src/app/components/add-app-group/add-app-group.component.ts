@@ -24,27 +24,27 @@ export class AddAppGroupComponent implements OnInit {
   ngOnInit() {
     
     if(this.data["inParent"] == true){
-    this.getGroups(false, new Group);
+    this.getGroups(true, new Group);
     }
 
     if (this.data["parentGroup"] != null && this.data != undefined){
       this.parentGroup = this.data["parentGroup"];
-      console.log(this.parentGroup)
     }
 
     if (this.data["group"] != null && this.data != undefined){
       this.group = this.data["group"];
       this.form = this.formBuilder.group({
-        name: [this.group.name, Validators.required],        
+        name: [this.group.name, [Validators.maxLength, Validators.required]],        
         logoUrl: [this.group.logoUrl],
         description: [this.group.description],
-        discountId: [this.group.discountId],
+        discountId: [this.group.discountId , [Validators.required,Validators.min(0),Validators.pattern("^[0-9]*$")]],
         parentGroup: [this.group.parentGroup],
-        discountRate: [this.group.discountRate, Validators.required]
+        image: this.srcResult,
+        discountRate: [this.group.discountRate, [Validators.required, Validators.max(100), Validators.min(0), Validators.pattern("^[0-9]*$")]]
       });
     }else{
       this.form = this.formBuilder.group({
-        name: ['', [Validators.required]],
+        name: ['', [Validators.maxLength, Validators.required]],
         logoUrl: [''],
         description: [''],
         parentGroup: this.parentGroup,

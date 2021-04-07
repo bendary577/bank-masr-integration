@@ -17,7 +17,6 @@ export class ActivitiesComponent implements OnInit {
   filterBy = "Daily";
   imagePath = './src/assets/user.png';
   totalSpendM: any;
-  totalSpendLoading = false;
   users = [];
   groups = [];
   transactionList = {
@@ -46,10 +45,6 @@ export class ActivitiesComponent implements OnInit {
     this.getTopUsers();
     this.getTopGroups();
     this.totalSpend("Today");
-  }
- 
-  backClicked() {
-    this._location.back();
   }
 
   totalSpend(date){

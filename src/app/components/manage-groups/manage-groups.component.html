@@ -1,9 +1,12 @@
 <div class="main" >
     <div class="header" style="margin-bottom: 15px;">
-        <button mat-flat-button class="headerBack" (click)="backClicked()">Go Back</button>
+        <button mat-flat-button class="headerBack" (click)="backClicked()" [hidden]="this.data.inParent">
+            <!-- <img class="form-b-img" src="../../../assets/left-arrow.png"> -->
+            Go Back</button>
         <button mat-flat-button (click)="addGroupDialog()">Add Group</button>
         <button mat-flat-button (click)="updateGroupDialog()" [disabled]="groupsList.selected.length != 1">Update Group</button>
-        <button mat-flat-button (click)="deleteGroups()" [disabled]="groupsList.selected.length == 0">Delete Groups</button>
+        <button mat-flat-button (click)="deleteGroups('true')" [disabled]="groupsList.selected.length == 0">Delete Groups</button>
+        <button mat-flat-button (click)="deleteGroups('false')" [disabled]="groupsList.selected.length == 0">Restore Groups</button>
     </div>   
 
     <ngx-datatable class="material" [loadingIndicator]="groupsList.showLoading" [messages]="groupsList.messages" 

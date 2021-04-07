@@ -46,9 +46,9 @@ export class ManageUsersComponent implements OnInit {
   }
 
     
-  backClicked() {
-    this._location.back();
-  }
+  // backClicked() {
+  //   this._location.back();
+  // }
   
   onSelect({selected}) {
     this.usersList.selected.splice(0, this.usersList.selected.length);
@@ -65,13 +65,27 @@ export class ManageUsersComponent implements OnInit {
     });
   }
 
-  deleteUsers(){
+  deleteUsers(flage){
     this.usersList.showLoading = true;
-    this.loyaltyService.deleteAppUsers(this.usersList.selected).then((res: any) => {
+    this.loyaltyService.deleteAppUsers(flage, this.usersList.selected).then((res: any) => {
       this.getGroups();
+      this.getUsers();
+      this.usersList.selected = [];
       this.usersList.showLoading = false;
+      this.snackBar.open("User deleted successfully.", null, {
+        duration: 2000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-success"
+      });
     }).catch(err => {
       this.usersList.showLoading = false;
+      this.usersList.selected = [];
+      this.getUsers();
+      this.snackBar.open("Can't delete Group.", null, {
+        duration: 2000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-success"
+      });
     });
   }
 
@@ -106,8 +120,9 @@ export class ManageUsersComponent implements OnInit {
           this.getUsers();
           this.newUser = new ApplicationUser();
           this.usersList.showLoading = false;
+          this.usersList.selected = [];
 
-          this.snackBar.open("Add sub-group successfully.", null, {
+          this.snackBar.open("User added successfully.", null, {
             duration: 2000,
             horizontalPosition: 'right',  
             panelClass:"my-snack-bar-success"
@@ -116,6 +131,7 @@ export class ManageUsersComponent implements OnInit {
           this.newUser = new ApplicationUser();
           this.usersList.showLoading = false;
           this.getUsers();
+          this.usersList.selected = [];
 
           let message = "";
           if(err.status === 401){
@@ -166,6 +182,7 @@ export class ManageUsersComponent implements OnInit {
             this.usersList.showLoading = false;
             this.getGroups();
             this.newUser = new ApplicationUser();
+            this.usersList.selected = [];
 
             this.snackBar.open("User Updated successfully.", null, {
               duration: 2000,
@@ -175,6 +192,7 @@ export class ManageUsersComponent implements OnInit {
           }).catch(err => {
             this.loading = false;
             this.usersList.showLoading = false;
+            this.usersList.selected = [];
 
             this.newUser = new ApplicationUser();
 
