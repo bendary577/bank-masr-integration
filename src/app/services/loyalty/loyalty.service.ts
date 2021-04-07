@@ -42,12 +42,11 @@ export class LoyaltyService {
     return this.http.post(Constants.ADD_APP_GROUPIMAGE_URL, formData, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
   
-  deleteAppGroups(groups) {
+  deleteAppGroups(flage, groups) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.put(Constants.Delete_APP_GROUPS_URL, groups, {
+    return this.http.put(Constants.Delete_APP_GROUPS_URL + "?addFlag=" + flage  , groups, {
        headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
-
 
   getTopGroups() {
     this.token = localStorage.getItem('auth_token');
@@ -71,9 +70,9 @@ export class LoyaltyService {
     return this.http.post(Constants.ADD_APP_USER_URL + "?addFlag=" + addFlag , user, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
   
-  deleteAppUsers(users) {
+  deleteAppUsers(flage, users) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.put(Constants.Delete_APP_USERS_URL, users, {
+    return this.http.put(Constants.Delete_APP_USERS_URL + "?addFlag=" + flage , users, {
        headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

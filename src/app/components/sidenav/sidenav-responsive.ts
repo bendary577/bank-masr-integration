@@ -56,11 +56,10 @@ export class SidenavResponsive implements OnDestroy,OnInit {
 
   ngOnInit(): void {
     if (this.shouldRun == true) {
+      this.getApplication();
       this.getSyncJobTypes();
       this.getOperationTypes();
-      this.getApplication();
     }
-
   }
 
   changeCurrentTab(cuurentTab) {

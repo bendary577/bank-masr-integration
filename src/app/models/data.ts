@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class Data {
 
     public storage: any;
-
+    public inParent: boolean;
     public constructor() { }
 
 }

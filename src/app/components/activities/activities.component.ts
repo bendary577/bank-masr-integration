@@ -6,6 +6,7 @@ import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import {Location} from '@angular/common';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-activities',
@@ -16,7 +17,6 @@ export class ActivitiesComponent implements OnInit {
   filterBy = "Daily";
   imagePath = './src/assets/user.png';
   totalSpendM: any;
-  totalSpendLoading = false;
   users = [];
   groups = [];
   transactionList = {
@@ -38,7 +38,7 @@ export class ActivitiesComponent implements OnInit {
   };
 
   constructor(public snackBar: MatSnackBar, private router: Router, private _location: Location,
-    private sidNav: SidenavResponsive,private loyaltyService: LoyaltyService) { }
+    private sidNav: SidenavResponsive,private loyaltyService: LoyaltyService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.getTransactions();
@@ -46,18 +46,14 @@ export class ActivitiesComponent implements OnInit {
     this.getTopGroups();
     this.totalSpend("Today");
   }
- 
-  backClicked() {
-    this._location.back();
-  }
 
   totalSpend(date){
-    this.totalSpendLoading = true;
+    this.spinner.show();
     this.loyaltyService.getTotalSpend(date).toPromise().then((res: any) => {
-      this.totalSpendLoading = false;
+      this.spinner.hide();
       this.totalSpendM = res["totalSpend"];
     }).catch(err => {
-      this.totalSpendLoading = false;
+      this.spinner.hide();
       let message = "";
       if(err.status === 401){
         message = ErrorMessages.SESSION_EXPIRED;
