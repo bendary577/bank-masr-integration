@@ -69,6 +69,7 @@ export class ManageUsersComponent implements OnInit {
     this.usersList.showLoading = true;
     this.loyaltyService.deleteAppUsers(flage, this.usersList.selected).then((res: any) => {
       this.getGroups();
+      this.getUsers();
       this.usersList.selected = [];
       this.usersList.showLoading = false;
       this.snackBar.open("User deleted successfully.", null, {
@@ -79,6 +80,7 @@ export class ManageUsersComponent implements OnInit {
     }).catch(err => {
       this.usersList.showLoading = false;
       this.usersList.selected = [];
+      this.getUsers();
       this.snackBar.open("Can't delete Group.", null, {
         duration: 2000,
         horizontalPosition: 'right',

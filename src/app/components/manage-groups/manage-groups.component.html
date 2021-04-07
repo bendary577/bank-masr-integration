@@ -6,7 +6,7 @@
         <button mat-flat-button (click)="addGroupDialog()">Add Group</button>
         <button mat-flat-button (click)="updateGroupDialog()" [disabled]="groupsList.selected.length != 1">Update Group</button>
         <button mat-flat-button (click)="deleteGroups('true')" [disabled]="groupsList.selected.length == 0">Delete Groups</button>
-        <button mat-flat-button (click)="deleteGroups('false')" [disabled]="groupsList.selected.length != 1">Restore Groups</button>
+        <button mat-flat-button (click)="deleteGroups('false')" [disabled]="groupsList.selected.length == 0">Restore Groups</button>
     </div>   
 
     <ngx-datatable class="material" [loadingIndicator]="groupsList.showLoading" [messages]="groupsList.messages" 
