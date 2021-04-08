@@ -4,4 +4,5 @@ export class RateCode {
     vatRate: number;
     serviceChargeRate: number;
     municipalityTaxRate: number;
+    basicPackageValue: number;
 }

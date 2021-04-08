@@ -229,7 +229,7 @@ export class OperaReportMapTablesComponent implements OnInit {
     }
   }
 
-  addRateCOde(){
+  addRateCode(){
     if(this.newRateCode.code &&  this.newRateCode.vatRate && this.newRateCode.municipalityTaxRate
       && this.newRateCode.serviceChargeRate){
        this.rateCodes.push(this.newRateCode);
