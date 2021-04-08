@@ -14,7 +14,7 @@
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Reason Id" [(ngModel)]="newCancelReason.typeId">
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Reason" [(ngModel)]="newCancelReason.type">
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Reason Description" [(ngModel)]="newCancelReason.typeDescription">
-            <button mat-flat-button (click)="add()">Add</button>
+            <button mat-flat-button (click)="addCancelReason()">Add</button>
         </div>
 
         <div *ngIf="cancelReasons?.length > 0">
@@ -55,7 +55,7 @@
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Payment Method" [(ngModel)]="newPaymentType.type">
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Payment Description" [(ngModel)]="newPaymentType.typeDescription">
 
-            <button mat-flat-button (click)="add()">Add</button>
+            <button mat-flat-button (click)="addPaymentType()">Add</button>
         </div>
 
         <div *ngIf="paymentTypes?.length > 0">
@@ -97,7 +97,7 @@
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type Id" [(ngModel)]="newRoomType.typeId">
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type" [(ngModel)]="newRoomType.type">
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type Description" [(ngModel)]="newRoomType.typeDescription">
-            <button mat-flat-button (click)="add()">Add</button>
+            <button mat-flat-button (click)="addRoomType()">Add</button>
         </div>
 
         <div *ngIf="roomTypes?.length > 0">
@@ -137,7 +137,7 @@
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type Id" [(ngModel)]="newNationalities.typeId">
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type" [(ngModel)]="newNationalities.type">
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type Description" [(ngModel)]="newNationalities.typeDescription">
-            <button mat-flat-button (click)="add()">Add</button>
+            <button mat-flat-button (click)="addNationality()">Add</button>
         </div>
 
         <div *ngIf="nationalities?.length > 0">
@@ -177,7 +177,7 @@
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type Id" [(ngModel)]="newPurposeOfVisit.typeId">
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type" [(ngModel)]="newPurposeOfVisit.type">
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type Description" [(ngModel)]="newPurposeOfVisit.typeDescription">
-            <button mat-flat-button (click)="add()">Add</button>
+            <button mat-flat-button (click)="addPurposeOfVisit()">Add</button>
         </div>
 
         <div *ngIf="purposeOfVisit?.length > 0">
@@ -217,7 +217,7 @@
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type Id" [(ngModel)]="newGender.typeId">
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type" [(ngModel)]="newGender.type">
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type Description" [(ngModel)]="newGender.typeDescription">
-            <button mat-flat-button (click)="add()">Add</button>
+            <button mat-flat-button (click)="addGender()">Add</button>
         </div>
 
         <div *ngIf="genders?.length > 0">
@@ -257,7 +257,7 @@
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type Id" [(ngModel)]="newCustomerTypes.typeId">
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type" [(ngModel)]="newCustomerTypes.type">
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type Description" [(ngModel)]="newCustomerTypes.typeDescription">
-            <button mat-flat-button (click)="add()">Add</button>
+            <button mat-flat-button (click)="addCustomerType()">Add</button>
         </div>
 
         <div *ngIf="customerTypes?.length > 0">
@@ -297,7 +297,7 @@
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type Id" [(ngModel)]="newTransactionTypes.typeId">
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type" [(ngModel)]="newTransactionTypes.type">
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type Description" [(ngModel)]="newTransactionTypes.typeDescription">
-            <button mat-flat-button (click)="add()">Add</button>
+            <button mat-flat-button (click)="addTransactionType()">Add</button>
         </div>
 
         <div *ngIf="transactionTypes?.length > 0">
@@ -337,7 +337,7 @@
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type Id" [(ngModel)]="newExpenseType.typeId">
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type" [(ngModel)]="newExpenseType.type">
             <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Type Description" [(ngModel)]="newExpenseType.typeDescription">
-            <button mat-flat-button (click)="add()">Add</button>
+            <button mat-flat-button (click)="addExpenseType()">Add</button>
         </div>
 
         <div *ngIf="expenseTypes?.length > 0">
@@ -364,6 +364,53 @@
             </ngx-datatable>
         </div>
     </mat-expansion-panel>
+
+        <!-- Expense Types -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Rate Code Mapping
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <div *ngIf="!loading" class="back" style="margin-bottom: 15px;">
+                <input matInput type="number" step="0.1" style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="eg. BARRO" [(ngModel)]="newRateCode.code">
+                <input matInput type="number" step="0.1" style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="eg. 5" [(ngModel)]="newRateCode.vatRate">
+                <input matInput type="number" step="0.1" style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="eg. 7" [(ngModel)]="newRateCode.municipalityTaxRate">
+                <input matInput type="number" step="0.1" style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="eg. 10" [(ngModel)]="newRateCode.serviceChargeRate">
+                <button mat-flat-button (click)="addExpenseType()">Add</button>
+            </div>
+    
+            <div *ngIf="rateCodes?.length > 0">
+    
+                <ngx-datatable class="material" [rows]="rateCodes" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
+    
+                    <ngx-datatable-column name="Rate Code">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <input matInput placeholder="eg. BARRO" [(ngModel)]="row.code">
+                        </ng-template>
+                    </ngx-datatable-column>
+    
+                    <ngx-datatable-column name="VAT Rate">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <input matInput placeholder="eg. 5" [(ngModel)]="row.vatRate">
+                        </ng-template>
+                    </ngx-datatable-column>
+    
+                    <ngx-datatable-column name="Municipality Tax Rate">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <input matInput placeholder="eg. 7" [(ngModel)]="row.municipalityTaxRate">
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Service Charge Rate">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <input matInput placeholder="eg. 10" [(ngModel)]="row.serviceChargeRate">
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+            </div>
+        </mat-expansion-panel>
 
     <br>
 

@@ -6,6 +6,7 @@ import { SimphonyLocation } from './SimphonyLocation';
 import { Supplier } from './supplier';
 import { ItemGroup } from './ItemGroup';
 import { BookingType } from './operaReports/paymentTypes';
+import { RateCode } from './operaReports/RateCode';
 
 export class GeneralSettings {
   id: string;
@@ -26,12 +27,13 @@ export class GeneralSettings {
   paymentTypes: Array<BookingType>|any;
   roomTypes : Array<BookingType>|any;
   nationalities: Array<BookingType>|any;
-
   purposeOfVisit: Array<BookingType>|any;
   genders: Array<BookingType>|any;
   customerTypes: Array<BookingType>|any;
   transactionTypes: Array<BookingType>|any;
   expenseTypes: Array<BookingType>|any;
+
+  rateCodes: Array<RateCode>|any;
 
   // ==> END of OPERA Vribles
   creationDate: Date;

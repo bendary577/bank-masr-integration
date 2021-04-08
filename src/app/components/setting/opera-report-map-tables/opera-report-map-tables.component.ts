@@ -4,6 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { GeneralSettings } from 'src/app/models/GeneralSettings';
 import { BookingType } from 'src/app/models/operaReports/paymentTypes';
+import { RateCode } from 'src/app/models/operaReports/RateCode';
 import { Response } from 'src/app/models/Response';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 
@@ -16,9 +17,10 @@ export class OperaReportMapTablesComponent implements OnInit {
   loading = true;
   saveLoading = true;
 
+  newCancelReason = new BookingType();
+
   generalSettings: GeneralSettings;
   newPaymentType = new BookingType();
-  newCancelReason = new BookingType();
   newRoomType = new BookingType();
   newNationalities = new BookingType();
   newPurposeOfVisit = new BookingType();
@@ -27,6 +29,9 @@ export class OperaReportMapTablesComponent implements OnInit {
   newTransactionTypes = new BookingType();
   newExpenseType = new BookingType();
 
+  newRateCode = new RateCode();
+
+  cancelReasons = [];
   purposeOfVisit = [];
   paymentTypes = [];
   genders = [];
@@ -34,8 +39,9 @@ export class OperaReportMapTablesComponent implements OnInit {
   roomTypes = [];
   transactionTypes = [];
   nationalities = [];
-  cancelReasons = [];
   expenseTypes = [];
+
+  rateCodes = [];
 
   constructor(public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService) { }
@@ -52,6 +58,7 @@ export class OperaReportMapTablesComponent implements OnInit {
       this.generalSettings = res as GeneralSettings;
 
       this.cancelReasons = this.generalSettings.cancelReasons;
+
       this.paymentTypes = this.generalSettings.paymentTypes;
       this.purposeOfVisit = this.generalSettings.purposeOfVisit;
       this.genders = this.generalSettings.genders;
@@ -60,6 +67,8 @@ export class OperaReportMapTablesComponent implements OnInit {
       this.transactionTypes = this.generalSettings.transactionTypes;
       this.nationalities = this.generalSettings.nationalities;
       this.expenseTypes = this.generalSettings.expenseTypes;
+
+      this.rateCodes = this.generalSettings.rateCodes;
 
       this.loading = false;
       this.spinner.hide();
@@ -85,61 +94,132 @@ export class OperaReportMapTablesComponent implements OnInit {
     });
   }
 
-  add(){
+  addPaymentType(){
     if(this.newPaymentType.typeId && this.newPaymentType.type && this.newPaymentType.typeDescription){
       this.paymentTypes.push(this.newPaymentType);
       this.newPaymentType = new BookingType();
 
       this.paymentTypes = [...this.paymentTypes];
+    }else {
+      this.snackBar.open('Please fill all type fields.', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+    }
+  }
 
-    } else if(this.newCancelReason.type &&  this.newCancelReason.type && this.newCancelReason.typeDescription){
+  addCancelReason(){
+    if(this.newCancelReason.type &&  this.newCancelReason.type && this.newCancelReason.typeDescription){
       this.cancelReasons.push(this.newCancelReason);
       this.newCancelReason = new BookingType();
 
       this.cancelReasons = [...this.cancelReasons];
+    }else {
+      this.snackBar.open('Please fill all type fields.', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+    }
+  }
 
-    } else if(this.newRoomType.type &&  this.newRoomType.type && this.newRoomType.typeDescription){
+  addRoomType(){
+    if(this.newRoomType.type &&  this.newRoomType.type && this.newRoomType.typeDescription){
       this.roomTypes.push(this.newRoomType);
       this.newRoomType = new BookingType();
 
       this.roomTypes = [...this.roomTypes];
+    }else {
+      this.snackBar.open('Please fill all type fields.', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+    }
+  }
 
-    } else if(this.newCustomerTypes.type &&  this.newCustomerTypes.type && this.newCustomerTypes.typeDescription){
-      this.customerTypes.push(this.newCustomerTypes);
-      this.newCustomerTypes = new BookingType();
-
-      this.customerTypes = [...this.customerTypes];
-
-    } else if(this.newNationalities.type &&  this.newNationalities.type && this.newNationalities.typeDescription){
+  addNationality(){
+    if(this.newNationalities.type &&  this.newNationalities.type && this.newNationalities.typeDescription){
       this.nationalities.push(this.newNationalities);
       this.newNationalities = new BookingType();
 
       this.nationalities = [...this.nationalities];
+    }else {
+      this.snackBar.open('Please fill all type fields.', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+    }
+  }
 
-    } else if(this.newPurposeOfVisit.type &&  this.newPurposeOfVisit.type && this.newPurposeOfVisit.typeDescription){
+  addCustomerType(){
+    if(this.newCustomerTypes.type &&  this.newCustomerTypes.type && this.newCustomerTypes.typeDescription){
+      this.customerTypes.push(this.newCustomerTypes);
+      this.newCustomerTypes = new BookingType();
+
+      this.customerTypes = [...this.customerTypes];
+    }else {
+      this.snackBar.open('Please fill all type fields.', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+    }
+  }
+
+  addPurposeOfVisit(){
+    if(this.newPurposeOfVisit.type &&  this.newPurposeOfVisit.type && this.newPurposeOfVisit.typeDescription){
       this.purposeOfVisit.push(this.newPurposeOfVisit);
       this.newPurposeOfVisit = new BookingType();
 
       this.purposeOfVisit = [...this.purposeOfVisit];
+    }else {
+      this.snackBar.open('Please fill all type fields.', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+    }
+  }
 
-    } else if(this.newGender.type &&  this.newGender.type && this.newGender.typeDescription){
+  addGender(){
+    if(this.newGender.type &&  this.newGender.type && this.newGender.typeDescription){
       this.genders.push(this.newGender);
       this.newGender = new BookingType();
 
       this.genders = [...this.genders];
+    }else {
+      this.snackBar.open('Please fill all type fields.', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+    }
+  }
 
-    } else if(this.newTransactionTypes.type &&  this.newTransactionTypes.type && this.newTransactionTypes.typeDescription){
+  addTransactionType(){
+    if(this.newTransactionTypes.type &&  this.newTransactionTypes.type && this.newTransactionTypes.typeDescription){
       this.transactionTypes.push(this.newTransactionTypes);
       this.newTransactionTypes = new BookingType();
 
       this.transactionTypes = [...this.transactionTypes];
+    }  else {
+      this.snackBar.open('Please fill all type fields.', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+    }
+  }
 
-    } else if(this.newExpenseType.type &&  this.newExpenseType.type && this.newExpenseType.typeDescription){
+  addExpenseType(){
+   if(this.newExpenseType.type &&  this.newExpenseType.type && this.newExpenseType.typeDescription){
       this.expenseTypes.push(this.newExpenseType);
       this.newExpenseType = new BookingType();
 
       this.expenseTypes = [...this.expenseTypes];
-
     } else {
       this.snackBar.open('Please fill all type fields.', null, {
         duration: 2000,
@@ -148,6 +228,22 @@ export class OperaReportMapTablesComponent implements OnInit {
       });
     }
   }
+
+  addRateCOde(){
+    if(this.newRateCode.code &&  this.newRateCode.vatRate && this.newRateCode.municipalityTaxRate
+      && this.newRateCode.serviceChargeRate){
+       this.rateCodes.push(this.newRateCode);
+       this.newRateCode = new RateCode();
+ 
+       this.rateCodes = [...this.rateCodes];
+     } else {
+       this.snackBar.open('Please fill all rate code fields.', null, {
+         duration: 2000,
+         horizontalPosition: 'center',
+         panelClass:"my-snack-bar-fail"
+       });
+     }
+   }
 
   onSaveClick(){
     this.spinner.show();
@@ -188,6 +284,10 @@ export class OperaReportMapTablesComponent implements OnInit {
 
       if(this.expenseTypes.length != 0) {
         this.generalSettings.expenseTypes = this.expenseTypes;
+      }
+
+      if(this.rateCodes.length != 0) {
+        this.generalSettings.rateCodes = this.rateCodes;
       }
 
       this.generalSettingsService.updateGeneralSettings(this.generalSettings).then(result => {
