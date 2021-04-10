@@ -6,9 +6,10 @@
             <mat-card-content>
                 <h2>Top Users</h2>
                 <div class="row" >
+                    <div [hidden]="users.length != 0">No users to show.</div>
                     <div class="column" *ngFor="let user of users">
                         <img  class="user-img" src={{user.logoUrl}} alt="image">
-                        <p>{{user.name}}</p>
+                        <p class="user-name"> {{user.name}}</p>
                     </div>                    
                 </div>
             </mat-card-content>
@@ -20,9 +21,10 @@
             <mat-card-content>
                 <h2>Top Groups</h2>
                 <div class="row">
+                    <div [hidden]="groups.length != 0">No groups to show.</div>
                     <div class="column" *ngFor="let group of groups">
                         <img  class="user-img" src={{group.logoUrl}} alt="image">
-                        <p>{{group.name}}</p>
+                        <p class="user-name">{{group.name}}</p>
                     </div>                    
                 </div>
             </mat-card-content>

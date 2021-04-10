@@ -120,6 +120,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { NewBookingReportComponent } from './components/new-booking-report/new-booking-report.component';
 import { ConsumptionMajorGroupChildComponent } from './components/consumption-major-group-child/consumption-major-group-child.component';
+import { ManageSubGroupComponent } from './components/manage-sub-group/manage-sub-group.component';
 
 @NgModule({
   declarations: [
@@ -197,6 +198,7 @@ import { ConsumptionMajorGroupChildComponent } from './components/consumption-ma
     ExportedFileConfigurationComponent,
     ManageGroupsComponent,
     ManageUsersComponent,
+    ManageSubGroupComponent,
     LoyaltyComponent,
     AddAppCompanyComponent,
     AddAppGroupComponent,

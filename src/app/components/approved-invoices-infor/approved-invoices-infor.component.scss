@@ -16,17 +16,35 @@
     height: 5vh;
 }
 
-.user-img{
-    min-width:50px;
-    min-height:50px;
-}
-
+.group-name{
+    font-weight: bold;
+  }
+  
 .headerBack {
     float: right;
     margin-left: 20px;
     background-color: #255685;
 }
 
+.group-name{
+    color: rgb(27, 84, 190);
+    // font-weight: normal;
+    text-decoration: blink;
+}
+
+.group-name:hover {
+    color: rgb(9, 32, 75);
+    text-decoration: underline;
+    // font-weight: normal;
+    text-decoration: blink;
+}
+
+.form-b-img{
+    float: right;
+    width: 30%;
+    height: 30%;
+    float: left;
+}
 
 #myProgress {
     width: 50%;

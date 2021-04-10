@@ -16,6 +16,7 @@ export class AddAppUserComponent implements OnInit {
   selectedCompany: Company;
   selectedGroup: Group;
   srcResult: any;
+  imageUploded: boolean = false;
 
   groups: Group[] = [];
 
@@ -46,7 +47,10 @@ export class AddAppUserComponent implements OnInit {
 
   csvInputChange(fileInputEvent: any) {
     this.srcResult = fileInputEvent.target.files[0];
+    if(this.srcResult){
+      this.imageUploded = true;
     }
+  }
   
   onNoClick(): void {
     this.dialogRef.close();

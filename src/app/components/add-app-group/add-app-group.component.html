@@ -4,7 +4,7 @@
     <form [formGroup]="form" class="my-form">
         <div class="form-group">
             <mat-form-field class="example-full-width">
-                <input matInput placeholder="Name" formControlName="name" required maxlength="10">
+                <input matInput placeholder="Name" formControlName="name" required maxlength="25">
                 <mat-error *ngIf="form.controls.name.hasError('required')">
                     Name is required.
                   </mat-error>
@@ -40,10 +40,10 @@
             <mat-form-field class="example-full-width">
                 <input  matInput required placeholder="Discount Id" formControlName="discountId">
                 <mat-error *ngIf="form.controls.discountId.hasError('required')">
-                    Discount Id is required.
+                    Discount ID is required.
                   </mat-error>
                   <mat-error *ngIf="form.controls.discountId.hasError('pattern')">
-                    Discount Id is positive numbers.
+                    Discount ID must be positive numbers.
                   </mat-error>
             </mat-form-field>
         </div>
@@ -61,6 +61,7 @@
             <button class="form-button" mat-flat-button color="primary" (click)="csvInput.click()" >
                 <img class="form-b-img" src="../../../assets/photos.png">
                 Choose Image</button>
+            <div [hidden]="!imageUploded">Uploaded.</div>
          </div>
 
     </form>

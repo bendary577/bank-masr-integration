@@ -44,11 +44,6 @@ export class ManageUsersComponent implements OnInit {
     this.getUsers();
     this.getGroups();
   }
-
-    
-  // backClicked() {
-  //   this._location.back();
-  // }
   
   onSelect({selected}) {
     this.usersList.selected.splice(0, this.usersList.selected.length);
@@ -107,15 +102,8 @@ export class ManageUsersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
 
-        this.loading = true;
-        this.newUser.name = res.name;
-        this.newUser.email = res.email;
-        this.newUser.group = res.group;
-        this.newUser.deleted = false;
-
         this.usersList.showLoading = true;
-        this.loyaltyService.addAppUsers(this.newUser, true).then(result => {
-          this.loyaltyService.addApplicationUserImage(res.image, result["id"]);
+        this.loyaltyService.addApplicationUser(true, res.name, res.email, res.group.id, res.image, "").then((result: any) => {
           this.loading = true;
           this.getUsers();
           this.newUser = new ApplicationUser();
@@ -132,7 +120,6 @@ export class ManageUsersComponent implements OnInit {
           this.usersList.showLoading = false;
           this.getUsers();
           this.usersList.selected = [];
-
           let message = "";
           if(err.status === 401){
             message = ErrorMessages.SESSION_EXPIRED;
@@ -144,7 +131,6 @@ export class ManageUsersComponent implements OnInit {
           } else {
             message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
           }
-    
           this.snackBar.open(message , null, {
             duration: 3000,
             horizontalPosition: 'right',
@@ -168,23 +154,18 @@ export class ManageUsersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(res => {
       if(res) {
         this.loading = true;
-
-          this.newUser = this.usersList.selected[0];
-          this.newUser.name = res.name;
-          this.newUser.email = res.email;
-          this.newUser.group = res.group;
-          this.newUser.deleted = false ;
-
-          this.usersList.showLoading = true;
-          this.loyaltyService.addAppUsers(this.newUser, false).then(result => {
-            this.loyaltyService.addApplicationUserImage(res.image, result["id"]);
+        this.usersList.showLoading = true;
+        if(res.group == undefined)
+        res.group = new Group();
+        this.loyaltyService.addApplicationUser(false, res.name, res.email, res.group.id, res.image,
+                                               this.usersList.selected[0]).then((result: any) => {
             this.loading = false;
             this.usersList.showLoading = false;
             this.getGroups();
             this.newUser = new ApplicationUser();
             this.usersList.selected = [];
 
-            this.snackBar.open("User Updated successfully.", null, {
+            this.snackBar.open("User updated successfully.", null, {
               duration: 2000,
               horizontalPosition: 'right',
               panelClass : "my-snack-bar-success"
@@ -211,7 +192,6 @@ export class ManageUsersComponent implements OnInit {
               horizontalPosition: 'right',
               panelClass:"my-snack-bar-fail"
             });
-  
           })
       }
     })

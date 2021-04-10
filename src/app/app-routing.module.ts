@@ -49,6 +49,7 @@ import { ActivitiesComponent } from './components/activities/activities.componen
 import { WlsIntegrationComponent } from './components/wls-integration/wls-integration.component';
 import { WlsIntegrationConfigComponent } from './components/wls-integration-config/wls-integration-config.component';
 import { NewBookingReportComponent } from './components/new-booking-report/new-booking-report.component';
+import { ManageSubGroupComponent } from './components/manage-sub-group/manage-sub-group.component';
 
 
 const routes: Routes = [
@@ -69,6 +70,7 @@ const routes: Routes = [
   // Loyalty Views
   { path: Constants.GET_LOYALTY_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MANAGE_GROUPS, component: ManageGroupsComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.MANAGE_SUB_GROUPS, component: ManageSubGroupComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MANAGE_USERS, component: ManageUsersComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MANAGE_ACTIVITIES, component: ActivitiesComponent ,canActivate:[AuthGuardService]},
 

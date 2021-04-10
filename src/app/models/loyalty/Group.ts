@@ -1,7 +1,6 @@
 export class Group {
-    public id: string;
+    public id: string = "";
     public name: string;
-    public logoUrl: string;
     public accountID: string;
     public description: string;
     public discountId: number;
