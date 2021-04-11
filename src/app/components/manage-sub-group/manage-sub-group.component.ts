@@ -19,6 +19,8 @@ export class ManageSubGroupComponent implements OnInit {
   newGroup: Group = new Group();
   inParent: boolean = false;
   groupId: String = "";
+  parentGroupName: String = "";
+
   groupsList = {
     paginateData: true as boolean,
     offset: 0,
@@ -45,8 +47,10 @@ export class ManageSubGroupComponent implements OnInit {
       this.inParent = false;
       if(this.data != null && this.data.storage != undefined){
         localStorage.setItem('groupId', this.data.storage.id);
+        localStorage.setItem('groupName', this.data.storage.name);
       }
       this.groupId = localStorage.getItem('groupId');
+      this.parentGroupName = localStorage.getItem('groupName');
       this.getGroups(this.inParent, this.groupId);
   }
 
@@ -96,8 +100,7 @@ export class ManageSubGroupComponent implements OnInit {
   addSubGroupDialog(){
     const dialogRef = this.dialog.open(AddAppGroupComponent, {
       width: '550px',
-        data: { inParent: this.inParent,
-                parentGroup: this.data.storage}
+      data: {inParent: this.inParent, parentGroup: this.data.storage}
   });
 
   dialogRef.afterClosed().subscribe(res => {
