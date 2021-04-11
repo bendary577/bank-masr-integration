@@ -64,13 +64,14 @@ export class ManageGroupsComponent implements OnInit {
   }
 
   getGroups(isParent, group){
+    this.groupsList.groupsData = [];
     this.groupsList.showLoading = true;
     this.loyaltyService.getAppGroups(isParent, group, 2).toPromise().then((res: any) => {
       this.groupsList.groupsData = res;
       this.groupsList.showLoading = false;
     }).catch(err => {
       this.groupsList.showLoading = false;
-    });
+    }); 
   }
 
   deleteGroups(flage){
