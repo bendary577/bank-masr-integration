@@ -28,6 +28,7 @@
                              [(ngModel)]="syncJobType.configuration.consumptionConfiguration.consumptionBasedOnType">
                                 <mat-option value="Cost Center">Cost Center</mat-option>
                                 <mat-option value="Location">Location</mat-option>
+                                <mat-option value="Location And RevenuCenter">Location And Revenue Center</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -63,6 +64,11 @@
                                 <mat-option [value]=code *ngFor="let code of analysisCodes">{{code}}</mat-option>
                             </mat-select>
                         </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-select matInput id="familyGroupAnalysisCode" name="familyGroupAnalysisCode" placeholder="Family Group Analysis Code" [(ngModel)]="syncJobType.configuration.familyGroupAnalysisCode">
+                                <mat-option [value]=code *ngFor="let code of familyCodes">{{code}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
                     </div>
                 </form>
             </div>
@@ -77,6 +83,45 @@
             </mat-expansion-panel-header>
 
             <app-analysis-configuration [analysis]=analysis></app-analysis-configuration>
+        </mat-expansion-panel>
+
+        <!-- Major Group Mapping -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Major Group Mapping
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="back" style="margin-bottom: 20px;">
+                <button mat-flat-button (click)="openMajorGroupDialog()">Add</button>
+            </div>
+
+            <div *ngIf="majorGroups?.length > 0">
+
+                <ngx-datatable class="material" [rows]="majorGroups" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
+
+                    <ngx-datatable-column name="Major Group">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.majorGroup">
+                                <input matInput placeholder="Account" [(ngModel)]="row.majorGroup" style="margin-left: 5px;">
+                            </mat-checkbox>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Account">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <input matInput placeholder="Account" [(ngModel)]="row.account">
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Group Childs">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <button mat-flat-button (click)="viewMajorGroupChildsDialog(row)">View</button>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                </ngx-datatable>
+            </div>
         </mat-expansion-panel>
 
         <br>

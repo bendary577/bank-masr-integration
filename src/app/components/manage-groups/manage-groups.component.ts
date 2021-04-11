@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { Constants } from 'src/app/models/constants';
 import { Data } from 'src/app/models/data';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
-import { Company } from 'src/app/models/loyalty/Company';
 import { Group } from 'src/app/models/loyalty/Group';
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
 import { AddAppGroupComponent } from '../add-app-group/add-app-group.component';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-manage-groups',
@@ -16,36 +16,45 @@ import { SidenavResponsive } from '../sidenav/sidenav-responsive';
   styleUrls: ['./manage-groups.component.scss']
 })
 export class ManageGroupsComponent implements OnInit {
-  company: Company = new Company();
   newGroup: Group = new Group();
-
+  inParent: boolean = false;
+  groupId: String = "";
   groupsList = {
     paginateData: true as boolean,
     offset: 0,
     messages: {
       emptyMessage: `
     <div >
-      <span class="classname">No Groups found</span>
+      <span style="font-size: 25px;text-alngign: center;">There are no groups yet.</span>
     </div>
   `
     },
     selected: [],
-    locationsCount: 0 as number,
+    groupsCount: 0 as number,
     pagesFilter: [10, 25, 50, 75, 100],
     showLoading: true,
     inputSearch: '' as string,
-    groupsData: [] 
+    groupsData: [] as Group[] 
   };
 
-  constructor( private loyaltyService: LoyaltyService, private router: Router, private data: Data,
-    public dialog: MatDialog, public snackBar: MatSnackBar, private sidNav: SidenavResponsive) { }
+  constructor(public snackBar: MatSnackBar,
+    private sidNav: SidenavResponsive, public dialog: MatDialog, private _location: Location,
+    private loyaltyService: LoyaltyService, private router: Router, public data: Data) { }
 
   ngOnInit() {
-    this.company = this.data.storage;
-    if(this.company == null || this.company == undefined){
-      this.router.navigate([Constants.LOYALTY]);
-    }else{
-      this.getGroups();
+      this.inParent = true;
+      this.getGroups(this.inParent, this.groupId);
+  }
+
+  
+  backClicked() {
+    this._location.back();
+  }
+  
+  openSupGroup(group: Group){
+    if(this.inParent){
+    this.data.storage = group;
+    this.router.navigate([Constants.MANAGE_SUB_GROUPS]);
     }
   }
 
@@ -53,35 +62,69 @@ export class ManageGroupsComponent implements OnInit {
     this.groupsList.selected.splice(0, this.groupsList.selected.length);
     this.groupsList.selected.push(...selected);
   }
-  
+
+  getGroups(isParent, group){
+    this.groupsList.showLoading = true;
+    this.loyaltyService.getAppGroups(isParent, group).toPromise().then((res: any) => {
+      this.groupsList.groupsData = res;
+      this.groupsList.showLoading = false;
+    }).catch(err => {
+      this.groupsList.showLoading = false;
+    });
+  }
+
+  deleteGroups(flage){
+    this.groupsList.showLoading = true;
+    this.loyaltyService.deleteAppGroups(flage, this.groupsList.selected).then((res: any) => {
+      this.getGroups(this.inParent, this.groupId);
+      this.groupsList.showLoading = false;
+      this.groupsList.selected = [];
+      this.snackBar.open("Groups deleted successfully.", null, {
+        duration: 2000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-success"
+      });
+    }).catch(err => {
+      this.getGroups(this.inParent, this.groupId);
+      this.groupsList.selected = [];
+      this.groupsList.showLoading = false;
+      this.snackBar.open("Can't delete Group.", null, {
+        duration: 2000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-success"
+      });
+    });
+  }
+
   addGroupDialog(){
     const dialogRef = this.dialog.open(AddAppGroupComponent, {
-        width: '550px'
+        width: '550px',
+        data: { inParent: this.inParent}
     });
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        this.newGroup.name = res.name;
-        this.newGroup.description = res.description;
-        this.newGroup.discountRate = res.discountRate;
-        this.newGroup.deleted = false;
-
         this.groupsList.showLoading = true;
-        this.loyaltyService.addAppGroups(this.newGroup, this.company.id, true).then(result => {
-          this.getGroups();
 
+        if(res.parentGroup == undefined)
+        res.parentGroup = new Group();
+
+        this.loyaltyService.addAppGroups(true, res.name, res.description, res.discountRate, res.discountId,
+          res.parentGroup.id, res.image, "").then((result: any) => {
+                        this.groupsList.showLoading = false;
+          this.groupsList.selected = [];
           this.newGroup = new Group();
-          this.groupsList.showLoading = false;
-
-          this.snackBar.open("Add sub-group successfully.", null, {
+          this.getGroups(true, this.groupId);
+          this.snackBar.open("Group Added successfully.", null, {
             duration: 2000,
             horizontalPosition: 'right',
             panelClass:"my-snack-bar-success"
           });
         }).catch(err => {
-          this.newGroup = new Group();
           this.groupsList.showLoading = false;
-
+          this.groupsList.selected = [];
+          this.newGroup = new Group();
+          this.getGroups(true, this.groupId);
           let message = "";
           if(err.status === 401){
             message = ErrorMessages.SESSION_EXPIRED;
@@ -93,8 +136,7 @@ export class ManageGroupsComponent implements OnInit {
           } else {
             message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
           }
-    
-          this.snackBar.open(message , null, {
+          this.snackBar.open(message, null, {
             duration: 3000,
             horizontalPosition: 'right',
             panelClass:"my-snack-bar-fail"
@@ -104,23 +146,54 @@ export class ManageGroupsComponent implements OnInit {
     });
   }
 
-  getGroups(){
-    this.groupsList.showLoading = true; 
-    this.loyaltyService.getAppGroups(this.company.id).toPromise().then((res: any) => {
-      this.groupsList.groupsData = res;
-      this.groupsList.showLoading = false;
-    }).catch(err => {
-      this.groupsList.showLoading = false;
+  updateGroupDialog(){
+    const dialogRef = this.dialog.open(AddAppGroupComponent, {
+      width: '550px',
+      data: {inParent: this.inParent, group: this.groupsList.selected[0] }
     });
+
+  dialogRef.afterClosed().subscribe(res => {
+    if (res) {
+      this.groupsList.showLoading = true;
+
+      if(res.parentGroup == undefined)
+      res.parentGroup = new Group();
+
+      this.loyaltyService.addAppGroups(false, res.name, res.description, res.discountRate, res.discountId,
+        res.parentGroup.id, res.image, this.groupsList.selected[0].id).then((result: any) => {
+                      this.groupsList.showLoading = false;
+        this.groupsList.selected = [];
+        this.newGroup = new Group();
+        this.getGroups(true, this.groupId);
+        this.snackBar.open("Group updated successfully.", null, {
+          duration: 2000,
+          horizontalPosition: 'right',
+          panelClass:"my-snack-bar-success"
+        });
+      }).catch(err => {
+        this.groupsList.showLoading = false;
+        this.groupsList.selected = [];
+        this.newGroup = new Group();
+        this.getGroups(true, this.groupId);
+        let message = "";
+        if(err.status === 401){
+          message = ErrorMessages.SESSION_EXPIRED;
+          this.sidNav.Logout();
+        } else if (err.error.message){
+          message = err.error.message;
+        } else if (err.message){
+          message = err.message;
+        } else {
+          message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
+        }
+        this.snackBar.open(message, null, {
+          duration: 3000,
+          horizontalPosition: 'right',
+          panelClass:"my-snack-bar-fail"
+        });
+      });
+    }
+  });
   }
 
-  deleteCompanies(){
-    this.groupsList.showLoading = true;
-    this.loyaltyService.deleteAppGroups(this.groupsList.selected).then((res: any) => {
-      this.getGroups();
-      this.groupsList.showLoading = false;
-    }).catch(err => {
-      this.groupsList.showLoading = false;
-    });
-  }
 }

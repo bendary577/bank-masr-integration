@@ -5,19 +5,12 @@
         <mat-card class="stat-card">
             <mat-card-content>
                 <h2>Top Users</h2>
-                <div class="row">
-                    <div class="column">
-                        <img  class="user-img" src="../../../assets/user2.jpg" alt="image">
-                        <p>Ahmed Mohamed</p>
+                <div class="row" >
+                    <div [hidden]="users.length != 0">No users to show.</div>
+                    <div class="column" *ngFor="let user of users">
+                        <img  class="user-img" src={{user.logoUrl}} alt="image">
+                        <p class="user-name"> {{user.name}}</p>
                     </div>                    
-                    <div class="column">
-                        <img  class="user-img" src="../../../assets/user1.jpg" alt="image">
-                        <p>Amr Mohamed</p>
-                    </div>
-                    <div class="column">
-                        <img  class="user-img" src="../../../assets/user3.jpg" alt="image">
-                        <p>Ali Mostafa</p>
-                    </div>
                 </div>
             </mat-card-content>
         </mat-card>
@@ -28,18 +21,11 @@
             <mat-card-content>
                 <h2>Top Groups</h2>
                 <div class="row">
-                    <div class="column">
-                        <img  class="user-img" src="../../../assets/letter_o.png" alt="image">
-                        <p>Ovio</p>
+                    <div [hidden]="groups.length != 0">No groups to show.</div>
+                    <div class="column" *ngFor="let group of groups">
+                        <img  class="user-img" src={{group.logoUrl}} alt="image">
+                        <p class="user-name">{{group.name}}</p>
                     </div>                    
-                    <div class="column">
-                        <img  class="user-img" src="../../../assets/letter_a.png" alt="image">
-                        <p>Top Management</p>
-                    </div>
-                    <div class="column">
-                        <img  class="user-img" src="../../../assets/letter_a.png" alt="image">
-                        <p>Arab Aluminum</p>
-                    </div>
                 </div>
             </mat-card-content>
         </mat-card>
@@ -54,34 +40,17 @@
                 <form class="my-form">
                     <div class="row">
                         <div class="two-column" style="text-align: left;">
-                            <button class="filter-btn" mat-raised-button>Today</button>
-                            <button class="filter-btn" mat-raised-button>Last Week</button>
-                            <button class="filter-btn" mat-raised-button>Last Month</button>
+                            <button class="filter-btn" (click)="totalSpend('Today')" mat-raised-button>Today</button>
+                            <button class="filter-btn" (click)="totalSpend('Last Week')" mat-raised-button>Last Week</button>
+                            <button class="filter-btn" (click)="totalSpend('Last Month')" mat-raised-button>Last Month</button>
                         </div>
                         <div class="two-column">
-                            <h3 *ngIf="filterBy=='Daily'" style="border-radius: 10px; text-align: center; height: auto;">
+                            <h3 style="border-radius: 10px; text-align: center; height: auto;">
                                 <div>
                                     Total spend
                                 </div>
                                 <div>
-                                    2450 EGP
-                                </div>
-                            </h3>
-
-                            <h3 *ngIf="filterBy=='Weekly'" style="border-radius: 10px; text-align: center; height: auto;">
-                                <div>
-                                    Total spend
-                                </div>
-                                <div>
-                                    4450 EGP
-                                </div>
-                            </h3>
-                            <h3 *ngIf="filterBy=='Monthly'" style="border-radius: 10px; text-align: center; height: auto;">
-                                <div>
-                                    Total spend
-                                </div>
-                                <div>
-                                    15250 EGP
+                                    {{totalSpendM | number : '1.2-2'}} EGP
                                 </div>
                             </h3>
                         </div>
@@ -93,47 +62,50 @@
 </div>
 
 <div class="main" >
-    <ngx-datatable class="material" [loadingIndicator]="reportsList.showLoading" [messages]="reportsList.messages" 
+
+        <ngx-datatable class="material" [loadingIndicator]="transactionList.showLoading" [messages]="transactionList.messages" 
     [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-     [rows]="reportsList.reportsData" [selected]="reportsList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
+     [rows]="transactionList.transactionData" [selected]="transactionList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
      [scrollbarH]="true">
 
-        <ngx-datatable-column name="Name">
+        <ngx-datatable-column name="User Name">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.name}}
+                {{row.user.name}}
             </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column name="Transaction Date">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.creationDate | date: 'dd/MM/yyyy hh:mm:ss' }}
+                {{row.transactionDate | date: 'dd/MM/yyyy hh:mm:ss' }}
             </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column name="Group">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.group}}
+                {{row.group.name}}
             </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column name="Total Payment">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.amount}} EGP
+                {{row.totalPayment}} EGP
             </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column name="Discount Rate">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.discountRate}} %
+                {{row.discountRate | number : '1.2-2'}} %
             </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column name="After Discount">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.amountAD}} EGP
+                {{row.afterDiscount | number : '1.2-2'}} EGP
             </ng-template>
         </ngx-datatable-column>
 
     </ngx-datatable>
+
 </div>
+<ngx-spinner></ngx-spinner>
 

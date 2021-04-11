@@ -107,7 +107,6 @@ import { SupplierMappingComponent } from './components/setting/supllier-mapping/
 import { AddSupplierComponent } from './components/add-supplier/add-supplier.component';
 import { ExportedFileConfigurationComponent } from './components/configuration/exported-file-configuration/exported-file-configuration.component';
 import { CreateOrderComponent } from './components/create-order/create-order.component';
-import { ManageComaniesComponent } from './components/manage-comanies/manage-comanies.component';
 import { ManageGroupsComponent } from './components/manage-groups/manage-groups.component';
 import { ManageUsersComponent } from './components/manage-users/manage-users.component';
 import { LoyaltyComponent } from './components/loyalty/loyalty.component';
@@ -129,6 +128,8 @@ import { OperaReportMapTablesComponent } from './components/setting/opera-report
 import { OperaBookingDashBoardComponent } from './components/opera-booking-dash-board/opera-booking-dash-board.component';
 import { ExpensesDetailsReportComponent } from './components/expenses-details-report/expenses-details-report.component';
 import { ExpensesDetailsReportConfigComponent } from './components/expenses-details-report-config/expenses-details-report-config.component';
+import { ConsumptionMajorGroupChildComponent } from './components/consumption-major-group-child/consumption-major-group-child.component';
+import { ManageSubGroupComponent } from './components/manage-sub-group/manage-sub-group.component';
 
 @NgModule({
   declarations: [
@@ -169,6 +170,7 @@ import { ExpensesDetailsReportConfigComponent } from './components/expenses-deta
     PosSalesInforComponent,
     PosSalesInforConfigurationComponent,
     AddMajorGroupComponent,
+    ConsumptionMajorGroupChildComponent,
     AddTenderComponent,
     BookedProductionComponent,
     BookedProductionConfigurationComponent,
@@ -203,9 +205,9 @@ import { ExpensesDetailsReportConfigComponent } from './components/expenses-deta
     SupplierMappingComponent,
     AddSupplierComponent,
     ExportedFileConfigurationComponent,
-    ManageComaniesComponent,
     ManageGroupsComponent,
     ManageUsersComponent,
+    ManageSubGroupComponent,
     LoyaltyComponent,
     AddAppCompanyComponent,
     AddAppGroupComponent,
@@ -252,6 +254,7 @@ import { ExpensesDetailsReportConfigComponent } from './components/expenses-deta
     FormsModule,
     MatProgressBarModule,
     NgxJsonViewerModule
+    
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, 
     CookieService, 
@@ -265,7 +268,7 @@ import { ExpensesDetailsReportConfigComponent } from './components/expenses-deta
   CsvService,
   OperationService],
   bootstrap: [AppComponent],
-  entryComponents: [AddUserComponent, AddAccountComponent, AddMajorGroupComponent, AddTenderComponent,
+  entryComponents: [AddUserComponent, AddAccountComponent, AddMajorGroupComponent,ConsumptionMajorGroupChildComponent, AddTenderComponent,
      AddTaxComponent, AddDiscountComponent, AddRevenueCenterComponent, AddServiceChargeComponent,
       SuppliersConfiguartionComponent, SchedulerConfigurationComponent, AddTenderChildComponent, 
       AddSimphonyLocationComponent, AddWebServiceInvokerComponent, AddLocationComponent,

@@ -85,6 +85,7 @@ export class LoginComponent implements OnInit {
         this.side.shouldRun = true;
         this.side.getSyncJobTypes();
         this.side.getOperationTypes();
+        this.side.getApplication();
         this.saveAccountERD();
         this.router.navigate([Constants.WELCOME_PAGE]);
       }).catch(err => {

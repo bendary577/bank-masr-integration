@@ -5,7 +5,8 @@ import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser';
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import { AddAppUserComponent } from '../../components/add-app-user/add-app-user.component'  
-import { Company } from 'src/app/models/loyalty/Company';
+import { Group } from 'src/app/models/loyalty/Group';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-manage-users',
@@ -13,9 +14,10 @@ import { Company } from 'src/app/models/loyalty/Company';
   styleUrls: ['./manage-users.component.scss']
 })
 export class ManageUsersComponent implements OnInit {
-
+ 
+  loading = false;
   newUser: ApplicationUser = new ApplicationUser();
-  companies: Company[];
+  groups: Group[];
 
   usersList = {
     paginateData: true as boolean,
@@ -35,14 +37,14 @@ export class ManageUsersComponent implements OnInit {
     usersData: [] 
   };
 
-  constructor(private loyaltyService: LoyaltyService, public dialog: MatDialog, public snackBar: MatSnackBar
-    , private sidNav: SidenavResponsive) { }
+  constructor(private loyaltyService: LoyaltyService, public dialog: MatDialog, private _location: Location,
+     public snackBar: MatSnackBar, private sidNav: SidenavResponsive) { }
 
   ngOnInit() {
     this.getUsers();
-    this.getCompanies();
+    this.getGroups();
   }
-
+  
   onSelect({selected}) {
     this.usersList.selected.splice(0, this.usersList.selected.length);
     this.usersList.selected.push(...selected);
@@ -58,9 +60,33 @@ export class ManageUsersComponent implements OnInit {
     });
   }
 
-  getCompanies(){
-    this.loyaltyService.getAppCompanies().toPromise().then((res: any) => {
-      this.companies = res;
+  deleteUsers(flage){
+    this.usersList.showLoading = true;
+    this.loyaltyService.deleteAppUsers(flage, this.usersList.selected).then((res: any) => {
+      this.getGroups();
+      this.getUsers();
+      this.usersList.selected = [];
+      this.usersList.showLoading = false;
+      this.snackBar.open("User deleted successfully.", null, {
+        duration: 2000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-success"
+      });
+    }).catch(err => {
+      this.usersList.showLoading = false;
+      this.usersList.selected = [];
+      this.getUsers();
+      this.snackBar.open("Can't delete Group.", null, {
+        duration: 2000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-success"
+      });
+    });
+  }
+
+  getGroups(){
+    this.loyaltyService.getAllAppGroups().toPromise().then((res: any) => {
+      this.groups = res;
     }).catch(err => {
     });
   }
@@ -69,33 +95,31 @@ export class ManageUsersComponent implements OnInit {
     const dialogRef = this.dialog.open(AddAppUserComponent, {
         width: '550px',
         data: {
-          companies: this.companies
+          groups: this.groups
         }
     });
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        this.newUser.name = res.name;
-        this.newUser.group = res.group;
-        this.newUser.company = res.company;
-        this.newUser.deleted = false;
 
         this.usersList.showLoading = true;
-        this.loyaltyService.addAppUsers(this.newUser, true).then(result => {
+        this.loyaltyService.addApplicationUser(true, res.name, res.email, res.group.id, res.image, "").then((result: any) => {
+          this.loading = true;
           this.getUsers();
-
           this.newUser = new ApplicationUser();
           this.usersList.showLoading = false;
+          this.usersList.selected = [];
 
-          this.snackBar.open("Add sub-group successfully.", null, {
+          this.snackBar.open("User added successfully.", null, {
             duration: 2000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'right',  
             panelClass:"my-snack-bar-success"
           });
         }).catch(err => {
           this.newUser = new ApplicationUser();
           this.usersList.showLoading = false;
-
+          this.getUsers();
+          this.usersList.selected = [];
           let message = "";
           if(err.status === 401){
             message = ErrorMessages.SESSION_EXPIRED;
@@ -107,7 +131,6 @@ export class ManageUsersComponent implements OnInit {
           } else {
             message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
           }
-    
           this.snackBar.open(message , null, {
             duration: 3000,
             horizontalPosition: 'right',
@@ -117,4 +140,61 @@ export class ManageUsersComponent implements OnInit {
       }
     });
   }
+
+  updateUserDialog(){
+    const dialogRef = this.dialog.open(AddAppUserComponent, {
+      
+      width : '550px',
+      data: {
+        user : this.usersList.selected[0],
+        groups: this.groups
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if(res) {
+        this.loading = true;
+        this.usersList.showLoading = true;
+        if(res.group == undefined)
+        res.group = new Group();
+        this.loyaltyService.addApplicationUser(false, res.name, res.email, res.group.id, res.image,
+                                               this.usersList.selected[0]).then((result: any) => {
+            this.loading = false;
+            this.usersList.showLoading = false;
+            this.getGroups();
+            this.newUser = new ApplicationUser();
+            this.usersList.selected = [];
+
+            this.snackBar.open("User updated successfully.", null, {
+              duration: 2000,
+              horizontalPosition: 'right',
+              panelClass : "my-snack-bar-success"
+            });
+          }).catch(err => {
+            this.loading = false;
+            this.usersList.showLoading = false;
+            this.usersList.selected = [];
+
+            this.newUser = new ApplicationUser();
+
+            let message = "";
+            if(err.status === 401){
+              message = ErrorMessages.SESSION_EXPIRED;
+              this.sidNav.Logout();
+            }else if(err.error.message){
+              message = err.error.message;
+            }else if(err.message){
+              message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+            }
+
+            this.snackBar.open(message , null, {
+              duration: 3000,
+              horizontalPosition: 'right',
+              panelClass:"my-snack-bar-fail"
+            });
+          })
+      }
+    })
+  }
+
 }

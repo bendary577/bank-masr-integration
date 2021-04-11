@@ -7,6 +7,7 @@ export class Company {
     public accountID: string;
     public description: string;
     public discountRate: string;
+    public parentGroupId : string;
     public groups: Group[];
     public creationDate: string;
     public deleted: boolean;

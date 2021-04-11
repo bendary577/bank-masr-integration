@@ -1,3 +1,4 @@
+import { CostCenter } from "./CostCenter";
 import { FamilyGroup } from "./FamilyGroup";
 import { RevenueCenter } from "./RevenueCenter";
 
@@ -12,6 +13,7 @@ export class MajorGroup {
   children: string[] = [];
   familyGroups: FamilyGroup[] = [];
   revenueCenters: RevenueCenter[] = [];
+  costCenters : CostCenter[] = [];
 
   public constructor() { }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Constants } from 'src/app/models/constants';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Cacheable } from 'ngx-cacheable';
+import { MajorGroup } from 'src/app/models/MajorGroup';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,11 @@ export class JournalService {
   getJournals() {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_JOURNALS_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
+  addMajorGroup(majorGroups: MajorGroup[], id:string) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.post(Constants.ADD_JOURNAL_GROUP_URL + "?syncJobTypeId=" + id, majorGroups, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
 
 }

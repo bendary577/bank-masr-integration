@@ -10,19 +10,29 @@
 
         <div class="form-group">
             <mat-form-field class="example-full-width">
-                <mat-select matInput id="companies" name="companies" placeholder="Group" formControlName="company">
-                    <mat-option [value]=c *ngFor="let c of companies">{{c.name}}</mat-option>
-                </mat-select>
+                <input matInput placeholder="Email" formControlName="email">
+                <mat-error *ngIf="form.controls.email.hasError('pattern')">
+                    Email must be well formed.
+                  </mat-error>
             </mat-form-field>
         </div>
 
         <div class="form-group">
             <mat-form-field class="example-full-width">
-                <mat-select matInput id="groups" name="groups" placeholder="Sub-Group" formControlName="group">
-                    <mat-option [value]=g *ngFor="let g of groups">{{g.name}}</mat-option>
+                <mat-select matInput id="groups" name="groups" placeholder="Group" formControlName="group">
+                    <mat-option></mat-option>
+                    <mat-option [value]=c *ngFor="let c of groups">{{c.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
+        
+        <div class="form-group" style="padding-top: 5%;">
+            <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="csvInputChange($event)" accept=".jpg" />
+            <button class="form-button" mat-flat-button color="primary" (click)="csvInput.click()" >
+                <img class="form-b-img" src="../../../assets/photos.png">
+                Choose Image</button>
+                <div [hidden]="!imageUploded">Uploaded.</div>
+         </div>
 
     </form>
 </div>

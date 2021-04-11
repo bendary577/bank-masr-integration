@@ -10,9 +10,40 @@
 }
 
 .header {
+    padding-top: 10px;
     text-align: end;
     padding: 4px 16px 4px 16px;
     height: 5vh;
+}
+
+.group-name{
+    font-weight: bold;
+  }
+  
+.headerBack {
+    float: right;
+    margin-left: 20px;
+    background-color: #255685;
+}
+
+.group-name{
+    color: rgb(27, 84, 190);
+    // font-weight: normal;
+    text-decoration: blink;
+}
+
+.group-name:hover {
+    color: rgb(9, 32, 75);
+    text-decoration: underline;
+    // font-weight: normal;
+    text-decoration: blink;
+}
+
+.form-b-img{
+    float: right;
+    width: 30%;
+    height: 30%;
+    float: left;
 }
 
 #myProgress {

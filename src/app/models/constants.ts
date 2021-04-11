@@ -41,6 +41,10 @@ export class Constants {
     static GET_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getSyncJobTypesByName';
     static GET_ACC_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getAccSyncJobTypesByName';
 
+    static GET_APPLICATION_URL = environment.apiHost + '/getApplications';
+    // static GET_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getSyncJobTypesByName';
+    // static GET_ACC_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getAccSyncJobTypesByName';
+
     static UPDATE_SYNC_JOB_TYPES_URL = environment.apiHost + '/updateSyncJobTypesConfiguration';
     static UPDATE_COST_CENTER_MAPPING_URL = environment.apiHost + '/updateCostCenterLocationMapping';
     static GET_SYNC_JOBS_URL = environment.apiHost + '/getSyncJobs';
@@ -48,7 +52,6 @@ export class Constants {
 
     static GET_OPERATION_URL = environment.apiHost + '/getOperation';
     static GET_OPERATION_DATA_BY_ID = environment.apiHost + '/getOperationDataById';
-
 
     static GET_SUPPLIERS_URL = environment.apiHost + '/getSuppliers';
     static GET_SUPPLIERS_DETAILS_URL = environment.apiHost + '/getSuppliersDetails';
@@ -76,6 +79,8 @@ export class Constants {
     static GET_OVER_GROUPS_URL = environment.apiHost + '/getOverGroups';
     static MAP_ITEM_GROUPS_URL = environment.apiHost + '/mapItems';
     static GET_JOURNALS_URL = environment.apiHost + '/getConsumption';
+    static ADD_JOURNAL_GROUP_URL = environment.apiHost + '/addConsumptionMajorGroup';
+
 
     static GET_POS_SALES_URL = environment.apiHost + '/getPOSSales';
     static GET_POS_SALES_TENDERS_URL = environment.apiHost + '/getTenders';
@@ -236,23 +241,26 @@ export class Constants {
 
     //////////////////////////////////////////////// Manage Application  //////////////////////////////////////////////
 
-    static LOYALTY = 'loyalty';
+    static GET_LOYALTY_PAGE = 'loyalty';
     static MANAGE_COMPANIES = 'manageCompanies';
     static MANAGE_GROUPS = "manageGroups";
+    static MANAGE_SUB_GROUPS = "manageSubGroups";
     static MANAGE_USERS = 'manageUsers';
     static MANAGE_ACTIVITIES = 'managActivities';
-
-    static GET_APP_COMPANIES_URL = environment.apiHost + '/getApplicationCompanies';
-    static ADD_APP_COMPANY_URL = environment.apiHost + '/addApplicationCompany';
-    static Delete_APP_COMPANIES_URL = environment.apiHost + '/deleteApplicationCompanies';
-
+    static REDEEM_VOUCHER = 'Redeem Voucher';
+    
     static GET_APP_GROUPS_URL = environment.apiHost + '/getApplicationGroups';
+    static GET_ALL_APP_GROUPS_URL = environment.apiHost + '/getAllApplicationGroups';
     static ADD_APP_GROUP_URL = environment.apiHost + '/addApplicationGroup';
     static Delete_APP_GROUPS_URL = environment.apiHost + '/deleteApplicationGroups';
-
+    static UPDATE_APP_GROUP_URL = environment.apiHost  + '/updateApplicationGroup'
     static GET_APP_USERS_URL = environment.apiHost + '/getApplicationUsers';
     static ADD_APP_USER_URL = environment.apiHost + '/addApplicationUser';
     static Delete_APP_USERS_URL = environment.apiHost + '/deleteApplicationUsers';
+    static GET_TRANSACTION_URL = environment.apiHost + '/transaction/getTransactions';
+    static GET_TOP_USERS_URL = environment.apiHost + '/getTopUser';
+    static GET_TOP_Groups_URL = environment.apiHost + '/getTopGroups';
+    static GET_TOTAL_SPEND_URL = environment.apiHost + '/transaction/getTotalSpendTransactions';
 
     //////////////////////////////////////////////// Export To Excel //////////////////////////////////////////////
 

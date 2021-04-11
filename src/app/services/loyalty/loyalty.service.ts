@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Constants } from 'src/app/models/constants';
 
-@Injectable({
+@Injectable({ 
   providedIn: 'root'
 })
 export class LoyaltyService {
@@ -10,36 +10,44 @@ export class LoyaltyService {
 
   constructor(private http: HttpClient) { }
 
-  getAppCompanies() {
+  getAllAppGroups() {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get(Constants.GET_APP_COMPANIES_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+    return this.http.get(Constants.GET_ALL_APP_GROUPS_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
-  addAppCompanies(company, addFlag) {
+  getAppGroups(isParent, groupId) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.post(Constants.ADD_APP_COMPANY_URL + "?addFlag=" + addFlag, company, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+    return this.http.get(Constants.GET_APP_GROUPS_URL + "?isParent=" +  isParent + "&parentId=" + groupId,
+     { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
-  deleteAppCompanies(companies) {
+  // addAppGroups(group, addFlag) {
+  //   this.token = localStorage.getItem('auth_token');
+  //   return this.http.post(Constants.ADD_APP_GROUP_URL + "?addFlag=" + addFlag , group, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+  // }
+
+  addAppGroups(flage, name, description, discountRate, discountId, parentGroupId, image, groupId) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.put(Constants.Delete_APP_COMPANIES_URL, companies, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+    const formData: FormData = new FormData();
+    formData.append('name', name);
+    formData.append('description', description);
+    formData.append('discountRate', discountRate);
+    formData.append('discountId', discountId);
+    formData.append('parentGroupId', parentGroupId);
+    formData.append('image', image);
+    formData.append('groupId', groupId);
+    return this.http.post(Constants.ADD_APP_GROUP_URL + "?addFlag=" + flage , formData, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+  }
+  
+  deleteAppGroups(flage, groups) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.put(Constants.Delete_APP_GROUPS_URL + "?addFlag=" + flage  , groups, {
+       headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  getAppGroups(companyId: String) {
+  getTopGroups() {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get(Constants.GET_APP_GROUPS_URL + "?companyId=" + companyId, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
-  }
-
-  addAppGroups(group, company, addFlag) {
-    this.token = localStorage.getItem('auth_token');
-    return this.http.post(Constants.ADD_APP_GROUP_URL + "?addFlag=" + addFlag + "&company=" + company, group, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
-  }
-
-  deleteAppGroups(groups) {
-    this.token = localStorage.getItem('auth_token');
-    return this.http.put(Constants.Delete_APP_GROUPS_URL, groups, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+    return this.http.get(Constants.GET_TOP_Groups_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -49,9 +57,37 @@ export class LoyaltyService {
     return this.http.get(Constants.GET_APP_USERS_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
-  addAppUsers(user, addFlag) {
+  getTopUsers() {
     this.token = localStorage.getItem('auth_token');
-    return this.http.post(Constants.ADD_APP_USER_URL + "?addFlag=" + addFlag , user, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+    return this.http.get(Constants.GET_TOP_USERS_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
+  addApplicationUser(flage, name, email, groupId, image, userId) {
+    this.token = localStorage.getItem('auth_token');
+    const formData: FormData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('groupId', groupId);
+    formData.append('image', image);
+    formData.append('userId', userId);
+    return this.http.post(Constants.ADD_APP_USER_URL  + "?addFlag=" + flage , formData, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+  }
+
+  deleteAppUsers(flage, users) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.put(Constants.Delete_APP_USERS_URL + "?addFlag=" + flage , users, {
+       headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+  }
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  getTransactions(transactionType) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get(Constants.GET_TRANSACTION_URL + "?transactionType=" + transactionType , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
+  getTotalSpend(date) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get(Constants.GET_TOTAL_SPEND_URL + "?transactionType=" + Constants.REDEEM_VOUCHER + "&dateFlag=" + date
+    , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
 }

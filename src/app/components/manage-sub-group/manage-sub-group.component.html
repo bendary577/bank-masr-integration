@@ -1,13 +1,14 @@
 <div class="main" >
     <div class="header" style="margin-bottom: 15px;">
-        <button mat-flat-button (click)="addCompanyDialog()">Add Group</button>
-        <button mat-flat-button (click)="updateCompanyDialog()" [disabled]="companiesList.selected.length != 1">Update Group</button>
-        <button mat-flat-button (click)="deleteCompanies()" [disabled]="companiesList.selected.length == 0">Delete Groups</button>
+        <button mat-flat-button (click)="addSubGroupDialog()">Add Supgroup</button>
+        <button mat-flat-button (click)="updateSubGroupDialog()" [disabled]="groupsList.selected.length != 1">Update Supgroup</button>
+        <button mat-flat-button (click)="deleteGroups('true')" [disabled]="groupsList.selected.length == 0">Delete Supgroup</button>
+        <button mat-flat-button (click)="deleteGroups('false')" [disabled]="groupsList.selected.length == 0">Restore Supgroup</button>
     </div>   
 
-    <ngx-datatable class="material" [loadingIndicator]="companiesList.showLoading" [messages]="companiesList.messages" 
+    <ngx-datatable class="material" [loadingIndicator]="groupsList.showLoading" [messages]="groupsList.messages" style="height: 65%;"
     [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-     [rows]="companiesList.companiesData" [selected]="companiesList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
+     [rows]="groupsList.groupsData" [selected]="groupsList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
     (select)='onSelect($event)' [scrollbarH]="true">
 
         <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
@@ -22,16 +23,10 @@
 
         <ngx-datatable-column name="Name">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                <a class="comany-name" (click)="openCompany(row)">{{row.name}}</a>
+                <span class="group-name">{{row.name}}</span>
             </ng-template>
         </ngx-datatable-column>
-
-        <!-- <ngx-datatable-column name="Description">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.description}}
-            </ng-template>
-        </ngx-datatable-column> -->
-
+        
         <ngx-datatable-column name="Discount Rate">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.discountRate}} %
@@ -57,5 +52,10 @@
             </ng-template>
         </ngx-datatable-column>
     </ngx-datatable>
+    <div class="header" style="margin-bottom: 15px;padding-top: 2%;">
+        <button mat-flat-button class="headerBack" (click)="backClicked()" [hidden]="inParent">
+            <!-- <img class="form-b-img" src="../../../assets/left-arrow.png"> -->
+            Go Back</button>
+    </div> 
 </div>
 
