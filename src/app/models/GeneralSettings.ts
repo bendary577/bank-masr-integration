@@ -7,6 +7,7 @@ import { Supplier } from './supplier';
 import { ItemGroup } from './ItemGroup';
 import { BookingType } from './operaReports/paymentTypes';
 import { RateCode } from './operaReports/RateCode';
+import { SimphonyDiscount } from './loyalty/SimphonyDiscount';
 
 export class GeneralSettings {
   id: string;
@@ -34,8 +35,12 @@ export class GeneralSettings {
   expenseTypes: Array<BookingType>|any;
 
   rateCodes: Array<RateCode>|any;
-
   // ==> END of OPERA Vribles
+
+  // ==> Simphony Variables
+  discountRates: Array<SimphonyDiscount>|any;
+  // ==> END of Simphony Variables
+  
   creationDate: Date;
   deleted: boolean;
 }

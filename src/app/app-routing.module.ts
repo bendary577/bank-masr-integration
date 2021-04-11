@@ -59,6 +59,7 @@ import { OperaBookingDashBoardComponent } from './components/opera-booking-dash-
 import { ExpensesDetailsReportComponent } from './components/expenses-details-report/expenses-details-report.component';
 import { ExpensesDetailsReportConfigComponent } from './components/expenses-details-report-config/expenses-details-report-config.component';
 import { ManageSubGroupComponent } from './components/manage-sub-group/manage-sub-group.component';
+import { SimphonyDiscountMapingComponent } from './components/simphony-discount-maping/simphony-discount-maping.component';
 
 
 const routes: Routes = [
@@ -76,6 +77,7 @@ const routes: Routes = [
   { path: Constants.OPERATION_TYPES, component: OperationTypesConfigurationComponent ,canActivate:[AuthGuardService]},
   { path: Constants.SUPPLIERS_MAPPING, component: SupplierMappingComponent ,canActivate:[AuthGuardService]},
   { path: Constants.OPERA_REPORT_MAP_TABLES, component: OperaReportMapTablesComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.SIMPHONY_DISCOUNT_MAP_TABLE, component: SimphonyDiscountMapingComponent ,canActivate:[AuthGuardService]},
 
   // OPERA Views
   { path: Constants.OPERA_BOOKING_DASHBOARD_PAGE, component: OperaBookingDashBoardComponent ,canActivate:[AuthGuardService]},
@@ -146,7 +148,6 @@ const routes: Routes = [
 
   { path: Constants.OCCUPANCY_UPDATE_REPORT_PAGE , component: OccupancyUpdateReportComponent ,canActivate:[AuthGuardService]},
   { path: Constants.OCCUPANCY_UPDATE_REPORT_CONFIG_PAGE , component: OccupancyUpdateReportConfigComponent ,canActivate:[AuthGuardService]},
-
 
   { path: Constants.EXPENSES_DETAILS_REPORT_PAGE , component: ExpensesDetailsReportComponent ,canActivate:[AuthGuardService]},
   { path: Constants.EXPENSES_DETAILS_REPORT_CONFIG_PAGE , component: ExpensesDetailsReportConfigComponent ,canActivate:[AuthGuardService]},

@@ -130,6 +130,7 @@ import { ExpensesDetailsReportComponent } from './components/expenses-details-re
 import { ExpensesDetailsReportConfigComponent } from './components/expenses-details-report-config/expenses-details-report-config.component';
 import { ConsumptionMajorGroupChildComponent } from './components/consumption-major-group-child/consumption-major-group-child.component';
 import { ManageSubGroupComponent } from './components/manage-sub-group/manage-sub-group.component';
+import { SimphonyDiscountMapingComponent } from './components/simphony-discount-maping/simphony-discount-maping.component';
 
 @NgModule({
   declarations: [
@@ -225,7 +226,8 @@ import { ManageSubGroupComponent } from './components/manage-sub-group/manage-su
     OperaReportMapTablesComponent,
     OperaBookingDashBoardComponent,
     ExpensesDetailsReportComponent,
-    ExpensesDetailsReportConfigComponent
+    ExpensesDetailsReportConfigComponent,
+    SimphonyDiscountMapingComponent
   ],
   imports: [
     BrowserModule,
