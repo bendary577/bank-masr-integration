@@ -28,8 +28,8 @@ export class AddAppGroupComponent implements OnInit {
     public dialogRef: MatDialogRef<AddAppGroupComponent>,
     private generalSettingsService: GeneralSettingsService, private authService: AuthService,
     @Inject(MAT_DIALOG_DATA) public data) { }
-    
-  ngOnInit() { 
+
+  ngOnInit() {
     if(this.authService.generalSettings != null){
       this.discountRates = this.authService.generalSettings.discountRates;
     }else{
@@ -48,7 +48,7 @@ export class AddAppGroupComponent implements OnInit {
       this.group = this.data["group"];
 
       this.form = this.formBuilder.group({
-        name: [this.group.name, [Validators.maxLength, Validators.required]],        
+        name: [this.group.name, [Validators.maxLength, Validators.required]],
         description: [this.group.description],
         discountId: [new SimphonyDiscount(this.group.discountId, this.group.discountRate), [Validators.required]],
         parentGroup: [this.parentGroup],

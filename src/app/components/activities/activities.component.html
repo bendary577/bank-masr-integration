@@ -5,16 +5,15 @@
         <mat-card class="stat-card">
             <mat-card-content>
                 <h2>Top Users</h2>
-                <div class="row" >
-                    <div class="column" [hidden]="users.length != 0">
-                        <img  class="user-img" src="../../../assets/defaultImage.jpg" alt="image">
-                        <p class="user-name">There is no users yet</p>
-                    </div>    
-
+                <div [hidden]="users.length != 0">
+                    <img class="user-img" src="../../../assets/defaultImage.jpg" alt="image">
+                    <p class="user-name">There is no users yet</p>
+                </div>
+                <div class="row">
                     <div class="column" *ngFor="let user of users">
-                        <img  class="user-img" src={{user.logoUrl}} alt="image">
+                        <img class="user-img" src={{user.logoUrl}} alt="image">
                         <p class="user-name"> {{user.name}}</p>
-                    </div>                    
+                    </div>
                 </div>
             </mat-card-content>
         </mat-card>
@@ -24,16 +23,15 @@
         <mat-card class="stat-card">
             <mat-card-content>
                 <h2>Top Groups</h2>
+                <div [hidden]="groups.length != 0">
+                    <img class="user-img" src="../../../assets/defaultGroup.png" alt="image">
+                    <p class="user-name">There is no groups yet</p>
+                </div>
                 <div class="row">
-                    <div class="column" [hidden]="groups.length != 0">
-                        <img  class="user-img" src="../../../assets/defaultGroup.png" alt="image">
-                        <p class="user-name">There is no groups yet</p>
-                    </div>  
-
                     <div class="column" *ngFor="let group of groups">
-                        <img  class="user-img" src={{group.logoUrl}} alt="image">
+                        <img class="user-img" src={{group.logoUrl}} alt="image">
                         <p class="user-name">{{group.name}}</p>
-                    </div>                    
+                    </div>
                 </div>
             </mat-card-content>
         </mat-card>
@@ -44,7 +42,7 @@
             <mat-card-content>
                 <h2>Total Spend</h2>
                 <br>
-                
+
                 <form class="my-form">
                     <div class="row">
                         <div class="two-column" style="text-align: left;">
@@ -69,12 +67,10 @@
     </div>
 </div>
 
-<div class="main" >
+<div class="main">
 
-        <ngx-datatable class="material" [loadingIndicator]="transactionList.showLoading" [messages]="transactionList.messages" 
-    [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-     [rows]="transactionList.transactionData" [selected]="transactionList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
-     [scrollbarH]="true">
+    <ngx-datatable class="material" [loadingIndicator]="transactionList.showLoading" [messages]="transactionList.messages" [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+        [rows]="transactionList.transactionData" [selected]="transactionList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" [scrollbarH]="true">
 
         <ngx-datatable-column name="User Name">
             <ng-template let-row="row" ngx-datatable-cell-template>
@@ -116,4 +112,3 @@
 
 </div>
 <ngx-spinner></ngx-spinner>
-
