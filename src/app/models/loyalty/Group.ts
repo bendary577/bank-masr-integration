@@ -4,7 +4,7 @@ export class Group {
     public accountID: string;
     public description: string;
     public discountId: number;
-    public discountRate: string;
+    public discountRate: number;
     public imageUrl: any;
     public parentGroup : Group;
     public creationDate: string;

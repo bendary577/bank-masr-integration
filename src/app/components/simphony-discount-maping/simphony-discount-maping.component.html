@@ -15,7 +15,7 @@
             <button mat-flat-button class="deleteBtn" (click)="addRateCode()" [disabled]="discountRatesList.selected.length == 0">Delete</button>
         </div>
 
-        <ngx-datatable class="material" [loadingIndicator]="discountRatesList.showLoading" [messages]="discountRatesList.messages" style="height: 65%;"
+        <ngx-datatable class="material" [loadingIndicator]="discountRatesList.showLoading" [messages]="discountRatesList.messages"
         [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
          [rows]="discountRatesList.discountRatesData" [selected]="discountRatesList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
         (select)='onSelect($event)' [scrollbarH]="true">

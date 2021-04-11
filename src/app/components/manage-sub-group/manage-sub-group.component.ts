@@ -63,7 +63,7 @@ export class ManageSubGroupComponent implements OnInit {
 
   getGroups(isParent, group){
     this.groupsList.showLoading = true;
-    this.loyaltyService.getAppGroups(isParent, group).toPromise().then((res: any) => {
+    this.loyaltyService.getAppGroups(isParent, group, 2).toPromise().then((res: any) => {
       this.groupsList.groupsData = res;
       this.groupsList.showLoading = false;
     }).catch(err => {

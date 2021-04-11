@@ -2,6 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { Group } from 'src/app/models/loyalty/Group';
+import { SimphonyDiscount } from 'src/app/models/loyalty/SimphonyDiscount';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
 
 @Component({
@@ -17,51 +19,55 @@ export class AddAppGroupComponent implements OnInit {
   srcResult: any;
   imageUploded: boolean = false;
 
+  discountRates = [];
+
   constructor(private formBuilder: FormBuilder, public snackBar: MatSnackBar, private loyaltyService: LoyaltyService,
-    public dialogRef: MatDialogRef<AddAppGroupComponent>, 
+    public dialogRef: MatDialogRef<AddAppGroupComponent>,  private authService: AuthService,
     @Inject(MAT_DIALOG_DATA) public data) { }
     
   ngOnInit() {  
+    this.discountRates = this.authService.generalSettings.discountRates;
+
     if(this.data["inParent"] == true){
-    this.getGroups(true, "");}
+      this.getGroups(true, "");
+    }
 
     if (this.data != undefined && this.data["parentGroup"] != null){
-      this.parentGroup = this.data["parentGroup"]; }
+      this.parentGroup = this.data["parentGroup"];
+    }
 
     if (this.data["group"] != null && this.data != undefined){
-      console.log(this.parentGroup)
       this.group = this.data["group"];
+
       this.form = this.formBuilder.group({
         name: [this.group.name, [Validators.maxLength, Validators.required]],        
         description: [this.group.description],
-        discountId: [this.group.discountId , [Validators.required,Validators.min(0),Validators.pattern("^[0-9]*$")]],
+        discountId: [new SimphonyDiscount(this.group.discountId, this.group.discountRate), [Validators.required]],
         parentGroup: [this.parentGroup],
-        image: this.srcResult,
-        discountRate: [this.group.discountRate, [Validators.required, Validators.max(100), Validators.min(0), Validators.pattern("^[0-9]*$")]]
+        image: this.srcResult
       });
     }else{
       this.form = this.formBuilder.group({
         name: ['', [Validators.maxLength, Validators.required]],
         description: [''],
         parentGroup: [this.parentGroup],
-        discountRate: ['', [Validators.required, Validators.max(100), Validators.min(0), Validators.pattern("^[0-9]*$")]],
-        discountId: ['', [Validators.required,Validators.min(0),Validators.pattern("^[0-9]*$")]],
+        discountId: ['', [Validators.required]],
       });
     }
   }
 
   getGroups(isParent, group){
-    this.loyaltyService.getAppGroups(isParent, group).toPromise().then((res: any) => {
+    this.loyaltyService.getAppGroups(isParent, group, 1).toPromise().then((res: any) => {
       this.groups= res;
     }).catch(err => {
     });
   }
 
   csvInputChange(fileInputEvent: any) {
-  this.srcResult = fileInputEvent.target.files[0];
-  if(this.srcResult){
-      this.imageUploded = true;
-  }
+    this.srcResult = fileInputEvent.target.files[0];
+    if(this.srcResult){
+        this.imageUploded = true;
+    }
   }
 
   onNoClick(): void {
@@ -76,11 +82,14 @@ export class AddAppGroupComponent implements OnInit {
         panelClass:"my-snack-bar-fail"
       });
     }else{
+      console.log({
+        discount: this.form.controls.discountId.value
+      })
       this.dialogRef.close({
         name: this.form.controls.name.value,
         description: this.form.controls.description.value,
-        discountRate: this.form.controls.discountRate.value,
-        discountId: this.form.controls.discountId.value,
+        discountId: this.form.controls.discountId.value.discountId,
+        discountRate: this.form.controls.discountId.value.discountRate,
         parentGroup: this.form.controls.parentGroup.value,
         image: this.srcResult
       });

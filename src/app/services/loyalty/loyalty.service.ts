@@ -15,16 +15,12 @@ export class LoyaltyService {
     return this.http.get(Constants.GET_ALL_APP_GROUPS_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
-  getAppGroups(isParent, groupId) {
+  getAppGroups(isParent, groupId, status: number) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get(Constants.GET_APP_GROUPS_URL + "?isParent=" +  isParent + "&parentId=" + groupId,
+    return this.http.get(Constants.GET_APP_GROUPS_URL + "?isParent=" +  isParent + "&parentId=" + groupId + "&status=" + status,
      { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
-  // addAppGroups(group, addFlag) {
-  //   this.token = localStorage.getItem('auth_token');
-  //   return this.http.post(Constants.ADD_APP_GROUP_URL + "?addFlag=" + addFlag , group, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
-  // }
 
   addAppGroups(flage, name, description, discountRate, discountId, parentGroupId, image, groupId) {
     this.token = localStorage.getItem('auth_token');

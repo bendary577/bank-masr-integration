@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Constants } from 'src/app/models/constants';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
-import { Cacheable } from 'ngx-cacheable';
 import { User } from 'src/app/models/user';
+import { GeneralSettings } from 'src/app/models/GeneralSettings';
+import { Account } from 'src/app/models/Account';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  account: Account;
+  generalSettings: GeneralSettings;
   token = localStorage.getItem('auth_token');
 
-  constructor( private http: HttpClient, private cookie: CookieService) {}
+  constructor( private http: HttpClient) {}
 
   login(user:User) {
    const auth =window.btoa('web-client:web-client-secret');

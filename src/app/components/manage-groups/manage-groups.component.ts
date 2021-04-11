@@ -65,7 +65,7 @@ export class ManageGroupsComponent implements OnInit {
 
   getGroups(isParent, group){
     this.groupsList.showLoading = true;
-    this.loyaltyService.getAppGroups(isParent, group).toPromise().then((res: any) => {
+    this.loyaltyService.getAppGroups(isParent, group, 2).toPromise().then((res: any) => {
       this.groupsList.groupsData = res;
       this.groupsList.showLoading = false;
     }).catch(err => {
@@ -152,7 +152,7 @@ export class ManageGroupsComponent implements OnInit {
       data: {inParent: this.inParent, group: this.groupsList.selected[0] }
     });
 
-  dialogRef.afterClosed().subscribe(res => {
+    dialogRef.afterClosed().subscribe(res => {
     if (res) {
       this.groupsList.showLoading = true;
 
@@ -193,7 +193,7 @@ export class ManageGroupsComponent implements OnInit {
         });
       });
     }
-  });
+    });
   }
 
 }
