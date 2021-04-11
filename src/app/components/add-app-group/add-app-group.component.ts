@@ -1,9 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { GeneralSettings } from 'src/app/models/GeneralSettings';
 import { Group } from 'src/app/models/loyalty/Group';
 import { SimphonyDiscount } from 'src/app/models/loyalty/SimphonyDiscount';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
 
 @Component({
@@ -22,11 +25,16 @@ export class AddAppGroupComponent implements OnInit {
   discountRates = [];
 
   constructor(private formBuilder: FormBuilder, public snackBar: MatSnackBar, private loyaltyService: LoyaltyService,
-    public dialogRef: MatDialogRef<AddAppGroupComponent>,  private authService: AuthService,
+    public dialogRef: MatDialogRef<AddAppGroupComponent>,
+    private generalSettingsService: GeneralSettingsService, private authService: AuthService,
     @Inject(MAT_DIALOG_DATA) public data) { }
     
-  ngOnInit() {  
-    this.discountRates = this.authService.generalSettings.discountRates;
+  ngOnInit() { 
+    if(this.authService.generalSettings != null){
+      this.discountRates = this.authService.generalSettings.discountRates;
+    }else{
+      this.getGeneralSettings();
+    }
 
     if(this.data["inParent"] == true){
       this.getGroups(true, "");
@@ -60,6 +68,28 @@ export class AddAppGroupComponent implements OnInit {
     this.loyaltyService.getAppGroups(isParent, group, 1).toPromise().then((res: any) => {
       this.groups= res;
     }).catch(err => {
+    });
+  }
+
+  getGeneralSettings() {
+    this.generalSettingsService.getGeneralSettings().then((res) => {
+      this.authService.generalSettings = res as GeneralSettings;
+      this.discountRates = this.authService.generalSettings.discountRates;
+    }).catch(err => {
+      let message = "";
+      if (err.error){
+        message = err.error;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_GET_CONFIG;
+      }
+
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
+      });
     });
   }
 

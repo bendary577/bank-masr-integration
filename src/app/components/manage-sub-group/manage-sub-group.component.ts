@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
-import { Constants } from 'src/app/models/constants';
 import { Data } from 'src/app/models/data';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { Group } from 'src/app/models/loyalty/Group';
@@ -113,7 +112,7 @@ export class ManageSubGroupComponent implements OnInit {
                       this.groupsList.showLoading = false;
         this.groupsList.selected = [];
         this.newGroup = new Group();
-        this.getGroups(true, this.groupId);
+        this.getGroups(this.inParent, this.groupId);
         this.snackBar.open("Supgroup Added successfully.", null, {
           duration: 2000,
           horizontalPosition: 'right',
@@ -123,7 +122,7 @@ export class ManageSubGroupComponent implements OnInit {
         this.groupsList.showLoading = false;
         this.groupsList.selected = [];
         this.newGroup = new Group();
-        this.getGroups(true, this.groupId);
+        this.getGroups(this.inParent, this.groupId);
         let message = "";
         if(err.status === 401){
           message = ErrorMessages.SESSION_EXPIRED;
@@ -164,7 +163,7 @@ export class ManageSubGroupComponent implements OnInit {
                       this.groupsList.showLoading = false;
         this.groupsList.selected = [];
         this.newGroup = new Group();
-        this.getGroups(true, this.groupId);
+        this.getGroups(this.inParent, this.groupId);
         this.snackBar.open("Supgroup updated successfully.", null, {
           duration: 2000,
           horizontalPosition: 'right',
@@ -174,7 +173,7 @@ export class ManageSubGroupComponent implements OnInit {
         this.groupsList.showLoading = false;
         this.groupsList.selected = [];
         this.newGroup = new Group();
-        this.getGroups(true, this.groupId);
+        this.getGroups(this.inParent, this.groupId);
         let message = "";
         if(err.status === 401){
           message = ErrorMessages.SESSION_EXPIRED;
@@ -194,77 +193,6 @@ export class ManageSubGroupComponent implements OnInit {
       });
     }
   });
-  //   const dialogRef = this.dialog.open(AddAppGroupComponent, {
-  //     width: '550px',
-  //     data: {group: this.groupsList.selected[0],
-  //             inParent: this.inParent, parentGroup: this.groupId}
-  //   });
-
-  //   dialogRef.afterClosed().subscribe(res => {
-  //     if (res) {
-  //       this.groupsList.showLoading = true;
-  //       this.loyaltyService.addAppGroups(this.newGroup, false).then((result: any) => {
-  //         this.loyaltyService.addAppGroupsImage(false, res.name, res.description, res.discountRate, res.discountId,
-  //            res.parentGroup, res.image, this.groupsList.selected[0].id).then((result: any) => {
-  //           this.groupsList.showLoading = false;
-  //           this.groupsList.selected = [];
-  //           this.getGroups(this.inParent, this.groupId);
-  //           this.newGroup = new Group();
-  //           this.snackBar.open("Group updated successfully.", null, {
-  //             duration: 2000,
-  //             horizontalPosition: 'right',
-  //             panelClass:"my-snack-bar-success"
-  //           });
-  
-  //         }).catch(err => {
-  //           this.groupsList.showLoading = false;
-  //           this.groupsList.selected = [];
-  //           this.newGroup = new Group();
-  //           this.getGroups(this.inParent, this.groupId);
-  //           let message = "";
-  //           if(err.status === 401){
-  //             message = ErrorMessages.SESSION_EXPIRED;
-  //             this.sidNav.Logout();
-  //           } else if (err.error.message){
-  //             message = err.error.message;
-  //           } else if (err.message){
-  //             message = err.message;
-  //           } else {
-  //             message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
-  //           }
-  //           this.snackBar.open("Failed to upadte group." , null, {
-  //             duration: 3000,
-  //             horizontalPosition: 'right',
-  //             panelClass:"my-snack-bar-fail"
-  //           });
-  //         });
-  //       }).catch(err => {
-  //         this.groupsList.showLoading = false;
-  //         this.groupsList.selected = [];
-  //         this.newGroup = new Group();
-  //         this.getGroups(this.inParent, this.groupId);
-  //         let message = "";
-  //         if(err.status === 401){
-  //           message = ErrorMessages.SESSION_EXPIRED;
-  //           this.sidNav.Logout();
-  //         } else if (err.error.message){
-  //           message = err.error.message;
-  //         } else if (err.message){
-  //           message = err.message;
-  //         } else {
-  //           message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
-  //         }
-  //         this.snackBar.open("Failed to upadte group."  , null, {
-  //           duration: 3000,
-  //           horizontalPosition: 'right',
-  //           panelClass:"my-snack-bar-fail"
-  //         });
-  //       });
-  //     }
-  //   });
-
   }
-
-
 
 }
