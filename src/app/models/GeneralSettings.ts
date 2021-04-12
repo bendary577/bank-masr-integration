@@ -4,11 +4,16 @@ import { Item } from './Item';
 import { MajorGroup } from './MajorGroup';
 import { SimphonyLocation } from './SimphonyLocation';
 import { Supplier } from './supplier';
+import { ItemGroup } from './ItemGroup';
+import { BookingType } from './operaReports/paymentTypes';
+import { RateCode } from './operaReports/RateCode';
+import { SimphonyDiscount } from './loyalty/SimphonyDiscount';
 
 export class GeneralSettings {
   id: string;
   accountId: string;
   items: Array<Item>|any;
+  itemGroups: Array<ItemGroup>|any;
   majorGroups: Array<MajorGroup>|any;
   overGroups: Array<OverGroup>|any;
   costCenterAccountMapping: Array<CostCenter>|any;
@@ -16,6 +21,26 @@ export class GeneralSettings {
   locations: Array<CostCenter>|any;
   simphonyLocations: Array<SimphonyLocation>|any;
   suppliers: Array<Supplier>|any;
+
+  // ==> OPERA Variables
+  cancelReasons: Array<BookingType>|any;
+
+  paymentTypes: Array<BookingType>|any;
+  roomTypes : Array<BookingType>|any;
+  nationalities: Array<BookingType>|any;
+  purposeOfVisit: Array<BookingType>|any;
+  genders: Array<BookingType>|any;
+  customerTypes: Array<BookingType>|any;
+  transactionTypes: Array<BookingType>|any;
+  expenseTypes: Array<BookingType>|any;
+
+  rateCodes: Array<RateCode>|any;
+  // ==> END of OPERA Vribles
+
+  // ==> Simphony Variables
+  discountRates: Array<SimphonyDiscount>|any;
+  // ==> END of Simphony Variables
+  
   creationDate: Date;
   deleted: boolean;
 }

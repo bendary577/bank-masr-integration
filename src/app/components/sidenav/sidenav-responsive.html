@@ -1,7 +1,9 @@
 <mat-toolbar class="example-toolbar" *ngIf="shouldRun">
 
     <button id="target" mat-icon-button (click)="snav.toggle()"><mat-icon  color="warn" >menu</mat-icon></button>
-    <h1 class="example-app-name">Oracle Inventory Integrator</h1>
+    <h1 class="example-app-name">Opera Integration Platform</h1>
+    <!-- <button mat-flat-button class="headerBack" (click)="backClicked()">Go Back</button> -->
+
 </mat-toolbar>
 
 <div class="example-container" [class.example-is-mobile]="(mobileQuery.matches&&!shouldRun)  " [class.example-containerpc]="(!shouldRun)">
@@ -27,7 +29,25 @@
                         Operation Types
                     </mat-expansion-panel-header>
                     <mat-nav-list dense *ngFor="let operation of operationTypes">
-                        <a mat-list-item (click)="snav.toggle() " routerLink={{operation.endPoint}}>{{operation.name}}</a>
+                        <a mat-list-item (click)="snav.toggle()" routerLink={{operation.endPoint}}>{{operation.name}}</a>
+                    </mat-nav-list>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
+                    <mat-expansion-panel-header>
+                        Reports
+                    </mat-expansion-panel-header>
+                    <mat-nav-list dense>
+                        <a mat-list-item (click)="snav.toggle()" routerLink="/operaBookingDashboard">Booking Reports</a>
+                    </mat-nav-list>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel [class.mat-elevation-z0]="true" dense *ngIf="applications.length > 0">
+                    <mat-expansion-panel-header>
+                        Applications
+                    </mat-expansion-panel-header>
+                    <mat-nav-list dense *ngFor="let application of applications">
+                        <a mat-list-item (click)="snav.toggle()" routerLink={{application.endPoint}}>{{application.name}}</a>
                     </mat-nav-list>
                 </mat-expansion-panel>
 
@@ -42,6 +62,8 @@
                         <a mat-list-item (click)="snav.toggle()" routerLink="/costCenterAccountMapping">Cost Center Mapping</a>
                         <a mat-list-item (click)="snav.toggle()" routerLink="/suppliersMapping">Suppliers Mapping</a>
                         <a mat-list-item (click)="snav.toggle()" routerLink="/includedOverGroups">Included Over Groups</a>
+                        <a mat-list-item (click)="snav.toggle()" routerLink="/operaReportMapTables">Opera Map Tables</a>
+                        <a mat-list-item (click)="snav.toggle()" routerLink="/simphonyDiscountMaping">Simphony Discount Mapping</a>
                         <a mat-list-item (click)="snav.toggle()" routerLink="/setting">General Settings</a>
                         <a mat-list-item (click)="snav.toggle()" routerLink="/users">Users</a>
                     </mat-nav-list>

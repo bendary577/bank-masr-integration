@@ -1,0 +1,131 @@
+<h3>Occupancy Update</h3>
+
+
+<div class="header">
+    <span class="history"> Sync Job History </span>
+
+    <select class="custom-select" (change)="getSyncJobData()" [(ngModel)]="selectedJob">
+        <option [ngValue]="job" *ngFor="let job of jobs">
+            {{job.creationDate}} - {{job.status}}</option>
+    </select>
+    <button mat-flat-button (click)="syncOccupancyUpdate()">Sync Occupancy Update Data</button>
+
+</div>
+<br>
+
+<div *ngIf="selectedJob">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <mat-card-title class="title">Sync Details</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-list-item>
+                <span class="key">Sync Number: </span>
+                <span class="value" *ngIf="selectedJob.id">{{selectedJob.id}}</span>
+                <span class="value" *ngIf="!selectedJob.id">No Info</span>
+            </mat-list-item>
+            <mat-list-item>
+                <span class="key">Sync status: </span>
+                <span class="value" *ngIf="selectedJob.status">{{selectedJob.status}}</span>
+                <span class="value" *ngIf="!selectedJob.status">No Info</span>
+            </mat-list-item>
+            <mat-list-item>
+                <span class="key">Start Date: </span>
+                <span class="value" *ngIf="selectedJob.creationDate">{{selectedJob.creationDate}}</span>
+                <span class="value" *ngIf="!selectedJob.creationDate">No Info</span>
+            </mat-list-item>
+            <mat-list-item>
+                <span class="key">End Date: </span>
+                <span class="value" *ngIf="selectedJob.endDate">{{selectedJob.endDate}}</span>
+                <span class="value" *ngIf="!selectedJob.endDate">No Info</span>
+            </mat-list-item>
+            <mat-list-item>
+                <span class="key">Reason: </span>
+                <span class="value" *ngIf="selectedJob.reason">{{selectedJob.reason}}</span>
+                <span class="value" *ngIf="!selectedJob.reason">No Info</span>
+            </mat-list-item>
+            <mat-list-item *ngIf="!occupancyUpdateList.occupancyUpdateData.length">
+                <span>
+                There was no new data to sync in this job, You can sync Occupancy Update now from <a (click)="syncOccupancyUpdate()">here</a>
+            </span>
+            </mat-list-item>
+        </mat-card-content>
+    </mat-card>
+</div>
+<br>
+ 
+<div>
+    <div>
+        <div *ngIf="!jobs.length">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <mat-card-title>No Data</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>
+                        There was no new data to sync in this job, You can sync Occupancy Update now from
+                        <a (click)="syncOccupancyUpdate()">here</a>
+                    </p>
+                </mat-card-content>
+            </mat-card>
+
+            <br>
+        </div>
+    </div>
+
+    <div *ngIf="jobs.length || occupancyUpdateList.showLoading">
+        <ngx-datatable style="max-width: 98%;" class="material" [loadingIndicator]="occupancyUpdateList.showLoading" [messages]="occupancyUpdateList.messages" 
+        [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+         [rows]="occupancyUpdateList.occupancyUpdateData" [selected]="occupancyUpdateList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
+        (select)='onSelect($event)' [scrollbarH]="true">
+    
+            <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
+            <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+            <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
+            </ng-template>
+    
+            <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
+             <input class="regular-checkbox" type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
+            </ng-template>
+            </ngx-datatable-column>
+    
+            <ngx-datatable-column name="Update Date">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.updateDate}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Rooms Occupied">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.roomsOccupied}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Rooms Available">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.roomsAvailable}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Rooms Booked">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.roomsBooked}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Rooms On Maintenance">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.roomsOnMaintenance}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="View JSON">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <button mat-flat-button (click)="viewJSON(row.data)">JSON</button>
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+    </div>
+
+    <ngx-spinner></ngx-spinner>
+</div>

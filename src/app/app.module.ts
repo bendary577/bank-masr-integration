@@ -11,8 +11,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SuppliersComponent } from './components/suppliers/suppliers.component';
-import { ShowHidePasswordModule } from 'ngx-show-hide-password';
-
 
 
 import {
@@ -109,6 +107,30 @@ import { SupplierMappingComponent } from './components/setting/supllier-mapping/
 import { AddSupplierComponent } from './components/add-supplier/add-supplier.component';
 import { ExportedFileConfigurationComponent } from './components/configuration/exported-file-configuration/exported-file-configuration.component';
 import { CreateOrderComponent } from './components/create-order/create-order.component';
+import { ManageGroupsComponent } from './components/manage-groups/manage-groups.component';
+import { ManageUsersComponent } from './components/manage-users/manage-users.component';
+import { LoyaltyComponent } from './components/loyalty/loyalty.component';
+import { AddAppCompanyComponent } from './components/add-app-company/add-app-company.component';
+import { AddAppGroupComponent } from './components/add-app-group/add-app-group.component';
+import { AddAppUserComponent } from './components/add-app-user/add-app-user.component';
+import { ActivitiesComponent } from './components/activities/activities.component';
+import { WlsIntegrationConfigComponent } from './components/wls-integration-config/wls-integration-config.component';
+import { WlsIntegrationComponent } from './components/wls-integration/wls-integration.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import { NewBookingReportComponent } from './components/new-booking-report/new-booking-report.component';
+import { CancelBookingReportComponent } from './components/cancel-booking-report/cancel-booking-report.component';
+import { OccupancyUpdateReportComponent } from './components/occupancy-update-report/occupancy-update-report.component';
+import { NewBookingReportConfigComponent } from './components/new-booking-report-config/new-booking-report-config.component';
+import { CancelBookingReportConfigComponent } from './components/cancel-booking-report-config/cancel-booking-report-config.component';
+import { OccupancyUpdateReportConfigComponent } from './components/occupancy-update-report-config/occupancy-update-report-config.component';
+import { OperaReportMapTablesComponent } from './components/setting/opera-report-map-tables/opera-report-map-tables.component';
+import { OperaBookingDashBoardComponent } from './components/opera-booking-dash-board/opera-booking-dash-board.component';
+import { ExpensesDetailsReportComponent } from './components/expenses-details-report/expenses-details-report.component';
+import { ExpensesDetailsReportConfigComponent } from './components/expenses-details-report-config/expenses-details-report-config.component';
+import { ConsumptionMajorGroupChildComponent } from './components/consumption-major-group-child/consumption-major-group-child.component';
+import { ManageSubGroupComponent } from './components/manage-sub-group/manage-sub-group.component';
+import { SimphonyDiscountMapingComponent } from './components/simphony-discount-maping/simphony-discount-maping.component';
 
 @NgModule({
   declarations: [
@@ -149,6 +171,7 @@ import { CreateOrderComponent } from './components/create-order/create-order.com
     PosSalesInforComponent,
     PosSalesInforConfigurationComponent,
     AddMajorGroupComponent,
+    ConsumptionMajorGroupChildComponent,
     AddTenderComponent,
     BookedProductionComponent,
     BookedProductionConfigurationComponent,
@@ -182,7 +205,29 @@ import { CreateOrderComponent } from './components/create-order/create-order.com
     OperaPaymentConfigurationComponent,
     SupplierMappingComponent,
     AddSupplierComponent,
-    ExportedFileConfigurationComponent
+    ExportedFileConfigurationComponent,
+    ManageGroupsComponent,
+    ManageUsersComponent,
+    ManageSubGroupComponent,
+    LoyaltyComponent,
+    AddAppCompanyComponent,
+    AddAppGroupComponent,
+    AddAppUserComponent,
+    ActivitiesComponent,
+    WlsIntegrationConfigComponent,
+    WlsIntegrationComponent,
+    DialogComponent,
+    NewBookingReportComponent,
+    CancelBookingReportComponent,
+    OccupancyUpdateReportComponent,
+    NewBookingReportConfigComponent,
+    CancelBookingReportConfigComponent,
+    OccupancyUpdateReportConfigComponent,
+    OperaReportMapTablesComponent,
+    OperaBookingDashBoardComponent,
+    ExpensesDetailsReportComponent,
+    ExpensesDetailsReportConfigComponent,
+    SimphonyDiscountMapingComponent
   ],
   imports: [
     BrowserModule,
@@ -210,24 +255,28 @@ import { CreateOrderComponent } from './components/create-order/create-order.com
     BrowserModule,
     FormsModule,
     MatProgressBarModule,
-    ShowHidePasswordModule,
+    NgxJsonViewerModule
+    
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},
-    CookieService,
-    AuthService,
-    InvoiceService,
-    AlertsService,
-    Data,
-    AuthGuardService,
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, 
+    CookieService, 
+    AuthService, 
+    InvoiceService, 
+    AlertsService, 
+    Data, 
+    AuthGuardService, 
     SidenavResponsive,
     ExcelService,
   CsvService,
   OperationService],
   bootstrap: [AppComponent],
-  entryComponents: [AddUserComponent, AddAccountComponent, AddMajorGroupComponent, AddTenderComponent,
+  entryComponents: [AddUserComponent, AddAccountComponent, AddMajorGroupComponent,ConsumptionMajorGroupChildComponent, AddTenderComponent,
      AddTaxComponent, AddDiscountComponent, AddRevenueCenterComponent, AddServiceChargeComponent,
-      SuppliersConfiguartionComponent, SchedulerConfigurationComponent, AddTenderChildComponent,
+      SuppliersConfiguartionComponent, SchedulerConfigurationComponent, AddTenderChildComponent, 
       AddSimphonyLocationComponent, AddWebServiceInvokerComponent, AddLocationComponent,
-      AddMajorGroupChildComponent, AddSalesStatisticsComponent, AddSupplierComponent]
+      AddMajorGroupChildComponent, AddSalesStatisticsComponent, AddSupplierComponent,
+    // Loyalty
+    AddAppCompanyComponent, AddAppGroupComponent, AddAppUserComponent, DialogComponent, 
+    ]
 })
 export class AppModule { }

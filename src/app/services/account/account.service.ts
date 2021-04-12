@@ -25,4 +25,9 @@ export class AccountService {
     this.token = localStorage.getItem('auth_token');
     return this.http.put(Constants.UPDATE_ACCOUNT , account, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
+
+  updateAccountSyncTypes(account) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.put(Constants.UPDATE_ACCOUNT_SYNC_TYPES , account, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+  }
 }

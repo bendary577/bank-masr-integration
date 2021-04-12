@@ -1,0 +1,53 @@
+<h3 mat-dialog-title>Simphony Map Tables</h3>
+<br>
+<div>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Discount Rate Mapping
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="back" style="margin-bottom: 15px;">
+            <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="eg. 1234" [(ngModel)]="newRateCode.discountId">
+            <input matInput type="number" step="0.1" style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="eq. 5 %" [(ngModel)]="newRateCode.discountRate">
+            <button mat-flat-button (click)="addRateCode()">Add</button>
+            <button mat-flat-button class="deleteBtn" (click)="addRateCode()" [disabled]="discountRatesList.selected.length == 0">Delete</button>
+        </div>
+
+        <ngx-datatable class="material" [loadingIndicator]="discountRatesList.showLoading" [messages]="discountRatesList.messages"
+        [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+         [rows]="discountRatesList.discountRatesData" [selected]="discountRatesList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
+        (select)='onSelect($event)' [scrollbarH]="true">
+    
+            <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
+            <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+            <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
+            </ng-template>
+    
+            <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
+             <input class="regular-checkbox" type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
+            </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Simphony Discount Id">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <input matInput placeholder="eg. 1234" [(ngModel)]="row.discountId">
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Discount Rate">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <input matInput placeholder="eg. 5 %" [(ngModel)]="row.discountRate">
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+    </mat-expansion-panel>
+
+    <br>
+
+    <div class="card-back">
+        <button mat-flat-button (click)="onSaveClick()">Save</button>
+    </div>
+    <ngx-spinner></ngx-spinner>
+</div>

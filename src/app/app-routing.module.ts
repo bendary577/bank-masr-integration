@@ -11,8 +11,6 @@ import { ErrorComponentComponent } from './components/error-component/error-comp
 import { SuppliersConfiguartionComponent } from './components/suppliers-configuartion/suppliers-configuartion.component';
 import { SupplierDetailsComponent } from './components/supplier-details/supplier-details.component';
 import {AuthGuardService} from "./guards/AuthGuardService";
-import { PosSalesComponent } from './components/pos-sales/pos-sales.component';
-import { PosSalesConfigurationComponent } from './components/pos-sales-configuration/pos-sales-configuration.component';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 import { ApprovedInvoiceInforConfigurationComponent } from './components/approved-invoice-infor-configuration/approved-invoice-infor-configuration.component';
 import { JournalsInforConfigurationsComponent } from './components/journals-infor-configurations/journals-infor-configurations.component';
@@ -44,6 +42,24 @@ import { ZealVoucherConfigComponent } from './components/zeal-voucher-config/zea
 import { OperaPaymentConfigurationComponent } from './components/opera-payment-configuration/opera-payment-configuration.component';
 import { SupplierMappingComponent } from './components/setting/supllier-mapping/supllier-mapping.component';
 import { CreateOrderComponent } from './components/create-order/create-order.component';
+import { ManageGroupsComponent } from './components/manage-groups/manage-groups.component';
+import { ManageUsersComponent } from './components/manage-users/manage-users.component';
+import { LoyaltyComponent } from './components/loyalty/loyalty.component';
+import { ActivitiesComponent } from './components/activities/activities.component';
+import { WlsIntegrationComponent } from './components/wls-integration/wls-integration.component';
+import { WlsIntegrationConfigComponent } from './components/wls-integration-config/wls-integration-config.component';
+import { NewBookingReportComponent } from './components/new-booking-report/new-booking-report.component';
+import { CancelBookingReportComponent } from './components/cancel-booking-report/cancel-booking-report.component';
+import { NewBookingReportConfigComponent } from './components/new-booking-report-config/new-booking-report-config.component';
+import { CancelBookingReportConfigComponent } from './components/cancel-booking-report-config/cancel-booking-report-config.component';
+import { OccupancyUpdateReportComponent } from './components/occupancy-update-report/occupancy-update-report.component';
+import { OccupancyUpdateReportConfigComponent } from './components/occupancy-update-report-config/occupancy-update-report-config.component';
+import { OperaReportMapTablesComponent } from './components/setting/opera-report-map-tables/opera-report-map-tables.component';
+import { OperaBookingDashBoardComponent } from './components/opera-booking-dash-board/opera-booking-dash-board.component';
+import { ExpensesDetailsReportComponent } from './components/expenses-details-report/expenses-details-report.component';
+import { ExpensesDetailsReportConfigComponent } from './components/expenses-details-report-config/expenses-details-report-config.component';
+import { ManageSubGroupComponent } from './components/manage-sub-group/manage-sub-group.component';
+import { SimphonyDiscountMapingComponent } from './components/simphony-discount-maping/simphony-discount-maping.component';
 
 
 const routes: Routes = [
@@ -60,6 +76,18 @@ const routes: Routes = [
   { path: Constants.INCLUDED_OVER_GROUPS, component: IncludedOverGroupsComponent ,canActivate:[AuthGuardService]},
   { path: Constants.OPERATION_TYPES, component: OperationTypesConfigurationComponent ,canActivate:[AuthGuardService]},
   { path: Constants.SUPPLIERS_MAPPING, component: SupplierMappingComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.OPERA_REPORT_MAP_TABLES, component: OperaReportMapTablesComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.SIMPHONY_DISCOUNT_MAP_TABLE, component: SimphonyDiscountMapingComponent ,canActivate:[AuthGuardService]},
+
+  // OPERA Views
+  { path: Constants.OPERA_BOOKING_DASHBOARD_PAGE, component: OperaBookingDashBoardComponent ,canActivate:[AuthGuardService]},
+
+  // Loyalty Views
+  { path: Constants.GET_LOYALTY_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.MANAGE_GROUPS, component: ManageGroupsComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.MANAGE_SUB_GROUPS, component: ManageSubGroupComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.MANAGE_USERS, component: ManageUsersComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.MANAGE_ACTIVITIES, component: ActivitiesComponent ,canActivate:[AuthGuardService]},
 
   // Pages
   { path: Constants.LOGIN_PAGE, component: LoginComponent},
@@ -94,6 +122,9 @@ const routes: Routes = [
   { path: Constants.MENU_ITEMS_PAGE , component: MenuItemsComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MENU_ITEMS_CONFIG_PAGE , component: MenuItemsConfigurationComponent ,canActivate:[AuthGuardService]},
 
+  { path: Constants.RESERVATION_PAGE , component: WlsIntegrationComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.RESERVATION_CONFIG_PAGE , component: WlsIntegrationConfigComponent ,canActivate:[AuthGuardService]},
+
   { path: Constants.CREATE_ORDER_PAGE , component: CreateOrderComponent ,canActivate:[AuthGuardService]},
   { path: Constants.CREATE_ORDER_CONFIG_PAGE , component: CreateOrderConfigComponent ,canActivate:[AuthGuardService]},
   
@@ -109,6 +140,18 @@ const routes: Routes = [
 
   { path: Constants.EXPORTED_FILES_PAGE , component: SyncExportedFilesComponent ,canActivate:[AuthGuardService]},
 
+  { path: Constants.NEW_BOOKING_REPORT_PAGE , component: NewBookingReportComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.NEW_BOOKING_REPORT_CONFIG_PAGE , component: NewBookingReportConfigComponent ,canActivate:[AuthGuardService]},
+
+  { path: Constants.CANCEL_BOOKING_REPORT_PAGE , component: CancelBookingReportComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.CANCEL_BOOKING_REPORT_CONFIG_PAGE , component: CancelBookingReportConfigComponent ,canActivate:[AuthGuardService]},
+
+  { path: Constants.OCCUPANCY_UPDATE_REPORT_PAGE , component: OccupancyUpdateReportComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.OCCUPANCY_UPDATE_REPORT_CONFIG_PAGE , component: OccupancyUpdateReportConfigComponent ,canActivate:[AuthGuardService]},
+
+  { path: Constants.EXPENSES_DETAILS_REPORT_PAGE , component: ExpensesDetailsReportComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.EXPENSES_DETAILS_REPORT_CONFIG_PAGE , component: ExpensesDetailsReportConfigComponent ,canActivate:[AuthGuardService]},
+
   // Error Page
   {path:'**', component: ErrorComponentComponent }
 
@@ -116,7 +159,7 @@ const routes: Routes = [
 
 @NgModule({
 
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

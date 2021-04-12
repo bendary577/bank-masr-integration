@@ -17,6 +17,7 @@ export class Constants {
     static GET_ACCOUNT = environment.apiHost + '/getAccount';
     static ADD_ACCOUNT = environment.apiHost + '/addAccount';
     static UPDATE_ACCOUNT = environment.apiHost + '/updateAccount';
+    static UPDATE_ACCOUNT_SYNC_TYPES = environment.apiHost + '/updateAccountSyncTypes';
 
     static GET_USERS = environment.apiHost + '/getUsers';
     static ADD_USER = environment.apiHost + '/addUser';
@@ -30,6 +31,7 @@ export class Constants {
     static GET_SYNC_JOB_DATA_BY_ID = environment.apiHost + '/getSyncJobDataById';
     static GET_SYNC_JOB_DATA = environment.apiHost + '/getSyncJobData';
     static CLEAR_SYNC_JOB_DATA = environment.apiHost + '/clearSyncJobData';
+    static GET_SYNC_JOB_DATA_BY_BOOKING_NO = environment.apiHost + '/getSyncJobDataByBookingNo';
 
     static GET_OPERATION_TYPES_URL = environment.apiHost + '/getOperationTypes';
     static GET_OPERATION_TYPE_BY_NAME_URL = environment.apiHost + '/getOperationTypeByName';
@@ -39,6 +41,10 @@ export class Constants {
     static GET_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getSyncJobTypesByName';
     static GET_ACC_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getAccSyncJobTypesByName';
 
+    static GET_APPLICATION_URL = environment.apiHost + '/getApplications';
+    // static GET_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getSyncJobTypesByName';
+    // static GET_ACC_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getAccSyncJobTypesByName';
+
     static UPDATE_SYNC_JOB_TYPES_URL = environment.apiHost + '/updateSyncJobTypesConfiguration';
     static UPDATE_COST_CENTER_MAPPING_URL = environment.apiHost + '/updateCostCenterLocationMapping';
     static GET_SYNC_JOBS_URL = environment.apiHost + '/getSyncJobs';
@@ -46,7 +52,6 @@ export class Constants {
 
     static GET_OPERATION_URL = environment.apiHost + '/getOperation';
     static GET_OPERATION_DATA_BY_ID = environment.apiHost + '/getOperationDataById';
-
 
     static GET_SUPPLIERS_URL = environment.apiHost + '/getSuppliers';
     static GET_SUPPLIERS_DETAILS_URL = environment.apiHost + '/getSuppliersDetails';
@@ -74,6 +79,8 @@ export class Constants {
     static GET_OVER_GROUPS_URL = environment.apiHost + '/getOverGroups';
     static MAP_ITEM_GROUPS_URL = environment.apiHost + '/mapItems';
     static GET_JOURNALS_URL = environment.apiHost + '/getConsumption';
+    static ADD_JOURNAL_GROUP_URL = environment.apiHost + '/addConsumptionMajorGroup';
+
 
     static GET_POS_SALES_URL = environment.apiHost + '/getPOSSales';
     static GET_POS_SALES_TENDERS_URL = environment.apiHost + '/getTenders';
@@ -91,7 +98,7 @@ export class Constants {
 
     static GET_MENU_ITEMS_URL = environment.apiHost + '/SyncSimphonyMenuItems';
     static ADD_SIMPHONY_LOCATION_URL = environment.apiHost + '/addSimphonyLocation';
-
+    
     // General Settings
     static GET_GENERAL_SETTINGS_URL = environment.apiHost + '/getGeneralSettings';
     static UPDATE_GENERAL_SETTINGS_URL = environment.apiHost + '/updateGeneralSettings';
@@ -163,6 +170,49 @@ export class Constants {
     static OPERA_PAYMENT_CONFIG_PAGE = 'operaPaymentConfig';
     static OPERA_PAYMENT_OPERATION = 'Opera Payment';
 
+    //////////////////////////////////////////////// Opera Reports  ////////////////////////////////////////////////////////
+
+    //==> Reservation Report
+    static RESERVATION_PAGE = '2wLsIntegration';
+    static RESERVATION_CONFIG_PAGE = '2wLsIntegration';
+    static RESERVATION_SYNC = '2wLsIntegration';
+
+    static SYNC_OPERA_RESERVATION_URL = environment.apiHost + '/2wlsIntegration/syncExcel';
+    static Get_Transaction_URL = environment.apiHost + '/2wlsIntegration/getTransaction';
+
+    //==> New Booking Report
+    static NEW_BOOKING_REPORT_PAGE = 'newBookingReport';
+    static NEW_BOOKING_REPORT_CONFIG_PAGE = 'newBookingReportConfig';
+    static NEW_BOOKING_REPORT_SYNC = 'New Booking Report';
+
+    static SYNC_OPERA_NEW_BOOKING_URL = environment.apiHost + '/fetchNewBooking';
+
+    //==> Cancel Booking Report
+    static CANCEL_BOOKING_REPORT_PAGE = 'cancelBookingReport';
+    static CANCEL_BOOKING_REPORT_CONFIG_PAGE = 'cancelBookingReportConfig';
+    static CANCEL_BOOKING_REPORT_SYNC = 'Cancel Booking Report';
+
+    static SYNC_OPERA_CANCEL_BOOKING_URL = environment.apiHost + '/fetchCancelBooking';
+
+    //==> Occupancy Update Report
+    static OCCUPANCY_UPDATE_REPORT_PAGE = 'occupancyUpdateReport';
+    static OCCUPANCY_UPDATE_REPORT_CONFIG_PAGE = 'occupancyUpdateReportConfig';
+    static OCCUPANCY_UPDATE_REPORT_SYNC = 'Occupancy Update Report';
+
+    static SYNC_OPERA_OCCUPANCY_UPDATE_URL = environment.apiHost + '/fetchOccupancyUpdate';
+
+    //==> Expenses Details Report
+    static EXPENSES_DETAILS_REPORT_PAGE = 'expensesDetailsReport';
+    static EXPENSES_DETAILS_REPORT_CONFIG_PAGE = 'expensesDetailsReportConfig';
+    static EXPENSES_DETAILS_REPORT_SYNC = 'Expenses Details Report';
+
+    static SYNC_OPERA_EXPENSES_DETAILS_URL = environment.apiHost + '/fetchExpensesDetails';
+
+    //==> Booking Dashboard
+    static OPERA_BOOKING_DASHBOARD_PAGE = 'operaBookingDashboard';
+
+    //////////////////////////////////////////////// Zeal Payment  /////////////////////////////////////////////////////////
+
     static ZEAL_PAYMENT_PAGE = 'zealPayment';
     static ZEAL_PAYMENT_CONFIG_PAGE = 'zealPaymentCongfig';
     static ZEAL_PAYMENT_OPERATION = 'Zeal Payment';
@@ -187,6 +237,32 @@ export class Constants {
     static OPERATION_TYPES = 'operationTypesConfiguration';
     static SYNC_TYPE_SCHEDULER = "Suppliers";
     static EXPORTED_FILES_PAGE = 'exportedFiles';
+    static OPERA_REPORT_MAP_TABLES = 'operaReportMapTables';
+
+    //////////////////////////////////////////////// Manage Application  //////////////////////////////////////////////
+
+    static GET_LOYALTY_PAGE = 'loyalty';
+    static MANAGE_COMPANIES = 'manageCompanies';
+    static MANAGE_GROUPS = "manageGroups";
+    static MANAGE_SUB_GROUPS = "manageSubGroups";
+    static MANAGE_USERS = 'manageUsers';
+    static MANAGE_ACTIVITIES = 'managActivities';
+    static REDEEM_VOUCHER = 'Redeem Voucher';
+    static SIMPHONY_DISCOUNT_MAP_TABLE = 'simphonyDiscountMaping';
+
+    static GET_APP_GROUPS_URL = environment.apiHost + '/getApplicationGroups';
+    static GET_ALL_APP_GROUPS_URL = environment.apiHost + '/getAllApplicationGroups';
+    static ADD_APP_GROUP_URL = environment.apiHost + '/addApplicationGroup';
+    static Delete_APP_GROUPS_URL = environment.apiHost + '/deleteApplicationGroups';
+    static UPDATE_APP_GROUP_URL = environment.apiHost  + '/updateApplicationGroup'
+    static GET_APP_USERS_URL = environment.apiHost + '/getApplicationUsers';
+    static ADD_APP_USER_URL = environment.apiHost + '/addApplicationUser';
+    static Delete_APP_USERS_URL = environment.apiHost + '/deleteApplicationUsers';
+    static GET_TRANSACTION_URL = environment.apiHost + '/transaction/getTransactions';
+    static GET_TOP_USERS_URL = environment.apiHost + '/getTopUser';
+    static GET_TOP_Groups_URL = environment.apiHost + '/getTopGroups';
+    static GET_TOTAL_SPEND_URL = environment.apiHost + '/transaction/getTotalSpendTransactions';
+
     //////////////////////////////////////////////// Export To Excel //////////////////////////////////////////////
 
     static EXPORT_APPROVED_INVOICES = environment.apiHost + '/invoices/export/excel';

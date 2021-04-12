@@ -8,6 +8,7 @@ import { GeneralSettings } from 'src/app/models/GeneralSettings';
 import { OverGroup } from 'src/app/models/OverGroup';
 import { Item } from 'src/app/models/Item';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { ItemGroup } from 'src/app/models/ItemGroup';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class IncludedOverGroupsComponent implements OnInit {
 
   generalSettings: GeneralSettings;
   overGroups: Array<OverGroup> = [];
+  itemGroups: Array<ItemGroup> = [];
   selectedOverGroups: Array<OverGroup> = [];
 
   mappedItems: Array<Item> = [];
@@ -36,8 +38,11 @@ export class IncludedOverGroupsComponent implements OnInit {
   getGeneralSettings() {
     this.generalSettingsService.getGeneralSettings().then((res) => {
       this.generalSettings = res as GeneralSettings;
+      
       this.overGroups = this.generalSettings.overGroups;
+      this.itemGroups = this.generalSettings.itemGroups;
       this.mappedItems = this.generalSettings.items;
+
       if(this.overGroups.length == 0){
         this.getOverGroups();
       }

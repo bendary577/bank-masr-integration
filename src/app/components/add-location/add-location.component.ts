@@ -39,7 +39,6 @@ export class AddLocationComponent implements OnInit {
       locationName: ['', Validators.required],
       accountCode: ['', Validators.required],
       costCenterReference: ['', Validators.required]
-
     });
   }
 }

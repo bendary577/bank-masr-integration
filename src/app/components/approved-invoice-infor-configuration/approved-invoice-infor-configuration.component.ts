@@ -15,7 +15,7 @@ import { JournalService } from 'src/app/services/journal/journal.service';
   selector: 'app-approved-invoice-infor-configuration',
   templateUrl: './approved-invoice-infor-configuration.component.html',
   styleUrls: ['./approved-invoice-infor-configuration.component.scss']
-})
+}) 
 export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
   userDefinedFlag = false;
   accountERD;
@@ -27,7 +27,7 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
 
   businessUnits = [];
   PaymentMethods = [];
-  analysisCodes = ["1","2","3","4","5","6","7","8","9","10"];
+  analysisCodes = [null,"1","2","3","4","5","6","7","8","9","10"];
   analysis = [];
   overGroups = [];
   selectedOverGroups = [];

@@ -1,0 +1,114 @@
+<br>
+
+<div class="row">
+    <div class="column">
+        <mat-card class="stat-card">
+            <mat-card-content>
+                <h2>Top Users</h2>
+                <div [hidden]="users.length != 0">
+                    <img class="user-img" src="../../../assets/defaultImage.jpg" alt="image">
+                    <p class="user-name">There is no users yet</p>
+                </div>
+                <div class="row">
+                    <div class="column" *ngFor="let user of users">
+                        <img class="user-img" src={{user.logoUrl}} alt="image">
+                        <p class="user-name"> {{user.name}}</p>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="column">
+        <mat-card class="stat-card">
+            <mat-card-content>
+                <h2>Top Groups</h2>
+                <div [hidden]="groups.length != 0">
+                    <img class="user-img" src="../../../assets/defaultGroup.png" alt="image">
+                    <p class="user-name">There is no groups yet</p>
+                </div>
+                <div class="row">
+                    <div class="column" *ngFor="let group of groups">
+                        <img class="user-img" src={{group.logoUrl}} alt="image">
+                        <p class="user-name">{{group.name}}</p>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="column">
+        <mat-card class="stat-card">
+            <mat-card-content>
+                <h2>Total Spend</h2>
+                <br>
+
+                <form class="my-form">
+                    <div class="row">
+                        <div class="two-column" style="text-align: left;">
+                            <button class="filter-btn" (click)="totalSpend('Today')" mat-raised-button>Today</button>
+                            <button class="filter-btn" (click)="totalSpend('Last Week')" mat-raised-button>Last Week</button>
+                            <button class="filter-btn" (click)="totalSpend('Last Month')" mat-raised-button>Last Month</button>
+                        </div>
+                        <div class="two-column">
+                            <h3 style="border-radius: 10px; text-align: center; height: auto;">
+                                <div>
+                                    Total spend
+                                </div>
+                                <div>
+                                    {{totalSpendM | number : '1.2-2'}} EGP
+                                </div>
+                            </h3>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+
+<div class="main">
+
+    <ngx-datatable class="material" [loadingIndicator]="transactionList.showLoading" [messages]="transactionList.messages" [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+        [rows]="transactionList.transactionData" [selected]="transactionList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" [scrollbarH]="true">
+
+        <ngx-datatable-column name="User Name">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.user.name}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Transaction Date">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.transactionDate | date: 'dd/MM/yyyy hh:mm:ss' }}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Group">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.group.name}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Total Payment">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.totalPayment}} EGP
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Discount Rate">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.discountRate | number : '1.2-2'}} %
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="After Discount">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.afterDiscount | number : '1.2-2'}} EGP
+            </ng-template>
+        </ngx-datatable-column>
+
+    </ngx-datatable>
+
+</div>
+<ngx-spinner></ngx-spinner>

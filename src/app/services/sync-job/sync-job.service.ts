@@ -21,22 +21,32 @@ export class SyncJobService {
 
   getSyncJobTypesDB() {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get<SyncJobType[]>(Constants.GET_SYNC_JOB_TYPES_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+    return this.http.get<SyncJobType[]>(Constants.GET_SYNC_JOB_TYPES_URL,
+       { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
+  getApplications() {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get<any>(Constants.GET_APPLICATION_URL,
+       { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
   getSyncJobTypeDB(syncJobTypeName: string) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get<SyncJobType>(Constants.GET_SYNC_JOB_TYPES_BY_NAME_URL + '?typeName=' + syncJobTypeName, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+    return this.http.get<SyncJobType>(Constants.GET_SYNC_JOB_TYPES_BY_NAME_URL + '?typeName=' + syncJobTypeName,
+     { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
   updateSyncJobTypeConfig(syncJobType) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.put(Constants.UPDATE_SYNC_JOB_TYPES_URL , syncJobType, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+    return this.http.put(Constants.UPDATE_SYNC_JOB_TYPES_URL , syncJobType,
+       { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
 
   updateCostCenterLocationMapping(costCenters) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.put(Constants.UPDATE_COST_CENTER_MAPPING_URL , costCenters, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+    return this.http.put(Constants.UPDATE_COST_CENTER_MAPPING_URL , costCenters,
+       { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
 
   getSyncJobs(syncJobTypeName: string) {
@@ -45,7 +55,7 @@ export class SyncJobService {
      { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
-  getSyncJobs2(syncJobTypeName: string) {
+  getOperation(syncJobTypeName: string) {
     this.token = localStorage.getItem('auth_token');
     return this.http.get<SyncJob[]>(Constants.GET_OPERATION_JOBS_URL + '?typeName=' + syncJobTypeName,
      { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
@@ -66,6 +76,12 @@ export class SyncJobService {
   clearSyncJobData() {
     this.token = localStorage.getItem('auth_token');
     return this.http.get<boolean>(Constants.CLEAR_SYNC_JOB_DATA,
+     { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
+  getSyncJobDataByBookingNo(bookingNo: string, bookingStatus: string) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get<SyncJobData[]>(Constants.GET_SYNC_JOB_DATA_BY_BOOKING_NO + '?bookingNo=' + bookingNo + '&bookingStatus=' + bookingStatus,
      { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 }

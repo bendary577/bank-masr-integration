@@ -1,0 +1,217 @@
+<h3>New Booking Detailes</h3>
+
+
+<div class="header">
+    <span class="history"> Sync Job History </span>
+
+    <select class="custom-select" (change)="getSyncJobData()" [(ngModel)]="selectedJob">
+        <option [ngValue]="job" *ngFor="let job of jobs">
+            {{job.creationDate}} - {{job.status}}</option>
+    </select>
+    <!-- <button mat-flat-button (click)="openModal()">Transfer New Booking Detailes</button> -->
+    <button mat-flat-button (click)="syncNewBooking()">Sync New Booking Data</button>
+
+</div>
+<br>
+
+<div id="myProgress">
+    <mat-progress-bar mode="indeterminate" *ngIf="staticgetNewBookingLoading"></mat-progress-bar>
+</div>
+
+<br>
+
+<div *ngIf="selectedJob">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <mat-card-title class="title">Sync Details</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-list-item>
+                <span class="key">Sync Number: </span>
+                <span class="value" *ngIf="selectedJob.id">{{selectedJob.id}}</span>
+                <span class="value" *ngIf="!selectedJob.id">No Info</span>
+            </mat-list-item>
+            <mat-list-item>
+                <span class="key">Sync status: </span>
+                <span class="value" *ngIf="selectedJob.status">{{selectedJob.status}}</span>
+                <span class="value" *ngIf="!selectedJob.status">No Info</span>
+            </mat-list-item>
+            <mat-list-item>
+                <span class="key">Start Date: </span>
+                <span class="value" *ngIf="selectedJob.creationDate">{{selectedJob.creationDate}}</span>
+                <span class="value" *ngIf="!selectedJob.creationDate">No Info</span>
+            </mat-list-item>
+            <mat-list-item>
+                <span class="key">End Date: </span>
+                <span class="value" *ngIf="selectedJob.endDate">{{selectedJob.endDate}}</span>
+                <span class="value" *ngIf="!selectedJob.endDate">No Info</span>
+            </mat-list-item>
+            <mat-list-item>
+                <span class="key">Reason: </span>
+                <span class="value" *ngIf="selectedJob.reason">{{selectedJob.reason}}</span>
+                <span class="value" *ngIf="!selectedJob.reason">No Info</span>
+            </mat-list-item>
+            <mat-list-item *ngIf="!newBookingList.newBookingData.length">
+                <span>
+                There was no new data to sync in this job, You can sync Booking Detailes now from <a (click)="syncNewBooking()">here</a>
+            </span>
+            </mat-list-item>
+        </mat-card-content>
+    </mat-card>
+</div>
+<br>
+ 
+<div>
+    <div>
+        <div *ngIf="!jobs.length">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <mat-card-title>No Data</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>
+                        There was no new data to sync in this job, You can sync Booking Detailes now from
+                        <a (click)="syncNewBooking()">here</a>
+                    </p>
+                </mat-card-content>
+            </mat-card>
+
+            <br>
+        </div>
+    </div>
+
+    <div *ngIf="jobs.length || newBookingList.showLoading">
+        <ngx-datatable style="max-width: 98%;" class="material" [loadingIndicator]="newBookingList.showLoading" [messages]="newBookingList.messages" 
+        [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+         [rows]="newBookingList.newBookingData" [selected]="newBookingList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
+        (select)='onSelect($event)' [scrollbarH]="true">
+    
+            <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
+            <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+            <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
+            </ng-template>
+    
+            <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
+             <input class="regular-checkbox" type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
+            </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Status">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <label *ngIf="row.data.cuFlag == '1'">NEW</label>
+                    <label *ngIf="row.data.cuFlag == '2'">UPDATE</label>
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Transaction Id">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.transactionId}}
+                </ng-template>
+            </ngx-datatable-column>
+    
+            <ngx-datatable-column name="Booking No">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.bookingNo}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Nationality Code">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.nationalityCode}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Arrival Date">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.checkInDate}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Departure Date">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.checkOutDate}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Number of Nights">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.totalDurationDays}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Room Number">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.allotedRoomNo}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Room Type">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.roomType}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Daily Room Rate">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.dailyRoomRate}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Total Room Rate">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.totalRoomRate}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Total Room">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.grandTotal}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Gender">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.gender}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Adults">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.noOfGuest}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Purpose of Visit">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.purposeOfVisit}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Date Of Birth">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.dateOfBirth}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Payment Methods">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.paymentType}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Number Of Room">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.noOfRooms}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="View JSON">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <button mat-flat-button (click)="viewJSON(row.data)">JSON</button>
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+    </div>
+
+    <ngx-spinner></ngx-spinner>
+</div>

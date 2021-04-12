@@ -117,7 +117,32 @@ export class ConfigurationComponent  implements OnInit{
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
+    });
+  }
 
+  updateAccountSyncTypes() {
+    this.loading = true;
+    this.spinner.show();
+    this.accountService.updateAccountSyncTypes(this.account).then((res: any) => {
+      this.spinner.hide();
+      this.loading = false;
+
+      this.snackBar.open("Update account information successfully.", null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-success"
+      });
+
+    }).catch(err => {
+      console.error(err);
+      this.spinner.hide();
+      this.loading = false;
+
+      this.snackBar.open(err.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
     });
   }
 

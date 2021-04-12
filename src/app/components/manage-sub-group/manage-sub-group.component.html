@@ -1,0 +1,62 @@
+<div class="main" >
+    <div class="header" style="margin-bottom: 15px;">
+        <p *ngIf="!inParent" class="history" style="padding-left: 5px;">{{parentGroupName}} </p>
+
+        <button mat-flat-button (click)="addSubGroupDialog()">Add Supgroup</button>
+        <button mat-flat-button (click)="updateSubGroupDialog()" [disabled]="groupsList.selected.length != 1">Update Supgroup</button>
+        <button mat-flat-button (click)="deleteGroups('true')" [disabled]="groupsList.selected.length == 0">Delete Supgroup</button>
+        <button mat-flat-button (click)="deleteGroups('false')" [disabled]="groupsList.selected.length == 0">Restore Supgroup</button>
+    </div>   
+
+    <ngx-datatable class="material" [loadingIndicator]="groupsList.showLoading" [messages]="groupsList.messages" style="height: 65%;"
+    [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+     [rows]="groupsList.groupsData" [selected]="groupsList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
+    (select)='onSelect($event)' [scrollbarH]="true">
+
+        <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
+        <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+        <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
+        </ng-template>
+
+        <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
+         <input class="regular-checkbox" type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
+        </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Name">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <span class="group-name">{{row.name}}</span>
+            </ng-template>
+        </ngx-datatable-column>
+        
+        <ngx-datatable-column name="Discount Rate">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.discountRate}} %
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="State">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <label *ngIf="!row.deleted" class="active-state">active</label>
+                <label *ngIf="row.deleted" class="deleted-state">deleted</label>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Creation Date">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.creationDate | date: 'dd/MM/yyyy hh:mm:ss' }}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Last Update">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.lastUpdate | date: 'dd/MM/yyyy hh:mm:ss' }}
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+    <br>
+    <div class="card-back">
+        <button mat-flat-button (click)="backClicked()" [hidden]="inParent">Go Back</button>
+    </div> 
+</div>
+
