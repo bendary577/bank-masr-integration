@@ -212,4 +212,20 @@ export class ManageUsersComponent implements OnInit {
     })
   }
 
+  validateUpdateUser(){
+    if(this.usersList.selected.length != 1){
+      return true;
+    }
+
+    if(this.usersList.selected.length == 1){
+      let updatedUser = this.usersList.selected[0];
+    
+      if(updatedUser.deleted){
+        return true;
+      }
+    }
+
+    return false;
+  }
+
 }

@@ -208,4 +208,20 @@ export class ManageGroupsComponent implements OnInit {
     });
   }
 
+  validateUpdateGroup(){
+    if(this.groupsList.selected.length != 1){
+      return true;
+    }
+
+    if(this.groupsList.selected.length == 1){
+      let updatedGroup = this.groupsList.selected[0] as Group;
+    
+      if(updatedGroup.deleted){
+        return true;
+      }
+    }
+
+    return false;
+  }
+
 }
