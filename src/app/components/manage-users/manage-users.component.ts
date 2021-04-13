@@ -17,7 +17,6 @@ export class ManageUsersComponent implements OnInit {
  
   loading = false;
   newUser: ApplicationUser = new ApplicationUser();
-  groups: Group[];
 
   usersList = {
     paginateData: true as boolean,
@@ -42,7 +41,6 @@ export class ManageUsersComponent implements OnInit {
 
   ngOnInit() {
     this.getUsers();
-    this.getGroups();
   }
   
   onSelect({selected}) {
@@ -95,23 +93,11 @@ export class ManageUsersComponent implements OnInit {
     });
   }
 
-  getGroups(){
-    this.loyaltyService.getAllAppGroups(1).toPromise().then((res: any) => {
-      this.groups = res;
-    }).catch(err => {
-      this.snackBar.open("Can't fetch group, Please try agian.", null, {
-        duration: 2000,
-        horizontalPosition: 'right',
-        panelClass:"my-snack-bar-success"
-      });
-    });
-  }
-
   addUserDialog(){
     const dialogRef = this.dialog.open(AddAppUserComponent, {
         width: '550px',
         data: {
-          groups: this.groups
+          user : this.usersList.selected[0]
         }
     });
 
@@ -134,7 +120,7 @@ export class ManageUsersComponent implements OnInit {
         }).catch(err => {
           this.newUser = new ApplicationUser();
           this.usersList.showLoading = false;
-          this.getUsers();
+
           this.usersList.selected = [];
           let message = "";
           if(err.status === 401){
@@ -159,11 +145,9 @@ export class ManageUsersComponent implements OnInit {
 
   updateUserDialog(){
     const dialogRef = this.dialog.open(AddAppUserComponent, {
-      
       width : '550px',
       data: {
-        user : this.usersList.selected[0],
-        groups: this.groups
+        user : this.usersList.selected[0]
       }
     });
 

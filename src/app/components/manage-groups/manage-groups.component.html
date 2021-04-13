@@ -2,8 +2,8 @@
     <div *ngIf="groupsList.groupsData.length != 0 || groupsList.showLoading" class="header" style="margin-bottom: 15px;">
         <button mat-flat-button (click)="addGroupDialog()">Add Group</button>
         <button mat-flat-button (click)="updateGroupDialog()" [disabled]="validateUpdateGroup()">Update Group</button>
-        <button mat-flat-button (click)="deleteGroups('true')" [disabled]="validateDeleteGroup()">Delete Groups</button>
-        <button mat-flat-button (click)="deleteGroups('false')" [disabled]="validateRestoreGroup()">Restore Groups</button>
+        <button mat-flat-button (click)="deleteGroups('true')" [disabled]="validateDeleteGroup()">Delete Group</button>
+        <button mat-flat-button (click)="deleteGroups('false')" [disabled]="validateRestoreGroup()">Restore Group</button>
     </div>
 
     <div *ngIf="groupsList.groupsData.length == 0 && !groupsList.showLoading" style="text-align: center;">

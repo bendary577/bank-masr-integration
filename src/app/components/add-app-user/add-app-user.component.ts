@@ -4,6 +4,7 @@ import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser';
 import { Company } from 'src/app/models/loyalty/Company';
 import { Group } from 'src/app/models/loyalty/Group';
+import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
 
 @Component({
   selector: 'app-add-app-user',
@@ -21,28 +22,37 @@ export class AddAppUserComponent implements OnInit {
   groups: Group[] = [];
 
   constructor(private formBuilder: FormBuilder, public snackBar: MatSnackBar, 
-    public dialogRef: MatDialogRef<AddAppUserComponent>, 
+    public dialogRef: MatDialogRef<AddAppUserComponent>, private loyaltyService: LoyaltyService,
     @Inject(MAT_DIALOG_DATA) public data) { }
  
   ngOnInit() {
+    this.getGroups();
     if (this.data["user"] != null && this.data != undefined){
       this.newUser = this.data["user"];
-      this.groups = this.data["groups"];
-
       this.form = this.formBuilder.group({
         name: [this.newUser.name, Validators.required],        
         email: [this.newUser.email],
         group: [this.newUser.group, Validators.required]
       });
     }else{
-      this.groups = this.data["groups"];
-
       this.form = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
       group: ['', Validators.required]
       });
     }
+  }
+
+  getGroups(){
+    this.loyaltyService.getAllAppGroups(1).toPromise().then((res: any) => {
+      this.groups = res;
+    }).catch(err => {
+      this.snackBar.open("Can't fetch group, Please try agian.", null, {
+        duration: 2000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-success"
+      });
+    });
   }
 
   csvInputChange(fileInputEvent: any) {
