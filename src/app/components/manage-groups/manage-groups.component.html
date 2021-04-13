@@ -1,18 +1,18 @@
 <div class="main" >
-    <div *ngIf="groupsList.groupsData.length != 0" class="header" style="margin-bottom: 15px;">
+    <div *ngIf="groupsList.groupsData.length != 0 || groupsList.showLoading" class="header" style="margin-bottom: 15px;">
         <button mat-flat-button (click)="addGroupDialog()">Add Group</button>
         <button mat-flat-button (click)="updateGroupDialog()" [disabled]="groupsList.selected.length != 1">Update Group</button>
         <button mat-flat-button (click)="deleteGroups('true')" [disabled]="groupsList.selected.length == 0">Delete Groups</button>
         <button mat-flat-button (click)="deleteGroups('false')" [disabled]="groupsList.selected.length == 0">Restore Groups</button>
     </div>
 
-    <div *ngIf="groupsList.groupsData.length == 0" style="text-align: center;">
+    <div *ngIf="groupsList.groupsData.length == 0 && !groupsList.showLoading" style="text-align: center;">
         <img style="max-width: 300px; margin-top: 100px;" src="../../../assets/no-user.png" alt="image">
         <p class="user-name">You haven't added any groups yet!</p>
         <button mat-flat-button (click)="addGroupDialog()">ADD GROUPS</button>
     </div>
 
-    <div *ngIf="groupsList.groupsData.length != 0" >
+    <div *ngIf="groupsList.groupsData.length != 0 || groupsList.showLoading" >
         <ngx-datatable class="material" [loadingIndicator]="groupsList.showLoading" [messages]="groupsList.messages"
         [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
          [rows]="groupsList.groupsData" [selected]="groupsList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
