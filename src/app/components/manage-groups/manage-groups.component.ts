@@ -242,4 +242,22 @@ export class ManageGroupsComponent implements OnInit {
     return false;
   }
 
+  validateRestoreGroup(){
+    if(this.groupsList.selected.length == 0){
+      return true;
+    }
+
+    // check if there any deleted groups selected
+    var i;
+    for (i = 0; i < this.groupsList.selected.length; i++) {
+      let selectedGroup = this.groupsList.selected[i] as Group;
+
+      if (!selectedGroup.deleted) {
+          return true;
+      }
+    }
+
+    return false;
+  }
+
 }
