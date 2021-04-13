@@ -10,9 +10,9 @@ export class LoyaltyService {
 
   constructor(private http: HttpClient) { }
 
-  getAllAppGroups() {
+  getAllAppGroups(status) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get(Constants.GET_ALL_APP_GROUPS_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+    return this.http.get(Constants.GET_ALL_APP_GROUPS_URL + "?status=" + status, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
   getAppGroups(isParent, groupId, status: number) {
