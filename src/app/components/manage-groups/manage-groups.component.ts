@@ -64,7 +64,6 @@ export class ManageGroupsComponent implements OnInit {
   }
 
   getGroups(isParent, group){
-    this.groupsList.groupsData = [];
     this.groupsList.showLoading = true;
     this.loyaltyService.getAppGroups(isParent, group, 2).toPromise().then((res: any) => {
       this.groupsList.groupsData = res;
@@ -80,7 +79,13 @@ export class ManageGroupsComponent implements OnInit {
       this.getGroups(this.inParent, this.groupId);
       this.groupsList.showLoading = false;
       this.groupsList.selected = [];
-      this.snackBar.open("Groups deleted successfully.", null, {
+
+      let message = "Groups deleted successfully.";
+      if(flage == 'false'){
+        message = "Groups restored successfully.";
+      }
+
+      this.snackBar.open(message, null, {
         duration: 2000,
         horizontalPosition: 'right',
         panelClass:"my-snack-bar-success"
@@ -89,7 +94,13 @@ export class ManageGroupsComponent implements OnInit {
       this.getGroups(this.inParent, this.groupId);
       this.groupsList.selected = [];
       this.groupsList.showLoading = false;
-      this.snackBar.open("Can't delete Group.", null, {
+
+      let message = "Can't delete Group.";
+      if(flage == 'false'){
+        message = "Can't restore Group.";
+      }
+      
+      this.snackBar.open(message, null, {
         duration: 2000,
         horizontalPosition: 'right',
         panelClass:"my-snack-bar-success"

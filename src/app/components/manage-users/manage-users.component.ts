@@ -24,8 +24,8 @@ export class ManageUsersComponent implements OnInit {
     offset: 0,
     messages: {
       emptyMessage: `
-    <div >
-      <span class="classname">No users found</span>
+    <div style="text-align: center;">
+      <p class="user-name">No users have been created yet</p>
     </div>
   `
     },
@@ -63,11 +63,16 @@ export class ManageUsersComponent implements OnInit {
   deleteUsers(flage){
     this.usersList.showLoading = true;
     this.loyaltyService.deleteAppUsers(flage, this.usersList.selected).then((res: any) => {
-      this.getGroups();
       this.getUsers();
       this.usersList.selected = [];
       this.usersList.showLoading = false;
-      this.snackBar.open("User deleted successfully.", null, {
+
+      let message = "User deleted successfully.";
+      if(!flage){
+        message = "User restored successfully.";
+      }
+
+      this.snackBar.open(message, null, {
         duration: 2000,
         horizontalPosition: 'right',
         panelClass:"my-snack-bar-success"
@@ -76,7 +81,13 @@ export class ManageUsersComponent implements OnInit {
       this.usersList.showLoading = false;
       this.usersList.selected = [];
       this.getUsers();
-      this.snackBar.open("Can't delete Group.", null, {
+
+      let message = "Can't delete user, Please try agian.";
+      if(!flage){
+        message = "Can't restore user, Please try agian.";
+      }
+
+      this.snackBar.open(message, null, {
         duration: 2000,
         horizontalPosition: 'right',
         panelClass:"my-snack-bar-success"
@@ -85,9 +96,14 @@ export class ManageUsersComponent implements OnInit {
   }
 
   getGroups(){
-    this.loyaltyService.getAllAppGroups().toPromise().then((res: any) => {
+    this.loyaltyService.getAllAppGroups(1).toPromise().then((res: any) => {
       this.groups = res;
     }).catch(err => {
+      this.snackBar.open("Can't fetch group, Please try agian.", null, {
+        duration: 2000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-success"
+      });
     });
   }
 
@@ -161,7 +177,6 @@ export class ManageUsersComponent implements OnInit {
                                                this.usersList.selected[0]).then((result: any) => {
             this.loading = false;
             this.usersList.showLoading = false;
-            this.getGroups();
             this.newUser = new ApplicationUser();
             this.usersList.selected = [];
 
