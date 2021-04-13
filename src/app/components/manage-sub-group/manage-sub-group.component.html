@@ -4,7 +4,7 @@
 
         <button mat-flat-button (click)="addSubGroupDialog()">Add Supgroup</button>
         <button mat-flat-button (click)="updateSubGroupDialog()" [disabled]="validateUpdateGroup()">Update Supgroup</button>
-        <button mat-flat-button (click)="deleteGroups('true')" [disabled]="groupsList.selected.length == 0">Delete Supgroup</button>
+        <button mat-flat-button (click)="deleteGroups('true')" [disabled]="validateDeleteGroup()">Delete Supgroup</button>
         <button mat-flat-button (click)="deleteGroups('false')" [disabled]="groupsList.selected.length == 0">Restore Supgroup</button>
     </div>   
 

@@ -228,4 +228,22 @@ export class ManageUsersComponent implements OnInit {
     return false;
   }
 
+  validateDeleteUsers(){
+    if(this.usersList.selected.length == 0){
+      return true;
+    }
+
+    // check if there any deleted user selected
+    var i;
+    for (i = 0; i < this.usersList.selected.length; i++) {
+      let usersList = this.usersList.selected[i] as ApplicationUser;
+
+      if (usersList.deleted) {
+          return true;
+      }
+    }
+
+    return false;
+  }
+
 }
