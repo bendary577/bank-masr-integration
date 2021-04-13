@@ -158,12 +158,12 @@ export class ManageUsersComponent implements OnInit {
         if(res.group == undefined)
         res.group = new Group();
         this.loyaltyService.addApplicationUser(false, res.name, res.email, res.group.id, res.image,
-                                               this.usersList.selected[0]).then((result: any) => {
+                                               this.usersList.selected[0].id).then((result: any) => {
             this.loading = false;
             this.usersList.showLoading = false;
             this.newUser = new ApplicationUser();
             this.usersList.selected = [];
-
+            this.getUsers();
             this.snackBar.open("User updated successfully.", null, {
               duration: 2000,
               horizontalPosition: 'right',
