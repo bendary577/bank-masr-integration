@@ -33,7 +33,7 @@
                     </mat-nav-list>
                 </mat-expansion-panel>
 
-                <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
+                <mat-expansion-panel [class.mat-elevation-z0]="true" dense *ngIf="syncJobTypes.length > 0">
                     <mat-expansion-panel-header>
                         Reports
                     </mat-expansion-panel-header>
@@ -56,13 +56,16 @@
                         Settings
                     </mat-expansion-panel-header>
                     <mat-nav-list dense>
-                        <a mat-list-item (click)="snav.toggle()" routerLink="/syncjobs" *ngIf="syncJobTypes.length > 0">Sync Types Configuration</a>
-                        <a mat-list-item (click)="snav.toggle()" routerLink="/operationTypesConfiguration" *ngIf="operationTypes.length > 0">Operation Types Configuration</a>
-                        <a mat-list-item (click)="snav.toggle()" routerLink="/costCenterLocationMapping">Location Mapping</a>
-                        <a mat-list-item (click)="snav.toggle()" routerLink="/costCenterAccountMapping">Cost Center Mapping</a>
-                        <a mat-list-item (click)="snav.toggle()" routerLink="/suppliersMapping">Suppliers Mapping</a>
-                        <a mat-list-item (click)="snav.toggle()" routerLink="/includedOverGroups">Included Over Groups</a>
-                        <a mat-list-item (click)="snav.toggle()" routerLink="/operaReportMapTables">Opera Map Tables</a>
+                        <div *ngIf="syncJobTypes.length > 0">
+                            <a mat-list-item (click)="snav.toggle()" routerLink="/syncjobs" *ngIf="syncJobTypes.length > 0">Sync Types Configuration</a>
+                            <a mat-list-item (click)="snav.toggle()" routerLink="/operationTypesConfiguration" *ngIf="operationTypes.length > 0">Operation Types Configuration</a>
+                            <a mat-list-item (click)="snav.toggle()" routerLink="/costCenterLocationMapping">Location Mapping</a>
+                            <a mat-list-item (click)="snav.toggle()" routerLink="/costCenterAccountMapping">Cost Center Mapping</a>
+                            <a mat-list-item (click)="snav.toggle()" routerLink="/suppliersMapping">Suppliers Mapping</a>
+                            <a mat-list-item (click)="snav.toggle()" routerLink="/includedOverGroups">Included Over Groups</a>
+                            <a mat-list-item (click)="snav.toggle()" routerLink="/operaReportMapTables">Opera Map Tables</a>
+                        </div>
+
                         <a mat-list-item (click)="snav.toggle()" routerLink="/simphonyDiscountMaping">Simphony Discount Mapping</a>
                         <a mat-list-item (click)="snav.toggle()" routerLink="/setting">General Settings</a>
                         <a mat-list-item (click)="snav.toggle()" routerLink="/users">Users</a>
