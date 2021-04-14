@@ -8,11 +8,20 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
 
-        <div class="back" style="margin-bottom: 15px;">
-            <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="eg. 1234" [(ngModel)]="newRateCode.discountId">
-            <input matInput id="number" type="number" min="0" step="0.1" style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="eq. 5 %" [(ngModel)]="newRateCode.discountRate">
-            <button mat-flat-button (click)="addRateCode()">Add</button>
-            <button mat-flat-button class="deleteBtn" (click)="addRateCode()" [disabled]="discountRatesList.selected.length == 0">Delete</button>
+        <div class="container">
+            <form class="my-form">
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="eg. 1234" [(ngModel)]="newRateCode.discountId">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <input matInput id="number" type="number" min="0" step="0.1" style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="eq. 5 %" [(ngModel)]="newRateCode.discountRate">
+                    </mat-form-field>
+
+                    <button mat-flat-button (click)="addRateCode()">Add</button>
+                    <button mat-flat-button class="deleteBtn" (click)="addRateCode()" [disabled]="discountRatesList.selected.length == 0">Delete</button>
+                </div>
+            </form>
         </div>
 
         <ngx-datatable class="material" [loadingIndicator]="discountRatesList.showLoading" [messages]="discountRatesList.messages"
