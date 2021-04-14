@@ -36,7 +36,7 @@ export class SimphonyDiscountMapingComponent implements OnInit {
   ngOnInit(): void {
     this.getGeneralSettings();
 
-    var number = document.getElementById('number');
+    var number = document.getElementById('discountRate');
 
     // Listen for input event on numInput.
     number.onkeydown = function(e) {
@@ -85,6 +85,9 @@ export class SimphonyDiscountMapingComponent implements OnInit {
   }
 
   addRateCode(){
+    console.log({
+      discount: this.newRateCode
+    })
     if(this.newRateCode.discountId  && this.newRateCode.discountRate){
       this.newRateCode.deleted = false;
 

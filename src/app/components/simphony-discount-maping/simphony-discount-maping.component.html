@@ -12,10 +12,10 @@
             <form class="my-form">
                 <div>
                     <mat-form-field class="example-full-width">
-                        <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="eg. 1234" [(ngModel)]="newRateCode.discountId">
+                        <input matInput id="discountId" name="discountId" style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="eg. 1234" [(ngModel)]="newRateCode.discountId">
                     </mat-form-field>
                     <mat-form-field class="example-full-width">
-                        <input matInput id="number" type="number" min="0" step="0.1" style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="eq. 5 %" [(ngModel)]="newRateCode.discountRate">
+                        <input matInput id="discountRate" name="discountRate"  type="number" min="0" step="0.1" style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="eq. 5 %" [(ngModel)]="newRateCode.discountRate">
                     </mat-form-field>
 
                     <button mat-flat-button (click)="addRateCode()">Add</button>
