@@ -92,7 +92,7 @@ export class CostCenterLocationMappingComponent implements OnInit {
 
       this.snackBar.open(message , null, {
         duration: 3000,
-        horizontalPosition: 'right',
+        horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
     });
@@ -122,7 +122,7 @@ export class CostCenterLocationMappingComponent implements OnInit {
 
           this.snackBar.open("Add location successfully.", null, {
             duration: 2000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-success"
           });
 
@@ -143,7 +143,7 @@ export class CostCenterLocationMappingComponent implements OnInit {
     
           this.snackBar.open(message , null, {
             duration: 3000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-fail"
           });
         });
@@ -176,7 +176,7 @@ export class CostCenterLocationMappingComponent implements OnInit {
 
           this.snackBar.open("Add revenue center successfully.", null, {
             duration: 2000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-success"
           });
 
@@ -202,7 +202,7 @@ export class CostCenterLocationMappingComponent implements OnInit {
     
           this.snackBar.open(message , null, {
             duration: 3000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-fail"
           });
         });

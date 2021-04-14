@@ -72,7 +72,7 @@ export class ManageUsersComponent implements OnInit {
 
       this.snackBar.open(message, null, {
         duration: 2000,
-        horizontalPosition: 'right',
+        horizontalPosition: 'center',
         panelClass:"my-snack-bar-success"
       });
     }).catch(err => {
@@ -87,7 +87,7 @@ export class ManageUsersComponent implements OnInit {
 
       this.snackBar.open(message, null, {
         duration: 2000,
-        horizontalPosition: 'right',
+        horizontalPosition: 'center',
         panelClass:"my-snack-bar-success"
       });
     });
@@ -114,7 +114,7 @@ export class ManageUsersComponent implements OnInit {
 
           this.snackBar.open("User added successfully.", null, {
             duration: 2000,
-            horizontalPosition: 'right',  
+            horizontalPosition: 'center',  
             panelClass:"my-snack-bar-success"
           });
         }).catch(err => {
@@ -135,7 +135,7 @@ export class ManageUsersComponent implements OnInit {
           }
           this.snackBar.open(message , null, {
             duration: 3000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-fail"
           });
         });
@@ -166,7 +166,7 @@ export class ManageUsersComponent implements OnInit {
             this.getUsers();
             this.snackBar.open("User updated successfully.", null, {
               duration: 2000,
-              horizontalPosition: 'right',
+              horizontalPosition: 'center',
               panelClass : "my-snack-bar-success"
             });
           }).catch(err => {
@@ -188,7 +188,7 @@ export class ManageUsersComponent implements OnInit {
 
             this.snackBar.open(message , null, {
               duration: 3000,
-              horizontalPosition: 'right',
+              horizontalPosition: 'center',
               panelClass:"my-snack-bar-fail"
             });
           })

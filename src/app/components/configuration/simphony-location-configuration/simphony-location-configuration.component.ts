@@ -48,7 +48,7 @@ export class SimphonyLocationConfigurationComponent implements OnInit {
 
           this.snackBar.open(result["message"], null, {
             duration: 2000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-success"
           });
 
@@ -70,7 +70,7 @@ export class SimphonyLocationConfigurationComponent implements OnInit {
     
           this.snackBar.open(message , null, {
             duration: 3000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-fail"
           });
         });

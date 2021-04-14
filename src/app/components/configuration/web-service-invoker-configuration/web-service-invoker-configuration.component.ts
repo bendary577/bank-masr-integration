@@ -46,7 +46,7 @@ export class WebServiceInvokerConfigurationComponent implements OnInit {
         this.userService.addInvokerUser(this.newInvoker, this.syncJobType.id).toPromise().then(result => {
           this.snackBar.open("Add web service invoker successfully.", null, {
             duration: 2000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-success"
           });
           
@@ -73,7 +73,7 @@ export class WebServiceInvokerConfigurationComponent implements OnInit {
     
           this.snackBar.open(message , null, {
             duration: 3000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-fail"
           });
         });

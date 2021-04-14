@@ -128,7 +128,7 @@ export class SuppliersComponent implements OnInit {
 
       this.snackBar.open(message , null, {
         duration: 3000,
-        horizontalPosition: 'right',
+        horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
     });
@@ -156,7 +156,7 @@ export class SuppliersComponent implements OnInit {
       }
       this.snackBar.open(message , null, {
         duration: 3000,
-        horizontalPosition: 'right',
+        horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
 

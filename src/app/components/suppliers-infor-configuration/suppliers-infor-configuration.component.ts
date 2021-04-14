@@ -131,7 +131,7 @@ export class SuppliersInforConfigurationComponent implements OnInit {
       this.spinner.hide();
       this.snackBar.open('An error has occurred.', null, {
         duration: 2000,
-        horizontalPosition: 'right',
+        horizontalPosition: 'center',
       });
     });
   }

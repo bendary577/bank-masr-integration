@@ -116,7 +116,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
     }).catch(err => {
       this.snackBar.open("Failed to get general settings" , null, {
         duration: 3000,
-        horizontalPosition: 'right',
+        horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
     });
@@ -188,7 +188,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
           this.snackBar.open(result["message"], null, {
             duration: 2000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-success"
           });
 
@@ -212,7 +212,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
           this.snackBar.open(message , null, {
             duration: 3000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-fail"
           });
         });
@@ -239,7 +239,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
         this.salesService.addMajorGroup(this.majorGroups, this.syncJobType.id).toPromise().then(result => {
           this.snackBar.open(result["message"], null, {
             duration: 2000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-success"
           });
 
@@ -265,7 +265,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
           this.snackBar.open(message , null, {
             duration: 3000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-fail"
           });
         });
@@ -287,7 +287,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
           this.loading = false;
           this.snackBar.open(result["message"], null, {
             duration: 2000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-success"
           });
 
@@ -307,7 +307,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
           this.snackBar.open(message , null, {
             duration: 3000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-fail"
           });
         });
@@ -335,7 +335,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
         this.salesService.addDiscount(this.discounts, this.syncJobType.id).toPromise().then(result => {
           this.snackBar.open(result["message"], null, {
             duration: 2000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-success"
           });
 
@@ -361,7 +361,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
           this.snackBar.open(message , null, {
             duration: 3000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-fail"
           });
         });
@@ -394,7 +394,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
           this.snackBar.open(result["message"], null, {
             duration: 2000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-success"
           });
 
@@ -421,7 +421,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
           this.snackBar.open(message , null, {
             duration: 3000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-fail"
           });
         });
@@ -454,7 +454,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
           this.snackBar.open(result["message"], null, {
             duration: 2000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-success"
           });
 
@@ -481,7 +481,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
           this.snackBar.open(message , null, {
             duration: 3000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-fail"
           });
         });

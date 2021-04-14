@@ -53,7 +53,7 @@ export class SupplierMappingComponent implements OnInit {
 
       this.snackBar.open(message , null, {
         duration: 3000,
-        horizontalPosition: 'right',
+        horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
       
@@ -88,7 +88,7 @@ export class SupplierMappingComponent implements OnInit {
 
           this.snackBar.open("Add supplier successfully.", null, {
             duration: 2000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-success"
           });
 
@@ -116,7 +116,7 @@ export class SupplierMappingComponent implements OnInit {
     
           this.snackBar.open(message , null, {
             duration: 3000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-fail"
           });
         });

@@ -143,7 +143,7 @@ export class JournalsInforConfigurationsComponent implements OnInit {
         this.journalService.addMajorGroup(this.majorGroups, this.syncJobType.id).toPromise().then(result => {
           this.snackBar.open(result["message"], null, {
             duration: 2000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-success"
           });
 
@@ -169,7 +169,7 @@ export class JournalsInforConfigurationsComponent implements OnInit {
 
           this.snackBar.open(message , null, {
             duration: 3000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-fail"
           });
         });
@@ -191,7 +191,7 @@ export class JournalsInforConfigurationsComponent implements OnInit {
           this.loading = false;
           this.snackBar.open(result["message"], null, {
             duration: 2000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-success"
           });
 
@@ -211,7 +211,7 @@ export class JournalsInforConfigurationsComponent implements OnInit {
 
           this.snackBar.open(message , null, {
             duration: 3000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-fail"
           });
         });

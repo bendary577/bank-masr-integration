@@ -82,7 +82,7 @@ export class ManageSubGroupComponent implements OnInit {
       this.groupsList.selected = [];
       this.snackBar.open("Groups deleted successfully.", null, {
         duration: 2000,
-        horizontalPosition: 'right',
+        horizontalPosition: 'center',
         panelClass:"my-snack-bar-success"
       });
     }).catch(err => {
@@ -91,7 +91,7 @@ export class ManageSubGroupComponent implements OnInit {
       this.groupsList.showLoading = false;
       this.snackBar.open("Can't delete Group.", null, {
         duration: 2000,
-        horizontalPosition: 'right',
+        horizontalPosition: 'center',
         panelClass:"my-snack-bar-success"
       });
     });
@@ -118,7 +118,7 @@ export class ManageSubGroupComponent implements OnInit {
         this.getGroups(this.inParent, this.groupId);
         this.snackBar.open("Supgroup Added successfully.", null, {
           duration: 2000,
-          horizontalPosition: 'right',
+          horizontalPosition: 'center',
           panelClass:"my-snack-bar-success"
         });
       }).catch(err => {
@@ -139,7 +139,7 @@ export class ManageSubGroupComponent implements OnInit {
         }
         this.snackBar.open(message, null, {
           duration: 3000,
-          horizontalPosition: 'right',
+          horizontalPosition: 'center',
           panelClass:"my-snack-bar-fail"
         });
       });
@@ -169,7 +169,7 @@ export class ManageSubGroupComponent implements OnInit {
         this.getGroups(this.inParent, this.groupId);
         this.snackBar.open("Supgroup updated successfully.", null, {
           duration: 2000,
-          horizontalPosition: 'right',
+          horizontalPosition: 'center',
           panelClass:"my-snack-bar-success"
         });
       }).catch(err => {
@@ -190,7 +190,7 @@ export class ManageSubGroupComponent implements OnInit {
         }
         this.snackBar.open(message, null, {
           duration: 3000,
-          horizontalPosition: 'right',
+          horizontalPosition: 'center',
           panelClass:"my-snack-bar-fail"
         });
       });

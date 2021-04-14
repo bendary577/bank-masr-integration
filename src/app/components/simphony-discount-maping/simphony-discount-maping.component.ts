@@ -72,7 +72,7 @@ export class SimphonyDiscountMapingComponent implements OnInit {
 
       this.snackBar.open(message , null, {
         duration: 3000,
-        horizontalPosition: 'right',
+        horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
       this.spinner.hide();

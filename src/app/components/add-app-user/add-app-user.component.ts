@@ -49,7 +49,7 @@ export class AddAppUserComponent implements OnInit {
     }).catch(err => {
       this.snackBar.open("Can't fetch group, Please try agian.", null, {
         duration: 2000,
-        horizontalPosition: 'right',
+        horizontalPosition: 'center',
         panelClass:"my-snack-bar-success"
       });
     });
@@ -70,7 +70,7 @@ export class AddAppUserComponent implements OnInit {
     if (this.form.invalid){
       this.snackBar.open("Please fill form values" , null, {
         duration: 3000,
-        horizontalPosition: 'right',
+        horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
     }else{

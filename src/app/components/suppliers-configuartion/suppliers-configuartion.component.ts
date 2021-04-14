@@ -64,7 +64,7 @@ export class SuppliersConfiguartionComponent implements OnInit {
       }
       this.snackBar.open(err.error.message , null, {
         duration: 3000,
-        horizontalPosition: 'right',
+        horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
       
@@ -149,7 +149,7 @@ export class SuppliersConfiguartionComponent implements OnInit {
       this.spinner.hide();
       this.snackBar.open('An error has occurred.', null, {
         duration: 2000,
-        horizontalPosition: 'right',
+        horizontalPosition: 'center',
       });
     });
   }

@@ -21,7 +21,7 @@ export class AddRevenueCenterComponent implements OnInit {
     if (this.form.invalid){
       this.snackBar.open("Please fill form values" , null, {
         duration: 3000,
-        horizontalPosition: 'right',
+        horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
     }else{

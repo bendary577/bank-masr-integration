@@ -87,7 +87,7 @@ export class ManageGroupsComponent implements OnInit {
 
       this.snackBar.open(message, null, {
         duration: 2000,
-        horizontalPosition: 'right',
+        horizontalPosition: 'center',
         panelClass:"my-snack-bar-success"
       });
     }).catch(err => {
@@ -102,7 +102,7 @@ export class ManageGroupsComponent implements OnInit {
       
       this.snackBar.open(message, null, {
         duration: 2000,
-        horizontalPosition: 'right',
+        horizontalPosition: 'center',
         panelClass:"my-snack-bar-success"
       });
     });
@@ -129,7 +129,7 @@ export class ManageGroupsComponent implements OnInit {
           this.getGroups(true, this.groupId);
           this.snackBar.open("Group Added successfully.", null, {
             duration: 2000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-success"
           });
         }).catch(err => {
@@ -150,7 +150,7 @@ export class ManageGroupsComponent implements OnInit {
           }
           this.snackBar.open(message, null, {
             duration: 3000,
-            horizontalPosition: 'right',
+            horizontalPosition: 'center',
             panelClass:"my-snack-bar-fail"
           });
         });
@@ -179,7 +179,7 @@ export class ManageGroupsComponent implements OnInit {
         this.getGroups(true, this.groupId);
         this.snackBar.open("Group updated successfully.", null, {
           duration: 2000,
-          horizontalPosition: 'right',
+          horizontalPosition: 'center',
           panelClass:"my-snack-bar-success"
         });
       }).catch(err => {
@@ -200,7 +200,7 @@ export class ManageGroupsComponent implements OnInit {
         }
         this.snackBar.open(message, null, {
           duration: 3000,
-          horizontalPosition: 'right',
+          horizontalPosition: 'center',
           panelClass:"my-snack-bar-fail"
         });
       });
