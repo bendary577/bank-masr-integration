@@ -80,16 +80,29 @@ export class ManageSubGroupComponent implements OnInit {
       this.getGroups(this.inParent, this.groupId);
       this.groupsList.showLoading = false;
       this.groupsList.selected = [];
-      this.snackBar.open("Groups deleted successfully.", null, {
+
+      let message = "Sub-groups deleted successfully.";
+      if(flage == 'false'){
+        message = "Sub-groups restored successfully.";
+      }
+
+      this.snackBar.open(message, null, {
         duration: 2000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-success"
       });
+
     }).catch(err => {
       this.getGroups(this.inParent, this.groupId);
       this.groupsList.selected = [];
       this.groupsList.showLoading = false;
-      this.snackBar.open("Can't delete Group.", null, {
+
+      let message = "Can't delete Sub-group, Please try agian";
+      if(flage == 'false'){
+        message = "Can't restore Sub-group, Please try agian";
+      }
+
+      this.snackBar.open(message, null, {
         duration: 2000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-success"
