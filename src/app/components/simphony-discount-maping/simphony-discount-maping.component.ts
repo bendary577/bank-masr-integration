@@ -5,6 +5,7 @@ import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { GeneralSettings } from 'src/app/models/GeneralSettings';
 import { SimphonyDiscount } from 'src/app/models/loyalty/SimphonyDiscount';
 import { Response } from 'src/app/models/Response';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 
 @Component({
@@ -31,7 +32,7 @@ export class SimphonyDiscountMapingComponent implements OnInit {
   };
 
   constructor(public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
-    private generalSettingsService: GeneralSettingsService) { }
+    private generalSettingsService: GeneralSettingsService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.getGeneralSettings();
@@ -114,6 +115,7 @@ export class SimphonyDiscountMapingComponent implements OnInit {
 
       this.generalSettingsService.updateGeneralSettings(this.generalSettings).then(result => {
         const response = result as Response;
+        this.authService.generalSettings = this.generalSettings;
         if (response.success) {
           this.snackBar.open('Save simphony discount rates successfully.', null, {
             duration: 2000,
