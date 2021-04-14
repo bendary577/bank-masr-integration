@@ -24,6 +24,8 @@ export class AddAppGroupComponent implements OnInit {
 
   discountRates = [];
 
+  groupsLoader = true;
+
   constructor(private formBuilder: FormBuilder, public snackBar: MatSnackBar, private loyaltyService: LoyaltyService,
     public dialogRef: MatDialogRef<AddAppGroupComponent>,
     private generalSettingsService: GeneralSettingsService, private authService: AuthService,
@@ -65,9 +67,21 @@ export class AddAppGroupComponent implements OnInit {
   }
 
   getGroups(isParent, group){
+    this.groupsLoader = true;
     this.loyaltyService.getAppGroups(isParent, group, 1).toPromise().then((res: any) => {
-      this.groups= res;
+      this.groups = res;
+      
+      // remove group it self from parent list
+      if(this.group != null){
+        this.groups.forEach((element,index)=>{
+          if(element.id == this.group.id){
+            this.groups.splice(index, 1);
+          }
+       });
+      }
+      this.groupsLoader = false;
     }).catch(err => {
+      this.groupsLoader = false;
     });
   }
 
