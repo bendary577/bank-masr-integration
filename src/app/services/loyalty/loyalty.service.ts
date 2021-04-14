@@ -35,9 +35,9 @@ export class LoyaltyService {
     return this.http.post(Constants.ADD_APP_GROUP_URL + "?addFlag=" + flage , formData, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
   
-  deleteAppGroups(flage, groups) {
+  deleteAppGroups(flage, groups, deleteUsers, parentGroupId) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.put(Constants.Delete_APP_GROUPS_URL + "?addFlag=" + flage  , groups, {
+    return this.http.put(Constants.Delete_APP_GROUPS_URL + "?addFlag=" + flage  + "&deleteUsers=" + deleteUsers + "&parentGroupId=" + parentGroupId , groups, {
        headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
 

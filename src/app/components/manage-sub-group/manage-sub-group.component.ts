@@ -76,7 +76,7 @@ export class ManageSubGroupComponent implements OnInit {
 
   deleteGroups(flage){
     this.groupsList.showLoading = true;
-    this.loyaltyService.deleteAppGroups(flage, this.groupsList.selected).then((res: any) => {
+    this.loyaltyService.deleteAppGroups(flage, this.groupsList.selected, true, "").then((res: any) => {
       this.getGroups(this.inParent, this.groupId);
       this.groupsList.showLoading = false;
       this.groupsList.selected = [];
