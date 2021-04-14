@@ -13,8 +13,6 @@ import { GeneralSettings } from 'src/app/models/GeneralSettings';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
-
-
 /** @title Responsive sidenav */
 @Component({
   selector: 'sidenav-responsive-example',

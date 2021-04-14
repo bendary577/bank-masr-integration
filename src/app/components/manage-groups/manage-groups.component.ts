@@ -92,7 +92,7 @@ export class ManageGroupsComponent implements OnInit {
       if(res.parentGroup == undefined)
       res.parentGroup = new Group();
 
-    this.loyaltyService.deleteAppGroups(flage, this.groupsList.selected, res.deleteUsers, res.parentGroup.id).then((res: any) => {
+    this.loyaltyService.deleteAppGroups(flage, this.groupsList.selected, res.withUsers, res.parentGroup.id).then((res: any) => {
       this.getGroups(this.inParent, this.groupId);
       this.groupsList.showLoading = false;
       this.groupsList.selected = [];

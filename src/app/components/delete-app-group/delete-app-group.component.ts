@@ -11,8 +11,8 @@ import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
 })
 export class DeleteAppGroupComponent implements OnInit {
   public form: FormGroup;
-  isDelete : boolean;
-  withUsers: boolean;
+  isDelete : boolean = false;
+  withUsers: boolean = true;
   groups: Group[];
   parentGroup: Group;
 
@@ -28,6 +28,7 @@ export class DeleteAppGroupComponent implements OnInit {
 
     this.getGroups(false, new Group);
     this.form = this.formBuilder.group({
+    withUsers: [this.withUsers],
     parentGroup: [this.parentGroup]
     });   
    }
@@ -55,8 +56,9 @@ export class DeleteAppGroupComponent implements OnInit {
         panelClass:"my-snack-bar-fail"
       });
     }else{
+      console.log("check form value : "+this.form.controls.withUsers.value)
       this.dialogRef.close({
-        deleteUsers: this.withUsers,
+        withUsers: this.form.controls.withUsers.value,
         parentGroup: this.form.controls.parentGroup.value,
       });
     }

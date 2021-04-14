@@ -3,20 +3,24 @@
 <div mat-dialog-content>
 
     <form [formGroup]="form" class="my-form">
-<!--  (change)="updateDeleteUsers(withUsers)" -->
-        <div class="form-group" >
-            <mat-checkbox class="example-margin" style="padding-right: 10px;" 
-            [(ngModel)]="withUsers">
-            <label [hidden]="isDelete" > Restore Users </label> 
-            <label [hidden] = "!isDelete" > Delete Users </label> 
+
+        <div class="form-group" *ngIf="!isDelete" >
+            <mat-checkbox class="example-margin" style="padding-right: 10px;" [(ngModel)]="withUsers" formControlName="withUsers">
+           <label> Restore Users </label> 
             </mat-checkbox>                   
         </div>
-<!-- && !withUsers -->
-        <div *ngIf="groups" class="form-group" style="padding-top: 10px;">
+
+        <div class="form-group" *ngIf="isDelete" >
+            <mat-checkbox class="example-margin" style="padding-right: 10px;" [(ngModel)]="withUsers" formControlName="withUsers">
+                <label> Delete Users </label> 
+            </mat-checkbox>                   
+        </div>
+
+        <div *ngIf="groups && !withUsers && isDelete" class="form-group" style="padding-top: 10px;">
             <mat-form-field class="example-full-width">
                 <mat-select matInput id="groups" name="groups" placeholder="Parent Group" formControlName="parentGroup">
                     <mat-option></mat-option>
-                    <mat-option [value]=c *ngFor="let c of groups">{{c.name}}</mat-option>
+                    <mat-option [value]=g *ngFor="let g of groups">{{g.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
