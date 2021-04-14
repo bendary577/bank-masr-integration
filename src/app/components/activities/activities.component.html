@@ -69,7 +69,19 @@
 
 <div class="main">
 
-    <ngx-datatable class="material" [loadingIndicator]="transactionList.showLoading" [messages]="transactionList.messages" [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+    <div *ngIf="transactionList.transactionData.length == 0"> 
+        <mat-card class="transaction-card">
+            <mat-card-content>
+                <div>
+                    <img src="../../../assets/activity.png" alt="image">
+                    <p>You do not have any recent activity.</p>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div *ngIf="transactionList.transactionData.length != 0">
+        <ngx-datatable class="material" [loadingIndicator]="transactionList.showLoading" [messages]="transactionList.messages" [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
         [rows]="transactionList.transactionData" [selected]="transactionList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" [scrollbarH]="true">
 
         <ngx-datatable-column name="User Name">
@@ -108,7 +120,8 @@
             </ng-template>
         </ngx-datatable-column>
 
-    </ngx-datatable>
+        </ngx-datatable>
+    </div>
 
 </div>
 <ngx-spinner></ngx-spinner>
