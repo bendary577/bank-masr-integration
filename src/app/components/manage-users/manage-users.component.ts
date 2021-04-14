@@ -17,6 +17,7 @@ export class ManageUsersComponent implements OnInit {
  
   loading = false;
   newUser: ApplicationUser = new ApplicationUser();
+  updatedUser: ApplicationUser = new ApplicationUser();
 
   usersList = {
     paginateData: true as boolean,
@@ -66,7 +67,7 @@ export class ManageUsersComponent implements OnInit {
       this.usersList.showLoading = false;
 
       let message = "User deleted successfully.";
-      if(!flage){
+      if(flage == 'false'){
         message = "User restored successfully.";
       }
 
@@ -81,7 +82,7 @@ export class ManageUsersComponent implements OnInit {
       this.getUsers();
 
       let message = "Can't delete user, Please try agian.";
-      if(!flage){
+      if(flage == 'false'){
         message = "Can't restore user, Please try agian.";
       }
 
@@ -105,6 +106,12 @@ export class ManageUsersComponent implements OnInit {
       if (res) {
 
         this.usersList.showLoading = true;
+
+        this.updatedUser = new ApplicationUser();
+        this.updatedUser.name = res.name;
+        this.updatedUser.email = res.email;
+        this.updatedUser.group = res.group;
+
         this.loyaltyService.addApplicationUser(true, res.name, res.email, res.group.id, res.image, "").then((result: any) => {
           this.loading = true;
           this.getUsers();
@@ -157,8 +164,14 @@ export class ManageUsersComponent implements OnInit {
         this.usersList.showLoading = true;
         if(res.group == undefined)
         res.group = new Group();
+
+        this.updatedUser = this.usersList.selected[0];
+        this.updatedUser.name = res.name;
+        this.updatedUser.email = res.email;
+        this.updatedUser.group = res.group;
+        
         this.loyaltyService.addApplicationUser(false, res.name, res.email, res.group.id, res.image,
-                                               this.usersList.selected[0].id).then((result: any) => {
+          this.usersList.selected[0].id).then((result: any) => {
             this.loading = false;
             this.usersList.showLoading = false;
             this.newUser = new ApplicationUser();
