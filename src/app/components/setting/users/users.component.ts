@@ -19,7 +19,22 @@ import { AddUserComponent } from '../../add-vendor/add-vendor.component';
 export class UsersComponent implements OnInit {
   loading = true;
   success = null;
-  usersList = [];
+  usersList = {
+    offset: 0,
+    messages: {
+      emptyMessage: `
+    <div >
+      <span style="font-size: 25px;text-alngign: center;">There are no users yet.</span>
+    </div>
+  `
+    },
+    selected: [],
+    usersCount: 0 as number,
+    pagesFilter: [10, 25, 50, 75, 100],
+    showLoading: true,
+    inputSearch: '' as string,
+    usersData: [], 
+  };
   panelOpenState = true;
   displayedColumns: string[] = ['firstName', 'username', 'lastName'];
 
@@ -32,21 +47,26 @@ export class UsersComponent implements OnInit {
     this.getUsers();
   }
 
+  
+  onSelect({selected}) {
+    this.usersList.selected.splice(0, this.usersList.selected.length);
+    this.usersList.selected.push(...selected);
+  }
+
   getUsers() {
     this.spinner.show();
     this.authService.getUsers().toPromise().then((res: any) => {
-      this.usersList = res;
-
+      this.usersList.usersData = res;
       this.spinner.hide();
-      this.loading = false;
+      this.usersList.showLoading = false;
     }).catch(err => {
       console.error(err);
       this.spinner.hide();
-      this.loading = false;
+      this.usersList.showLoading = false;
     });
   }
 
-  openDialog(): void {
+  openAddDialog(): void {
     const dialogRef = this.dialog.open(AddUserComponent, {
       width: '550px'
     });
@@ -54,7 +74,29 @@ export class UsersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.spinner.show();
-        this.authService.addUser(res).toPromise().then(result => {
+        this.authService.addUser(res, true).toPromise().then(result => {
+          this.getUsers()
+        }).catch(err => {
+          this.spinner.hide();
+          this.snackBar.open('An error has occurred.', null, {
+            duration: 2000,
+            horizontalPosition: 'right',
+          });
+        });
+      }
+    });
+  }
+
+  openUpdateDialog(): void {
+    const dialogRef = this.dialog.open(AddUserComponent, {
+      width: '550px',
+      data:{user: this.usersList.selected[0]}
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.spinner.show();
+        this.authService.addUser(res, false).toPromise().then(result => {
           this.getUsers()
         }).catch(err => {
           this.spinner.hide();

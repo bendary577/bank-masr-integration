@@ -37,9 +37,9 @@ export class AuthService {
     return this.http.get(Constants.GET_USERS,{ headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
-  addUser(user) {
+  addUser(user ,addFlag) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.post(Constants.ADD_USER, user, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+    return this.http.post(Constants.ADD_USER + "?addFlag=" + addFlag , user, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
 }

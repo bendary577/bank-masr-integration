@@ -3,6 +3,7 @@
     <div *ngIf="usersList.usersData.length != 0 || usersList.showLoading" class="header" style="margin-bottom: 15px;">
         <button mat-flat-button (click)="addUserDialog()">Add User</button>
         <button mat-flat-button (click)="updateUserDialog()" [disabled]="validateUpdateUser()">Update User</button>
+        <button mat-flat-button (click)="resendQRCode()" [disabled]="usersList.selected.length != 1">Resend QR Code</button>
         <button mat-flat-button (click)="deleteUsers('true')" [disabled]="validateDeleteUsers()">Delete User</button>
         <button mat-flat-button (click)="deleteUsers('false')" [disabled]="validateRestoreUsers()">Restore User</button>
     </div> 
@@ -63,13 +64,13 @@
     
             <ngx-datatable-column name="Creation Date">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.creationDate | date: 'dd/MM/yyyy hh:mm:ss' }}
+                    {{row.creationDate | date: 'dd/MM/yyyy HH:mm:ss' }}
                 </ng-template>
             </ngx-datatable-column>
     
             <ngx-datatable-column name="Last Update">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.lastUpdate | date: 'dd/MM/yyyy hh:mm:ss' }}
+                    {{row.lastUpdate | date: 'dd/MM/yyyy HH:mm:ss' }}
                 </ng-template>
             </ngx-datatable-column>
         </ngx-datatable>

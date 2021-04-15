@@ -21,6 +21,7 @@ export class AddAppGroupComponent implements OnInit {
   parentGroup: Group;
   srcResult: any;
   imageUploded: boolean = false;
+  inUpdate = false;
 
   discountRates = [];
 
@@ -45,6 +46,7 @@ export class AddAppGroupComponent implements OnInit {
     }
 
     if (this.data["group"] != null && this.data != undefined){
+      this.inUpdate = true;
       this.group = this.data["group"];
 
       this.form = this.formBuilder.group({

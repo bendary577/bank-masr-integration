@@ -18,6 +18,7 @@ export class AddAppUserComponent implements OnInit {
   selectedGroup: Group;
   srcResult: any;
   imageUploded: boolean = false;
+  inUpdate = false;
 
   groups: Group[] = [];
 
@@ -28,6 +29,7 @@ export class AddAppUserComponent implements OnInit {
   ngOnInit() {
     this.getGroups();
     if (this.data["user"] != null && this.data != undefined){
+      this.inUpdate = true;
       this.newUser = this.data["user"];
       this.form = this.formBuilder.group({
         name: [this.newUser.name, Validators.required],        

@@ -37,6 +37,9 @@
     </form>
 </div>
 <div mat-dialog-actions>
-    <button mat-button cdkFocusInitial (click)="onSaveClick()" >Save</button>
+    <button mat-button cdkFocusInitial (click)="onSaveClick()" >
+        <label [hidden] = "inUpdate">Save</label> 
+        <label [hidden] = "!inUpdate">Upadet</label> 
+        </button>
     <button mat-button (click)="onNoClick()">Cancel</button>
 </div>

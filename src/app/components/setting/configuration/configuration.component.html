@@ -9,7 +9,7 @@
         <button mat-flat-button (click)="updateAccountSyncTypes()">Update Account Sync Types</button>
     </div>
     <br>
-    <div>
+    <div *ngIf="account.creationDate">
         <mat-accordion multi>
 
             <!-- Oracle Hospitality Inventory Management -->

@@ -84,8 +84,6 @@ export class ManageGroupsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(res => {
       
     this.groupsList.showLoading = true;
-
-    console.log(res)
     
     if(res){
 

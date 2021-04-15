@@ -196,6 +196,44 @@ export class ManageUsersComponent implements OnInit {
     })
   }
 
+  resendQRCode(){
+    this.usersList.showLoading = true;
+    this.loyaltyService.resendQRCode(this.usersList.selected[0].id).then((result: any) => {
+      this.loading = true;
+      this.getUsers();
+      this.newUser = new ApplicationUser();
+      this.usersList.showLoading = false;
+      this.usersList.selected = [];
+
+      this.snackBar.open("QR Code send successfully.", null, {
+        duration: 2000,
+        horizontalPosition: 'right',  
+        panelClass:"my-snack-bar-success"
+      });
+    }).catch(err => {
+      this.newUser = new ApplicationUser();
+      this.usersList.showLoading = false;
+
+      this.usersList.selected = [];
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
+      }
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
+      });
+    });
+  }
+
   validateUpdateUser(){
     if(this.usersList.selected.length != 1){
       return true;

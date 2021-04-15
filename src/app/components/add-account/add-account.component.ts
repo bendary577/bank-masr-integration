@@ -12,10 +12,43 @@ export class AddAccountComponent implements OnInit {
 
   public form: FormGroup;
   submitted = false;
+  srcResult: any;
+  imageUploded: boolean = false;
   newAccount:Account;
   ERD: string;
 
   constructor(private formBuilder: FormBuilder, public dialogRef: MatDialogRef<AddAccountComponent>) { }
+
+  ngOnInit() {
+    this.form = this.formBuilder.group({
+      name: ['', Validators.required],
+      domain: ['', Validators.required],
+      erd: ['', Validators.required],
+      locationQuota: ['', Validators.required],
+      usernameOHIM: ['', Validators.required],
+      passwordOHIM: ['', Validators.required],
+      companyOHIM: ['', Validators.required],
+
+      usernameOHRA: ['', Validators.required],
+      passwordOHRA: ['', Validators.required],
+      companyOHRA: ['', Validators.required],
+
+      usernameFusion: ['', Validators.required],
+      passwordFusion: ['', Validators.required],
+
+      usernameSun: ['', Validators.required],
+      passwordSun: ['', Validators.required],
+      hostSun: ['', Validators.required],
+      portSun: ['', Validators.required],
+    });
+  }
+
+  csvInputChange(fileInputEvent: any) {
+    this.srcResult = fileInputEvent.target.files[0];
+    if(this.srcResult){
+        this.imageUploded = true;
+    }
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -24,6 +57,7 @@ export class AddAccountComponent implements OnInit {
   onSaveClick(): void {
     this.dialogRef.close({
       name: this.form.controls.name.value,
+      image: this.srcResult,
       domain: this.form.controls.domain.value,
       erd: this.form.controls.erd.value,
       locationQuota: this.form.controls.locationQuota.value,
@@ -52,30 +86,6 @@ export class AddAccountComponent implements OnInit {
           "port": this.form.controls.portSun.value
         },
       ]
-    });
-  }
-
-  ngOnInit() {
-    this.form = this.formBuilder.group({
-      name: ['', Validators.required],
-      domain: ['', Validators.required],
-      erd: ['', Validators.required],
-      locationQuota: ['', Validators.required],
-      usernameOHIM: ['', Validators.required],
-      passwordOHIM: ['', Validators.required],
-      companyOHIM: ['', Validators.required],
-
-      usernameOHRA: ['', Validators.required],
-      passwordOHRA: ['', Validators.required],
-      companyOHRA: ['', Validators.required],
-
-      usernameFusion: ['', Validators.required],
-      passwordFusion: ['', Validators.required],
-
-      usernameSun: ['', Validators.required],
-      passwordSun: ['', Validators.required],
-      hostSun: ['', Validators.required],
-      portSun: ['', Validators.required],
     });
   }
 

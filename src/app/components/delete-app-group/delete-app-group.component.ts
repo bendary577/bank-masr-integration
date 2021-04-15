@@ -11,7 +11,7 @@ import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
 })
 export class DeleteAppGroupComponent implements OnInit {
   public form: FormGroup;
-  isDelete : boolean = false;
+  isDelete : String;
   withUsers: boolean = true;
   groups: Group[];
   parentGroup: Group;
@@ -22,18 +22,26 @@ export class DeleteAppGroupComponent implements OnInit {
 
   ngOnInit(): void {
 
+    console.log({
+      data: this.data
+    })
     if(this.data != undefined && this.data["isDelete"]){
+      console.log("getting data from data object")
       this.isDelete = this.data["isDelete"];
+    }else{
+      this.isDelete = "false";
     }
-
-    this.getGroups(false, new Group);
+    if(this.isDelete == "true"){
+      this.getGroups(this.isDelete, false, new Group);
+    }
+    
     this.form = this.formBuilder.group({
     withUsers: [this.withUsers],
     parentGroup: [this.parentGroup]
     });   
    }
 
-  getGroups(isParent, group){
+  getGroups(isDelete, isParent, group){
     this.loyaltyService.getAllAppGroups(1).toPromise().then((res: any) => {
       this.groups= res;
     }).catch(err => {

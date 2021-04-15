@@ -23,7 +23,10 @@
         <div>
             <mat-form-field class="example-full-width">
                 <mat-select matInput id="discountId" name="discountId" placeholder="Simphony Discount Id" formControlName="discountId">
-                    <mat-option [value]=discountRate *ngFor="let discountRate of discountRates">{{discountRate.discountId}} - {{discountRate.discountRate}}%</mat-option>
+                    <mat-option></mat-option>
+                    <mat-option [value]=discountRate *ngFor="let discountRate of discountRates">
+                        {{discountRate.discountId}} - {{discountRate.discountRate}}%
+                    </mat-option>
                     </mat-select>
             </mat-form-field>
         </div>
@@ -48,6 +51,9 @@
     </form>
 </div>
 <div mat-dialog-actions>
-    <button mat-button cdkFocusInitial (click)="onSaveClick()" >Save</button>
+    <button mat-button cdkFocusInitial (click)="onSaveClick()" >
+       <label [hidden] = "inUpdate">Save</label> 
+       <label [hidden] = "!inUpdate">Upadet</label> 
+    </button>
     <button mat-button (click)="onNoClick()">Cancel</button>
 </div>

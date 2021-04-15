@@ -69,6 +69,13 @@ export class LoyaltyService {
     return this.http.post(Constants.ADD_APP_USER_URL  + "?addFlag=" + flage , formData, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
 
+  resendQRCode(userId) {
+    this.token = localStorage.getItem('auth_token');
+    const formData: FormData = new FormData();
+    formData.append('userId', userId);
+    return this.http.post(Constants.RESEND_QR_CODE, formData, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+  }
+
   deleteAppUsers(flage, users) {
     this.token = localStorage.getItem('auth_token');
     return this.http.put(Constants.Delete_APP_USERS_URL + "?addFlag=" + flage , users, {
