@@ -22,12 +22,11 @@ export class LoyaltyService {
   }
 
 
-  addAppGroups(flage, name, description, discountRate, discountId, parentGroupId, image, groupId) {
+  addAppGroups(flage, name, description, discountId, parentGroupId, image, groupId) {
     this.token = localStorage.getItem('auth_token');
     const formData: FormData = new FormData();
     formData.append('name', name);
     formData.append('description', description);
-    formData.append('discountRate', discountRate);
     formData.append('discountId', discountId);
     formData.append('parentGroupId', parentGroupId);
     formData.append('image', image);
@@ -83,9 +82,9 @@ export class LoyaltyService {
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  getTransactions(transactionType) {
+  getTransactions(transactionType, time) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get(Constants.GET_TRANSACTION_URL + "?transactionType=" + transactionType , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+    return this.http.get(Constants.GET_TRANSACTION_URL + "?transactionType=" + transactionType + "&time=" + time   , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
   getTotalSpend(date) {

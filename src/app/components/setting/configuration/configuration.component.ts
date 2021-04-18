@@ -30,6 +30,7 @@ export class ConfigurationComponent  implements OnInit{
 
   ngOnInit() {
     this.getAccount();
+
   }
 
   getAccount() {
@@ -37,6 +38,8 @@ export class ConfigurationComponent  implements OnInit{
     this.spinner.show();
     this.accountService.getAccount().toPromise().then((res: any) => {
       this.account = res;
+      console.log(this.account)
+
       this.accountCredentials = this.account.accountCredentials;
       this.spinner.hide();
       this.loading = false;

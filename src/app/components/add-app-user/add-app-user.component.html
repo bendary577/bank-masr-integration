@@ -10,7 +10,7 @@
 
         <div class="form-group">
             <mat-form-field class="example-full-width">
-                <input matInput placeholder="Email" formControlName="email">
+                <input matInput placeholder="Email" formControlName="email" >
                 <mat-error *ngIf="form.controls.email.hasError('pattern')">
                     Email must be well formed.
                   </mat-error>
@@ -21,7 +21,7 @@
             <mat-form-field class="example-full-width">
                 <mat-select matInput id="groups" name="groups" placeholder="Group" formControlName="group">
                     <mat-option></mat-option>
-                    <mat-option [value]=c *ngFor="let c of groups">{{c.name}}</mat-option>
+                    <mat-option [value]=c.id *ngFor="let c of groups">{{c.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>

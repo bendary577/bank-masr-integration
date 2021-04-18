@@ -6,6 +6,8 @@ import {User} from "../../../models/user";
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { AddUserComponent } from '../../add-vendor/add-vendor.component';
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
 
 /**
  * @title Basic expansion panel
@@ -41,7 +43,7 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private spinner: NgxSpinnerService, public snackBar: MatSnackBar, private authService:AuthService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog, private sidNav: SidenavResponsive) { }
 
   ngOnInit() {
     this.getUsers();
@@ -75,12 +77,30 @@ export class UsersComponent implements OnInit {
       if (res) {
         this.spinner.show();
         this.authService.addUser(res, true).toPromise().then(result => {
-          this.getUsers()
-        }).catch(err => {
-          this.spinner.hide();
-          this.snackBar.open('An error has occurred.', null, {
+          this.usersList.selected = [];
+          this.getUsers();
+          this.snackBar.open("User Added successfully.", null, {
             duration: 2000,
             horizontalPosition: 'right',
+            panelClass:"my-snack-bar-success"
+          });
+        }).catch(err => {
+          this.usersList.selected = [];
+          let message = "";
+          if(err.status === 401){
+            message = ErrorMessages.SESSION_EXPIRED;
+            this.sidNav.Logout();
+          } else if (err.error.message){
+            message = err.error.message;
+          } else if (err.message){
+            message = err.message;
+          } else {
+            message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
+          }
+          this.snackBar.open(message, null, {
+            duration: 3000,
+            horizontalPosition: 'right',
+            panelClass:"my-snack-bar-fail"
           });
         });
       }
@@ -97,12 +117,30 @@ export class UsersComponent implements OnInit {
       if (res) {
         this.spinner.show();
         this.authService.addUser(res, false).toPromise().then(result => {
-          this.getUsers()
-        }).catch(err => {
-          this.spinner.hide();
-          this.snackBar.open('An error has occurred.', null, {
+          this.getUsers();
+          this.usersList.selected = [];
+          this.snackBar.open("User updated successfully.", null, {
             duration: 2000,
             horizontalPosition: 'right',
+            panelClass:"my-snack-bar-success"
+          });
+        }).catch(err => {
+          this.usersList.selected = [];
+          let message = "";
+          if(err.status === 401){
+            message = ErrorMessages.SESSION_EXPIRED;
+            this.sidNav.Logout();
+          } else if (err.error.message){
+            message = err.error.message;
+          } else if (err.message){
+            message = err.message;
+          } else {
+            message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
+          }
+          this.snackBar.open(message, null, {
+            duration: 3000,
+            horizontalPosition: 'right',
+            panelClass:"my-snack-bar-fail"
           });
         });
       }

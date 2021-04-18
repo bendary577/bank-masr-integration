@@ -41,10 +41,16 @@
             
             <ngx-datatable-column name="Simphony Discount ID">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.discountId}}
+                    {{row.simphonyDiscount.discountId}}
                 </ng-template>
             </ngx-datatable-column>
     
+            <ngx-datatable-column name="Discount Rate">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.simphonyDiscount.discountRate}} %
+                </ng-template>
+            </ngx-datatable-column>
+
             <ngx-datatable-column name="State">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     <label *ngIf="!row.deleted" class="active-state">active</label>

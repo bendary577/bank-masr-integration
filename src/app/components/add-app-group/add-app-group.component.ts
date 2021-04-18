@@ -18,6 +18,7 @@ export class AddAppGroupComponent implements OnInit {
   public form: FormGroup;
   groups: Group[];
   group: Group = new Group();
+  slectedDiscount: number;
   parentGroup: Group;
   srcResult: any;
   imageUploded: boolean = false;
@@ -48,11 +49,12 @@ export class AddAppGroupComponent implements OnInit {
     if (this.data["group"] != null && this.data != undefined){
       this.inUpdate = true;
       this.group = this.data["group"];
-
+      this.slectedDiscount = this.group.simphonyDiscount.discountId;
+      console.log(this.slectedDiscount)
       this.form = this.formBuilder.group({
         name: [this.group.name, [Validators.maxLength, Validators.required]],
         description: [this.group.description],
-        discountId: [new SimphonyDiscount(this.group.discountId, this.group.discountRate), [Validators.required]],
+        discountId: [this.group.simphonyDiscount.discountId, [Validators.required]],
         parentGroup: [this.parentGroup],
         image: this.srcResult
       });
@@ -114,9 +116,6 @@ export class AddAppGroupComponent implements OnInit {
         panelClass:"my-snack-bar-fail"
       });
     }else{
-      console.log({
-        discount: this.form.controls.discountId.value
-      })
       this.dialogRef.close({
         name: this.form.controls.name.value,
         description: this.form.controls.description.value,

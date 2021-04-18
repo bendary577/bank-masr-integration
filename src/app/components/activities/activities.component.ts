@@ -41,15 +41,15 @@ export class ActivitiesComponent implements OnInit {
     private sidNav: SidenavResponsive,private loyaltyService: LoyaltyService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
-    this.getTransactions();
     this.getTopUsers();
     this.getTopGroups();
-    this.totalSpend("Today");
+    this.totalSpend("Total");
   }
 
   totalSpend(date){
     this.spinner.show();
     this.loyaltyService.getTotalSpend(date).toPromise().then((res: any) => {
+      this.getTransactions(date);
       this.spinner.hide();
       this.totalSpendM = res["totalSpend"];
     }).catch(err => {
@@ -122,10 +122,10 @@ export class ActivitiesComponent implements OnInit {
     });  
   }
 
-  getTransactions(){
+  getTransactions(time){
 
     this.transactionList.showLoading = true;
-    this.loyaltyService.getTransactions( Constants.REDEEM_VOUCHER).toPromise().then((res: any) => {
+    this.loyaltyService.getTransactions( Constants.REDEEM_VOUCHER, time).toPromise().then((res: any) => {
       this.transactionList.transactionData = res;
       this.transactionList.showLoading = false;
     }).catch(err => {

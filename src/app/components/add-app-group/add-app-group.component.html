@@ -21,12 +21,11 @@
         </div>
 
         <div>
-            <mat-form-field class="example-full-width">
-                <mat-select matInput id="discountId" name="discountId" placeholder="Simphony Discount Id" formControlName="discountId">
+            <mat-form-field class="example-full-width" >
+                <mat-select matInput id="discountId" name="discountId" [value]="slectedDiscount" placeholder="Simphony Discount Id" formControlName="discountId">
                     <mat-option></mat-option>
-                    <mat-option [value]=discountRate *ngFor="let discountRate of discountRates">
-                        {{discountRate.discountId}} - {{discountRate.discountRate}}%
-                    </mat-option>
+                    <mat-option [value]=discountRate.discountId *ngFor="let discountRate of discountRates">
+                        {{discountRate.discountId}} - {{discountRate.discountRate}}%</mat-option>
                     </mat-select>
             </mat-form-field>
         </div>

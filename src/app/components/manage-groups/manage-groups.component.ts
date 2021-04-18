@@ -140,7 +140,7 @@ export class ManageGroupsComponent implements OnInit {
         if(res.parentGroup == undefined)
         res.parentGroup = new Group();
 
-        this.loyaltyService.addAppGroups(true, res.name, res.description, res.discountRate, res.discountId,
+        this.loyaltyService.addAppGroups(true, res.name, res.description, res.discountId,
           res.parentGroup.id, res.image, "").then((result: any) => {
                         this.groupsList.showLoading = false;
           this.groupsList.selected = [];
@@ -190,7 +190,7 @@ export class ManageGroupsComponent implements OnInit {
       if(res.parentGroup == undefined)
       res.parentGroup = new Group();
 
-      this.loyaltyService.addAppGroups(false, res.name, res.description, res.discountRate, res.discountId,
+      this.loyaltyService.addAppGroups(false, res.name, res.description, res.discountId,
         res.parentGroup.id, res.image, this.groupsList.selected[0].id).then((result: any) => {
                       this.groupsList.showLoading = false;
         this.groupsList.selected = [];
