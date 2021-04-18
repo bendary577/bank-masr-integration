@@ -29,6 +29,11 @@ export class JournalService {
     return this.http.get(Constants.GET_JOURNALS_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
+  getCostOfGoods() {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get(Constants.GET_COST_OF_GOODS_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
   addMajorGroup(majorGroups: MajorGroup[], id:string) {
     this.token = localStorage.getItem('auth_token');
     return this.http.post(Constants.ADD_JOURNAL_GROUP_URL + "?syncJobTypeId=" + id, majorGroups, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});

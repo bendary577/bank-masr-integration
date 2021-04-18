@@ -151,7 +151,7 @@ export class Constants {
     static COST_OF_GOODS_PAGE = 'costOfGoods';
     static COST_OF_GOODS_CONFIG_PAGE = 'costOfGoodsConfig';
 
-    static GET_COST_OF_GOODS_URL = environment.apiHost + '/getcostOfGoods';
+    static GET_COST_OF_GOODS_URL = environment.apiHost + '/getCostOfGoods';
 
 
     static POS_SALES_PAGE = 'posSales';

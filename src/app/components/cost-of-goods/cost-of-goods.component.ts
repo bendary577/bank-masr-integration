@@ -51,7 +51,7 @@ export class CostOfGoodsComponent implements OnInit {
     localStorage.setItem('getJournalsLoding', "true");
     CostOfGoodsComponent.getJournalsLoding = true;
 
-    this.journalService.getJournals().toPromise().then((res: any) => {
+    this.journalService.getCostOfGoods().toPromise().then((res: any) => {
       this.getSyncJobs(Constants.COST_OF_GOODS_SYNC);
 
       localStorage.setItem('getJournalsLoding', "false");
