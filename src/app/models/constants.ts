@@ -63,9 +63,6 @@ export class Constants {
 
     static GET_CREDIT_NOTE_URL = environment.apiHost + '/getCreditNotes';
 
-    static GET_BOOKED_TRANSFER_URL = environment.apiHost + '/getBookedTransfer';
-    static GET_BOOKED_TRANSFER_DETAILS_URL = environment.apiHost + '/getBookedTransferDetails';
-
     static GET_WASTE_GROUPS_URL = environment.apiHost + '/getWasteGroups';
     static GET_WASTE_URL = environment.apiHost + '/getWastage';
 
@@ -78,9 +75,6 @@ export class Constants {
 
     static GET_OVER_GROUPS_URL = environment.apiHost + '/getOverGroups';
     static MAP_ITEM_GROUPS_URL = environment.apiHost + '/mapItems';
-    static GET_JOURNALS_URL = environment.apiHost + '/getConsumption';
-    static ADD_JOURNAL_GROUP_URL = environment.apiHost + '/addConsumptionMajorGroup';
-
 
     static GET_POS_SALES_URL = environment.apiHost + '/getPOSSales';
     static GET_POS_SALES_TENDERS_URL = environment.apiHost + '/getTenders';
@@ -128,6 +122,8 @@ export class Constants {
     static CREDIT_NOTE_INFOR_CONFIG_PAGE = 'creditNotesSunConfig';
     static CREDIT_NOTE_SYNC = 'Credit Notes';
 
+    //////////////////////////////////////////////// Transfers  ////////////////////////////////////////////////////////
+
     static BOOKED_TRANSFER_PAGE = 'bookedTransfers';
     static BOOKED_TRANSFER_INFOR_PAGE = 'bookedTransfersSun';
     static BOOKED_TRANSFER_CONFIG_PAGE = 'bookedTransfersConfig';
@@ -135,11 +131,28 @@ export class Constants {
     static BOOKED_TRANSFER_DETAILS_PAGE = 'bookedTransfersDetails';
     static BOOKED_TRANSFER_SYNC = 'Booked Transfers';
 
+    static GET_BOOKED_TRANSFER_URL = environment.apiHost + '/getBookedTransfer';
+    static GET_BOOKED_TRANSFER_DETAILS_URL = environment.apiHost + '/getBookedTransferDetails';
+
+    //////////////////////////////////////////////// Consumption  ////////////////////////////////////////////////////////
+
     static CONSUMPTION_SYNC = 'Consumption';
     static CONSUMPTION_PAGE = 'consumption';
     static CONSUMPTION_CONFIG_PAGE = 'consumptionConfig';
     static CONSUMPTION_INFOR_PAGE = 'consumptionSun';
     static CONSUMPTION_SUN_CONFIG_PAGE = 'consumptionSunConfig';
+
+    static GET_JOURNALS_URL = environment.apiHost + '/getConsumption';
+    static ADD_JOURNAL_GROUP_URL = environment.apiHost + '/addConsumptionMajorGroup';
+
+    //////////////////////////////////////////////// Cost of Goods  //////////////////////////////////////////////////////
+
+    static COST_OF_GOODS_SYNC = 'Cost of Goods';
+    static COST_OF_GOODS_PAGE = 'costOfGoods';
+    static COST_OF_GOODS_CONFIG_PAGE = 'costOfGoodsConfig';
+
+    static GET_COST_OF_GOODS_URL = environment.apiHost + '/getcostOfGoods';
+
 
     static POS_SALES_PAGE = 'posSales';
     static POS_SALES_INFOR_PAGE = 'posSalesSun';

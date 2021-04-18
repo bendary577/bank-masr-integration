@@ -95,6 +95,9 @@ export class SyncJobsconfigComponent implements OnInit {
         this.router.navigate([Constants.CONSUMPTION_CONFIG_PAGE]);
       }
     }
+    else if (syncJobType.name == Constants.COST_OF_GOODS_SYNC) {
+        this.router.navigate([Constants.COST_OF_GOODS_CONFIG_PAGE]);
+    }
     else if (syncJobType.name == Constants.BOOKED_TRANSFER_SYNC) {
       if (this.accountERD == Constants.SUN_ERD || this.accountERD == Constants.EXPORT_TO_SUN_ERD) {
         this.router.navigate([Constants.BOOKED_TRANSFER_INFOR_CONFIG_PAGE]);

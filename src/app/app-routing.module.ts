@@ -60,6 +60,8 @@ import { ExpensesDetailsReportComponent } from './components/expenses-details-re
 import { ExpensesDetailsReportConfigComponent } from './components/expenses-details-report-config/expenses-details-report-config.component';
 import { ManageSubGroupComponent } from './components/manage-sub-group/manage-sub-group.component';
 import { SimphonyDiscountMapingComponent } from './components/simphony-discount-maping/simphony-discount-maping.component';
+import { CostOfGoodsComponent } from './components/cost-of-goods/cost-of-goods.component';
+import { CostOfGoodsConfigComponent } from './components/cost-of-goods-config/cost-of-goods-config.component';
 
 
 const routes: Routes = [
@@ -109,6 +111,9 @@ const routes: Routes = [
 
   { path: Constants.CONSUMPTION_INFOR_PAGE , component: JournalInforComponent  , canActivate:[AuthGuardService]},
   { path: Constants.CONSUMPTION_SUN_CONFIG_PAGE , component: JournalsInforConfigurationsComponent  , canActivate:[AuthGuardService]},
+
+  { path: Constants.COST_OF_GOODS_PAGE , component: CostOfGoodsComponent  , canActivate:[AuthGuardService]},
+  { path: Constants.COST_OF_GOODS_CONFIG_PAGE , component: CostOfGoodsConfigComponent  , canActivate:[AuthGuardService]},
 
   { path: Constants.POS_SALES_INFOR_PAGE , component: PosSalesInforComponent  , canActivate:[AuthGuardService]},
   { path: Constants.POS_SALES_INFOR_CONFIG_PAGE , component: PosSalesInforConfigurationComponent  , canActivate:[AuthGuardService]},
