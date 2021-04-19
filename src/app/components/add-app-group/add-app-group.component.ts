@@ -32,14 +32,11 @@ export class AddAppGroupComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data) { }
 
   ngOnInit() {
-    if(this.authService.generalSettings != null){
-      this.discountRates = this.authService.generalSettings.discountRates;
-    }else{
-      this.getGeneralSettings();
-    }
 
+    this.getGeneralSettings();
+    
     if(this.data["inParent"] == true){
-      this.getGroups(true, "");
+      this.getGroups(true, ""); 
     }
 
     if (this.data != undefined && this.data["parentGroup"] != null){
