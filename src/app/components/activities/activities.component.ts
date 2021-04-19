@@ -124,10 +124,12 @@ export class ActivitiesComponent implements OnInit {
 
   getTransactions(time){
 
+    this.transactionList.transactionData = [];
     this.transactionList.showLoading = true;
     this.loyaltyService.getTransactions( Constants.REDEEM_VOUCHER, time).toPromise().then((res: any) => {
       this.transactionList.transactionData = res;
       this.transactionList.showLoading = false;
+
     }).catch(err => {
       this.transactionList.showLoading = false;
       let message = "";

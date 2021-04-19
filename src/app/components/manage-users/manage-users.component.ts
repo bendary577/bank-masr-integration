@@ -66,7 +66,7 @@ export class ManageUsersComponent implements OnInit {
       this.usersList.showLoading = false;
 
       let message = "User deleted successfully.";
-      if(!flage){
+      if(flage == 'false'){        
         message = "User restored successfully.";
       }
 

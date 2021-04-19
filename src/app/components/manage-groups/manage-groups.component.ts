@@ -139,7 +139,7 @@ export class ManageGroupsComponent implements OnInit {
 
         if(res.parentGroup == undefined)
         res.parentGroup = new Group();
-
+  
         this.loyaltyService.addAppGroups(true, res.name, res.description, res.discountId,
           res.parentGroup.id, res.image, "").then((result: any) => {
                         this.groupsList.showLoading = false;

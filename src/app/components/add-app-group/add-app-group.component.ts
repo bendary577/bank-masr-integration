@@ -119,7 +119,7 @@ export class AddAppGroupComponent implements OnInit {
       this.dialogRef.close({
         name: this.form.controls.name.value,
         description: this.form.controls.description.value,
-        discountId: this.form.controls.discountId.value.discountId,
+        discountId: this.form.controls.discountId.value,
         discountRate: this.form.controls.discountId.value.discountRate,
         parentGroup: this.form.controls.parentGroup.value,
         image: this.srcResult

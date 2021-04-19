@@ -88,13 +88,21 @@ export class UsersComponent implements OnInit {
           this.usersList.selected = [];
           let message = "";
           if(err.status === 401){
+            console.log(err);
+            
             message = ErrorMessages.SESSION_EXPIRED;
             this.sidNav.Logout();
           } else if (err.error.message){
+                        console.log(err);
+
             message = err.error.message;
           } else if (err.message){
+                        console.log(err);
+
             message = err.message;
           } else {
+                        console.log(err);
+
             message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
           }
           this.snackBar.open(message, null, {

@@ -9,7 +9,7 @@
 
     <br>
     
-    <ngx-datatable class="material" [loadingIndicator]="usersList.showLoading" [messages]="usersList.messages"
+    <ngx-datatable class="material" [loadingIndicator]="usersList.showLoading" [messages]="usersList.messages" style="width : 95%;"
     [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
      [rows]="usersList.usersData" [selected]="usersList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
     (select)='onSelect($event)' [scrollbarH]="true">

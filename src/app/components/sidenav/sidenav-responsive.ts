@@ -12,6 +12,7 @@ import { OperationTypesService } from 'src/app/services/OperationTypes/operation
 import { GeneralSettings } from 'src/app/models/GeneralSettings';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { AccountService } from 'src/app/services/account/account.service';
 
 /** @title Responsive sidenav */
 @Component({
@@ -26,11 +27,20 @@ export class SidenavResponsive implements OnDestroy,OnInit {
   syncJobTypes: SyncJobType[] = [];
   operationTypes: SyncJobType[] = [];
   applications: Application[] = [];
+  generalSettings: GeneralSettings;
+  account: Account;
+  accountCredentials: [] = [];
+  simphonyLocations:[];
+  costCenterAccountMapping:[];
+  suppliers:[];
+  overGroups:[];
+  discountRates:[];
+
   private _mobileQueryListener: () => void;
  
   constructor( changeDetectorRef: ChangeDetectorRef,
               private router: Router, media: MediaMatcher, location: Location, private _location: Location,
-              public snackBar: MatSnackBar,
+              public snackBar: MatSnackBar, public accountService: AccountService,
               private syncJobService: SyncJobService, public operationTypeService: OperationTypesService,
               private generalSettingsService: GeneralSettingsService, private authService: AuthService) {
 
@@ -59,10 +69,11 @@ export class SidenavResponsive implements OnDestroy,OnInit {
 
   ngOnInit(): void {
     if (this.shouldRun == true) {
+      this.getGeneralSettings();
       this.getApplication();
       this.getSyncJobTypes();
       this.getOperationTypes();
-      this.getGeneralSettings();
+      this.getAccount();
     }
   }
 
@@ -101,8 +112,18 @@ export class SidenavResponsive implements OnDestroy,OnInit {
     });
   }
 
+  getAccount() {
+    this.accountService.getAccount().toPromise().then((res: any) => {
+      this.account = res;
+      this.accountCredentials = this.account["accountCredentials"];
+    }).catch(err => {''
+      console.error(err);
+    });
+  }
+
   getGeneralSettings() {
     this.generalSettingsService.getGeneralSettings().then((res) => {
+      
       this.authService.generalSettings = res as GeneralSettings;
     }).catch(err => {
       let message = "";
