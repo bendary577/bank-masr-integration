@@ -41,11 +41,10 @@
         <mat-card class="stat-card">
             <mat-card-content>
                 <h2>Total Spend</h2>
-                <br>
-
                 <form class="my-form">
                     <div class="row">
                         <div class="two-column" style="text-align: left;">
+                            <button class="filter-btn" (click)="totalSpend('Totoal')" mat-raised-button>Total</button>
                             <button class="filter-btn" (click)="totalSpend('Today')" mat-raised-button>Today</button>
                             <button class="filter-btn" (click)="totalSpend('Last Week')" mat-raised-button>Last Week</button>
                             <button class="filter-btn" (click)="totalSpend('Last Month')" mat-raised-button>Last Month</button>
@@ -92,7 +91,7 @@
 
         <ngx-datatable-column name="Transaction Date">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.transactionDate | date: 'dd/MM/yyyy hh:mm:ss' }}
+                {{row.transactionDate | date: 'dd/MM/yyyy HH:mm:ss' }}
             </ng-template>
         </ngx-datatable-column>
 

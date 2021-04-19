@@ -22,12 +22,11 @@ export class LoyaltyService {
   }
 
 
-  addAppGroups(flage, name, description, discountRate, discountId, parentGroupId, image, groupId) {
+  addAppGroups(flage, name, description, discountId, parentGroupId, image, groupId) {
     this.token = localStorage.getItem('auth_token');
     const formData: FormData = new FormData();
     formData.append('name', name);
     formData.append('description', description);
-    formData.append('discountRate', discountRate);
     formData.append('discountId', discountId);
     formData.append('parentGroupId', parentGroupId);
     formData.append('image', image);
@@ -35,9 +34,9 @@ export class LoyaltyService {
     return this.http.post(Constants.ADD_APP_GROUP_URL + "?addFlag=" + flage , formData, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
   
-  deleteAppGroups(flage, groups) {
+  deleteAppGroups(flage, groups, withUsers, parentGroupId) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.put(Constants.Delete_APP_GROUPS_URL + "?addFlag=" + flage  , groups, {
+    return this.http.put(Constants.Delete_APP_GROUPS_URL + "?addFlag=" + flage  + "&withUsers=" + withUsers + "&parentGroupId=" + parentGroupId , groups, {
        headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
 
@@ -69,6 +68,13 @@ export class LoyaltyService {
     return this.http.post(Constants.ADD_APP_USER_URL  + "?addFlag=" + flage , formData, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
 
+  resendQRCode(userId) {
+    this.token = localStorage.getItem('auth_token');
+    const formData: FormData = new FormData();
+    formData.append('userId', userId);
+    return this.http.post(Constants.RESEND_QR_CODE, formData, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+  }
+
   deleteAppUsers(flage, users) {
     this.token = localStorage.getItem('auth_token');
     return this.http.put(Constants.Delete_APP_USERS_URL + "?addFlag=" + flage , users, {
@@ -76,9 +82,9 @@ export class LoyaltyService {
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  getTransactions(transactionType) {
+  getTransactions(transactionType, time) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get(Constants.GET_TRANSACTION_URL + "?transactionType=" + transactionType , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+    return this.http.get(Constants.GET_TRANSACTION_URL + "?transactionType=" + transactionType + "&time=" + time   , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
   getTotalSpend(date) {

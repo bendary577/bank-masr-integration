@@ -14,11 +14,10 @@ import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
 export class AddAppUserComponent implements OnInit {
   public form: FormGroup;
   newUser = new ApplicationUser();
-  selectedCompany: Company;
-  selectedGroup: Group;
+  selectedGroup: String;
   srcResult: any;
   imageUploded: boolean = false;
-
+  inUpdate = false;
   groups: Group[] = [];
 
   constructor(private formBuilder: FormBuilder, public snackBar: MatSnackBar, 
@@ -27,12 +26,14 @@ export class AddAppUserComponent implements OnInit {
  
   ngOnInit() {
     this.getGroups();
-    if (this.data["user"] != null && this.data != undefined){
+    if (this.data != undefined && this.data["user"] != null){
+      this.inUpdate = true;
       this.newUser = this.data["user"];
+      this.selectedGroup = this.newUser.group.id;
       this.form = this.formBuilder.group({
         name: [this.newUser.name, Validators.required],        
-        email: [this.newUser.email],
-        group: [this.newUser.group, Validators.required]
+        email: [this.newUser.email, [Validators.required, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
+        group: [this.newUser.group.id, Validators.required]
       });
     }else{
       this.form = this.formBuilder.group({

@@ -133,6 +133,7 @@ import { ManageSubGroupComponent } from './components/manage-sub-group/manage-su
 import { SimphonyDiscountMapingComponent } from './components/simphony-discount-maping/simphony-discount-maping.component';
 import { CostOfGoodsComponent } from './components/cost-of-goods/cost-of-goods.component';
 import { CostOfGoodsConfigComponent } from './components/cost-of-goods-config/cost-of-goods-config.component';
+import { DeleteAppGroupComponent } from './components/delete-app-group/delete-app-group.component';
 
 @NgModule({
   declarations: [
@@ -215,6 +216,7 @@ import { CostOfGoodsConfigComponent } from './components/cost-of-goods-config/co
     AddAppCompanyComponent,
     AddAppGroupComponent,
     AddAppUserComponent,
+    DeleteAppGroupComponent,
     ActivitiesComponent,
     WlsIntegrationConfigComponent,
     WlsIntegrationComponent,
@@ -280,7 +282,7 @@ import { CostOfGoodsConfigComponent } from './components/cost-of-goods-config/co
       AddSimphonyLocationComponent, AddWebServiceInvokerComponent, AddLocationComponent,
       AddMajorGroupChildComponent, AddSalesStatisticsComponent, AddSupplierComponent,
     // Loyalty
-    AddAppCompanyComponent, AddAppGroupComponent, AddAppUserComponent, DialogComponent, 
+    AddAppCompanyComponent, AddAppGroupComponent, AddAppUserComponent, DialogComponent, DeleteAppGroupComponent
     ]
 })
 export class AppModule { }

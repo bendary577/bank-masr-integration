@@ -26,6 +26,14 @@
             </mat-form-field>
         </div>
 
+        <div class="form-group" style="padding-top: 5%;">
+            <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="csvInputChange($event)" accept="image/*" />
+            <button class="form-button" mat-flat-button color="primary" (click)="csvInput.click()" >
+                <img class="form-b-img" src="../../../assets/photos.png">
+                Choose Image</button>
+            <div [hidden]="!imageUploded">Image uploaded successfully.</div>
+         </div>
+
         <span class="erdTitle">Oracle Inventory Credentials </span>
 
         <div class="form-group">

@@ -10,7 +10,7 @@
 
         <div class="form-group">
             <mat-form-field class="example-full-width">
-                <input matInput placeholder="Email" formControlName="email">
+                <input matInput placeholder="Email" formControlName="email" >
                 <mat-error *ngIf="form.controls.email.hasError('pattern')">
                     Email must be well formed.
                   </mat-error>
@@ -20,8 +20,8 @@
         <div class="form-group">
             <mat-form-field class="example-full-width">
                 <mat-select matInput id="groups" name="groups" placeholder="Group" formControlName="group">
-                    <mat-option [value]=c *ngFor="let c of groups">{{c.name}}</mat-option>
                     <mat-option></mat-option>
+                    <mat-option [value]=c.id *ngFor="let c of groups">{{c.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
@@ -37,6 +37,9 @@
     </form>
 </div>
 <div mat-dialog-actions>
-    <button mat-button cdkFocusInitial (click)="onSaveClick()" >Save</button>
+    <button mat-button cdkFocusInitial (click)="onSaveClick()" >
+        <label [hidden] = "inUpdate">Save</label> 
+        <label [hidden] = "!inUpdate">Update</label> 
+        </button>
     <button mat-button (click)="onNoClick()">Cancel</button>
 </div>
