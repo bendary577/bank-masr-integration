@@ -23,11 +23,13 @@
                       <thead>
                           <th style="margin-right: 10;">Revenue Center Name</th>
                           <th>Account Code</th>
+                          <th>Require Analysis</th>
                     </thead>
                     <tbody>
                          <tr *ngFor="let row of majorGroup.revenueCenters">
                             <td style="text-align: center;">{{row.revenueCenter}}</td>
                             <td style="text-align: center;">{{row.accountCode}}</td>
+                            <td style="text-align: center;">{{row.requireAnalysis}}</td>
                         </tr>
                     </tbody>
                 </table>
