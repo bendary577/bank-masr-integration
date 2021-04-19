@@ -5,6 +5,7 @@ export class RevenueCenter {
     revenueCenter: string;
     accountCode: string;
     discountAccount: string;
+    requireAnalysis: boolean;
 
     orderTypes: OrderType[];
 }
