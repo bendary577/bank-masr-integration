@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
             <mat-form-field class="example-full-width">
-                <input matInput placeholder="User Name" formControlName="username" required maxlength="25" minlength="5">
+                <input matInput placeholder="User Name" formControlName="username" required maxlength="50" minlength="5">
                 <mat-error *ngIf="form.controls.username.hasError('required')">
                     Username is required.
                   </mat-error>
@@ -31,12 +31,12 @@
         </div>
         <div class="form-group">
             <mat-form-field class="example-full-width">
-                <input type="password" matInput placeholder="Password" formControlName="password" required minlength="8">
+                <input type="password" matInput placeholder="Password" formControlName="password" required minlength="7">
                 <mat-error *ngIf="form.controls.password.hasError('required')">
                     Password is required.
                   </mat-error>
                   <mat-error *ngIf="form.controls.username.hasError('minlength')">
-                    Password lenght must be more than 7 characters.
+                    Password lenght must be more than 6 characters.
                   </mat-error>
             </mat-form-field>
         </div>
