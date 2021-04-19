@@ -126,14 +126,17 @@ export class SidenavResponsive implements OnDestroy,OnInit {
       
       this.authService.generalSettings = res as GeneralSettings;
     }).catch(err => {
-      let message = "";
-      if (err.error){
-        message = err.error;
+      let message = "Error happend, Please try again.";
+      if(err.status === 401){
+         message = ErrorMessages.SESSION_EXPIRED;
+        this.Logout();
+
+      } else if (err.error.message){
+        message = err.error.message;
       } else if (err.message){
         message = err.message;
-      } else {
-        message = ErrorMessages.FAILED_TO_GET_CONFIG;
       }
+
 
       this.snackBar.open(message , null, {
         duration: 3000,
