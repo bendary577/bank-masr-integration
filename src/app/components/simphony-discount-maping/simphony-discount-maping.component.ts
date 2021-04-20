@@ -105,6 +105,24 @@ export class SimphonyDiscountMapingComponent implements OnInit {
      }
   }
 
+  deleteRate(){
+
+    if(this.newRateCode.discountId  && this.newRateCode.discountRate){
+      this.newRateCode.deleted = false;
+
+       this.discountRatesList.discountRatesData.push(this.newRateCode);
+       this.newRateCode = new SimphonyDiscount(0, 0);
+ 
+       this.discountRatesList.discountRatesData = [...this.discountRatesList.discountRatesData];
+     } else {
+       this.snackBar.open('Please fill all dicount rate code fields.', null, {
+         duration: 2000,
+         horizontalPosition: 'center',
+         panelClass:"my-snack-bar-fail"
+       });
+     }
+  }
+
   onSaveClick(){
     this.spinner.show();
 

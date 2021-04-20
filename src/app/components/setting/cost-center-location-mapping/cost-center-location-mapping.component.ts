@@ -164,6 +164,7 @@ export class CostCenterLocationMappingComponent implements OnInit {
         this.newRevenueCenter = {};
         this.newRevenueCenter.checked = true;
         this.newRevenueCenter.revenueCenter = res.name;
+        this.newRevenueCenter.revenueCenterId = res.id;
 
         if(!this.generalSettings.revenueCenters){
           this.generalSettings.revenueCenters = [];
@@ -209,7 +210,6 @@ export class CostCenterLocationMappingComponent implements OnInit {
       }
     });
   }
-
 
   onSaveClick(): void {
     this.spinner.show();

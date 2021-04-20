@@ -26,13 +26,15 @@ export class AddRevenueCenterComponent implements OnInit {
       });
     }else{
       this.dialogRef.close({
-        name: this.form.controls.name.value,
+        id: this.form.controls.id.value,
+        name: this.form.controls.name.value
       });
     }
   }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
+      id: ['', Validators.required],
       name: ['', Validators.required],
     });
   }
