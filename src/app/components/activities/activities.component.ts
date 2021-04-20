@@ -46,6 +46,10 @@ export class ActivitiesComponent implements OnInit {
     this.totalSpend("Total");
   }
 
+  refresh() {
+    location.reload();
+  }
+  
   totalSpend(date){
     this.spinner.show();
     this.loyaltyService.getTotalSpend(date).toPromise().then((res: any) => {

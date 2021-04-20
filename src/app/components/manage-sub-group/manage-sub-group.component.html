@@ -1,6 +1,9 @@
 <div class="main" >
     <div class="header" style="margin-bottom: 15px;">
-        <p *ngIf="!inParent" class="history" >Parent Group Name : {{parentGroupName}} </p>
+        <button mat-flat-button class="button-back" (click)="backClicked()">Go Back</button>
+        <button mat-flat-button class="button-back" (click)="refresh()">Refresh</button>
+
+        <!-- <div *ngIf="!inParent" class="parentGroupName" >Parent Group : {{parentGroupName}} </div> -->
 
         <button mat-flat-button (click)="addSubGroupDialog()">Add Supgroup</button>
         <button mat-flat-button (click)="updateSubGroupDialog()" [disabled]="validateUpdateGroup()">Update Supgroup</button>
@@ -8,7 +11,7 @@
         <button mat-flat-button (click)="deleteGroups('false')" [disabled]="validateRestoreGroup()">Restore Supgroup</button>
     </div>   
 
-    <ngx-datatable class="material" [loadingIndicator]="groupsList.showLoading" [messages]="groupsList.messages" style="height: 65%;"
+    <ngx-datatable class="material" [loadingIndicator]="groupsList.showLoading" [messages]="groupsList.messages"
     [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
      [rows]="groupsList.groupsData" [selected]="groupsList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
     (select)='onSelect($event)' [scrollbarH]="true">
@@ -55,8 +58,6 @@
         </ngx-datatable-column>
     </ngx-datatable>
     <br>
-    <div class="card-back">
-        <button mat-flat-button (click)="backClicked()" [hidden]="inParent">Go Back</button>
-    </div> 
+
 </div>
 

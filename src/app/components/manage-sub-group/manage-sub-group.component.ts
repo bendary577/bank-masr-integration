@@ -58,6 +58,10 @@ export class ManageSubGroupComponent implements OnInit {
   backClicked() {
     this._location.back();
   }
+    
+  refresh() {
+    location.reload();
+  }
 
   onSelect({selected}) {
     this.groupsList.selected.splice(0, this.groupsList.selected.length);

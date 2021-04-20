@@ -68,6 +68,38 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  deleteUsers(flage){
+    this.usersList.showLoading = true;
+    this.authService.deleteUsers(flage, this.usersList.selected[0]).then((res: any) => {
+      
+      this.getUsers();
+      this.usersList.selected = [];
+      this.usersList.showLoading = false;
+
+      let message = "User deleted successfully.";
+      if(flage == 'false'){        
+        message = "User restored successfully.";
+      }
+
+      this.snackBar.open(message, null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-success"
+      });
+    }).catch(err => {
+      this.usersList.showLoading = false;
+      this.usersList.selected = [];
+      this.getUsers();
+      let message = "Can't delete user.";
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
+      });
+    });
+  }
+
+
   openAddDialog(): void {
     const dialogRef = this.dialog.open(AddUserComponent, {
       width: '550px'
@@ -79,6 +111,7 @@ export class UsersComponent implements OnInit {
         this.authService.addUser(res, true).toPromise().then(result => {
           this.usersList.selected = [];
           this.getUsers();
+          this.spinner.hide();
           this.snackBar.open("User Added successfully.", null, {
             duration: 2000,
             horizontalPosition: 'right',
@@ -86,23 +119,16 @@ export class UsersComponent implements OnInit {
           });
         }).catch(err => {
           this.usersList.selected = [];
+          this.spinner.hide();
           let message = "";
-          if(err.status === 401){
-            console.log(err);
-            
+          if(err.status === 401){            
             message = ErrorMessages.SESSION_EXPIRED;
             this.sidNav.Logout();
           } else if (err.error.message){
-                        console.log(err);
-
             message = err.error.message;
           } else if (err.message){
-                        console.log(err);
-
             message = err.message;
           } else {
-                        console.log(err);
-
             message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
           }
           this.snackBar.open(message, null, {
@@ -127,6 +153,7 @@ export class UsersComponent implements OnInit {
         this.authService.addUser(res, false).toPromise().then(result => {
           this.getUsers();
           this.usersList.selected = [];
+          this.spinner.hide();
           this.snackBar.open("User updated successfully.", null, {
             duration: 2000,
             horizontalPosition: 'right',
@@ -134,6 +161,7 @@ export class UsersComponent implements OnInit {
           });
         }).catch(err => {
           this.usersList.selected = [];
+          this.spinner.hide();
           let message = "";
           if(err.status === 401){
             message = ErrorMessages.SESSION_EXPIRED;
@@ -153,6 +181,62 @@ export class UsersComponent implements OnInit {
         });
       }
     });
+  }
+
+  validateDeleteUsers(){
+    if(this.usersList.selected.length != 1){
+      return true;
+    }
+
+    // check if there any deleted user selected
+    var i;
+    for (i = 0; i < this.usersList.selected.length; i++) {
+      let usersList = this.usersList.selected[i] as User;
+
+      if (usersList.deleted) {
+          return true;
+      }
+    }
+
+    return false;
+  }
+
+  validateRestoreUsers(){
+    if(this.usersList.selected.length != 1){
+      return true;
+    }
+
+    // check if there any deleted user selected
+    var i;
+    for (i = 0; i < this.usersList.selected.length; i++) {
+      let usersList = this.usersList.selected[i] as User;
+
+      if (!usersList.deleted) {
+          return true;
+      }
+
+      // if(usersList.group.deleted){
+      //   return true;
+      // }
+
+    return false;
+    }
+  }
+
+  validateUpdateUser(){
+    if(this.usersList.selected.length != 1){
+      return true;
+    }
+
+    if(this.usersList.selected.length == 1){
+      let updatedUser = this.usersList.selected[0];
+    
+      if(updatedUser.deleted){
+        return true;
+      }
+    }
+
+    return false;
   }
 
 }

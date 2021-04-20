@@ -47,9 +47,8 @@ export class ManageGroupsComponent implements OnInit {
       this.getGroups(this.inParent, this.groupId);
   }
 
-  
-  backClicked() {
-    this._location.back();
+  refresh() {
+    location.reload();
   }
   
   openSupGroup(group: Group){

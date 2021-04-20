@@ -19,7 +19,8 @@
                     </mat-form-field>
 
                     <button mat-flat-button (click)="addRateCode()">Add</button>
-                    <button mat-flat-button class="deleteBtn" (click)="addRateCode()" [disabled]="discountRatesList.selected.length == 0">Delete</button>
+                    <button mat-flat-button class="deleteBtn" (click)="deleteRateCode(false)" [disabled]="discountRatesList.selected.length != 1">Delete</button>
+                    <button mat-flat-button class="deleteBtn" (click)="deleteRateCode(true)" [disabled]="discountRatesList.selected.length != 1">Restore</button>
                 </div>
             </form>
         </div>
@@ -50,6 +51,14 @@
                     <input matInput placeholder="eg. 5 %" [(ngModel)]="row.discountRate">
                 </ng-template>
             </ngx-datatable-column>
+
+            <ngx-datatable-column name="State">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <label *ngIf="!row.deleted" class="active-state">active</label>
+                    <label *ngIf="row.deleted" class="deleted-state">deleted</label>
+                </ng-template>
+            </ngx-datatable-column>
+
         </ngx-datatable>
     </mat-expansion-panel>
 

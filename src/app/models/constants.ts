@@ -21,7 +21,8 @@ export class Constants {
 
     static GET_USERS = environment.apiHost + '/getUsers';
     static ADD_USER = environment.apiHost + '/addAdminUser';
-
+    static Delete_USERS_URL = environment.apiHost + '/deleteUsers';
+    
     static ADD_INVOKER_USER = environment.apiHost + '/addInvokerUser';
     static GET_INVOKER_USERS = environment.apiHost + '/getInvokerUser';
 

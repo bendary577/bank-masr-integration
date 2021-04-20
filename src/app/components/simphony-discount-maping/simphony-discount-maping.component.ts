@@ -89,7 +89,23 @@ export class SimphonyDiscountMapingComponent implements OnInit {
     console.log({
       discount: this.newRateCode
     })
+
     if(this.newRateCode.discountId  && this.newRateCode.discountRate){
+
+      var i;
+      for (i = 0; i < this.discountRatesList.discountRatesData.length; i++) {
+        let discountRatesData = this.discountRatesList.discountRatesData[i] as SimphonyDiscount;
+  
+        if (discountRatesData.discountId == this.newRateCode.discountId) {
+          this.snackBar.open('This discount ID is duplicate with exist one.', null, {
+            duration: 2000,
+            horizontalPosition: 'center',
+            panelClass:"my-snack-bar-fail"
+          });
+            return ;
+        }
+      }
+
       this.newRateCode.deleted = false;
 
        this.discountRatesList.discountRatesData.push(this.newRateCode);
@@ -102,25 +118,27 @@ export class SimphonyDiscountMapingComponent implements OnInit {
          horizontalPosition: 'center',
          panelClass:"my-snack-bar-fail"
        });
-     }
+    }
   }
 
-  deleteRate(){
-
-    if(this.newRateCode.discountId  && this.newRateCode.discountRate){
-      this.newRateCode.deleted = false;
-
-       this.discountRatesList.discountRatesData.push(this.newRateCode);
-       this.newRateCode = new SimphonyDiscount(0, 0);
- 
-       this.discountRatesList.discountRatesData = [...this.discountRatesList.discountRatesData];
-     } else {
-       this.snackBar.open('Please fill all dicount rate code fields.', null, {
-         duration: 2000,
-         horizontalPosition: 'center',
-         panelClass:"my-snack-bar-fail"
-       });
-     }
+  deleteRateCode(addFlag){
+    if(addFlag){
+      var i;
+      for (i = 0; i < this.discountRatesList.discountRatesData.length; i++) {
+        if (this.discountRatesList.discountRatesData[i].discountId == this.discountRatesList.selected[0].discountId) {
+          this.discountRatesList.discountRatesData[i].deleted = false;
+        }
+        this.discountRatesList.discountRatesData = [...this.discountRatesList.discountRatesData];
+      }
+    }else{
+      var i;
+      for (i = 0; i < this.discountRatesList.discountRatesData.length; i++) {
+        if (this.discountRatesList.discountRatesData[i].discountId == this.discountRatesList.selected[0].discountId) {
+          this.discountRatesList.discountRatesData[i].deleted = true;
+        }
+        this.discountRatesList.discountRatesData = [...this.discountRatesList.discountRatesData];
+      }
+    }
   }
 
   onSaveClick(){
@@ -158,7 +176,6 @@ export class SimphonyDiscountMapingComponent implements OnInit {
         this.spinner.hide();
       });
     } catch (e) {
-      console.log({error: e});
       this.snackBar.open('Failed to save simphony discount rates, Please try again.', null, {
         duration: 2000,
         horizontalPosition: 'center',

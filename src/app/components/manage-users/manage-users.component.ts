@@ -49,6 +49,10 @@ export class ManageUsersComponent implements OnInit {
     this.usersList.selected.push(...selected);
   }
 
+  refresh() {
+    location.reload();
+  }
+  
   getUsers(){
     this.usersList.showLoading = true;
     this.loyaltyService.getAppUsers().toPromise().then((res: any) => {

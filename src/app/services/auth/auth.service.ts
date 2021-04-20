@@ -42,4 +42,10 @@ export class AuthService {
     return this.http.post(Constants.ADD_USER + "?addFlag=" + addFlag , user, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
+  deleteUsers(flage, user) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.put(Constants.Delete_USERS_URL + "?addFlag=" + flage + "&userId=" + user.id , "", {
+       headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+  }
+
 }

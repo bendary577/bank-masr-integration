@@ -4,6 +4,7 @@ export class User {
     username: string;
     password: string;
     domain: string;
+    deleted: boolean;
  
     public constructor() { }
 
