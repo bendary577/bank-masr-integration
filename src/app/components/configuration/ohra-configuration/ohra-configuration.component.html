@@ -2,16 +2,6 @@
     <form class="my-form">
         <div>
             <mat-form-field class="example-full-width">
-                <mat-select matInput id="accountCode" name="accountCode" placeholder="Account code per"
-                    [(ngModel)]="syncJobType.configuration.accountCodePer">
-                    <mat-option value="OverGroups">Over Groups</mat-option>
-                    <mat-option value="CostCenters">Cost Centers</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-  
-        <div>
-            <mat-form-field class="example-full-width">
                 <mat-select matInput id="consumptionPerGroup" name="consumptionPerGroup" placeholder="Sync per"
                     [(ngModel)]="syncJobType.configuration.syncPerGroup">
                     <mat-option value="OverGroups">Over Groups</mat-option>
