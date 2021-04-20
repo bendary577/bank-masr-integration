@@ -33,7 +33,7 @@
                     </mat-nav-list>
                 </mat-expansion-panel>
 
-                <mat-expansion-panel [class.mat-elevation-z0]="true" dense *ngIf="syncJobTypes.length > 0">
+                <mat-expansion-panel [class.mat-elevation-z0]="true" dense *ngIf="operationTypes.length > 0">
                     <mat-expansion-panel-header>
                         Reports
                     </mat-expansion-panel-header>
@@ -67,7 +67,6 @@
                         </div>
 
                         <a mat-list-item (click)="snav.toggle()" routerLink="/simphonyDiscountMaping">Simphony Discount Mapping</a>
-                        <a mat-list-item (click)="snav.toggle()" routerLink="/setting">General Settings</a>
                         <a mat-list-item (click)="snav.toggle()" routerLink="/users">Users</a>
                     </mat-nav-list>
                 </mat-expansion-panel>

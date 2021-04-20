@@ -20,7 +20,7 @@ export class Constants {
     static UPDATE_ACCOUNT_SYNC_TYPES = environment.apiHost + '/updateAccountSyncTypes';
 
     static GET_USERS = environment.apiHost + '/getUsers';
-    static ADD_USER = environment.apiHost + '/addUser';
+    static ADD_USER = environment.apiHost + '/addAdminUser';
 
     static ADD_INVOKER_USER = environment.apiHost + '/addInvokerUser';
     static GET_INVOKER_USERS = environment.apiHost + '/getInvokerUser';
@@ -270,6 +270,7 @@ export class Constants {
     static UPDATE_APP_GROUP_URL = environment.apiHost  + '/updateApplicationGroup'
     static GET_APP_USERS_URL = environment.apiHost + '/getApplicationUsers';
     static ADD_APP_USER_URL = environment.apiHost + '/addApplicationUser';
+    static RESEND_QR_CODE = environment.apiHost + '/resendQRCode';
     static Delete_APP_USERS_URL = environment.apiHost + '/deleteApplicationUsers';
     static GET_TRANSACTION_URL = environment.apiHost + '/transaction/getTransactions';
     static GET_TOP_USERS_URL = environment.apiHost + '/getTopUser';

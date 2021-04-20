@@ -8,6 +8,7 @@ import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
 import { AddAppGroupComponent } from '../add-app-group/add-app-group.component';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import {Location} from '@angular/common';
+import { DeleteAppGroupComponent } from '../delete-app-group/delete-app-group.component';
 
 @Component({
   selector: 'app-manage-sub-group',
@@ -54,7 +55,6 @@ export class ManageSubGroupComponent implements OnInit {
       this.getGroups(this.inParent, this.groupId);
   }
 
-  
   backClicked() {
     this._location.back();
   }
@@ -75,8 +75,20 @@ export class ManageSubGroupComponent implements OnInit {
   }
 
   deleteGroups(flage){
+
+    const dialogRef = this.dialog.open(DeleteAppGroupComponent, {
+      width: '550px',
+      data: { isDelete: flage}
+  });
+  
+    dialogRef.afterClosed().subscribe(res => {
+      
     this.groupsList.showLoading = true;
-    this.loyaltyService.deleteAppGroups(flage, this.groupsList.selected).then((res: any) => {
+    
+    if(res){
+      if(res.parentGroup == undefined)
+      res.parentGroup = new Group();
+    this.loyaltyService.deleteAppGroups(flage, this.groupsList.selected, true, "").then((res: any) => {
       this.getGroups(this.inParent, this.groupId);
       this.groupsList.showLoading = false;
       this.groupsList.selected = [];
@@ -108,6 +120,10 @@ export class ManageSubGroupComponent implements OnInit {
         panelClass:"my-snack-bar-success"
       });
     });
+  }else{
+    this.groupsList.showLoading = false;
+  }
+  });
   }
 
   addSubGroupDialog(){
@@ -123,7 +139,7 @@ export class ManageSubGroupComponent implements OnInit {
       if(res.parentGroup == undefined)
       res.parentGroup = new Group();
 
-      this.loyaltyService.addAppGroups(true, res.name, res.description, res.discountRate, res.discountId,
+      this.loyaltyService.addAppGroups(true, res.name, res.description, res.discountId,
         res.parentGroup.id, res.image, "").then((result: any) => {
                       this.groupsList.showLoading = false;
         this.groupsList.selected = [];
@@ -174,7 +190,7 @@ export class ManageSubGroupComponent implements OnInit {
       if(res.parentGroup == undefined)
       res.parentGroup = new Group();
 
-      this.loyaltyService.addAppGroups(false, res.name, res.description, res.discountRate, res.discountId,
+      this.loyaltyService.addAppGroups(false, res.name, res.description, res.discountId,
         res.parentGroup.id, res.image, this.groupsList.selected[0].id).then((result: any) => {
                       this.groupsList.showLoading = false;
         this.groupsList.selected = [];

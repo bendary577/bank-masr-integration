@@ -18,9 +18,11 @@ export class AddAppGroupComponent implements OnInit {
   public form: FormGroup;
   groups: Group[];
   group: Group = new Group();
+  slectedDiscount: number;
   parentGroup: Group;
   srcResult: any;
   imageUploded: boolean = false;
+  inUpdate = false;
 
   discountRates = [];
 
@@ -32,14 +34,11 @@ export class AddAppGroupComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data) { }
 
   ngOnInit() {
-    if(this.authService.generalSettings != null){
-      this.discountRates = this.authService.generalSettings.discountRates;
-    }else{
-      this.getGeneralSettings();
-    }
 
+    this.getGeneralSettings();
+    
     if(this.data["inParent"] == true){
-      this.getGroups(true, "");
+      this.getGroups(true, ""); 
     }
 
     if (this.data != undefined && this.data["parentGroup"] != null){
@@ -47,12 +46,14 @@ export class AddAppGroupComponent implements OnInit {
     }
 
     if (this.data["group"] != null && this.data != undefined){
+      this.inUpdate = true;
       this.group = this.data["group"];
-
+      this.slectedDiscount = this.group.simphonyDiscount.discountId;
+      console.log(this.slectedDiscount)
       this.form = this.formBuilder.group({
         name: [this.group.name, [Validators.maxLength, Validators.required]],
         description: [this.group.description],
-        discountId: [new SimphonyDiscount(this.group.discountId, this.group.discountRate), [Validators.required]],
+        discountId: [this.group.simphonyDiscount.discountId, [Validators.required]],
         parentGroup: [this.parentGroup],
         image: this.srcResult
       });
@@ -126,13 +127,10 @@ export class AddAppGroupComponent implements OnInit {
         panelClass:"my-snack-bar-fail"
       });
     }else{
-      console.log({
-        discount: this.form.controls.discountId.value
-      })
       this.dialogRef.close({
         name: this.form.controls.name.value,
         description: this.form.controls.description.value,
-        discountId: this.form.controls.discountId.value.discountId,
+        discountId: this.form.controls.discountId.value,
         discountRate: this.form.controls.discountId.value.discountRate,
         parentGroup: this.form.controls.parentGroup.value,
         image: this.srcResult

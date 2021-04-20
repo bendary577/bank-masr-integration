@@ -67,7 +67,7 @@ export class ManageUsersComponent implements OnInit {
       this.usersList.showLoading = false;
 
       let message = "User deleted successfully.";
-      if(flage == 'false'){
+      if(flage == 'false'){        
         message = "User restored successfully.";
       }
 
@@ -80,16 +80,21 @@ export class ManageUsersComponent implements OnInit {
       this.usersList.showLoading = false;
       this.usersList.selected = [];
       this.getUsers();
-
-      let message = "Can't delete user, Please try agian.";
-      if(flage == 'false'){
-        message = "Can't restore user, Please try agian.";
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
       }
-
-      this.snackBar.open(message, null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-success"
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
       });
     });
   }
@@ -97,22 +102,14 @@ export class ManageUsersComponent implements OnInit {
   addUserDialog(){
     const dialogRef = this.dialog.open(AddAppUserComponent, {
         width: '550px',
-        data: {
-          user : this.usersList.selected[0]
-        }
+
     });
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
 
         this.usersList.showLoading = true;
-
-        this.updatedUser = new ApplicationUser();
-        this.updatedUser.name = res.name;
-        this.updatedUser.email = res.email;
-        this.updatedUser.group = res.group;
-
-        this.loyaltyService.addApplicationUser(true, res.name, res.email, res.group.id, res.image, "").then((result: any) => {
+        this.loyaltyService.addApplicationUser(true, res.name, res.email, res.group, res.image, "").then((result: any) => {
           this.loading = true;
           this.getUsers();
           this.newUser = new ApplicationUser();
@@ -164,14 +161,8 @@ export class ManageUsersComponent implements OnInit {
         this.usersList.showLoading = true;
         if(res.group == undefined)
         res.group = new Group();
-
-        this.updatedUser = this.usersList.selected[0];
-        this.updatedUser.name = res.name;
-        this.updatedUser.email = res.email;
-        this.updatedUser.group = res.group;
-        
-        this.loyaltyService.addApplicationUser(false, res.name, res.email, res.group.id, res.image,
-          this.usersList.selected[0].id).then((result: any) => {
+        this.loyaltyService.addApplicationUser(false, res.name, res.email, res.group, res.image,
+                                               this.usersList.selected[0].id).then((result: any) => {
             this.loading = false;
             this.usersList.showLoading = false;
             this.newUser = new ApplicationUser();
@@ -207,6 +198,44 @@ export class ManageUsersComponent implements OnInit {
           })
       }
     })
+  }
+
+  resendQRCode(){
+    this.usersList.showLoading = true;
+    this.loyaltyService.resendQRCode(this.usersList.selected[0].id).then((result: any) => {
+      this.loading = true;
+      this.getUsers();
+      this.newUser = new ApplicationUser();
+      this.usersList.showLoading = false;
+      this.usersList.selected = [];
+
+      this.snackBar.open("QR Code send successfully.", null, {
+        duration: 2000,
+        horizontalPosition: 'right',  
+        panelClass:"my-snack-bar-success"
+      });
+    }).catch(err => {
+      this.newUser = new ApplicationUser();
+      this.usersList.showLoading = false;
+
+      this.usersList.selected = [];
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
+      }
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
+      });
+    });
   }
 
   validateUpdateUser(){
@@ -256,9 +285,12 @@ export class ManageUsersComponent implements OnInit {
       if (!usersList.deleted) {
           return true;
       }
-    }
+
+      // if(usersList.group.deleted){
+      //   return true;
+      // }
 
     return false;
+    }
   }
-
 }
