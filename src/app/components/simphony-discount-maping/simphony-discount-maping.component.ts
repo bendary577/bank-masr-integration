@@ -121,25 +121,25 @@ export class SimphonyDiscountMapingComponent implements OnInit {
     }
   }
 
-  deleteRateCode(addFlag){
-    if(addFlag){
-      var i;
-      for (i = 0; i < this.discountRatesList.discountRatesData.length; i++) {
-        if (this.discountRatesList.discountRatesData[i].discountId == this.discountRatesList.selected[0].discountId) {
-          this.discountRatesList.discountRatesData[i].deleted = false;
-        }
-        this.discountRatesList.discountRatesData = [...this.discountRatesList.discountRatesData];
-      }
-    }else{
-      var i;
-      for (i = 0; i < this.discountRatesList.discountRatesData.length; i++) {
-        if (this.discountRatesList.discountRatesData[i].discountId == this.discountRatesList.selected[0].discountId) {
-          this.discountRatesList.discountRatesData[i].deleted = true;
-        }
-        this.discountRatesList.discountRatesData = [...this.discountRatesList.discountRatesData];
-      }
-    }
-  }
+  // deleteRateCode(addFlag){
+  //   if(addFlag){
+  //     var i;
+  //     for (i = 0; i < this.discountRatesList.discountRatesData.length; i++) {
+  //       if (this.discountRatesList.discountRatesData[i].discountId == this.discountRatesList.selected[0].discountId) {
+  //         this.discountRatesList.discountRatesData[i].deleted = false;
+  //       }
+  //       this.discountRatesList.discountRatesData = [...this.discountRatesList.discountRatesData];
+  //     }
+  //   }else{
+  //     var i;
+  //     for (i = 0; i < this.discountRatesList.discountRatesData.length; i++) {
+  //       if (this.discountRatesList.discountRatesData[i].discountId == this.discountRatesList.selected[0].discountId) {
+  //         this.discountRatesList.discountRatesData[i].deleted = true;
+  //       }
+  //       this.discountRatesList.discountRatesData = [...this.discountRatesList.discountRatesData];
+  //     }
+  //   }
+  // }
 
   onSaveClick(){
     this.spinner.show();

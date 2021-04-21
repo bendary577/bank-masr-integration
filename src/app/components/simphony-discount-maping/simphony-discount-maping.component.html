@@ -19,8 +19,8 @@
                     </mat-form-field>
 
                     <button mat-flat-button (click)="addRateCode()">Add</button>
-                    <button mat-flat-button class="deleteBtn" (click)="deleteRateCode(false)" [disabled]="discountRatesList.selected.length != 1">Delete</button>
-                    <button mat-flat-button class="deleteBtn" (click)="deleteRateCode(true)" [disabled]="discountRatesList.selected.length != 1">Restore</button>
+                    <!-- <button mat-flat-button class="deleteBtn" (click)="deleteRateCode(false)" [disabled]="discountRatesList.selected.length != 1">Delete</button>
+                    <button mat-flat-button class="deleteBtn" (click)="deleteRateCode(true)" [disabled]="discountRatesList.selected.length != 1">Restore</button> -->
                 </div>
             </form>
         </div>
@@ -30,7 +30,7 @@
          [rows]="discountRatesList.discountRatesData" [selected]="discountRatesList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
         (select)='onSelect($event)' [scrollbarH]="true">
     
-            <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
+            <!-- <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
             <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
             <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
             </ng-template>
@@ -38,7 +38,7 @@
             <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
              <input class="regular-checkbox" type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
             </ng-template>
-            </ngx-datatable-column>
+            </ngx-datatable-column> -->
 
             <ngx-datatable-column name="Simphony Discount Id">
                 <ng-template let-row="row" ngx-datatable-cell-template>
@@ -52,12 +52,12 @@
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="State">
+            <!-- <ngx-datatable-column name="State">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     <label *ngIf="!row.deleted" class="active-state">active</label>
                     <label *ngIf="row.deleted" class="deleted-state">deleted</label>
                 </ng-template>
-            </ngx-datatable-column>
+            </ngx-datatable-column> -->
 
         </ngx-datatable>
     </mat-expansion-panel>
