@@ -1,6 +1,6 @@
 <div class="main" >
     <div *ngIf="groupsList.groupsData.length != 0 || groupsList.showLoading" class="header" style="margin-bottom: 15px;">
-        <button mat-flat-button class="button-back" (click)="refresh()">Refresh</button>
+        <!-- <button mat-flat-button class="button-back" (click)="refresh()">Refresh</button> -->
 
         <button mat-flat-button (click)="addGroupDialog()">Add Group</button>
         <button mat-flat-button (click)="updateGroupDialog()" [disabled]="validateUpdateGroup()">Update Group</button>

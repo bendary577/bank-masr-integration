@@ -1,7 +1,7 @@
 <div class="main" >
 
     <div *ngIf="usersList.usersData.length != 0 || usersList.showLoading" class="header" style="margin-bottom: 15px;">
-        <button mat-flat-button class="button-back" (click)="refresh()">Refresh</button>
+        <!-- <button mat-flat-button class="button-back" (click)="refresh()">Refresh</button> -->
 
         <button mat-flat-button (click)="addUserDialog()">Add User</button>
         <button mat-flat-button (click)="updateUserDialog()" [disabled]="validateUpdateUser()">Update User</button>

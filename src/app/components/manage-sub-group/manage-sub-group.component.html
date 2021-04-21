@@ -1,9 +1,9 @@
 <div class="main" >
     <div class="header" style="margin-bottom: 15px;">
         <button mat-flat-button class="button-back" (click)="backClicked()">Go Back</button>
-        <button mat-flat-button class="button-back" (click)="refresh()">Refresh</button>
+        <!-- <button mat-flat-button class="button-back" (click)="refresh()">Refresh</button> -->
 
-        <!-- <div *ngIf="!inParent" class="parentGroupName" >Parent Group : {{parentGroupName}} </div> -->
+        <div *ngIf="!inParent" class="parentGroupName" >Parent Group : {{parentGroupName}} </div>
 
         <button mat-flat-button (click)="addSubGroupDialog()">Add Supgroup</button>
         <button mat-flat-button (click)="updateSubGroupDialog()" [disabled]="validateUpdateGroup()">Update Supgroup</button>
