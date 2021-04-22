@@ -8,7 +8,6 @@
         <option [ngValue]="job" *ngFor="let job of jobs">
             {{job.creationDate}} - {{job.status}}</option>
     </select>
-    <!-- <button mat-flat-button (click)="openModal()">Transfer New Booking Detailes</button> -->
     <button mat-flat-button (click)="syncNewBooking()">Sync New Booking Data</button>
 
 </div>
@@ -163,7 +162,31 @@
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="Total Room">
+            <ngx-datatable-column name="VAT">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.vat}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Municipality Tax">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.municipalityTax}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Discount">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.discount}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Number Of Room">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.noOfRooms}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Grand Total">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.data.grandTotal}}
                 </ng-template>
@@ -196,12 +219,6 @@
             <ngx-datatable-column name="Payment Methods">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.data.paymentType}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Number Of Room">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.noOfRooms}}
                 </ng-template>
             </ngx-datatable-column>
 
