@@ -448,6 +448,9 @@
         <form class="my-form">
             <div>
                 <mat-form-field class="example-full-width">
+                    <input matInput type="number" step="0.1" style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Rate Code eg. ANEXBB" name="vatRate" [(ngModel)]="newRateCode.code">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
                     <input matInput type="number" step="0.1" style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="VAT Rate eg. 5" name="vatRate" [(ngModel)]="newRateCode.vatRate">
                 </mat-form-field>
                 <mat-form-field class="example-full-width">
