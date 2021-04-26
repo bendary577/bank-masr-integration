@@ -87,7 +87,7 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <div class="back" style="margin-bottom: 20px;">
-                <button mat-flat-button (click)="openLocationDialog()">Add</button>
+                <button mat-flat-button (click)="openLocationDialog(true)">Add</button>
             </div>
 
             <div *ngIf="consumptionLocations?.length > 0">
@@ -114,7 +114,51 @@
 
                     <ngx-datatable-column name="Item Groups">
                         <ng-template let-row="row" ngx-datatable-cell-template>
-                            <button mat-flat-button (click)="viewLocationItemGroupsDialog(row)">View</button>
+                            <button mat-flat-button (click)="viewLocationItemGroupsDialog(row, true)">View</button>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                </ngx-datatable>
+            </div>
+
+        </mat-expansion-panel>
+
+        <!-- Cost Center Configurations -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Cost Centers
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="back" style="margin-bottom: 20px;">
+                <button mat-flat-button (click)="openLocationDialog(false)">Add</button>
+            </div>
+
+            <div *ngIf="consumptionCostCenters?.length > 0">
+
+                <ngx-datatable class="material" [rows]="consumptionCostCenters" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
+
+                    <ngx-datatable-column name="Cost Center">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.costCenter.costCenter}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Account Code">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <input matInput placeholder="Account" [(ngModel)]="row.accountCode">
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Items Count">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.itemGroups.length}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Item Groups">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <button mat-flat-button (click)="viewLocationItemGroupsDialog(row, false)">View</button>
                         </ng-template>
                     </ngx-datatable-column>
 

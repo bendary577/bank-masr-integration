@@ -41,7 +41,8 @@ export class JournalsInforConfigurationsComponent implements OnInit {
   columns = []
 
   newConsumptionLocation = new ConsumptionLocation();
-  consumptionLocations = []
+  consumptionLocations = [];
+  consumptionCostCenters = [];
 
   generalSettings = new GeneralSettings();
 
@@ -81,6 +82,7 @@ export class JournalsInforConfigurationsComponent implements OnInit {
       }
       this.analysis = this.syncJobType.configuration["analysis"];
       this.consumptionLocations = this.syncJobType.configuration["consumptionConfiguration"]["consumptionLocations"];
+      this.consumptionCostCenters = this.syncJobType.configuration["consumptionConfiguration"]["consumptionCostCenters"];
 
       this.loading = false;
       this.spinner.hide();
@@ -145,10 +147,10 @@ export class JournalsInforConfigurationsComponent implements OnInit {
     }
   }
 
-  openLocationDialog(){
+  openLocationDialog(updateLocation: boolean){
     const dialogRef = this.dialog.open(AddConsumptionLocationComponent, {
       width: '550px',
-      data: {generalSettings: this.generalSettings}
+      data: {generalSettings: this.generalSettings, updateLocation: updateLocation}
     });
 
     dialogRef.afterClosed().subscribe(res => {
@@ -159,13 +161,17 @@ export class JournalsInforConfigurationsComponent implements OnInit {
         this.newConsumptionLocation.accountCode = res.account;
         this.newConsumptionLocation.costCenter = res.costCenter;
 
-        console.log({
-          location: res.costCenter
-        })
+        let locations = [];
 
-        this.consumptionLocations.push(this.newConsumptionLocation);
+        if(updateLocation){
+          this.consumptionLocations.push(this.newConsumptionLocation);
+          locations = this.consumptionLocations;
+        }else{
+          this.consumptionCostCenters.push(this.newConsumptionLocation);
+          locations = this.consumptionCostCenters;
+        }
 
-        this.consumptionService.updateConsumptionLocations(this.consumptionLocations, this.syncJobType.id, true).toPromise().then(result => {
+        this.consumptionService.updateConsumptionLocations(locations, this.syncJobType.id, updateLocation).toPromise().then(result => {
           this.snackBar.open(result["message"], null, {
             duration: 2000,
             horizontalPosition: 'center',
@@ -202,7 +208,7 @@ export class JournalsInforConfigurationsComponent implements OnInit {
     });
   }
 
-  viewLocationItemGroupsDialog(counsumptionLocation: ConsumptionLocation){
+  viewLocationItemGroupsDialog(counsumptionLocation: ConsumptionLocation, updateLocation: boolean){
     const dialogRef = this.dialog.open(AddConsumptionLocationItemsComponent, {
       width: '550px',
       data: {counsumptionLocation: counsumptionLocation}
@@ -211,7 +217,15 @@ export class JournalsInforConfigurationsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.loading = true;
-        this.consumptionService.updateConsumptionLocations(this.consumptionLocations, this.syncJobType.id, true).toPromise().then(result => {
+        let locations = [];
+
+        if(updateLocation){
+          locations = this.consumptionLocations;
+        }else{
+          locations = this.consumptionCostCenters;
+        }
+
+        this.consumptionService.updateConsumptionLocations(locations, this.syncJobType.id, updateLocation).toPromise().then(result => {
           this.loading = false;
           this.snackBar.open(result["message"], null, {
             duration: 2000,

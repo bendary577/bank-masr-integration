@@ -13,6 +13,7 @@ export class AddConsumptionLocationComponent implements OnInit {
   public form: FormGroup;
   submitted = false;
   newAccount:Account;
+  updateLocation: boolean;
 
   locations: CostCenter[] = [];
   generalSettings: GeneralSettings;
@@ -33,8 +34,15 @@ export class AddConsumptionLocationComponent implements OnInit {
 
   ngOnInit() {
     this.generalSettings = this.data["generalSettings"];
+    this.updateLocation = this.data["updateLocation"];
+
     if (this.generalSettings.locations){
-      this.locations = this.generalSettings.locations;
+      if(this.updateLocation){
+        this.locations = this.generalSettings.locations;
+      }else{
+        this.locations = this.generalSettings.costCenterAccountMapping;
+      }
+      
     }
 
     this.form = this.formBuilder.group({
