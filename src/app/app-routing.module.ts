@@ -62,6 +62,7 @@ import { ManageSubGroupComponent } from './components/manage-sub-group/manage-su
 import { SimphonyDiscountMapingComponent } from './components/simphony-discount-maping/simphony-discount-maping.component';
 import { CostOfGoodsComponent } from './components/cost-of-goods/cost-of-goods.component';
 import { CostOfGoodsConfigComponent } from './components/cost-of-goods-config/cost-of-goods-config.component';
+import { AmazonComponent } from './components/amazon/amazon.component';
 
 
 const routes: Routes = [
@@ -157,6 +158,9 @@ const routes: Routes = [
 
   { path: Constants.EXPENSES_DETAILS_REPORT_PAGE , component: ExpensesDetailsReportComponent ,canActivate:[AuthGuardService]},
   { path: Constants.EXPENSES_DETAILS_REPORT_CONFIG_PAGE , component: ExpensesDetailsReportConfigComponent ,canActivate:[AuthGuardService]},
+
+
+  { path: "amazon" , component: AmazonComponent ,canActivate:[AuthGuardService]},
 
   // Error Page
   {path:'**', component: ErrorComponentComponent }

@@ -136,6 +136,7 @@ import { CostOfGoodsConfigComponent } from './components/cost-of-goods-config/co
 import { DeleteAppGroupComponent } from './components/delete-app-group/delete-app-group.component';
 import { AddConsumptionLocationComponent } from './components/add-consumption-location/add-consumption-location.component';
 import { AddConsumptionLocationItemsComponent } from './components/add-consumption-location-items/add-consumption-location-items.component';
+import { AmazonComponent } from './components/amazon/amazon.component';
 
 @NgModule({
   declarations: [
@@ -237,7 +238,8 @@ import { AddConsumptionLocationItemsComponent } from './components/add-consumpti
     CostOfGoodsComponent,
     CostOfGoodsConfigComponent,
     AddConsumptionLocationComponent,
-    AddConsumptionLocationItemsComponent
+    AddConsumptionLocationItemsComponent,
+    AmazonComponent
   ],
   imports: [
     BrowserModule,
@@ -265,7 +267,8 @@ import { AddConsumptionLocationItemsComponent } from './components/add-consumpti
     BrowserModule,
     FormsModule,
     MatProgressBarModule,
-    NgxJsonViewerModule
+    NgxJsonViewerModule,
+    
     
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, 
