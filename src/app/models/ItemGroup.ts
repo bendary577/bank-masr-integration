@@ -5,6 +5,8 @@ export class ItemGroup {
     overGroup: string;
     majorGroup: string;
     account: string;
+    inventoryAccount: string;
+    expensesAccount: string;
     
     public constructor() { }
 }

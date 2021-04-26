@@ -18,6 +18,7 @@ import { ConsumptionLocation } from 'src/app/models/ConsumptionLocation';
 import { GeneralSettings } from 'src/app/models/GeneralSettings';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 import { JournalService } from 'src/app/services/journal/journal.service';
+import { AddConsumptionLocationItemsComponent } from '../add-consumption-location-items/add-consumption-location-items.component';
 
 @Component({
   selector: 'app-journals-infor-configurations',
@@ -201,17 +202,16 @@ export class JournalsInforConfigurationsComponent implements OnInit {
     });
   }
 
-  viewMajorGroupChildsDialog(itemGroup: ItemGroup){
-    const dialogRef = this.dialog.open(AddMajorGroupChildComponent, {
+  viewLocationItemGroupsDialog(counsumptionLocation: ConsumptionLocation){
+    const dialogRef = this.dialog.open(AddConsumptionLocationItemsComponent, {
       width: '550px',
-      minHeight: '1000px',
-      data: {itemGroup: itemGroup}
+      data: {counsumptionLocation: counsumptionLocation}
     });
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.loading = true;
-        this.salesService.addMajorGroup(this.consumptionLocations, this.syncJobType.id).toPromise().then(result => {
+        this.consumptionService.updateConsumptionLocations(this.consumptionLocations, this.syncJobType.id, true).toPromise().then(result => {
           this.loading = false;
           this.snackBar.open(result["message"], null, {
             duration: 2000,

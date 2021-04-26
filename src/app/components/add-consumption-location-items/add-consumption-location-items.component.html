@@ -1,0 +1,42 @@
+<h1 mat-dialog-title>Location Items Groups</h1>
+<mat-dialog-content>
+    <div mat-dialog-content>
+        <form [formGroup]="form" class="my-form" style="margin: 0px auto 0px;">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Item Group" formControlName="itemGroup">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Account Code" formControlName="accountCode">
+                </mat-form-field>
+
+                <button mat-button cdkFocusInitial (click)="addItemGroup()">Add</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table-latitude">
+                     <caption>Item Groups</caption>
+                      <thead>
+                          <th>Item Group</th>
+                          <th>Account Code</th>
+                    </thead>
+                    <tbody>
+                         <tr *ngFor="let row of location.itemGroups">
+                            <td style="text-align: center;">{{row.itemGroup}}</td>
+                            <td style="text-align: center;">{{row.expensesAccount}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div mat-dialog-actions>
+        <button mat-button cdkFocusInitial (click)="onSaveClick()">Save</button>
+        <button mat-button (click)="onNoClick()">Cancel</button>
+    </div>
+
+</mat-dialog-content>
+

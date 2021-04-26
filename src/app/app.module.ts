@@ -135,6 +135,7 @@ import { CostOfGoodsComponent } from './components/cost-of-goods/cost-of-goods.c
 import { CostOfGoodsConfigComponent } from './components/cost-of-goods-config/cost-of-goods-config.component';
 import { DeleteAppGroupComponent } from './components/delete-app-group/delete-app-group.component';
 import { AddConsumptionLocationComponent } from './components/add-consumption-location/add-consumption-location.component';
+import { AddConsumptionLocationItemsComponent } from './components/add-consumption-location-items/add-consumption-location-items.component';
 
 @NgModule({
   declarations: [
@@ -235,7 +236,8 @@ import { AddConsumptionLocationComponent } from './components/add-consumption-lo
     SimphonyDiscountMapingComponent,
     CostOfGoodsComponent,
     CostOfGoodsConfigComponent,
-    AddConsumptionLocationComponent
+    AddConsumptionLocationComponent,
+    AddConsumptionLocationItemsComponent
   ],
   imports: [
     BrowserModule,
@@ -282,8 +284,11 @@ import { AddConsumptionLocationComponent } from './components/add-consumption-lo
      AddTaxComponent, AddDiscountComponent, AddRevenueCenterComponent, AddServiceChargeComponent,
       SuppliersConfiguartionComponent, SchedulerConfigurationComponent, AddTenderChildComponent, 
       AddSimphonyLocationComponent, AddWebServiceInvokerComponent, AddLocationComponent,
-      AddMajorGroupChildComponent, AddSalesStatisticsComponent, AddSupplierComponent, AddConsumptionLocationComponent,
-    // Loyalty
+      AddMajorGroupChildComponent, AddSalesStatisticsComponent, AddSupplierComponent, 
+    
+    // ==> Consumption Sync Job Type
+    AddConsumptionLocationComponent, AddConsumptionLocationItemsComponent,
+    // ==> Loyalty
     AddAppCompanyComponent, AddAppGroupComponent, AddAppUserComponent, DialogComponent, DeleteAppGroupComponent
     ]
 })
