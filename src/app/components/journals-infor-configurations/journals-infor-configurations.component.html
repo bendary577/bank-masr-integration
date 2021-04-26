@@ -79,6 +79,50 @@
             <app-analysis-configuration [analysis]=analysis></app-analysis-configuration>
         </mat-expansion-panel>
 
+        <!-- Item Group Configurations -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Locations
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="back" style="margin-bottom: 20px;">
+                <button mat-flat-button (click)="openLocationDialog()">Add</button>
+            </div>
+
+            <div *ngIf="consumptionLocations?.length > 0">
+
+                <ngx-datatable class="material" [rows]="consumptionLocations" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
+
+                    <ngx-datatable-column name="Location">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.costCenter.locationName}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Account Code">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <input matInput placeholder="Account" [(ngModel)]="row.accountCode">
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Items Count">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.itemGroups.length}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Item Groups">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <button mat-flat-button (click)="viewMajorGroupChildsDialog(row)">View</button>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                </ngx-datatable>
+            </div>
+
+        </mat-expansion-panel>
+
         <br>
 
         <div class="card-back">

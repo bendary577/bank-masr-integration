@@ -110,6 +110,7 @@ const routes: Routes = [
   { path: Constants.CREDIT_NOTE_INFOR_CONFIG_PAGE , component: CreditNotesInforConfigurationComponent  , canActivate:[AuthGuardService]},
 
   { path: Constants.CONSUMPTION_INFOR_PAGE , component: JournalInforComponent  , canActivate:[AuthGuardService]},
+  { path: Constants.CONSUMPTION_CONFIG_PAGE , component: JournalsInforConfigurationsComponent  , canActivate:[AuthGuardService]},
   { path: Constants.CONSUMPTION_SUN_CONFIG_PAGE , component: JournalsInforConfigurationsComponent  , canActivate:[AuthGuardService]},
 
   { path: Constants.COST_OF_GOODS_PAGE , component: CostOfGoodsComponent  , canActivate:[AuthGuardService]},

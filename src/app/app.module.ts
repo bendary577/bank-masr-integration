@@ -134,6 +134,7 @@ import { SimphonyDiscountMapingComponent } from './components/simphony-discount-
 import { CostOfGoodsComponent } from './components/cost-of-goods/cost-of-goods.component';
 import { CostOfGoodsConfigComponent } from './components/cost-of-goods-config/cost-of-goods-config.component';
 import { DeleteAppGroupComponent } from './components/delete-app-group/delete-app-group.component';
+import { AddConsumptionLocationComponent } from './components/add-consumption-location/add-consumption-location.component';
 
 @NgModule({
   declarations: [
@@ -233,7 +234,8 @@ import { DeleteAppGroupComponent } from './components/delete-app-group/delete-ap
     ExpensesDetailsReportConfigComponent,
     SimphonyDiscountMapingComponent,
     CostOfGoodsComponent,
-    CostOfGoodsConfigComponent
+    CostOfGoodsConfigComponent,
+    AddConsumptionLocationComponent
   ],
   imports: [
     BrowserModule,
@@ -280,7 +282,7 @@ import { DeleteAppGroupComponent } from './components/delete-app-group/delete-ap
      AddTaxComponent, AddDiscountComponent, AddRevenueCenterComponent, AddServiceChargeComponent,
       SuppliersConfiguartionComponent, SchedulerConfigurationComponent, AddTenderChildComponent, 
       AddSimphonyLocationComponent, AddWebServiceInvokerComponent, AddLocationComponent,
-      AddMajorGroupChildComponent, AddSalesStatisticsComponent, AddSupplierComponent,
+      AddMajorGroupChildComponent, AddSalesStatisticsComponent, AddSupplierComponent, AddConsumptionLocationComponent,
     // Loyalty
     AddAppCompanyComponent, AddAppGroupComponent, AddAppUserComponent, DialogComponent, DeleteAppGroupComponent
     ]

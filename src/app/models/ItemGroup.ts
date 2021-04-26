@@ -4,7 +4,8 @@ export class ItemGroup {
     itemGroup: string;
     overGroup: string;
     majorGroup: string;
-
+    account: string;
+    
     public constructor() { }
 }
   

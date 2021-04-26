@@ -9,6 +9,15 @@ import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.s
 import { AccountSyncType } from 'src/app/models/AccountSyncType';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
+import { AddMajorGroupComponent } from '../addMajorGroup/add-major-group.component';
+import { ItemGroup } from 'src/app/models/ItemGroup';
+import { AddMajorGroupChildComponent } from '../addMajorGroupChild/add-major-group-child.component';
+import { PosSalesService } from '../../services/posSales/pos-sales.service';
+import { AddConsumptionLocationComponent } from '../add-consumption-location/add-consumption-location.component';
+import { ConsumptionLocation } from 'src/app/models/ConsumptionLocation';
+import { GeneralSettings } from 'src/app/models/GeneralSettings';
+import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
+import { JournalService } from 'src/app/services/journal/journal.service';
 
 @Component({
   selector: 'app-journals-infor-configurations',
@@ -29,15 +38,36 @@ export class JournalsInforConfigurationsComponent implements OnInit {
   analysisCodes = [null, "1","2","3","4","5","6","7","8","9","10"];
 
   columns = []
+
+  newConsumptionLocation = new ConsumptionLocation();
+  consumptionLocations = []
+
+  generalSettings = new GeneralSettings();
+
   constructor(private spinner: NgxSpinnerService, private sidNav: SidenavResponsive,
-    public dialog: MatDialog, private syncJobService:SyncJobService,
+    public dialog: MatDialog, private syncJobService:SyncJobService, 
+    private generalSettingsService: GeneralSettingsService, private salesService:PosSalesService,
+    private consumptionService: JournalService,
     private accSyncTypeService:AccSyncTypeService, private router:Router,
-     public snackBar: MatSnackBar) {
+    public snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
     this.getSyncJobType();
+    this.getGeneralSettings();
     this.accountERD = localStorage.getItem('accountERD');
+  }
+
+  getGeneralSettings() {
+    this.generalSettingsService.getGeneralSettings().then((res) => {
+      this.generalSettings = res as GeneralSettings;
+    }).catch(err => {
+      this.snackBar.open("Failed to get general settings" , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+    });
   }
 
   getSyncJobType() {
@@ -49,6 +79,7 @@ export class JournalsInforConfigurationsComponent implements OnInit {
         this.userDefinedFlag = true;
       }
       this.analysis = this.syncJobType.configuration["analysis"];
+      this.consumptionLocations = this.syncJobType.configuration["consumptionConfiguration"]["consumptionLocations"];
 
       this.loading = false;
       this.spinner.hide();
@@ -111,6 +142,105 @@ export class JournalsInforConfigurationsComponent implements OnInit {
     }else{
       this.userDefinedFlag = false;
     }
+  }
+
+  openLocationDialog(){
+    const dialogRef = this.dialog.open(AddConsumptionLocationComponent, {
+      width: '550px',
+      data: {generalSettings: this.generalSettings}
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.spinner.show();
+        this.loading = true;
+        this.newConsumptionLocation = new ConsumptionLocation();
+        this.newConsumptionLocation.accountCode = res.account;
+        this.newConsumptionLocation.costCenter = res.costCenter;
+
+        console.log({
+          location: res.costCenter
+        })
+
+        this.consumptionLocations.push(this.newConsumptionLocation);
+
+        this.consumptionService.updateConsumptionLocations(this.consumptionLocations, this.syncJobType.id, true).toPromise().then(result => {
+          this.snackBar.open(result["message"], null, {
+            duration: 2000,
+            horizontalPosition: 'center',
+            panelClass:"my-snack-bar-success"
+          });
+
+          this.spinner.hide();
+          this.loading = false;
+
+        }).catch(err => {
+          this.spinner.hide();
+          this.loading = false;
+          this.consumptionLocations.pop();
+
+          let message = "";
+          if(err.status === 401){
+             message = ErrorMessages.SESSION_EXPIRED;
+            this.sidNav.Logout();
+          } else if (err.error.message){
+            message = err.error.message;
+          } else if (err.message){
+            message = err.message;
+          } else {
+            message = 'Can not add consumption location now, please try again.';
+          }
+
+          this.snackBar.open(message , null, {
+            duration: 3000,
+            horizontalPosition: 'center',
+            panelClass:"my-snack-bar-fail"
+          });
+        });
+      }
+    });
+  }
+
+  viewMajorGroupChildsDialog(itemGroup: ItemGroup){
+    const dialogRef = this.dialog.open(AddMajorGroupChildComponent, {
+      width: '550px',
+      minHeight: '1000px',
+      data: {itemGroup: itemGroup}
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.loading = true;
+        this.salesService.addMajorGroup(this.consumptionLocations, this.syncJobType.id).toPromise().then(result => {
+          this.loading = false;
+          this.snackBar.open(result["message"], null, {
+            duration: 2000,
+            horizontalPosition: 'center',
+            panelClass:"my-snack-bar-success"
+          });
+
+        }).catch(err => {
+          this.loading = false;
+          let message = "";
+          if(err.status === 401){
+            message = ErrorMessages.SESSION_EXPIRED;
+            this.sidNav.Logout();
+          } else if (err.error.message){
+            message = err.error.message;
+          } else if (err.message){
+            message = err.message;
+          } else {
+            message = ErrorMessages.FAILED_TO_SYNC;
+          }
+
+          this.snackBar.open(message , null, {
+            duration: 3000,
+            horizontalPosition: 'center',
+            panelClass:"my-snack-bar-fail"
+          });
+        });
+      }
+    });
   }
 
 }

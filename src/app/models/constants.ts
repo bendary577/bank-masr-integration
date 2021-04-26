@@ -145,6 +145,7 @@ export class Constants {
 
     static GET_JOURNALS_URL = environment.apiHost + '/getConsumption';
     static ADD_JOURNAL_GROUP_URL = environment.apiHost + '/addConsumptionMajorGroup';
+    static UPDATE_CONSUMPTION_LOCATIONS_URL = environment.apiHost + '/updateConsumptionLocations';
 
     //////////////////////////////////////////////// Cost of Goods  //////////////////////////////////////////////////////
 
