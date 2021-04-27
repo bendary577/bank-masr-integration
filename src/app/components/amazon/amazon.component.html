@@ -1,0 +1,14 @@
+<p>amazon works!</p>
+
+<form method="post" action="https://sbcheckout.payfort.com/FortAPI/paymentPage" #form id=form1 name=form1>
+    <input type="hidden" #command name="service_command" [value]="paymentSchema.service_command">
+    <input type="hidden" #access_code name="access_code" [value]="paymentSchema.access_code">
+    <input type="hidden" #merchant_identifier name="merchant_identifier" [value]="paymentSchema.merchant_identifier">
+    <input type="hidden" #merchant_reference name="merchant_reference" [value]="paymentSchema.merchant_reference">
+    <input type="hidden" #amount name="expiry_date" [value]="paymentSchema.expiry_date">
+    <input type="hidden" #currency name="card_number" [value]="paymentSchema.card_number">
+    <input type="hidden" #language name="language" [value]="paymentSchema.language">
+    <input type="hidden" #customer_email name="card_security_code" [value]="paymentSchema.card_security_code">
+    <input type="hidden" #signature name="signature" [value]="paymentSchema.signature">
+    <input type="submit" value="submit" id="submit2" (click)="form.submit()">
+</form>
