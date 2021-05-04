@@ -140,6 +140,9 @@ import { AmazonComponent } from './components/amazon/amazon.component';
 import { HotelOpiComponent } from './components/hotel-opi/hotel-opi.component';
 import { OpiActivitiesComponent } from './components/opi-activities/opi-activities.component';
 import { OpiTransactionsComponent } from './components/opi-transactions/opi-transactions.component';
+import { ChartsModule } from 'ng2-charts';
+import { AngularDropdownModule } from 'angular-dropdown';
+import { NgWormholeModule } from 'ng-wormhole';
 
 @NgModule({
   declarations: [
@@ -275,8 +278,9 @@ import { OpiTransactionsComponent } from './components/opi-transactions/opi-tran
     FormsModule,
     MatProgressBarModule,
     NgxJsonViewerModule,
-    
-    
+    ChartsModule,
+    AngularDropdownModule,
+    NgWormholeModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, 
     CookieService, 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Transactions } from '../opi-transactions/transactions';
 import { TransactionsItems } from '../opi-transactions/transactions-items';
+import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, Color } from 'ng2-charts';
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 
 @Component({
   selector: 'app-opi-activities',
@@ -9,9 +11,9 @@ import { TransactionsItems } from '../opi-transactions/transactions-items';
 })
 export class OpiActivitiesComponent implements OnInit {
 
-  totalCheckIn = 1;
-  totalcheckOut = 1; 
-  totalTransactions = 1;
+  totalCheckIn = 2;
+  totalcheckOut = 3; 
+  totalTransactions = 5;
 
   transactionsData = TransactionsItems; 
 
@@ -33,7 +35,41 @@ export class OpiActivitiesComponent implements OnInit {
     transactionsData: [] as Transactions[]
   };
 
-  constructor() { }
+  public pieChartOptions: ChartOptions = {
+    responsive: true,
+  };
+    
+  public pieChartData: SingleDataSet = [this.totalTransactions, this.totalCheckIn, this.totalcheckOut];
+  public pieChartType: ChartType = 'pie';
+  public pieChartLegend = true;
+  public pieChartPlugins = [];
+  public pieChartLabels: Label[] = ['Transactions', 'Check In', 'Check Out'];
+
+  public lineChartData: ChartDataSets[] = [
+    { data: [65, 59, 82, 33, 79, 56, 55, 40], label: 'Series A' },
+  ];
+  
+  public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+
+  public lineChartOptions: (ChartOptions) = {
+    responsive: true,
+  };
+
+  public lineChartColors: Color[] = [
+    {
+      borderColor: 'black',
+      backgroundColor: 'rgba(255,0,0,0.3)',
+    },
+  ];
+
+  public lineChartLegend = true;
+  public lineChartType = 'line';
+  public lineChartPlugins = [];
+
+  constructor() { 
+    monkeyPatchChartJsTooltip();
+    monkeyPatchChartJsLegend();
+  }
 
   ngOnInit(): void {
     this.totalSpend('today')
@@ -43,4 +79,7 @@ export class OpiActivitiesComponent implements OnInit {
     
   }
 
+  no(){
+    
+  }
 }

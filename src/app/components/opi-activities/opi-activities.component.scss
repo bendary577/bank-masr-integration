@@ -1,4 +1,31 @@
 @import "../approved-invoices-infor/approved-invoices-infor.component.scss";
+@import '~angular-dropdown/styles';
+ng-dropdown, ng-dropdown-content {
+  box-sizing: border-box;
+}
+
+.ng-dropdown {
+  position: relative;
+}
+
+.ng-dropdown-content {
+  position: absolute;
+  width: auto;
+  z-index: $ng-dropdown-content-z-index;
+  background-color: $ng-dropdown-content-background-color;
+}
+
+.ng-dropdown-content--left { left: 0; }
+.ng-dropdown-content--right { right: 0; }
+
+.ng-dropdown-overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: $ng-dropdown-content-z-index - 100;
+}
 
 .header {
   text-align: end;
@@ -11,7 +38,7 @@
 }
 .stat-card{
   margin: 10px;
-  height: 225px;
+  height: auto;
 }
 
 .transaction-card{
