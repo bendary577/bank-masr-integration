@@ -15,6 +15,8 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 export class ExpensesDetailsReportConfigComponent implements OnInit {
   loading = true;
   syncJobType: AccountSyncType;
+  groupCodes = [];
+  newGroupCode: string = "";
 
   constructor(private spinner: NgxSpinnerService, private router:Router,
      public snackBar: MatSnackBar, private syncJobService:SyncJobService,
@@ -29,6 +31,7 @@ export class ExpensesDetailsReportConfigComponent implements OnInit {
    this.loading = true;
    this.accSyncTypeService.getAccSyncJobType(Constants.EXPENSES_DETAILS_REPORT_SYNC).toPromise().then((res: any) => {
      this.syncJobType = res;
+     this.groupCodes = this.syncJobType["configuration"]["bookingConfiguration"]["neglectedGroupCodes"];
 
      this.loading = false;
    }).catch(err => {
@@ -36,6 +39,21 @@ export class ExpensesDetailsReportConfigComponent implements OnInit {
      this.loading = false;
    });
  }
+
+  addTransactionGroup(){
+    if(this.newGroupCode != ""){
+      this.groupCodes.push(this.newGroupCode);
+      this.newGroupCode = "";
+
+      this.groupCodes = [...this.groupCodes];
+    } else {
+      this.snackBar.open('Please enter group code value.', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+    }
+  }
 
   onSaveClick(): void {
     this.spinner.show();
