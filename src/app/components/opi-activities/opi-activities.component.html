@@ -1,0 +1,162 @@
+
+<div class="row">
+    <div class="column">
+        <mat-card class="stat-card">
+            <mat-card-content>
+                <h2>Check In</h2>
+                <form class="my-form">
+                    <div class="row">
+                        <div class="two-column" style="text-align: left;">
+                            <button class="filter-btn" (click)="totalSpend('Totoal')" mat-raised-button>Total</button>
+                            <button class="filter-btn" (click)="totalSpend('Today')" mat-raised-button>Today</button>
+                            <button class="filter-btn" (click)="totalSpend('Last Week')" mat-raised-button>Last Week</button>
+                            <button class="filter-btn" (click)="totalSpend('Last Month')" mat-raised-button>Last Month</button>
+                        </div>
+                        <div class="two-column">
+                            <h3 style="border-radius: 10px; text-align: center; height: auto;">
+                                <div>
+                                    Total Check In
+                                </div>
+                                <div>
+                                    {{totalCheckIn}}
+                                </div>
+                            </h3>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>    <div class="column">
+        <mat-card class="stat-card">
+            <mat-card-content>
+                <h2>Check Out</h2>
+                <form class="my-form">
+                    <div class="row">
+                        <div class="two-column" style="text-align: left;">
+                            <button class="filter-btn" (click)="totalSpend('Totoal')" mat-raised-button>Total</button>
+                            <button class="filter-btn" (click)="totalSpend('Today')" mat-raised-button>Today</button>
+                            <button class="filter-btn" (click)="totalSpend('Last Week')" mat-raised-button>Last Week</button>
+                            <button class="filter-btn" (click)="totalSpend('Last Month')" mat-raised-button>Last Month</button>
+                        </div>
+                        <div class="two-column">
+                            <h3 style="border-radius: 10px; text-align: center; height: auto;">
+                                <div>
+                                    Total Check Out
+                                </div>
+                                <div>
+                                    {{totalcheckOut}}
+                                </div>
+                            </h3>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="column">
+        <mat-card class="stat-card">
+            <mat-card-content>
+                <h2>Transactions</h2>
+                <form class="my-form">
+                    <div class="row">
+                        <div class="two-column" style="text-align: left;">
+                            <button class="filter-btn" (click)="totalSpend('Totoal')" mat-raised-button>Total</button>
+                            <button class="filter-btn" (click)="totalSpend('Today')" mat-raised-button>Today</button>
+                            <button class="filter-btn" (click)="totalSpend('Last Week')" mat-raised-button>Last Week</button>
+                            <button class="filter-btn" (click)="totalSpend('Last Month')" mat-raised-button>Last Month</button>
+                        </div>
+                        <div class="two-column">
+                            <h3 style="border-radius: 10px; text-align: center; height: auto;">
+                                <div>
+                                    Total Transactions
+                                </div>
+                                <div>
+                                    {{totalTransactions}}
+                                </div>
+                                <i class="pe-7s-arc"> </i>
+                            </h3>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+
+<div class="main">
+
+    <!-- <div *ngIf="transactionList.transactionData.length == 0"> 
+        <mat-card class="transaction-card">
+            <mat-card-content>
+                <div>
+                    <img src="../../../assets/activity.png" alt="image">
+                    <p>You do not have any recent activity.</p>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div> -->
+
+    <div *ngIf="transactionsData.length != 0">
+        <ngx-datatable class="material" [loadingIndicator]="transactionsList.showLoading" [messages]="transactionsList.messages" [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+        [rows]="transactionsData" [selected]="transactionsList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" [scrollbarH]="true">
+
+        <ngx-datatable-column name="Booking Number">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.bookingNumber}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Phone Number">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.phoneNumber}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="User Name">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.guestName}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Web Site">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.webSite}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Check In Date">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.checkInDate}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <!-- <ngx-datatable-column name="Group">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.group.name}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Total Payment">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.totalPayment}} EGP
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Discount Rate">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.discountRate | number : '1.2-2'}} %
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="After Discount">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.afterDiscount | number : '1.2-2'}} EGP
+            </ng-template>
+        </ngx-datatable-column> -->
+
+        </ngx-datatable>
+    </div>
+
+</div>
+<ngx-spinner></ngx-spinner>

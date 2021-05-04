@@ -1,0 +1,59 @@
+@import "../approved-invoices-infor/approved-invoices-infor.component.scss";
+
+.header {
+  text-align: end;
+  padding: 4px 4px 4px 4px;
+  height: 4vh;
+}
+.headerBack {
+  float: right;
+  padding-left: 20px;
+}
+.stat-card{
+  margin: 10px;
+  height: 225px;
+}
+
+.transaction-card{
+  margin-right: 11px;
+  height: 300px;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+  width: 33%;
+  text-align: center;
+}
+
+.two-column{
+  float: left;
+  width: 50%;
+  text-align: center;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+  padding-left: 10px;
+}
+.row{
+  display: flex;
+  overflow: hidden;    
+  scroll-behavior: smooth;
+}
+
+.user-img{
+  display: inline;
+  width: 70px;
+  min-height: 70px;
+  border-radius: 50%;
+}
+
+.filter-btn{
+  width: 120px;
+  margin-bottom: 10px;
+  background-color: white;
+  color: black;
+}

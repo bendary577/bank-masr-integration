@@ -63,6 +63,7 @@ import { SimphonyDiscountMapingComponent } from './components/simphony-discount-
 import { CostOfGoodsComponent } from './components/cost-of-goods/cost-of-goods.component';
 import { CostOfGoodsConfigComponent } from './components/cost-of-goods-config/cost-of-goods-config.component';
 import { AmazonComponent } from './components/amazon/amazon.component';
+import { HotelOpiComponent } from './components/hotel-opi/hotel-opi.component';
 
 
 const routes: Routes = [
@@ -92,6 +93,11 @@ const routes: Routes = [
   { path: Constants.MANAGE_USERS, component: ManageUsersComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MANAGE_ACTIVITIES, component: ActivitiesComponent ,canActivate:[AuthGuardService]},
 
+  // Hotel OPI Views
+  { path: Constants.GET_HOTEL_OPI_PAGE, component: HotelOpiComponent ,canActivate:[AuthGuardService]},
+  // { path: Constants.MANAGE_GROUPS, component: ManageGroupsComponent ,canActivate:[AuthGuardService]},
+  // { path: Constants.MANAGE_ACTIVITIES, component: ActivitiesComponent ,canActivate:[AuthGuardService]},
+  
   // Pages
   { path: Constants.LOGIN_PAGE, component: LoginComponent},
   { path: Constants.WELCOME_PAGE, component: WelcomePageComponent , canActivate:[AuthGuardService]},

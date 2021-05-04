@@ -137,6 +137,9 @@ import { DeleteAppGroupComponent } from './components/delete-app-group/delete-ap
 import { AddConsumptionLocationComponent } from './components/add-consumption-location/add-consumption-location.component';
 import { AddConsumptionLocationItemsComponent } from './components/add-consumption-location-items/add-consumption-location-items.component';
 import { AmazonComponent } from './components/amazon/amazon.component';
+import { HotelOpiComponent } from './components/hotel-opi/hotel-opi.component';
+import { OpiActivitiesComponent } from './components/opi-activities/opi-activities.component';
+import { OpiTransactionsComponent } from './components/opi-transactions/opi-transactions.component';
 
 @NgModule({
   declarations: [
@@ -239,7 +242,11 @@ import { AmazonComponent } from './components/amazon/amazon.component';
     CostOfGoodsConfigComponent,
     AddConsumptionLocationComponent,
     AddConsumptionLocationItemsComponent,
-    AmazonComponent
+    AmazonComponent,
+    HotelOpiComponent,
+    OpiActivitiesComponent,
+    OpiTransactionsComponent
+
   ],
   imports: [
     BrowserModule,

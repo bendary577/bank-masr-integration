@@ -279,7 +279,14 @@ export class Constants {
     static GET_TOP_Groups_URL = environment.apiHost + '/getTopGroups';
     static GET_TOTAL_SPEND_URL = environment.apiHost + '/transaction/getTotalSpendTransactions';
 
+    //////////////////////////////////////////////// Manage Application  //////////////////////////////////////////////
+
+    static GET_HOTEL_OPI_PAGE = 'hotelOpi';
+
+    // static GET_APP_GROUPS_URL = environment.apiHost + '/getApplicationGroups';
+
     //////////////////////////////////////////////// Export To Excel //////////////////////////////////////////////
+
 
     static EXPORT_APPROVED_INVOICES = environment.apiHost + '/invoices/export/excel';
     static EXPORT_CREDIT_NOTES = environment.apiHost + '/invoices/export/excel';
