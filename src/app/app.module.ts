@@ -143,6 +143,7 @@ import { OpiTransactionsComponent } from './components/opi-transactions/opi-tran
 import { ChartsModule } from 'ng2-charts';
 import { AngularDropdownModule } from 'angular-dropdown';
 import { NgWormholeModule } from 'ng-wormhole';
+import { FilterComponent } from './components/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -248,7 +249,8 @@ import { NgWormholeModule } from 'ng-wormhole';
     AmazonComponent,
     HotelOpiComponent,
     OpiActivitiesComponent,
-    OpiTransactionsComponent
+    OpiTransactionsComponent,
+    FilterComponent
 
   ],
   imports: [
