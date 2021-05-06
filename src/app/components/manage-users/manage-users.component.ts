@@ -7,6 +7,9 @@ import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import { AddAppUserComponent } from '../../components/add-app-user/add-app-user.component'  
 import { Group } from 'src/app/models/loyalty/Group';
 import {Location} from '@angular/common';
+import { Router } from '@angular/router';
+import { Data } from 'src/app/models/data';
+import { Constants } from 'src/app/models/constants';
 
 @Component({
   selector: 'app-manage-users',
@@ -38,7 +41,7 @@ export class ManageUsersComponent implements OnInit {
   };
 
   constructor(private loyaltyService: LoyaltyService, public dialog: MatDialog, private _location: Location,
-     public snackBar: MatSnackBar, private sidNav: SidenavResponsive) { }
+     public snackBar: MatSnackBar, private sidNav: SidenavResponsive, private router: Router, public data: Data) { }
 
   ngOnInit() {
     this.getUsers();
@@ -51,6 +54,12 @@ export class ManageUsersComponent implements OnInit {
 
   refresh() {
     location.reload();
+  }
+  
+  openUserProfile(user: ApplicationUser){
+    console.log(user)
+    this.data.storage = user;
+    this.router.navigate([Constants.USER_PROFILE]);
   }
   
   getUsers(){

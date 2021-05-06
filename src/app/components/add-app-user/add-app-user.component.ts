@@ -19,6 +19,7 @@ export class AddAppUserComponent implements OnInit {
   imageUploded: boolean = false;
   inUpdate = false;
   groups: Group[] = [];
+  qrcodeMethod = ["Email", "SMS", "Print"];
 
   constructor(private formBuilder: FormBuilder, public snackBar: MatSnackBar, 
     public dialogRef: MatDialogRef<AddAppUserComponent>, private loyaltyService: LoyaltyService,
@@ -31,14 +32,18 @@ export class AddAppUserComponent implements OnInit {
       this.newUser = this.data["user"];
       this.selectedGroup = this.newUser.group.id;
       this.form = this.formBuilder.group({
-        name: [this.newUser.name, Validators.required],        
+        name: [this.newUser.name, [Validators.maxLength, Validators.required]], 
+        qrcodeMethod: [this.qrcodeMethod[0], Validators.required],
         email: [this.newUser.email, [Validators.required, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
+        mobile: ['', [Validators.maxLength, Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
         group: [this.newUser.group.id, Validators.required]
       });
     }else{
       this.form = this.formBuilder.group({
       name: ['', Validators.required],
+      qrcodeMethod: ['email', Validators.required],
       email: ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
+      mobile: ['', [Validators.maxLength, Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
       group: ['', Validators.required]
       });
     }
@@ -77,7 +82,9 @@ export class AddAppUserComponent implements OnInit {
     }else{
       this.dialogRef.close({
         name: this.form.controls.name.value,
+        qrcodeMethod: this.form.controls.qrcodeMethod.value,
         email: this.form.controls.email.value,
+        mobile: this.form.controls.mobile.value,
         group: this.form.controls.group.value,
         image: this.srcResult,
       });

@@ -144,6 +144,7 @@ import { ChartsModule } from 'ng2-charts';
 import { AngularDropdownModule } from 'angular-dropdown';
 import { NgWormholeModule } from 'ng-wormhole';
 import { FilterComponent } from './components/filter/filter.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -250,8 +251,8 @@ import { FilterComponent } from './components/filter/filter.component';
     HotelOpiComponent,
     OpiActivitiesComponent,
     OpiTransactionsComponent,
-    FilterComponent
-
+    FilterComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

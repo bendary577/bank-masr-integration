@@ -4,7 +4,22 @@
     <form [formGroup]="form" class="my-form">
         <div class="form-group">
             <mat-form-field class="example-full-width">
-                <input matInput placeholder="Name" formControlName="name">
+                <input matInput placeholder="Name" formControlName="name" required maxlength="50">
+                <mat-error *ngIf="form.controls.name.hasError('required')">
+                    Name is required.
+                  </mat-error>
+                  <mat-error *ngIf="form.controls.name.hasError('maxlength')">
+                    Name is to long.
+                  </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <mat-select matInput id="qrcodeMethod" name="qrcodeMethod" 
+                placeholder="Send QRcode Method" formControlName="qrcodeMethod" >
+                    <mat-option [value]=q *ngFor="let q of qrcodeMethod">{{q}}</mat-option>
+                </mat-select>
             </mat-form-field>
         </div>
 
@@ -13,6 +28,21 @@
                 <input matInput placeholder="Email" formControlName="email" >
                 <mat-error *ngIf="form.controls.email.hasError('pattern')">
                     Email must be well formed.
+                  </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Moblie" formControlName="mobile" required maxlength="11" >
+                <mat-error *ngIf="form.controls.mobile.hasError('required')">
+                    Moblie is required.
+                  </mat-error>
+                  <mat-error *ngIf="form.controls.mobile.hasError('maxlength')">
+                    Moblie is to long.
+                  </mat-error>
+                  <mat-error *ngIf="form.controls.mobile.hasError('pattern')">
+                    Mobile must be well formed.
                   </mat-error>
             </mat-form-field>
         </div>
@@ -33,7 +63,6 @@
                 Choose Image</button>
                 <div [hidden]="!imageUploded">Image uploaded successfully.</div>
          </div>
-
     </form>
 </div>
 <div mat-dialog-actions>

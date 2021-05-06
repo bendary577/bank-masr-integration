@@ -1,0 +1,194 @@
+<div class="header" style="margin-bottom: 15px;">
+    <button mat-flat-button class="button-back" (click)="backClicked()">Go Back</button>
+</div>   
+
+<div style="width: 30%; height: 70%; margin: 2%; float: left;">
+    <mat-card class="stat-card" style="margin-left: 20px;">
+        <mat-card-content>
+            <div style=" text-align: center;">
+                <img class="user-img" src="../../../assets/defaultImage.jpg" alt="image">
+                <h1 style="margin-top: 0;
+                        margin-bottom: .5rem;
+                        font-weight: 500;
+                        line-height: 1.2;
+                        color: #32393f"> Test User</h1>
+                <h4 style=""> Test@test.comv <br> Test Group </h4>
+                <button mat-flat-button class="button-back" (click)="backClicked()">Go Back</button>
+                <button class="filter-btn" (click)="addRevenueCenter()" mat-raised-button>Add Revenue Center</button>
+                <hr>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+<div style="width: 60%; height: 100%; margin: 2%; float: left;">
+    <div style="width: 100%;">
+        <mat-card class="stat-card">
+            <mat-card-content>
+                <h2>User Wallet</h2>
+                <form class="my-form">
+                    <div class="row">
+                        <div class="two-column" style="text-align: left;">
+                            <button class="filter-btn" (click)="chargeWallet()" mat-raised-button>Charge Wallet</button>
+                            <button class="filter-btn" (click)="addRevenueCenter()" mat-raised-button>Add Revenue Center</button>
+                        </div>
+                        <div class="two-column">
+                            <h3 style="border-radius: 10px; text-align: center; height: auto;">
+                                <div>
+                                    Wallet Credit
+                                </div>
+                                <div>
+                                    50 EGP
+                                </div>
+                            </h3>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div style="width: 100%; height: 60%;">
+        <!-- <mat-card class="stat-card">
+            <mat-card-content> -->
+
+                <div *ngIf="transactionsData.length != 0" >
+                    <ngx-datatable class="material" [loadingIndicator]="transactionsList.showLoading"
+                         [messages]="transactionsList.messages" style="border-radius:1%; width: 98%;"
+                        [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+                        [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [rows]="transactionsData"
+                        [selected]="transactionsList.selected" [selectionType]="'checkbox'"
+                        [selectAllRowsOnPage]="false" [scrollbarH]="true">
+
+                        <ngx-datatable-column name="Booking Number">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.bookingNumber}}
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="User Name">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.guestName}}
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Phone Number">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.phoneNumber}}
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Web Site">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.webSite}}
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Check In Date">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.checkInDate}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                    </ngx-datatable>
+
+                </div>
+
+            <!-- </mat-card-content>
+        </mat-card> -->
+    </div>
+</div>
+
+<!-- 
+<div class="row">
+    <div class="column">
+        <mat-card class="stat-card">
+            <mat-card-content>
+                    <div >
+                        <img class="user-img" src="../../../assets/defaultImage.jpg" alt="image">
+                        <h1 class="user-name"> Test User</h1> 
+                        <h2 class="user-name"> Test@test.com</h2> 
+                        <h2 class="user-name"> Test Group</h2> 
+
+                    </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="column">
+        <mat-card class="stat-card">
+            <mat-card-content>
+                <h2>User Wallet</h2>
+                <form class="my-form">
+                    <div class="row">
+                        <div class="two-column" style="text-align: left;">
+                            <button class="filter-btn" (click)="Charge()" mat-raised-button>Charge Wallet</button>
+                            <button class="filter-btn" (click)="Charge()" mat-raised-button>Add Revenue Center</button>
+                        </div>
+                        <div class="two-column">
+                            <h3 style="border-radius: 10px; text-align: center; height: auto;">
+                                <div>
+                                    Wallet Credit
+                                </div>
+                                <div>
+                                    50 EGP
+                                </div>
+                            </h3>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+</div>
+
+<div class="main">
+
+    <div *ngIf="transactionsData.length == 0"> 
+        <mat-card class="transaction-card">
+            <mat-card-content>
+                <div>
+                    <img src="../../../assets/activity.png" alt="image">
+                    <p>You do not have any recent activity.</p>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div *ngIf="transactionsData.length != 0">
+        <ngx-datatable class="material" [loadingIndicator]="transactionsList.showLoading" [messages]="transactionsList.messages" [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+        [rows]="transactionsData" [selected]="transactionsList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" [scrollbarH]="true">
+
+        <ngx-datatable-column name="Booking Number">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.bookingNumber}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="User Name">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.guestName}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Phone Number">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.phoneNumber}}
+            </ng-template>
+        </ngx-datatable-column>
+        
+        <ngx-datatable-column name="Web Site">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.webSite}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Check In Date">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.checkInDate}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        </ngx-datatable>
+    </div>
+
+</div>
+<ngx-spinner></ngx-spinner> -->
