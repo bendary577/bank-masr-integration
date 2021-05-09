@@ -19,6 +19,16 @@
                     <input matInput float id="municipalityTax" name="municipalityTax" placeholder="Municipality Tax" [(ngModel)]="syncJobType.configuration.bookingConfiguration.municipalityTax">
                 </mat-form-field>
             </div>
+            <div>
+                <mat-form-field class="example-full-width">
+                    <input matInput float id="vatRate" name="vatRate" placeholder="VAT Rate" [(ngModel)]="syncJobType.configuration.bookingConfiguration.vatRate">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="example-full-width">
+                    <input matInput float id="serviceChargeRate" name="serviceChargeRate" placeholder="Service Charge Rate" [(ngModel)]="syncJobType.configuration.bookingConfiguration.serviceChargeRate">
+                </mat-form-field>
+            </div>
         </mat-expansion-panel>
 
         <br>
