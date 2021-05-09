@@ -1,14 +1,21 @@
-<div class="row">
-    <div style="margin: auto;">
-        <p style="font-family: fantasy; font-weight: bold; font-size: 20px;">Choose Revenue Center</p>
-        <button class="filter-btn" (click)="totalSpend('Totoal')" mat-raised-button>TAke Away</button>
-        <button class="filter-btn" (click)="totalSpend('Today')" mat-raised-button>Dine In</button>
-        <button class="filter-btn" (click)="totalSpend('Today')" mat-raised-button>Rest</button>
-    </div>
+<h1 mat-dialog-title>Cahrge Wallet</h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="form" class="my-form">
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Amount" formControlName="amount" required maxlength="50">
+                <mat-error *ngIf="form.controls.amount.hasError('required')">
+                    Amount is required.
+                  </mat-error>
+                  <mat-error *ngIf="form.controls.amount.hasError('maxlength')">
+                    Amount is to long.
+                  </mat-error>
+            </mat-form-field>
+        </div>
+    </form>
 </div>
-<div >
-    <div mat-dialog-actions >
-        <button mat-button cdkFocusInitial (click)="onSaveClick()">Save</button>
-        <button mat-button (click)="onNoClick()">Cancel</button>
-    </div>
+<div mat-dialog-actions>
+    <button mat-button cdkFocusInitial (click)="onSaveClick()" > Charge </button>
+    <button mat-button (click)="onNoClick()"> Cancel </button>
 </div>

@@ -145,6 +145,8 @@ import { AngularDropdownModule } from 'angular-dropdown';
 import { NgWormholeModule } from 'ng-wormhole';
 import { FilterComponent } from './components/filter/filter.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { EditWalletComponent } from './components/edit-wallet/edit-wallet.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -252,7 +254,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     OpiActivitiesComponent,
     OpiTransactionsComponent,
     FilterComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    EditWalletComponent
   ],
   imports: [
     BrowserModule,
@@ -283,7 +286,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     NgxJsonViewerModule,
     ChartsModule,
     AngularDropdownModule,
-    NgWormholeModule
+    NgWormholeModule,
+    ToastrModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, 
     CookieService, 
@@ -306,7 +310,13 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     // ==> Consumption Sync Job Type
     AddConsumptionLocationComponent, AddConsumptionLocationItemsComponent,
     // ==> Loyalty
-    AddAppCompanyComponent, AddAppGroupComponent, AddAppUserComponent, DialogComponent, DeleteAppGroupComponent
+    AddAppCompanyComponent,
+    AddAppGroupComponent,
+    AddAppUserComponent,
+    DialogComponent,
+    DeleteAppGroupComponent,
+    EditWalletComponent
+    
     ]
 })
 export class AppModule { }

@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
@@ -9,26 +9,49 @@ import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class EditWalletComponent implements OnInit {
 
-  fromDate:any;
+  func = 'add';
+  form: FormGroup;
+  private _fromDate: any;
+  public get fromDate(): any {
+    return this._fromDate;
+  }
+
+  public set fromDate(value: any) {
+    this._fromDate = value;
+  }
   toDate:any;
 
   constructor(private formBuilder: FormBuilder, public snackBar: MatSnackBar, 
     public dialogRef: MatDialogRef<EditWalletComponent>,@Inject(MAT_DIALOG_DATA) public data) { }
 
   ngOnInit(): void {
+
+    this.func = this.data["func"];
+
+      this.form = this.formBuilder.group({
+      amount: ['', Validators.required],
+     });
   }
-
-  onSaveClick(){
-    this.dialogRef.close();
-
-  }
-
-  onNoClick(){
-    this.dialogRef.close();
-
-  }
-
+  
   totalSpend(date){
-
   }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  onSaveClick(): void {
+    if (this.form.invalid){
+      this.snackBar.open("Please fill form values" , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+    }else{
+      this.dialogRef.close({
+        amount: this.form.controls.name.value,
+      });
+    }
+  }
+
 }

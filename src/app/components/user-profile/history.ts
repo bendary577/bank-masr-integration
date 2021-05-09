@@ -1,11 +1,11 @@
 export class History {
 
-    
-    number: number;
-    guestName: String;
-    phoneNumber: String;
-    bookingNumber: number;
-    webSite: String;
-    checkInDate: String;
+    transactionDate: String;
+    totalPayment: number;
+    afterDiscount: number;
+    revenueCenter: String;
+    creator: String;
+    modification:String;
+    modifier:String;
 
 }
