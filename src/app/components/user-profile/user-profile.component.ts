@@ -16,6 +16,8 @@ export class UserProfileComponent implements OnInit {
   
   transactionsData = TransactionsItems; 
 
+  revenuCenters = ["Take Away", "Rest", "Dine In", "Compelmentary","Take Away", "Rest", "Dine In", "Compelmentary","Take Away", "Rest", "Dine In", "Compelmentary","Take Away", "Rest", "Dine In", "Compelmentary"]
+
   transactionsList = {
     paginateData: true as boolean,
     offset: 0,
@@ -37,6 +39,8 @@ export class UserProfileComponent implements OnInit {
   constructor(public data: Data, private _location: Location, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    console.log(this.revenuCenters)
+
     console.log(this.data.storage)
   }
 
@@ -64,6 +68,10 @@ export class UserProfileComponent implements OnInit {
 
   backClicked() {
     this._location.back();
+  }
+
+  refresh() {
+    location.reload();
   }
 }
 

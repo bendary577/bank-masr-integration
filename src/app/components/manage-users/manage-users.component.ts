@@ -57,7 +57,6 @@ export class ManageUsersComponent implements OnInit {
   }
   
   openUserProfile(user: ApplicationUser){
-    console.log(user)
     this.data.storage = user;
     this.router.navigate([Constants.USER_PROFILE]);
   }

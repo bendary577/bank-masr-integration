@@ -1,17 +1,169 @@
-// @import "../approved-invoices-infor/approved-invoices-infor.component.scss";
+@import "../approved-invoices-infor/approved-invoices-infor.component.scss";
 
-.header {
-  text-align: end;
-  padding: 4px 4px 4px 4px;
-  height: 4vh;
+h3{
+  margin:auto;
+  margin-bottom: 10px;
+  border-radius: 10px; 
+  text-align: center;
+  font-size: larger;
+  font-weight: bold; 
+  font-family: Arial, Helvetica, sans-serif;
+  height: auto;
+  width: 75%;
 }
+
+.right-col{
+  position: fixed;
+  width: 25%; 
+  height: 73%; 
+  float: left;
+  margin-left: 2%;
+}
+
+.header{
+  display: block;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  height: 3%;
+}
+
+.button-back {
+  color: #ffffff;
+  float: left;
+  margin-right: 10px;
+  background-color: rgb(59, 98, 182)!important;
+}
+
+.user-profile{
+  width: 100%;
+  height: 100%;
+  float: left;
+}
+
+.user-card{
+  text-align: center;
+  margin: 10px;
+  width: 100%;
+  height: 100%;
+  box-shadow:0 0 5px 5px rgb(207, 207, 207);
+  border: 1px;
+}
+
+mat-card-content{
+height: 100;
+}
+
+.user-name{
+  margin: 5px;
+  display: block;
+  font-weight: bold;
+  font-size: larger;
+  line-height: 1.2;
+  color: #32393f;
+}
+
+.user-data table{
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.user-data td{
+  text-align: left;
+  margin-right: 20px;
+}
+
+.title{
+  margin-right: 20px;
+  text-align: left;
+  font-size: medium;
+  font-weight: 600;
+  color: #020202;
+}
+
+.res{
+  text-align: right;
+  font-size: medium;
+  font-weight: 500;
+  color: #4d4d4d;
+}
+
+.user-btn{
+  margin: 10px;
+  width: 100px;
+  background-color: rgb(245, 245, 245);
+  color: black;
+  font-weight: bold;
+  position: relative;
+  bottom: 0px;
+  right: 0px;
+}
+
 .headerBack {
   float: right;
   padding-left: 20px;
 }
-.stat-card{
-  margin: 10px;
-  height: 100%;
+
+.left-col{
+  margin: 1%;
+  width: 65%; 
+  height: 100%; 
+  float: right;
+}
+
+.wallet{
+  margin-bottom: 1%;
+}
+
+.wallet-card{
+  width: 96%;
+  margin-bottom: 1%;
+  box-shadow:0 0 5px 5px rgb(207, 207, 207);
+} 
+.list-group{
+  width: 350px;
+  height: 150px;
+  display: inline-block;
+  overflow:scroll;
+  border-top:1px #000000;
+}
+
+.list-group-item-header{
+  width: 350px;
+  font-size: larger;
+  font-weight: lighter;
+  margin: auto;
+  color: rgb(252, 252, 252);
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.list-group-item{
+  text-align: left;
+  position: relative;
+  display: block;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.125);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }
 
 .transaction-card{
@@ -38,6 +190,7 @@
   clear: both;
   padding-left: 10px;
 }
+
 .row{
   display: flex;
   overflow: hidden;    
@@ -54,17 +207,9 @@
 .filter-btn{
   margin: 10px;
   width: 160px;
-  display: block;
-  margin-bottom: 10px;
+  margin: 10px;
   background-color: rgb(241, 241, 241);
   color: black;
   font-weight: bold;
 }
 
-.button-back {
-  color: #ffffff;
-  margin-top: 10px;
-  float: left;
-  margin: 10;
-  background-color: rgb(59, 98, 182)!important;
-}

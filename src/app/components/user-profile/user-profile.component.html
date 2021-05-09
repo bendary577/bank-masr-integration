@@ -1,38 +1,67 @@
-<div class="header" style="margin-bottom: 15px;">
-    <button mat-flat-button class="button-back" (click)="backClicked()">Go Back</button>
-</div>   
-
-<div style="width: 30%; height: 70%; margin: 2%; float: left;">
-    <mat-card class="stat-card" style="margin-left: 20px;">
-        <mat-card-content>
-            <div style=" text-align: center;">
+<div class="right-col">
+    <div class="header">
+        <button mat-flat-button class="button-back" (click)="backClicked()">Go Back</button>
+        <button mat-flat-button class="button-back" (click)="refresh()">Refresh</button>
+    </div>
+    <div class="user-profile">
+        <mat-card class="user-card">
+            <mat-card-content>
                 <img class="user-img" src="../../../assets/defaultImage.jpg" alt="image">
-                <h1 style="margin-top: 0;
-                        margin-bottom: .5rem;
-                        font-weight: 500;
-                        line-height: 1.2;
-                        color: #32393f"> Test User</h1>
-                <h4 style=""> Test@test.comv <br> Test Group </h4>
-                <button mat-flat-button class="button-back" (click)="backClicked()">Go Back</button>
-                <button class="filter-btn" (click)="addRevenueCenter()" mat-raised-button>Add Revenue Center</button>
+                <span class="user-name">
+                    Test User
+                </span>
+                <span>test.user@entrepreware.com</span>
                 <hr>
-            </div>
-        </mat-card-content>
-    </mat-card>
+                <div class="user-data">
+                    <table>
+                        <tr>
+                            <td class="title">Mobile </td>
+                            <td> </td>
+                            <td class="res"> 010101010102</td>
+                        </tr>
+                        <tr>
+                            <td class="title">Group </td>
+                            <td> </td>
+                            <td class="res"> Test Group</td>
+                        </tr>
+                        <tr>
+                            <td class="title">Rate </td>
+                            <td> </td>
+                            <td class="res"> 20 %</td>
+                        </tr>
+                        <tr>
+                            <td class="title">Status </td>
+                            <td> </td>
+                            <td class="res"> Active</td>
+                        </tr>
+                        <tr>
+                            <td class="title">Creation Date </td>
+                            <td> </td>
+                            <td class="res"> 21/04/2021 20:15</td>
+                        </tr>
+                        <tr>
+                            <td class="title">Last Update</td>
+                            <td> </td>
+                            <td class="res"> 21/04/2021 20:15</td>
+                        </tr>
+                    </table>
+                </div>
+                <button class="user-btn" (click)="addRevenueCenter()" mat-raised-button>Edite</button>
+                <button class="user-btn" (click)="addRevenueCenter()" mat-raised-button>Delete</button>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>
-<div style="width: 60%; height: 100%; margin: 2%; float: left;">
-    <div style="width: 100%;">
-        <mat-card class="stat-card">
+
+<div class="left-col">
+    <div class="wallet">
+        <mat-card class="wallet-card">
             <mat-card-content>
                 <h2>User Wallet</h2>
                 <form class="my-form">
                     <div class="row">
-                        <div class="two-column" style="text-align: left;">
-                            <button class="filter-btn" (click)="chargeWallet()" mat-raised-button>Charge Wallet</button>
-                            <button class="filter-btn" (click)="addRevenueCenter()" mat-raised-button>Add Revenue Center</button>
-                        </div>
-                        <div class="two-column">
-                            <h3 style="border-radius: 10px; text-align: center; height: auto;">
+                        <div class="two-column" style="text-align: center;">
+                            <h3 >
                                 <div>
                                     Wallet Credit
                                 </div>
@@ -40,6 +69,20 @@
                                     50 EGP
                                 </div>
                             </h3>
+                            <button class="filter-btn" (click)="chargeWallet()" mat-raised-button>Charge Wallet</button>
+                            <button class="filter-btn" (click)="addRevenueCenter()" mat-raised-button>Edite Wallet</button>
+                        </div>
+                        <div class="two-column">
+                            <!-- To have radio, change input type to radio and add same name attribute to all inputs -->
+                            <div class="list-group-item-header">
+                                Revenue Centers
+                            </div>
+                            <div class="list-group">
+                                <label class="list-group-item" *ngFor="let revenue of revenuCenters">
+                                    <input class="form-check-input me-1" type="checkbox">
+                                    {{revenue}}
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -50,48 +93,47 @@
         <!-- <mat-card class="stat-card">
             <mat-card-content> -->
 
-                <div *ngIf="transactionsData.length != 0" >
-                    <ngx-datatable class="material" [loadingIndicator]="transactionsList.showLoading"
-                         [messages]="transactionsList.messages" style="border-radius:1%; width: 98%;"
-                        [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
-                        [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [rows]="transactionsData"
-                        [selected]="transactionsList.selected" [selectionType]="'checkbox'"
-                        [selectAllRowsOnPage]="false" [scrollbarH]="true">
+        <div *ngIf="transactionsData.length != 0">
+            <ngx-datatable class="material" [loadingIndicator]="transactionsList.showLoading"
+                [messages]="transactionsList.messages" style="border-radius:1%; width: 100%;" [sortType]="'multi'"
+                [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"
+                [scrollbarH]="true" [rows]="transactionsData" [selected]="transactionsList.selected"
+                [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" [scrollbarH]="true">
 
-                        <ngx-datatable-column name="Booking Number">
-                            <ng-template let-row="row" ngx-datatable-cell-template>
-                                {{row.bookingNumber}}
-                            </ng-template>
-                        </ngx-datatable-column>
+                <ngx-datatable-column name="Booking Number">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.bookingNumber}}
+                    </ng-template>
+                </ngx-datatable-column>
 
-                        <ngx-datatable-column name="User Name">
-                            <ng-template let-row="row" ngx-datatable-cell-template>
-                                {{row.guestName}}
-                            </ng-template>
-                        </ngx-datatable-column>
+                <ngx-datatable-column name="User Name">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.guestName}}
+                    </ng-template>
+                </ngx-datatable-column>
 
-                        <ngx-datatable-column name="Phone Number">
-                            <ng-template let-row="row" ngx-datatable-cell-template>
-                                {{row.phoneNumber}}
-                            </ng-template>
-                        </ngx-datatable-column>
+                <ngx-datatable-column name="Phone Number">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.phoneNumber}}
+                    </ng-template>
+                </ngx-datatable-column>
 
-                        <ngx-datatable-column name="Web Site">
-                            <ng-template let-row="row" ngx-datatable-cell-template>
-                                {{row.webSite}}
-                            </ng-template>
-                        </ngx-datatable-column>
+                <ngx-datatable-column name="Web Site">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.webSite}}
+                    </ng-template>
+                </ngx-datatable-column>
 
-                        <ngx-datatable-column name="Check In Date">
-                            <ng-template let-row="row" ngx-datatable-cell-template>
-                                {{row.checkInDate}}
-                            </ng-template>
-                        </ngx-datatable-column>
-                    </ngx-datatable>
+                <ngx-datatable-column name="Check In Date">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.checkInDate}}
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
 
-                </div>
+        </div>
 
-            <!-- </mat-card-content>
+        <!-- </mat-card-content>
         </mat-card> -->
     </div>
 </div>
