@@ -10,8 +10,16 @@ import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 export class EditWalletComponent implements OnInit {
 
   func = 'add';
+  inCharge = false;
+  inDeduct = false;
+  generateVoucher = false;
+  amount = 0;
+  voucher='';
+  showVoucher = false;
   form: FormGroup;
+
   private _fromDate: any;
+
   public get fromDate(): any {
     return this._fromDate;
   }
@@ -22,22 +30,51 @@ export class EditWalletComponent implements OnInit {
   toDate:any;
 
   constructor(private formBuilder: FormBuilder, public snackBar: MatSnackBar, 
-    public dialogRef: MatDialogRef<EditWalletComponent>,@Inject(MAT_DIALOG_DATA) public data) { }
+    public dialogRef: MatDialogRef<EditWalletComponent>,
+    @Inject(MAT_DIALOG_DATA) public data) { }
 
   ngOnInit(): void {
 
-    this.func = this.data["func"];
+    this.func = this.data["function"];
+
+    if(this.func == 'add' ){
+      this.inCharge = true;
+    }else if(this.func == 'deduct'){
+      this.inDeduct = true;
+    }else if(this.func == 'showVoucher'){
+      this.showVoucher = true;
+      this.amount = this.data["amount"];
+      this.voucher = this.getRandomString(10);
+    }else{
+      this.showVoucher = true;
+    }
 
       this.form = this.formBuilder.group({
       amount: ['', Validators.required],
      });
   }
   
+   getRandomString(length) {
+    var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var result = '';
+    for ( var i = 0; i < length; i++ ) {
+        result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+    }
+    return result;
+  }
+
   totalSpend(date){
   }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  onCloseClick(){
+    this.dialogRef.close({
+      amount: this.amount,
+      voucher : this.voucher
+    });
   }
 
   onSaveClick(): void {
@@ -49,7 +86,7 @@ export class EditWalletComponent implements OnInit {
       });
     }else{
       this.dialogRef.close({
-        amount: this.form.controls.name.value,
+        amount: this.form.controls.amount.value,
       });
     }
   }

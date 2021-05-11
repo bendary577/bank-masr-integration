@@ -1,254 +1,282 @@
-<div class="right-col">
-    <div class="header">
-        <button mat-flat-button class="button-back" (click)="backClicked()">Go Back</button>
-        <button mat-flat-button class="button-back" (click)="refresh()">Refresh</button>
+<div>
+    <div class="right-col">
+        <div class="header">
+            <button mat-flat-button class="button-back" (click)="backClicked()">Go Back</button>
+            <button mat-flat-button class="refresh-btn-view" (click)="refresh()">
+                <img class="refresh-img" src="../../../assets/refresh.png">
+            </button>
+        </div>
+        <div class="user-profile">
+            <mat-card class="user-card">
+                <mat-card-content>
+                    <img class="user-img" src="../../../assets/defaultImage.jpg" alt="image">
+                    <span class="user-name">
+                        Test User
+                    </span>
+                    <span style="color: #1661a3;">test.user@entrepreware.com</span>
+                    <hr>
+                    <div class="user-data">
+                        <table>
+                            <tr>
+                                <td class="title">Mobile </td>
+                                <td> </td>
+                                <td class="res"> 010101010102</td>
+                            </tr>
+                            <tr>
+                                <td class="title">Group </td>
+                                <td> </td>
+                                <td class="res"> Test Group</td>
+                            </tr>
+                            <tr>
+                                <td class="title">Rate </td>
+                                <td> </td>
+                                <td class="res"> 20 %</td>
+                            </tr>
+                            <tr>
+                                <td class="title">Status </td>
+                                <td> </td>
+                                <td class="res"> Active</td>
+                            </tr>
+                            <tr>
+                                <td class="title">Creation Date </td>
+                                <td> </td>
+                                <td class="res"> 21/04/2021 20:15</td>
+                            </tr>
+                            <tr>
+                                <td class="title">Last Update</td>
+                                <td> </td>
+                                <td class="res"> 21/04/2021 20:15</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <button class="user-btn" (click)="userAction()" mat-raised-button>Edit</button>
+                    <button class="user-btn" (click)="addRevenueCenter()" mat-raised-button>Delete</button>
+                </mat-card-content>
+            </mat-card>
+        </div>
     </div>
-    <div class="user-profile">
-        <mat-card class="user-card">
-            <mat-card-content>
-                <img class="user-img" src="../../../assets/defaultImage.jpg" alt="image">
-                <span class="user-name">
-                    Test User
-                </span>
-                <span style="color: #1661a3;">test.user@entrepreware.com</span>
-                <hr>
-                <div class="user-data">
-                    <table>
-                        <tr>
-                            <td class="title">Mobile </td>
-                            <td> </td>
-                            <td class="res"> 010101010102</td>
-                        </tr>
-                        <tr>
-                            <td class="title">Group </td>
-                            <td> </td>
-                            <td class="res"> Test Group</td>
-                        </tr>
-                        <tr>
-                            <td class="title">Rate </td>
-                            <td> </td>
-                            <td class="res"> 20 %</td>
-                        </tr>
-                        <tr>
-                            <td class="title">Status </td>
-                            <td> </td>
-                            <td class="res"> Active</td>
-                        </tr>
-                        <tr>
-                            <td class="title">Creation Date </td>
-                            <td> </td>
-                            <td class="res"> 21/04/2021 20:15</td>
-                        </tr>
-                        <tr>
-                            <td class="title">Last Update</td>
-                            <td> </td>
-                            <td class="res"> 21/04/2021 20:15</td>
-                        </tr>
-                    </table>
+
+    <div class="left-col">
+        <div class="wallet">
+            <div class="column">
+                <mat-card class="wallet-card">
+                    <mat-card-content>
+                        <h2>User Wallet</h2>
+                        <form class="my-form">
+                            <div class="row">
+                                <div class="wallet-amount">
+                                    <h3>
+                                        <div>
+                                            Wallet Credit
+                                        </div>
+                                        <div style="font-size: larger;">
+                                            {{credit}} USD
+                                        </div>
+                                    </h3>
+                                    <button class="filter-btn" (click)="chargeWallet('add')"
+                                        mat-raised-button>Charge</button>
+                                    <button class="filter-btn" (click)="chargeWallet('deduct')"
+                                        mat-raised-button>Deduct</button>
+                                    <!-- <button class="filter-btn" (click)="chargeWallet('generat')"
+                                        mat-raised-button>Generate
+                                        Voucher</button> -->
+                                </div>
+                            </div>
+                        </form>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="column">
+                <mat-card class="wallet-card">
+                    <mat-card-content>
+                        <h2>Wallet Revenue Centers</h2>
+                        <form class="my-form">
+                            <div class="row">
+                                <div class="two-column">
+                                    <!-- To have radio, change input type to radio and add same name attribute to all inputs -->
+                                    <div class="list-group-item-header">
+                                        Revenue Centers
+                                    </div>
+                                    <div class="list-group">
+                                        <label class="list-group-item" *ngFor="let revenue of revenuCenters">
+                                            <!-- <input class="form-check-input me-1" type="checkbox"> -->
+                                            {{revenue}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="column">
+                <mat-card class="wallet-card">
+                    <mat-card-content>
+                        <h2>User Wallet</h2>
+                        <form class="my-form">
+                            <div class="row">
+                                <div class="wallet-amount">
+                                    <h3>
+                                        <div>
+                                            Voucher Code
+                                        </div>
+                                        <div style="font-size: larger;">
+                                            FristNewVoucher
+                                        </div>
+                                    </h3>
+                                    <button class="filter-btn" (click)="chargeWallet('sms')"
+                                        mat-raised-button>Send SMS</button>
+                                    <button class="filter-btn" (click)="chargeWallet('mail')"
+                                        mat-raised-button>Send Mail</button>
+                                    <button class="filter-btn" (click)="chargeWallet('print')"
+                                        mat-raised-button> Print </button>
+                                </div>
+                            </div>
+                        </form>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+        <div class="trans-tabel">
+            <div class="title-card">
+            User Wallet
                 </div>
-                <button class="user-btn" (click)="userAction()" mat-raised-button>Edite</button>
-                <button class="user-btn" (click)="addRevenueCenter()" mat-raised-button>Delete</button>
-            </mat-card-content>
-        </mat-card>
-    </div>
-</div>
+            <div *ngIf="voucherData.length != 0">
+                <ngx-datatable class="material" [loadingIndicator]="transactionsList.showLoading"
+                    [messages]="transactionsList.messages"
+                    style="border-radius:1%; width: 100%; height: 360px; display: inline-block;" [sortType]="'multi'"
+                    [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"
+                    [scrollbarH]="true" [rows]="voucherData" [selected]="transactionsList.selected"
+                    [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" [scrollbarH]="true" >
 
-<div class="left-col">
-    <div class="wallet">
-        <div class="two-column">
-            <mat-card class="wallet-card">
-                <mat-card-content>
-                    <h2>User Wallet</h2>
-                    <form class="my-form">
-                        <div class="row">
-                            <div class="wallet-amount">
-                                <h3>
-                                    <div>
-                                        Wallet Credit
-                                    </div>
-                                    <div style="font-size: larger;">
-                                        50 EGP
-                                    </div>
-                                </h3>
-                                <button class="filter-btn" (click)="chargeWallet('add')" mat-raised-button>Charge</button>
-                                <button class="filter-btn" (click)="chargeWallet('deduct')" mat-raised-button>Deduct</button>
-                                <button class="filter-btn" (click)="chargeWallet('generat')" mat-raised-button>Generate Voucher</button>
-                            </div>
-                        </div>
-                    </form>
-                </mat-card-content>
-            </mat-card>
-        </div>
-        <div class="two-column">
-            <mat-card class="wallet-card">
-                <mat-card-content>
-                    <h2>Wallet Revenue Centers</h2>
-                    <form class="my-form">
-                        <div class="row">
-                            <div class="two-column">
-                                <!-- To have radio, change input type to radio and add same name attribute to all inputs -->
-                                <div class="list-group-item-header">
-                                    Revenue Centers
-                                </div>
-                                <div class="list-group">
-                                    <label class="list-group-item" *ngFor="let revenue of revenuCenters">
-                                        <input class="form-check-input me-1" type="checkbox">
-                                        {{revenue}}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </mat-card-content>
-            </mat-card>
-        </div>
-    </div>
-    <div class="trans-tabel">
-        <div *ngIf="transactionsData.length != 0">
-            <ngx-datatable class="material" [loadingIndicator]="transactionsList.showLoading"
-                [messages]="transactionsList.messages" style="border-radius:1%; width: 100%; height: 350px;"
-                [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
-                [scrollbarV]="true" [scrollbarH]="true" [rows]="transactionsData" [selected]="transactionsList.selected"
-                [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" [scrollbarH]="true">
+                    <ngx-datatable-column name="Voucher Creation Date">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.voucherDate}}
+                        </ng-template>
+                    </ngx-datatable-column>
 
-                    
-                <ngx-datatable-column name="Transaction Date">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.transactionDate}}
-                    </ng-template>
-                </ngx-datatable-column>
+                    <ngx-datatable-column name="Total Amount">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.totalAmount}} EGP
+                        </ng-template>
+                    </ngx-datatable-column>
 
-                <ngx-datatable-column name="Total Amount">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.totalPayment}} EGP
-                    </ng-template>
-                </ngx-datatable-column>
+                    <ngx-datatable-column name="Amount After Discount">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.voucher}}
+                        </ng-template>
+                    </ngx-datatable-column>
 
-                <ngx-datatable-column name="Amount After Discount">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.afterDiscount}} EGP
-                    </ng-template>
-                </ngx-datatable-column>
+                    <ngx-datatable-column name="Creator Agent">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.creator}}
+                        </ng-template>
+                    </ngx-datatable-column>
 
-                <ngx-datatable-column name="Amount After Discount">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.revenueCenter}} EGP
-                    </ng-template>
-                </ngx-datatable-column>
-                
-                <ngx-datatable-column name="Amount After Discount">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.creator}} EGP
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="Amount After Discount">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.afterDiscount}} EGP
-                    </ng-template>
-                </ngx-datatable-column>
-            </ngx-datatable>
-        </div>
-    </div>
-    <div class="trans-tabel" style="margin-top: 100px;">
-        <div *ngIf="transactionsData.length != 0">
-            <ngx-datatable class="material" [loadingIndicator]="transactionsList.showLoading"
-                [messages]="transactionsList.messages" style="border-radius:1%; width: 100%; height: 350px;"
-                [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
-                [scrollbarV]="true" [scrollbarH]="true" [rows]="transactionsData" [selected]="transactionsList.selected"
-                [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" [scrollbarH]="true">
-
-                    
-                <ngx-datatable-column name="Transaction Date">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.transactionDate}}
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="Total Amount">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.totalPayment}} EGP
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="Amount After Discount">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.afterDiscount}} EGP
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="Amount After Discount">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.revenueCenter}} EGP
-                    </ng-template>
-                </ngx-datatable-column>
-                
-                <ngx-datatable-column name="Amount After Discount">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.creator}} EGP
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="Amount After Discount">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.afterDiscount}} EGP
-                    </ng-template>
-                </ngx-datatable-column>
-
-            </ngx-datatable>
-
+                </ngx-datatable>
+            </div>
         </div>
     </div>
 </div>
 
-<!-- <div class="main">
+<div class="main-view">
 
-    <div *ngIf="transactionsData.length != 0">
-        <ngx-datatable class="material" [loadingIndicator]="transactionsList.showLoading"
-            [messages]="transactionsList.messages" style="border-radius:1%; width: 85%; height: 450px;"
-            [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
-            [scrollbarV]="true" [scrollbarH]="true" [rows]="transactionsData" [selected]="transactionsList.selected"
-            [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" [scrollbarH]="true">
-
-                
-            <ngx-datatable-column name="Transaction Date">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.transactionDate}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Total Amount">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.totalPayment}} EGP
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Amount After Discount">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.afterDiscount}} EGP
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Amount After Discount">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.revenueCenter}} EGP
-                </ng-template>
-            </ngx-datatable-column>
-            
-            <ngx-datatable-column name="Amount After Discount">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.creator}} EGP
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Amount After Discount">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.afterDiscount}} EGP
-                </ng-template>
-            </ngx-datatable-column>
-        </ngx-datatable>
+    <div class="filter-view" *ngIf="openFilter">
+        <div style="margin-top:10px;">
+            <div class="column" style="float: left;">
+                <p style="font-family: Arial, Helvetica, sans-serif; font-weight: 200; font-size: 20px;"> Filter By Date </p>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Start Date" type="date" name="fromDate" id="fromDate"
+                        [(ngModel)]="fromDate">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="End Date" type="date" name="toDate" id="toDate" [(ngModel)]="toDate">
+                </mat-form-field>
+            </div>
+            <div class="column" style="float: left;">
+                <p style="font-family: Arial, Helvetica, sans-serif; font-weight: 200; font-size: 20px;">Filter By</p>
+                <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                        <mat-select matInput id="groups" name="field" placeholder="Filter Field" [(ngModel)]="field">
+                            <!-- formControlName="parentGroup" -->
+                            <mat-option [value]=c *ngFor="let c of fields">{{c}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Field Value" [(ngModel)]="fieldValues" maxlength="50">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="column" style="float: left; margin-top: 150px;">
+                <div mat-dialog-actions>
+                    <button mat-button cdkFocusInitial (click)="onFilterClick()" style="width: 100px;">Filter</button>
+                    <button mat-button (click)="onCancelClick()" style="width: 100px;">Cancel</button>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
-</div> -->
+<div style="float: right; width: 96%; margin-left: 50px; color: rgb(32, 32, 32);">
+    <button mat-flat-button class="filter-btn-view" (click)="openFilterView()">
+        <img class="filter-img" src="../../../assets/filter.png">
+    </button>
+</div>
 
-<ngx-spinner></ngx-spinner>
+<div *ngIf="transactionsData.length != 0">
+
+    <ngx-datatable class="material" [loadingIndicator]="transactionsList.showLoading"
+        [messages]="transactionsList.messages" style="border-radius:1%; width: 96%; height: 450px; margin-bottom: 20px;" [sortType]="'multi'"
+        [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"
+        [scrollbarH]="true" [rows]="transactionsData" [selected]="transactionsList.selected"
+        [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" [scrollbarH]="true">
+
+
+        <ngx-datatable-column name="Transaction Date">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.transactionDate}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Total Amount">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.totalPayment}} EGP
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Amount After Discount">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.afterDiscount}} EGP
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Revenue Center">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.revenueCenter}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Creator Agent">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.creator}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Update">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.update}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Update Agent">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.modifier}}
+            </ng-template>
+        </ngx-datatable-column>
+
+    </ngx-datatable>
+    <ngx-spinner></ngx-spinner>
+</div>

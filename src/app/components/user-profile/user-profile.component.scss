@@ -12,14 +12,16 @@ h3{
   width: 80%;
 }
 
-br{
+hr{
   width:90%;
+  margin: 20px;
+  margin-right: 10px;
 }
 
 .right-col{
-  position: fixed;
-  width: 25%; 
-  height: 73%; 
+  // position: fixed;
+  width: 24%; 
+  height: 100%; 
   float: left;
   margin-left: 2%;
 }
@@ -27,13 +29,11 @@ br{
 .header{
   display: block;
   height: 3%;
-  margin-top: 10;
 }
 
 .button-back {
   color: #ffffff;
   float: left;
-  margin-right: 10px;
   background-color: rgb(59, 98, 182)!important;
 }
 
@@ -46,9 +46,8 @@ br{
 .user-card{
   text-align: center;
   margin-top: 25px;
-  padding-right: 0;
   width: 100%;
-  height: 530px;
+  height: 600px;
   box-shadow:0 0 5px 5px rgb(207, 207, 207);
   border: 1px;
 }
@@ -58,7 +57,7 @@ height: 100;
 }
 
 mat-card{
-  padding-right: 0px;
+  padding-right: 5px;
   display: inline-block;
 }
 
@@ -72,8 +71,7 @@ mat-card{
 }
 
 .user-data table{
-  margin-top: 10px;
-  margin-left: 10px;
+  margin: 20px;  
 }
 
 .user-data td{
@@ -114,8 +112,9 @@ mat-card{
 
 .left-col{
   margin: 1%;
-  margin-top: 5.1%;
-  width: 65%; 
+  margin-top: 5.3%;
+  margin-left: 3%;
+  width: 70%; 
   height: 100%; 
   float: right;
 }
@@ -125,39 +124,42 @@ mat-card{
 }
 
 .wallet-card{
+  float: right;
   text-align: center;
-  width: 91%;
-  height: 230px;
-  margin-bottom: 3%;
-  margin-left: 1%;
+  width: 90%;
+  height: 240px;
+  margin-bottom: 4%;
+  margin-left: 2%;
   box-shadow:0 0 5px 5px rgb(207, 207, 207);
 } 
+
 
 .wallet-amount{
   width: 100%;
 }
 
+
 .list-group{
-  width: 350px;
+  width: 250px;
   height: 150px;
   display: inline-block;
   overflow:scroll;
-  border-top:1px #000000;
+  
 }
 
 .list-group-item-header{
-  width: 350px;
+  width: 250px;
   font-size: larger;
   font-weight: lighter;
   margin-bottom: 5px;
   margin: auto;
   color: rgb(252, 252, 252);
   background-color: #3F51B5 ;
-  border-color: #3F51B5 ;
 }
 
 .list-group-item{
   text-align: left;
+  padding-left: 10px;
   position: relative;
   display: block;
   margin-bottom: -1px;
@@ -190,10 +192,32 @@ mat-card{
   height: 300px;
 }
 
+.main-view {
+  text-align: center;
+  height: auto;
+  margin-top: 0;
+  margin-bottom: 50px;
+}
+
+.title-card{
+  margin: auto;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 2px solid rgb(197, 197, 197);
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  margin-bottom: 20px ;
+  width: 70%;
+  height: 30px;
+  font-weight: bold;
+  font-size: large;
+} 
+
 /* Create three equal columns that floats next to each other */
 .column {
   width: 33%;
   text-align: center;
+  float: left;
 }
 
 .two-column{
@@ -204,11 +228,16 @@ mat-card{
 }
 
 .trans-tabel{
-  display: block;
-  margin-top: 20px;
-  margin-bottom: 100px;
   width: 100%;
-  height: 60%;
+  display: inline-block;
+}
+
+.filter-view{
+  margin: 10px;
+  display: inline-block;
+  width: 96%;
+  border: 2px solid rgb(197, 197, 197);
+  height: 250px;
 }
 
 /* Clear floats after the columns */
@@ -230,15 +259,43 @@ mat-card{
   width: 100px;
   min-height: 100px;
   border-radius: 50%;
+  margin-top: 30px;
 }
 
 .filter-btn{
-  margin: 5px;
   margin-top: 7px;
-  width: auto;
   background-color: rgb(241, 241, 241);
   color: black;
   font-weight: bold;
+  border: 2px solid rgb(197, 197, 197);
   box-shadow:0 0 3px 3px rgb(226, 226, 226);
 }
 
+.filter-btn-view{
+  margin: 10px;
+  width: 60px;
+  height: 37px;
+  background-color: #fafafa;
+  float: right;
+  color: #000000;
+}
+
+.filter-img{
+  width: 30px;
+  height: 32px; 
+}
+
+.refresh-btn-view{
+  text-align: center;
+  margin-top: 5px;
+  border: 2px solid rgb(214, 214, 214);
+  background-color: rgb(255, 255, 255);
+  float: left;
+  height: 37px;
+  }
+
+.refresh-img{
+  width: 22px;
+  height: 23px; 
+  padding-bottom: 3px;
+}

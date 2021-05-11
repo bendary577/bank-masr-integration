@@ -5,7 +5,7 @@ export class History {
     afterDiscount: number;
     revenueCenter: String;
     creator: String;
-    modification:String;
+    update:String;
     modifier:String;
 
 }
