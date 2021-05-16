@@ -26,8 +26,10 @@ export class UserProfileComponent implements OnInit {
   fieldValues:any;
   credit = 50;
   voucherHistory = new VoucherHistory();
-
-  revenuCenters = ["Take Away", "Rest", "Dine In", "Compelmentary","Take Away", "Rest", "Dine In", "Compelmentary","Take Away", "Rest", "Dine In", "Compelmentary","Take Away", "Rest", "Dine In", "Compelmentary"]
+  simphonyDiscount:{discountRate:20, discountId:"10025"}
+  group: any = {name:"Entrepreware IT",simphonyDiscount: "" } ; 
+  user: any = {name:"Bassel", email:"bassel@entrepreware.com" , group:""};
+  revenuCenters = ["Take Away", "Rest", "Dine In", "Compelmentary","Officer", "Rest", "Dine In", "Compelmentary","Take Away", "Rest", "Dine In", "Compelmentary","Take Away", "Rest", "Dine In", "Compelmentary"]
 
   transactionsList = {
     paginateData: true as boolean,
@@ -51,6 +53,26 @@ export class UserProfileComponent implements OnInit {
                public dialog: MatDialog) { }
 
   ngOnInit(): void {
+
+    console.log(this.data)
+
+    if(this.data != null && this.data.storage != undefined){
+      localStorage.setItem('userId', this.data.storage.id);
+      this.user = this.data.storage;
+      this.group = this.user["group"];
+      this.simphonyDiscount = this.group["simphonyDiscount"];
+    }
+
+
+    // let btn = document.querySelector('.mouse-cursor-gradient-tracking');
+    // btn.addEventListener('mousemove', e => {
+    //   let rect = e.target.getBoundingClientRect();
+    //   let x = e.clientX - rect.left;
+    //   let y = e.clientY - rect.top;
+    //   btn.style.setProperty('--x', x + 'px');
+    //   btn.style.setProperty('--y', y + 'px');
+    // });
+
   }
 
   getVoucherData(newRes){
@@ -104,11 +126,56 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
-  userAction(){    
+  updateUserDialog(){
     const dialogRef = this.dialog.open(AddAppUserComponent, {
-      width: '550px',
+      width : '550px',
+      data: {
+        user : this.user
+      }
+    });
 
-  });
+    // dialogRef.afterClosed().subscribe(res => {
+    //   if(res) {
+    //     this.sp
+    //     if(res.group == undefined)
+    //     res.group = new Group();
+    //     this.loyaltyService.addApplicationUser(false, res.name, res.email, res.group, res.image,
+    //                                            this.usersList.selected[0].id).then((result: any) => {
+    //         this.loading = false;
+    //         this.usersList.showLoading = false;
+    //         this.newUser = new ApplicationUser();
+    //         this.usersList.selected = [];
+    //         this.getUsers();
+    //         this.snackBar.open("User updated successfully.", null, {
+    //           duration: 2000,
+    //           horizontalPosition: 'center',
+    //           panelClass : "my-snack-bar-success"
+    //         });
+    //       }).catch(err => {
+    //         this.loading = false;
+    //         this.usersList.showLoading = false;
+    //         this.usersList.selected = [];
+
+    //         this.newUser = new ApplicationUser();
+
+    //         let message = "";
+    //         if(err.status === 401){
+    //           message = ErrorMessages.SESSION_EXPIRED;
+    //           this.sidNav.Logout();
+    //         }else if(err.error.message){
+    //           message = err.error.message;
+    //         }else if(err.message){
+    //           message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+    //         }
+
+    //         this.snackBar.open(message , null, {
+    //           duration: 3000,
+    //           horizontalPosition: 'center',
+    //           panelClass:"my-snack-bar-fail"
+    //         });
+    //       })
+    //   }
+    // })
   }
 
   backClicked() {
@@ -147,6 +214,7 @@ export class UserProfileComponent implements OnInit {
   onCancelClick(): void {
     this.openFilter = false;
   }
+
 
   // showSuccess() {
   //   this.toastr.success('Hello world!', 'Toastr fun!');
