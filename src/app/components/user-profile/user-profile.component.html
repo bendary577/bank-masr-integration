@@ -1,4 +1,4 @@
-<div>
+<div style="margin-top: 10px;">
     <div class="right-col">
         <div class="header">
             <button mat-flat-button class="button-back" (click)="backClicked()">Go Back</button>
@@ -9,47 +9,58 @@
         <div class="user-profile">
             <mat-card class="user-card">
                 <mat-card-content>
-                    <img class="user-img" src="../../../assets/defaultImage.jpg" alt="image">
+                    <img class="user-img" src={{user.logoUrl}} alt="image">
                     <span class="user-name">
-                        Test User
+                        {{user.name}}
                     </span>
-                    <span style="color: #1661a3;">test.user@entrepreware.com</span>
+                    <span style="color: #1661a3;">{{user.email}}</span>
                     <hr>
                     <div class="user-data">
                         <table>
                             <tr>
-                                <td class="title">Mobile </td>
+                                <td class="title" style="float: left;" style="float: left;">Mobile </td>
                                 <td> </td>
-                                <td class="res"> 010101010102</td>
+                                <td class="res" style="float: right;" style="float: right;"> 01010101012</td>
                             </tr>
                             <tr>
-                                <td class="title">Group </td>
+                                <td class="title" style="float: left;">Group </td>
                                 <td> </td>
-                                <td class="res"> Test Group</td>
+                                <td class="res" style="float: right;"> {{group.name}}</td>
                             </tr>
                             <tr>
-                                <td class="title">Rate </td>
+                                <td class="title" style="float: left;">Discount</td>
                                 <td> </td>
-                                <td class="res"> 20 %</td>
+                                <td class="res" style="float: right;"> {{simphonyDiscount.discountRate}} %</td>
                             </tr>
                             <tr>
-                                <td class="title">Status </td>
+                                <td class="title" style="float: left;">Discount ID</td>
                                 <td> </td>
-                                <td class="res"> Active</td>
+                                <td class="res" style="float: right;"> {{simphonyDiscount.discountId}}</td>
                             </tr>
                             <tr>
-                                <td class="title">Creation Date </td>
+                                <td class="title" style="float: left;">Status </td>
                                 <td> </td>
-                                <td class="res"> 21/04/2021 20:15</td>
+                                
+                                <td  class="res" style="float: right;"> 
+                                    Active
+                                    <!-- <h1 *ngIF="!user.deleted">Active</h1>
+                                    <h1 *ngIF="user.deleted">Deleted</div> -->
+                                </td>
                             </tr>
                             <tr>
-                                <td class="title">Last Update</td>
+                                <td class="title" style="float: left;">Creation Date </td>
                                 <td> </td>
-                                <td class="res"> 21/04/2021 20:15</td>
+                                <td class="res" style="float: right;"> 2021-05-12</td>
+                            </tr>
+                            <!-- *ngIf="user.lastUpdate" -->
+                            <tr >
+                                <td class="title" style="float: left;">Last Update</td>
+                                <td> </td>
+                                <td class="res" style="float: right;"> 2021-05-12</td>
                             </tr>
                         </table>
                     </div>
-                    <button class="user-btn" (click)="userAction()" mat-raised-button>Edit</button>
+                    <button class="user-btn" (click)="updateUserDialog()" mat-raised-button>Update</button>
                     <button class="user-btn" (click)="addRevenueCenter()" mat-raised-button>Delete</button>
                 </mat-card-content>
             </mat-card>
@@ -77,9 +88,9 @@
                                         mat-raised-button>Charge</button>
                                     <button class="filter-btn" (click)="chargeWallet('deduct')"
                                         mat-raised-button>Deduct</button>
-                                    <!-- <button class="filter-btn" (click)="chargeWallet('generat')"
-                                        mat-raised-button>Generate
-                                        Voucher</button> -->
+                                        <!-- <button class="mouse-cursor-gradient-tracking">
+                                            <span>Hover me</span>
+                                          </button> -->
                                 </div>
                             </div>
                         </form>
@@ -112,7 +123,7 @@
             <div class="column">
                 <mat-card class="wallet-card">
                     <mat-card-content>
-                        <h2>User Wallet</h2>
+                        <h2>User Voucher</h2>
                         <form class="my-form">
                             <div class="row">
                                 <div class="wallet-amount">
@@ -124,12 +135,12 @@
                                             FristNewVoucher
                                         </div>
                                     </h3>
-                                    <button class="filter-btn" (click)="chargeWallet('sms')"
-                                        mat-raised-button>Send SMS</button>
-                                    <button class="filter-btn" (click)="chargeWallet('mail')"
-                                        mat-raised-button>Send Mail</button>
-                                    <button class="filter-btn" (click)="chargeWallet('print')"
-                                        mat-raised-button> Print </button>
+                                    <button class="filter-btn" (click)="chargeWallet('sms')" mat-raised-button>Send
+                                        SMS</button>
+                                    <button class="filter-btn" (click)="chargeWallet('mail')" mat-raised-button>Send
+                                        Mail</button>
+                                    <button class="filter-btn" (click)="chargeWallet('print')" mat-raised-button> Print
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -139,15 +150,15 @@
         </div>
         <div class="trans-tabel">
             <div class="title-card">
-            User Wallet
-                </div>
+                Wallet History
+            </div>
             <div *ngIf="voucherData.length != 0">
                 <ngx-datatable class="material" [loadingIndicator]="transactionsList.showLoading"
                     [messages]="transactionsList.messages"
-                    style="border-radius:1%; width: 100%; height: 360px; display: inline-block;" [sortType]="'multi'"
+                    style="border-radius:1%; width: 100%; height: 310px; display: inline-block;" [sortType]="'multi'"
                     [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"
                     [scrollbarH]="true" [rows]="voucherData" [selected]="transactionsList.selected"
-                    [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" [scrollbarH]="true" >
+                    [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" [scrollbarH]="true">
 
                     <ngx-datatable-column name="Voucher Creation Date">
                         <ng-template let-row="row" ngx-datatable-cell-template>
@@ -179,42 +190,40 @@
     </div>
 </div>
 
-<div class="main-view">
-
-    <div class="filter-view" *ngIf="openFilter">
-        <div style="margin-top:10px;">
-            <div class="column" style="float: left;">
-                <p style="font-family: Arial, Helvetica, sans-serif; font-weight: 200; font-size: 20px;"> Filter By Date </p>
+<div class="filter-container" *ngIf="openFilter">
+    <div class="filter-view">
+        <div class="column" style="float: left;">
+            <p style="font-family: Arial, Helvetica, sans-serif; font-weight: 200; font-size: 20px;"> Filter By Date
+            </p>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Start Date" type="date" name="fromDate" id="fromDate"
+                    [(ngModel)]="fromDate">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="End Date" type="date" name="toDate" id="toDate" [(ngModel)]="toDate">
+            </mat-form-field>
+        </div>
+        <div class="column" style="float: left;">
+            <p style="font-family: Arial, Helvetica, sans-serif; font-weight: 200; font-size: 20px;">Filter By</p>
+            <div class="form-group">
                 <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Start Date" type="date" name="fromDate" id="fromDate"
-                        [(ngModel)]="fromDate">
-                </mat-form-field>
-                <br>
-                <mat-form-field class="example-full-width">
-                    <input matInput placeholder="End Date" type="date" name="toDate" id="toDate" [(ngModel)]="toDate">
+                    <mat-select matInput id="groups" name="field" placeholder="Filter Field" [(ngModel)]="field">
+                        <!-- formControlName="parentGroup" -->
+                        <mat-option [value]=c *ngFor="let c of fields">{{c}}</mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
-            <div class="column" style="float: left;">
-                <p style="font-family: Arial, Helvetica, sans-serif; font-weight: 200; font-size: 20px;">Filter By</p>
-                <div class="form-group">
-                    <mat-form-field class="example-full-width">
-                        <mat-select matInput id="groups" name="field" placeholder="Filter Field" [(ngModel)]="field">
-                            <!-- formControlName="parentGroup" -->
-                            <mat-option [value]=c *ngFor="let c of fields">{{c}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div class="form-group">
-                    <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Field Value" [(ngModel)]="fieldValues" maxlength="50">
-                    </mat-form-field>
-                </div>
+            <div class="form-group">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Field Value" [(ngModel)]="fieldValues" maxlength="50">
+                </mat-form-field>
             </div>
-            <div class="column" style="float: left; margin-top: 150px;">
-                <div mat-dialog-actions>
-                    <button mat-button cdkFocusInitial (click)="onFilterClick()" style="width: 100px;">Filter</button>
-                    <button mat-button (click)="onCancelClick()" style="width: 100px;">Cancel</button>
-                </div>
+        </div>
+        <div class="column" style="float: left; margin-top: 150px;">
+            <div mat-dialog-actions>
+                <button mat-button cdkFocusInitial (click)="onFilterClick()" style="width: 100px;">Filter</button>
+                <button mat-button (click)="onCancelClick()" style="width: 100px;">Cancel</button>
             </div>
         </div>
     </div>
@@ -226,12 +235,14 @@
     </button>
 </div>
 
-<div *ngIf="transactionsData.length != 0">
-
-    <ngx-datatable class="material" [loadingIndicator]="transactionsList.showLoading"
-        [messages]="transactionsList.messages" style="border-radius:1%; width: 96%; height: 450px; margin-bottom: 20px;" [sortType]="'multi'"
-        [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"
-        [scrollbarH]="true" [rows]="transactionsData" [selected]="transactionsList.selected"
+<div class="userTransTable" *ngIf="transactionsData.length != 0">
+    <div class="title-card" style="width:96%;">
+        User Transaction History
+    </div>
+    <ngx-datatable class="material" [loadingIndicator]="transactionsList.showLoading" [messages]="transactionsList.messages" 
+        style="  border-radius:1%;  width: 96%;  height: 450px; margin-bottom: 20px;"
+        [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+        [scrollbarV]="true" [scrollbarH]="true" [rows]="transactionsData" [selected]="transactionsList.selected"
         [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" [scrollbarH]="true">
 
 
