@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Data } from 'src/app/models/data';
 import { Transactions } from '../opi-transactions/transactions';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 import { MatDialog } from '@angular/material';
 import { EditWalletComponent } from '../edit-wallet/edit-wallet.component';
 import { HistoryItems } from './history-items';
@@ -15,21 +15,22 @@ import { VoucherHistory } from './voucher-history';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
-  
-  transactionsData = HistoryItems; 
-  voucherData = VoucherHistoryItems;
+
+  transactionsData = [];
+  voucherData = [];
+  voucherCode = "No Vocher Code";
   openFilter = false;
-  fromDate:any;
-  toDate:any;
-  field:any;
-  fields=["Rvenue Center", "Agent"]
-  fieldValues:any;
-  credit = 50;
+  fromDate: any;
+  toDate: any;
+  field: any;
+  fields = ["Revenue Center", "Agent"]
+  fieldValues: any;
+  credit = 0;
   voucherHistory = new VoucherHistory();
-  simphonyDiscount:{discountRate:20, discountId:"10025"}
-  group: any = {name:"Entrepreware IT",simphonyDiscount: "" } ; 
-  user: any = {name:"Bassel", email:"bassel@entrepreware.com" , group:""};
-  revenuCenters = ["Take Away", "Rest", "Dine In", "Compelmentary","Officer", "Rest", "Dine In", "Compelmentary","Take Away", "Rest", "Dine In", "Compelmentary","Take Away", "Rest", "Dine In", "Compelmentary"]
+  simphonyDiscount: { discountRate: 20, discountId: "10025" }
+  group: any = { name: "Entrepreware IT", simphonyDiscount: "" };
+  user: any = { name: "Bassel", email: "bassel@entrepreware.com", group: "" };
+  revenuCenters = ["No Revenue Centers"];
 
   transactionsList = {
     paginateData: true as boolean,
@@ -48,15 +49,15 @@ export class UserProfileComponent implements OnInit {
     inputSearch: '' as string,
     transactionsData: [] as Transactions[]
   };
-  
-  constructor( public data: Data, private _location: Location,
-               public dialog: MatDialog) { }
+
+  constructor(public data: Data, private _location: Location,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
     console.log(this.data)
 
-    if(this.data != null && this.data.storage != undefined){
+    if (this.data != null && this.data.storage != undefined) {
       localStorage.setItem('userId', this.data.storage.id);
       this.user = this.data.storage;
       this.group = this.user["group"];
@@ -75,39 +76,42 @@ export class UserProfileComponent implements OnInit {
 
   }
 
-  getVoucherData(newRes){
+  getVoucherData(newRes) {
     this.voucherData.push(
-      {         voucherDate: "",
-              totalAmount: Number(newRes.amount),
-              voucher: newRes.voucher,
-                  creator: "Kareem",})  
-                  console.log(this.voucherData);
-                  this.voucherData = this.voucherData;
+      {
+        voucherDate: "2021-05-16", totalAmount: Number(newRes.amount),
+        voucher: "NewVoucherCode", creator: "Kareem",
+      });
+
+      this.voucherCode = "NewVoucherCode";
+
   }
 
-  chargeWallet(func){    
+  chargeWallet(func) {
     const dialogRef = this.dialog.open(EditWalletComponent, {
       width: '550px',
-      data :{ function: func }
+      data: { function: func }
     });
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        if(func == 'add'){
-        this.credit = Number(this.credit) + Number(res.amount);
-        }else if(func == 'deduct'){
-          this.credit = Number(this.credit) - Number(res.amount);
-        }else{
+        if (func == 'add') {
           this.credit = Number(this.credit) + Number(res.amount);
-          
+          this.getVoucherData(res);
+          this.revenuCenters = ["Take Away", "Rest", "Dine In", "Compelmentary"];
+        } else if (func == 'deduct') {
+          this.credit = Number(this.credit) - Number(res.amount);
+        } else {
+          this.credit = Number(this.credit) + Number(res.amount);
+
           const dialogRef = this.dialog.open(EditWalletComponent, {
             width: '550px',
-            data :{ function: "showVoucher" , amount: res.amount }
+            data: { function: "showVoucher", amount: res.amount }
           });
-          
+
           dialogRef.afterClosed().subscribe(newRes => {
             if (newRes) {
-                this.getVoucherData(newRes);
+              this.getVoucherData(newRes);
             }
           });
         }
@@ -115,7 +119,7 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
-  addRevenueCenter(){    
+  addRevenueCenter() {
     const dialogRef = this.dialog.open(EditWalletComponent, {
       width: '550px',
     });
@@ -126,11 +130,11 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
-  updateUserDialog(){
+  updateUserDialog() {
     const dialogRef = this.dialog.open(AddAppUserComponent, {
-      width : '550px',
+      width: '550px',
       data: {
-        user : this.user
+        user: this.user
       }
     });
 
@@ -183,13 +187,15 @@ export class UserProfileComponent implements OnInit {
   }
 
   refresh() {
-    location.reload();
+    this.credit = this.credit - 100;
+    this.transactionsData = HistoryItems;
+    // location.reload();
   }
 
-  openFilterView(){
-    if(this.openFilter){
-    this.openFilter = false;
-    }else{
+  openFilterView() {
+    if (this.openFilter) {
+      this.openFilter = false;
+    } else {
       this.openFilter = true;
     }
   }
@@ -199,15 +205,15 @@ export class UserProfileComponent implements OnInit {
     this.transactionsData = HistoryItems;
 
     console.log(this.fromDate)
-    if(this.field == "Rvenue Center"){
-    console.log(this.transactionsData.filter(xx => xx.revenueCenter === this.fieldValues))
+    if (this.field == "Revenue Center") {
+      console.log(this.transactionsData.filter(xx => xx.revenueCenter === this.fieldValues))
 
-    this.transactionsData = this.transactionsData.filter(xx => xx.revenueCenter === this.fieldValues) ;
-    }else if (this.field == "Agent"){
-      this.transactionsData = this.transactionsData.filter(xx => xx.creator === this.fieldValues) ;
+      this.transactionsData = this.transactionsData.filter(xx => xx.revenueCenter === this.fieldValues);
+    } else if (this.field == "Agent") {
+      this.transactionsData = this.transactionsData.filter(xx => xx.modifier === this.fieldValues);
 
-    }else{
-      this.transactionsData = this.transactionsData.filter(xx => xx.transactionDate === this.fromDate) ;
+    } else {
+      this.transactionsData = this.transactionsData.filter(xx => xx.transactionDate === this.fromDate);
     }
   }
 

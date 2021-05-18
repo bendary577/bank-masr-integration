@@ -17,7 +17,9 @@ export class EditWalletComponent implements OnInit {
   voucher='';
   showVoucher = false;
   form: FormGroup;
-  revenuCenters = ["Take Away", "Rest", "Dine In", "Compelmentary","Take Away", "Rest", "Dine In", "Compelmentary","Take Away", "Rest", "Dine In", "Compelmentary","Take Away", "Rest", "Dine In", "Compelmentary"]
+  revenuCenters = ["Take Away", "Rest", "Dine In", "Compelmentary","Table Service", "Fast trans",
+                    "To Go", "Dlivery","Online Carryout", "Rest", "Dine In", "Compelmentary",
+                    "Take Away", "Rest", "Dine In", "Compelmentary"]
 
   private _fromDate: any;
 
@@ -52,6 +54,7 @@ export class EditWalletComponent implements OnInit {
 
       this.form = this.formBuilder.group({
       amount: ['', Validators.required],
+      revenuecenters: [''],
      });
   }
   
@@ -88,6 +91,7 @@ export class EditWalletComponent implements OnInit {
     }else{
       this.dialogRef.close({
         amount: this.form.controls.amount.value,
+        revenuecenters: this.form.controls.revenuecenters.value
       });
     }
   }

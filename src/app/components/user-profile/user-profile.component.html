@@ -5,7 +5,7 @@
             <button mat-flat-button class="refresh-btn-view" (click)="refresh()">
                 <img class="refresh-img" src="../../../assets/refresh.png">
             </button>
-        </div>
+        </div> 
         <div class="user-profile">
             <mat-card class="user-card">
                 <mat-card-content>
@@ -20,7 +20,7 @@
                             <tr>
                                 <td class="title" style="float: left;" style="float: left;">Mobile </td>
                                 <td> </td>
-                                <td class="res" style="float: right;" style="float: right;"> 01010101012</td>
+                                <td class="res" style="float: right;" style="float: right;"> 01010101010</td>
                             </tr>
                             <tr>
                                 <td class="title" style="float: left;">Group </td>
@@ -40,8 +40,8 @@
                             <tr>
                                 <td class="title" style="float: left;">Status </td>
                                 <td> </td>
-                                
-                                <td  class="res" style="float: right;"> 
+
+                                <td class="res" style="float: right;">
                                     Active
                                     <!-- <h1 *ngIF="!user.deleted">Active</h1>
                                     <h1 *ngIF="user.deleted">Deleted</div> -->
@@ -50,13 +50,13 @@
                             <tr>
                                 <td class="title" style="float: left;">Creation Date </td>
                                 <td> </td>
-                                <td class="res" style="float: right;"> 2021-05-12</td>
+                                <td class="res" style="float: right;"> 2021-05-16</td>
                             </tr>
                             <!-- *ngIf="user.lastUpdate" -->
-                            <tr >
+                            <tr>
                                 <td class="title" style="float: left;">Last Update</td>
                                 <td> </td>
-                                <td class="res" style="float: right;"> 2021-05-12</td>
+                                <td class="res" style="float: right;"> 2021-05-16</td>
                             </tr>
                         </table>
                     </div>
@@ -88,7 +88,7 @@
                                         mat-raised-button>Charge</button>
                                     <button class="filter-btn" (click)="chargeWallet('deduct')"
                                         mat-raised-button>Deduct</button>
-                                        <!-- <button class="mouse-cursor-gradient-tracking">
+                                    <!-- <button class="mouse-cursor-gradient-tracking">
                                             <span>Hover me</span>
                                           </button> -->
                                 </div>
@@ -132,15 +132,22 @@
                                             Voucher Code
                                         </div>
                                         <div style="font-size: larger;">
-                                            FristNewVoucher
+                                            {{voucherCode}}
                                         </div>
                                     </h3>
-                                    <button class="filter-btn" (click)="chargeWallet('sms')" mat-raised-button>Send
-                                        SMS</button>
-                                    <button class="filter-btn" (click)="chargeWallet('mail')" mat-raised-button>Send
+                                    <div class="column">
+                                        <button class="filter-btn" (click)="chargeWallet('sms')" mat-raised-button>Send SMS</button>
+                                    </div>
+                                    <div class="column">
+                                        <button class="filter-btn" (click)="chargeWallet('sms')" mat-raised-button style="margin-left: 20px;"> Print </button>
+                                    </div>
+                                    <div class="column">
+                                        <button class="filter-btn" (click)="chargeWallet('sms')" mat-raised-button>Send Email</button>
+                                    </div>
+                                    <!-- <button class="filter-btn" (click)="chargeWallet('mail')" mat-raised-button>Send
                                         Mail</button>
                                     <button class="filter-btn" (click)="chargeWallet('print')" mat-raised-button> Print
-                                    </button>
+                                    </button> -->
                                 </div>
                             </div>
                         </form>
@@ -151,6 +158,16 @@
         <div class="trans-tabel">
             <div class="title-card">
                 Wallet History
+            </div>
+            <div *ngIf="voucherData.length == 0"> 
+                <mat-card class="transaction-card" >
+                    <mat-card-content>
+                        <div style="text-align: center;">
+                            <img src="../../../assets/activity.png" alt="image">
+                            <p>You do not have any recent history.</p>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
             </div>
             <div *ngIf="voucherData.length != 0">
                 <ngx-datatable class="material" [loadingIndicator]="transactionsList.showLoading"
@@ -168,7 +185,7 @@
 
                     <ngx-datatable-column name="Total Amount">
                         <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.totalAmount}} EGP
+                            {{row.totalAmount}} USD
                         </ng-template>
                     </ngx-datatable-column>
 
@@ -235,14 +252,25 @@
     </button>
 </div>
 
-<div class="userTransTable" *ngIf="transactionsData.length != 0">
+<div class="userTransTable" >
     <div class="title-card" style="width:96%;">
         User Transaction History
     </div>
-    <ngx-datatable class="material" [loadingIndicator]="transactionsList.showLoading" [messages]="transactionsList.messages" 
-        style="  border-radius:1%;  width: 96%;  height: 450px; margin-bottom: 20px;"
-        [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
-        [scrollbarV]="true" [scrollbarH]="true" [rows]="transactionsData" [selected]="transactionsList.selected"
+    <div *ngIf="transactionsData.length == 0" style="width:96%; margin-left: 2%;"> 
+        <mat-card class="transaction-card" >
+            <mat-card-content>
+                <div style="text-align: center;">
+                    <img src="../../../assets/activity.png" alt="image">
+                    <p>You do not have any recent activity.</p>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <ngx-datatable class="material" [loadingIndicator]="transactionsList.showLoading"
+        [messages]="transactionsList.messages" *ngIf="transactionsData.length != 0"
+        style="  border-radius:1%;  width: 96%;  height: 450px; margin-bottom: 20px;" [sortType]="'multi'"
+        [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"
+        [scrollbarH]="true" [rows]="transactionsData" [selected]="transactionsList.selected"
         [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" [scrollbarH]="true">
 
 
@@ -254,19 +282,25 @@
 
         <ngx-datatable-column name="Total Amount">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.totalPayment}} EGP
+                {{row.totalPayment}} USD
             </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column name="Amount After Discount">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.afterDiscount}} EGP
+                {{row.afterDiscount}} USD
             </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column name="Revenue Center">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.revenueCenter}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Check Number">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.checkNumber}}
             </ng-template>
         </ngx-datatable-column>
 
