@@ -94,6 +94,7 @@ const routes: Routes = [
   { path: Constants.MANAGE_USERS, component: ManageUsersComponent ,canActivate:[AuthGuardService]},
   { path: Constants.USER_PROFILE, component: UserProfileComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MANAGE_ACTIVITIES, component: ActivitiesComponent ,canActivate:[AuthGuardService]},
+  // { path: Constants.ACCOUNT_CONFIGURATION, component: ConfigurationComponent ,canActivate:[AuthGuardService]},
 
   // Hotel OPI Views
   { path: Constants.GET_HOTEL_OPI_PAGE, component: HotelOpiComponent ,canActivate:[AuthGuardService]},

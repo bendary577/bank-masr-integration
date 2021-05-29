@@ -62,8 +62,12 @@
                             <a mat-list-item (click)="snav.toggle()" routerLink="/suppliersMapping">Suppliers Mapping</a>
                             <a mat-list-item (click)="snav.toggle()" routerLink="/includedOverGroups">Included Over Groups</a>
                             <a mat-list-item (click)="snav.toggle()" routerLink="/operaReportMapTables">Opera Map Tables</a>
-                        </div>
+                            <!-- <a mat-list-item (click)="snav.toggle()" routerLink="/configuration" *ngIf="syncJobTypes.length > 0">Configuration</a> -->
 
+                        </div>
+                        <!-- <div *ngIf="admin">
+                            <a mat-list-item (click)="snav.toggle()" routerLink="/configuration" *ngIf="syncJobTypes.length > 0">Configuration</a>
+                        </div> -->
                         <a mat-list-item (click)="snav.toggle()" routerLink="/costCenterLocationMapping">Location Mapping</a>
                         <a mat-list-item (click)="snav.toggle()" routerLink="/simphonyDiscountMaping">Simphony Discount Mapping</a>
                         <a mat-list-item (click)="snav.toggle()" routerLink="/users">Users</a>
