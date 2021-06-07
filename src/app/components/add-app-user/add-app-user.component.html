@@ -1,74 +1,102 @@
-<h1 mat-dialog-title>New User</h1>
+<h1 mat-dialog-title>New Guest</h1>
 
-<div mat-dialog-content>
-    <form [formGroup]="form" class="my-form">
-        <div class="form-group">
-            <mat-form-field class="example-full-width">
-                <input matInput placeholder="Name" formControlName="name" required maxlength="50">
-                <mat-error *ngIf="form.controls.name.hasError('required')">
-                    Name is required.
-                  </mat-error>
-                  <mat-error *ngIf="form.controls.name.hasError('maxlength')">
-                    Name is to long.
-                  </mat-error>
-            </mat-form-field>
+<div class="row">
+    <div class="two-column" style="float: right;">
+        <div mat-dialog-content >
+            <form [formGroup]="form" class="my-form">
+                <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Name" formControlName="name" required maxlength="50">
+                        <mat-error *ngIf="form.controls.name.hasError('required')">
+                            Name is required.
+                        </mat-error>
+                        <mat-error *ngIf="form.controls.name.hasError('maxlength')">
+                            Name is to long.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                        <mat-select matInput id="qrcodeMethod" name="qrcodeMethod" placeholder="Send QRcode Method"
+                            formControlName="qrcodeMethod">
+                            <mat-option [value]=q *ngFor="let q of qrcodeMethod">{{q}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Email" formControlName="email">
+                        <mat-error *ngIf="form.controls.email.hasError('pattern')">
+                            Email must be well formed.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Moblie" formControlName="mobile" required maxlength="11">
+                        <mat-error *ngIf="form.controls.mobile.hasError('required')">
+                            Moblie is required.
+                        </mat-error>
+                        <mat-error *ngIf="form.controls.mobile.hasError('maxlength')">
+                            Moblie is to long.
+                        </mat-error>
+                        <mat-error *ngIf="form.controls.mobile.hasError('pattern')">
+                            Mobile must be well formed.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                        <mat-select matInput id="groups" name="groups" placeholder="Group" formControlName="group">
+                            <mat-option></mat-option>
+                            <mat-option [value]=c.id *ngFor="let c of groups">{{c.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                    <mat-checkbox class="example-margin" style="padding-right: 10px;">
+                        <label> Send Welcome SMS </label>
+                    </mat-checkbox>
+
+                    <mat-checkbox class="example-margin" style="padding-right: 10px;">
+                        <label> Send Email </label>
+                    </mat-checkbox>
+                </div>
+
+                <div class="form-group" style="padding-top: 5%;">
+                    <input #csvInput hidden="true" type="file" onclick="this.value=null"
+                        (change)="csvInputChange($event)" accept="image/*" />
+                    <button class="form-button" mat-flat-button color="primary" (click)="csvInput.click()">
+                        <img class="form-b-img" src="../../../assets/photos.png">
+                        Choose Image</button>
+                    <div [hidden]="!imageUploded">Image uploaded successfully.</div>
+                </div>
+
+            </form>
         </div>
 
-        <div class="form-group">
-            <mat-form-field class="example-full-width">
-                <mat-select matInput id="qrcodeMethod" name="qrcodeMethod" 
-                placeholder="Send QRcode Method" formControlName="qrcodeMethod" >
-                    <mat-option [value]=q *ngFor="let q of qrcodeMethod">{{q}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
+    </div>
+    <div class="two-column" style="float: right;border-left: 1px solid rgb(197, 197, 197);">
+        <div class="card-dive" style="padding-top: 5%;">
 
-        <div class="form-group">
-            <mat-form-field class="example-full-width">
-                <input matInput placeholder="Email" formControlName="email" >
-                <mat-error *ngIf="form.controls.email.hasError('pattern')">
-                    Email must be well formed.
-                  </mat-error>
-            </mat-form-field>
+            <img style="width:250px; height: 250px;" src="../../../assets/credit 1.png">
         </div>
-
-        <div class="form-group">
-            <mat-form-field class="example-full-width">
-                <input matInput placeholder="Moblie" formControlName="mobile" required maxlength="11" >
-                <mat-error *ngIf="form.controls.mobile.hasError('required')">
-                    Moblie is required.
-                  </mat-error>
-                  <mat-error *ngIf="form.controls.mobile.hasError('maxlength')">
-                    Moblie is to long.
-                  </mat-error>
-                  <mat-error *ngIf="form.controls.mobile.hasError('pattern')">
-                    Mobile must be well formed.
-                  </mat-error>
-            </mat-form-field>
+        <div style="padding-top: 20%; font-size: large; font-weight: bolder; font-size: larger;">
+            Swipe the card
         </div>
-
-        <div class="form-group">
-            <mat-form-field class="example-full-width">
-                <mat-select matInput id="groups" name="groups" placeholder="Group" formControlName="group">
-                    <mat-option></mat-option>
-                    <mat-option [value]=c.id *ngFor="let c of groups">{{c.name}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        
-        <div class="form-group" style="padding-top: 5%;">
-            <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="csvInputChange($event)" accept="image/*" />
-            <button class="form-button" mat-flat-button color="primary" (click)="csvInput.click()" >
-                <img class="form-b-img" src="../../../assets/photos.png">
-                Choose Image</button>
-                <div [hidden]="!imageUploded">Image uploaded successfully.</div>
-         </div>
-    </form>
+    </div>
 </div>
-<div mat-dialog-actions>
-    <button mat-button cdkFocusInitial (click)="onSaveClick()" >
-        <label [hidden] = "inUpdate">Save</label> 
-        <label [hidden] = "!inUpdate">Update</label> 
+<div class="row">
+    <div mat-dialog-actions>
+        <button mat-button cdkFocusInitial (click)="onSaveClick()">
+            <label [hidden]="inUpdate">Save</label>
+            <label [hidden]="!inUpdate">Update</label>
         </button>
-    <button mat-button (click)="onNoClick()">Cancel</button>
+        <button mat-button (click)="onNoClick()">Cancel</button>
+    </div>
 </div>

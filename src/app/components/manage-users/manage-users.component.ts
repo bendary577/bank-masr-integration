@@ -40,6 +40,9 @@ export class ManageUsersComponent implements OnInit {
     usersData: [] 
   };
 
+  props = {  'background-color' : '#e07d93'  };
+  props2 = {  'background-color' : '#3F51B5'  };
+
   constructor(private loyaltyService: LoyaltyService, public dialog: MatDialog, private _location: Location,
      public snackBar: MatSnackBar, private sidNav: SidenavResponsive, private router: Router, public data: Data) { }
 
@@ -113,7 +116,7 @@ export class ManageUsersComponent implements OnInit {
 
   addUserDialog(){
     const dialogRef = this.dialog.open(AddAppUserComponent, {
-        width: '550px',
+        width: '850px',
 
     });
 

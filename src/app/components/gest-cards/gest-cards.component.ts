@@ -11,11 +11,11 @@ import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 
 @Component({
-  selector: 'app-activities',
-  templateUrl: './activities.component.html',
-  styleUrls: ['./activities.component.scss']
+  selector: 'app-gest-cards',
+  templateUrl: './gest-cards.component.html',
+  styleUrls: ['./gest-cards.component.scss']
 })
-export class ActivitiesComponent implements OnInit {
+export class GestCardsComponent implements OnInit {
   filterBy = "Daily";
   imagePath = './src/assets/user.png';
   totalSpendM: any;
@@ -185,8 +185,5 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
-  closeCard(){
-
-  }
 
 }

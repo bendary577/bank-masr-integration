@@ -1,14 +1,77 @@
+<div *ngIf="usersList.usersData.length != 0 || usersList.showLoading" class="header" style="margin: 15px;">
+    <!-- <button mat-flat-button class="button-back" (click)="refresh()">Refresh</button> -->
+
+    <button mat-flat-button (click)="addUserDialog()">Add Guest</button>
+    <button mat-flat-button (click)="updateUserDialog()" [disabled]="validateUpdateUser()">Update Guest</button>
+    <button mat-flat-button (click)="resendQRCode()" [disabled]="usersList.selected.length != 1">Resend QR Code</button>
+    <button mat-flat-button (click)="deleteUsers('true')" [disabled]="validateDeleteUsers()">Delete Guest</button>
+    <button mat-flat-button (click)="deleteUsers('false')" [disabled]="validateRestoreUsers()">Restore Guest</button>
+</div> 
+
+<div class="filter-container">
+    <div class="filter-title">
+        <span style="display: inline-block; font-size: 20px; font-weight: bold; color: black;">Guest Cards</span>
+    </div>
+    <div class="filter-buttons">
+
+        <div class="five-column" >
+            <select class="custom-select" >
+                <option value="" selected style="display:none">Guest Name</option>
+                <option value=""></option>
+                <option >Ahmed</option>
+                <option >Othman</option>
+                <option >Mona</option>
+                     <!-- {{job.creationDate}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob"  -->
+            </select>
+        </div>
+        <div class="five-column" >
+            <select class="custom-select">
+                <option value="" selected style="display:none">Card Number</option>
+                <option value=""></option>
+                <option >012568954</option>
+                <option >544311545</option>
+                <option >823235455</option>
+                     <!-- {{job.creationDate}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob"  -->
+            </select>
+        </div>
+        <div class="five-column" >
+            <select class="custom-select">
+                <option value="" selected style="display:none">Card Statues</option>
+                <option value=""></option>
+                <option >Active</option>
+                <option >Deleted</option>
+                <option >Blocked</option>
+                <option >Expired</option>
+                     <!-- {{job.creationDate}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob"  -->
+            </select>
+        </div>
+        <div class="five-column" >
+            <input matInput placeholder="Search Key Word...">
+            <!-- <option value="" disabled selected>Guest Name</option>
+                <option >Ahmed</option>
+                     {{job.creationDate}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob"  
+            </select> -->
+        </div>
+    </div>
+    <div class="filter-view">
+
+        <div class="filter-item" [ngStyle]="props" >
+        <!-- <span matBadge="5" matBadgeOverlap="false">Text with a badge</span> -->
+        Mona
+        </div>
+        <div class="filter-item" [ngStyle]="props">
+        Ahmed
+        </div>
+        <div class="filter-item" [ngStyle]="props2">
+         Nisantasi
+        </div>
+        <div class="filter-item" [ngStyle]="props2">
+        Mcdonald's
+        </div>
+    </div>
+</div>
+
 <div class="main" >
-
-    <div *ngIf="usersList.usersData.length != 0 || usersList.showLoading" class="header" style="margin-bottom: 15px;">
-        <!-- <button mat-flat-button class="button-back" (click)="refresh()">Refresh</button> -->
-
-        <button mat-flat-button (click)="addUserDialog()">Add User</button>
-        <button mat-flat-button (click)="updateUserDialog()" [disabled]="validateUpdateUser()">Update User</button>
-        <button mat-flat-button (click)="resendQRCode()" [disabled]="usersList.selected.length != 1">Resend QR Code</button>
-        <button mat-flat-button (click)="deleteUsers('true')" [disabled]="validateDeleteUsers()">Delete User</button>
-        <button mat-flat-button (click)="deleteUsers('false')" [disabled]="validateRestoreUsers()">Restore User</button>
-    </div> 
 
     <div *ngIf="usersList.usersData.length == 0 && !usersList.showLoading" style="text-align: center;">
         <img style="max-width: 300px; margin-top: 100px;" src="../../../assets/no-user.png" alt="image">

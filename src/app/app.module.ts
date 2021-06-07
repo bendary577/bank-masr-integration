@@ -26,7 +26,9 @@ import {
   MatCheckboxModule,
   MatCardModule,
   MatRippleModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatBadgeModule,
+  MatMenuModule
 } from '@angular/material';
 import {SidenavResponsive} from "./components/sidenav/sidenav-responsive";
 import {ConfigurationComponent} from "./components/setting/configuration/configuration.component";
@@ -147,9 +149,11 @@ import { FilterComponent } from './components/filter/filter.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { EditWalletComponent } from './components/edit-wallet/edit-wallet.component';
 import { ToastrModule } from 'ngx-toastr';
+import { GestCardsComponent } from './components/gest-cards/gest-cards.component';
 
 @NgModule({
   declarations: [
+    GestCardsComponent,
     AppComponent,
     LoginComponent,
     SuppliersComponent,
@@ -267,6 +271,8 @@ import { ToastrModule } from 'ngx-toastr';
     NgxSpinnerModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatMenuModule,
+    MatBadgeModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
