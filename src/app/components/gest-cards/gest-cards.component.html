@@ -1,4 +1,4 @@
-<div class="filter-container">
+<div class="filter-container" *ngIf="transactionList.transactionData.length != 0">
     <div class="filter-title">
         <span style="display: inline-block; font-size: 20px; font-weight: bold; color: black;">Guest Cards</span>
     </div>
@@ -31,7 +31,7 @@
             </select>
         </div>
         <div class="five-column" >
-            <select class="custom-select">
+            <select class="custom-select" (change)="filterByGuestName()" [(ngModel)]="selectedGuest">
                 <option value="" selected style="display:none">Card Number</option>
                 <option value=""></option>
                 <option >012568954</option>
@@ -41,13 +41,14 @@
             </select>
         </div>
         <div class="five-column" >
-            <select class="custom-select">
+            <select class="custom-select" (change)="filterByGuestName()" [(ngModel)]="selectedGuest">
                 <option value="" selected style="display:none">Card Statues</option>
                 <option value=""></option>
-                <option >Active</option>
+                <option value= "active">Active</option>
                 <option >Deleted</option>
                 <option >Blocked</option>
-                <option >Expired</option>
+                <option value= "expired">Expired</option>
+
                      <!-- {{job.creationDate}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob"  -->
             </select>
         </div>
@@ -59,21 +60,13 @@
             </select> -->
         </div>
     </div>
-    <div class="filter-view">
+    <div class="filter-view" *ngIf="guestNames.length">
 
-        <div class="filter-item" [ngStyle]="props" >
-        <!-- <span matBadge="5" matBadgeOverlap="false">Text with a badge</span> -->
-        Mona
-        </div>
-        <div class="filter-item" [ngStyle]="props">
-        Ahmed
-        </div>
-        <div class="filter-item" [ngStyle]="props2">
-         Nisantasi
-        </div>
-        <div class="filter-item" [ngStyle]="props2">
-        Mcdonald's
-        </div>
+        <div class="filter-item" [ngStyle]="props" *ngFor="let name of guestNames">
+            <!-- <span matBadge="5" matBadgeOverlap="false">Text with a badge</span> -->
+            {{name}}
+            </div>
+
     </div>
 </div>
 
@@ -94,7 +87,7 @@
     <div *ngIf="transactionList.transactionData.length != 0">
         <ngx-datatable class="material" [loadingIndicator]="transactionList.showLoading" [messages]="transactionList.messages" style="width: 98%"
          [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-        [rows]="transactionList.transactionData" [selected]="transactionList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" [scrollbarH]="true">
+        [rows]="usersList.usersData" [selected]="transactionList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" [scrollbarH]="true">
 
         <ngx-datatable-column name="Card Number">
             <ng-template let-row="row" ngx-datatable-cell-template>
@@ -105,7 +98,7 @@
 
         <ngx-datatable-column name="User Name">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.user.name}}
+                {{row.name}}
             </ng-template>
         </ngx-datatable-column>
 
@@ -115,36 +108,37 @@
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Guest">
+        <ngx-datatable-column name="Guest Number">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                2
+                <label *ngIf="!row.deleted">2</label>
+                <label *ngIf="row.deleted" >4</label>
             </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column name="Palance">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.totalPayment}} USD
+                <label *ngIf="!row.deleted">20 USD</label>
+                <label *ngIf="row.deleted">40 USD</label>
             </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column name="Expired In">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                3 h
+                <label *ngIf="!row.deleted" >3 h</label>
+                <label *ngIf="row.deleted" >0 h</label>
             </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column name="State">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                <label *ngIf="row.user.active" class="active-state">active</label>
-                <label *ngIf="row.user.deleted" class="deleted-state">deleted</label>
-                <label *ngIf="row.user.expired" class="deleted-state">expired</label>
-                <label *ngIf="row.user.blocked" class="deleted-state">blocked</label>
+                <label *ngIf="!row.deleted" class="active-state">active</label>
+                <label *ngIf="row.deleted" class="deleted-state">Deleted</label>
             </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column name="Last Update">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.transactionDate | date: 'dd/MM/yyyy HH:mm:ss' }}
+                {{row.creationDate | date: 'dd/MM/yyyy HH:mm:ss' }}
             </ng-template>
         </ngx-datatable-column>
 

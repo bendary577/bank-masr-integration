@@ -41,12 +41,15 @@ export class ActivitiesComponent implements OnInit {
 
   props = {  'background-color' : '#e07d93'  };
   props2 = {  'background-color' : '#3F51B5'  };
+  noFilter = true;
+  selectedGuest="";
+  guestNames= [];
 
 
   public barChartOptions: ChartOptions = {
     responsive: true,
   };
-  public rvcBarChartLabels: Label[] = ['2006', '2007', '2008', '2009'];
+  public rvcBarChartLabels: Label[] = ['Retaurant 1', 'Retaurant 2', 'Retaurant 3', 'Retaurant 4'];
   public rvcBarChartType: ChartType = 'bar';
   public rvcBarChartLegend = true;
   public rvcBarChartPlugins = [];
@@ -54,16 +57,16 @@ export class ActivitiesComponent implements OnInit {
   "rgba(224, 108, 112, 1)",
   "rgba(224, 108, 112, 1)"]
   public rvcBarChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81], label: 'RVC Sales' },
+    { data: [ , 20], label: 'Sales Per Revenue Center' },
   ];
   
-  public traBarChartLabels: Label[] = ['2006', '2007', '2008', '2009'];
+  public traBarChartLabels: Label[] = ['1', '2', '3', '4','5','6','7','8','9','10','11'];
   public traBarChartType: ChartType = 'bar';
   public traBarChartLegend = true;
   public traBarChartPlugins = [];
   // public traBlue= ['blue', 'blue', 'blue', 'blue']
   public traBarChartData: ChartDataSets[] = [
-    { data: [20, 60, 50, 40], label: 'Transaction' },
+    { data: [ , , , 20], label: 'Transaction' },
   ];
 
   constructor(public snackBar: MatSnackBar, private router: Router, private _location: Location,
@@ -146,7 +149,6 @@ export class ActivitiesComponent implements OnInit {
       } else {
         message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
       }
-
       this.snackBar.open(message , null, {
         duration: 3000,
         horizontalPosition: 'center',
@@ -187,6 +189,13 @@ export class ActivitiesComponent implements OnInit {
 
   closeCard(){
 
+  }
+
+  filterByGuestName(){
+    // this.getUsers();
+    // this.usersList.usersData = [this.usersList.usersData[0]]
+    // console.log(this.usersList.usersData)
+    // this.guestNames.push(this.selectedGuest);
   }
 
 }

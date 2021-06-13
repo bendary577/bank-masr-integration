@@ -25,7 +25,7 @@ export class UserProfileComponent implements OnInit {
   field: any;
   fields = ["Revenue Center", "Agent"]
   fieldValues: any;
-  credit = 0;
+  credit = 430;
   voucherHistory = new VoucherHistory();
   simphonyDiscount: { discountRate: 20, discountId: "10025" }
   group: any = { name: "Entrepreware IT", simphonyDiscount: "" };
@@ -79,17 +79,17 @@ export class UserProfileComponent implements OnInit {
   getVoucherData(newRes) {
     this.voucherData.push(
       {
-        voucherDate: "2021-05-16", totalAmount: Number(newRes.amount),
-        voucher: "NewVoucherCode", creator: "Kareem",
+        voucherDate: "2021-10-06", totalAmount: Number(newRes.amount),
+        voucher: "756787237523", creator: "Kareem",
       });
 
-      this.voucherCode = "NewVoucherCode";
+      this.voucherCode = "756787237523";
 
   }
 
   chargeWallet(func) {
     const dialogRef = this.dialog.open(EditWalletComponent, {
-      width: '550px',
+      width: '300px',
       data: { function: func }
     });
 
@@ -98,8 +98,7 @@ export class UserProfileComponent implements OnInit {
         if (func == 'add') {
           this.credit = Number(this.credit) + Number(res.amount);
           this.getVoucherData(res);
-          this.revenuCenters = ["Take Away", "Rest", "Dine In", "Compelmentary"];
-        } else if (func == 'deduct') {
+          this.revenuCenters = ["Restaurant 1" , "Restaurant 2" , "Restaurant 3" , "Restaurant 4"];        } else if (func == 'deduct') {
           this.credit = Number(this.credit) - Number(res.amount);
         } else {
           this.credit = Number(this.credit) + Number(res.amount);
@@ -121,7 +120,7 @@ export class UserProfileComponent implements OnInit {
 
   addRevenueCenter() {
     const dialogRef = this.dialog.open(EditWalletComponent, {
-      width: '550px',
+      width: '200px',
     });
 
     dialogRef.afterClosed().subscribe(res => {

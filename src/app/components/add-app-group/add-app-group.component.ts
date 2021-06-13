@@ -62,7 +62,7 @@ export class AddAppGroupComponent implements OnInit {
         name: ['', [Validators.maxLength, Validators.required]],
         description: [''],
         parentGroup: [this.parentGroup],
-        discountId: ['', [Validators.required]],
+        discountId: [''],
       });
     }
   }

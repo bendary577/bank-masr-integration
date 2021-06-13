@@ -48,7 +48,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="title" style="float: left;">Creation Date </td>
+                                <td class="title" style="float: left;">Creation Time </td>
                                 <td> </td>
                                 <td class="res" style="float: right;"> 2021-05-16</td>
                             </tr>
@@ -72,7 +72,7 @@
             <div class="column">
                 <mat-card class="wallet-card">
                     <mat-card-content>
-                        <h2>User Wallet</h2>
+                        <h2>Guest Wallet</h2>
                         <form class="my-form">
                             <div class="row">
                                 <div class="wallet-amount">
@@ -123,31 +123,25 @@
             <div class="column">
                 <mat-card class="wallet-card">
                     <mat-card-content>
-                        <h2>User Voucher</h2>
+                        <h2>Guest Card</h2>
                         <form class="my-form">
                             <div class="row">
                                 <div class="wallet-amount">
                                     <h3>
                                         <div>
-                                            Voucher Code
+                                            Card Number
                                         </div>
                                         <div style="font-size: larger;">
-                                            {{voucherCode}}
+                                            756787237523
                                         </div>
                                     </h3>
-                                    <div class="column">
-                                        <button class="filter-btn" (click)="chargeWallet('sms')" mat-raised-button>Send SMS</button>
-                                    </div>
-                                    <div class="column">
-                                        <button class="filter-btn" (click)="chargeWallet('sms')" mat-raised-button style="margin-left: 20px;"> Print </button>
-                                    </div>
-                                    <div class="column">
-                                        <button class="filter-btn" (click)="chargeWallet('sms')" mat-raised-button>Send Email</button>
-                                    </div>
-                                    <!-- <button class="filter-btn" (click)="chargeWallet('mail')" mat-raised-button>Send
-                                        Mail</button>
-                                    <button class="filter-btn" (click)="chargeWallet('print')" mat-raised-button> Print
-                                    </button> -->
+                                    <button class="filter-btn" (click)="chargeWallet('add')"
+                                        mat-raised-button>Send Mail</button>
+                                    <button class="filter-btn" (click)="chargeWallet('deduct')"
+                                        mat-raised-button>Send SMS</button>
+                                    <!-- <button class="mouse-cursor-gradient-tracking">
+                                            <span>Hover me</span>
+                                          </button> -->
                                 </div>
                             </div>
                         </form>
@@ -157,7 +151,7 @@
         </div>
         <div class="trans-tabel">
             <div class="title-card">
-                Wallet History
+                Card History
             </div>
             <div *ngIf="voucherData.length == 0"> 
                 <mat-card class="transaction-card" >
@@ -207,7 +201,7 @@
     </div>
 </div>
 
-<div class="filter-container" *ngIf="openFilter">
+<!-- <div class="filter-container" *ngIf="openFilter">
     <div class="filter-view">
         <div class="column" style="float: left;">
             <p style="font-family: Arial, Helvetica, sans-serif; font-weight: 200; font-size: 20px;"> Filter By Date
@@ -226,7 +220,7 @@
             <div class="form-group">
                 <mat-form-field class="example-full-width">
                     <mat-select matInput id="groups" name="field" placeholder="Filter Field" [(ngModel)]="field">
-                        <!-- formControlName="parentGroup" -->
+                        formControlName="parentGroup" 
                         <mat-option [value]=c *ngFor="let c of fields">{{c}}</mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -324,4 +318,4 @@
 
     </ngx-datatable>
     <ngx-spinner></ngx-spinner>
-</div>
+</div> -->

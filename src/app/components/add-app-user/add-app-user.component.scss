@@ -1,14 +1,21 @@
 @import "../add-tax/add-tax.component.scss";
 
 .two-column{
-    float: left;
-    width: 50%;
+    float: right;
+    width: 50%; 
     height: 100%;
     text-align: center;
   }
 
   .row{
     display: flex;
-    overflow: hidden;    
-    scroll-behavior: smooth;
   }
+
+  .mat-dialog-content{
+
+    overflow: hidden;
+  }
+
+.mat-tab-labels {
+    background-color: rgb(182, 217, 248);
+}

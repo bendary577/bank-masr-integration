@@ -20,6 +20,8 @@ export class AddAppUserComponent implements OnInit {
   inUpdate = false;
   groups: Group[] = [];
   qrcodeMethod = ["Email", "SMS", "Print"];
+  swiped=false;
+  cardNumber = 0;
 
   constructor(private formBuilder: FormBuilder, public snackBar: MatSnackBar, 
     public dialogRef: MatDialogRef<AddAppUserComponent>, private loyaltyService: LoyaltyService,
@@ -27,6 +29,9 @@ export class AddAppUserComponent implements OnInit {
  
   ngOnInit() {
     this.getGroups();
+
+    this.swipe();
+
     if (this.data != undefined && this.data["user"] != null){
       this.inUpdate = true;
       this.newUser = this.data["user"];
@@ -40,11 +45,14 @@ export class AddAppUserComponent implements OnInit {
       });
     }else{
       this.form = this.formBuilder.group({
-      name: ['', Validators.required],
-      qrcodeMethod: ['email', Validators.required],
-      email: ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
-      mobile: ['', [Validators.maxLength, Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
-      group: ['', Validators.required]
+      name: [''],
+      qrcodeMethod: ['email'],
+      email: [''],
+      mobile: [''], 
+      price:[100],
+      accompanied:[''],
+      groupa:['Generic'],
+      group: ['']
       });
     }
   }
@@ -68,6 +76,18 @@ export class AddAppUserComponent implements OnInit {
     }
   }
   
+  // async swipe(){
+  //   await delay(1000);
+
+  // }
+
+  async swipe() {
+    await new Promise<void>(resolve => setTimeout(()=>resolve(), 2500)).then(()=>
+    {
+      this.swiped = true;
+      this.cardNumber = Math.floor(Math.random() *  12354553225);
+    });
+}
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -79,6 +99,7 @@ export class AddAppUserComponent implements OnInit {
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
+      console.log(this.form.getError)
     }else{
       this.dialogRef.close({
         name: this.form.controls.name.value,

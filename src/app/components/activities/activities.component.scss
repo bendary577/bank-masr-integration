@@ -116,7 +116,7 @@ margin-left: 0px;
 
 .custom-select, .custom-select select{
   border: 2px solid rgb(197, 197, 197);
-  width: 16%;
+  width: 14%;
   height: 32px;
   border-radius: 5px;
   left:auto;
@@ -135,7 +135,7 @@ margin-left: 0px;
   margin-left: 2%;
   float: left;
   height: 20%;
-  width: 15%;
+  width: 14%;
 }
 
 .menue-btn{
@@ -158,4 +158,8 @@ margin-left: 0px;
   color: rgb(87, 87, 87);
   font-size: 20px;
   font-weight: bold;
+}
+
+canvas{
+  width: 1080px; height: 250px;
 }

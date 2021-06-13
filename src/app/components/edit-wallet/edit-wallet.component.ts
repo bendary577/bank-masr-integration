@@ -17,9 +17,7 @@ export class EditWalletComponent implements OnInit {
   voucher='';
   showVoucher = false;
   form: FormGroup;
-  revenuCenters = ["Take Away", "Rest", "Dine In", "Compelmentary","Table Service", "Fast trans",
-                    "To Go", "Dlivery","Online Carryout", "Rest", "Dine In", "Compelmentary",
-                    "Take Away", "Rest", "Dine In", "Compelmentary"]
+  revenuCenters = ["Restaurant 1" , "Restaurant 2" , "Restaurant 3" , "Restaurant 4"]
 
   private _fromDate: any;
 

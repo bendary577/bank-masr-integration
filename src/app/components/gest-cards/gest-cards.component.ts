@@ -39,9 +39,29 @@ export class GestCardsComponent implements OnInit {
     transactionData: [] 
   };
 
+  usersList = {
+    paginateData: true as boolean,
+    offset: 0,
+    messages: {
+      emptyMessage: `
+    <div style="text-align: center;">
+      <p class="user-name">No users have been created yet</p>
+    </div>
+  `
+    },
+    selected: [],
+    locationsCount: 0 as number,
+    pagesFilter: [10, 25, 50, 75, 100],
+    showLoading: true,
+    inputSearch: '' as string,
+    usersData: [] 
+  };
+
   props = {  'background-color' : '#e07d93'  };
   props2 = {  'background-color' : '#3F51B5'  };
-
+  noFilter = true;
+  selectedGuest="";
+  guestNames= [];
 
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -73,6 +93,17 @@ export class GestCardsComponent implements OnInit {
     this.getTopUsers();
     this.getTopGroups();
     this.totalSpend("Total");
+    this.getUsers();
+  }
+
+  getUsers(){
+    this.usersList.showLoading = true;
+    this.loyaltyService.getAppUsers().toPromise().then((res: any) => {
+      this.usersList.usersData = res;
+      this.usersList.showLoading = false;
+    }).catch(err => {
+      this.usersList.showLoading = false;
+    });
   }
 
   refresh() {
@@ -185,5 +216,9 @@ export class GestCardsComponent implements OnInit {
     });
   }
 
-
+  filterByGuestName(){
+    this.getUsers();
+    this.usersList.usersData = [this.usersList.usersData[1]]
+    this.guestNames.push(this.selectedGuest);
+  }
 }
