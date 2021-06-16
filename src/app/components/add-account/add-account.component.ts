@@ -24,6 +24,8 @@ export class AddAccountComponent implements OnInit {
       name: ['', Validators.required],
       domain: ['', Validators.required],
       erd: ['', Validators.required],
+      microsVersion: ['', Validators.required],
+
       locationQuota: ['', Validators.required],
       usernameOHIM: ['', Validators.required],
       passwordOHIM: ['', Validators.required],
@@ -60,6 +62,8 @@ export class AddAccountComponent implements OnInit {
       image: this.srcResult,
       domain: this.form.controls.domain.value,
       erd: this.form.controls.erd.value,
+      microsVersion: this.form.controls.microsVersion.value,
+        
       locationQuota: this.form.controls.locationQuota.value,
       accountCredentials: [
          {"account": "HospitalityOHIM",

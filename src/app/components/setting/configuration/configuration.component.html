@@ -11,9 +11,21 @@
     <br>
     <div *ngIf="account.accountCredentials">
         <mat-accordion multi>
-
             <!-- Oracle Hospitality Inventory Management -->
             <mat-expansion-panel *ngFor="let accountCredential of accountCredentials">
+
+                <form class="my-form" *ngIf="accountCredential.account == 'HospitalityOHRA'">
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <mat-select matInput id="microsVersion" name="microsVersion" placeholder="Oracle Micros Simphony Version"
+                                [(ngModel)]="account.microsVersion">
+                                <mat-option value="version2">Version 1</mat-option>
+                                <mat-option value="version2">Version 2</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </form>
+
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         {{accountCredential.account}}
