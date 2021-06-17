@@ -11,7 +11,13 @@
             </mat-expansion-panel-header>
             <div>
                 <mat-form-field class="example-full-width">
-                    <input matInput id="filePath" name="filePath" placeholder="File Path" [(ngModel)]="syncJobType.configuration.bookingConfiguration.filePath">
+                    <input matInput id="fileBaseName" name="fileBaseName" placeholder="File Base Name" [(ngModel)]="syncJobType.configuration.bookingConfiguration.fileBaseName">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="example-full-width">
+                    <input matInput id="fileExtension" name="fileExtension" placeholder="File Extension"
+                        [(ngModel)]="syncJobType.configuration.bookingConfiguration.fileExtension">
                 </mat-form-field>
             </div>
             <div>
