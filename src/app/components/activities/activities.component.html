@@ -67,9 +67,64 @@
     </div>
 </div>
 
+<div class="filter-container" >
+    <div class="filter-title">
+        <span style="display: inline-block; font-size: 20px; font-weight: bold; color: black;">Filter Transaction</span>
+    </div>
+    <div class="filter-buttons">
+
+        <div class="five-column" style="width:20%;" > 
+            <span style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 15px;">From</span>
+            <input matInput placeholder="Start Date" type="date" name="fromDate" id="fromDate" [(ngModel)]="fromDate" class="custom-select"
+            style="width:80%">        </div>  
+
+        <div class="five-column" style="width:20%;"> 
+            <span style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 15px;">To</span>
+            <input matInput placeholder="End Date" type="date" name="toDate" id="toDate" [(ngModel)]="toDate" class="custom-select"
+            style="width:80%" (change)="getTransInRangAndGroup()">        </div>  
+
+        <!-- <div class="five-column">
+            <select class="custom-select" (change)="filterByGuestName()" [(ngModel)]="selectedGuest">
+                <option value="" selected style="display:none">From</option>
+                <option value=""></option>
+                <option value="01111111111">0111111111</option>
+                <option value="02222222222">0222222222</option
+                 {{job.creationDate}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob" 
+            </select>
+        </div>
+
+        <div class="five-column">
+            <select class="custom-select" (change)="filterByGuestName()" [(ngModel)]="selectedGuest">
+                <option value="" selected style="display:none">To</option>
+                <option value=""></option>
+                <option value="01111111111">0111111111</option>
+                <option value="02222222222">0222222222</option>
+                {{job.creationDate}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob" 
+            </select>
+        </div> -->
+
+        <div class="five-column">
+            <span style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 15px; margin-right:15px; margin-top: 25px;">Group</span>
+            <select class="custom-select" (change)="getTransInRangAndGroup()" [(ngModel)]="selectedGroup">
+                <!-- <option value="" selected style="display:none"></option> -->
+                <option value="" selected>All Groups</option>
+                <option  [ngValue]="group.name"  *ngFor="let group of groups">{{group.name}}</option>
+                <!-- {{job.creationDate}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob"  -->
+            </select>
+        </div>
+
+    <!-- <div class="filter-view" *ngIf="guestNames.length">
+        <div class="filter-item" [ngStyle]="props" *ngFor="let name of guestNames">
+            <span matBadge="5" matBadgeOverlap="false">Text with a badge</span> 
+            {{name}}
+        </div>
+    </div> -->
+    
+</div>
+
 <div class="main">
 
-    <div *ngIf="transactionList.transactionData.length == 0"> 
+    <div *ngIf="false"> 
         <mat-card class="transaction-card">
             <mat-card-content>
                 <div>
@@ -80,7 +135,7 @@
         </mat-card>
     </div>
 
-    <div *ngIf="transactionList.transactionData.length != 0">
+    <div >
         <ngx-datatable class="material" [loadingIndicator]="transactionList.showLoading" [messages]="transactionList.messages" [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
         [rows]="transactionList.transactionData" [selected]="transactionList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" [scrollbarH]="true">
 

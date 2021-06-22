@@ -92,4 +92,12 @@ export class LoyaltyService {
     return this.http.get(Constants.GET_TOTAL_SPEND_URL + "?transactionType=" + Constants.REDEEM_VOUCHER + "&dateFlag=" + date
     , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
+
+  getTotalTransInRang(startTime, endTime, group) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get(Constants.GET_TOTAL_TRANS_INRANG_URL + "?transactionType=" + Constants.REDEEM_VOUCHER + "&startTime=" + startTime + "&endTime=" + endTime + "&group=" + group
+    , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
 }
+

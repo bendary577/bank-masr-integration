@@ -7,6 +7,7 @@ import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import {Location} from '@angular/common';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Group } from 'src/app/models/loyalty/Group';
 
 @Component({
   selector: 'app-activities',
@@ -19,6 +20,12 @@ export class ActivitiesComponent implements OnInit {
   totalSpendM: any;
   users = [];
   groups = [];
+  selectedGuest =  '';
+  props= [""];
+  guestNames= [];
+  fromDate = '';
+  toDate = '';
+  selectedGroup =  '';
   transactionList = {
     paginateData: true as boolean,
     offset: 0,
@@ -154,6 +161,58 @@ export class ActivitiesComponent implements OnInit {
         panelClass:"my-snack-bar-fail"
       });
     });
+  }
+
+  getTransInRangAndGroup(){
+
+
+    if(this.fromDate ==  '' && this.toDate != ''){
+
+      this.snackBar.open("Configure Start Date" , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+
+      return null;
+    }
+
+    this.transactionList.transactionData = [];
+    this.transactionList.showLoading = true;
+
+    this.loyaltyService.getTotalTransInRang(this.fromDate, this.toDate, this.selectedGroup).toPromise().then((res: any) => {
+      
+      this.transactionList.transactionData = res["transactions"];
+      this.totalSpendM = res["totalSpend"];
+
+      this.transactionList.showLoading = false;
+      this.snackBar.open("Transactions filterd successfully." , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-success"
+      });
+
+    }).catch(err => {
+      
+      this.transactionList.showLoading = false;
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
+      }
+
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+    });  
   }
 
 }

@@ -278,7 +278,7 @@ export class Constants {
     static GET_TOP_USERS_URL = environment.apiHost + '/getTopUser';
     static GET_TOP_Groups_URL = environment.apiHost + '/getTopGroups';
     static GET_TOTAL_SPEND_URL = environment.apiHost + '/transaction/getTotalSpendTransactions';
-
+    static GET_TOTAL_TRANS_INRANG_URL = environment.apiHost + "/transaction/getTransactionsInRange"
     //////////////////////////////////////////////// Manage Application  //////////////////////////////////////////////
 
     static GET_HOTEL_OPI_PAGE = 'hotelOpi';
