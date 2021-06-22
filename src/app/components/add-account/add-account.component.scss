@@ -1,5 +1,4 @@
-@import "../approved-invoices-infor/approved-invoices-infor.component.scss";
-
+@import '../approved-invoices-infor/approved-invoices-infor.component.scss';
 
 .erdTitle {
   font-size: 18px;
@@ -8,7 +7,7 @@
 }
 
 form {
-  width: 420px;
+  // width: 420px;
   margin: 35px auto 100px;
   display: block;
   float: none;
@@ -52,16 +51,29 @@ form {
 }
 
 .mat-input-element:disabled {
-    color: black;
+  color: black;
 }
 
-.form-button{
+.form-button {
   background-color: rgb(114, 127, 145);
-  width: 35%;
+  width: 45%;
 }
-.form-b-img{
+.form-b-img {
   width: 20%;
   height: 20%;
   padding: 5% 5% 5% 5%;
   float: left;
+}
+
+.two-column {
+  float: left;
+  width: 45%;
+  height: 100%;
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  overflow: hidden;
+  scroll-behavior: smooth;
 }

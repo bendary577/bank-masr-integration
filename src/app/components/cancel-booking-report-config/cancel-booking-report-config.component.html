@@ -11,12 +11,32 @@
             </mat-expansion-panel-header>
             <div>
                 <mat-form-field class="example-full-width">
-                    <input matInput id="filePath" name="filePath" placeholder="File Path" [(ngModel)]="syncJobType.configuration.bookingConfiguration.filePath">
+                    <input matInput id="fileBaseName" name="fileBaseName" placeholder="File Base Name"
+                        [(ngModel)]="syncJobType.configuration.bookingConfiguration.fileBaseName">
                 </mat-form-field>
             </div>
             <div>
                 <mat-form-field class="example-full-width">
-                    <input matInput type="number" step="0.01" id="municipalityTax" name="municipalityTax" placeholder="Municipality Tax" [(ngModel)]="syncJobType.configuration.bookingConfiguration.municipalityTax">
+                    <input matInput id="fileExtension" name="fileExtension" placeholder="File Extension"
+                        [(ngModel)]="syncJobType.configuration.bookingConfiguration.fileExtension">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="example-full-width">
+                    <input matInput float id="municipalityTax" name="municipalityTax" placeholder="Municipality Tax Rate"
+                        [(ngModel)]="syncJobType.configuration.bookingConfiguration.municipalityTaxRate">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="example-full-width">
+                    <input matInput float id="vatRate" name="vatRate" placeholder="VAT Rate"
+                        [(ngModel)]="syncJobType.configuration.bookingConfiguration.vatRate">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="example-full-width">
+                    <input matInput float id="serviceChargeRate" name="serviceChargeRate" placeholder="Service Charge Rate"
+                        [(ngModel)]="syncJobType.configuration.bookingConfiguration.serviceChargeRate">
                 </mat-form-field>
             </div>
         </mat-expansion-panel>

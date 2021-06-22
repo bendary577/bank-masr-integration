@@ -1,8 +1,13 @@
 <h3>Booking Dashboard</h3>
 
-<div >
-    <input class="searchInput" matInput placeholder="Booking No." [(ngModel)]="searchInput" (ngModelChange)="filterBooking($event)">
-</div>
+<form class="my-form">
+    <div>
+        <mat-form-field class="example-full-width" style="width: 90%;padding-left: 5%;">
+            <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Booking No."
+             name="searchInput" [(ngModel)]="searchInput" (ngModelChange)="filterBooking($event)">
+        </mat-form-field>
+    </div>
+</form>
 
 <br>
  
@@ -35,7 +40,7 @@
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="Booking No">
+            <ngx-datatable-column name="Reservation Status">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.data.reservationStatus}}
                 </ng-template>
