@@ -8,6 +8,7 @@ import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import {Location} from '@angular/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Group } from 'src/app/models/loyalty/Group';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-activities',
@@ -20,12 +21,13 @@ export class ActivitiesComponent implements OnInit {
   totalSpendM: any;
   users = [];
   groups = [];
+  topGroups = [];
   selectedGuest =  '';
   props= [""];
   guestNames= [];
-  fromDate = '';
-  toDate = '';
-  selectedGroup =  '';
+  fromDate: Date;
+  toDate: Date;
+  selectedGroupId =  '';
   transactionList = {
     paginateData: true as boolean,
     offset: 0,
@@ -112,6 +114,7 @@ export class ActivitiesComponent implements OnInit {
   getTopGroups(){
     this.loyaltyService.getTopGroups().toPromise().then((res: any) => {
       this.groups = res;
+      this.topGroups = this.groups.slice(0, 3)
     }).catch(err => {
       let message = "";
       if(err.status === 401){
@@ -165,10 +168,14 @@ export class ActivitiesComponent implements OnInit {
 
   getTransInRangAndGroup(){
 
+    var first = moment('2019/04/01');
+    var second = moment('2019/03/01');
+    var diff = Math.abs(first.diff(second, 'days')); 
+    console.log(first)
 
-    if(this.fromDate ==  '' && this.toDate != ''){
+    if( ( this.fromDate ==  undefined && this.toDate != undefined ) || ((this.toDate.valueOf() - this.fromDate.valueOf()) < 0 )){
 
-      this.snackBar.open("Configure Start Date" , null, {
+      this.snackBar.open("Configure start date and end date correctly." , null, {
         duration: 3000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
@@ -180,7 +187,7 @@ export class ActivitiesComponent implements OnInit {
     this.transactionList.transactionData = [];
     this.transactionList.showLoading = true;
 
-    this.loyaltyService.getTotalTransInRang(this.fromDate, this.toDate, this.selectedGroup).toPromise().then((res: any) => {
+    this.loyaltyService.getTotalTransInRang(this.fromDate.toString(), this.toDate.toString(), this.selectedGroupId).toPromise().then((res: any) => {
       
       this.transactionList.transactionData = res["transactions"];
       this.totalSpendM = res["totalSpend"];
