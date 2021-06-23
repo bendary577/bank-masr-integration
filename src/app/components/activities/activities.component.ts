@@ -25,8 +25,8 @@ export class ActivitiesComponent implements OnInit {
   selectedGuest =  '';
   props= [""];
   guestNames= [];
-  fromDate: Date;
-  toDate: Date;
+  fromDate = '';
+  toDate= '';
   selectedGroupId =  '';
   transactionList = {
     paginateData: true as boolean,
@@ -60,6 +60,7 @@ export class ActivitiesComponent implements OnInit {
   }
   
   totalSpend(date){
+    this.restFilters()
     this.spinner.show();
     this.loyaltyService.getTotalSpend(date).toPromise().then((res: any) => {
       this.getTransactions(date);
@@ -168,14 +169,20 @@ export class ActivitiesComponent implements OnInit {
 
   getTransInRangAndGroup(){
 
-    var first = moment('2019/04/01');
-    var second = moment('2019/03/01');
-    var diff = Math.abs(first.diff(second, 'days')); 
-    console.log(first)
+    if((this.fromDate ==  '' || this.toDate == '') && this.selectedGroupId == ''){
 
-    if( ( this.fromDate ==  undefined && this.toDate != undefined ) || ((this.toDate.valueOf() - this.fromDate.valueOf()) < 0 )){
+      this.snackBar.open("Configure start date, end date and group correctly." , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
 
-      this.snackBar.open("Configure start date and end date correctly." , null, {
+      return null;
+    }
+
+    if( this.fromDate !=  undefined && this.toDate != undefined && (moment(this.toDate.toString()).diff(moment(this.fromDate.toString()), 'day') < 0 )){
+      
+      this.snackBar.open("Configure start date and end date correctly, \n start date can't be after end date." , null, {
         duration: 3000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
@@ -187,7 +194,8 @@ export class ActivitiesComponent implements OnInit {
     this.transactionList.transactionData = [];
     this.transactionList.showLoading = true;
 
-    this.loyaltyService.getTotalTransInRang(this.fromDate.toString(), this.toDate.toString(), this.selectedGroupId).toPromise().then((res: any) => {
+
+    this.loyaltyService.getTotalTransInRang(this.fromDate, this.toDate, this.selectedGroupId).toPromise().then((res: any) => {
       
       this.transactionList.transactionData = res["transactions"];
       this.totalSpendM = res["totalSpend"];
@@ -220,6 +228,16 @@ export class ActivitiesComponent implements OnInit {
         panelClass:"my-snack-bar-fail"
       });
     });  
+  }
+
+  validatefilter(){
+    return false;
+  }
+
+  restFilters(){
+    this.fromDate = '';
+    this.toDate = '';
+    this.selectedGroupId = '';
   }
 
 }
