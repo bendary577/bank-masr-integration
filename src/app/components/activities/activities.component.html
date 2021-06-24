@@ -56,7 +56,7 @@
                                     Total spend
                                 </div>
                                 <div>
-                                    {{totalSpendM | number : '1.2-2'}} USD
+                                    {{totalSpendM | number : '1.2-2'}} GHS
                                 </div>
                             </h3>
                         </div>
@@ -163,7 +163,7 @@
 
         <ngx-datatable-column name="Total Payment">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.totalPayment}} USD
+                {{row.totalPayment}} GHS
             </ng-template>
         </ngx-datatable-column>
 
@@ -175,7 +175,7 @@
 
         <ngx-datatable-column name="After Discount">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.afterDiscount | number : '1.2-2'}} USD
+                {{row.afterDiscount | number : '1.2-2'}} GHS
             </ng-template>
         </ngx-datatable-column>
 
