@@ -8,7 +8,6 @@ import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import {Location} from '@angular/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Group } from 'src/app/models/loyalty/Group';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-activities',
