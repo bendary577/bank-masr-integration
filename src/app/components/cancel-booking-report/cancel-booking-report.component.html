@@ -6,7 +6,7 @@
 
     <select class="custom-select" (change)="getSyncJobData()" [(ngModel)]="selectedJob">
         <option [ngValue]="job" *ngFor="let job of jobs">
-            {{job.creationDate}} - {{job.status}}</option>
+            {{job.creationDate | date:'dd-MM-yyyy H:MM:SS'}} - {{job.status}}</option>
     </select>
     <button mat-flat-button (click)="syncCancelBooking()">Sync Cancel Booking Data</button>
 
@@ -31,12 +31,12 @@
             </mat-list-item>
             <mat-list-item>
                 <span class="key">Start Date: </span>
-                <span class="value" *ngIf="selectedJob.creationDate">{{selectedJob.creationDate}}</span>
+                <span class="value" *ngIf="selectedJob.creationDate">{{selectedJob.creationDate | date:'dd-MM-yyyy H:MM:SS'}}</span>
                 <span class="value" *ngIf="!selectedJob.creationDate">No Info</span>
             </mat-list-item>
             <mat-list-item>
                 <span class="key">End Date: </span>
-                <span class="value" *ngIf="selectedJob.endDate">{{selectedJob.endDate}}</span>
+                <span class="value" *ngIf="selectedJob.endDate">{{selectedJob.endDate | date:'dd-MM-yyyy H:MM:SS'}}</span>
                 <span class="value" *ngIf="!selectedJob.endDate">No Info</span>
             </mat-list-item>
             <mat-list-item>

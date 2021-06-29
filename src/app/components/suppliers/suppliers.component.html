@@ -5,7 +5,7 @@
 
     <select class="custom-select" (change)="getSyncJobData()" [(ngModel)]="selectedJob">
         <option [ngValue]="job" *ngFor="let job of jobs">
-            {{job.creationDate}} - {{job.status}}
+            {{job.creationDate | date:'dd-MM-yyyy H:MM:SS'}} - {{job.status}}
             <p *ngIf="job.rowsFetched == 0 &&  job.status != 'Running'">- No new data fetched.</p>
           </option>
     </select>
@@ -35,12 +35,12 @@
             </mat-list-item>
             <mat-list-item>
                 <span class="key">Start Date: </span>
-                <span class="value" *ngIf="selectedJob.creationDate">{{selectedJob.creationDate}}</span>
+                <span class="value" *ngIf="selectedJob.creationDate">{{selectedJob.creationDate | date:'dd-MM-yyyy H:MM:SS'}}</span>
                 <span class="value" *ngIf="!selectedJob.creationDate">No Info</span>
             </mat-list-item>
             <mat-list-item>
                 <span class="key">End Date: </span>
-                <span class="value" *ngIf="selectedJob.endDate">{{selectedJob.endDate}}</span>
+                <span class="value" *ngIf="selectedJob.endDate">{{selectedJob.endDate | date:'dd-MM-yyyy H:MM:SS'}}</span>
                 <span class="value" *ngIf="!selectedJob.endDate">No Info</span>
             </mat-list-item>
             <mat-list-item>
