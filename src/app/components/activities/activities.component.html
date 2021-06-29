@@ -88,7 +88,7 @@
                 <option value=""></option>
                 <option value="01111111111">0111111111</option>
                 <option value="02222222222">0222222222</option
-                 {{job.creationDate}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob" 
+                 {{job.creationDate | date:'dd-MM-yyyy H:MM:SS'}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob" 
             </select>
         </div>
 
@@ -98,7 +98,7 @@
                 <option value=""></option>
                 <option value="01111111111">0111111111</option>
                 <option value="02222222222">0222222222</option>
-                {{job.creationDate}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob" 
+                {{job.creationDate | date:'dd-MM-yyyy H:MM:SS'}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob" 
             </select>
         </div> -->
 
@@ -108,7 +108,7 @@
                 <!-- <option value="" selected style="display:none"></option> -->
                 <option value="" selected>All Groups</option>
                 <option  [ngValue]="group.id"  *ngFor="let group of groups">{{group.name}}</option>
-                <!-- {{job.creationDate}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob"  -->
+                <!-- {{job.creationDate | date:'dd-MM-yyyy H:MM:SS'}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob"  -->
             </select>
         </div>
 
