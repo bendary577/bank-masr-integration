@@ -9,6 +9,8 @@ import {Location} from '@angular/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Group } from 'src/app/models/loyalty/Group';
 import * as moment from 'moment';
+import { saveAs } from 'file-saver';
+import { ExcelService } from 'src/app/services/excel/excel.service';
 
 @Component({
   selector: 'app-activities',
@@ -47,7 +49,7 @@ export class ActivitiesComponent implements OnInit {
   };
 
   constructor(public snackBar: MatSnackBar, private router: Router, private _location: Location,
-    private sidNav: SidenavResponsive,private loyaltyService: LoyaltyService, private spinner: NgxSpinnerService) { }
+    private sidNav: SidenavResponsive,private loyaltyService: LoyaltyService, private excelService: ExcelService , private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.getTopUsers();
@@ -240,4 +242,33 @@ export class ActivitiesComponent implements OnInit {
     this.selectedGroupId = '';
   }
 
+  extractExcelFile(){
+
+    this.spinner.show();
+    this.excelService.exporttransactionExcel( this.transactionList.transactionData).subscribe(
+      res => {
+        const blob = new Blob([res], { type : 'application/vnd.ms.excel' });
+        const file = new File([blob], "Transactions" + '.xlsx', { type: 'application/vnd.ms.excel' });
+        saveAs(file);
+
+        this.snackBar.open("Export Successfully", null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
+        });
+        this.spinner.hide();
+
+      },
+      err => {
+        this.spinner.hide();
+
+        console.error(err)
+        this.snackBar.open("Fail to export, Please try agian" , null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+      }
+   );
+  }
 }

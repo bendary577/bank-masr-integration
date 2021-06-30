@@ -1,6 +1,3 @@
-<!-- <div class="header" style="margin-bottom: 15px; margin-left: 15px;">
-    <button mat-flat-button class="button-back" (click)="refresh()">Refresh</button>
-</div>  -->
 <div class="row">
     <div class="column">
         <mat-card class="stat-card">
@@ -73,55 +70,28 @@
     </div>
     <div class="filter-buttons">
 
-        <div class="five-column" style="width:20%;" > 
-            <span style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 15px;">From</span>
+        <div class="five-column" style="width:18%;" > 
+            <span class="filterTitle">From</span>
             <input matInput placeholder="Start Date" type="date" name="fromDate" id="fromDate" [(ngModel)]="fromDate" class="custom-select">
             </div>
-        <div class="five-column" style="width:20%;"> 
-            <span style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 15px;">To</span>
+        <div class="five-column" style="width:18%;"> 
+            <span class="groupTitle">To</span>
             <input matInput placeholder="End Date" type="date" name="toDate" id="toDate" [(ngModel)]="toDate" class="custom-select">
         </div>
 
-        <!-- <div class="five-column">
-            <select class="custom-select" (change)="filterByGuestName()" [(ngModel)]="selectedGuest">
-                <option value="" selected style="display:none">From</option>
-                <option value=""></option>
-                <option value="01111111111">0111111111</option>
-                <option value="02222222222">0222222222</option
-                 {{job.creationDate}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob" 
-            </select>
-        </div>
-
         <div class="five-column">
-            <select class="custom-select" (change)="filterByGuestName()" [(ngModel)]="selectedGuest">
-                <option value="" selected style="display:none">To</option>
-                <option value=""></option>
-                <option value="01111111111">0111111111</option>
-                <option value="02222222222">0222222222</option>
-                {{job.creationDate}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob" 
-            </select>
-        </div> -->
-
-        <div class="five-column">
-            <span style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 15px; margin-right:15px; margin-top: 25px;">Group</span>
+            <span class="filterTitle groupTitle">Group</span>
             <select class="custom-select" [(ngModel)]="selectedGroupId">
-                <!-- <option value="" selected style="display:none"></option> -->
                 <option value="" selected>All Groups</option>
                 <option  [ngValue]="group.id"  *ngFor="let group of groups">{{group.name}}</option>
-                <!-- {{job.creationDate}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob"  -->
             </select>
         </div>
 
-    <!-- <div class="filter-view" *ngIf="guestNames.length">
-        <div class="filter-item" [ngStyle]="props" *ngFor="let name of guestNames">
-            <span matBadge="5" matBadgeOverlap="false">Text with a badge</span> 
-            {{name}}
-        </div>
-    </div> -->
-
-    <div class="five-column" style="float: right;">
+    <div class="five-column filterButtons">
         <button mat-stroked-button (click)="getTransInRangAndGroup()" class="filteration">Filter</button>
         <button mat-stroked-button (click)="restFilters()"  class="filteration" [disabled]="validatefilter()">Reset</button>
+        <button mat-flat-button (click)="extractExcelFile()" [disabled]="transactionList.transactionData.length == 0" >Export Excel File</button>
+
     </div> 
 
 </div>

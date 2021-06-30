@@ -104,7 +104,7 @@
 
 .custom-select, .custom-select select{
   border: 2px solid rgb(197, 197, 197);
-  width: 14%;
+  width: 12%;
   height: 32px;
   border-radius: 5px;
   left:auto;
@@ -113,7 +113,7 @@
 .five-column input{
   margin-top: 6px;
   margin-left: 10px;
-  width: 70%;
+  width: 65%;
   height: 25px;
   border-radius: 5px;
   border: 2px solid rgb(197, 197, 197);
@@ -157,4 +157,22 @@ canvas{
 background-color: rgb(255, 255, 255);
 color: rgb(0, 0, 0);
 
+}
+
+.filterButtons{
+  margin-left: auto;
+  float: right;
+  width: 35%;
+}
+
+.filterTitle{
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 15px;
+
+}
+
+.groupTitle{
+  margin-right:15px;
+  margin-top: 25px;
 }

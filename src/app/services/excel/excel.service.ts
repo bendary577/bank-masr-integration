@@ -9,6 +9,7 @@ const EXCEL_EXTENSION = '.xlsx';
 
 @Injectable()
 export class ExcelService {
+
   token = localStorage.getItem('auth_token');
 
   constructor(private http: HttpClient) { }
@@ -56,5 +57,10 @@ export class ExcelService {
   exportBookedProductionToExcel(syncJobID) {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.EXPORT_BOOKED_PRODUCTION + '?syncJobId=' + syncJobID , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token}), responseType: 'blob'});
+  }
+
+  exporttransactionExcel(transactionData: any[]) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.post(Constants.EXPORT_TRANSACTION_EXCEL_SHEET ,transactionData , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token}), responseType: 'blob'});
   }
 }

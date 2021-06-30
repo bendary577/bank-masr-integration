@@ -6,6 +6,7 @@ import { Constants } from 'src/app/models/constants';
   providedIn: 'root'
 })
 export class LoyaltyService {
+
   token = localStorage.getItem('auth_token');
 
   constructor(private http: HttpClient) { }
