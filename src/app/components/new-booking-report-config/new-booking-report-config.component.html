@@ -37,6 +37,46 @@
             </div>
         </mat-expansion-panel>
 
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Neglected Room Types
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+        
+        
+            <form class="my-form">
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;"
+                            placeholder="Room Type eg. Posting Master" name="roomType" [(ngModel)]="newRoomType">
+                    </mat-form-field>
+                    <button mat-flat-button (click)="addRoomType()">Add Room Type</button>
+                </div>
+            </form>
+        
+            <div *ngIf="neglectedRoomTypes?.length > 0">
+        
+                <div class="container">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <table class="table-latitude">
+                                <thead>
+                                    <th>Room Type</th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let row of neglectedRoomTypes">
+                                        <td style="text-align: center;">{{row}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        </mat-expansion-panel>
+
         <br>
         <div class="card-back">
             <button mat-flat-button (click)="onSaveClick()">Save</button>
