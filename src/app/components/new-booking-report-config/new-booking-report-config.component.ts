@@ -37,7 +37,9 @@ export class NewBookingReportConfigComponent implements OnInit {
       .toPromise()
       .then((res: any) => {
         this.syncJobType = res
-        this.neglectedRoomTypes = this.syncJobType["configuration"]["bookingConfiguration"]["neglectedRoomTypes"];
+        this.neglectedRoomTypes = this.syncJobType['configuration'][
+          'bookingConfiguration'
+        ]['neglectedRoomTypes']
 
         this.loading = false
       })
@@ -54,7 +56,7 @@ export class NewBookingReportConfigComponent implements OnInit {
 
       this.neglectedRoomTypes = [...this.neglectedRoomTypes]
     } else {
-      this.snackBar.open('Please enter group code value.', null, {
+      this.snackBar.open('Please enter room type.', null, {
         duration: 2000,
         horizontalPosition: 'center',
         panelClass: 'my-snack-bar-fail',
@@ -64,6 +66,9 @@ export class NewBookingReportConfigComponent implements OnInit {
 
   onSaveClick(): void {
     this.spinner.show()
+    this.syncJobType['configuration']['bookingConfiguration'][
+      'neglectedRoomTypes'
+    ] = this.neglectedRoomTypes
     this.syncJobService
       .updateSyncJobTypeConfig(this.syncJobType)
       .then((result) => {
