@@ -5,6 +5,7 @@ export class ApplicationUser {
     public id: string;
     public name: string;
     public email: String;
+    public moblie:String;
     public group: Group;
     public creationDate: string;
     public lastUpdate: string;

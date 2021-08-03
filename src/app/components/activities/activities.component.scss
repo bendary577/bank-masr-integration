@@ -44,10 +44,24 @@
   scroll-behavior: smooth;
 }
 
+.chart-card{
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: auto;
+  width: 85%;
+}
+
 .user-img{
   display: inline;
   width: 70px;
   min-height: 70px;
+  border-radius: 50%;
+}
+
+.profile-img{
+  width: 30px;
+  min-height: 30px;
   border-radius: 50%;
 }
 

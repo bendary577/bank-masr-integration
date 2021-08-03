@@ -1,0 +1,21 @@
+@import "../add-tax/add-tax.component.scss";
+
+.two-column{
+    float: right;
+    width: 50%; 
+    height: 100%;
+    text-align: center;
+  }
+
+  .row{
+    display: flex;
+  }
+
+  .mat-dialog-content{
+
+    overflow: hidden;
+  }
+
+.mat-tab-labels {
+    background-color: rgb(182, 217, 248);
+}

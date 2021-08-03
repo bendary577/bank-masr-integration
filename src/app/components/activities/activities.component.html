@@ -96,6 +96,120 @@
 
 </div>
 
+<div class="row" >
+    <div class="two-column" style="width: 700px; height: 400px; padding-left: 350px;">
+        <mat-card class="chart-card">
+            <mat-card-content>
+                <div [hidden]="transactionList.transactionData.length">
+                    <p class="user-name">There is no analyses yet</p>
+                </div>
+                <div style="display: block;" *ngIf="transactionList.transactionData.length">
+                    <canvas baseChart 
+                      [datasets]="rvcBarChartData"
+                      [labels]="rvcBarChartLabels"
+                      [options]="barChartOptions"
+                      [plugins]="rvcBarChartPlugins"
+                      [legend]="rvcBarChartLegend"
+                      [chartType]="rvcBarChartType">
+                    </canvas>
+                  </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <!-- <div class="two-column">
+        <mat-card class="chart-card">
+            <mat-card-content>
+                <div [hidden]="transactionList.transactionData.length">
+                    <p class="user-name">There is no analyses yet</p>
+                </div>
+                <div style="display: block;" *ngIf="transactionList.transactionData.length">
+                    <canvas baseChart 
+                      [datasets]="traBarChartData"
+                      [colors]="rvcBlue"
+                      [labels]="traBarChartLabels"
+                      [options]="barChartOptions"
+                      [plugins]="traBarChartPlugins"
+                      [legend]="traBarChartLegend"
+                      [chartType]="traBarChartType">
+                    </canvas>
+                  </div>
+            </mat-card-content>
+        </mat-card>
+    </div> -->
+</div>
+
+<div class="filter-container" *ngIf="transactionList.transactionData.length != 0">
+    <div class="filter-title">
+        <span style="display: inline-block; font-size: 20px; font-weight: bold; color: black;"> Filter Transactions</span>
+    </div>
+    <div class="filter-buttons">
+        <div class="five-column" >
+            <!-- <mat-form-field class="example-full-width">
+                <mat-select matInput id="groups" name="groups" placeholder="Parent Group" >
+                    <mat-option>Ahmed</mat-option>
+                     <mat-option [value]=c *ngFor="let c of groups">{{c.name}}</mat-option> formControlName="parentGroup"
+                </mat-select>
+            </mat-form-field> -->
+            <select class="custom-select">
+                <option value="" selected style="display:none">Revenue Center</option>
+                <option value=""></option>
+                <option >Nisantasi</option>
+                <option >Hardees</option>
+                <option >Mcdonald's</option>
+
+                     <!-- {{job.creationDate}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob"  -->
+            </select>
+        </div>
+        <div class="five-column" >
+            <select class="custom-select" >
+                <option value="" selected style="display:none">Guest Name</option>
+                <option value=""></option>
+                <option >Ahmed</option>
+                <option >Othman</option>
+                <option >Mona</option>
+                     <!-- {{job.creationDate}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob"  -->
+            </select>
+        </div>
+        <div class="five-column" >
+            <select class="custom-select">
+                <option value="" selected style="display:none">Card Number</option>
+                <option value=""></option>
+                <option >012568954</option>
+                <option >544311545</option>
+                <option >823235455</option>
+                     <!-- {{job.creationDate}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob"  -->
+            </select>
+        </div>
+        <div class="five-column" >
+            <select class="custom-select">
+                <option value="" selected style="display:none">Card Statues</option>
+                <option value=""></option>
+                <option >Active</option>
+                <option >Deleted</option>
+                <option >Blocked</option>
+                <option >Expired</option>
+                     <!-- {{job.creationDate}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob"  -->
+            </select>
+        </div>
+        <!-- <div class="five-column" >
+            <input matInput placeholder="Search Key Word...">
+            < <option value="" disabled selected>Guest Name</option>
+                <option >Ahmed</option>
+                     {{job.creationDate}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob"  
+            </select> 
+        </div> -->
+    </div>
+    <div class="filter-view" *ngIf="guestNames.length">
+
+        <div class="filter-item" [ngStyle]="props" *ngFor="let name of guestNames">
+            <!-- <span matBadge="5" matBadgeOverlap="false">Text with a badge</span> -->
+            {{name}}
+            </div>
+
+    </div>
+</div>
+
+
 <div class="main">
 
     <div *ngIf="false"> 
@@ -109,9 +223,17 @@
         </mat-card>
     </div>
 
-    <div >
-        <ngx-datatable class="material" [loadingIndicator]="transactionList.showLoading" [messages]="transactionList.messages" [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+    <div *ngIf="transactionList.transactionData.length != 0">
+        <ngx-datatable class="material" [loadingIndicator]="transactionList.showLoading" [messages]="transactionList.messages" style="width: 98%"
+         [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
         [rows]="transactionList.transactionData" [selected]="transactionList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" [scrollbarH]="true">
+
+        <ngx-datatable-column name="Card Number">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <div style="float: left;"><img class="profile-img" src="../../../assets/profile.png"  alt="image"> </div>
+                <div style="float: left; color: black; margin-top: 3px; margin-left: 5px;">1256420369</div>
+            </ng-template>
+        </ngx-datatable-column>
 
         <ngx-datatable-column name="User Name">
             <ng-template let-row="row" ngx-datatable-cell-template>
@@ -119,15 +241,15 @@
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Transaction Date">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.transactionDate | date: 'dd/MM/yyyy HH:mm:ss' }}
-            </ng-template>
-        </ngx-datatable-column>
-
         <ngx-datatable-column name="Group">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.group.name}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="RVC">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                Restaurant
             </ng-template>
         </ngx-datatable-column>
 

@@ -11,6 +11,8 @@ import { Group } from 'src/app/models/loyalty/Group';
 import * as moment from 'moment';
 import { saveAs } from 'file-saver';
 import { ExcelService } from 'src/app/services/excel/excel.service';
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-activities',
@@ -25,11 +27,15 @@ export class ActivitiesComponent implements OnInit {
   groups = [];
   topGroups = [];
   selectedGuest =  '';
-  props= [""];
   guestNames= [];
   fromDate = '';
   toDate= '';
   selectedGroupId =  '';
+
+  props = {  'background-color' : '#e07d93'  };
+  props2 = {  'background-color' : '#3F51B5'  };
+  noFilter = true ; 
+
   transactionList = {
     paginateData: true as boolean,
     offset: 0,
@@ -47,6 +53,29 @@ export class ActivitiesComponent implements OnInit {
     inputSearch: '' as string,
     transactionData: [] 
   };
+
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+  };
+  public rvcBarChartLabels: Label[] = ['Retaurant 1', 'Retaurant 2', 'Retaurant 3', 'Retaurant 4'];
+  public rvcBarChartType: ChartType = 'bar';
+  public rvcBarChartLegend = true;
+  public rvcBarChartPlugins = [];
+  public rvcBlue= ["rgba(224, 108, 112, 1)",
+  "rgba(224, 108, 112, 1)",
+  "rgba(224, 108, 112, 1)"]
+  public rvcBarChartData: ChartDataSets[] = [
+    { data: [ , 20], label: 'Sales Per Revenue Center' },
+  ];
+  
+  public traBarChartLabels: Label[] = ['1', '2', '3', '4','5','6','7','8','9','10','11'];
+  public traBarChartType: ChartType = 'bar';
+  public traBarChartLegend = true;
+  public traBarChartPlugins = [];
+  // public traBlue= ['blue', 'blue', 'blue', 'blue']
+  public traBarChartData: ChartDataSets[] = [
+    { data: [ , , , 20], label: 'Transaction' },
+  ];
 
   constructor(public snackBar: MatSnackBar, private router: Router, private _location: Location,
     private sidNav: SidenavResponsive,private loyaltyService: LoyaltyService, private excelService: ExcelService , private spinner: NgxSpinnerService) { }
@@ -130,7 +159,6 @@ export class ActivitiesComponent implements OnInit {
       } else {
         message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
       }
-
       this.snackBar.open(message , null, {
         duration: 3000,
         horizontalPosition: 'center',
@@ -271,4 +299,15 @@ export class ActivitiesComponent implements OnInit {
       }
    );
   }
+  closeCard(){
+
+  }
+
+  filterByGuestName(){
+    // this.getUsers();
+    // this.usersList.usersData = [this.usersList.usersData[0]]
+    // console.log(this.usersList.usersData)
+    // this.guestNames.push(this.selectedGuest);
+  }
+
 }

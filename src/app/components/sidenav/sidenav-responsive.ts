@@ -35,6 +35,7 @@ export class SidenavResponsive implements OnDestroy,OnInit {
   suppliers:[];
   overGroups:[];
   discountRates:[];
+  admin= false;
 
   private _mobileQueryListener: () => void;
  
@@ -75,6 +76,12 @@ export class SidenavResponsive implements OnDestroy,OnInit {
       this.getOperationTypes();
       this.getAccount();
     }
+    
+    if(this.account.id != undefined && this.account.id == "5fe34649283cde246c2d7734"){
+      this.admin = true;
+    }
+
+    console.log(this.admin)
   }
 
   changeCurrentTab(cuurentTab) {

@@ -1,0 +1,66 @@
+<div *ngIf="!showVoucher">
+
+    <h1 *ngIf="inCharge" mat-dialog-title>Charge Wallet</h1>
+    <h1 *ngIf="inDeduct" mat-dialog-title>Deduct From Wallet</h1>
+    <h1 *ngIf="generateVoucher" mat-dialog-title>Generate Voucher</h1>
+
+    <div class="row">
+        <div mat-dialog-content>
+            <form [formGroup]="form" class="my-form">
+                <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Amount" formControlName="amount" required maxlength="50">
+                        <mat-error *ngIf="form.controls.amount.hasError('required')">
+                            Amount is required.
+                        </mat-error>
+                        <mat-error *ngIf="form.controls.amount.hasError('maxlength')">
+                            Amount is to long.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="row" *ngIf="inCharge">
+                    <h4>            Revenue Centers        </h4>
+                </div>
+                <div class="row" *ngIf="inCharge">
+                    <div class="list-group" >
+                        <label class="list-group-item" *ngFor="let revenue of revenuCenters">
+                            <input class="form-check-input me-1" type="checkbox">
+                            {{revenue}}
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button cdkFocusInitial (click)="onSaveClick()">
+            <label [hidden]="!inCharge ">Charge</label>
+            <label [hidden]="!inDeduct">Deduct</label>
+            <label [hidden]="!generateVoucher">Generate</label>
+        </button>
+        <button mat-button (click)="onNoClick()"> Cancel </button>
+    </div>
+</div>
+<!-- <div *ngIf="showVoucher">
+    <div *ngIf="amount">
+        <h1 mat-dialog-title>Voucher Card</h1>
+        <hr>
+        <p style="font-family: Arial, Helvetica, sans-serif; font-weight: 200; font-size: 20px;"> <span
+                style="font-weight: bold;"> Total Amount </span> : {{amount}} </p>
+        <p style="font-family: Arial, Helvetica, sans-serif; font-weight: 200; font-size: 20px;"><span
+                style="font-weight: bold;"> Voucher Code </span> : FristNewVoucher </p>
+
+        <div mat-dialog-actions>
+            <button mat-button (click)="onCloseClick()"> Close </button>
+        </div>
+    </div>
+    <div *ngIf="!amount">
+        <h1 mat-dialog-title>Voucher Card</h1>
+        <hr>
+        <p style="font-family: Arial, Helvetica, sans-serif; font-weight: 200; font-size: 20px;"> Voucher Sended
+            Successfuly. </p>
+        <div mat-dialog-actions>
+            <button mat-button (click)="onNoClick()"> Close </button>
+        </div>
+    </div>
+</div> -->

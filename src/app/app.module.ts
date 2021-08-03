@@ -26,7 +26,9 @@ import {
   MatCheckboxModule,
   MatCardModule,
   MatRippleModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatBadgeModule,
+  MatMenuModule
 } from '@angular/material';
 import {SidenavResponsive} from "./components/sidenav/sidenav-responsive";
 import {ConfigurationComponent} from "./components/setting/configuration/configuration.component";
@@ -140,9 +142,18 @@ import { AmazonComponent } from './components/amazon/amazon.component';
 import { HotelOpiComponent } from './components/hotel-opi/hotel-opi.component';
 import { OpiActivitiesComponent } from './components/opi-activities/opi-activities.component';
 import { OpiTransactionsComponent } from './components/opi-transactions/opi-transactions.component';
+import { ChartsModule } from 'ng2-charts';
+import { AngularDropdownModule } from 'angular-dropdown';
+import { NgWormholeModule } from 'ng-wormhole';
+import { FilterComponent } from './components/filter/filter.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { EditWalletComponent } from './components/edit-wallet/edit-wallet.component';
+import { ToastrModule } from 'ngx-toastr';
+import { GestCardsComponent } from './components/gest-cards/gest-cards.component';
 
 @NgModule({
   declarations: [
+    GestCardsComponent,
     AppComponent,
     LoginComponent,
     SuppliersComponent,
@@ -245,8 +256,10 @@ import { OpiTransactionsComponent } from './components/opi-transactions/opi-tran
     AmazonComponent,
     HotelOpiComponent,
     OpiActivitiesComponent,
-    OpiTransactionsComponent
-
+    OpiTransactionsComponent,
+    FilterComponent,
+    UserProfileComponent,
+    EditWalletComponent
   ],
   imports: [
     BrowserModule,
@@ -258,6 +271,8 @@ import { OpiTransactionsComponent } from './components/opi-transactions/opi-tran
     NgxSpinnerModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatMenuModule,
+    MatBadgeModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
@@ -275,8 +290,10 @@ import { OpiTransactionsComponent } from './components/opi-transactions/opi-tran
     FormsModule,
     MatProgressBarModule,
     NgxJsonViewerModule,
-    
-    
+    ChartsModule,
+    AngularDropdownModule,
+    NgWormholeModule,
+    ToastrModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, 
     CookieService, 
@@ -299,7 +316,13 @@ import { OpiTransactionsComponent } from './components/opi-transactions/opi-tran
     // ==> Consumption Sync Job Type
     AddConsumptionLocationComponent, AddConsumptionLocationItemsComponent,
     // ==> Loyalty
-    AddAppCompanyComponent, AddAppGroupComponent, AddAppUserComponent, DialogComponent, DeleteAppGroupComponent
+    AddAppCompanyComponent,
+    AddAppGroupComponent,
+    AddAppUserComponent,
+    DialogComponent,
+    DeleteAppGroupComponent,
+    EditWalletComponent
+    
     ]
 })
 export class AppModule { }

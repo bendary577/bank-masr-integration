@@ -64,6 +64,7 @@ import { CostOfGoodsComponent } from './components/cost-of-goods/cost-of-goods.c
 import { CostOfGoodsConfigComponent } from './components/cost-of-goods-config/cost-of-goods-config.component';
 import { AmazonComponent } from './components/amazon/amazon.component';
 import { HotelOpiComponent } from './components/hotel-opi/hotel-opi.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 
 const routes: Routes = [
@@ -91,7 +92,9 @@ const routes: Routes = [
   { path: Constants.MANAGE_GROUPS, component: ManageGroupsComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MANAGE_SUB_GROUPS, component: ManageSubGroupComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MANAGE_USERS, component: ManageUsersComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.USER_PROFILE, component: UserProfileComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MANAGE_ACTIVITIES, component: ActivitiesComponent ,canActivate:[AuthGuardService]},
+  // { path: Constants.ACCOUNT_CONFIGURATION, component: ConfigurationComponent ,canActivate:[AuthGuardService]},
 
   // Hotel OPI Views
   { path: Constants.GET_HOTEL_OPI_PAGE, component: HotelOpiComponent ,canActivate:[AuthGuardService]},
