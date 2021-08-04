@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit {
         this.side.getApplication();
         this.saveAccountERD();
         // this.getFeatures();
-        // this.getRoles();
+        this.getRoles();
         this.router.navigate([Constants.WELCOME_PAGE]);
       }).catch(err => {
         localStorage.setItem('auth_token','');
@@ -110,7 +110,6 @@ export class LoginComponent implements OnInit {
 
   saveAccountERD() {
     this.accountService.getAccount().toPromise().then((res: any) => {
-
       this.account = res;
       localStorage.setItem('accountERD',res.erd);
 
@@ -119,63 +118,72 @@ export class LoginComponent implements OnInit {
     });
   }
 
-
-  getFeatures() {
-
-    this.accountService.getAccountFeature(this.account.id).then((res: any) => {
-      localStorage.setItem('features', res['data']);
-
-      console.log(localStorage.getItem("features"));
-
-    }).catch(err =>{
-
-      let message = "Error happend, Please try again.";
-
-      if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
-        this.side.Logout();
-      }else if(err.message){
-        message = err.message;
-      }else if(err.error.message){
-        message = err.error.message;
-      }
-       this.snackBar.open(message, null, {
-         duration: 3000,
-         horizontalPosition: 'center',
-         panelClass:"my-snack-bar-fail"
-       });
-
-    });
-
-  }
-
   getRoles() {
+    this.accountService.getRoles("asfas", true).toPromise().then((res: any) =>{
+      localStorage.setItem('roles', JSON.stringify(res["data"]));
+//      console.log(JSON.parse(localStorage.getItem('roles'))) ;
+    }).catch(err => { 
+      console.log(err );
 
-    this.accountService.getRoles("", true).toPromise().then((res: any) =>{
-      localStorage.setItem("roles", res["data"]);
-
-      console.log(localStorage.getItem("roles"));
-
-    }).catch(err => {
-
-      let message = "Error happend, Please try again.";
-
-      if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
-        this.side.Logout();
-      }else if(err.message){
-        message = err.message;
-      }else if(err.error.message){
-        message = err.error.message;
-      }
-       this.snackBar.open(message, null, {
-         duration: 3000,
-         horizontalPosition: 'center',
-         panelClass:"my-snack-bar-fail"
-       });
-       
     })
   }
+
+  // getFeatures() {
+
+  //   this.accountService.getAccountFeature(this.account.id).then((res: any) => {
+  //     localStorage.setItem('features', res['data']);
+
+  //     console.log(localStorage.getItem("features"));
+
+  //   }).catch(err =>{
+
+  //     let message = "Error happend, Please try again.";
+
+  //     if(err.status === 401){
+  //       message = ErrorMessages.SESSION_EXPIRED;
+  //       this.side.Logout();
+  //     }else if(err.message){
+  //       message = err.message;
+  //     }else if(err.error.message){
+  //       message = err.error.message;
+  //     }
+  //      this.snackBar.open(message, null, {
+  //        duration: 3000,
+  //        horizontalPosition: 'center',
+  //        panelClass:"my-snack-bar-fail"
+  //      });
+
+  //   });
+
+  // }
+
+  // getRoles() {
+
+  //   this.accountService.getRoles("", true).toPromise().then((res: any) =>{
+  //     localStorage.setItem("roles", res["data"]);
+
+  //     console.log(localStorage.getItem("roles"));
+
+  //   }).catch(err => {
+
+  //     let message = "Error happend, Please try again.";
+
+  //     if(err.status === 401){
+  //       message = ErrorMessages.SESSION_EXPIRED;
+  //       this.side.Logout();
+  //     }else if(err.message){
+  //       message = err.message;
+  //     }else if(err.error.message){
+  //       message = err.error.message;
+  //     }
+  //      this.snackBar.open(message, null, {
+  //        duration: 3000,
+  //        horizontalPosition: 'center',
+  //        panelClass:"my-snack-bar-fail"
+  //      });
+       
+  //   })
+  // }
 
 
 }

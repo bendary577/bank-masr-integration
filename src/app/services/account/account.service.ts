@@ -34,12 +34,13 @@ export class AccountService {
 
   getAccountFeature(accountId){
     this.token = localStorage.getItem("auth_token");
-    return this.http.get(Constants.GET_FEATURES + "?accountId=" + accountId , {headers: new HttpHeaders({Authorization: 'Bearer' + this.token})}).toPromise();
+    return this.http.get(Constants.GET_FEATURES + "?accountId=" + accountId
+     , {headers: new HttpHeaders({Authorization: 'Bearer' + this.token})}).toPromise();
   }
 
   getRoles(userId: any, sameUser : Boolean) {
     this.token = localStorage.getItem("auth_token");
     return this.http.get(Constants.GET_ROLES + "?userId=" + userId  + "&sameUser=" + sameUser
-    , {headers: new HttpHeaders({autherization: 'Bearer' + this.token})});
+    , {headers: new HttpHeaders({Authorization: 'Bearer' + this.token})});
   }
 }
