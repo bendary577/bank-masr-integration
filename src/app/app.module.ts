@@ -150,6 +150,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { EditWalletComponent } from './components/edit-wallet/edit-wallet.component';
 import { ToastrModule } from 'ngx-toastr';
 import { GestCardsComponent } from './components/gest-cards/gest-cards.component';
+import { AddAppUserAccompiedComponent } from './components/add-app-user-accompied/add-app-user-accompied.component';
 
 @NgModule({
   declarations: [
@@ -233,6 +234,7 @@ import { GestCardsComponent } from './components/gest-cards/gest-cards.component
     AddAppCompanyComponent,
     AddAppGroupComponent,
     AddAppUserComponent,
+    AddAppUserAccompiedComponent,
     DeleteAppGroupComponent,
     ActivitiesComponent,
     WlsIntegrationConfigComponent,

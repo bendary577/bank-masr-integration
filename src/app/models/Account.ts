@@ -8,6 +8,7 @@ export class Account {
     public locationQuota: Number;
     public creationDate: string;
     public deleted: boolean;
+    public features: [];
 
     public constructor() { }
 }

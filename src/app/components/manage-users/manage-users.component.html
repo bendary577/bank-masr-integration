@@ -100,7 +100,7 @@
     </div>
     <div class="filter-view" *ngIf="guestNames.length">
 
-        <div class="filter-item" [ngStyle]="props" *ngFor="let name of guestNames">
+        <div class="filter-item" [ngStyle]="styleProps" *ngFor="let name of guestNames">
             <!-- <span matBadge="5" matBadgeOverlap="false">Text with a badge</span> -->
             {{name}}
         </div>
@@ -125,7 +125,7 @@
     <div *ngIf="usersList.usersData.length != 0 || usersList.showLoading">
         <ngx-datatable class="material" [loadingIndicator]="usersList.showLoading" [messages]="usersList.messages"
             [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
-            [scrollbarV]="true" [scrollbarH]="true" [rows]="users" [selected]="usersList.selected"
+            [scrollbarV]="true" [scrollbarH]="true" [rows]="usersList.usersData" [selected]="usersList.selected"
             [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" (select)='onSelect($event)' [scrollbarH]="true">
 
             <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true" style="width:10px ;">

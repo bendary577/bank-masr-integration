@@ -11,5 +11,8 @@ export class ApplicationUser {
     public lastUpdate: string;
     public deleted: boolean;
 
+    public wallet;
+    public accompanied: [];
+
     public constructor() { }
 }

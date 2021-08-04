@@ -15,6 +15,8 @@ export class Constants {
     static LOGIN = environment.apiHost + '/login';
 
     static GET_ACCOUNT = environment.apiHost + '/getAccount';
+    static GET_FEATURES = environment.apiHost + '/feature/getFeatures';
+    static GET_ROLES = environment.apiHost + '/role/getRoles';
     static ADD_ACCOUNT = environment.apiHost + '/addAccount';
     static UPDATE_ACCOUNT = environment.apiHost + '/updateAccount';
     static UPDATE_ACCOUNT_SYNC_TYPES = environment.apiHost + '/updateAccountSyncTypes';
@@ -268,6 +270,7 @@ export class Constants {
 
     static GET_APP_GROUPS_URL = environment.apiHost + '/getApplicationGroups';
     static GET_ALL_APP_GROUPS_URL = environment.apiHost + '/getAllApplicationGroups';
+    static GET_GENERIC_GROUP = environment.apiHost + '/getGenericGroup';
     static ADD_APP_GROUP_URL = environment.apiHost + '/addApplicationGroup';
     static Delete_APP_GROUPS_URL = environment.apiHost + '/deleteApplicationGroups';
     static UPDATE_APP_GROUP_URL = environment.apiHost  + '/updateApplicationGroup'

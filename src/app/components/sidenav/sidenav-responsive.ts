@@ -13,6 +13,7 @@ import { GeneralSettings } from 'src/app/models/GeneralSettings';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { AccountService } from 'src/app/services/account/account.service';
+import { Account } from 'src/app/models/Account';
 
 /** @title Responsive sidenav */
 @Component({
@@ -29,6 +30,8 @@ export class SidenavResponsive implements OnDestroy,OnInit {
   applications: Application[] = [];
   generalSettings: GeneralSettings;
   account: Account;
+  accountFeatures: [];
+  userRoles: [];
   accountCredentials: [] = [];
   simphonyLocations:[];
   costCenterAccountMapping:[];
@@ -76,12 +79,10 @@ export class SidenavResponsive implements OnDestroy,OnInit {
       this.getOperationTypes();
       this.getAccount();
     }
-    
-    if(this.account.id != undefined && this.account.id == "5fe34649283cde246c2d7734"){
+
+    if(this.account != undefined && this.account.id == "5fe34649283cde246c2d7734"){
       this.admin = true;
     }
-
-    console.log(this.admin)
   }
 
   changeCurrentTab(cuurentTab) {

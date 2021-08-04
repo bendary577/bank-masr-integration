@@ -16,6 +16,11 @@ export class LoyaltyService {
     return this.http.get(Constants.GET_ALL_APP_GROUPS_URL + "?status=" + status, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
+  getGenericGroup() {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get(Constants.GET_GENERIC_GROUP , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
   getAppGroups(isParent, groupId, status: number) {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_APP_GROUPS_URL + "?isParent=" +  isParent + "&parentId=" + groupId + "&status=" + status,
@@ -58,7 +63,7 @@ export class LoyaltyService {
     return this.http.get(Constants.GET_TOP_USERS_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
-  addApplicationUser(flage, name, email, groupId, image, userId) {
+  addApplicationUser(flage, name, email, groupId, image, userId, accompiendUsers) {
     this.token = localStorage.getItem('auth_token');
     const formData: FormData = new FormData();
     formData.append('name', name);
@@ -66,6 +71,8 @@ export class LoyaltyService {
     formData.append('groupId', groupId);
     formData.append('image', image);
     formData.append('userId', userId);
+    formData.append('accompiendUsers', accompiendUsers);
+
     return this.http.post(Constants.ADD_APP_USER_URL  + "?addFlag=" + flage , formData, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
 
