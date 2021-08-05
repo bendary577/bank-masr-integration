@@ -64,6 +64,28 @@
 
             </mat-expansion-panel>
 
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Methods for sending files
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <form class="my-form">
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <mat-select matInput id="sendMethod" name="sendMethod" placeholder="Send files via"
+                                [(ngModel)]="account.sendMethod">
+                                <mat-option value="drive">Google Drive</mat-option>
+                                <mat-option value="ftp">FTP Server</mat-option>
+                                <mat-option value="sun">SUN SSC</mat-option>
+                                <mat-option value="other">OTHER</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </form>
+
+            </mat-expansion-panel>
         </mat-accordion>
         <ngx-spinner></ngx-spinner>
     </div>
