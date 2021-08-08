@@ -259,6 +259,8 @@ export class Constants {
     //////////////////////////////////////////////// Manage Application  //////////////////////////////////////////////
 
     static GET_LOYALTY_PAGE = 'loyalty';
+    static GET_WALLET_PAGE = 'entrySystem';
+    static GET_VOUCHER_PAGE = 'voucher';
     static MANAGE_COMPANIES = 'manageCompanies';
     static MANAGE_GROUPS = "manageGroups";
     static MANAGE_SUB_GROUPS = "manageSubGroups";

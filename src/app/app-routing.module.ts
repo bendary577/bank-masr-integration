@@ -89,7 +89,11 @@ const routes: Routes = [
 
   // Loyalty Views
   { path: Constants.GET_LOYALTY_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.GET_WALLET_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.GET_VOUCHER_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
+
   { path: Constants.MANAGE_GROUPS, component: ManageGroupsComponent ,canActivate:[AuthGuardService]},
+
   { path: Constants.MANAGE_SUB_GROUPS, component: ManageSubGroupComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MANAGE_USERS, component: ManageUsersComponent ,canActivate:[AuthGuardService]},
   { path: Constants.USER_PROFILE, component: UserProfileComponent ,canActivate:[AuthGuardService]},

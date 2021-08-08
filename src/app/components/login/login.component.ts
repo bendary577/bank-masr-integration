@@ -45,10 +45,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    console.log(this.user);
-    console.log(this.account);
-
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -121,7 +117,7 @@ export class LoginComponent implements OnInit {
   getRoles() {
     this.accountService.getRoles("asfas", true).toPromise().then((res: any) =>{
       localStorage.setItem('roles', JSON.stringify(res["data"]));
-//      console.log(JSON.parse(localStorage.getItem('roles'))) ;
+      console.log(JSON.parse(localStorage.getItem('roles'))) ;
     }).catch(err => { 
       console.log(err );
 

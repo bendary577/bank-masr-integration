@@ -15,4 +15,5 @@ export class ApplicationUser {
     public accompanied: [];
 
     public constructor() { }
+    
 }

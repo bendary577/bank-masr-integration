@@ -188,7 +188,6 @@ export class ActivitiesComponent implements OnInit {
       } else {
         message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
       }
-
       this.snackBar.open(message , null, {
         duration: 3000,
         horizontalPosition: 'center',
@@ -198,32 +197,24 @@ export class ActivitiesComponent implements OnInit {
   }
 
   getTransInRangAndGroup(){
-
     if((this.fromDate ==  '' || this.toDate == '') && this.selectedGroupId == ''){
-
       this.snackBar.open("Configure start date, end date and group correctly." , null, {
         duration: 3000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
-
       return null;
     }
-
     if( this.fromDate !=  undefined && this.toDate != undefined && (moment(this.toDate.toString()).diff(moment(this.fromDate.toString()), 'day') < 0 )){
-      
       this.snackBar.open("Configure start date and end date correctly, \n start date can't be after end date." , null, {
         duration: 3000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
-
       return null;
     }
-
     this.transactionList.transactionData = [];
     this.transactionList.showLoading = true;
-
 
     this.loyaltyService.getTotalTransInRang(this.fromDate, this.toDate, this.selectedGroupId).toPromise().then((res: any) => {
       
@@ -236,9 +227,7 @@ export class ActivitiesComponent implements OnInit {
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-success"
       });
-
     }).catch(err => {
-      
       this.transactionList.showLoading = false;
       let message = "";
       if(err.status === 401){
@@ -251,7 +240,6 @@ export class ActivitiesComponent implements OnInit {
       } else {
         message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
       }
-
       this.snackBar.open(message , null, {
         duration: 3000,
         horizontalPosition: 'center',
@@ -299,8 +287,8 @@ export class ActivitiesComponent implements OnInit {
       }
    );
   }
-  closeCard(){
 
+  closeCard(){
   }
 
   filterByGuestName(){
