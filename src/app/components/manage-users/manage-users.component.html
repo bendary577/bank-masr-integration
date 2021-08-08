@@ -12,58 +12,29 @@
     <div class="filter-title">
         <span style="display: inline-block; font-size: 20px; font-weight: bold; color: black;">Filter Guest</span>
     </div>
-    <div class="filter-buttons">
+    <div class="searchField">
 
-        <!-- <div class="five-column" style="width:16%;" > 
-            <span style="font-family: fantasy; font-weight: 50; font-size: 12px;">From</span>
-            <input matInput placeholder="Start Date" type="date" name="fromDate" id="fromDate" [(ngModel)]="fromDate" style="  border: 2px solid rgb(197, 197, 197);
-            width: 160px;
-            height: 32px;
-            border-radius: 5px;
-            left:auto;">
-        </div>        
-
-        <div class="five-column" style="width:16%;"> 
-            <span style="font-family: fantasy; font-weight: 50; font-size: 12px;">To</span>
-            <input matInput placeholder="End Dateu" type="date" name="toDate" id="toDate" [(ngModel)]="toDate" style="  border: 2px solid rgb(197, 197, 197);
-            width: 160px;
-            height: 32px;
-            border-radius: 5px;
-            left:auto;">
-        </div>   -->
-
-        <div class="five-column">
-            <select class="custom-select" (change)="filterByGuestName()" [(ngModel)]="selectedGuest">
-                <option value="" selected style="display:none">From</option>
-                <option value=""></option>
-                <option value="01111111111">0111111111</option>
-                <option value="02222222222">0222222222</option>
-                <!-- {{job.creationDate}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob"  -->
-            </select>
+        <div class="five-column" style="width:18%;" > 
+            <span class="filterTitle">From</span>
+            <input matInput placeholder="Start Date" type="date" name="fromDate" id="fromDate" [(ngModel)]="fromDate" class="custom-select">
+            </div>
+        <div class="five-column" style="width:18%;"> 
+            <span class="groupTitle">To</span>
+            <input matInput placeholder="End Date" type="date" name="toDate" id="toDate" [(ngModel)]="toDate" class="custom-select">
         </div>
 
-        <div class="five-column">
-            <select class="custom-select" (change)="filterByGuestName()" [(ngModel)]="selectedGuest">
-                <option value="" selected style="display:none">To</option>
-                <option value=""></option>
-                <option value="01111111111">0111111111</option>
-                <option value="02222222222">0222222222</option>
-                <!-- {{job.creationDate}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob"  -->
-            </select>
-        </div>
-
-        <div class="five-column">
-            <select class="custom-select" (change)="filterByGuestName()" [(ngModel)]="selectedGuest">
+        <br >
+        
+        <div  style="margin-top: 20px; margin-left: 40px;">
+        <div class="dropDownStyle"> 
+            <select class="" (change)="filterUsers(selectedGuest)" [(ngModel)]="selectedGuest">
                 <option value="" selected style="display:none">Card Number</option>
-                <option value=""></option>
-                <option value="01111111111">0111111111</option>
-                <option value="02222222222">0222222222</option>
-                <!-- {{job.creationDate}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob"  -->
+                <option  [ngValue]="user.code"  *ngFor="let user of usersList.usersData">{{user.code}}</option>
             </select>
         </div>
 
-        <div class="five-column">
-            <select class="custom-select" (change)="filterByGuestName()" [(ngModel)]="selectedGuest">
+        <div class="dropDownStyle">
+            <select class="" (change)="filterByGuestName()" [(ngModel)]="selectedGuest">
                 <option value="" selected style="display:none">Guest Name</option>
                 <option value=""></option>
                 <option value="Test user">Test user</option>
@@ -72,17 +43,17 @@
             </select>
         </div>
 
-        <div class="five-column">
-            <select class="custom-select">
+        <div class="dropDownStyle">
+            <select class="" (change)="filterUsers('test')">
                 <option value="" selected style="display:none">Card Statues</option>
                 <option value=""></option>
-                <option>Active</option>
-                <option>Expired</option>
+                <option value="Active">Active</option>
+                <option value="">Expired</option>
                 <!-- {{job.creationDate}} - {{job.status}}</option> [ngValue]="job" *ngFor="let job of jobs" (change)="getSyncJobData()" [(ngModel)]="selectedJob"  -->
             </select>
         </div>
-        <div class="five-column">
-            <select class="custom-select" (change)="filterByGuestName()" [(ngModel)]="selectedGuest">
+        <div class="dropDownStyle">
+            <select class="" (change)="filterByGuestName()" [(ngModel)]="selectedGuest">
                 <option value="" selected style="display:none">Group</option>
                 <option value=""></option>
                 <option value="Test user">Test user</option>
@@ -98,20 +69,21 @@
             </select> 
         </div> -->
     </div>
-    <div class="filter-view" *ngIf="guestNames.length">
+    <!-- <div class="filter-view" *ngIf="guestNames.length">
 
         <div class="filter-item" [ngStyle]="styleProps" *ngFor="let name of guestNames">
-            <!-- <span matBadge="5" matBadgeOverlap="false">Text with a badge</span> -->
+             <span matBadge="5" matBadgeOverlap="false">Text with a badge</span> 
             {{name}}
         </div>
 
-        <!-- <div class="filter-item" [ngStyle]="props2">
+        <div class="filter-item" [ngStyle]="props2">
          Nisantasi
         </div>
         <div class="filter-item" [ngStyle]="props2">
         Mcdonald's
-        </div> -->
-    </div>
+        </div> 
+    </div> -->
+</div>
 </div>
 
 <div class="main">

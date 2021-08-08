@@ -152,7 +152,9 @@ export class ManageUsersComponent implements OnInit {
 
         this.usersList.showLoading = true;
 
-        this.loyaltyService.addApplicationUser(true, res.name, res.email, res.group, res.image, "", res.accompiendUsers).then((result: any) => {
+        console.log(res.accompiendUsers)
+
+        this.loyaltyService.addApplicationUser(true, true, res.name, res.email, res.group, res.image, "", res.accompiendUsers).then((result: any) => {
           this.loading = true;
           this.getUsers();
           this.newUser = new ApplicationUser();
@@ -209,7 +211,7 @@ export class ManageUsersComponent implements OnInit {
         this.usersList.showLoading = true;
         if(res.group == undefined)
         res.group = new Group();
-        this.loyaltyService.addApplicationUser(false, res.name, res.email, res.group, res.image,
+        this.loyaltyService.addApplicationUser(false,true, res.name, res.email, res.group, res.image,
                                                this.usersList.selected[0].id, []).then((result: any) => {
             this.loading = false;
             this.usersList.showLoading = false;
@@ -324,7 +326,6 @@ export class ManageUsersComponent implements OnInit {
     if(this.usersList.selected.length == 0){
       return true;
     }
-
     // check if there any deleted user selected
     var i;
     for (i = 0; i < this.usersList.selected.length; i++) {
@@ -333,17 +334,41 @@ export class ManageUsersComponent implements OnInit {
       if (!usersList.deleted) {
           return true;
       }
-
       // if(usersList.group.deleted){
       //   return true;
       // }
-
     return false;
     }
   }
 
   filterByGuestName(){
     this.guestNames.push(this.selectedGuest);
+  }
+
+  filterUsers(selectedGuest){
+
+    const strs = this.usersList.usersData;
+    const result = strs.filter(s => s.code.includes(selectedGuest));
+
+    console.log(selectedGuest);
+
+    console.log(strs);
+    console.log(result);
+
+    this.usersList.usersData = result
+  }
+
+  getTransInRangAndGroup(){
+
+  }
+
+  validatefilter(){
+  }
+
+  restFilters(){
+  }
+
+  extractExcelFile(){
   }
 
 }

@@ -1,8 +1,9 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser';
 import { Company } from 'src/app/models/loyalty/Company';
+import { AccompiendGuest } from 'src/app/models/loyalty/AccompiendGuest';
 import { Group } from 'src/app/models/loyalty/Group';
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
 
@@ -23,7 +24,7 @@ export class AddAppUserAccompiedComponent implements OnInit {
   qrcodeMethod = ["Email", "SMS", "Print"];
   swiped=false;
   cardNumber = 0;
-  @Input() accompiedNumber ;
+  @Input() accompiedNumber = 1 ;
 
   constructor(private formBuilder: FormBuilder, public snackBar: MatSnackBar, 
     public dialogRef: MatDialogRef<AddAppUserAccompiedComponent>, private loyaltyService: LoyaltyService,
@@ -58,7 +59,7 @@ export class AddAppUserAccompiedComponent implements OnInit {
       name: [''],
       email: [''],
       mobile: [''], 
-      accompanied:[''],
+      accompanied:[1],
       });
 
       
@@ -117,13 +118,20 @@ export class AddAppUserAccompiedComponent implements OnInit {
       });
       console.log(this.form.getError)
     }else{
+
+      let accompiendGuest = ApplicationUser;
+      
+      for(let i = 0 ; i < this.accompiendForms.length ; i++){
+        // accompiendGuest.name =  this.accompiendForms[i].controls.name.value;
+      }
       this.dialogRef.close({
         name: this.form.controls.name.value,
         email: this.form.controls.email.value,
         mobile: this.form.controls.mobile.value,
-        balance:this.form.controls.balance.value,
+        balance: this.form.controls.balance.value,
         group: this.group,
         image: this.srcResult,
+        accompiendUsers: [new AccompiendGuest("Bassel","faisal" )]
       });
     }
   }
@@ -132,4 +140,12 @@ export class AddAppUserAccompiedComponent implements OnInit {
 
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+
+    console.log("New Test")
+    // this.doSomething(changes.categoryId.currentValue);
+    // You can also use categoryId.previousValue and 
+    // categoryId.firstChange for comparing old and new values
+    
+}
 }
