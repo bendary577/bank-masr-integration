@@ -151,6 +151,7 @@ import { EditWalletComponent } from './components/edit-wallet/edit-wallet.compon
 import { ToastrModule } from 'ngx-toastr';
 import { GestCardsComponent } from './components/gest-cards/gest-cards.component';
 import { AddAppUserAccompiedComponent } from './components/add-app-user-accompied/add-app-user-accompied.component';
+import { SideNaveComponent } from './components/side-nave/side-nave.component';
 
 @NgModule({
   declarations: [
@@ -261,7 +262,8 @@ import { AddAppUserAccompiedComponent } from './components/add-app-user-accompie
     OpiTransactionsComponent,
     FilterComponent,
     UserProfileComponent,
-    EditWalletComponent
+    EditWalletComponent,
+    SideNaveComponent
   ],
   imports: [
     BrowserModule,

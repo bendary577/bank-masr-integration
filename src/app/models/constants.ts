@@ -106,6 +106,7 @@ export class Constants {
     static WELCOME_PAGE = 'welcomePage';
     static HOME_PAGE = 'home';
     static SIDE_NAV = 'sidenav';
+    static NEW_SIDE_NAV = 'newSidenav';
 
     static SUPPLIERS_PAGE = 'suppliers';
     static SUPPLIERS_CONFIG_PAGE = 'suppliersConfig';
