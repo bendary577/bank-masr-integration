@@ -151,6 +151,9 @@ import { EditWalletComponent } from './components/edit-wallet/edit-wallet.compon
 import { ToastrModule } from 'ngx-toastr';
 import { GestCardsComponent } from './components/gest-cards/gest-cards.component';
 import { AddAppUserAccompiedComponent } from './components/add-app-user-accompied/add-app-user-accompied.component';
+import { SideNaveComponent } from './components/side-nave/side-nave.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -261,7 +264,9 @@ import { AddAppUserAccompiedComponent } from './components/add-app-user-accompie
     OpiTransactionsComponent,
     FilterComponent,
     UserProfileComponent,
-    EditWalletComponent
+    EditWalletComponent,
+    SideNaveComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
@@ -295,7 +300,8 @@ import { AddAppUserAccompiedComponent } from './components/add-app-user-accompie
     ChartsModule,
     AngularDropdownModule,
     NgWormholeModule,
-    ToastrModule
+    ToastrModule,
+    NgbModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, 
     CookieService, 

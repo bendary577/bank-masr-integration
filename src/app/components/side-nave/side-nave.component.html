@@ -1,0 +1,148 @@
+ <div>
+
+  <nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+      <a class="sidebar-brand brand-logo" href="index.html"><img src="assets/images/Anywarelogo.png" alt="logo" /></a>
+    </div>
+    <ul class="nav">
+      <li class="nav-item profile" >
+        <div class="profile-desc">
+          <div class="profile-pic">
+            <div class="count-indicator">
+              <img class="user-logo img-xs rounded-circle" src="assets/images/faces/face15.jpg" alt="">
+            </div>
+            <br>
+            <div class="profile-name">
+              <h5 class="mb-0 font-weight-normal" translate>Henry Kein</h5>
+              <span translate>Gold Member</span>
+            </div>
+          </div>
+          <div class="dropdown" ngbDropdown placement="bottom-right">
+            <a class="profile-dropdown" id="profile-dropdown"><i class="mdi mdi-dots-vertical" ngbDropdownToggle></i></a>
+            <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" ngbDropdownMenu aria-labelledby="profile-dropdown">
+              <a href="#" class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-dark rounded-circle">
+                    <i class="mdi mdi-settings text-primary"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content">
+                  <p class="preview-subject ellipsis mb-1 text-small" translate>Account settings</p>
+                </div>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-dark rounded-circle">
+                    <i class="mdi mdi-onepassword  text-info"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content">
+                  <p class="preview-subject ellipsis mb-1 text-small" translate>Change Password</p>
+                </div>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-dark rounded-circle">
+                    <i class="mdi mdi-calendar-today text-success"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content">
+                  <p class="preview-subject ellipsis mb-1 text-small" translate>To-do list</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <br>
+      <div class="supprot-field nav-item">
+      <a class="nav-link" (click)="method()" aria-controls="ui-basic">
+        <span class="menu-icon">
+          <i class="mdi mdi-headset"></i>
+        </span>
+        <span class="menu-title" style="color: black; font-size: larger;"translate>We are here to help</span>
+      </a>
+    </div>
+      <br>
+      <li class="nav-item nav-category">
+        <span class="nav-link" translate>Navigation</span>
+      </li>
+      <li class="nav-item menu-items">
+        <a class="nav-link" (click)="uiBasicCollapsed = !uiBasicCollapsed" [attr.aria-expanded]="uiBasicCollapsed" aria-controls="ui-basic">
+          <span class="menu-icon">
+            <i class="mdi mdi-laptop"></i>
+          </span>
+          <span class="menu-title" translate>Sync Job Types</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="ui-basic" [ngbCollapse]="!uiBasicCollapsed">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item" *ngFor="let type of syncJobTypes"> <a class="nav-link" routerLink={{type.endPoint}} routerLinkActive="active" #dropdowns="routerLinkActive" translate>{{type.name}}</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item menu-items">
+        <a class="nav-link" (click)="appBasicCollapsed = !appBasicCollapsed" [attr.aria-expanded]="uiBasicCollapsed" aria-controls="ui-basic">
+          <span class="menu-icon">
+            <i class="mdi mdi-laptop"></i>
+          </span>
+          <span class="menu-title" translate>Applications</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="ui-basic" [ngbCollapse]="!appBasicCollapsed">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item" *ngFor="let application of applications"> <a class="nav-link" routerLink={{application.endPoint}} routerLinkActive="active" #dropdowns="routerLinkActive" translate>{{application.name}}</a></li>
+          </ul>
+        </div>
+      </li>
+      
+
+
+
+
+      <li class="nav-item nav-category">
+        <span class="nav-link" translate>More</span>
+      </li>
+      <li class="nav-item menu-items" [ngClass]="{ 'active' : login.isActive }">
+        <a class="nav-link" (click)="userPagesCollapsed = !userPagesCollapsed"  [attr.aria-expanded]="userPagesCollapsed" aria-controls="auth">
+          <span class="menu-icon">
+            <i class="mdi mdi-security"></i>
+          </span>
+          <span class="menu-title" translate>User Pages</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="auth" [ngbCollapse]="!userPagesCollapsed">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" routerLink="user-pages/login" routerLinkActive="active" #login="routerLinkActive" translate> Logout </a></li>
+          </ul>
+        </div>
+      </li>
+      <br><br>
+      <li class="tips-field" [ngClass]="{ 'active' : login.isActive }">
+        <a class="nav-link" (click)="tipPagesCollapsed = !tipPagesCollapsed"  [attr.aria-expanded]="tipPagesCollapsed" aria-controls="auth">
+          <i class="mdi mdi-arrow-right-bold-circle"></i>
+          <span class="menu-title" style="color: black; font-size: larger;" translate>Today’s Tip</span>
+        </a>
+        <div class="tip" id="auth" [ngbCollapse]="!tipPagesCollapsed">
+          <ul class="nav flex-column sub-menu">
+          ergtrtewrt
+        </ul>
+        </div>
+      </li>
+    </ul>
+  </nav>
+  
+  <div class="container-fluid page-body-wrapper">
+      <app-nav-bar *ngIf="showNavbar"></app-nav-bar>
+      <div class="main-panel" [ngClass]="{ 'main-panel-only' : !showSidebar }">
+        <div class="content-wrapper">
+          <div contentAnimate *ngIf="!isLoading" class="h-100">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
+</div> 
