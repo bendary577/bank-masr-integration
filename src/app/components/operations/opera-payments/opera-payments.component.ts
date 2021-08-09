@@ -16,9 +16,9 @@ export class OperaPaymentsComponent implements OnInit {
   transactions = []
 
   // Transaction Chart
-  public data: any;
-  public selectedSliceLabel : string = "No Transactions";
-  public selectedSliceValue : string = "0%";
+  public data: any
+  public selectedSliceLabel: string = 'No Transactions'
+  public selectedSliceValue: string = '0%'
 
   // @ViewChild("chart", { static: true })
   // public chart: IgxDoughnutChartComponent;
@@ -31,6 +31,7 @@ export class OperaPaymentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getOperationTypes()
+    this.countOperationTypes()
   }
 
   getOperationTypes() {
@@ -42,6 +43,30 @@ export class OperaPaymentsComponent implements OnInit {
       .toPromise()
       .then((res: any) => {
         this.transactions = res
+        this.spinner.hide()
+        this.loading = false
+      })
+      .catch((err) => {
+        console.error(err)
+        this.spinner.hide()
+        this.loading = false
+
+        let message = ''
+        if (err.status === 401) {
+          message = ErrorMessages.SESSION_EXPIRED
+          this.sidNav.Logout()
+        }
+      })
+  }
+
+  countOperationTypes() {
+    this.loading = true
+    this.spinner.show()
+
+    this.operaPaymentService
+      .countOperaTransactions(this.fromDate, this.toDate)
+      .toPromise()
+      .then((res: any) => {
         this.spinner.hide()
         this.loading = false
       })

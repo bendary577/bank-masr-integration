@@ -21,4 +21,16 @@ export class OperaPaymentService {
       { headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }) },
     )
   }
+
+    countOperaTransactions(fromDate, toDate) {
+    this.token = localStorage.getItem('auth_token')
+    return this.http.get(
+      Constants.COUNT_OPERA_TRANSACTIONS_URL +
+        '?startDate=' +
+        fromDate +
+        '&endDate=' +
+        toDate,
+      { headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }) },
+    )
+  }
 }
