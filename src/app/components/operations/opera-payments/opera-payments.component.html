@@ -1,1 +1,81 @@
-<p>opera-payments works!</p>
+<h3>Monitor Opera Payment Transactions</h3>
+
+<div>
+    <div>
+        <div *ngIf="!transactions.length">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <mat-card-title>No Data</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>There was no new transactions.</p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="main" *ngIf="transactions.length">
+
+            <div class="row">
+                <div class="column">
+                    <mat-card class="stat-card">
+                        <mat-card-content>
+
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+            
+            <div style="text-align: left !important; margin-left: 0.5%;">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Start Date" type="date" name="fromDate" id="fromDate"
+                        [(ngModel)]="fromDate">
+                </mat-form-field>
+            
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="End Date" type="date" name="toDate" id="toDate"
+                        [(ngModel)]="toDate">
+                </mat-form-field>
+
+                <button mat-flat-button (click)="getOperationTypes()">Apply Filter</button>
+            </div>
+
+            <ngx-datatable class="material" [rows]="transactions" [columnMode]="'force'" [headerHeight]="50"
+                [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+                [sorts]="[{prop: 'creationDate', dir: 'desc'}, {prop: 'creationDate', dir: 'desc'}
+                , {prop: 'amount', dir: 'desc'}]">
+                
+                <ngx-datatable-column name="Status">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.status}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Reason">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.reason}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+
+                <ngx-datatable-column name="Transaction Date">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.creationDate | date:'dd-MM-yyyy H:MM:SS'}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Transaction Amount">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.amount}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Currency">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.currency}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+            </ngx-datatable>
+        </div>
+    </div>
+
+    <ngx-spinner></ngx-spinner>
+
+</div>

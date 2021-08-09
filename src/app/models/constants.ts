@@ -181,9 +181,12 @@ export class Constants {
     static CREATE_ORDER_CONFIG_PAGE = 'createCheckConfig';
     static CREATE_ORDER_OPERATION = 'Create Check';
 
+    //////////////////////////////////////////////// Opera Payment  ////////////////////////////////////////////////////////
+
     static OPERA_PAYMENT_PAGE = 'operaPayments';
     static OPERA_PAYMENT_CONFIG_PAGE = 'operaPaymentConfig';
     static OPERA_PAYMENT_OPERATION = 'Opera Payment';
+    static LIST_OPERA_TRANSACTIONS_URL = environment.apiHost + '/listOperaTransaction';
 
     //////////////////////////////////////////////// Opera Reports  ////////////////////////////////////////////////////////
 
