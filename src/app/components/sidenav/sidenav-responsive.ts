@@ -13,6 +13,7 @@ import { GeneralSettings } from 'src/app/models/GeneralSettings';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { AccountService } from 'src/app/services/account/account.service';
+import { Account } from 'src/app/models/Account';
 
 /** @title Responsive sidenav */
 @Component({

@@ -181,7 +181,7 @@ export class Constants {
     static CREATE_ORDER_CONFIG_PAGE = 'createCheckConfig';
     static CREATE_ORDER_OPERATION = 'Create Check';
 
-    static OPERA_PAYMENT_PAGE = 'operaPayment';
+    static OPERA_PAYMENT_PAGE = 'operaPayments';
     static OPERA_PAYMENT_CONFIG_PAGE = 'operaPaymentConfig';
     static OPERA_PAYMENT_OPERATION = 'Opera Payment';
 

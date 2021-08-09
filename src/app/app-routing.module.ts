@@ -64,6 +64,7 @@ import { CostOfGoodsComponent } from './components/cost-of-goods/cost-of-goods.c
 import { CostOfGoodsConfigComponent } from './components/cost-of-goods-config/cost-of-goods-config.component';
 import { AmazonComponent } from './components/amazon/amazon.component';
 import { HotelOpiComponent } from './components/hotel-opi/hotel-opi.component';
+import { OperaPaymentsComponent } from './components/operations/opera-payments/opera-payments.component';
 
 
 const routes: Routes = [
@@ -165,6 +166,9 @@ const routes: Routes = [
   { path: Constants.EXPENSES_DETAILS_REPORT_PAGE , component: ExpensesDetailsReportComponent ,canActivate:[AuthGuardService]},
   { path: Constants.EXPENSES_DETAILS_REPORT_CONFIG_PAGE , component: ExpensesDetailsReportConfigComponent ,canActivate:[AuthGuardService]},
 
+
+  { path: Constants.OPERA_PAYMENT_PAGE , component: OperaPaymentsComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.OPERA_PAYMENT_CONFIG_PAGE , component: OperaPaymentConfigurationComponent ,canActivate:[AuthGuardService]},
 
   { path: "amazon" , component: AmazonComponent ,canActivate:[AuthGuardService]},
 

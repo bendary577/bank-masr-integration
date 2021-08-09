@@ -55,6 +55,11 @@
                         Settings
                     </mat-expansion-panel-header>
                     <mat-nav-list dense>
+                        <div *ngIf="operationTypes.length > 0">
+                            <a mat-list-item (click)="snav.toggle()" routerLink="/operationTypesConfiguration"
+                                *ngIf="operationTypes.length > 0">Operation Types Configuration</a>
+                        </div>
+
                         <div *ngIf="syncJobTypes.length > 0">
                             <a mat-list-item (click)="snav.toggle()" routerLink="/syncjobs" *ngIf="syncJobTypes.length > 0">Sync Types Configuration</a>
                             <a mat-list-item (click)="snav.toggle()" routerLink="/operationTypesConfiguration" *ngIf="operationTypes.length > 0">Operation Types Configuration</a>

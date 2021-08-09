@@ -140,6 +140,7 @@ import { AmazonComponent } from './components/amazon/amazon.component';
 import { HotelOpiComponent } from './components/hotel-opi/hotel-opi.component';
 import { OpiActivitiesComponent } from './components/opi-activities/opi-activities.component';
 import { OpiTransactionsComponent } from './components/opi-transactions/opi-transactions.component';
+import { OperaPaymentsComponent } from './components/operations/opera-payments/opera-payments.component';
 
 @NgModule({
   declarations: [
@@ -245,7 +246,8 @@ import { OpiTransactionsComponent } from './components/opi-transactions/opi-tran
     AmazonComponent,
     HotelOpiComponent,
     OpiActivitiesComponent,
-    OpiTransactionsComponent
+    OpiTransactionsComponent,
+    OperaPaymentsComponent
 
   ],
   imports: [
