@@ -116,8 +116,8 @@ export class LoginComponent implements OnInit {
 
   getRoles() {
     this.accountService.getRoles("asfas", true).toPromise().then((res: any) =>{
-      localStorage.setItem('roles', JSON.stringify(res["data"]));
-      console.log(JSON.parse(localStorage.getItem('roles'))) ;
+      localStorage.setItem('user', JSON.stringify(res["data"]));
+      localStorage.setItem('roles', JSON.stringify(res["data"]["roles"]));
     }).catch(err => { 
       console.log(err );
 

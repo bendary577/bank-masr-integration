@@ -52,11 +52,11 @@
   }
 
   .remove {
-    @extend .ml-auto;
+    @extend .ml-auto !optional;
     @extend .text-secondary;
     .rtl & {
-      @extend .ml-0;
-      @extend .mr-auto;
+      @extend .ml-0 !optional;
+      @extend .mr-auto !optional;
     }
     cursor: pointer;
     font-size: 1.125rem;
@@ -71,7 +71,7 @@
     text-decoration: line-through;
     text-decoration-color: theme-color(primary);
     .remove {
-      @extend .text-primary;
+      @extend .text-primary !optional;
     }
   }
 }

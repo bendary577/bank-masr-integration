@@ -7,16 +7,16 @@
     position: relative;
     margin: 0 auto;
 }
-.moving-square-loader:before{
-    content: "";
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    top: calc(50% - 10px);
-    left: 0px;
-    background-color: rgba(theme-color(danger), .7);
-    animation: rotatemove 1s infinite;
-  }
+// .moving-square-loader:before{
+//     content: "";
+//     position: absolute;
+//     width: 10px;
+//     height: 10px;
+//     top: calc(50% - 10px);
+//     left: 0px;
+//     background-color: rgba(theme-color(danger), .7);
+//     animation: rotatemove 1s infinite;
+//   }
   
   @keyframes rotatemove{
     0%{

@@ -39,7 +39,7 @@ body {
   transition: width $action-transition-duration $action-transition-timing-function, margin $action-transition-duration $action-transition-timing-function;
   width: 100%;
   min-height: calc(100vh - #{$navbar-height});
-  padding-top: $navbar-height;
+  // padding-top: $navbar-height;
   @include display-flex();
   @include flex-direction(column);
   @media (max-width: 991px) {
@@ -53,7 +53,7 @@ body {
 
 .content-wrapper {
   background: #e7eaf7;
-  padding: 1.875rem 1.75rem;
+  // padding: 1.875rem 1.75rem;
   width: 100%;
   @include flex-grow(1);
 }

@@ -58,7 +58,7 @@
 .btn-toolbar {
   .btn-group {
     +.btn-group {
-      @extend .ml-2;
+      @extend .ml-2 !optional;
     }
   }
 }

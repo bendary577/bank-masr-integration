@@ -123,7 +123,7 @@ a:visited {
 a {
     color: blue;
     font-weight: bold;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 span.italic {
@@ -132,15 +132,25 @@ span.italic {
     font-size: 12px;
 }
 
+.example-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 64px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
 
 /* You can add global styles to this file, and also import other style files */
 
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
-@import './assets/scss/variables';
-@import "~compass-mixins/lib/compass";
-@import "~compass-mixins/lib/animate";
 @import "~bootstrap/scss/bootstrap";
+
+@import './assets/scss/variables';
+@import "~@melonthierry/compass-mixins/lib/compass";
+@import "~@melonthierry/compass-mixins/lib/animate";
 @import "./assets/scss/fonts";
 @import "./assets/scss/functions";
 

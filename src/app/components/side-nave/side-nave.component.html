@@ -1,10 +1,12 @@
- <div>
+ <!-- <div> -->
 
-  <nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <nav class="sidebar sidebar-offcanvas" id="sidebar" [class.example-containerpc]="(!shouldRun)">
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+      <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="assets/image2vector.svg" alt="logo" /></a>
       <a class="sidebar-brand brand-logo" href="index.html"><img src="assets/images/Anywarelogo.png" alt="logo" /></a>
+      <!-- <a class="sidebar-brand brand-logo" href="index.html"><img src="assets/63.svg" alt="logo" /></a> -->
     </div>
-    <ul class="nav">
+    <ul class="nav" #snav>
       <li class="nav-item profile" >
         <div class="profile-desc">
           <div class="profile-pic">
@@ -18,7 +20,7 @@
             </div>
           </div>
           <div class="dropdown" ngbDropdown placement="bottom-right">
-            <a class="profile-dropdown" id="profile-dropdown"><i class="mdi mdi-dots-vertical" ngbDropdownToggle></i></a>
+            <a class="profile-dropdown" id="profile-dropdown" style="text-decoration: none;"><i class="mdi mdi-dots-vertical" ngbDropdownToggle></i></a>
             <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" ngbDropdownMenu aria-labelledby="profile-dropdown">
               <a href="#" class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
@@ -67,47 +69,110 @@
       </a>
     </div>
       <br>
-      <li class="nav-item nav-category">
-        <span class="nav-link" translate>Navigation</span>
+      <li class="nav-item nav-category" >
+        <span class="nav-link" translate>Main Menu</span>
       </li>
-      <li class="nav-item menu-items">
+      <li class="nav-item menu-items" [ngClass]="{'active' : buttons.isActive || dropdowns.isActive || typography.isActive }">
         <a class="nav-link" (click)="uiBasicCollapsed = !uiBasicCollapsed" [attr.aria-expanded]="uiBasicCollapsed" aria-controls="ui-basic">
           <span class="menu-icon">
             <i class="mdi mdi-laptop"></i>
+          </span>
+          <span class="menu-title" translate>Basic UI Elements</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="ui-basic" [ngbCollapse]="!uiBasicCollapsed">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link active" routerLink="basic-ui/buttons" routerLinkActive="active" #buttons="routerLinkActive" translate>Buttons</a></li>
+            <li class="nav-item"> <a class="nav-link" routerLink="basic-ui/dropdowns" routerLinkActive="active" #dropdowns="routerLinkActive" translate>Dropdowns</a></li>
+            <li class="nav-item"> <a class="nav-link" routerLink="basic-ui/typography" routerLinkActive="active" #typography="routerLinkActive" translate>Typography</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item menu-items" [ngClass]="{ 'active' : uiBasicCollapsed }">
+        <a class="nav-link" (click)="titleOpened('uiBasicCollapsed');" [attr.aria-expanded]="uiBasicCollapsed" aria-controls="ui-basic">
+          <span class="menu-icon">
+            <i class="mdi mdi-cloud-sync"></i>
           </span>
           <span class="menu-title" translate>Sync Job Types</span>
           <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="ui-basic" [ngbCollapse]="!uiBasicCollapsed">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item" *ngFor="let type of syncJobTypes"> <a class="nav-link" routerLink={{type.endPoint}} routerLinkActive="active" #dropdowns="routerLinkActive" translate>{{type.name}}</a></li>
+            <li class="nav-item" *ngFor="let type of syncJobTypes"> <a class="nav-link" routerLink={{type.endPoint}} routerLinkActive="active"  translate>{{type.name}}</a></li>
           </ul>
         </div>
       </li>
-      <li class="nav-item menu-items">
-        <a class="nav-link" (click)="appBasicCollapsed = !appBasicCollapsed" [attr.aria-expanded]="uiBasicCollapsed" aria-controls="ui-basic">
+      <li class="nav-item menu-items" [ngClass]="{ 'active' : appBasicCollapsed }">
+        <a class="nav-link" (click)=" titleOpened('appBasicCollapsed');" [attr.aria-expanded]="uiBasicCollapsed" aria-controls="ui-basic">
           <span class="menu-icon">
-            <i class="mdi mdi-laptop"></i>
+            <i class="mdi mdi-arrange-send-backward"></i>
           </span>
           <span class="menu-title" translate>Applications</span>
           <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="ui-basic" [ngbCollapse]="!appBasicCollapsed">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item" *ngFor="let application of applications"> <a class="nav-link" routerLink={{application.endPoint}} routerLinkActive="active" #dropdowns="routerLinkActive" translate>{{application.name}}</a></li>
+            <li class="nav-item" *ngFor="let application of applications"> <a class="nav-link" routerLink={{application.endPoint}} routerLinkActive="active" translate>{{application.name}}</a></li>
           </ul>
         </div>
       </li>
-      
-
-
-
-
+      <li class="nav-item menu-items" [ngClass]="{ 'active' : repBasicCollapsed }">
+        <a class="nav-link" (click)=" titleOpened('repBasicCollapsed');" [attr.aria-expanded]="repBasicCollapsed" aria-controls="ui-basic">
+          <span class="menu-icon">
+            <i class="mdi mdi-newspaper"></i>
+          </span>
+          <span class="menu-title" translate>Reports</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="ui-basic" [ngbCollapse]="!repBasicCollapsed">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item" > <a class="nav-link" rrouterLink="/operaBookingDashboard" routerLinkActive="active" translate>Booking Report</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item menu-items"  [ngClass]="{ 'active' : opeBasicCollapsed }">
+        <a class="nav-link" (click)="titleOpened('opeBasicCollapsed');" [attr.aria-expanded]="opeBasicCollapsed" aria-controls="ui-basic">
+          <span class="menu-icon">
+            <i class="mdi mdi-wan"></i>
+          </span>
+          <span class="menu-title" translate>Operations</span>
+          <i class="menu-arrow"></i>
+          <!-- <i class="mdi mdi-arrow-up-bold" *ngIf="!opeBasicCollapsed"></i>
+          <i class="mdi mdi-arrow-down-bold" *ngIf="opeBasicCollapsed"></i> -->
+        </a>
+        <div class="collapse" id="ui-basic" [ngbCollapse]="!opeBasicCollapsed">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item" *ngFor="let operation of operationTypes"> <a class="nav-link" routerLink={{operation.endPoint}} routerLinkActive="active" #dropdowns="routerLinkActive" translate>{{operation.name}}</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item menu-items" [ngClass]="{ 'active' : setBasicCollapsed }">
+        <a class="nav-link" (click)="titleOpened('setBasicCollapsed');" [attr.aria-expanded]="setBasicCollapsed" aria-controls="ui-basic">
+          <span class="menu-icon">
+            <i class="mdi mdi-settings"></i>
+          </span>
+          <span class="menu-title" translate>Settings</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="ui-basic" [ngbCollapse]="!setBasicCollapsed">
+          <ul class="nav flex-column sub-menu">
+              <li class="nav-item"><a class="nav-link settingLink" routerLink="/syncjobs" *ngIf="syncJobTypes.length > 0">Sync Configuration</a> </li>
+              <li class="nav-item"><a class="nav-link" routerLink="/operationTypesConfiguration" >Operation Configuration</a> </li>
+              <li class="nav-item"><a class="nav-link" routerLink="/costCenterAccountMapping">Costcenter Mapping</a></li>
+              <li class="nav-item"><a class="nav-link" routerLink="/suppliersMapping">Suppliers Mapping</a></li>
+              <li class="nav-item"><a class="nav-link" routerLink="/includedOverGroups">Included Groups</a> </li>
+              <li class="nav-item"><a class="nav-link"routerLink="/operaReportMapTables">Opera Mapping</a>  </li>
+              <li class="nav-item"><a class="nav-link" routerLink="/costCenterLocationMapping">Location Mapping</a>              </li>
+              <li class="nav-item"><a class="nav-link"routerLink="/simphonyDiscountMaping">Discount Mapping</a>               </li>
+              <li class="nav-item"><a class="nav-link " (click)="snav.toggle()" routerLink="/setting">General Settings</a>              </li>
+          </ul>
+        </div>
+      </li>
       <li class="nav-item nav-category">
         <span class="nav-link" translate>More</span>
       </li>
-      <li class="nav-item menu-items" [ngClass]="{ 'active' : login.isActive }">
-        <a class="nav-link" (click)="userPagesCollapsed = !userPagesCollapsed"  [attr.aria-expanded]="userPagesCollapsed" aria-controls="auth">
+      <li class="nav-item menu-items" [ngClass]="{ 'active' : userPagesCollapsed }">
+        <a class="nav-link" (click)="titleOpened('userPagesCollapsed');"  [attr.aria-expanded]="userPagesCollapsed" aria-controls="auth">
           <span class="menu-icon">
             <i class="mdi mdi-security"></i>
           </span>
@@ -116,26 +181,57 @@
         </a>
         <div class="collapse" id="auth" [ngbCollapse]="!userPagesCollapsed">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" routerLink="user-pages/login" routerLinkActive="active" #login="routerLinkActive" translate> Logout </a></li>
+            <!-- <li class="nav-item"> <a class="nav-link" routerLink="user-pages/login" routerLinkActive="active" #login="routerLinkActive" translate> Logout </a></li> -->
+            <!-- <li class="nav-item"> <a class="nav-link" (click)="Logout()" translate> Logout </a></li> -->
+
+            <li class="nav-item"><a class="nav-link" routerLink="/users">Users</a></li>
           </ul>
         </div>
       </li>
       <br><br>
-      <li class="tips-field" [ngClass]="{ 'active' : login.isActive }">
-        <a class="nav-link" (click)="tipPagesCollapsed = !tipPagesCollapsed"  [attr.aria-expanded]="tipPagesCollapsed" aria-controls="auth">
-          <i class="mdi mdi-arrow-right-bold-circle"></i>
-          <span class="menu-title" style="color: black; font-size: larger;" translate>Today’s Tip</span>
+      <li class="nav-item tips-field" [ngClass]="{ 'active' : tipPagesCollapsed }" style="margin-right: 10px;">
+        <a class="nav-link tip-link" (click)="tipPagesCollapsed = !tipPagesCollapsed"  [attr.aria-expanded]="tipPagesCollapsed" aria-controls="auth">
+          <span class="menu-icon">
+            <i class="mdi mdi-arrow-right-bold-circle"></i>
+          </span>
+          <span class="menu-title" translate>Today’s Tip</span>
+          <img class="user-logo img-xs rounded-circle" style="padding-left: 10px;" src="assets/images/faces/face15.jpg" alt="">
+
         </a>
-        <div class="tip" id="auth" [ngbCollapse]="!tipPagesCollapsed">
+        <div class="collapse" id="auth" [ngbCollapse]="!tipPagesCollapsed">
           <ul class="nav flex-column sub-menu">
-          ergtrtewrt
-        </ul>
+            <span class="menu-title" style="color: black; font-size: large;"translate>Do you know </span>
+            <br>
+            that you can export your files on 
+            Google Drive ?
+          </ul>
         </div>
       </li>
+      <!--  <br><br>
+     <li class="menu-items tips-field" [ngClass]="{ 'active' : tipPagesCollapsed }">
+        <a class="nav-link" (click)="tipPagesCollapsed = !tipPagesCollapsed"  [attr.aria-expanded]="tipPagesCollapsed" aria-controls="auth">
+          
+          <span class="menu-icon">
+
+          <i class="mdi mdi-arrow-right-bold-circle"></i>
+
+        </span>
+
+          <span class="menu-title"  translate>Today’s Tip</span>
+        </a>
+        <div class="collapse tip" id="auth" [ngbCollapse]="!tipPagesCollapsed">
+          <ul class="nav flex-column sub-menu">
+            Do you know 
+            <br>
+            that you can export your files on 
+            Google Drive ?
+        </ul>
+        </div>
+      </li> -->
     </ul>
   </nav>
   
-  <div class="container-fluid page-body-wrapper">
+  <!-- <div class="container-fluid page-body-wrapper">
       <app-nav-bar *ngIf="showNavbar"></app-nav-bar>
       <div class="main-panel" [ngClass]="{ 'main-panel-only' : !showSidebar }">
         <div class="content-wrapper">
@@ -145,4 +241,4 @@
         </div>
       </div>
     </div>
-</div> 
+</div>  -->

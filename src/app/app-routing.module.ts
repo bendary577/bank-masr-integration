@@ -65,18 +65,15 @@ import { CostOfGoodsConfigComponent } from './components/cost-of-goods-config/co
 import { AmazonComponent } from './components/amazon/amazon.component';
 import { HotelOpiComponent } from './components/hotel-opi/hotel-opi.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { SideNaveComponent } from './components/side-nave/side-nave.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: Constants.LOGIN_PAGE, pathMatch: 'full'},
   { path: Constants.SIDE_NAV, component: SidenavResponsive  ,canActivate:[AuthGuardService]},
-  { path: Constants.NEW_SIDE_NAV, component: SideNaveComponent  ,canActivate:[AuthGuardService]},
   {
     path: Constants.SETTING, component: ConfigurationComponent ,
     children: []
   },
-  { path: Constants.NEW_SIDE_NAV, component: SideNaveComponent  ,canActivate:[AuthGuardService]},
   { path: Constants.USERS_CONFIGURATION, component: UsersComponent,canActivate:[AuthGuardService] },
   { path: Constants.SYNC_JOBS, component: SyncJobsconfigComponent ,canActivate:[AuthGuardService]},
   { path: Constants.COST_CENTER_LOCATION_MAPPING, component: CostCenterLocationMappingComponent ,canActivate:[AuthGuardService]},
@@ -93,7 +90,7 @@ const routes: Routes = [
   // Loyalty Views
   { path: Constants.GET_LOYALTY_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
   { path: Constants.GET_WALLET_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
-  { path: Constants.GET_VOUCHER_PAGE, component: SideNaveComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.GET_VOUCHER_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
 
   { path: Constants.MANAGE_GROUPS, component: ManageGroupsComponent ,canActivate:[AuthGuardService]},
 
