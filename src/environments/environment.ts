@@ -3,15 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-
-  apiHost: 'http://localhost:8081',
+  // apiHost: 'http://localhost:8081',
 
   // apiHost: 'http://130.211.219.76:8081',
   // Dev Server
-  // apiHost: 'http://34.122.155.73:8081',
-  
-  production: false
-};
+  apiHost: 'http://34.122.155.73:8081',
+
+  production: false,
+}
 
 /*
 
@@ -22,4 +21,3 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
-

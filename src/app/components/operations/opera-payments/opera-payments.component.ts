@@ -13,15 +13,13 @@ export class OperaPaymentsComponent implements OnInit {
   loading = false
   fromDate = ''
   toDate = ''
+  cardNumber = ''
   transactions = []
 
-  // Transaction Chart
-  public data: any
-  public selectedSliceLabel: string = 'No Transactions'
-  public selectedSliceValue: string = '0%'
-
-  // @ViewChild("chart", { static: true })
-  // public chart: IgxDoughnutChartComponent;
+  // Transaction Stat
+  succeedTransactionCount = ''
+  failedTransactionCount = ''
+  totalTransactionAmount = ''
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -31,12 +29,12 @@ export class OperaPaymentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getOperationTypes()
-    this.countOperationTypes()
   }
 
   getOperationTypes() {
     this.loading = true
     this.spinner.show()
+    this.countOperationTypes()
 
     this.operaPaymentService
       .listOperaTransactions(this.fromDate, this.toDate)
@@ -60,21 +58,19 @@ export class OperaPaymentsComponent implements OnInit {
   }
 
   countOperationTypes() {
-    this.loading = true
-    this.spinner.show()
-
     this.operaPaymentService
       .countOperaTransactions(this.fromDate, this.toDate)
       .toPromise()
       .then((res: any) => {
+        this.succeedTransactionCount = res['succeedTransactionCount']
+        this.failedTransactionCount = res['failedTransactionCount']
+        this.totalTransactionAmount = res['totalTransactionAmount']
+
         this.spinner.hide()
         this.loading = false
       })
       .catch((err) => {
         console.error(err)
-        this.spinner.hide()
-        this.loading = false
-
         let message = ''
         if (err.status === 401) {
           message = ErrorMessages.SESSION_EXPIRED

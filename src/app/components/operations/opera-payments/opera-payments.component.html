@@ -2,6 +2,62 @@
 
 <div>
     <div>
+        <div style="text-align: left !important; margin-left: 1.5%;">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Start Date" type="date" name="fromDate" id="fromDate" [(ngModel)]="fromDate">
+            </mat-form-field>
+        
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="End Date" type="date" name="toDate" id="toDate" [(ngModel)]="toDate">
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <input matInput id="cardNumber" name="cardNumber" placeholder="Card Number"
+                    [(ngModel)]="cardNumber">
+            </mat-form-field>
+        
+            <button mat-flat-button (click)="getOperationTypes()">Apply Filter</button>
+            <button mat-flat-button >Export to Excel</button>
+        </div>
+
+        <div class="row">
+            <div class="column">
+                <mat-card class="stat-card">
+                    <mat-card-content>
+                        <h2>Total Transactions Amount</h2>
+                        <p style="font-size: 55px; color: darkblue;">0 EGP</p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+            <div class="column">
+                <mat-card class="stat-card">
+                    <mat-card-content>
+                        <h2>Total Transactions Amount</h2>
+                        <p style="font-size: 55px; color: darkblue;">{{totalTransactionAmount | number:'1.0-2'}} USD</p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        
+            <div class="column">
+                <mat-card class="stat-card">
+                    <mat-card-content>
+                        <h2>No. of Transactions Succeed</h2>
+                        <p style="font-size: 55px; color: darkblue;">{{succeedTransactionCount}}</p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        
+            <div class="column">
+                <mat-card class="stat-card">
+                    <mat-card-content>
+                        <h2>No. of Transactions Failed</h2>
+                        <p style="font-size: 55px; color: darkblue;">{{failedTransactionCount}}</p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+
         <div *ngIf="!transactions.length">
             <mat-card class="example-card">
                 <mat-card-header>
@@ -14,31 +70,6 @@
         </div>
 
         <div class="main" *ngIf="transactions.length">
-
-            <div class="row">
-                <div class="column">
-                    <mat-card class="stat-card">
-                        <mat-card-content>
-
-                        </mat-card-content>
-                    </mat-card>
-                </div>
-            </div>
-            
-            <div style="text-align: left !important; margin-left: 0.5%;">
-                <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Start Date" type="date" name="fromDate" id="fromDate"
-                        [(ngModel)]="fromDate">
-                </mat-form-field>
-            
-                <mat-form-field class="example-full-width">
-                    <input matInput placeholder="End Date" type="date" name="toDate" id="toDate"
-                        [(ngModel)]="toDate">
-                </mat-form-field>
-
-                <button mat-flat-button (click)="getOperationTypes()">Apply Filter</button>
-            </div>
-
             <ngx-datatable class="material" [rows]="transactions" [columnMode]="'force'" [headerHeight]="50"
                 [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
                 [sorts]="[{prop: 'creationDate', dir: 'desc'}, {prop: 'creationDate', dir: 'desc'}
@@ -61,9 +92,16 @@
                         {{row.creationDate | date:'dd-MM-yyyy H:MM:SS'}}
                     </ng-template>
                 </ngx-datatable-column>
+
+                <ngx-datatable-column name="Card Number">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.cardNumber}}
+                    </ng-template>
+                </ngx-datatable-column>
+
                 <ngx-datatable-column name="Transaction Amount">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.amount}}
+                        {{row.amount | number:'1.0-2'}}
                     </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Currency">

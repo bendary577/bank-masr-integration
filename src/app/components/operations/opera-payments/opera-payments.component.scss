@@ -1,1 +1,23 @@
-@import "../../approved-invoices-infor/approved-invoices-infor.component.scss";
+@import '../../approved-invoices-infor/approved-invoices-infor.component.scss';
+
+/* Clear floats after the columns */
+.row:after {
+  content: '';
+  display: table;
+  clear: both;
+  padding-left: 10px;
+}
+.row {
+  display: flex;
+  overflow: hidden;
+  scroll-behavior: smooth;
+}
+/* Create three equal columns that floats next to each other */
+.column {
+  width: 33%;
+  text-align: center;
+}
+.stat-card {
+  margin: 10px;
+  height: 140px;
+}
