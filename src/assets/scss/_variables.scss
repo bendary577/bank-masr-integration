@@ -111,12 +111,13 @@ $sidebar-width-icon: 70px;
 
 $sidebar-bg: #f1f1f1;
 $sidebar-menu-color: $text-muted;
-$sidebar-submenu-color: $sidebar-menu-color;
+// $sidebar-menu-color
+$sidebar-submenu-color: #757575;
 $sidebar-menu-active-bg: darken($sidebar-bg, 5%);
-$sidebar-menu-active-color: color(white);
-$sidebar-menu-hover-bg: #ffddb5;
-$sidebar-menu-hover-color: color(rgb(0, 0, 0));
-$sidebar-submenu-hover-color: color(white);
+$sidebar-menu-active-color: #43475d;
+$sidebar-menu-hover-bg: #fcd2a2;
+$sidebar-menu-hover-color: #43475d;
+$sidebar-submenu-hover-color: #3f4355;
 $sidebar-menu-icon-color: #bba8bff5;
 $sidebar-menu-arrow-color: rgba(108, 114, 147, 0.36);
 $sidebar-menu-border-color: #f2edf3;
