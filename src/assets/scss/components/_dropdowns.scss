@@ -16,6 +16,7 @@
     }
   }
   .dropdown-menu {
+    border: 1px solid #000000;
     margin-top: .75rem;
     background-color: $dropdown-bg;
     color: #ffffff;
@@ -28,7 +29,7 @@
         background: initial;
       }
       &:hover {
-        background: #13151b;
+        background:#cbcdd8;
       }
     }
   }

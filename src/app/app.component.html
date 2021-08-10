@@ -1,6 +1,27 @@
 <!-- <sidenav-responsive-example></sidenav-responsive-example>
  -->
 
- <app-side-nave></app-side-nave>
+ <!-- <app-side-nave></app-side-nave> -->
+
+ <!-- <app-side-nave></app-side-nave> -->
 
 
+ <div class="container-scroller">
+    <app-side-nave *ngIf="showSidebar"></app-side-nave>
+    <div class="container-fluid page-body-wrapper">
+      <!-- <app-settings-panel *ngIf="showSettings"></app-settings-panel> -->
+      <app-nav-bar *ngIf="showNavbar"></app-nav-bar>
+      <div class="main-panel" [ngClass]="{ 'main-panel-only' : !showSidebar }">
+        <div class="content-wrapper">
+          <!-- <app-spinner *ngIf="isLoading"></app-spinner> -->
+          <div contentAnimate *ngIf="!isLoading" class="h-100">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+        <!-- <app-footer *ngIf="showFooter"></app-footer> -->
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>

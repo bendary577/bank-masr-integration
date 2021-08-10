@@ -1,10 +1,11 @@
- <div>
+ <!-- <div> -->
 
-  <nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <nav class="sidebar sidebar-offcanvas" id="sidebar" [class.example-containerpc]="(!shouldRun)">
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
       <a class="sidebar-brand brand-logo" href="index.html"><img src="assets/images/Anywarelogo.png" alt="logo" /></a>
+      <a class="sidebar-brand brand-logo" href="index.html"><img src="assets/63.svg" alt="logo" /></a>
     </div>
-    <ul class="nav">
+    <ul class="nav" #snav>
       <li class="nav-item profile" >
         <div class="profile-desc">
           <div class="profile-pic">
@@ -73,7 +74,7 @@
       <li class="nav-item menu-items">
         <a class="nav-link" (click)="uiBasicCollapsed = !uiBasicCollapsed" [attr.aria-expanded]="uiBasicCollapsed" aria-controls="ui-basic">
           <span class="menu-icon">
-            <i class="mdi mdi-laptop"></i>
+            <i class="mdi mdi-cloud-sync"></i>
           </span>
           <span class="menu-title" translate>Sync Job Types</span>
           <i class="menu-arrow"></i>
@@ -87,7 +88,7 @@
       <li class="nav-item menu-items">
         <a class="nav-link" (click)="appBasicCollapsed = !appBasicCollapsed" [attr.aria-expanded]="uiBasicCollapsed" aria-controls="ui-basic">
           <span class="menu-icon">
-            <i class="mdi mdi-laptop"></i>
+            <i class="mdi mdi-arrange-send-backward"></i>
           </span>
           <span class="menu-title" translate>Applications</span>
           <i class="menu-arrow"></i>
@@ -99,14 +100,10 @@
         </div>
       </li>
       
-
-
-
-
       <li class="nav-item nav-category">
         <span class="nav-link" translate>More</span>
       </li>
-      <li class="nav-item menu-items" [ngClass]="{ 'active' : login.isActive }">
+      <li class="nav-item menu-items" [ngClass]="{ 'active' : userPagesCollapsed }">
         <a class="nav-link" (click)="userPagesCollapsed = !userPagesCollapsed"  [attr.aria-expanded]="userPagesCollapsed" aria-controls="auth">
           <span class="menu-icon">
             <i class="mdi mdi-security"></i>
@@ -116,16 +113,16 @@
         </a>
         <div class="collapse" id="auth" [ngbCollapse]="!userPagesCollapsed">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" routerLink="user-pages/login" routerLinkActive="active" #login="routerLinkActive" translate> Logout </a></li>
+            <!-- <li class="nav-item"> <a class="nav-link" routerLink="user-pages/login" routerLinkActive="active" #login="routerLinkActive" translate> Logout </a></li> -->
+            <li class="nav-item"> <a class="nav-link" (click)="Logout()" translate> Logout </a></li>
           </ul>
         </div>
       </li>
       <br><br>
-      <li class="tips-field" [ngClass]="{ 'active' : login.isActive }">
+      <li class="tips-field" [ngClass]="{ 'active' : tipPagesCollapsed }">
         <a class="nav-link" (click)="tipPagesCollapsed = !tipPagesCollapsed"  [attr.aria-expanded]="tipPagesCollapsed" aria-controls="auth">
           <i class="mdi mdi-arrow-right-bold-circle"></i>
-          <span class="menu-title" style="color: black; font-size: larger;" translate>Today’s Tip</span>
-        </a>
+          <span class="menu-title" style="color: black; font-size: larger;" translate>Today’s Tip</span></a>
         <div class="tip" id="auth" [ngbCollapse]="!tipPagesCollapsed">
           <ul class="nav flex-column sub-menu">
           ergtrtewrt
@@ -135,7 +132,7 @@
     </ul>
   </nav>
   
-  <div class="container-fluid page-body-wrapper">
+  <!-- <div class="container-fluid page-body-wrapper">
       <app-nav-bar *ngIf="showNavbar"></app-nav-bar>
       <div class="main-panel" [ngClass]="{ 'main-panel-only' : !showSidebar }">
         <div class="content-wrapper">
@@ -145,4 +142,4 @@
         </div>
       </div>
     </div>
-</div> 
+</div>  -->

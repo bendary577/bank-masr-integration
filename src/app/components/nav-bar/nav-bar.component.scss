@@ -47,7 +47,7 @@
       width: 55px;
     }
     .navbar-brand {
-      color: lighten(color(gray-dark), 20%);
+      // color: lighten(color(gray-dark), 20%);
       font-size: 1.5rem;
       line-height: 48px;
       margin-right: 0;
@@ -57,7 +57,7 @@
       &:active,
       &:focus,
       &:hover {
-        color: lighten(color(gray-dark), 10%);
+        // color: lighten(color(gray-dark), 10%);
       }
 
       :host-context(.rtl) & {
@@ -102,6 +102,7 @@
       border: 0;
       color: $text-muted;
       height: $navbar-height;
+      box-shadow:none;
       @include border-radius(0px);
       &:not(.navbar-toggler-right) {
         font-size: 0.875rem;
@@ -140,8 +141,8 @@
         }
       }
       :host-context(.rtl) & {
-        @extend .ml-0;
-        @extend .mr-4;
+        @extend .ml-0 !optional;
+        @extend .mr-4 !optional;
       }
     }
 
@@ -273,7 +274,7 @@
                 }
                 :host-context(.rtl) & {
                   i{
-                    @extend .mr-0;
+                    @extend .mr-0 !optional;
                     margin-left: 10px;
                   }
                 }
@@ -299,7 +300,7 @@
         }
         &.nav-profile {
           .nav-link {
-            @extend .d-flex;
+            @extend .d-flex ;
             .nav-profile-img {
               position: relative;
               width: 32px;

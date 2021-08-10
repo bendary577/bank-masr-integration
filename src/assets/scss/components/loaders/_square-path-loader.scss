@@ -7,16 +7,16 @@
     position: relative;
     margin: 0 auto;
 }
-.square-path-loader:before, .square-path-loader:after{
-    content: "";
-    width: 15px;
-    height: 15px;
-    position: absolute;
-    top: 0;
-    left: calc(50% - 10px);
-    background-color: rgba(theme-color(success), .7);
-    animation: squaremove 1s ease-in-out infinite;
-  }
+// .square-path-loader:before, .square-path-loader:after{
+//     content: "";
+//     width: 15px;
+//     height: 15px;
+//     position: absolute;
+//     top: 0;
+//     left: calc(50% - 10px);
+//     background-color: rgba(theme-color(success), .7);
+//     animation: squaremove 1s ease-in-out infinite;
+//   }
   
   .square-path-loader:after{
     bottom: 0;

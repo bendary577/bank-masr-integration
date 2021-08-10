@@ -7,5 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'oracle-hospitality-frontend';
-
+    
+  showSidebar: boolean = true;
+  showNavbar: boolean = true;
+  showFooter: boolean = true;
+  showSettings: boolean = true;
+  isLoading: boolean;
+  
 }

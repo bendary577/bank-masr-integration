@@ -137,10 +137,11 @@ span.italic {
 
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
-@import './assets/scss/variables';
-@import "~compass-mixins/lib/compass";
-@import "~compass-mixins/lib/animate";
 @import "~bootstrap/scss/bootstrap";
+
+@import './assets/scss/variables';
+@import "~@melonthierry/compass-mixins/lib/compass";
+@import "~@melonthierry/compass-mixins/lib/animate";
 @import "./assets/scss/fonts";
 @import "./assets/scss/functions";
 
