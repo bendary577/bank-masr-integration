@@ -265,6 +265,25 @@ export class SideNaveComponent implements OnInit {
 
   }
 
+  public tripOpend = false;
+  public tripDownOpend = true;
+  public tripDowncolspand = false;
+  public props = {'height' : 'auto'};
+
+  closeTip(){
+    this.tripOpend = false;
+    this.tripDownOpend = false;
+
+  }
+  colspandTip(){
+    this.tripDowncolspand = !this.tripDowncolspand;
+    if(this.tripDowncolspand){
+    this.props = {'height' : '50px'};
+    }else{
+    this.props = {'height' : 'auto'};
+    }
+  }
+
   titleOpened(title) {
     if (title == 'uiBasicCollapsed') {
       this.uiBasicCollapsed = !this.uiBasicCollapsed;

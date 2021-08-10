@@ -59,6 +59,28 @@
         </div>
       </li>
 
+      <div class="card" [ngStyle]="props" style="margin: 5px;" *ngIf="tripOpend">
+        <div class="card-body">
+          <h4 class="card-title text-danger">
+              <i class="mdi mdi-arrow-right-bold arrowIcone" (click)= "colspandTip()"> </i>
+            Today's Tips
+            <span>
+              <i class="mdi mdi-close-octagon closeIcone" (click)= "closeTip()"> </i>
+            </span>
+          </h4>
+          <div class="row" *ngIf="tripDowncolspand">
+            <span style="color: black; font-size: large;"translate>Do you know </span>
+            <div class="col-8 col-sm-12 col-xl-8 my-auto">
+              that you can export your files on 
+              Google Drive ?
+            </div>
+            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+              <i class="icon-lg mdi mdi-folder-google-drive text-success ml-auto"></i>
+            </div>
+          </div>
+        </div>
+      </div> 
+
       <br>
       <div class="supprot-field nav-item">
       <a class="nav-link" (click)="method()" aria-controls="ui-basic">
@@ -181,15 +203,12 @@
         </a>
         <div class="collapse" id="auth" [ngbCollapse]="!userPagesCollapsed">
           <ul class="nav flex-column sub-menu">
-            <!-- <li class="nav-item"> <a class="nav-link" routerLink="user-pages/login" routerLinkActive="active" #login="routerLinkActive" translate> Logout </a></li> -->
-            <!-- <li class="nav-item"> <a class="nav-link" (click)="Logout()" translate> Logout </a></li> -->
-
             <li class="nav-item"><a class="nav-link" routerLink="/users">Users</a></li>
           </ul>
         </div>
       </li>
       <br><br>
-      <li class="nav-item tips-field" [ngClass]="{ 'active' : tipPagesCollapsed }" style="margin-right: 10px;">
+      <!-- <li class="nav-item tips-field" [ngClass]="{ 'active' : tipPagesCollapsed }" style="margin-right: 10px;">
         <a class="nav-link tip-link" (click)="tipPagesCollapsed = !tipPagesCollapsed"  [attr.aria-expanded]="tipPagesCollapsed" aria-controls="auth">
           <span class="menu-icon">
             <i class="mdi mdi-arrow-right-bold-circle"></i>
@@ -206,8 +225,7 @@
             Google Drive ?
           </ul>
         </div>
-      </li>
-      <!--  <br><br>
+      </li>       <br><br> 
      <li class="menu-items tips-field" [ngClass]="{ 'active' : tipPagesCollapsed }">
         <a class="nav-link" (click)="tipPagesCollapsed = !tipPagesCollapsed"  [attr.aria-expanded]="tipPagesCollapsed" aria-controls="auth">
           
@@ -228,17 +246,34 @@
         </ul>
         </div>
       </li> -->
-    </ul>
-  </nav>
-  
-  <!-- <div class="container-fluid page-body-wrapper">
-      <app-nav-bar *ngIf="showNavbar"></app-nav-bar>
-      <div class="main-panel" [ngClass]="{ 'main-panel-only' : !showSidebar }">
-        <div class="content-wrapper">
-          <div contentAnimate *ngIf="!isLoading" class="h-100">
-            <router-outlet></router-outlet>
+
+      <div class="card" [ngStyle]="props" *ngIf="tripDownOpend">
+        <div class="card-body">
+          <h4 class="card-title text-danger" >
+            <i class="mdi mdi-arrow-right-bold arrowIcone" (click)= "colspandTip()" > </i>
+            Today's Tips
+            <span>
+              <i class="mdi mdi-close-octagon closeIcone" (click)= "closeTip()"> </i>
+            </span>
+          </h4>
+          <div class="row" *ngIf="!tripDowncolspand">
+            <span style="color: black; font-size: larger; padding-bottom: 5px;"translate>Do you know </span>
+            <div class="col-8 col-sm-12 col-xl-8 my-auto" style="text-align: center;">
+              that you can export your files on 
+              Google Drive ?
+            </div>
+            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+              <i class="icon-lg mdi mdi-folder-google-drive text-success ml-auto"></i>
+            </div>
+            <a style="color: blue; text-decoration: underline; font-size: small; text-align: left; cursor: pointer;" href="#">Learn More
+              <i class="mdi mdi-arrow-top-right" > </i>
+            </a>
           </div>
         </div>
-      </div>
-    </div>
-</div>  -->
+      </div> 
+    </ul>
+
+
+
+  </nav>
+  
