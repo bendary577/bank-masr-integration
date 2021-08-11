@@ -154,6 +154,8 @@ import { AddAppUserAccompiedComponent } from './components/add-app-user-accompie
 import { SideNaveComponent } from './components/side-nave/side-nave.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { SupportComponent } from './components/support/support.component';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 @NgModule({
   declarations: [
@@ -266,7 +268,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     UserProfileComponent,
     EditWalletComponent,
     SideNaveComponent,
-    NavBarComponent
+    NavBarComponent, SupportComponent
   ],
   imports: [
     BrowserModule,
@@ -301,7 +303,9 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     AngularDropdownModule,
     NgWormholeModule,
     ToastrModule,
-    NgbModule
+    NgbModule,
+    FormsModule,
+    NgxDaterangepickerMd.forRoot()
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, 
     CookieService, 

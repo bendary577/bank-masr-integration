@@ -47,7 +47,8 @@ export class SideNaveComponent implements OnInit {
   showSettings: boolean = true;
   isLoading: boolean;
 
-
+  public user;
+  
   constructor(changeDetectorRef: ChangeDetectorRef,
     private router: Router, media: MediaMatcher, location: Location, private _location: Location,
     public snackBar: MatSnackBar, public accountService: AccountService,
@@ -70,6 +71,11 @@ export class SideNaveComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    if(localStorage.getItem("user") != undefined || localStorage.getItem("user") != null){
+      this.user = JSON.parse(localStorage.getItem("user"))
+      this.account = JSON.parse(localStorage.getItem("account"));
+     }
 
     this.mobileQuery.removeListener(this._mobileQueryListener);
 

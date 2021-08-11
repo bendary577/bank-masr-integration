@@ -320,4 +320,8 @@ export class Constants {
     static SUN_ERD = 'Sun';
     static FUSION_ERD = 'Fusion';
     static SIMPHONY_ERD = 'Simphony';
+
+    /////////////////////////////////////////////// new Design /////////////////////////////////////////
+
+    static SUPPORT = 'support';
 }

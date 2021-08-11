@@ -134,6 +134,11 @@ color: #f47920;
           }
         }
 
+        .help-title{
+          color: black;
+           font-size: larger;
+        }
+
         .menu-icon {
           margin-right: 0.5rem;
           line-height: 1;
@@ -312,6 +317,7 @@ color: #f47920;
       }
       .dropdown{
         .dropdown-menu {
+          color: black;
           padding: 0;
           margin-top: 1.25rem;
           .dropdown-item {
@@ -906,7 +912,7 @@ color: #f47920;
 }
 
 .card {
-  background-color: #f3ca9c;
+  background-color: #ffbf76;
   height: 210px;
   padding: 0px;
   margin: 5px;
@@ -988,7 +994,7 @@ mgl-map {
   width: 100%;
 }
 .closeIcone{
-  margin-left: 45px;
+  margin-left: 50px;
   cursor: pointer;
 }
 

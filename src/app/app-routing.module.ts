@@ -65,6 +65,7 @@ import { CostOfGoodsConfigComponent } from './components/cost-of-goods-config/co
 import { AmazonComponent } from './components/amazon/amazon.component';
 import { HotelOpiComponent } from './components/hotel-opi/hotel-opi.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { SupportComponent } from './components/support/support.component';
 
 
 const routes: Routes = [
@@ -172,7 +173,8 @@ const routes: Routes = [
   { path: Constants.EXPENSES_DETAILS_REPORT_PAGE , component: ExpensesDetailsReportComponent ,canActivate:[AuthGuardService]},
   { path: Constants.EXPENSES_DETAILS_REPORT_CONFIG_PAGE , component: ExpensesDetailsReportConfigComponent ,canActivate:[AuthGuardService]},
 
-
+  { path : Constants.SUPPORT , component: SupportComponent, canActivate:[AuthGuardService]},
+  
   { path: "amazon" , component: AmazonComponent ,canActivate:[AuthGuardService]},
 
   // Error Page

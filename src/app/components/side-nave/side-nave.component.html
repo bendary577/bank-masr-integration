@@ -15,8 +15,8 @@
             </div>
             <br>
             <div class="profile-name">
-              <h5 class="mb-0 font-weight-normal" translate>Henry Kein</h5>
-              <span translate>Gold Member</span>
+              <h5 class="mb-0 font-weight-normal" translate>{{user.name}}</h5>
+              <span translate>{{account.name}}</span>
             </div>
           </div>
           <div class="dropdown" ngbDropdown placement="bottom-right">
@@ -25,7 +25,7 @@
               <a href="#" class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
                   <div class="preview-icon bg-dark rounded-circle">
-                    <i class="mdi mdi-settings text-primary"></i>
+                    <i class="mdi mdi-wrench text-primary"></i>
                   </div>
                 </div>
                 <div class="preview-item-content">
@@ -43,7 +43,7 @@
                   <p class="preview-subject ellipsis mb-1 text-small" translate>Change Password</p>
                 </div>
               </a>
-              <div class="dropdown-divider"></div>
+              <!-- <div class="dropdown-divider"></div>
               <a href="#" class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
                   <div class="preview-icon bg-dark rounded-circle">
@@ -53,7 +53,7 @@
                 <div class="preview-item-content">
                   <p class="preview-subject ellipsis mb-1 text-small" translate>To-do list</p>
                 </div>
-              </a>
+              </a> -->
             </div>
           </div>
         </div>
@@ -83,32 +83,16 @@
 
       <br>
       <div class="supprot-field nav-item">
-      <a class="nav-link" (click)="method()" aria-controls="ui-basic">
+      <a class="nav-link" routerLink="/support" aria-controls="ui-basic">
         <span class="menu-icon">
           <i class="mdi mdi-headset"></i>
         </span>
-        <span class="menu-title" style="color: black; font-size: larger;"translate>We are here to help</span>
+        <span class="menu-title help-title" translate>We are here to help</span>
       </a>
     </div>
       <br>
       <li class="nav-item nav-category" >
         <span class="nav-link" translate>Main Menu</span>
-      </li>
-      <li class="nav-item menu-items" [ngClass]="{'active' : buttons.isActive || dropdowns.isActive || typography.isActive }">
-        <a class="nav-link" (click)="uiBasicCollapsed = !uiBasicCollapsed" [attr.aria-expanded]="uiBasicCollapsed" aria-controls="ui-basic">
-          <span class="menu-icon">
-            <i class="mdi mdi-cloud-sync"></i>
-          </span>
-          <span class="menu-title" translate>Basic UI Elements</span>
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="collapse" id="ui-basic" [ngbCollapse]="!uiBasicCollapsed">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link active" routerLink="basic-ui/buttons" routerLinkActive="active" #buttons="routerLinkActive" translate>Buttons</a></li>
-            <li class="nav-item"> <a class="nav-link" routerLink="basic-ui/dropdowns" routerLinkActive="active" #dropdowns="routerLinkActive" translate>Dropdowns</a></li>
-            <li class="nav-item"> <a class="nav-link" routerLink="basic-ui/typography" routerLinkActive="active" #typography="routerLinkActive" translate>Typography</a></li>
-          </ul>
-        </div>
       </li>
       <li class="nav-item menu-items" [ngClass]="{ 'active' : uiBasicCollapsed }">
         <a class="nav-link" (click)="titleOpened('uiBasicCollapsed');" [attr.aria-expanded]="uiBasicCollapsed" aria-controls="ui-basic">
@@ -171,7 +155,7 @@
       <li class="nav-item menu-items" [ngClass]="{ 'active' : setBasicCollapsed }">
         <a class="nav-link" (click)="titleOpened('setBasicCollapsed');" [attr.aria-expanded]="setBasicCollapsed" aria-controls="ui-basic">
           <span class="menu-icon">
-            <i class="mdi mdi-settings"></i>
+            <i class="mdi mdi-wrench"></i>
           </span>
           <span class="menu-title" translate>Settings</span>
           <i class="menu-arrow"></i>
@@ -184,6 +168,7 @@
               <li class="nav-item"><a class="nav-link" routerLink="/suppliersMapping">Suppliers Mapping</a></li>
               <li class="nav-item"><a class="nav-link" routerLink="/includedOverGroups">Included Groups</a> </li>
               <li class="nav-item"><a class="nav-link"routerLink="/operaReportMapTables">Opera Mapping</a>  </li>
+              <li class="nav-item"><a class="nav-link" routerLink="/costCenterLocationMapping">Location Mapping</a>              </li>
               <li class="nav-item"><a class="nav-link" routerLink="/costCenterLocationMapping">Location Mapping</a>              </li>
               <li class="nav-item"><a class="nav-link"routerLink="/simphonyDiscountMaping">Discount Mapping</a>               </li>
               <li class="nav-item"><a class="nav-link " (click)="snav.toggle()" routerLink="/setting">General Settings</a>              </li>
@@ -250,15 +235,18 @@
       <div class="card" [ngStyle]="props" *ngIf="tripDownOpend">
         <div class="card-body">
           <h4 class="card-title text-danger" >
-            <i class="mdi mdi-arrow-right-bold arrowIcone" (click)= "colspandTip()" > </i>
-            Today's Tips
+            <i class="mdi mdi-arrow-right-bold arrowIcone" (click)= "colspandTip()" >
+              <span >Today's Tips</span>
+            </i>
             <span>
               <i class="mdi mdi-close-octagon closeIcone" (click)= "closeTip()"> </i>
             </span>
           </h4>
           <div class="row" *ngIf="!tripDowncolspand">
-            <span style="color: black; font-size: larger; padding-bottom: 5px;"translate>Do you know </span>
-            <div class="col-8 col-sm-12 col-xl-8 my-auto" style="text-align: center;">
+            <span style="color: black; font-size: larger; padding-bottom: 5px;font-weight: bolder;
+            font-size: 20px;"translate>Do you know! </span>
+            <div class="col-8 col-sm-12 col-xl-8 my-auto" style="text-align: center; font-size: 17px;
+            font-weight: medium;">
               that you can export your files on 
               Google Drive ?
             </div>

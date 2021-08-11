@@ -34,7 +34,8 @@
   font-size: $input-placeholder-font-size;
   font-weight: normal;
   padding: 0.625rem 0.6875rem;
-  background-color: $input-bg;
+  //$input-bg
+  background-color: black;
   border-radius: 2px;
   &::placeholder {
     color: $text-muted;

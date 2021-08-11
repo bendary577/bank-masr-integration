@@ -14,8 +14,9 @@ export class NavBarComponent implements OnInit {
 
   public iconOnlyToggled = false;
   public sidebarToggled = false;
-  public logedUSer;
+  public user;
   public roles;
+  public account;
   
   constructor(config: NgbDropdownConfig, private sideNave : SidenavResponsive, router: Router) {
     config.placement = 'bottom-right';
@@ -23,10 +24,12 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit() {
 
-    if(localStorage.getItem("user") != undefined && localStorage.getItem("user") != null){
-      this.logedUSer =  localStorage.getItem("user");
-      this.roles = localStorage.getItem("roles");
-    }
+    if(localStorage.getItem("user") != undefined || localStorage.getItem("user") != null){
+      this.user = JSON.parse(localStorage.getItem("user"))
+      this.roles = JSON.parse(localStorage.getItem("roles"));
+      this.account = JSON.parse(localStorage.getItem("account"));
+     }
+
         
   }
 

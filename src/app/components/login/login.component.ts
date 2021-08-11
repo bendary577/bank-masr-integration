@@ -108,7 +108,7 @@ export class LoginComponent implements OnInit {
     this.accountService.getAccount().toPromise().then((res: any) => {
       this.account = res;
       localStorage.setItem('accountERD',res.erd);
-
+      localStorage.setItem('account', JSON.stringify(res));
     }).catch(err => {''
       console.error(err);
     });
