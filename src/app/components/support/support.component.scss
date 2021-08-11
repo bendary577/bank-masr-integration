@@ -27,8 +27,10 @@
     // overflow: visible !important;
 
 
+
     .row{
         padding-left:30px;
+        overflow: visible;
     }
 
     .titltes{
@@ -121,16 +123,27 @@
       ngx-daterangepicker-material {
       & {
       .md-drppicker {
-          min-width: 640px !important;
+          min-width: 670px !important;
           display: -webkit-inline-box;
-          overflow: visible;
+
+          .buttons{
+                .buttons_input{
+                  button{
+                        background: #f47920;
+                      }
+                  }
+            }
 
           .ranges{
             ul{
                 li{
                     button{
                         color: #000000;
+                          &.active{
+                            background-color: #ffb560;
+                          }
                         }
+
                  }
             
             }
@@ -141,12 +154,12 @@
 
             td {
               &.active {
-                //  background-color: ........;
+                 background-color: #ffb560;
                 //  border-radius: ........;
                 //  color: ...........;
 
               &.off {
-                  // background-color: ........ !important;
+                   background-color: #e0b787 !important;
                   // border-color: ....... !important;
                   // color: ........ !important;
               }

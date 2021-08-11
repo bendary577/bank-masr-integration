@@ -80,6 +80,7 @@ export class SupportComponent implements OnInit {
       });
     }else{
 
+      console.log(this.selectedRange)
 
 
       //In case Sen Data
