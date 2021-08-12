@@ -84,4 +84,18 @@ export class SyncJobService {
     return this.http.get<SyncJobData[]>(Constants.GET_SYNC_JOB_DATA_BY_BOOKING_NO + '?bookingNo=' + bookingNo + '&bookingStatus=' + bookingStatus,
      { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
+
+  getExportedfiles(dateRange, email, loation, moduleId){
+
+    this.token = localStorage.getItem('auth_token');
+
+    const formData: FormData = new FormData();
+    formData.append('dateRange', dateRange);
+    formData.append('email', email);
+    formData.append('store', loation);
+    formData.append('moduleId', moduleId);
+
+    return this.http.post(Constants.GET_EXPORTED_FILE , formData, {headers: new HttpHeaders({Authorization: 'Bearer' + this.token})} )
+  }
+
 }

@@ -24,41 +24,33 @@
             <form [formGroup]="form" class="my-form">
                 <div class="form-group">
                     <mat-form-field appearance="outline">
-                        <!-- <mat-label>Date Range</mat-label> -->
-                        <input matInput type="text" name="daterange" ngxDaterangepickerMd formControlName="selected"
+                        <input matInput type="text" name="daterange" ngxDaterangepickerMd formControlName="dateRange"
                             placeholder="Date Range" [(ngModel)]="selectedRange" [showCustomRangeLabel]="true"
                             [alwaysShowCalendars]="true" [linkedCalendars]="false" [ranges]="ranges"
                              [locale]="calendarLocale" [minDate]="minDate"
                             [placeholder]="calendarPlaceholder" [keepCalendarOpeningWithRange]="true"
                             [minDate]="minDate" [maxDate]="maxDate" />
-
-                        <!-- <input type="text" matInput ngxDaterangepickerMd
-                            [locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY'}" startKey="start" endKey="end"
-                            [(ngModel)]="selected" name="daterange" formControlName="selected" placeholder="Date Range" [ranges]="ranges"/> -->
-                        <!-- <input matInput placeholder="Date Range" formControlName="dateRange" [disabled]="true">  -->
-                        <mat-icon matSuffix class="calender" (click)="print()">edit_calendar</mat-icon>
-                        <!-- <mat-hint>Hint</mat-hint> -->
+                        <mat-icon matSuffix class="calender" (click)="openDatepicker()">edit_calendar</mat-icon>
                     </mat-form-field>
                 </div>
                 <div class="form-group">
                     <mat-form-field appearance="outline">
-                        <!-- <mat-label>Store</mat-label> -->
                         <mat-select class="form-controls" id="store" placeholder="Store" formControlName="store">
                             <mat-option></mat-option>
+                            <mat-option [value]="loc.costCenterReference" *ngFor="let loc of locationList.locationData">{{loc.locationName}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
                 <div class="form-group">
                     <mat-form-field appearance="outline">
-                        <!-- <mat-label>Module</mat-label> -->
                         <mat-select class="form-controls" id="modules" placeholder="Module" formControlName="module">
                             <mat-option></mat-option>
-                        </mat-select>
+                            <mat-option [value]="sync.id" *ngFor="let sync of syncJoobsTypesList.syncJoobsTypesData">{{sync.name}}</mat-option>
+                       </mat-select>
                     </mat-form-field>
                 </div>
                 <div class="form-group">
                     <mat-form-field appearance="outline">
-                        <!-- <mat-label>Email</mat-label> -->
                         <input matInput placeholder="Email" formControlName="email">
                         <mat-error *ngIf="form.controls.email.hasError('pattern')">
                             Email must be well formed.

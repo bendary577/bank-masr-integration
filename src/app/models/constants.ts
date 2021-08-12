@@ -286,6 +286,8 @@ export class Constants {
     static GET_TOP_Groups_URL = environment.apiHost + '/getTopGroups';
     static GET_TOTAL_SPEND_URL = environment.apiHost + '/transaction/getTotalSpendTransactions';
     static GET_TOTAL_TRANS_INRANG_URL = environment.apiHost + "/transaction/getTransactionsInRange"
+    static GET_EXPORTED_FILE = environment.apiHost + "/support/supportExportedFiles";
+
 
     //////////////////////////////////////////////// Manage Application  //////////////////////////////////////////////
 
