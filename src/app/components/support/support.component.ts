@@ -156,12 +156,6 @@ export class SupportComponent implements OnInit {
         panelClass:"my-snack-bar-fail"
       });
     }else{
-/*
-JSON.stringify(this.selectedRange),
-        this.form.controls.email.value, 
-        this.form.controls.store.value,
-        this.form.controls.module.value
-*/
       this.exportRequest.costCenters = this.form.controls.store.value;
       this.exportRequest.syncJobTypes = this.form.controls.module.value;
       this.exportRequest.email = this.form.controls.email.value;

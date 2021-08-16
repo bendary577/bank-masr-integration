@@ -118,13 +118,14 @@
 //   // padding-right: 100px !important;
 //   display: -webkit-inline-box;
 //  }
-
+ 
 ::ng-deep {
       ngx-daterangepicker-material {
       & {
       .md-drppicker {
           min-width: 670px !important;
           display: -webkit-inline-box;
+          top: 20px;
 
           .buttons{
                 .buttons_input{
