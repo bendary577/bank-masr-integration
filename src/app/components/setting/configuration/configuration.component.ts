@@ -29,6 +29,7 @@ export class ConfigurationComponent implements OnInit {
   accountCredentials = [];
   panelOpenState = true;
   addRole = false;
+  hideAuthenticationBtn = false;
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -176,6 +177,14 @@ export class ConfigurationComponent implements OnInit {
 
   initializeDriveAccount(account) {
     this.driveService.initClient(account.apiKey, account.clientId);
+  }
+
+  authenticateDrice() {
+    this.driveService.signIn().then(() => {
+      if (this.driveService.isSignedIn) {
+        this.hideAuthenticationBtn = true;
+      }
+    });
   }
 }
 const EXPANSION_PANEL_ANIMATION_TIMING = "500ms cubic-bezier(0.4,0.0,0.2,1)";
