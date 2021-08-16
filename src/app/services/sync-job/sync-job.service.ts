@@ -85,17 +85,18 @@ export class SyncJobService {
      { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
-  getExportedfiles(dateRange, email, loation, moduleId){
-
-    this.token = localStorage.getItem('auth_token');
-
+  /*
+  dateRange, email, loation, moduleId
+  
     const formData: FormData = new FormData();
     formData.append('dateRange', dateRange);
     formData.append('email', email);
     formData.append('store', loation);
     formData.append('moduleId', moduleId);
-
-    return this.http.post(Constants.GET_EXPORTED_FILE , formData, {headers: new HttpHeaders({Authorization: 'Bearer' + this.token})} )
+  */
+  getExportedfiles(exportRequest){
+    this.token = localStorage.getItem('auth_token');
+    return this.http.post(Constants.GET_EXPORTED_FILE , exportRequest, {headers: new HttpHeaders({Authorization: 'Bearer' + this.token})} )
   }
 
 }
