@@ -315,6 +315,7 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
     Data, 
     AuthGuardService, 
     SidenavResponsive,
+    SideNaveComponent,
     ExcelService,
   CsvService,
   OperationService],

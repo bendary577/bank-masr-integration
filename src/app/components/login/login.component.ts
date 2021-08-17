@@ -10,6 +10,7 @@ import {User} from "../../models/user";
 import { AccountService } from 'src/app/services/account/account.service';
 import { Account } from '../../models/Account';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  side: SidenavResponsive;
+  side: SideNaveComponent;
+  // sideNav : SideNaveComponent;
   account:Account;
 
   constructor(
@@ -32,7 +34,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthService,
     private accountService: AccountService,
-    public snackBar: MatSnackBar, side: SidenavResponsive,
+    public snackBar: MatSnackBar, side: SideNaveComponent,
     private spinner: NgxSpinnerService
   ) {
     this.side = side;
@@ -79,16 +81,19 @@ export class LoginComponent implements OnInit {
         // localStorage.setItem('user',JSON.stringify(this.user));
 
         this.spinner.hide();
+        this.saveAccountERD();
+        // this.getFeatures();
+        this.getRoles();
         this.loading = false;
         this.side.setshouldRun(true);
         this.side.shouldRun = true;
         this.side.getSyncJobTypes();
         this.side.getOperationTypes();
         this.side.getApplication();
-        this.saveAccountERD();
-        // this.getFeatures();
-        this.getRoles();
+
         this.router.navigate([Constants.WELCOME_PAGE]);
+        // this.side.refresh();
+
       }).catch(err => {
         localStorage.setItem('auth_token','');
         localStorage.setItem('user','');
@@ -109,7 +114,9 @@ export class LoginComponent implements OnInit {
       this.account = res;
       localStorage.setItem('accountERD',res.erd);
       localStorage.setItem('account', JSON.stringify(res));
-    }).catch(err => {''
+      localStorage.setItem('features', JSON.stringify(res["features"]));
+
+    }).catch(err => {
       console.error(err);
     });
   }
