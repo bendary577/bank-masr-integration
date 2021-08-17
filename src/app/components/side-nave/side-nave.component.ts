@@ -20,8 +20,27 @@ import { Account } from 'src/app/models/Account';
   templateUrl: './side-nave.component.html',
   styleUrls: ['./side-nave.component.scss']
 })
-export class SideNaveComponent implements OnInit {
+export class SideNaveComponent implements OnDestroy,OnInit {
 
+  public user;
+  shouldRun: boolean = false;
+  selectedTab = Constants.CURRENT_TAB;
+  mobileQuery: MediaQueryList;
+  syncJobTypes: SyncJobType[] = [];
+  operationTypes: SyncJobType[] = [];
+  applications: Application[] = [];
+  generalSettings: GeneralSettings;
+  account: Account;
+  accountFeatures: [];
+  userRoles: [];
+  userFeature: [];
+  accountCredentials: [] = [];
+  simphonyLocations: [];
+  costCenterAccountMapping: [];
+  suppliers: [];
+  overGroups: [];
+  discountRates: [];
+  admin = false;
 
   public uiBasicCollapsed = true;
   public repBasicCollapsed = false;
@@ -46,9 +65,12 @@ export class SideNaveComponent implements OnInit {
   showFooter: boolean = true;
   showSettings: boolean = true;
   isLoading: boolean;
-
-  public user;
   
+  public tripOpend = false;
+  public tripDownOpend = true;
+  public tripDowncolspand = false;
+  public props = {'height' : 'auto'};
+
   constructor(changeDetectorRef: ChangeDetectorRef,
     private router: Router, media: MediaMatcher, location: Location, private _location: Location,
     public snackBar: MatSnackBar, public accountService: AccountService,
@@ -73,9 +95,18 @@ export class SideNaveComponent implements OnInit {
   ngOnInit() {
 
     if(localStorage.getItem("user") != undefined || localStorage.getItem("user") != null){
-      this.user = JSON.parse(localStorage.getItem("user"))
       this.account = JSON.parse(localStorage.getItem("account"));
+      this.userFeature = JSON.parse(localStorage.getItem("account"));
+      this.user = JSON.parse(localStorage.getItem("user"))
+      this.userRoles = JSON.parse(localStorage.getItem("roles"))
+      
      }
+
+    console.log(this.user);
+    console.log(this.account);
+    console.log(this.userRoles);
+    console.log(this.accountFeatures);
+
 
     this.mobileQuery.removeListener(this._mobileQueryListener);
 
@@ -107,25 +138,6 @@ export class SideNaveComponent implements OnInit {
       });
     });
   }
-
-
-  shouldRun: boolean = false;
-  selectedTab = Constants.CURRENT_TAB;
-  mobileQuery: MediaQueryList;
-  syncJobTypes: SyncJobType[] = [];
-  operationTypes: SyncJobType[] = [];
-  applications: Application[] = [];
-  generalSettings: GeneralSettings;
-  account: Account;
-  accountFeatures: [];
-  userRoles: [];
-  accountCredentials: [] = [];
-  simphonyLocations: [];
-  costCenterAccountMapping: [];
-  suppliers: [];
-  overGroups: [];
-  discountRates: [];
-  admin = false;
 
   private _mobileQueryListener: () => void;
 
@@ -263,6 +275,28 @@ export class SideNaveComponent implements OnInit {
   }
 
 
+  hasRole(refernce): Boolean{
+
+    console.log(refernce)
+
+    for(let i = 0 ; i < this.userRoles.length ; i++){
+      console.log(refernce + 1)
+
+      if(this.userRoles[i]["reference"] == refernce){
+
+        console.log(refernce + 2)
+
+        return true;
+      }
+    }
+
+    console.log(refernce + 4)
+
+    return false;
+
+  }
+
+
   setshouldRun(shouldRun: boolean) {
     this.shouldRun = shouldRun;
   }
@@ -270,11 +304,6 @@ export class SideNaveComponent implements OnInit {
   method() {
 
   }
-
-  public tripOpend = false;
-  public tripDownOpend = true;
-  public tripDowncolspand = false;
-  public props = {'height' : 'auto'};
 
   closeTip(){
     this.tripOpend = false;

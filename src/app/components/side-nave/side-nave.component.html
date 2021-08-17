@@ -98,7 +98,7 @@
     <li class="nav-item nav-category">
       <span class="nav-link" translate>Main Menu</span>
     </li>
-    <li class="nav-item menu-items" [ngClass]="{ 'active' : uiBasicCollapsed }">
+    <li class="nav-item menu-items" [ngClass]="{ 'active' : uiBasicCollapsed }" *ngIf="hasRole('see_syncs')">
       <a class="nav-link" (click)="titleOpened('uiBasicCollapsed');" [attr.aria-expanded]="uiBasicCollapsed"
         aria-controls="ui-basic">
         <span class="menu-icon">
