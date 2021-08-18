@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="tow-column">
+        <form class="myForm">
+            <div>
+                <p style="font-family: fantasy; font-weight: bold; font-size: 20px;">From</p>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Start Date" type="date" name="fromDate" id="fromDate"
+                        [(ngModel)]="fromDate">
+                </mat-form-field>
+
+                <p style="font-family: fantasy; font-weight: bold; font-size: 20px;">To</p>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="End Date" type="date" name="toDate" id="toDate" [(ngModel)]="toDate">
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+    <div class="tow-column" style="padding-left: 20%;">
+        <p style="font-family: fantasy; font-weight: bold; font-size: 20px;">Fast Filter</p>
+        <button class="filter-btn" (click)="totalSpend('Totoal')" mat-raised-button>Total</button>
+        <button class="filter-btn" (click)="totalSpend('Today')" mat-raised-button>Today</button>
+        <button class="filter-btn" (click)="totalSpend('Last Week')" mat-raised-button>This Week</button>
+        <button class="filter-btn" (click)="totalSpend('Last Week')" mat-raised-button>Last Week</button>
+        <button class="filter-btn" (click)="totalSpend('Last Week')" mat-raised-button>This Week</button>
+        <button class="filter-btn" (click)="totalSpend('Last Month')" mat-raised-button>Last Month</button>
+    </div>
+</div>
+<div >
+    <div mat-dialog-actions >
+        <button mat-button cdkFocusInitial (click)="onSaveClick()">Filter</button>
+        <button mat-button (click)="onNoClick()">Cancel</button>
+    </div>
+</div>

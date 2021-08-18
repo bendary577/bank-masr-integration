@@ -7,6 +7,10 @@ import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import { AddAppUserComponent } from '../../components/add-app-user/add-app-user.component'  
 import { Group } from 'src/app/models/loyalty/Group';
 import {Location} from '@angular/common';
+import { Router } from '@angular/router';
+import { Data } from 'src/app/models/data';
+import { Constants } from 'src/app/models/constants';
+import { AddAppUserAccompiedComponent } from '../add-app-user-accompied/add-app-user-accompied.component';
 
 @Component({
   selector: 'app-manage-users',
@@ -18,6 +22,22 @@ export class ManageUsersComponent implements OnInit {
   loading = false;
   newUser: ApplicationUser = new ApplicationUser();
   updatedUser: ApplicationUser = new ApplicationUser();
+  role = true;
+
+  styleProps = {  'background-color' : '#e07d93'  };
+  styleProps2 = {  'background-color' : '#3F51B5'  };
+
+  noFilter = true;
+  selectedGuest="";
+  guestNames= [];
+  expiration= 0;
+  palance=0;
+  cardNumber = 0;
+  accompanied = 2;
+    
+  fromDate:any;
+  toDate:any;
+  isEntrySys = true;
 
   usersList = {
     paginateData: true as boolean,
@@ -37,10 +57,12 @@ export class ManageUsersComponent implements OnInit {
     usersData: [] 
   };
 
+
   constructor(private loyaltyService: LoyaltyService, public dialog: MatDialog, private _location: Location,
-     public snackBar: MatSnackBar, private sidNav: SidenavResponsive) { }
+     public snackBar: MatSnackBar, private sidNav: SidenavResponsive, private router: Router, public data: Data) { }
 
   ngOnInit() {
+
     this.getUsers();
   }
   
@@ -49,8 +71,16 @@ export class ManageUsersComponent implements OnInit {
     this.usersList.selected.push(...selected);
   }
 
+  totalSpend(date){
+  }
+
   refresh() {
     location.reload();
+  }
+  
+  openUserProfile(user: ApplicationUser){
+    this.data.storage = user;
+    this.router.navigate([Constants.USER_PROFILE]);
   }
   
   getUsers(){
@@ -104,16 +134,27 @@ export class ManageUsersComponent implements OnInit {
   }
 
   addUserDialog(){
-    const dialogRef = this.dialog.open(AddAppUserComponent, {
-        width: '550px',
 
-    });
+    let dialogRef ;
+
+    if(this.isEntrySys){
+      dialogRef = this.dialog.open(AddAppUserAccompiedComponent, {
+          width: '900px',
+        });
+    }else{
+      dialogRef = this.dialog.open(AddAppUserComponent, {
+        width: '550px',
+      });
+    }
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
 
         this.usersList.showLoading = true;
-        this.loyaltyService.addApplicationUser(true, res.name, res.email, res.group, res.image, "").then((result: any) => {
+
+        console.log(res.accompiendUsers)
+
+        this.loyaltyService.addApplicationUser(true, true, res.name, res.email, res.group, res.image, "", res.accompiendUsers).then((result: any) => {
           this.loading = true;
           this.getUsers();
           this.newUser = new ApplicationUser();
@@ -146,14 +187,19 @@ export class ManageUsersComponent implements OnInit {
             horizontalPosition: 'center',
             panelClass:"my-snack-bar-fail"
           });
+
         });
       }
     });
   }
 
+  addUser(){
+    
+  }
+
   updateUserDialog(){
     const dialogRef = this.dialog.open(AddAppUserComponent, {
-      width : '550px',
+      width : '900px',
       data: {
         user : this.usersList.selected[0]
       }
@@ -165,8 +211,8 @@ export class ManageUsersComponent implements OnInit {
         this.usersList.showLoading = true;
         if(res.group == undefined)
         res.group = new Group();
-        this.loyaltyService.addApplicationUser(false, res.name, res.email, res.group, res.image,
-                                               this.usersList.selected[0].id).then((result: any) => {
+        this.loyaltyService.addApplicationUser(false,true, res.name, res.email, res.group, res.image,
+                                               this.usersList.selected[0].id, []).then((result: any) => {
             this.loading = false;
             this.usersList.showLoading = false;
             this.newUser = new ApplicationUser();
@@ -280,7 +326,6 @@ export class ManageUsersComponent implements OnInit {
     if(this.usersList.selected.length == 0){
       return true;
     }
-
     // check if there any deleted user selected
     var i;
     for (i = 0; i < this.usersList.selected.length; i++) {
@@ -289,12 +334,41 @@ export class ManageUsersComponent implements OnInit {
       if (!usersList.deleted) {
           return true;
       }
-
       // if(usersList.group.deleted){
       //   return true;
       // }
-
     return false;
     }
   }
+
+  filterByGuestName(){
+    this.guestNames.push(this.selectedGuest);
+  }
+
+  filterUsers(selectedGuest){
+
+    const strs = this.usersList.usersData;
+    const result = strs.filter(s => s.code.includes(selectedGuest));
+
+    console.log(selectedGuest);
+
+    console.log(strs);
+    console.log(result);
+
+    this.usersList.usersData = result
+  }
+
+  getTransInRangAndGroup(){
+
+  }
+
+  validatefilter(){
+  }
+
+  restFilters(){
+  }
+
+  extractExcelFile(){
+  }
+
 }

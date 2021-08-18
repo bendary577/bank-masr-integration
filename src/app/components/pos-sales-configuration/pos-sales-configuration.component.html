@@ -67,14 +67,12 @@
                     [(ngModel)]="syncJobType.configuration.accountSettings.accountingPeriodName">
                 </mat-form-field>
             </div>
-
                     
             </form>
     </div>
             
         </mat-expansion-panel>
 
-        
         <mat-expansion-panel >
             <mat-expansion-panel-header>
             <mat-panel-title>
@@ -149,13 +147,11 @@
                 </div>
           </mat-expansion-panel>
 
-        
         <br>
         <div class="card-back">
             <button mat-flat-button (click)="onSaveClick()">Save</button>
             <button mat-flat-button (click)="onCancelClick()">Cancel</button>
         </div>
-  
     </div>
 
     <div *ngIf="!loading && !syncJobType">

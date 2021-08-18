@@ -1,0 +1,78 @@
+<h1 mat-dialog-title class="welcomeing">
+    <span class="hi">Hi,</span> {{user.name}}
+</h1>
+<div class="card">
+    <div class="row">
+        <div class="col titltes">
+            <form [formGroup]="form" class="my-form">
+                <div class="form-group labeldiv">
+                    <span class="labelTitle">Choose a date range:</span>
+                </div>
+                <div class="form-group labeldiv">
+                    <span class="labelTitle">Srores:</span>
+                </div>
+                <div class="form-group labeldiv">
+                    <span class="labelTitle">Modules:</span>
+                </div>
+                <div class="form-group labeldiv">
+                    <span class="labelTitle">Email:</span>
+                </div>
+            </form>
+        </div>
+        <div class="col forms">
+            <form [formGroup]="form" class="my-form">
+                <div class="form-group">
+                    <mat-form-field appearance="outline">
+                        <input  autocomplete="off"required matInput type="text" name="daterange" ngxDaterangepickerMd formControlName="dateRange"
+                            placeholder="Date Range" [(ngModel)]="selectedRange" [showCustomRangeLabel]="true"
+                            [alwaysShowCalendars]="true" [linkedCalendars]="false" [ranges]="ranges"
+                             [locale]="calendarLocale" [minDate]="minDate"
+                            [placeholder]="calendarPlaceholder" [keepCalendarOpeningWithRange]="true"
+                            [minDate]="minDate" [maxDate]="maxDate" />
+                        <mat-icon matSuffix class="calender" (click)="openDatepicker()">edit_calendar</mat-icon>
+                        <mat-error *ngIf="form.controls.dateRange.hasError('required')">
+                                Date rang is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field appearance="outline">
+                        <mat-select multiple required class="form-controls" id="store" placeholder="Store" formControlName="store">
+                            <mat-option></mat-option>
+                            <mat-option [value]="loc" *ngFor="let loc of locationList.locationData">{{loc.locationName}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="form.controls.store.hasError('required')">
+                            Store is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field appearance="outline">
+                        <mat-select multiple required class="form-controls" id="modules" placeholder="Module" formControlName="module">
+                            <mat-option></mat-option>
+                            <mat-option  [value]="sync" *ngFor="let sync of syncJoobsTypesList.syncJoobsTypesData">{{sync.name}}</mat-option>
+                       </mat-select>
+                       <mat-error *ngIf="form.controls.module.hasError('required')">
+                        Module is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="Email" formControlName="email" required>
+                        <mat-error *ngIf="form.controls.email.hasError('pattern')">
+                            Email must be well formed.
+                        </mat-error>
+                        <mat-error *ngIf="form.controls.email.hasError('required')">
+                            Email is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div mat-dialog-actions>
+                    <button class="btn btn-warning" style="margin-top: 20px;" (click)="onExportClick()">Export</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <ngx-spinner></ngx-spinner>
+</div>

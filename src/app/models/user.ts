@@ -5,6 +5,7 @@ export class User {
     password: string;
     domain: string;
     deleted: boolean;
+    roles: []
  
     public constructor() { }
 

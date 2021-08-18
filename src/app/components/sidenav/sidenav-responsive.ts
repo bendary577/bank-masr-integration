@@ -30,12 +30,15 @@ export class SidenavResponsive implements OnDestroy,OnInit {
   applications: Application[] = [];
   generalSettings: GeneralSettings;
   account: Account;
+  accountFeatures: [];
+  userRoles: [];
   accountCredentials: [] = [];
   simphonyLocations:[];
   costCenterAccountMapping:[];
   suppliers:[];
   overGroups:[];
   discountRates:[];
+  admin= false;
 
   private _mobileQueryListener: () => void;
  
@@ -68,6 +71,10 @@ export class SidenavResponsive implements OnDestroy,OnInit {
     this._location.back();
   }
 
+  refresh() {
+    location.reload();
+  }
+  
   ngOnInit(): void {
     if (this.shouldRun == true) {
       this.getGeneralSettings();
@@ -75,6 +82,10 @@ export class SidenavResponsive implements OnDestroy,OnInit {
       this.getSyncJobTypes();
       this.getOperationTypes();
       this.getAccount();
+    }
+
+    if(this.account != undefined && this.account.id == "5fe34649283cde246c2d7734"){
+      this.admin = true;
     }
   }
 
