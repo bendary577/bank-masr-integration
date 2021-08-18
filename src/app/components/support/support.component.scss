@@ -88,6 +88,10 @@
     border-radius: 0 28px 28px 0 !important;
   }
 
+  ::ng-deep  .mat-form-field-infix{
+    width: 80px !important;
+  }
+
   /* Border */
 .mat-form-field-appearance-outline
 .mat-form-field-outline
@@ -130,11 +134,9 @@
           .buttons{
                 .buttons_input{
                   button{
-                        background: #f47920;
-                      }
+                        background: #f47920;  }
                   }
             }
-
           .ranges{
             ul{
                 li{
@@ -144,9 +146,7 @@
                             background-color: #ffb560;
                           }
                         }
-
                  }
-            
             }
         }
 
