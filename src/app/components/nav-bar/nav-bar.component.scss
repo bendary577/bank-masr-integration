@@ -1,27 +1,28 @@
 /* Navbar */
 
-@import '../../../styles.scss';
+// @import '../../../styles.scss';
 
 /* Navbar */
 
-.navbar {
-  font-family: $type1;
+::ng-deep .navbar {
+  // font-family: 'Rubik', sans-serif;
+  font-family: 'Rubik', sans-serif;
   font-weight: normal;
-  background: $navbar-bg;
-  left: $sidebar-width-lg;
-  transition:left $action-transition-duration $action-transition-timing-function;
-  -webkit-transition:left $action-transition-duration $action-transition-timing-function;
-  -moz-transition:left $action-transition-duration $action-transition-timing-function;
-  -ms-transition:left $action-transition-duration $action-transition-timing-function;
+  background: #ffffff;
+  left: 244px;
+  transition:left 0.25s ease;
+  -webkit-transition:left 0.25s ease;
+  -moz-transition:left 0.25s ease;
+  -ms-transition:left 0.25s ease;
 
   :host-context(.rtl) & {
     @media (min-width: 992px) {
-      right: $sidebar-width-lg;
+      right: 244px;
       left: 0;
-      transition:right $action-transition-duration $action-transition-timing-function;
-      -webkit-transition:right $action-transition-duration $action-transition-timing-function;
-      -moz-transition:right $action-transition-duration $action-transition-timing-function;
-      -ms-transition:right $action-transition-duration $action-transition-timing-function;
+      transition:right 0.25s ease;
+      -webkit-transition:right 0.25s ease;
+      -moz-transition:right 0.25s ease;
+      -ms-transition:right 0.25s ease;
     }
   }
 
@@ -32,15 +33,15 @@
     width: 110px;
   }
   .navbar-brand-wrapper {
-    transition: width $action-transition-duration $action-transition-timing-function, background $action-transition-duration $action-transition-timing-function;
-    -webkit-transition: width $action-transition-duration $action-transition-timing-function, background $action-transition-duration $action-transition-timing-function;
-    -moz-transition: width $action-transition-duration $action-transition-timing-function, background $action-transition-duration $action-transition-timing-function;
-    -ms-transition: width $action-transition-duration $action-transition-timing-function, background $action-transition-duration $action-transition-timing-function;
-    background: $navbar-bg;
-    width: $sidebar-width-lg;
-    height: $navbar-height;
+    transition: width 0.25s ease, background 0.25s ease;
+    -webkit-transition: width 0.25s ease, background 0.25s ease;
+    -moz-transition: width 0.25s ease, background 0.25s ease;
+    -ms-transition: width 0.25s ease, background 0.25s ease;
+    background: #ffffff;
+    width: 244px;
+    height: 70px;
     :host-context(.sidebar-dark) & {
-      background: $sidebar-bg;
+      background: #f1f1f1;
     }
 
     @media (max-width: 991px) {
@@ -65,7 +66,7 @@
       }
 
       img {
-        width: calc(#{$sidebar-width-lg} - 120px );
+        width: calc(#{244px} - 120px );
         max-width: 100%;
         height: 28px;
         margin: auto;
@@ -74,7 +75,7 @@
       &.brand-logo-mini {
         display: none;
         img {
-          // width: calc(#{$sidebar-width-icon} - 50px );
+          // width: calc(#{70px} - 50px );
           max-width: 20%;
           height: 28px;
           margin: auto;
@@ -83,15 +84,15 @@
     }
   }
   .navbar-menu-wrapper {
-    transition: width $action-transition-duration $action-transition-timing-function;
-    -webkit-transition: width $action-transition-duration $action-transition-timing-function;
-    -moz-transition: width $action-transition-duration $action-transition-timing-function;
-    -ms-transition: width $action-transition-duration $action-transition-timing-function;
-    color: $navbar-menu-color;
+    transition: width 0.25s ease;
+    -webkit-transition: width 0.25s ease;
+    -moz-transition: width 0.25s ease;
+    -ms-transition: width 0.25s ease;
+    color: #ffffff;
     padding-left: 15px;
     padding-right: 15px;
     width: 100%;
-    height: $navbar-height;
+    height: 70px;
     @media (max-width: 991px) {
       width: auto;
       padding-left: 15px;
@@ -100,10 +101,10 @@
 
     .navbar-toggler {
       border: 0;
-      color: $text-muted;
-      height: $navbar-height;
+      color: #6c7293;
+      height: 70px;
       box-shadow:none;
-      @include border-radius(0px);
+      // @include border-radius(0px);
       &:not(.navbar-toggler-right) {
         font-size: 0.875rem;
         @media (max-width: 991px) {
@@ -122,27 +123,27 @@
     .search-field {
       .input-group {
         input {
-          font-size: $default-font-size;
+          font-size: 0.875rem;
           padding: .5rem;
-          @include input-placeholder {
-            font-size: $navbar-font-size;
-            color: $navbar-menu-color;
-            font-family: $type1;
-            font-weight: $font-weight-light;
-          }
+          // @include input-placeholder {
+          //   font-size: .9375rem;
+          //   color: #ffffff;
+          //   font-family: 'Rubik', sans-serif;
+          //   font-weight: .300;
+          // }
         }
         i {
           font-size: 17px;
           margin-right: 0;
-          color: $navbar-menu-color;
+          color: #ffffff;
         }
         .input-group-text {
           background: transparent;
         }
       }
       :host-context(.rtl) & {
-        @extend .ml-0 !optional;
-        @extend .mr-4 !optional;
+        // @extend .ml-0 !optional;
+        // @extend .mr-4 !optional;
       }
     }
 
@@ -164,7 +165,7 @@
         min-width: 14px;
         height: 14px;
         font-size: .5rem;
-        color: $white;
+        color: white;
         bottom: 16px;
         right: -5px;
         line-height: 1;
@@ -183,12 +184,12 @@
       .nav-item {
         .nav-link {
           color: inherit;
-          font-size: $navbar-font-size;
+          font-size: .9375rem;
           margin-left: 1rem;
           margin-right: 1rem;
           white-space: nowrap;
-          @include display-flex;
-          @include align-items(center);
+          // @include display-flex;
+          // @include align-items(center);
           cursor: pointer;
           @media (max-width: 767px) {
             margin-left: .8rem;
@@ -196,7 +197,7 @@
           }
           i {
             display: flex;
-            font-size: $navbar-icon-font-size;
+            font-size: 1.125rem;
             color: #000000;
 
           }
@@ -237,9 +238,9 @@
             }
           }
           .dropdown-menu {
-            @extend .dropdownAnimation;
+            // @extend .dropdownAnimation;
             border: none;
-            @include border-radius(5px);
+            // @include border-radius(5px);
             -webkit-box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.2);
             -moz-box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.2);
             box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.2);
@@ -259,8 +260,8 @@
               padding: 0;
 
               .dropdown-item {
-                @extend .d-flex;
-                @extend .align-items-center;
+                // @extend .d-flex;
+                // @extend .align-items-center;
                 margin-bottom: 0;
                 padding: 11px 13px;
                 cursor: pointer;
@@ -276,7 +277,7 @@
                 }
                 :host-context(.rtl) & {
                   i{
-                    @extend .mr-0 !optional;
+                    // @extend .mr-0 !optional;
                     margin-left: 10px;
                   }
                 }
@@ -295,14 +296,14 @@
             .navbar-dropdown {
               left: 20px;
               right: 20px;
-              top: $navbar-height;
+              top: 70px;
               width: calc(100% - 40px);
             }
           }
         }
         &.nav-profile {
           .nav-link {
-            @extend .d-flex ;
+            // @extend .d-flex ;
             .nav-profile-img {
               position: relative;
               width: 32px;
@@ -368,8 +369,8 @@
         padding: 13px 20px 11px 20px;
         border: 1px solid #282a30;
         &::placeholder {
-          color: $text-muted;
-          font-size: $input-placeholder-font-size;
+          color: #6c7293;
+          font-size: .875rem;
         }
       }
     }
@@ -412,7 +413,7 @@
 :host-context(.sidebar-mini) {
   @media (min-width: 992px) {
     .navbar {
-      left: $sidebar-width-mini;
+      left: 185px;
       .navbar-menu-wrapper {
         width: 100%;
       }
@@ -423,12 +424,12 @@
 :host-context(.sidebar-icon-only) {
   @media(min-width: 992px) {
     .navbar { 
-      left: $sidebar-width-icon;
+      left: 70px;
       .navbar-menu-wrapper {
         width: 100%;
       }
       .navbar-brand-wrapper {
-        width: $sidebar-width-icon;
+        width: 70px;
         .brand-logo {
           display: none;
         }
@@ -443,11 +444,11 @@
 :host-context(.boxed-layout) {
   @media(min-width: 1200px) {
     .navbar {
-      right: calc((100% - #{$boxed-container-width}) / 2);
-      left:  calc(((100% - #{$boxed-container-width}) / 2) + #{$sidebar-width-lg});
+      right: calc((100% - #{1200px}) / 2);
+      left:  calc(((100% - #{1200px}) / 2) + #{244px});
       &.fixed-top {
         margin: auto;
-        max-width: $boxed-container-width;
+        max-width: 1200px;
       }
     }
   }
@@ -456,7 +457,7 @@
 :host-context(.boxed-layout.sidebar-icon-only) {
   @media(min-width: 1200px) {
     .navbar{
-      left:  calc(((100% - #{$boxed-container-width}) / 2) + #{$sidebar-width-icon});
+      left:  calc(((100% - #{1200px}) / 2) + #{70px});
     }
   }
 }
@@ -465,7 +466,7 @@
   @media(min-width: 992px) {
     .navbar{
       left: 0;
-      right: $sidebar-width-icon;
+      right: 70px;
     }
   }
 }
@@ -473,7 +474,7 @@
 :host-context(.rtl.boxed-layout) {
   @media(min-width: 992px) {
     .navbar {
-      right: calc(((100% - 1200px) / 2) + #{$sidebar-width-lg});
+      right: calc(((100% - 1200px) / 2) + #{244px});
       left: calc((100% - 1200px) / 2);
     }
   }
@@ -482,7 +483,7 @@
 :host-context(.rtl.boxed-layout.sidebar-icon-only) {
   @media(min-width: 992px) {
     .navbar {
-      right: calc(((100% - 1200px) / 2) + #{$sidebar-width-icon});
+      right: calc(((100% - 1200px) / 2) + #{70px});
     }
   }
 }  
@@ -491,7 +492,7 @@
   @media(min-width: 992px) {
     .navbar {
       left: 0;
-      right: #{$sidebar-width-mini};
+      right: #{185px};
     }
   }
 } 
@@ -500,7 +501,7 @@
   @media(min-width: 992px) {
     .navbar {
       left: 0;
-      right: #{$sidebar-width-icon};
+      right: #{70px};
     }
   }
 }  
