@@ -186,6 +186,10 @@ export class ConfigurationComponent implements OnInit {
       }
     });
   }
+
+  uploadFilesToDrive() {
+    console.log("upload files to drive....")
+  }
 }
 const EXPANSION_PANEL_ANIMATION_TIMING = "500ms cubic-bezier(0.4,0.0,0.2,1)";
 MatExpansionPanel["decorators"][0].args[0].animations = [

@@ -122,7 +122,7 @@
         <button
           mat-flat-button
           (click)="authenticateDrice()"
-          *ngIf="hideAuthenticationBtn && account.sendMethod === 'drive'"
+          *ngIf="account.sendMethod === 'drive' && !hideAuthenticationBtn"
         >
           Authenticate your Drive Account
         </button>
