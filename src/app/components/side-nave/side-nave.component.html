@@ -84,7 +84,7 @@
     </div>
 
     <br>
-    <div class="supprot-field ">
+    <div class="supprot-field" *ngIf="hasRole('see_support')">
       <div class="nav-item">
         <a class="nav-link" routerLink="/support" aria-controls="ui-basic">
           <span class="menu-icon">
@@ -95,7 +95,8 @@
       </div>
     </div>
     <br>
-    <li class="nav-item nav-category">
+    <li class="nav-item nav-category"
+     *ngIf=" hasRole('see_syncs') || hasRole('see_applications') ||  hasRole('see_reports') || hasRole('see_operations') || hasRole('see_settings')">
       <span class="nav-link" translate>Main Menu</span>
     </li>
     <li class="nav-item menu-items" [ngClass]="{ 'active' : uiBasicCollapsed }" *ngIf="hasRole('see_syncs')">
@@ -114,7 +115,7 @@
         </ul>
       </div>
     </li>
-    <li class="nav-item menu-items" [ngClass]="{ 'active' : appBasicCollapsed }">
+    <li class="nav-item menu-items" [ngClass]="{ 'active' : appBasicCollapsed }" *ngIf="hasRole('see_applications')">
       <a class="nav-link" (click)=" titleOpened('appBasicCollapsed');" [attr.aria-expanded]="uiBasicCollapsed"
         aria-controls="ui-basic">
         <span class="menu-icon">
@@ -130,7 +131,7 @@
         </ul>
       </div>
     </li>
-    <li class="nav-item menu-items" [ngClass]="{ 'active' : repBasicCollapsed }">
+    <li class="nav-item menu-items" [ngClass]="{ 'active' : repBasicCollapsed }" *ngIf="hasRole('see_reports')">
       <a class="nav-link" (click)=" titleOpened('repBasicCollapsed');" [attr.aria-expanded]="repBasicCollapsed"
         aria-controls="ui-basic">
         <span class="menu-icon">
@@ -146,7 +147,7 @@
         </ul>
       </div>
     </li>
-    <li class="nav-item menu-items" [ngClass]="{ 'active' : opeBasicCollapsed }">
+    <li class="nav-item menu-items" [ngClass]="{ 'active' : opeBasicCollapsed }" *ngIf="hasRole('see_operations')">
       <a class="nav-link" (click)="titleOpened('opeBasicCollapsed');" [attr.aria-expanded]="opeBasicCollapsed"
         aria-controls="ui-basic">
         <span class="menu-icon">
@@ -165,7 +166,7 @@
         </ul>
       </div>
     </li>
-    <li class="nav-item menu-items" [ngClass]="{ 'active' : setBasicCollapsed }">
+    <li class="nav-item menu-items" [ngClass]="{ 'active' : setBasicCollapsed }" *ngIf="hasRole('see_settings')">
       <a class="nav-link" (click)="titleOpened('setBasicCollapsed');" [attr.aria-expanded]="setBasicCollapsed"
         aria-controls="ui-basic">
         <span class="menu-icon">
@@ -176,26 +177,25 @@
       </a>
       <div class="collapse" id="ui-basic" [ngbCollapse]="!setBasicCollapsed">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"><a class="nav-link settingLink" routerLink="/syncjobs"
+          <li class="nav-item" *ngIf="hasRole('see_syncs_config')"><a class="nav-link settingLink" routerLink="/syncjobs"
               *ngIf="syncJobTypes.length > 0">Sync Configuration</a> </li>
           <li class="nav-item"><a class="nav-link" routerLink="/operationTypesConfiguration">Operation Configuration</a>
           </li>
-          <li class="nav-item"><a class="nav-link" routerLink="/costCenterAccountMapping">Costcenter Mapping</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/suppliersMapping">Suppliers Mapping</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/includedOverGroups">Included Groups</a> </li>
-          <li class="nav-item"><a class="nav-link" routerLink="/operaReportMapTables">Opera Mapping</a> </li>
-          <li class="nav-item"><a class="nav-link" routerLink="/costCenterLocationMapping">Location Mapping</a> </li>
-          <li class="nav-item"><a class="nav-link" routerLink="/costCenterLocationMapping">Location Mapping</a> </li>
-          <li class="nav-item"><a class="nav-link" routerLink="/simphonyDiscountMaping">Discount Mapping</a> </li>
-          <li class="nav-item"><a class="nav-link " (click)="snav.toggle()" routerLink="/setting">General Settings</a>
+          <li class="nav-item" *ngIf="hasRole('see_cost_mapping')"><a class="nav-link" routerLink="/costCenterAccountMapping">Costcenter Mapping</a></li>
+          <li class="nav-item" *ngIf="hasRole('see_sup_mapping')"><a class="nav-link" routerLink="/suppliersMapping">Suppliers Mapping</a></li>
+          <li class="nav-item" *ngIf="hasRole('see_groups_mapping')"><a class="nav-link" routerLink="/includedOverGroups">Included Groups</a> </li>
+          <li class="nav-item" *ngIf="hasRole('see_opera_mapping')"><a class="nav-link" routerLink="/operaReportMapTables">Opera Mapping</a> </li>
+          <li class="nav-item" *ngIf="hasRole('see_locationMapping')"><a class="nav-link" routerLink="/costCenterLocationMapping">Location Mapping</a> </li>
+          <li class="nav-item" *ngIf="hasRole('see_simphony_discountmapping')"><a class="nav-link" routerLink="/simphonyDiscountMaping">Discount Mapping</a> </li>
+          <li class="nav-item" *ngIf="hasRole('see_general_setting')"><a class="nav-link " (click)="snav.toggle()" routerLink="/setting">General Settings</a>
           </li>
         </ul>
       </div>
     </li>
-    <li class="nav-item nav-category">
+    <li class="nav-item nav-category" *ngIf="hasRole('see_user_pages')">
       <span class="nav-link" translate>More</span>
     </li>
-    <li class="nav-item menu-items" [ngClass]="{ 'active' : userPagesCollapsed }">
+    <li class="nav-item menu-items" [ngClass]="{ 'active' : userPagesCollapsed }" *ngIf="hasRole('see_user_pages')">
       <a class="nav-link" (click)="titleOpened('userPagesCollapsed');" [attr.aria-expanded]="userPagesCollapsed"
         aria-controls="auth">
         <span class="menu-icon">
@@ -206,7 +206,7 @@
       </a>
       <div class="collapse" id="auth" [ngbCollapse]="!userPagesCollapsed">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"><a class="nav-link" routerLink="/users">Users</a></li>
+          <li class="nav-item" *ngIf="hasRole('see_users')"><a class="nav-link" routerLink="/users">Users</a></li>
         </ul>
       </div>
     </li>

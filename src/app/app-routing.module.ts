@@ -107,7 +107,7 @@ const routes: Routes = [
   // { path: Constants.MANAGE_ACTIVITIES, component: ActivitiesComponent ,canActivate:[AuthGuardService]},
   
   // Pages
-  { path: Constants.LOGIN_PAGE, component: LoginComponent, canActivate:[AuthGuardService]},
+  { path: Constants.LOGIN_PAGE, component: LoginComponent},
   { path: Constants.WELCOME_PAGE, component: WelcomePageComponent , canActivate:[AuthGuardService]},
 
   { path: Constants.SUPPLIERS_PAGE, component: SuppliersComponent , canActivate:[AuthGuardService]},

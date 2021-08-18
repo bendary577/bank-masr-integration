@@ -277,21 +277,11 @@ export class SideNaveComponent implements OnDestroy,OnInit {
 
   hasRole(refernce): Boolean{
 
-    console.log(refernce)
-
     for(let i = 0 ; i < this.userRoles.length ; i++){
-      console.log(refernce + 1)
-
       if(this.userRoles[i]["reference"] == refernce){
-
-        console.log(refernce + 2)
-
         return true;
       }
     }
-
-    console.log(refernce + 4)
-
     return false;
 
   }
