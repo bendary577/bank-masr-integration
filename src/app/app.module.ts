@@ -317,6 +317,7 @@ import { OperaPaymentsComponent } from "./components/operations/opera-payments/o
     AddConsumptionLocationComponent,
     AddConsumptionLocationItemsComponent,
     // ==> Loyalty
+    
     AddAppCompanyComponent,
     AddAppGroupComponent,
     AddAppUserComponent,
