@@ -47,8 +47,6 @@ export class JournalInforComponent implements OnInit {
     } else {
       JournalInforComponent.getJournalsLoding = false;
     }
-
-    this.uploadFilesToDrive();
   }
 
   get staticgetJournalsLoding() {
@@ -69,6 +67,10 @@ export class JournalInforComponent implements OnInit {
         JournalInforComponent.getJournalsLoding = false;
 
         if (res.success) {
+          if (res.files) {
+            if (this.driveService.isSignedIn === true)
+              this.uploadFilesToDrive(res.files);
+          }
           this.snackBar.open(res.message, null, {
             duration: 2000,
             horizontalPosition: "center",
@@ -241,7 +243,10 @@ export class JournalInforComponent implements OnInit {
     );
   }
 
-  uploadFilesToDrive(): void {
+  uploadFilesToDrive(files): void {
+    for (let file of files) {
+      console.log(file);
+    }
     console.log("This is working...");
     const file = new File(["foo"], "fooSym.txt", {
       type: "text/plain",
