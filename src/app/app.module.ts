@@ -291,6 +291,7 @@ import { OperaPaymentsComponent } from "./components/operations/opera-payments/o
     CsvService,
     OperationService,
     DriveService,
+    DriveService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
@@ -312,7 +313,7 @@ import { OperaPaymentsComponent } from "./components/operations/opera-payments/o
     AddMajorGroupChildComponent,
     AddSalesStatisticsComponent,
     AddSupplierComponent,
-
+    DriveService,
     // ==> Consumption Sync Job Type
     AddConsumptionLocationComponent,
     AddConsumptionLocationItemsComponent,
