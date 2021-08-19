@@ -7,6 +7,7 @@ import { Constants } from 'src/app/models/constants';
   providedIn: 'root'
 })
 export class AccountService {
+
   token = localStorage.getItem('auth_token');
 
   constructor(private http : HttpClient) { }
@@ -29,5 +30,17 @@ export class AccountService {
   updateAccountSyncTypes(account) {
     this.token = localStorage.getItem('auth_token');
     return this.http.put(Constants.UPDATE_ACCOUNT_SYNC_TYPES , account, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+  }
+
+  getAccountFeature(accountId){
+    this.token = localStorage.getItem("auth_token");
+    return this.http.get(Constants.GET_FEATURES + "?accountId=" + accountId
+     , {headers: new HttpHeaders({Authorization: 'Bearer' + this.token})}).toPromise();
+  }
+
+  getRoles(userId: any, sameUser : Boolean) {
+    this.token = localStorage.getItem("auth_token");
+    return this.http.get(Constants.GET_ROLES + "?userId=" + userId  + "&sameUser=" + sameUser
+    , {headers: new HttpHeaders({Authorization: 'Bearer' + this.token})});
   }
 }

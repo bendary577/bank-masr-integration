@@ -11,6 +11,7 @@ export class Account {
   public apiKey?: string;
   public clientId?: string;
   public deleted: boolean;
+  public features: [];
 
   public constructor() {}
 }

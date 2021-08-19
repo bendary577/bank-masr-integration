@@ -34,4 +34,6 @@ export class OpiTransactionsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  no(){
+  }
 }

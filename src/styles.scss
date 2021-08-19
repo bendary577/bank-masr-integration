@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import "../node_modules/@swimlane/ngx-datatable/assets/app.css";
-@import "../node_modules/@swimlane/ngx-datatable/themes/material.css";
-@import "../node_modules/@swimlane/ngx-datatable/assets/icons.css";
+@import "~@swimlane/ngx-datatable/assets/app.css";
+@import "~@swimlane/ngx-datatable/themes/material.css";
+// @import "~@swimlane/ngx-datatable/assets/icons.css";
 html {
     height: 100%;
 }
@@ -21,7 +21,7 @@ body {
 
 .mat-snack-bar-container {
     background: #c62828;
-    color: white;
+    color: white; 
 }
 
 .mat-tab-label,
@@ -123,7 +123,7 @@ a:visited {
 a {
     color: blue;
     font-weight: bold;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 span.italic {
@@ -131,3 +131,109 @@ span.italic {
     color: red;
     font-size: 12px;
 }
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 64px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+/* You can add global styles to this file, and also import other style files */
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/bootstrap";
+
+@import './assets/scss/variables';
+@import "~@melonthierry/compass-mixins/lib/compass";
+@import "~@melonthierry/compass-mixins/lib/animate";
+@import "./assets/scss/fonts";
+@import "./assets/scss/functions";
+
+/* === Icon fonts === */
+@import "~ti-icons/css/themify-icons.css";
+@import "~@mdi/font/scss/materialdesignicons";
+@import "~font-awesome/scss/font-awesome";
+@import "~flag-icon-css/sass/flag-icon";
+@import "~simple-line-icons/scss/simple-line-icons";
+
+
+/* === Template mixins === */
+@import "./assets/scss/mixins/animation";
+@import "./assets/scss/mixins/badges";
+@import "./assets/scss/mixins/buttons";
+@import "./assets/scss/mixins/misc";
+@import "./assets/scss/mixins/color-functions";
+@import "./assets/scss/mixins/cards";
+@import "./assets/scss/mixins/blockqoute";
+@import "./assets/scss/mixins/popovers";
+@import "./assets/scss/mixins/tooltips";
+@import "./assets/scss/mixins/no-ui-slider";
+
+/* === Core Styles === */
+@import "./assets/scss/background";
+@import "./assets/scss/typography";
+@import "./assets/scss/reset";
+@import "./assets/scss/responsive";
+@import "./assets/scss/misc";
+@import "./assets/scss/utilities";
+@import "./assets/scss/demo";
+@import "./assets/scss/spinner";
+
+/* === Components === */
+@import "./assets/scss/components/forms";
+@import "./assets/scss/components/checkbox-radio";
+@import "./assets/scss/components/icons";
+@import "./assets/scss/components/tables";
+@import "./assets/scss/components/accordions";
+@import "./assets/scss/components/buttons";
+@import "./assets/scss/components/breadcrumbs";
+@import "./assets/scss/components/badges";
+@import "./assets/scss/components/cards";
+@import "./assets/scss/components/preview";
+@import "./assets/scss/components/popovers";
+@import "./assets/scss/components/lists";
+@import "./assets/scss/components/bootstrap-progress";
+@import "./assets/scss/components/bootstrap-alerts";
+@import "./assets/scss/components/dropdowns";
+@import "./assets/scss/components/pagination";
+@import "./assets/scss/components/loaders/loaders";
+@import "./assets/scss/components/todo-list";
+
+@import "./assets/scss/components/landing-screens/auth";
+
+// /* === Plugin styles === */
+// @import "~morris.js/morris.css";
+// @import "~chartist/dist/chartist.min.css";
+// @import '~dragula/dist/dragula.min.css';
+// @import "~nouislider/distribute/nouislider.min.css";
+// @import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+// @import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+// @import '~select2/dist/css/select2.min.css';
+// @import '~ngx-bar-rating/themes/br-default-theme';
+// @import '~ngx-bar-rating/themes/br-bootstrap-theme';
+// @import '~ngx-bar-rating/themes/br-fontawesome-theme';
+// @import '~ngx-bar-rating/themes/br-fontawesome-o-theme';
+// @import '~ngx-bar-rating/themes/br-horizontal-theme';
+// @import '~ngx-bar-rating/themes/br-vertical-theme';
+// @import '~ngx-bar-rating/themes/br-stars-theme';
+// @import '~ngx-bar-rating/themes/br-movie-theme';
+// @import '~ngx-bar-rating/themes/br-square-theme';
+// @import '~summernote/dist/summernote-lite.css';
+// @import '~codemirror/lib/codemirror.css';
+// @import '~codemirror/theme/dracula.css';
+// @import '~datatables.net-dt/css/jquery.dataTables.css';
+// @import '~ngx-toastr/toastr-bs4-alert';
+// @import "~@ng-select/ng-select/themes/default.theme.css";
+
+/* === Plugin Overrides === */
+@import "./assets/scss/components/plugin-overrides/owl-carousel";
+@import "./assets/scss/components/plugin-overrides/select2";
+@import "./assets/scss/components/plugin-overrides/toast";
+
+/* === Layout === */
+@import "./assets/scss/layout";

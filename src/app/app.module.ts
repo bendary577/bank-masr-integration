@@ -26,6 +26,8 @@ import {
   MatCardModule,
   MatRippleModule,
   MatProgressBarModule,
+  MatMenuModule,
+  MatBadgeModule,
 } from "@angular/material";
 import { SidenavResponsive } from "./components/sidenav/sidenav-responsive";
 import { ConfigurationComponent } from "./components/setting/configuration/configuration.component";
@@ -141,9 +143,24 @@ import { HotelOpiComponent } from "./components/hotel-opi/hotel-opi.component";
 import { OpiActivitiesComponent } from "./components/opi-activities/opi-activities.component";
 import { OpiTransactionsComponent } from "./components/opi-transactions/opi-transactions.component";
 import { OperaPaymentsComponent } from "./components/operations/opera-payments/opera-payments.component";
+import { ChartsModule } from 'ng2-charts';
+import { AngularDropdownModule } from 'angular-dropdown';
+import { NgWormholeModule } from 'ng-wormhole';
+import { FilterComponent } from './components/filter/filter.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { EditWalletComponent } from './components/edit-wallet/edit-wallet.component';
+import { ToastrModule } from 'ngx-toastr';
+import { GestCardsComponent } from './components/gest-cards/gest-cards.component';
+import { AddAppUserAccompiedComponent } from './components/add-app-user-accompied/add-app-user-accompied.component';
+import { SideNaveComponent } from './components/side-nave/side-nave.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { SupportComponent } from './components/support/support.component';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 @NgModule({
   declarations: [
+    GestCardsComponent,
     AppComponent,
     LoginComponent,
     SuppliersComponent,
@@ -223,6 +240,7 @@ import { OperaPaymentsComponent } from "./components/operations/opera-payments/o
     AddAppCompanyComponent,
     AddAppGroupComponent,
     AddAppUserComponent,
+    AddAppUserAccompiedComponent,
     DeleteAppGroupComponent,
     ActivitiesComponent,
     WlsIntegrationConfigComponent,
@@ -247,8 +265,13 @@ import { OperaPaymentsComponent } from "./components/operations/opera-payments/o
     HotelOpiComponent,
     OpiActivitiesComponent,
     OpiTransactionsComponent,
-    OperaPaymentsComponent
+    OperaPaymentsComponent,
 
+    FilterComponent,
+    UserProfileComponent,
+    EditWalletComponent,
+    SideNaveComponent,
+    NavBarComponent, SupportComponent
   ],
   imports: [
     BrowserModule,
@@ -260,6 +283,8 @@ import { OperaPaymentsComponent } from "./components/operations/opera-payments/o
     NgxSpinnerModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatMenuModule,
+    MatBadgeModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
@@ -277,6 +302,13 @@ import { OperaPaymentsComponent } from "./components/operations/opera-payments/o
     FormsModule,
     MatProgressBarModule,
     NgxJsonViewerModule,
+    ChartsModule,
+    AngularDropdownModule,
+    NgWormholeModule,
+    ToastrModule,
+    NgbModule,
+    FormsModule,
+    NgxDaterangepickerMd.forRoot()
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
@@ -287,6 +319,7 @@ import { OperaPaymentsComponent } from "./components/operations/opera-payments/o
     Data,
     AuthGuardService,
     SidenavResponsive,
+    SideNaveComponent,
     ExcelService,
     CsvService,
     OperationService,
@@ -324,6 +357,8 @@ import { OperaPaymentsComponent } from "./components/operations/opera-payments/o
     AddAppUserComponent,
     DialogComponent,
     DeleteAppGroupComponent,
+    EditWalletComponent
+
   ],
-})
+    })
 export class AppModule {}

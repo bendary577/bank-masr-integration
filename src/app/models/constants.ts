@@ -349,4 +349,18 @@ export class Constants {
   static SUN_ERD = 'Sun'
   static FUSION_ERD = 'Fusion'
   static SIMPHONY_ERD = 'Simphony'
+
+    static GET_FEATURES = environment.apiHost + '/feature/getFeatures';
+    static GET_ROLES = environment.apiHost + '/role/getRoles';
+  
+    static GET_WALLET_PAGE = 'entrySystem';
+    static GET_VOUCHER_PAGE = 'voucher';
+    static USER_PROFILE = 'userProfile';
+
+    static GET_GENERIC_GROUP = environment.apiHost + '/getGenericGroup';
+    static GET_EXPORTED_FILE = environment.apiHost + "/support/supportExportedFiles";
+
+    /////////////////////////////////////////////// new Design /////////////////////////////////////////
+
+    static SUPPORT = 'support';
 }

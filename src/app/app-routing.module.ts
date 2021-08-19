@@ -65,6 +65,8 @@ import { CostOfGoodsConfigComponent } from './components/cost-of-goods-config/co
 import { AmazonComponent } from './components/amazon/amazon.component';
 import { HotelOpiComponent } from './components/hotel-opi/hotel-opi.component';
 import { OperaPaymentsComponent } from './components/operations/opera-payments/opera-payments.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { SupportComponent } from './components/support/support.component';
 
 
 const routes: Routes = [
@@ -89,10 +91,16 @@ const routes: Routes = [
 
   // Loyalty Views
   { path: Constants.GET_LOYALTY_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.GET_WALLET_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.GET_VOUCHER_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
+
   { path: Constants.MANAGE_GROUPS, component: ManageGroupsComponent ,canActivate:[AuthGuardService]},
+
   { path: Constants.MANAGE_SUB_GROUPS, component: ManageSubGroupComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MANAGE_USERS, component: ManageUsersComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.USER_PROFILE, component: UserProfileComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MANAGE_ACTIVITIES, component: ActivitiesComponent ,canActivate:[AuthGuardService]},
+  // { path: Constants.ACCOUNT_CONFIGURATION, component: ConfigurationComponent ,canActivate:[AuthGuardService]},
 
   // Hotel OPI Views
   { path: Constants.GET_HOTEL_OPI_PAGE, component: HotelOpiComponent ,canActivate:[AuthGuardService]},
@@ -170,6 +178,8 @@ const routes: Routes = [
   { path: Constants.OPERA_PAYMENT_PAGE , component: OperaPaymentsComponent ,canActivate:[AuthGuardService]},
   { path: Constants.OPERA_PAYMENT_CONFIG_PAGE , component: OperaPaymentConfigurationComponent ,canActivate:[AuthGuardService]},
 
+  { path : Constants.SUPPORT , component: SupportComponent, canActivate:[AuthGuardService]},
+  
   { path: "amazon" , component: AmazonComponent ,canActivate:[AuthGuardService]},
 
   // Error Page
