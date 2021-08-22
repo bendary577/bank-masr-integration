@@ -100,7 +100,7 @@
      *ngIf=" hasRole('see_syncs') || hasRole('see_applications') ||  hasRole('see_reports') || hasRole('see_operations') || hasRole('see_settings')">
       <span class="nav-link" translate>Main Menu</span>
     </li>
-    <li class="nav-item menu-items" [ngClass]="{ 'active' : uiBasicCollapsed }" *ngIf="hasRole('see_syncs')">
+    <li class="nav-item menu-items" [ngClass]="{ 'active' : uiBasicCollapsed }" *ngIf="hasRole('see_syncs') && syncJobTypes.length > 0">
       <a class="nav-link" (click)="titleOpened('uiBasicCollapsed');" [attr.aria-expanded]="uiBasicCollapsed"
         aria-controls="ui-basic">
         <span class="menu-icon">
@@ -116,7 +116,7 @@
         </ul>
       </div>
     </li>
-    <li class="nav-item menu-items" [ngClass]="{ 'active' : appBasicCollapsed }" *ngIf="hasRole('see_applications')">
+    <li class="nav-item menu-items" [ngClass]="{ 'active' : appBasicCollapsed }" *ngIf="hasRole('see_applications') && applications.length > 0">
       <a class="nav-link" (click)=" titleOpened('appBasicCollapsed');" [attr.aria-expanded]="uiBasicCollapsed"
         aria-controls="ui-basic">
         <span class="menu-icon">
@@ -132,7 +132,7 @@
         </ul>
       </div>
     </li>
-    <li class="nav-item menu-items" [ngClass]="{ 'active' : repBasicCollapsed }" *ngIf="hasRole('see_reports')">
+    <li class="nav-item menu-items" [ngClass]="{ 'active' : repBasicCollapsed }" *ngIf="hasRole('see_reports') && reports.length> 0">
       <a class="nav-link" (click)=" titleOpened('repBasicCollapsed');" [attr.aria-expanded]="repBasicCollapsed"
         aria-controls="ui-basic">
         <span class="menu-icon">
@@ -148,7 +148,7 @@
         </ul>
       </div>
     </li>
-    <li class="nav-item menu-items" [ngClass]="{ 'active' : opeBasicCollapsed }" *ngIf="hasRole('see_operations')">
+    <li class="nav-item menu-items" [ngClass]="{ 'active' : opeBasicCollapsed }" *ngIf="hasRole('see_operations') && operationTypes.length > 0">
       <a class="nav-link" (click)="titleOpened('opeBasicCollapsed');" [attr.aria-expanded]="opeBasicCollapsed"
         aria-controls="ui-basic">
         <span class="menu-icon">

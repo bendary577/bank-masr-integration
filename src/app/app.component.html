@@ -1,27 +1,15 @@
 <!-- <sidenav-responsive-example></sidenav-responsive-example>
  -->
-
- <!-- <app-side-nave></app-side-nave> -->
-
- <!-- <app-side-nave></app-side-nave> -->
-
-
  <div class="container-scroller">
-   <!-- *ngIf="showSidebar" *ngIf="showNavbar"-->
     <app-side-nave [class.example-containerpc]="(!shouldRun)" *ngIf="shouldRun"></app-side-nave>
-      <!-- <app-settings-panel *ngIf="showSettings"></app-settings-panel> -->
       <app-nav-bar *ngIf="shouldRun"></app-nav-bar>
       <div class="main-panel" [ngClass]="{ 'main-panel-only' : !shouldRun }">
         <div class="content-wrapper">
-          <!-- <app-spinner *ngIf="isLoading"></app-spinner> -->
           <ngx-spinner *ngIf="isLoading"></ngx-spinner>
           <div contentAnimate *ngIf="!isLoading" class="h-100">
             <router-outlet></router-outlet>
           </div>
         </div>
         <!-- <app-footer *ngIf="showFooter"></app-footer> -->
-        <!-- partial -->
       </div>
-      <!-- main-panel ends -->  
-    <!-- page-body-wrapper ends -->
 </div>

@@ -5,6 +5,7 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { Application } from 'src/app/models/Application';
 import { Constants } from 'src/app/models/constants';
+import {User} from "../../models/user";
 import { NavigationEnd, Router } from '@angular/router';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { MatSnackBar } from '@angular/material';
@@ -22,18 +23,19 @@ import { Account } from 'src/app/models/Account';
 })
 export class SideNaveComponent implements OnDestroy,OnInit {
 
-  public user;
+  public user: User;
   shouldRun: boolean = false;
   selectedTab = Constants.CURRENT_TAB;
   mobileQuery: MediaQueryList;
   syncJobTypes: SyncJobType[] = [];
   operationTypes: SyncJobType[] = [];
   applications: Application[] = [];
+  reports = [];
   generalSettings: GeneralSettings;
   account: Account;
   accountFeatures: [];
-  userRoles: [];
-  userFeature: [];
+  userRoles = [];
+  userFeature = [];
   accountCredentials: [] = [];
   simphonyLocations: [];
   costCenterAccountMapping: [];
@@ -67,7 +69,7 @@ export class SideNaveComponent implements OnDestroy,OnInit {
   isLoading: boolean;
   
   public tripOpend = false;
-  public tripDownOpend = true;
+  public tripDownOpend = false;
   public tripDowncolspand = false;
   public props = {'height' : 'auto'};
 
@@ -102,11 +104,10 @@ export class SideNaveComponent implements OnDestroy,OnInit {
       
      }
 
-    console.log(this.user);
-    console.log(this.account);
-    console.log(this.userRoles);
-    console.log(this.accountFeatures);
-
+    // console.log(this.user);
+    // console.log(this.account);
+    // console.log(this.userRoles);
+    // console.log(this.accountFeatures);
 
     this.mobileQuery.removeListener(this._mobileQueryListener);
 
@@ -291,15 +292,11 @@ export class SideNaveComponent implements OnDestroy,OnInit {
     this.shouldRun = shouldRun;
   }
 
-  method() {
-
-  }
-
   closeTip(){
     this.tripOpend = false;
     this.tripDownOpend = false;
-
   }
+  
   colspandTip(){
     this.tripDowncolspand = !this.tripDowncolspand;
     if(this.tripDowncolspand){

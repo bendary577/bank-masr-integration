@@ -9,9 +9,11 @@
   float: right;
   padding-left: 20px;
 }
+
 .stat-card{
   margin: 10px;
   height: 225px;
+  overflow: hidden;
 }
 
 .transaction-card{
@@ -66,8 +68,9 @@
 }
 
 .filter-btn{
-  width: 120px;
-  margin-bottom: 10px;
+  width: 100px;
+  height: 32px;
+  margin-bottom: 8px;
   background-color: white;
   color: black;
 }

@@ -13,6 +13,7 @@ import { saveAs } from 'file-saver';
 import { ExcelService } from 'src/app/services/excel/excel.service';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-activities',
@@ -78,7 +79,7 @@ export class ActivitiesComponent implements OnInit {
   ];
 
   constructor(public snackBar: MatSnackBar, private router: Router, private _location: Location,
-    private sidNav: SidenavResponsive,private loyaltyService: LoyaltyService, private excelService: ExcelService , private spinner: NgxSpinnerService) { }
+    private sidNav: SideNaveComponent,private loyaltyService: LoyaltyService, private excelService: ExcelService , private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.getTopUsers();
@@ -286,6 +287,10 @@ export class ActivitiesComponent implements OnInit {
         });
       }
    );
+  }
+
+  hasRole(reference){
+    return this.sidNav.hasRole(reference);
   }
 
   closeCard(){

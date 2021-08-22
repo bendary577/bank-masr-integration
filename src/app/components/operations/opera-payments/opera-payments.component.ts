@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
+import { MatSnackBar } from '@angular/material'
 import { NgxSpinnerService } from 'ngx-spinner'
 import { ErrorMessages } from 'src/app/models/ErrorMessages'
 import { OperaPaymentService } from 'src/app/services/operaPayment/opera-payment.service'
 import { SidenavResponsive } from '../../sidenav/sidenav-responsive'
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-opera-payments',
@@ -11,9 +13,9 @@ import { SidenavResponsive } from '../../sidenav/sidenav-responsive'
 })
 export class OperaPaymentsComponent implements OnInit {
   loading = false
-  fromDate = ''
-  toDate = ''
-  cardNumber = ''
+  fromDate = Date();
+  toDate = Date();
+  cardNumber = '';
   transactions = []
 
   // Transaction Stat
@@ -25,6 +27,7 @@ export class OperaPaymentsComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private sidNav: SidenavResponsive,
     private operaPaymentService: OperaPaymentService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -37,10 +40,10 @@ export class OperaPaymentsComponent implements OnInit {
     this.countOperationTypes()
 
     this.operaPaymentService
-      .listOperaTransactions(this.fromDate, this.toDate)
+      .listOperaTransactions(this.fromDate, this.toDate, "")
       .toPromise()
       .then((res: any) => {
-        this.transactions = res
+        this.transactions = res["transactions"]
         this.spinner.hide()
         this.loading = false
       })
@@ -78,4 +81,63 @@ export class OperaPaymentsComponent implements OnInit {
         }
       })
   }
+
+  filterTransaction(){
+
+    // this.transactionList.showLoading = false;
+    this.spinner.show();
+
+    if((this.fromDate ==  '' || this.toDate == '') && this.cardNumber == ''){
+      this.snackBar.open("Configure start date, end date and group correctly." , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+      return null;
+    }
+    if( this.fromDate !=  undefined && this.toDate != undefined && (moment(this.toDate.toString()).diff(moment(this.fromDate.toString()), 'day') < 0 )){
+      this.snackBar.open("Configure start date and end date correctly, \n start date can't be after end date." , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+      return null;
+    }
+    this.transactions = [];
+
+    this.operaPaymentService.listOperaTransactions(this.fromDate, this.toDate, this.cardNumber).toPromise().then((res: any) => {
+      
+      this.transactions = res["transactions"];
+      this.succeedTransactionCount = res['succeedTransactionCount']
+      this.failedTransactionCount = res['failedTransactionCount']
+      this.totalTransactionAmount = res['totalTransactionAmount']
+
+      this.spinner.hide();
+
+      this.snackBar.open("Transactions filterd successfully." , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-success"
+      });
+    }).catch(err => {
+      this.spinner.hide();
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
+      }
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+    });  
+  }
+
 }

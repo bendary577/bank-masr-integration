@@ -6,18 +6,15 @@ import { Constants } from 'src/app/models/constants'
   providedIn: 'root',
 })
 export class OperaPaymentService {
+
   token = localStorage.getItem('auth_token')
 
   constructor(private http: HttpClient) {}
 
-  listOperaTransactions(fromDate, toDate) {
+  listOperaTransactions(fromDate, toDate, cardNumber) {
     this.token = localStorage.getItem('auth_token')
     return this.http.get(
-      Constants.LIST_OPERA_TRANSACTIONS_URL +
-        '?startDate=' +
-        fromDate +
-        '&endDate=' +
-        toDate,
+      Constants.LIST_OPERA_TRANSACTIONS_URL + '?startDate=' +  fromDate +  '&endDate=' + toDate + "&cardNumber=" + cardNumber,
       { headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }) },
     )
   }
@@ -33,4 +30,5 @@ export class OperaPaymentService {
       { headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }) },
     )
   }
+
 }

@@ -75,7 +75,7 @@
             <input matInput placeholder="Start Date" type="date" name="fromDate" id="fromDate" [(ngModel)]="fromDate" class="custom-select">
             </div>
         <div class="five-column" style="width:18%;"> 
-            <span class="groupTitle">To</span>
+            <span class="filterTitle">To</span>
             <input matInput placeholder="End Date" type="date" name="toDate" id="toDate" [(ngModel)]="toDate" class="custom-select">
         </div>
 
@@ -96,7 +96,7 @@
 
 </div>
 
-<div class="row" >
+<div class="row" *ngIf="hasRole('show_statistic')">
     <div class="two-column" style="width: 700px; height: 400px; padding-left: 350px;">
         <mat-card class="chart-card">
             <mat-card-content>
@@ -138,7 +138,7 @@
     </div> -->
 </div>
 
-<div class="filter-container" *ngIf="transactionList.transactionData.length != 0">
+<div class="filter-container" *ngIf="transactionList.transactionData.length != 0 && hasRole('show_activities_filter')">
     <div class="filter-title">
         <span style="display: inline-block; font-size: 20px; font-weight: bold; color: black;"> Filter Transactions</span>
     </div>
@@ -212,7 +212,7 @@
 
 <div class="main">
 
-    <div *ngIf="false"> 
+    <div *ngIf="transactionList.transactionData.length == 0"> 
         <mat-card class="transaction-card">
             <mat-card-content>
                 <div>
@@ -228,7 +228,7 @@
          [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
         [rows]="transactionList.transactionData" [selected]="transactionList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" [scrollbarH]="true">
 
-        <ngx-datatable-column name="Card Number">
+        <ngx-datatable-column name="Card Number" *ngIf="hasRole('show_card_number')">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 <div style="float: left;"><img class="profile-img" src="../../../assets/profile.png"  alt="image"> </div>
                 <div style="float: left; color: black; margin-top: 3px; margin-left: 5px;">1256420369</div>
@@ -247,7 +247,7 @@
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="RVC">
+        <ngx-datatable-column name="RVC" *ngIf="hasRole('show_revenue_center')">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 Restaurant
             </ng-template>
@@ -268,6 +268,12 @@
         <ngx-datatable-column name="After Discount">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.afterDiscount | number : '1.2-2'}} GHS
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Transaction Time">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.transactionDate | date: 'dd/MM/yyyy HH:mm:ss'}}
             </ng-template>
         </ngx-datatable-column>
 

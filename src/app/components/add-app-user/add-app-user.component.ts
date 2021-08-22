@@ -80,6 +80,10 @@ export class AddAppUserComponent implements OnInit {
         email: this.form.controls.email.value,
         group: this.form.controls.group.value,
         image: this.srcResult,
+        cardCode: " ",
+        mobile: " ",
+        balance: " ",
+        accompaniedGuests: " "
       });
     }
   }

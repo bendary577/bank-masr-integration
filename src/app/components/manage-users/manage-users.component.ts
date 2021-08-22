@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { Data } from 'src/app/models/data';
 import { Constants } from 'src/app/models/constants';
 import { AddAppUserAccompiedComponent } from '../add-app-user-accompied/add-app-user-accompied.component';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-manage-users',
@@ -59,7 +60,7 @@ export class ManageUsersComponent implements OnInit {
 
 
   constructor(private loyaltyService: LoyaltyService, public dialog: MatDialog, private _location: Location,
-     public snackBar: MatSnackBar, private sidNav: SidenavResponsive, private router: Router, public data: Data) { }
+     public snackBar: MatSnackBar, private sidNav: SideNaveComponent, private router: Router, public data: Data) { }
 
   ngOnInit() {
 
@@ -133,11 +134,13 @@ export class ManageUsersComponent implements OnInit {
     });
   }
 
-  addUserDialog(){
+  addUserDialog(type){
 
     let dialogRef ;
+    let isGeneric  = false;
 
-    if(this.isEntrySys){
+    if(type){
+      isGeneric = true;
       dialogRef = this.dialog.open(AddAppUserAccompiedComponent, {
           width: '900px',
         });
@@ -154,7 +157,8 @@ export class ManageUsersComponent implements OnInit {
 
         console.log(res.accompiendUsers)
 
-        this.loyaltyService.addApplicationUser(true, true, res.name, res.email, res.group, res.image, "", res.accompiendUsers).then((result: any) => {
+        this.loyaltyService.addApplicationUser(true, isGeneric, res.name, res.email, res.group, res.image,
+           "", res.accompiendUsers, res.cardCode, res.mobile, res.balance).then((result: any) => {
           this.loading = true;
           this.getUsers();
           this.newUser = new ApplicationUser();
@@ -198,12 +202,25 @@ export class ManageUsersComponent implements OnInit {
   }
 
   updateUserDialog(){
-    const dialogRef = this.dialog.open(AddAppUserComponent, {
-      width : '900px',
-      data: {
-        user : this.usersList.selected[0]
-      }
-    });
+
+    let dialogRef
+    let isGeneric = this.usersList.selected[0].isGeneric;
+    isGeneric = false;
+    if(isGeneric){
+        dialogRef = this.dialog.open(AddAppUserAccompiedComponent, {
+          width : '900px',
+          data: {
+            user : this.usersList.selected[0]
+          }
+        });
+        }else{
+          dialogRef = this.dialog.open(AddAppUserComponent, {
+            width : '500px',
+            data: {
+              user : this.usersList.selected[0]
+            }
+          });
+        }
 
     dialogRef.afterClosed().subscribe(res => {
       if(res) {
@@ -211,8 +228,8 @@ export class ManageUsersComponent implements OnInit {
         this.usersList.showLoading = true;
         if(res.group == undefined)
         res.group = new Group();
-        this.loyaltyService.addApplicationUser(false,true, res.name, res.email, res.group, res.image,
-                                               this.usersList.selected[0].id, []).then((result: any) => {
+        this.loyaltyService.addApplicationUser(false, isGeneric, res.name, res.email, res.group, res.image,
+                                               this.usersList.selected[0].id, [], res.cardCode, res.mobile, res.balance).then((result: any) => {
             this.loading = false;
             this.usersList.showLoading = false;
             this.newUser = new ApplicationUser();
@@ -266,6 +283,7 @@ export class ManageUsersComponent implements OnInit {
       });
     }).catch(err => {
       this.newUser = new ApplicationUser();
+      this.usersList.showLoading = false;
       this.usersList.showLoading = false;
 
       this.usersList.selected = [];
@@ -358,8 +376,11 @@ export class ManageUsersComponent implements OnInit {
     this.usersList.usersData = result
   }
 
+  hasRole(referece){
+    return this.sidNav.hasRole(referece);
+  }
+  
   getTransInRangAndGroup(){
-
   }
 
   validatefilter(){

@@ -208,6 +208,8 @@ export class Constants {
     environment.apiHost + '/listOperaTransaction'
   static COUNT_OPERA_TRANSACTIONS_URL =
     environment.apiHost + '/countOperaTransaction'
+  static FILTER_TRANSACTION = environment.apiHost + '/filterTransaction';
+
 
   //////////////////////////////////////////////// Opera Reports  ////////////////////////////////////////////////////////
 
@@ -363,4 +365,7 @@ export class Constants {
     /////////////////////////////////////////////// new Design /////////////////////////////////////////
 
     static SUPPORT = 'support';
+
+
+    /////////////////////////////////////////////// 
 }
