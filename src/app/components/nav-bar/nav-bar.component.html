@@ -1,4 +1,4 @@
-<nav class="navbar default-layout-navbar p-0 fixed-top d-flex flex-row">
+<nav class="navbar default-layout-navbar p-0 fixed-top d-flex flex-row nav-style">
     <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
       <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/image2vector.svg" alt="logo" /></a>
     </div>
@@ -152,7 +152,7 @@
           <a class="nav-link" id="profileDropdown" ngbDropdownToggle>
             <div class="navbar-profile">
               <img class="img-xs rounded-circle border-left" src="assets/images/faces/face15.jpg" alt="">
-              <p class="mb-0 d-none d-sm-block navbar-profile-name" style="margin-right: 5px;" translate>Admin</p>
+              <p class="mb-0 d-none d-sm-block navbar-profile-name" style="margin-right: 5px;" translate>{{user.name}}</p>
               <!-- {{user.name}} -->
               <i class="mdi mdi-dots-horizontal d-none d-sm-block"></i>
             </div>
@@ -160,20 +160,36 @@
           <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" ngbDropdownMenu aria-labelledby="profileDropdown">
             <h6 class="p-3 mb-0" translate>Profile</h6>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item preview-item">
+
+            <a href="#" class="dropdown-item preview-item">
               <div class="preview-thumbnail">
-                <div class="preview-icon bg-dark rounded-circle">
-                  <i class="mdi mdi-settings text-success"></i>
+                <!-- bg-dark -->
+                <div class="preview-icon rounded-circle">
+                  <i class="mdi mdi-wrench text-primary"></i>
                 </div>
               </div>
               <div class="preview-item-content">
-                <p class="preview-subject mb-1" translate>Settings</p>
+                <p class="preview-subject ellipsis mb-1" translate>Settings</p>
               </div>
             </a>
+
+            <!-- <a href="#" class="dropdown-item preview-item">
+              <div class="preview-thumbnail">
+                <div class="preview-icon rounded-circle">
+                  <i class="mdi mdi-wrench text-primary"></i>
+                </div>
+              </div>
+              <div class="preview-item-content">
+                <p class="preview-subject ellipsis mb-1 text-small" translate>Account settings</p>
+              </div>
+            </a>
+             -->
+
             <div class="dropdown-divider"></div>
             <a class="dropdown-item preview-item" (click)="Logout()">
               <div class="preview-thumbnail">
-                <div class="preview-icon bg-dark rounded-circle">
+                <!-- bg-dark-->
+                <div class="preview-icon rounded-circle">
                   <i class="mdi mdi-logout text-danger"></i>
                 </div>
               </div>

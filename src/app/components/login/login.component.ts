@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Constants } from 'src/app/models/constants';
 import { MatSnackBar } from '@angular/material';
-import { SidenavResponsive } from "../sidenav/sidenav-responsive";
 import { NgxSpinnerService } from 'ngx-spinner';
 import {User} from "../../models/user";
 import { AccountService } from 'src/app/services/account/account.service';
@@ -56,12 +55,10 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
   }
 
-
   onSubmit() {
     this.submitted = true;
     this.isValid();
   }
-
 
   isValid() {
     this.spinner.show();
@@ -78,22 +75,10 @@ export class LoginComponent implements OnInit {
       this.authenticationService.login(this.user).toPromise().then((res: any) => {
         localStorage.setItem('auth_token',res.access_token);
         localStorage.setItem('refresh_token',res.refresh_token);
-        // localStorage.setItem('user',JSON.stringify(this.user));
-
-        this.spinner.hide();
-        this.saveAccountERD();
-        // this.getFeatures();
         this.getRoles();
-        this.loading = false;
-        this.side.setshouldRun(true);
-        this.side.shouldRun = true;
-        this.side.getSyncJobTypes();
-        this.side.getOperationTypes();
-        this.side.getApplication();
-
-        this.router.navigate([Constants.WELCOME_PAGE]);
+        // localStorage.setItem('user',JSON.stringify(this.user));
+        // this.getFeatures();
         // this.side.refresh();
-
       }).catch(err => {
         localStorage.setItem('auth_token','');
         localStorage.setItem('user','');
@@ -115,7 +100,6 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('accountERD',res.erd);
       localStorage.setItem('account', JSON.stringify(res));
       localStorage.setItem('features', JSON.stringify(res["features"]));
-
     }).catch(err => {
       console.error(err);
     });
@@ -125,68 +109,66 @@ export class LoginComponent implements OnInit {
     this.accountService.getRoles("asfas", true).toPromise().then((res: any) =>{
       localStorage.setItem('user', JSON.stringify(res["data"]));
       localStorage.setItem('roles', JSON.stringify(res["data"]["roles"]));
+      this.loading = false;
+      this.side.setshouldRun(true);
+      this.side.shouldRun = true;
+      this.side.getSyncJobTypes();
+      this.side.getOperationTypes();
+      this.side.getApplication();
+      this.saveAccountERD();
+      this.router.navigate([Constants.WELCOME_PAGE]);
+      this.spinner.hide();  
     }).catch(err => { 
       console.log(err );
-
     })
   }
 
-  // getFeatures() {
+  /*
+  getFeatures() {
+    this.accountService.getAccountFeature(this.account.id).then((res: any) => {
+      localStorage.setItem('features', res['data']);
+      console.log(localStorage.getItem("features"));
+    }).catch(err =>{
+      let message = "Error happend, Please try again.";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.side.Logout();
+      }else if(err.message){
+        message = err.message;
+      }else if(err.error.message){
+        message = err.error.message;
+      }
+       this.snackBar.open(message, null, {
+         duration: 3000,
+         horizontalPosition: 'center',
+         panelClass:"my-snack-bar-fail"
+       });
+    });
+  }
+*/
 
-  //   this.accountService.getAccountFeature(this.account.id).then((res: any) => {
-  //     localStorage.setItem('features', res['data']);
-
-  //     console.log(localStorage.getItem("features"));
-
-  //   }).catch(err =>{
-
-  //     let message = "Error happend, Please try again.";
-
-  //     if(err.status === 401){
-  //       message = ErrorMessages.SESSION_EXPIRED;
-  //       this.side.Logout();
-  //     }else if(err.message){
-  //       message = err.message;
-  //     }else if(err.error.message){
-  //       message = err.error.message;
-  //     }
-  //      this.snackBar.open(message, null, {
-  //        duration: 3000,
-  //        horizontalPosition: 'center',
-  //        panelClass:"my-snack-bar-fail"
-  //      });
-
-  //   });
-
-  // }
-
-  // getRoles() {
-
-  //   this.accountService.getRoles("", true).toPromise().then((res: any) =>{
-  //     localStorage.setItem("roles", res["data"]);
-
-  //     console.log(localStorage.getItem("roles"));
-
-  //   }).catch(err => {
-
-  //     let message = "Error happend, Please try again.";
-
-  //     if(err.status === 401){
-  //       message = ErrorMessages.SESSION_EXPIRED;
-  //       this.side.Logout();
-  //     }else if(err.message){
-  //       message = err.message;
-  //     }else if(err.error.message){
-  //       message = err.error.message;
-  //     }
-  //      this.snackBar.open(message, null, {
-  //        duration: 3000,
-  //        horizontalPosition: 'center',
-  //        panelClass:"my-snack-bar-fail"
-  //      });
-       
-  //   })
-  // }
-
+/*
+  getRoles() {
+    this.accountService.getRoles("", true).toPromise().then((res: any) =>{
+      localStorage.setItem("roles", res["data"]);
+      console.log(localStorage.getItem("roles"));
+    }).catch(err => {
+      let message = "Error happend, Please try again.";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.side.Logout();
+      }else if(err.message){
+        message = err.message;
+      }else if(err.error.message){
+        message = err.error.message;
+      }
+       this.snackBar.open(message, null, {
+         duration: 3000,
+         horizontalPosition: 'center',
+         panelClass:"my-snack-bar-fail"
+       });
+    })
+  }
+*/
 
 }

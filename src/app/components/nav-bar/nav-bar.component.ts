@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
-import { User } from 'src/app/models/user';
 import { SideNaveComponent } from '../side-nave/side-nave.component';
-import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 
 @Component({
   selector: 'app-nav-bar',
@@ -18,19 +16,16 @@ export class NavBarComponent implements OnInit {
   public roles;
   public account;
   
-  constructor(config: NgbDropdownConfig, private sideNave : SidenavResponsive, router: Router) {
+  constructor(private config: NgbDropdownConfig,private router: Router, private sideNav : SideNaveComponent) {
     config.placement = 'bottom-right';
   }
 
   ngOnInit() {
-
     if(localStorage.getItem("user") != undefined || localStorage.getItem("user") != null){
       this.user = JSON.parse(localStorage.getItem("user"))
       this.roles = JSON.parse(localStorage.getItem("roles"));
       this.account = JSON.parse(localStorage.getItem("account"));
      }
-
-        
   }
 
   // toggle sidebar in small devices
@@ -67,6 +62,6 @@ export class NavBarComponent implements OnInit {
   }
 
   Logout(){
-    this.sideNave.Logout()
+    this.sideNav.Logout();
   }
 }

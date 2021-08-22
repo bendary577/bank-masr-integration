@@ -68,7 +68,7 @@ export class SideNaveComponent implements OnDestroy,OnInit {
   showSettings: boolean = true;
   isLoading: boolean;
   
-  public tripOpend = false;
+  public tipOpend = false;
   public tripDownOpend = false;
   public tripDowncolspand = false;
   public props = {'height' : 'auto'};
@@ -95,19 +95,14 @@ export class SideNaveComponent implements OnDestroy,OnInit {
   }
 
   ngOnInit() {
+    console.log(this.shouldRun)
 
     if(localStorage.getItem("user") != undefined || localStorage.getItem("user") != null){
       this.account = JSON.parse(localStorage.getItem("account"));
       this.userFeature = JSON.parse(localStorage.getItem("account"));
       this.user = JSON.parse(localStorage.getItem("user"))
       this.userRoles = JSON.parse(localStorage.getItem("roles"))
-      
      }
-
-    // console.log(this.user);
-    // console.log(this.account);
-    // console.log(this.userRoles);
-    // console.log(this.accountFeatures);
 
     this.mobileQuery.removeListener(this._mobileQueryListener);
 
@@ -268,23 +263,21 @@ export class SideNaveComponent implements OnDestroy,OnInit {
     return this.operationTypes;
   }
 
-  /*  public set setshouldRun(shouldRun:boolean) {
-      this.shouldRun=shouldRun;
-    }*/
+  // public set setshouldRun(shouldRun:boolean) {
+  //     this.shouldRun=shouldRun;
+  //   }
   public get getshouldRun() {
     return this.shouldRun;
   }
 
 
   hasRole(refernce): Boolean{
-
     for(let i = 0 ; i < this.userRoles.length ; i++){
       if(this.userRoles[i]["reference"] == refernce){
         return true;
       }
     }
     return false;
-
   }
 
 
@@ -293,7 +286,7 @@ export class SideNaveComponent implements OnDestroy,OnInit {
   }
 
   closeTip(){
-    this.tripOpend = false;
+    this.tipOpend = false;
     this.tripDownOpend = false;
   }
   

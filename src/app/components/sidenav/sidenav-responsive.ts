@@ -76,6 +76,7 @@ export class SidenavResponsive implements OnDestroy,OnInit {
   }
   
   ngOnInit(): void {
+
     if (this.shouldRun == true) {
       this.getGeneralSettings();
       this.getApplication();

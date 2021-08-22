@@ -22,7 +22,7 @@
         <div class="col forms">
             <form [formGroup]="form" class="my-form">
                 <div class="form-group">
-                    <mat-form-field appearance="outline">
+                    <mat-form-field class="dateBacker" appearance="outline">
                         <input  autocomplete="off"required matInput type="text" name="daterange" ngxDaterangepickerMd formControlName="dateRange"
                             placeholder="Date Range" [(ngModel)]="selectedRange" [showCustomRangeLabel]="true"
                             [alwaysShowCalendars]="true" [linkedCalendars]="false" [ranges]="ranges"

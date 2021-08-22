@@ -4,6 +4,22 @@
 
 /* Navbar */
 
+.rounded-circle{
+  background-color: #cccdd3;
+}
+
+.preview-item-content{
+  padding:15px;
+}
+
+.nav-style {
+  bottom: inherit;
+  box-shadow: none;
+  padding-left: 15px !important;
+  padding-right: 17% !important;
+  width: 100%;
+}
+
 ::ng-deep .navbar {
   // font-family: 'Rubik', sans-serif;
   font-family: 'Rubik', sans-serif;
@@ -245,6 +261,7 @@
             -moz-box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.2);
             box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.2);
             color: black;
+            right: 10px;
             &.navbar-dropdown {
               position: absolute;            
               font-size: 0.9rem;
@@ -505,3 +522,9 @@
     }
   }
 }  
+
+// nav {
+//   width: 100% !important;
+//   bottom: inherit !important;
+//   box-shadow: none !important;
+// }
