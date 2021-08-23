@@ -13,8 +13,8 @@ import * as moment from 'moment';
 })
 export class OperaPaymentsComponent implements OnInit {
   loading = false
-  fromDate = Date();
-  toDate = Date();
+  fromDate = '';
+  toDate = '';
   cardNumber = '';
   transactions = []
 

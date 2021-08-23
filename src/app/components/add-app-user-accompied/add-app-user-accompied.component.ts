@@ -140,12 +140,15 @@ export class AddAppUserAccompiedComponent implements OnInit {
 
   }
 
+  hasRole(refernce){
+
+  }
+
   ngOnChanges(changes: SimpleChanges) {
 
     console.log("New Test")
     // this.doSomething(changes.categoryId.currentValue);
     // You can also use categoryId.previousValue and 
     // categoryId.firstChange for comparing old and new values
-    
-}
+  }
 }

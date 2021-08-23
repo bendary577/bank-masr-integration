@@ -1,6 +1,6 @@
 <div *ngIf="usersList.usersData.length != 0 || usersList.showLoading" class="header" style="margin: 15px;">
-    <div *ngIf="hasRole('show_G_U_button')"><button mat-flat-button (click)="addUserDialog(true)">Add Generic Guest</button></div>
-    <button mat-flat-button (click)="addUserDialog(false)">Add Guest</button>
+    <button mat-flat-button (click)="addUserDialog(true)" *ngIf="hasRole('show_G_U_button')">Add Generic Guest</button>
+    <button mat-flat-button (click)="addUserDialog(false)" *ngIf="hasRole('add_guest')">Add Guest</button>
     <button mat-flat-button (click)="updateUserDialog()" [disabled]="validateUpdateUser()">Update Guest</button>
     <button mat-flat-button (click)="resendQRCode()" [disabled]="usersList.selected.length != 1">Resend QR Code</button>
     <button mat-flat-button (click)="deleteUsers('true')" [disabled]="validateDeleteUsers()">Delete Guest</button>
@@ -99,7 +99,7 @@
             [scrollbarV]="true" [scrollbarH]="true" [rows]="usersList.usersData" [selected]="usersList.selected"
             [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" (select)='onSelect($event)' [scrollbarH]="true">
 
-            <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true" style="width:10px ;">
+            <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true" [width]="5">
                 <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
                     let-selectFn="selectFn">
                     <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected"
@@ -113,11 +113,16 @@
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="Card Number" *ngIf="hasRole('show_card_number')">
+            <ngx-datatable-column name="" *ngIf="hasRole('show_card_image')" [width]="25">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    <div style="float: left;"><img class="profile-img" src="../../../assets/profile.png" alt="image">
-                    </div>
-                    <div style="float: left; color: black; margin-top: 3px; margin-left: 5px;">{{row.cardNumber}}</div>
+                    <div style="float: left;" ngIf="hasRole('show_card_image')"><img class="profile-img" src="../../../assets/profile.png" alt="image"> </div>
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Card Number" [width]="20">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div style="float: left;" ngIf="hasRole('show_card_image')"><img class="profile-img" src="../../../assets/profile.png" alt="image"> </div>
+                    <div ngIf="hasRole('show_card_number')" style="float: left; color: black; margin-top: 3px; margin-left: 5px;">{{row.cardNumber}}</div>
                 </ng-template>
             </ngx-datatable-column>
 
@@ -144,7 +149,7 @@
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="Group">
+            <ngx-datatable-column name="Group" *ngIf="hasRole('show_ group')">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.group.name}}
                 </ng-template>
@@ -168,7 +173,7 @@
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="Discount Rate">
+            <ngx-datatable-column name="Discount Rate" *ngIf="hasRole('show_discount')">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     <label *ngIf="row.group.name != ''">{{row.group.simphonyDiscount.discountRate}} %</label>
                 </ng-template>

@@ -1,27 +1,36 @@
-<h1 mat-dialog-title>New Guest</h1>
+<div class="dialog-body">
+    <h1 mat-dialog-title>New Guest</h1>
 
-<div class="row" style="margin-bottom: 0px;">
-    <!-- border-right: 1px solid rgb(197, 197, 197) -->
-    <div class="two-column" style=" width: 45%; margin-right: 2%; ; float: left; padding-top: 100px;">
-        <div class="card-dive" style="padding-top: 5%;" *ngIf="!swiped">
-            <img style="width:150px; height: 108px; padding-top: 50px; padding-left: 10px;" src="../../../assets/1200px-Universal_Contactless_Card_Symbol.svg.png">
-            <br><br>
-            <span *ngIf="!swiped" style="font-weight: bolder; font-size: larger;">Swipe The Card</span> 
+    <div class="row" style="margin-bottom: 0px;">
+        <div class="two-column cardSide">
+            <div class="card-div" *ngIf="!swiped">
+                <img class="image_style" src="../../../assets/1200px-Universal_Contactless_Card_Symbol.svg.png">
+                <br><br>
+                <span *ngIf="!swiped" style="font-weight: bolder; font-size: larger;">Swipe The Card</span>
+            </div>
+            <div class="card-div" *ngIf="swiped">
+                <img class="image_style" src="../../../assets/1200px-Universal_Contactless_Card_Symbol.png">
+                <br><br>
+                <span *ngIf="swiped" style="font-weight: bolder; font-size: larger;">Card Number : <span
+                        style="color: #2da525;"> {{cardNumber}}</span></span>
+            </div>
+            <div class="row buttonsDiv">
+                <div mat-dialog-actions>
+                    <button mat-button cdkFocusInitial (click)="onSaveClick()">
+                        <label [hidden]="inUpdate">Save</label>
+                        <label [hidden]="!inUpdate">Update</label>
+                    </button>
+                    <button mat-button (click)="onNoClick()">Cancel</button>
+                </div>
+            </div>
         </div>
-        <div class="card-dive" style="padding-top: 5%;" *ngIf="swiped">
-            <img style="width:150px; height: 108px; padding-top: 50px; padding-left: 10px;" src="../../../assets/1200px-Universal_Contactless_Card_Symbol.png">
-            <br><br>
-            <span *ngIf="swiped" style="font-weight: bolder; font-size: larger;">Card Number : <span style="color: #2da525;"> {{cardNumber}}</span></span>
-        </div>
-    </div>
-    <div class="two-column" style="width: 52%; margin-right: 2%; float: right;" >
+        <div class="two-column formSide">
+            <mat-tab-group>
+                <mat-tab label="Main Guest" style="background-color: rgb(167, 167, 167);">
+                    <div mat-dialog-content>
+                        <form [formGroup]="form" class="my-form">
 
-        <mat-tab-group>
-            <mat-tab label="Main Guest" style="background-color: rgb(167, 167, 167);">
-                <div mat-dialog-content >
-                    <form [formGroup]="form" class="my-form">
-
-                        <div class="form-group">
+                        <div class="form-group" *ngIf="hasRole('show-form-groups')">
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="Group" formControlName="group" maxlength="50">
                                 <mat-error *ngIf="form.controls.name.hasError('required')">
@@ -33,69 +42,70 @@
                             </mat-form-field>
                         </div>
 
-                        <div class="form-group">
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Price" formControlName="balance" maxlength="50">
-                                <mat-error *ngIf="form.controls.name.hasError('required')">
-                                    Frist Name is required.
-                                </mat-error>
-                                <mat-error *ngIf="form.controls.name.hasError('maxlength')">
-                                    Frist Name is to long.
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
+                            <div class="form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Price" formControlName="balance" maxlength="50">
+                                    <mat-error *ngIf="form.controls.name.hasError('required')">
+                                        Frist Name is required.
+                                    </mat-error>
+                                    <mat-error *ngIf="form.controls.name.hasError('maxlength')">
+                                        Frist Name is to long.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
 
-                        <h4 mat-dialog-title style="text-align: left; font-size: small;">Optional Fields</h4>
+                            <h4 mat-dialog-title style="text-align: left; font-size: small;">Optional Fields</h4>
 
-                        <div class="form-group">
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Name" formControlName="name" maxlength="50">
-                                <mat-error *ngIf="form.controls.name.hasError('required')">
-                                    Frist Name is required.
-                                </mat-error>
-                                <mat-error *ngIf="form.controls.name.hasError('maxlength')">
-                                    Frist Name is to long.
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-                
-                        <div class="form-group">
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Number Of Accompanied Guest" formControlName="accompanied" maxlength="50" [(ngModel)]="accompiedNumber">
-                                <mat-error *ngIf="form.controls.name.hasError('required')">
-                                    Frist Name is required.
-                                </mat-error>
-                                <mat-error *ngIf="form.controls.name.hasError('maxlength')">
-                                    Frist Name is to long.
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-        
-                        <div class="form-group">
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Email" formControlName="email">
-                                <mat-error *ngIf="form.controls.email.hasError('pattern')">
-                                    Email must be well formed.
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-        
-                        <div class="form-group">
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Moblie" formControlName="mobile" maxlength="11">
-                                <mat-error *ngIf="form.controls.mobile.hasError('required')">
-                                    Moblie is required.
-                                </mat-error>
-                                <mat-error *ngIf="form.controls.mobile.hasError('maxlength')">
-                                    Moblie is to long.
-                                </mat-error>
-                                <mat-error *ngIf="form.controls.mobile.hasError('pattern')">
-                                    Mobile must be well formed.
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-        
-                        <!-- <div class="form-group">
+                            <div class="form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Name" formControlName="name" maxlength="50">
+                                    <mat-error *ngIf="form.controls.name.hasError('required')">
+                                        Frist Name is required.
+                                    </mat-error>
+                                    <mat-error *ngIf="form.controls.name.hasError('maxlength')">
+                                        Frist Name is to long.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Number Of Accompanied Guest"
+                                        formControlName="accompanied" maxlength="50" [(ngModel)]="accompiedNumber">
+                                    <mat-error *ngIf="form.controls.name.hasError('required')">
+                                        Frist Name is required.
+                                    </mat-error>
+                                    <mat-error *ngIf="form.controls.name.hasError('maxlength')">
+                                        Frist Name is to long.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Email" formControlName="email">
+                                    <mat-error *ngIf="form.controls.email.hasError('pattern')">
+                                        Email must be well formed.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Moblie" formControlName="mobile" maxlength="11">
+                                    <mat-error *ngIf="form.controls.mobile.hasError('required')">
+                                        Moblie is required.
+                                    </mat-error>
+                                    <mat-error *ngIf="form.controls.mobile.hasError('maxlength')">
+                                        Moblie is to long.
+                                    </mat-error>
+                                    <mat-error *ngIf="form.controls.mobile.hasError('pattern')">
+                                        Mobile must be well formed.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- <div class="form-group">
                             <mat-form-field class="example-full-width">
                                 <mat-select matInput id="groups" name="groups" placeholder="Generic Group" formControlName="group">
                                     <mat-option></mat-option>
@@ -103,136 +113,84 @@
                                 </mat-select>
                             </mat-form-field>
                         </div> -->
-        
-                        <div class="form-group">
-                            <mat-checkbox class="example-margin" style="padding-right: 10px;">
-                                <label> Send SMS </label>
-                            </mat-checkbox>
-        
-                            <mat-checkbox class="example-margin" style="padding-right: 10px;">
-                                <label> Send Email </label>
-                            </mat-checkbox>
-        
-                            <mat-checkbox class="example-margin" style="padding-right: 10px;">
-                                <label> Print </label>
-                            </mat-checkbox>
-                        </div>
-        
-                        <div class="form-group" style="padding-top: 5%;">
-                            <input #csvInput hidden="true" type="file" onclick="this.value=null"
-                                (change)="csvInputChange($event)" accept="image/*" />
-                            <button class="form-button" mat-flat-button color="primary" (click)="csvInput.click()">
-                                <img class="form-b-img" src="../../../assets/photos.png">
-                                Choose Image</button>
-                            <div [hidden]="!imageUploded">Image uploaded successfully.</div>
-                        </div>
-        
-                    </form>
-                </div>
-            </mat-tab>
-            <mat-tab label="Accompanied Guests" style="background-color: rgb(167, 167, 167);" *ngIf="accompiedNumber != 0">
-                <div mat-dialog-content >
-                    <div *ngFor="let accompiedForm of accompiendForms">
-                       {{ accompiendForms.length}}
-                    <form [formGroup]="accompiedForm" class="my-form" >
-                        <h4 mat-dialog-title style="text-align: left; font-size: small;">Guest Number One</h4>
 
-                        <div class="form-group">
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Name" formControlName="name" maxlength="50">
-                                <mat-error *ngIf="form.controls.name.hasError('required')">
-                                    Frist Name is required.
-                                </mat-error>
-                                <mat-error *ngIf="form.controls.name.hasError('maxlength')">
-                                    Frist Name is to long.
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
+                            <div class="form-group">
+                                <mat-checkbox class="example-margin" style="padding-right: 10px;">
+                                    <label> Send SMS </label>
+                                </mat-checkbox>
 
-                        <div class="form-group">
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Email" formControlName="email">
-                                <mat-error *ngIf="form.controls.email.hasError('pattern')">
-                                    Email must be well formed.
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-        
-                        <div class="form-group">
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Moblie" formControlName="mobile" maxlength="11">
-                                <mat-error *ngIf="form.controls.mobile.hasError('required')">
-                                    Moblie is required.
-                                </mat-error>
-                                <mat-error *ngIf="form.controls.mobile.hasError('maxlength')">
-                                    Moblie is to long.
-                                </mat-error>
-                                <mat-error *ngIf="form.controls.mobile.hasError('pattern')">
-                                    Mobile must be well formed.
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
+                                <mat-checkbox class="example-margin" style="padding-right: 10px;">
+                                    <label> Send Email </label>
+                                </mat-checkbox>
 
-                    </form>
-                </div>
-                </div>
-            </mat-tab>
-        </mat-tab-group>
+                                <mat-checkbox class="example-margin" style="padding-right: 10px;">
+                                    <label> Print </label>
+                                </mat-checkbox>
+                            </div>
+
+                            <div class="form-group" style="padding-top: 5%;">
+                                <input #csvInput hidden="true" type="file" onclick="this.value=null"
+                                    (change)="csvInputChange($event)" accept="image/*" />
+                                <button class="form-button" mat-flat-button color="primary" (click)="csvInput.click()">
+                                    <img class="form-b-img" src="../../../assets/photos.png">
+                                    Choose Image</button>
+                                <div [hidden]="!imageUploded">Image uploaded successfully.</div>
+                            </div>
+
+                        </form>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Accompanied Guests" style="background-color: rgb(167, 167, 167);"
+                    *ngIf="accompiedNumber != 0">
+                    <div mat-dialog-content>
+                        <div *ngFor="let accompiedForm of accompiendForms">
+                            {{ accompiendForms.length}}
+                            <form [formGroup]="accompiedForm" class="my-form">
+                                <h4 mat-dialog-title style="text-align: left; font-size: small;">Guest Number One</h4>
+
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Name" formControlName="name" maxlength="50">
+                                        <mat-error *ngIf="form.controls.name.hasError('required')">
+                                            Frist Name is required.
+                                        </mat-error>
+                                        <mat-error *ngIf="form.controls.name.hasError('maxlength')">
+                                            Frist Name is to long.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Email" formControlName="email">
+                                        <mat-error *ngIf="form.controls.email.hasError('pattern')">
+                                            Email must be well formed.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Moblie" formControlName="mobile" maxlength="11">
+                                        <mat-error *ngIf="form.controls.mobile.hasError('required')">
+                                            Moblie is required.
+                                        </mat-error>
+                                        <mat-error *ngIf="form.controls.mobile.hasError('maxlength')">
+                                            Moblie is to long.
+                                        </mat-error>
+                                        <mat-error *ngIf="form.controls.mobile.hasError('pattern')">
+                                            Mobile must be well formed.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+
+        </div>
 
     </div>
-
 </div>
-<div class="row" style="margin-top: 0px; margin-left: 40%;">
-    <div mat-dialog-actions>
-        <button mat-button cdkFocusInitial (click)="onSaveClick()">
-            <label [hidden]="inUpdate">Save</label>
-            <label [hidden]="!inUpdate">Update</label>
-        </button>
-        <button mat-button (click)="onNoClick()">Cancel</button>
-    </div>
-</div>
-
-
-
-<!--
-
-                        <h4 mat-dialog-title style="text-align: left; font-size: small;">Guest Number Two</h4>
-
-                        <div class="form-group">
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Name" formControlName="name" maxlength="50">
-                                <mat-error *ngIf="form.controls.name.hasError('required')">
-                                    Frist Name is required.
-                                </mat-error>
-                                <mat-error *ngIf="form.controls.name.hasError('maxlength')">
-                                    Frist Name is to long.
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-
-                        <div class="form-group">
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Email" formControlName="email">
-                                <mat-error *ngIf="form.controls.email.hasError('pattern')">
-                                    Email must be well formed.
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-        
-                        <div class="form-group">
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Moblie" formControlName="mobile" maxlength="11">
-                                <mat-error *ngIf="form.controls.mobile.hasError('required')">
-                                    Moblie is required.
-                                </mat-error>
-                                <mat-error *ngIf="form.controls.mobile.hasError('maxlength')">
-                                    Moblie is to long.
-                                </mat-error>
-                                <mat-error *ngIf="form.controls.mobile.hasError('pattern')">
-                                    Mobile must be well formed.
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-        
-
--->

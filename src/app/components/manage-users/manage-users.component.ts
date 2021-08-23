@@ -202,7 +202,6 @@ export class ManageUsersComponent implements OnInit {
   }
 
   updateUserDialog(){
-
     let dialogRef
     let isGeneric = this.usersList.selected[0].isGeneric;
     isGeneric = false;

@@ -80,7 +80,7 @@
         </div>
 
         <div class="five-column">
-            <span class="filterTitle groupTitle">Group</span>
+            <span class="filterTitle">Group</span>
             <select class="custom-select" [(ngModel)]="selectedGroupId">
                 <option value="" selected>All Groups</option>
                 <option  [ngValue]="group.id"  *ngFor="let group of groups">{{group.name}}</option>

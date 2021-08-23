@@ -20,7 +20,7 @@
          [rows]="groupsList.groupsData" [selected]="groupsList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
         (select)='onSelect($event)' [scrollbarH]="true">
     
-            <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
+            <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true" [width]="7">
             <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
             <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
             </ng-template>

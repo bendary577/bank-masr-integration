@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
       this.authenticationService.login(this.user).toPromise().then((res: any) => {
         localStorage.setItem('auth_token',res.access_token);
         localStorage.setItem('refresh_token',res.refresh_token);
-        this.getRoles();
+        this.saveAccountERD();
         // localStorage.setItem('user',JSON.stringify(this.user));
         // this.getFeatures();
         // this.side.refresh();
@@ -94,28 +94,18 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  saveAccountERD() {
-    this.accountService.getAccount().toPromise().then((res: any) => {
-      this.account = res;
-      localStorage.setItem('accountERD',res.erd);
-      localStorage.setItem('account', JSON.stringify(res));
-      localStorage.setItem('features', JSON.stringify(res["features"]));
-    }).catch(err => {
-      console.error(err);
-    });
-  }
 
   getRoles() {
     this.accountService.getRoles("asfas", true).toPromise().then((res: any) =>{
       localStorage.setItem('user', JSON.stringify(res["data"]));
       localStorage.setItem('roles', JSON.stringify(res["data"]["roles"]));
+      
       this.loading = false;
       this.side.setshouldRun(true);
       this.side.shouldRun = true;
       this.side.getSyncJobTypes();
       this.side.getOperationTypes();
       this.side.getApplication();
-      this.saveAccountERD();
       this.router.navigate([Constants.WELCOME_PAGE]);
       this.spinner.hide();  
     }).catch(err => { 
@@ -123,6 +113,18 @@ export class LoginComponent implements OnInit {
     })
   }
 
+  saveAccountERD() {
+    this.accountService.getAccount().toPromise().then((res: any) => {
+      this.account = res;
+      localStorage.setItem('accountERD',res.erd);
+      localStorage.setItem('account', JSON.stringify(res));
+      localStorage.setItem('features', JSON.stringify(res["features"]));
+      this.getRoles(); 
+
+    }).catch(err => {
+      console.error(err);
+    });
+  }
   /*
   getFeatures() {
     this.accountService.getAccountFeature(this.account.id).then((res: any) => {

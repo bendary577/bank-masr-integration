@@ -32,11 +32,11 @@ export class SideNaveComponent implements OnDestroy,OnInit {
   applications: Application[] = [];
   reports = [];
   generalSettings: GeneralSettings;
-  account: Account;
-  accountFeatures: [];
-  userRoles = [];
-  userFeature = [];
-  accountCredentials: [] = [];
+  public account: Account;
+  public accountFeatures: [];
+  public static userRoles = [];
+  public userFeature = [];
+  public accountCredentials: [] = [];
   simphonyLocations: [];
   costCenterAccountMapping: [];
   suppliers: [];
@@ -95,14 +95,15 @@ export class SideNaveComponent implements OnDestroy,OnInit {
   }
 
   ngOnInit() {
-    console.log(this.shouldRun)
 
     if(localStorage.getItem("user") != undefined || localStorage.getItem("user") != null){
       this.account = JSON.parse(localStorage.getItem("account"));
       this.userFeature = JSON.parse(localStorage.getItem("account"));
       this.user = JSON.parse(localStorage.getItem("user"))
-      this.userRoles = JSON.parse(localStorage.getItem("roles"))
+      SideNaveComponent.userRoles = JSON.parse(localStorage.getItem("roles"))
      }
+
+     console.log(SideNaveComponent.userRoles)
 
     this.mobileQuery.removeListener(this._mobileQueryListener);
 
@@ -272,14 +273,13 @@ export class SideNaveComponent implements OnDestroy,OnInit {
 
 
   hasRole(refernce): Boolean{
-    for(let i = 0 ; i < this.userRoles.length ; i++){
-      if(this.userRoles[i]["reference"] == refernce){
+    for(let i = 0 ; i < SideNaveComponent.userRoles .length ; i++){
+      if(SideNaveComponent.userRoles[i]["reference"] == refernce){
         return true;
       }
     }
     return false;
   }
-
 
   setshouldRun(shouldRun: boolean) {
     this.shouldRun = shouldRun;

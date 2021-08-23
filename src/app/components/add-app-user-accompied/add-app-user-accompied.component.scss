@@ -3,7 +3,7 @@
 .two-column{
     float: right;
     width: 50%; 
-    height: 100%;
+    height: 90%;
     text-align: center;
   }
 
@@ -11,11 +11,52 @@
     display: flex;
   }
 
-  .mat-dialog-content{
-
+.mat-dialog-content{
     overflow: hidden;
   }
 
 .mat-tab-labels {
     background-color: rgb(182, 217, 248);
+}
+
+ ::ng-deep .mat-dialog-container {
+    height: 700px !important;
+}
+
+.form-group{
+  margin-bottom: 0px;
+}
+
+.image_style{
+  width:130px; 
+  height: 108px; 
+  padding-top: 50px; 
+  padding-left: 10px;
+}
+
+.card_div{
+  padding-top: 5%;
+}
+
+.cardSide{
+  // padding-top: 30%;
+  width: 45%; 
+  float: left;
+}
+
+.buttonsDiv{
+  height: 50px;
+  margin-left: 15px;
+  margin-top: 100%;
+}
+
+.dialog-body{
+  overflow: hidden !important;   
+  height: 100%;
+}
+
+.form-side{
+  width: 52%; 
+  margin-right: 2%; 
+  float: right;
 }
