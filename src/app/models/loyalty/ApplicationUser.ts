@@ -10,8 +10,9 @@ export class ApplicationUser {
     public creationDate: string;
     public lastUpdate: string;
     public deleted: boolean;
-
+    public expire;
     public wallet;
+    public mobile;
     public accompanied: [];
 
     public constructor() { }

@@ -1,19 +1,41 @@
 @import "../add-tax/add-tax.component.scss";
+@import "../add-app-group/add-app-group.component.scss";
+
+::ng-deep .mat-form-field-wrapper{
+  margin: 0px !important;
+}
+.accom-guest{
+      form{
+        margin: 0px auto 0px;
+      }
+}
+
+.main-guest{
+
+  ::ng-deep .mat-dialog-content{
+    overflow: hidden !important;
+  }
+
+}
 
 .two-column{
     float: right;
     width: 50%; 
-    height: 90%;
+    height: 100%;
     text-align: center;
+  }
+
+  .formSide{
+    padding-bottom: 10px;
   }
 
   .row{
     display: flex;
   }
 
-.mat-dialog-content{
-    overflow: hidden;
-  }
+// .mat-dialog-content{
+//     overflow: hidden;
+//   }
 
 .mat-tab-labels {
     background-color: rgb(182, 217, 248);
@@ -44,8 +66,12 @@
   float: left;
 }
 
-.buttonsDiv{
-  height: 50px;
+.card-div{
+  height: 70%;
+  margin-top:20px ;
+}
+.buttons-div{
+  height: 20%;
   margin-left: 15px;
   margin-top: 100%;
 }
@@ -58,5 +84,44 @@
 .form-side{
   width: 52%; 
   margin-right: 2%; 
-  float: right;
+  float: right; 
 }
+
+::ng-deep .mat-form-field-label {
+  left: 20px !important;
+  padding-top: 10px !important;
+  color: hsl(0, 0%, 45%) !important;
+}
+
+// ::ng-deep .mat-form-field-label {
+//   position: absolute;
+//   left: 0;
+//   font: inherit;
+//   pointer-events: none;
+//   width: 100%;
+//   white-space: nowrap;
+//   text-overflow: ellipsis;
+//   overflow: hidden;
+//   transform-origin: 0 0;
+//   transition: transform .4s cubic-bezier(.25,.8,.25,1),color .4s cubic-bezier(.25,.8,.25,1),width .4s cubic-bezier(.25,.8,.25,1);
+//   display: none;
+// }
+
+
+// ::ng-deep .mat-empty {
+//   @extend .mat-form-field-label ;
+//   @extend .ng-tns-c71-8 !optional;
+//   @extend .ng-star-inserted !optional;
+// }
+
+// ::ng-deep .ng-tns-c71-9 {
+//   @extend .mat-form-field-label;
+//   @extend .ng-tns-c71-8 !optional;
+//   @extend .ng-star-inserted !optional;
+// }
+
+// ::ng-deep .mat-form-field-empty {
+//   @extend .mat-form-field-label ;
+//   @extend .ng-tns-c71-8 !optional;
+//   @extend .ng-star-inserted !optional;
+// }

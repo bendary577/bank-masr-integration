@@ -11,5 +11,18 @@ flex: 1 1 auto;
 
 mat-tab-group {
 padding-top: 70px;
+}
+
+::ng-deep .mat-tab-label{
+    color: #ff6c00 !important;
+    font-weight: bolder !important;
+
+    &:hover{
+        background-color: #d8d8d8 !important;
+    }
 
 }
+::ng-deep .mat-tab-label-active {
+    background-color: #d8d8d8 !important;
+}
+

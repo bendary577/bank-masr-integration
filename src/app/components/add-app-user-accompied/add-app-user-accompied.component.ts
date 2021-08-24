@@ -1,8 +1,7 @@
-import { Component, Inject, Input, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewChecked, Component, Inject, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser';
-import { Company } from 'src/app/models/loyalty/Company';
 import { AccompiendGuest } from 'src/app/models/loyalty/AccompiendGuest';
 import { Group } from 'src/app/models/loyalty/Group';
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
@@ -12,9 +11,10 @@ import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
   templateUrl: './add-app-user-accompied.component.html',
   styleUrls: ['./add-app-user-accompied.component.scss']
 })
-export class AddAppUserAccompiedComponent implements OnInit {
+export class AddAppUserAccompiedComponent implements OnInit  {
   public form: FormGroup;
   public accompiendForms: FormGroup[] = [];
+  accompiendGuests= [];
   user = new ApplicationUser();
   selectedGroup: String;
   srcResult: any;
@@ -24,8 +24,8 @@ export class AddAppUserAccompiedComponent implements OnInit {
   qrcodeMethod = ["Email", "SMS", "Print"];
   swiped=false;
   cardNumber = 0;
-  @Input() accompiedNumber = 1 ;
-
+  // @ViewChild('ChildViewComponent') accompiedNumber = 2 ;
+  @Input() accompiedNumber = 0 ;
   constructor(private formBuilder: FormBuilder, public snackBar: MatSnackBar, 
     public dialogRef: MatDialogRef<AddAppUserAccompiedComponent>, private loyaltyService: LoyaltyService,
     @Inject(MAT_DIALOG_DATA) public data) { }
@@ -45,6 +45,7 @@ export class AddAppUserAccompiedComponent implements OnInit {
         mobile: ['', [Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
         group: this.group,
         balance:[this.user.wallet.price],
+        expire: [this.user.expire],
         accompanied:[this.user.accompanied.length],
       });
 
@@ -56,28 +57,18 @@ export class AddAppUserAccompiedComponent implements OnInit {
       this.form = this.formBuilder.group({
       group: this.group,
       balance:[100],
+      expire:[24],
       name: [''],
       email: [''],
       mobile: [''], 
       accompanied:[1],
       });
-
-      
-      for(var i = 0 ; i < this.form.controls.accompanied.value; i++){
-
-        let accompiendForm:  FormGroup;
-
-        accompiendForm = this.formBuilder.group({
-          name: [''],
-          email: [""],
-          mobile: [''],
-        })
-
-        this.accompiendForms.push(accompiendForm);
-      }
-    }
   }
+}
 
+  // ngAfterViewChecked(){
+  //   console.log("AAA")
+  // }
   getGenericGroup(){
     this.loyaltyService.getGenericGroup().toPromise().then((res: any) => {
       this.group = res;
@@ -117,38 +108,67 @@ export class AddAppUserAccompiedComponent implements OnInit {
         panelClass:"my-snack-bar-fail"
       });
       console.log(this.form.getError)
+    }else if (this.cardNumber == 0 || this.cardNumber == undefined || this.cardNumber == null){
+      this.snackBar.open("Please enter the card number" , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
     }else{
 
-      let accompiendGuest = ApplicationUser;
+      let accompiendGuest = new AccompiendGuest();
       
       for(let i = 0 ; i < this.accompiendForms.length ; i++){
-        // accompiendGuest.name =  this.accompiendForms[i].controls.name.value;
+        accompiendGuest.name =  this.accompiendForms[i].controls.name.value;
+        accompiendGuest.email =  this.accompiendForms[i].controls.email.value;
+        accompiendGuest.mobile =  this.accompiendForms[i].controls.mobile.value;
+
+        this.accompiendGuests.push(accompiendGuest);
       }
+
       this.dialogRef.close({
         name: this.form.controls.name.value,
         email: this.form.controls.email.value,
         mobile: this.form.controls.mobile.value,
         balance: this.form.controls.balance.value,
+        expire: this.form.controls.expire.value,
         group: this.group,
         image: this.srcResult,
-        accompiendUsers: [new AccompiendGuest("Bassel","faisal" )]
+        cardCode:this.cardNumber,
+        accompiendUsers: this.accompiendGuests
       });
     }
   }
 
-  giveValues(){
-
+   addAccompiend() {
+    this.accompiedNumber = this.accompiedNumber + 1;
+    let accompiendForm:  FormGroup;
+    accompiendForm = this.formBuilder.group({
+        name: ['', [Validators.maxLength, Validators.required]], 
+        email: ['', [Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"), Validators.required]],
+        mobile: ['', [Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"), Validators.required]], 
+    })
+    this.accompiendForms.push(accompiendForm);
   }
 
-  hasRole(refernce){
 
-  }
+   giveValues(){}
 
-  ngOnChanges(changes: SimpleChanges) {
+  hasRole(refernce){ }
+
+  // @Override
+  // void ngOnChanges(Map<String, SimpleChange> changes) {
+  //   print(changes);
+  // }
+
+  onChanges(changes: SimpleChanges) {
 
     console.log("New Test")
     // this.doSomething(changes.categoryId.currentValue);
     // You can also use categoryId.previousValue and 
     // categoryId.firstChange for comparing old and new values
   }
+
 }
+
+

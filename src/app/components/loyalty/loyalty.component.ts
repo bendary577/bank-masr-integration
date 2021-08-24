@@ -20,7 +20,6 @@ export class LoyaltyComponent implements OnInit {
   }
 
   hasRole(role): Boolean{
-    console.log(this.sideNav.hasRole(role))
    return this.sideNav.hasRole(role);
   }
 

@@ -4,7 +4,6 @@ import { TransactionsItems } from '../opi-transactions/transactions-items';
 import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, Color } from 'ng2-charts';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { MatDialog } from '@angular/material';
-import { AddAppUserComponent } from '../add-app-user/add-app-user.component';
 import { FilterComponent } from '../filter/filter.component';
 
 @Component({

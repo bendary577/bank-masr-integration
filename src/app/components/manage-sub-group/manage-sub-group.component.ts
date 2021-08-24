@@ -132,7 +132,7 @@ export class ManageSubGroupComponent implements OnInit {
 
   addSubGroupDialog(){
     const dialogRef = this.dialog.open(AddAppGroupComponent, {
-      width: '550px',
+      width: '420px',
       data: {inParent: this.inParent, parentGroup: this.data.storage}
   });
 
@@ -182,7 +182,7 @@ export class ManageSubGroupComponent implements OnInit {
 
   updateSubGroupDialog(){
     const dialogRef = this.dialog.open(AddAppGroupComponent, {
-      width: '550px',
+      width: '420px',
       data: {group: this.groupsList.selected[0],
               inParent: this.inParent, parentGroup: this.groupsList.selected[0].parentGroup}
   });

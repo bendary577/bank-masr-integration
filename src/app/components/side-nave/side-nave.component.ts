@@ -103,8 +103,6 @@ export class SideNaveComponent implements OnDestroy,OnInit {
       SideNaveComponent.userRoles = JSON.parse(localStorage.getItem("roles"))
      }
 
-     console.log(SideNaveComponent.userRoles)
-
     this.mobileQuery.removeListener(this._mobileQueryListener);
 
     if (this.shouldRun == true) {
@@ -272,9 +270,9 @@ export class SideNaveComponent implements OnDestroy,OnInit {
   }
 
 
-  hasRole(refernce): Boolean{
+  hasRole(reference): Boolean{
     for(let i = 0 ; i < SideNaveComponent.userRoles .length ; i++){
-      if(SideNaveComponent.userRoles[i]["reference"] == refernce){
+      if(SideNaveComponent.userRoles[i]["reference"] == reference){
         return true;
       }
     }
