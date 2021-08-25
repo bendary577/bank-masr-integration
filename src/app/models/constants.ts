@@ -315,6 +315,8 @@ export class Constants {
     environment.apiHost + '/transaction/getTotalSpendTransactions'
   static GET_TOTAL_TRANS_INRANG_URL =
     environment.apiHost + '/transaction/getTransactionsInRange'
+    static CHARGE_WALLET = environment.apiHost  + '/wallet/chargeWallet';
+
 
   //////////////////////////////////////////////// Manage Application  //////////////////////////////////////////////
 

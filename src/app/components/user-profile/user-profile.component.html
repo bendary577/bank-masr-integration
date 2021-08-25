@@ -1,4 +1,4 @@
-<div style="margin-top: 10px;">
+<div style="margin-top: 80px;">
     <div class="right-col">
         <div class="header">
             <button mat-flat-button class="button-back" (click)="backClicked()">Go Back</button>
@@ -27,12 +27,12 @@
                                 <td> </td>
                                 <td class="res" style="float: right;"> {{group.name}}</td>
                             </tr>
-                            <tr>
+                            <tr *ngIf="hasRole('show_discount')">
                                 <td class="title" style="float: left;">Discount</td>
                                 <td> </td>
                                 <td class="res" style="float: right;"> {{simphonyDiscount.discountRate}} %</td>
                             </tr>
-                            <tr>
+                            <tr *ngIf="hasRole('show_discount')">
                                 <td class="title" style="float: left;">Discount ID</td>
                                 <td> </td>
                                 <td class="res" style="float: right;"> {{simphonyDiscount.discountId}}</td>
@@ -43,8 +43,6 @@
 
                                 <td class="res" style="float: right;">
                                     Active
-                                    <!-- <h1 *ngIF="!user.deleted">Active</h1>
-                                    <h1 *ngIF="user.deleted">Deleted</div> -->
                                 </td>
                             </tr>
                             <tr>
@@ -164,11 +162,11 @@
                 </mat-card>
             </div>
             <div *ngIf="voucherData.length != 0">
-                <ngx-datatable class="material" [loadingIndicator]="transactionsList.showLoading"
-                    [messages]="transactionsList.messages"
+                <ngx-datatable class="material" [loadingIndicator]="walletHistoryList.showLoading"
+                    [messages]="walletHistoryList.messages"
                     style="border-radius:1%; width: 100%; height: 310px; display: inline-block;" [sortType]="'multi'"
                     [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"
-                    [scrollbarH]="true" [rows]="voucherData" [selected]="transactionsList.selected"
+                    [scrollbarH]="true" [rows]="walletHistoryList.walletHistoryData" [selected]="walletHistoryList.selected"
                     [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" [scrollbarH]="true">
 
                     <ngx-datatable-column name="Voucher Creation Date">

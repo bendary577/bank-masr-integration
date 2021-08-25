@@ -2,12 +2,15 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Data } from 'src/app/models/data';
 import { Transactions } from '../opi-transactions/transactions';
 import { Location } from '@angular/common';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { EditWalletComponent } from '../edit-wallet/edit-wallet.component';
 import { HistoryItems } from './history-items';
 import { AddAppUserComponent } from '../add-app-user/add-app-user.component';
-import { VoucherHistoryItems } from './voucher-history-items';
 import { VoucherHistory } from './voucher-history';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
+import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-user-profile',
@@ -32,7 +35,7 @@ export class UserProfileComponent implements OnInit {
   user: any = { name: "Bassel", email: "bassel@entrepreware.com", group: "" };
   revenuCenters = ["No Revenue Centers"];
 
-  transactionsList = {
+  walletHistoryList = {
     paginateData: true as boolean,
     offset: 0,
     messages: {
@@ -47,11 +50,11 @@ export class UserProfileComponent implements OnInit {
     pagesFilter: [10, 25, 50, 75, 100],
     showLoading: false,
     inputSearch: '' as string,
-    transactionsData: [] as Transactions[]
+    walletHistoryData: [] as Transactions[]
   };
 
-  constructor(public data: Data, private _location: Location,
-    public dialog: MatDialog) { }
+  constructor(public data: Data, private _location: Location, private sideNav: SideNaveComponent, private loyaltyService : LoyaltyService,
+    private sppiner : NgxSpinnerService, private snackBar  : MatSnackBar, public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -63,17 +66,6 @@ export class UserProfileComponent implements OnInit {
       this.group = this.user["group"];
       this.simphonyDiscount = this.group["simphonyDiscount"];
     }
-
-
-    // let btn = document.querySelector('.mouse-cursor-gradient-tracking');
-    // btn.addEventListener('mousemove', e => {
-    //   let rect = e.target.getBoundingClientRect();
-    //   let x = e.clientX - rect.left;
-    //   let y = e.clientY - rect.top;
-    //   btn.style.setProperty('--x', x + 'px');
-    //   btn.style.setProperty('--y', y + 'px');
-    // });
-
   }
 
   getVoucherData(newRes) {
@@ -82,9 +74,7 @@ export class UserProfileComponent implements OnInit {
         voucherDate: "2021-10-06", totalAmount: Number(newRes.amount),
         voucher: "756787237523", creator: "Kareem",
       });
-
       this.voucherCode = "756787237523";
-
   }
 
   chargeWallet(func) {
@@ -94,28 +84,38 @@ export class UserProfileComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(res => {
-      if (res) {
-        if (func == 'add') {
-          this.credit = Number(this.credit) + Number(res.amount);
-          this.getVoucherData(res);
-          this.revenuCenters = ["Restaurant 1" , "Restaurant 2" , "Restaurant 3" , "Restaurant 4"];        } else if (func == 'deduct') {
-          this.credit = Number(this.credit) - Number(res.amount);
-        } else {
-          this.credit = Number(this.credit) + Number(res.amount);
+      if(res) {
 
-          const dialogRef = this.dialog.open(EditWalletComponent, {
-            width: '550px',
-            data: { function: "showVoucher", amount: res.amount }
-          });
+        
 
-          dialogRef.afterClosed().subscribe(newRes => {
-            if (newRes) {
-              this.getVoucherData(newRes);
+        this.loyaltyService.chargeWallet(func, this.user.id , res.name).toPromise().then((result: any) => {
+            this.walletHistoryList.showLoading = true;
+            this.snackBar.open("User updated successfully.", null, {
+              duration: 2000,
+              horizontalPosition: 'center',
+              panelClass : "my-snack-bar-success"
+            });
+          }).catch(err => {
+
+            let message = "";
+            if(err.status === 401){
+              message = ErrorMessages.SESSION_EXPIRED;
+              this.sideNav.Logout();
+            }else if(err.error.message){
+              message = err.error.message;
+            }else if(err.message){
+              message = ErrorMessages.FAILED_TO_SAVE_CONFIG
             }
-          });
-        }
+
+            this.snackBar.open(message , null, {
+              duration: 3000,
+              horizontalPosition: 'center',
+              panelClass:"my-snack-bar-fail"
+            });
+          })
       }
     })
+
   }
 
   addRevenueCenter() {
@@ -220,6 +220,9 @@ export class UserProfileComponent implements OnInit {
     this.openFilter = false;
   }
 
+  hasRole(reference): Boolean{
+    return this.sideNav.hasRole(reference);
+  }
 
   // showSuccess() {
   //   this.toastr.success('Hello world!', 'Toastr fun!');

@@ -2,7 +2,7 @@
 
     <h1 *ngIf="inCharge" mat-dialog-title>Charge Wallet</h1>
     <h1 *ngIf="inDeduct" mat-dialog-title>Deduct From Wallet</h1>
-    <h1 *ngIf="generateVoucher" mat-dialog-title>Generate Voucher</h1>
+    <!-- <h1 *ngIf="generateVoucher" mat-dialog-title>Generate Voucher</h1> -->
 
     <div class="row">
         <div mat-dialog-content>
@@ -23,9 +23,9 @@
                 </div>
                 <div class="row" *ngIf="inCharge">
                     <div class="list-group" >
-                        <label class="list-group-item" *ngFor="let revenue of revenuCenters">
+                        <label class="list-group-item" *ngFor="let revenue of revenueCenters">
                             <input class="form-check-input me-1" type="checkbox">
-                            {{revenue}}
+                            {{revenue.revenueCenter}}
                         </label>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
         <button mat-button cdkFocusInitial (click)="onSaveClick()">
             <label [hidden]="!inCharge ">Charge</label>
             <label [hidden]="!inDeduct">Deduct</label>
-            <label [hidden]="!generateVoucher">Generate</label>
+            <!-- <label [hidden]="!generateVoucher">Generate</label> -->
         </button>
         <button mat-button (click)="onNoClick()"> Cancel </button>
     </div>
