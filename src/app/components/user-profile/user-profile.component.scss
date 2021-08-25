@@ -1,4 +1,5 @@
 @import "../approved-invoices-infor/approved-invoices-infor.component.scss";
+@import "../operations/opera-payments/opera-payments.component.scss";
 
 h3{
   margin:auto;
@@ -10,6 +11,12 @@ h3{
   font-family: Arial, Helvetica, sans-serif;
   height: auto;
   width: 80%;
+  background-color: #ffddb5 !important;
+  color: #000000;
+}
+
+h2{
+  font-size: 20px;
 }
 
 hr{
@@ -32,9 +39,9 @@ hr{
 }
 
 .button-back {
-  color: #ffffff;
+  color: #000000;
   float: left;
-  background-color: rgb(59, 98, 182)!important;
+  background-color: #ffddb5 !important;
 }
 
 .user-profile{
@@ -42,12 +49,16 @@ hr{
   margin-top: 25px;
   width: 100%;
   height: 100%;
+
+    .mat-card-content{
+      margin : 20px;
+    }
 }
 
 .user-card{
-  height: 600px;
   text-align: center;
   width: 100%;
+  height: 90%;
   box-shadow:0 0 5px 5px rgb(207, 207, 207);
   border: 1px;
 }
@@ -97,10 +108,10 @@ mat-card{
 }
 
 .user-btn{
-  margin-top: 10%;
+  margin-top: 8%;
   width: 100px;
-  background-color: #3f51b5;
-  color: rgb(255, 255, 255);
+  background-color: #ffddb5;
+  color: rgb(0, 0, 0);
   font-weight: bold;
   font-size: small;
   font-family: Arial, Helvetica, sans-serif;
@@ -135,6 +146,7 @@ mat-card{
   margin-bottom: 4%;
   margin-left: 3%;
   box-shadow:0 0 5px 5px rgb(207, 207, 207);
+  padding-top: 20px;
 } 
 
 
@@ -143,11 +155,18 @@ mat-card{
 }
 
 
+.wallet-revenue{
+  overflow: hidden;
+  padding: 10px;
+}
+
 .list-group{
-  width: 250px;
+  max-width: 100%;
   height: 150px;
   display: inline-block;
   overflow:scroll;
+  overflow-x: hidden;
+  padding-right: 10px;
 }
 
 .list-group-item-header{
@@ -156,9 +175,9 @@ mat-card{
   font-weight: lighter;
   margin-bottom: 5px;
   margin: auto;
-  color: rgb(252, 252, 252);
-  background-color: #3F51B5 ;
-  display: inline-block;
+  color: #000000;
+  background-color: #ffddb5;
+  font-weight: 500;
 }
 
 .list-group-item{
@@ -210,14 +229,15 @@ mat-card{
   text-align: center;
   margin: auto;
   margin-top: 10px;
-  border-radius:10px 10px 0 0;
-  border: 2px solid rgb(197, 197, 197);
   border-bottom: none;
-  background-color: rgb(255, 255, 255);
-  width: 100%;
+  width: 98%;
   height: 40px;
   font-weight: bold;
   font-size: large;
+  background-color: rgb(255, 255, 255);
+  border-radius:10px 10px 0 0;
+  border: 2px solid #efefef;
+  box-shadow:0 0 3px 3px rgb(226, 226, 226);
 } 
 
 /* Create three equal columns that floats next to each other */
@@ -309,16 +329,19 @@ mat-card{
 .refresh-btn-view{
   text-align: center;
   margin-top: 5px;
-  border: 2px solid rgb(214, 214, 214);
-  background-color: rgb(151, 151, 151);
+  background-color:inherit;
+  border-radius: 100%;
   float: left;
   height: 37px;
+  background-color: #d8d8d8;
+  border: none;
   }
 
 .refresh-img{
   width: 22px;
-  height: 23px; 
+  height: 30px; 
   padding-bottom: 3px;
+  padding-top: 5px;
 }
 
 .mouse-cursor-gradient-tracking {
@@ -352,4 +375,14 @@ mat-card{
 
 .mouse-cursor-gradient-tracking:hover:before {
   --size: 200px;
+}
+
+::ng-deep .mat-raised-button{
+  padding: 0 10px !important;
+  margin-top: 20px;
+}
+
+.empty-box{
+  width: 30%;
+  padding:5%;
 }
