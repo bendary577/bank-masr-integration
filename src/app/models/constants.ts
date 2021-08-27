@@ -311,11 +311,9 @@ export class Constants {
     environment.apiHost + '/transaction/getTransactions'
   static GET_TOP_USERS_URL = environment.apiHost + '/getTopUser'
   static GET_TOP_Groups_URL = environment.apiHost + '/getTopGroups'
-  static GET_TOTAL_SPEND_URL =
-    environment.apiHost + '/transaction/getTotalSpendTransactions'
-  static GET_TOTAL_TRANS_INRANG_URL =
-    environment.apiHost + '/transaction/getTransactionsInRange'
-    static CHARGE_WALLET = environment.apiHost  + '/wallet/chargeWallet';
+  static GET_TOTAL_SPEND_URL = environment.apiHost + '/transaction/getTotalSpendTransactions'
+  static GET_TOTAL_TRANS_INRANG_URL = environment.apiHost + '/transaction/getTransactionsInRange'
+  static CHARGE_WALLET = environment.apiHost  + '/wallet/chargeWallet';
 
 
   //////////////////////////////////////////////// Manage Application  //////////////////////////////////////////////

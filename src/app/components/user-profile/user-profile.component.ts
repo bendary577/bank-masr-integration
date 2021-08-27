@@ -4,13 +4,13 @@ import { Transactions } from '../opi-transactions/transactions';
 import { Location } from '@angular/common';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { EditWalletComponent } from '../edit-wallet/edit-wallet.component';
-import { HistoryItems } from './history-items';
 import { AddAppUserComponent } from '../add-app-user/add-app-user.component';
-import { VoucherHistory } from './voucher-history';
 import { SideNaveComponent } from '../side-nave/side-nave.component';
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { VoucherHistory } from 'src/app/models/wallet/voucher-history';
+import { RevenueCenter } from 'src/app/models/RevenueCenter';
 
 @Component({
   selector: 'app-user-profile',
@@ -19,7 +19,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class UserProfileComponent implements OnInit {
 
-  transactionsData = [];
   voucherData = [];
   voucherCode = "No Vocher Code";
   openFilter = false;
@@ -28,12 +27,12 @@ export class UserProfileComponent implements OnInit {
   field: any;
   fields = ["Revenue Center", "Agent"]
   fieldValues: any;
-  credit = 430;
+  credit = 0;
   voucherHistory = new VoucherHistory();
-  simphonyDiscount: { discountRate: 20, discountId: "10025" }
-  group: any = { name: "Entrepreware IT", simphonyDiscount: "" };
-  user: any = { name: "Bassel", email: "bassel@entrepreware.com", group: "" };
-  revenuCenters = ["No Revenue Centers"];
+  simphonyDiscount;
+  group;
+  user;
+  revenueCenters: RevenueCenter[] = [];
 
   walletHistoryList = {
     paginateData: true as boolean,
@@ -53,19 +52,46 @@ export class UserProfileComponent implements OnInit {
     walletHistoryData: [] as Transactions[]
   };
 
-  constructor(public data: Data, private _location: Location, private sideNav: SideNaveComponent, private loyaltyService : LoyaltyService,
-    private sppiner : NgxSpinnerService, private snackBar  : MatSnackBar, public dialog: MatDialog) { }
+  constructor(public data: Data, private _location: Location, private sideNav: SideNaveComponent, private loyaltyService: LoyaltyService,
+    private sppiner: NgxSpinnerService, private snackBar: MatSnackBar, public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
-    console.log(this.data)
-
     if (this.data != null && this.data.storage != undefined) {
-      localStorage.setItem('userId', this.data.storage.id);
-      this.user = this.data.storage;
-      this.group = this.user["group"];
-      this.simphonyDiscount = this.group["simphonyDiscount"];
+      localStorage.setItem('currentGuest', JSON.stringify(this.data.storage));
     }
+    this.user = JSON.parse(localStorage.getItem('currentGuest'));
+    console.log(this.user)
+    this.calculateParams(this.user);
+    this.group = this.user["group"];
+    this.simphonyDiscount = this.group["simphonyDiscount"];
+
+
+  }
+
+  calculateParams(user) {
+
+    let balance = user.wallet.balance ;
+    for (let i = 0; i < balance.length; i++) {
+      this.credit = this.credit + balance[i]["amount"];
+
+      let revenueCenters = balance.revenueCenters;
+      for (let j = 0; j < revenueCenters.length; j++) {
+          if(this.checkExistance(revenueCenters[i])){
+
+          }
+      }
+    }
+  }
+
+  checkExistance(revenue): Boolean{
+
+    for (let j = 0; j < this.revenueCenters.length; j++) {
+          if(this.revenueCenters[j].revenueCenter == revenue.revenueCenter){
+            return true;
+          }
+      }
+   return true
   }
 
   getVoucherData(newRes) {
@@ -74,7 +100,7 @@ export class UserProfileComponent implements OnInit {
         voucherDate: "2021-10-06", totalAmount: Number(newRes.amount),
         voucher: "756787237523", creator: "Kareem",
       });
-      this.voucherCode = "756787237523";
+    this.voucherCode = "756787237523";
   }
 
   chargeWallet(func) {
@@ -84,35 +110,33 @@ export class UserProfileComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(res => {
-      if(res) {
+      if (res) {
 
-        
+        this.loyaltyService.chargeWallet(func, this.user.id, res.name).toPromise().then((result: any) => {
+          this.walletHistoryList.showLoading = true;
+          this.snackBar.open("User updated successfully.", null, {
+            duration: 2000,
+            horizontalPosition: 'center',
+            panelClass: "my-snack-bar-success"
+          });
+        }).catch(err => {
 
-        this.loyaltyService.chargeWallet(func, this.user.id , res.name).toPromise().then((result: any) => {
-            this.walletHistoryList.showLoading = true;
-            this.snackBar.open("User updated successfully.", null, {
-              duration: 2000,
-              horizontalPosition: 'center',
-              panelClass : "my-snack-bar-success"
-            });
-          }).catch(err => {
+          let message = "";
+          if (err.status === 401) {
+            message = ErrorMessages.SESSION_EXPIRED;
+            this.sideNav.Logout();
+          } else if (err.error.message) {
+            message = err.error.message;
+          } else if (err.message) {
+            message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+          }
 
-            let message = "";
-            if(err.status === 401){
-              message = ErrorMessages.SESSION_EXPIRED;
-              this.sideNav.Logout();
-            }else if(err.error.message){
-              message = err.error.message;
-            }else if(err.message){
-              message = ErrorMessages.FAILED_TO_SAVE_CONFIG
-            }
-
-            this.snackBar.open(message , null, {
-              duration: 3000,
-              horizontalPosition: 'center',
-              panelClass:"my-snack-bar-fail"
-            });
-          })
+          this.snackBar.open(message, null, {
+            duration: 3000,
+            horizontalPosition: 'center',
+            panelClass: "my-snack-bar-fail"
+          });
+        })
       }
     })
 
@@ -186,8 +210,8 @@ export class UserProfileComponent implements OnInit {
   }
 
   refresh() {
-    this.credit = this.credit - 100;
-    this.transactionsData = HistoryItems;
+    // this.credit = this.credit - 100;
+    // this.transactionsData = HistoryItems;
     // location.reload();
   }
 
@@ -201,18 +225,18 @@ export class UserProfileComponent implements OnInit {
 
   onFilterClick(): void {
 
-    this.transactionsData = HistoryItems;
+    // this.transactionsData = HistoryItems;
 
     console.log(this.fromDate)
     if (this.field == "Revenue Center") {
-      console.log(this.transactionsData.filter(xx => xx.revenueCenter === this.fieldValues))
+      // console.log(this.transactionsData.filter(xx => xx.revenueCenter === this.fieldValues))
 
-      this.transactionsData = this.transactionsData.filter(xx => xx.revenueCenter === this.fieldValues);
+      // this.transactionsData = this.transactionsData.filter(xx => xx.revenueCenter === this.fieldValues);
     } else if (this.field == "Agent") {
-      this.transactionsData = this.transactionsData.filter(xx => xx.modifier === this.fieldValues);
+      // this.transactionsData = this.transactionsData.filter(xx => xx.modifier === this.fieldValues);
 
     } else {
-      this.transactionsData = this.transactionsData.filter(xx => xx.transactionDate === this.fromDate);
+      // this.transactionsData = this.transactionsData.filter(xx => xx.transactionDate === this.fromDate);
     }
   }
 
@@ -220,7 +244,7 @@ export class UserProfileComponent implements OnInit {
     this.openFilter = false;
   }
 
-  hasRole(reference): Boolean{
+  hasRole(reference): Boolean {
     return this.sideNav.hasRole(reference);
   }
 
