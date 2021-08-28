@@ -24,7 +24,7 @@
                 <div class="row" *ngIf="inCharge">
                     <div class="list-group" >
                         <label class="list-group-item" *ngFor="let revenue of revenueCenters">
-                            <input class="form-check-input me-1" type="checkbox">
+                            <input class="form-check-input me-1" type="checkbox" (change)="toggleEditable($event, revenue)">
                             {{revenue.revenueCenter}}
                         </label>
                     </div>

@@ -20,7 +20,7 @@
                             <tr>
                                 <td class="title" style="float: left;" style="float: left;">Mobile </td>
                                 <td> </td>
-                                <td class="res" style="float: right;" style="float: right;"> 01010101010</td>
+                                <td class="res" style="float: right;" style="float: right;"> {{user.mobile}}</td>
                             </tr>
                             <tr>
                                 <td class="title" style="float: left;">Group </td>
@@ -40,21 +40,21 @@
                             <tr>
                                 <td class="title" style="float: left;">Status </td>
                                 <td> </td>
-
                                 <td class="res" style="float: right;">
-                                    Active
+                                    <label *ngIf="!user.deleted && !lessThanOrEqualZero(user.expire) " class="active-state">Active</label>
+                                    <label *ngIf="user.statues" class="deleted-state">Deleted</label>
+                                    <label *ngIf="!user.deleted && lessThanOrEqualZero(user.expire)"  style="color: #1661a3;">Expired</label>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="title" style="float: left;">Creation Time </td>
                                 <td> </td>
-                                <td class="res" style="float: right;"> 2021-05-16</td>
+                                <td class="res" style="float: right;">{{user.creationDate | date: 'dd/MM/yyyy' }}</td>
                             </tr>
-                            <!-- *ngIf="user.lastUpdate" -->
                             <tr>
                                 <td class="title" style="float: left;">Last Update</td>
                                 <td> </td>
-                                <td class="res" style="float: right;"> 2021-05-16</td>
+                                <td class="res" style="float: right;">{{user.lastUpdate | date: 'dd/MM/yyyy' }}</td>
                             </tr>
                         </table>
                     </div>
@@ -81,11 +81,7 @@
                                 </div>
                             </h3>
                             <button class="filter-btn" (click)="chargeWallet('add')" mat-raised-button>Charge</button>
-                            <button class="filter-btn" (click)="chargeWallet('deduct')"
-                                mat-raised-button>Deduct</button>
-                            <!-- <button class="mouse-cursor-gradient-tracking">
-                                            <span>Hover me</span>
-                                          </button> -->
+                            <button class="filter-btn" (click)="chargeWallet('deduct')" mat-raised-button>Deduct</button>
                         </div>
 
                     </mat-card-content>
@@ -119,7 +115,7 @@
                                 Card Number
                             </div>
                             <div style="font-size: larger;">
-                                756787237523
+                                {{user.code}}
                             </div>
                         </h3>
                         <button class="filter-btn" (click)="chargeWallet('add')" mat-raised-button>Send Mail</button>
@@ -132,7 +128,7 @@
             <div class="title-card">
                 Card History
             </div>
-            <div *ngIf="voucherData.length == 0">
+            <div *ngIf="walletHistoryList.walletHistoryData.length == 0">
                 <mat-card class="transaction-card">
                     <mat-card-content>
                         <div style="text-align: center;">
@@ -142,7 +138,7 @@
                     </mat-card-content>
                 </mat-card>
             </div>
-            <div *ngIf="voucherData.length != 0">
+            <div *ngIf="walletHistoryList.walletHistoryData.length != 0">
                 <ngx-datatable class="material" [loadingIndicator]="walletHistoryList.showLoading"
                     [messages]="walletHistoryList.messages"
                     style="border-radius:1%; width: 100%; height: 310px; display: inline-block;" [sortType]="'multi'"
@@ -151,27 +147,33 @@
                     [selected]="walletHistoryList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false"
                     [scrollbarH]="true">
 
-                    <ngx-datatable-column name="Voucher Creation Date">
+                    <ngx-datatable-column name="Opreation Time">
                         <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.voucherDate}}
+                            {{row.date}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    
+                    <ngx-datatable-column name="Opreation Type">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.operation}}
                         </ng-template>
                     </ngx-datatable-column>
 
-                    <ngx-datatable-column name="Total Amount">
+                    <ngx-datatable-column name="Operation Amount">
                         <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.totalAmount}} USD
+                            {{row.amount}} USD
                         </ng-template>
                     </ngx-datatable-column>
 
-                    <ngx-datatable-column name="Amount After Discount">
+                    <ngx-datatable-column name="Previous Balance">
                         <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.voucher}}
+                            {{row.previousBalance}}
                         </ng-template>
                     </ngx-datatable-column>
 
-                    <ngx-datatable-column name="Creator Agent">
+                    <ngx-datatable-column name="New Balance">
                         <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.creator}}
+                            {{row.newBalance}}
                         </ng-template>
                     </ngx-datatable-column>
 

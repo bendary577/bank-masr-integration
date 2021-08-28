@@ -111,9 +111,10 @@ export class LoyaltyService {
     , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
-  chargeWallet(chargeFlag: boolean, userId,balance: any) {
+  chargeWallet(chargeFlag, userId, balance) {
 
     let token = localStorage.getItem('auth_token');
+    console.log(balance);
     return this.http.post(Constants.CHARGE_WALLET + "?userId=" + userId,  balance, {headers: new HttpHeaders({Authorization: 'Bearer' + this.token})});
   }
 

@@ -358,13 +358,19 @@ export class ManageUsersComponent implements OnInit {
 
     const strs = this.usersList.usersData;
     const result = strs.filter(s => s.code.includes(selectedGuest));
-
     console.log(selectedGuest);
-
     console.log(strs);
     console.log(result);
-
     this.usersList.usersData = result
+  }
+
+  calculateParams(user): Number {
+    let credit = 0;
+    let balance = user.wallet.balance ;
+    for (let i = 0; i < balance.length; i++) {
+      credit = credit + balance[i]["amount"];
+    }
+    return credit;
   }
 
   hasRole(reference){

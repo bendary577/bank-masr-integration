@@ -56,7 +56,6 @@ export class UserProfileComponent implements OnInit {
     private sppiner: NgxSpinnerService, private snackBar: MatSnackBar, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-
     if (this.data != null && this.data.storage != undefined) {
       localStorage.setItem('currentGuest', JSON.stringify(this.data.storage));
     }
@@ -65,33 +64,31 @@ export class UserProfileComponent implements OnInit {
     this.calculateParams(this.user);
     this.group = this.user["group"];
     this.simphonyDiscount = this.group["simphonyDiscount"];
-
-
+    this.walletHistoryList.walletHistoryData = this.user["wallet"]["walletHistory"];
+    console.log(this.walletHistoryList.walletHistoryData)
   }
 
   calculateParams(user) {
-
     let balance = user.wallet.balance ;
     for (let i = 0; i < balance.length; i++) {
       this.credit = this.credit + balance[i]["amount"];
-
-      let revenueCenters = balance.revenueCenters;
+      let revenueCenters = balance[i].revenueCenters;
+      console.log(revenueCenters)
       for (let j = 0; j < revenueCenters.length; j++) {
-          if(this.checkExistance(revenueCenters[i])){
-
+          if(!this.checkExistance(revenueCenters[j])){
+              this.revenueCenters.push(revenueCenters[j])
           }
       }
     }
   }
 
   checkExistance(revenue): Boolean{
-
     for (let j = 0; j < this.revenueCenters.length; j++) {
           if(this.revenueCenters[j].revenueCenter == revenue.revenueCenter){
             return true;
           }
       }
-   return true
+   return false;
   }
 
   getVoucherData(newRes) {
@@ -103,6 +100,17 @@ export class UserProfileComponent implements OnInit {
     this.voucherCode = "756787237523";
   }
 
+  lessThanOrEqualZero(expiry): Boolean{
+    if(expiry < 0){
+      return true
+    }else if(expiry == 0){
+      return true
+    }
+    else{
+      return false;
+    }
+  }
+
   chargeWallet(func) {
     const dialogRef = this.dialog.open(EditWalletComponent, {
       width: '300px',
@@ -111,8 +119,8 @@ export class UserProfileComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-
-        this.loyaltyService.chargeWallet(func, this.user.id, res.name).toPromise().then((result: any) => {
+        console.log(res)
+        this.loyaltyService.chargeWallet(func, this.user.id, res).toPromise().then((result: any) => {
           this.walletHistoryList.showLoading = true;
           this.snackBar.open("User updated successfully.", null, {
             duration: 2000,

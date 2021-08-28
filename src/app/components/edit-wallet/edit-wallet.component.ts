@@ -45,7 +45,7 @@ export class EditWalletComponent implements OnInit {
 
       this.form = this.formBuilder.group({
       amount: ['', Validators.required],
-      revenuecenters: [''],
+      revenuecenters: [[]],
      });
     
   }
@@ -57,7 +57,6 @@ export class EditWalletComponent implements OnInit {
         if(this.generalSettings.revenueCenters){
           this.revenueCenters = this.generalSettings.revenueCenters;
           console.log(this.revenueCenters)
-
         }
     }).catch(err => {
       let message = "";
@@ -84,11 +83,17 @@ export class EditWalletComponent implements OnInit {
     return result;
   }
 
-  totalSpend(date){
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
+  toggleEditable(event, revenue){
+    console.log(this.form.controls.revenuecenters.value)
+    if(event.target.checked){
+      this.form.controls.revenuecenters.value.push(revenue)
+    }else{
+      for(let i = 0; i < this.form.controls.revenuecenters.value.length ; i++){
+        if(this.form.controls.revenuecenters.value[i].revenueCenter == revenue.revenueCenter){
+          this.form.controls.revenuecenters.value.splice(i, 1);
+        }
+      }
+    }
   }
 
   onCloseClick(){
@@ -98,7 +103,8 @@ export class EditWalletComponent implements OnInit {
   }
 
   onSaveClick(): void {
-    if (this.form.invalid){
+    console.log(this.form.controls.revenuecenters.value)
+    if (this.form.invalid || this.form.controls.revenuecenters.value.length == 0){
       this.snackBar.open("Please fill form values" , null, {
         duration: 3000,
         horizontalPosition: 'center',
@@ -107,9 +113,16 @@ export class EditWalletComponent implements OnInit {
     }else{
       this.dialogRef.close({
         amount: this.form.controls.amount.value,
-        revenuecenters: this.form.controls.revenuecenters.value
+        revenueCenters: this.form.controls.revenuecenters.value
       });
     }
+  }
+  
+  totalSpend(date){
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }
