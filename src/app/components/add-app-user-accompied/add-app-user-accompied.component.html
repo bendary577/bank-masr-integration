@@ -59,7 +59,8 @@
                             </mat-form-field>
 
                             <mat-form-field class="example-full-width creditForm" appearance="outline">
-                                <input matInput placeholder="Balance" formControlName="balance" maxlength="50">
+                                <input matInput placeholder="Balance" formControlName="balance" maxlength="50" *ngIf="!inUpdate">
+                                <input matInput placeholder="Balance" formControlName="balance" maxlength="50" *ngIf="inUpdate" readonly [(ngModel)] = "credit">
                                 <mat-label>Price</mat-label>
                                 <mat-error *ngIf="form.controls.name.hasError('required')">
                                     Balance is required.
@@ -81,11 +82,9 @@
                                 </mat-error>
                             </mat-form-field>
 
-                            <mat-form-field class="example-full-width creditForm" appearance="outline">
-                                <input matInput placeholder="Number Of Accompanied Guest" formControlName="accompanied"
-                                    maxlength="50" [(ngModel)]="accompiedNumber" readonly>
+                            <mat-form-field class="example-full-width creditForm" appearance="outline" *ngIf="inUpdate">
+                                <input matInput placeholder="Number Of Accompanied Guest" formControlName="accompanied" maxlength="50" readonly>
                                 <mat-label>Accompanied Guest Number</mat-label>
-
                                 <mat-error *ngIf="form.controls.name.hasError('required')">
                                     Frist Name is required.
                                 </mat-error>

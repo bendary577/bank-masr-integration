@@ -1,3 +1,4 @@
+import { AccompiendGuest } from "./AccompiendGuest";
 import { Company } from "./Company";
 import { Group } from "./Group";
 
@@ -13,7 +14,7 @@ export class ApplicationUser {
     public expire;
     public wallet;
     public mobile;
-    public accompanied: [];
+    public accompaniedGuests: AccompiendGuest[];
 
     public constructor() { }
     

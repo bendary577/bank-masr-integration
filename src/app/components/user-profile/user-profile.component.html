@@ -81,7 +81,7 @@
                                 </div>
                             </h3>
                             <button class="filter-btn" (click)="chargeWallet('add')" mat-raised-button>Charge</button>
-                            <button class="filter-btn" (click)="chargeWallet('deduct')" mat-raised-button>Deduct</button>
+                            <button class="filter-btn" (click)="deductWallet('deduct')" mat-raised-button>Deduct</button>
                         </div>
 
                     </mat-card-content>
@@ -91,18 +91,14 @@
                 <mat-card class="wallet-card wallet-revenue">
                     <mat-card-content>
                         <h2>Wallet Revenue Centers</h2>
-
-                        <!-- To have radio, change input type to radio and add same name attribute to all inputs -->
                         <div class="list-group">
                             <div class="list-group-item-header">
                                 Revenue Centers
                             </div>
                             <label class="list-group-item" *ngFor="let revenue of revenueCenters">
-                                <!-- <input class="form-check-input me-1" type="checkbox"> -->
                                 {{revenue.revenueCenter}}
                             </label>
                         </div>
-
                     </mat-card-content>
                 </mat-card>
             </div>
@@ -141,17 +137,11 @@
             <div *ngIf="walletHistoryList.walletHistoryData.length != 0">
                 <ngx-datatable class="material" [loadingIndicator]="walletHistoryList.showLoading"
                     [messages]="walletHistoryList.messages"
-                    style="border-radius:1%; width: 100%; height: 310px; display: inline-block;" [sortType]="'multi'"
+                    style="border-radius:1%; width: 98%; height: 310px; display: inline-block;" [sortType]="'multi'"
                     [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"
                     [scrollbarH]="true" [rows]="walletHistoryList.walletHistoryData"
                     [selected]="walletHistoryList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false"
                     [scrollbarH]="true">
-
-                    <ngx-datatable-column name="Opreation Time">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.date}}
-                        </ng-template>
-                    </ngx-datatable-column>
                     
                     <ngx-datatable-column name="Opreation Type">
                         <ng-template let-row="row" ngx-datatable-cell-template>
@@ -161,19 +151,25 @@
 
                     <ngx-datatable-column name="Operation Amount">
                         <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.amount}} USD
+                            {{row.amount}} $
                         </ng-template>
                     </ngx-datatable-column>
 
                     <ngx-datatable-column name="Previous Balance">
                         <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.previousBalance}}
+                            {{row.previousBalance}} $
                         </ng-template>
                     </ngx-datatable-column>
 
                     <ngx-datatable-column name="New Balance">
                         <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.newBalance}}
+                            {{row.newBalance}} $
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Opreation Time">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.date | date: 'dd/MM/yyyy HH:mm:ss' }}
                         </ng-template>
                     </ngx-datatable-column>
 

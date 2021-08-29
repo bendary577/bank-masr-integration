@@ -24,6 +24,7 @@ export class AddAppUserAccompiedComponent implements OnInit  {
   qrcodeMethod = ["Email", "SMS", "Print"];
   swiped=false;
   cardNumber = 0;
+  credit=0;
   // @ViewChild('ChildViewComponent') accompiedNumber = 2 ;
   @Input() accompiedNumber = 0 ;
   constructor(private formBuilder: FormBuilder, public snackBar: MatSnackBar, 
@@ -39,19 +40,27 @@ export class AddAppUserAccompiedComponent implements OnInit  {
       this.inUpdate = true;
       this.user = this.data["user"];
       this.selectedGroup = this.user.group.id;
+      this.calculateParams();
+      console.log(this.user.accompaniedGuests.length)
+      for(var i = 0 ; i < this.user.accompaniedGuests.length; i++){
+        let accompiendForm:  FormGroup;
+        accompiendForm = this.formBuilder.group({
+            name: [this.user.accompaniedGuests[i].name, [Validators.maxLength, Validators.required]], 
+            email: [this.user.accompaniedGuests[i].email, [Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"), Validators.required]],
+            mobile: [this.user.accompaniedGuests[i].mobile, [Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"), Validators.required]], 
+        })
+        this.accompiendForms.push(accompiendForm);
+      }
+
       this.form = this.formBuilder.group({
         name: [this.user.name, [Validators.maxLength]], 
         email: [this.user.email, [Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
-        mobile: ['', [Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
+        mobile: [this.user.mobile, [Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
         group: this.group,
         balance:[this.user.wallet.price],
         expire: [this.user.expire],
-        accompanied:[this.user.accompanied.length],
+        accompanied:[this.user.accompaniedGuests.length],
       });
-
-      for(var i = 0 ; i < this.user.accompanied.length; i++){
-
-      }
 
     }else{
       this.form = this.formBuilder.group({
@@ -61,14 +70,20 @@ export class AddAppUserAccompiedComponent implements OnInit  {
       name: [''],
       email: [''],
       mobile: [''], 
-      accompanied:[1],
+      accompanied:[0],
       });
   }
 }
 
-  // ngAfterViewChecked(){
-  //   console.log("AAA")
-  // }
+  calculateParams(){
+    let credit = 0;
+    let balance = this.user.wallet.balance ;
+    for (let i = 0; i < balance.length; i++) {
+      credit = credit + balance[i]["amount"];
+    }
+    this.credit = credit;
+  }
+
   getGenericGroup(){
     this.loyaltyService.getGenericGroup().toPromise().then((res: any) => {
       this.group = res;

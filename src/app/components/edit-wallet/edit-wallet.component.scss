@@ -1,6 +1,12 @@
  @import "../user-profile/user-profile.component.scss";
+ @import "../add-app-group/add-app-group.component.scss";
+
 button {
     color: white;
     background-color: #3f51b5;
-    margin-right: 10px
+    width:100px;
+}
+
+.groups-buttons{
+    width:100px;
 }

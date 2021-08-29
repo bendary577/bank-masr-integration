@@ -1,6 +1,9 @@
 @import "../add-tax/add-tax.component.scss";
 @import "../add-app-group/add-app-group.component.scss";
 
+::ng-deep .mat-tab-body{
+  padding-top: 10px;
+}
 ::ng-deep .mat-form-field-wrapper{
   margin: 0px !important;
 }

@@ -34,15 +34,6 @@ export class EditWalletComponent implements OnInit {
       this.inDeduct = true;
     }
     this.getRevenueCenters();
-
-        // }else if(this.func == 'showVoucher'){
-    //   this.showVoucher = true;
-    //   this.amount = this.data["amount"];
-    //   this.voucher = this.getRandomString(10);
-    // }else{
-    //   this.showVoucher = true;
-    // }
-
       this.form = this.formBuilder.group({
       amount: ['', Validators.required],
       revenuecenters: [[]],
@@ -104,7 +95,8 @@ export class EditWalletComponent implements OnInit {
 
   onSaveClick(): void {
     console.log(this.form.controls.revenuecenters.value)
-    if (this.form.invalid || this.form.controls.revenuecenters.value.length == 0){
+    if (this.form.invalid ||
+       (this.form.controls.revenuecenters.value.length == 0 && !this.inDeduct)){
       this.snackBar.open("Please fill form values" , null, {
         duration: 3000,
         horizontalPosition: 'center',

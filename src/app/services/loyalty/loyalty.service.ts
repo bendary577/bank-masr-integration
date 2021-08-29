@@ -27,6 +27,9 @@ export class LoyaltyService {
      { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
+  getAppUser(id){
+      return this.http.get(Constants.GET_APP_USER + "/" +  id, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
 
   addAppGroups(flage, name, description, discountId, parentGroupId, image, groupId) {
     this.token = localStorage.getItem('auth_token');
@@ -117,6 +120,14 @@ export class LoyaltyService {
     console.log(balance);
     return this.http.post(Constants.CHARGE_WALLET + "?userId=" + userId,  balance, {headers: new HttpHeaders({Authorization: 'Bearer' + this.token})});
   }
+
+  deductWallet(chargeFlag, userId, amount) {
+    let token = localStorage.getItem('auth_token');
+    return this.http.post(Constants.DEDUCT_WALLET + "?userId=" + userId + "&amount=" + amount ,  {}, {headers: new HttpHeaders({Authorization: 'Bearer' + this.token})});
+  }
+
+  
+
 
 }
 
