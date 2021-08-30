@@ -224,7 +224,7 @@ export class Constants {
   //==> New Booking Report
   static NEW_BOOKING_REPORT_PAGE = 'newBookingReport'
   static NEW_BOOKING_REPORT_CONFIG_PAGE = 'newBookingReportConfig'
-  static NEW_BOOKING_REPORT_SYNC = 'New Booking Report'
+  static NEW_BOOKING_REPORT_SYNC = 'New/Update Booking'
 
   static SYNC_OPERA_NEW_BOOKING_URL = environment.apiHost + '/fetchNewBooking'
 
