@@ -127,7 +127,6 @@ export class SidenavResponsive implements OnDestroy, OnInit {
       .toPromise()
       .then((res: any) => {
         this.account = res
-        localStorage.setItem('accountId', this.account.id);
         this.accountCredentials = this.account['accountCredentials']
       })
       .catch((err) => {
@@ -228,11 +227,10 @@ export class SidenavResponsive implements OnDestroy, OnInit {
   }
 
   hasRole(reference): Boolean {
-    console.log(this.account)
     if (
       this.account != null &&
       this.account != undefined &&
-      this.account.id == '6059caf66973e968e46b29c4'
+      localStorage.getItem('accountId') == '6059caf66973e968e46b29c4'
     ) {
       return false
     }
