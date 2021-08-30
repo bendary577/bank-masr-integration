@@ -32,7 +32,7 @@
                     </mat-nav-list>
                 </mat-expansion-panel>
 
-                <mat-expansion-panel [class.mat-elevation-z0]="true" dense *ngIf="syncJobTypes.length > 0">
+                <mat-expansion-panel [class.mat-elevation-z0]="true" dense *ngIf="syncJobTypes.length > 0 && hasRole('show_reports')">
                     <mat-expansion-panel-header>
                         Reports
                     </mat-expansion-panel-header>
@@ -50,7 +50,7 @@
                     </mat-nav-list>
                 </mat-expansion-panel>
 
-                <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
+                <mat-expansion-panel [class.mat-elevation-z0]="true" *ngIf="hasRole('show_reports')" dense>
                     <mat-expansion-panel-header> 
                         Settings
                     </mat-expansion-panel-header>
