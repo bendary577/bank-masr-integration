@@ -1,4 +1,10 @@
 @import "../approved-invoices-infor/approved-invoices-infor.component.scss";
+@import "../operations/opera-payments/opera-payments.component.scss";
+
+h3{
+  background-color: #ffddb5 !important;
+  color: black !important;
+}
 
 .header {
   text-align: end;
@@ -11,6 +17,7 @@
 }
 
 .stat-card{
+  padding: 10px !important;
   margin: 10px;
   height: 225px;
   overflow: hidden;
@@ -70,9 +77,10 @@
 .filter-btn{
   width: 100px;
   height: 32px;
-  margin-bottom: 8px;
+  margin-top: 5px;
   background-color: white;
   color: black;
+  box-shadow:0 1px 10px 0.5px #ababab;
 }
 
 .filter-container{
@@ -119,22 +127,22 @@
   margin-right: 10px;
 }
 
-.custom-select, .custom-select select{
-  border: 2px solid rgb(197, 197, 197);
-  width: 12%;
-  height: 32px;
-  border-radius: 5px;
-  left:auto;
-}
+// .custom-select, .custom-select select{
+//   border: 2px solid rgb(197, 197, 197);
+//   width: 12%;
+//   height: 32px;
+//   border-radius: 5px;
+//   left:auto;
+// }
 
-.five-column input{
-  margin-top: 6px;
-  margin-left: 10px;
-  width: 65%;
-  height: 25px;
-  border-radius: 5px;
-  border: 2px solid rgb(197, 197, 197);
-}
+// .five-column input{
+//   margin-top: 6px;
+//   margin-left: 10px;
+//   width: 65%;
+//   height: 25px;
+//   border-radius: 5px;
+//   border: 2px solid rgb(197, 197, 197);
+// }
 
 .five-column {
   margin-left: 2%;
@@ -170,17 +178,16 @@ canvas{
 }
 
 .filteration{
-
-background-color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);
-
+  box-shadow:0 1px 10px 0.5px #ababab;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
 }
 
-.filterButtons{
-  margin-left: auto;
-  float: right;
-  width: 35%;
-}
+// .filterButtons{
+//   margin-left: auto;
+//   float: right;
+//   width: 35%;
+// }
 
 .filterTitle{
   font-family: Arial, Helvetica, sans-serif;
@@ -206,3 +213,16 @@ color: rgb(0, 0, 0);
   position: unset;
   float: left;
 }
+
+::ng-deep .mat-form-field-flex{
+  width: 60% !important;
+}
+
+::ng-deep .mat-form-field-outline{
+  border: 1px solid #7d7d7d !important;
+}
+
+::ng-deep .mat-card-content{
+  margin:10px !important;
+}
+

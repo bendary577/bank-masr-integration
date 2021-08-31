@@ -134,13 +134,11 @@ export class UserProfileComponent implements OnInit {
   }
 
   chargeWallet(func) {
-    this.walletHistoryList.showLoading = true;
-
     const dialogRef = this.dialog.open(EditWalletComponent, {
       width: '300px',
       data: { function: func }
     });
-
+    this.walletHistoryList.showLoading = true;
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         console.log(res)
@@ -173,14 +171,15 @@ export class UserProfileComponent implements OnInit {
         })
       }
     })
+    this.walletHistoryList.showLoading = false;
   }
 
   deductWallet(func) {
-    this.walletHistoryList.showLoading = true;
     const dialogRef = this.dialog.open(EditWalletComponent, {
       width: '300px',
       data: { function: func }
     });
+    this.walletHistoryList.showLoading = true;
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
@@ -213,6 +212,7 @@ export class UserProfileComponent implements OnInit {
         })
       }
     })
+    this.walletHistoryList.showLoading = false;
   }
 
   addRevenueCenter() {
