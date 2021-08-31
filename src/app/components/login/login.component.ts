@@ -98,17 +98,19 @@ export class LoginComponent implements OnInit {
     this.accountService
       .getAccount()
       .toPromise()
-      .then((res: any) => {
+      .then(async (res: any) => {
         this.account = res
-        localStorage.setItem('accountERD', res.erd)
-        localStorage.setItem('accountId', res.id)
-        this.spinner.hide()
-        this.loading = false
+        await localStorage.setItem('accountERD', res.erd)
+        await localStorage.setItem('accountId', res.id)
+
         this.side.setshouldRun(true)
         this.side.shouldRun = true
         this.side.getSyncJobTypes()
         this.side.getOperationTypes()
         this.side.getApplication()
+
+        this.spinner.hide()
+        this.loading = false
         this.router.navigate([Constants.WELCOME_PAGE])
       })
       .catch((err) => {
