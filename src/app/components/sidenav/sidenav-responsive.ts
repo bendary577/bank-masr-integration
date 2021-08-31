@@ -227,16 +227,12 @@ export class SidenavResponsive implements OnDestroy, OnInit {
   }
 
   hasRole(reference: string): Boolean {
-    if (reference == 'show_reports') {
-      if (this.account == null || this.account == undefined) {
-        return false
-      }
+    if (this.account == null || this.account == undefined) {
+      return false
+    }
 
-      if (localStorage.getItem('accountId') == '6059caf66973e968e46b29c4') {
-        return false
-      } else {
-        return true
-      }
+    if (this.account != null && this.account != undefined && localStorage.getItem('accountId') == '6059caf66973e968e46b29c4') {
+      return false
     } else {
       return true
     }
