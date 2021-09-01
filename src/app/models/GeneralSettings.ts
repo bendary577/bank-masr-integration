@@ -8,6 +8,7 @@ import { ItemGroup } from './ItemGroup';
 import { BookingType } from './operaReports/paymentTypes';
 import { RateCode } from './operaReports/RateCode';
 import { SimphonyDiscount } from './loyalty/SimphonyDiscount';
+import { PosMachineMap } from './operaPayment/posMachineMap';
 
 export class GeneralSettings {
   id: string;
@@ -21,7 +22,7 @@ export class GeneralSettings {
   locations: Array<CostCenter>|any;
   simphonyLocations: Array<SimphonyLocation>|any;
   suppliers: Array<Supplier>|any;
-
+  posMachineMaps: PosMachineMap[];
   // ==> OPERA Variables
   cancelReasons: Array<BookingType>|any;
 

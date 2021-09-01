@@ -1,0 +1,37 @@
+@import "../../../components/approved-invoices-infor/approved-invoices-infor.component.scss";
+@import "../../../components/operations/opera-payments/opera-payments.component.scss";
+
+// .deleteBtn{
+//     background-color:  #FC544B!important;
+//     color: white;
+// }
+
+// .deleteBtn:disabled{
+//     background-color: darkslategrey;
+// }
+
+mat-expansion-panel {
+    box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+    border-radius: 28px;
+    margin: 20px;
+    margin-bottom: inherit;
+}
+
+.filterButton{
+    margin-top: 0px;
+    width: 100px;
+    float:none;
+}
+
+.saveButton{
+    bottom: 20px;
+}
+
+.addButton{
+    float: right;
+}
+
+.ngx-datatable.scroll-vertical{
+    width: 100%;
+    border-radius: 28px;
+}

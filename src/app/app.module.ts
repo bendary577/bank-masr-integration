@@ -157,6 +157,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { SupportComponent } from './components/support/support.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { PosMachineMappingComponent } from "./components/setting/pos-machine-mapping/pos-machine-mapping.component";
 
 @NgModule({
   declarations: [
@@ -266,12 +267,13 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
     OpiActivitiesComponent,
     OpiTransactionsComponent,
     OperaPaymentsComponent,
-
     FilterComponent,
     UserProfileComponent,
     EditWalletComponent,
     SideNaveComponent,
-    NavBarComponent, SupportComponent
+    NavBarComponent,
+    SupportComponent,
+    PosMachineMappingComponent
   ],
   imports: [
     BrowserModule,

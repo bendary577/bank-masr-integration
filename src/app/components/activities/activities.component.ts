@@ -4,10 +4,8 @@ import { Router } from '@angular/router';
 import { Constants } from 'src/app/models/constants';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
-import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import {Location} from '@angular/common';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Group } from 'src/app/models/loyalty/Group';
 import * as moment from 'moment';
 import { saveAs } from 'file-saver';
 import { ExcelService } from 'src/app/services/excel/excel.service';
@@ -26,13 +24,16 @@ export class ActivitiesComponent implements OnInit {
   totalSpendM: any;
   users = [];
   groups = [];
+  revenues = [];
   topGroups = [];
   selectedGuest =  '';
-  guestNames= [];
+  guests= [];
   fromDate = '';
   toDate= '';
   selectedGroupId =  '';
-
+  selectedRevenue = '';
+  selectedGuestName = '';
+  selections = [];
   props = {  'background-color' : '#e07d93'  };
   props2 = {  'background-color' : '#3F51B5'  };
   noFilter = true ; 
@@ -303,4 +304,10 @@ export class ActivitiesComponent implements OnInit {
     // this.guestNames.push(this.selectedGuest);
   }
 
+  statues(guest){ 
+  }
+
+  selection(){
+    return false;
+  }
 }

@@ -67,6 +67,7 @@ import { HotelOpiComponent } from './components/hotel-opi/hotel-opi.component';
 import { OperaPaymentsComponent } from './components/operations/opera-payments/opera-payments.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { SupportComponent } from './components/support/support.component';
+import { PosMachineMappingComponent } from './components/setting/pos-machine-mapping/pos-machine-mapping.component';
 
 
 const routes: Routes = [
@@ -85,6 +86,7 @@ const routes: Routes = [
   { path: Constants.SUPPLIERS_MAPPING, component: SupplierMappingComponent ,canActivate:[AuthGuardService]},
   { path: Constants.OPERA_REPORT_MAP_TABLES, component: OperaReportMapTablesComponent ,canActivate:[AuthGuardService]},
   { path: Constants.SIMPHONY_DISCOUNT_MAP_TABLE, component: SimphonyDiscountMapingComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.POS_MACHINE_MAP_TABLE, component: PosMachineMappingComponent ,canActivate:[AuthGuardService]},
 
   // OPERA Views
   { path: Constants.OPERA_BOOKING_DASHBOARD_PAGE, component: OperaBookingDashBoardComponent ,canActivate:[AuthGuardService]},

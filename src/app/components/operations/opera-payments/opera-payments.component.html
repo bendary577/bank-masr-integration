@@ -13,13 +13,13 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="example-full-width dateForm">
-                <input matInput placeholder="Start Date" [matDatepicker]="fromDateOpicker" name="fromDate" id="fromDate" [(ngModel)]="fromDate">
+                <input matInput placeholder="Start Date" [matDatepicker]="fromDateOpicker" name="fromDate" id="fromDate" [(ngModel)]="fromDate" readonly>
                 <mat-datepicker-toggle matSuffix [for]="fromDateOpicker"></mat-datepicker-toggle>
                 <mat-datepicker #fromDateOpicker></mat-datepicker>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="example-full-width dateForm">
-                <input matInput placeholder="End Date" [matDatepicker]="toDatePicker" name="toDate" id="toDate" [(ngModel)]="toDate">
+                <input matInput placeholder="End Date" [matDatepicker]="toDatePicker" name="toDate" id="toDate" [(ngModel)]="toDate" readonly>
                 <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
                 <mat-datepicker #toDatePicker></mat-datepicker>
             </mat-form-field>
