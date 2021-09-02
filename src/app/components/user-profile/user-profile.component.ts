@@ -91,11 +91,11 @@ export class UserProfileComponent implements OnInit {
   }
 
   calculateParams(user) {
+    this.credit = 0;
     let balance = user.wallet.balance ;
     for (let i = 0; i < balance.length; i++) {
       this.credit = this.credit + balance[i]["amount"];
       let revenueCenters = balance[i].revenueCenters;
-      console.log(revenueCenters)
       for (let j = 0; j < revenueCenters.length; j++) {
           if(!this.checkExistance(revenueCenters[j])){
               this.revenueCenters.push(revenueCenters[j])
@@ -138,13 +138,15 @@ export class UserProfileComponent implements OnInit {
       width: '300px',
       data: { function: func }
     });
-    this.walletHistoryList.showLoading = true;
     dialogRef.afterClosed().subscribe(res => {
+      this.walletHistoryList.showLoading = true;
+      this.sppiner.show()
       if (res) {
         console.log(res)
         this.loyaltyService.chargeWallet(func, this.user.id, res).toPromise().then((result: any) => {
           this.walletHistoryList.showLoading = false;
           this.getApplicationUser();
+          this.sppiner.hide();
           this.snackBar.open("Wallet Charged Successfully.", null, {
             duration: 2000,
             horizontalPosition: 'center',
@@ -162,7 +164,7 @@ export class UserProfileComponent implements OnInit {
           } else if (err.message) {
             message = ErrorMessages.FAILED_TO_SAVE_CONFIG
           }
-
+          this.sppiner.hide()
           this.snackBar.open(message, null, {
             duration: 3000,
             horizontalPosition: 'center',
@@ -179,14 +181,15 @@ export class UserProfileComponent implements OnInit {
       width: '300px',
       data: { function: func }
     });
-    this.walletHistoryList.showLoading = true;
-
     dialogRef.afterClosed().subscribe(res => {
+      this.walletHistoryList.showLoading = true;
+     this.sppiner.show()
       if (res) {
         console.log(res)
         this.loyaltyService.deductWallet(func, this.user.id, res.amount).toPromise().then((result: any) => {
           this.walletHistoryList.showLoading = false;
           this.getApplicationUser();
+          this.sppiner.hide()
           this.snackBar.open("Amount deducted from Wallet successfully.", null, {
             duration: 2000,
             horizontalPosition: 'center',
@@ -194,6 +197,8 @@ export class UserProfileComponent implements OnInit {
           });
         }).catch(err => {
           this.walletHistoryList.showLoading = false;
+         this.sppiner.hide()
+
           let message = "";
           if (err.status === 401) {
             message = ErrorMessages.SESSION_EXPIRED;
@@ -203,7 +208,6 @@ export class UserProfileComponent implements OnInit {
           } else if (err.message) {
             message = ErrorMessages.FAILED_TO_SAVE_CONFIG
           }
-
           this.snackBar.open(message, null, {
             duration: 3000,
             horizontalPosition: 'center',

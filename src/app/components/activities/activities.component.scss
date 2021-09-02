@@ -54,11 +54,13 @@ h3{
 }
 
 .chart-card{
-  margin: auto;
-  margin-top: 10px;
+  margin: 20px;
+  padding: 5px;
   margin-bottom: 10px;
+  margin-top: 10px;
   height: auto;
-  width: 85%;
+  width: 96%;
+  height: 280px;
 }
 
 .user-img{
@@ -222,27 +224,38 @@ canvas{
 }
 
 .chart-img{
-  width: 20%;
-  height: 15%;
-}
-::ng-deep .mat-form-field-flex{
-  width: 100% !important;
+  width: 25%;
 }
 
-// ::ng-deep .mat-form-field-outline{
-//   border: 1px solid #7d7d7d !important;
-// }
-
-::ng-deep .mat-card-content{
-  margin:10px !important;
+.people-img{
+  width: 15%;
+  margin-top: 50px;
 }
 
-::ng-deep .mat-form-field-flex{
-  width: 200px !important;
+.guest-chart{
+  width: 80%;
+  height: 80px;
+  margin: 5% auto;
+  border-radius: 10px;
+  text-align: center;
 }
 
-::ng-deep .mat-form-field-label {
-  left: 20px !important;
-  padding-top: 10px !important;
-  color: hsl(0, 0%, 45%) !important;
+.activity_body{
+  ::ng-deep .mat-form-field-flex{
+    width: 100% !important;
+  }
+
+  ::ng-deep .mat-card-content{
+    margin:10px !important;
+  }
+
+  ::ng-deep .mat-form-field-flex{
+    width: 200px !important;
+  }
+
+  ::ng-deep .mat-form-field-label {
+    left: 20px !important;
+    padding-top: 10px !important;
+    color: hsl(0, 0%, 45%) !important;
+  }
 }

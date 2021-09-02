@@ -126,8 +126,5 @@ export class LoyaltyService {
     return this.http.post(Constants.DEDUCT_WALLET + "?userId=" + userId + "&amount=" + amount ,  {}, {headers: new HttpHeaders({Authorization: 'Bearer' + this.token})});
   }
 
-  
-
-
 }
 

@@ -33,6 +33,7 @@ export class ActivitiesComponent implements OnInit {
   selectedGroupId =  '';
   selectedRevenue = '';
   selectedGuestName = '';
+  guestAverage;
   selections = [];
   props = {  'background-color' : '#e07d93'  };
   props2 = {  'background-color' : '#3F51B5'  };
@@ -310,4 +311,16 @@ export class ActivitiesComponent implements OnInit {
   selection(){
     return false;
   }
+
+  public lessThanOrEqualZero(expiry): Boolean{
+    if(expiry < 0){
+      return true
+    }else if(expiry == 0){
+      return true
+    }
+    else{
+      return false;
+    }
+  }
+
 }
