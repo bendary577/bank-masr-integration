@@ -1,6 +1,9 @@
 @import "../approved-invoices-infor/approved-invoices-infor.component.scss";
 @import "../operations/opera-payments/opera-payments.component.scss";
 
+canvas{
+  height: 250px !important;
+}
 h3{
   background-color: #ffddb5 !important;
   color: black !important;
@@ -60,7 +63,7 @@ h3{
   margin-top: 10px;
   height: auto;
   width: 96%;
-  height: 280px;
+  height: 280px;overflow: hidden;
 }
 
 .user-img{
@@ -236,6 +239,7 @@ canvas{
   width: 80%;
   height: 80px;
   margin: 5% auto;
+  margin-bottom: 5%;
   border-radius: 10px;
   text-align: center;
 }

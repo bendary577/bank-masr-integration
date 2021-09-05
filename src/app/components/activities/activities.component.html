@@ -70,7 +70,7 @@
     </div>
 
     <div class="row" *ngIf="hasRole('show_statistic')">
-        <div class="two-column">
+        <div class="two-column" *ngIf="transactionList.transactionData.length">
             <mat-card class="chart-card">
                 <mat-card-content>
                     <div style="display: block;" *ngIf="transactionList.transactionData.length">
@@ -83,15 +83,15 @@
             </mat-card>
         </div>
 
-        <div class="two-column">
+        <div class="two-column" *ngIf="transactionList.transactionData.length">
             <mat-card class="chart-card">
                 <mat-card-content>
-                    <div style="display: block;" *ngIf="transactionList.transactionData.length">
+                    <div style="display: block; width: 95%; height: 95%;">
                         <img src="../../../assets/group.png" class="people-img">
                         <img src="../../../assets/increase.png" class="chart-img">
                         <h3 class="guest-chart">
                             Average Number of Guests<br>
-                            {{guestAverage}} Guest
+                            {{guestAverage}} Guests
                         </h3>
                         <!-- <canvas baseChart [datasets]="traBarChartData" [colors]="rvcBlue" [labels]="traBarChartLabels"
                         [options]="barChartOptions" [plugins]="traBarChartPlugins" [legend]="traBarChartLegend"
@@ -244,7 +244,7 @@
                 <ngx-datatable-column name="Card Status" [width]="90" *ngIf="hasRole('show_card_status')">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         <label *ngIf="!row.user.deleted && !lessThanOrEqualZero(row.user.expire) " class="active-state">Active</label>
-                        <label *ngIf="row.user.statues" class="deleted-state">Deleted</label>
+                        <label *ngIf="row.user.deleted" class="deleted-state">Deleted</label>
                         <label *ngIf="!row.user.deleted && lessThanOrEqualZero(row.user.expire)"
                             style="color: #1661a3;">Expired</label>
                     </ng-template>
@@ -258,7 +258,7 @@
 
                 <ngx-datatable-column name="RVC" *ngIf="hasRole('show_revenue_center')" [width]="90">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.revenueCenter}}
+                        {{row.revenueCentreName}}
                     </ng-template>
                 </ngx-datatable-column>
 

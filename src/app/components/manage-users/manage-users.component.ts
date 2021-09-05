@@ -154,7 +154,7 @@ export class ManageUsersComponent implements OnInit {
       if (res) {
         this.usersList.showLoading = true;
         this.loyaltyService.addApplicationUser(true, isGeneric, res.name, res.email, res.group, res.image,
-           "", res.accompiendUsers, res.cardCode, res.mobile, res.balance, res.expire).then((result: any) => {
+           "", res.accompiendUsers, res.cardCode, res.mobile, res.balance, res.expire, res.sendEmail, res.sendSMS).then((result: any) => {
           this.loading = true;
           this.getUsers();
           this.newUser = new ApplicationUser();
@@ -220,7 +220,7 @@ export class ManageUsersComponent implements OnInit {
         if(res.group == undefined)
         res.group = new Group();
         this.loyaltyService.addApplicationUser(false, isGeneric, res.name, res.email, res.group, res.image,
-                                               this.usersList.selected[0].id, [], res.cardCode, res.mobile, res.balance, res.expire).then((result: any) => {
+                            this.usersList.selected[0].id, res.accompiendUsers, res.cardCode, res.mobile, res.balance, res.expire, res.sendEmail, res.sendSMS).then((result: any) => {        
             this.loading = false;
             this.usersList.showLoading = false;
             this.newUser = new ApplicationUser();

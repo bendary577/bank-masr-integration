@@ -12,6 +12,7 @@ import { ExcelService } from 'src/app/services/excel/excel.service';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { SideNaveComponent } from '../side-nave/side-nave.component';
+import { RevenueCenter } from 'src/app/models/RevenueCenter';
 
 @Component({
   selector: 'app-activities',
@@ -24,8 +25,9 @@ export class ActivitiesComponent implements OnInit {
   totalSpendM: any;
   users = [];
   groups = [];
-  revenues = [];
   topGroups = [];
+  revenues = [];
+  expenses = [];
   selectedGuest =  '';
   guests= [];
   fromDate = '';
@@ -33,7 +35,7 @@ export class ActivitiesComponent implements OnInit {
   selectedGroupId =  '';
   selectedRevenue = '';
   selectedGuestName = '';
-  guestAverage;
+  guestAverage = 0;
   selections = [];
   props = {  'background-color' : '#e07d93'  };
   props2 = {  'background-color' : '#3F51B5'  };
@@ -60,7 +62,7 @@ export class ActivitiesComponent implements OnInit {
   public barChartOptions: ChartOptions = {
     responsive: true,
   };
-  public rvcBarChartLabels: Label[] = ['Retaurant 1', 'Retaurant 2', 'Retaurant 3', 'Retaurant 4'];
+  public rvcBarChartLabels: Label[] = this.revenues;
   public rvcBarChartType: ChartType = 'bar';
   public rvcBarChartLegend = true;
   public rvcBarChartPlugins = [];
@@ -68,17 +70,17 @@ export class ActivitiesComponent implements OnInit {
   "rgba(224, 108, 112, 1)",
   "rgba(224, 108, 112, 1)"]
   public rvcBarChartData: ChartDataSets[] = [
-    { data: [ , 20], label: 'Sales Per Revenue Center' },
+    { data: this.expenses, label: 'Sales Per Revenue Center' },
   ];
   
-  public traBarChartLabels: Label[] = ['1', '2', '3', '4','5','6','7','8','9','10','11'];
-  public traBarChartType: ChartType = 'bar';
-  public traBarChartLegend = true;
-  public traBarChartPlugins = [];
-  // public traBlue= ['blue', 'blue', 'blue', 'blue']
-  public traBarChartData: ChartDataSets[] = [
-    { data: [ , , , 20], label: 'Transaction' },
-  ];
+  // public traBarChartLabels: Label[] = ['1', '2', '3', '4','5','6','7','8','9','10','11'];
+  // public traBarChartType: ChartType = 'bar';
+  // public traBarChartLegend = true;
+  // public traBarChartPlugins = [];
+  // // public traBlue= ['blue', 'blue', 'blue', 'blue']
+  // public traBarChartData: ChartDataSets[] = [
+  //   { data: [ , , , 20], label: 'Transaction' },
+  // ];
 
   constructor(public snackBar: MatSnackBar, private router: Router, private _location: Location,
     private sidNav: SideNaveComponent,private loyaltyService: LoyaltyService, private excelService: ExcelService , private spinner: NgxSpinnerService) { }
@@ -87,7 +89,9 @@ export class ActivitiesComponent implements OnInit {
     this.getTopUsers();
     this.getTopGroups();
     this.totalSpend("Total");
+
   }
+
 
   refresh() {
     location.reload();
@@ -171,13 +175,13 @@ export class ActivitiesComponent implements OnInit {
   }
 
   getTransactions(time){
-
     this.transactionList.transactionData = [];
     this.transactionList.showLoading = true;
     this.loyaltyService.getTransactions( Constants.REDEEM_VOUCHER, time).toPromise().then((res: any) => {
       this.transactionList.transactionData = res;
       this.transactionList.showLoading = false;
-
+      this.calculteChart();
+      this.averageGuests();
     }).catch(err => {
       this.transactionList.showLoading = false;
       let message = "";
@@ -295,6 +299,48 @@ export class ActivitiesComponent implements OnInit {
     return this.sidNav.hasRole(reference);
   }
 
+  calculteChart(){
+    let transactions = this.transactionList.transactionData;
+    let revenue;
+    for(let i = 0; i < transactions.length; i++){
+      revenue = transactions[i].revenueCentreName;
+      let expenses = 0;
+      if(this.notExistInRevenues(revenue)){
+        for(let j = 0 ; j < transactions.length; j++){
+          if(transactions[j].revenueCentreName == revenue && revenue != ""){
+            console.log("A")
+            expenses = expenses + transactions[j].afterDiscount;
+          }
+        }
+        this.revenues.push(revenue);
+        this.expenses.push(expenses);
+    }
+    }
+  }
+
+  notExistInRevenues(revenue): Boolean{
+    for(let i = 0; i < this.revenues.length; i++){
+      if(this.revenues[i] == revenue){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  averageGuests(){
+    let guests = [];
+    let transactions= this.transactionList.transactionData;
+    for(let i = 0; i < transactions.length; i++){
+      console.log(guests.indexOf(transactions[i].code) <= -1)
+     console.log(guests.indexOf(transactions[i].code))
+
+      if(guests.indexOf(transactions[i].code) <= -1){
+        this.guestAverage += 1;
+        guests.push(transactions[i].code)
+      }
+    }
+   }
+
   closeCard(){
   }
 
@@ -313,14 +359,10 @@ export class ActivitiesComponent implements OnInit {
   }
 
   public lessThanOrEqualZero(expiry): Boolean{
-    if(expiry < 0){
-      return true
-    }else if(expiry == 0){
+    console.log(expiry)
+    if(expiry <= 0){
       return true
     }
-    else{
-      return false;
-    }
+    return false;
   }
-
 }

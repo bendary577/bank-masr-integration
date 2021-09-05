@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, Inject, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Inject, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser';
@@ -25,6 +25,9 @@ export class AddAppUserAccompiedComponent implements OnInit  {
   swiped=false;
   cardNumber = 0;
   credit=0;
+  sendSMS = false;
+  sendEmail = false;
+
   // @ViewChild('ChildViewComponent') accompiedNumber = 2 ;
   @Input() accompiedNumber = 0 ;
   constructor(private formBuilder: FormBuilder, public snackBar: MatSnackBar, 
@@ -33,21 +36,16 @@ export class AddAppUserAccompiedComponent implements OnInit  {
  
   ngOnInit() {
     this.getGenericGroup();
-
-    this.swipe();
-
     if (this.data != undefined && this.data["user"] != null){
       this.inUpdate = true;
       this.user = this.data["user"];
       this.selectedGroup = this.user.group.id;
-      this.calculateParams();
-      console.log(this.user.accompaniedGuests.length)
       for(var i = 0 ; i < this.user.accompaniedGuests.length; i++){
         let accompiendForm:  FormGroup;
         accompiendForm = this.formBuilder.group({
             name: [this.user.accompaniedGuests[i].name, [Validators.maxLength, Validators.required]], 
-            email: [this.user.accompaniedGuests[i].email, [Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"), Validators.required]],
-            mobile: [this.user.accompaniedGuests[i].mobile, [Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"), Validators.required]], 
+            email: [this.user.accompaniedGuests[i].email, [Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
+            mobile: [this.user.accompaniedGuests[i].mobile, [Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
         })
         this.accompiendForms.push(accompiendForm);
       }
@@ -61,19 +59,22 @@ export class AddAppUserAccompiedComponent implements OnInit  {
         expire: [this.user.expire],
         accompanied:[this.user.accompaniedGuests.length],
       });
-
     }else{
       this.form = this.formBuilder.group({
       group: this.group,
       balance:[100],
       expire:[24],
-      name: [''],
-      email: [''],
-      mobile: [''], 
+      name: [""],
+      email: [""],
+      mobile: [""], 
       accompanied:[0],
       });
+      console.log(this.form.controls.email.value)
+      console.log(this.form.controls.mobile.value)
+    }
+    this.swipe();
+    this.calculateParams();
   }
-}
 
   calculateParams(){
     let credit = 0;
@@ -104,11 +105,17 @@ export class AddAppUserAccompiedComponent implements OnInit  {
   }
 
   async swipe() {
-    await new Promise<void>(resolve => setTimeout(()=>resolve(), 2500)).then(()=>
-    {
+    console.log(this.inUpdate)
+    if(this.inUpdate){
+      this.cardNumber = this.user.code;
       this.swiped = true;
-      this.cardNumber = Math.floor(Math.random() *  12354553225);
-    });
+    }else{
+      await new Promise<void>(resolve => setTimeout(()=>resolve(), 2500)).then(()=>
+      {
+        this.swiped = true;
+        this.cardNumber = Math.floor(Math.random() *  12354553225);
+      });
+    }
   }
 
   onNoClick(): void {
@@ -130,17 +137,13 @@ export class AddAppUserAccompiedComponent implements OnInit  {
         panelClass:"my-snack-bar-fail"
       });
     }else{
-
-      let accompiendGuest = new AccompiendGuest();
-      
       for(let i = 0 ; i < this.accompiendForms.length ; i++){
+        let accompiendGuest = new AccompiendGuest();
         accompiendGuest.name =  this.accompiendForms[i].controls.name.value;
         accompiendGuest.email =  this.accompiendForms[i].controls.email.value;
         accompiendGuest.mobile =  this.accompiendForms[i].controls.mobile.value;
-
         this.accompiendGuests.push(accompiendGuest);
       }
-
       this.dialogRef.close({
         name: this.form.controls.name.value,
         email: this.form.controls.email.value,
@@ -150,6 +153,8 @@ export class AddAppUserAccompiedComponent implements OnInit  {
         group: this.group,
         image: this.srcResult,
         cardCode:this.cardNumber,
+        sendEmail: this.sendEmail,
+        sendSMS: this.sendSMS,
         accompiendUsers: this.accompiendGuests
       });
     }
@@ -160,14 +165,21 @@ export class AddAppUserAccompiedComponent implements OnInit  {
     let accompiendForm:  FormGroup;
     accompiendForm = this.formBuilder.group({
         name: ['', [Validators.maxLength, Validators.required]], 
-        email: ['', [Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"), Validators.required]],
-        mobile: ['', [Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"), Validators.required]], 
+        email: ['', [Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
+        mobile: ['', [Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
     })
     this.accompiendForms.push(accompiendForm);
   }
 
+  toggleEditable(event, param){
+    if(param == 'sms'){
+      this.sendSMS = event.checked;
+    }else{
+      this.sendEmail = event.checked;
+    }
+  }
 
-   giveValues(){}
+  giveValues(){}
 
   hasRole(refernce){ }
 

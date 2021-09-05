@@ -67,7 +67,11 @@ export class LoyaltyService {
   }
 
   addApplicationUser(flage, isGeneric,  name, email, group,
-     image, userId, accompiendUsers, cardCode, mobile, balance, expire) {
+     image, userId, accompiendUsers, cardCode, mobile, balance, expire, sendEmail, sendSMS) {
+       console.log(email)
+       console.log(mobile)
+
+
     this.token = localStorage.getItem('auth_token');
     const formData: FormData = new FormData();
     formData.append('name', name);
@@ -79,6 +83,8 @@ export class LoyaltyService {
     formData.append('mobile', mobile);
     formData.append('balance', balance);
     formData.append('expire', expire);
+    formData.append('sendEmail', sendEmail)
+    formData.append('sendSMS', sendSMS)
     formData.append('accompaniedGuests', JSON.stringify(accompiendUsers));
     return this.http.post(Constants.ADD_APP_USER_URL  + "?addFlag=" + flage + "&isGeneric=" + isGeneric , formData, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
@@ -123,8 +129,14 @@ export class LoyaltyService {
 
   deductWallet(chargeFlag, userId, amount) {
     let token = localStorage.getItem('auth_token');
-    return this.http.post(Constants.DEDUCT_WALLET + "?userId=" + userId + "&amount=" + amount ,  {}, {headers: new HttpHeaders({Authorization: 'Bearer' + this.token})});
+    return this.http.post(Constants.DEDUCT_WALLET + "?userId=" + userId + "&amount=" + amount ,  {},
+     {headers: new HttpHeaders({Authorization: 'Bearer' + this.token})});
   }
 
+  sendSmsOrEmail(user, process){
+    let token = localStorage.getItem('auth_token');
+    return this.http.post(Constants.SEND_EMAIL_SMS + "?process=" + process, user ,
+       {headers: new HttpHeaders({Authorization: 'Bearer' + this.token})})
+  }
 }
 

@@ -128,3 +128,9 @@
 //   @extend .ng-tns-c71-8 !optional;
 //   @extend .ng-star-inserted !optional;
 // }
+
+::ng-deep .mat-checkbox-checked{
+   .mat-checkbox-background{
+    background-color: #f8bc72 !important;
+   }
+}

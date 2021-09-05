@@ -49,6 +49,7 @@ export class Constants {
     environment.apiHost + '/getAccSyncJobTypesByName'
 
   static GET_APPLICATION_URL = environment.apiHost + '/getApplications'
+  static SEND_EMAIL_SMS = environment.apiHost + '/sendSmsOrEmail'
   // static GET_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getSyncJobTypesByName';
   // static GET_ACC_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getAccSyncJobTypesByName';
 

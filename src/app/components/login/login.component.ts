@@ -5,7 +5,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { Constants } from 'src/app/models/constants';
 import { MatSnackBar } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
-import {User} from "../../models/user";
+import { User } from "../../models/user";
 import { AccountService } from 'src/app/services/account/account.service';
 import { Account } from '../../models/Account';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
@@ -18,14 +18,14 @@ import { SideNaveComponent } from '../side-nave/side-nave.component';
 })
 
 export class LoginComponent implements OnInit {
-  public user:User;
+  public user: User;
   public loginForm: FormGroup;
   loading = false;
   submitted = false;
   returnUrl: string;
   side: SideNaveComponent;
   // sideNav : SideNaveComponent;
-  account:Account;
+  account: Account;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -67,39 +67,42 @@ export class LoginComponent implements OnInit {
     const domainName = username.split("@");
 
     // if (domainName.length == 2) {
-      this.user= new User();
-      this.user.name="auth";
-      this.user.username=username;
-      this.user.password=password;
+    this.user = new User();
+    this.user.name = "auth";
+    this.user.username = username;
+    this.user.password = password;
 
-      this.authenticationService.login(this.user).toPromise().then((res: any) => {
-        localStorage.setItem('auth_token',res.access_token);
-        localStorage.setItem('refresh_token',res.refresh_token);
-        this.saveAccountERD();
-        // localStorage.setItem('user',JSON.stringify(this.user));
-        // this.getFeatures();
-        // this.side.refresh();
-      }).catch(err => {
-        localStorage.setItem('auth_token','');
-        localStorage.setItem('user','');
-        localStorage.setItem('accountERD','');
+    this.authenticationService.login(this.user).toPromise().then((res: any) => {
+      localStorage.setItem('auth_token', res.access_token);
+      localStorage.setItem('refresh_token', res.refresh_token);
+      this.saveAccountERD();
+      // localStorage.setItem('user',JSON.stringify(this.user));
+      // this.getFeatures();
+      // this.side.refresh();
+    }).catch(err => {
+      localStorage.setItem('auth_token', '');
+      localStorage.setItem('user', '');
+      localStorage.setItem('accountERD', '');
 
-        this.spinner.hide();
-        this.loading = false;
-        this.snackBar.open('Wrong Credentials.', null, {
-          duration: 2000,
-          horizontalPosition: 'center',
-        });
-        return;
+      this.spinner.hide();
+      this.loading = false;
+      this.snackBar.open('Wrong Credentials.', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
       });
+      return;
+    });
   }
 
 
   getRoles() {
-    this.accountService.getRoles("asfas", true).toPromise().then((res: any) =>{
-      localStorage.setItem('user', JSON.stringify(res["data"]));
-      localStorage.setItem('roles', JSON.stringify(res["data"]["roles"]));
-      
+    this.accountService.getRoles("asfas", true).toPromise().then((res: any) => {
+      if (res.data && res.data != null) {
+        localStorage.setItem('user', JSON.stringify(res.data));
+        if (res.data.roles && res.data.roles != null) {
+          localStorage.setItem('roles', JSON.stringify(res.data.roles));
+        }
+      }
       this.loading = false;
       this.side.setshouldRun(true);
       this.side.shouldRun = true;
@@ -107,70 +110,29 @@ export class LoginComponent implements OnInit {
       this.side.getOperationTypes();
       this.side.getApplication();
       this.router.navigate([Constants.WELCOME_PAGE]);
-      this.spinner.hide();  
-    }).catch(err => { 
-      console.log(err );
+      this.spinner.hide();
+    }).catch(err => {
+      console.log(err);
     })
   }
 
   saveAccountERD() {
     this.accountService.getAccount().toPromise().then((res: any) => {
       this.account = res;
-      localStorage.setItem('accountERD',res.erd);
-      localStorage.setItem('account', JSON.stringify(res));
-      localStorage.setItem('features', JSON.stringify(res["features"]));
-      this.getRoles(); 
 
+      if (res) {
+        localStorage.setItem('account', JSON.stringify(res));
+        if (res.erd && res.erd != null) {
+          localStorage.setItem('accountERD', res.erd);
+        }
+        if (res.features && res.features != null) {
+          localStorage.setItem('features', JSON.stringify(res.features));
+        }
+      }
+      this.getRoles();
     }).catch(err => {
       console.error(err);
     });
   }
-  /*
-  getFeatures() {
-    this.accountService.getAccountFeature(this.account.id).then((res: any) => {
-      localStorage.setItem('features', res['data']);
-      console.log(localStorage.getItem("features"));
-    }).catch(err =>{
-      let message = "Error happend, Please try again.";
-      if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
-        this.side.Logout();
-      }else if(err.message){
-        message = err.message;
-      }else if(err.error.message){
-        message = err.error.message;
-      }
-       this.snackBar.open(message, null, {
-         duration: 3000,
-         horizontalPosition: 'center',
-         panelClass:"my-snack-bar-fail"
-       });
-    });
-  }
-*/
-
-/*
-  getRoles() {
-    this.accountService.getRoles("", true).toPromise().then((res: any) =>{
-      localStorage.setItem("roles", res["data"]);
-      console.log(localStorage.getItem("roles"));
-    }).catch(err => {
-      let message = "Error happend, Please try again.";
-      if(err.status === 401){
-        message = ErrorMessages.SESSION_EXPIRED;
-        this.side.Logout();
-      }else if(err.message){
-        message = err.message;
-      }else if(err.error.message){
-        message = err.error.message;
-      }
-       this.snackBar.open(message, null, {
-         duration: 3000,
-         horizontalPosition: 'center',
-         panelClass:"my-snack-bar-fail"
-       });
-    })
-  }
-*/
 
 }

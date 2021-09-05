@@ -11,6 +11,7 @@ import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { VoucherHistory } from 'src/app/models/wallet/voucher-history';
 import { RevenueCenter } from 'src/app/models/RevenueCenter';
+import { AddAppUserAccompiedComponent } from '../add-app-user-accompied/add-app-user-accompied.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -63,12 +64,12 @@ export class UserProfileComponent implements OnInit {
       this.group = this.user["group"];
       this.simphonyDiscount = this.group["simphonyDiscount"];
       this.walletHistoryList.walletHistoryData = this.user["wallet"]["walletHistory"];
-    }else{
-        this.getApplicationUser();
+    } else {
+      this.getApplicationUser();
     }
   }
 
-  getApplicationUser(){
+  getApplicationUser() {
     this.walletHistoryList.showLoading = true;
     this.loyaltyService.getAppUser(localStorage.getItem('currentGuestId')).toPromise().then((result: any) => {
       this.walletHistoryList.showLoading = false;
@@ -92,25 +93,25 @@ export class UserProfileComponent implements OnInit {
 
   calculateParams(user) {
     this.credit = 0;
-    let balance = user.wallet.balance ;
+    let balance = user.wallet.balance;
     for (let i = 0; i < balance.length; i++) {
       this.credit = this.credit + balance[i]["amount"];
       let revenueCenters = balance[i].revenueCenters;
       for (let j = 0; j < revenueCenters.length; j++) {
-          if(!this.checkExistance(revenueCenters[j])){
-              this.revenueCenters.push(revenueCenters[j])
-          }
+        if (!this.checkExistance(revenueCenters[j])) {
+          this.revenueCenters.push(revenueCenters[j])
+        }
       }
     }
   }
 
-  checkExistance(revenue): Boolean{
+  checkExistance(revenue): Boolean {
     for (let j = 0; j < this.revenueCenters.length; j++) {
-          if(this.revenueCenters[j].revenueCenter == revenue.revenueCenter){
-            return true;
-          }
+      if (this.revenueCenters[j].revenueCenter == revenue.revenueCenter) {
+        return true;
       }
-   return false;
+    }
+    return false;
   }
 
   getVoucherData(newRes) {
@@ -122,13 +123,13 @@ export class UserProfileComponent implements OnInit {
     this.voucherCode = "756787237523";
   }
 
-  lessThanOrEqualZero(expiry): Boolean{
-    if(expiry < 0){
+  lessThanOrEqualZero(expiry): Boolean {
+    if (expiry < 0) {
       return true
-    }else if(expiry == 0){
+    } else if (expiry == 0) {
       return true
     }
-    else{
+    else {
       return false;
     }
   }
@@ -183,21 +184,17 @@ export class UserProfileComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(res => {
       this.walletHistoryList.showLoading = true;
-     this.sppiner.show()
+      this.sppiner.show()
       if (res) {
         console.log(res)
         this.loyaltyService.deductWallet(func, this.user.id, res.amount).toPromise().then((result: any) => {
           this.walletHistoryList.showLoading = false;
           this.getApplicationUser();
           this.sppiner.hide()
-          this.snackBar.open("Amount deducted from Wallet successfully.", null, {
-            duration: 2000,
-            horizontalPosition: 'center',
-            panelClass: "my-snack-bar-success"
-          });
+
         }).catch(err => {
           this.walletHistoryList.showLoading = false;
-         this.sppiner.hide()
+          this.sppiner.hide()
 
           let message = "";
           if (err.status === 401) {
@@ -223,63 +220,115 @@ export class UserProfileComponent implements OnInit {
     const dialogRef = this.dialog.open(EditWalletComponent, {
       width: '200px',
     });
-
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
       }
     })
   }
 
-  updateUserDialog() {
-    const dialogRef = this.dialog.open(AddAppUserComponent, {
-      width: '550px',
-      data: {
-        user: this.user
+  send(process) {
+    this.sppiner.show();
+    this.loyaltyService.sendSmsOrEmail(this.user, process).toPromise().then(res => {
+      this.sppiner.hide()
+      this.snackBar.open(process + " sent successfully.", null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass: "my-snack-bar-success"
+      });
+    }).catch(err => {
+      this.sppiner.hide()
+      let message = "Can't send " + process + ".";
+      if (err.status === 401) {
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sideNav.Logout();
+      } else if (err.error.message) {
+        message = err.error.message;
+      } else if (err.message) {
+        message = ErrorMessages.FAILED_TO_SAVE_CONFIG
       }
+      this.snackBar.open(message, null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass: "my-snack-bar-fail"
+      });
+    })
+  }
+
+  updateUserDialog(){
+    const dialogRef = this.dialog.open(AddAppUserAccompiedComponent, {
+          width : '900px',
+          data: {
+            user : this.user
+          }
     });
+    dialogRef.afterClosed().subscribe(res => {
+      if(res) {
+        this.sppiner.show()
+        if(res.group == undefined)
+        this.loyaltyService.addApplicationUser(false, true, res.name, res.email, res.group, res.image,
+                            this.user.id, res.accompiendUsers, res.cardCode, res.mobile, res.balance, res.expire, res.sendEmail, res.sendSMS).then((result: any) => {        
+            this.getApplicationUser();
+            this.sppiner.hide()
+            this.snackBar.open("User updated successfully.", null, {
+              duration: 2000,
+              horizontalPosition: 'center',
+              panelClass : "my-snack-bar-success"
+            });
+          }).catch(err => {
+            this.getApplicationUser();
+            this.sppiner.hide()
+            let message = "";
+            if(err.status === 401){
+              message = ErrorMessages.SESSION_EXPIRED;
+            }else if(err.error.message){
+              message = err.error.message;
+            }else if(err.message){
+              message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+            }
+            this.snackBar.open(message , null, {
+              duration: 3000,
+              horizontalPosition: 'center',
+              panelClass:"my-snack-bar-fail"
+            });
+          })
+      }
+    })
+  }
 
-    // dialogRef.afterClosed().subscribe(res => {
-    //   if(res) {
-    //     this.sp
-    //     if(res.group == undefined)
-    //     res.group = new Group();
-    //     this.loyaltyService.addApplicationUser(false, res.name, res.email, res.group, res.image,
-    //                                            this.usersList.selected[0].id).then((result: any) => {
-    //         this.loading = false;
-    //         this.usersList.showLoading = false;
-    //         this.newUser = new ApplicationUser();
-    //         this.usersList.selected = [];
-    //         this.getUsers();
-    //         this.snackBar.open("User updated successfully.", null, {
-    //           duration: 2000,
-    //           horizontalPosition: 'center',
-    //           panelClass : "my-snack-bar-success"
-    //         });
-    //       }).catch(err => {
-    //         this.loading = false;
-    //         this.usersList.showLoading = false;
-    //         this.usersList.selected = [];
+  deleteUsers(flage){
+    this.sppiner.show()
+    this.loyaltyService.deleteAppUsers(flage, [this.user]).then((res: any) => {
+      this.getApplicationUser();
+      this.sppiner.hide()
+      let message = "User deleted successfully.";
+      if(flage == 'false'){        
+        message = "User restored successfully.";
+      }
 
-    //         this.newUser = new ApplicationUser();
-
-    //         let message = "";
-    //         if(err.status === 401){
-    //           message = ErrorMessages.SESSION_EXPIRED;
-    //           this.sidNav.Logout();
-    //         }else if(err.error.message){
-    //           message = err.error.message;
-    //         }else if(err.message){
-    //           message = ErrorMessages.FAILED_TO_SAVE_CONFIG
-    //         }
-
-    //         this.snackBar.open(message , null, {
-    //           duration: 3000,
-    //           horizontalPosition: 'center',
-    //           panelClass:"my-snack-bar-fail"
-    //         });
-    //       })
-    //   }
-    // })
+      this.snackBar.open(message, null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-success"
+      });
+    }).catch(err => {
+      this.getApplicationUser();
+      this.sppiner.hide()
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
+      }
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
+      });
+    });
   }
 
   backClicked() {

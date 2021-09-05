@@ -75,7 +75,6 @@ export class EditWalletComponent implements OnInit {
   }
 
   toggleEditable(event, revenue){
-    console.log(this.form.controls.revenuecenters.value)
     if(event.target.checked){
       this.form.controls.revenuecenters.value.push(revenue)
     }else{

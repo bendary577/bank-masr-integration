@@ -14,6 +14,7 @@ export class ApplicationUser {
     public expire;
     public wallet;
     public mobile;
+    public code;
     public accompaniedGuests: AccompiendGuest[];
 
     public constructor() { }
