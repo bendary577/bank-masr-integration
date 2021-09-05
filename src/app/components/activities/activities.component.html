@@ -112,7 +112,8 @@
         </div>
 
         <div class="filter-buttons">
-            <div class="five-column" *ngIf="hasRole('see_group_filter')">
+
+            <div class="five-column">
                 <mat-form-field appearance="outline" class="example-full-width creditForm">
                     <input matInput placeholder="Start Date" formContrlName="fromDate" id="fromDate"
                         [(ngModel)]="fromDate" [matDatepicker]="fromDatepicker" readonly>
@@ -120,7 +121,7 @@
                     <mat-datepicker #fromDatepicker></mat-datepicker>
                 </mat-form-field>
             </div>
-            <div class="five-column" *ngIf="hasRole('see_group_filter')">
+            <div class="five-column">
                 <mat-form-field appearance="outline" class="example-full-width creditForm">
                     <input matInput placeholder="End Date" formContrlName="toDate" id="toDate" [(ngModel)]="toDate"
                         [matDatepicker]="toDatepicker" readonly>
@@ -134,7 +135,7 @@
                     <mat-select class="custom-select" [(ngModel)]="selectedGroupId">
                         <mat-option value="" selected>All Groups</mat-option>
                         <mat-option value="group.id" *ngFor="let group of groups">{{group.name}}</mat-option>
-                    </mat-select>
+                    </mat-select> 
                     <mat-label>Group</mat-label>
                 </mat-form-field>
             </div>
@@ -142,41 +143,42 @@
 
             <div class="five-column" *ngIf="hasRole('see_wallet_filter')">
                 <mat-form-field appearance="outline" class="example-full-width creditForm">
-                    <mat-select class="custom-select" [(ngModel)]="selectedRevenue">
+                    <input matInput placeholder="Revenue Center" formContrlName="revenue" id="revenue" [(ngModel)]= "selectedRevenue">
+                    <!-- <mat-select class="custom-select" [(ngModel)]="selectedRevenue">
                         <mat-option value="" selected>All Revenue Centers</mat-option>
-                        <mat-option value="revenue.revenueCenter" *ngFor="let revenue of revenues">
-                            {{revenue.revenueCenter}}
-                        </mat-option>
+                        <mat-option value="revenue.revenueCenter" *ngFor="let revenue of revenues"> {{revenue}} </mat-option>
                     </mat-select>
-                    <mat-label>Revenue Center</mat-label>
+                    <mat-label>Revenue Center</mat-label> -->
                 </mat-form-field>
             </div>
 
             <div class="five-column" *ngIf="hasRole('see_wallet_filter')">
                 <mat-form-field appearance="outline" class="example-full-width creditForm">
-                    <mat-select class="custom-select" [(ngModel)]="selectedGuestName">
+                    <input matInput placeholder="Guest Name" formContrlName="guestName" id="guestName" [(ngModel)]= "selectedGuestName">
+                    <!-- <mat-select class="custom-select" [(ngModel)]="selectedGuestName">
                         <mat-option value="" selected>All Guests</mat-option>
                         <mat-option value="guest.name" *ngFor="let guest of guests">{{guest.name}}</mat-option>
                     </mat-select>
-                    <mat-label>Guest Name</mat-label>
+                    <mat-label>Guest Name</mat-label> -->
                 </mat-form-field>
             </div>
 
             <div class="five-column" *ngIf="hasRole('see_wallet_filter')">
                 <mat-form-field appearance="outline" class="example-full-width creditForm">
-                    <mat-select class="custom-select" [(ngModel)]="selectedGuestName">
+                    <input matInput placeholder="Card Number" formContrlName="cardNumber" id="cardNumber" [(ngModel)]= "selectedCardNum">
+                    <!-- <mat-select class="custom-select" [(ngModel)]="selectedCardNum">
                         <mat-option value="" selected>All Card Numbers</mat-option>
                         <mat-option value="guest.code" *ngFor="let guest of guests">{{guest.code}}</mat-option>
                     </mat-select>
-                    <mat-label>Card Number</mat-label>
+                    <mat-label>Card Number</mat-label> -->
                 </mat-form-field>
             </div>
 
             <div class="five-column" *ngIf="hasRole('see_wallet_filter')">
                 <mat-form-field appearance="outline" class="example-full-width creditForm">
-                    <mat-select class="custom-select" [(ngModel)]="selectedGuestName">
+                    <mat-select class="custom-select" [(ngModel)]="selectedCardStatues">
                         <mat-option value="" selected>All Statues</mat-option>
-                        <mat-option value="statues(guest)" *ngFor="let guest of guests">{{statues(guest)}}</mat-option>
+                        <mat-option value="{{statue}}" *ngFor="let statue of statues">{{statue}}</mat-option>
                     </mat-select>
                     <mat-label>Card Statues</mat-label>
                 </mat-form-field>
@@ -187,16 +189,16 @@
                 <button mat-flat-button (click)="extractExcelFile()"
                     [disabled]="transactionList.transactionData.length == 0" class="filterButton">Export To
                     Excel</button>
-                <button mat-stroked-button (click)="getTransInRangAndGroup()" class="filterButton">Filter</button>
-                <button mat-stroked-button (click)="restFilters()" class="filterButton"
-                    [disabled]="validatefilter()">Reset</button>
+                <button mat-stroked-button (click)="getTransInRangAndGroup()" class="filterButton" *ngIf="hasRole('see_group_filter')">Filter</button>
+                <button mat-stroked-button (click)="filterTransactions()" class="filterButton" *ngIf="hasRole('see_wallet_filter')">Filter</button>
+                <button mat-stroked-button (click)="resetFilter()" class="filterButton" >Reset</button>
             </div>
 
-            <div class="filter-view" *ngIf="selection()">
+            <!-- <div class="filter-view" *ngIf="selection()">
                 <div class="filter-item" [ngStyle]="props" *ngFor="let selection of selections">
                     {{selection}}
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="main">
@@ -243,9 +245,9 @@
 
                 <ngx-datatable-column name="Card Status" [width]="90" *ngIf="hasRole('show_card_status')">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        <label *ngIf="!row.user.deleted && !lessThanOrEqualZero(row.user.expire) " class="active-state">Active</label>
+                        <label *ngIf="!row.user.deleted && !lessThanOrEqualZero(row.user.expired) " class="active-state">Active</label>
                         <label *ngIf="row.user.deleted" class="deleted-state">Deleted</label>
-                        <label *ngIf="!row.user.deleted && lessThanOrEqualZero(row.user.expire)"
+                        <label *ngIf="!row.user.deleted && lessThanOrEqualZero(row.user.expired)"
                             style="color: #1661a3;">Expired</label>
                     </ng-template>
                 </ngx-datatable-column>

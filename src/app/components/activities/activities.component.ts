@@ -12,7 +12,6 @@ import { ExcelService } from 'src/app/services/excel/excel.service';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { SideNaveComponent } from '../side-nave/side-nave.component';
-import { RevenueCenter } from 'src/app/models/RevenueCenter';
 
 @Component({
   selector: 'app-activities',
@@ -28,18 +27,20 @@ export class ActivitiesComponent implements OnInit {
   topGroups = [];
   revenues = [];
   expenses = [];
-  selectedGuest =  '';
   guests= [];
   fromDate = '';
   toDate= '';
   selectedGroupId =  '';
   selectedRevenue = '';
   selectedGuestName = '';
+  selectedCardNum = '';
+  selectedCardStatues= '';
   guestAverage = 0;
   selections = [];
+  statues = ['Active', 'Expired', 'Deleted']
   props = {  'background-color' : '#e07d93'  };
   props2 = {  'background-color' : '#3F51B5'  };
-  noFilter = true ; 
+  noFilter = true ;
 
   transactionList = {
     paginateData: true as boolean,
@@ -56,7 +57,9 @@ export class ActivitiesComponent implements OnInit {
     pagesFilter: [10, 25, 50, 75, 100],
     showLoading: true,
     inputSearch: '' as string,
-    transactionData: [] 
+    transactionData: [],
+    allTransactionDataBeforeFilter: [],
+    firstTime: true
   };
 
   public barChartOptions: ChartOptions = {
@@ -66,13 +69,11 @@ export class ActivitiesComponent implements OnInit {
   public rvcBarChartType: ChartType = 'bar';
   public rvcBarChartLegend = true;
   public rvcBarChartPlugins = [];
-  public rvcBlue= ["rgba(224, 108, 112, 1)",
-  "rgba(224, 108, 112, 1)",
-  "rgba(224, 108, 112, 1)"]
+  public rvcBlue= ["rgba(224, 108, 112, 1)", "rgba(224, 108, 112, 1)", "rgba(224, 108, 112, 1)"]
   public rvcBarChartData: ChartDataSets[] = [
     { data: this.expenses, label: 'Sales Per Revenue Center' },
   ];
-  
+
   // public traBarChartLabels: Label[] = ['1', '2', '3', '4','5','6','7','8','9','10','11'];
   // public traBarChartType: ChartType = 'bar';
   // public traBarChartLegend = true;
@@ -96,7 +97,7 @@ export class ActivitiesComponent implements OnInit {
   refresh() {
     location.reload();
   }
-  
+
   totalSpend(date){
     this.restFilters()
     this.spinner.show();
@@ -123,7 +124,7 @@ export class ActivitiesComponent implements OnInit {
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
-    });  
+    });
   }
 
   getTopUsers(){
@@ -147,7 +148,7 @@ export class ActivitiesComponent implements OnInit {
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
-    });  
+    });
   }
 
   getTopGroups(){
@@ -171,7 +172,7 @@ export class ActivitiesComponent implements OnInit {
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
-    });  
+    });
   }
 
   getTransactions(time){
@@ -179,6 +180,7 @@ export class ActivitiesComponent implements OnInit {
     this.transactionList.showLoading = true;
     this.loyaltyService.getTransactions( Constants.REDEEM_VOUCHER, time).toPromise().then((res: any) => {
       this.transactionList.transactionData = res;
+      this.allTransactionDataBeforeFilter();
       this.transactionList.showLoading = false;
       this.calculteChart();
       this.averageGuests();
@@ -203,6 +205,13 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
+  allTransactionDataBeforeFilter(){
+      if(this.transactionList.firstTime){
+        this.transactionList.firstTime = false;
+        this.transactionList.allTransactionDataBeforeFilter = this.transactionList.transactionData;
+      }
+  }
+
   getTransInRangAndGroup(){
     if((this.fromDate ==  '' || this.toDate == '') && this.selectedGroupId == ''){
       this.snackBar.open("Configure start date, end date and group correctly." , null, {
@@ -224,7 +233,7 @@ export class ActivitiesComponent implements OnInit {
     this.transactionList.showLoading = true;
 
     this.loyaltyService.getTotalTransInRang(this.fromDate, this.toDate, this.selectedGroupId).toPromise().then((res: any) => {
-      
+
       this.transactionList.transactionData = res["transactions"];
       this.totalSpendM = res["totalSpend"];
 
@@ -252,11 +261,7 @@ export class ActivitiesComponent implements OnInit {
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
-    });  
-  }
-
-  validatefilter(){
-    return false;
+    });
   }
 
   restFilters(){
@@ -266,7 +271,6 @@ export class ActivitiesComponent implements OnInit {
   }
 
   extractExcelFile(){
-
     this.spinner.show();
     this.excelService.exporttransactionExcel( this.transactionList.transactionData).subscribe(
       res => {
@@ -308,7 +312,6 @@ export class ActivitiesComponent implements OnInit {
       if(this.notExistInRevenues(revenue)){
         for(let j = 0 ; j < transactions.length; j++){
           if(transactions[j].revenueCentreName == revenue && revenue != ""){
-            console.log("A")
             expenses = expenses + transactions[j].afterDiscount;
           }
         }
@@ -331,9 +334,6 @@ export class ActivitiesComponent implements OnInit {
     let guests = [];
     let transactions= this.transactionList.transactionData;
     for(let i = 0; i < transactions.length; i++){
-      console.log(guests.indexOf(transactions[i].code) <= -1)
-     console.log(guests.indexOf(transactions[i].code))
-
       if(guests.indexOf(transactions[i].code) <= -1){
         this.guestAverage += 1;
         guests.push(transactions[i].code)
@@ -341,26 +341,51 @@ export class ActivitiesComponent implements OnInit {
     }
    }
 
-  closeCard(){
+   filterTransactions(){
+    const transactions = this.transactionList.transactionData;
+
+    if(this.selectedCardNum != ""){
+      console.log("A")
+        const result = transactions.filter(s => s.code.includes(this.selectedCardNum));
+        this.transactionList.transactionData = result
+    }
+
+    if(this.selectedGuestName != ""){
+      const result = transactions.filter(s => s.user.name.includes(this.selectedGuestName));
+      this.transactionList.transactionData = result
+    }
+    
+    if(this.selectedRevenue != ""){
+      const result = transactions.filter(s => s.revenueCentreName.includes(this.selectedRevenue));
+      this.transactionList.transactionData = result
+    }
+
+    if(this.selectedCardStatues != ""){
+      if(this.selectedCardStatues == 'Deleted'){
+        const result = transactions.filter(s => s.user.deleted.includes(true));
+        this.transactionList.transactionData = result
+      }else if(this.selectedCardStatues == 'Active'){
+        const result = transactions.filter(s => s.user.deleted.includes(false));
+        this.transactionList.transactionData = result;
+      }else if(this.selectedCardStatues == 'Expired'){
+        const result = transactions.filter(s => s.user.expired.includes(0));
+        this.transactionList.transactionData = result;
+      }
+    }
+
   }
 
-  filterByGuestName(){
-    // this.getUsers();
-    // this.usersList.usersData = [this.usersList.usersData[0]]
-    // console.log(this.usersList.usersData)
-    // this.guestNames.push(this.selectedGuest);
-  }
+  resetFilter(){
+    this.selectedGroupId =  '';
+    this.selectedRevenue = '';
+    this.selectedGuestName = '';
+    this.selectedCardNum = '';
+    this.selectedCardStatues= '';
+    this.transactionList.transactionData =  this.transactionList.allTransactionDataBeforeFilter;
+    }
 
-  statues(guest){ 
-  }
-
-  selection(){
-    return false;
-  }
-
-  public lessThanOrEqualZero(expiry): Boolean{
-    console.log(expiry)
-    if(expiry <= 0){
+  public lessThanOrEqualZero(expired): Boolean{
+    if(expired){
       return true
     }
     return false;

@@ -123,15 +123,11 @@ export class UserProfileComponent implements OnInit {
     this.voucherCode = "756787237523";
   }
 
-  lessThanOrEqualZero(expiry): Boolean {
-    if (expiry < 0) {
-      return true
-    } else if (expiry == 0) {
+  lessThanOrEqualZero(expired): Boolean {
+    if (expired) {
       return true
     }
-    else {
       return false;
-    }
   }
 
   chargeWallet(func) {
