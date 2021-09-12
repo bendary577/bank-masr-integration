@@ -6,7 +6,7 @@
     <button mat-flat-button class="groups-buttons" (click)="updateUserDialog()" [disabled]="validateUpdateUser()">Update
         Guest</button>
     <button mat-flat-button class="groups-buttons" (click)="resendQRCode()"
-        [disabled]="usersList.selected.length != 1">Resend QR Code</button>
+        [disabled]="usersList.selected.length != 1" *ngIf="hasRole('resend_QR_code')">Resend QR Code</button>
     <button mat-flat-button class="groups-buttons" (click)="deleteUsers('true')"
         [disabled]="validateDeleteUsers()">Delete Guest</button>
     <button mat-flat-button class="groups-buttons" (click)="deleteUsers('false')"

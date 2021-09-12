@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Constants } from 'src/app/models/constants';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import * as moment from 'moment';
 import { saveAs } from 'file-saver';
@@ -25,23 +25,23 @@ export class ActivitiesComponent implements OnInit {
   users = [];
   groups = [];
   topGroups = [];
-  topResturants = [];
+  topRevenueCenters = [];
   revenues = [];
   expenses = [];
-  guests= [];
+  guests = [];
   fromDate = '';
-  toDate= '';
-  selectedGroupId =  '';
+  toDate = '';
+  selectedGroupId = '';
   selectedRevenue = '';
   selectedGuestName = '';
   selectedCardNum = '';
-  selectedCardStatues= '';
+  selectedCardStatues = '';
   guestAverage = 0;
   selections = [];
   statues = ['Active', 'Expired', 'Deleted']
-  props = {  'background-color' : '#e07d93'  };
-  props2 = {  'background-color' : '#3F51B5'  };
-  noFilter = true ;
+  props = { 'background-color': '#e07d93' };
+  props2 = { 'background-color': '#3F51B5' };
+  noFilter = true;
 
   transactionList = {
     paginateData: true as boolean,
@@ -70,7 +70,7 @@ export class ActivitiesComponent implements OnInit {
   public rvcBarChartType: ChartType = 'bar';
   public rvcBarChartLegend = true;
   public rvcBarChartPlugins = [];
-  public rvcBlue= ["rgba(224, 108, 112, 1)", "rgba(224, 108, 112, 1)", "rgba(224, 108, 112, 1)"]
+  public rvcBlue = ["rgba(224, 108, 112, 1)", "rgba(224, 108, 112, 1)", "rgba(224, 108, 112, 1)"]
   public rvcBarChartData: ChartDataSets[] = [
     { data: this.expenses, label: 'Sales Per Revenue Center' },
   ];
@@ -85,7 +85,7 @@ export class ActivitiesComponent implements OnInit {
   // ];
 
   constructor(public snackBar: MatSnackBar, private router: Router, private _location: Location,
-    private sidNav: SideNaveComponent,private loyaltyService: LoyaltyService, private excelService: ExcelService , private spinner: NgxSpinnerService) { }
+    private sidNav: SideNaveComponent, private loyaltyService: LoyaltyService, private excelService: ExcelService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.getTopUsers();
@@ -99,7 +99,7 @@ export class ActivitiesComponent implements OnInit {
     location.reload();
   }
 
-  totalSpend(date){
+  totalSpend(date) {
     this.restFilters()
     this.spinner.show();
     this.loyaltyService.getTotalSpend(date).toPromise().then((res: any) => {
@@ -109,77 +109,77 @@ export class ActivitiesComponent implements OnInit {
     }).catch(err => {
       this.spinner.hide();
       let message = "";
-      if(err.status === 401){
+      if (err.status === 401) {
         message = ErrorMessages.SESSION_EXPIRED;
         this.sidNav.Logout();
-      } else if (err.error.message){
+      } else if (err.error.message) {
         message = err.error.message;
-      } else if (err.message){
+      } else if (err.message) {
         message = err.message;
       } else {
         message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
       }
 
-      this.snackBar.open(message , null, {
+      this.snackBar.open(message, null, {
         duration: 3000,
         horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
+        panelClass: "my-snack-bar-fail"
       });
     });
   }
 
-  getTopUsers(){
+  getTopUsers() {
     this.loyaltyService.getTopUsers().toPromise().then((res: any) => {
       this.users = res;
     }).catch(err => {
       let message = "";
-      if(err.status === 401){
+      if (err.status === 401) {
         message = ErrorMessages.SESSION_EXPIRED;
         this.sidNav.Logout();
-      } else if (err.error.message){
+      } else if (err.error.message) {
         message = err.error.message;
-      } else if (err.message){
+      } else if (err.message) {
         message = err.message;
       } else {
         message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
       }
 
-      this.snackBar.open(message , null, {
+      this.snackBar.open(message, null, {
         duration: 3000,
         horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
+        panelClass: "my-snack-bar-fail"
       });
     });
   }
 
-  getTopGroups(){
+  getTopGroups() {
     this.loyaltyService.getTopGroups().toPromise().then((res: any) => {
       this.groups = res;
       this.topGroups = this.groups.slice(0, 3)
     }).catch(err => {
       let message = "";
-      if(err.status === 401){
+      if (err.status === 401) {
         message = ErrorMessages.SESSION_EXPIRED;
         this.sidNav.Logout();
-      } else if (err.error.message){
+      } else if (err.error.message) {
         message = err.error.message;
-      } else if (err.message){
+      } else if (err.message) {
         message = err.message;
       } else {
         message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
       }
-      this.snackBar.open(message , null, {
+      this.snackBar.open(message, null, {
         duration: 3000,
         horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
+        panelClass: "my-snack-bar-fail"
       });
     });
   }
 
-  getTransactions(time){
+  getTransactions(time) {
     this.transactionList.transactionData = [];
     this.transactionList.showLoading = true;
-    this.loyaltyService.getTransactions( Constants.REDEEM_VOUCHER, time).toPromise().then((res: any) => {
+    this.loyaltyService.getTransactions(Constants.REDEEM_VOUCHER, time).toPromise().then((res: any) => {
       this.transactionList.transactionData = res;
       this.allTransactionDataBeforeFilter();
       this.transactionList.showLoading = false;
@@ -188,45 +188,45 @@ export class ActivitiesComponent implements OnInit {
     }).catch(err => {
       this.transactionList.showLoading = false;
       let message = "";
-      if(err.status === 401){
+      if (err.status === 401) {
         message = ErrorMessages.SESSION_EXPIRED;
         this.sidNav.Logout();
-      } else if (err.error.message){
+      } else if (err.error.message) {
         message = err.error.message;
-      } else if (err.message){
+      } else if (err.message) {
         message = err.message;
       } else {
         message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
       }
-      this.snackBar.open(message , null, {
+      this.snackBar.open(message, null, {
         duration: 3000,
         horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
+        panelClass: "my-snack-bar-fail"
       });
     });
   }
 
-  allTransactionDataBeforeFilter(){
-      if(this.transactionList.firstTime){
-        this.transactionList.firstTime = false;
-        this.transactionList.allTransactionDataBeforeFilter = this.transactionList.transactionData;
-      }
+  allTransactionDataBeforeFilter() {
+    if (this.transactionList.firstTime) {
+      this.transactionList.firstTime = false;
+      this.transactionList.allTransactionDataBeforeFilter = this.transactionList.transactionData;
+    }
   }
 
-  getTransInRangAndGroup(){
-    if((this.fromDate ==  '' || this.toDate == '') && this.selectedGroupId == ''){
-      this.snackBar.open("Configure start date, end date and group correctly." , null, {
+  getTransInRangAndGroup() {
+    if ((this.fromDate == '' || this.toDate == '') && this.selectedGroupId == '') {
+      this.snackBar.open("Configure start date, end date and group correctly.", null, {
         duration: 3000,
         horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
+        panelClass: "my-snack-bar-fail"
       });
       return null;
     }
-    if( this.fromDate !=  undefined && this.toDate != undefined && (moment(this.toDate.toString()).diff(moment(this.fromDate.toString()), 'day') < 0 )){
-      this.snackBar.open("Configure start date and end date correctly, \n start date can't be after end date." , null, {
+    if (this.fromDate != undefined && this.toDate != undefined && (moment(this.toDate.toString()).diff(moment(this.fromDate.toString()), 'day') < 0)) {
+      this.snackBar.open("Configure start date and end date correctly, \n start date can't be after end date.", null, {
         duration: 3000,
         horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
+        panelClass: "my-snack-bar-fail"
       });
       return null;
     }
@@ -239,50 +239,50 @@ export class ActivitiesComponent implements OnInit {
       this.totalSpendM = res["totalSpend"];
 
       this.transactionList.showLoading = false;
-      this.snackBar.open("Transactions filterd successfully." , null, {
+      this.snackBar.open("Transactions filterd successfully.", null, {
         duration: 3000,
         horizontalPosition: 'center',
-        panelClass:"my-snack-bar-success"
+        panelClass: "my-snack-bar-success"
       });
     }).catch(err => {
       this.transactionList.showLoading = false;
       let message = "";
-      if(err.status === 401){
+      if (err.status === 401) {
         message = ErrorMessages.SESSION_EXPIRED;
         this.sidNav.Logout();
-      } else if (err.error.message){
+      } else if (err.error.message) {
         message = err.error.message;
-      } else if (err.message){
+      } else if (err.message) {
         message = err.message;
       } else {
         message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
       }
-      this.snackBar.open(message , null, {
+      this.snackBar.open(message, null, {
         duration: 3000,
         horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
+        panelClass: "my-snack-bar-fail"
       });
     });
   }
 
-  restFilters(){
+  restFilters() {
     this.fromDate = '';
     this.toDate = '';
     this.selectedGroupId = '';
   }
 
-  extractExcelFile(){
+  extractExcelFile() {
     this.spinner.show();
-    this.excelService.exporttransactionExcel( this.transactionList.transactionData).subscribe(
+    this.excelService.exporttransactionExcel(this.transactionList.transactionData).subscribe(
       res => {
-        const blob = new Blob([res], { type : 'application/vnd.ms.excel' });
+        const blob = new Blob([res], { type: 'application/vnd.ms.excel' });
         const file = new File([blob], "Transactions" + '.xlsx', { type: 'application/vnd.ms.excel' });
         saveAs(file);
 
         this.snackBar.open("Export Successfully", null, {
           duration: 2000,
           horizontalPosition: 'center',
-          panelClass:"my-snack-bar-success"
+          panelClass: "my-snack-bar-success"
         });
         this.spinner.hide();
 
@@ -291,103 +291,103 @@ export class ActivitiesComponent implements OnInit {
         this.spinner.hide();
 
         console.error(err)
-        this.snackBar.open("Fail to export, Please try agian" , null, {
+        this.snackBar.open("Fail to export, Please try agian", null, {
           duration: 2000,
           horizontalPosition: 'center',
-          panelClass:"my-snack-bar-fail"
+          panelClass: "my-snack-bar-fail"
         });
       }
-   );
+    );
   }
 
-  hasRole(reference){
+  hasRole(reference) {
     return this.sidNav.hasRole(reference);
   }
 
-  calculteChart(){
+  calculteChart() {
     let resturants = [];
     let transactions = this.transactionList.transactionData;
     let revenue;
-    for(let i = 0; i < transactions.length; i++){
+    for (let i = 0; i < transactions.length; i++) {
       revenue = transactions[i].revenueCentreName;
       let expenses = 0;
-      if(this.notExistInRevenues(revenue)){
-        for(let j = 0 ; j < transactions.length; j++){
-          if(transactions[j].revenueCentreName == revenue && revenue != ""){
+      if (this.notExistInRevenues(revenue)) {
+        for (let j = 0; j < transactions.length; j++) {
+          if (transactions[j].revenueCentreName == revenue && revenue != "") {
             expenses = expenses + transactions[j].afterDiscount;
           }
         }
         this.revenues.push(revenue);
         this.expenses.push(expenses);
-    }
+      }
     }
 
+    let revenueLength = this.revenues.length
+    if (revenueLength > 5) { revenueLength = 5 }
+    this.revenues = this.revenues.slice(0, revenueLength)
+    this.expenses = this.expenses.slice(0, revenueLength)
+
     let length = this.revenues.length;
-    if(length > 3){length = 3}
-    var topValues = this.expenses.sort((a,b) => b-a).slice(0,length);
-    this.topResturants = [this.revenues[this.expenses.indexOf(topValues[0])],
+    if (length > 3) { length = 3 }
+    var topValues = this.expenses.sort((a, b) => b - a).slice(0, length);
+    this.topRevenueCenters = [this.revenues[this.expenses.indexOf(topValues[0])],
     this.revenues[this.expenses.indexOf(topValues[1])], this.revenues[this.expenses.indexOf(topValues[2])]]
   }
 
-  notExistInRevenues(revenue): Boolean{
-    for(let i = 0; i < this.revenues.length; i++){
-      if(this.revenues[i] == revenue){
+  notExistInRevenues(revenue): Boolean {
+    for (let i = 0; i < this.revenues.length; i++) {
+      if (this.revenues[i] == revenue) {
         return false;
       }
     }
     return true;
   }
 
-  averageGuests(){
+  averageGuests() {
     let guests = [];
-    let transactions= this.transactionList.transactionData;
-    for(let i = 0; i < transactions.length; i++){
-      if(guests.indexOf(transactions[i].code) <= -1){
+    let transactions = this.transactionList.transactionData;
+    for (let i = 0; i < transactions.length; i++) {
+      if (guests.indexOf(transactions[i].code) <= -1) {
         this.guestAverage += 1;
         guests.push(transactions[i].code)
       }
     }
-   }
+  }
 
-   filterTransactions(){
-
-    // console.log("this.item : " + new Date(item.transactionDate).getTime())
-    // console.log("this.item from : " + (new Date(item.transactionDate).getTime() >= new Date(this.fromDate).getTime()))
-    // console.log("this.item from : " + (new Date(item.transactionDate).getTime() <= new Date(this.toDate).getTime()))
+  filterTransactions() {
     const transactions = this.transactionList.transactionData;
-
-    if(this.fromDate != "" && this.toDate != ""){
+    if (this.fromDate != "" && this.toDate != "") {
       console.log("this.fromDate : " + new Date(this.fromDate).getTime())
       console.log("this.toDate : " + new Date(this.toDate).getTime())
       this.transactionList.transactionData = transactions.filter(item => {
         new Date(item.transactionDate).getTime() >= new Date(this.fromDate).getTime() &&
-        new Date(item.transactionDate).getTime() <= new Date(this.toDate).getTime()
-      }); 
+          new Date(item.transactionDate).getTime() <= new Date(this.toDate).getTime()
+      });
     }
 
-    if(this.selectedCardNum != ""){
-        const result = transactions.filter(s => s.code.includes(this.selectedCardNum));
-        this.transactionList.transactionData = result
+    if (this.selectedCardNum != "") {
+      const result = transactions.filter(s => s.code.includes(this.selectedCardNum));
+      this.transactionList.transactionData = result
     }
 
-    if(this.selectedGuestName != ""){
+    if (this.selectedGuestName != "") {
       const result = transactions.filter(s => s.user.name.includes(this.selectedGuestName));
       this.transactionList.transactionData = result
     }
-    
-    if(this.selectedRevenue != ""){
+
+    if (this.selectedRevenue != "") {
       const result = transactions.filter(s => s.revenueCentreName.includes(this.selectedRevenue));
       this.transactionList.transactionData = result
     }
 
-    if(this.selectedCardStatues != ""){
-      if(this.selectedCardStatues == 'Deleted'){
+    if (this.selectedCardStatues != "") {
+      if (this.selectedCardStatues == 'Deleted') {
         const result = transactions.filter(s => s.user.deleted.includes(true));
         this.transactionList.transactionData = result
-      }else if(this.selectedCardStatues == 'Active'){
+      } else if (this.selectedCardStatues == 'Active') {
         const result = transactions.filter(s => s.user.deleted.includes(false));
         this.transactionList.transactionData = result;
-      }else if(this.selectedCardStatues == 'Expired'){
+      } else if (this.selectedCardStatues == 'Expired') {
         const result = transactions.filter(s => s.user.expired.includes(0));
         this.transactionList.transactionData = result;
       }
@@ -395,17 +395,17 @@ export class ActivitiesComponent implements OnInit {
 
   }
 
-  resetFilter(){
-    this.selectedGroupId =  '';
+  resetFilter() {
+    this.selectedGroupId = '';
     this.selectedRevenue = '';
     this.selectedGuestName = '';
     this.selectedCardNum = '';
-    this.selectedCardStatues= '';
-    this.transactionList.transactionData =  this.transactionList.allTransactionDataBeforeFilter;
-    }
+    this.selectedCardStatues = '';
+    this.transactionList.transactionData = this.transactionList.allTransactionDataBeforeFilter;
+  }
 
-  public lessThanOrEqualZero(expired): Boolean{
-    if(expired){
+  public lessThanOrEqualZero(expired): Boolean {
+    if (expired) {
       return true
     }
     return false;
