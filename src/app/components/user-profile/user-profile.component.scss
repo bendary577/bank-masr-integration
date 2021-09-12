@@ -107,8 +107,13 @@ mat-card{
   color: #4d4d4d;
 }
 
+.user-btn-container{
+  margin-top: 100px;
+}
+
 .user-btn{
-  margin-top: 8%;
+  border-radius: 25px;
+  margin-top: 10px;
   width: 100px;
   background-color: #ffddb5;
   color: rgb(0, 0, 0);
@@ -128,7 +133,7 @@ mat-card{
   margin-top: 70px;
   margin-left: 3%;
   width: 70%; 
-  height: 100%; 
+  height: 600px; 
   float: right;
 }
 

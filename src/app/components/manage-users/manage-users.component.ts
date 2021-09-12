@@ -134,6 +134,85 @@ export class ManageUsersComponent implements OnInit {
     });
   }
 
+  deleteOneUsers(guest, flage){
+    this.usersList.showLoading = true;
+    this.loyaltyService.deleteAppUsers(flage, [guest]).then((res: any) => {
+      this.getUsers();
+      this.usersList.selected = [];
+      this.usersList.showLoading = false;
+
+      let message = "User deleted successfully.";
+      if(flage == 'false'){        
+        message = "User restored successfully.";
+      }
+
+      this.snackBar.open(message, null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-success"
+      });
+    }).catch(err => {
+      this.usersList.showLoading = false;
+      this.usersList.selected = [];
+      this.getUsers();
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
+      }
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
+      });
+    });
+  }
+
+  suspendGuest(guest, susFlag){
+    this.usersList.showLoading = true;
+    this,this.loyaltyService.suspendGuest(guest, susFlag).then((res: any) => {
+      this.usersList.selected = [];
+      this.getUsers()
+      this.usersList.showLoading = false;
+      let message = "Guest suspended successfully.";
+      if(!susFlag){        
+        message = "Guest actived successfully.";
+      }
+      this.snackBar.open(message, null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-success"
+      });
+    }).catch(err =>{
+      this.usersList.selected = [];
+      this.getUsers()
+      this.usersList.showLoading = false;
+      let message = "";
+      if(err.status === 401){
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
+      } else if (err.error.message){
+        message = err.error.message;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
+      }
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'right',
+        panelClass:"my-snack-bar-fail"
+      });
+    })
+
+  }
+
   addUserDialog(type){
 
     let dialogRef ;

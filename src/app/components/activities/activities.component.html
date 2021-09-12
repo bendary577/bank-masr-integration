@@ -18,7 +18,7 @@
             </mat-card>
         </div>
 
-        <div class="column">
+        <div class="column" *ngIf="hasRole('show_group')">
             <mat-card class="stat-card">
                 <mat-card-content>
                     <h2>Top Groups</h2>
@@ -30,6 +30,25 @@
                         <div class="column" *ngFor="let group of topGroups">
                             <img class="user-img" src={{group.logoUrl}} alt="image">
                             <p class="user-name">{{group.name}}</p>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="column" *ngIf="hasRole('show_statistic')">
+            <mat-card class="stat-card">
+                <mat-card-content>
+                    <h2>Top Resturants</h2>
+                    <div [hidden]="topResturants.length != 0">
+                        <img class="user-img" src="../../../assets/restaurantImg.png" alt="image">
+                        <p class="user-name">There is no Resturants yet</p>
+                    </div>
+                    <div class="row">
+                        <div class="column" *ngFor="let resturant of topResturants">
+                            <div *ngIf="resturant != '' ">
+                            <img class="user-img" src="../../../assets/restaurantImg.png" alt="image">
+                            <p class="user-name">{{resturant}}</p></div>
                         </div>
                     </div>
                 </mat-card-content>
@@ -86,7 +105,7 @@
         <div class="two-column" *ngIf="transactionList.transactionData.length">
             <mat-card class="chart-card">
                 <mat-card-content>
-                    <div style="display: block; width: 95%; height: 95%;">
+                    <div style="display: block; width: 100%; height: 95%;">
                         <img src="../../../assets/group.png" class="people-img">
                         <img src="../../../assets/increase.png" class="chart-img">
                         <h3 class="guest-chart">

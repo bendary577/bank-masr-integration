@@ -136,7 +136,13 @@ export class LoyaltyService {
   sendSmsOrEmail(user, process){
     let token = localStorage.getItem('auth_token');
     return this.http.post(Constants.SEND_EMAIL_SMS + "?process=" + process, user ,
-       {headers: new HttpHeaders({Authorization: 'Bearer' + this.token})})
+       {headers: new HttpHeaders({Authorization: 'Bearer' + token})})
+  }
+
+  suspendGuest(guest, susFlag){
+    this.token = localStorage.getItem('auth_token');
+    return this.http.post(Constants.SUSPEND_GEUST_URL + "?susFlag=" + susFlag, guest,
+       {headers: new HttpHeaders({Authorization: 'Bearer' + this.token})}).toPromise();
   }
 }
 

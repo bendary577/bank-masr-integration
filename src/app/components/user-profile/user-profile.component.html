@@ -41,9 +41,13 @@
                                 <td class="title" style="float: left;">Status </td>
                                 <td> </td>
                                 <td class="res" style="float: right;">
-                                    <label *ngIf="!user.deleted && !lessThanOrEqualZero(user.expired) " class="active-state">Active</label>
+                                    <label *ngIf="!user.deleted && !lessThanOrEqualZero(user.expired) && !user.suspended "
+                                        class="active-state">Active</label>
+                                    <label *ngIf="!user.deleted && !lessThanOrEqualZero(user.expired) && user.suspended"
+                                         style="color: #1661a3;">Suspended</label>
                                     <label *ngIf="user.deleted" class="deleted-state">Deleted</label>
-                                    <label *ngIf="!user.deleted && lessThanOrEqualZero(user.expired)"  style="color: #1661a3;">Expired</label>
+                                    <label *ngIf="!user.deleted && lessThanOrEqualZero(user.expired)"
+                                        style="color: #1661a3;">Expired</label>
                                 </td>
                             </tr>
                             <tr>
@@ -58,9 +62,13 @@
                             </tr>
                         </table>
                     </div>
-                    <button class="user-btn" (click)="updateUserDialog()" mat-raised-button>Update</button>
-                    <button class="user-btn" (click)="deleteUsers('true')" *ngIf="!user.deleted" mat-raised-button>Delete</button>
-                    <button class="user-btn" (click)="deleteUsers('false')" *ngIf="user.deleted" mat-raised-button>Restore</button>
+                    <div class="user-btn-container">
+                        <button class="user-btn" (click)="updateUserDialog()" mat-raised-button>Update</button>
+                        <button class="user-btn" (click)="deleteUsers('true')" *ngIf="!user.deleted"
+                            mat-raised-button>Delete</button>
+                        <button class="user-btn" (click)="deleteUsers('false')" *ngIf="user.deleted"
+                            mat-raised-button>Restore</button>
+                    </div>
                 </mat-card-content>
             </mat-card>
         </div>
@@ -82,7 +90,8 @@
                                 </div>
                             </h3>
                             <button class="filter-btn" (click)="chargeWallet('add')" mat-raised-button>Charge</button>
-                            <button class="filter-btn" (click)="deductWallet('deduct')" mat-raised-button>Deduct</button>
+                            <button class="filter-btn" (click)="deductWallet('deduct')"
+                                mat-raised-button>Deduct</button>
                         </div>
 
                     </mat-card-content>
@@ -143,7 +152,7 @@
                     [scrollbarH]="true" [rows]="walletHistoryList.walletHistoryData"
                     [selected]="walletHistoryList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false"
                     [scrollbarH]="true">
-                    
+
                     <ngx-datatable-column name="Opreation Type">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                             {{row.operation}}

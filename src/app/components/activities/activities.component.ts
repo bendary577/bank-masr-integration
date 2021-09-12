@@ -25,6 +25,7 @@ export class ActivitiesComponent implements OnInit {
   users = [];
   groups = [];
   topGroups = [];
+  topResturants = [];
   revenues = [];
   expenses = [];
   guests= [];
@@ -304,6 +305,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   calculteChart(){
+    let resturants = [];
     let transactions = this.transactionList.transactionData;
     let revenue;
     for(let i = 0; i < transactions.length; i++){
@@ -319,6 +321,12 @@ export class ActivitiesComponent implements OnInit {
         this.expenses.push(expenses);
     }
     }
+
+    let length = this.revenues.length;
+    if(length > 3){length = 3}
+    var topValues = this.expenses.sort((a,b) => b-a).slice(0,length);
+    this.topResturants = [this.revenues[this.expenses.indexOf(topValues[0])],
+    this.revenues[this.expenses.indexOf(topValues[1])], this.revenues[this.expenses.indexOf(topValues[2])]]
   }
 
   notExistInRevenues(revenue): Boolean{
@@ -342,10 +350,22 @@ export class ActivitiesComponent implements OnInit {
    }
 
    filterTransactions(){
+
+    // console.log("this.item : " + new Date(item.transactionDate).getTime())
+    // console.log("this.item from : " + (new Date(item.transactionDate).getTime() >= new Date(this.fromDate).getTime()))
+    // console.log("this.item from : " + (new Date(item.transactionDate).getTime() <= new Date(this.toDate).getTime()))
     const transactions = this.transactionList.transactionData;
 
+    if(this.fromDate != "" && this.toDate != ""){
+      console.log("this.fromDate : " + new Date(this.fromDate).getTime())
+      console.log("this.toDate : " + new Date(this.toDate).getTime())
+      this.transactionList.transactionData = transactions.filter(item => {
+        new Date(item.transactionDate).getTime() >= new Date(this.fromDate).getTime() &&
+        new Date(item.transactionDate).getTime() <= new Date(this.toDate).getTime()
+      }); 
+    }
+
     if(this.selectedCardNum != ""){
-      console.log("A")
         const result = transactions.filter(s => s.code.includes(this.selectedCardNum));
         this.transactionList.transactionData = result
     }
