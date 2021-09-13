@@ -1,6 +1,4 @@
-<h3 mat-dialog-title>Simphony Map Tables</h3>
-<br>
-<div>
+<div style="margin-top: 100px;">
     <mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>
@@ -11,14 +9,15 @@
         <div class="container">
             <form class="my-form">
                 <div>
-                    <mat-form-field class="example-full-width">
-                        <input matInput id="discountId" name="discountId" style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="eg. 1234" [(ngModel)]="newRateCode.discountId">
+                    <mat-form-field appearance="outline" class="example-full-width dateForm">
+                        <input matInput id="discountId" name="discountId" style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;"
+                         placeholder="Discount ID" [(ngModel)]="newRateCode.discountId">
                     </mat-form-field>
-                    <mat-form-field class="example-full-width">
-                        <input matInput id="discountRate" name="discountRate"  type="number" min="0" step="0.1" style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="eq. 5 %" [(ngModel)]="newRateCode.discountRate">
+                    <mat-form-field appearance="outline" class="example-full-width dateForm">
+                        <input matInput id="discountRate" name="discountRate" style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;"
+                         placeholder="Discount Rate" [(ngModel)]="newRateCode.discountRate">
                     </mat-form-field>
-
-                    <button mat-flat-button (click)="addRateCode()">Add</button>
+                    <button mat-flat-button (click)="addRateCode()" class="filterButton addButton">Add</button>
                     <!-- <button mat-flat-button class="deleteBtn" (click)="deleteRateCode(false)" [disabled]="discountRatesList.selected.length != 1">Delete</button>
                     <button mat-flat-button class="deleteBtn" (click)="deleteRateCode(true)" [disabled]="discountRatesList.selected.length != 1">Restore</button> -->
                 </div>
@@ -61,11 +60,9 @@
 
         </ngx-datatable>
     </mat-expansion-panel>
-
     <br>
-
     <div class="card-back">
-        <button mat-flat-button (click)="onSaveClick()">Save</button>
+        <button mat-flat-button (click)="onSaveClick()" class="filterButton saveButton">Save</button>
     </div>
     <ngx-spinner></ngx-spinner>
 </div>

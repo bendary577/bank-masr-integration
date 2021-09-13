@@ -1,10 +1,3 @@
-@import "../../components/approved-invoices-infor/approved-invoices-infor.component.scss";
-
-// .deleteBtn{
-//     background-color:  #FC544B!important;
-//     color: white;
-// }
-
-// .deleteBtn:disabled{
-//     background-color: darkslategrey;
-// }
+@import "../approved-invoices-infor/approved-invoices-infor.component.scss";
+@import "../operations/opera-payments/opera-payments.component.scss";
+@import "../setting/pos-machine-mapping/pos-machine-mapping.component.scss";

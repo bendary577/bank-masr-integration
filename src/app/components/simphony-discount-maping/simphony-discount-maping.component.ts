@@ -14,7 +14,7 @@ import { GeneralSettingsService } from 'src/app/services/generalSettings/general
   styleUrls: ['./simphony-discount-maping.component.scss']
 })
 export class SimphonyDiscountMapingComponent implements OnInit {
-  newRateCode = new SimphonyDiscount(0, 0);
+  newRateCode = new SimphonyDiscount();
   generalSettings: GeneralSettings = new GeneralSettings();
 
   discountRatesList = {
@@ -109,7 +109,7 @@ export class SimphonyDiscountMapingComponent implements OnInit {
       this.newRateCode.deleted = false;
 
        this.discountRatesList.discountRatesData.push(this.newRateCode);
-       this.newRateCode = new SimphonyDiscount(0, 0);
+       this.newRateCode = new SimphonyDiscount();
  
        this.discountRatesList.discountRatesData = [...this.discountRatesList.discountRatesData];
      } else {

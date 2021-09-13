@@ -1,63 +1,88 @@
-<div class="main" style="padding-top: 100px;" >
+<div class="main" style="padding-top: 100px;">
     <div class="header" style="margin-bottom: 15px;">
-        <button mat-flat-button class="button-back" (click)="backClicked()">Go Back</button>
+        <button mat-flat-button class="button-back" (click)="backClicked()" class="groups-buttons"
+            style="float: left">Go Back</button>
         <!-- <button mat-flat-button class="button-back" (click)="refresh()">Refresh</button> -->
 
-        <div *ngIf="!inParent" class="parentGroupName" >Parent Group : {{parentGroupName}} </div>
+        <!-- <div *ngIf="!inParent" class="parentGroupName">Parent Group : {{parentGroupName}} </div> -->
 
-        <button mat-flat-button (click)="addSubGroupDialog()">Add Supgroup</button>
-        <button mat-flat-button (click)="updateSubGroupDialog()" [disabled]="validateUpdateGroup()">Update Supgroup</button>
-        <button mat-flat-button (click)="deleteGroups('true')" [disabled]="validateDeleteGroup()">Delete Supgroup</button>
-        <button mat-flat-button (click)="deleteGroups('false')" [disabled]="validateRestoreGroup()">Restore Supgroup</button>
-    </div>   
+        <button mat-flat-button (click)="addSubGroupDialog()" class="groups-buttons">Add Supgroup</button>
+        <button mat-flat-button (click)="updateSubGroupDialog()" [disabled]="validateUpdateGroup()"
+            class="groups-buttons">Update Supgroup</button>
+        <button mat-flat-button (click)="deleteGroups('true')" [disabled]="validateDeleteGroup()"
+            class="groups-buttons">Delete Supgroup</button>
+        <button mat-flat-button (click)="deleteGroups('false')" [disabled]="validateRestoreGroup()"
+            class="groups-buttons">Restore Supgroup</button>
+    </div>
 
-    <ngx-datatable class="material" [loadingIndicator]="groupsList.showLoading" [messages]="groupsList.messages"
-    [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-     [rows]="groupsList.groupsData" [selected]="groupsList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
-    (select)='onSelect($event)' [scrollbarH]="true">
+    <div class="trans-tabel">
+        <div class="title-card">
+            Parent Group : {{parentGroupName}}
+        </div>
+        <div *ngIf="groupsList.groupsData.length == 0">
+            <mat-card class="transaction-card">
+                <mat-card-content>
+                    <div style="text-align: center;">
+                        <img src="../../../assets/empty-box.png" alt="image" class="empty-box"><br>
+                        <span>There are no subgroups yet.</span>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div *ngIf="groupsList.groupsData.length != 0">            <ngx-datatable class="material" [loadingIndicator]="groupsList.showLoading" [messages]="groupsList.messages"
+                [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+                [scrollbarV]="true" [scrollbarH]="true" [rows]="groupsList.groupsData" [selected]="groupsList.selected"
+                [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" (select)='onSelect($event)'
+                [scrollbarH]="true">
 
-        <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
-        <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
-        <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
-        </ng-template>
+                <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false"
+                    [resizeable]="true">
+                    <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
+                        let-selectFn="selectFn">
+                        <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected"
+                            (change)="selectFn(!allRowsSelected)" />
+                    </ng-template>
 
-        <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
-         <input class="regular-checkbox" type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
-        </ng-template>
-        </ngx-datatable-column>
+                    <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected"
+                        let-onCheckboxChangeFn="onCheckboxChangeFn">
+                        <input class="regular-checkbox" type="checkbox" [checked]="isSelected"
+                            (change)="onCheckboxChangeFn($event)" />
+                    </ng-template>
+                </ngx-datatable-column>
 
-        <ngx-datatable-column name="Name">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                <span class="group-name">{{row.name}}</span>
-            </ng-template>
-        </ngx-datatable-column>
-        
-        <ngx-datatable-column name="Simphony Discount ID">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.simphonyDiscount.discountId}}
-            </ng-template>
-        </ngx-datatable-column>
+                <ngx-datatable-column name="Name">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <span class="group-name">{{row.name}}</span>
+                    </ng-template>
+                </ngx-datatable-column>
 
-        <ngx-datatable-column name="State">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                <label *ngIf="!row.deleted" class="active-state">active</label>
-                <label *ngIf="row.deleted" class="deleted-state">deleted</label>
-            </ng-template>
-        </ngx-datatable-column>
+                <ngx-datatable-column name="Simphony Discount ID">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.simphonyDiscount.discountId}}
+                    </ng-template>
+                </ngx-datatable-column>
 
-        <ngx-datatable-column name="Creation Date">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.creationDate | date: 'dd/MM/yyyy HH:mm:ss' }}
-            </ng-template>
-        </ngx-datatable-column>
+                <ngx-datatable-column name="State">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <label *ngIf="!row.deleted" class="active-state">active</label>
+                        <label *ngIf="row.deleted" class="deleted-state">deleted</label>
+                    </ng-template>
+                </ngx-datatable-column>
 
-        <ngx-datatable-column name="Last Update">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.lastUpdate | date: 'dd/MM/yyyy HH:mm:ss' }}
-            </ng-template>
-        </ngx-datatable-column>
-    </ngx-datatable>
+                <ngx-datatable-column name="Creation Date">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.creationDate | date: 'dd/MM/yyyy HH:mm:ss' }}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Last Update">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.lastUpdate | date: 'dd/MM/yyyy HH:mm:ss' }}
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </div>
+    </div>
     <br>
 
 </div>
-
