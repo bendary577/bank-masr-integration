@@ -332,9 +332,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   refresh() {
-    // this.credit = this.credit - 100;
-    // this.transactionsData = HistoryItems;
-    // location.reload();
+    location.reload();
   }
 
   openFilterView() {

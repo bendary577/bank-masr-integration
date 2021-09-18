@@ -59,6 +59,7 @@ export class AddAppUserAccompiedComponent implements OnInit  {
         expire: [this.user.expire],
         accompanied:[this.user.accompaniedGuests.length],
       });
+      this.calculateParams();
     }else{
       this.form = this.formBuilder.group({
       group: this.group,
@@ -69,11 +70,8 @@ export class AddAppUserAccompiedComponent implements OnInit  {
       mobile: [""], 
       accompanied:[0],
       });
-      console.log(this.form.controls.email.value)
-      console.log(this.form.controls.mobile.value)
     }
     this.swipe();
-    this.calculateParams();
   }
 
   calculateParams(){
@@ -105,7 +103,6 @@ export class AddAppUserAccompiedComponent implements OnInit  {
   }
 
   async swipe() {
-    console.log(this.inUpdate)
     if(this.inUpdate){
       this.cardNumber = this.user.code;
       this.swiped = true;
@@ -129,7 +126,6 @@ export class AddAppUserAccompiedComponent implements OnInit  {
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
-      console.log(this.form.getError)
     }else if (this.cardNumber == 0 || this.cardNumber == undefined || this.cardNumber == null){
       this.snackBar.open("Please enter the card number" , null, {
         duration: 3000,
