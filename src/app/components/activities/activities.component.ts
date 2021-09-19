@@ -289,7 +289,6 @@ export class ActivitiesComponent implements OnInit {
       },
       err => {
         this.spinner.hide();
-
         console.error(err)
         this.snackBar.open("Fail to export, Please try agian", null, {
           duration: 2000,
@@ -305,7 +304,6 @@ export class ActivitiesComponent implements OnInit {
   }
 
   calculteChart() {
-    let resturants = [];
     let transactions = this.transactionList.transactionData;
     let revenue;
     for (let i = 0; i < transactions.length; i++) {
@@ -321,18 +319,20 @@ export class ActivitiesComponent implements OnInit {
         this.expenses.push(expenses);
       }
     }
-
     let revenueLength = this.revenues.length
     if (revenueLength > 5) { revenueLength = 5 }
     this.revenues = this.revenues.slice(0, revenueLength)
     this.expenses = this.expenses.slice(0, revenueLength)
     let length = this.revenues.length;
     if (length > 0) {
-      console.log(this.revenues)
       if (length > 3) { length = 3 }
       var topValues = this.expenses.sort((a, b) => b - a).slice(0, length);
       this.topRevenueCenters = [this.revenues[this.expenses.indexOf(topValues[0])],
       this.revenues[this.expenses.indexOf(topValues[1])], this.revenues[this.expenses.indexOf(topValues[2])]]
+      this.topRevenueCenters = this.topRevenueCenters.sort((a, b) => b - a).slice(0, length);
+    }
+    if(this.revenues.length == 1 || this.revenues.length == 2){
+      this.revenues.push(...['', '']);
     }
   }
 
@@ -359,11 +359,9 @@ export class ActivitiesComponent implements OnInit {
   filterTransactions() {
     const transactions = this.transactionList.transactionData;
     if (this.fromDate != "" && this.toDate != "") {
-      console.log("this.fromDate : " + new Date(this.fromDate).getTime())
-      console.log("this.toDate : " + new Date(this.toDate).getTime())
       this.transactionList.transactionData = transactions.filter(item => {
-        new Date(item.transactionDate).getTime() >= new Date(this.fromDate).getTime() &&
-          new Date(item.transactionDate).getTime() <= new Date(this.toDate).getTime()
+        return (new Date(item.transactionDate).getTime() >= new Date(this.fromDate).getTime() &&
+          new Date(item.transactionDate).getTime() <= new Date(this.toDate).getTime())
       });
     }
 
