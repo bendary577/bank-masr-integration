@@ -55,6 +55,7 @@ body {
   background: #e7eaf7;
   // padding: 1.875rem 1.75rem;
   width: 100%;
+  display: inline;
   @include flex-grow(1);
 }
 

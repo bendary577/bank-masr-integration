@@ -221,7 +221,7 @@ export class ManageUsersComponent implements OnInit {
     if(type){
       isGeneric = true;
       dialogRef = this.dialog.open(AddAppUserAccompiedComponent, {
-          width: '900px',
+          width: '550px',
         });
     }else{
       dialogRef = this.dialog.open(AddAppUserComponent, {

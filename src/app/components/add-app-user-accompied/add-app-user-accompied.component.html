@@ -2,9 +2,8 @@
     <h1 mat-dialog-title>New Guest</h1>
 
     <div class="row">
-
+<!-- 
         <div class="two-column cardSide">
-
             <div class="card-div">
                 <div *ngIf="!swiped">
                     <img class="image_style" src="../../../assets/1200px-Universal_Contactless_Card_Symbol.svg.png">
@@ -14,30 +13,21 @@
                 <div *ngIf="swiped">
                     <img class="image_style" src="../../../assets/1200px-Universal_Contactless_Card_Symbol.png">
                     <br><br>
-                    <span *ngIf="swiped" style="font-weight: bolder; font-size: larger;">Card Number : <span
+                    <span *ngIf="swiped" style="font-weight: bolder; font-size: larger;">Card Number :<span
                             style="color: #2da525;"> {{cardNumber}}</span></span>
                 </div>
             </div>
-            <div class="buttons-div">
-                <div mat-dialog-actions>
-                    <button mat-button cdkFocusInitial (click)="onSaveClick()" class="groups-buttons">
-                        <label [hidden]="inUpdate">Save</label>
-                        <label [hidden]="!inUpdate">Update</label>
-                    </button>
-                    <button mat-button (click)="onNoClick()" class="groups-buttons">Cancel</button>
-                </div>
-            </div>
-        </div>
+        </div> -->
 
-        <div class="two-column formSide">
-            <mat-tab-group>
+        <div class="two-column formSide"style="width: 100%; margin-left: 10px">
+            <mat-tab-group  (selectedTabChange)="tabClick($event)">
                 <mat-tab label="Main Guest">
                     <div mat-dialog-content class="main-guest">
                         <form [formGroup]="form" class="my-form">
 
                             <mat-form-field class="example-full-width creditForm" *ngIf="hasRole('show-form-groups')"
                                 appearance="outline">
-                                <input matInput placeholder="Group" formControlName="group" maxlength="50">
+                                <input matInput placeholder="Group" formControlName="group" maxlength="50" required>
                                 <mat-label>Group</mat-label>
                                 <mat-error *ngIf="form.controls.name.hasError('required')">
                                     Frist Name is required.
@@ -67,6 +57,16 @@
                                 </mat-error>
                                 <mat-error *ngIf="form.controls.name.hasError('maxlength')">
                                     Balance is to long.
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field class="example-full-width creditForm" appearance="outline">
+                                <input matInput placeholder="Card Number" formControlName="cardNum" maxlength="3">
+                                <mat-error *ngIf="form.controls.cardNum.hasError('required')">
+                                    Expiration is required.
+                                </mat-error>
+                                <mat-error *ngIf="form.controls.cardNum.hasError('maxlength')">
+                                    Expiration to long.
                                 </mat-error>
                             </mat-form-field>
 
@@ -140,7 +140,7 @@
                         </form>
                     </div>
                 </mat-tab>
-                <mat-tab label="Accompanied Guests" >
+                <mat-tab label="Accompanied Guests" (click)="addAccompiend()">
                     <div mat-dialog-content>
                         <div *ngFor="let accompiedForm of accompiendForms; let i = index" class="accom-guest">
                             <form [formGroup]="accompiedForm" class="my-form" aria-disabled="true">
@@ -182,11 +182,20 @@
                             </form>
                         </div>
                     </div>
-                    <button mat-button (click)="addAccompiend()" class="groups-buttons" style="float: right; margin-bottom: 20px;">Add Guest</button>
                 </mat-tab>
             </mat-tab-group>
 
         </div>
-
+    </div>
+    <div class="buttons-div">
+        <div mat-dialog-actions>
+            <button mat-button cdkFocusInitial (click)="onSaveClick()" class="groups-buttons">
+                <label [hidden]="inUpdate">Save</label>
+                <label [hidden]="!inUpdate">Update</label>
+            </button>
+            <button mat-button (click)="onNoClick()" class="groups-buttons">Cancel</button>
+            <button mat-button (click)="addAccompiend()" class="groups-buttons add-accom-buttons" 
+            *ngIf="accompiedNumber != 0">Add Guest</button>
+        </div>
     </div>
 </div>

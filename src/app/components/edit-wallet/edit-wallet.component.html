@@ -5,7 +5,7 @@
         <div mat-dialog-content>
             <form [formGroup]="form" class="my-form">
                 <div class="form-group">
-                    <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-form-field class="example-full-width">
                         <input matInput placeholder="Amount" formControlName="amount" required maxlength="50">
                         <mat-error *ngIf="form.controls.amount.hasError('required')">
                             Amount is required.

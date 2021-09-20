@@ -22,7 +22,7 @@ export class AddAppUserAccompiedComponent implements OnInit  {
   inUpdate = false;
   group: Group;
   qrcodeMethod = ["Email", "SMS", "Print"];
-  swiped=false;
+  swiped = true;
   cardNumber = 0;
   credit=0;
   sendSMS = false;
@@ -57,6 +57,7 @@ export class AddAppUserAccompiedComponent implements OnInit  {
         group: this.group,
         balance:[this.user.wallet.price],
         expire: [this.user.expire],
+        cardNum: [this.user.code],
         accompanied:[this.user.accompaniedGuests.length],
       });
       this.calculateParams();
@@ -66,8 +67,9 @@ export class AddAppUserAccompiedComponent implements OnInit  {
       balance:[100],
       expire:[24],
       name: [""],
-      email: [""],
-      mobile: [""], 
+      email: ["", [Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
+      mobile: ["", [Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
+      cardNum: [""],
       accompanied:[0],
       });
     }
@@ -148,7 +150,7 @@ export class AddAppUserAccompiedComponent implements OnInit  {
         expire: this.form.controls.expire.value,
         group: this.group,
         image: this.srcResult,
-        cardCode:this.cardNumber,
+        cardCode:this.form.controls.cardNum.value,
         sendEmail: this.sendEmail,
         sendSMS: this.sendSMS,
         accompiendUsers: this.accompiendGuests
@@ -157,6 +159,7 @@ export class AddAppUserAccompiedComponent implements OnInit  {
   }
 
    addAccompiend() {
+     console.log("A")
     this.accompiedNumber = this.accompiedNumber + 1;
     let accompiendForm:  FormGroup;
     accompiendForm = this.formBuilder.group({
@@ -192,6 +195,11 @@ export class AddAppUserAccompiedComponent implements OnInit  {
     // categoryId.firstChange for comparing old and new values
   }
 
+  tabClick(tab){
+    if(tab.index == 1 && this.accompiedNumber  == 0){
+        this.addAccompiend();
+    }
+  }
 }
 
 

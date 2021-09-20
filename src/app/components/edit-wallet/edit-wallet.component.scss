@@ -11,3 +11,11 @@ button {
 .groups-buttons{
     width:100px;
 }
+
+.list-group-item{
+    padding-left: 20px;
+  }
+
+  ::ng-deep .mat-dialog-container {
+    height: auto !important;
+}

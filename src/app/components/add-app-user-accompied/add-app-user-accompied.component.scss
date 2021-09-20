@@ -14,11 +14,9 @@
 }
 
 .main-guest{
-
   ::ng-deep .mat-dialog-content{
     overflow: hidden !important;
   }
-
 }
 
 .two-column{
@@ -30,10 +28,12 @@
 
   .formSide{
     padding-bottom: 10px;
+    width: 55%;
   }
 
   .row{
     display: flex;
+    height: 60vh;
   }
 
 // .mat-dialog-content{
@@ -69,18 +69,22 @@
 
 .cardSide{
   // padding-top: 30%;
-  width: 45%; 
+  width: 38%; 
   float: left;
 }
 
 .card-div{
-  height: 70%;
+  height: 60%;
   margin-top:20px ;
 }
+
 .buttons-div{
+  height: 5vh;
+  padding-left: 10px;
+  position: unset;
   height: 20%;
-  margin-left: 15px;
-  margin-top: 100%;
+  align-items: center;
+  bottom: 0;
 }
 
 .dialog-body{
@@ -100,6 +104,9 @@
   color: hsl(0, 0%, 45%) !important;
 }
 
+::ng-deep .mat-form-field {
+  padding-left: 20px !important; 
+}
 // ::ng-deep .mat-form-field-label {
 //   position: absolute;
 //   left: 0;
@@ -141,4 +148,8 @@
 
 .groups-buttons{
   width: 120px;
+}
+
+.add-accom-buttons{
+  float: right; margin-bottom: 20px;
 }
