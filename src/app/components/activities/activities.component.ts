@@ -94,7 +94,6 @@ export class ActivitiesComponent implements OnInit {
 
   }
 
-
   refresh() {
     location.reload();
   }
@@ -319,22 +318,27 @@ export class ActivitiesComponent implements OnInit {
         this.expenses.push(expenses);
       }
     }
-    let revenueLength = this.revenues.length
-    if (revenueLength > 5) { revenueLength = 5 }
-    this.revenues = this.revenues.slice(0, revenueLength)
-    this.expenses = this.expenses.slice(0, revenueLength)
-    let length = this.revenues.length;
-    if (length > 0) {
-      if (length > 3) { length = 3 }
-      var topValues = this.expenses.sort((a, b) => b - a).slice(0, length);
-      this.topRevenueCenters = [this.revenues[this.expenses.indexOf(topValues[0])],
-      this.revenues[this.expenses.indexOf(topValues[1])], this.revenues[this.expenses.indexOf(topValues[2])]]
-      this.topRevenueCenters = this.topRevenueCenters.sort((a, b) => b - a).slice(0, length);
-    }
+    this.grtTopRevenues(this.revenues, this.expenses);
     if(this.revenues.length == 1 || this.revenues.length == 2){
       this.revenues.push(...['', '']);
     }
   }
+
+  grtTopRevenues(tempRevenue, tempExpence ){ 
+    let revenueLength = tempRevenue.length;
+    if (revenueLength > 5) { revenueLength = 5 }
+    tempRevenue = tempRevenue.slice(0, revenueLength)
+    tempExpence = tempRevenue.slice(0, revenueLength)
+    let length = tempRevenue.length;
+    if (length > 0) {
+      if (length > 3) { length = 3 }
+      var topValues = tempExpence.sort((a, b) => b - a).slice(0, length);
+      this.topRevenueCenters = [tempRevenue[tempExpence.indexOf(topValues[0])],
+      tempRevenue[tempExpence.indexOf(topValues[1])], tempRevenue[tempExpence.indexOf(topValues[2])]]
+      this.topRevenueCenters = this.topRevenueCenters.sort((a, b) => b - a).slice(0, length);
+    }
+  }
+
 
   notExistInRevenues(revenue): Boolean {
     for (let i = 0; i < this.revenues.length; i++) {

@@ -5,7 +5,7 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { Application } from 'src/app/models/Application';
 import { Constants } from 'src/app/models/constants';
-import {User} from "../../models/user";
+import { User } from "../../models/user";
 import { NavigationEnd, Router } from '@angular/router';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { MatSnackBar } from '@angular/material';

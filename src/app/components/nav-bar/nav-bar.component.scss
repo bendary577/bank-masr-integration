@@ -445,6 +445,7 @@
       left: 70px;
       .navbar-menu-wrapper {
         width: 100%;
+        min-width: 1200px;
       }
       .navbar-brand-wrapper {
         width: 70px;
@@ -527,8 +528,8 @@
   }
 }  
 
-// nav {
-//   width: 100% !important;
-//   bottom: inherit !important;
-//   box-shadow: none !important;
-// }
+nav {
+  width: 100% !important;
+  bottom: inherit !important;
+  box-shadow: none !important;
+}
