@@ -127,7 +127,7 @@ export class UserProfileComponent implements OnInit {
     if (expired) {
       return true
     }
-      return false;
+    return false;
   }
 
   chargeWallet(func) {
@@ -136,40 +136,43 @@ export class UserProfileComponent implements OnInit {
       data: { function: func }
     });
     dialogRef.afterClosed().subscribe(res => {
-      this.walletHistoryList.showLoading = true;
-      this.sppiner.show()
       if (res) {
-        console.log(res)
-        this.loyaltyService.chargeWallet(func, this.user.id, res).toPromise().then((result: any) => {
-          this.walletHistoryList.showLoading = false;
-          this.getApplicationUser();
-          this.sppiner.hide();
-          this.snackBar.open("Wallet Charged Successfully.", null, {
-            duration: 2000,
-            horizontalPosition: 'center',
-            panelClass: "my-snack-bar-success"
-          });
-        }).catch(err => {
-          this.walletHistoryList.showLoading = false;
+        this.walletHistoryList.showLoading = true;
+        this.sppiner.show()
+        if (res) {
+          console.log(res)
+          this.loyaltyService.chargeWallet(func, this.user.id, res).toPromise().then((result: any) => {
+            this.walletHistoryList.showLoading = false;
+            this.getApplicationUser();
+            this.sppiner.hide();
+            this.snackBar.open("Wallet Charged Successfully.", null, {
+              duration: 2000,
+              horizontalPosition: 'center',
+              panelClass: "my-snack-bar-success"
+            });
+          }).catch(err => {
+            this.walletHistoryList.showLoading = false;
 
-          let message = "";
-          if (err.status === 401) {
-            message = ErrorMessages.SESSION_EXPIRED;
-            this.sideNav.Logout();
-          } else if (err.error.message) {
-            message = err.error.message;
-          } else if (err.message) {
-            message = ErrorMessages.FAILED_TO_SAVE_CONFIG
-          }
-          this.sppiner.hide()
-          this.snackBar.open(message, null, {
-            duration: 3000,
-            horizontalPosition: 'center',
-            panelClass: "my-snack-bar-fail"
-          });
-        })
+            let message = "";
+            if (err.status === 401) {
+              message = ErrorMessages.SESSION_EXPIRED;
+              this.sideNav.Logout();
+            } else if (err.error.message) {
+              message = err.error.message;
+            } else if (err.message) {
+              message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+            }
+            this.sppiner.hide()
+            this.snackBar.open(message, null, {
+              duration: 3000,
+              horizontalPosition: 'center',
+              panelClass: "my-snack-bar-fail"
+            });
+          })
+        }
       }
-    })
+    });
+
     this.walletHistoryList.showLoading = false;
   }
 
@@ -179,36 +182,39 @@ export class UserProfileComponent implements OnInit {
       data: { function: func }
     });
     dialogRef.afterClosed().subscribe(res => {
-      this.walletHistoryList.showLoading = true;
-      this.sppiner.show()
       if (res) {
-        console.log(res)
-        this.loyaltyService.deductWallet(func, this.user.id, res.amount).toPromise().then((result: any) => {
-          this.walletHistoryList.showLoading = false;
-          this.getApplicationUser();
-          this.sppiner.hide()
 
-        }).catch(err => {
-          this.walletHistoryList.showLoading = false;
-          this.sppiner.hide()
+        this.walletHistoryList.showLoading = true;
+        this.sppiner.show()
+        if (res) {
+          console.log(res)
+          this.loyaltyService.deductWallet(func, this.user.id, res.amount).toPromise().then((result: any) => {
+            this.walletHistoryList.showLoading = false;
+            this.getApplicationUser();
+            this.sppiner.hide()
 
-          let message = "";
-          if (err.status === 401) {
-            message = ErrorMessages.SESSION_EXPIRED;
-            this.sideNav.Logout();
-          } else if (err.error.message) {
-            message = err.error.message;
-          } else if (err.message) {
-            message = ErrorMessages.FAILED_TO_SAVE_CONFIG
-          }
-          this.snackBar.open(message, null, {
-            duration: 3000,
-            horizontalPosition: 'center',
-            panelClass: "my-snack-bar-fail"
-          });
-        })
+          }).catch(err => {
+            this.walletHistoryList.showLoading = false;
+            this.sppiner.hide()
+
+            let message = "";
+            if (err.status === 401) {
+              message = ErrorMessages.SESSION_EXPIRED;
+              this.sideNav.Logout();
+            } else if (err.error.message) {
+              message = err.error.message;
+            } else if (err.message) {
+              message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+            }
+            this.snackBar.open(message, null, {
+              duration: 3000,
+              horizontalPosition: 'center',
+              panelClass: "my-snack-bar-fail"
+            });
+          })
+        }
       }
-    })
+    });
     this.walletHistoryList.showLoading = false;
   }
 
@@ -250,79 +256,79 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
-  updateUserDialog(){
+  updateUserDialog() {
     const dialogRef = this.dialog.open(AddAppUserAccompiedComponent, {
-          width : '900px',
-          data: {
-            user : this.user
-          }
+      width: '900px',
+      data: {
+        user: this.user
+      }
     });
     dialogRef.afterClosed().subscribe(res => {
-      if(res) {
+      if (res) {
         this.sppiner.show()
-        if(res.group == undefined)
-        this.loyaltyService.addApplicationUser(false, true, res.name, res.email, res.group, res.image,
-                            this.user.id, res.accompiendUsers, res.cardCode, res.mobile, res.balance, res.expire, res.sendEmail, res.sendSMS).then((result: any) => {        
-            this.getApplicationUser();
-            this.sppiner.hide()
-            this.snackBar.open("User updated successfully.", null, {
-              duration: 2000,
-              horizontalPosition: 'center',
-              panelClass : "my-snack-bar-success"
-            });
-          }).catch(err => {
-            this.getApplicationUser();
-            this.sppiner.hide()
-            let message = "";
-            if(err.status === 401){
-              message = ErrorMessages.SESSION_EXPIRED;
-            }else if(err.error.message){
-              message = err.error.message;
-            }else if(err.message){
-              message = ErrorMessages.FAILED_TO_SAVE_CONFIG
-            }
-            this.snackBar.open(message , null, {
-              duration: 3000,
-              horizontalPosition: 'center',
-              panelClass:"my-snack-bar-fail"
-            });
-          })
+        if (res.group == undefined)
+          this.loyaltyService.addApplicationUser(false, true, res.name, res.email, res.group, res.image,
+            this.user.id, res.accompiendUsers, res.cardCode, res.mobile, res.balance, res.expire, res.sendEmail, res.sendSMS).then((result: any) => {
+              this.getApplicationUser();
+              this.sppiner.hide()
+              this.snackBar.open("User updated successfully.", null, {
+                duration: 2000,
+                horizontalPosition: 'center',
+                panelClass: "my-snack-bar-success"
+              });
+            }).catch(err => {
+              this.getApplicationUser();
+              this.sppiner.hide()
+              let message = "";
+              if (err.status === 401) {
+                message = ErrorMessages.SESSION_EXPIRED;
+              } else if (err.error.message) {
+                message = err.error.message;
+              } else if (err.message) {
+                message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+              }
+              this.snackBar.open(message, null, {
+                duration: 3000,
+                horizontalPosition: 'center',
+                panelClass: "my-snack-bar-fail"
+              });
+            })
       }
     })
   }
 
-  deleteUsers(flage){
+  deleteUsers(flage) {
     this.sppiner.show()
     this.loyaltyService.deleteAppUsers(flage, [this.user]).then((res: any) => {
       this.getApplicationUser();
       this.sppiner.hide()
       let message = "User deleted successfully.";
-      if(flage == 'false'){        
+      if (flage == 'false') {
         message = "User restored successfully.";
       }
 
       this.snackBar.open(message, null, {
         duration: 2000,
         horizontalPosition: 'center',
-        panelClass:"my-snack-bar-success"
+        panelClass: "my-snack-bar-success"
       });
     }).catch(err => {
       this.getApplicationUser();
       this.sppiner.hide()
       let message = "";
-      if(err.status === 401){
+      if (err.status === 401) {
         message = ErrorMessages.SESSION_EXPIRED;
-      } else if (err.error.message){
+      } else if (err.error.message) {
         message = err.error.message;
-      } else if (err.message){
+      } else if (err.message) {
         message = err.message;
       } else {
         message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
       }
-      this.snackBar.open(message , null, {
+      this.snackBar.open(message, null, {
         duration: 3000,
         horizontalPosition: 'right',
-        panelClass:"my-snack-bar-fail"
+        panelClass: "my-snack-bar-fail"
       });
     });
   }
@@ -343,23 +349,6 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  onFilterClick(): void {
-
-    // this.transactionsData = HistoryItems;
-
-    console.log(this.fromDate)
-    if (this.field == "Revenue Center") {
-      // console.log(this.transactionsData.filter(xx => xx.revenueCenter === this.fieldValues))
-
-      // this.transactionsData = this.transactionsData.filter(xx => xx.revenueCenter === this.fieldValues);
-    } else if (this.field == "Agent") {
-      // this.transactionsData = this.transactionsData.filter(xx => xx.modifier === this.fieldValues);
-
-    } else {
-      // this.transactionsData = this.transactionsData.filter(xx => xx.transactionDate === this.fromDate);
-    }
-  }
-
   onCancelClick(): void {
     this.openFilter = false;
   }
@@ -367,14 +356,6 @@ export class UserProfileComponent implements OnInit {
   hasRole(reference): Boolean {
     return this.sideNav.hasRole(reference);
   }
-
-  // showSuccess() {
-  //   this.toastr.success('Hello world!', 'Toastr fun!');
-  //   this.toastr.error('everything is broken', 'Major Error', {
-  //     timeOut: 3000,
-  //   });
-  // }
-
 }
 
 

@@ -87,9 +87,7 @@ export class EditWalletComponent implements OnInit {
   }
 
   onCloseClick(){
-    this.dialogRef.close({
-      amount: this.amount,
-    });
+    this.dialogRef.close();
   }
 
   onSaveClick(): void {
@@ -111,9 +109,4 @@ export class EditWalletComponent implements OnInit {
   
   totalSpend(date){
   }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
 }

@@ -18,6 +18,7 @@
   padding-left: 15px !important;
   padding-right: 17% !important;
   width: 100%;
+  overflow: visible;
 }
 
 ::ng-deep .navbar {
@@ -453,6 +454,9 @@
         .brand-logo-mini {
           display: block;
         }
+      }
+      .nav-style {
+      padding-right: 5% !important;
       }
     }
   }

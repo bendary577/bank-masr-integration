@@ -44,6 +44,10 @@
     background-color: rgb(182, 217, 248);
 }
 
+//  ::ng-deep .mat-dialog-container {
+//     height: 700px !important;
+// }
+
  ::ng-deep .mat-dialog-container {
     height: 700px !important;
 }
@@ -80,8 +84,8 @@
 }
 
 .dialog-body{
-  overflow: hidden !important;   
-  height: 100%;
+  overflow: hidden !important; 
+  // height: 100%;
 }
 
 .form-side{
@@ -133,4 +137,8 @@
    .mat-checkbox-background{
     background-color: #f8bc72 !important;
    }
+}
+
+.groups-buttons{
+  width: 120px;
 }

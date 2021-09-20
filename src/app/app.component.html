@@ -1,15 +1,15 @@
-<!-- <sidenav-responsive-example></sidenav-responsive-example>
- -->
- <div class="container-scroller">
-    <app-side-nave [class.example-containerpc]="(!shouldRun)" *ngIf="shouldRun"></app-side-nave>
-      <app-nav-bar *ngIf="shouldRun"></app-nav-bar>
-      <div class="main-panel" [ngClass]="{ 'main-panel-only' : !shouldRun }">
-        <div class="content-wrapper">
-          <ngx-spinner *ngIf="isLoading"></ngx-spinner>
-          <div contentAnimate *ngIf="!isLoading" class="h-100">
-            <router-outlet></router-outlet>
-          </div>
-        </div>
-        <!-- <app-footer *ngIf="showFooter"></app-footer> -->
+<!-- <sidenav-responsive-example></sidenav-responsive-example>-->
+
+<div class="container-scroller">
+  <app-side-nave [class.example-containerpc]="(!shouldRun)" *ngIf="shouldRun"></app-side-nave>
+  <app-nav-bar *ngIf="shouldRun"></app-nav-bar>
+  <div class="main-panel" [ngClass]="{ 'main-panel-only' : !shouldRun }" style="position: relative;">
+    <div class="content-wrapper" style="position: relative;">
+      <ngx-spinner *ngIf="isLoading"></ngx-spinner>
+      <div contentAnimate *ngIf="!isLoading" class="h-100" style="position: relative;">
+        <router-outlet></router-outlet>
       </div>
+    </div>
+    <!-- <app-footer *ngIf="showFooter"></app-footer> -->
+  </div>
 </div>
