@@ -361,7 +361,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   filterTransactions() {
-    const transactions = this.transactionList.transactionData;
+    const transactions = this.transactionList.allTransactionDataBeforeFilter;
     if (this.fromDate != "" && this.toDate != "") {
       this.transactionList.transactionData = transactions.filter(item => {
         return (new Date(item.transactionDate).getTime() >= new Date(this.fromDate).getTime() &&
@@ -386,13 +386,19 @@ export class ActivitiesComponent implements OnInit {
 
     if (this.selectedCardStatues != "") {
       if (this.selectedCardStatues == 'Deleted') {
-        const result = transactions.filter(s => s.user.deleted.includes(true));
+        const result = transactions.filter(s => {
+          return (s.user.deleted == (1));
+        });
         this.transactionList.transactionData = result
       } else if (this.selectedCardStatues == 'Active') {
-        const result = transactions.filter(s => s.user.deleted.includes(false));
+        const result = transactions.filter(s => {
+          return (s.user.deleted == (0));
+        });
         this.transactionList.transactionData = result;
       } else if (this.selectedCardStatues == 'Expired') {
-        const result = transactions.filter(s => s.user.expired.includes(0));
+        const result = transactions.filter(s => {
+          return (s.user.expire == (0));
+        });
         this.transactionList.transactionData = result;
       }
     }
