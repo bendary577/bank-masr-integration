@@ -136,11 +136,11 @@ h3{
 }
 
 .five-column {
-  margin-left: 15px;
+  margin-left: 10px;
   margin-bottom: 50px;
   float: left;
   height: 20px;
-  width: 140px;
+  width: 135px;
 }
 
 .menue-btn{
@@ -237,7 +237,7 @@ canvas{
   display: inline;
 
   ::ng-deep .mat-form-field-flex{
-    width: 150px !important;
+    width: 140px !important;
     height: 35px !important ;
 
 
@@ -275,3 +275,9 @@ mat-icon {
   right: -60px;
   font-size: medium;
 }
+
+.row-center{
+  padding-top:20px ;
+  justify-content: center;
+}
+

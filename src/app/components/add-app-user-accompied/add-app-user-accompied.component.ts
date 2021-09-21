@@ -64,12 +64,12 @@ export class AddAppUserAccompiedComponent implements OnInit  {
     }else{
       this.form = this.formBuilder.group({
       group: this.group,
-      balance:[100],
-      expire:[24],
-      name: [""],
-      email: ["", [Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
+      balance:[100, [Validators.required, Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+      expire:[24, [Validators.required, Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+      name: ["", [Validators.maxLength]],
+      email: ["", [Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"), Validators.maxLength]],
       mobile: ["", [Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
-      cardNum: [""],
+      cardNum: ["", [Validators.required, Validators.maxLength]],
       accompanied:[0],
       });
     }
@@ -190,6 +190,20 @@ export class AddAppUserAccompiedComponent implements OnInit  {
     }else if(tab.index == 1){
       this.inAccompiendView = true;
     } 
+  }
+
+  validateFrom(){
+    for(let i = 0 ; i < this.accompiendForms.length; i++){
+      if(this.accompiendForms[i].invalid){
+        this.snackBar.open("Please full fill all fields of the accompanied guest correctly." , null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+        return
+      }
+    }; 
+    this.addAccompiend()
   }
 }
 

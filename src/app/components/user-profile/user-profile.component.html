@@ -22,21 +22,25 @@
                                 <td> </td>
                                 <td class="res" style="float: right;" style="float: right;"> {{user.mobile}}</td>
                             </tr>
+                            <hr class="hrClass">
                             <tr>
                                 <td class="title" style="float: left;">Group </td>
                                 <td> </td>
                                 <td class="res" style="float: right;"> {{group.name}}</td>
                             </tr>
+                            <hr class="hrClass"  *ngIf="hasRole('show_discount')">
                             <tr *ngIf="hasRole('show_discount')">
                                 <td class="title" style="float: left;">Discount</td>
                                 <td> </td>
                                 <td class="res" style="float: right;"> {{simphonyDiscount.discountRate}} %</td>
                             </tr>
+                            <hr class="hrClass"  *ngIf="hasRole('show_discount')">
                             <tr *ngIf="hasRole('show_discount')">
                                 <td class="title" style="float: left;">Discount ID</td>
                                 <td> </td>
                                 <td class="res" style="float: right;"> {{simphonyDiscount.discountId}}</td>
                             </tr>
+                            <hr class="hrClass">
                             <tr>
                                 <td class="title" style="float: left;">Status </td>
                                 <td> </td>
@@ -50,11 +54,13 @@
                                         style="color: #1661a3;">Expired</label>
                                 </td>
                             </tr>
+                            <hr class="hrClass">
                             <tr>
                                 <td class="title" style="float: left;">Creation Time </td>
                                 <td> </td>
                                 <td class="res" style="float: right;">{{user.creationDate | date: 'dd/MM/yyyy' }}</td>
                             </tr>
+                            <hr class="hrClass">
                             <tr>
                                 <td class="title" style="float: left;">Last Update</td>
                                 <td> </td>

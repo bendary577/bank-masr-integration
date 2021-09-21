@@ -3,7 +3,7 @@
 
     <div class="row">
 
-        <div class="two-column cardSide">
+        <div class="two-column cardSide" style="padding-top: 60px;">
             <div class="card-div">
                 <div>
                     <img class="image_style" src="../../../assets/1200px-Universal_Contactless_Card_Symbol.svg.png">
@@ -32,7 +32,7 @@
                             </mat-form-field>
 
                             <mat-form-field class="example-full-width creditForm" appearance="outline">
-                                <input matInput placeholder="Epire" formControlName="expire" maxlength="3">
+                                <input matInput placeholder="Epire" formControlName="expire" maxlength="3" required>
                                 <mat-label>Expire</mat-label>
                                 <mat-error *ngIf="form.controls.expire.hasError('required')">
                                     Expiration is required.
@@ -43,24 +43,24 @@
                             </mat-form-field>
 
                             <mat-form-field class="example-full-width creditForm" appearance="outline">
-                                <input matInput placeholder="Balance" formControlName="balance" maxlength="50" *ngIf="!inUpdate">
-                                <input matInput placeholder="Balance" formControlName="balance" maxlength="50" *ngIf="inUpdate" readonly [(ngModel)] = "credit">
-                                <mat-label>Price</mat-label>
-                                <mat-error *ngIf="form.controls.name.hasError('required')">
+                                <input matInput placeholder="Balance" formControlName="balance" maxlength="10" *ngIf="!inUpdate" required>
+                                <input matInput placeholder="Balance" formControlName="balance" maxlength="10" *ngIf="inUpdate" readonly [(ngModel)] = "credit" required>
+                                <mat-label>Balance</mat-label>
+                                <mat-error *ngIf="form.controls.balance.hasError('required')">
                                     Balance is required.
                                 </mat-error>
-                                <mat-error *ngIf="form.controls.name.hasError('maxlength')">
+                                <mat-error *ngIf="form.controls.balance.hasError('maxlength')">
                                     Balance is to long.
                                 </mat-error>
                             </mat-form-field>
 
                             <mat-form-field class="example-full-width creditForm" appearance="outline">
-                                <input matInput placeholder="Card Number" formControlName="cardNum" maxlength="3">
+                                <input matInput placeholder="Card Number" formControlName="cardNum" maxlength="20">
                                 <mat-error *ngIf="form.controls.cardNum.hasError('required')">
-                                    Expiration is required.
+                                    Card Number is required.
                                 </mat-error>
                                 <mat-error *ngIf="form.controls.cardNum.hasError('maxlength')">
-                                    Expiration to long.
+                                    Card Number to long.
                                 </mat-error>
                             </mat-form-field>
 
@@ -192,8 +192,9 @@
     </div>
     <div class="buttons-div" *ngIf="inAccompiendView">
         <div mat-dialog-actions>
-            <button mat-button (click)="addAccompiend()" class="groups-buttons add-accom-buttons" 
-            *ngIf="accompiedNumber != 0">Add Guest</button>
+            <button mat-button (click)="validateFrom()" class="groups-buttons add-accom-buttons" 
+            *ngIf="accompiedNumber != 0" >Add Guest</button>
+            <!-- [disabled]="previousIsFilled()" -->
         </div>
     </div>
 </div>

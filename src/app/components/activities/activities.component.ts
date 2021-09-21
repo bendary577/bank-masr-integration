@@ -26,8 +26,8 @@ export class ActivitiesComponent implements OnInit {
   groups = [];
   topGroups = [];
   topRevenueCenters = [];
-  revenues = [];
-  expenses = [];
+  revenues = ["Take Away", "", ""];
+  expenses = [90];
   guests = [];
   fromDate = '';
   toDate = '';
@@ -107,8 +107,10 @@ export class ActivitiesComponent implements OnInit {
       this.totalSpendM = res["totalSpend"];
       this.revenues = res["revenues"];
       this.expenses = res["expenses"];
-      this.topRevenueCenters = res["topRevenueCenters"]
-
+      // this.topRevenueCenters = res["topRevenueCenters"]
+      this.calculteChart();
+      console.log(this.expenses)
+      console.log(this.revenues)
     }).catch(err => {
       this.spinner.hide();
       let message = "";
@@ -187,6 +189,7 @@ export class ActivitiesComponent implements OnInit {
       this.allTransactionDataBeforeFilter();
       this.transactionList.showLoading = false;
       this.averageGuests();
+      this.calculteChart();
     }).catch(err => {
       this.transactionList.showLoading = false;
       let message = "";
@@ -206,6 +209,56 @@ export class ActivitiesComponent implements OnInit {
         panelClass: "my-snack-bar-fail"
       });
     });
+  }
+
+  calculteChart() {
+    this.revenues = [];
+    this.expenses = [];
+    this.topRevenueCenters = [];
+    let transactions = this.transactionList.transactionData;
+    let revenue;
+    for (let i = 0; i < transactions.length; i++) {
+      revenue = transactions[i].revenueCentreName;
+      let expenses = 0;
+      if (this.notExistInRevenues(revenue)) {
+        for (let j = 0; j < transactions.length; j++) {
+          if (transactions[j].revenueCentreName == revenue && revenue != "") {
+            expenses = expenses + transactions[j].afterDiscount;
+          }
+        }
+        this.revenues.push(revenue);
+        this.expenses.push(expenses);
+      }
+    }
+    this.grtTopRevenues(this.revenues, this.expenses);
+    if(this.revenues.length == 1 || this.revenues.length == 2){
+      this.revenues.push(...['', '']);
+    }
+  }
+
+  grtTopRevenues(tempRevenue, tempExpence ){ 
+    let revenueLength = tempRevenue.length;
+    if (revenueLength > 5) { revenueLength = 5 }
+    tempRevenue = tempRevenue.slice(0, revenueLength)
+    tempExpence = tempRevenue.slice(0, revenueLength)
+    let length = tempRevenue.length;
+    if (length > 0) {
+      if (length > 3) { length = 3 }
+      var topValues = tempExpence.sort((a, b) => b - a).slice(0, length);
+      this.topRevenueCenters = [tempRevenue[tempExpence.indexOf(topValues[0])],
+      tempRevenue[tempExpence.indexOf(topValues[1])], tempRevenue[tempExpence.indexOf(topValues[2])]]
+      this.topRevenueCenters = this.topRevenueCenters.sort((a, b) => b - a).slice(0, length);
+    }
+  }
+
+
+  notExistInRevenues(revenue): Boolean {
+    for (let i = 0; i < this.revenues.length; i++) {
+      if (this.revenues[i] == revenue) {
+        return false;
+      }
+    }
+    return true;
   }
 
   allTransactionDataBeforeFilter() {
@@ -308,55 +361,6 @@ export class ActivitiesComponent implements OnInit {
     return this.sidNav.hasRole(reference);
   }
 
-  calculteChart() {
-    this.revenues = [];
-    this.expenses = [];
-    this.topRevenueCenters = [];
-    let transactions = this.transactionList.transactionData;
-    let revenue;
-    for (let i = 0; i < transactions.length; i++) {
-      revenue = transactions[i].revenueCentreName;
-      let expenses = 0;
-      if (this.notExistInRevenues(revenue)) {
-        for (let j = 0; j < transactions.length; j++) {
-          if (transactions[j].revenueCentreName == revenue && revenue != "") {
-            expenses = expenses + transactions[j].afterDiscount;
-          }
-        }
-        this.revenues.push(revenue);
-        this.expenses.push(expenses);
-      }
-    }
-    this.grtTopRevenues(this.revenues, this.expenses);
-    if(this.revenues.length == 1 || this.revenues.length == 2){
-      this.revenues.push(...['', '']);
-    }
-  }
-
-  grtTopRevenues(tempRevenue, tempExpence ){ 
-    let revenueLength = tempRevenue.length;
-    if (revenueLength > 5) { revenueLength = 5 }
-    tempRevenue = tempRevenue.slice(0, revenueLength)
-    tempExpence = tempRevenue.slice(0, revenueLength)
-    let length = tempRevenue.length;
-    if (length > 0) {
-      if (length > 3) { length = 3 }
-      var topValues = tempExpence.sort((a, b) => b - a).slice(0, length);
-      this.topRevenueCenters = [tempRevenue[tempExpence.indexOf(topValues[0])],
-      tempRevenue[tempExpence.indexOf(topValues[1])], tempRevenue[tempExpence.indexOf(topValues[2])]]
-      this.topRevenueCenters = this.topRevenueCenters.sort((a, b) => b - a).slice(0, length);
-    }
-  }
-
-
-  notExistInRevenues(revenue): Boolean {
-    for (let i = 0; i < this.revenues.length; i++) {
-      if (this.revenues[i] == revenue) {
-        return false;
-      }
-    }
-    return true;
-  }
 
   averageGuests() {
     let guests = [];

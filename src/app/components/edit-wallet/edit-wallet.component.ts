@@ -35,7 +35,7 @@ export class EditWalletComponent implements OnInit {
     }
     this.getRevenueCenters();
       this.form = this.formBuilder.group({
-      amount: ['', Validators.required],
+      amount: ['', [Validators.required, Validators.pattern("^((\\+91-?))?[0-9]{10}$")]],
       revenuecenters: [[]],
      });
     

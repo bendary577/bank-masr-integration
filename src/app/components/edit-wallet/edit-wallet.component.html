@@ -6,12 +6,15 @@
             <form [formGroup]="form" class="my-form">
                 <div class="form-group">
                     <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Amount" formControlName="amount" required maxlength="50">
+                        <input matInput placeholder="Amount" formControlName="amount" required maxlength="10" required>
                         <mat-error *ngIf="form.controls.amount.hasError('required')">
                             Amount is required.
                         </mat-error>
                         <mat-error *ngIf="form.controls.amount.hasError('maxlength')">
                             Amount is to long.
+                        </mat-error>
+                        <mat-error *ngIf="form.controls.amount.hasError('pattern')">
+                            Amount Is Not Well Formed.
                         </mat-error>
                     </mat-form-field>
                 </div>

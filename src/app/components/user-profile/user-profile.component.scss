@@ -111,7 +111,7 @@ mat-card{
 }
 
 .user-btn-container{
-  margin-top: 120px;
+  margin-top: 60px;
   margin-bottom: 20px !important;
 }
 
@@ -405,4 +405,12 @@ mat-card{
   width: 250px;
   padding:50px;
   padding-bottom:25px ;
+}
+
+.user-data{
+  hr{
+    width: 100%;
+    margin: 10px !important;
+    margin-left: 80px !important;
+  }
 }
