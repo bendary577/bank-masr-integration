@@ -89,7 +89,6 @@ h3{
   margin-top: 5px;
   background-color: white;
   color: black;
-  box-shadow:0 1px 10px 0.5px #ababab;
 }
 
 .filter-container{
@@ -154,11 +153,11 @@ h3{
 // }
 
 .five-column {
-//  margin-left: 1%;
+  margin-left: 20px;
   margin-bottom: 50px;
   float: left;
-  height: 20%;
-  width: 18%;
+  height: 20px;
+  width: 150px;
 }
 
 .menue-btn{
@@ -231,18 +230,20 @@ canvas{
 }
 
 .chart-img{
-  width: 25%;
+  display: inline;
+  width: 140px;
 }
 
 .people-img{
-  width: 15%;
-  margin-top: 50px;
+  display: inline;
+  width: 60px;
+  margin-top: 70px;
 }
 
 .guest-chart{
-  width: 80%;
+  width: 400px;
   height: 80px;
-  margin: 5% auto;
+  margin: 40px auto;
   margin-bottom: 5%;
   border-radius: 10px;
   text-align: center;
@@ -250,20 +251,21 @@ canvas{
 
 .activity_body{
   ::ng-deep .mat-form-field-flex{
-    width: 80% !important;
+    width: 150px !important;
   }
 
   ::ng-deep .mat-card-content{
     margin:10px !important;
   }
 
-  ::ng-deep .mat-form-field-flex{
-    width: 200px !important;
-  }
+  // ::ng-deep .mat-form-field-flex{
+  //   width: 200px !important;
+  // }
 
   ::ng-deep .mat-form-field-label {
     left: 20px !important;
     padding-top: 10px !important;
     color: hsl(0, 0%, 45%) !important;
+    margin: 50px !important;
   }
 }
