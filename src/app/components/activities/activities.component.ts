@@ -105,6 +105,10 @@ export class ActivitiesComponent implements OnInit {
       this.getTransactions(date);
       this.spinner.hide();
       this.totalSpendM = res["totalSpend"];
+      this.revenues = res["revenues"];
+      this.expenses = res["expenses"];
+      this.topRevenueCenters = res["topRevenueCenters"]
+
     }).catch(err => {
       this.spinner.hide();
       let message = "";
@@ -182,7 +186,6 @@ export class ActivitiesComponent implements OnInit {
       this.transactionList.transactionData = res;
       this.allTransactionDataBeforeFilter();
       this.transactionList.showLoading = false;
-      this.calculteChart();
       this.averageGuests();
     }).catch(err => {
       this.transactionList.showLoading = false;
@@ -235,7 +238,10 @@ export class ActivitiesComponent implements OnInit {
     this.loyaltyService.getTotalTransInRang(this.fromDate, this.toDate, this.selectedGroupId).toPromise().then((res: any) => {
 
       this.transactionList.transactionData = res["transactions"];
-      this.totalSpendM = res["totalSpend"];
+      this.totalSpendM =res["totalSpend"];
+      this.revenues = res["revenues"];
+      this.expenses = res["expenses"];
+      this.topRevenueCenters = res["topRevenueCenters"]
 
       this.transactionList.showLoading = false;
       this.snackBar.open("Transactions filterd successfully.", null, {
@@ -363,9 +369,19 @@ export class ActivitiesComponent implements OnInit {
     }
   }
 
-  filterTransactions() {
+  resetPicker(event) {
+    if(event == 'fromDate'){
+      this.fromDate =  undefined;
+      this.filterTransactions(event);
+    }else if(event == 'toDate'){
+      this.toDate = undefined;
+      this.filterTransactions(event);
+    }
+  }
+
+  filterTransactions(event) {
     const transactions = this.transactionList.allTransactionDataBeforeFilter;
-    if (this.fromDate != "" && this.toDate != "") {
+    if (this.fromDate != "" && this.fromDate != undefined && this.toDate != undefined &&this.toDate != "") {
       this.transactionList.transactionData = transactions.filter(item => {
         return (new Date(item.transactionDate).getTime() >= new Date(this.fromDate).getTime() &&
           new Date(item.transactionDate).getTime() <= new Date(this.toDate).getTime())
@@ -404,6 +420,11 @@ export class ActivitiesComponent implements OnInit {
         });
         this.transactionList.transactionData = result;
       }
+    }
+
+    if((!this.fromDate || !this.toDate) && !this.selectedCardNum && !this.selectedGuestName && 
+    !this.selectedCardStatues && !this.selectedRevenue){
+      this.transactionList.transactionData = this.transactionList.transactionData;
     }
 
   }

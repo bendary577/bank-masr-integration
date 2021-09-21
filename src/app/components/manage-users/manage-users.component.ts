@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDatepicker, MatDialog, MatSnackBar } from '@angular/material';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser';
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
@@ -12,6 +12,7 @@ import { Data } from 'src/app/models/data';
 import { Constants } from 'src/app/models/constants';
 import { AddAppUserAccompiedComponent } from '../add-app-user-accompied/add-app-user-accompied.component';
 import { SideNaveComponent } from '../side-nave/side-nave.component';
+import { Moment } from 'moment';
 
 @Component({
   selector: 'app-manage-users',
@@ -41,8 +42,8 @@ export class ManageUsersComponent implements OnInit {
   selectedCardNum = '';
   selectedCardStatues = '';
   statues = ['Active', 'Expired', 'Deleted']
-  fromDate:any;
-  toDate:any;
+  fromDate;
+  toDate;
   isEntrySys = true;
 
   usersList = {
@@ -497,10 +498,20 @@ export class ManageUsersComponent implements OnInit {
   hasRole(reference){
     return this.sidNav.hasRole(reference);
   }
+
+  resetPicker(event) {
+    if(event == 'fromDate'){
+      this.fromDate =  undefined;
+      this.filterGuests(event);
+    }else if(event == 'toDate'){
+      this.toDate = undefined;
+      this.filterGuests(event);
+    }
+  }
   
-  filterGuests() {
+  filterGuests(event) {
     const guests = this.usersList.allGuestsBeforeFilter;
-    if (this.fromDate != "" && this.toDate != "") {
+    if (this.fromDate != "" && this.fromDate != undefined && this.toDate != undefined &&this.toDate != "") {
       this.usersList.usersData = guests.filter(item => {
         return (new Date(item.creationDate).getTime() >= new Date(this.fromDate).getTime() &&
           new Date(item.creationDate).getTime() <= new Date(this.toDate).getTime())
@@ -534,6 +545,9 @@ export class ManageUsersComponent implements OnInit {
         });
         this.usersList.usersData = result;
       }
+    }
+    if((!this.fromDate || !this.toDate) && !this.selectedCardNum && !this.selectedGuestName && !this.selectedCardStatues){
+      this.usersList.usersData = this.usersList.allGuestsBeforeFilter;
     }
 
   }

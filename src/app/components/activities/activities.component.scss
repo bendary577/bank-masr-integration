@@ -238,6 +238,16 @@ canvas{
 
   ::ng-deep .mat-form-field-flex{
     width: 150px !important;
+    height: 35px !important ;
+
+
+     .mat-form-field-outline-end {
+        background-color: #fdfdfd;
+     }
+
+     .mat-form-field-outline-start {
+        background-color: #fdfdfd;
+     }
   }
 
   ::ng-deep .mat-card-content{
@@ -254,4 +264,14 @@ canvas{
     color: hsl(0, 0%, 45%) !important;
     margin: 50px !important;
   }
+}
+
+mat-icon {
+  position: absolute;
+  float: right;
+  top: -1px !important;
+  cursor: pointer;
+  color: rgb(80 80 80 / 54%);
+  right: -60px;
+  font-size: medium;
 }
