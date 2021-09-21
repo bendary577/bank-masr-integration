@@ -25,10 +25,13 @@ hr{
   margin-right: 10px;
 }
 
+tr{
+  padding-top: 20px;
+}
+
 .right-col{
-  // position: fixed;
-  width: 24%; 
-  height: 100%; 
+  width: 30%; 
+  height: 600px; 
   float: left;
   margin-left: 2%;
 }
@@ -58,7 +61,7 @@ hr{
 .user-card{
   text-align: center;
   width: 100%;
-  height: 90%;
+  height: 95%;
   box-shadow:0 0 5px 5px rgb(207, 207, 207);
   border: 1px;
 }
@@ -93,7 +96,7 @@ mat-card{
 }
 
 .title{
-  width: 70%;
+  width: 100%;
   text-align: left;
   font-size: medium;
   font-weight: 600;
@@ -108,7 +111,8 @@ mat-card{
 }
 
 .user-btn-container{
-  margin-top: 100px;
+  margin-top: 120px;
+  margin-bottom: 20px !important;
 }
 
 .user-btn{
@@ -131,8 +135,8 @@ mat-card{
 .left-col{
   margin: 1%;
   margin-top: 70px;
-  margin-left: 3%;
-  width: 70%; 
+  margin-left: 5px;
+  width: 65%; 
   height: 600px; 
   float: right;
 }
@@ -152,13 +156,12 @@ mat-card{
   margin-left: 3%;
   box-shadow:0 0 5px 5px rgb(207, 207, 207);
   padding-top: 20px;
+  overflow: hidden;
 } 
-
 
 .wallet-amount{
   width: 100%;
 }
-
 
 .wallet-revenue{
   overflow: hidden;
@@ -310,14 +313,22 @@ mat-card{
   margin-top: 30px;
 }
 
+.rvc-img{
+  display: inline;
+  width: 70px;
+  min-height: 70px;
+  border-radius: 50%;
+  margin-top: 20px;
+}
+
 .filter-btn{
   text-align: center;
   margin-top: 7px;
   background-color: rgb(241, 241, 241);
   color: black;
   font-weight: bold;
-  border: 2px solid rgb(197, 197, 197);
-  box-shadow:0 0 3px 3px rgb(226, 226, 226);
+  // border: 2px solid rgb(197, 197, 197);
+  // box-shadow:0 0 3px 3px rgb(226, 226, 226);
 }
 
 .filter-btn-view{
@@ -386,11 +397,12 @@ mat-card{
 }
 
 ::ng-deep .mat-raised-button{
-  padding: 0 10px !important;
+  padding: 0 5px !important;
   margin-top: 20px;
 }
 
 .empty-box{
-  width: 30%;
-  padding:5%;
+  width: 250px;
+  padding:50px;
+  padding-bottom:25px ;
 }

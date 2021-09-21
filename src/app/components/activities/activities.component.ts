@@ -303,6 +303,9 @@ export class ActivitiesComponent implements OnInit {
   }
 
   calculteChart() {
+    this.revenues = [];
+    this.expenses = [];
+    this.topRevenueCenters = [];
     let transactions = this.transactionList.transactionData;
     let revenue;
     for (let i = 0; i < transactions.length; i++) {

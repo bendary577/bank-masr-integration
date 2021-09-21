@@ -35,7 +35,12 @@ export class ManageUsersComponent implements OnInit {
   palance=0;
   cardNumber = 0;
   accompanied = 2;
-    
+  selectedGroupId = '';
+  selectedRevenue = '';
+  selectedGuestName = '';
+  selectedCardNum = '';
+  selectedCardStatues = '';
+  statues = ['Active', 'Expired', 'Deleted']
   fromDate:any;
   toDate:any;
   isEntrySys = true;
@@ -55,7 +60,8 @@ export class ManageUsersComponent implements OnInit {
     pagesFilter: [10, 25, 50, 75, 100],
     showLoading: true,
     inputSearch: '' as string,
-    usersData: [] 
+    usersData: [],
+    allGuestsBeforeFilter: []
   };
 
 
@@ -88,6 +94,7 @@ export class ManageUsersComponent implements OnInit {
     this.usersList.showLoading = true;
     this.loyaltyService.getAppUsers().toPromise().then((res: any) => {
       this.usersList.usersData = res;
+      this.usersList.allGuestsBeforeFilter = res;
       this.usersList.showLoading = false;
     }).catch(err => {
       this.usersList.showLoading = false;
@@ -221,7 +228,7 @@ export class ManageUsersComponent implements OnInit {
     if(type){
       isGeneric = true;
       dialogRef = this.dialog.open(AddAppUserAccompiedComponent, {
-          width: '550px',
+          width: '700px',
         });
     }else{
       dialogRef = this.dialog.open(AddAppUserComponent, {
@@ -278,7 +285,7 @@ export class ManageUsersComponent implements OnInit {
     console.log(isGeneric)
     if(isGeneric){
         dialogRef = this.dialog.open(AddAppUserAccompiedComponent, {
-          width : '900px',
+          width : '700px',
           data: {
             user : this.usersList.selected[0]
           }
@@ -336,6 +343,34 @@ export class ManageUsersComponent implements OnInit {
       }
     })
   }
+
+  send(process) {
+    this.loyaltyService.sendSmsOrEmail(this.usersList.selected[0], process).toPromise().then(res => {
+      // this.sppiner.hide()
+      this.snackBar.open(process + " sent successfully.", null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass: "my-snack-bar-success"
+      });
+    }).catch(err => {
+      // this.sppiner.hide()
+      let message = "Can't send " + process + ".";
+      if (err.status === 401) {
+        message = ErrorMessages.SESSION_EXPIRED;
+        // this.sideNav.Logout();
+      } else if (err.error.message) {
+        message = err.error.message;
+      } else if (err.message) {
+        message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+      }
+      this.snackBar.open(message, null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass: "my-snack-bar-fail"
+      });
+    })
+  }
+
 
   resendQRCode(){
     this.usersList.showLoading = true;
@@ -463,6 +498,56 @@ export class ManageUsersComponent implements OnInit {
     return this.sidNav.hasRole(reference);
   }
   
+  filterGuests() {
+    const guests = this.usersList.allGuestsBeforeFilter;
+    if (this.fromDate != "" && this.toDate != "") {
+      this.usersList.usersData = guests.filter(item => {
+        return (new Date(item.creationDate).getTime() >= new Date(this.fromDate).getTime() &&
+          new Date(item.creationDate).getTime() <= new Date(this.toDate).getTime())
+      });
+    }
+
+    if (this.selectedCardNum != "") {
+      const result = guests.filter(s => s.code.includes(this.selectedCardNum));
+      this.usersList.usersData = result
+    }
+
+    if (this.selectedGuestName != "") {
+      const result = guests.filter(s => s.name.includes(this.selectedGuestName));
+      this.usersList.usersData = result
+    }
+
+    if (this.selectedCardStatues != "") {
+      if (this.selectedCardStatues == 'Deleted') {
+        const result = guests.filter(s => {
+          return (s.deleted == (1));
+        });
+        this.usersList.usersData = result
+      } else if (this.selectedCardStatues == 'Active') {
+        const result = guests.filter(s => {
+          return (s.deleted == (0));
+        });
+        this.usersList.usersData = result;
+      } else if (this.selectedCardStatues == 'Expired') {
+        const result = guests.filter(s => {
+          return (s.expire == (0));
+        });
+        this.usersList.usersData = result;
+      }
+    }
+
+  }
+
+  resetFilter() {
+    this.selectedGroupId = '';
+    this.selectedRevenue = '';
+    this.selectedGuestName = '';
+    this.selectedCardNum = '';
+    this.selectedCardStatues = '';
+    this.usersList.usersData = this.usersList.allGuestsBeforeFilter;
+  }
+
+
   getTransInRangAndGroup(){
   }
 

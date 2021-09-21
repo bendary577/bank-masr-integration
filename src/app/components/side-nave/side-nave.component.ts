@@ -297,6 +297,10 @@ export class SideNaveComponent implements OnDestroy,OnInit {
     }
   }
 
+  searchModules(search){
+    // this.syncJobTypes()
+  }
+
   titleOpened(title) {
     if (title == 'uiBasicCollapsed') {
       this.uiBasicCollapsed = !this.uiBasicCollapsed;

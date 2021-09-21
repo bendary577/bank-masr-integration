@@ -36,7 +36,8 @@ body {
 }
 
 .main-panel {
-  transition: width $action-transition-duration $action-transition-timing-function, margin $action-transition-duration $action-transition-timing-function;
+  display: inline-flex !important;
+  // transition: width $action-transition-duration $action-transition-timing-function, margin $action-transition-duration $action-transition-timing-function;
   width: 100%;
   min-height: calc(100vh - #{$navbar-height});
   // padding-top: $navbar-height;

@@ -1,8 +1,24 @@
 @import "../approved-invoices-infor/approved-invoices-infor.component.scss";
-@import "../activities/activities.component.scss";
 @import "../manage-groups/manage-groups.component.scss";
 
+@import "../activities/activities.component.scss";
 
 .user-link{
     cursor: pointer;
+}
+
+.five-column {
+    width: 130px;
+  }
+
+.guestFilte{
+    ::ng-deep .mat-form-field-flex{
+        width: 140px !important;
+    }
+}
+
+.filterButtons{
+    // padding-left: 30px;
+  float: right;
+  width: 180px;
 }

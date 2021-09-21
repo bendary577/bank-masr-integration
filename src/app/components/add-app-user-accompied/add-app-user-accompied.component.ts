@@ -27,7 +27,7 @@ export class AddAppUserAccompiedComponent implements OnInit  {
   credit=0;
   sendSMS = false;
   sendEmail = false;
-
+  inAccompiendView = false;
   // @ViewChild('ChildViewComponent') accompiedNumber = 2 ;
   @Input() accompiedNumber = 0 ;
   constructor(private formBuilder: FormBuilder, public snackBar: MatSnackBar, 
@@ -159,7 +159,6 @@ export class AddAppUserAccompiedComponent implements OnInit  {
   }
 
    addAccompiend() {
-     console.log("A")
     this.accompiedNumber = this.accompiedNumber + 1;
     let accompiendForm:  FormGroup;
     accompiendForm = this.formBuilder.group({
@@ -178,27 +177,19 @@ export class AddAppUserAccompiedComponent implements OnInit  {
     }
   }
 
-  giveValues(){}
-
-  hasRole(refernce){ }
-
-  // @Override
-  // void ngOnChanges(Map<String, SimpleChange> changes) {
-  //   print(changes);
-  // }
-
-  onChanges(changes: SimpleChanges) {
-
-    console.log("New Test")
-    // this.doSomething(changes.categoryId.currentValue);
-    // You can also use categoryId.previousValue and 
-    // categoryId.firstChange for comparing old and new values
+  hasRole(role){
+    
   }
 
   tabClick(tab){
     if(tab.index == 1 && this.accompiedNumber  == 0){
         this.addAccompiend();
-    }
+        this.inAccompiendView = true;
+    }else if(tab.index == 0){
+        this.inAccompiendView = false;
+    }else if(tab.index == 1){
+      this.inAccompiendView = true;
+    } 
   }
 }
 

@@ -4,11 +4,11 @@
             <mat-card class="stat-card">
                 <mat-card-content>
                     <h2>Top Users</h2>
-                    <div [hidden]="users.length != 0">
+                    <div *ngIf="users.length == 0 || !transactionList.transactionData.length">
                         <img class="user-img" src="../../../assets/defaultImage.jpg" alt="image">
                         <p class="user-name">There is no users yet</p>
                     </div>
-                    <div class="row">
+                    <div class="row" *ngIf="users.length != 0 && transactionList.transactionData.length">
                         <div class="column" *ngFor="let user of users">
                             <img class="user-img" src={{user.logoUrl}} alt="image">
                             <p class="user-name"> {{user.name}}</p>
@@ -22,11 +22,11 @@
             <mat-card class="stat-card">
                 <mat-card-content>
                     <h2>Top Groups</h2>
-                    <div [hidden]="topGroups.length != 0">
+                    <div *ngIf="topGroups.length == 0 || !transactionList.transactionData.length">
                         <img class="user-img" src="../../../assets/defaultGroup.png" alt="image">
                         <p class="user-name">There is no groups yet</p>
                     </div>
-                    <div class="row">
+                    <div class="row" *ngIf="topGroups.length != 0 && transactionList.transactionData.length">
                         <div class="column" *ngFor="let group of topGroups">
                             <img class="user-img" src={{group.logoUrl}} alt="image">
                             <p class="user-name">{{group.name}}</p>
@@ -122,7 +122,7 @@
     </div>
 
 
-    <div class="filter-container">
+    <div class="filter-container" *ngIf="transactionList.transactionData.length">
 
         <div class="filter-title">
             <span style="display: inline-block; font-size: 20px; font-weight: bold; color: black;">Filter

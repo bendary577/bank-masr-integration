@@ -7,65 +7,65 @@
         Guest</button>
     <button mat-flat-button class="groups-buttons" (click)="resendQRCode()"
         [disabled]="usersList.selected.length != 1" *ngIf="hasRole('resend_QR_code')">Resend QR Code</button>
+    <button mat-flat-button class="groups-buttons" (click)="send('Email')"
+        [disabled]="usersList.selected.length != 1" *ngIf="hasRole('resend_email')">Resend Email</button>
     <button mat-flat-button class="groups-buttons" (click)="deleteUsers('true')"
         [disabled]="validateDeleteUsers()">Delete Guest</button>
     <button mat-flat-button class="groups-buttons" (click)="deleteUsers('false')"
         [disabled]="validateRestoreUsers()">Restore Guest</button>
 </div>
 
-<div class="filter-container"
-    *ngIf="(usersList.usersData.length != 0 || usersList.showLoading ) && hasRole('show_filter_section')">
+<div class="filter-container">
+
     <div class="filter-title">
-        <span style="display: inline-block; font-size: 20px; font-weight: bold; color: black;">Filter Guest</span>
+        <span style="display: inline-block; font-size: 20px; font-weight: bold; color: black;">Filter Guests</span>
     </div>
-    <div class="searchField">
 
-        <div class="five-column" style="width:18%;">
-            <span class="filterTitle">From</span>
-            <input matInput placeholder="Start Date" type="date" name="fromDate" id="fromDate" [(ngModel)]="fromDate"
-                class="custom-select">
+    <div class="filter-buttons guestFilte">
+
+        <div class="five-column">
+            <mat-form-field appearance="outline" class="example-full-width creditForm">
+                <input matInput placeholder="Start Date" formContrlName="fromDate" id="fromDate"
+                    [(ngModel)]="fromDate" [matDatepicker]="fromDatepicker" readonly>
+                <mat-datepicker-toggle matSuffix [for]="fromDatepicker"></mat-datepicker-toggle>
+                <mat-datepicker #fromDatepicker></mat-datepicker>
+            </mat-form-field>
         </div>
-        <div class="five-column" style="width:18%;">
-            <span class="groupTitle">To</span>
-            <input matInput placeholder="End Date" type="date" name="toDate" id="toDate" [(ngModel)]="toDate"
-                class="custom-select">
+
+        <div class="five-column">
+            <mat-form-field appearance="outline" class="example-full-width creditForm">
+                <input matInput placeholder="End Date" formContrlName="toDate" id="toDate" [(ngModel)]="toDate"
+                    [matDatepicker]="toDatepicker" readonly>
+                <mat-datepicker-toggle matSuffix [for]="toDatepicker"></mat-datepicker-toggle>
+                <mat-datepicker #toDatepicker></mat-datepicker>
+            </mat-form-field>
         </div>
 
-        <br>
 
-        <div style="margin-top: 20px; margin-left: 40px;">
-            <div class="dropDownStyle">
-                <select class="" (change)="filterUsers(selectedGuest)" [(ngModel)]="selectedGuest">
-                    <option value="" selected style="display:none">Card Number</option>
-                    <option [ngValue]="user.code" *ngFor="let user of usersList.usersData">{{user.code}}</option>
-                </select>
-            </div>
+        <div class="five-column" *ngIf="hasRole('see_wallet_filter')">
+            <mat-form-field appearance="outline" class="example-full-width creditForm">
+                <input matInput placeholder="Guest Name" formContrlName="guestName" id="guestName" [(ngModel)]= "selectedGuestName">
+            </mat-form-field>
+        </div>
 
-            <div class="dropDownStyle">
-                <select class="" (change)="filterByGuestName()" [(ngModel)]="selectedGuest">
-                    <option value="" selected style="display:none">Guest Name</option>
-                    <option value=""></option>
-                    <option value="Test user">Test user</option>
-                    <option value="New Test">New Test</option>
-                </select>
-            </div>
+        <div class="five-column" *ngIf="hasRole('see_wallet_filter')">
+            <mat-form-field appearance="outline" class="example-full-width creditForm">
+                <input matInput placeholder="Card Number" formContrlName="cardNumber" id="cardNumber" [(ngModel)]= "selectedCardNum">
+            </mat-form-field>
+        </div>
 
-            <div class="dropDownStyle">
-                <select class="" (change)="filterUsers('test')">
-                    <option value="" selected style="display:none">Card Statues</option>
-                    <option value=""></option>
-                    <option value="Active">Active</option>
-                    <option value="">Expired</option>
-                </select>
-            </div>
-            <div class="dropDownStyle">
-                <select class="" (change)="filterByGuestName()" [(ngModel)]="selectedGuest">
-                    <option value="" selected style="display:none">Group</option>
-                    <option value=""></option>
-                    <option value="Test user">Test user</option>
-                    <option value="New Test">New Test</option>
-                </select>
-            </div>
+        <div class="five-column" *ngIf="hasRole('see_wallet_filter')">
+            <mat-form-field appearance="outline" class="example-full-width creditForm">
+                <mat-select class="custom-select" [(ngModel)]="selectedCardStatues">
+                    <mat-option value="" selected>All Statues</mat-option>
+                    <mat-option value="{{statue}}" *ngFor="let statue of statues">{{statue}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="five-column filterButtons">
+            <button mat-stroked-button (click)="filterGuests()" class="filterButton" *ngIf="hasRole('see_wallet_filter')">Filter</button>
+            <button mat-stroked-button (click)="resetFilter()" class="filterButton">Reset</button>
         </div>
     </div>
 </div>

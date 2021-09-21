@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Directive, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { SideNaveComponent } from '../side-nave/side-nave.component';
+
+
+@Directive({selector: 'child-directive'})
+class ChildDirective {
+}
 
 @Component({
   selector: 'app-nav-bar',
@@ -15,7 +20,8 @@ export class NavBarComponent implements OnInit {
   public user;
   public roles;
   public account;
-  
+  @ViewChild(ChildDirective) searchInput!: ChildDirective;
+
   constructor(private config: NgbDropdownConfig,private router: Router, private sideNav : SideNaveComponent) {
     config.placement = 'bottom-right';
   }
@@ -32,6 +38,11 @@ export class NavBarComponent implements OnInit {
   toggleOffcanvas() {
     document.querySelector('.sidebar-offcanvas').classList.toggle('active');
   }
+  
+  searchChange(event) {
+    this.sideNav.searchModules(event.target.value)
+  }
+
 
   // toggle sidebar
   toggleSidebar() {
@@ -64,4 +75,6 @@ export class NavBarComponent implements OnInit {
   Logout(){
     this.sideNav.Logout();
   }
+
+
 }

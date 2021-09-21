@@ -101,7 +101,11 @@
                 <mat-card class="wallet-card wallet-revenue">
                     <mat-card-content>
                         <h2>Wallet Revenue Centers</h2>
-                        <div class="list-group">
+                        <div [hidden]="revenueCenters.length">
+                            <img class="rvc-img" src="../../../assets/restaurantImg.png" alt="image">
+                            <p class="rvc-name">There is no Revenue Centers yet</p>
+                        </div>
+                        <div class="list-group" [hidden]="!revenueCenters.length">
                             <div class="list-group-item-header">
                                 Revenue Centers
                             </div>
@@ -138,8 +142,8 @@
                 <mat-card class="transaction-card">
                     <mat-card-content>
                         <div style="text-align: center;">
-                            <img src="../../../assets/empty-box.png" alt="image" class="empty-box">
-                            <p>You do not have any recent history.</p>
+                            <img src="../../../assets/empty-box.png" alt="image" class="empty-box"><br>
+                            <span>You do not have any recent history.</span>
                         </div>
                     </mat-card-content>
                 </mat-card>

@@ -9,7 +9,7 @@
       <ul class="navbar-nav w-100">
         <li class="nav-item w-100">
           <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search" src="../assets/scss/components/loaders/_colored-balls.scss">
-            <input type="text" class="form-control" placeholder="{{'Search Modules' }}"> <!--| translate -->
+            <input type="text" class="form-control" placeholder="{{'Search Modules'}}" (input)="searchChange($event)"> <!--| translate -->
           </form>
         </li>
       </ul>
@@ -161,9 +161,8 @@
             <h6 class="p-3 mb-0" translate>Profile</h6>
             <div class="dropdown-divider"></div>
 
-            <a href="#" class="dropdown-item preview-item">
+            <!-- <a href="#" class="dropdown-item preview-item">
               <div class="preview-thumbnail">
-                <!-- bg-dark -->
                 <div class="preview-icon rounded-circle">
                   <i class="mdi mdi-wrench text-primary"></i>
                 </div>
@@ -171,7 +170,7 @@
               <div class="preview-item-content">
                 <p class="preview-subject ellipsis mb-1" translate>Settings</p>
               </div>
-            </a>
+            </a> -->
 
             <!-- <a href="#" class="dropdown-item preview-item">
               <div class="preview-thumbnail">
@@ -199,8 +198,8 @@
                 <p class="preview-subject mb-1" (click)="Logout()" translate>Log out</p>
               </div>
             </a>
-            <div class="dropdown-divider"></div>
-            <p class="p-3 mb-0 text-center" translate>Advanced settings</p>
+            <!-- <div class="dropdown-divider"></div>
+            <p class="p-3 mb-0 text-center" translate>Advanced settings</p> -->
           </div>
         </li>
       </ul>
