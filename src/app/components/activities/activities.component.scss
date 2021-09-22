@@ -233,18 +233,13 @@ canvas{
 }
 
 .activity_body{
-
   display: inline;
-
   ::ng-deep .mat-form-field-flex{
     width: 140px !important;
     height: 35px !important ;
-
-
      .mat-form-field-outline-end {
         background-color: #fdfdfd;
      }
-
      .mat-form-field-outline-start {
         background-color: #fdfdfd;
      }
@@ -254,16 +249,23 @@ canvas{
     margin:10px !important;
   }
 
-  // ::ng-deep .mat-form-field-flex{
-  //   width: 200px !important;
-  // }
-
   ::ng-deep .mat-form-field-label {
     left: 20px !important;
     padding-top: 10px !important;
     color: hsl(0, 0%, 45%) !important;
     margin: 50px !important;
   }
+}
+
+.loyalty-style{
+     ::ng-deep .mat-form-field-flex{
+       width: 180px !important;
+      }
+
+      .five-column {
+        width: 190px;
+      }
+      
 }
 
 mat-icon {

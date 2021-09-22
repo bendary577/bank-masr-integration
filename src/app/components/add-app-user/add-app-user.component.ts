@@ -78,12 +78,15 @@ export class AddAppUserComponent implements OnInit {
       this.dialogRef.close({
         name: this.form.controls.name.value,
         email: this.form.controls.email.value,
-        group: this.form.controls.group.value,
+        group: this.form.controls.group.value.id,
         image: this.srcResult,
         cardCode: " ",
         mobile: " ",
-        balance: " ",
-        accompaniedGuests: " "
+        balance: 0,
+        accompaniedGuests: " ",
+        expire:0,
+        sendEmail: false,
+        sendSMS: false
       });
     }
   }

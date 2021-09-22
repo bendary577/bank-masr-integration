@@ -91,6 +91,10 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
+  getCurrency(){
+    return JSON.parse(localStorage.getItem("account")).currency;
+  }
+
   calculateParams(user) {
     this.credit = 0;
     let balance = user.wallet.balance;
@@ -238,8 +242,13 @@ export class UserProfileComponent implements OnInit {
         panelClass: "my-snack-bar-success"
       });
     }).catch(err => {
-      this.sppiner.hide()
-      let message = "Can't send " + process + ".";
+      this.sppiner.hide();
+      let message = "";
+      if(process == 'Email'){
+      message = "Invalid Email.";
+      }else{
+      message = "Invalid Mobile Number.";
+      }
       if (err.status === 401) {
         message = ErrorMessages.SESSION_EXPIRED;
         this.sideNav.Logout();

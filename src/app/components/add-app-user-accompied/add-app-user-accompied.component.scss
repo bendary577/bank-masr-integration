@@ -50,7 +50,7 @@
 // }
 
  ::ng-deep .mat-dialog-container {
-    height: 700px !important;
+    height: 710px !important;
 }
 
 .form-group{
@@ -94,7 +94,7 @@
 }
 
 .form-side{
-  width: 52%; 
+  width: 55%; 
   margin-right: 2%; 
   float: right; 
 }
@@ -153,4 +153,10 @@
 
 .add-accom-buttons{
   float: right; margin-bottom: 20px;
+}
+
+
+::ng-deep .mat-dialog-actions {
+  padding-top: 20px;
+  justify-content: center !important;
 }

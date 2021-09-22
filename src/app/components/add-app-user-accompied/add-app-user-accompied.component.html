@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <div class="two-column formSide" style="height:90%">
+        <div class="two-column formSide" style=" margin-left: 30px; height:90%">
             <mat-tab-group  (selectedTabChange)="tabClick($event)">
                 <mat-tab label="Main Guest">
                     <div mat-dialog-content class="main-guest">
@@ -32,13 +32,16 @@
                             </mat-form-field>
 
                             <mat-form-field class="example-full-width creditForm" appearance="outline">
-                                <input matInput placeholder="Epire" formControlName="expire" maxlength="3" required>
+                                <input matInput placeholder="Expire" formControlName="expire" maxlength="3" required>
                                 <mat-label>Expire</mat-label>
                                 <mat-error *ngIf="form.controls.expire.hasError('required')">
-                                    Expiration is required.
+                                    Expiration Date is required.
                                 </mat-error>
                                 <mat-error *ngIf="form.controls.expire.hasError('maxlength')">
-                                    Expiration to long.
+                                    Expiration Date to long.
+                                </mat-error>
+                                <mat-error *ngIf="form.controls.expire.hasError('pattern')">
+                                    Expiration Date must be well formed.
                                 </mat-error>
                             </mat-form-field>
 
@@ -52,6 +55,9 @@
                                 <mat-error *ngIf="form.controls.balance.hasError('maxlength')">
                                     Balance is to long.
                                 </mat-error>
+                                <mat-error *ngIf="form.controls.balance.hasError('pattern')">
+                                    Balance must be well formed.
+                                </mat-error>
                             </mat-form-field>
 
                             <mat-form-field class="example-full-width creditForm" appearance="outline">
@@ -61,6 +67,9 @@
                                 </mat-error>
                                 <mat-error *ngIf="form.controls.cardNum.hasError('maxlength')">
                                     Card Number to long.
+                                </mat-error>
+                                <mat-error *ngIf="form.controls.cardNum.hasError('pattern')">
+                                    Card Number must be well formed.
                                 </mat-error>
                             </mat-form-field>
 
@@ -76,7 +85,7 @@
                                 </mat-error>
                             </mat-form-field>
 
-                            <mat-form-field class="example-full-width creditForm" appearance="outline" *ngIf="inUpdate">
+                            <!-- <mat-form-field class="example-full-width creditForm" appearance="outline" *ngIf="inUpdate">
                                 <input matInput placeholder="Number Of Accompanied Guest" formControlName="accompanied" maxlength="50" readonly>
                                 <mat-label>Accompanied Guest Number</mat-label>
                                 <mat-error *ngIf="form.controls.name.hasError('required')">
@@ -85,7 +94,7 @@
                                 <mat-error *ngIf="form.controls.name.hasError('maxlength')">
                                     Frist Name is to long.
                                 </mat-error>
-                            </mat-form-field>
+                            </mat-form-field> -->
 
                             <mat-form-field class="example-full-width creditForm" appearance="outline">
                                 <input matInput placeholder="Email" formControlName="email">

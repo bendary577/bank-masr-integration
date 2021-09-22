@@ -15,7 +15,7 @@
         [disabled]="validateRestoreUsers()">Restore Guest</button>
 </div>
 
-<div class="filter-container">
+<div class="filter-container" *ngIf="hasRole('see_wallet_filter')">
 
     <div class="filter-title">
         <span style="display: inline-block; font-size: 20px; font-weight: bold; color: black;">Filter Guests</span>

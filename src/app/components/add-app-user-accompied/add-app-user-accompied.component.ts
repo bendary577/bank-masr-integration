@@ -64,8 +64,8 @@ export class AddAppUserAccompiedComponent implements OnInit  {
     }else{
       this.form = this.formBuilder.group({
       group: this.group,
-      balance:[100, [Validators.required, Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
-      expire:[24, [Validators.required, Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+      balance:[100, [Validators.required, Validators.maxLength, Validators.pattern('[- +()0-9]+')]],
+      expire:[24, [Validators.required, Validators.maxLength, Validators.pattern('[- +()0-9]+')]],
       name: ["", [Validators.maxLength]],
       email: ["", [Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"), Validators.maxLength]],
       mobile: ["", [Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
@@ -122,6 +122,7 @@ export class AddAppUserAccompiedComponent implements OnInit  {
   }
 
   onSaveClick(): void {
+    console.log("S")
     if (this.form.invalid){
       this.snackBar.open("Please fill form values" , null, {
         duration: 3000,

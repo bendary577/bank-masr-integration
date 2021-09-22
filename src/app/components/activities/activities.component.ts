@@ -26,8 +26,8 @@ export class ActivitiesComponent implements OnInit {
   groups = [];
   topGroups = [];
   topRevenueCenters = [];
-  revenues = ["Take Away", "", ""];
-  expenses = [90];
+  revenues = [];
+  expenses = [];
   guests = [];
   fromDate = '';
   toDate = '';
@@ -42,7 +42,15 @@ export class ActivitiesComponent implements OnInit {
   props = { 'background-color': '#e07d93' };
   props2 = { 'background-color': '#3F51B5' };
   noFilter = true;
-
+  rvcBarChartLabels: Label[];
+  rvcBarChartType: ChartType ;
+  rvcBarChartPlugins;
+  rvcBarChartLegend;
+  rvcBlue;
+  rvcBarChartData: ChartDataSets[];
+  public barChartOptions: ChartOptions;
+  chartCreated = false;
+  
   transactionList = {
     paginateData: true as boolean,
     offset: 0,
@@ -63,27 +71,6 @@ export class ActivitiesComponent implements OnInit {
     firstTime: true
   };
 
-  public barChartOptions: ChartOptions = {
-    responsive: true,
-  };
-  public rvcBarChartLabels: Label[] = this.revenues;
-  public rvcBarChartType: ChartType = 'bar';
-  public rvcBarChartLegend = true;
-  public rvcBarChartPlugins = [];
-  public rvcBlue = ["rgba(224, 108, 112, 1)", "rgba(224, 108, 112, 1)", "rgba(224, 108, 112, 1)"]
-  public rvcBarChartData: ChartDataSets[] = [
-    { data: this.expenses, label: 'Sales Per Revenue Center' },
-  ];
-
-  // public traBarChartLabels: Label[] = ['1', '2', '3', '4','5','6','7','8','9','10','11'];
-  // public traBarChartType: ChartType = 'bar';
-  // public traBarChartLegend = true;
-  // public traBarChartPlugins = [];
-  // // public traBlue= ['blue', 'blue', 'blue', 'blue']
-  // public traBarChartData: ChartDataSets[] = [
-  //   { data: [ , , , 20], label: 'Transaction' },
-  // ];
-
   constructor(public snackBar: MatSnackBar, private router: Router, private _location: Location,
     private sidNav: SideNaveComponent, private loyaltyService: LoyaltyService, private excelService: ExcelService, private spinner: NgxSpinnerService) { }
 
@@ -91,7 +78,19 @@ export class ActivitiesComponent implements OnInit {
     this.getTopUsers();
     this.getTopGroups();
     this.totalSpend("Total");
+  }
 
+  createChart(){
+    if(!this.chartCreated){
+        this.chartCreated = true;
+        this.barChartOptions = {
+          responsive: true,
+        };
+        this.rvcBarChartType = 'bar';
+        this.rvcBarChartLegend = true;
+        this.rvcBarChartPlugins = [];
+        this.rvcBlue = ["rgba(224, 108, 112, 1)", "rgba(224, 108, 112, 1)", "rgba(224, 108, 112, 1)"]
+    }
   }
 
   refresh() {
@@ -105,10 +104,10 @@ export class ActivitiesComponent implements OnInit {
       this.getTransactions(date);
       this.spinner.hide();
       this.totalSpendM = res["totalSpend"];
-      this.revenues = res["revenues"];
-      this.expenses = res["expenses"];
-      // this.topRevenueCenters = res["topRevenueCenters"]
-      this.calculteChart();
+      this.topRevenueCenters = res["topRevenueCenters"]
+      this.rvcBarChartLabels = res["revenues"];
+      this.rvcBarChartData = [{ data: res["expenses"], label: 'Sales Per Revenue Center' },]; 
+      this.createChart();
       console.log(this.expenses)
       console.log(this.revenues)
     }).catch(err => {
@@ -189,7 +188,6 @@ export class ActivitiesComponent implements OnInit {
       this.allTransactionDataBeforeFilter();
       this.transactionList.showLoading = false;
       this.averageGuests();
-      this.calculteChart();
     }).catch(err => {
       this.transactionList.showLoading = false;
       let message = "";
@@ -209,56 +207,6 @@ export class ActivitiesComponent implements OnInit {
         panelClass: "my-snack-bar-fail"
       });
     });
-  }
-
-  calculteChart() {
-    this.revenues = [];
-    this.expenses = [];
-    this.topRevenueCenters = [];
-    let transactions = this.transactionList.transactionData;
-    let revenue;
-    for (let i = 0; i < transactions.length; i++) {
-      revenue = transactions[i].revenueCentreName;
-      let expenses = 0;
-      if (this.notExistInRevenues(revenue)) {
-        for (let j = 0; j < transactions.length; j++) {
-          if (transactions[j].revenueCentreName == revenue && revenue != "") {
-            expenses = expenses + transactions[j].afterDiscount;
-          }
-        }
-        this.revenues.push(revenue);
-        this.expenses.push(expenses);
-      }
-    }
-    this.grtTopRevenues(this.revenues, this.expenses);
-    if(this.revenues.length == 1 || this.revenues.length == 2){
-      this.revenues.push(...['', '']);
-    }
-  }
-
-  grtTopRevenues(tempRevenue, tempExpence ){ 
-    let revenueLength = tempRevenue.length;
-    if (revenueLength > 5) { revenueLength = 5 }
-    tempRevenue = tempRevenue.slice(0, revenueLength)
-    tempExpence = tempRevenue.slice(0, revenueLength)
-    let length = tempRevenue.length;
-    if (length > 0) {
-      if (length > 3) { length = 3 }
-      var topValues = tempExpence.sort((a, b) => b - a).slice(0, length);
-      this.topRevenueCenters = [tempRevenue[tempExpence.indexOf(topValues[0])],
-      tempRevenue[tempExpence.indexOf(topValues[1])], tempRevenue[tempExpence.indexOf(topValues[2])]]
-      this.topRevenueCenters = this.topRevenueCenters.sort((a, b) => b - a).slice(0, length);
-    }
-  }
-
-
-  notExistInRevenues(revenue): Boolean {
-    for (let i = 0; i < this.revenues.length; i++) {
-      if (this.revenues[i] == revenue) {
-        return false;
-      }
-    }
-    return true;
   }
 
   allTransactionDataBeforeFilter() {
@@ -329,6 +277,10 @@ export class ActivitiesComponent implements OnInit {
     this.selectedGroupId = '';
   }
 
+  getCurrency(){
+    return JSON.parse(localStorage.getItem("account")).currency;
+  }
+
   extractExcelFile() {
     this.spinner.show();
     this.excelService.exporttransactionExcel(this.transactionList.transactionData).subscribe(
@@ -363,14 +315,27 @@ export class ActivitiesComponent implements OnInit {
 
 
   averageGuests() {
-    let guests = [];
     let transactions = this.transactionList.transactionData;
-    for (let i = 0; i < transactions.length; i++) {
-      if (guests.indexOf(transactions[i].code) <= -1) {
-        this.guestAverage += 1;
-        guests.push(transactions[i].code)
-      }
-    }
+
+    let fristDate = new Date(Math.min.apply(null, transactions.map(function(e) {
+    return new Date(e.transactionDate);})));
+
+    let latestDate = new Date(Math.max.apply(null, transactions.map(function(e) {
+      return new Date(e.transactionDate);})));
+    
+    let diff =  Math.floor((Date.UTC(latestDate.getFullYear(),
+    latestDate.getMonth(), latestDate.getDate())
+      - Date.UTC(fristDate.getFullYear(), fristDate.getMonth(),
+      fristDate.getDate()) ) /(1000 * 60 * 60 * 24));
+
+    this.guestAverage = transactions.length /  diff;
+
+    // for (let i = 0; i < transactions.length; i++) {
+    //   if (guests.indexOf(transactions[i].code) <= -1) {
+    //     this.guestAverage += 1;
+    //     guests.push(transactions[i].code)
+    //   }
+    // }
   }
 
   resetPicker(event) {
@@ -428,9 +393,8 @@ export class ActivitiesComponent implements OnInit {
 
     if((!this.fromDate || !this.toDate) && !this.selectedCardNum && !this.selectedGuestName && 
     !this.selectedCardStatues && !this.selectedRevenue){
-      this.transactionList.transactionData = this.transactionList.transactionData;
+      this.transactionList.transactionData = this.transactionList.allTransactionDataBeforeFilter;
     }
-
   }
 
   resetFilter() {

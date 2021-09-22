@@ -172,9 +172,8 @@ mat-card{
   max-width: 100%;
   height: 150px;
   display: inline-block;
-  overflow:scroll;
   overflow-x: hidden;
-  padding: 10px;
+  padding: 0px;
 }
 
 .list-group-item-header{
@@ -197,6 +196,8 @@ mat-card{
   display: block;
   margin-bottom: -1px;
   background-color: #fff;
+  width: 210px;
+  overflow-y: hidden;
   border: 1px solid rgba(0,0,0,.125);
 }
 
