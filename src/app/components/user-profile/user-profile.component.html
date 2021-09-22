@@ -9,39 +9,40 @@
         <div class="user-profile">
             <mat-card class="user-card">
                 <mat-card-content>
-                    <img class="user-img" src={{user.logoUrl}} alt="image">
-                    <span class="user-name">
+                    <img class="user-img" src={{user.logoUrl}} alt="image" *ngIf="user">
+                    <img class="user-img" src="../../../assets/defaultImage.jpg" alt="image" *ngIf="!user">
+                    <span class="user-name" *ngIf="user">
                         {{user.name}}
                     </span>
-                    <span style="color: #1661a3;">{{user.email}}</span>
+                    <span style="color: #1661a3;" *ngIf="user">{{user.email}}</span>
                     <hr>
                     <div class="user-data">
                         <table>
-                            <tr>
+                            <tr *ngIf="user.mobile">
                                 <td class="title" style="float: left;" style="float: left;">Mobile </td>
                                 <td> </td>
                                 <td class="res" style="float: right;" style="float: right;"> {{user.mobile}}</td>
                             </tr>
-                            <hr class="hrClass">
-                            <tr>
+                            <hr class="hrClass"  *ngIf="user.mobile">
+                            <tr *ngIf="group.name">
                                 <td class="title" style="float: left;">Group </td>
                                 <td> </td>
                                 <td class="res" style="float: right;"> {{group.name}}</td>
                             </tr>
-                            <hr class="hrClass"  *ngIf="hasRole('show_discount')">
-                            <tr *ngIf="hasRole('show_discount')">
+                            <hr class="hrClass"  *ngIf="hasRole('show_discount') && simphonyDiscount.discountRate">
+                            <tr *ngIf="hasRole('show_discount') && simphonyDiscount.discountRate">
                                 <td class="title" style="float: left;">Discount</td>
                                 <td> </td>
                                 <td class="res" style="float: right;"> {{simphonyDiscount.discountRate}} %</td>
                             </tr>
-                            <hr class="hrClass"  *ngIf="hasRole('show_discount')">
-                            <tr *ngIf="hasRole('show_discount')">
+                            <hr class="hrClass"  *ngIf="hasRole('show_discount') && simphonyDiscount.discountId">
+                            <tr *ngIf="hasRole('show_discount') && simphonyDiscount.discountId">
                                 <td class="title" style="float: left;">Discount ID</td>
                                 <td> </td>
                                 <td class="res" style="float: right;"> {{simphonyDiscount.discountId}}</td>
                             </tr>
-                            <hr class="hrClass">
-                            <tr>
+                            <hr class="hrClass" *ngIf="user">
+                            <tr *ngIf="user">
                                 <td class="title" style="float: left;">Status </td>
                                 <td> </td>
                                 <td class="res" style="float: right;">
@@ -54,14 +55,20 @@
                                         style="color: #1661a3;">Expired</label>
                                 </td>
                             </tr>
-                            <hr class="hrClass">
-                            <tr>
+                            <hr class="hrClass" *ngIf="user && user.expire">
+                            <tr *ngIf="user">
+                                <td class="title" style="float: left;">Expire In </td>
+                                <td> </td>
+                                <td class="res" style="float: right;">{{user.expire}} H</td>
+                            </tr>
+                            <hr class="hrClass" *ngIf="user">
+                            <tr *ngIf="user">
                                 <td class="title" style="float: left;">Creation Time </td>
                                 <td> </td>
                                 <td class="res" style="float: right;">{{user.creationDate | date: 'dd/MM/yyyy' }}</td>
                             </tr>
-                            <hr class="hrClass">
-                            <tr>
+                            <hr class="hrClass" *ngIf="user.lastUpdate">
+                            <tr *ngIf="user.lastUpdate">
                                 <td class="title" style="float: left;">Last Update</td>
                                 <td> </td>
                                 <td class="res" style="float: right;">{{user.lastUpdate | date: 'dd/MM/yyyy' }}</td>
@@ -69,7 +76,7 @@
                         </table>
                     </div>
                     <div class="user-btn-container">
-                        <button class="user-btn" (click)="updateUserDialog()" mat-raised-button>Update</button>
+                        <button class="user-btn" (click)="updateUserDialog()" mat-raised-button *ngIf="user">Update</button>
                         <button class="user-btn" (click)="deleteUsers('true')" *ngIf="!user.deleted"
                             mat-raised-button>Delete</button>
                         <button class="user-btn" (click)="deleteUsers('false')" *ngIf="user.deleted"
@@ -92,7 +99,7 @@
                                     Wallet Credit
                                 </div>
                                 <div style="font-size: larger;">
-                                    {{credit}} USD
+                                    {{credit}} {{getCurrency()}}
                                 </div>
                             </h3>
                             <button class="filter-btn" (click)="chargeWallet('add')" mat-raised-button>Charge</button>
@@ -107,17 +114,23 @@
                 <mat-card class="wallet-card wallet-revenue">
                     <mat-card-content>
                         <h2>Wallet Revenue Centers</h2>
-                        <div [hidden]="revenueCenters.length">
+                        <!-- <div [hidden]="revenueCenters.length">
                             <img class="rvc-img" src="../../../assets/restaurantImg.png" alt="image">
                             <p class="rvc-name">There is no Revenue Centers yet</p>
-                        </div>
-                        <div class="list-group" [hidden]="!revenueCenters.length">
+                        </div> -->
+                        
+                        <div class="list-group" *ngIf="revenueCenters">
                             <div class="list-group-item-header">
                                 Revenue Centers
                             </div>
                             <label class="list-group-item" *ngFor="let revenue of revenueCenters">
                                 {{revenue.revenueCenter}}
                             </label>
+                        </div>
+                        <div class="list-group" *ngIf="!revenueCenters">
+                            <div class="list-group-item-header">
+                                There Is No Revenue Centers
+                            </div>
                         </div>
                     </mat-card-content>
                 </mat-card>
@@ -144,7 +157,7 @@
             <div class="title-card">
                 Card History
             </div>
-            <div *ngIf="walletHistoryList.walletHistoryData.length == 0">
+            <div *ngIf="    walletHistoryList.walletHistoryData.length == 0">
                 <mat-card class="transaction-card">
                     <mat-card-content>
                         <div style="text-align: center;">
@@ -171,19 +184,19 @@
 
                     <ngx-datatable-column name="Operation Amount">
                         <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.amount}} $
+                            {{row.amount}} {{getCurrency()}}
                         </ng-template>
                     </ngx-datatable-column>
 
                     <ngx-datatable-column name="Previous Balance">
                         <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.previousBalance}} $
+                            {{row.previousBalance}} {{getCurrency()}}
                         </ng-template>
                     </ngx-datatable-column>
 
                     <ngx-datatable-column name="New Balance">
                         <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.newBalance}} $
+                            {{row.newBalance}} {{getCurrency()}}
                         </ng-template>
                     </ngx-datatable-column>
 
