@@ -1,11 +1,14 @@
 <mat-tab-group>
-    <mat-tab label="Groups"> 
+    <mat-tab label="Groups" *ngIf="hasRole('show_groups')"> 
         <app-manage-groups></app-manage-groups>
     </mat-tab>
-    <mat-tab label="Users"> 
+    <mat-tab label="Guest" *ngIf="hasRole('show_guests')"> 
         <app-manage-users></app-manage-users>
     </mat-tab>
-    <mat-tab label="Activities">
+    <mat-tab label="Activities" *ngIf="hasRole('show_activities')">
         <app-activities></app-activities>
     </mat-tab>
+    <!-- <mat-tab label="Guest Cards">
+        <app-gest-cards></app-gest-cards>
+    </mat-tab> -->
   </mat-tab-group>

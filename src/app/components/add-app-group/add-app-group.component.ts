@@ -63,6 +63,7 @@ export class AddAppGroupComponent implements OnInit {
         description: [''],
         parentGroup: [this.parentGroup],
         discountId: ['', [Validators.required]],
+        image:''
       });
     }
   }

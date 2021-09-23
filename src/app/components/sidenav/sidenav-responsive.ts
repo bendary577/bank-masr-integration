@@ -21,41 +21,37 @@ import { Account } from 'src/app/models/Account'
   templateUrl: 'sidenav-responsive.html',
   styleUrls: ['sidenav-responsive.css'],
 })
-export class SidenavResponsive implements OnDestroy, OnInit {
-  shouldRun: boolean = false
-  selectedTab = Constants.CURRENT_TAB
-  mobileQuery: MediaQueryList
-  syncJobTypes: SyncJobType[] = []
-  operationTypes: SyncJobType[] = []
-  applications: Application[] = []
-  generalSettings: GeneralSettings
-  account: Account
-  accountCredentials: [] = []
-  simphonyLocations: []
-  costCenterAccountMapping: []
-  suppliers: []
-  overGroups: []
-  discountRates: []
+export class SidenavResponsive implements OnDestroy,OnInit {
+  shouldRun: boolean=false;
+  selectedTab = Constants.CURRENT_TAB;
+  mobileQuery: MediaQueryList;
+  syncJobTypes: SyncJobType[] = [];
+  operationTypes: SyncJobType[] = [];
+  applications: Application[] = [];
+  generalSettings: GeneralSettings;
+  account: Account;
+  accountFeatures: [];
+  userRoles: [];
+  accountCredentials: [] = [];
+  simphonyLocations:[];
+  costCenterAccountMapping:[];
+  suppliers:[];
+  overGroups:[];
+  discountRates:[];
+  admin= false;
 
-  private _mobileQueryListener: () => void
+  private _mobileQueryListener: () => void;
+ 
+  constructor( changeDetectorRef: ChangeDetectorRef,
+              private router: Router, media: MediaMatcher, location: Location, private _location: Location,
+              public snackBar: MatSnackBar, public accountService: AccountService,
+              private syncJobService: SyncJobService, public operationTypeService: OperationTypesService,
+              private generalSettingsService: GeneralSettingsService, private authService: AuthService) {
 
-  constructor(
-    changeDetectorRef: ChangeDetectorRef,
-    private router: Router,
-    media: MediaMatcher,
-    location: Location,
-    private _location: Location,
-    public snackBar: MatSnackBar,
-    public accountService: AccountService,
-    private syncJobService: SyncJobService,
-    public operationTypeService: OperationTypesService,
-    private generalSettingsService: GeneralSettingsService,
-    private authService: AuthService,
-  ) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)')
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges()
-    this.mobileQuery.addListener(this._mobileQueryListener)
-    this.shouldRun = location.path() !== '/login' && location.path() !== '/'
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+    this.shouldRun = location.path() !== "/login"&&location.path() !=="/";
     router.events.subscribe((val) => {
       // see also
       if (val instanceof NavigationEnd) {
@@ -73,13 +69,22 @@ export class SidenavResponsive implements OnDestroy, OnInit {
     this._location.back()
   }
 
+  refresh() {
+    location.reload();
+  }
+  
   ngOnInit(): void {
+
     if (this.shouldRun == true) {
       this.getGeneralSettings()
       this.getApplication()
       this.getSyncJobTypes()
       this.getOperationTypes()
       this.getAccount()
+    }
+
+    if(this.account != undefined && this.account.id == "5fe34649283cde246c2d7734"){
+      this.admin = true;
     }
   }
 

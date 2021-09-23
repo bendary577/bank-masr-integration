@@ -128,7 +128,7 @@ export class ManageGroupsComponent implements OnInit {
 
   addGroupDialog(){
     const dialogRef = this.dialog.open(AddAppGroupComponent, {
-        width: '550px',
+        width: '420px',
         data: { inParent: this.inParent}
     });
 
@@ -178,7 +178,7 @@ export class ManageGroupsComponent implements OnInit {
 
   updateGroupDialog(){
     const dialogRef = this.dialog.open(AddAppGroupComponent, {
-      width: '550px',
+      width: '420px',
       data: {inParent: this.inParent, group: this.groupsList.selected[0] }
     });
 
@@ -274,7 +274,6 @@ export class ManageGroupsComponent implements OnInit {
           return true;
       }
     }
-
     return false;
   }
 

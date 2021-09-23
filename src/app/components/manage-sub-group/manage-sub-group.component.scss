@@ -1,1 +1,29 @@
 @import "../approved-invoices-infor/approved-invoices-infor.component.scss";
+@import "../manage-groups/manage-groups.component.scss";
+
+.title-card{
+    display: inline-block;
+    text-align: center;
+    margin: auto;
+    margin-top: 10px;
+    border-bottom: none;
+    width: 100%;
+    height: 60px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: large;
+    background-color: rgb(255, 255, 255);
+    border-radius:10px 10px 0 0;
+    border: 2px solid #efefef;
+    box-shadow:0 0 3px 3px rgb(226, 226, 226);
+  } 
+
+  .empty-box{
+    width: 20%;
+    padding: 50px;
+  }
+
+  .transaction-card{
+    height: 350px;
+    overflow: hidden;
+  }

@@ -1,58 +1,57 @@
-<h1 mat-dialog-title>New Group</h1>
+<div class="dialog-body">
 
-<div mat-dialog-content>
-    <form [formGroup]="form" class="my-form">
-        <div class="form-group">
-            <mat-form-field class="example-full-width">
-                <input matInput placeholder="Name" formControlName="name" required maxlength="25">
-                <mat-error *ngIf="form.controls.name.hasError('required')">
-                    Name is required.
-                  </mat-error>
-                  <mat-error *ngIf="form.controls.name.hasError('maxlength')">
-                    Name is to long.
-                  </mat-error>
-            </mat-form-field>
-        </div>
+    <span mat-dialog-title>New Group</span>
 
-        <div class="form-group">
-            <mat-form-field class="example-full-width">
-                <input matInput placeholder="Description" formControlName="description" maxlength="50">
-            </mat-form-field>
-        </div>
+    <div mat-dialog-content>
+        <form [formGroup]="form" class="my-form">
+            
+                <mat-form-field class="example-full-width creditForm" appearance="outline">
+                    <input matInput placeholder="Name" formControlName="name" required maxlength="25">
+                    <mat-error *ngIf="form.controls.name.hasError('required')">
+                        Name is required.
+                    </mat-error>
+                    <mat-error *ngIf="form.controls.name.hasError('maxlength')">
+                        Name is to long.
+                    </mat-error>
+                </mat-form-field>
 
-        <div>
-            <mat-form-field class="example-full-width" >
-                <mat-select matInput id="discountId" name="discountId" [value]="slectedDiscount" placeholder="Simphony Discount Id" formControlName="discountId">
-                    <mat-option></mat-option>
-                    <mat-option [value]=discountRate.discountId *ngFor="let discountRate of discountRates">
-                        {{discountRate.discountId}} - {{discountRate.discountRate}}%</mat-option>
+                <mat-form-field class="example-full-width creditForm" appearance="outline">
+                    <input matInput placeholder="Description" formControlName="description" maxlength="50">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width creditForm" appearance="outline">
+                    <mat-select matInput id="discountId" name="discountId" [value]="slectedDiscount"
+                        placeholder="Simphony Discount Id" formControlName="discountId">
+                        <mat-option></mat-option>
+                        <mat-option [value]=discountRate.discountId *ngFor="let discountRate of discountRates">
+                            {{discountRate.discountId}} - {{discountRate.discountRate}}%</mat-option>
                     </mat-select>
-            </mat-form-field>
-        </div>
+                </mat-form-field>
 
-        <div *ngIf="groups && groups.length!=0 && data.inParent && !groupsLoader" class="form-group">
-            <mat-form-field class="example-full-width">
-                <mat-select matInput id="groups" name="groups" placeholder="Parent Group" formControlName="parentGroup">
-                    <mat-option></mat-option>
-                    <mat-option [value]=c *ngFor="let c of groups">{{c.name}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
+                <mat-form-field class="example-full-width creditForm" appearance="outline" *ngIf="groups && groups.length!=0 && data.inParent && !groupsLoader">
+                    <mat-select matInput id="groups" name="groups" placeholder="Parent Group"
+                        formControlName="parentGroup">
+                        <mat-option></mat-option>
+                        <mat-option [value]=c *ngFor="let c of groups">{{c.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
 
-        <div class="form-group" style="padding-top: 5%;">
-            <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="csvInputChange($event)" accept="image/*" />
-            <button class="form-button" mat-flat-button color="primary" (click)="csvInput.click()" >
-                <img class="form-b-img" src="../../../assets/photos.png">
-                Choose Image</button>
-            <div [hidden]="!imageUploded">Image uploaded successfully.</div>
-         </div>
+            <div style="padding-top: 1%;">
+                    <input #csvInput hidden="true" type="file" onclick="this.value=null"
+                        (change)="csvInputChange($event)" accept="image/*" formControlName="image"/>
+                    <button class="form-button" mat-flat-button color="primary" (click)="csvInput.click()">
+                        <img class="form-b-img" src="../../../assets/photos.png">
+                        Choose Image</button>
+                    <div [hidden]="!imageUploded">Image uploaded successfully.</div>
+            </div>
+        </form>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button cdkFocusInitial (click)="onSaveClick()" class="groups-buttons">
+            <label [hidden]="inUpdate">Save</label>
+            <label [hidden]="!inUpdate">Update</label>
+        </button>
+        <button mat-button (click)="onNoClick()" class="groups-buttons">Cancel</button>
+    </div>
 
-    </form>
-</div>
-<div mat-dialog-actions>
-    <button mat-button cdkFocusInitial (click)="onSaveClick()" >
-       <label [hidden] = "inUpdate">Save</label> 
-       <label [hidden] = "!inUpdate">Update</label> 
-    </button>
-    <button mat-button (click)="onNoClick()">Cancel</button>
 </div>

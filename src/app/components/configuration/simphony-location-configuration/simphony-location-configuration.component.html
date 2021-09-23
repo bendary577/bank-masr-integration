@@ -1,7 +1,8 @@
-<div class="back" style="margin-bottom: 15px;">
-    <button mat-flat-button (click)="openSimphonyLocationDialog()">Add</button>
+<div class="container">
+    <div class="back" style="margin-bottom: 15px;">
+        <button mat-flat-button (click)="openSimphonyLocationDialog()" class="filterButton addButton">Add</button>
+    </div>
 </div>
-
 <div *ngIf="locations?.length > 0">
 
     <ngx-datatable class="material" [rows]="locations" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" 

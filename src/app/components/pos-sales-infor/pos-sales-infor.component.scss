@@ -1,1 +1,13 @@
 @import "../approved-invoices-infor/approved-invoices-infor.component.scss";
+
+h3 {
+    background-color: #3F51B5!important;
+    font-weight: bolder !important;
+    margin-top: 70px !important;
+    margin-bottom: 28px !important;
+    height: 64px !important;
+}
+
+.custom-select{
+    margin-left:10px;
+}

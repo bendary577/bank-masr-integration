@@ -9,6 +9,7 @@ import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
 import { AddLocationComponent } from '../../add-location/add-location.component';
 import { CostCenter } from 'src/app/models/CostCenter';
 import { AddRevenueCenterComponent } from '../../add-revenue-center/add-revenue-center.component';
+import { SideNaveComponent } from '../../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-cost-center-location-mapping',
@@ -44,7 +45,7 @@ export class CostCenterLocationMappingComponent implements OnInit {
     locationsData: [] 
   };
 
-  constructor(private spinner: NgxSpinnerService, public snackBar: MatSnackBar, 
+  constructor(private spinner: NgxSpinnerService, public snackBar: MatSnackBar, private sideNav: SideNaveComponent,
     private generalSettingsService:GeneralSettingsService, private sidNav: SidenavResponsive,
     public dialog: MatDialog) {
   }
@@ -242,4 +243,9 @@ export class CostCenterLocationMappingComponent implements OnInit {
       this.saveLoading = false;
     });
   }
+
+  hasRole(role): Boolean{
+    return this.sideNav.hasRole(role);
+   }
+
 }

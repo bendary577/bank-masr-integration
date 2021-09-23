@@ -1,0 +1,42 @@
+<div *ngIf="!showVoucher">
+    <span *ngIf="inCharge" mat-dialog-title >Charge Wallet</span>
+    <span *ngIf="inDeduct" mat-dialog-title >Deduct From Wallet</span>
+    <div class="row">
+        <div mat-dialog-content>
+            <form [formGroup]="form" class="my-form">
+                <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Amount" formControlName="amount" required maxlength="10" required>
+                        <mat-error *ngIf="form.controls.amount.hasError('required')">
+                            Amount is required.
+                        </mat-error>
+                        <mat-error *ngIf="form.controls.amount.hasError('maxlength')">
+                            Amount is to long.
+                        </mat-error>
+                        <mat-error *ngIf="form.controls.amount.hasError('pattern')">
+                            Amount Is Not Well Formed.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="row" *ngIf="inCharge">
+                    <h4>Revenue Centers</h4>
+                </div>
+                <div class="row" *ngIf="inCharge">
+                    <div class="list-group" >
+                        <label class="list-group-item" *ngFor="let revenue of revenueCenters">
+                            <input class="form-check-input me-1" type="checkbox" (change)="toggleEditable($event, revenue)">
+                            {{revenue.revenueCenter}}
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div mat-dialog-actions>
+            <button mat-button cdkFocusInitial (click)="onSaveClick()" class="groups-buttons">
+                <label [hidden]="!inCharge ">Charge</label>
+                <label [hidden]="!inDeduct">Deduct</label>
+            </button>
+            <button mat-button (click)="onCloseClick()" class="groups-buttons"> Cancel </button>
+        </div>
+    </div>
+</div>

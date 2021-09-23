@@ -23,6 +23,7 @@ export class Constants {
   static GET_USERS = environment.apiHost + '/getUsers'
   static ADD_USER = environment.apiHost + '/addAdminUser'
   static Delete_USERS_URL = environment.apiHost + '/deleteUsers'
+  static SUSPEND_GEUST_URL = environment.apiHost + '/suspendApplicationUsers'
 
   static ADD_INVOKER_USER = environment.apiHost + '/addInvokerUser'
   static GET_INVOKER_USERS = environment.apiHost + '/getInvokerUser'
@@ -49,6 +50,7 @@ export class Constants {
     environment.apiHost + '/getAccSyncJobTypesByName'
 
   static GET_APPLICATION_URL = environment.apiHost + '/getApplications'
+  static SEND_EMAIL_SMS = environment.apiHost + '/sendSmsOrEmail'
   // static GET_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getSyncJobTypesByName';
   // static GET_ACC_SYNC_JOB_TYPES_BY_NAME_URL = environment.apiHost + '/getAccSyncJobTypesByName';
 
@@ -208,6 +210,8 @@ export class Constants {
     environment.apiHost + '/listOperaTransaction'
   static COUNT_OPERA_TRANSACTIONS_URL =
     environment.apiHost + '/countOperaTransaction'
+  static FILTER_TRANSACTION = environment.apiHost + '/filterTransaction';
+
 
   //////////////////////////////////////////////// Opera Reports  ////////////////////////////////////////////////////////
 
@@ -293,6 +297,7 @@ export class Constants {
   static MANAGE_ACTIVITIES = 'managActivities'
   static REDEEM_VOUCHER = 'Redeem Voucher'
   static SIMPHONY_DISCOUNT_MAP_TABLE = 'simphonyDiscountMaping'
+  static POS_MACHINE_MAP_TABLE = 'posMachinMapping';
 
   static GET_APP_GROUPS_URL = environment.apiHost + '/getApplicationGroups'
   static GET_ALL_APP_GROUPS_URL =
@@ -302,6 +307,7 @@ export class Constants {
     environment.apiHost + '/deleteApplicationGroups'
   static UPDATE_APP_GROUP_URL = environment.apiHost + '/updateApplicationGroup'
   static GET_APP_USERS_URL = environment.apiHost + '/getApplicationUsers'
+  static GET_APP_USER = environment.apiHost + '/applicationUsers'
   static ADD_APP_USER_URL = environment.apiHost + '/addApplicationUser'
   static RESEND_QR_CODE = environment.apiHost + '/resendQRCode'
   static Delete_APP_USERS_URL = environment.apiHost + '/deleteApplicationUsers'
@@ -309,10 +315,11 @@ export class Constants {
     environment.apiHost + '/transaction/getTransactions'
   static GET_TOP_USERS_URL = environment.apiHost + '/getTopUser'
   static GET_TOP_Groups_URL = environment.apiHost + '/getTopGroups'
-  static GET_TOTAL_SPEND_URL =
-    environment.apiHost + '/transaction/getTotalSpendTransactions'
-  static GET_TOTAL_TRANS_INRANG_URL =
-    environment.apiHost + '/transaction/getTransactionsInRange'
+  static GET_TOTAL_SPEND_URL = environment.apiHost + '/transaction/getTotalSpendTransactions'
+  static GET_TOTAL_TRANS_INRANG_URL = environment.apiHost + '/transaction/getTransactionsInRange'
+  static CHARGE_WALLET = environment.apiHost  + '/wallet/chargeWallet';
+  static DEDUCT_WALLET = environment.apiHost  + '/wallet/deductFromWallet';
+
 
   //////////////////////////////////////////////// Manage Application  //////////////////////////////////////////////
 
@@ -349,4 +356,21 @@ export class Constants {
   static SUN_ERD = 'Sun'
   static FUSION_ERD = 'Fusion'
   static SIMPHONY_ERD = 'Simphony'
+
+    static GET_FEATURES = environment.apiHost + '/feature/getFeatures';
+    static GET_ROLES = environment.apiHost + '/role/getRoles';
+  
+    static GET_WALLET_PAGE = 'entrySystem';
+    static GET_VOUCHER_PAGE = 'voucher';
+    static USER_PROFILE = 'userProfile';
+
+    static GET_GENERIC_GROUP = environment.apiHost + '/getGenericGroup';
+    static GET_EXPORTED_FILE = environment.apiHost + "/support/supportExportedFiles";
+
+    /////////////////////////////////////////////// new Design /////////////////////////////////////////
+
+    static SUPPORT = 'support';
+
+
+    /////////////////////////////////////////////// 
 }

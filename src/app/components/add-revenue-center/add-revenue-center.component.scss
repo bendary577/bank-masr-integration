@@ -1,1 +1,6 @@
 @import "../add-tax/add-tax.component.scss";
+@import "../add-app-user-accompied/add-app-user-accompied.component.scss";
+
+::ng-deep .mat-dialog-container {
+    height: auto !important;
+}

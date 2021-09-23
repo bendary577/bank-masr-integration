@@ -1,1 +1,41 @@
 @import "../add-tax/add-tax.component.scss";
+@import "../operations/opera-payments/opera-payments.component.scss";
+
+.dialog-body {
+    // height: 100%;
+    border-radius: 20px;
+}
+
+
+.form-button{
+    width: 160px;
+    border-radius: 15px;
+    padding-left: 5px;
+}
+
+::ng-deep .mat-form-field-outline{
+    box-shadow: 0 4px 5px rgba(black, 0.35) !important;
+}
+
+.groups-buttons{
+    width: 150px;
+    height: 30px;
+    background-color: #fecc90;
+    color: black;
+    border-radius: 28px;
+    // box-shadow: 0 4px 14px rgba(black, 0.35) !important;
+    margin: 20px;
+    &:disabled{
+        background-color: #ffe7cb;
+        color: rgb(53, 53, 53);
+    }
+}
+
+.list-group{
+    height: auto;
+    padding: 0px;
+  }
+  
+  ::ng-deep form {
+    margin: 5px 0 0  !important;
+}

@@ -1,92 +1,133 @@
 <div *ngIf="!loading">
-    <h3>General Settings</h3>
+  <h3>General Settings</h3>
 
-    <div class="header">
-        <button mat-flat-button (click)="addAccountDialog()">Add Account</button>
+  <div class="header">
+    <button mat-flat-button (click)="addAccountDialog()">Add Account</button>
 
-        <button mat-flat-button (click)="updateAccount()">Update Account</button>
+    <button mat-flat-button (click)="updateAccount()">Update Account</button>
 
-        <button mat-flat-button (click)="updateAccountSyncTypes()">Update Account Sync Types</button>
-    </div>
-    <br>
-    <div *ngIf="account.accountCredentials">
-        <mat-accordion multi>
-            <!-- Oracle Hospitality Inventory Management -->
-            <mat-expansion-panel *ngFor="let accountCredential of accountCredentials">
+    <button mat-flat-button (click)="updateAccountSyncTypes()">
+      Update Account Sync Types
+    </button>
+  </div>
+  <br />
+  <div *ngIf="account.accountCredentials">
+    <mat-accordion multi>
+      <!-- Oracle Hospitality Inventory Management -->
+      <mat-expansion-panel *ngFor="let accountCredential of accountCredentials">
+        <form
+          class="my-form"
+          *ngIf="accountCredential.account == 'HospitalityOHRA'"
+        >
+          <div>
+            <mat-form-field class="example-full-width">
+              <mat-select
+                matInput
+                id="microsVersion"
+                name="microsVersion"
+                placeholder="Oracle Micros Simphony Version"
+                [(ngModel)]="account.microsVersion"
+              >
+                <mat-option value="version1">Version 1</mat-option>
+                <mat-option value="version2">Version 2</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </form>
 
-                <form class="my-form" *ngIf="accountCredential.account == 'HospitalityOHRA'">
-                    <div>
-                        <mat-form-field class="example-full-width">
-                            <mat-select matInput id="microsVersion" name="microsVersion" placeholder="Oracle Micros Simphony Version"
-                                [(ngModel)]="account.microsVersion">
-                                <mat-option value="version1">Version 1</mat-option>
-                                <mat-option value="version2">Version 2</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                </form>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ accountCredential.account }}
+          </mat-panel-title>
+          <mat-panel-description> </mat-panel-description>
+        </mat-expansion-panel-header>
 
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        {{accountCredential.account}}
-                    </mat-panel-title>
-                    <mat-panel-description>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Username"
+            [(ngModel)]="accountCredential.username"
+          />
+        </mat-form-field>
 
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
+        <mat-form-field>
+          <!-- showHideInput -->
+          <input
+            id="{{ accountCredential.username }}"
+            type="password"
+            placeholder="Password"
+            matInput
+            [(ngModel)]="accountCredential.password"
+          />
 
-                <mat-form-field>
-                    <input matInput placeholder="Username" [(ngModel)]="accountCredential.username">
-                </mat-form-field>
-
-                <mat-form-field>
-                    <!-- showHideInput -->
-                    <input id={{accountCredential.username}} type="password" placeholder="Password" matInput [(ngModel)]="accountCredential.password">
-
-                    <!-- <i matSuffix class="material-icons" showHideTrigger={{accountCredential.username}}
+          <!-- <i matSuffix class="material-icons" showHideTrigger={{accountCredential.username}}
          [showHideStatus]="{ materialIcon: true, id: accountCredential.username }"></i> -->
+        </mat-form-field>
+        <mat-form-field *ngIf="accountCredential.account != 'Sun'">
+          <input
+            matInput
+            placeholder="Company"
+            [(ngModel)]="accountCredential.company"
+          />
+        </mat-form-field>
+        <mat-form-field *ngIf="accountCredential.account != 'Sun'">
+          <input
+            matInput
+            placeholder="Link"
+            [(ngModel)]="accountCredential.link"
+          />
+        </mat-form-field>
 
-                </mat-form-field>
-                <mat-form-field  *ngIf="accountCredential.account != 'Sun'">
-                    <input matInput placeholder="Company" [(ngModel)]="accountCredential.company">
-                </mat-form-field >
-                <mat-form-field *ngIf="accountCredential.account != 'Sun'">
-                    <input matInput placeholder="Link" [(ngModel)]="accountCredential.link">
-                </mat-form-field>
+        <!-- Sun System Connect -->
+        <mat-form-field *ngIf="accountCredential.account == 'Sun'">
+          <input
+            matInput
+            placeholder="Host IP"
+            [(ngModel)]="accountCredential.host"
+          />
+        </mat-form-field>
+        <mat-form-field *ngIf="accountCredential.account == 'Sun'">
+          <input
+            matInput
+            placeholder="Port"
+            [(ngModel)]="accountCredential.port"
+          />
+        </mat-form-field>
+      </mat-expansion-panel>
 
-                <!-- Sun System Connect -->
-                <mat-form-field *ngIf="accountCredential.account == 'Sun'">
-                    <input matInput placeholder="Host IP" [(ngModel)]="accountCredential.host">
-                </mat-form-field>
-                <mat-form-field *ngIf="accountCredential.account == 'Sun'">
-                    <input matInput placeholder="Port" [(ngModel)]="accountCredential.port">
-                </mat-form-field>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Methods for sending files </mat-panel-title>
+        </mat-expansion-panel-header>
 
-            </mat-expansion-panel>
+        <form class="my-form">
+          <div>
+            <mat-form-field class="example-full-width">
+              <mat-select
+                matInput
+                id="sendMethod"
+                name="sendMethod"
+                placeholder="Send files via"
+                [(ngModel)]="account.sendMethod"
+              >
+                <mat-option value="drive">Google Drive</mat-option>
+                <mat-option value="ftp">FTP Server</mat-option>
+                <mat-option value="sun">SUN SSC</mat-option>
+                <mat-option value="other">OTHER</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </form>
 
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Methods for sending files
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-
-                <form class="my-form">
-                    <div>
-                        <mat-form-field class="example-full-width">
-                            <mat-select matInput id="sendMethod" name="sendMethod" placeholder="Send files via"
-                                [(ngModel)]="account.sendMethod">
-                                <mat-option value="drive">Google Drive</mat-option>
-                                <mat-option value="ftp">FTP Server</mat-option>
-                                <mat-option value="sun">SUN SSC</mat-option>
-                                <mat-option value="other">OTHER</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                </form>
-
-            </mat-expansion-panel>
-        </mat-accordion>
-        <ngx-spinner></ngx-spinner>
-    </div>
+        <button
+          mat-flat-button
+          (click)="authenticateDrice()"
+          *ngIf="account.sendMethod === 'drive' && !hideAuthenticationBtn"
+        >
+          Authenticate your Drive Account
+        </button>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <ngx-spinner></ngx-spinner>
+  </div>
 </div>

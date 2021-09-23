@@ -3,8 +3,5 @@ export class SimphonyDiscount {
     public discountRate: number;
     public deleted: boolean;
 
-    public constructor(discountId: number, discountRate: number) { 
-        this.discountId = discountId;
-        this.discountRate = discountRate
-    }
+    public constructor() {}
 }
