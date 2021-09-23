@@ -322,6 +322,7 @@ import { PosMachineMappingComponent } from "./components/setting/pos-machine-map
     AuthGuardService,
     SidenavResponsive,
     SideNaveComponent,
+    NavBarComponent,
     ExcelService,
     CsvService,
     OperationService,

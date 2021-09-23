@@ -114,11 +114,10 @@
                 <mat-card class="wallet-card wallet-revenue">
                     <mat-card-content>
                         <h2>Wallet Revenue Centers</h2>
-                        <!-- <div [hidden]="revenueCenters.length">
-                            <img class="rvc-img" src="../../../assets/restaurantImg.png" alt="image">
-                            <p class="rvc-name">There is no Revenue Centers yet</p>
-                        </div> -->
-                        
+                        <div [hidden]="revenueCenters.length" style="padding-bottom: 20px;">
+                            <img class="rvc-img" src="../../../assets/restaurant.png" alt="image">
+                            <p class="rvc-name">There Is No Revenue Centers</p>
+                        </div> 
                         <div class="list-group" *ngIf="revenueCenters">
                             <div class="list-group-item-header">
                                 Revenue Centers
@@ -126,11 +125,6 @@
                             <label class="list-group-item" *ngFor="let revenue of revenueCenters">
                                 {{revenue.revenueCenter}}
                             </label>
-                        </div>
-                        <div class="list-group" *ngIf="!revenueCenters">
-                            <div class="list-group-item-header">
-                                There Is No Revenue Centers
-                            </div>
                         </div>
                     </mat-card-content>
                 </mat-card>
@@ -157,7 +151,7 @@
             <div class="title-card">
                 Card History
             </div>
-            <div *ngIf="    walletHistoryList.walletHistoryData.length == 0">
+            <div *ngIf="!walletHistoryList || walletHistoryList.walletHistoryData.length == 0">
                 <mat-card class="transaction-card">
                     <mat-card-content>
                         <div style="text-align: center;">

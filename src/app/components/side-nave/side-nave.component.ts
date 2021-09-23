@@ -15,6 +15,7 @@ import { GeneralSettingsService } from 'src/app/services/generalSettings/general
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { AccountService } from 'src/app/services/account/account.service';
 import { Account } from 'src/app/models/Account';
+import { NavBarComponent } from '../nav-bar/nav-bar.component';
 
 @Component({
   selector: 'app-side-nave',

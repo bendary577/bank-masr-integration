@@ -64,7 +64,6 @@ export class NavBarComponent implements OnInit {
         body.classList.remove('sidebar-hidden');
       }
     }
-
   }
 
   // toggle right sidebar

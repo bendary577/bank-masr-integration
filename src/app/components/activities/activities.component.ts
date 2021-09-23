@@ -26,8 +26,6 @@ export class ActivitiesComponent implements OnInit {
   groups = [];
   topGroups = [];
   topRevenueCenters = [];
-  revenues = [];
-  expenses = [];
   guests = [];
   fromDate = '';
   toDate = '';
@@ -108,8 +106,6 @@ export class ActivitiesComponent implements OnInit {
       this.rvcBarChartLabels = res["revenues"];
       this.rvcBarChartData = [{ data: res["expenses"], label: 'Sales Per Revenue Center' },]; 
       this.createChart();
-      console.log(this.expenses)
-      console.log(this.revenues)
     }).catch(err => {
       this.spinner.hide();
       let message = "";
@@ -240,10 +236,10 @@ export class ActivitiesComponent implements OnInit {
 
       this.transactionList.transactionData = res["transactions"];
       this.totalSpendM =res["totalSpend"];
-      this.revenues = res["revenues"];
-      this.expenses = res["expenses"];
       this.topRevenueCenters = res["topRevenueCenters"]
-
+      this.rvcBarChartLabels = res["revenues"];
+      this.rvcBarChartData = [{ data: res["expenses"], label: 'Sales Per Revenue Center' },]; 
+      this.createChart();
       this.transactionList.showLoading = false;
       this.snackBar.open("Transactions filterd successfully.", null, {
         duration: 3000,
@@ -320,15 +316,14 @@ export class ActivitiesComponent implements OnInit {
     let fristDate = new Date(Math.min.apply(null, transactions.map(function(e) {
     return new Date(e.transactionDate);})));
 
-    let latestDate = new Date(Math.max.apply(null, transactions.map(function(e) {
-      return new Date(e.transactionDate);})));
+    let latestDate = new Date();
     
     let diff =  Math.floor((Date.UTC(latestDate.getFullYear(),
     latestDate.getMonth(), latestDate.getDate())
       - Date.UTC(fristDate.getFullYear(), fristDate.getMonth(),
       fristDate.getDate()) ) /(1000 * 60 * 60 * 24));
 
-    this.guestAverage = transactions.length /  diff;
+    this.guestAverage = Math.round(((transactions.length /  diff) + Number.EPSILON) * 100) / 100 ;
 
     // for (let i = 0; i < transactions.length; i++) {
     //   if (guests.indexOf(transactions[i].code) <= -1) {
