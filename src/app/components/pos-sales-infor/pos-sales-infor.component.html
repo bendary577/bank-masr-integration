@@ -1,171 +1,186 @@
-<h3 >POS Sales</h3>
+<div class="sync-body">
+    <h3>POS Sales</h3>
 
+    <div class="header">
+        <span class="history"> Sync Job History </span>
 
-<div class="header">
-    <span class="history"> Sync Job History </span>
-
-    <select class="custom-select" (change)="getSyncJobData()" [(ngModel)]="selectedJob">
+        <!-- <select class="custom-select" (change)="getSyncJobData()" [(ngModel)]="selectedJob">
         <option [ngValue]="job" *ngFor="let job of jobs">
             {{job.creationDate | date:'dd-MM-yyyy H:MM:SS'}} - {{job.status}}</option>
-    </select>
-    <button mat-flat-button (click)="exportToCSV()" [disabled]="jobs.length == 0">Export to CSV</button>
-    <button mat-flat-button (click)="generateSingleFile()" [disabled]="jobs.length == 0">Generate Single File</button>
-    <button mat-flat-button (click)="getPOSSalesSyncJob()" [disabled]="staticgetPosSalesLoading">Sync POS Sales Now</button>
-</div>
+    </select> -->
 
-<br>
-<div id="myProgress">
-    <mat-progress-bar mode="indeterminate" *ngIf="staticgetPosSalesLoading"></mat-progress-bar>
-</div>
+        <mat-form-field appearance="outline">
+            <mat-select required class="form-controls" id="sync" placeholder="Sync Job"
+            (ngModelChange)="getSyncJobData()" [(ngModel)]="selectedJob">
+                <mat-option></mat-option>
+                <mat-option [value]="job" *ngFor="let job of jobs">{{job.creationDate | date:'dd-MM-yyyy H:MM:SS'}} -
+                    {{job.status}}
+                    <p *ngIf="job.rowsFetched == 0">- No new data fetched.</p>
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
 
-<br>
 
-<div *ngIf="selectedJob">
-    <mat-card class="example-card">
-        <mat-card-header>
-            <mat-card-title class="title">Sync Details</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <mat-list-item>
-                <span class="key">Sync Number: </span>
-                <span class="value" *ngIf="selectedJob.id">{{selectedJob.id}}</span>
-                <span class="value" *ngIf="!selectedJob.id">No Info</span>
-            </mat-list-item>
-            <mat-list-item>
-                <span class="key">Sync status: </span>
-                <span class="value" *ngIf="selectedJob.status">{{selectedJob.status}}</span>
-                <span class="value" *ngIf="!selectedJob.status">No Info</span>
-            </mat-list-item>
-            <mat-list-item>
-                <span class="key">Start Date: </span>
-                <span class="value" *ngIf="selectedJob.creationDate">{{selectedJob.creationDate | date:'dd-MM-yyyy H:MM:SS'}}</span>
-                <span class="value" *ngIf="!selectedJob.creationDate">No Info</span>
-            </mat-list-item>
-            <mat-list-item>
-                <span class="key">End Date: </span>
-                <span class="value" *ngIf="selectedJob.endDate">{{selectedJob.endDate | date:'dd-MM-yyyy H:MM:SS'}}</span>
-                <span class="value" *ngIf="!selectedJob.endDate">No Info</span>
-            </mat-list-item>
-            <mat-list-item>
-                <span class="key">Reason: </span>
-                <span class="value" *ngIf="selectedJob.reason">{{selectedJob.reason}}</span>
-                <span class="value" *ngIf="!selectedJob.reason">No Info</span>
-            </mat-list-item>
-            <mat-list-item *ngIf="!posSales.length">
-                <span>
-                There was no new data to sync in this job, You can sync POS sales now from <a (click)="getPOSSalesSyncJob()">here</a>
-            </span>
-            </mat-list-item>
-        </mat-card-content>
-    </mat-card>
-</div>
-<br>
-
-<div>
-    <div>
-        <div *ngIf="!jobs.length">
-            <mat-card class="example-card">
-                <mat-card-header>
-                    <mat-card-title>No Data</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <p>
-                        There was no new data to sync in this job, You can sync POS sales now from
-                        <a (click)="getPOSSalesSyncJob()">here</a>
-                    </p>
-
-                </mat-card-content>
-            </mat-card>
-        </div>
-
-        <div class="main" *ngIf="posSales.length">
-            <ngx-datatable class="material" [rows]="posSales" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
-                <ngx-datatable-column name="Status">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.status}}
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Reason">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.reason}}
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Description">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.description}}
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="Inventory Account">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.inventoryAccount}}
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Expenses Account">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.expensesAccount}}
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="Transaction Date">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.transactionDate}}
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="Sales Total Credit">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.totalCr}}
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="Sales Total Debit">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.totalDr}}
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="From Cost Center">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.fromCostCenter}}
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Account Code">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.fromAccountCode}}
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="T1">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.analysisCodeT1}}
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="T2">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.analysisCodeT2}}
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="T3">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.analysisCodeT3}}
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="T4">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.analysisCodeT4}}
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="T5">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.analysisCodeT5}}
-                    </ng-template>
-                </ngx-datatable-column>
-
-            </ngx-datatable>
-        </div>
+        <button mat-flat-button class="filterButton" (click)="getPOSSalesSyncJob()" [disabled]="staticgetPosSalesLoading">Sync POS Sales
+            Now</button>
+            <button mat-flat-button class="filterButton" (click)="generateSingleFile()" [disabled]="jobs.length == 0">Generate Single
+                File</button>
+            <button mat-flat-button class="filterButton" (click)="exportToCSV()" [disabled]="jobs.length == 0">Export to CSV</button>
     </div>
 
-    <ngx-spinner></ngx-spinner>
+    <br>
+    <div id="myProgress">
+        <mat-progress-bar mode="indeterminate" *ngIf="staticgetPosSalesLoading"></mat-progress-bar>
+    </div>
 
+    <br>
+
+    <div *ngIf="selectedJob">
+        <mat-card class="example-card">
+            <h2 class="cardHeader">Sync Details</h2>
+            <mat-card-content>
+                <mat-list-item>
+                    <span class="key">Sync Number: </span>
+                    <span class="value" *ngIf="selectedJob.id">{{selectedJob.id}}</span>
+                    <span class="value" *ngIf="!selectedJob.id">No Info</span>
+                </mat-list-item>
+                <mat-list-item>
+                    <span class="key">Sync status: </span>
+                    <span class="value" *ngIf="selectedJob.status">{{selectedJob.status}}</span>
+                    <span class="value" *ngIf="!selectedJob.status">No Info</span>
+                </mat-list-item>
+                <mat-list-item>
+                    <span class="key">Start Date: </span>
+                    <span class="value" *ngIf="selectedJob.creationDate">{{selectedJob.creationDate | date:'dd-MM-yyyy
+                        H:MM:SS'}}</span>
+                    <span class="value" *ngIf="!selectedJob.creationDate">No Info</span>
+                </mat-list-item>
+                <mat-list-item>
+                    <span class="key">End Date: </span>
+                    <span class="value" *ngIf="selectedJob.endDate">{{selectedJob.endDate | date:'dd-MM-yyyy
+                        H:MM:SS'}}</span>
+                    <span class="value" *ngIf="!selectedJob.endDate">No Info</span>
+                </mat-list-item>
+                <mat-list-item>
+                    <span class="key">Reason: </span>
+                    <span class="value" *ngIf="selectedJob.reason">{{selectedJob.reason}}</span>
+                    <span class="value" *ngIf="!selectedJob.reason">No Info</span>
+                </mat-list-item>
+                <mat-list-item *ngIf="!posSales.length">
+                    <span>
+                        There was no new data to sync in this job, You can sync POS sales now from <a
+                            (click)="getPOSSalesSyncJob()">here</a>
+                    </span>
+                </mat-list-item>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <br>
+
+    <div>
+        <div>
+            <div *ngIf="!jobs.length">
+                <mat-card class="example-card">
+                    <h2 class="cardHeader">No Data</h2>
+                    <mat-card-content>
+                        <p>
+                            <span class="empty-data">
+                            There was no new data to sync in this job, You can sync POS sales now from
+                            <a (click)="getPOSSalesSyncJob()">here</a>
+                        </span>
+                        </p>
+
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+            <div class="main" *ngIf="posSales.length">
+                <ngx-datatable class="material" [rows]="posSales" [columnMode]="'force'" [headerHeight]="50"
+                    [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
+                    <ngx-datatable-column name="Status">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.status}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Reason">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.reason}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Description">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.data.description}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Inventory Account">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.data.inventoryAccount}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Expenses Account">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.data.expensesAccount}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Transaction Date">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.data.transactionDate}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Sales Total Credit">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.data.totalCr}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Sales Total Debit">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.data.totalDr}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="From Cost Center">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.data.fromCostCenter}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Account Code">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.data.fromAccountCode}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="T1">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.data.analysisCodeT1}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="T2">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.data.analysisCodeT2}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="T3">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.data.analysisCodeT3}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="T4">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.data.analysisCodeT4}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="T5">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.data.analysisCodeT5}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+            </div>
+        </div>
+        <ngx-spinner></ngx-spinner>
+    </div>
 </div>
