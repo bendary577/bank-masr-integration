@@ -131,8 +131,7 @@
                 <mat-form-field appearance="outline" class="example-full-width creditForm">
                     <input matInput placeholder="Start Date" formContrlName="fromDate" id="fromDate" [(ngModel)]="fromDate"
                         [matDatepicker]="fromDatepicker" readonly>
-                    <mat-icon matDatepickerToggleIcon (click)="resetPicker('fromDate')" [hidden]="!fromDate">clear
-                    </mat-icon>
+                    <mat-icon matDatepickerToggleIcon (click)="resetPicker('fromDate')" [hidden]="!fromDate">clear</mat-icon>
                     <mat-datepicker-toggle matSuffix [for]="fromDatepicker"></mat-datepicker-toggle>
                     <mat-datepicker #fromDatepicker></mat-datepicker>
                 </mat-form-field>
@@ -141,8 +140,7 @@
                 <mat-form-field appearance="outline" class="example-full-width creditForm">
                     <input matInput placeholder="End Date" formContrlName="toDate" id="toDate" [(ngModel)]="toDate"
                         [matDatepicker]="toDatepicker" readonly>
-                    <mat-icon matDatepickerToggleIcon (click)="resetPicker('toDate')" [hidden]="!toDate">clear
-                    </mat-icon>
+                    <mat-icon matDatepickerToggleIcon (click)="resetPicker('toDate')" [hidden]="!toDate">clear</mat-icon>
                     <mat-datepicker-toggle matSuffix [for]="toDatepicker"></mat-datepicker-toggle>
                     <mat-datepicker #toDatepicker></mat-datepicker>
                 </mat-form-field>

@@ -1,6 +1,4 @@
 @import "../../support/support.component.scss";
-@import "../../pos-sales/pos-sales.component.scss";
-@import "../../pos-sales-infor/pos-sales-infor.component.scss";
 
 .sync-conf{
 
@@ -22,8 +20,10 @@
 
 
     .filterButton{
+        margin-bottom:10px;
         height: 30px;
-        background-color: #ffb560;
+        background-color: #fecc90;
+        color: #000000;
     }
 
     .table-btn{

@@ -5,4 +5,5 @@ export class ErrorMessages {
     static FAILED_TO_SYNC = "Failed to sync now, Please try agian after few minutes.";
     static FAILED_TO_SAVE_CONFIG = "Failed to save configuration now, Please try agian after few minutes.";
     static FAILED_TO_GET_CONFIG= "Failed to get configuration now, Please try agian after few minutes.";
+    static ENTERNAL_SERVER_ERROR = "Enternal Server Error";
 }

@@ -1,373 +1,424 @@
-<h3 mat-dialog-title>Update POS Sales Configuartion</h3>
+<div class="config-style">
+    <h3 mat-dialog-title>Update POS Sales Configuartion</h3>
+
+    <div>
+        <div *ngIf="!loading && syncJobType">
+
+            <!-- Oracle Hospitality Configurations -->
+            <mat-expansion-panel *ngIf="accountERD == 'ExportSun'">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Exported File
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <app-exported-file-configuration [syncJobType]=syncJobType></app-exported-file-configuration>
+            </mat-expansion-panel>
+
+            <!-- Oracle Hospitality Configurations -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Oracle Hospitality
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <app-ohra-configuration [syncJobType]=syncJobType></app-ohra-configuration>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Infor Sun System
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <app-infor-system-configuration [syncJobType]=syncJobType></app-infor-system-configuration>
+            </mat-expansion-panel>
+
+            <!-- Cash Shortage/Surplus POS Configurations -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Cash Shortage/Surplus POS
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="container" *ngIf="!loading">
+                    <form class="my-form">
+                        <div>
+                            <mat-form-field class="example-full-width">
+                                <input matInput id="cashShortagePOS" name="cashShortagePOS"
+                                    placeholder="Cash Shortage POS Account"
+                                    [(ngModel)]="syncJobType.configuration.salesConfiguration.cashShortagePOS">
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field class="example-full-width">
+                                <input matInput id="cashSurplusPOS" name="cashSurplusPOS"
+                                    placeholder="Cash Surplus POS Account"
+                                    [(ngModel)]="syncJobType.configuration.salesConfiguration.cashSurplusPOS">
+                            </mat-form-field>
+                        </div>
+                    </form>
+                </div>
+
+            </mat-expansion-panel>
+
+            <!-- Analysis Configurations -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Analysis Codes
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="container" *ngIf="!loading">
+                    <form class="my-form">
+                        <div>
+                            <mat-form-field class="example-full-width">
+                                <mat-select matInput id="locationAnalysisCode" name="locationAnalysisCode"
+                                    placeholder="Location Analysis Code"
+                                    [(ngModel)]="syncJobType.configuration.locationAnalysisCode">
+                                    <mat-option [value]=code *ngFor="let code of analysisCodes">{{code}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <mat-select matInput id="tenderAnalysisCode" name="tenderAnalysisCode"
+                                    placeholder="Tender Analysis Code"
+                                    [(ngModel)]="syncJobType.configuration.tenderAnalysisCode">
+                                    <mat-option [value]=code *ngFor="let code of analysisCodes">{{code}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <mat-select matInput id="familyGroupAnalysisCode" name="familyGroupAnalysisCode"
+                                    placeholder="Family Group Analysis Code"
+                                    [(ngModel)]="syncJobType.configuration.familyGroupAnalysisCode">
+                                    <mat-option [value]=code *ngFor="let code of analysisCodes">{{code}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </form>
+                </div>
+
+            </mat-expansion-panel>
+
+            <!-- Analysis Configurations -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Analysis
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <app-analysis-configuration [analysis]=analysis></app-analysis-configuration>
+            </mat-expansion-panel>
+
+            <!-- Tenders Mapping -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Tenders Mapping
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <app-tender-configuration [tenders]=tenders [syncJobType]=syncJobType [generalSettings]=generalSettings>
+                </app-tender-configuration>
+            </mat-expansion-panel>
+
+            <!-- Taxes Mapping -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Taxes Mapping
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="back" style="margin-bottom: 20px;">
+                    <button mat-flat-button (click)="openTaxDialog()">Add</button>
+                    <mat-checkbox id="taxIncluded" name="taxIncluded" class="example-margin"
+                        style="padding-right: 10px;"
+                        [(ngModel)]="syncJobType.configuration.salesConfiguration.taxIncluded">Is tax included
+                    </mat-checkbox>
+                    <mat-checkbox id="syncTotalTax" name="syncTotalTax" class="example-margin"
+                        [(ngModel)]="syncJobType.configuration.salesConfiguration.syncTotalTax">Sync total tax
+                    </mat-checkbox>
+                </div>
+
+                <div *ngIf="syncJobType.configuration.salesConfiguration.syncTotalTax">
+                    <mat-form-field class="example-full-width">
+                        <input matInput id="totalTaxAccount" name="totalTaxAccount" placeholder="Total Tax Account"
+                            [(ngModel)]="syncJobType.configuration.salesConfiguration.totalTaxAccount">
+                    </mat-form-field>
+                </div>
+
+                <div
+                    *ngIf="!syncJobType.configuration.salesConfiguration.syncTotalTax && taxes?.length > 0 && !loading">
+
+                    <ngx-datatable class="material" [rows]="taxes" [columnMode]="'force'" [headerHeight]="50"
+                        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+                        [sortType]="'multi'">
+
+                        <ngx-datatable-column name="tax">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.tax">
+                                    {{row.tax}}</mat-checkbox>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Account">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <input matInput placeholder="Account" [(ngModel)]="row.account">
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                    </ngx-datatable>
+                </div>
+            </mat-expansion-panel>
+
+            <!-- Major Group Mapping -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Major Group Mapping
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="back" style="margin-bottom: 20px;">
+                    <button mat-flat-button (click)="openMajorGroupDialog()">Add</button>
+
+                    <mat-checkbox class="example-margin" style="padding-right: 10px;"
+                        [(ngModel)]="syncJobType.configuration.salesConfiguration.MGDiscount"
+                        [disabled]="syncJobType.configuration.salesConfiguration.RVDiscount">Include Major Group
+                        Discount</mat-checkbox>
+
+                    <mat-checkbox class="example-margin" style="padding-right: 10px;"
+                        [(ngModel)]="syncJobType.configuration.salesConfiguration.RVDiscount"
+                        [disabled]="syncJobType.configuration.salesConfiguration.MGDiscount">Include Revenue Center
+                        Discount</mat-checkbox>
+                    <mat-checkbox class="example-margin"
+                        [(ngModel)]="syncJobType.configuration.salesConfiguration.syncMG">Sync major groups or family
+                        groups.</mat-checkbox>
+                </div>
+
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <mat-select matInput id="GrossDiscountSales" name="GrossDiscountSales"
+                            placeholder="Sync sales gross/gross less discount"
+                            [(ngModel)]="syncJobType.configuration.salesConfiguration.grossDiscountSales">
+                            <mat-option value="Gross">Gross</mat-option>
+                            <mat-option value="Gross Less Discount">Gross Less Discount</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div *ngIf="majorGroups?.length > 0">
+
+                    <ngx-datatable class="material" [rows]="majorGroups" [columnMode]="'force'" [headerHeight]="50"
+                        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+                        [sortType]="'multi'">
+
+                        <ngx-datatable-column name="Major Group">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.majorGroup">
+                                    {{row.majorGroup}}</mat-checkbox>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Account">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <input matInput placeholder="Account" [(ngModel)]="row.account">
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Discount"
+                            *ngIf="syncJobType.configuration.salesConfiguration.MGDiscount">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <input matInput placeholder="Discount" [(ngModel)]="row.discountAccount">
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Childs Count">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.children.length}}
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Group Childs">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <button mat-flat-button (click)="viewMajorGroupChildsDialog(row)">View</button>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                    </ngx-datatable>
+                </div>
+            </mat-expansion-panel>
+
+            <!-- Discount Mapping -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Discount Mapping
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="back" style="margin-bottom: 20px;">
+                    <button mat-flat-button (click)="openDiscountDialog()">Add</button>
+                    <mat-checkbox id="syncTotalDiscounts" name="syncTotalDiscounts" class="example-margin"
+                        [(ngModel)]="syncJobType.configuration.salesConfiguration.syncTotalDiscounts">Sync total
+                        discounts</mat-checkbox>
+                </div>
+
+                <div *ngIf="syncJobType.configuration.salesConfiguration.syncTotalDiscounts">
+                    <mat-form-field class="example-full-width">
+                        <input matInput id="totalDiscountsAccount" name="totalDiscountsAccount"
+                            placeholder="Total discount Account"
+                            [(ngModel)]="syncJobType.configuration.salesConfiguration.totalDiscountsAccount">
+                    </mat-form-field>
+                </div>
+
+                <div *ngIf="!syncJobType.configuration.salesConfiguration.syncTotalDiscounts && discounts?.length > 0">
+
+                    <ngx-datatable class="material" [rows]="discounts" [columnMode]="'force'" [headerHeight]="50"
+                        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+                        [sortType]="'multi'">
+
+                        <ngx-datatable-column name="Discount">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.discount">
+                                    {{row.discount}}</mat-checkbox>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Account">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <input matInput placeholder="Account" [(ngModel)]="row.account">
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                    </ngx-datatable>
+                </div>
+            </mat-expansion-panel>
+
+            <!-- Service Charge Mapping -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Service Charge Mapping
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="back" style="margin-bottom: 20px;">
+                    <button mat-flat-button (click)="openServiceChargeDialog()">Add</button>
+                    <mat-checkbox id="syncTotalServiceCharge" name="syncTotalServiceCharge" class="example-margin"
+                        [(ngModel)]="syncJobType.configuration.salesConfiguration.syncTotalServiceCharge">Sync total
+                        service charges</mat-checkbox>
+                </div>
+
+                <div *ngIf="syncJobType.configuration.salesConfiguration.syncTotalServiceCharge">
+                    <mat-form-field class="example-full-width">
+                        <input matInput id="totalServiceChargeAccount" name="totalServiceChargeAccount"
+                            placeholder="Total Service Charge Account"
+                            [(ngModel)]="syncJobType.configuration.salesConfiguration.totalServiceChargeAccount">
+                    </mat-form-field>
+                </div>
+
+                <div
+                    *ngIf="!syncJobType.configuration.salesConfiguration.syncTotalServiceCharge && serviceCharges?.length > 0">
+
+                    <ngx-datatable class="material" [rows]="serviceCharges" [columnMode]="'force'" [headerHeight]="50"
+                        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+                        [sortType]="'multi'">
+
+                        <ngx-datatable-column name="Service Charge">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <mat-checkbox class="example-margin" [(ngModel)]="row.checked"
+                                    *ngIf="row.serviceCharge">{{row.serviceCharge}}</mat-checkbox>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Location">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <input matInput placeholder="Location" [(ngModel)]="row.costCenter.locationName"
+                                    disabled>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Revenue Center">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <input matInput placeholder="Revenue Center"
+                                    [(ngModel)]="row.revenueCenter.revenueCenter" disabled>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Account">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <input matInput placeholder="Account" [(ngModel)]="row.account">
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                    </ngx-datatable>
+                </div>
+            </mat-expansion-panel>
 
 
-<div>
-    <div *ngIf="!loading && syncJobType">
+            <!-- Service Charge Mapping -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Statistics Mapping
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="back" style="margin-bottom: 20px;">
+                    <button mat-flat-button (click)="openStatisticsDialog()">Add</button>
+                </div>
 
-        <!-- Oracle Hospitality Configurations -->
-        <mat-expansion-panel *ngIf="accountERD == 'ExportSun'">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Exported File
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-exported-file-configuration [syncJobType]=syncJobType></app-exported-file-configuration>
-        </mat-expansion-panel>
+                <div *ngIf="statistics?.length > 0">
+                    <ngx-datatable class="material" [rows]="statistics" [columnMode]="'force'" [headerHeight]="50"
+                        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+                        [sortType]="'multi'">
 
-        <!-- Oracle Hospitality Configurations -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Oracle Hospitality
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-ohra-configuration [syncJobType]=syncJobType></app-ohra-configuration>
-        </mat-expansion-panel>
+                        <ngx-datatable-column name="Location">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.location">
+                                    {{row.location}}</mat-checkbox>
+                            </ng-template>
+                        </ngx-datatable-column>
 
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Infor Sun System
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-infor-system-configuration [syncJobType]=syncJobType></app-infor-system-configuration>
-        </mat-expansion-panel>
+                        <ngx-datatable-column name="No Guest Account">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <input matInput placeholder="No Guest Account" [(ngModel)]="row.NoGuestAccount">
+                            </ng-template>
+                        </ngx-datatable-column>
 
-        <!-- Cash Shortage/Surplus POS Configurations -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Cash Shortage/Surplus POS
-                </mat-panel-title>
-            </mat-expansion-panel-header>
+                        <ngx-datatable-column name="No Tables Account">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <input matInput placeholder="No Tables Account" [(ngModel)]="row.NoTablesAccount">
+                            </ng-template>
+                        </ngx-datatable-column>
 
-            <div class="container" *ngIf="!loading">
-                <form class="my-form">
-                    <div>
-                        <mat-form-field class="example-full-width">
-                            <input matInput id="cashShortagePOS" name="cashShortagePOS" placeholder="Cash Shortage POS Account" [(ngModel)]="syncJobType.configuration.salesConfiguration.cashShortagePOS">
-                        </mat-form-field>
-                    </div>
-                    <div>
-                        <mat-form-field class="example-full-width">
-                            <input matInput id="cashSurplusPOS" name="cashSurplusPOS" placeholder="Cash Surplus POS Account" [(ngModel)]="syncJobType.configuration.salesConfiguration.cashSurplusPOS">
-                        </mat-form-field>
-                    </div>
-                </form>
+                        <ngx-datatable-column name="No Checks Account">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <input matInput placeholder="No Checks Account" [(ngModel)]="row.NoChecksAccount">
+                            </ng-template>
+                        </ngx-datatable-column>
+                    </ngx-datatable>
+                </div>
+            </mat-expansion-panel>
+
+            <br>
+            <div class="card-back">
+                <button mat-flat-button (click)="onSaveClick()">Save</button>
             </div>
 
-        </mat-expansion-panel>
-
-        <!-- Analysis Configurations -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Analysis Codes
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-
-            <div class="container" *ngIf="!loading">
-                <form class="my-form">
-                    <div>
-                        <mat-form-field class="example-full-width">
-                            <mat-select matInput id="locationAnalysisCode" name="locationAnalysisCode" placeholder="Location Analysis Code" [(ngModel)]="syncJobType.configuration.locationAnalysisCode">
-                                <mat-option [value]=code *ngFor="let code of analysisCodes">{{code}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <mat-form-field class="example-full-width">
-                            <mat-select matInput id="tenderAnalysisCode" name="tenderAnalysisCode" placeholder="Tender Analysis Code" [(ngModel)]="syncJobType.configuration.tenderAnalysisCode">
-                                <mat-option [value]=code *ngFor="let code of analysisCodes">{{code}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <mat-form-field class="example-full-width">
-                            <mat-select matInput id="familyGroupAnalysisCode" name="familyGroupAnalysisCode" placeholder="Family Group Analysis Code" [(ngModel)]="syncJobType.configuration.familyGroupAnalysisCode">
-                                <mat-option [value]=code *ngFor="let code of analysisCodes">{{code}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                </form>
-            </div>
-
-        </mat-expansion-panel>
-
-        <!-- Analysis Configurations -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Analysis
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-
-            <app-analysis-configuration [analysis]=analysis></app-analysis-configuration>
-        </mat-expansion-panel>
-
-        <!-- Tenders Mapping -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Tenders Mapping
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-
-            <app-tender-configuration [tenders]=tenders [syncJobType]=syncJobType [generalSettings]=generalSettings></app-tender-configuration>
-        </mat-expansion-panel>
-
-        <!-- Taxes Mapping -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Taxes Mapping
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-
-            <div class="back" style="margin-bottom: 20px;">
-                <button mat-flat-button (click)="openTaxDialog()">Add</button>
-                <mat-checkbox id="taxIncluded" name="taxIncluded" class="example-margin" style="padding-right: 10px;" [(ngModel)]="syncJobType.configuration.salesConfiguration.taxIncluded">Is tax included</mat-checkbox>
-                <mat-checkbox id="syncTotalTax" name="syncTotalTax" class="example-margin" [(ngModel)]="syncJobType.configuration.salesConfiguration.syncTotalTax">Sync total tax</mat-checkbox>
-            </div>
-
-            <div *ngIf="syncJobType.configuration.salesConfiguration.syncTotalTax">
-                <mat-form-field class="example-full-width">
-                    <input matInput id="totalTaxAccount" name="totalTaxAccount" placeholder="Total Tax Account" [(ngModel)]="syncJobType.configuration.salesConfiguration.totalTaxAccount">
-                </mat-form-field>
-            </div>
-
-            <div *ngIf="!syncJobType.configuration.salesConfiguration.syncTotalTax && taxes?.length > 0 && !loading">
-
-                <ngx-datatable class="material" [rows]="taxes" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
-
-                    <ngx-datatable-column name="tax">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.tax">{{row.tax}}</mat-checkbox>
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="Account">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <input matInput placeholder="Account" [(ngModel)]="row.account">
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                </ngx-datatable>
-            </div>
-        </mat-expansion-panel>
-
-        <!-- Major Group Mapping -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Major Group Mapping
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="back" style="margin-bottom: 20px;">
-                <button mat-flat-button (click)="openMajorGroupDialog()">Add</button>
-
-                <mat-checkbox class="example-margin" style="padding-right: 10px;"
-                 [(ngModel)]="syncJobType.configuration.salesConfiguration.MGDiscount"
-                  [disabled]="syncJobType.configuration.salesConfiguration.RVDiscount">Include Major Group Discount</mat-checkbox>
-                  
-                <mat-checkbox class="example-margin"
-                 style="padding-right: 10px;"
-                  [(ngModel)]="syncJobType.configuration.salesConfiguration.RVDiscount"
-                   [disabled]="syncJobType.configuration.salesConfiguration.MGDiscount">Include Revenue Center Discount</mat-checkbox>
-                <mat-checkbox class="example-margin" [(ngModel)]="syncJobType.configuration.salesConfiguration.syncMG">Sync major groups or family groups.</mat-checkbox>
-            </div>
-
-            <div>
-                <mat-form-field class="example-full-width">
-                    <mat-select matInput id="GrossDiscountSales" name="GrossDiscountSales" placeholder="Sync sales gross/gross less discount" [(ngModel)]="syncJobType.configuration.salesConfiguration.grossDiscountSales">
-                        <mat-option value="Gross">Gross</mat-option>
-                        <mat-option value="Gross Less Discount">Gross Less Discount</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-
-            <div *ngIf="majorGroups?.length > 0">
-
-                <ngx-datatable class="material" [rows]="majorGroups" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
-
-                    <ngx-datatable-column name="Major Group">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.majorGroup">{{row.majorGroup}}</mat-checkbox>
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="Account">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <input matInput placeholder="Account" [(ngModel)]="row.account">
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="Discount" *ngIf="syncJobType.configuration.salesConfiguration.MGDiscount">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <input matInput placeholder="Discount" [(ngModel)]="row.discountAccount">
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="Childs Count">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.children.length}}
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="Group Childs">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <button mat-flat-button (click)="viewMajorGroupChildsDialog(row)">View</button>
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                </ngx-datatable>
-            </div>
-        </mat-expansion-panel>
-
-        <!-- Discount Mapping -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Discount Mapping
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="back" style="margin-bottom: 20px;">
-                <button mat-flat-button (click)="openDiscountDialog()">Add</button>
-                <mat-checkbox id="syncTotalDiscounts" name="syncTotalDiscounts" class="example-margin" [(ngModel)]="syncJobType.configuration.salesConfiguration.syncTotalDiscounts">Sync total discounts</mat-checkbox>
-            </div>
-
-            <div *ngIf="syncJobType.configuration.salesConfiguration.syncTotalDiscounts">
-                <mat-form-field class="example-full-width">
-                    <input matInput id="totalDiscountsAccount" name="totalDiscountsAccount" placeholder="Total discount Account" [(ngModel)]="syncJobType.configuration.salesConfiguration.totalDiscountsAccount">
-                </mat-form-field>
-            </div>
-
-            <div *ngIf="!syncJobType.configuration.salesConfiguration.syncTotalDiscounts && discounts?.length > 0">
-
-                <ngx-datatable class="material" [rows]="discounts" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
-
-                    <ngx-datatable-column name="Discount">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.discount">{{row.discount}}</mat-checkbox>
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="Account">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <input matInput placeholder="Account" [(ngModel)]="row.account">
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                </ngx-datatable>
-            </div>
-        </mat-expansion-panel>
-
-        <!-- Service Charge Mapping -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Service Charge Mapping
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="back" style="margin-bottom: 20px;">
-                <button mat-flat-button (click)="openServiceChargeDialog()">Add</button>
-                <mat-checkbox id="syncTotalServiceCharge" name="syncTotalServiceCharge" class="example-margin" [(ngModel)]="syncJobType.configuration.salesConfiguration.syncTotalServiceCharge">Sync total service charges</mat-checkbox>
-            </div>
-
-            <div *ngIf="syncJobType.configuration.salesConfiguration.syncTotalServiceCharge">
-                <mat-form-field class="example-full-width">
-                    <input matInput id="totalServiceChargeAccount" name="totalServiceChargeAccount" placeholder="Total Service Charge Account" [(ngModel)]="syncJobType.configuration.salesConfiguration.totalServiceChargeAccount">
-                </mat-form-field>
-            </div>
-
-            <div *ngIf="!syncJobType.configuration.salesConfiguration.syncTotalServiceCharge && serviceCharges?.length > 0">
-
-                <ngx-datatable class="material" [rows]="serviceCharges" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
-
-                    <ngx-datatable-column name="Service Charge">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.serviceCharge">{{row.serviceCharge}}</mat-checkbox>
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="Location">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <input matInput placeholder="Location" [(ngModel)]="row.costCenter.locationName" disabled>
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="Revenue Center">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <input matInput placeholder="Revenue Center" [(ngModel)]="row.revenueCenter.revenueCenter" disabled>
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="Account">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <input matInput placeholder="Account" [(ngModel)]="row.account">
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                </ngx-datatable>
-            </div>
-        </mat-expansion-panel>
-
-        
-        <!-- Service Charge Mapping -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Statistics Mapping
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="back" style="margin-bottom: 20px;">
-                <button mat-flat-button (click)="openStatisticsDialog()">Add</button>
-            </div>
-
-            <div *ngIf="statistics?.length > 0">
-                <ngx-datatable class="material" [rows]="statistics" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
-
-                    <ngx-datatable-column name="Location">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <mat-checkbox class="example-margin" [(ngModel)]="row.checked" *ngIf="row.location">{{row.location}}</mat-checkbox>
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="No Guest Account">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <input matInput placeholder="No Guest Account" [(ngModel)]="row.NoGuestAccount">
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="No Tables Account">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <input matInput placeholder="No Tables Account" [(ngModel)]="row.NoTablesAccount">
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="No Checks Account">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <input matInput placeholder="No Checks Account" [(ngModel)]="row.NoChecksAccount">
-                        </ng-template>
-                    </ngx-datatable-column>
-                </ngx-datatable>
-            </div>
-        </mat-expansion-panel>
-
-        <br>
-        <div class="card-back">
-            <button mat-flat-button (click)="onSaveClick()">Save</button>
         </div>
 
+        <div *ngIf="!loading && !syncJobType">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <mat-card-title>Welcome</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>
+                        Can't Configure your sync right now, Please try again after few minutes.
+                    </p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <ngx-spinner></ngx-spinner>
     </div>
-
-    <div *ngIf="!loading && !syncJobType">
-        <mat-card class="example-card">
-            <mat-card-header>
-                <mat-card-title>Welcome</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <p>
-                    Can't Configure your sync right now, Please try again after few minutes.
-                </p>
-            </mat-card-content>
-        </mat-card>
-    </div>
-    <ngx-spinner></ngx-spinner>
 </div>
