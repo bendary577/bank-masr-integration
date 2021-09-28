@@ -43,13 +43,13 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": false,
-              "outputHashing": "none",
+              "optimization": true,
+              "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": false,
-              "extractLicenses": false,
+              "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": false,
+              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
