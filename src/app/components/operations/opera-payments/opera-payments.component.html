@@ -101,7 +101,6 @@
                     </ng-template>
                 </ngx-datatable-column>
 
-
                 <ngx-datatable-column name="Transaction Date">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{row.creationDate | date:'dd-MM-yyyy H:MM:SS'}}
@@ -134,6 +133,18 @@
                 <ngx-datatable-column name="Currency">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{row.currency}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Check-in Date">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        01-09-2021 12:09:29
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Check-out Date">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        15-09-2021 12:09:29
                     </ng-template>
                 </ngx-datatable-column>
 
