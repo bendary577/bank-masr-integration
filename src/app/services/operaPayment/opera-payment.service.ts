@@ -13,8 +13,12 @@ export class OperaPaymentService {
 
   listOperaTransactions(fromDate, toDate, cardNumber) {
     this.token = localStorage.getItem('auth_token')
-    return this.http.get(
-      Constants.LIST_OPERA_TRANSACTIONS_URL + '?startDate=' +  fromDate +  '&endDate=' + toDate + "&cardNumber=" + cardNumber,
+    const formData: FormData = new FormData();
+    formData.append('startDate', fromDate);
+    formData.append('endDate', toDate);
+    formData.append('cardNumber', cardNumber);
+    return this.http.post(
+      Constants.LIST_OPERA_TRANSACTIONS_URL, formData,
       { headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }) },
     )
   }

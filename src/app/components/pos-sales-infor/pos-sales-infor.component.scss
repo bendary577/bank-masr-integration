@@ -64,3 +64,15 @@ h3 {
     }
 }
 
+::ng-deep .mat-progress-bar-fill {
+    background-color: #f47920 !important;
+
+    ::after{
+        background-color: #f47920 !important;
+    }
+}
+
+::ng-deep .mat-progress-bar-fill::after {
+    
+    background-color: #f47920;
+}

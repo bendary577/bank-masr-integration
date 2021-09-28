@@ -40,10 +40,10 @@ export class OperaPaymentsComponent implements OnInit {
   resetPicker(event) {
     if (event == 'fromDate') {
       this.fromDate = '';
-      this.getOperationTypes();
+      this.filterTransaction();
     } else if (event == 'toDate') {
       this.toDate = '';
-      this.getOperationTypes();
+      this.filterTransaction();
     }
   }
 
