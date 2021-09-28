@@ -22,12 +22,17 @@
   padding: 0px;
 }
 
+.main {
+  padding: 16px 20px 4px 10px;
+}
+
 .stat-card {
   margin: 10px;
   height: auto;
   min-height: 200px;
   max-height: 300px;
   overflow: hidden;
+
 }
 
 
@@ -38,6 +43,15 @@
   font-weight: bold;
   background-color: #fecc90;
   padding-top: 10px;
+  padding-left:10px;
+}
+
+.card-text{
+  padding-left:10px;
+}
+
+.example-card{
+  margin-top: 50px;
 }
 
 .cardText{
@@ -121,4 +135,14 @@
 
 ::ng-deep .mat-icon-button{
   color: #f47920 !important;
+}
+
+mat-icon {
+  position: absolute;
+  float: right;
+  top: -1px !important;
+  cursor: pointer;
+  color: rgb(80 80 80 / 54%);
+  right: -60px;
+  font-size: medium;
 }
