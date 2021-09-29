@@ -107,15 +107,15 @@
                     </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="Guest Number">
+                <ngx-datatable-column name="Sequence Number">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        19182
+                        {{row.sequenceNo}}
                     </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="Guest Name">
+                <ngx-datatable-column name="Guest Number">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        Zhandossov
+                        {{row.guestNumber}}
                     </ng-template>
                 </ngx-datatable-column>
 
@@ -138,13 +138,13 @@
 
                 <ngx-datatable-column name="Check-in Date">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        01-09-2021 12:00:00
+                        {{row.CheckInDate}}
                     </ng-template>
                 </ngx-datatable-column>
 
                 <ngx-datatable-column name="Check-out Date">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        15-09-2021 12:00:00
+                        {{row.CheckOutDate}}
                     </ng-template>
                 </ngx-datatable-column>
 
