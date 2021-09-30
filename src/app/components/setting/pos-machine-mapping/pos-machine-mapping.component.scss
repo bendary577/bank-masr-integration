@@ -1,4 +1,4 @@
-@import "../../../components/approved-invoices-infor/approved-invoices-infor.component.scss";
+@import "../../../../assets/scss/syncs.scss";
 @import "../../../components/operations/opera-payments/opera-payments.component.scss";
 
 // .deleteBtn{
@@ -9,6 +9,24 @@
 // .deleteBtn:disabled{
 //     background-color: darkslategrey;
 // }
+
+.config-style{
+  
+    h3 {
+        background-color: #f1f1f1!important;
+        font-weight: bolder !important;
+        margin-top: 70px !important;
+        margin-bottom: 28px !important;
+        height: 64px !important;
+        color:#f47920;
+        border-left: 1px solid;
+    }
+
+    ::ng-deep .mat-form-field {
+        width: 300px !important;
+    }
+
+}
 
 mat-expansion-panel {
     box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);

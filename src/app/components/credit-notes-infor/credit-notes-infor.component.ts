@@ -44,6 +44,35 @@ export class CreditNotesInforComponent implements OnInit {
     }
   }
 
+
+  exportToCSV(): void {
+    this.csvService
+      .exportSalesToCSV(this.selectedJob.id, Constants.CREDIT_NOTE_SYNC)
+      .subscribe(
+        (res) => {
+          const blob = new Blob([res.body], { type: "application/vnd.ms.txt" });
+          const file = new File([blob], "Cost_Of_gGoods" + ".ndf", {
+            type: "application/vnd.ms.txt",
+          });
+          saveAs(file);
+
+          this.snackBar.open("Export Successfully", null, {
+            duration: 2000,
+            horizontalPosition: "center",
+            panelClass: "my-snack-bar-success",
+          });
+        },
+        (err) => {
+          console.error(err);
+          this.snackBar.open("Fail to export, Please try agian", null, {
+            duration: 2000,
+            horizontalPosition: "center",
+            panelClass: "my-snack-bar-fail",
+          });
+        }
+      );
+  }
+
   getCreditNoteDB() {
     this.spinner.show();
     this.syncJobService.getSyncJobData(Constants.CREDIT_NOTE_SYNC).toPromise().then((res: any) => {

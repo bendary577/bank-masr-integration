@@ -208,4 +208,7 @@ export class WastageInforComponent implements OnInit {
    );
   }
 
+  exportToCSV(){
+    
+  }
 }

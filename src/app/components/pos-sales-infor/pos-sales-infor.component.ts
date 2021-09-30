@@ -24,7 +24,6 @@ export class PosSalesInforComponent implements OnInit {
   selectedJob :SyncJob = null;
   state = "";
 
-
   constructor(private spinner: NgxSpinnerService, private syncJobService: SyncJobService,
     public snackBar: MatSnackBar, private posSalesService:PosSalesService, private excelService: ExcelService,
     private csvService: CsvService) { }

@@ -98,15 +98,21 @@ export class ActivitiesComponent implements OnInit {
   totalSpend(date) {
     this.restFilters()
     this.spinner.show();
+    this.transactionList.transactionData = [];
+    this.transactionList.showLoading = true;
     this.loyaltyService.getTotalSpend(date).toPromise().then((res: any) => {
-      this.getTransactions(date);
+      // this.getTransactions(date);
       this.spinner.hide();
+      this.transactionList.showLoading = false;
+      this.transactionList.transactionData = res["transactions"];
+      this.allTransactionDataBeforeFilter();
       this.totalSpendM = res["totalSpend"];
       this.topRevenueCenters = res["topRevenueCenters"]
       this.rvcBarChartLabels = res["revenues"];
       this.rvcBarChartData = [{ data: res["expenses"], label: 'Sales Per Revenue Center' },]; 
       this.createChart();
     }).catch(err => {
+      this.transactionList.showLoading = false;
       this.spinner.hide();
       let message = "";
       if (err.status === 401) {
@@ -119,7 +125,35 @@ export class ActivitiesComponent implements OnInit {
       } else {
         message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
       }
+      this.snackBar.open(message, null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass: "my-snack-bar-fail"
+      });
+    });
+  }
 
+  getTransactions(time) {
+    this.transactionList.transactionData = [];
+    this.transactionList.showLoading = true;
+    this.loyaltyService.getTransactions(Constants.REDEEM_VOUCHER, time).toPromise().then((res: any) => {
+      this.transactionList.transactionData = res;
+      this.allTransactionDataBeforeFilter();
+      this.transactionList.showLoading = false;
+      this.averageGuests();
+    }).catch(err => {
+      this.transactionList.showLoading = false;
+      let message = "";
+      if (err.status === 401) {
+        message = ErrorMessages.SESSION_EXPIRED;
+        this.sidNav.Logout();
+      } else if (err.error.message) {
+        message = err.error.message;
+      } else if (err.message) {
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
+      }
       this.snackBar.open(message, null, {
         duration: 3000,
         horizontalPosition: 'center',
@@ -176,34 +210,7 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
-  getTransactions(time) {
-    this.transactionList.transactionData = [];
-    this.transactionList.showLoading = true;
-    this.loyaltyService.getTransactions(Constants.REDEEM_VOUCHER, time).toPromise().then((res: any) => {
-      this.transactionList.transactionData = res;
-      this.allTransactionDataBeforeFilter();
-      this.transactionList.showLoading = false;
-      this.averageGuests();
-    }).catch(err => {
-      this.transactionList.showLoading = false;
-      let message = "";
-      if (err.status === 401) {
-        message = ErrorMessages.SESSION_EXPIRED;
-        this.sidNav.Logout();
-      } else if (err.error.message) {
-        message = err.error.message;
-      } else if (err.message) {
-        message = err.message;
-      } else {
-        message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
-      }
-      this.snackBar.open(message, null, {
-        duration: 3000,
-        horizontalPosition: 'center',
-        panelClass: "my-snack-bar-fail"
-      });
-    });
-  }
+
 
   allTransactionDataBeforeFilter() {
     if (this.transactionList.firstTime) {

@@ -1,4 +1,18 @@
-@import '../../approved-invoices-infor/approved-invoices-infor.component.scss';
+@import "../../../../assets/scss/syncs.scss";
+
+.payment-body{
+  text-align: left !important;
+  margin-left: 0%;
+  mat-icon {
+    position: absolute;
+    float: right;
+    top: -1px !important;
+    cursor: pointer;
+    color: rgb(80 80 80 / 54%);
+    right: -60px;
+    font-size: medium;
+  }
+}
 
 /* Clear floats after the columns */
 .row:after {
@@ -137,12 +151,3 @@
   color: #f47920 !important;
 }
 
-mat-icon {
-  position: absolute;
-  float: right;
-  top: -1px !important;
-  cursor: pointer;
-  color: rgb(80 80 80 / 54%);
-  right: -60px;
-  font-size: medium;
-}

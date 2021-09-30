@@ -10,8 +10,6 @@ import { SyncJob } from 'src/app/models/SyncJob';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 
-
-
 @Component({
   selector: 'app-suppliers',
   templateUrl: './suppliers.component.html',

@@ -180,4 +180,28 @@ export class BookedTransferInforComponent implements OnInit {
    );
   }
 
+  generateSingleFile():void {
+    this.csvService.generateSingleFile(Constants.BOOKED_TRANSFER_SYNC).subscribe(
+      res => {
+        const blob = new Blob([res.body], { type : 'application/vnd.ms.txt' });
+        const file = new File([blob], Constants.BOOKED_TRANSFER_SYNC + '.ndf', { type: 'application/vnd.ms.txt' });
+        saveAs(file);
+
+        this.snackBar.open("Export Successfully", null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
+        });
+      },
+      err => {
+        console.error(err)
+        this.snackBar.open("Fail to export, Please try agian" , null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+      }
+   );
+  }
+
 }

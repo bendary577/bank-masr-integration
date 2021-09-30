@@ -1,4 +1,5 @@
-<div style="margin-top: 100px;">
+<div class="config-style">
+    <h3 mat-dialog-title>Update POS Sales Configuartion</h3>
     <mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>
@@ -10,31 +11,36 @@
             <form class="my-form">
                 <div>
                     <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="name" name="name" style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;"
-                         placeholder="Machine Name" [(ngModel)]="newMachineMap.name">
+                        <input matInput id="name" name="name"
+                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Machine Name"
+                            [(ngModel)]="newMachineMap.name">
                     </mat-form-field>
                     <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="ip" name="ip" style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;"
-                         placeholder="Machine Ip" [(ngModel)]="newMachineMap.ip">
+                        <input matInput id="ip" name="ip"
+                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Machine Ip"
+                            [(ngModel)]="newMachineMap.ip">
                     </mat-form-field>
                     <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="port" name="port" style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;"
-                         placeholder="Machine Port" [(ngModel)]="newMachineMap.port">
+                        <input matInput id="port" name="port"
+                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Machine Port"
+                            [(ngModel)]="newMachineMap.port">
                     </mat-form-field>
                     <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="flag" name="flag" style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;"
-                         placeholder="Machine Flag" [(ngModel)]="newMachineMap.flag">
+                        <input matInput id="flag" name="flag"
+                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Machine Flag"
+                            [(ngModel)]="newMachineMap.flag">
                     </mat-form-field>
                     <button mat-flat-button (click)="addRateCode()" class="filterButton addButton">Add</button>
                 </div>
             </form>
         </div>
 
-        <ngx-datatable class="material" [loadingIndicator]="posMachineList.showLoading" [messages]="posMachineList.messages"
-        [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-         [rows]="posMachineList.posMachinesData" [selected]="posMachineList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
-        (select)='onSelect($event)' [scrollbarH]="true">
-    
+        <ngx-datatable class="material" [loadingIndicator]="posMachineList.showLoading"
+            [messages]="posMachineList.messages" [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50"
+            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+            [rows]="posMachineList.posMachinesData" [selected]="posMachineList.selected" [selectionType]="'checkbox'"
+            [selectAllRowsOnPage]="false" (select)='onSelect($event)' [scrollbarH]="true">
+
             <ngx-datatable-column name="Machine Name">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     <input matInput placeholder="Name" [(ngModel)]="row.name">
@@ -46,13 +52,13 @@
                     <input matInput placeholder="eg. 5 %" [(ngModel)]="row.ip">
                 </ng-template>
             </ngx-datatable-column>
-            
+
             <ngx-datatable-column name="Machine Port">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     <input matInput placeholder="eg. 5 %" [(ngModel)]="row.port">
                 </ng-template>
             </ngx-datatable-column>
-            
+
             <ngx-datatable-column name="Machine Flag">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     <input matInput placeholder="eg. 5 %" [(ngModel)]="row.flag">

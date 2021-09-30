@@ -1,13 +1,10 @@
 @import '../add-app-user/add-app-user.component.scss';
 @import '../../../styles.scss';
 
-
 .welcomeing{
-
     font-size: 25px;
     padding-top: 10%;
     padding-left: 5%;
-
     .hi{
         font-size: 40px;
     }
@@ -24,8 +21,6 @@
     box-shadow: 0px 10px 10px rgba(black, 0.35);
     border-radius: 10px;
     // overflow: visible !important;
-
-
 
     .row{
         padding-left:30px;

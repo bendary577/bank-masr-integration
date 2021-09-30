@@ -1,20 +1,18 @@
-@import "../approved-invoices-infor/approved-invoices-infor.component.scss";
+@import "../../../assets/scss/syncs.scss";
 @import "../support/support.component.scss";
 
-h3 {
-    background-color: #f1f1f1!important;
-    font-weight: bolder !important;
-    margin-top: 70px !important;
-    margin-bottom: 28px !important;
-    height: 64px !important;
-    color:#f47920;
-    border-left: 1px solid;
-}
-
-// color: orange;
-// background-color: #f1f1f1 !important;
-
 .sync-body{
+
+    h3 {
+        background-color: #f1f1f1!important;
+        font-weight: bolder !important;
+        margin-top: 70px !important;
+        margin-bottom: 28px !important;
+        height: 64px !important;
+        color:#f47920;
+        border-left: 1px solid;
+    }
+    
     .custom-select{
         margin-left:10px;
     }
@@ -25,7 +23,7 @@ h3 {
     }
 
     ::ng-deep mat-form-field{
-        width: 390px !important;
+        width: 380px !important;
         padding-right: 50px;
         padding-top: 5px;
         margin-right: 30px;
@@ -47,7 +45,7 @@ h3 {
 
     .filterButton{
         height: 40px;
-        margin-left: 10px;
+        margin-left: 5px;
     }
 
     .cardHeader{

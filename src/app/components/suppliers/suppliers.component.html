@@ -1,137 +1,145 @@
-<h3>Suppliers</h3>
+<div class="sync-body">
+    <h3>Suppliers</h3>
 
-<div class="header">
-    <span class="history"> Sync Job History </span>
+    <div class="header">
+        <span class="history"> Sync Job History </span>
 
-    <select class="custom-select" (change)="getSyncJobData()" [(ngModel)]="selectedJob">
-        <option [ngValue]="job" *ngFor="let job of jobs">
-            {{job.creationDate | date:'dd-MM-yyyy H:MM:SS'}} - {{job.status}}
-            <p *ngIf="job.rowsFetched == 0 &&  job.status != 'Running'">- No new data fetched.</p>
-          </option>
-    </select>
-    <button mat-flat-button (click)="getSuppliersSyncJob()">Sync Suppliers Now</button>
-</div>
-<br>
+        <mat-form-field appearance="outline">
+            <mat-select required class="form-controls" id="sync" placeholder="Sync Job"
+            (ngModelChange)="getSyncJobData()" [(ngModel)]="selectedJob">
+                <mat-option></mat-option>
+                <mat-option [value]="job" *ngFor="let job of jobs">{{job.creationDate | date:'dd-MM-yyyy H:MM:SS'}} -
+                    {{job.status}}
+                    <p *ngIf="job.rowsFetched == 0 &&  job.status != 'Running'">- No new data fetched.</p>
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
 
-<div id="myProgress">
-    <mat-progress-bar mode="indeterminate" *ngIf="staticgetSuppliersLoading"></mat-progress-bar>
-</div>
-<br>
-<div *ngIf="selectedJob">
-    <mat-card class="example-card">
-        <mat-card-header>
-            <mat-card-title class="title">Sync Details</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <mat-list-item>
-                <span class="key">Sync Number: </span>
-                <span class="value" *ngIf="selectedJob.id">{{selectedJob.id}}</span>
-                <span class="value" *ngIf="!selectedJob.id">No Info</span>
-            </mat-list-item>
-            <mat-list-item>
-                <span class="key">Sync status: </span>
-                <span class="value" *ngIf="selectedJob.status">{{selectedJob.status}}</span>
-                <span class="value" *ngIf="!selectedJob.status">No Info</span>
-            </mat-list-item>
-            <mat-list-item>
-                <span class="key">Start Date: </span>
-                <span class="value" *ngIf="selectedJob.creationDate">{{selectedJob.creationDate | date:'dd-MM-yyyy H:MM:SS'}}</span>
-                <span class="value" *ngIf="!selectedJob.creationDate">No Info</span>
-            </mat-list-item>
-            <mat-list-item>
-                <span class="key">End Date: </span>
-                <span class="value" *ngIf="selectedJob.endDate">{{selectedJob.endDate | date:'dd-MM-yyyy H:MM:SS'}}</span>
-                <span class="value" *ngIf="!selectedJob.endDate">No Info</span>
-            </mat-list-item>
-            <mat-list-item>
-                <span class="key">Reason: </span>
-                <span class="value" *ngIf="selectedJob.reason">{{selectedJob.reason}}</span>
-                <span class="value" *ngIf="!selectedJob.reason">No Info</span>
-            </mat-list-item>
-            <!-- <mat-list-item>
+        <button mat-flat-button class="filterButton" (click)="getSuppliersSyncJob()">Sync Suppliers Now</button>
+    </div>
+    <br>
+
+    <div id="myProgress">
+        <mat-progress-bar mode="indeterminate" *ngIf="staticgetSuppliersLoading"></mat-progress-bar>
+    </div>
+    <br>
+    <div *ngIf="selectedJob">
+        <mat-card class="example-card">
+            <h2 class="cardHeader">Sync Details</h2>
+            <mat-card-content>
+                <mat-list-item>
+                    <span class="key">Sync Number: </span>
+                    <span class="value" *ngIf="selectedJob.id">{{selectedJob.id}}</span>
+                    <span class="value" *ngIf="!selectedJob.id">No Info</span>
+                </mat-list-item>
+                <mat-list-item>
+                    <span class="key">Sync status: </span>
+                    <span class="value" *ngIf="selectedJob.status">{{selectedJob.status}}</span>
+                    <span class="value" *ngIf="!selectedJob.status">No Info</span>
+                </mat-list-item>
+                <mat-list-item>
+                    <span class="key">Start Date: </span>
+                    <span class="value" *ngIf="selectedJob.creationDate">{{selectedJob.creationDate | date:'dd-MM-yyyy
+                        H:MM:SS'}}</span>
+                    <span class="value" *ngIf="!selectedJob.creationDate">No Info</span>
+                </mat-list-item>
+                <mat-list-item>
+                    <span class="key">End Date: </span>
+                    <span class="value" *ngIf="selectedJob.endDate">{{selectedJob.endDate | date:'dd-MM-yyyy
+                        H:MM:SS'}}</span>
+                    <span class="value" *ngIf="!selectedJob.endDate">No Info</span>
+                </mat-list-item>
+                <mat-list-item>
+                    <span class="key">Reason: </span>
+                    <span class="value" *ngIf="selectedJob.reason">{{selectedJob.reason}}</span>
+                    <span class="value" *ngIf="!selectedJob.reason">No Info</span>
+                </mat-list-item>
+                <!-- <mat-list-item>
                 <span class="key">User: </span>
                 <span class="value" *ngIf="selectedJob.endDate">{{selectedJob.user_id}}</span>
                 <span class="value" *ngIf="!selectedJob.endDate">No Info</span>
             </mat-list-item> -->
-            <mat-list-item *ngIf="!dataSource.length">
-                <span>
-                There was no new data to sync in this job, You can sync suppliers now from <a (click)="getSuppliersSyncJob()">here</a>
-            </span>
-            </mat-list-item>
-        </mat-card-content>
-    </mat-card>
-    <br>
-</div>
-
-
-<div>
-    <div *ngIf="!selectedJob">
-        <mat-card class="example-card">
-            <mat-card-header>
-                <mat-card-title>No Data</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <p>
-                    There was no new data to sync in this job, You can sync suppliers now from
-                    <a (click)="getSuppliersSyncJob()">here</a>
-                </p>
-
+                <mat-list-item *ngIf="!dataSource.length">
+                    <span>
+                        There was no new data to sync in this job, You can sync suppliers now from <a
+                            (click)="getSuppliersSyncJob()">here</a>
+                    </span>
+                </mat-list-item>
             </mat-card-content>
         </mat-card>
+        <br>
     </div>
 
-    <div class="main" *ngIf="dataSource.length">
-        <ngx-datatable *ngIf="!loading" class="material" [rows]="dataSource" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
-            <ngx-datatable-column name="Status">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.status}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Reason">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.reason}}
-                </ng-template>
-            </ngx-datatable-column>
 
-            <ngx-datatable-column name="Details">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <a (click)="showDetails(row)">Click here</a>
-                </ng-template>
-            </ngx-datatable-column>
+    <div>
+        <div *ngIf="!selectedJob">
+            <mat-card class="example-card">
+                <h2 class="cardHeader">No Data</h2>
+                <mat-card-content>
+                    <p style="padding:20px;">
+                        There was no new data to sync in this job, You can sync suppliers now from
+                        <a (click)="getSuppliersSyncJob()">here</a>
+                    </p>
 
-            <ngx-datatable-column name="State">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.supplierStatus}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="SupplierID">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.supplierId}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Supplier">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.supplier}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Description">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.description}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Supplier Status">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.status}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Supplier Number">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.supplierNumber}}
-                </ng-template>
-            </ngx-datatable-column>
+                </mat-card-content>
+            </mat-card>
+        </div>
 
-        </ngx-datatable>
+        <div class="main" *ngIf="dataSource.length">
+            <ngx-datatable *ngIf="!loading" class="material" [rows]="dataSource" [columnMode]="'force'"
+                [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+                [sortType]="'multi'">
+                <ngx-datatable-column name="Status">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.status}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Reason">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.reason}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Details">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <a (click)="showDetails(row)">Click here</a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="State">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.supplierStatus}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="SupplierID">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.supplierId}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Supplier">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.supplier}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Description">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.description}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Supplier Status">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.status}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Supplier Number">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.supplierNumber}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+            </ngx-datatable>
+        </div>
+        <ngx-spinner></ngx-spinner>
+
     </div>
-    <ngx-spinner></ngx-spinner>
-
 </div>

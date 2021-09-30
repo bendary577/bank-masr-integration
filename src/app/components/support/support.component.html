@@ -38,7 +38,6 @@
                 <div class="form-group">
                     <mat-form-field appearance="outline">
                         <mat-select multiple required class="form-controls" id="store" placeholder="Store" formControlName="store">
-                            <mat-option></mat-option>
                             <mat-option [value]="loc" *ngFor="let loc of locationList.locationData">{{loc.locationName}}</mat-option>
                         </mat-select>
                         <mat-error *ngIf="form.controls.store.hasError('required')">
@@ -49,7 +48,6 @@
                 <div class="form-group">
                     <mat-form-field appearance="outline">
                         <mat-select multiple required class="form-controls" id="modules" placeholder="Module" formControlName="module">
-                            <mat-option></mat-option>
                             <mat-option  [value]="sync" *ngFor="let sync of syncJoobsTypesList.syncJoobsTypesData">{{sync.name}}</mat-option>
                        </mat-select>
                        <mat-error *ngIf="form.controls.module.hasError('required')">

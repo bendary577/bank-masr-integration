@@ -1,19 +1,25 @@
-@import "../approved-invoices-infor/approved-invoices-infor.component.scss";
+@import "../../../assets/scss/syncs.scss";
+@import "../pos-sales-infor/pos-sales-infor.component.scss";
 
-
-.ng-valid[required], .ng-valid.required  {
-    font-size: 16px;
-    text-align: center;
-    text-decoration: none;
-    border-left: 10px solid rgb(218, 200, 43); /* yellow */
+.table-btn{
+    box-shadow: unset !important;
+    float: left;
+    bottom: 10px;
 }
 
-.ng-invalid:not(form)  {
-    font-size: 16px;
-    text-align: center;
-    text-decoration: none;
-    border-left: 10px solid #e94646; /* red */
-}
+// .ng-valid[required], .ng-valid.required  {
+//     font-size: 16px;
+//     text-align: center;
+//     text-decoration: none;
+//     border-left: 10px solid rgb(218, 200, 43); /* yellow */
+// }
+
+// .ng-invalid:not(form)  {
+//     font-size: 16px;
+//     text-align: center;
+//     text-decoration: none;
+//     border-left: 10px solid #e94646; /* red */
+// }
 
 .backdrop {
     background-color:rgba(0,0,0,0.6);
