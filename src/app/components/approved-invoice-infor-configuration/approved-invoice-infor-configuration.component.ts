@@ -58,6 +58,8 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
         this.getOverGroups();
       }
       this.loading = false;
+      this.syncJobType = undefined;
+
     }).catch(err => {
       console.error(err);
 

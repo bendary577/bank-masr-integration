@@ -158,6 +158,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { SupportComponent } from './components/support/support.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { PosMachineMappingComponent } from "./components/setting/pos-machine-mapping/pos-machine-mapping.component";
+import { TestPaginationComponent } from "./components/test-pagination/test-pagination.component";
 
 @NgModule({
   declarations: [
@@ -244,6 +245,7 @@ import { PosMachineMappingComponent } from "./components/setting/pos-machine-map
     AddAppUserAccompiedComponent,
     DeleteAppGroupComponent,
     ActivitiesComponent,
+    TestPaginationComponent,
     WlsIntegrationConfigComponent,
     WlsIntegrationComponent,
     DialogComponent,

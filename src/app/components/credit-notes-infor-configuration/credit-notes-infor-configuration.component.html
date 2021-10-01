@@ -1,100 +1,104 @@
-<h3 mat-dialog-title>Update Credit Notes Configuartion</h3>
+<div class="config-style">
+    <h3 mat-dialog-title>Update Credit Notes Configuartion</h3>
 
-<div>
-    <div *ngIf="!loading && syncJobType">
-        <!-- Oracle Hospitality Configurations -->
-        <mat-expansion-panel *ngIf="accountERD == 'ExportSun'">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Exported File
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-exported-file-configuration [syncJobType]=syncJobType></app-exported-file-configuration>
-        </mat-expansion-panel>
+    <div>
+        <div *ngIf="!loading && syncJobType">
+            <!-- Oracle Hospitality Configurations -->
+            <mat-expansion-panel *ngIf="accountERD == 'ExportSun'">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Exported File
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <app-exported-file-configuration [syncJobType]=syncJobType></app-exported-file-configuration>
+            </mat-expansion-panel>
 
-        <!-- Oracle Hospitality Configurations -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Oracle Hospitality Configurations
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-ohra-configuration [syncJobType]=syncJobType></app-ohra-configuration>
-        </mat-expansion-panel>
+            <!-- Oracle Hospitality Configurations -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Oracle Hospitality Configurations
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <app-ohra-configuration [syncJobType]=syncJobType></app-ohra-configuration>
+            </mat-expansion-panel>
 
-        <!-- Infor Sun System Configurations -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Infor Sun System
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-infor-system-configuration [syncJobType]=syncJobType></app-infor-system-configuration>
-        </mat-expansion-panel>
-        
-        <!-- Loction Ledger Analysis Configurations -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Loction Ledger Analysis
-                </mat-panel-title>
-            </mat-expansion-panel-header>
+            <!-- Infor Sun System Configurations -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Infor Sun System
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <app-infor-system-configuration [syncJobType]=syncJobType></app-infor-system-configuration>
+            </mat-expansion-panel>
 
-            <div class="container" *ngIf="!loading">
-                <form class="my-form">
+            <!-- Loction Ledger Analysis Configurations -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Loction Ledger Analysis
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
 
-                    <div>
-                        <mat-form-field class="example-full-width">
-                            <mat-select matInput id="locationAnalysis" name="locationAnalysis" placeholder="Location Ledger Analysis" [(ngModel)]="syncJobType.configuration.locationAnalysis">
-                                <mat-option value="1">1</mat-option>
-                                <mat-option value="2">2</mat-option>
-                                <mat-option value="3">3</mat-option>
-                                <mat-option value="4">4</mat-option>
-                                <mat-option value="5">5</mat-option>
-                                <mat-option value="6">6</mat-option>
-                                <mat-option value="7">7</mat-option>
-                                <mat-option value="8">8</mat-option>
-                                <mat-option value="9">9</mat-option>
-                                <mat-option value="10">10</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
+                <div class="container" *ngIf="!loading">
+                    <form class="my-form">
 
-                </form>
+                        <div>
+                            <mat-form-field class="example-full-width">
+                                <mat-select matInput id="locationAnalysis" name="locationAnalysis"
+                                    placeholder="Location Ledger Analysis"
+                                    [(ngModel)]="syncJobType.configuration.locationAnalysis">
+                                    <mat-option value="1">1</mat-option>
+                                    <mat-option value="2">2</mat-option>
+                                    <mat-option value="3">3</mat-option>
+                                    <mat-option value="4">4</mat-option>
+                                    <mat-option value="5">5</mat-option>
+                                    <mat-option value="6">6</mat-option>
+                                    <mat-option value="7">7</mat-option>
+                                    <mat-option value="8">8</mat-option>
+                                    <mat-option value="9">9</mat-option>
+                                    <mat-option value="10">10</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                    </form>
+                </div>
+
+            </mat-expansion-panel>
+            <!-- Analysis Configurations -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Analysis
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <app-analysis-configuration [analysis]=analysis></app-analysis-configuration>
+            </mat-expansion-panel>
+
+            <br>
+
+            <div class="card-back">
+                <button mat-flat-button (click)="onSaveClick()" class="filterButton saveButton">Save</button>
+                <button mat-flat-button (click)="onCancelClick()" class="filterButton saveButton">Cancel</button>
             </div>
 
-        </mat-expansion-panel>
-        <!-- Analysis Configurations -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Analysis
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-
-            <app-analysis-configuration [analysis]=analysis></app-analysis-configuration>
-        </mat-expansion-panel>
-
-        <br>
-
-        <div class="card-back">
-            <button mat-flat-button (click)="onSaveClick()">Save</button>
-            <button mat-flat-button (click)="onCancelClick()">Cancel</button>
         </div>
 
-    </div>
-
-    <div *ngIf="!loading && !syncJobType">
-        <mat-card class="example-card">
-                <mat-card-header>
-                    <mat-card-title>Welcome</mat-card-title>
-                </mat-card-header>
+        <div *ngIf="!loading && !syncJobType">
+            <mat-card class="example-card">
+                <h2 class="cardHeader">No Data</h2>
                 <mat-card-content>
-                    <p>
+                  <p>
+                    <span class="empty-data">
                         Can't Configure your sync right now, Please try again after few minutes.
+                    </span>
                     </p>
                 </mat-card-content>
-        </mat-card>
+            </mat-card>
+        </div>
+        <ngx-spinner></ngx-spinner>
     </div>
-    <ngx-spinner></ngx-spinner>
 </div>

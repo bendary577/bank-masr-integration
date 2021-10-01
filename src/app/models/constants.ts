@@ -311,15 +311,14 @@ export class Constants {
   static ADD_APP_USER_URL = environment.apiHost + '/addApplicationUser'
   static RESEND_QR_CODE = environment.apiHost + '/resendQRCode'
   static Delete_APP_USERS_URL = environment.apiHost + '/deleteApplicationUsers'
-  static GET_TRANSACTION_URL =
-    environment.apiHost + '/transaction/getTransactions'
+  static GET_TRANSACTION_URL =  environment.apiHost + '/transaction/getTransactions'
   static GET_TOP_USERS_URL = environment.apiHost + '/getTopUser'
   static GET_TOP_Groups_URL = environment.apiHost + '/getTopGroups'
   static GET_TOTAL_SPEND_URL = environment.apiHost + '/transaction/getTotalSpendTransactions'
   static GET_TOTAL_TRANS_INRANG_URL = environment.apiHost + '/transaction/getTransactionsInRange'
   static CHARGE_WALLET = environment.apiHost  + '/wallet/chargeWallet';
   static DEDUCT_WALLET = environment.apiHost  + '/wallet/deductFromWallet';
-
+  static GET_TRANSACTION_PAGINATED = environment.apiHost + "/transaction/transactionPagination"
 
   //////////////////////////////////////////////// Manage Application  //////////////////////////////////////////////
 

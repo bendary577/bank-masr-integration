@@ -68,6 +68,7 @@ import { OperaPaymentsComponent } from './components/operations/opera-payments/o
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { SupportComponent } from './components/support/support.component';
 import { PosMachineMappingComponent } from './components/setting/pos-machine-mapping/pos-machine-mapping.component';
+import { TestPaginationComponent } from './components/test-pagination/test-pagination.component';
 
 
 const routes: Routes = [
@@ -95,6 +96,7 @@ const routes: Routes = [
   { path: Constants.GET_LOYALTY_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
   { path: Constants.GET_WALLET_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
   { path: Constants.GET_VOUCHER_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
+  {path: "transPagin", component:TestPaginationComponent, canActivate:[AuthGuardService]},
 
   { path: Constants.MANAGE_GROUPS, component: ManageGroupsComponent ,canActivate:[AuthGuardService]},
 

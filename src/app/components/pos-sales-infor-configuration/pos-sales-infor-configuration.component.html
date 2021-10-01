@@ -132,7 +132,7 @@
                 </mat-expansion-panel-header>
 
                 <div class="back" style="margin-bottom: 20px;">
-                    <button mat-flat-button (click)="openTaxDialog()">Add</button>
+                    <button mat-flat-button (click)="openTaxDialog()" class="filterButton addButton">Add</button>
                     <mat-checkbox id="taxIncluded" name="taxIncluded" class="example-margin"
                         style="padding-right: 10px;"
                         [(ngModel)]="syncJobType.configuration.salesConfiguration.taxIncluded">Is tax included
@@ -181,7 +181,7 @@
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="back" style="margin-bottom: 20px;">
-                    <button mat-flat-button (click)="openMajorGroupDialog()">Add</button>
+                    <button mat-flat-button (click)="openMajorGroupDialog()" class="filterButton addButton">Add</button>
 
                     <mat-checkbox class="example-margin" style="padding-right: 10px;"
                         [(ngModel)]="syncJobType.configuration.salesConfiguration.MGDiscount"
@@ -242,7 +242,7 @@
 
                         <ngx-datatable-column name="Group Childs">
                             <ng-template let-row="row" ngx-datatable-cell-template>
-                                <button mat-flat-button (click)="viewMajorGroupChildsDialog(row)">View</button>
+                                <button mat-flat-button (click)="viewMajorGroupChildsDialog(row)" class="filterButton table-btn">View</button>
                             </ng-template>
                         </ngx-datatable-column>
 
@@ -258,7 +258,7 @@
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="back" style="margin-bottom: 20px;">
-                    <button mat-flat-button (click)="openDiscountDialog()">Add</button>
+                    <button mat-flat-button (click)="openDiscountDialog()" class="filterButton addButton">Add</button>
                     <mat-checkbox id="syncTotalDiscounts" name="syncTotalDiscounts" class="example-margin"
                         [(ngModel)]="syncJobType.configuration.salesConfiguration.syncTotalDiscounts">Sync total
                         discounts</mat-checkbox>
@@ -303,7 +303,7 @@
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="back" style="margin-bottom: 20px;">
-                    <button mat-flat-button (click)="openServiceChargeDialog()">Add</button>
+                    <button mat-flat-button (click)="openServiceChargeDialog()" class="filterButton addButton">Add</button>
                     <mat-checkbox id="syncTotalServiceCharge" name="syncTotalServiceCharge" class="example-margin"
                         [(ngModel)]="syncJobType.configuration.salesConfiguration.syncTotalServiceCharge">Sync total
                         service charges</mat-checkbox>
@@ -364,7 +364,7 @@
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="back" style="margin-bottom: 20px;">
-                    <button mat-flat-button (click)="openStatisticsDialog()">Add</button>
+                    <button mat-flat-button (click)="openStatisticsDialog()" class="filterButton addButton">Add</button>
                 </div>
 
                 <div *ngIf="statistics?.length > 0">
@@ -409,12 +409,12 @@
 
         <div *ngIf="!loading && !syncJobType">
             <mat-card class="example-card">
-                <mat-card-header>
-                    <mat-card-title>Welcome</mat-card-title>
-                </mat-card-header>
+                <h2 class="cardHeader">No Data</h2>
                 <mat-card-content>
-                    <p>
+                  <p>
+                    <span class="empty-data">
                         Can't Configure your sync right now, Please try again after few minutes.
+                    </span>
                     </p>
                 </mat-card-content>
             </mat-card>

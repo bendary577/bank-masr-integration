@@ -1,187 +1,197 @@
-<h3 mat-dialog-title>Update Consumption Configuartion</h3>
+<div class="config-style">
+    <h3 mat-dialog-title>Update Consumption Configuartion</h3>
 
-<div>
-    <div *ngIf="!loading && syncJobType">
-        <!-- Oracle Hospitality Configurations -->
-        <mat-expansion-panel *ngIf="accountERD == 'ExportSun'">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Exported File
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-exported-file-configuration [syncJobType]=syncJobType></app-exported-file-configuration>
-        </mat-expansion-panel>
-        
-        <!-- Oracle Hospitality Configurations -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Oracle Hospitality Configurations
-                </mat-panel-title>
-            </mat-expansion-panel-header>
+    <div>
+        <div *ngIf="!loading && syncJobType">
+            <!-- Oracle Hospitality Configurations -->
+            <mat-expansion-panel *ngIf="accountERD == 'ExportSun'">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Exported File
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <app-exported-file-configuration [syncJobType]=syncJobType></app-exported-file-configuration>
+            </mat-expansion-panel>
 
-            <div class="container" *ngIf="!loading">
-                <form class="my-form">
-                    <div>
-                        <mat-form-field class="example-full-width">
-                            <mat-select matInput id="consumptionBasedOnType" name="consumptionBasedOnType" placeholder="Consumption based on" 
-                             [(ngModel)]="syncJobType.configuration.consumptionConfiguration.consumptionBasedOnType">
-                                <mat-option value="Cost Center">Cost Center</mat-option>
-                                <mat-option value="Location">Location</mat-option>
-                                <mat-option value="Both">Both</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
+            <!-- Oracle Hospitality Configurations -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Oracle Hospitality Configurations
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
 
-                </form>
+                <div class="container" *ngIf="!loading">
+                    <form class="my-form">
+                        <div>
+                            <mat-form-field class="example-full-width">
+                                <mat-select matInput id="consumptionBasedOnType" name="consumptionBasedOnType"
+                                    placeholder="Consumption based on"
+                                    [(ngModel)]="syncJobType.configuration.consumptionConfiguration.consumptionBasedOnType">
+                                    <mat-option value="Cost Center">Cost Center</mat-option>
+                                    <mat-option value="Location">Location</mat-option>
+                                    <mat-option value="Both">Both</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                    </form>
+                </div>
+                <app-ohra-configuration [syncJobType]=syncJobType></app-ohra-configuration>
+            </mat-expansion-panel>
+
+            <!-- Infor Sun System Configurations -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Infor Sun System
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <app-infor-system-configuration [syncJobType]=syncJobType></app-infor-system-configuration>
+            </mat-expansion-panel>
+
+            <!-- Loction Ledger Analysis Configurations -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Analysis Codes
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="container" *ngIf="!loading">
+                    <form class="my-form">
+                        <div>
+                            <mat-form-field class="example-full-width">
+                                <mat-select matInput id="locationAnalysisCode" name="locationAnalysisCode"
+                                    placeholder="Location Analysis Code"
+                                    [(ngModel)]="syncJobType.configuration.locationAnalysisCode">
+                                    <mat-option [value]=code *ngFor="let code of analysisCodes">{{code}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </form>
+                </div>
+            </mat-expansion-panel>
+
+            <!-- Analysis Configurations -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Analysis
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <app-analysis-configuration [analysis]=analysis></app-analysis-configuration>
+            </mat-expansion-panel>
+
+            <!-- Item Group Configurations -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Locations
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="back" style="margin-bottom: 20px;">
+                    <button mat-flat-button (click)="openLocationDialog(true)" class="filterButton addButton">Add</button>
+                </div>
+
+                <div *ngIf="consumptionLocations?.length > 0">
+
+                    <ngx-datatable class="material" [rows]="consumptionLocations" [columnMode]="'force'"
+                        [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+                        [sortType]="'multi'">
+
+                        <ngx-datatable-column name="Location">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <mat-checkbox class="example-margin" [(ngModel)]="row.check"
+                                    *ngIf="row.costCenter.locationName">
+                                    {{row.costCenter.locationName}}
+                                </mat-checkbox>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Account Code">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <input matInput placeholder="Account" [(ngModel)]="row.accountCode">
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Items Count">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.itemGroups.length}}
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Item Groups">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <button mat-flat-button (click)="viewLocationItemGroupsDialog(row, true)" class="filterButton table-btn">View</button>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                    </ngx-datatable>
+                </div>
+
+            </mat-expansion-panel>
+
+            <!-- Cost Center Configurations -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Cost Centers
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="back" style="margin-bottom: 20px;">
+                    <button mat-flat-button (click)="openLocationDialog(false)" class="filterButton addButton">Add</button>
+                </div>
+
+                <div *ngIf="consumptionCostCenters?.length > 0">
+
+                    <ngx-datatable class="material" [rows]="consumptionCostCenters" [columnMode]="'force'"
+                        [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+                        [sortType]="'multi'">
+
+                        <ngx-datatable-column name="Cost Center">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <mat-checkbox class="example-margin" [(ngModel)]="row.check"
+                                    *ngIf="row.costCenter.costCenter">{{row.costCenter.costCenter}}
+                                </mat-checkbox>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Account Code">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <input matInput placeholder="Account" [(ngModel)]="row.accountCode">
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Items Count">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.itemGroups.length}}
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Item Groups">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <button mat-flat-button (click)="viewLocationItemGroupsDialog(row, false)" class="filterButton table-btn">View</button>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                    </ngx-datatable>
+                </div>
+
+            </mat-expansion-panel>
+
+            <br>
+
+            <div class="card-back">
+                <button mat-flat-button (click)="onSaveClick()" class="filterButton saveButton">Save</button>
+                <button mat-flat-button (click)="onCancelClick()" class="filterButton saveButton">Cancel</button>
             </div>
-            <app-ohra-configuration [syncJobType]=syncJobType></app-ohra-configuration>
-        </mat-expansion-panel>
 
-        <!-- Infor Sun System Configurations -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Infor Sun System
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-infor-system-configuration [syncJobType]=syncJobType></app-infor-system-configuration>
-        </mat-expansion-panel>
-        
-        <!-- Loction Ledger Analysis Configurations -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Analysis Codes
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-
-            <div class="container" *ngIf="!loading">
-                <form class="my-form">
-                    <div>
-                        <mat-form-field class="example-full-width">
-                            <mat-select matInput id="locationAnalysisCode" name="locationAnalysisCode" placeholder="Location Analysis Code" [(ngModel)]="syncJobType.configuration.locationAnalysisCode">
-                                <mat-option [value]=code *ngFor="let code of analysisCodes">{{code}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                </form>
-            </div>
-        </mat-expansion-panel>
-
-        <!-- Analysis Configurations -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Analysis
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-
-            <app-analysis-configuration [analysis]=analysis></app-analysis-configuration>
-        </mat-expansion-panel>
-
-        <!-- Item Group Configurations -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Locations
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="back" style="margin-bottom: 20px;">
-                <button mat-flat-button (click)="openLocationDialog(true)">Add</button>
-            </div>
-
-            <div *ngIf="consumptionLocations?.length > 0">
-
-                <ngx-datatable class="material" [rows]="consumptionLocations" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
-
-                    <ngx-datatable-column name="Location">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <mat-checkbox class="example-margin" [(ngModel)]="row.check" *ngIf="row.costCenter.locationName">
-                                {{row.costCenter.locationName}}
-                            </mat-checkbox>
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="Account Code">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <input matInput placeholder="Account" [(ngModel)]="row.accountCode">
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="Items Count">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.itemGroups.length}}
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="Item Groups">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <button mat-flat-button (click)="viewLocationItemGroupsDialog(row, true)">View</button>
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                </ngx-datatable>
-            </div>
-
-        </mat-expansion-panel>
-
-        <!-- Cost Center Configurations -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Cost Centers
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="back" style="margin-bottom: 20px;">
-                <button mat-flat-button (click)="openLocationDialog(false)">Add</button>
-            </div>
-
-            <div *ngIf="consumptionCostCenters?.length > 0">
-
-                <ngx-datatable class="material" [rows]="consumptionCostCenters" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
-
-                    <ngx-datatable-column name="Cost Center">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <mat-checkbox class="example-margin" [(ngModel)]="row.check" *ngIf="row.costCenter.costCenter">{{row.costCenter.costCenter}}
-                            </mat-checkbox>
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="Account Code">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <input matInput placeholder="Account" [(ngModel)]="row.accountCode">
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="Items Count">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row.itemGroups.length}}
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="Item Groups">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <button mat-flat-button (click)="viewLocationItemGroupsDialog(row, false)">View</button>
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                </ngx-datatable>
-            </div>
-
-        </mat-expansion-panel>
-
-        <br>
-
-        <div class="card-back">
-            <button mat-flat-button (click)="onSaveClick()">Save</button>
-            <button mat-flat-button (click)="onCancelClick()">Cancel</button>
         </div>
 
-    </div>
-
-    <div *ngIf="!loading && !syncJobType">
-        <mat-card class="example-card">
+        <div *ngIf="!loading && !syncJobType">
+            <mat-card class="example-card">
                 <mat-card-header>
                     <mat-card-title>Welcome</mat-card-title>
                 </mat-card-header>
@@ -190,8 +200,10 @@
                         Can't Configure your sync right now, Please try again after few minutes.
                     </p>
                 </mat-card-content>
-        </mat-card>
+            </mat-card>
+        </div>
+
+        <ngx-spinner></ngx-spinner>
     </div>
 
-    <ngx-spinner></ngx-spinner>
 </div>

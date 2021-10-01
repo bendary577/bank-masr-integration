@@ -144,5 +144,10 @@ export class LoyaltyService {
     return this.http.post(Constants.SUSPEND_GEUST_URL + "?susFlag=" + susFlag, guest,
        {headers: new HttpHeaders({Authorization: 'Bearer' + this.token})}).toPromise();
   }
+
+  getTransactionPages(){
+    return this.http.get(Constants.GET_TRANSACTION_PAGINATED + "?page=" + 0 + "&size=" + 10, 
+    {headers: new HttpHeaders({Authorization: 'Bearer' + this.token})}).toPromise();
+  }
 }
 
