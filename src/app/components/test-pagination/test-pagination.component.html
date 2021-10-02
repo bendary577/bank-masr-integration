@@ -1,6 +1,6 @@
 <div style="padding-top:100px">
     <ngx-datatable class="material" 
-         style="width: 98%" [sortType]="'multi'" [columnMode]="'force'"
+         style="width: 98%; min-width: 98%;" [sortType]="'multi'" [columnMode]="'force'"
         [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
         [rows]="transactions" [sortType]="'multi'"   (page)='getValue($event)'
         [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" [scrollbarH]="true">
