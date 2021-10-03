@@ -3,7 +3,7 @@
 </h1>
 <div class="card">
     <div class="row">
-        <div class="col titltes">
+        <!-- <div class="col titltes">
             <form [formGroup]="form" class="my-form">
                 <div class="form-group labeldiv">
                     <span class="labelTitle">Choose a date range:</span>
@@ -18,9 +18,12 @@
                     <span class="labelTitle">Email:</span>
                 </div>
             </form>
-        </div>
+        </div> -->
         <div class="col forms">
             <form [formGroup]="form" class="my-form">
+                <div class="form-group labeldiv">
+                    <span class="labelTitle">Choose a date range:</span>
+                </div>
                 <div class="form-group">
                     <mat-form-field class="dateBacker" appearance="outline">
                         <input  autocomplete="off"required matInput type="text" name="daterange" ngxDaterangepickerMd formControlName="dateRange"
@@ -35,6 +38,10 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
+
+                <div class="form-group labeldiv">
+                    <span class="labelTitle">Stores:</span>
+                </div>
                 <div class="form-group">
                     <mat-form-field appearance="outline">
                         <mat-select multiple required class="form-controls" id="store" placeholder="Store" formControlName="store">
@@ -44,6 +51,10 @@
                             Store is required.
                         </mat-error>
                     </mat-form-field>
+                </div>
+
+                <div class="form-group labeldiv">
+                    <span class="labelTitle">Modules:</span>
                 </div>
                 <div class="form-group">
                     <mat-form-field appearance="outline">
@@ -55,9 +66,13 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
+
+                <div class="form-group labeldiv">
+                    <span class="labelTitle">Email:</span>
+                </div>
                 <div class="form-group">
                     <mat-form-field appearance="outline">
-                        <input matInput placeholder="Email" formControlName="email" required>
+                        <input matInput placeholder="user@example.com" formControlName="email" required>
                         <mat-error *ngIf="form.controls.email.hasError('pattern')">
                             Email must be well formed.
                         </mat-error>

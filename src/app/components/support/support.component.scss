@@ -1,164 +1,163 @@
 @import '../add-app-user/add-app-user.component.scss';
 @import '../../../styles.scss';
 
-.welcomeing{
-    font-size: 25px;
-    padding-top: 10%;
-    padding-left: 5%;
-    .hi{
-        font-size: 40px;
-    }
+.welcomeing {
+  font-size: 25px;
+  padding-top: 10%;
+  padding-left: 5%;
+  .hi {
+    font-size: 40px;
+  }
 }
-.card{
-    width:75%;
-    height:60%;
-    max-height: 560px ;
-    margin: 5%;
-    margin-top:5%;
-    margin-left: 10%;
-    padding: 2%;
-    border:0.5px solid #e9e8e8;
-    box-shadow: 0px 10px 10px rgba(black, 0.35);
-    border-radius: 10px;
-    // overflow: visible !important;
+.card {
+  width: 75%;
+  // height: 60%;
+  max-height: 560px;
+  margin: 5%;
+  margin-top: 5%;
+  margin-left: 10%;
+  padding: 2%;
+  border: 0.5px solid #e9e8e8;
+  box-shadow: 0px 10px 10px rgba(black, 0.35);
+  border-radius: 10px;
+  // overflow: visible !important;
 
-    .row{
-        padding-left:30px;
-        overflow: visible;
-    }
+  .row {
+    padding-left: 30px;
+    overflow: visible;
+  }
 
-    .titltes{
-         max-width: 30%;
-         
-         .labelTitle{
-             text-align: left;
-             font-size: 20px;
-             font-weight: bolder;
-             font-family: Roboto;
-         } 
-         
-         .labeldiv{
-             margin-bottom: 40px;
-             padding-top: 20px;
-             padding-bottom: 0px;
-         }
-    }
+  .titltes {
+    max-width: 30%;
 
-    .forms{
-        float: right;
-        max-width: 60%;
-        margin-left: 20px;
-
-        .calender{
-            cursor: pointer;
-            color: #f47920;
-        }
-
-        .btn-warning{
-            border-radius: 30px;
-            background-color: #ffb560;
-            color: black;
-            font-weight: bolder;
-            font-size: 20px;
-            width:130px;
-            height:50px;
-        }
-    }
-}
-
-  .form-group{
-      margin-bottom: 0px;
+    .labelTitle {
+      text-align: left;
+      font-size: 18px;
       font-weight: bolder;
-      left: 50%;
-      right: 50%;
+      font-family: Roboto;
+    }
+
+    .labeldiv {
+      margin-bottom: 40px;
+      padding-top: 20px;
+      padding-bottom: 0px;
+    }
   }
 
-  ::ng-deep .mat-form-field-outline-start {
-    border-radius: 28px 0 0 28px !important;
-    min-width: 28px !important;
-  }
-  
-  ::ng-deep .mat-form-field-outline-end {
-    border-radius: 0 28px 28px 0 !important;
-  }
+  .forms {
+    float: right;
+    // max-width: 60%;
+    // margin-left: 20px;
 
-  ::ng-deep  .mat-form-field-infix{
-    width: 80px !important;
-  }
+    .calender {
+      cursor: pointer;
+      color: #f47920;
+    }
 
-  /* Border */
+    .btn-warning {
+      border-radius: 30px;
+      background-color: #ffb560;
+      color: black;
+      font-weight: bolder;
+      font-size: 20px;
+      width: 130px;
+      height: 50px;
+    }
+  }
+}
+
+.form-group {
+  margin-bottom: 0px;
+  font-weight: bolder;
+  left: 50%;
+  right: 50%;
+}
+
+::ng-deep .mat-form-field-outline-start {
+  border-radius: 28px 0 0 28px !important;
+  min-width: 28px !important;
+}
+
+::ng-deep .mat-form-field-outline-end {
+  border-radius: 0 28px 28px 0 !important;
+}
+
+::ng-deep .mat-form-field-infix {
+  width: 80px !important;
+}
+
+/* Border */
 .mat-form-field-appearance-outline
-.mat-form-field-outline
-.mat-form-field 
-.ng-tns-c71-0
-.mat-form-field-type-mat-input
-.mat-form-field-appearance-outline
- .mat-form-field-can-float 
- .mat-form-field-has-label 
- .mat-form-field-hide-placeholder {
-   color: #f47920;
- }
- /* Font color */
- input.mat-input-element {
-   color: black;
- }
+  .mat-form-field-outline
+  .mat-form-field
+  .ng-tns-c71-0
+  .mat-form-field-type-mat-input
+  .mat-form-field-appearance-outline
+  .mat-form-field-can-float
+  .mat-form-field-has-label
+  .mat-form-field-hide-placeholder {
+  color: #f47920;
+}
+/* Font color */
+input.mat-input-element {
+  color: black;
+}
 
- .mat-form-field-flex{
-   background-color: rgb(119, 119, 119);
- }
+.mat-form-field-flex {
+  background-color: rgb(119, 119, 119);
+}
 
- .md-drppicker{
-    background:#474747;
- }
-
+.md-drppicker {
+  background: #474747;
+}
 
 // ::ng-deep .md-drppicker {
 //   // padding-right: 100px !important;
 //   display: -webkit-inline-box;
 //  }
- 
-::ng-deep {
-      ngx-daterangepicker-material {
-      & {
-      .md-drppicker {
-          min-width: 670px !important;
-          display: -webkit-inline-box;
-          top: 20px;
 
-          .buttons{
-                .buttons_input{
-                  button{
-                        background: #f47920;  }
-                  }
+::ng-deep {
+  ngx-daterangepicker-material {
+    & {
+      .md-drppicker {
+        min-width: 670px !important;
+        display: -webkit-inline-box;
+        top: 20px;
+
+        .buttons {
+          .buttons_input {
+            button {
+              background: #f47920;
             }
-          .ranges{
-            ul{
-                li{
-                    button{
-                        color: #000000;
-                          &.active{
-                            background-color: #ffb560;
-                          }
-                        }
-                 }
+          }
+        }
+        .ranges {
+          ul {
+            li {
+              button {
+                color: #000000;
+                &.active {
+                  background-color: #ffb560;
+                }
+              }
             }
+          }
         }
 
-          &.double {
-            .calendar {
-
+        &.double {
+          .calendar {
             td {
               &.active {
-                 background-color: #ffb560;
+                background-color: #ffb560;
                 //  border-radius: ........;
                 //  color: ...........;
 
-              &.off {
-                   background-color: #e0b787 !important;
+                &.off {
+                  background-color: #e0b787 !important;
                   // border-color: ....... !important;
                   // color: ........ !important;
+                }
               }
-            }
             }
           }
         }
@@ -167,8 +166,7 @@
   }
 }
 
-
-::ng-deep .cdk-overlay-pane{
+::ng-deep .cdk-overlay-pane {
   min-width: 377.406px;
   pointer-events: auto;
   font-size: 16px;
@@ -177,6 +175,6 @@
   transform: translateX(-40px) translateY(-15px);
 }
 
-input{
+input {
   border-bottom: none !important;
 }
