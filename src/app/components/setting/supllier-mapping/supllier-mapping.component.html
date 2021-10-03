@@ -1,67 +1,72 @@
-<h3 mat-dialog-title>Suppliers Account Mapping</h3>
-<div class="header">
-    <button mat-flat-button (click)="getSuppliers()">Fetch Suppliers</button>
-</div>
-<br>
-<div>
-    <!-- Suppliers -->
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Suppliers To Account Code Mapping
-            </mat-panel-title>
-        </mat-expansion-panel-header>
+<div class="config-style">
+    <h3 mat-dialog-title>Suppliers Account Mapping</h3>
+    <div class="header">
+        <button mat-flat-button (click)="getSuppliers()" class="filterButton table-btn" style="width:150px; float:right">Fetch Suppliers</button>
+    </div>
+    <br>
+    <div>
+        <!-- Suppliers -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Suppliers To Account Code Mapping
+                </mat-panel-title>
+            </mat-expansion-panel-header>
 
-        <div class="back" style="margin-bottom: 15px;">
-            <button mat-flat-button (click)="openSupplierDialog()">Add</button>
-        </div>        
+            <div class="back" style="margin-bottom: 15px;">
+                <button mat-flat-button (click)="openSupplierDialog()" class="filterButton addButton">Add</button>
+            </div>
 
-        <div *ngIf="!loading">
-            <div *ngIf="!suppliersLoding">
-                <div *ngIf="suppliers?.length == 0">
-                    <mat-card class="example-card">
-                        <mat-card-header>
-                            <mat-card-title>Error</mat-card-title>
-                        </mat-card-header>
-                        <mat-card-content>
-                            <p>
-                                Error happend while fetching suppliers, make sure you have suppliers.
-                            </p>
+            <div *ngIf="!loading">
+                <div *ngIf="!suppliersLoding">
+                    <div *ngIf="suppliers?.length == 0">
+                        <mat-card class="example-card">
+                            <mat-card-header>
+                                <mat-card-title>Error</mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <p>
+                                    Error happend while fetching suppliers, make sure you have suppliers.
+                                </p>
 
-                        </mat-card-content>
-                    </mat-card>
-                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
 
-                <div class="main" *ngIf="suppliers?.length > 0">
-                    <ngx-datatable *ngIf="!loading" class="material" [rows]="suppliers" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
-                        <ngx-datatable-column name="Supplier Name">
-                            <ng-template let-row="row" ngx-datatable-cell-template>
-                                {{row.supplierName}}
-                            </ng-template>
-                        </ngx-datatable-column>
+                    <div class="main" *ngIf="suppliers?.length > 0">
+                        <ngx-datatable *ngIf="!loading" class="material" [rows]="suppliers" [columnMode]="'force'"
+                            [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"
+                            [scrollbarH]="true" [sortType]="'multi'">
+                            <ngx-datatable-column name="Supplier Name">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    {{row.supplierName}}
+                                </ng-template>
+                            </ngx-datatable-column>
 
-                        <ngx-datatable-column name="Supplier Reference">
-                            <ng-template let-row="row" ngx-datatable-cell-template>
-                                <input matInput placeholder="Supplier Reference" [(ngModel)]="row.supplierReference">
-                            </ng-template>
-                        </ngx-datatable-column>
+                            <ngx-datatable-column name="Supplier Reference">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    <input matInput placeholder="Supplier Reference"
+                                        [(ngModel)]="row.supplierReference">
+                                </ng-template>
+                            </ngx-datatable-column>
 
-                        <ngx-datatable-column name="Account Code">
-                            <ng-template let-row="row" ngx-datatable-cell-template>
-                                <input matInput placeholder="Account Code" [(ngModel)]="row.accountCode">
-                            </ng-template>
-                        </ngx-datatable-column>
+                            <ngx-datatable-column name="Account Code">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    <input matInput placeholder="Account Code" [(ngModel)]="row.accountCode">
+                                </ng-template>
+                            </ngx-datatable-column>
 
-                    </ngx-datatable>
+                        </ngx-datatable>
+                    </div>
                 </div>
             </div>
+
+        </mat-expansion-panel>
+        <br>
+
+        <div class="card-back">
+            <button mat-flat-button (click)="onSaveClick()" class="filterButton saveButton">Save</button>
         </div>
-
-    </mat-expansion-panel>
-    <br>
-
-    <div class="card-back">
-        <button mat-flat-button (click)="onSaveClick()">Save</button>
+        <ngx-spinner></ngx-spinner>
     </div>
-    <ngx-spinner></ngx-spinner>
 </div>

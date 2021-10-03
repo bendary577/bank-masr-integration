@@ -30,7 +30,7 @@
 
 mat-expansion-panel {
     box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
-    border-radius: 28px;
+    border-radius: 28px !important;
     margin: 15px;
     margin-bottom: inherit;
 }
@@ -75,4 +75,8 @@ mat-expansion-panel {
  .empty-data{
     margin: 30px;
     margin-left:10px;
+}
+
+.card-back{
+    margin-top: 20px;
 }

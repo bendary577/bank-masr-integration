@@ -1,89 +1,94 @@
-<h3 mat-dialog-title>Cost Center Account Mapping</h3>
-<div class="header">
-    <button mat-flat-button (click)="getCostCenters()">Fetch Cost Centers</button>
-</div>
-<br>
-<div>
-    <!-- Cost Centers -->
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Cost Centers Mapping To Account Code
-            </mat-panel-title>
-        </mat-expansion-panel-header>
+<div class="config-style">
+    <h3 mat-dialog-title>Cost Center Account Mapping</h3>
+    <div class="header">
+        <button mat-flat-button (click)="getCostCenters()" class="filterButton table-btn" style="width:150px; float:right">Fetch Cost Centers</button>
+    </div>
+    <br>
+    <div>
+        <!-- Cost Centers -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Cost Centers Mapping To Account Code
+                </mat-panel-title>
+            </mat-expansion-panel-header>
 
-        <div *ngIf="!loading">
-            <div *ngIf="!costCenterLoding">
-                <div *ngIf="costCenters?.length == 0">
-                    <mat-card class="example-card">
-                        <mat-card-header>
-                            <mat-card-title>Error</mat-card-title>
-                        </mat-card-header>
-                        <mat-card-content>
-                            <p>
-                                Error happend while fetching cost centers, make sure you have cost centers.
-                            </p>
+            <div *ngIf="!loading">
+                <div *ngIf="!costCenterLoding">
+                    <div *ngIf="costCenters?.length == 0">
+                        <mat-card class="example-card">
+                            <mat-card-header>
+                                <mat-card-title>Error</mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <p>
+                                    Error happend while fetching cost centers, make sure you have cost centers.
+                                </p>
 
-                        </mat-card-content>
-                    </mat-card>
-                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
 
-                <div class="main" *ngIf="costCenters?.length > 0">
-                    <ngx-datatable *ngIf="!loading" class="material" [rows]="costCenters" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
+                    <div class="main" *ngIf="costCenters?.length > 0">
+                        <ngx-datatable *ngIf="!loading" class="material" [rows]="costCenters" [columnMode]="'force'"
+                            [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"
+                            [scrollbarH]="true" [sortType]="'multi'">
 
-                        <ngx-datatable-column name="">
-                            <ng-template let-row="row" ngx-datatable-cell-template>
-                                <mat-checkbox class="example-margin" [(ngModel)]="row.checked"></mat-checkbox>
-                            </ng-template>
-                        </ngx-datatable-column>
+                            <ngx-datatable-column name="">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    <mat-checkbox class="example-margin" [(ngModel)]="row.checked"></mat-checkbox>
+                                </ng-template>
+                            </ngx-datatable-column>
 
-                        <ngx-datatable-column name="Cost Center">
-                            <ng-template let-row="row" ngx-datatable-cell-template>
-                                {{row.costCenter}}
-                            </ng-template>
-                        </ngx-datatable-column>
+                            <ngx-datatable-column name="Cost Center">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    {{row.costCenter}}
+                                </ng-template>
+                            </ngx-datatable-column>
 
-                        <ngx-datatable-column name="Account Code">
-                            <ng-template let-row="row" ngx-datatable-cell-template>
-                                <input matInput placeholder="Account Code" [(ngModel)]="row.accountCode">
-                            </ng-template>
-                        </ngx-datatable-column>
+                            <ngx-datatable-column name="Account Code">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    <input matInput placeholder="Account Code" [(ngModel)]="row.accountCode">
+                                </ng-template>
+                            </ngx-datatable-column>
 
-                        <ngx-datatable-column name="Reference">
-                            <ng-template let-row="row" ngx-datatable-cell-template>
-                                <input matInput placeholder="Reference" [(ngModel)]="row.costCenterReference">
-                            </ng-template>
-                        </ngx-datatable-column>
+                            <ngx-datatable-column name="Reference">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    <input matInput placeholder="Reference" [(ngModel)]="row.costCenterReference">
+                                </ng-template>
+                            </ngx-datatable-column>
 
-                        <ngx-datatable-column name="Location">
-                            <ng-template let-row="row" ngx-datatable-cell-template>
-                                <div *ngIf="row.location">
-                                    {{row.location.locationName}}
-                                </div>
-                                <div *ngIf="!row.location">
-                                    No Location
-                                </div>
-                            </ng-template>
-                        </ngx-datatable-column>
+                            <ngx-datatable-column name="Location">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    <div *ngIf="row.location">
+                                        {{row.location.locationName}}
+                                    </div>
+                                    <div *ngIf="!row.location">
+                                        No Location
+                                    </div>
+                                </ng-template>
+                            </ngx-datatable-column>
 
-                        <ngx-datatable-column name="Location">
-                            <ng-template let-row="row" ngx-datatable-cell-template>
-                                <mat-select matInput id="location" name="location" placeholder="Location" [(ngModel)]="row.location">
-                                    <mat-option [value]=loc *ngFor="let loc of locations">
-                                        {{loc.locationName}}</mat-option>
+                            <ngx-datatable-column name="Location">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    <mat-select matInput id="location" name="location" placeholder="Location"
+                                        [(ngModel)]="row.location">
+                                        <mat-option [value]=loc *ngFor="let loc of locations">
+                                            {{loc.locationName}}</mat-option>
                                     </mat-select>
-                            </ng-template>
-                        </ngx-datatable-column>
-                    </ngx-datatable>
+                                </ng-template>
+                            </ngx-datatable-column>
+                        </ngx-datatable>
+                    </div>
                 </div>
             </div>
+
+        </mat-expansion-panel>
+        <br>
+
+        <div class="card-back">
+            <button mat-flat-button (click)="onSaveClick()" class="filterButton saveButton">Save</button>
         </div>
-
-    </mat-expansion-panel>
-    <br>
-
-    <div class="card-back">
-        <button mat-flat-button (click)="onSaveClick()">Save</button>
+        <ngx-spinner></ngx-spinner>
     </div>
-    <ngx-spinner></ngx-spinner>
 </div>

@@ -13,6 +13,7 @@ import { SyncJobService } from "src/app/services/sync-job/sync-job.service";
 import { Account } from "src/app/models/Account";
 import { AccountService } from "src/app/services/account/account.service";
 import { AddAccountComponent } from "../../add-account/add-account.component";
+import { SideNaveComponent } from "../../side-nave/side-nave.component";
 
 /**
  * @title Basic expansion panel
@@ -36,7 +37,8 @@ export class ConfigurationComponent implements OnInit {
     private driveService: DriveService,
     public snackBar: MatSnackBar,
     public accountService: AccountService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private sideNav: SideNaveComponent
   ) {}
 
   ngOnInit() {
@@ -190,6 +192,11 @@ export class ConfigurationComponent implements OnInit {
   uploadFilesToDrive() {
     console.log("upload files to drive....")
   }
+
+  hasRole(role): Boolean{
+    return this.sideNav.hasRole(role);
+   }
+
 }
 const EXPANSION_PANEL_ANIMATION_TIMING = "500ms cubic-bezier(0.4,0.0,0.2,1)";
 MatExpansionPanel["decorators"][0].args[0].animations = [
