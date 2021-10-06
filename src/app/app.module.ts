@@ -159,6 +159,7 @@ import { SupportComponent } from './components/support/support.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { PosMachineMappingComponent } from "./components/setting/pos-machine-mapping/pos-machine-mapping.component";
 import { TestPaginationComponent } from "./components/test-pagination/test-pagination.component";
+import { SimphonyPaymentComponent } from "./components/operations/simphony-payment/simphony-payment.component";
 
 @NgModule({
   declarations: [
@@ -275,7 +276,8 @@ import { TestPaginationComponent } from "./components/test-pagination/test-pagin
     SideNaveComponent,
     NavBarComponent,
     SupportComponent,
-    PosMachineMappingComponent
+    PosMachineMappingComponent,
+    SimphonyPaymentComponent
   ],
   imports: [
     BrowserModule,

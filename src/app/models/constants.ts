@@ -212,6 +212,16 @@ export class Constants {
     environment.apiHost + '/countOperaTransaction'
   static FILTER_TRANSACTION = environment.apiHost + '/filterTransaction';
 
+  //////////////////////////////////////////////// Simphony Payment  ////////////////////////////////////////////////////////
+
+  static SIMPHONY_PAYMENT_PAGE = 'simphonyPayment'
+  static SIMPHONY_PAYMENT_CONFIG_PAGE = 'simphonyPaymentConfig'
+  static SIMPHONY_PAYMENT_OPERATION = 'Simphony Payment'
+  static LIST_SIMPHONY_TRANSACTIONS_URL =
+    environment.apiHost + '/listSimphonyTransaction'
+  static COUNT_SIMPHONY_TRANSACTIONS_URL =
+    environment.apiHost + '/countSimphonyTransaction'
+  static FILTER_SIMPHONY_TRANSACTION = environment.apiHost + '/filterSimphonyTransaction';
 
   //////////////////////////////////////////////// Opera Reports  ////////////////////////////////////////////////////////
 
