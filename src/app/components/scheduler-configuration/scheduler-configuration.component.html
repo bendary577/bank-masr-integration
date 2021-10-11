@@ -1,48 +1,54 @@
-<h1 mat-dialog-title>Update Duration Configuartion</h1>
-<div mat-dialog-content>
-    <div class="container" *ngIf="!loading">
-        <form class="my-form">
-            <div>
-                <mat-form-field class="example-full-width">
-                    <mat-select placeholder="Duration" name="duration" [(ngModel)]="syncJobType.configuration.schedulerConfiguration.duration">
-                        <mat-option value="Daily">Daily</mat-option>
-                        <mat-option value="Weekly">Weekly</mat-option>
-                        <mat-option value="Monthly">Monthly</mat-option>
-                        <mat-option value="DailyPerMonth">Daily Per Month</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
+<div class="schedualer_view">
+    <h1 mat-dialog-title>Update Duration Configuartion</h1>
+    <div mat-dialog-content>
+        <div class="container" *ngIf="!loading">
+            <form class="my-form">
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <mat-select placeholder="Duration" name="duration"
+                            [(ngModel)]="syncJobType.configuration.schedulerConfiguration.duration">
+                            <mat-option value="Daily">Daily</mat-option>
+                            <mat-option value="Weekly">Weekly</mat-option>
+                            <mat-option value="Monthly">Monthly</mat-option>
+                            <mat-option value="DailyPerMonth">Daily Per Month</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
 
-            <div *ngIf="syncJobType.configuration.schedulerConfiguration.duration == 'Weekly'">
-                <mat-form-field>
-                    <mat-select placeholder="Day Name" name="dayName" [(ngModel)]="syncJobType.configuration.schedulerConfiguration.dayName">
-                        <mat-option value={{name}} *ngFor="let name of daysName">
-                            {{name}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div *ngIf="syncJobType.configuration.schedulerConfiguration.duration == 'Monthly' ||
+                <div *ngIf="syncJobType.configuration.schedulerConfiguration.duration == 'Weekly'">
+                    <mat-form-field>
+                        <mat-select placeholder="Day Name" name="dayName"
+                            [(ngModel)]="syncJobType.configuration.schedulerConfiguration.dayName">
+                            <mat-option value={{name}} *ngFor="let name of daysName">
+                                {{name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div *ngIf="syncJobType.configuration.schedulerConfiguration.duration == 'Monthly' ||
             syncJobType.configuration.schedulerConfiguration.duration == 'DailyPerMonth' ">
-                <mat-form-field>
-                    <mat-select placeholder="Day" name="day" [(ngModel)]="syncJobType.configuration.schedulerConfiguration.day">
-                        <mat-option value={{day}} *ngFor="let day of days">
-                            {{day}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field>
-                    <input matInput type="time" id="appt" name="appt" min="01:00" max="23:59" [(ngModel)]="syncJobType.configuration.schedulerConfiguration.hour">
+                    <mat-form-field>
+                        <mat-select placeholder="Day" name="day"
+                            [(ngModel)]="syncJobType.configuration.schedulerConfiguration.day">
+                            <mat-option value={{day}} *ngFor="let day of days">
+                                {{day}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <input matInput type="time" id="appt" name="appt" min="01:00" max="23:59"
+                            [(ngModel)]="syncJobType.configuration.schedulerConfiguration.hour">
 
-                </mat-form-field>
-            </div>
-        </form>
+                    </mat-form-field>
+                </div>
+            </form>
+        </div>
+
+        <ngx-spinner></ngx-spinner>
+
     </div>
-
-    <ngx-spinner></ngx-spinner>
-
-</div>
-<div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button cdkFocusInitial (click)="onSaveClick()">Save</button>
+    <div mat-dialog-actions class="btns">
+        <button mat-button class="groups-buttons" (click)="onNoClick()" >Cancel</button>
+        <button mat-button class="groups-buttons" cdkFocusInitial (click)="onSaveClick()">Save</button>
+    </div>
 </div>

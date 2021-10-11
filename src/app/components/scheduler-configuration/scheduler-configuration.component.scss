@@ -1,1 +1,11 @@
 @import "../../../assets/scss/syncs.scss";
+@import "../edit-wallet/edit-wallet.component.scss";
+
+.schedualer_view{
+    .btns{
+        justify-content: center;
+    }
+    .groups-buttons{
+        margin:5px;
+    }
+}
