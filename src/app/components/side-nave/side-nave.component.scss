@@ -823,8 +823,10 @@ color: #f47920;
     -webkit-transition: all 0.25s ease-out;
     -o-transition: all 0.25s ease-out;
     transition: all 0.25s ease-out;
+    visibility: hidden !important;
     &.active {
       right: 0;
+      visibility: visible !important;
     }
   }
 }

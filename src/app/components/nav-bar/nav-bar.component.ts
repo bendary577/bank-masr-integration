@@ -73,20 +73,12 @@ export class NavBarComponent implements OnInit {
         localStorage.setItem("side-menu-width", "small");
       }
     } else {
-      console.log("J")
-
       this.sidebarToggled = !this.sidebarToggled;    console.log("A")
 
       if(this.sidebarToggled) {
-        console.log("K")
-
         body.classList.add('sidebar-hidden');
-        console.log("L")
-
       } else {
         body.classList.remove('sidebar-hidden');
-        console.log("M")
-
       }
     }
   }
