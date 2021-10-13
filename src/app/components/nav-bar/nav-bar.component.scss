@@ -405,6 +405,9 @@
         }
         &.brand-logo-mini {
           display: inline-block;
+          img {
+            max-width: 100% !important;
+          }
         }
       }
     }
