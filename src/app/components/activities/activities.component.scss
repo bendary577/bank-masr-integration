@@ -288,3 +288,15 @@ canvas{
   padding:50px;
   padding-bottom:25px ;
 }
+
+@media screen and (max-width: 991px) {
+    .card-column{
+      display: contents;
+    }
+    .row{
+      justify-content: center;
+    }
+    .stat-card{
+      width:80%;
+    }
+}

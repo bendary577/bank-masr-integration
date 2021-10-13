@@ -1,6 +1,6 @@
 <div class="activity_body">
     <div class="row">
-        <div class="column">
+        <div class="column card-column">
             <mat-card class="stat-card">
                 <mat-card-content>
                     <h2>Top Guests</h2>
@@ -19,7 +19,7 @@
             </mat-card>
         </div>
 
-        <div class="column" *ngIf="hasRole('show_group')">
+        <div class="column card-column" *ngIf="hasRole('show_group')">
             <mat-card class="stat-card">
                 <mat-card-content>
                     <h2>Top Groups</h2>
@@ -37,7 +37,7 @@
             </mat-card>
         </div>
 
-        <div class="column" *ngIf="hasRole('show_statistic')">
+        <div class="column card-column" *ngIf="hasRole('show_statistic')">
             <mat-card class="stat-card">
                 <mat-card-content>
                     <h2>Top Revenues</h2>
@@ -55,7 +55,7 @@
             </mat-card>
         </div>
 
-        <div class="column">
+        <div class="column card-column">
             <mat-card class="stat-card">
                 <mat-card-content>
                     <h2>Total Spend</h2>
