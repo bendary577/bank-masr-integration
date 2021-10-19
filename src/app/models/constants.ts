@@ -351,6 +351,10 @@ export class Constants {
   static EXPORT_TRANSACTION_EXCEL_SHEET =
     environment.apiHost + '/transaction/exportExcelSheet'
 
+  //////////////////////////////////////////////// Generate Custom Reports //////////////////////////////////////////////
+
+  static GENERATE_WATAGE_CUSTOM_REPORT = environment.apiHost + '/generateWastageMonthlyReport'
+
   //////////////////////////////////////////////// Export To CSV //////////////////////////////////////////////
 
   static EXPORT_Excel = environment.apiHost + '/export/excel'
