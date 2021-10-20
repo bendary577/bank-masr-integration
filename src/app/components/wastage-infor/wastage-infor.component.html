@@ -8,17 +8,16 @@
             <mat-select required class="form-controls" id="sync" placeholder="Sync Job"
             (ngModelChange)="getSyncJobData()" [(ngModel)]="selectedJob">
                 <mat-option></mat-option>
-                <mat-option [value]="job" *ngFor="let job of jobs">{{job.creationDate | date:'dd-MM-yyyy H:MM:SS'}} -
-                    {{job.status}}
-                    <p *ngIf="job.rowsFetched == 0 &&  job.status != 'Running'">- No new data fetched.</p>
+                <mat-option [value]="job" *ngFor="let job of jobs">{{job.creationDate | date:'dd-MM-yyyy H:MM:SS'}} - {{job.status}}
+                    <!-- <p *ngIf="job.rowsFetched == 0 &&  job.status != 'Running'">- No new data fetched.</p> -->
                 </mat-option>
             </mat-select>
         </mat-form-field>
 
-        <button mat-flat-button  class="filterButton"  (click)="getWastageSyncJob()" [disabled]="staticgetWastageLoading">Sync Wastage</button>
-        <button mat-flat-button  class="filterButton"  (click)="generateSingleFile()" [disabled]="jobs.length == 0">Generate Single File</button>
+        <button mat-flat-button class="filterButton" (click)="getWastageSyncJob()" [disabled]="staticgetWastageLoading">Sync Wastage</button>
+        <button mat-flat-button class="filterButton" (click)="generateSingleFile()" [disabled]="jobs.length == 0">Generate Single File</button>
         <button mat-flat-button class="filterButton" (click)="exportToCSV()" [disabled]="jobs.length == 0">Export to CSV</button>
-        <button mat-flat-button class="filterButton" (click)="generateCustomReport()" [disabled]="jobs.length == 0">Custom Report</button>  
+        <!-- <button mat-flat-button class="filterButton" (click)="generateCustomReport()" [disabled]="jobs.length == 0">Custom Report</button>   -->
     </div>
     <br>
     <div id="myProgress">
