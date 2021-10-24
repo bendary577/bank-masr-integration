@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import * as moment from 'moment'
@@ -13,9 +13,8 @@ import { ErrorMessages } from 'src/app/models/ErrorMessages'
 import { ExportRequest } from 'src/app/models/ExportRequest'
 import { GeneralSettings } from 'src/app/models/GeneralSettings'
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service'
-import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service'
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service'
-import { FilterComponent } from '../filter/filter.component'
+import {MatOption, MatSelect} from "@angular/material";
 
 @Component({
   selector: 'app-support',
@@ -36,46 +35,24 @@ export class SupportComponent implements OnInit {
   maxDate: Moment
   exportRequest = new ExportRequest()
   user
-  locationList = {
-    pagantion: true,
-    messages: {
-      empityMessages: `
-      <div >
-          <span class="classname">No Locations found</span>
-        </div>
-      `,
-    },
-    selected: [],
-    locationsCount: 0,
-    pagesFilter: [10, 25, 50, 75, 100],
-    showLoading: false,
-    locationData: [],
-  }
 
-  syncJoobsTypesList = {
-    pagantion: true,
-    messages: {
-      empityMessages: `
-      <div >
-          <span class="classname">No Locations found</span>
-        </div>
-      `,
-    },
-    selected: [],
-    syncJoobsTypesCount: 0,
-    pagesFilter: [10, 25, 50, 75, 100],
-    showLoading: false,
-    syncJoobsTypesData: [],
-  }
+  locationData: []
+  syncJobsTypesData: []
 
   dialogRef: any
+  exportFlag = false
+
+  allSelected = false;
+  @ViewChild('myModule') moduleSel: MatSelect;
+
+  allStoresSelected = false;
+  @ViewChild('myStores') storesSel: MatSelect;
 
   constructor(
     private formBuilder: FormBuilder,
     public snackBar: MatSnackBar,
     public dateRangeDialog: MatDialog,
     private syncJobSerivce: SyncJobService,
-    private loyaltyService: LoyaltyService,
     private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService,
   ) {
@@ -105,8 +82,6 @@ export class SupportComponent implements OnInit {
       Today: [moment(), moment()],
       yesterday: [moment(), moment()],
       'Current week': [moment().startOf('isoWeek'), moment().endOf('isoWeek')],
-      // 'Next 2 days': [moment().add(1, 'days'), moment().add(2, 'days')],
-      // 'Next 3 days': [moment().add(1, 'days'), moment().add(3, 'days')],
     }
     this.calendarPlaceholder = 'All'
     this.minDate = moment()
@@ -142,7 +117,7 @@ export class SupportComponent implements OnInit {
       .then((res: any) => {
         this.generalSettings = res as GeneralSettings
         if (this.generalSettings.locations) {
-          this.locationList.locationData = this.generalSettings.locations
+          this.locationData = this.generalSettings.locations
         }
       })
       .catch((err) => {
@@ -167,7 +142,7 @@ export class SupportComponent implements OnInit {
       .getSyncJobTypesDB()
       .toPromise()
       .then((res: any) => {
-        this.syncJoobsTypesList.syncJoobsTypesData = res
+        this.syncJobsTypesData = res
       })
       .catch((err) => {
         let message = 'Error happend, Please try again.'
@@ -196,6 +171,13 @@ export class SupportComponent implements OnInit {
         panelClass: 'my-snack-bar-fail',
       })
     } else {
+      if(this.form.controls.module.value[0] == 0){
+        this.form.controls.module.value.splice(0, 1);
+      }
+
+      if(this.form.controls.store.value[0] == 0){
+        this.form.controls.store.value.splice(0, 1);
+      }
       this.exportRequest.costCenters = this.form.controls.store.value
       this.exportRequest.syncJobTypes = this.form.controls.module.value
       this.exportRequest.email = this.form.controls.email.value
@@ -207,7 +189,7 @@ export class SupportComponent implements OnInit {
         .toPromise()
         .then((res: any) => {
           this.spinner.hide()
-          console.log(res)
+          this.exportFlag = true
           this.snackBar.open(res['message'], null, {
             duration: 2000,
             horizontalPosition: 'center',
@@ -224,6 +206,7 @@ export class SupportComponent implements OnInit {
           } else if (err.message) {
             message = err.message
           }
+          this.exportFlag = true
           this.snackBar.open(message, null, {
             duration: 3000,
             horizontalPosition: 'center',
@@ -255,5 +238,27 @@ export class SupportComponent implements OnInit {
 
   openDatepicker() {
     this.pickerDirective.open()
+  }
+
+  toggleAllSelection() {
+    this.allSelected = !this.allSelected;  // to control select-unselect
+    
+    if (this.allSelected) {
+      this.moduleSel.options.forEach( (item : MatOption) => item.select());
+    } else {
+      this.moduleSel.options.forEach( (item : MatOption) => {item.deselect()});
+    }
+    this.moduleSel.close();
+  }
+
+  toggleAllStoresSelection() {
+    this.allStoresSelected = !this.allStoresSelected;  // to control select-unselect
+    
+    if (this.allStoresSelected) {
+      this.storesSel.options.forEach( (item : MatOption) => item.select());
+    } else {
+      this.storesSel.options.forEach( (item : MatOption) => {item.deselect()});
+    }
+    this.storesSel.close();
   }
 }

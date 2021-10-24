@@ -1,93 +1,100 @@
 .ngx-datatable.scroll-vertical {
-    // height: 100vh;
-    width: 100%;
+  // height: 100vh;
+  width: 100%;
+}
+
+h3 {
+  background-color: #ffb560 !important;
+  padding: 24px;
+  font-weight: bolder;
+}
+
+.header {
+  text-align: end;
+  padding: 10px 16px 15px 16px;
+  height: 5vh;
+}
+
+.card-back {
+  text-align: center;
+  padding: 4px 16px 4px 16px;
+  height: 5vh;
+}
+
+.header-btn {
+  text-align: end;
+  padding: 4px 16px 4px 16px;
+  height: 5vh;
+}
+
+button {
+  color: white;
+  background-color: #ffb560;
+  margin-right: 10px;
+}
+
+.example-container {
+  height: 700px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+mat-expansion-panel {
+  margin-bottom: 10px;
+}
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+mat-form-field {
+  margin-right: 12px;
+}
+
+.example-card {
+  width: 50%;
+  margin: auto;
+  padding: 10px;
+}
+
+.loader {
+  border: 6px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 6px solid #3498db;
+  width: 12px;
+  height: 12px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
   }
-  
-  h3{
-    background-color: #3F51B5!important;
-    padding: 24px;
-    font-weight: bolder;
+  100% {
+    -webkit-transform: rotate(360deg);
   }
-  
-  .header {
-    text-align: end;
-    padding: 10px 16px 15px 16px;
-    height: 5vh;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  
-  .card-back {
-    text-align: center;
-    padding: 4px 16px 4px 16px;
-    height: 5vh;
+  100% {
+    transform: rotate(360deg);
   }
-  
-  .header-btn {
-    text-align: end;
-    padding: 4px 16px 4px 16px;
-    height: 5vh;
-  }
-  
-  button {
-    color:white;
-    background-color: #3f51b5;
-    margin-right: 10px
-  }
-  
-  .example-container {
-    height: 700px;
-    overflow: auto;
-  }
-  
-  table {
-    width: 100%;
-  }
-  mat-expansion-panel{
-    margin-bottom: 10px;
-  
-  }
-  .example-headers-align .mat-expansion-panel-header-title,
-  .example-headers-align .mat-expansion-panel-header-description {
-    flex-basis: 0;
-  }
-  
-  .example-headers-align .mat-expansion-panel-header-description {
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  mat-form-field {
-    margin-right: 12px;
-  }
-  
-  .example-card {
-    width: 50%;
-    margin: auto;
-    padding: 10px;
-  }
-  
-  .loader {
-    border: 6px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 6px solid #3498db;
-    width: 12px;
-    height: 12px;
-    -webkit-animation: spin 2s linear infinite; /* Safari */
-    animation: spin 2s linear infinite;
-  }
-  
-  /* Safari */
-  @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
-  // .form-group {
-  //   width: 70%;
-  // }
-  
-  // @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+}
+
+// .form-group {
+//   width: 70%;
+// }
+
+// @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');

@@ -1,8 +1,12 @@
 <h1 mat-dialog-title class="welcomeing">
     <span class="hi">Hi,</span> {{user.name}}
+
+    <p style="margin-top: 10px" *ngIf="!exportFlag"> 
+        Please select the date range and stores for the chosen modules and they will be exported and sent directly to your mail. 
+    </p>
 </h1>
 <div class="card">
-    <div class="row">
+    <div class="row" *ngIf="!exportFlag">
         <!-- <div class="col titltes">
             <form [formGroup]="form" class="my-form">
                 <div class="form-group labeldiv">
@@ -25,6 +29,18 @@
                     <span class="labelTitle">Choose a date range:</span>
                 </div>
                 <div class="form-group">
+                    <!-- <mat-form-field appearance="fill">
+                        <mat-label>Enter a date range</mat-label>
+                        <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                            <input matStartDate formControlName="start" placeholder="Start date">
+                            <input matEndDate formControlName="end" placeholder="End date">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                    
+                        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+                    </mat-form-field> -->
                     <mat-form-field class="dateBacker" appearance="outline">
                         <input  autocomplete="off"required matInput type="text" name="daterange" ngxDaterangepickerMd formControlName="dateRange"
                             placeholder="Date Range" [(ngModel)]="selectedRange" [showCustomRangeLabel]="true"
@@ -44,8 +60,9 @@
                 </div>
                 <div class="form-group">
                     <mat-form-field appearance="outline">
-                        <mat-select multiple required class="form-controls" id="store" placeholder="Store" formControlName="store">
-                            <mat-option [value]="loc" *ngFor="let loc of locationList.locationData">{{loc.locationName}}</mat-option>
+                        <mat-select multiple #myStores required class="form-controls" id="store" placeholder="Store" formControlName="store">
+                            <mat-option [value]="0" (click)="toggleAllStoresSelection()">All</mat-option>
+                            <mat-option [value]="loc" *ngFor="let loc of locationData">{{loc.locationName}}</mat-option>
                         </mat-select>
                         <mat-error *ngIf="form.controls.store.hasError('required')">
                             Store is required.
@@ -56,15 +73,17 @@
                 <div class="form-group labeldiv">
                     <span class="labelTitle">Modules:</span>
                 </div>
+
                 <div class="form-group">
                     <mat-form-field appearance="outline">
-                        <mat-select multiple required class="form-controls" id="modules" placeholder="Module" formControlName="module">
-                            <mat-option  [value]="sync" *ngFor="let sync of syncJoobsTypesList.syncJoobsTypesData">{{sync.name}}</mat-option>
+                        <mat-select multiple #myModule required class="form-controls" id="modules" placeholder="Module" formControlName="module">
+                            <mat-option [value]="0" (click)="toggleAllSelection()">All</mat-option>
+                            <mat-option [value]="sync" *ngFor="let sync of syncJobsTypesData">{{sync.name}}</mat-option>
                        </mat-select>
-                       <mat-error *ngIf="form.controls.module.hasError('required')">
-                        Module is required.
-                        </mat-error>
                     </mat-form-field>
+                    <mat-error *ngIf="form.controls.module.hasError('required')">
+                        It is necessary to choose one module.
+                    </mat-error>
                 </div>
 
                 <div class="form-group labeldiv">
@@ -87,5 +106,13 @@
             </form>
         </div>
         <ngx-spinner></ngx-spinner>
+    </div>
+
+    <div class="row" *ngIf="exportFlag" style="display:flex;justify-content:center;align-items:center;">
+        <img class="user-img" src="../../../assets/report-icon.png" alt="image" style="max-width: 150px;">
+        <p style="text-align: center;margin-top: 15px;">
+            Your request to export modules is received successfully, <br>
+            The reports are being processed and will be sent directly to your mail.
+        </p>
     </div>
 </div>

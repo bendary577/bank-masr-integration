@@ -1,55 +1,54 @@
 .ngx-datatable.scroll-vertical {
-    // height: 100vh;
-    width: 100%;
-  }
-  
-  h3{
-    background-color: #3F51B5!important;
-    padding: 24px;
-    font-weight: bolder;
-  }
-  
-  
-  .header {
-    text-align: end;
-    padding: 4px 16px 4px 16px;
-    height: 5vh;
-  }
-  
-  button {
-    color: white;
-    background-color: #3f51b5;
-    margin-right: 10px
-  }
-  
-  .header-btn {
-    text-align: end;
-    padding: 4px 16px 4px 16px;
-    height: 5vh;
-  }
-  .example-container {
-    height: 400px;
-    overflow: auto;
-  }
-  
-  table {
-    width: 100%;
-  }
-  
-  .active-state{
-    font-family: Nunito;
-    font-style: normal;
-    font-weight: normal;
-    line-height: normal;
-    // font-size: 13px;
-    color: #388E3C;
+  // height: 100vh;
+  width: 100%;
 }
 
-.deleted-state{
+h3 {
+  background-color: #ffb560 !important;
+  padding: 24px;
+  font-weight: bolder;
+}
+
+.header {
+  text-align: end;
+  padding: 4px 16px 4px 16px;
+  height: 5vh;
+}
+
+button {
+  color: white;
+  background-color: #ffb560;
+  margin-right: 10px;
+}
+
+.header-btn {
+  text-align: end;
+  padding: 4px 16px 4px 16px;
+  height: 5vh;
+}
+.example-container {
+  height: 400px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.active-state {
   font-family: Nunito;
   font-style: normal;
   font-weight: normal;
   line-height: normal;
   // font-size: 13px;
-  color: #FC544B;
+  color: #388e3c;
+}
+
+.deleted-state {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  // font-size: 13px;
+  color: #fc544b;
 }
