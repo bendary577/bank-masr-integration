@@ -14,7 +14,7 @@ import { ExportRequest } from 'src/app/models/ExportRequest'
 import { GeneralSettings } from 'src/app/models/GeneralSettings'
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service'
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service'
-import {MatOption, MatSelect} from "@angular/material";
+import { MatOption, MatSelect } from '@angular/material'
 
 @Component({
   selector: 'app-support',
@@ -30,7 +30,7 @@ export class SupportComponent implements OnInit {
   calendarLocale: LocaleConfig
   ranges: any
   calendarPlaceholder: string
-  selectedRange
+  // selectedRange
   minDate: Moment
   maxDate: Moment
   exportRequest = new ExportRequest()
@@ -42,11 +42,11 @@ export class SupportComponent implements OnInit {
   dialogRef: any
   exportFlag = false
 
-  allSelected = false;
-  @ViewChild('myModule') moduleSel: MatSelect;
+  allSelected = false
+  @ViewChild('myModule') moduleSel: MatSelect
 
-  allStoresSelected = false;
-  @ViewChild('myStores') storesSel: MatSelect;
+  allStoresSelected = false
+  @ViewChild('myStores') storesSel: MatSelect
 
   constructor(
     private formBuilder: FormBuilder,
@@ -106,7 +106,9 @@ export class SupportComponent implements OnInit {
           Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
         ],
       ],
-      dateRange: ['', [Validators.required]],
+      // dateRange: ['', [Validators.required]],
+      startDate: ['', [Validators.required]],
+      endDate: ['', [Validators.required]],
       module: [[], [Validators.required]],
     })
   }
@@ -162,26 +164,26 @@ export class SupportComponent implements OnInit {
   }
 
   onExportClick(): void {
-    console.log(this.form.controls.store.value)
-    console.log(this.form.controls.module.value)
-    if (this.form.invalid || this.selectedRange['endDate'] == undefined) {
+    if (this.form.invalid) {
       this.snackBar.open('Please fill form values', null, {
         duration: 3000,
         horizontalPosition: 'center',
         panelClass: 'my-snack-bar-fail',
       })
     } else {
-      if(this.form.controls.module.value[0] == 0){
-        this.form.controls.module.value.splice(0, 1);
+      if (this.form.controls.module.value[0] == 0) {
+        this.form.controls.module.value.splice(0, 1)
       }
 
-      if(this.form.controls.store.value[0] == 0){
-        this.form.controls.store.value.splice(0, 1);
+      if (this.form.controls.store.value[0] == 0) {
+        this.form.controls.store.value.splice(0, 1)
       }
       this.exportRequest.costCenters = this.form.controls.store.value
       this.exportRequest.syncJobTypes = this.form.controls.module.value
       this.exportRequest.email = this.form.controls.email.value
-      this.exportRequest.dateRange = this.form.controls.dateRange.value
+      // this.exportRequest.dateRange = this.form.controls.dateRange.value
+      this.exportRequest.startDate = this.form.controls.startDate.value
+      this.exportRequest.endDate = this.form.controls.endDate.value
       console.log(this.exportRequest)
       this.spinner.show()
       this.syncJobSerivce
@@ -241,24 +243,28 @@ export class SupportComponent implements OnInit {
   }
 
   toggleAllSelection() {
-    this.allSelected = !this.allSelected;  // to control select-unselect
-    
+    this.allSelected = !this.allSelected // to control select-unselect
+
     if (this.allSelected) {
-      this.moduleSel.options.forEach( (item : MatOption) => item.select());
+      this.moduleSel.options.forEach((item: MatOption) => item.select())
     } else {
-      this.moduleSel.options.forEach( (item : MatOption) => {item.deselect()});
+      this.moduleSel.options.forEach((item: MatOption) => {
+        item.deselect()
+      })
     }
-    this.moduleSel.close();
+    this.moduleSel.close()
   }
 
   toggleAllStoresSelection() {
-    this.allStoresSelected = !this.allStoresSelected;  // to control select-unselect
-    
+    this.allStoresSelected = !this.allStoresSelected // to control select-unselect
+
     if (this.allStoresSelected) {
-      this.storesSel.options.forEach( (item : MatOption) => item.select());
+      this.storesSel.options.forEach((item: MatOption) => item.select())
     } else {
-      this.storesSel.options.forEach( (item : MatOption) => {item.deselect()});
+      this.storesSel.options.forEach((item: MatOption) => {
+        item.deselect()
+      })
     }
-    this.storesSel.close();
+    this.storesSel.close()
   }
 }

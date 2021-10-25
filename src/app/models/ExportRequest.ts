@@ -3,6 +3,8 @@ export class ExportRequest {
     costCenters;
     dateRange;
     email;
+    startDate;
+    endDate;
 
     public constructor() { }
 }
