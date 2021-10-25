@@ -85,9 +85,9 @@
     </div>
 
     <br> <!--'see_support'-->
-    <!-- <div class="supprot-field" *ngIf="hasRole('see_support')">
+    <div class="supprot-field" *ngIf="hasRole('see_support')">
       <div class="nav-item">
-        <a class="nav-link" routerLink="/support" aria-controls="ui-basic">
+        <a class="nav-link" href="javascript:void(Tawk_API.toggle())" aria-controls="ui-basic">
           <span class="menu-icon">
             <i class="mdi mdi-headset"></i>
           </span>
@@ -95,7 +95,7 @@
         </a>
       </div>
     </div>
-    <br> -->
+    <br>
     <li class="nav-item nav-category"
      *ngIf=" hasRole('see_syncs') || hasRole('see_applications') ||  hasRole('see_reports') || hasRole('see_operations') || hasRole('see_settings')">
       <span class="nav-link" translate>Main Menu</span>
