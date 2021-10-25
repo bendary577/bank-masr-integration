@@ -116,6 +116,14 @@ input.mat-input-element {
 //   display: -webkit-inline-box;
 //  }
 
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: unset;
+}
+
+::ng-deep .mat-option-pseudo-checkbox.mat-pseudo-checkbox-checked {
+  background-color: #fecc90;
+}
+
 ::ng-deep {
   ngx-daterangepicker-material {
     & {
@@ -165,16 +173,16 @@ input.mat-input-element {
     }
   }
 
-::ng-deep .cdk-overlay-pane {
-  min-width: 377.406px;
-  pointer-events: auto;
-  font-size: 16px;
-  top: 213.422px;
-  left: 564.859px;
-  transform: translateX(-40px) translateY(-15px);
-}
+  ::ng-deep .cdk-overlay-pane {
+    min-width: 377.406px;
+    pointer-events: auto;
+    font-size: 16px;
+    top: 213.422px;
+    left: 564.859px;
+    transform: translateX(-40px) translateY(-15px);
+  }
 
-input {
-  border-bottom: none !important;
-}
+  input {
+    border-bottom: none !important;
+  }
 }
