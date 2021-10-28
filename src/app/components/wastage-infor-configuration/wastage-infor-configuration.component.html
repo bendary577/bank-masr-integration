@@ -98,8 +98,12 @@
                         Over Groups Mapping
                     </mat-panel-title>
                 </mat-expansion-panel-header>
+                <div>
+                    <button mat-flat-button (click)="getOverGroups()" class="filterButton table-btn" style="width:150px;">
+                        Fetch Over Groups</button>
+                </div>
+                <br>
                 <div *ngIf="overGroups?.length > 0">
-
                     <ngx-datatable class="material" [rows]="overGroups" [columnMode]="'force'" [headerHeight]="50"
                         [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
                         [sortType]="'multi'">

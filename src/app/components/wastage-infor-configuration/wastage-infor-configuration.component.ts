@@ -65,15 +65,12 @@ export class WastageInforConfigurationComponent implements OnInit {
         }
         this.analysis = this.syncJobType.configuration['analysis']
         this.overGroups = this.syncJobType.configuration['overGroups']
-        this.wasteGroups = this.syncJobType.configuration[
-          'wastageConfiguration'
-        ]['wasteGroups']
-        this.uniqueOverGroupMapping = this.syncJobType.configuration[
-          'uniqueOverGroupMapping'
-        ]
+        this.wasteGroups = this.syncJobType.configuration['wastageConfiguration']['wasteGroups']
+        this.uniqueOverGroupMapping = this.syncJobType.configuration['uniqueOverGroupMapping']
 
         if (this.uniqueOverGroupMapping) {
-          this.getOverGroups()
+          this.overGroups = this.syncJobType.configuration['overGroups']
+          // this.getOverGroups()
         }
 
         this.syncJobTypeloading = false
