@@ -1,12 +1,29 @@
 <div class="container">
     <form class="my-form">
         <div>
+            <mat-checkbox id="singleFilePerDay" name="singleFilePerDay" class="example-margin"
+                [(ngModel)]="syncJobType.configuration.singleFilePerDay">Export single file per day.</mat-checkbox>
+        </div>
+
+        <div>
             <mat-form-field class="example-full-width">
                 <mat-select matInput id="consumptionPerGroup" name="consumptionPerGroup" placeholder="Sync per"
                     [(ngModel)]="syncJobType.configuration.syncPerGroup">
                     <mat-option value="OverGroups">Over Groups</mat-option>
                     <mat-option value="ItemGroups">Item Groups</mat-option>
                     <mat-option value="Items">Items</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div *ngIf="syncJobType.name == 'Consumption'">
+            <mat-form-field class="example-full-width">
+                <mat-select matInput id="consumptionBasedOnType" name="consumptionBasedOnType"
+                    placeholder="Consumption based on"
+                    [(ngModel)]="syncJobType.configuration.consumptionConfiguration.consumptionBasedOnType">
+                    <mat-option value="Cost Center">Cost Center</mat-option>
+                    <mat-option value="Location">Location</mat-option>
+                    <mat-option value="Both">Both</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
