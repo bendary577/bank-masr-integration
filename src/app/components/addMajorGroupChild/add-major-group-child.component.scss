@@ -8,6 +8,13 @@ body {
     background-color: $background;
 }
 
+.tableTitle{
+    text-transform: uppercase;
+    font-weight: bold;
+    color: $lfs-yellow;
+    text-align: center;
+}
+
 .table-latitude {
     width: 100%;
     caption {

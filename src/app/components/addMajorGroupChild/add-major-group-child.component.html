@@ -5,7 +5,7 @@
                 <mat-form-field class="example-full-width">
                     <input matInput placeholder="Major Group Name" formControlName="name">
                 </mat-form-field>
-                <button mat-button cdkFocusInitial (click)="addChild()">Add</button>
+                <button style="margin-bottom: 20px" mat-button cdkFocusInitial (click)="addChild()">Add</button>
     
         </form>
     </div>
@@ -13,8 +13,8 @@
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-body">
+                <p class="tableTitle">Major Group Children</p>
                 <table class="table-latitude">
-                     <caption>Major Group Children</caption>
                       <thead>
                           <th>Name</th>
                     </thead>
@@ -27,6 +27,8 @@
             </div>
         </div>
     </div>
+
+    <hr>
     
     <div mat-dialog-content>
         <form [formGroup]="rcForm" class="my-form" style="margin: 0px auto 0px;">
@@ -40,15 +42,14 @@
                     <input matInput placeholder="Discount Account" formControlName="rcDiscountAccount">
                 </mat-form-field>
                 
-                <button mat-button cdkFocusInitial (click)="addRevenueCenter()">Add</button>
+                <button style="margin-bottom: 20px" mat-button cdkFocusInitial (click)="addRevenueCenter()">Add</button>
         </form>
     </div>
-    
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-body">
+                <p class="tableTitle">Revenue Centers</p>
                 <table class="table-latitude">
-                     <caption>Revenue Centers</caption>
                       <thead>
                           <th>Revenue Center Name</th>
                           <th>Account Code</th>
@@ -66,6 +67,7 @@
         </div>
     </div>
 
+    <hr>
     <div mat-dialog-content>
         <form [formGroup]="fgForm" class="my-form" style="margin: 0px auto 0px;">
                 <mat-form-field class="example-full-width">
@@ -75,15 +77,14 @@
                     <input matInput placeholder="Department Code" formControlName="departmentCode">
                 </mat-form-field>
 
-                <button mat-button cdkFocusInitial (click)="addFamilyGroup()">Add</button>
+                <button style="margin-bottom: 20px" mat-button cdkFocusInitial (click)="addFamilyGroup()">Add</button>
         </form>
     </div>
-
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-body">
+                <p class="tableTitle">Family Groups</p>
                 <table class="table-latitude">
-                     <caption>Family Groups</caption>
                       <thead>
                           <th>Family Group Name</th>
                           <th>Department Code</th>
