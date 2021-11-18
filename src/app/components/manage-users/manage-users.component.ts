@@ -272,6 +272,7 @@ export class ManageUsersComponent implements OnInit {
             res.expire,
             res.sendEmail,
             res.sendSMS,
+            res.points,
           )
           .then((result: any) => {
             this.loading = true
@@ -353,6 +354,7 @@ export class ManageUsersComponent implements OnInit {
             res.expire,
             res.sendEmail,
             res.sendSMS,
+            res.points,
           )
           .then((result: any) => {
             this.loading = false

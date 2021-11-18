@@ -273,7 +273,7 @@ export class UserProfileComponent implements OnInit {
         this.sppiner.show()
         if (res.group == undefined)
           this.loyaltyService.addApplicationUser(false, true, res.name, res.email, res.group, res.image,
-            this.user.id, res.accompiendUsers, res.cardCode, res.mobile, res.balance, res.expire, res.sendEmail, res.sendSMS).then((result: any) => {
+            this.user.id, res.accompiendUsers, res.cardCode, res.mobile, res.balance, res.expire, res.sendEmail, res.sendSMS, res.points).then((result: any) => {
               this.getApplicationUser();
               this.sppiner.hide()
               this.snackBar.open("User updated successfully.", null, {

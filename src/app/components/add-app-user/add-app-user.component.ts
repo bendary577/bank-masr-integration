@@ -2,9 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser';
-import { Company } from 'src/app/models/loyalty/Company';
 import { Group } from 'src/app/models/loyalty/Group';
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-add-app-user',
@@ -21,7 +21,9 @@ export class AddAppUserComponent implements OnInit {
   groups: Group[] = [];
 
   constructor(private formBuilder: FormBuilder, public snackBar: MatSnackBar, 
-    public dialogRef: MatDialogRef<AddAppUserComponent>, private loyaltyService: LoyaltyService,
+    public dialogRef: MatDialogRef<AddAppUserComponent>, 
+    private loyaltyService: LoyaltyService,
+    private sidNav: SideNaveComponent,
     @Inject(MAT_DIALOG_DATA) public data) { }
  
   ngOnInit() {
@@ -33,15 +35,21 @@ export class AddAppUserComponent implements OnInit {
       this.form = this.formBuilder.group({
         name: [this.newUser.name, Validators.required],        
         email: [this.newUser.email, [Validators.required, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
-        group: [this.newUser.group.id, Validators.required]
+        group: [this.newUser.group.id, Validators.required],
+        points: [this.newUser.points]
       });
     }else{
       this.form = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
-      group: ['', Validators.required]
+      group: ['', Validators.required],
+      points: [0]
       });
     }
+  }
+
+  hasRole(reference) {
+    return this.sidNav.hasRole(reference)
   }
 
   getGroups(){
@@ -79,6 +87,7 @@ export class AddAppUserComponent implements OnInit {
         name: this.form.controls.name.value,
         email: this.form.controls.email.value,
         group: this.form.controls.group.value,
+        points: this.form.controls.points.value,
         image: this.srcResult,
         cardCode: " ",
         mobile: " ",

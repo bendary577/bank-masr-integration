@@ -29,6 +29,11 @@
                 </mat-select>
             </mat-form-field>
 
+            <!-- Reward Points -->
+            <mat-form-field class="example-full-width creditForm" appearance="outline" *ngIf="hasRole('add_reward_points')">
+                <input matInput placeholder="Add welcome points" type="number" min="0" formControlName="points">
+            </mat-form-field>
+
             <div>
                 <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="csvInputChange($event)"
                     accept="image/*" />
@@ -39,7 +44,6 @@
             </div>
 
             <div mat-dialog-actions class="mat-action-style">
-                <!--  -->
                 <button mat-button cdkFocusInitial (click)="onSaveClick()" class="groups-buttons">
                     <label [hidden]="inUpdate">Save</label>
                     <label [hidden]="!inUpdate">Update</label>

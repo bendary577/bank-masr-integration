@@ -112,6 +112,8 @@ export class LoginComponent implements OnInit {
       this.spinner.hide();
     }).catch(err => {
       console.log(err);
+      this.loading = false;
+      this.spinner.hide();
     })
   }
 
