@@ -1,3 +1,5 @@
+import { AccountEmailConfig } from "./AccountEmailConfig";
+
 export class Account {
   public id: string;
   public name: string;
@@ -12,6 +14,7 @@ export class Account {
   public clientId?: string;
   public deleted: boolean;
   public features: [];
+  public emailConfig: AccountEmailConfig;
 
   public constructor() {}
 }
