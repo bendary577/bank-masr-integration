@@ -41,6 +41,9 @@ export class GeneralSettings {
   // ==> Simphony Variables
   discountRates: Array<SimphonyDiscount>|any;
   // ==> END of Simphony Variables
+
+  exchangeRate: number;
+  pointsPerPurchases: number;
   
   creationDate: Date;
   deleted: boolean;

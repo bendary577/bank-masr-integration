@@ -1,0 +1,36 @@
+<div class="config-style">
+    <div>
+        <h3>Reward Points Settings</h3>
+        <div >
+            <mat-accordion multi>
+                <!-- Point Calculation Settings -->
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Point Calculation Settings
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <div>
+                        <strong>Exchange Rate:</strong> 1 reward point = 
+                        <input matInput placeholder="1 EGP" type="number" min="0"  [(ngModel)]="generalSettings.exchangeRate"/>
+                    </div>
+                    <br>
+                    <div>
+                        <strong>Points for purchases:</strong> Each 
+                        <input matInput placeholder="10 EGP" type="number" min="0" [(ngModel)]="generalSettings.pointsPerPurchases" /> Spent will earn 1 point.
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+
+            <br>
+            
+            <div class="card-back">
+                <button mat-flat-button (click)="onSaveClick()" class="filterButton saveButton">Save</button>
+            </div>
+
+            <ngx-spinner></ngx-spinner>
+        </div>
+    </div>
+
+</div>

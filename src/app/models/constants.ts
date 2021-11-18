@@ -308,6 +308,7 @@ export class Constants {
   static REDEEM_VOUCHER = 'Redeem Voucher'
   static SIMPHONY_DISCOUNT_MAP_TABLE = 'simphonyDiscountMaping'
   static POS_MACHINE_MAP_TABLE = 'posMachinMapping';
+  static REWORD_PORINTS_SETTINGS= 'rewardPointsSettings';
 
   static GET_APP_GROUPS_URL = environment.apiHost + '/getApplicationGroups'
   static GET_ALL_APP_GROUPS_URL =

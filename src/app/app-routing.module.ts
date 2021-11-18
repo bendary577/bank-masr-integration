@@ -69,6 +69,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { SupportComponent } from './components/support/support.component';
 import { PosMachineMappingComponent } from './components/setting/pos-machine-mapping/pos-machine-mapping.component';
 import { TestPaginationComponent } from './components/test-pagination/test-pagination.component';
+import { RewardPointsSettingsComponent } from './components/setting/reward-points-settings/reward-points-settings.component';
 
 
 const routes: Routes = [
@@ -88,6 +89,7 @@ const routes: Routes = [
   { path: Constants.OPERA_REPORT_MAP_TABLES, component: OperaReportMapTablesComponent ,canActivate:[AuthGuardService]},
   { path: Constants.SIMPHONY_DISCOUNT_MAP_TABLE, component: SimphonyDiscountMapingComponent ,canActivate:[AuthGuardService]},
   { path: Constants.POS_MACHINE_MAP_TABLE, component: PosMachineMappingComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.REWORD_PORINTS_SETTINGS, component: RewardPointsSettingsComponent ,canActivate:[AuthGuardService]},
 
   // OPERA Views
   { path: Constants.OPERA_BOOKING_DASHBOARD_PAGE, component: OperaBookingDashBoardComponent ,canActivate:[AuthGuardService]},

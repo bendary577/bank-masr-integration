@@ -161,6 +161,7 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { PosMachineMappingComponent } from "./components/setting/pos-machine-mapping/pos-machine-mapping.component";
 import { TestPaginationComponent } from "./components/test-pagination/test-pagination.component";
 import { SimphonyPaymentComponent } from "./components/operations/simphony-payment/simphony-payment.component";
+import { RewardPointsSettingsComponent } from './components/setting/reward-points-settings/reward-points-settings.component';
 
 @NgModule({
   declarations: [
@@ -278,7 +279,8 @@ import { SimphonyPaymentComponent } from "./components/operations/simphony-payme
     NavBarComponent,
     SupportComponent,
     PosMachineMappingComponent,
-    SimphonyPaymentComponent
+    SimphonyPaymentComponent,
+    RewardPointsSettingsComponent
   ],
   imports: [
     BrowserModule,
