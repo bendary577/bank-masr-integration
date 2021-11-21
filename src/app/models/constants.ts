@@ -210,7 +210,7 @@ export class Constants {
     environment.apiHost + '/listOperaTransaction'
   static COUNT_OPERA_TRANSACTIONS_URL =
     environment.apiHost + '/countOperaTransaction'
-  static FILTER_TRANSACTION = environment.apiHost + '/filterTransaction';
+  static FILTER_TRANSACTION = environment.apiHost + '/filterTransaction'
 
   //////////////////////////////////////////////// Simphony Payment  ////////////////////////////////////////////////////////
 
@@ -221,7 +221,8 @@ export class Constants {
     environment.apiHost + '/listSimphonyTransaction'
   static COUNT_SIMPHONY_TRANSACTIONS_URL =
     environment.apiHost + '/countSimphonyTransaction'
-  static FILTER_SIMPHONY_TRANSACTION = environment.apiHost + '/filterSimphonyTransaction';
+  static FILTER_SIMPHONY_TRANSACTION =
+    environment.apiHost + '/filterSimphonyTransaction'
 
   //////////////////////////////////////////////// Opera Reports  ////////////////////////////////////////////////////////
 
@@ -245,7 +246,7 @@ export class Constants {
   //==> Cancel Booking Report
   static CANCEL_BOOKING_REPORT_PAGE = 'cancelBookingReport'
   static CANCEL_BOOKING_REPORT_CONFIG_PAGE = 'cancelBookingReportConfig'
-  static CANCEL_BOOKING_REPORT_SYNC = 'Cancel Booking Report'
+  static CANCEL_BOOKING_REPORT_SYNC = 'Cancel Booking'
 
   static SYNC_OPERA_CANCEL_BOOKING_URL =
     environment.apiHost + '/fetchCancelBooking'
@@ -253,7 +254,7 @@ export class Constants {
   //==> Occupancy Update Report
   static OCCUPANCY_UPDATE_REPORT_PAGE = 'occupancyUpdateReport'
   static OCCUPANCY_UPDATE_REPORT_CONFIG_PAGE = 'occupancyUpdateReportConfig'
-  static OCCUPANCY_UPDATE_REPORT_SYNC = 'Occupancy Update Report'
+  static OCCUPANCY_UPDATE_REPORT_SYNC = 'Occupancy Update'
 
   static SYNC_OPERA_OCCUPANCY_UPDATE_URL =
     environment.apiHost + '/fetchOccupancyUpdate'
@@ -261,7 +262,7 @@ export class Constants {
   //==> Expenses Details Report
   static EXPENSES_DETAILS_REPORT_PAGE = 'expensesDetailsReport'
   static EXPENSES_DETAILS_REPORT_CONFIG_PAGE = 'expensesDetailsReportConfig'
-  static EXPENSES_DETAILS_REPORT_SYNC = 'Expenses Details Report'
+  static EXPENSES_DETAILS_REPORT_SYNC = 'Expenses Details'
 
   static SYNC_OPERA_EXPENSES_DETAILS_URL =
     environment.apiHost + '/fetchExpensesDetails'
@@ -307,8 +308,8 @@ export class Constants {
   static MANAGE_ACTIVITIES = 'managActivities'
   static REDEEM_VOUCHER = 'Redeem Voucher'
   static SIMPHONY_DISCOUNT_MAP_TABLE = 'simphonyDiscountMaping'
-  static POS_MACHINE_MAP_TABLE = 'posMachinMapping';
-  static REWORD_PORINTS_SETTINGS= 'rewardPointsSettings';
+  static POS_MACHINE_MAP_TABLE = 'posMachinMapping'
+  static REWORD_PORINTS_SETTINGS = 'rewardPointsSettings'
 
   static GET_APP_GROUPS_URL = environment.apiHost + '/getApplicationGroups'
   static GET_ALL_APP_GROUPS_URL =
@@ -322,14 +323,18 @@ export class Constants {
   static ADD_APP_USER_URL = environment.apiHost + '/addApplicationUser'
   static RESEND_QR_CODE = environment.apiHost + '/resendQRCode'
   static Delete_APP_USERS_URL = environment.apiHost + '/deleteApplicationUsers'
-  static GET_TRANSACTION_URL =  environment.apiHost + '/transaction/getTransactions'
+  static GET_TRANSACTION_URL =
+    environment.apiHost + '/transaction/getTransactions'
   static GET_TOP_USERS_URL = environment.apiHost + '/getTopUser'
   static GET_TOP_Groups_URL = environment.apiHost + '/getTopGroups'
-  static GET_TOTAL_SPEND_URL = environment.apiHost + '/transaction/getTotalSpendTransactions'
-  static GET_TOTAL_TRANS_INRANG_URL = environment.apiHost + '/transaction/getTransactionsInRange'
-  static CHARGE_WALLET = environment.apiHost  + '/wallet/chargeWallet';
-  static DEDUCT_WALLET = environment.apiHost  + '/wallet/deductFromWallet';
-  static GET_TRANSACTION_PAGINATED = environment.apiHost + "/transaction/transactionPagination"
+  static GET_TOTAL_SPEND_URL =
+    environment.apiHost + '/transaction/getTotalSpendTransactions'
+  static GET_TOTAL_TRANS_INRANG_URL =
+    environment.apiHost + '/transaction/getTransactionsInRange'
+  static CHARGE_WALLET = environment.apiHost + '/wallet/chargeWallet'
+  static DEDUCT_WALLET = environment.apiHost + '/wallet/deductFromWallet'
+  static GET_TRANSACTION_PAGINATED =
+    environment.apiHost + '/transaction/transactionPagination'
 
   //////////////////////////////////////////////// Manage Application  //////////////////////////////////////////////
 
@@ -354,7 +359,8 @@ export class Constants {
 
   //////////////////////////////////////////////// Generate Custom Reports //////////////////////////////////////////////
 
-  static GENERATE_WATAGE_CUSTOM_REPORT = environment.apiHost + '/generateWastageMonthlyReport'
+  static GENERATE_WATAGE_CUSTOM_REPORT =
+    environment.apiHost + '/generateWastageMonthlyReport'
 
   //////////////////////////////////////////////// Export To CSV //////////////////////////////////////////////
 
@@ -371,20 +377,20 @@ export class Constants {
   static FUSION_ERD = 'Fusion'
   static SIMPHONY_ERD = 'Simphony'
 
-    static GET_FEATURES = environment.apiHost + '/feature/getFeatures';
-    static GET_ROLES = environment.apiHost + '/role/getRoles';
-  
-    static GET_WALLET_PAGE = 'entrySystem';
-    static GET_VOUCHER_PAGE = 'voucher';
-    static USER_PROFILE = 'userProfile';
+  static GET_FEATURES = environment.apiHost + '/feature/getFeatures'
+  static GET_ROLES = environment.apiHost + '/role/getRoles'
 
-    static GET_GENERIC_GROUP = environment.apiHost + '/getGenericGroup';
-    static GET_EXPORTED_FILE = environment.apiHost + "/support/supportExportedFiles";
+  static GET_WALLET_PAGE = 'entrySystem'
+  static GET_VOUCHER_PAGE = 'voucher'
+  static USER_PROFILE = 'userProfile'
 
-    /////////////////////////////////////////////// new Design /////////////////////////////////////////
+  static GET_GENERIC_GROUP = environment.apiHost + '/getGenericGroup'
+  static GET_EXPORTED_FILE =
+    environment.apiHost + '/support/supportExportedFiles'
 
-    static SUPPORT = 'support';
+  /////////////////////////////////////////////// new Design /////////////////////////////////////////
 
+  static SUPPORT = 'support'
 
-    /////////////////////////////////////////////// 
+  ///////////////////////////////////////////////
 }
