@@ -44,6 +44,44 @@
             </div>
         </mat-expansion-panel>
 
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Web Service Configuration
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div>
+                <mat-form-field class="example-full-width">
+                    <input matInput id="url" name="url" placeholder="Service Endpoint"
+                        [(ngModel)]="syncJobType.configuration.bookingConfiguration.url">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="example-full-width">
+                    <input matInput id="gatewayKey" name="gatewayKey" placeholder="X-GatewayAPIKey"
+                        [(ngModel)]="syncJobType.configuration.bookingConfiguration.gatewayKey">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="example-full-width">
+                    <input matInput id="username" name="username" placeholder="Web Service Username"
+                        [(ngModel)]="syncJobType.configuration.bookingConfiguration.username">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="example-full-width">
+                    <input matInput id="password" name="password" placeholder="Web Service Password"
+                        [(ngModel)]="syncJobType.configuration.bookingConfiguration.password">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="example-full-width">
+                    <input matInput id="channel" name="channel" placeholder="Web Service Channel"
+                        [(ngModel)]="syncJobType.configuration.bookingConfiguration.channel">
+                </mat-form-field>
+            </div>
+        </mat-expansion-panel>
+
         <br>
         <div class="card-back">
             <button mat-flat-button (click)="onSaveClick()">Save</button>
