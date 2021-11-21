@@ -1,5 +1,5 @@
+<div class="sync-body">
 <h3>Expenses Details Detailes</h3>
-
 
 <div class="header">
     <span class="history"> Sync Job History </span>
@@ -32,12 +32,14 @@
             </mat-list-item>
             <mat-list-item>
                 <span class="key">Start Date: </span>
-                <span class="value" *ngIf="selectedJob.creationDate">{{selectedJob.creationDate | date:'dd-MM-yyyy H:MM:SS'}}</span>
+                <span class="value" *ngIf="selectedJob.creationDate">{{selectedJob.creationDate | date:'dd-MM-yyyy
+                    H:MM:SS'}}</span>
                 <span class="value" *ngIf="!selectedJob.creationDate">No Info</span>
             </mat-list-item>
             <mat-list-item>
                 <span class="key">End Date: </span>
-                <span class="value" *ngIf="selectedJob.endDate">{{selectedJob.endDate | date:'dd-MM-yyyy H:MM:SS'}}</span>
+                <span class="value" *ngIf="selectedJob.endDate">{{selectedJob.endDate | date:'dd-MM-yyyy
+                    H:MM:SS'}}</span>
                 <span class="value" *ngIf="!selectedJob.endDate">No Info</span>
             </mat-list-item>
             <mat-list-item>
@@ -47,14 +49,15 @@
             </mat-list-item>
             <mat-list-item *ngIf="!transactionList.transactionData.length">
                 <span>
-                There was no new data to sync in this job, You can sync Cancel Booking Detailes now from <a (click)="syncExpensesDetails()">here</a>
-            </span>
+                    There was no new data to sync in this job, You can sync Cancel Booking Detailes now from <a
+                        (click)="syncExpensesDetails()">here</a>
+                </span>
             </mat-list-item>
         </mat-card-content>
     </mat-card>
 </div>
 <br>
- 
+
 <div>
     <div>
         <div *ngIf="!jobs.length">
@@ -75,19 +78,24 @@
     </div>
 
     <div *ngIf="jobs.length || transactionList.showLoading">
-        <ngx-datatable style="max-width: 98%;" class="material" [loadingIndicator]="transactionList.showLoading" [messages]="transactionList.messages" 
-        [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-         [rows]="transactionList.transactionData" [selected]="transactionList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
-        (select)='onSelect($event)' [scrollbarH]="true">
-    
+        <ngx-datatable style="max-width: 98%;" class="material" [loadingIndicator]="transactionList.showLoading"
+            [messages]="transactionList.messages" [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50"
+            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+            [rows]="transactionList.transactionData" [selected]="transactionList.selected" [selectionType]="'checkbox'"
+            [selectAllRowsOnPage]="false" (select)='onSelect($event)' [scrollbarH]="true">
+
             <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
-            <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
-            <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
-            </ng-template>
-    
-            <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
-             <input class="regular-checkbox" type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
-            </ng-template>
+                <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
+                    let-selectFn="selectFn">
+                    <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected"
+                        (change)="selectFn(!allRowsSelected)" />
+                </ng-template>
+
+                <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected"
+                    let-onCheckboxChangeFn="onCheckboxChangeFn">
+                    <input class="regular-checkbox" type="checkbox" [checked]="isSelected"
+                        (change)="onCheckboxChangeFn($event)" />
+                </ng-template>
             </ngx-datatable-column>
 
             <ngx-datatable-column name="Status">
@@ -96,7 +104,7 @@
                     <label *ngIf="row.data.items[0].cuFlag == '2'">UPDATE</label>
                 </ng-template>
             </ngx-datatable-column>
-    
+
             <ngx-datatable-column name="Transaction Id">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.data.transactionId}}
@@ -156,7 +164,7 @@
                     {{row.data.items[0].grandTotal}}
                 </ng-template>
             </ngx-datatable-column>
-            
+
             <ngx-datatable-column name="Payment Type">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.data.items[0].paymentType}}
@@ -172,4 +180,5 @@
     </div>
 
     <ngx-spinner></ngx-spinner>
+</div>
 </div>

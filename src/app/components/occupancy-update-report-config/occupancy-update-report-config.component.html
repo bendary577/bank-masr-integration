@@ -1,49 +1,89 @@
-<h3 mat-dialog-title>Occupancy Update Configuartion</h3>
 
-<div>
+<div class="config-style">
+    <h3 mat-dialog-title>Occupancy Update Configuartion</h3>
+    <div>
+        <div *ngIf="!loading && syncJobType">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        General Configuration
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input matInput id="fileBaseName" name="fileBaseName" placeholder="File Base Name"
+                            [(ngModel)]="syncJobType.configuration.bookingConfiguration.fileBaseName">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input matInput id="fileExtension" name="fileExtension" placeholder="File Extension"
+                            [(ngModel)]="syncJobType.configuration.bookingConfiguration.fileExtension">
+                    </mat-form-field>
+                </div>
+            </mat-expansion-panel>
 
-    <div *ngIf="!loading && syncJobType">
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    General Configuration
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div>
-                <mat-form-field class="example-full-width">
-                    <input matInput id="fileBaseName" name="fileBaseName" placeholder="File Base Name"
-                        [(ngModel)]="syncJobType.configuration.bookingConfiguration.fileBaseName">
-                </mat-form-field>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Web Service Configuration
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input matInput id="url" name="url" placeholder="Service Endpoint"
+                            [(ngModel)]="syncJobType.configuration.bookingConfiguration.url">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input matInput id="gatewayKey" name="gatewayKey" placeholder="X-GatewayAPIKey"
+                            [(ngModel)]="syncJobType.configuration.bookingConfiguration.gatewayKey">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input matInput id="username" name="username" placeholder="Web Service Username"
+                            [(ngModel)]="syncJobType.configuration.bookingConfiguration.username">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input matInput id="password" name="password" placeholder="Web Service Password"
+                            [(ngModel)]="syncJobType.configuration.bookingConfiguration.password">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input matInput id="channel" name="channel" placeholder="Web Service Channel"
+                            [(ngModel)]="syncJobType.configuration.bookingConfiguration.channel">
+                    </mat-form-field>
+                </div>
+            </mat-expansion-panel>
+    
+            <br>
+            <div class="card-back">
+                <button mat-flat-button (click)="onSaveClick()">Save</button>
+                <button mat-flat-button (click)="onCancelClick()">Cancel</button>
             </div>
-            <div>
-                <mat-form-field class="example-full-width">
-                    <input matInput id="fileExtension" name="fileExtension" placeholder="File Extension"
-                        [(ngModel)]="syncJobType.configuration.bookingConfiguration.fileExtension">
-                </mat-form-field>
-            </div>
-        </mat-expansion-panel>
-
-        <br>
-        <div class="card-back">
-            <button mat-flat-button (click)="onSaveClick()">Save</button>
-            <button mat-flat-button (click)="onCancelClick()">Cancel</button>
+    
         </div>
-  
-    </div>
-
-    <div *ngIf="!loading && !syncJobType">
-        <mat-card class="example-card">
-            <h2 class="cardHeader">No Data</h2>
-            <mat-card-content>
-              <p>
-                <span class="empty-data">
-                    Can't Configure your sync right now, Please try again after few minutes.
-                </span>
+    
+        <div *ngIf="!loading && !syncJobType">
+            <mat-card class="example-card">
+                <h2 class="cardHeader">No Data</h2>
+                <mat-card-content>
+                    <p>
+                        <span class="empty-data">
+                            Can't Configure your sync right now, Please try again after few minutes.
+                        </span>
                     </p>
                 </mat-card-content>
-        </mat-card>
+            </mat-card>
+        </div>
+    
+        <ngx-spinner></ngx-spinner>
     </div>
-
-      <ngx-spinner></ngx-spinner>
+      
 </div>
   

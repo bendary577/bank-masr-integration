@@ -1,3 +1,4 @@
+<div class="config-style">
 <h3 mat-dialog-title>Cancel Booking Configuartion</h3>
 
 <div>
@@ -23,7 +24,8 @@
             </div>
             <div>
                 <mat-form-field class="example-full-width">
-                    <input matInput float id="municipalityTax" name="municipalityTax" placeholder="Municipality Tax Rate"
+                    <input matInput float id="municipalityTax" name="municipalityTax"
+                        placeholder="Municipality Tax Rate"
                         [(ngModel)]="syncJobType.configuration.bookingConfiguration.municipalityTaxRate">
                 </mat-form-field>
             </div>
@@ -35,7 +37,8 @@
             </div>
             <div>
                 <mat-form-field class="example-full-width">
-                    <input matInput float id="serviceChargeRate" name="serviceChargeRate" placeholder="Service Charge Rate"
+                    <input matInput float id="serviceChargeRate" name="serviceChargeRate"
+                        placeholder="Service Charge Rate"
                         [(ngModel)]="syncJobType.configuration.bookingConfiguration.serviceChargeRate">
                 </mat-form-field>
             </div>
@@ -46,22 +49,23 @@
             <button mat-flat-button (click)="onSaveClick()">Save</button>
             <button mat-flat-button (click)="onCancelClick()">Cancel</button>
         </div>
-  
+
     </div>
 
     <div *ngIf="!loading && !syncJobType">
         <mat-card class="example-card">
             <h2 class="cardHeader">No Data</h2>
             <mat-card-content>
-              <p>
-                <span class="empty-data">
-                    Can't Configure your sync right now, Please try again after few minutes.
-                </span>
-                    </p>
-                </mat-card-content>
+                <p>
+                    <span class="empty-data">
+                        Can't Configure your sync right now, Please try again after few minutes.
+                    </span>
+                </p>
+            </mat-card-content>
         </mat-card>
     </div>
 
-      <ngx-spinner></ngx-spinner>
+    <ngx-spinner></ngx-spinner>
 </div>
-  
+
+</div>

@@ -1,3 +1,4 @@
+<div class="config-style">
 <h3 mat-dialog-title>Expenses Details Configuartion</h3>
 
 <div>
@@ -23,17 +24,21 @@
             </div>
             <div>
                 <mat-form-field class="example-full-width">
-                    <input matInput id="municipalityTaxRate" name="municipalityTaxRate" placeholder="Municipality Tax Rate" [(ngModel)]="syncJobType.configuration.bookingConfiguration.municipalityTaxRate">
+                    <input matInput id="municipalityTaxRate" name="municipalityTaxRate"
+                        placeholder="Municipality Tax Rate"
+                        [(ngModel)]="syncJobType.configuration.bookingConfiguration.municipalityTaxRate">
                 </mat-form-field>
             </div>
             <div>
                 <mat-form-field class="example-full-width">
-                    <input matInput id="vatRate" name="vatRate" placeholder="VAT Rate" [(ngModel)]="syncJobType.configuration.bookingConfiguration.vatRate">
+                    <input matInput id="vatRate" name="vatRate" placeholder="VAT Rate"
+                        [(ngModel)]="syncJobType.configuration.bookingConfiguration.vatRate">
                 </mat-form-field>
             </div>
             <div>
                 <mat-form-field class="example-full-width">
-                    <input matInput id="serviceChargeRate" name="serviceChargeRate" placeholder="Service Charge Rate" [(ngModel)]="syncJobType.configuration.bookingConfiguration.serviceChargeRate">
+                    <input matInput id="serviceChargeRate" name="serviceChargeRate" placeholder="Service Charge Rate"
+                        [(ngModel)]="syncJobType.configuration.bookingConfiguration.serviceChargeRate">
                 </mat-form-field>
             </div>
         </mat-expansion-panel>
@@ -45,35 +50,36 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
 
-            
-        <form class="my-form">
-            <div>
-                <mat-form-field class="example-full-width">
-                    <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Group Code eg. TAX" name="vatRate" [(ngModel)]="newGroupCode">
-                </mat-form-field>
-                <button mat-flat-button (click)="addTransactionGroup()">Add Group Code</button>
-            </div>
-        </form>
 
-        <div *ngIf="groupCodes?.length > 0">
+            <form class="my-form">
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;"
+                            placeholder="Group Code eg. TAX" name="vatRate" [(ngModel)]="newGroupCode">
+                    </mat-form-field>
+                    <button mat-flat-button (click)="addTransactionGroup()">Add Group Code</button>
+                </div>
+            </form>
 
-            <div class="container">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <table class="table-latitude">
-                              <thead>
-                                  <th>Group Code</th>
-                            </thead>
-                            <tbody>
-                                 <tr *ngFor="let row of groupCodes">
-                                    <td style="text-align: center;">{{row}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+            <div *ngIf="groupCodes?.length > 0">
+
+                <div class="container">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <table class="table-latitude">
+                                <thead>
+                                    <th>Group Code</th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let row of groupCodes">
+                                        <td style="text-align: center;">{{row}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
         </mat-expansion-panel>
 
@@ -82,22 +88,23 @@
             <button mat-flat-button (click)="onSaveClick()">Save</button>
             <button mat-flat-button (click)="onCancelClick()">Cancel</button>
         </div>
-  
+
     </div>
 
     <div *ngIf="!loading && !syncJobType">
         <mat-card class="example-card">
             <h2 class="cardHeader">No Data</h2>
             <mat-card-content>
-              <p>
-                <span class="empty-data">
-                    Can't Configure your sync right now, Please try again after few minutes.
-                </span>
-                    </p>
-                </mat-card-content>
+                <p>
+                    <span class="empty-data">
+                        Can't Configure your sync right now, Please try again after few minutes.
+                    </span>
+                </p>
+            </mat-card-content>
         </mat-card>
     </div>
 
-      <ngx-spinner></ngx-spinner>
+    <ngx-spinner></ngx-spinner>
 </div>
-  
+
+</div>
