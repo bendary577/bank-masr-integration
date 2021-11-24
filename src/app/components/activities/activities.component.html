@@ -305,6 +305,12 @@
                     </ng-template>
                 </ngx-datatable-column>
 
+                <ngx-datatable-column name="Points Redeemed" [width]="90" *ngIf="hasRole('view_reward_points')">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.pointsRedeemed}}
+                    </ng-template>
+                </ngx-datatable-column>
+
                 <ngx-datatable-column name="Total Payment" [width]="90">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{row.totalPayment}} {{getCurrency()}}
