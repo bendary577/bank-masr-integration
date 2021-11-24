@@ -1,0 +1,88 @@
+<h3>Simphony Checks</h3>
+
+
+<div *ngIf="selectedOperation">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <mat-card-title class="title">Operation Details</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-list-item>
+                <span class="key">Operation Number: </span>
+                <span class="value" *ngIf="selectedOperation.id">{{selectedOperation.id}}</span>
+                <span class="value" *ngIf="!selectedOperation.id">No Info</span>
+            </mat-list-item>
+            <mat-list-item>
+                <span class="key">Operation status: </span>
+                <span class="value" *ngIf="selectedOperation.status">{{selectedOperation.status}}</span>
+                <span class="value" *ngIf="!selectedOperation.status">No Info</span>
+            </mat-list-item>
+            <mat-list-item>
+                <span class="key">Start Date: </span>
+                <span class="value" *ngIf="selectedOperation.creationDate">{{selectedOperation.creationDate}}</span>
+                <span class="value" *ngIf="!selectedOperation.creationDate">No Info</span>
+            </mat-list-item>
+            <mat-list-item>
+                <span class="key">End Date: </span>
+                <span class="value" *ngIf="selectedOperation.endDate">{{selectedOperation.endDate}}</span>
+                <span class="value" *ngIf="!selectedOperation.endDate">No Info</span>
+            </mat-list-item>
+            <mat-list-item>
+                <span class="key">Reason: </span>
+                <span class="value" *ngIf="selectedOperation.reason">{{selectedOperation.reason}}</span>
+                <span class="value" *ngIf="!selectedOperation.reason">No Info</span>
+            </mat-list-item>
+            <mat-list-item *ngIf="!operationData.length">
+                <span> No data.</span>
+            </mat-list-item>
+        </mat-card-content>
+    </mat-card>
+</div>
+<br>
+
+<div>
+    <div>
+        <div *ngIf="!operations.length">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <mat-card-title>No Data</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p> No operation to show. </p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <br>
+        <div class="main" *ngIf="operationData.length">
+            <ngx-datatable class="material"  style="height: 300px;" [rows]="operationData" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
+                <ngx-datatable-column name="Status">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.status}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Message">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.message}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="QR Code">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.code}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Total Price">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.totalDue}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Check Number">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.receiptNumber}}
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </div>
+    </div>
+    <ngx-spinner></ngx-spinner>
+
+</div>
