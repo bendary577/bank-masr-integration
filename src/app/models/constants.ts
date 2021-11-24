@@ -84,6 +84,8 @@ export class Constants {
   static GET_ZEALPOINTS_URL = environment.apiHost + '/zeal/zealPoints'
   static GET_ZEALVOUCHER_URL = environment.apiHost + '/zeal/zealVoucher'
 
+  static GET_SIMPHONY_PAYMENT_URL = environment.apiHost + '/zeal/zealPayment'
+  
   static GET_BUSINESS_UNITS_URL = environment.apiHost + '/getBusinessUnits'
   static GET_PAYMENT_METHODS_URL = environment.apiHost + '/getPaymentMethods'
 
@@ -216,7 +218,11 @@ export class Constants {
 
   static SIMPHONY_PAYMENT_PAGE = 'simphonyPayment'
   static SIMPHONY_PAYMENT_CONFIG_PAGE = 'simphonyPaymentConfig'
-  static SIMPHONY_PAYMENT_OPERATION = 'Simphony Payment'
+
+  static SIMPHONY_CHECK_PAGE = 'simphonyCheck'
+  static SIMPHONY_CHECK_CONFIG_PAGE = 'simphonyCheckConfig'
+  static SIMPHONY_CHECK_OPERATION = 'Simphony Check Payment'
+
   static LIST_SIMPHONY_TRANSACTIONS_URL =
     environment.apiHost + '/listSimphonyTransaction'
   static COUNT_SIMPHONY_TRANSACTIONS_URL =
@@ -283,6 +289,11 @@ export class Constants {
   static ZEAL_POINTS_PAGE = 'zealPoints'
   static ZEAL_POINTS_CONFIG_PAGE = 'zealPointsCongfig'
   static ZEAL_POINTS_OPERATION = 'Zeal Points'
+
+  static SIMPHONY_PAYMENT_PAGE = 'zealPayment'
+  static ZEAL_PAYMEN
+  T_CONFIG_PAGE = 'zealPaymentCongfig'
+  static ZEAL_PAYMENT_OPERATION = 'Zeal Payment'
 
   static TABS_PAGE = 'tabs'
   static SETTING = 'setting'
