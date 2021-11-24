@@ -85,7 +85,7 @@ export class Constants {
   static GET_ZEALVOUCHER_URL = environment.apiHost + '/zeal/zealVoucher'
 
   static GET_SIMPHONY_PAYMENT_URL = environment.apiHost + '/zeal/zealPayment'
-  
+
   static GET_BUSINESS_UNITS_URL = environment.apiHost + '/getBusinessUnits'
   static GET_PAYMENT_METHODS_URL = environment.apiHost + '/getPaymentMethods'
 
@@ -290,10 +290,10 @@ export class Constants {
   static ZEAL_POINTS_CONFIG_PAGE = 'zealPointsCongfig'
   static ZEAL_POINTS_OPERATION = 'Zeal Points'
 
-  static SIMPHONY_PAYMENT_PAGE = 'zealPayment'
+  // static SIMPHONY_PAYMENT_PAGE = 'zealPayment'
   static ZEAL_PAYMEN
   T_CONFIG_PAGE = 'zealPaymentCongfig'
-  static ZEAL_PAYMENT_OPERATION = 'Zeal Payment'
+  // static ZEAL_PAYMENT_OPERATION = 'Zeal Payment'
 
   static TABS_PAGE = 'tabs'
   static SETTING = 'setting'
