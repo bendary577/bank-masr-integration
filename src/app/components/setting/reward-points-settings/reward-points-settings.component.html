@@ -12,13 +12,13 @@
                     </mat-expansion-panel-header>
 
                     <div>
-                        <strong>Exchange Rate:</strong> 1 reward point = 
-                        <input matInput placeholder="1 EGP" type="number" min="0"  [(ngModel)]="generalSettings.exchangeRate"/>
+                        <strong>Reward Points:</strong>
+                        <input matInput placeholder="10" type="number" min="0"  [(ngModel)]="generalSettings.pointReward"/> %
                     </div>
                     <br>
                     <div>
-                        <strong>Points for purchases:</strong> Each 
-                        <input matInput placeholder="10 EGP" type="number" min="0" [(ngModel)]="generalSettings.pointsPerPurchases" /> Spent will earn 1 point.
+                        <strong>Points Redemption 1$ = </strong> 
+                        <input matInput placeholder="1" type="number" min="0" [(ngModel)]="generalSettings.pointsRedemption" /> Points
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>
