@@ -224,7 +224,7 @@ export class Constants {
   static SIMPHONY_CHECK_OPERATION = 'Simphony Check Payment'
 
   static LIST_SIMPHONY_CHECK_PAYMENT_URL =
-    environment.apiHost + '/test/simphonyPayment/simphonyCheck'
+   environment.apiHost + '/simphonyPayment/simphonyCheck'
   static COUNT_SIMPHONY_TRANSACTIONS_URL =
     environment.apiHost + '/countSimphonyTransaction'
   static FILTER_SIMPHONY_TRANSACTION =

@@ -23,7 +23,7 @@ export class OperaPaymentService {
     )
   }
 
-  listSimphonyCheckPayment(fromDate, toDate, cardNumber) {
+  simphonyCheckPayment(fromDate, toDate, cardNumber) {
     this.token = localStorage.getItem('auth_token')
     const formData: FormData = new FormData();
     formData.append('startDate', fromDate);

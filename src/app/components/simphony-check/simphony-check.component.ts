@@ -54,16 +54,12 @@ export class SimphonyCheckComponent implements OnInit {
     this.countOperationTypes()
 
     this.operaPaymentService
-      .listSimphonyCheckPayment(this.fromDate, this.toDate, "")
-      .toPromise()
-      .then((res: any) => {
-        console.log(res)
+      .simphonyCheckPayment(this.fromDate, this.toDate, "").toPromise().then((res: any) => {
         this.transactions = res["transactions"]
         console.log(this.transactions)
         this.spinner.hide()
         this.loading = false
-      })
-      .catch((err) => {
+      }).catch((err) => {
         console.error(err)
         this.spinner.hide()
         this.loading = false
