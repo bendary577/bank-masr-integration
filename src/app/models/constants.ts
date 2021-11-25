@@ -290,10 +290,10 @@ export class Constants {
   static ZEAL_POINTS_CONFIG_PAGE = 'zealPointsCongfig'
   static ZEAL_POINTS_OPERATION = 'Zeal Points'
 
-  static SIMPHONY_PAYMENT_PAGE = 'zealPayment'
-  static ZEAL_PAYMEN
-  T_CONFIG_PAGE = 'zealPaymentCongfig'
-  static ZEAL_PAYMENT_OPERATION = 'Zeal Payment'
+  // static SIMPHONY_PAYMENT_PAGE = 'zealPayment'
+  // static ZEAL_PAYMEN
+  // T_CONFIG_PAGE = 'zealPaymentCongfig'
+  // static ZEAL_PAYMENT_OPERATION = 'Zeal Payment'
 
   static TABS_PAGE = 'tabs'
   static SETTING = 'setting'
