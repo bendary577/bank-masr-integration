@@ -23,6 +23,18 @@ export class OperaPaymentService {
     )
   }
 
+  listSimphonyCheckPayment(fromDate, toDate, cardNumber) {
+    this.token = localStorage.getItem('auth_token')
+    const formData: FormData = new FormData();
+    formData.append('startDate', fromDate);
+    formData.append('endDate', toDate);
+    formData.append('cardNumber', cardNumber);
+    return this.http.post(
+      Constants.LIST_SIMPHONY_CHECK_PAYMENT_URL, formData,
+      { headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }) },
+    )
+  }
+
     countOperaTransactions(fromDate, toDate) {
     this.token = localStorage.getItem('auth_token')
     return this.http.get(

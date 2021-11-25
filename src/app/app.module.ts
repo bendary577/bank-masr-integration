@@ -162,6 +162,8 @@ import { PosMachineMappingComponent } from "./components/setting/pos-machine-map
 import { TestPaginationComponent } from "./components/test-pagination/test-pagination.component";
 import { SimphonyPaymentComponent } from "./components/operations/simphony-payment/simphony-payment.component";
 import { RewardPointsSettingsComponent } from './components/setting/reward-points-settings/reward-points-settings.component';
+import { SimphonyCheckComponent } from "./components/simphony-check/simphony-check.component";
+import { SimphonyCheckConfigurationComponent } from "./components/simphony-check-configuration/simphony-check-configuration.component";
 
 @NgModule({
   declarations: [
@@ -280,6 +282,8 @@ import { RewardPointsSettingsComponent } from './components/setting/reward-point
     SupportComponent,
     PosMachineMappingComponent,
     SimphonyPaymentComponent,
+    SimphonyCheckComponent,
+    SimphonyCheckConfigurationComponent,
     RewardPointsSettingsComponent
   ],
   imports: [

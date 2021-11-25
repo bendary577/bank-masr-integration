@@ -54,7 +54,7 @@ export class SimphonyCheckComponent implements OnInit {
     this.countOperationTypes()
 
     this.operaPaymentService
-      .listOperaTransactions(this.fromDate, this.toDate, "")
+      .listSimphonyCheckPayment(this.fromDate, this.toDate, "")
       .toPromise()
       .then((res: any) => {
         console.log(res)
@@ -153,5 +153,12 @@ export class SimphonyCheckComponent implements OnInit {
         });
       });
     }
+  }
+  openCheckPayment(row){
+  }
+  deleteOneUsers(row, flag){
+  }
+  hasRole(role){
+    return true;
   }
 }

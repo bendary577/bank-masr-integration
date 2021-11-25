@@ -1,0 +1,163 @@
+@import "../../../assets/scss/syncs.scss";
+
+.payment-body{
+  text-align: left !important;
+  margin-left: 0%;
+  mat-icon {
+    position: absolute;
+    float: right;
+    top: -1px !important;
+    cursor: pointer;
+    color: rgb(80 80 80 / 54%);
+    right: -60px;
+    font-size: medium;
+  }
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: '';
+  display: table;
+  clear: both;
+  padding-left: 10px;
+}
+.row {
+  display: flex;
+  overflow: hidden;
+  scroll-behavior: smooth;
+}
+/* Create three equal columns that floats next to each other */
+.column {
+  width: 33%;
+  text-align: center;
+}
+
+.mat-card{
+  padding: 0px;
+}
+
+.main {
+  padding: 16px 20px 4px 10px;
+}
+
+.stat-card {
+  margin: 10px;
+  height: auto;
+  min-height: 200px;
+  max-height: 300px;
+  overflow: hidden;
+
+}
+
+
+.cardHeader{
+  border-radius: 2px 2px 10px 10px;
+  min-height: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #fecc90;
+  padding-top: 10px;
+  padding-left:10px;
+}
+
+.card-text{
+  padding-left:10px;
+}
+
+.example-card{
+  margin-top: 50px;
+}
+
+.cardText{
+  font-size: 40px;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  padding-top: 20px;
+}
+
+.filterButton{
+  margin-top: 8px;
+  font-weight: bold;
+  float: right;
+  background-color: #fecc90;
+  color: black;
+  border-radius: 28px;
+  box-shadow: 0 4px 14px rgba(black, 0.35) !important;
+}
+
+::ng-deep .mat-form-field-outline-start {
+  border-radius: 28px 0 0 28px !important;
+  min-width: 28px !important;
+  // border-color: aliceblue !important;
+}
+
+::ng-deep .mat-form-field-outline-end {
+  border-radius: 0 28px 28px 0 !important;
+}
+
+::ng-deep .mat-form-field-flex{
+  height: 45px !important;
+  align-items: center !important;
+}
+
+::ng-deep .mat-form-field-outline{
+  box-shadow: 0 4px 14px rgba(black, 0.35) !important;
+  border-radius: 28px !important;
+}
+
+.creditForm{
+    ::ng-deep .mat-form-field-wrapper{
+      width: 320px !important;
+    }
+}
+
+.dateForm{
+    ::ng-deep .mat-form-field-wrapper{
+      width: 160px !important;
+    }
+}
+
+.cardIcon{
+  font-size: 15px;
+  color: #f47920;
+  width: 50px;
+  height: 50px;
+  font-size: 30px;  padding: 8px; padding-top: 12px;
+}
+
+.checkboxIcon{
+  font-size: 40px;
+  color: #25ae88;
+  padding: 8px;
+  padding-top: 12px;
+}
+
+.alertboxIcon{
+  font-size: 40px;
+  color: #ff7761;
+  padding: 8px;
+  padding-top: 12px;
+}
+
+::ng-deep .md-datepicker-button {
+  display: none !important;   
+}
+
+.md-datepicker-input-container {
+  margin-left: 0 !important;    
+}
+
+::ng-deep .mat-icon-button{
+  color: #f47920 !important;
+}
+
+h3 {
+    background-color: #f1f1f1!important;
+    font-weight: bolder !important;
+    margin-top: 70px !important;
+    margin-bottom: 28px !important;
+    height: 64px !important;
+    color:#f47920;
+    border-left: 1px solid;
+}
+
