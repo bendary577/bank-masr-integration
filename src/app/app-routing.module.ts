@@ -72,6 +72,7 @@ import { TestPaginationComponent } from './components/test-pagination/test-pagin
 import { RewardPointsSettingsComponent } from './components/setting/reward-points-settings/reward-points-settings.component';
 import { SimphonyCheckComponent } from './components/simphony-check/simphony-check.component';
 import { SimphonyCheckConfigurationComponent } from './components/simphony-check-configuration/simphony-check-configuration.component';
+import { SimphonyPaymentComponent } from './components/operations/simphony-payment/simphony-payment.component';
 
 
 const routes: Routes = [
@@ -187,6 +188,9 @@ const routes: Routes = [
   { path: Constants.OPERA_PAYMENT_CONFIG_PAGE , component: OperaPaymentConfigurationComponent ,canActivate:[AuthGuardService]},
 
   { path: Constants.SIMPHONY_CHECK_PAGE , component: SimphonyCheckComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.SIMPHONY_CHECK_CONFIG_PAGE , component: SimphonyCheckConfigurationComponent ,canActivate:[AuthGuardService]},
+
+  { path: Constants.SIMPHONY_PAYMENT_PAGE , component: SimphonyPaymentComponent ,canActivate:[AuthGuardService]},
   { path: Constants.SIMPHONY_CHECK_CONFIG_PAGE , component: SimphonyCheckConfigurationComponent ,canActivate:[AuthGuardService]},
 
   { path : Constants.SUPPORT , component: SupportComponent, canActivate:[AuthGuardService]},

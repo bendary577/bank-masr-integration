@@ -1,6 +1,7 @@
 @import "../../../assets/scss/syncs.scss";
 
 .payment-body{
+
   text-align: left !important;
   margin-left: 0%;
   mat-icon {
@@ -12,6 +13,7 @@
     right: -60px;
     font-size: medium;
   }
+  
 }
 
 /* Clear floats after the columns */
@@ -161,3 +163,16 @@ h3 {
     border-left: 1px solid;
 }
 
+.menue-btn-choi{
+  background-color: white;
+  color: black;
+  font-size: 20px;
+}
+
+.menue-btn{
+  width: 15px;
+  background-color: white;
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+}

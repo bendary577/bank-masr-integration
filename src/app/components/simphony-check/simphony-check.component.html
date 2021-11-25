@@ -1,4 +1,4 @@
-<h3>Simphony Checks Payment</h3>
+<h3>Simphony Checks Payments</h3>
 <div>
     <div class="payment-body">
 
@@ -10,6 +10,8 @@
             <input matInput id="cardNumber" name="cardNumber" placeholder="Card Number" [(ngModel)]="cardNumber">
         </mat-form-field>
 
+        <!-- <Span style="font-size: 20px;font-weight: bold;color: #f47920;margin: 10px;">Filter Checks By Date</Span> -->
+        
         <mat-form-field appearance="outline" class="example-full-width dateForm">
             <input matInput placeholder="Start Date" [matDatepicker]="fromDateOpicker" name="fromDate" id="fromDate"
                 [(ngModel)]="fromDate" readonly>
@@ -31,19 +33,11 @@
     </div>
 
     <div class="row">
-        <!-- <div class="column">
-                <mat-card class="stat-card">
-                    <mat-card-content>
-                        <h2>Total Transactions Amount</h2>
-                        <p style="font-size: 55px; color: darkblue;">0 EGP</p>
-                    </mat-card-content>
-                </mat-card>
-            </div> -->
 
         <div class="column">
             <mat-card class="stat-card">
                 <mat-card-content>
-                    <h2 class="cardHeader">Total Transactions Amount</h2>
+                    <h2 class="cardHeader">Total Checks Amount</h2>
                     <p class="cardText">{{totalTransactionAmount | number:'1.0-2'}} USD</p>
                 </mat-card-content>
             </mat-card>
@@ -52,7 +46,7 @@
         <div class="column">
             <mat-card class="stat-card">
                 <mat-card-content>
-                    <h2 class="cardHeader">No. of Transactions Succeed</h2>
+                    <h2 class="cardHeader">No. of Payed Checks</h2>
                     <p class="cardText"> {{succeedTransactionCount}}
                         <span class="menu-icon">
                             <i class="mdi mdi-checkbox-multiple-marked-circle checkboxIcon"></i>
@@ -65,7 +59,7 @@
         <div class="column">
             <mat-card class="stat-card">
                 <mat-card-content>
-                    <h2 class="cardHeader">No. of Transactions Failed</h2>
+                    <h2 class="cardHeader">No. of Not Payed Checks</h2>
                     <p class="cardText"> {{failedTransactionCount}}
                         <span class="menu-icon">
                             <i class="mdi mdi-message-alert alertboxIcon"></i>
@@ -140,120 +134,6 @@
                 </ngx-datatable-column>
 
         </ngx-datatable>
-
-        <!-- <ngx-datatable class="material"  style="height: 300px;" [rows]="operationData" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
-                <ngx-datatable-column name="Status">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.status}}
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Message">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.message}}
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="QR Code">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.code}}
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Total Price">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.totalDue}}
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Check Number">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.receiptNumber}}
-                    </ng-template>
-                </ngx-datatable-column>
-            </ngx-datatable> -->
-            <!-- <ngx-datatable-column name="Status">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.status}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Reason">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.reason}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Transaction Date">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.creationDate | date:'dd-MM-yyyy H:MM:SS'}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Sequence Number">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.sequenceNo}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Guest Number">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.guestNumber}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Card Number">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.cardNumber}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Transaction Amount">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.amount | number:'1.0-2'}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Currency">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.currency}}
-                </ng-template>
-            </ngx-datatable-column> -->
-            <!-- 
-                <ngx-datatable-column name="Check-in Date">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.checkInDate}}
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="Check-out Date">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.checkOutDate}}
-                    </ng-template>
-                </ngx-datatable-column> -->
-
-
-        <!-- <ngx-datatable class="material"  style="height: 300px;" [rows]="operationData" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
-                <ngx-datatable-column name="Status">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.status}}
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Message">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.message}}
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="QR Code">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.code}}
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Total Price">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.totalDue}}
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Check Number">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.data.receiptNumber}}
-                    </ng-template>
-                </ngx-datatable-column>
-            </ngx-datatable> -->
     </div>
 </div>
 <ngx-spinner></ngx-spinner>

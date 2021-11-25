@@ -6,6 +6,9 @@ import { OperaPaymentService } from 'src/app/services/operaPayment/opera-payment
 import { SidenavResponsive } from '../sidenav/sidenav-responsive'
 import { DateAdapter } from '@angular/material/core';
 import * as moment from 'moment';
+import { Data } from 'src/app/models/data'
+import { Router } from '@angular/router'
+import { Constants } from 'src/app/models/constants'
 
 @Component({
   selector: 'app-simphony-check',
@@ -18,7 +21,8 @@ export class SimphonyCheckComponent implements OnInit {
   fromDate = '';
   toDate = '';
   cardNumber = '';
-  transactions = []
+  transactions = [];
+  inParent = true;
 
   // Transaction Stat
   succeedTransactionCount = 0;
@@ -29,7 +33,9 @@ export class SimphonyCheckComponent implements OnInit {
     private spinner: NgxSpinnerService, private dateAdapter: DateAdapter<Date>,
     private sidNav: SidenavResponsive,
     private operaPaymentService: OperaPaymentService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public data: Data,
+    private router: Router
   ) {
     this.dateAdapter.setLocale('en-GB');
   }
@@ -51,11 +57,18 @@ export class SimphonyCheckComponent implements OnInit {
   getOperationTypes() {
     this.loading = true
     this.spinner.show()
-    this.countOperationTypes()
+    // this.countOperationTypes()
 
     this.operaPaymentService
       .simphonyCheckPayment(this.fromDate, this.toDate, "").toPromise().then((res: any) => {
-        this.transactions = res["transactions"]
+        if(res["transactions"] !=  undefined || res["transactions"] != null)
+        {
+          this.transactions = res["transactions"];
+          this.succeedTransactionCount = res['succeedTransactionCount']
+          this.failedTransactionCount = res['failedTransactionCount']
+          this.totalTransactionAmount = res['totalTransactionAmount']
+        }
+
         console.log(this.transactions)
         this.spinner.hide()
         this.loading = false
@@ -151,6 +164,10 @@ export class SimphonyCheckComponent implements OnInit {
     }
   }
   openCheckPayment(row){
+    if(this.inParent){
+      this.data.storage = row;
+      this.router.navigate([Constants.SIMPHONY_PAYMENT_PAGE]);
+      }
   }
   deleteOneUsers(row, flag){
   }
