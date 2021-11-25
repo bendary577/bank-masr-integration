@@ -1,60 +1,147 @@
-<h3>Simphony Checks</h3>
-
-
-<div *ngIf="selectedOperation">
-    <mat-card class="example-card">
-        <mat-card-header>
-            <mat-card-title class="title">Operation Details</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <mat-list-item>
-                <span class="key">Operation Number: </span>
-                <span class="value" *ngIf="selectedOperation.id">{{selectedOperation.id}}</span>
-                <span class="value" *ngIf="!selectedOperation.id">No Info</span>
-            </mat-list-item>
-            <mat-list-item>
-                <span class="key">Operation status: </span>
-                <span class="value" *ngIf="selectedOperation.status">{{selectedOperation.status}}</span>
-                <span class="value" *ngIf="!selectedOperation.status">No Info</span>
-            </mat-list-item>
-            <mat-list-item>
-                <span class="key">Start Date: </span>
-                <span class="value" *ngIf="selectedOperation.creationDate">{{selectedOperation.creationDate}}</span>
-                <span class="value" *ngIf="!selectedOperation.creationDate">No Info</span>
-            </mat-list-item>
-            <mat-list-item>
-                <span class="key">End Date: </span>
-                <span class="value" *ngIf="selectedOperation.endDate">{{selectedOperation.endDate}}</span>
-                <span class="value" *ngIf="!selectedOperation.endDate">No Info</span>
-            </mat-list-item>
-            <mat-list-item>
-                <span class="key">Reason: </span>
-                <span class="value" *ngIf="selectedOperation.reason">{{selectedOperation.reason}}</span>
-                <span class="value" *ngIf="!selectedOperation.reason">No Info</span>
-            </mat-list-item>
-            <mat-list-item *ngIf="!operationData.length">
-                <span> No data.</span>
-            </mat-list-item>
-        </mat-card-content>
-    </mat-card>
-</div>
-<br>
-
+<h3>Simphony Checks Payment</h3>
 <div>
-    <div>
-        <div *ngIf="!operations.length">
-            <mat-card class="example-card">
-                <mat-card-header>
-                    <mat-card-title>No Data</mat-card-title>
-                </mat-card-header>
+    <div class="payment-body">
+
+        <span class="menu-icon">
+            <i class="mdi mdi-credit-card cardIcon"></i>
+        </span>
+
+        <mat-form-field appearance="outline" class="example-full-width creditForm">
+            <input matInput id="cardNumber" name="cardNumber" placeholder="Card Number" [(ngModel)]="cardNumber">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="example-full-width dateForm">
+            <input matInput placeholder="Start Date" [matDatepicker]="fromDateOpicker" name="fromDate" id="fromDate"
+                [(ngModel)]="fromDate" readonly>
+            <mat-icon matDatepickerToggleIcon (click)="resetPicker('fromDate')" [hidden]="!fromDate">clear</mat-icon>
+            <mat-datepicker-toggle matSuffix [for]="fromDateOpicker"></mat-datepicker-toggle>
+            <mat-datepicker #fromDateOpicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="example-full-width dateForm">
+            <input matInput placeholder="End Date" [matDatepicker]="toDatePicker" name="toDate" id="toDate"
+                [(ngModel)]="toDate" readonly>
+            <mat-icon matDatepickerToggleIcon (click)="resetPicker('toDate')" [hidden]="!toDate">clear</mat-icon>
+            <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #toDatePicker></mat-datepicker>
+        </mat-form-field>
+
+        <button mat-flat-button class="filterButton">Export to Excel</button>
+        <button mat-flat-button (click)="filterTransaction()" class="filterButton">Apply Filter</button>
+    </div>
+
+    <div class="row">
+        <!-- <div class="column">
+                <mat-card class="stat-card">
+                    <mat-card-content>
+                        <h2>Total Transactions Amount</h2>
+                        <p style="font-size: 55px; color: darkblue;">0 EGP</p>
+                    </mat-card-content>
+                </mat-card>
+            </div> -->
+
+        <div class="column">
+            <mat-card class="stat-card">
                 <mat-card-content>
-                    <p> No operation to show. </p>
+                    <h2 class="cardHeader">Total Transactions Amount</h2>
+                    <p class="cardText">{{totalTransactionAmount | number:'1.0-2'}} USD</p>
                 </mat-card-content>
             </mat-card>
         </div>
-        <br>
-        <div class="main" *ngIf="operationData.length">
-            <ngx-datatable class="material"  style="height: 300px;" [rows]="operationData" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
+
+        <div class="column">
+            <mat-card class="stat-card">
+                <mat-card-content>
+                    <h2 class="cardHeader">No. of Transactions Succeed</h2>
+                    <p class="cardText"> {{succeedTransactionCount}}
+                        <span class="menu-icon">
+                            <i class="mdi mdi-checkbox-multiple-marked-circle checkboxIcon"></i>
+                        </span>
+                    </p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="column">
+            <mat-card class="stat-card">
+                <mat-card-content>
+                    <h2 class="cardHeader">No. of Transactions Failed</h2>
+                    <p class="cardText"> {{failedTransactionCount}}
+                        <span class="menu-icon">
+                            <i class="mdi mdi-message-alert alertboxIcon"></i>
+                        </span>
+                    </p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+    <div *ngIf="!transactions.length">
+        <mat-card class="example-card">
+            <h2 class="cardHeader">No Data</h2>
+            <mat-card-content>
+                <p class="card-text">There was no new transactions.</p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="main" *ngIf="transactions.length">
+        <ngx-datatable class="material" [rows]="transactions" [columnMode]="'force'" [headerHeight]="50"
+            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sorts]="[{prop: 'creationDate', dir: 'desc'}, {prop: 'creationDate', dir: 'desc'}
+                , {prop: 'amount', dir: 'desc'}]">
+
+                            
+                <ngx-datatable-column name="Check Status">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <span *ngIf="row.payed">Payed</span>
+                        <span *ngIf="!row.payed">Not Payed</span>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="RevenueCenter Name">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.revenueCenterName}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="RevenueCenter Name">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.checkValue}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Check Tips">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.tips}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Creation Time">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.creationDate}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Last Update Time">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.lastUpdate}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Options" *ngIf="hasRole('show_option')" [width]="90">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <button class="menue-btn" mat-button [matMenuTriggerFor]="menu">. . . </button>
+                        <mat-menu #menu="matMenu">
+                            <button *ngIf="!row.deleted" class="menue-btn-choi" mat-menu-item (click)="deleteOneUsers(row, 'true')">Delete Check</button>
+                            <button *ngIf="row.deleted" class="menue-btn-choi" mat-menu-item (click)="deleteOneUsers(row, 'false')">Restore Check</button>
+                            <button class="menue-btn-choi" mat-menu-item (click)="openCheckPayment(row)">Preview Payment</button>
+                        </mat-menu>
+                    </ng-template>
+                </ngx-datatable-column>
+
+        </ngx-datatable>
+
+        <!-- <ngx-datatable class="material"  style="height: 300px;" [rows]="operationData" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
                 <ngx-datatable-column name="Status">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{row.data.status}}
@@ -80,9 +167,93 @@
                         {{row.data.receiptNumber}}
                     </ng-template>
                 </ngx-datatable-column>
-            </ngx-datatable>
-        </div>
-    </div>
-    <ngx-spinner></ngx-spinner>
+            </ngx-datatable> -->
+            <!-- <ngx-datatable-column name="Status">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.status}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Reason">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.reason}}
+                </ng-template>
+            </ngx-datatable-column>
 
+            <ngx-datatable-column name="Transaction Date">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.creationDate | date:'dd-MM-yyyy H:MM:SS'}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Sequence Number">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.sequenceNo}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Guest Number">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.guestNumber}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Card Number">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.cardNumber}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Transaction Amount">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.amount | number:'1.0-2'}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Currency">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.currency}}
+                </ng-template>
+            </ngx-datatable-column> -->
+            <!-- 
+                <ngx-datatable-column name="Check-in Date">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.checkInDate}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Check-out Date">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.checkOutDate}}
+                    </ng-template>
+                </ngx-datatable-column> -->
+
+
+        <!-- <ngx-datatable class="material"  style="height: 300px;" [rows]="operationData" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
+                <ngx-datatable-column name="Status">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.status}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Message">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.message}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="QR Code">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.code}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Total Price">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.totalDue}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Check Number">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.receiptNumber}}
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable> -->
+    </div>
 </div>
+<ngx-spinner></ngx-spinner>

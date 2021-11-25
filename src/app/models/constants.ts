@@ -223,8 +223,8 @@ export class Constants {
   static SIMPHONY_CHECK_CONFIG_PAGE = 'simphonyCheckConfig'
   static SIMPHONY_CHECK_OPERATION = 'Simphony Check Payment'
 
-  static LIST_SIMPHONY_TRANSACTIONS_URL =
-    environment.apiHost + '/listSimphonyTransaction'
+  static LIST_SIMPHONY_CHECK_PAYMENT_URL =
+    environment.apiHost + '/test/simphonyPayment/simphonyCheck'
   static COUNT_SIMPHONY_TRANSACTIONS_URL =
     environment.apiHost + '/countSimphonyTransaction'
   static FILTER_SIMPHONY_TRANSACTION =
@@ -289,11 +289,6 @@ export class Constants {
   static ZEAL_POINTS_PAGE = 'zealPoints'
   static ZEAL_POINTS_CONFIG_PAGE = 'zealPointsCongfig'
   static ZEAL_POINTS_OPERATION = 'Zeal Points'
-
-  static SIMPHONY_PAYMENT_PAGE = 'zealPayment'
-  static ZEAL_PAYMEN
-  T_CONFIG_PAGE = 'zealPaymentCongfig'
-  static ZEAL_PAYMENT_OPERATION = 'Zeal Payment'
 
   static TABS_PAGE = 'tabs'
   static SETTING = 'setting'
