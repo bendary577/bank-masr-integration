@@ -100,8 +100,8 @@
 
             <ngx-datatable-column name="Status">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    <label *ngIf="row.data.items[0].cuFlag == '1'">NEW</label>
-                    <label *ngIf="row.data.items[0].cuFlag == '2'">UPDATE</label>
+                    <label *ngIf="row.data.cuFlag == '1'">NEW</label>
+                    <label *ngIf="row.data.cuFlag == '2'">UPDATE</label>
                 </ng-template>
             </ngx-datatable-column>
 
@@ -119,55 +119,55 @@
 
             <ngx-datatable-column name="Expense Date">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.items[0].expenseDate}}
+                    {{row.data.expenseDate}}
                 </ng-template>
             </ngx-datatable-column>
 
             <ngx-datatable-column name="Item Number">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.items[0].itemNumber}}
+                    {{row.data.itemNumber}}
                 </ng-template>
             </ngx-datatable-column>
 
             <ngx-datatable-column name="Expense Type Id">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.items[0].expenseTypeId}}
+                    {{row.data.expenseTypeId}}
                 </ng-template>
             </ngx-datatable-column>
 
             <ngx-datatable-column name="Unit Price">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.items[0].unitPrice}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Discount">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.items[0].discount}}
+                    {{row.data.unitPrice}}
                 </ng-template>
             </ngx-datatable-column>
 
             <ngx-datatable-column name="VAT">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.items[0].vat}}
+                    {{row.data.vat}}
                 </ng-template>
             </ngx-datatable-column>
 
             <ngx-datatable-column name="Municipality Tax">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.items[0].municipalityTax}}
+                    {{row.data.municipalityTax}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Discount">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.data.discount}}
                 </ng-template>
             </ngx-datatable-column>
 
             <ngx-datatable-column name="Grand Total">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.items[0].grandTotal}}
+                    {{row.data.grandTotal}}
                 </ng-template>
             </ngx-datatable-column>
 
             <ngx-datatable-column name="Payment Type">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.items[0].paymentType}}
+                    {{row.data.paymentType}}
                 </ng-template>
             </ngx-datatable-column>
 
