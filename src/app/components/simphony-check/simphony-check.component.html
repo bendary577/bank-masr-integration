@@ -2,15 +2,15 @@
 <div>
     <div class="payment-body">
 
-        <span class="menu-icon">
-            <i class="mdi mdi-credit-card cardIcon"></i>
+
+        
+        <span class="menu-icon" style="padding-left:10px">
         </span>
 
         <mat-form-field appearance="outline" class="example-full-width creditForm">
             <input matInput id="cardNumber" name="cardNumber" placeholder="Card Number" [(ngModel)]="cardNumber">
+            <i class="mdi mdi-credit-card cardIcon" id="input_img"></i>
         </mat-form-field>
-
-        <!-- <Span style="font-size: 20px;font-weight: bold;color: #f47920;margin: 10px;">Filter Checks By Date</Span> -->
         
         <mat-form-field appearance="outline" class="example-full-width dateForm">
             <input matInput placeholder="Start Date" [matDatepicker]="fromDateOpicker" name="fromDate" id="fromDate"
@@ -98,7 +98,13 @@
                     </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="RevenueCenter Name">
+                <ngx-datatable-column name="Check Number">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.checkNumber}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Check Value">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{row.checkValue}}
                     </ng-template>
@@ -124,11 +130,11 @@
 
                 <ngx-datatable-column name="Options" *ngIf="hasRole('show_option')" [width]="90">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        <button class="menue-btn" mat-button [matMenuTriggerFor]="menu">. . . </button>
+                        <button class="menue-btn" [matMenuTriggerFor]="menu"><i class="mdi mdi-dots-vertical"></i></button>
                         <mat-menu #menu="matMenu">
-                            <button *ngIf="!row.deleted" class="menue-btn-choi" mat-menu-item (click)="deleteOneUsers(row, 'true')">Delete Check</button>
-                            <button *ngIf="row.deleted" class="menue-btn-choi" mat-menu-item (click)="deleteOneUsers(row, 'false')">Restore Check</button>
-                            <button class="menue-btn-choi" mat-menu-item (click)="openCheckPayment(row)">Preview Payment</button>
+                            <!-- <button *ngIf="!row.deleted" class="menue-btn-choi" mat-menu-item (click)="deleteOneUsers(row, 'true')">Delete Check</button> -->
+                            <!-- <button *ngIf="row.deleted" class="menue-btn-choi" mat-menu-item (click)="deleteOneUsers(row, 'false')">Restore Check</button> -->
+                            <button class="menue-btn-choi" mat-menu-item (click)="openCheckPayment(row)">Preview Payments</button>
                         </mat-menu>
                     </ng-template>
                 </ngx-datatable-column>

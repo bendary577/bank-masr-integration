@@ -23,9 +23,14 @@
     }
 
     ::ng-deep .mat-form-field {
-        width: 300px !important;
+        width: 200px !important;
     }
 
+    .dateForm{
+        ::ng-deep .mat-form-field-wrapper{
+          width: 190px !important;
+        }
+    }
 }
 
 mat-expansion-panel {
