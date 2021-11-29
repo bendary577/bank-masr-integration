@@ -130,7 +130,7 @@
             <div class="five-column">
                 <mat-form-field appearance="outline" class="example-full-width creditForm">
                     <input matInput placeholder="Start Date" formContrlName="fromDate" id="fromDate" [(ngModel)]="fromDate"
-                        [matDatepicker]="fromDatepicker" readonly>
+                    style="padding-top: 0px;padding-bottom: 8px;" [matDatepicker]="fromDatepicker" readonly>
                     <mat-icon matDatepickerToggleIcon (click)="resetPicker('fromDate')" [hidden]="!fromDate">clear</mat-icon>
                     <mat-datepicker-toggle matSuffix [for]="fromDatepicker"></mat-datepicker-toggle>
                     <mat-datepicker #fromDatepicker></mat-datepicker>
@@ -139,7 +139,7 @@
             <div class="five-column">
                 <mat-form-field appearance="outline" class="example-full-width creditForm">
                     <input matInput placeholder="End Date" formContrlName="toDate" id="toDate" [(ngModel)]="toDate"
-                        [matDatepicker]="toDatepicker" readonly>
+                    style="padding-top: 0px;padding-bottom: 8px;"  [matDatepicker]="toDatepicker" readonly>
                     <mat-icon matDatepickerToggleIcon (click)="resetPicker('toDate')" [hidden]="!toDate">clear</mat-icon>
                     <mat-datepicker-toggle matSuffix [for]="toDatepicker"></mat-datepicker-toggle>
                     <mat-datepicker #toDatepicker></mat-datepicker>
@@ -148,7 +148,7 @@
 
             <div class="five-column" *ngIf="hasRole('see_group_filter')">
                 <mat-form-field appearance="outline" class="example-full-width creditForm">
-                    <mat-select class="custom-select" [(ngModel)]="selectedGroupId">
+                    <mat-select class="custom-select" [(ngModel)]="selectedGroupId" style="padding-top: 0px;padding-bottom: 8px;">
                         <mat-option value="" selected>All Groups</mat-option>
                         <mat-option value="group.id" *ngFor="let group of groups">{{group.name}}</mat-option>
                     </mat-select>
@@ -175,7 +175,7 @@
                 <mat-form-field appearance="outline" class="example-full-width creditForm">
                     <input matInput placeholder="Start Date" formContrlName="fromDate" id="fromDate"
                         (ngModelChange)="filterTransactions($event)" [(ngModel)]="fromDate"
-                        [matDatepicker]="fromDatepicker" readonly>
+                        style="padding-top: 0px;padding-bottom: 8px;" [matDatepicker]="fromDatepicker" readonly>
                     <mat-icon matDatepickerToggleIcon (click)="resetPicker('fromDate')" [hidden]="!fromDate">clear
                     </mat-icon>
                     <mat-datepicker-toggle matSuffix [for]="fromDatepicker"></mat-datepicker-toggle>
@@ -185,7 +185,7 @@
             <div class="five-column">
                 <mat-form-field appearance="outline" class="example-full-width creditForm">
                     <input matInput placeholder="End Date" formContrlName="toDate" id="toDate" [(ngModel)]="toDate"
-                        (ngModelChange)="filterTransactions($event)" [matDatepicker]="toDatepicker" readonly>
+                    style="padding-top: 0px;padding-bottom: 8px;" (ngModelChange)="filterTransactions($event)" [matDatepicker]="toDatepicker" readonly>
                     <mat-icon matDatepickerToggleIcon (click)="resetPicker('toDate')" [hidden]="!toDate">clear
                     </mat-icon>
                     <mat-datepicker-toggle matSuffix [for]="toDatepicker"></mat-datepicker-toggle>
@@ -194,7 +194,7 @@
             </div>
             <div class="five-column" *ngIf="hasRole('see_group_filter')">
                 <mat-form-field appearance="outline" class="example-full-width creditForm">
-                    <mat-select class="custom-select" [(ngModel)]="selectedGroupId">
+                    <mat-select class="custom-select" [(ngModel)]="selectedGroupId" style="padding-top: 0px;padding-bottom: 8px;">
                         <mat-option value="" selected>All Groups</mat-option>
                         <mat-option value="group.id" *ngFor="let group of groups">{{group.name}}</mat-option>
                     </mat-select>
@@ -202,27 +202,27 @@
                 </mat-form-field>
             </div>
             <div class="five-column" *ngIf="hasRole('see_wallet_filter')">
-                <mat-form-field appearance="outline" class="example-full-width creditForm">
+                <mat-form-field appearance="outline" class="example-full-width creditForm" >
                     <input matInput (input)="filterTransactions($event)" placeholder="Revenue Center"
-                        formContrlName="revenue" id="revenue" [(ngModel)]="selectedRevenue">
+                        formContrlName="revenue" id="revenue" [(ngModel)]="selectedRevenue" style="padding-top: 0px;padding-bottom: 8px;">
                 </mat-form-field>
             </div>
             <div class="five-column" *ngIf="hasRole('see_wallet_filter')">
                 <mat-form-field appearance="outline" class="example-full-width creditForm">
                     <input matInput (input)="filterTransactions($event)" placeholder="Guest Name"
-                        formContrlName="guestName" id="guestName" [(ngModel)]="selectedGuestName">
+                        formContrlName="guestName" id="guestName" [(ngModel)]="selectedGuestName" style="padding-top: 0px;padding-bottom: 8px;">
                 </mat-form-field>
             </div>
             <div class="five-column" *ngIf="hasRole('see_wallet_filter')">
                 <mat-form-field appearance="outline" class="example-full-width creditForm">
                     <input matInput (input)="filterTransactions($event)" placeholder="Card Number"
-                        formContrlName="cardNumber" id="cardNumber" [(ngModel)]="selectedCardNum">
+                        formContrlName="cardNumber" id="cardNumber" [(ngModel)]="selectedCardNum" style="padding-top: 0px;padding-bottom: 8px;">
                 </mat-form-field>
             </div>
             <div class="five-column" *ngIf="hasRole('see_wallet_filter')">
                 <mat-form-field appearance="outline" class="example-full-width creditForm">
                     <mat-select class="custom-select" [(ngModel)]="selectedCardStatues"
-                        (ngModelChange)="filterTransactions($event)">
+                        (ngModelChange)="filterTransactions($event)" style="padding-top: 0px;padding-bottom: 8px;">
                         <mat-option value="" selected>All Statues</mat-option>
                         <mat-option value="{{statue}}" *ngFor="let statue of statues">{{statue}}</mat-option>
                     </mat-select>
@@ -233,11 +233,6 @@
                     [disabled]="transactionList.transactionData.length == 0" class="filterButton"
                     style="height: 30px; margin-top: 5px;">Export To Excel</button>
             </div>
-            <!-- <div class="filter-view" *ngIf="selection()">
-                <div class="filter-item" [ngStyle]="props" *ngFor="let selection of selections">
-                    {{selection}}
-                </div>
-            </div> -->
         </div>
     </div>
     <div class="main">

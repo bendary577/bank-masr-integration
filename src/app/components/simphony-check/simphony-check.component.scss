@@ -124,7 +124,7 @@
   color: #f47920;
   width: 50px;
   height: 50px;
-  font-size: 30px;  padding: 8px; padding-top: 12px;
+  font-size: 30px;
 }
 
 .checkboxIcon{
@@ -153,6 +153,10 @@
   color: #f47920 !important;
 }
 
+::ng-deep .mat-input-element{
+  margin-bottom: 10px !important;
+}
+
 h3 {
     background-color: #f1f1f1!important;
     font-weight: bolder !important;
@@ -169,10 +173,24 @@ h3 {
   font-size: 20px;
 }
 
+.menue-btn:hover{
+  background-color: inherit;
+  color: rgb(80, 80, 80);
+}
+
 .menue-btn{
+  border: none;
   width: 15px;
-  background-color: white;
+  background-color: inherit;
   color: black;
   font-size: 20px;
   font-weight: bold;
+}
+
+#input_img {
+  position:absolute;
+  bottom:25px;
+  right:10px;
+  width:24px;
+  height:24px;
 }
