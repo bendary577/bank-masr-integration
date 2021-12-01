@@ -3,9 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  apiHost: 'http://localhost:8081',
+  // apiHost: 'http://localhost:8081',
   // apiHost: 'http://130.211.219.76:8081',
-  // apiHost: 'http://34.122.155.73:8081',
+  apiHost: 'http://34.122.155.73:8081',
 
   production: false,
 }

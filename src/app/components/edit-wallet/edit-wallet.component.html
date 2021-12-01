@@ -1,7 +1,7 @@
 <div *ngIf="!showVoucher">
     <span *ngIf="inCharge" mat-dialog-title >Charge Wallet</span>
     <span *ngIf="inDeduct" mat-dialog-title >Deduct From Wallet</span>
-    <div class="row">
+    <div class="row charge_form">
         <div mat-dialog-content>
             <form [formGroup]="form" class="my-form">
                 <div class="form-group">

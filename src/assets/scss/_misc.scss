@@ -39,6 +39,7 @@ body {
   display: inline-flex !important;
   // transition: width $action-transition-duration $action-transition-timing-function, margin $action-transition-duration $action-transition-timing-function;
   width: 100%;
+  overflow-x: scroll;
   min-height: calc(100vh - #{$navbar-height});
   // padding-top: $navbar-height;
   @include display-flex();

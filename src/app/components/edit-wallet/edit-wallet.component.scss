@@ -10,6 +10,7 @@ button {
 
 .groups-buttons {
   width: 100px;
+  margin: 10px 5px 20px 20px
 }
 
 .list-group-item {
@@ -18,4 +19,10 @@ button {
 
 ::ng-deep .mat-dialog-container {
   height: auto !important;
+}
+
+.charge_form{
+  ::ng-deep .mat-dialog-content{
+      padding: 0 40px;
+  }
 }
