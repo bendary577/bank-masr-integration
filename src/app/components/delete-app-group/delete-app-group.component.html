@@ -13,7 +13,6 @@
         <div *ngIf="groups && groups.length != 0 && !withUsers" class="form-group" style="padding-top: 10px;">
             <mat-form-field class="example-full-width">
                 <mat-select matInput id="groups" name="groups" placeholder="Group" formControlName="parentGroup">
-                    <mat-option></mat-option>
                     <mat-option [value]=g *ngFor="let g of groups">{{g.name}}</mat-option>
                 </mat-select>
             </mat-form-field>

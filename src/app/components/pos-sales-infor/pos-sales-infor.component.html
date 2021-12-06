@@ -12,7 +12,6 @@
         <mat-form-field appearance="outline">
             <mat-select required class="form-controls" id="sync" placeholder="Sync Job"
             (ngModelChange)="getSyncJobData()" [(ngModel)]="selectedJob">
-                <mat-option></mat-option>
                 <mat-option [value]="job" *ngFor="let job of jobs">{{job.creationDate | date:'dd-MM-yyyy H:MM:SS'}} -
                     {{job.status}}
                     <p *ngIf="job.rowsFetched == 0">- No new data fetched.</p>
