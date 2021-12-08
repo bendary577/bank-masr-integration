@@ -41,8 +41,8 @@ export class ManageUsersComponent implements OnInit {
   selectedCardNum = ''
   selectedCardStatues = ''
   statues = ['Active', 'Expired', 'Deleted']
-  fromDate
-  toDate
+  fromDate = ''
+  toDate  = ''
   isEntrySys = true
 
   usersList = {
@@ -245,7 +245,7 @@ export class ManageUsersComponent implements OnInit {
     if (type) {
       isGeneric = true
       dialogRef = this.dialog.open(AddAppUserAccompiedComponent, {
-        width: '700px',
+        width: '710px',
       })
     } else {
       dialogRef = this.dialog.open(AddAppUserComponent, {
@@ -319,7 +319,7 @@ export class ManageUsersComponent implements OnInit {
     console.log(isGeneric)
     if (isGeneric) {
       dialogRef = this.dialog.open(AddAppUserAccompiedComponent, {
-        width: '700px',
+        width: '710px',
         data: {
           user: this.usersList.selected[0],
         },
@@ -555,17 +555,38 @@ export class ManageUsersComponent implements OnInit {
   }
 
   resetPicker(event) {
-    if (event == 'fromDate') {
+    // if (event == 'fromDate') {
       this.fromDate = undefined
-      this.filterGuests(event)
-    } else if (event == 'toDate') {
+      // this.filterGuests(event)
+    // } else if (event == 'toDate') {
       this.toDate = undefined
       this.filterGuests(event)
-    }
+    // }
   }
 
   filterGuests(event) {
-    const guests = this.usersList.allGuestsBeforeFilter
+    const guests = this.usersList.allGuestsBeforeFilter;
+
+    if((this.fromDate != '' &&
+    this.fromDate != undefined) && (this.toDate == undefined ||
+      this.toDate == '')){
+        this.snackBar.open("Please Configure End Date Time.", null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass: ['blue-snackbar'],
+        })
+      }
+
+      if((this.toDate != '' &&
+      this.toDate != undefined) && (this.fromDate == undefined ||
+        this.fromDate == '')){
+          this.snackBar.open("Please Configure Start Date Time.", null, {
+            duration: 2000,
+            horizontalPosition: 'center',
+            panelClass: ['blue-snackbar'],
+          })
+        }
+
     if (
       this.fromDate != '' &&
       this.fromDate != undefined &&
