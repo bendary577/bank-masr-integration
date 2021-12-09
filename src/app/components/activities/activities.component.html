@@ -221,7 +221,7 @@
             </div>
             <div class="five-column" *ngIf="hasRole('see_wallet_filter')">
                 <mat-form-field appearance="outline" class="example-full-width creditForm">
-                    <select matNativeControl required class="custom-select" [(ngModel)]="selectedCardStatues" 
+                    <select matNativeControl class="custom-select" [(ngModel)]="selectedCardStatues" 
                     (ngModelChange)="filterTransactions($event)" style="padding-top: 0px;padding-bottom: 8px;position: absolute;left: 0;top: 4px;">
                         <option value="" selected>All Statues</option>
                         <option value="{{statue}}" *ngFor="let statue of statues">{{statue}}</option>

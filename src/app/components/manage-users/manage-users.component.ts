@@ -573,7 +573,7 @@ export class ManageUsersComponent implements OnInit {
         this.snackBar.open("Please Configure End Date Time.", null, {
           duration: 2000,
           horizontalPosition: 'center',
-          panelClass: ['blue-snackbar'],
+          panelClass:['redNoMatch']
         })
       }
 
@@ -583,7 +583,7 @@ export class ManageUsersComponent implements OnInit {
           this.snackBar.open("Please Configure Start Date Time.", null, {
             duration: 2000,
             horizontalPosition: 'center',
-            panelClass: ['blue-snackbar'],
+            panelClass:['redNoMatch']
           })
         }
 

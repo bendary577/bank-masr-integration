@@ -301,3 +301,9 @@ canvas{
       width:80%;
     }
 }
+
+::ng-deep .redNoMatch
+{
+  color:white;
+  background: #727272 !important;
+}
