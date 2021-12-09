@@ -230,6 +230,7 @@ canvas{
   margin-bottom: 5%;
   border-radius: 10px;
   text-align: center;
+  font-size: 20px;
 }
 
 .activity_body{
@@ -299,4 +300,10 @@ canvas{
     .stat-card{
       width:80%;
     }
+}
+
+::ng-deep .redNoMatch
+{
+  color:white;
+  background: #727272 !important;
 }

@@ -1,4 +1,4 @@
-<div *ngIf="usersList.usersData.length != 0 || usersList.showLoading" class="header">
+<div *ngIf="usersList.allGuestsBeforeFilter.length != 0 ||usersList.usersData.length != 0 || usersList.showLoading" class="header">
     <button mat-flat-button class="groups-buttons" (click)="addUserDialog(true)" *ngIf="hasRole('show_G_U_button')">Add
         Generic Guest</button>
     <button mat-flat-button class="groups-buttons" (click)="addUserDialog(false)" *ngIf="hasRole('add_guest')">Add
@@ -60,11 +60,11 @@
 
         <div class="five-column" *ngIf="hasRole('see_wallet_filter')">
             <mat-form-field appearance="outline" class="example-full-width creditForm">
-                <mat-select class="custom-select" [(ngModel)]="selectedCardStatues" 
-                (ngModelChange)="filterGuests($event)" style="padding-top: 0px;padding-bottom: 8px;">
-                    <mat-option value="" selected>All Statues</mat-option>
-                    <mat-option value="{{statue}}" *ngFor="let statue of statues">{{statue}}</mat-option>
-                </mat-select>
+                <select matNativeControl class="custom-select" [(ngModel)]="selectedCardStatues" 
+                (ngModelChange)="filterGuests($event)" style="padding-top: 0px;padding-bottom: 8px;position: absolute;left: 0;top: 4px;">
+                    <option value="" selected>All Statues</option>
+                    <option value="{{statue}}" *ngFor="let statue of statues">{{statue}}</option>
+                  </select>
             </mat-form-field>
         </div>
 
@@ -78,12 +78,18 @@
 <div class="main">
 
     <div *ngIf="usersList.usersData.length == 0 && !usersList.showLoading" style="text-align: center;">
+        <div *ngIf="usersList.allGuestsBeforeFilter.length != 0">
+            <img style="max-width: 300px; margin-top: 100px;" src="../../../assets/no-user.png" alt="image">
+            <p class="user-name">There is no guests in this date time range!</p>
+        </div>
+        <div *ngIf="usersList.allGuestsBeforeFilter.length == 0">
         <img style="max-width: 300px; margin-top: 100px;" src="../../../assets/no-user.png" alt="image">
-        <p class="user-name">You haven't added any users yet!</p>
+        <p class="user-name">You haven't added any guest yet!</p>
         <button mat-flat-button class="groups-buttons" (click)="addUserDialog(true)"
             *ngIf="hasRole('show_G_U_button')">Add Generic Guest</button>
         <button mat-flat-button class="groups-buttons" (click)="addUserDialog(false)" *ngIf="hasRole('add_guest')">Add
             Guest</button>
+        </div>
     </div>
 
     <div *ngIf="usersList.usersData.length != 0 || usersList.showLoading">

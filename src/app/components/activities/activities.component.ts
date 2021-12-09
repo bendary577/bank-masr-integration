@@ -34,7 +34,7 @@ export class ActivitiesComponent implements OnInit {
   selectedGuestName = ''
   selectedCardNum = ''
   selectedCardStatues = ''
-  guestAverage = 0
+  guestAverage = 2
   selections = []
   statues = ['Active', 'Expired', 'Deleted']
   props = { 'background-color': '#e07d93' }
@@ -48,6 +48,7 @@ export class ActivitiesComponent implements OnInit {
   rvcBarChartData: ChartDataSets[]
   public barChartOptions: ChartOptions
   chartCreated = false
+  dateRnageFlage = 'Total';
 
   transactionList = {
     paginateData: true as boolean,
@@ -106,7 +107,16 @@ export class ActivitiesComponent implements OnInit {
     location.reload()
   }
 
+  validateDateRange(dateRange){
+    if(this.dateRnageFlage == dateRange){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
   totalSpend(date) {
+    this.dateRnageFlage = date;
     this.restFilters()
     this.spinner.show()
     this.transactionList.transactionData = []
@@ -122,10 +132,18 @@ export class ActivitiesComponent implements OnInit {
         this.allTransactionDataBeforeFilter()
         this.totalSpendM = res['totalSpend']
         this.topRevenueCenters = res['topRevenueCenters']
-        this.rvcBarChartLabels = res['revenues']
-        this.rvcBarChartData = [
-          { data: res['expenses'], label: 'Sales Per Revenue Center' },
-        ]
+        if(res['revenues'] == null || res['revenues'] == undefined || res['revenues'] == []){
+          this.rvcBarChartLabels = [];
+        }else{
+          this.rvcBarChartLabels = res['revenues']
+        }
+        if( res['expenses'] == null || res['expenses'] == undefined || res['expenses'] == []){
+          this.rvcBarChartData = [
+            { data: [], label: 'Sales Per Revenue Center' },
+          ]        }else{
+            this.rvcBarChartData = [
+              { data: res['expenses'], label: 'Sales Per Revenue Center' },
+            ]        }
         this.createChart()
       })
       .catch((err) => {
@@ -291,10 +309,18 @@ export class ActivitiesComponent implements OnInit {
         this.transactionList.transactionData = res['transactions']
         this.totalSpendM = res['totalSpend']
         this.topRevenueCenters = res['topRevenueCenters']
-        this.rvcBarChartLabels = res['revenues']
-        this.rvcBarChartData = [
-          { data: res['expenses'], label: 'Sales Per Revenue Center' },
-        ]
+        if(res['revenues'] == null || res['revenues'] == undefined || res['revenues'] == []){
+          this.rvcBarChartLabels = [];
+        }else{
+          this.rvcBarChartLabels = res['revenues']
+        }
+        if( res['expenses'] == null || res['expenses'] == undefined || res['expenses'] == []){
+          this.rvcBarChartData = [
+            { data: [], label: 'Sales Per Revenue Center' },
+          ]        }else{
+            this.rvcBarChartData = [
+              { data: res['expenses'], label: 'Sales Per Revenue Center' },
+            ]        }
         this.createChart()
         this.transactionList.showLoading = false
         this.snackBar.open('Transactions filterd successfully.', null, {
@@ -398,7 +424,7 @@ export class ActivitiesComponent implements OnInit {
     )
 
     this.guestAverage =
-      Math.round((transactions.length / diff + Number.EPSILON) * 100) / 100
+      Math.round((transactions.length / diff + Number.EPSILON) * 100) / 100;
 
     // for (let i = 0; i < transactions.length; i++) {
     //   if (guests.indexOf(transactions[i].code) <= -1) {
@@ -409,17 +435,38 @@ export class ActivitiesComponent implements OnInit {
   }
 
   resetPicker(event) {
-    if (event == 'fromDate') {
+    // if (event == 'fromDate') {
       this.fromDate = undefined
-      this.filterTransactions(event)
-    } else if (event == 'toDate') {
+      // this.filterTransactions(event)
+    // } else if (event == 'toDate') {
       this.toDate = undefined
       this.filterTransactions(event)
-    }
+    // }
   }
 
   filterTransactions(event) {
     const transactions = this.transactionList.allTransactionDataBeforeFilter
+
+    if((this.fromDate != '' &&
+    this.fromDate != undefined) && (this.toDate == undefined ||
+      this.toDate == '')){
+        this.snackBar.open("Please Configure End Date Time.", null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:['redNoMatch']
+        })
+      }
+
+      if((this.toDate != '' &&
+      this.toDate != undefined) && (this.fromDate == undefined ||
+        this.fromDate == '')){
+          this.snackBar.open("Please Configure Start Date Time.", null, {
+            duration: 2000,
+            horizontalPosition: 'center',
+            panelClass:['redNoMatch']
+          })
+        }
+        
     if (
       this.fromDate != '' &&
       this.fromDate != undefined &&

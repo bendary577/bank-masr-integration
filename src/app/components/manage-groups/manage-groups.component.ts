@@ -227,6 +227,11 @@ export class ManageGroupsComponent implements OnInit {
   }
 
   validateUpdateGroup(){
+
+    if(this.hasRole("")){
+      return true;
+    }
+
     if(this.groupsList.selected.length != 1){
       return true;
     }
@@ -238,11 +243,24 @@ export class ManageGroupsComponent implements OnInit {
         return true;
       }
     }
+    
+    return false;
+  }
+
+  validateAddGroup(){
+    if(this.hasRole("")){
+      return true;
+    }
 
     return false;
   }
 
   validateDeleteGroup(){
+    
+    if(this.hasRole("")){
+      return true;
+    }
+
     if(this.groupsList.selected.length == 0){
       return true;
     }
@@ -256,11 +274,15 @@ export class ManageGroupsComponent implements OnInit {
           return true;
       }
     }
-
     return false;
   }
 
   validateRestoreGroup(){
+    
+    if(this.hasRole("")){
+      return true;
+    }
+
     if(this.groupsList.selected.length == 0){
       return true;
     }
@@ -275,6 +297,13 @@ export class ManageGroupsComponent implements OnInit {
       }
     }
     return false;
+  }
+  
+  hasRole(reference) {
+    if (JSON.parse(localStorage.getItem('account')).id == '613e240ade75d51cc04fb38d') {
+      return true;
+    }
+    // return this.sidNav.hasRole(reference)
   }
 
 }
