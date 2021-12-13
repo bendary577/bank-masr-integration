@@ -1,5 +1,8 @@
 <div class="dialog-body">
-    <h1 mat-dialog-title>New Guest</h1>
+    <h1 mat-dialog-title>
+        <label [hidden]="inUpdate" style="margin-top:10px;">New Guest</label>
+        <label [hidden]="!inUpdate" style="margin-top:10px;">Update Guest</label>
+    </h1>
 
     <div class="row">
 

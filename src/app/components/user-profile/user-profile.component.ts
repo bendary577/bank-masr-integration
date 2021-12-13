@@ -91,7 +91,7 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
-  getCurrency(){
+  getCurrency() {
     return JSON.parse(localStorage.getItem("account")).currency;
   }
 
@@ -244,10 +244,10 @@ export class UserProfileComponent implements OnInit {
     }).catch(err => {
       this.sppiner.hide();
       let message = "";
-      if(process == 'Email'){
-      message = "Invalid Email.";
-      }else{
-      message = "Invalid Mobile Number.";
+      if (process == 'Email') {
+        message = "Invalid Email.";
+      } else {
+        message = "Invalid Mobile Number.";
       }
       if (err.status === 401) {
         message = ErrorMessages.SESSION_EXPIRED;
@@ -263,7 +263,7 @@ export class UserProfileComponent implements OnInit {
 
   updateUserDialog() {
     const dialogRef = this.dialog.open(AddAppUserAccompiedComponent, {
-      width: '900px',
+      width: '800px',
       data: {
         user: this.user
       }
@@ -271,33 +271,32 @@ export class UserProfileComponent implements OnInit {
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.sppiner.show()
-        if (res.group == undefined)
-          this.loyaltyService.addApplicationUser(false, true, res.name, res.email, res.group, res.image,
-            this.user.id, res.accompiendUsers, res.cardCode, res.mobile, res.balance, res.expire, res.sendEmail, res.sendSMS, res.points).then((result: any) => {
-              this.getApplicationUser();
-              this.sppiner.hide()
-              this.snackBar.open("User updated successfully.", null, {
-                duration: 2000,
-                horizontalPosition: 'center',
-                panelClass: "my-snack-bar-success"
-              });
-            }).catch(err => {
-              this.getApplicationUser();
-              this.sppiner.hide()
-              let message = "";
-              if (err.status === 401) {
-                message = ErrorMessages.SESSION_EXPIRED;
-              } else if (err.error.message) {
-                message = err.error.message;
-              } else if (err.message) {
-                message = ErrorMessages.FAILED_TO_SAVE_CONFIG
-              }
-              this.snackBar.open(message, null, {
-                duration: 3000,
-                horizontalPosition: 'center',
-                panelClass: "my-snack-bar-fail"
-              });
-            })
+        this.loyaltyService.addApplicationUser(false, true, res.name, res.email, res.group, res.image,
+          this.user.id, res.accompiendUsers, res.cardCode, res.mobile, res.balance, res.expire, res.sendEmail, res.sendSMS, res.points).then((result: any) => {
+            this.getApplicationUser();
+            this.sppiner.hide()
+            this.snackBar.open("User updated successfully.", null, {
+              duration: 2000,
+              horizontalPosition: 'center',
+              panelClass: "my-snack-bar-success"
+            });
+          }).catch(err => {
+            this.getApplicationUser();
+            this.sppiner.hide()
+            let message = "";
+            if (err.status === 401) {
+              message = ErrorMessages.SESSION_EXPIRED;
+            } else if (err.error.message) {
+              message = err.error.message;
+            } else if (err.message) {
+              message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+            }
+            this.snackBar.open(message, null, {
+              duration: 3000,
+              horizontalPosition: 'center',
+              panelClass: "my-snack-bar-fail"
+            });
+          })
       }
     })
   }

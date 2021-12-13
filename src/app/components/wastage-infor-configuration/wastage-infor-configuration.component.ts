@@ -121,8 +121,23 @@ export class WastageInforConfigurationComponent implements OnInit {
       .getwasteGroups()
       .toPromise()
       .then((res: any) => {
-        this.wasteGroups = res.data
+        if(res.data.length > 0){
+          this.wasteGroups = res.data
+        }
 
+        if (res.success) {
+          this.snackBar.open(res.message, null, {
+            duration: 2000,
+            horizontalPosition: 'center',
+            panelClass:"my-snack-bar-success"
+          });
+        }else{
+          this.snackBar.open(res.message, null, {
+            duration: 3000,
+            horizontalPosition: 'center',
+            panelClass: 'my-snack-bar-fail',
+          })
+        }
         this.wasteLoading = false
         this.spinner.hide()
       })

@@ -6,7 +6,7 @@
                     <h2>Top Guests</h2>
                     <div *ngIf="users.length == 0 || !transactionList.transactionData.length">
                         <img class="user-img" src="../../../assets/defaultImage.jpg" alt="image">
-                        <p class="user-name">There is no Guests yet</p>
+                        <p class="user-name">There is no Guests</p>
                     </div>
                     <div class="row row-center" *ngIf="users.length != 0 && transactionList.transactionData.length">
                         <div class="column" *ngFor="let user of users">
@@ -25,7 +25,7 @@
                     <h2>Top Groups</h2>
                     <div *ngIf="topGroups.length == 0 || !transactionList.transactionData.length">
                         <img class="user-img" src="../../../assets/defaultGroup.png" alt="image">
-                        <p class="user-name">There is no groups yet</p>
+                        <p class="user-name">There is no groups</p>
                     </div>
                     <div class="row row-center" *ngIf="topGroups.length != 0 && transactionList.transactionData.length">
                         <div class="column" *ngFor="let group of topGroups">
@@ -43,7 +43,7 @@
                     <h2>Top Revenues</h2>
                     <div *ngIf="topRevenueCenters.length == 0">
                         <img class="user-img" src="../../../assets/restaurant.png" alt="image">
-                        <p class="user-name">There is no Revenue Centers yet</p>
+                        <p class="user-name">There is no Revenue Centers</p>
                     </div>
                     <div class="row row-center">
                         <div class="column" *ngFor="let revenueCenter of topRevenueCenters">
@@ -62,14 +62,14 @@
                     <form class="my-form">
                         <div class="row">
                             <div class="two-column" style="text-align: left;">
-                                <button class="filter-btn" (click)="totalSpend('Totoal')"
+                                <button class="filter-btn" (click)="totalSpend('Total')" [disabled]="validateDateRange('Total')"
                                     mat-raised-button>Total</button>
-                                <button class="filter-btn" (click)="totalSpend('Today')"
+                                <button class="filter-btn" (click)="totalSpend('Today')" [disabled]="validateDateRange('Today')"
                                     mat-raised-button>Today</button>
-                                <button class="filter-btn" (click)="totalSpend('Last Week')" mat-raised-button>Last
-                                    Week</button>
-                                <button class="filter-btn" (click)="totalSpend('Last Month')" mat-raised-button>Last
-                                    Month</button>
+                                <button class="filter-btn" (click)="totalSpend('Last Week')" [disabled]="validateDateRange('Last Week')"
+                                 mat-raised-button>Last Week</button>
+                                <button class="filter-btn" (click)="totalSpend('Last Month')" [disabled]="validateDateRange('Last Month')"
+                                 mat-raised-button>Last Month</button>
                             </div>
                             <div class="two-column">
                                 <h3 style="border-radius: 10px; text-align: center; height: auto;">
@@ -109,7 +109,7 @@
                         <img src="../../../assets/group.png" class="people-img">
                         <img src="../../../assets/increase.png" class="chart-img">
                         <h3 class="guest-chart">
-                            Average Number of Guests<br>
+                            Average Number of Guests per day<br>
                             {{guestAverage}} Guests
                         </h3>
                     </div>
@@ -221,11 +221,11 @@
             </div>
             <div class="five-column" *ngIf="hasRole('see_wallet_filter')">
                 <mat-form-field appearance="outline" class="example-full-width creditForm">
-                    <mat-select class="custom-select" [(ngModel)]="selectedCardStatues"
-                        (ngModelChange)="filterTransactions($event)" style="padding-top: 0px;padding-bottom: 8px;">
-                        <mat-option value="" selected>All Statues</mat-option>
-                        <mat-option value="{{statue}}" *ngFor="let statue of statues">{{statue}}</mat-option>
-                    </mat-select>
+                    <select matNativeControl class="custom-select" [(ngModel)]="selectedCardStatues" 
+                    (ngModelChange)="filterTransactions($event)" style="padding-top: 0px;padding-bottom: 8px;position: absolute;left: 0;top: 4px;">
+                        <option value="" selected>All Statues</option>
+                        <option value="{{statue}}" *ngFor="let statue of statues">{{statue}}</option>
+                      </select>
                 </mat-form-field>
             </div>
             <div class="five-column filterButtons" style="width: 140px;" *ngIf="hasRole('see_wallet_filter')">

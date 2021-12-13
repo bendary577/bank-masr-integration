@@ -151,6 +151,7 @@ export class AddAppUserAccompiedComponent implements OnInit  {
         expire: this.form.controls.expire.value,
         group: this.group.id,
         image: this.srcResult,
+        points:0,
         cardCode:this.form.controls.cardNum.value,
         sendEmail: this.sendEmail,
         sendSMS: this.sendSMS,
