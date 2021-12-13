@@ -9,7 +9,7 @@
             (ngModelChange)="getSyncJobData()" [(ngModel)]="selectedJob">
                 <mat-option [value]="job" *ngFor="let job of jobs">{{job.creationDate | date:'dd-MM-yyyy H:MM:SS'}} -
                     {{job.status}}
-                    <p *ngIf="job.rowsFetched == 0 &&  job.status != 'Running'">- No new data fetched.</p>
+                 <!--   <p *ngIf="job.rowsFetched == 0 &&  job.status != 'Running'">- No new data fetched.</p>-->
                 </mat-option>
             </mat-select>
         </mat-form-field>
