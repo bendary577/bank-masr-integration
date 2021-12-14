@@ -149,7 +149,8 @@
         </ul>
       </div>
     </li>
-    <li class="nav-item menu-items" [ngClass]="{ 'active' : repBasicCollapsed }" *ngIf="hasRole('see_reports') && reports.length> 0">
+    <!-- *ngIf="hasRole('see_reports') && reports.length> 0" -->
+    <li class="nav-item menu-items" [ngClass]="{ 'active' : repBasicCollapsed }" *ngIf="hasRole('see_reports')" >
       <a class="nav-link" (click)=" titleOpened('repBasicCollapsed');" [attr.aria-expanded]="repBasicCollapsed"
         aria-controls="ui-basic">
         <span class="menu-icon">
@@ -160,7 +161,7 @@
       </a>
       <div class="collapse" id="ui-basic" [ngbCollapse]="!repBasicCollapsed">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" rrouterLink="/operaBookingDashboard" routerLinkActive="active"
+          <li class="nav-item"> <a class="nav-link" routerLink="/operaBookingDashboard" routerLinkActive="active"
               translate>Booking Report</a></li>
         </ul>
       </div>

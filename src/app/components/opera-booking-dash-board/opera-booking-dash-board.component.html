@@ -1,259 +1,274 @@
-<h3>Booking Dashboard</h3>
-
-<form class="my-form">
-    <div>
-        <mat-form-field class="example-full-width" style="width: 90%;padding-left: 5%;">
-            <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Booking No."
-             name="searchInput" [(ngModel)]="searchInput" (ngModelChange)="filterBooking($event)">
-        </mat-form-field>
-    </div>
-</form>
-
-<br>
- 
-<div>
-    <div>
-        <ngx-datatable style="max-width: 98%;height: 300px;" class="material" [loadingIndicator]="bookingList.showLoading" [messages]="bookingList.messages" 
-        [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-            [rows]="bookingList.bookingData" [selected]="bookingList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
-        (select)='onSelect($event)' [scrollbarH]="true">
-    
-            <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
-            <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
-            <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
-            </ng-template>
-    
-            <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
-                <input class="regular-checkbox" type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
-            </ng-template>
-            </ngx-datatable-column>
-    
-            <ngx-datatable-column name="Status">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <label *ngIf="row.data.cuFlag == '1'">NEW</label>
-                    <label *ngIf="row.data.cuFlag == '2'">UPDATE</label>
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Transaction Id">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.transactionId}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Reservation Status">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.reservationStatus}}
-                </ng-template>
-            </ngx-datatable-column>
-    
-            <ngx-datatable-column name="Booking No">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.bookingNo}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Nationality Code">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.nationalityCode}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Arrival Date">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.checkInDate}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Departure Date">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.checkOutDate}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Number of Nights">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.totalDurationDays}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Room Number">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.allotedRoomNo}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Room Type">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.roomType}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Full Rate Amount">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.totalRoomRate}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Total Room">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.grandTotal}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Gender">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.gender}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Adults">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.noOfGuest}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Purpose of Visit">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.purposeOfVisit}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Date Of Birth">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.dateOfBirth}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Payment Methods">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.paymentType}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Number Of Room">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.noOfRooms}}
-                </ng-template>
-            </ngx-datatable-column>
-    
-            <ngx-datatable-column name="View JSON">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <button mat-flat-button (click)="viewJSON(row.data)">JSON</button>
-                </ng-template>
-            </ngx-datatable-column>
-        </ngx-datatable>
-    </div>
-
-    <br>
+<div class="config-style">
+    <h3>Booking Dashboard</h3>
 
     <div>
-        <ngx-datatable style="max-width: 98%;height: 300px;" class="material" [loadingIndicator]="cancelBookingList.showLoading" [messages]="bookingList.messages" 
-        [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-            [rows]="cancelBookingList.bookingData" [selected]="cancelBookingList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
-        (select)='onSelect($event)' [scrollbarH]="true">
-    
-            <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
-            <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
-            <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
-            </ng-template>
-    
-            <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
-                <input class="regular-checkbox" type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
-            </ng-template>
-            </ngx-datatable-column>
-    
-            <ngx-datatable-column name="Status">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <label *ngIf="row.data.cuFlag == '1'">NEW</label>
-                    <label *ngIf="row.data.cuFlag == '2'">UPDATE</label>
-                </ng-template>
-            </ngx-datatable-column>
-    
-            <ngx-datatable-column name="Transaction Id">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.transactionId}}
-                </ng-template>
-            </ngx-datatable-column>
+        <div>
+            <form class="my-form">
+                <div>
+                    <mat-form-field class="example-full-width" style="width: 90%;padding-left: 5%;">
+                        <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Booking No."
+                        name="searchInput" [(ngModel)]="searchInput" (ngModelChange)="filterBooking($event)">
+                    </mat-form-field>
+                </div>
+            </form>
+        </div>
+        <br>
 
-            <ngx-datatable-column name="Booking No">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.bookingNo}}
+        <div>
+            <ngx-datatable style="max-width: 98%;height: 300px;" class="material" [loadingIndicator]="bookingList.showLoading" [messages]="bookingList.messages" 
+            [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+                [rows]="bookingList.bookingData" [selected]="bookingList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
+            (select)='onSelect($event)' [scrollbarH]="true">
+        
+                <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
+                <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+                <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
                 </ng-template>
-            </ngx-datatable-column>
+        
+                <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
+                    <input class="regular-checkbox" type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
+                </ng-template>
+                </ngx-datatable-column>
 
-            <ngx-datatable-column name="Cancel Reason">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.cancelReason}}
-                </ng-template>
-            </ngx-datatable-column>
+                <ngx-datatable-column name="Status">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.status}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Reason">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.reason}}
+                    </ng-template>
+                </ngx-datatable-column>
+                
+                <ngx-datatable-column name="Status">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <label *ngIf="row.data.cuFlag == '1'">NEW</label>
+                        <label *ngIf="row.data.cuFlag == '2'">UPDATE</label>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Transaction Id">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.transactionId}}
+                    </ng-template>
+                </ngx-datatable-column>
 
-            <ngx-datatable-column name="Cancel With Charges">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.cancelWithCharges}}
-                </ng-template>
-            </ngx-datatable-column>
+                <ngx-datatable-column name="Reservation Status">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.reservationStatus}}
+                    </ng-template>
+                </ngx-datatable-column>
+        
+                <ngx-datatable-column name="Booking No">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.bookingNo}}
+                    </ng-template>
+                </ngx-datatable-column>
 
-            <ngx-datatable-column name="Chargeable Days">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.chargeableDays}}
-                </ng-template>
-            </ngx-datatable-column>
+                <ngx-datatable-column name="Nationality Code">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.nationalityCode}}
+                    </ng-template>
+                </ngx-datatable-column>
 
-            <ngx-datatable-column name="Room Rent Type">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.roomRentType}}
-                </ng-template>
-            </ngx-datatable-column>
+                <ngx-datatable-column name="Arrival Date">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.checkInDate}}
+                    </ng-template>
+                </ngx-datatable-column>
 
-            <ngx-datatable-column name="Daily Room Rate">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.dailyRoomRate}}
-                </ng-template>
-            </ngx-datatable-column>
+                <ngx-datatable-column name="Departure Date">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.checkOutDate}}
+                    </ng-template>
+                </ngx-datatable-column>
 
-            <ngx-datatable-column name="Total Room Rate">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.totalRoomRate}}
-                </ng-template>
-            </ngx-datatable-column>
+                <ngx-datatable-column name="Number of Nights">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.totalDurationDays}}
+                    </ng-template>
+                </ngx-datatable-column>
 
-            <ngx-datatable-column name="VAT">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.vat}}
-                </ng-template>
-            </ngx-datatable-column>
+                <ngx-datatable-column name="Room Number">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.allotedRoomNo}}
+                    </ng-template>
+                </ngx-datatable-column>
 
-            <ngx-datatable-column name="Municipality Tax">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.municipalityTax}}
-                </ng-template>
-            </ngx-datatable-column>
+                <ngx-datatable-column name="Room Type">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.roomType}}
+                    </ng-template>
+                </ngx-datatable-column>
 
-            <ngx-datatable-column name="Discount">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.discount}}
-                </ng-template>
-            </ngx-datatable-column>
+                <ngx-datatable-column name="Full Rate Amount">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.totalRoomRate}}
+                    </ng-template>
+                </ngx-datatable-column>
 
-            <ngx-datatable-column name="Total Room">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.grandTotal}}
-                </ng-template>
-            </ngx-datatable-column>
+                <ngx-datatable-column name="Total Room">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.grandTotal}}
+                    </ng-template>
+                </ngx-datatable-column>
 
-            <ngx-datatable-column name="Payment Methods">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.paymentType}}
-                </ng-template>
-            </ngx-datatable-column>
+                <ngx-datatable-column name="Gender">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.gender}}
+                    </ng-template>
+                </ngx-datatable-column>
 
-            <ngx-datatable-column name="View JSON">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <button mat-flat-button (click)="viewJSON(row.data)">JSON</button>
+                <ngx-datatable-column name="Adults">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.noOfGuest}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Purpose of Visit">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.purposeOfVisit}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Date Of Birth">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.dateOfBirth}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Payment Methods">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.paymentType}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Number Of Room">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.noOfRooms}}
+                    </ng-template>
+                </ngx-datatable-column>
+        
+                <ngx-datatable-column name="View JSON">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <button mat-flat-button (click)="viewJSON(row.data)">JSON</button>
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </div>
+
+        <br>
+
+        <div>
+            <ngx-datatable style="max-width: 98%;height: 300px;" class="material" [loadingIndicator]="cancelBookingList.showLoading" [messages]="bookingList.messages" 
+            [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+                [rows]="cancelBookingList.bookingData" [selected]="cancelBookingList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
+            (select)='onSelect($event)' [scrollbarH]="true">
+        
+                <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
+                <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+                <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
                 </ng-template>
-            </ngx-datatable-column>
-        </ngx-datatable>
+        
+                <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
+                    <input class="regular-checkbox" type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
+                </ng-template>
+                </ngx-datatable-column>
+        
+                <ngx-datatable-column name="Status">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <label *ngIf="row.data.cuFlag == '1'">NEW</label>
+                        <label *ngIf="row.data.cuFlag == '2'">UPDATE</label>
+                    </ng-template>
+                </ngx-datatable-column>
+        
+                <ngx-datatable-column name="Transaction Id">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.transactionId}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Booking No">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.bookingNo}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Cancel Reason">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.cancelReason}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Cancel With Charges">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.cancelWithCharges}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Chargeable Days">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.chargeableDays}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Room Rent Type">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.roomRentType}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Daily Room Rate">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.dailyRoomRate}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Total Room Rate">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.totalRoomRate}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="VAT">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.vat}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Municipality Tax">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.municipalityTax}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Discount">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.discount}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Total Room">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.grandTotal}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Payment Methods">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.paymentType}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="View JSON">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <button mat-flat-button (click)="viewJSON(row.data)">JSON</button>
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </div>
+        
+        <ngx-spinner></ngx-spinner>
     </div>
-    
-    <ngx-spinner></ngx-spinner>
+
 </div>
