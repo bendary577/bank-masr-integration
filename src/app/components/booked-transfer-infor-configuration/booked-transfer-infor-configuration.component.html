@@ -1,8 +1,17 @@
 <div class="config-style">
     <h3 mat-dialog-title>Update Transfer Configuartion</h3>
 
+
     <div>
         <div *ngIf="!loading && syncJobType">
+            <mat-expansion-panel >
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Exported File
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <app-exported-file-configuration [syncJobType]=syncJobType></app-exported-file-configuration>
+            </mat-expansion-panel>
             <!-- Oracle Hospitality Configurations -->
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
