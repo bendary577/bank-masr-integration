@@ -69,34 +69,43 @@ export class UsersComponent implements OnInit {
   }
 
   deleteUsers(flage){
-    this.usersList.showLoading = true;
-    this.authService.deleteUsers(flage, this.usersList.selected[0]).then((res: any) => {
-      
-      this.getUsers();
-      this.usersList.selected = [];
-      this.usersList.showLoading = false;
-
-      let message = "User deleted successfully.";
-      if(flage == 'false'){        
-        message = "User restored successfully.";
-      }
-
-      this.snackBar.open(message, null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-success"
+    if(this.usersList.selected.length > 0){
+      this.usersList.showLoading = true;
+      this.authService.deleteUsers(flage, this.usersList.selected[0]).then((res: any) => {
+        
+        this.getUsers();
+        this.usersList.selected = [];
+        this.usersList.showLoading = false;
+  
+        let message = "User deleted successfully.";
+        if(flage == 'false'){        
+          message = "User restored successfully.";
+        }
+  
+        this.snackBar.open(message, null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
+        });
+      }).catch(err => {
+        this.usersList.showLoading = false;
+        this.usersList.selected = [];
+        this.getUsers();
+        let message = "Can't delete user.";
+        this.snackBar.open(message , null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
       });
-    }).catch(err => {
-      this.usersList.showLoading = false;
-      this.usersList.selected = [];
-      this.getUsers();
-      let message = "Can't delete user.";
+    }else{
+      let message = "Please select at least one user!";
       this.snackBar.open(message , null, {
         duration: 3000,
-        horizontalPosition: 'right',
+        horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
-    });
+    }
   }
 
 
@@ -183,6 +192,14 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  validateViewUser(){
+    if(this.usersList.selected.length == 1){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
   validateDeleteUsers(){
     if(this.usersList.selected.length != 1){
       return true;
@@ -214,10 +231,6 @@ export class UsersComponent implements OnInit {
       if (!usersList.deleted) {
           return true;
       }
-
-      // if(usersList.group.deleted){
-      //   return true;
-      // }
 
     return false;
     }
