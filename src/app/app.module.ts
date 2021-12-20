@@ -164,6 +164,7 @@ import { SimphonyPaymentComponent } from "./components/operations/simphony-payme
 import { RewardPointsSettingsComponent } from './components/setting/reward-points-settings/reward-points-settings.component';
 import { SimphonyCheckComponent } from "./components/simphony-check/simphony-check.component";
 import { SimphonyCheckConfigurationComponent } from "./components/simphony-check-configuration/simphony-check-configuration.component";
+import { ViewUserComponent } from './components/view-user/view-user.component';
 
 @NgModule({
   declarations: [
@@ -284,7 +285,8 @@ import { SimphonyCheckConfigurationComponent } from "./components/simphony-check
     SimphonyPaymentComponent,
     SimphonyCheckComponent,
     SimphonyCheckConfigurationComponent,
-    RewardPointsSettingsComponent
+    RewardPointsSettingsComponent,
+    ViewUserComponent
   ],
   imports: [
     BrowserModule,
@@ -344,6 +346,7 @@ import { SimphonyCheckConfigurationComponent } from "./components/simphony-check
   bootstrap: [AppComponent],
   entryComponents: [
     AddUserComponent,
+    ViewUserComponent,
     AddAccountComponent,
     AddMajorGroupComponent,
     ConsumptionMajorGroupChildComponent,

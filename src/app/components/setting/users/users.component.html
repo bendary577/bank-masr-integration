@@ -3,6 +3,7 @@
     <div class="header">
         <div class="header-btn">
             <button mat-flat-button (click)="openAddDialog()">Add User</button>
+            <button mat-flat-button (click)="openViewUserDialog()" [disabled]="validateViewUser()">View User</button>   
             <button mat-flat-button (click)="openUpdateDialog()" [disabled]="validateUpdateUser()">Edit User</button>
             <button mat-flat-button (click)="deleteUsers('true')" [disabled]="validateDeleteUsers()">Delete User</button>
             <button mat-flat-button (click)="deleteUsers('false')" [disabled]="validateRestoreUsers()">Restore User</button>    

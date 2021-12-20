@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { AddUserComponent } from '../../add-vendor/add-vendor.component';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
+import { ViewUserComponent } from '../../view-user/view-user.component';
 
 /**
  * @title Basic expansion panel
@@ -192,11 +193,54 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  openViewUserDialog(): void {
+    const dialogRef = this.dialog.open(ViewUserComponent, {
+      width: '550px',
+      data:{user: this.usersList.selected[0]}
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.spinner.show();
+
+        this.authService.addUser(res, false).toPromise().then(result => {
+          this.getUsers();
+          this.usersList.selected = [];
+          this.spinner.hide();
+          this.snackBar.open("User updated successfully.", null, {
+            duration: 2000,
+            horizontalPosition: 'right',
+            panelClass:"my-snack-bar-success"
+          });
+        }).catch(err => {
+          this.usersList.selected = [];
+          this.spinner.hide();
+          let message = "";
+          if(err.status === 401){
+            message = ErrorMessages.SESSION_EXPIRED;
+            this.sidNav.Logout();
+          } else if (err.error.message){
+            message = err.error.message;
+          } else if (err.message){
+            message = err.message;
+          } else {
+            message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
+          }
+          this.snackBar.open(message, null, {
+            duration: 3000,
+            horizontalPosition: 'right',
+            panelClass:"my-snack-bar-fail"
+          });
+        });
+      }
+    });
+  }
+
   validateViewUser(){
     if(this.usersList.selected.length == 1){
-      return true;
-    }else{
       return false;
+    }else{
+      return true;
     }
   }
 
