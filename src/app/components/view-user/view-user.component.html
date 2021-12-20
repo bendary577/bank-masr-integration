@@ -1,8 +1,23 @@
 <div>
     <!-- Select All Roles -->
-    <div class="back">
+    <div>
         <mat-checkbox id="all" name="all" class="example-margin">Select All Roles
         </mat-checkbox>
-    </div>
+
+        <mat-accordion multi>
+            <!-- Oracle Hospitality Inventory Management -->
+            <mat-expansion-panel *ngFor="let feature of features">
     
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{ feature.name }}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <label class="list-group-item" *ngFor="let role of feature.roles">
+                <mat-checkbox id="all" name="all" class="example-margin">{{role.name}}</mat-checkbox>
+            </label>
+
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
 </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Feature } from 'src/app/models/Feature';
 import { AccountService } from 'src/app/services/account/account.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { AccountService } from 'src/app/services/account/account.service';
 export class ViewUserComponent implements OnInit {
   loading = false;
   accountID = "";
+  features: Feature[] = [];
 
   constructor(private spinner: NgxSpinnerService,
      public snackBar: MatSnackBar,
@@ -28,7 +30,7 @@ export class ViewUserComponent implements OnInit {
 
     this.accountService.getAccountFeature(this.accountID).then((res: any) => {
       if (res.data && res.data != null) {
-  
+        this.features = res.data;
       }
 
       this.loading = false;
