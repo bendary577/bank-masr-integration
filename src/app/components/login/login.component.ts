@@ -95,7 +95,7 @@ export class LoginComponent implements OnInit {
 
 
   getRoles() {
-    this.accountService.getRoles("asfas", true).toPromise().then((res: any) => {
+    this.accountService.getRoles("asfas", true).then((res: any) => {
       if (res.data && res.data != null) {
         localStorage.setItem('user', JSON.stringify(res.data));
         if (res.data.roles && res.data.roles != null) {
