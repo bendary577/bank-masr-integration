@@ -40,7 +40,7 @@ export class ViewUserComponent implements OnInit {
       .getRoles(this.userID, false)
       .then(async (res: any) => {
         if (res.data && res.data != null) {
-          this.roles = res.data.roles
+          this.roles = res.data
           await this.mapUserRoles()
         }
 
