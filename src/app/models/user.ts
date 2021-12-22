@@ -1,3 +1,5 @@
+import { Role } from 'src/app/models/Role'
+
 export class User {
     id: number;
     name: string;
@@ -5,7 +7,7 @@ export class User {
     password: string;
     domain: string;
     deleted: boolean;
-    roles: []
+    roles: Role[]
  
     public constructor() { }
 

@@ -3,7 +3,9 @@ import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material'
 import { NgxSpinnerService } from 'ngx-spinner'
 import { Feature } from 'src/app/models/Feature'
 import { Role } from 'src/app/models/Role'
+import { User } from 'src/app/models/user'
 import { AccountService } from 'src/app/services/account/account.service'
+import { UserService } from 'src/app/services/user/user.service'
 
 @Component({
   selector: 'app-view-user',
@@ -13,8 +15,9 @@ import { AccountService } from 'src/app/services/account/account.service'
 export class ViewUserComponent implements OnInit {
   loading = true
   accountID = ''
-  userID = ''
+  user: User
   roles: Role[] = []
+  selectedRoles: string[] = []
   features: Feature[] = []
   selectAll = false
 
@@ -22,12 +25,13 @@ export class ViewUserComponent implements OnInit {
     public dialogRef: MatDialogRef<ViewUserComponent>,
     private spinner: NgxSpinnerService,
     public snackBar: MatSnackBar,
+    public userService: UserService,
     public accountService: AccountService,
     @Inject(MAT_DIALOG_DATA) public data,
   ) {}
 
   ngOnInit(): void {
-    this.userID = this.data.user.id
+    this.user = this.data.user
     this.getAccountFeatures()
     this.getUserRoles()
   }
@@ -37,7 +41,7 @@ export class ViewUserComponent implements OnInit {
     this.spinner.show()
 
     this.accountService
-      .getRoles(this.userID, false)
+      .getRoles(this.user.id, false)
       .then(async (res: any) => {
         if (res.data && res.data != null) {
           this.roles = res.data
@@ -129,5 +133,40 @@ export class ViewUserComponent implements OnInit {
     this.dialogRef.close()
   }
 
-  updateUser() {}
+  updateUser() {
+    this.loading = true
+    this.spinner.show()
+
+    this.selectedRoles = []
+    for (var i = 0; i < this.features.length; i++) {
+      for (var j = 0; j < this.features[i].roles.length; j++) {
+        if (this.features[i].roles[j].checked) {
+          this.selectedRoles.push(this.features[i].roles[j].id)
+        }
+      }
+    }
+
+    this.accountService
+      .updateUserRoles(this.user.id, this.selectedRoles)
+      .then(async (res: any) => {
+        if (res.data && res.data != null) {
+          this.roles = res.data
+          await this.mapUserRoles()
+        }
+
+        this.loading = false
+        this.spinner.hide()
+      })
+      .catch((err) => {
+        console.log(err)
+        this.snackBar.open(err.message, null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass: 'my-snack-bar-fail',
+        })
+
+        this.loading = false
+        this.spinner.hide()
+      })
+  }
 }

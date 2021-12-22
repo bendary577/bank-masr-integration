@@ -15,6 +15,11 @@ export class UserService {
     return this.http.post(Constants.ADD_USER , user, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
   }
 
+  updateUser(user) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.post(Constants.UPDATE_USER , user, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})}).toPromise();
+  }
+
   addInvokerUser(user, syncJobTypeID : string) {
     this.token = localStorage.getItem('auth_token');
     return this.http.post(Constants.ADD_INVOKER_USER + "?syncJobTypeId=" + syncJobTypeID , user, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});

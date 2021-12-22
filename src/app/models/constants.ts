@@ -21,6 +21,7 @@ export class Constants {
     environment.apiHost + '/updateAccountSyncTypes'
 
   static GET_USERS = environment.apiHost + '/getUsers'
+  static UPDATE_USER = environment.apiHost + '/updateUser'
   static ADD_USER = environment.apiHost + '/addAdminUser'
   static Delete_USERS_URL = environment.apiHost + '/deleteUsers'
   static SUSPEND_GEUST_URL = environment.apiHost + '/suspendApplicationUsers'
@@ -390,6 +391,7 @@ export class Constants {
 
   static GET_FEATURES = environment.apiHost + '/feature/getFeatures'
   static GET_ROLES = environment.apiHost + '/role/getRoles'
+  static UPDATE_USER_ROLES = environment.apiHost + '/role/updateUserRoles'
 
   static GET_WALLET_PAGE = 'entrySystem'
   static GET_VOUCHER_PAGE = 'voucher'
