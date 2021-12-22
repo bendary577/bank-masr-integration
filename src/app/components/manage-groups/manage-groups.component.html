@@ -1,6 +1,6 @@
 <div class="main" >
 
-    <div [hidden]="hasRole('r')" *ngIf="groupsList.groupsData.length != 0 || groupsList.showLoading" class="header">
+    <div *ngIf="groupsList.groupsData.length != 0 || groupsList.showLoading" class="header">
         <button mat-flat-button (click)="addGroupDialog()" [disabled]="validateAddGroup()" class="groups-buttons" ><span class="mob-text">Add Group</span></button>
         <button mat-flat-button (click)="updateGroupDialog()" [disabled]="validateUpdateGroup()" class="groups-buttons"><span class="mob-text">Update Group</span></button>
         <button mat-flat-button (click)="deleteGroups('true')" [disabled]="validateDeleteGroup()" class="groups-buttons"><span class="mob-text">Delete Group</span></button>
