@@ -43,8 +43,8 @@ export class ViewUserComponent implements OnInit {
     this.accountService
       .getRoles(this.user.id, false)
       .then(async (res: any) => {
-        if (res.data && res.data != null) {
-          this.roles = res.data
+        if (res.data && res.data.roles != null) {
+          this.roles = res.data.roles
           await this.mapUserRoles()
         }
 
@@ -156,6 +156,8 @@ export class ViewUserComponent implements OnInit {
 
         this.loading = false
         this.spinner.hide()
+
+        this.cancel()
       })
       .catch((err) => {
         console.log(err)

@@ -96,11 +96,11 @@
       </div>
     </div>
     <br>
-    <li class="nav-item nav-category"
-     *ngIf=" hasRole('see_syncs') || hasRole('see_applications') ||  hasRole('see_reports') || hasRole('see_operations') || hasRole('see_settings')">
+    <!-- *ngIf=" hasRole('see_syncs') || hasRole('see_applications') ||  hasRole('see_reports') || hasRole('see_operations') || hasRole('see_settings')" -->
+    <li class="nav-item nav-category" *ngIf="hasFeature('main_feature')">
       <span class="nav-link" translate>Main Menu</span>
     </li>
-    <li class="nav-item menu-items" [ngClass]="{ 'active' : uiBasicCollapsed }" *ngIf="hasRole('see_syncs') && syncJobTypes.length > 0">
+    <li class="nav-item menu-items" [ngClass]="{'active' : uiBasicCollapsed }" *ngIf="hasFeature('sync_jobs') && hasRole('see_syncs') && syncJobTypes.length > 0">
       <a class="nav-link" (click)="titleOpened('uiBasicCollapsed');" [attr.aria-expanded]="uiBasicCollapsed"
         aria-controls="ui-basic">
         <span class="menu-icon">
@@ -133,7 +133,7 @@
         </ul>
       </div>
     </li>
-    <li class="nav-item menu-items" [ngClass]="{ 'active' : appBasicCollapsed }" *ngIf="hasRole('see_applications') && applications.length > 0">
+    <li class="nav-item menu-items" [ngClass]="{ 'active' : appBasicCollapsed }" *ngIf="hasFeature('applications') && hasRole('see_applications') && applications.length > 0">
       <a class="nav-link" (click)=" titleOpened('appBasicCollapsed');" [attr.aria-expanded]="uiBasicCollapsed"
         aria-controls="ui-basic">
         <span class="menu-icon">
@@ -144,12 +144,19 @@
       </a>
       <div class="collapse" id="ui-basic" [ngbCollapse]="!appBasicCollapsed">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item" *ngFor="let application of applications"> <a class="nav-link"
-              routerLink={{application.endPoint}} routerLinkActive="active" translate>{{application.name}}</a></li>
+          <li class="nav-item" *ngIf="hasFeature('loyalty')">
+             <a class="nav-link" routerLink="/loyalty" routerLinkActive="active" translate>Loyalty</a>
+          </li>
+          <li class="nav-item" *ngIf="hasFeature('entry_system') && !hasFeature('loyalty')">
+             <a class="nav-link" routerLink="/entrySystem" routerLinkActive="active" translate>Entry System</a>
+          </li>
+
+          <!-- <li class="nav-item" *ngFor="let application of applications"> <a class="nav-link"
+              routerLink={{application.endPoint}} routerLinkActive="active" translate>{{application.name}}</a></li> -->
         </ul>
       </div>
     </li>
-    <!-- *ngIf="hasRole('see_reports') && reports.length> 0" -->
+
     <li class="nav-item menu-items" [ngClass]="{ 'active' : repBasicCollapsed }" *ngIf="hasRole('see_reports')" >
       <a class="nav-link" (click)=" titleOpened('repBasicCollapsed');" [attr.aria-expanded]="repBasicCollapsed"
         aria-controls="ui-basic">
@@ -166,6 +173,7 @@
         </ul>
       </div>
     </li>
+
     <li class="nav-item menu-items" [ngClass]="{ 'active' : opeBasicCollapsed }" *ngIf="hasRole('see_operations') && operationTypes.length > 0">
       <a class="nav-link" (click)="titleOpened('opeBasicCollapsed');" [attr.aria-expanded]="opeBasicCollapsed"
         aria-controls="ui-basic">
@@ -185,6 +193,7 @@
         </ul>
       </div>
     </li>
+
     <li class="nav-item menu-items" [ngClass]="{ 'active' : setBasicCollapsed }" *ngIf="hasRole('see_settings')">
       <a class="nav-link" (click)="titleOpened('setBasicCollapsed');" [attr.aria-expanded]="setBasicCollapsed"
         aria-controls="ui-basic">
@@ -213,6 +222,7 @@
         </ul>
       </div>
     </li>
+
     <li class="nav-item nav-category" *ngIf="hasRole('see_user_pages')">
       <span class="nav-link" translate>More</span>
     </li>

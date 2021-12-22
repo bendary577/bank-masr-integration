@@ -101,7 +101,6 @@ export class ManageUsersComponent implements OnInit {
       .toPromise()
       .then((res: any) => {
         this.usersList.usersData = res
-        console.log(this.usersList.usersData[0])
         this.usersList.allGuestsBeforeFilter = res
         this.usersList.showLoading = false
       })

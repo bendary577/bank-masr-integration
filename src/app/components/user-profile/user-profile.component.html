@@ -18,6 +18,12 @@
                     <hr>
                     <div class="user-data">
                         <table>
+                            <tr *ngIf="user.code">
+                                <td class="title" style="float: left;" style="float: left;">Guest Card </td>
+                                <td> </td>
+                                <td class="res" style="float: right;" style="float: right;"> {{user.code}}</td>
+                            </tr>
+                            <hr class="hrClass" *ngIf="user.code">
                             <tr *ngIf="user.mobile">
                                 <td class="title" style="float: left;" style="float: left;">Mobile </td>
                                 <td> </td>
@@ -130,7 +136,7 @@
                     </mat-card-content>
                 </mat-card>
             </div>
-            <div class="column">
+            <!-- <div class="column">
                 <mat-card class="wallet-card">
                     <mat-card-content>
                         <h2>Guest Card</h2>
@@ -146,7 +152,7 @@
                         <button class="filter-btn" (click)="send('SMS')" mat-raised-button>Send SMS</button>
                     </mat-card-content>
                 </mat-card>
-            </div>
+            </div> -->
         </div>
         <div class="trans-tabel">
             <div class="title-card">

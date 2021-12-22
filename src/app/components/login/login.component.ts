@@ -104,8 +104,8 @@ export class LoginComponent implements OnInit {
       .then((res: any) => {
         if (res.data && res.data != null) {
           localStorage.setItem('user', JSON.stringify(res.data))
-          if (res.data && res.data != null) {
-            localStorage.setItem('roles', JSON.stringify(res.data))
+          if (res.data && res.data.roles != null) {
+            localStorage.setItem('roles', JSON.stringify(res.data.roles))
           }
         }
         this.loading = false

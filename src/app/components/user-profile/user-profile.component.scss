@@ -1,13 +1,13 @@
-@import "../../../assets/scss/syncs.scss";
-@import "../operations/opera-payments/opera-payments.component.scss";
+@import '../../../assets/scss/syncs.scss';
+@import '../operations/opera-payments/opera-payments.component.scss';
 
-h3{
-  margin:auto;
+h3 {
+  margin: auto;
   margin-bottom: 10px;
-  border-radius: 10px; 
+  border-radius: 10px;
   text-align: center;
   font-size: larger;
-  font-weight: bold; 
+  font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
   height: auto;
   width: 80%;
@@ -15,28 +15,28 @@ h3{
   color: #000000;
 }
 
-h2{
+h2 {
   font-size: 20px;
 }
 
-hr{
-  width:90%;
+hr {
+  width: 90%;
   margin: 20px;
   margin-right: 10px;
 }
 
-tr{
+tr {
   padding-top: 20px;
 }
 
-.right-col{
-  width: 30%; 
-  height: 600px; 
+.right-col {
+  width: 30%;
+  height: 600px;
   float: left;
   margin-left: 2%;
 }
 
-.header{
+.header {
   display: block;
   height: 30px;
 }
@@ -47,35 +47,35 @@ tr{
   background-color: #ffddb5 !important;
 }
 
-.user-profile{
+.user-profile {
   display: inline-block;
   margin-top: 25px;
   width: 100%;
   height: 100%;
 
-    .mat-card-content{
-      margin : 20px;
-    }
+  .mat-card-content {
+    margin: 20px;
+  }
 }
 
-.user-card{
+.user-card {
   text-align: center;
   width: 100%;
-  height: 95%;
-  box-shadow:0 0 5px 5px rgb(207, 207, 207);
+  // height: 95%;
+  box-shadow: 0 0 5px 5px rgb(207, 207, 207);
   border: 1px;
 }
 
-mat-card-content{
-height: 100;
+mat-card-content {
+  height: 100;
 }
 
-mat-card{
+mat-card {
   padding-right: 5px;
   display: inline-block;
 }
 
-.user-name{
+.user-name {
   margin: 5px;
   display: block;
   font-weight: bold;
@@ -84,18 +84,18 @@ mat-card{
   color: #044b8a;
 }
 
-.user-data table{
+.user-data table {
   text-align: center;
   margin: 10px;
   width: 95%;
 }
 
-.user-data td{
+.user-data td {
   text-align: left;
   margin-right: 20px;
 }
 
-.title{
+.title {
   width: 100%;
   text-align: left;
   font-size: medium;
@@ -103,19 +103,19 @@ mat-card{
   color: #020202;
 }
 
-.res{
+.res {
   text-align: left;
   font-size: medium;
   font-weight: 500;
   color: #4d4d4d;
 }
 
-.user-btn-container{
+.user-btn-container {
   margin-top: 60px;
   margin-bottom: 20px !important;
 }
 
-.user-btn{
+.user-btn {
   border-radius: 25px;
   margin-top: 00px;
   width: 100px;
@@ -132,43 +132,43 @@ mat-card{
   padding-left: 20px;
 }
 
-.left-col{
+.left-col {
   margin: 1%;
   margin-top: 70px;
   margin-left: 5px;
-  width: 65%; 
-  height: 600px; 
+  width: 65%;
+  height: 600px;
   float: right;
 }
 
-.wallet{
+.wallet {
   text-align: center;
   margin-right: 10px;
   margin-bottom: 10px;
 }
 
-.wallet-card{
+.wallet-card {
   float: left;
   text-align: center;
   width: 90%;
   height: 230px;
   margin-bottom: 4%;
   margin-left: 3%;
-  box-shadow:0 0 5px 5px rgb(207, 207, 207);
+  box-shadow: 0 0 5px 5px rgb(207, 207, 207);
   padding-top: 20px;
   overflow: hidden;
-} 
+}
 
-.wallet-amount{
+.wallet-amount {
   width: 100%;
 }
 
-.wallet-revenue{
+.wallet-revenue {
   overflow: hidden;
   padding: 10px;
 }
 
-.list-group{
+.list-group {
   max-width: 100%;
   height: 150px;
   display: inline-block;
@@ -176,7 +176,7 @@ mat-card{
   padding: 0px;
 }
 
-.list-group-item-header{
+.list-group-item-header {
   width: 250px;
   font-size: larger;
   font-weight: lighter;
@@ -189,16 +189,16 @@ mat-card{
   padding-left: 10px;
 }
 
-.list-group-item{
+.list-group-item {
   text-align: left;
   padding-left: 10px;
   position: relative;
   display: block;
   margin-bottom: -1px;
   background-color: #fff;
-  width: 170px;
+  // width: 170px;
   overflow-y: hidden;
-  border: 1px solid rgba(0,0,0,.125);
+  border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 /* width */
@@ -208,23 +208,23 @@ mat-card{
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }
 
-.transaction-card{
+.transaction-card {
   width: 98%;
   margin-right: 11px;
-  box-shadow:0 0 3px 3px rgb(226, 226, 226);
+  box-shadow: 0 0 3px 3px rgb(226, 226, 226);
   height: 280px;
   overflow: hidden;
 }
@@ -236,7 +236,7 @@ mat-card{
   margin-bottom: 50px;
 }
 
-.title-card{
+.title-card {
   display: inline-block;
   text-align: center;
   margin: auto;
@@ -247,44 +247,44 @@ mat-card{
   font-weight: bold;
   font-size: large;
   background-color: rgb(255, 255, 255);
-  border-radius:10px 10px 0 0;
+  border-radius: 10px 10px 0 0;
   border: 2px solid #efefef;
-  box-shadow:0 0 3px 3px rgb(226, 226, 226);
-} 
+  box-shadow: 0 0 3px 3px rgb(226, 226, 226);
+}
 
 /* Create three equal columns that floats next to each other */
 .column {
-  width: 33%;
+  width: 50%;
   text-align: center;
   float: right;
 }
 
-.two-column{
+.two-column {
   float: left;
   width: 50%;
   text-align: center;
   text-align: center;
 }
 
-.trans-tabel{
+.trans-tabel {
   width: 100%;
   display: inline-block;
 }
 
-.filter-view{
+.filter-view {
   border-radius: 5px;
-  margin-top:10px;
+  margin-top: 10px;
   border: 2px solid rgb(197, 197, 197);
   display: inline-block;
   width: 80%;
 }
 
-.userTransTable{
+.userTransTable {
   text-align: center;
   margin: 20px;
 }
 
-.filter-container{
+.filter-container {
   text-align: center;
   margin: 10px;
   display: inline-block;
@@ -294,19 +294,19 @@ mat-card{
 
 /* Clear floats after the columns */
 .row:after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
   padding-left: 10px;
 }
 
-.row{
+.row {
   display: flex;
-  overflow: hidden;    
+  overflow: hidden;
   scroll-behavior: smooth;
 }
 
-.user-img{
+.user-img {
   display: inline;
   width: 100px;
   min-height: 100px;
@@ -314,7 +314,7 @@ mat-card{
   margin-top: 30px;
 }
 
-.rvc-img{
+.rvc-img {
   display: inline;
   width: 70px;
   min-height: 70px;
@@ -322,7 +322,7 @@ mat-card{
   margin-top: 20px;
 }
 
-.filter-btn{
+.filter-btn {
   text-align: center;
   margin-top: 7px;
   background-color: rgb(241, 241, 241);
@@ -332,7 +332,7 @@ mat-card{
   // box-shadow:0 0 3px 3px rgb(226, 226, 226);
 }
 
-.filter-btn-view{
+.filter-btn-view {
   margin: 10px;
   width: 60px;
   height: 37px;
@@ -341,25 +341,25 @@ mat-card{
   color: #000000;
 }
 
-.filter-img{
+.filter-img {
   width: 30px;
-  height: 32px; 
+  height: 32px;
 }
 
-.refresh-btn-view{
+.refresh-btn-view {
   text-align: center;
   margin-top: 5px;
-  background-color:inherit;
+  background-color: inherit;
   border-radius: 100%;
   float: left;
   height: 37px;
   background-color: #d8d8d8;
   border: none;
-  }
+}
 
-.refresh-img{
+.refresh-img {
   width: 22px;
-  height: 30px; 
+  height: 30px;
   padding-bottom: 3px;
   padding-top: 5px;
 }
@@ -397,19 +397,19 @@ mat-card{
   --size: 200px;
 }
 
-::ng-deep .mat-raised-button{
+::ng-deep .mat-raised-button {
   padding: 0 5px !important;
   margin-top: 20px;
 }
 
-.empty-box{
+.empty-box {
   width: 250px;
-  padding:50px;
-  padding-bottom:25px ;
+  padding: 50px;
+  padding-bottom: 25px;
 }
 
-.user-data{
-  hr{
+.user-data {
+  hr {
     width: 100%;
     margin: 10px !important;
     margin-left: 80px !important;
