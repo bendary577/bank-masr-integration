@@ -1,0 +1,23 @@
+<!-- Tax Analysis  Configurations -->
+
+<div class="container" *ngIf="syncJobType">
+    <form class="my-form">
+       
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput id="taxAccountCode" name="taxAccountCode" placeholder="Tax Account code" [(ngModel)]="syncJobType.configuration.inforConfiguration.taxAccountCode">
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput id="taxAccountReference" name="taxAccountReference" placeholder="Tax Account Reference" [(ngModel)]="syncJobType.configuration.inforConfiguration.taxAccountReference">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput id="noTaxAccountReference" name="noTaxAccountReference" placeholder="No Tax Reference" [(ngModel)]="syncJobType.configuration.inforConfiguration.noTaxAccountReference">
+            </mat-form-field>
+        </div>
+    </form>
+</div>

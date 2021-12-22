@@ -1,5 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { LoginComponent } from "./components/login/login.component";
@@ -164,6 +164,7 @@ import { SimphonyPaymentComponent } from "./components/operations/simphony-payme
 import { RewardPointsSettingsComponent } from './components/setting/reward-points-settings/reward-points-settings.component';
 import { SimphonyCheckComponent } from "./components/simphony-check/simphony-check.component";
 import { SimphonyCheckConfigurationComponent } from "./components/simphony-check-configuration/simphony-check-configuration.component";
+import { TaxAnalysisConfigrutionComponent } from "./components/configuration/tax-analysis-configrution/tax-analysis-configrution.component";
 
 @NgModule({
   declarations: [
@@ -215,6 +216,7 @@ import { SimphonyCheckConfigurationComponent } from "./components/simphony-check
     AddServiceChargeComponent,
     AnalysisConfigurationComponent,
     InforSystemConfigurationComponent,
+    TaxAnalysisConfigrutionComponent,
     TenderConfigurationComponent,
     AddTenderChildComponent,
     MenuItemsComponent,
@@ -375,5 +377,6 @@ import { SimphonyCheckConfigurationComponent } from "./components/simphony-check
     EditWalletComponent
 
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     })
 export class AppModule {}
