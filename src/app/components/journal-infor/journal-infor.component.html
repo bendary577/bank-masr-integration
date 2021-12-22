@@ -13,7 +13,7 @@
         </mat-select>
     </mat-form-field>
 
-    <button mat-flat-button class="filterButton" (click)="getJournalsJobSyncJob()" [disabled]="staticgetJournalsLoding">Sync consumption Now</button>
+    <button *ngIf="hasRole('sync_jobs')" mat-flat-button class="filterButton" (click)="getJournalsJobSyncJob()" [disabled]="staticgetJournalsLoding">Sync consumption Now</button>
     <button mat-flat-button class="filterButton" (click)="generateSingleFile()" [disabled]="jobs.length == 0">Generate Single File</button>
     <button mat-flat-button class="filterButton" (click)="exportToCSV()" [disabled]="jobs.length == 0">Export to CSV</button>
 </div>

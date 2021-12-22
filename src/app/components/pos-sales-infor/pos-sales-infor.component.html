@@ -20,7 +20,7 @@
         </mat-form-field>
 
 
-        <button mat-flat-button class="filterButton" (click)="getPOSSalesSyncJob()" [disabled]="staticgetPosSalesLoading">Sync POS Sales
+        <button *ngIf="hasRole('sync_jobs')" mat-flat-button class="filterButton" (click)="getPOSSalesSyncJob()" [disabled]="staticgetPosSalesLoading">Sync POS Sales
             Now</button>
             <button mat-flat-button class="filterButton" (click)="generateSingleFile()" [disabled]="jobs.length == 0">Generate Single
                 File</button>

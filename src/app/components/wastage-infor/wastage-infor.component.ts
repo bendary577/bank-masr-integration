@@ -47,6 +47,10 @@ export class WastageInforComponent implements OnInit {
     }
   }
 
+  hasRole(reference) {
+    return this.sidNav.hasRole(reference)
+  }
+
   get staticgetWastageLoading() {
     return WastageInforComponent.getWastageLoading
   }

@@ -43,6 +43,10 @@ export class CostOfGoodsComponent implements OnInit {
     }
   }
 
+  hasRole(reference) {
+    return this.sidNav.hasRole(reference)
+  }
+
   get staticgetJournalsLoding() {
     return CostOfGoodsComponent.getJournalsLoding ;
   }

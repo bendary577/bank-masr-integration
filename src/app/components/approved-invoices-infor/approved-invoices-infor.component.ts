@@ -42,6 +42,10 @@ export class ApprovedInvoicesInforComponent implements OnInit {
     }
   }
 
+  hasRole(reference) {
+    return this.sidNav.hasRole(reference)
+  }
+
   getApprovedInvoicesDB() {
     this.loading = true;
     this.spinner.show();

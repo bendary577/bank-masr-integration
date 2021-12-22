@@ -49,6 +49,10 @@ export class JournalInforComponent implements OnInit {
     }
   }
 
+  hasRole(reference) {
+    return this.sidNav.hasRole(reference)
+  }
+
   get staticgetJournalsLoding() {
     return JournalInforComponent.getJournalsLoding;
   }

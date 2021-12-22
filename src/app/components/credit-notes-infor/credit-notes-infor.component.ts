@@ -44,7 +44,10 @@ export class CreditNotesInforComponent implements OnInit {
     }
   }
 
-
+  hasRole(reference) {
+    return this.sidNav.hasRole(reference)
+  }
+  
   exportToCSV(): void {
     this.csvService
       .exportSalesToCSV(this.selectedJob.id, Constants.CREDIT_NOTE_SYNC)

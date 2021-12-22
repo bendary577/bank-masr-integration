@@ -48,6 +48,10 @@ export class BookedProductionComponent implements OnInit {
     }
   }
 
+  hasRole(reference) {
+    return this.sidNav.hasRole(reference)
+  }
+
   getBookedProductionDB() {
     this.spinner.show();
     this.syncJobService.getSyncJobData("Booked Production").toPromise().then((res: any) => {

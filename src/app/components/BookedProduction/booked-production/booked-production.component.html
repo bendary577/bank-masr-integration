@@ -22,7 +22,7 @@
             </mat-select>
         </mat-form-field>
 
-        <button mat-flat-button class="filterButton" (click)="getBookedProductionSyncJob()" [disabled]="getBookedProductionLoading">Sync
+        <button *ngIf="hasRole('sync_jobs')" mat-flat-button class="filterButton" (click)="getBookedProductionSyncJob()" [disabled]="getBookedProductionLoading">Sync
             Booked Production Now</button>
         <button mat-flat-button class="filterButton" (click)="generateSingleFile()" [disabled]="jobs.length == 0">Generate Single
             File</button>

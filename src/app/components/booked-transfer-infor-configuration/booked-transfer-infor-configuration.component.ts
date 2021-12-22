@@ -50,6 +50,10 @@ export class BookedTransferInforConfigurationComponent implements OnInit {
     this.getSyncJobType();
   }
 
+  hasRole(reference) {
+    return this.sidNav.hasRole(reference)
+  }
+
   getSyncJobType() {
     this.loading = true;
     this.accSyncTypeService.getAccSyncJobType(Constants.BOOKED_TRANSFER_SYNC).toPromise().then((res: any) => {

@@ -48,6 +48,10 @@ export class BookedTransferInforComponent implements OnInit {
     }
   }
 
+  hasRole(reference) {
+    return this.sidNav.hasRole(reference)
+  }
+
   get staticgetTransfersLoading() {
     return BookedTransferInforComponent.getTransfersLoading ;
   }

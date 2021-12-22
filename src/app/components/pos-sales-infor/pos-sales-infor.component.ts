@@ -8,6 +8,7 @@ import { PosSalesService } from 'src/app/services/posSales/pos-sales.service';
 import { ExcelService } from 'src/app/services/excel/excel.service';
 import { saveAs } from 'file-saver';
 import { CsvService } from 'src/app/services/csv/csv.service';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-pos-sales-infor',
@@ -26,6 +27,7 @@ export class PosSalesInforComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService, private syncJobService: SyncJobService,
     public snackBar: MatSnackBar, private posSalesService:PosSalesService, private excelService: ExcelService,
+    private sidNav: SideNaveComponent,
     private csvService: CsvService) { }
 
   ngOnInit() {
@@ -37,6 +39,10 @@ export class PosSalesInforComponent implements OnInit {
     else{
       PosSalesInforComponent.getPosSalesLoading = false;
     }
+  }
+
+  hasRole(reference) {
+    return this.sidNav.hasRole(reference)
   }
 
   get staticgetPosSalesLoading() {
