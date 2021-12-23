@@ -1,57 +1,80 @@
 <div class="sync-body">
     <h3>Revenue by Agent</h3>
 
+    <div class="header" style="margin-bottom: 10px;">
+        <mat-form-field appearance="outline" class="example-full-width creditForm">
+            <input matInput placeholder="Start Date" formContrlName="fromDate" id="fromDate" [(ngModel)]="fromDate"
+            [matDatepicker]="fromDatepicker" readonly>
+            <mat-icon matDatepickerToggleIcon (click)="resetPicker('fromDate')" [hidden]="!fromDate">clear</mat-icon>
+            <mat-datepicker-toggle matSuffix [for]="fromDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #fromDatepicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="example-full-width creditForm">
+            <input matInput placeholder="End Date" formContrlName="toDate" id="toDate" [(ngModel)]="toDate"
+                [matDatepicker]="toDatepicker" readonly>
+            <mat-icon matDatepickerToggleIcon (click)="resetPicker('toDate')" [hidden]="!toDate">clear</mat-icon>
+            <mat-datepicker-toggle matSuffix [for]="toDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #toDatepicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="example-full-width creditForm">
+            <mat-select class="custom-select" [(ngModel)]="selectedAgent" style="padding-top: 0px;padding-bottom: 8px;">
+                <mat-option value="" selected>All Agents</mat-option>
+                <mat-option value="agent.id" *ngFor="let agent of agents">{{agent.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button mat-flat-button class="filterButton" >Export to Excel</button>
+    </div>
+    <br>
     <div>
-
-        <ngx-datatable style="max-width: 98%;height: 300px;" class="material"
-            [loadingIndicator]="actionList.showLoading" [messages]="actionList.messages" [sortType]="'multi'"
-            [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"
-            [scrollbarH]="true" [rows]="actionList.actionData" [selected]="actionList.selected"
-            [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" (select)='onSelect($event)'
-            [scrollbarH]="true">
-
-            <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false"
-                [resizeable]="true">
+        <ngx-datatable style="max-width: 98%;height: 300px;" class="material" [loadingIndicator]="actionList.showLoading"
+            [messages]="actionList.messages" [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+            [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [rows]="actionList.actionData"
+            [selected]="actionList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false"
+            (select)='onSelect($event)' [scrollbarH]="true">
+        
+            <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
                 <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
                     let-selectFn="selectFn">
                     <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected"
                         (change)="selectFn(!allRowsSelected)" />
                 </ng-template>
-
+        
                 <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected"
                     let-onCheckboxChangeFn="onCheckboxChangeFn">
                     <input class="regular-checkbox" type="checkbox" [checked]="isSelected"
                         (change)="onCheckboxChangeFn($event)" />
                 </ng-template>
             </ngx-datatable-column>
-
+        
             <ngx-datatable-column name="Agent Name">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.user.name}}
                 </ng-template>
             </ngx-datatable-column>
-            
+        
             <ngx-datatable-column name="Action">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.actionType}}
                 </ng-template>
             </ngx-datatable-column>
-
+        
             <ngx-datatable-column name="Amount">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.amount}}
                 </ng-template>
             </ngx-datatable-column>
-            
+        
             <ngx-datatable-column name="Date">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.date | date:'dd-MM-yyyy H:MM:SS'}}
                 </ng-template>
             </ngx-datatable-column>
-
+        
         </ngx-datatable>
-
-        <ngx-spinner></ngx-spinner>
     </div>
 
+    <ngx-spinner></ngx-spinner>
 </div>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { MatSnackBar } from '@angular/material'
 import { NgxSpinnerService } from 'ngx-spinner'
+import { User } from 'src/app/models/user'
+import { AuthService } from 'src/app/services/auth/auth.service'
 import { UserService } from 'src/app/services/user/user.service'
 import { SidenavResponsive } from '../../sidenav/sidenav-responsive'
 
@@ -10,6 +12,11 @@ import { SidenavResponsive } from '../../sidenav/sidenav-responsive'
   styleUrls: ['./revenue-by-agent.component.scss'],
 })
 export class RevenueByAgentComponent implements OnInit {
+  fromDate = ''
+  toDate = ''
+  selectedAgent = '';
+  agents: User[] = [];
+  
   actionList = {
     paginateData: true as boolean,
     offset: 0,
@@ -33,9 +40,11 @@ export class RevenueByAgentComponent implements OnInit {
     public snackBar: MatSnackBar,
     private sidNav: SidenavResponsive,
     private userService: UserService,
+    private authService:AuthService
   ) {}
 
   ngOnInit(): void {
+    this.getAgents();
     this.getAgentsActions()
   }
 
@@ -43,6 +52,21 @@ export class RevenueByAgentComponent implements OnInit {
     this.actionList.selected.splice(0, this.actionList.selected.length)
     this.actionList.selected.push(...selected)
   }
+
+  resetPicker(event) {
+    this.fromDate = undefined
+    this.toDate = undefined
+    this.getAgentsActions()
+  }
+
+  getAgents() {
+    this.authService.getUsers().toPromise().then((res: any) => {
+      this.agents = res;
+    }).catch(err => {
+      console.error(err);
+    });
+  }
+
 
   getAgentsActions() {
     this.spinner.show()
@@ -62,5 +86,13 @@ export class RevenueByAgentComponent implements OnInit {
         this.spinner.hide()
         this.actionList.showLoading = false
       })
+  }
+
+  filterActions(event){
+
+  }
+
+  extractExcelFile(){
+
   }
 }

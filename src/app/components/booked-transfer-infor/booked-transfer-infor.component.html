@@ -4,7 +4,7 @@
     <div class="header">
         <span class="history"> Sync Job History </span>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" class="history-dropdown">
             <mat-select required class="form-controls" id="sync" placeholder="Sync Job"
             (ngModelChange)="getSyncJobData()" [(ngModel)]="selectedJob">
                 <mat-option [value]="job" *ngFor="let job of jobs">{{job.creationDate | date:'dd-MM-yyyy H:MM:SS'}} -
