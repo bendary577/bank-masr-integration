@@ -27,7 +27,8 @@ export class CreditNotesInforConfigurationComponent implements OnInit {
   PaymentMethods = [];
   selectedCostCenters = [];
   timePeriods = ["All", "Current Year", "Current Month", "Last Month", "Last Year", "User-defined"];
-  analysis = []
+  analysisCodes = [null,"1","2","3","4","5","6","7","8","9","10"];
+  analysis = [];
   accountERD;
 
   constructor(private spinner: NgxSpinnerService, private sidNav: SidenavResponsive,

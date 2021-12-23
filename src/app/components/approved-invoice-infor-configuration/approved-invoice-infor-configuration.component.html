@@ -78,6 +78,20 @@
                 </div>
             </mat-expansion-panel>
 
+       <!-- Tax Analysis Configurations -->
+
+       <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Tax Analysis Configuartion
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-tax-analysis-configrution [syncJobType]=syncJobType></app-tax-analysis-configrution>
+    </mat-expansion-panel>
+           
+
+
+
             <!-- Analysis Configurations -->
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
@@ -134,10 +148,10 @@
             <mat-card class="example-card">
                 <h2 class="cardHeader">No Data</h2>
                 <mat-card-content>
-                  <p>
-                    <span class="empty-data">
-                        Can't Configure your sync right now, Please try again after few minutes.
-                    </span>
+                    <p>
+                        <span class="empty-data">
+                            Can't Configure your sync right now, Please try again after few minutes.
+                        </span>
                     </p>
                 </mat-card-content>
             </mat-card>
