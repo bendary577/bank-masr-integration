@@ -29,4 +29,12 @@ export class UserService {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_INVOKER_USERS + "?syncJobTypeId=" + syncJobTypeID , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
+
+  // ==> Entry System
+  getUserAction(userId : string, actionType: string) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get(Constants.GET_ALL_AGENT_ACTIONS + "?userId=" + userId + "&actionType=" + actionType,
+      { headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }) });
+  }
+
 }

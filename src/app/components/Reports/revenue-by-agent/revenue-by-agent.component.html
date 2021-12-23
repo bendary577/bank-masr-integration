@@ -1,0 +1,57 @@
+<div class="sync-body">
+    <h3>Revenue by Agent</h3>
+
+    <div>
+
+        <ngx-datatable style="max-width: 98%;height: 300px;" class="material"
+            [loadingIndicator]="actionList.showLoading" [messages]="actionList.messages" [sortType]="'multi'"
+            [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"
+            [scrollbarH]="true" [rows]="actionList.actionData" [selected]="actionList.selected"
+            [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" (select)='onSelect($event)'
+            [scrollbarH]="true">
+
+            <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false"
+                [resizeable]="true">
+                <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
+                    let-selectFn="selectFn">
+                    <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected"
+                        (change)="selectFn(!allRowsSelected)" />
+                </ng-template>
+
+                <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected"
+                    let-onCheckboxChangeFn="onCheckboxChangeFn">
+                    <input class="regular-checkbox" type="checkbox" [checked]="isSelected"
+                        (change)="onCheckboxChangeFn($event)" />
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Agent Name">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.user.name}}
+                </ng-template>
+            </ngx-datatable-column>
+            
+            <ngx-datatable-column name="Action">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.actionType}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Amount">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.amount}}
+                </ng-template>
+            </ngx-datatable-column>
+            
+            <ngx-datatable-column name="Date">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.date | date:'dd-MM-yyyy H:MM:SS'}}
+                </ng-template>
+            </ngx-datatable-column>
+
+        </ngx-datatable>
+
+        <ngx-spinner></ngx-spinner>
+    </div>
+
+</div>

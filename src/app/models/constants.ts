@@ -347,8 +347,15 @@ export class Constants {
   static DEDUCT_WALLET = environment.apiHost + '/wallet/deductFromWallet'
   static GET_TRANSACTION_PAGINATED =
     environment.apiHost + '/transaction/transactionPagination'
+  
+  //////////////////////////////////////////////// Entry System Application  ///////////////////////////////////
+  
+  //==> Entry System Reports
+  static REVENUE_BY_AGENT_PAGE = 'revenueByAgent'
 
-  //////////////////////////////////////////////// Manage Application  //////////////////////////////////////////////
+  static GET_ALL_AGENT_ACTIONS = environment.apiHost + '/getAgentActions'
+
+  //////////////////////////////////////////////// Manage Application  //////////////////////////////////////////
 
   static GET_HOTEL_OPI_PAGE = 'hotelOpi'
 

@@ -73,6 +73,7 @@ import { RewardPointsSettingsComponent } from './components/setting/reward-point
 import { SimphonyCheckComponent } from './components/simphony-check/simphony-check.component';
 import { SimphonyCheckConfigurationComponent } from './components/simphony-check-configuration/simphony-check-configuration.component';
 import { SimphonyPaymentComponent } from './components/operations/simphony-payment/simphony-payment.component';
+import { RevenueByAgentComponent } from './components/Reports/revenue-by-agent/revenue-by-agent.component';
 
 
 const routes: Routes = [
@@ -110,6 +111,9 @@ const routes: Routes = [
   { path: Constants.USER_PROFILE, component: UserProfileComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MANAGE_ACTIVITIES, component: ActivitiesComponent ,canActivate:[AuthGuardService]},
   // { path: Constants.ACCOUNT_CONFIGURATION, component: ConfigurationComponent ,canActivate:[AuthGuardService]},
+
+  // Entry System Views
+  { path: Constants.REVENUE_BY_AGENT_PAGE, component: RevenueByAgentComponent ,canActivate:[AuthGuardService]},
 
   // Hotel OPI Views
   { path: Constants.GET_HOTEL_OPI_PAGE, component: HotelOpiComponent ,canActivate:[AuthGuardService]},

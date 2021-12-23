@@ -166,6 +166,7 @@ import { SimphonyCheckComponent } from "./components/simphony-check/simphony-che
 import { SimphonyCheckConfigurationComponent } from "./components/simphony-check-configuration/simphony-check-configuration.component";
 import { ViewUserComponent } from './components/view-user/view-user.component';
 import { TaxAnalysisConfigrutionComponent } from "./components/configuration/tax-analysis-configrution/tax-analysis-configrution.component";
+import { RevenueByAgentComponent } from './components/Reports/revenue-by-agent/revenue-by-agent.component';
 
 @NgModule({
   declarations: [
@@ -288,7 +289,8 @@ import { TaxAnalysisConfigrutionComponent } from "./components/configuration/tax
     SimphonyCheckComponent,
     SimphonyCheckConfigurationComponent,
     RewardPointsSettingsComponent,
-    ViewUserComponent
+    ViewUserComponent,
+    RevenueByAgentComponent
   ],
   imports: [
     BrowserModule,
