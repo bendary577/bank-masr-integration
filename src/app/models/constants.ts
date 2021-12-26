@@ -225,7 +225,7 @@ export class Constants {
   static SIMPHONY_CHECK_OPERATION = 'Simphony Check Payment'
 
   static LIST_SIMPHONY_CHECK_PAYMENT_URL =
-   environment.apiHost + '/simphonyPayment/simphonyCheck'
+    environment.apiHost + '/simphonyPayment/simphonyCheck'
   static COUNT_SIMPHONY_TRANSACTIONS_URL =
     environment.apiHost + '/countSimphonyTransaction'
   static FILTER_SIMPHONY_TRANSACTION =
@@ -347,13 +347,15 @@ export class Constants {
   static DEDUCT_WALLET = environment.apiHost + '/wallet/deductFromWallet'
   static GET_TRANSACTION_PAGINATED =
     environment.apiHost + '/transaction/transactionPagination'
-  
+
   //////////////////////////////////////////////// Entry System Application  ///////////////////////////////////
-  
+
   //==> Entry System Reports
   static REVENUE_BY_AGENT_PAGE = 'revenueByAgent'
 
   static GET_ALL_AGENT_ACTIONS = environment.apiHost + '/getAgentActions'
+  static GET_AGENT_ACTION_SUMMARY =
+    environment.apiHost + '/getAgentActionsSummary'
 
   //////////////////////////////////////////////// Manage Application  //////////////////////////////////////////
 
@@ -375,6 +377,9 @@ export class Constants {
   static EXPORT_SALES = environment.apiHost + '/sales/export/excel'
   static EXPORT_TRANSACTION_EXCEL_SHEET =
     environment.apiHost + '/transaction/exportExcelSheet'
+
+  static EXPORT_AGENT_ACTIONS_EXCEL_SHEET =
+    environment.apiHost + '/exportAgentActionToExcel'
 
   //////////////////////////////////////////////// Generate Custom Reports //////////////////////////////////////////////
 

@@ -64,6 +64,26 @@ export class ExcelService {
     return this.http.post(Constants.EXPORT_TRANSACTION_EXCEL_SHEET ,transactionData , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token}), responseType: 'blob'});
   }
 
+  // ==> Entry System
+  exportAgentActionExcel(
+    userId: string,
+    actionType: string,
+    fromDate: string,
+    toDate: string,
+  ) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.post(Constants.EXPORT_AGENT_ACTIONS_EXCEL_SHEET +
+        '?userId=' +
+        userId +
+        '&actionType=' +
+        actionType +
+        '&fromDate=' +
+        fromDate +
+        '&toDate=' +
+        toDate
+      , {} , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token}), responseType: 'blob'});
+  }
+
   //////////////////////////////////////////////// Generate Custom Reports //////////////////////////////////////////////
 
   generateWastageReport() {

@@ -4,8 +4,10 @@ import { NgxSpinnerService } from 'ngx-spinner'
 import { ErrorMessages } from 'src/app/models/ErrorMessages'
 import { User } from 'src/app/models/user'
 import { AuthService } from 'src/app/services/auth/auth.service'
+import { ExcelService } from 'src/app/services/excel/excel.service'
 import { UserService } from 'src/app/services/user/user.service'
 import { SidenavResponsive } from '../../sidenav/sidenav-responsive'
+import { saveAs } from 'file-saver'
 
 @Component({
   selector: 'app-revenue-by-agent',
@@ -14,6 +16,7 @@ import { SidenavResponsive } from '../../sidenav/sidenav-responsive'
 })
 export class RevenueByAgentComponent implements OnInit {
   agents: User[] = []
+  actionSummary = []
   actionTypes: string[] = ['Charge Wallet', 'Deduct From Wallet']
 
   filter = {
@@ -36,7 +39,7 @@ export class RevenueByAgentComponent implements OnInit {
     selected: [],
     newBookingCount: 0 as number,
     pagesFilter: [10, 25, 50, 75, 100],
-    showLoading: false,
+    showLoading: true,
     inputSearch: '' as string,
     actionData: [],
   }
@@ -47,10 +50,12 @@ export class RevenueByAgentComponent implements OnInit {
     private sidNav: SidenavResponsive,
     private userService: UserService,
     private authService: AuthService,
+    private excelService: ExcelService
   ) {}
 
   ngOnInit(): void {
     this.getAgents()
+    this.getActionSummary()
     this.getAgentsActions()
   }
 
@@ -80,13 +85,13 @@ export class RevenueByAgentComponent implements OnInit {
       .catch((err) => {
         console.error(err)
 
-        let message = "";
-        if(err.status === 401){
-          message = ErrorMessages.SESSION_EXPIRED;
-          this.sidNav.Logout();
-        } else if (err.error.message){
-          message = err.error.message;
-        } 
+        let message = ''
+        if (err.status === 401) {
+          message = ErrorMessages.SESSION_EXPIRED
+          this.sidNav.Logout()
+        } else if (err.error.message) {
+          message = err.error.message
+        }
         this.snackBar.open(message, null, {
           duration: 3000,
           horizontalPosition: 'center',
@@ -96,16 +101,10 @@ export class RevenueByAgentComponent implements OnInit {
   }
 
   getAgentsActions() {
-    console.log({
-      from: this.filter.fromDate,
-      to: this.filter.toDate,
-    })
     if (
       (this.filter.fromDate == null && this.filter.toDate == null) ||
       (this.filter.fromDate != null && this.filter.toDate != null)
     ) {
-      this.spinner.show()
-
       let fromDate = ''
       let toDate = ''
 
@@ -124,22 +123,19 @@ export class RevenueByAgentComponent implements OnInit {
         .toPromise()
         .then((res: any) => {
           this.actionList.actionData = res
-
-          this.spinner.hide()
           this.actionList.showLoading = false
         })
         .catch((err) => {
           console.error(err)
-          this.spinner.hide()
           this.actionList.showLoading = false
 
-          let message = "";
-          if(err.status === 401){
-            message = ErrorMessages.SESSION_EXPIRED;
-            this.sidNav.Logout();
-          } else if (err.error.message){
-            message = err.error.message;
-          } 
+          let message = ''
+          if (err.status === 401) {
+            message = ErrorMessages.SESSION_EXPIRED
+            this.sidNav.Logout()
+          } else if (err.error.message) {
+            message = err.error.message
+          }
           this.snackBar.open(message, null, {
             duration: 3000,
             horizontalPosition: 'center',
@@ -155,7 +151,73 @@ export class RevenueByAgentComponent implements OnInit {
     }
   }
 
-  extractExcelFile() {}
+  getActionSummary() {
+    this.userService
+      .getUserActionSummary()
+      .toPromise()
+      .then((res: any) => {
+        this.actionSummary = res
+      })
+      .catch((err) => {
+        console.error(err)
+
+        let message = ''
+        if (err.status === 401) {
+          message = ErrorMessages.SESSION_EXPIRED
+          this.sidNav.Logout()
+        } else if (err.error.message) {
+          message = err.error.message
+        }
+        this.snackBar.open(message, null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass: 'my-snack-bar-fail',
+        })
+      })
+  }
+
+  extractExcelFile() {
+    this.spinner.show()
+    let fromDate = ''
+    let toDate = ''
+
+    if (this.filter.fromDate != null && this.filter.toDate != null) {
+      fromDate = this.filter.fromDate
+      toDate = this.filter.toDate
+    }
+
+    this.excelService
+      .exportAgentActionExcel(
+        this.filter.selectedAgent,
+        this.filter.actionType,
+        fromDate,
+        toDate)
+      .subscribe(
+        (res) => {
+          const blob = new Blob([res], { type: 'application/vnd.ms.excel' })
+          const file = new File([blob], 'Agent_Actions' + '.xlsx', {
+            type: 'application/vnd.ms.excel',
+          })
+          saveAs(file)
+
+          this.snackBar.open('Export Successfully', null, {
+            duration: 2000,
+            horizontalPosition: 'center',
+            panelClass: 'my-snack-bar-success',
+          })
+          this.spinner.hide()
+        },
+        (err) => {
+          this.spinner.hide()
+          console.error(err)
+          this.snackBar.open('Fail to export, Please try agian', null, {
+            duration: 2000,
+            horizontalPosition: 'center',
+            panelClass: 'my-snack-bar-fail',
+          })
+        },
+      )
+  }
 
   hasRole(reference) {
     return this.sidNav.hasRole(reference)
