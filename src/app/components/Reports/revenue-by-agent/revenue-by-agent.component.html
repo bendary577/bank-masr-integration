@@ -38,6 +38,15 @@
                 <mat-card-content>
                     <h2 style="font-size:20px">Charges</h2>
 
+                    <table style="width: 100%;">
+                        <tbody>
+                            <tr *ngFor="let stat of actionSummary">
+                                <td style="text-align: center;width: 50%;">{{stat.agent.name}}</td>
+                                <td style="text-align: center;width: 50%;">{{stat.chargeAmount}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
                 </mat-card-content>
             </mat-card>
         </div>
@@ -46,7 +55,16 @@
             <mat-card class="stat-card">
                 <mat-card-content>
                     <h2 style="font-size:20px">Deduct</h2>
-       
+
+                    <table style="width: 100%;">
+                        <tbody>
+                            <tr *ngFor="let stat of actionSummary">
+                                <td style="text-align: center;width: 50%;">{{stat.agent.name}}</td>
+                                <td style="text-align: center;width: 50%;">{{stat.deductAmount}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
                 </mat-card-content>
             </mat-card>
         </div>
@@ -55,6 +73,17 @@
             <mat-card class="stat-card">
                 <mat-card-content>
                     <h2 style="font-size:20px">Entrance Amount</h2>
+
+                    
+                    <table style="width: 100%;">
+                        <tbody>
+                            <tr *ngFor="let stat of actionSummary">
+                                <td style="text-align: center;width: 50%;">{{stat.agent.name}}</td>
+                                <td style="text-align: center;width: 50%;">{{stat.entranceAmount}}</td>
+                            </tr>
+                        </tbody>
+                    </table>y
+                    y
 
                 </mat-card-content>
             </mat-card>

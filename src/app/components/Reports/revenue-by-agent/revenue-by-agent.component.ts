@@ -17,7 +17,11 @@ import { saveAs } from 'file-saver'
 export class RevenueByAgentComponent implements OnInit {
   agents: User[] = []
   actionSummary = []
-  actionTypes: string[] = ['Charge Wallet', 'Deduct From Wallet']
+  actionTypes: string[] = [
+    'Charge Wallet',
+    'Deduct From Wallet',
+    'Entrance Amount',
+  ]
 
   filter = {
     fromDate: null,
@@ -50,7 +54,7 @@ export class RevenueByAgentComponent implements OnInit {
     private sidNav: SidenavResponsive,
     private userService: UserService,
     private authService: AuthService,
-    private excelService: ExcelService
+    private excelService: ExcelService,
   ) {}
 
   ngOnInit(): void {
@@ -112,6 +116,8 @@ export class RevenueByAgentComponent implements OnInit {
         fromDate = this.filter.fromDate
         toDate = this.filter.toDate
       }
+
+      this.actionList.showLoading = true
 
       this.userService
         .getUserAction(
@@ -191,7 +197,8 @@ export class RevenueByAgentComponent implements OnInit {
         this.filter.selectedAgent,
         this.filter.actionType,
         fromDate,
-        toDate)
+        toDate,
+      )
       .subscribe(
         (res) => {
           const blob = new Blob([res], { type: 'application/vnd.ms.excel' })
