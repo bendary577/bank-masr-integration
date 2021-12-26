@@ -31,9 +31,10 @@ export class UserService {
   }
 
   // ==> Entry System
-  getUserAction(userId : string, actionType: string) {
+  getUserAction(userId : string, actionType: string, fromDate: string, toDate: string) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get(Constants.GET_ALL_AGENT_ACTIONS + "?userId=" + userId + "&actionType=" + actionType,
+    return this.http.get(Constants.GET_ALL_AGENT_ACTIONS + "?userId=" + userId + "&actionType=" + actionType
+    + "&fromDate=" + fromDate + "&toDate=" + toDate,
       { headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }) });
   }
 

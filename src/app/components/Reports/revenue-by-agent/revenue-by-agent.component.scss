@@ -1,3 +1,15 @@
-// @import '../../../../assets/scss/syncs.scss';
-@import '../../activities/activities.component.scss';
+@import '../../../../assets/scss/syncs.scss';
 @import '../../support/support.component.scss';
+
+
+.summary-row{
+  display: flex;
+  overflow: hidden;    
+  scroll-behavior: smooth;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+  width: 33%;
+  text-align: center;
+}
