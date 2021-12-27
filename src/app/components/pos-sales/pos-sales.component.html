@@ -8,7 +8,7 @@
         <option [ngValue]="job" *ngFor="let job of jobs">
             {{job.creationDate | date:'dd-MM-yyyy H:MM:SS'}} - {{job.status}}</option>
     </select>
-    <button mat-flat-button (click)="getPOSSalesSyncJob()">Sync POS Sales Now</button>
+    <button *ngIf="hasRole('sync_jobs')" mat-flat-button (click)="getPOSSalesSyncJob()">Sync POS Sales Now</button>
 </div>
 
 <br>

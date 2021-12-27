@@ -214,7 +214,7 @@
 
             <ngx-datatable-column name="Options" *ngIf="hasRole('show_option')" [width]="90">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    <button class="menue-btn" mat-button [matMenuTriggerFor]="menu">. . . </button>
+                    <button class="menue-btn" mat-button [matMenuTriggerFor]="menu">...</button>
                     <mat-menu #menu="matMenu">
                         <button *ngIf="!row.suspended" class="menue-btn-choi" mat-menu-item (click)="suspendGuest(row, true)">Suspend</button>
                         <button *ngIf="row.suspended" class="menue-btn-choi" mat-menu-item (click)="suspendGuest(row, false)">Active</button>

@@ -10,6 +10,7 @@ import { ExcelService } from 'src/app/services/excel/excel.service';
 import { saveAs } from 'file-saver';
 import { Constants } from 'src/app/models/constants';
 import { CsvService } from 'src/app/services/csv/csv.service';
+import { SideNaveComponent } from '../side-nave/side-nave.component'
 
 @Component({
   selector: 'app-credit-notes-infor',
@@ -29,7 +30,7 @@ export class CreditNotesInforComponent implements OnInit {
 
 
   constructor(private spinner: NgxSpinnerService, private creditNoteService: CreditNoteService,
-    private syncJobService:SyncJobService, private sidNav: SidenavResponsive, private excelService: ExcelService,
+    private syncJobService:SyncJobService, private sidNav: SideNaveComponent, private excelService: ExcelService,
     public dialog: MatDialog, public snackBar: MatSnackBar, private csvService: CsvService) { }
 
   ngOnInit() {

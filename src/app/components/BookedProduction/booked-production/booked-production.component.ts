@@ -10,6 +10,7 @@ import { ExcelService } from 'src/app/services/excel/excel.service';
 import { saveAs } from 'file-saver';
 import { Constants } from 'src/app/models/constants';
 import { CsvService } from 'src/app/services/csv/csv.service';
+import { SideNaveComponent } from '../../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-booked-production',
@@ -30,7 +31,7 @@ export class BookedProductionComponent implements OnInit {
 
 
   constructor(private spinner: NgxSpinnerService, private bookedProductionService: BookedProductionService,
-    public snackBar: MatSnackBar, private syncJobService:SyncJobService, private sidNav: SidenavResponsive,
+    public snackBar: MatSnackBar, private syncJobService:SyncJobService, private sidNav: SideNaveComponent,
     private excelService: ExcelService, private csvService: CsvService
     ) {
 

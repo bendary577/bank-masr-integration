@@ -9,6 +9,7 @@ import { Data } from 'src/app/models/data';
 import { SyncJob } from 'src/app/models/SyncJob';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { SideNaveComponent } from '../side-nave/side-nave.component'
 
 @Component({
   selector: 'app-suppliers',
@@ -27,7 +28,7 @@ export class SuppliersComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService, private supplierService: SupplierService,
     private syncJobService: SyncJobService,
-    public snackBar: MatSnackBar, private router: Router, private data: Data, private sidNav: SidenavResponsive) {
+    public snackBar: MatSnackBar, private router: Router, private data: Data, private sidNav: SideNaveComponent) {
 
   }
 

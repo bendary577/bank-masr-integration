@@ -10,6 +10,7 @@ import { ExcelService } from 'src/app/services/excel/excel.service'
 import { saveAs } from 'file-saver'
 import { Constants } from 'src/app/models/constants'
 import { CsvService } from 'src/app/services/csv/csv.service'
+import { SideNaveComponent } from '../side-nave/side-nave.component'
 
 @Component({
   selector: 'app-approved-invoices-infor',
@@ -29,7 +30,7 @@ export class ApprovedInvoicesInforComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private invoiceService: InvoiceService,
     private syncJobService: SyncJobService,
-    private sidNav: SidenavResponsive,
+    private sidNav: SideNaveComponent,
     private excelService: ExcelService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
@@ -48,10 +49,6 @@ export class ApprovedInvoicesInforComponent implements OnInit {
   }
 
   hasRole(reference) {
-    console.log({
-      reference: reference,
-      AP: this.sidNav.hasRole(reference),
-    })
     return this.sidNav.hasRole(reference)
   }
 

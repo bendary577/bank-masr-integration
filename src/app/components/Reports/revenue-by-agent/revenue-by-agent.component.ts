@@ -231,6 +231,10 @@ export class RevenueByAgentComponent implements OnInit {
       )
   }
 
+  getCurrency() {
+    return JSON.parse(localStorage.getItem('account')).currency
+  }
+
   hasRole(reference) {
     return this.sidNav.hasRole(reference)
   }

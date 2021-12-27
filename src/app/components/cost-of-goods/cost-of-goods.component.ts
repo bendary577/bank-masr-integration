@@ -10,6 +10,7 @@ import { JournalService } from 'src/app/services/journal/journal.service';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import { saveAs } from 'file-saver';
+import { SideNaveComponent } from '../side-nave/side-nave.component'
 
 @Component({
   selector: 'app-cost-of-goods',
@@ -26,7 +27,7 @@ export class CostOfGoodsComponent implements OnInit {
   selectedJob :SyncJob = null;
   state = "";
 
-  constructor(private spinner: NgxSpinnerService, private sidNav: SidenavResponsive,
+  constructor(private spinner: NgxSpinnerService, private sidNav: SideNaveComponent,
     private journalService: JournalService, private syncJobService: SyncJobService,
     private excelService: ExcelService,
     public snackBar: MatSnackBar, private csvService: CsvService) { }

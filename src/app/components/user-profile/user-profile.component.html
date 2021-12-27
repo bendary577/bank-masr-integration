@@ -18,18 +18,18 @@
                     <hr>
                     <div class="user-data">
                         <table>
-                            <tr *ngIf="user.code">
+                            <tr *ngIf="user && user.code">
                                 <td class="title" style="float: left;" style="float: left;">Guest Card </td>
                                 <td> </td>
                                 <td class="res" style="float: right;" style="float: right;"> {{user.code}}</td>
                             </tr>
-                            <hr class="hrClass" *ngIf="user.code">
-                            <tr *ngIf="user.mobile">
+                            <hr class="hrClass" *ngIf="user && user.code">
+                            <tr *ngIf="user && user.mobile">
                                 <td class="title" style="float: left;" style="float: left;">Mobile </td>
                                 <td> </td>
                                 <td class="res" style="float: right;" style="float: right;"> {{user.mobile}}</td>
                             </tr>
-                            <hr class="hrClass"  *ngIf="user.mobile">
+                            <hr class="hrClass"  *ngIf="user && user.mobile">
                             <tr *ngIf="group.name">
                                 <td class="title" style="float: left;">Group </td>
                                 <td> </td>
@@ -198,6 +198,14 @@
                     <ngx-datatable-column name="New Balance">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                             {{row.newBalance}} {{getCurrency()}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Agent Name">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <li *ngIf="row.user">
+                                {{row.user.name}}
+                            </li> 
                         </ng-template>
                     </ngx-datatable-column>
 

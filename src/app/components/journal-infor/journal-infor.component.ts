@@ -12,6 +12,7 @@ import { saveAs } from "file-saver";
 import { CsvService } from "src/app/services/csv/csv.service";
 import { FileInfo } from "src/app/models/fileInfo";
 import { DriveService } from "src/app/services/drive/drive.service";
+import { SideNaveComponent } from '../side-nave/side-nave.component'
 
 @Component({
   selector: "app-journal-infor",
@@ -29,7 +30,7 @@ export class JournalInforComponent implements OnInit {
 
   constructor(
     private spinner: NgxSpinnerService,
-    private sidNav: SidenavResponsive,
+    private sidNav: SideNaveComponent,
     private journalService: JournalService,
     private syncJobService: SyncJobService,
     private excelService: ExcelService,

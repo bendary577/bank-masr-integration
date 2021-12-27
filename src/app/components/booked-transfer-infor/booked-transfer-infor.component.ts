@@ -11,6 +11,7 @@ import { ExcelService } from 'src/app/services/excel/excel.service';
 import { saveAs } from 'file-saver';
 import { CsvService } from 'src/app/services/csv/csv.service';
 import { Constants } from 'src/app/models/constants';
+import { SideNaveComponent } from '../side-nave/side-nave.component'
 
 @Component({
   selector: 'app-booked-transfer-infor',
@@ -31,7 +32,7 @@ export class BookedTransferInforComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService, private transferService: TransferService,
     public snackBar: MatSnackBar, private syncJobService:SyncJobService, private router:Router,
-    private sidNav: SidenavResponsive, private excelService: ExcelService, private csvService: CsvService
+    private sidNav: SideNaveComponent, private excelService: ExcelService, private csvService: CsvService
     ) {
 
   }

@@ -10,6 +10,7 @@ import { SidenavResponsive } from '../sidenav/sidenav-responsive'
 import { ExcelService } from 'src/app/services/excel/excel.service'
 import { saveAs } from 'file-saver'
 import { CsvService } from 'src/app/services/csv/csv.service'
+import { SideNaveComponent } from '../side-nave/side-nave.component'
 
 @Component({
   selector: 'app-wastage-infor',
@@ -29,7 +30,7 @@ export class WastageInforComponent implements OnInit {
     private spinner: NgxSpinnerService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
-    private sidNav: SidenavResponsive,
+    private sidNav: SideNaveComponent,
     private syncJobService: SyncJobService,
     private wastageService: WastageService,
     private excelService: ExcelService,
