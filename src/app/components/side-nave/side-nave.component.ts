@@ -301,6 +301,9 @@ export class SideNaveComponent implements OnDestroy, OnInit {
       }
       return false
     }
+    else { 
+      return false
+    }
   }
 
   hasFeature(reference): Boolean {

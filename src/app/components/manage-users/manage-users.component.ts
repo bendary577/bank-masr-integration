@@ -13,6 +13,7 @@ import { Constants } from 'src/app/models/constants'
 import { AddAppUserAccompiedComponent } from '../add-app-user-accompied/add-app-user-accompied.component'
 import { SideNaveComponent } from '../side-nave/side-nave.component'
 import { Moment } from 'moment'
+import { ExtendExpiryDateComponent } from '../extend-expiry-date/extend-expiry-date.component'
 
 @Component({
   selector: 'app-manage-users',
@@ -42,7 +43,7 @@ export class ManageUsersComponent implements OnInit {
   selectedCardStatues = ''
   statues = ['Active', 'Expired', 'Deleted']
   fromDate = ''
-  toDate  = ''
+  toDate = ''
   isEntrySys = true
 
   usersList = {
@@ -149,6 +150,67 @@ export class ManageUsersComponent implements OnInit {
           horizontalPosition: 'right',
           panelClass: 'my-snack-bar-fail',
         })
+      })
+  }
+
+  extendExpiryDate(guest) {
+    this.dialog
+      .open(ExtendExpiryDateComponent, {})
+      .afterClosed()
+      .subscribe((res) => {
+        if (res) {
+          this.usersList.showLoading = true
+          this.loyaltyService
+            .addApplicationUser(
+              false,
+              true,
+              guest.name,
+              guest.email,
+              guest.group.id,
+              guest.image,
+              guest.id,
+              guest.accompiendUsers,
+              guest.cardCode,
+              guest.mobile,
+              guest.balance,
+              +guest.expire + res.hours,
+              false,
+              false,
+              guest.points,
+            )
+            .then((result: any) => {
+              this.loading = false
+              this.usersList.showLoading = false
+              this.newUser = new ApplicationUser()
+              this.usersList.selected = []
+              this.getUsers()
+              this.snackBar.open('Guest updated successfully.', null, {
+                duration: 2000,
+                horizontalPosition: 'center',
+                panelClass: 'my-snack-bar-success',
+              })
+            })
+            .catch((err) => {
+              this.loading = false
+              let message = ''
+              if (err.status === 401) {
+                message = ErrorMessages.SESSION_EXPIRED
+                this.sidNav.Logout()
+              } else if (err.error.message) {
+                message = err.error.message
+              } else if (err.message) {
+                message = err.message
+              } else {
+                message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+              }
+
+              this.snackBar.open(message, null, {
+                duration: 3000,
+                horizontalPosition: 'center',
+                panelClass: 'my-snack-bar-fail',
+              })
+            })
+        }
       })
   }
 
@@ -555,36 +617,40 @@ export class ManageUsersComponent implements OnInit {
 
   resetPicker(event) {
     // if (event == 'fromDate') {
-      this.fromDate = undefined
-      // this.filterGuests(event)
+    this.fromDate = undefined
+    // this.filterGuests(event)
     // } else if (event == 'toDate') {
-      this.toDate = undefined
-      this.filterGuests(event)
+    this.toDate = undefined
+    this.filterGuests(event)
     // }
   }
 
   filterGuests(event) {
-    const guests = this.usersList.allGuestsBeforeFilter;
+    const guests = this.usersList.allGuestsBeforeFilter
 
-    if((this.fromDate != '' &&
-    this.fromDate != undefined) && (this.toDate == undefined ||
-      this.toDate == '')){
-        this.snackBar.open("Please Configure End Date Time.", null, {
-          duration: 2000,
-          horizontalPosition: 'center',
-          panelClass:['redNoMatch']
-        })
-      }
+    if (
+      this.fromDate != '' &&
+      this.fromDate != undefined &&
+      (this.toDate == undefined || this.toDate == '')
+    ) {
+      this.snackBar.open('Please Configure End Date Time.', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass: ['redNoMatch'],
+      })
+    }
 
-      if((this.toDate != '' &&
-      this.toDate != undefined) && (this.fromDate == undefined ||
-        this.fromDate == '')){
-          this.snackBar.open("Please Configure Start Date Time.", null, {
-            duration: 2000,
-            horizontalPosition: 'center',
-            panelClass:['redNoMatch']
-          })
-        }
+    if (
+      this.toDate != '' &&
+      this.toDate != undefined &&
+      (this.fromDate == undefined || this.fromDate == '')
+    ) {
+      this.snackBar.open('Please Configure Start Date Time.', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass: ['redNoMatch'],
+      })
+    }
 
     if (
       this.fromDate != '' &&

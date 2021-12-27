@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material'
 import { NgxSpinnerService } from 'ngx-spinner'
 import { ErrorMessages } from 'src/app/models/ErrorMessages'
 import { User } from 'src/app/models/user'
+import { Paginate } from 'src/app/models/Paginate'
 import { AuthService } from 'src/app/services/auth/auth.service'
 import { ExcelService } from 'src/app/services/excel/excel.service'
 import { UserService } from 'src/app/services/user/user.service'
@@ -23,6 +24,7 @@ export class RevenueByAgentComponent implements OnInit {
     'Entrance Amount',
   ]
 
+  paginate = {} as Paginate;
   filter = {
     fromDate: null,
     toDate: null,
@@ -55,7 +57,10 @@ export class RevenueByAgentComponent implements OnInit {
     private userService: UserService,
     private authService: AuthService,
     private excelService: ExcelService,
-  ) {}
+  ) {
+    this.paginate.pageNumber = 0
+    this.paginate.limit = 10;
+  }
 
   ngOnInit(): void {
     this.getAgents()

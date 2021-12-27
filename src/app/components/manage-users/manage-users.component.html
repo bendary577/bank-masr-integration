@@ -220,7 +220,8 @@
                         <button *ngIf="row.suspended" class="menue-btn-choi" mat-menu-item (click)="suspendGuest(row, false)">Active</button>
                         <button *ngIf="!row.deleted" class="menue-btn-choi" mat-menu-item (click)="deleteOneUsers(row, 'true')">Delete Guest</button>
                         <button *ngIf="row.deleted" class="menue-btn-choi" mat-menu-item (click)="deleteOneUsers(row, 'false')">Restore Guest</button>
-                        <!-- <button class="menue-btn-choi" mat-menu-item>Cancel</button> -->
+                        <button *ngIf="!row.deleted" class="menue-btn-choi" mat-menu-item (click)="extendExpiryDate(row)">
+                            Extend Expiry Date</button>
                         <button class="menue-btn-choi" mat-menu-item (click)="openUserProfile(row)">Preview</button>
                     </mat-menu>
                 </ng-template>
