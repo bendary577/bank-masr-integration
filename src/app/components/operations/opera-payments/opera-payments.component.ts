@@ -56,9 +56,7 @@ export class OperaPaymentsComponent implements OnInit {
       .listOperaTransactions(this.fromDate, this.toDate, "")
       .toPromise()
       .then((res: any) => {
-        console.log(res)
         this.transactions = res["transactions"]
-        console.log(this.transactions)
         this.spinner.hide()
         this.loading = false
       })

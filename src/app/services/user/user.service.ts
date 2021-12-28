@@ -72,6 +72,8 @@ export class UserService {
     actionType: string,
     fromDate: string,
     toDate: string,
+    pageNumber,
+    limit
   ) {
     this.token = localStorage.getItem('auth_token')
     return this.http.get(
@@ -83,7 +85,12 @@ export class UserService {
         '&fromDate=' +
         fromDate +
         '&toDate=' +
-        toDate,
+        toDate +
+        '&pageNumber=' +
+        pageNumber +
+        '&limit=' +
+        limit,
+
       { headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }) },
     )
   }

@@ -21,12 +21,7 @@ export class DeleteAppGroupComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data) { }
 
   ngOnInit(): void {
-
-    console.log({
-      data: this.data
-    })
     if(this.data != undefined && this.data["isDelete"]){
-      console.log("getting data from data object")
       this.isDelete = this.data["isDelete"];
     }else{
       this.isDelete = "false";

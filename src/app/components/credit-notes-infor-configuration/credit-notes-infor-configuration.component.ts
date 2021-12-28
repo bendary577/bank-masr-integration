@@ -57,7 +57,6 @@ export class CreditNotesInforConfigurationComponent implements OnInit {
 
   onSaveClick(): void {
     this.spinner.show();
-    console.log ("Date", this.syncJobType.configuration.toDate)
     this.syncJobService.updateSyncJobTypeConfig(this.syncJobType).then(result => {
       this.spinner.hide();
       this.router.navigate([Constants.SYNC_JOBS]);

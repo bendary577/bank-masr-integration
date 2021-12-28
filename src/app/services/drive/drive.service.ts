@@ -13,7 +13,6 @@ export class DriveService {
   constructor() {}
 
   initClient(apiKey, clientId) {
-    console.log("A")
     return new Promise<void>((resolve, reject) => {
       gapi.load("client:auth2", () => {
         return gapi.client

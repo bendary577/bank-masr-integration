@@ -219,7 +219,6 @@ export class LoyaltyService {
 
   chargeWallet(chargeFlag, userId, balance) {
     let token = localStorage.getItem('auth_token')
-    console.log(balance)
     return this.http.post(
       Constants.CHARGE_WALLET + '?userId=' + userId,
       balance,

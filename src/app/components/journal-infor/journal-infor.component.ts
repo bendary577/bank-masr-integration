@@ -252,7 +252,6 @@ export class JournalInforComponent implements OnInit {
     for (let file of files) {
       console.log(file);
     }
-    console.log("This is working...");
     const file = new File(["foo"], "fooSym.txt", {
       type: "text/plain",
     });

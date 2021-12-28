@@ -377,7 +377,6 @@ export class ManageUsersComponent implements OnInit {
   updateUserDialog() {
     let dialogRef
     let isGeneric = this.usersList.selected[0].generic
-    console.log(isGeneric)
     if (isGeneric) {
       dialogRef = this.dialog.open(AddAppUserAccompiedComponent, {
         width: '710px',

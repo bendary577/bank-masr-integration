@@ -49,7 +49,6 @@ export class ConfigurationComponent implements OnInit {
       .toPromise()
       .then((res: any) => {
         this.account = res
-        console.log(this.account)
 
         if (this.account.apiKey && this.account.clientId) {
           this.initializeDriveAccount(this.account)

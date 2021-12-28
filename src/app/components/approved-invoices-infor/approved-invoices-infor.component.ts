@@ -84,7 +84,6 @@ export class ApprovedInvoicesInforComponent implements OnInit {
       .toPromise()
       .then((res: any) => {
         this.success = res.success
-        console.log(res)
 
         if (this.success) {
           this.snackBar.open(res.message, null, {

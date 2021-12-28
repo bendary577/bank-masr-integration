@@ -45,35 +45,19 @@ export class NavBarComponent implements OnInit {
 
   // toggle sidebar
   toggleSidebar() {
-    console.log("A")
     let body = document.querySelector('body');
-    console.log("B")
 
     if((!body.classList.contains('sidebar-toggle-display')) && (!body.classList.contains('sidebar-absolute'))) {
-      console.log("C")
-
       this.iconOnlyToggled = !this.iconOnlyToggled;
-      console.log("DD")
-
       if(this.iconOnlyToggled) {
-        console.log("E")
-
         body.classList.add('sidebar-icon-only');
-        console.log("F")
-
         localStorage.setItem("side-menu-width", "all");
-        console.log("G")
-
       } else {
-        console.log("H")
-
         body.classList.remove('sidebar-icon-only');
-        console.log("I")
-
         localStorage.setItem("side-menu-width", "small");
       }
     } else {
-      this.sidebarToggled = !this.sidebarToggled;    console.log("A")
+      this.sidebarToggled = !this.sidebarToggled;
 
       if(this.sidebarToggled) {
         body.classList.add('sidebar-hidden');

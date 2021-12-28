@@ -32,9 +32,7 @@ export class RewardPointsSettingsComponent implements OnInit {
       .getGeneralSettings()
       .then((res) => {
         this.generalSettings = res as GeneralSettings
-        console.log({
-          generalSettings: this.generalSettings,
-        })
+
         this.spinner.hide()
       })
       .catch((err) => {
@@ -59,9 +57,7 @@ export class RewardPointsSettingsComponent implements OnInit {
   onSaveClick() {
     try {
       this.spinner.show()
-      console.log({
-        generalSettings: this.generalSettings,
-      })
+
       this.generalSettingsService
         .updateGeneralSettings(this.generalSettings)
         .then((result) => {

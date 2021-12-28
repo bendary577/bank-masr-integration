@@ -322,7 +322,6 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        console.log(res)
         this.spinner.show();
         this.loading = true;
         this.newDiscount = {};
@@ -377,7 +376,6 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        console.log(res)
         this.spinner.show();
         this.loading = true;
         this.newServiceCharge.checked = true;
@@ -437,7 +435,6 @@ export class PosSalesInforConfigurationComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        console.log(res)
         this.spinner.show();
         this.loading = true;
 

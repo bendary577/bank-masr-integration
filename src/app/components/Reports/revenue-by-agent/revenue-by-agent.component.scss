@@ -13,3 +13,28 @@
   width: 33%;
   text-align: center;
 }
+
+.controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 20px auto;
+
+  div:not(:last-of-type) {
+    $space: 20px;
+    margin-right: $space;
+
+    &:after {
+      content: '|';
+      margin-left: $space;
+    }
+  }
+
+  label {
+    margin-right: 5px;
+  }
+
+  select {
+    padding: 3px;
+  }
+}

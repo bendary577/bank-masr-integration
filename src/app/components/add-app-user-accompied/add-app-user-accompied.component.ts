@@ -122,7 +122,6 @@ export class AddAppUserAccompiedComponent implements OnInit  {
   }
 
   onSaveClick(): void {
-    console.log("S")
     if (this.form.invalid){
       this.snackBar.open("Please fill form values" , null, {
         duration: 3000,

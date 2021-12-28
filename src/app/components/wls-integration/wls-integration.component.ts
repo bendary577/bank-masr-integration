@@ -64,7 +64,6 @@ export class WlsIntegrationComponent implements OnInit {
         panelClass:"my-snack-bar-success"
       });
     }).catch(err => {
-      console.log("catch");
       this.getSyncJobs(Constants.RESERVATION_SYNC);
 
       localStorage.setItem('getReservationLodign', "false");

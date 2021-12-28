@@ -44,16 +44,14 @@ export class RevenueByAgentComponent implements OnInit {
     },
     selected: [],
     size: 10 as number,
-    pageNumber: 0 as number,
-    limit: 0 as number,
+    pageNumber: 1 as number,
+    limit: 10 as number,
     actionsCount: 0 as number,
     pagesFilter: [10, 25, 50, 75, 100],
     showLoading: true,
     inputSearch: '' as string,
     actionData: [],
   }
-
-  public column = [{name:'Name'},{name:'Gender'},{name:'Company'}];
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -74,13 +72,6 @@ export class RevenueByAgentComponent implements OnInit {
     this.getAgentsActions()
   }
 
-  setPage(pageInfo) {
-    console.log({
-      currentPage: this.actionList.pageNumber,
-    })
-    this.actionList.pageNumber = pageInfo.offset
-  }
-
   onSelect({ selected }) {
     this.actionList.selected.splice(0, this.actionList.selected.length)
     this.actionList.selected.push(...selected)
@@ -99,6 +90,13 @@ export class RevenueByAgentComponent implements OnInit {
 
   onLimitChange(limit) {
     this.actionList.limit = limit
+    this.getAgentsActions();
+  }
+
+  
+  changePage(pageInfo) {
+    this.actionList.pageNumber = pageInfo.page
+    this.getAgentsActions();
   }
 
   getAgents() {
@@ -139,8 +137,6 @@ export class RevenueByAgentComponent implements OnInit {
         toDate = this.filter.toDate
       }
 
-      this.actionList.showLoading = true
-
       this.userService
         .countUserAction(
           this.filter.selectedAgent,
@@ -151,12 +147,9 @@ export class RevenueByAgentComponent implements OnInit {
         .toPromise()
         .then((res: any) => {
           this.actionList.actionsCount = res
-          this.actionList.showLoading = false
         })
         .catch((err) => {
           console.error(err)
-          this.actionList.showLoading = false
-
           let message = ''
           if (err.status === 401) {
             message = ErrorMessages.SESSION_EXPIRED
@@ -200,6 +193,8 @@ export class RevenueByAgentComponent implements OnInit {
           this.filter.actionType,
           fromDate,
           toDate,
+          this.actionList.pageNumber,
+          this.actionList.limit
         )
         .toPromise()
         .then((res: any) => {

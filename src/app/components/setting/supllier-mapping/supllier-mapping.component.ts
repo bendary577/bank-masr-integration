@@ -69,7 +69,6 @@ export class SupplierMappingComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        console.log(res)
         this.spinner.show();
         this.loading = true;
 

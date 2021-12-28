@@ -38,7 +38,6 @@ export class SimphonyPaymentComponent implements OnInit {
   ngOnInit(): void {
 
     if(this.data != null && this.data.storage != undefined){
-      console.log(this.data);
        localStorage.setItem('currentCheck', JSON.stringify(this.data.storage.transactionResponses));
        this.transactions = this.data.storage.transactionResponses;
     }else{

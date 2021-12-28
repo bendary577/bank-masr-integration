@@ -26,7 +26,6 @@ export class AmazonComponent implements OnInit {
     // const hash = `TESTSHAINaccess_code=${this.paymentSchema.access_code}amount=${this.paymentSchema.amount}command=${this.PaymentSchema.command}currency=${this.PaymentSchema.currency}customer_email=${this.PaymentSchema.customer_email}language=${this.PaymentSchema.language}merchant_identifier=${this.PaymentSchema.merchant_identifier}merchant_reference=${this.PaymentSchema.merchant_reference}order_description=${this.PaymentSchema.order_description}return_url=${this.PaymentSchema.return_url}TESTSHAIN`;
     const sign = "6BA83163FEA3455DC270473F6CD00450DE86CD76A3B7358EE8E66C6785E3A6EE";
     this.paymentSchema.signature = sign;
-    // console.log(hash);
 
   }
 

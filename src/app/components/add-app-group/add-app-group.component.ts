@@ -55,7 +55,6 @@ export class AddAppGroupComponent implements OnInit {
       this.inUpdate = true
       this.group = this.data['group']
       this.slectedDiscount = this.group.simphonyDiscount.discountId
-      console.log(this.slectedDiscount)
       this.form = this.formBuilder.group({
         name: [this.group.name, [Validators.maxLength, Validators.required]],
         description: [this.group.description],

@@ -73,7 +73,6 @@ export class EditWalletComponent implements OnInit {
       .getGeneralSettings()
       .then((res: any) => {
         this.generalSettings = res as GeneralSettings
-        console.log(res)
         if (this.generalSettings.revenueCenters) {
           this.revenueCenterList.revenueCenterData = this.generalSettings.revenueCenters
           this.revenueCenterList.showLoading = false;

@@ -63,9 +63,6 @@ export class ZealPaymentComponent implements OnInit {
       this.operationData = [res];
       this.data = res["data"];
 
-      console.log({
-        operationData: this.operationData
-      });
       this.spinner.hide();
       this.loading = false;
     }).catch(err => {
