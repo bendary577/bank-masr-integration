@@ -295,12 +295,6 @@ export class SideNaveComponent implements OnDestroy, OnInit {
   hasRole(reference): Boolean {
     if (SideNaveComponent.userRoles) {
       for (let i = 0; i < SideNaveComponent.userRoles.length; i++) {
-        if (SideNaveComponent.userRoles[i]['reference'] == 'sync_jobs') {
-          console.log({
-            v1: SideNaveComponent.userRoles[i]['reference'],
-            v2: reference
-          })
-        }
         if (SideNaveComponent.userRoles[i]['reference'] == reference) {
           return true
         }

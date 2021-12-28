@@ -46,6 +46,27 @@ export class UserService {
   }
 
   // ==> Entry System
+  countUserAction(
+    userId: string,
+    actionType: string,
+    fromDate: string,
+    toDate: string,
+  ) {
+    this.token = localStorage.getItem('auth_token')
+    return this.http.get(
+      Constants.COUNT_ALL_AGENT_ACTIONS +
+        '?userId=' +
+        userId +
+        '&actionType=' +
+        actionType +
+        '&fromDate=' +
+        fromDate +
+        '&toDate=' +
+        toDate,
+      { headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }) },
+    )
+  }
+
   getUserAction(
     userId: string,
     actionType: string,

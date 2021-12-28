@@ -354,6 +354,7 @@ export class Constants {
   static REVENUE_BY_AGENT_PAGE = 'revenueByAgent'
 
   static GET_ALL_AGENT_ACTIONS = environment.apiHost + '/getAgentActions'
+  static COUNT_ALL_AGENT_ACTIONS = environment.apiHost + '/countAgentActions'
   static GET_AGENT_ACTION_SUMMARY =
     environment.apiHost + '/getAgentActionsSummary'
 

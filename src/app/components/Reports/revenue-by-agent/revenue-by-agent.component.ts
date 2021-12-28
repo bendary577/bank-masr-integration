@@ -24,7 +24,7 @@ export class RevenueByAgentComponent implements OnInit {
     'Entrance Amount',
   ]
 
-  paginate = {} as Paginate;
+  paginate = {} as Paginate
   filter = {
     fromDate: null,
     toDate: null,
@@ -43,12 +43,17 @@ export class RevenueByAgentComponent implements OnInit {
       `,
     },
     selected: [],
-    newBookingCount: 0 as number,
+    size: 10 as number,
+    pageNumber: 0 as number,
+    limit: 0 as number,
+    actionsCount: 0 as number,
     pagesFilter: [10, 25, 50, 75, 100],
     showLoading: true,
     inputSearch: '' as string,
     actionData: [],
   }
+
+  public column = [{name:'Name'},{name:'Gender'},{name:'Company'}];
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -59,13 +64,21 @@ export class RevenueByAgentComponent implements OnInit {
     private excelService: ExcelService,
   ) {
     this.paginate.pageNumber = 0
-    this.paginate.limit = 10;
+    this.paginate.limit = 10
   }
 
   ngOnInit(): void {
     this.getAgents()
     this.getActionSummary()
+    this.countAgentsActions()
     this.getAgentsActions()
+  }
+
+  setPage(pageInfo) {
+    console.log({
+      currentPage: this.actionList.pageNumber,
+    })
+    this.actionList.pageNumber = pageInfo.offset
   }
 
   onSelect({ selected }) {
@@ -82,6 +95,10 @@ export class RevenueByAgentComponent implements OnInit {
     }
 
     this.getAgentsActions()
+  }
+
+  onLimitChange(limit) {
+    this.actionList.limit = limit
   }
 
   getAgents() {
@@ -107,6 +124,59 @@ export class RevenueByAgentComponent implements OnInit {
           panelClass: 'my-snack-bar-fail',
         })
       })
+  }
+
+  countAgentsActions() {
+    if (
+      (this.filter.fromDate == null && this.filter.toDate == null) ||
+      (this.filter.fromDate != null && this.filter.toDate != null)
+    ) {
+      let fromDate = ''
+      let toDate = ''
+
+      if (this.filter.fromDate != null && this.filter.toDate != null) {
+        fromDate = this.filter.fromDate
+        toDate = this.filter.toDate
+      }
+
+      this.actionList.showLoading = true
+
+      this.userService
+        .countUserAction(
+          this.filter.selectedAgent,
+          this.filter.actionType,
+          fromDate,
+          toDate,
+        )
+        .toPromise()
+        .then((res: any) => {
+          this.actionList.actionsCount = res
+          this.actionList.showLoading = false
+        })
+        .catch((err) => {
+          console.error(err)
+          this.actionList.showLoading = false
+
+          let message = ''
+          if (err.status === 401) {
+            message = ErrorMessages.SESSION_EXPIRED
+            this.sidNav.Logout()
+          } else if (err.error.message) {
+            message = err.error.message
+          }
+          this.snackBar.open(message, null, {
+            duration: 3000,
+            horizontalPosition: 'center',
+            panelClass: 'my-snack-bar-fail',
+          })
+        })
+    } else {
+      this.snackBar.open('Please enter date range.', null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass: 'my-snack-bar-fail',
+      })
+    }
   }
 
   getAgentsActions() {
