@@ -95,7 +95,7 @@
     </div>
     <br>
     <div>
-        <ngx-datatable style="max-width: 98%;height: 300px;" class="material" [loadingIndicator]="actionList.showLoading"
+        <ngx-datatable style="max-width: 98%;height: 350px;" class="material" [loadingIndicator]="actionList.showLoading"
             [messages]="actionList.messages" [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
             [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [rows]="actionList.actionData"
             [selected]="actionList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false"
@@ -144,21 +144,22 @@
                 let-curPage="curPage" let-offset="offset" let-isVisible="isVisible">
 
                 <div class="page-count">
-                    Showing 1 to {{actionList.actionData.length}} of  {{actionList.actionsCount}} entries
-
-                    <select (change)="onLimitChange($event.target.value)" style="width: 50px;position: inherit;">
-                        <option *ngFor="let option of actionList.pagesFilter"
-                            [value]="option">{{ option }}
-                        </option>
-                    </select>
+                    Showing {{actionList.actionData.length}} of  {{actionList.actionsCount}} entries
                 </div>
 
+                <select (change)="onLimitChange($event.target.value)" style="width: 50px;position: inherit;">
+                    <option *ngFor="let option of actionList.pagesFilter"
+                        [value]="option">{{ option }}
+                    </option>
+                </select>
 
+<!-- [hidden]="!(actionList.actionsCount / actionList.limit > 1)" -->
                 <datatable-pager [pagerLeftArrowIcon]="'datatable-icon-left'" [pagerRightArrowIcon]="'datatable-icon-right'"
-                    [pagerPreviousIcon]="'datatable-icon-prev'" [pagerNextIcon]="'datatable-icon-skip'" [page]="curPage"
-                    [size]="actionList.limit" [count]="rowCount" [hidden]="!(rowCount / actionList.limit > 1)"
+                    [pagerPreviousIcon]="'datatable-icon-prev'" [pagerNextIcon]="'datatable-icon-skip'" [page]="actionList.pageNumber"
+                    [size]="actionList.limit" [count]="actionList.actionsCount" 
                     (change)="changePage($event)">
-        
+    
+
                 </datatable-pager>
                 </ng-template>
             </ngx-datatable-footer>

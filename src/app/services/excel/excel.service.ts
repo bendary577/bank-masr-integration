@@ -70,6 +70,8 @@ export class ExcelService {
     actionType: string,
     fromDate: string,
     toDate: string,
+    pageNumber,
+    limit
   ) {
     this.token = localStorage.getItem('auth_token');
     return this.http.post(Constants.EXPORT_AGENT_ACTIONS_EXCEL_SHEET +
@@ -80,7 +82,11 @@ export class ExcelService {
         '&fromDate=' +
         fromDate +
         '&toDate=' +
-        toDate
+        toDate +
+        '&pageNumber=' +
+        pageNumber +
+        '&limit=' +
+        limit
       , {} , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token}), responseType: 'blob'});
   }
 
