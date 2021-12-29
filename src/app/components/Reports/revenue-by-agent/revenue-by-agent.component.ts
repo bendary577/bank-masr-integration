@@ -267,9 +267,7 @@ export class RevenueByAgentComponent implements OnInit {
         this.filter.selectedAgent,
         this.filter.actionType,
         fromDate,
-        toDate,
-        this.actionList.pageNumber,
-        this.actionList.limit
+        toDate
       )
       .subscribe(
         (res) => {
