@@ -10,6 +10,8 @@ import { WastageService } from 'src/app/services/wastage/wastage.service'
 import { JournalService } from 'src/app/services/journal/journal.service'
 import { ErrorMessages } from 'src/app/models/ErrorMessages'
 import { SidenavResponsive } from '../sidenav/sidenav-responsive'
+import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service'
+import { GeneralSettings } from 'src/app/models/GeneralSettings'
 
 @Component({
   selector: 'app-wastage-infor-configuration',
@@ -26,13 +28,14 @@ export class WastageInforConfigurationComponent implements OnInit {
   selectedTender = []
   wasteGroups = []
   overGroups = []
+  locations = []
 
   analysis = []
   selectedWasteGroups = []
   selectedOverGroups = []
 
   uniqueOverGroupMapping = false
-
+  generalSettings: GeneralSettings;
   syncJobType: AccountSyncType
   accountERD
   analysisCodes = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
@@ -46,6 +49,7 @@ export class WastageInforConfigurationComponent implements OnInit {
     private router: Router,
     public snackBar: MatSnackBar,
     private sidNav: SidenavResponsive,
+    private generalSettingsService:GeneralSettingsService
   ) {}
 
   ngOnInit() {
@@ -63,6 +67,7 @@ export class WastageInforConfigurationComponent implements OnInit {
         if (this.syncJobType.configuration.timePeriod == 'UserDefined') {
           this.userDefinedFlag = true
         }
+        this.locations = this.syncJobType.configuration['wastageConfiguration']['locations']
         this.analysis = this.syncJobType.configuration['analysis']
         this.overGroups = this.syncJobType.configuration['overGroups']
         this.wasteGroups = this.syncJobType.configuration['wastageConfiguration']['wasteGroups']
@@ -79,6 +84,33 @@ export class WastageInforConfigurationComponent implements OnInit {
         console.error(err)
         this.syncJobTypeloading = false
       })
+  }
+
+  getAccountLocations(){
+    this.spinner.show();
+    this.generalSettingsService.getGeneralSettings().then((res) => {
+      this.generalSettings = res as GeneralSettings;
+      this.locations = this.generalSettings.locations;
+
+      this.spinner.hide();
+    }).catch(err => {
+      let message = "";
+      if (err.error){
+        message = err.error;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = "Failed to get general settings.";
+      }
+
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+      
+      this.spinner.hide();
+    });
   }
 
   getOverGroups() {
@@ -185,6 +217,10 @@ export class WastageInforConfigurationComponent implements OnInit {
           'wasteGroups'
         ] = this.selectedOverGroups
       }
+    }
+
+    if(this.locations.length != 0){
+      this.syncJobType.configuration['wastageConfiguration']['locations'] = this.locations
     }
 
     this.syncJobService
