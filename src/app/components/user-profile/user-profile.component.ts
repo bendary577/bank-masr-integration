@@ -131,15 +131,6 @@ export class UserProfileComponent implements OnInit {
     return false
   }
 
-  getVoucherData(newRes) {
-    this.voucherData.push({
-      voucherDate: '2021-10-06',
-      totalAmount: Number(newRes.amount),
-      voucher: '756787237523',
-      creator: 'Kareem',
-    })
-    this.voucherCode = '756787237523'
-  }
 
   lessThanOrEqualZero(expired): Boolean {
     if (expired) {

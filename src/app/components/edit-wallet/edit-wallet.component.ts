@@ -55,7 +55,6 @@ export class EditWalletComponent implements OnInit {
     this.getRevenueCenters()
     this.form = this.formBuilder.group({
       amount: ['', [Validators.required, Validators.pattern('[- +()0-9]+')]],
-      // revenuecenters: [[]],
     })
   }
 
@@ -72,13 +71,15 @@ export class EditWalletComponent implements OnInit {
     this.generalSettingsService
       .getGeneralSettings()
       .then((res: any) => {
+        this.revenueCenterList.showLoading = false;
         this.generalSettings = res as GeneralSettings
         if (this.generalSettings.revenueCenters) {
           this.revenueCenterList.revenueCenterData = this.generalSettings.revenueCenters
-          this.revenueCenterList.showLoading = false;
         }
       })
       .catch((err) => {
+        this.revenueCenterList.showLoading = false;  
+
         let message = ''
         if (err.message) {
           message = err.message
@@ -92,35 +93,7 @@ export class EditWalletComponent implements OnInit {
           horizontalPosition: 'center',
           panelClass: 'my-snack-bar-fail',
         })
-        this.revenueCenterList.showLoading = false;
       })
-  }
-  
-  getRandomString(length) {
-    var randomChars =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    var result = ''
-    for (var i = 0; i < length; i++) {
-      result += randomChars.charAt(
-        Math.floor(Math.random() * randomChars.length),
-      )
-    }
-    return result
-  }
-
-  toggleEditable(event, revenue) {
-    if (event.target.checked) {
-      this.form.controls.revenuecenters.value.push(revenue)
-    } else {
-      for (let i = 0; i < this.form.controls.revenuecenters.value.length; i++) {
-        if (
-          this.form.controls.revenuecenters.value[i].revenueCenter ==
-          revenue.revenueCenter
-        ) {
-          this.form.controls.revenuecenters.value.splice(i, 1)
-        }
-      }
-    }
   }
 
   onCloseClick() {
