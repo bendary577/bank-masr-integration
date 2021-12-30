@@ -26,8 +26,8 @@ export class RevenueByAgentComponent implements OnInit {
 
   paginate = {} as Paginate
   filter = {
-    fromDate: null,
-    toDate: null,
+    fromDate: '',
+    toDate: '',
     selectedAgent: '',
     actionType: '',
   }
@@ -125,106 +125,69 @@ export class RevenueByAgentComponent implements OnInit {
   }
 
   countAgentsActions() {
-    if (
-      (this.filter.fromDate == null && this.filter.toDate == null) ||
-      (this.filter.fromDate != null && this.filter.toDate != null)
-    ) {
-      let fromDate = ''
-      let toDate = ''
-
-      if (this.filter.fromDate != null && this.filter.toDate != null) {
-        fromDate = this.filter.fromDate
-        toDate = this.filter.toDate
-      }
-
-      this.userService
-        .countUserAction(
-          this.filter.selectedAgent,
-          this.filter.actionType,
-          fromDate,
-          toDate,
-        )
-        .toPromise()
-        .then((res: any) => {
-          this.actionList.actionsCount = res
-        })
-        .catch((err) => {
-          console.error(err)
-          let message = ''
-          if (err.status === 401) {
-            message = ErrorMessages.SESSION_EXPIRED
-            this.sidNav.Logout()
-          } else if (err.error.message) {
-            message = err.error.message
-          }
-          this.snackBar.open(message, null, {
-            duration: 3000,
-            horizontalPosition: 'center',
-            panelClass: 'my-snack-bar-fail',
-          })
-        })
-    } else {
-      this.snackBar.open('Please enter date range.', null, {
-        duration: 3000,
-        horizontalPosition: 'center',
-        panelClass: 'my-snack-bar-fail',
+    this.userService
+      .countUserAction(
+        this.filter.selectedAgent,
+        this.filter.actionType,
+        this.filter.fromDate,
+        this.filter.toDate,
+      )
+      .toPromise()
+      .then((res: any) => {
+        this.actionList.actionsCount = res
       })
-    }
+      .catch((err) => {
+        console.error(err)
+        let message = ''
+        if (err.status === 401) {
+          message = ErrorMessages.SESSION_EXPIRED
+          this.sidNav.Logout()
+        } else if (err.error.message) {
+          message = err.error.message
+        }
+        this.snackBar.open(message, null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass: 'my-snack-bar-fail',
+        })
+      })
   }
 
   getAgentsActions() {
-    if (
-      (this.filter.fromDate == null && this.filter.toDate == null) ||
-      (this.filter.fromDate != null && this.filter.toDate != null)
-    ) {
-      let fromDate = ''
-      let toDate = ''
+    this.actionList.showLoading = true
 
-      if (this.filter.fromDate != null && this.filter.toDate != null) {
-        fromDate = this.filter.fromDate
-        toDate = this.filter.toDate
-      }
-
-      this.actionList.showLoading = true
-
-      this.userService
-        .getUserAction(
-          this.filter.selectedAgent,
-          this.filter.actionType,
-          fromDate,
-          toDate,
-          this.actionList.pageNumber,
-          this.actionList.limit
-        )
-        .toPromise()
-        .then((res: any) => {
-          this.actionList.actionData = res
-          this.actionList.showLoading = false
-        })
-        .catch((err) => {
-          console.error(err)
-          this.actionList.showLoading = false
-
-          let message = ''
-          if (err.status === 401) {
-            message = ErrorMessages.SESSION_EXPIRED
-            this.sidNav.Logout()
-          } else if (err.error.message) {
-            message = err.error.message
-          }
-          this.snackBar.open(message, null, {
-            duration: 3000,
-            horizontalPosition: 'center',
-            panelClass: 'my-snack-bar-fail',
-          })
-        })
-    } else {
-      this.snackBar.open('Please enter date range.', null, {
-        duration: 3000,
-        horizontalPosition: 'center',
-        panelClass: 'my-snack-bar-fail',
+    this.userService
+      .getUserAction(
+        this.filter.selectedAgent,
+        this.filter.actionType,
+        this.filter.fromDate,
+        this.filter.toDate,
+        this.actionList.pageNumber,
+        this.actionList.limit
+      )
+      .toPromise()
+      .then((res: any) => {
+        this.actionList.actionData = res
+        this.actionList.showLoading = false
       })
-    }
+      .catch((err) => {
+        console.error(err)
+        this.actionList.showLoading = false
+
+        let message = ''
+        if (err.status === 401) {
+          message = ErrorMessages.SESSION_EXPIRED
+          this.sidNav.Logout()
+        } else if (err.error.message) {
+          message = err.error.message
+        }
+        this.snackBar.open(message, null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass: 'my-snack-bar-fail',
+        })
+      })
+
   }
 
   getActionSummary() {
