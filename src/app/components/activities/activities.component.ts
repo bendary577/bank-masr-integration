@@ -18,6 +18,8 @@ import { SideNaveComponent } from '../side-nave/side-nave.component'
 export class ActivitiesComponent implements OnInit {
   filterBy = 'Daily'
   imagePath = './src/assets/user.png'
+
+  totalSpendLoading = true;
   totalSpendM: any
   users = []
   groups = []
@@ -80,7 +82,7 @@ export class ActivitiesComponent implements OnInit {
   ngOnInit() {
     this.getTopUsers()
     this.getTopGroups()
-    this.totalSpend('Total')
+    this.totalSpend('Today')
     this.getTransactions();
   }
 
@@ -120,11 +122,14 @@ export class ActivitiesComponent implements OnInit {
   }
 
   totalSpend(date) {
+    this.totalSpendLoading = true;
     this.dateRnageFlage = date;
     this.loyaltyService
       .getTotalSpend(date)
       .toPromise()
       .then((res: any) => {
+        this.totalSpendLoading = false;
+
         this.totalSpendM = res['totalSpend']
         this.topRevenueCenters = res['topRevenueCenters']
         if(res['revenues'] == null || res['revenues'] == undefined || res['revenues'] == []){
@@ -142,6 +147,8 @@ export class ActivitiesComponent implements OnInit {
         this.createChart()
       })
       .catch((err) => {
+        this.totalSpendLoading = false;
+
         let message = ''
         if (err.status === 401) {
           message = ErrorMessages.SESSION_EXPIRED

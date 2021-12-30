@@ -72,13 +72,12 @@
                                  mat-raised-button>Last Month</button>
                             </div>
                             <div class="two-column">
-                                <h3 style="border-radius: 10px; text-align: center; height: auto;">
-                                    <div>
-                                        Total spend
-                                    </div>
-                                    <div>
+                                <h3 style="border-radius: 10px; text-align: center; height: 100%;display:flex;justify-content:center;align-items:center;">
+    
+                                    <div *ngIf="!totalSpendLoading">
                                         {{totalSpendM | number : '1.2-2'}} {{getCurrency()}}
                                     </div>
+                                    <div class="loader" *ngIf="totalSpendLoading"></div>
                                 </h3>
                             </div>
                         </div>
