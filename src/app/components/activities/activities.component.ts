@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core'
 import { MatSnackBar } from '@angular/material'
-import { Router } from '@angular/router'
 import { Constants } from 'src/app/models/constants'
 import { ErrorMessages } from 'src/app/models/ErrorMessages'
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service'
-import { Location } from '@angular/common'
 import { NgxSpinnerService } from 'ngx-spinner'
-import * as moment from 'moment'
 import { saveAs } from 'file-saver'
 import { ExcelService } from 'src/app/services/excel/excel.service'
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js'
@@ -61,6 +58,8 @@ export class ActivitiesComponent implements OnInit {
   `,
     },
     selected: [],
+    pageNumber: 1 as number,
+    limit: 10 as number,
     transactionCount: 0 as number,
     pagesFilter: [10, 25, 50, 75, 100],
     showLoading: true,
@@ -72,8 +71,6 @@ export class ActivitiesComponent implements OnInit {
 
   constructor(
     public snackBar: MatSnackBar,
-    private router: Router,
-    private _location: Location,
     private sidNav: SideNaveComponent,
     private loyaltyService: LoyaltyService,
     private excelService: ExcelService,
@@ -84,6 +81,17 @@ export class ActivitiesComponent implements OnInit {
     this.getTopUsers()
     this.getTopGroups()
     this.totalSpend('Total')
+    this.getTransactions();
+  }
+
+  onLimitChange(limit) {
+    this.transactionList.limit = limit
+    this.getTransactions();
+  }
+
+  changePage(pageInfo) {
+    this.transactionList.pageNumber = pageInfo.page
+    this.getTransactions();
   }
 
   createChart() {
@@ -103,10 +111,6 @@ export class ActivitiesComponent implements OnInit {
     }
   }
 
-  refresh() {
-    location.reload()
-  }
-
   validateDateRange(dateRange){
     if(this.dateRnageFlage == dateRange){
       return true;
@@ -117,19 +121,10 @@ export class ActivitiesComponent implements OnInit {
 
   totalSpend(date) {
     this.dateRnageFlage = date;
-    this.restFilters()
-    this.spinner.show()
-    this.transactionList.transactionData = []
-    this.transactionList.showLoading = true
     this.loyaltyService
       .getTotalSpend(date)
       .toPromise()
       .then((res: any) => {
-        // this.getTransactions(date);
-        this.spinner.hide()
-        this.transactionList.showLoading = false
-        this.transactionList.transactionData = res['transactions']
-        this.allTransactionDataBeforeFilter()
         this.totalSpendM = res['totalSpend']
         this.topRevenueCenters = res['topRevenueCenters']
         if(res['revenues'] == null || res['revenues'] == undefined || res['revenues'] == []){
@@ -147,8 +142,6 @@ export class ActivitiesComponent implements OnInit {
         this.createChart()
       })
       .catch((err) => {
-        this.transactionList.showLoading = false
-        this.spinner.hide()
         let message = ''
         if (err.status === 401) {
           message = ErrorMessages.SESSION_EXPIRED
@@ -168,17 +161,53 @@ export class ActivitiesComponent implements OnInit {
       })
   }
 
-  getTransactions(time) {
-    this.transactionList.transactionData = []
+  getTransactionsCount() {
+    this.loyaltyService
+      .countTransactions(
+        Constants.REDEEM_VOUCHER,
+        this.fromDate,
+        this.toDate,
+        this.selectedGroupId)
+      .toPromise()
+      .then((res: any) => {
+        this.transactionList.transactionCount = res
+      })
+      .catch((err) => {
+        let message = ''
+        if (err.status === 401) {
+          message = ErrorMessages.SESSION_EXPIRED
+          this.sidNav.Logout()
+        } else if (err.error.message) {
+          message = err.error.message
+        } else if (err.message) {
+          message = err.message
+        } else {
+          message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+        }
+        this.snackBar.open(message, null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass: 'my-snack-bar-fail',
+        })
+      })
+  }
+
+  getTransactions() {
+    this.getTransactionsCount();
     this.transactionList.showLoading = true
     this.loyaltyService
-      .getTransactions(Constants.REDEEM_VOUCHER, time)
+      .getTransactions(
+        Constants.REDEEM_VOUCHER,
+        this.fromDate,
+        this.toDate,
+        this.selectedGroupId,
+        this.transactionList.pageNumber,
+        this.transactionList.limit)
       .toPromise()
       .then((res: any) => {
         this.transactionList.transactionData = res
         this.allTransactionDataBeforeFilter()
         this.transactionList.showLoading = false
-        this.averageGuests()
       })
       .catch((err) => {
         this.transactionList.showLoading = false
@@ -264,92 +293,6 @@ export class ActivitiesComponent implements OnInit {
     }
   }
 
-  getTransInRangAndGroup() {
-    if (
-      (this.fromDate == '' || this.toDate == '') &&
-      this.selectedGroupId == ''
-    ) {
-      this.snackBar.open(
-        'Configure start date, end date and group correctly.',
-        null,
-        {
-          duration: 3000,
-          horizontalPosition: 'center',
-          panelClass: 'my-snack-bar-fail',
-        },
-      )
-      return null
-    }
-    if (
-      this.fromDate != undefined &&
-      this.toDate != undefined &&
-      moment(this.toDate.toString()).diff(
-        moment(this.fromDate.toString()),
-        'day',
-      ) < 0
-    ) {
-      this.snackBar.open(
-        "Configure start date and end date correctly, \n start date can't be after end date.",
-        null,
-        {
-          duration: 3000,
-          horizontalPosition: 'center',
-          panelClass: 'my-snack-bar-fail',
-        },
-      )
-      return null
-    }
-    this.transactionList.transactionData = []
-    this.transactionList.showLoading = true
-
-    this.loyaltyService
-      .getTotalTransInRang(this.fromDate, this.toDate, this.selectedGroupId)
-      .toPromise()
-      .then((res: any) => {
-        this.transactionList.transactionData = res['transactions']
-        this.totalSpendM = res['totalSpend']
-        this.topRevenueCenters = res['topRevenueCenters']
-        if(res['revenues'] == null || res['revenues'] == undefined || res['revenues'] == []){
-          this.rvcBarChartLabels = [];
-        }else{
-          this.rvcBarChartLabels = res['revenues']
-        }
-        if( res['expenses'] == null || res['expenses'] == undefined || res['expenses'] == []){
-          this.rvcBarChartData = [
-            { data: [], label: 'Sales Per Revenue Center' },
-          ]        }else{
-            this.rvcBarChartData = [
-              { data: res['expenses'], label: 'Sales Per Revenue Center' },
-            ]        }
-        this.createChart()
-        this.transactionList.showLoading = false
-        this.snackBar.open('Transactions filterd successfully.', null, {
-          duration: 3000,
-          horizontalPosition: 'center',
-          panelClass: 'my-snack-bar-success',
-        })
-      })
-      .catch((err) => {
-        this.transactionList.showLoading = false
-        let message = ''
-        if (err.status === 401) {
-          message = ErrorMessages.SESSION_EXPIRED
-          this.sidNav.Logout()
-        } else if (err.error.message) {
-          message = err.error.message
-        } else if (err.message) {
-          message = err.message
-        } else {
-          message = ErrorMessages.FAILED_TO_SAVE_CONFIG
-        }
-        this.snackBar.open(message, null, {
-          duration: 3000,
-          horizontalPosition: 'center',
-          panelClass: 'my-snack-bar-fail',
-        })
-      })
-  }
-
   restFilters() {
     this.fromDate = ''
     this.toDate = ''
@@ -393,55 +336,6 @@ export class ActivitiesComponent implements OnInit {
 
   hasRole(reference) {
     return this.sidNav.hasRole(reference)
-  }
-
-  averageGuests() {
-    let transactions = this.transactionList.transactionData
-
-    let fristDate = new Date(
-      Math.min.apply(
-        null,
-        transactions.map(function (e) {
-          return new Date(e.transactionDate)
-        }),
-      ),
-    )
-
-    let latestDate = new Date()
-
-    let diff = Math.floor(
-      (Date.UTC(
-        latestDate.getFullYear(),
-        latestDate.getMonth(),
-        latestDate.getDate(),
-      ) -
-        Date.UTC(
-          fristDate.getFullYear(),
-          fristDate.getMonth(),
-          fristDate.getDate(),
-        )) /
-        (1000 * 60 * 60 * 24),
-    )
-
-    this.guestAverage =
-      Math.round((transactions.length / diff + Number.EPSILON) * 100) / 100;
-
-    // for (let i = 0; i < transactions.length; i++) {
-    //   if (guests.indexOf(transactions[i].code) <= -1) {
-    //     this.guestAverage += 1;
-    //     guests.push(transactions[i].code)
-    //   }
-    // }
-  }
-
-  resetPicker(event) {
-    // if (event == 'fromDate') {
-      this.fromDate = undefined
-      // this.filterTransactions(event)
-    // } else if (event == 'toDate') {
-      this.toDate = undefined
-      this.filterTransactions(event)
-    // }
   }
 
   filterTransactions(event) {
@@ -535,12 +429,15 @@ export class ActivitiesComponent implements OnInit {
   }
 
   resetFilter() {
+    this.fromDate = ''
+    this.toDate = ''
     this.selectedGroupId = ''
     this.selectedRevenue = ''
     this.selectedGuestName = ''
     this.selectedCardNum = ''
     this.selectedCardStatues = ''
     this.transactionList.transactionData = this.transactionList.allTransactionDataBeforeFilter
+    this.getTransactions();
   }
 
   public lessThanOrEqualZero(expired): Boolean {
@@ -549,4 +446,95 @@ export class ActivitiesComponent implements OnInit {
     }
     return false
   }
+
+  // NOT USED FUNCTION ************************************************************************************************************
+
+  getTransInRangAndGroup() {
+    this.transactionList.transactionData = []
+    this.transactionList.showLoading = true
+
+    this.loyaltyService
+      .getTotalTransInRang(this.fromDate, this.toDate, this.selectedGroupId)
+      .toPromise()
+      .then((res: any) => {
+        this.transactionList.transactionData = res['transactions']
+        this.totalSpendM = res['totalSpend']
+        this.topRevenueCenters = res['topRevenueCenters']
+        if(res['revenues'] == null || res['revenues'] == undefined || res['revenues'] == []){
+          this.rvcBarChartLabels = [];
+        }else{
+          this.rvcBarChartLabels = res['revenues']
+        }
+        if( res['expenses'] == null || res['expenses'] == undefined || res['expenses'] == []){
+          this.rvcBarChartData = [
+            { data: [], label: 'Sales Per Revenue Center' },
+          ]        }else{
+            this.rvcBarChartData = [
+              { data: res['expenses'], label: 'Sales Per Revenue Center' },
+            ]        }
+        this.createChart()
+        this.transactionList.showLoading = false
+        this.snackBar.open('Transactions filterd successfully.', null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass: 'my-snack-bar-success',
+        })
+      })
+      .catch((err) => {
+        this.transactionList.showLoading = false
+        let message = ''
+        if (err.status === 401) {
+          message = ErrorMessages.SESSION_EXPIRED
+          this.sidNav.Logout()
+        } else if (err.error.message) {
+          message = err.error.message
+        } else if (err.message) {
+          message = err.message
+        } else {
+          message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+        }
+        this.snackBar.open(message, null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass: 'my-snack-bar-fail',
+        })
+      })
+  }
+
+  averageGuests() {
+    let transactions = this.transactionList.transactionData
+
+    let fristDate = new Date(
+      Math.min.apply(
+        null,
+        transactions.map(function (e) {
+          return new Date(e.transactionDate)
+        }),
+      ),
+    )
+
+    let latestDate = new Date()
+
+    let diff = Math.floor(
+      (Date.UTC(
+        latestDate.getFullYear(),
+        latestDate.getMonth(),
+        latestDate.getDate(),
+      ) -
+        Date.UTC(
+          fristDate.getFullYear(),
+          fristDate.getMonth(),
+          fristDate.getDate(),
+        )) /
+        (1000 * 60 * 60 * 24),
+    )
+
+    this.guestAverage =
+      Math.round((transactions.length / diff + Number.EPSILON) * 100) / 100;
+
+
+  }
+
 }
+
+

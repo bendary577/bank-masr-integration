@@ -177,14 +177,38 @@ export class LoyaltyService {
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  getTransactions(transactionType, time) {
+  countTransactions(transactionType, fromDate, toDate, group) {
+    this.token = localStorage.getItem('auth_token')
+    return this.http.get(
+      Constants.GET_TRANSACTION_COUNT_URL +
+        '?transactionType=' +
+        transactionType +
+        '&fromDate=' +
+        fromDate + 
+        '&toDate=' +
+        toDate +
+        '&group=' +
+        group,
+      { headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }) },
+    )
+  }
+
+  getTransactions(transactionType, fromDate, toDate, group, pageNumber, limit) {
     this.token = localStorage.getItem('auth_token')
     return this.http.get(
       Constants.GET_TRANSACTION_URL +
         '?transactionType=' +
         transactionType +
-        '&time=' +
-        time,
+        '&fromDate=' +
+        fromDate + 
+        '&toDate=' +
+        toDate +
+        '&group=' +
+        group +
+        '&pageNumber=' +
+        pageNumber +
+        '&limit=' +
+        limit,
       { headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }) },
     )
   }

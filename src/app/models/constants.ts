@@ -240,7 +240,7 @@ export class Constants {
 
   static SYNC_OPERA_RESERVATION_URL =
     environment.apiHost + '/2wlsIntegration/syncExcel'
-  static Get_Transaction_URL =
+  static Get_W_Transaction_URL =
     environment.apiHost + '/2wlsIntegration/getTransaction'
 
   //==> New Booking Report
@@ -337,6 +337,8 @@ export class Constants {
   static Delete_APP_USERS_URL = environment.apiHost + '/deleteApplicationUsers'
   static GET_TRANSACTION_URL =
     environment.apiHost + '/transaction/getTransactions'
+  static GET_TRANSACTION_COUNT_URL =
+  environment.apiHost + '/transaction/getTransactionsCount'
   static GET_TOP_USERS_URL = environment.apiHost + '/getTopUser'
   static GET_TOP_Groups_URL = environment.apiHost + '/getTopGroups'
   static GET_TOTAL_SPEND_URL =

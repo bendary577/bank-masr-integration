@@ -24,7 +24,7 @@ export class MenuItemsService {
 
   getTransaction() {
     this.token = localStorage.getItem('auth_token');
-    return this.http.get(Constants.Get_Transaction_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+    return this.http.get(Constants.Get_W_Transaction_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
   addSimphonyLocation(locations: SimphonyLocation[]) {

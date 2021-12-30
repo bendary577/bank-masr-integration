@@ -32,6 +32,8 @@ export class GestCardsComponent implements OnInit {
   `,
     },
     selected: [],
+    pageNumber: 1 as number,
+    limit: 10 as number,
     transactionCount: 0 as number,
     pagesFilter: [10, 25, 50, 75, 100],
     showLoading: true,
@@ -50,6 +52,8 @@ export class GestCardsComponent implements OnInit {
   `,
     },
     selected: [],
+    pageNumber: 1 as number,
+    limit: 10 as number,
     locationsCount: 0 as number,
     pagesFilter: [10, 25, 50, 75, 100],
     showLoading: true,
@@ -214,7 +218,12 @@ export class GestCardsComponent implements OnInit {
     this.transactionList.transactionData = []
     this.transactionList.showLoading = true
     this.loyaltyService
-      .getTransactions(Constants.REDEEM_VOUCHER, time)
+      .getTransactions(Constants.REDEEM_VOUCHER,
+         time,
+         time,
+         "",
+         this.transactionList.pageNumber,
+         this.transactionList.limit)
       .toPromise()
       .then((res: any) => {
         this.transactionList.transactionData = res
