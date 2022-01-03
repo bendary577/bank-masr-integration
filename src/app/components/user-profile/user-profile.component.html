@@ -52,16 +52,16 @@
                                 <td class="title" style="float: left;">Status </td>
                                 <td> </td>
                                 <td class="res" style="float: right;">
-                                    <label *ngIf="!user.deleted && !lessThanOrEqualZero(user.expired) && !user.suspended "
+                                    <label *ngIf="!user.deleted && !lessThanOrEqualZero(user.expire) && !user.suspended "
                                         class="active-state">Active</label>
-                                    <label *ngIf="!user.deleted && !lessThanOrEqualZero(user.expired) && user.suspended"
+                                    <label *ngIf="!user.deleted && !lessThanOrEqualZero(user.expire) && user.suspended"
                                          style="color: #1661a3;">Suspended</label>
                                     <label *ngIf="user.deleted" class="deleted-state">Deleted</label>
-                                    <label *ngIf="!user.deleted && lessThanOrEqualZero(user.expired)"
+                                    <label *ngIf="!user.deleted && lessThanOrEqualZero(user.expire)"
                                         style="color: #1661a3;">Expired</label>
                                 </td>
                             </tr>
-                            <hr class="hrClass" *ngIf="user && user.expire">
+                            <hr class="hrClass" *ngIf="user">
                             <tr *ngIf="user">
                                 <td class="title" style="float: left;">Expire In </td>
                                 <td> </td>
@@ -88,6 +88,10 @@
                         <button class="user-btn" (click)="deleteUsers('false')" *ngIf="user.deleted"
                             mat-raised-button>Restore</button>
                     </div>
+                    <div>
+                        <button class="user-btn" (click)="extendExpiryDate(user)" mat-raised-button *ngIf="user" 
+                        [disabled]="user.deleted">Extend Expiry Date</button>
+                    </div>
                 </mat-card-content>
             </mat-card>
         </div>
@@ -108,8 +112,11 @@
                                     {{credit}} {{getCurrency()}}
                                 </div>
                             </h3>
-                            <button class="filter-btn" (click)="chargeWallet('add')" mat-raised-button>Charge</button>
+                            <button class="filter-btn" (click)="chargeWallet('add')" 
+                            [disabled]="user.deleted || lessThanOrEqualZero(user.expire) || user.suspended"
+                             mat-raised-button>Charge</button>
                             <button class="filter-btn" (click)="deductWallet('deduct')"
+                            [disabled]="user.deleted || lessThanOrEqualZero(user.expire) || user.suspended"
                                 mat-raised-button>Deduct</button>
                         </div>
 

@@ -11,6 +11,7 @@ import { NgxSpinnerService } from 'ngx-spinner'
 import { VoucherHistory } from 'src/app/models/wallet/voucher-history'
 import { RevenueCenter } from 'src/app/models/RevenueCenter'
 import { AddAppUserAccompiedComponent } from '../add-app-user-accompied/add-app-user-accompied.component'
+import { ExtendExpiryDateComponent } from '../extend-expiry-date/extend-expiry-date.component'
 
 @Component({
   selector: 'app-user-profile',
@@ -132,11 +133,11 @@ export class UserProfileComponent implements OnInit {
   }
 
 
-  lessThanOrEqualZero(expired): Boolean {
-    if (expired) {
-      return true
+  lessThanOrEqualZero(expireHours): Boolean {
+    if (expireHours > 0) {
+      return false
     }
-    return false
+    return true
   }
 
   chargeWallet(func) {
@@ -273,6 +274,65 @@ export class UserProfileComponent implements OnInit {
           horizontalPosition: 'center',
           panelClass: 'my-snack-bar-fail',
         })
+      })
+  }
+
+  extendExpiryDate(guest) {
+    this.dialog
+      .open(ExtendExpiryDateComponent, {})
+      .afterClosed()
+      .subscribe((res) => {
+        if (res) {
+          this.sppiner.show();
+          this.loyaltyService
+            .addApplicationUser(
+              false,
+              true,
+              guest.name,
+              guest.email,
+              guest.group.id,
+              guest.image,
+              guest.id,
+              guest.accompiendUsers,
+              guest.cardCode,
+              guest.mobile,
+              guest.balance,
+              +guest.expire + res.hours,
+              false,
+              false,
+              guest.points,
+            )
+            .then((result: any) => {
+              this.getApplicationUser()
+              this.sppiner.hide()
+              this.snackBar.open('User updated successfully.', null, {
+                duration: 2000,
+                horizontalPosition: 'center',
+                panelClass: 'my-snack-bar-success',
+              })
+            })
+            .catch((err) => {
+              this.sppiner.hide();
+
+              let message = ''
+              if (err.status === 401) {
+                message = ErrorMessages.SESSION_EXPIRED
+                this.sideNav.Logout()
+              } else if (err.error.message) {
+                message = err.error.message
+              } else if (err.message) {
+                message = err.message
+              } else {
+                message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+              }
+
+              this.snackBar.open(message, null, {
+                duration: 3000,
+                horizontalPosition: 'center',
+                panelClass: 'my-snack-bar-fail',
+              })
+            })
+        }
       })
   }
 

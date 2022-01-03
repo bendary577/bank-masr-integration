@@ -603,11 +603,11 @@ export class ManageUsersComponent implements OnInit {
     return credit
   }
 
-  lessThanOrEqualZero(expired): Boolean {
-    if (expired) {
-      return true
+  lessThanOrEqualZero(expireHours): Boolean {
+    if (expireHours > 0) {
+      return false
     }
-    return false
+    return true
   }
 
   hasRole(reference) {

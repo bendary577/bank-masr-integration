@@ -274,6 +274,12 @@
                     </ng-template>
                 </ngx-datatable-column>
 
+                <ngx-datatable-column name="Status" [width]="90">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.status}}
+                    </ng-template>
+                </ngx-datatable-column>
+
                 <ngx-datatable-column name="Card Status" [width]="90" *ngIf="hasRole('show_card_status')">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         <label *ngIf="!row.user.deleted && !lessThanOrEqualZero(row.user.expired) "
