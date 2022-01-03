@@ -30,7 +30,7 @@
                                 <td class="res" style="float: right;" style="float: right;"> {{user.mobile}}</td>
                             </tr>
                             <hr class="hrClass"  *ngIf="user && user.mobile">
-                            <tr *ngIf="group.name">
+                            <tr *ngIf="group && group.name">
                                 <td class="title" style="float: left;">Group </td>
                                 <td> </td>
                                 <td class="res" style="float: right;"> {{group.name}}</td>
@@ -73,8 +73,8 @@
                                 <td> </td>
                                 <td class="res" style="float: right;">{{user.creationDate | date: 'dd/MM/yyyy' }}</td>
                             </tr>
-                            <hr class="hrClass" *ngIf="user.lastUpdate">
-                            <tr *ngIf="user.lastUpdate">
+                            <hr class="hrClass" *ngIf="user && user.lastUpdate">
+                            <tr *ngIf="user && user.lastUpdate">
                                 <td class="title" style="float: left;">Last Update</td>
                                 <td> </td>
                                 <td class="res" style="float: right;">{{user.lastUpdate | date: 'dd/MM/yyyy' }}</td>
@@ -83,14 +83,14 @@
                     </div>
                     <div class="user-btn-container">
                         <button class="user-btn" (click)="updateUserDialog()" mat-raised-button *ngIf="user">Update</button>
-                        <button class="user-btn" (click)="deleteUsers('true')" *ngIf="!user.deleted"
+                        <button class="user-btn" (click)="deleteUsers('true')" *ngIf="user && !user.deleted"
                             mat-raised-button>Delete</button>
-                        <button class="user-btn" (click)="deleteUsers('false')" *ngIf="user.deleted"
+                        <button class="user-btn" (click)="deleteUsers('false')" *ngIf="user && user.deleted"
                             mat-raised-button>Restore</button>
                     </div>
                     <div>
                         <button class="user-btn" (click)="extendExpiryDate(user)" mat-raised-button *ngIf="user" 
-                        [disabled]="user.deleted">Extend Expiry Date</button>
+                        [disabled]="user && user.deleted">Extend Expiry Date</button>
                     </div>
                 </mat-card-content>
             </mat-card>
@@ -113,10 +113,10 @@
                                 </div>
                             </h3>
                             <button class="filter-btn" (click)="chargeWallet('add')" 
-                            [disabled]="user.deleted || lessThanOrEqualZero(user.expire) || user.suspended"
+                            [disabled]="user && (user.deleted || lessThanOrEqualZero(user.expire) || user.suspended)"
                              mat-raised-button>Charge</button>
                             <button class="filter-btn" (click)="deductWallet('deduct')"
-                            [disabled]="user.deleted || lessThanOrEqualZero(user.expire) || user.suspended"
+                            [disabled]="user && (user.deleted || lessThanOrEqualZero(user.expire) || user.suspended)"
                                 mat-raised-button>Deduct</button>
                         </div>
 
@@ -162,6 +162,12 @@
             </div> -->
         </div>
         <div class="trans-tabel">
+            <div>
+                <button mat-flat-button (click)="extractExcelFile()"
+                    [disabled]="walletHistoryList.walletHistoryData.length == 0" class="filterButton" style="height: 30px; margin-top: 5px;">Export To
+                    Excel</button>
+            </div>
+
             <div class="title-card">
                 Card History
             </div>

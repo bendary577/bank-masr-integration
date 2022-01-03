@@ -84,6 +84,16 @@ export class ExcelService {
       , {} , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token}), responseType: 'blob'});
   }
 
+  exportWalletHistoryExcel(
+    userId: string,
+  ) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.post(Constants.EXPORT_WALLET_HISTORY_EXCEL_SHEET +
+        '?userId=' +
+        userId
+      , {} , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token}), responseType: 'blob'});
+  }
+
   //////////////////////////////////////////////// Generate Custom Reports //////////////////////////////////////////////
 
   generateWastageReport() {

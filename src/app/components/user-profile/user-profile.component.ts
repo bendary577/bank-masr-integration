@@ -12,6 +12,8 @@ import { VoucherHistory } from 'src/app/models/wallet/voucher-history'
 import { RevenueCenter } from 'src/app/models/RevenueCenter'
 import { AddAppUserAccompiedComponent } from '../add-app-user-accompied/add-app-user-accompied.component'
 import { ExtendExpiryDateComponent } from '../extend-expiry-date/extend-expiry-date.component'
+import { ExcelService } from 'src/app/services/excel/excel.service'
+import { saveAs } from 'file-saver'
 
 @Component({
   selector: 'app-user-profile',
@@ -57,8 +59,9 @@ export class UserProfileComponent implements OnInit {
     private _location: Location,
     private sideNav: SideNaveComponent,
     private loyaltyService: LoyaltyService,
-    private sppiner: NgxSpinnerService,
+    private spinner: NgxSpinnerService,
     private snackBar: MatSnackBar,
+    private excelService: ExcelService,
     public dialog: MatDialog,
   ) {}
 
@@ -148,7 +151,7 @@ export class UserProfileComponent implements OnInit {
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         this.walletHistoryList.showLoading = true
-        this.sppiner.show()
+        this.spinner.show()
         if (res) {
           console.log(res)
           this.loyaltyService
@@ -157,7 +160,7 @@ export class UserProfileComponent implements OnInit {
             .then((result: any) => {
               this.walletHistoryList.showLoading = false
               this.getApplicationUser()
-              this.sppiner.hide()
+              this.spinner.hide()
               this.snackBar.open('Wallet Charged Successfully.', null, {
                 duration: 2000,
                 horizontalPosition: 'center',
@@ -176,7 +179,7 @@ export class UserProfileComponent implements OnInit {
               } else if (err.message) {
                 message = ErrorMessages.FAILED_TO_SAVE_CONFIG
               }
-              this.sppiner.hide()
+              this.spinner.hide()
               this.snackBar.open(message, null, {
                 duration: 3000,
                 horizontalPosition: 'center',
@@ -198,7 +201,7 @@ export class UserProfileComponent implements OnInit {
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         this.walletHistoryList.showLoading = true
-        this.sppiner.show()
+        this.spinner.show()
         if (res) {
           console.log(res)
           this.loyaltyService
@@ -207,11 +210,11 @@ export class UserProfileComponent implements OnInit {
             .then((result: any) => {
               this.walletHistoryList.showLoading = false
               this.getApplicationUser()
-              this.sppiner.hide()
+              this.spinner.hide()
             })
             .catch((err) => {
               this.walletHistoryList.showLoading = false
-              this.sppiner.hide()
+              this.spinner.hide()
 
               let message = ''
               if (err.status === 401) {
@@ -245,12 +248,12 @@ export class UserProfileComponent implements OnInit {
   }
 
   send(process) {
-    this.sppiner.show()
+    this.spinner.show()
     this.loyaltyService
       .sendSmsOrEmail(this.user, process)
       .toPromise()
       .then((res) => {
-        this.sppiner.hide()
+        this.spinner.hide()
         this.snackBar.open(process + ' sent successfully.', null, {
           duration: 2000,
           horizontalPosition: 'center',
@@ -258,7 +261,7 @@ export class UserProfileComponent implements OnInit {
         })
       })
       .catch((err) => {
-        this.sppiner.hide()
+        this.spinner.hide()
         let message = ''
         if (process == 'Email') {
           message = 'Invalid Email.'
@@ -283,7 +286,7 @@ export class UserProfileComponent implements OnInit {
       .afterClosed()
       .subscribe((res) => {
         if (res) {
-          this.sppiner.show();
+          this.spinner.show();
           this.loyaltyService
             .addApplicationUser(
               false,
@@ -304,7 +307,7 @@ export class UserProfileComponent implements OnInit {
             )
             .then((result: any) => {
               this.getApplicationUser()
-              this.sppiner.hide()
+              this.spinner.hide()
               this.snackBar.open('User updated successfully.', null, {
                 duration: 2000,
                 horizontalPosition: 'center',
@@ -312,7 +315,7 @@ export class UserProfileComponent implements OnInit {
               })
             })
             .catch((err) => {
-              this.sppiner.hide();
+              this.spinner.hide();
 
               let message = ''
               if (err.status === 401) {
@@ -345,7 +348,7 @@ export class UserProfileComponent implements OnInit {
     })
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
-        this.sppiner.show()
+        this.spinner.show()
         this.loyaltyService
           .addApplicationUser(
             false,
@@ -366,7 +369,7 @@ export class UserProfileComponent implements OnInit {
           )
           .then((result: any) => {
             this.getApplicationUser()
-            this.sppiner.hide()
+            this.spinner.hide()
             this.snackBar.open('User updated successfully.', null, {
               duration: 2000,
               horizontalPosition: 'center',
@@ -375,7 +378,7 @@ export class UserProfileComponent implements OnInit {
           })
           .catch((err) => {
             this.getApplicationUser()
-            this.sppiner.hide()
+            this.spinner.hide()
             let message = ''
             if (err.status === 401) {
               message = ErrorMessages.SESSION_EXPIRED
@@ -395,12 +398,12 @@ export class UserProfileComponent implements OnInit {
   }
 
   deleteUsers(flage) {
-    this.sppiner.show()
+    this.spinner.show()
     this.loyaltyService
       .deleteAppUsers(flage, [this.user])
       .then((res: any) => {
         this.getApplicationUser()
-        this.sppiner.hide()
+        this.spinner.hide()
         let message = 'User deleted successfully.'
         if (flage == 'false') {
           message = 'User restored successfully.'
@@ -414,7 +417,7 @@ export class UserProfileComponent implements OnInit {
       })
       .catch((err) => {
         this.getApplicationUser()
-        this.sppiner.hide()
+        this.spinner.hide()
         let message = ''
         if (err.status === 401) {
           message = ErrorMessages.SESSION_EXPIRED
@@ -431,6 +434,37 @@ export class UserProfileComponent implements OnInit {
           panelClass: 'my-snack-bar-fail',
         })
       })
+  }
+
+  extractExcelFile() {
+    this.spinner.show()
+    this.excelService
+      .exportWalletHistoryExcel(this.user.id)
+      .subscribe(
+        (res) => {
+          const blob = new Blob([res], { type: 'application/vnd.ms.excel' })
+          const file = new File([blob], 'Wallet History' + '.xlsx', {
+            type: 'application/vnd.ms.excel',
+          })
+          saveAs(file)
+
+          this.snackBar.open('Export Successfully', null, {
+            duration: 2000,
+            horizontalPosition: 'center',
+            panelClass: 'my-snack-bar-success',
+          })
+          this.spinner.hide()
+        },
+        (err) => {
+          this.spinner.hide()
+          console.error(err)
+          this.snackBar.open('Fail to export, Please try agian', null, {
+            duration: 2000,
+            horizontalPosition: 'center',
+            panelClass: 'my-snack-bar-fail',
+          })
+        },
+      )
   }
 
   backClicked() {

@@ -381,8 +381,12 @@ export class Constants {
   static EXPORT_TRANSACTION_EXCEL_SHEET =
     environment.apiHost + '/transaction/exportExcelSheet'
 
+  // ==> Entry System
   static EXPORT_AGENT_ACTIONS_EXCEL_SHEET =
-    environment.apiHost + '/exportAgentActionToExcel'
+    environment.apiHost + '/exportAgentActionToExcel';
+
+  static EXPORT_WALLET_HISTORY_EXCEL_SHEET =
+    environment.apiHost + '/wallet/exportWalletHistoryToExcel'
 
   //////////////////////////////////////////////// Generate Custom Reports //////////////////////////////////////////////
 
