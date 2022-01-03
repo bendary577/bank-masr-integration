@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
-import { MatDatepicker, MatDialog, MatSnackBar } from '@angular/material'
+import { MatDialog, MatSnackBar } from '@angular/material'
 import { ErrorMessages } from 'src/app/models/ErrorMessages'
 import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser'
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service'
-import { SidenavResponsive } from '../sidenav/sidenav-responsive'
 import { AddAppUserComponent } from '../../components/add-app-user/add-app-user.component'
 import { Group } from 'src/app/models/loyalty/Group'
 import { Location } from '@angular/common'
@@ -12,7 +11,6 @@ import { Data } from 'src/app/models/data'
 import { Constants } from 'src/app/models/constants'
 import { AddAppUserAccompiedComponent } from '../add-app-user-accompied/add-app-user-accompied.component'
 import { SideNaveComponent } from '../side-nave/side-nave.component'
-import { Moment } from 'moment'
 import { ExtendExpiryDateComponent } from '../extend-expiry-date/extend-expiry-date.component'
 
 @Component({
@@ -305,7 +303,7 @@ export class ManageUsersComponent implements OnInit {
         })
   }
 
-  addUserDialog(type) {
+  addUserDialog(type, genericGroup) {
     let dialogRef
     let isGeneric = false
 
@@ -313,6 +311,9 @@ export class ManageUsersComponent implements OnInit {
       isGeneric = true
       dialogRef = this.dialog.open(AddAppUserAccompiedComponent, {
         width: '420px',
+        data: {
+          generic: genericGroup
+        },
       })
     } else {
       dialogRef = this.dialog.open(AddAppUserComponent, {

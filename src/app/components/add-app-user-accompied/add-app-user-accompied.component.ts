@@ -15,12 +15,13 @@ export class AddAppUserAccompiedComponent implements OnInit  {
   public form: FormGroup;
   public accompiendForms: FormGroup[] = [];
   accompiendGuests= [];
+  groups: Group[] = [];
   user = new ApplicationUser();
   selectedGroup: String;
   srcResult: any;
   imageUploded: boolean = false;
   inUpdate = false;
-  group: Group;
+  group: Group = new Group();
   qrcodeMethod = ["Email", "SMS", "Print"];
   swiped = true;
   cardNumber = 0;
@@ -28,14 +29,23 @@ export class AddAppUserAccompiedComponent implements OnInit  {
   sendSMS = false;
   sendEmail = false;
   inAccompiendView = false;
-  // @ViewChild('ChildViewComponent') accompiedNumber = 2 ;
+  isGeneric = true;
+
   @Input() accompiedNumber = 0 ;
   constructor(private formBuilder: FormBuilder, public snackBar: MatSnackBar, 
     public dialogRef: MatDialogRef<AddAppUserAccompiedComponent>, private loyaltyService: LoyaltyService,
     @Inject(MAT_DIALOG_DATA) public data) { }
  
   ngOnInit() {
-    this.getGenericGroup();
+    if (this.data != undefined && this.data["generic"] != null){
+      if(this.data["generic"]){
+        this.getGenericGroup();
+      }else{
+        this.isGeneric = false;
+        this.getGroups();
+      }
+    }
+  
     if (this.data != undefined && this.data["user"] != null){
       this.inUpdate = true;
       this.user = this.data["user"];
@@ -88,6 +98,18 @@ export class AddAppUserAccompiedComponent implements OnInit  {
       credit = credit + balance[i]["amount"];
     }
     this.credit = credit;
+  }
+
+  getGroups(){
+    this.loyaltyService.getAllAppGroups(1).toPromise().then((res: any) => {
+      this.groups = res;
+    }).catch(err => {
+      this.snackBar.open("Can't fetch group, Please try agian.", null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-success"
+      });
+    });
   }
 
   getGenericGroup(){
@@ -147,6 +169,9 @@ export class AddAppUserAccompiedComponent implements OnInit  {
         accompiendGuest.mobile =  this.accompiendForms[i].controls.mobile.value;
         this.accompiendGuests.push(accompiendGuest);
       }
+
+      this.group.id = this.form.controls.group.value;
+
       this.dialogRef.close({
         name: this.form.controls.name.value,
         email: this.form.controls.email.value,

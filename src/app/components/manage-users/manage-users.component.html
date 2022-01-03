@@ -1,7 +1,9 @@
 <div *ngIf="usersList.allGuestsBeforeFilter.length != 0 ||usersList.usersData.length != 0 || usersList.showLoading" class="header">
-    <button mat-flat-button class="groups-buttons" (click)="addUserDialog(true)" *ngIf="hasRole('show_G_U_button')">Add
+    <button mat-flat-button class="groups-buttons" (click)="addUserDialog(true, true)" *ngIf="hasRole('show_G_U_button')">Add
         Generic Guest</button>
-    <button mat-flat-button class="groups-buttons" (click)="addUserDialog(false)" *ngIf="hasRole('add_guest')">Add
+    <button mat-flat-button class="groups-buttons" (click)="addUserDialog(true, false)" *ngIf="hasRole('show_G_U_button')">Add
+            Guest</button>
+    <button mat-flat-button class="groups-buttons" (click)="addUserDialog(false, false)" *ngIf="hasRole('add_guest')">Add
         Guest</button>
     <button mat-flat-button class="groups-buttons" (click)="updateUserDialog()" [disabled]="validateUpdateUser()">Update
         Guest</button>
@@ -85,9 +87,15 @@
         <div *ngIf="usersList.allGuestsBeforeFilter.length == 0">
         <img style="max-width: 300px; margin-top: 100px;" src="../../../assets/no-user.png" alt="image">
         <p class="user-name">You haven't added any guest yet!</p>
-        <button mat-flat-button class="groups-buttons" (click)="addUserDialog(true)"
+
+        <!-- Add Entry System user -->
+        <button mat-flat-button class="groups-buttons" (click)="addUserDialog(true, true)"
             *ngIf="hasRole('show_G_U_button')">Add Generic Guest</button>
-        <button mat-flat-button class="groups-buttons" (click)="addUserDialog(false)" *ngIf="hasRole('add_guest')">Add
+        <button mat-flat-button class="groups-buttons" (click)="addUserDialog(true, false)" *ngIf="hasRole('show_G_U_button')">Add
+                Guest</button>
+
+        <!-- Add Loyalty User -->
+        <button mat-flat-button class="groups-buttons" (click)="addUserDialog(false, false)" *ngIf="hasRole('add_guest')">Add
             Guest</button>
         </div>
     </div>
