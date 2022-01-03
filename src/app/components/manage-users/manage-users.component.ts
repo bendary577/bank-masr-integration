@@ -112,8 +112,14 @@ export class ManageUsersComponent implements OnInit {
 
   deleteUsers(flage) {
     this.usersList.showLoading = true
+    let deletedId = []
+
+    for(var i = 0 ; i < this.usersList.selected.length; i++){
+      deletedId.push(this.usersList.selected[i].id)
+    }
+
     this.loyaltyService
-      .deleteAppUsers(flage, this.usersList.selected)
+      .deleteAppUsers(flage, deletedId)
       .then((res: any) => {
         this.getUsers()
         this.usersList.selected = []
@@ -217,7 +223,7 @@ export class ManageUsersComponent implements OnInit {
   deleteOneUsers(guest, flage) {
     this.usersList.showLoading = true
     this.loyaltyService
-      .deleteAppUsers(flage, [guest])
+      .deleteAppUsers(flage, [guest.id])
       .then((res: any) => {
         this.getUsers()
         this.usersList.selected = []

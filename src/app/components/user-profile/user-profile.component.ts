@@ -400,7 +400,7 @@ export class UserProfileComponent implements OnInit {
   deleteUsers(flage) {
     this.spinner.show()
     this.loyaltyService
-      .deleteAppUsers(flage, [this.user])
+      .deleteAppUsers(flage, [this.user.id])
       .then((res: any) => {
         this.getApplicationUser()
         this.spinner.hide()
