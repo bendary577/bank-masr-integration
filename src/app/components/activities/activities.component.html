@@ -314,6 +314,12 @@
                     </ng-template>
                 </ngx-datatable-column>
 
+                <ngx-datatable-column name="Partial Payment" [width]="90" *ngIf="hasFeature('partial_payment')">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.partialPayment}} {{getCurrency()}}
+                    </ng-template>
+                </ngx-datatable-column>
+
                 <ngx-datatable-column name="Total Payment" [width]="90">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{row.totalPayment}} {{getCurrency()}}

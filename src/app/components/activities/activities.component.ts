@@ -345,6 +345,10 @@ export class ActivitiesComponent implements OnInit {
     return this.sidNav.hasRole(reference)
   }
 
+  hasFeature(reference) {
+    return this.sidNav.hasFeature(reference)
+  }
+
   filterTransactions(event) {
     const transactions = this.transactionList.allTransactionDataBeforeFilter
 
