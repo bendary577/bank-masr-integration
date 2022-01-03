@@ -7,8 +7,8 @@
             </button>
         </div>
         <div class="user-profile">
-            <mat-card class="user-card">
-                <mat-card-content>
+            <mat-card class="user-card" style="min-height: 100px;">
+                <mat-card-content style="min-height: 186px;">
                     <img class="user-img" src={{user.logoUrl}} alt="image" *ngIf="user">
                     <img class="user-img" src="../../../assets/defaultImage.jpg" alt="image" *ngIf="!user">
                     <span class="user-name" *ngIf="user">
@@ -89,7 +89,7 @@
                             mat-raised-button>Restore</button>
                     </div>
                     <div>
-                        <button class="user-btn" (click)="extendExpiryDate(user)" mat-raised-button *ngIf="user" 
+                        <button class="user-btn" style="width: 210px;" (click)="extendExpiryDate(user)" mat-raised-button *ngIf="user" 
                         [disabled]="user && user.deleted">Extend Expiry Date</button>
                     </div>
                 </mat-card-content>
@@ -171,7 +171,7 @@
             <div class="title-card">
                 Card History
             </div>
-            <div *ngIf="!walletHistoryList || walletHistoryList.walletHistoryData.length == 0">
+            <div *ngIf="!walletHistoryList.showLoading && walletHistoryList.walletHistoryData.length == 0">
                 <mat-card class="transaction-card">
                     <mat-card-content>
                         <div style="text-align: center;">
@@ -181,7 +181,9 @@
                     </mat-card-content>
                 </mat-card>
             </div>
-            <div *ngIf="walletHistoryList.walletHistoryData.length != 0">
+
+            <div *ngIf="walletHistoryList.showLoading || 
+            (!walletHistoryList.showLoading && walletHistoryList.walletHistoryData.length != 0)">
                 <ngx-datatable class="material" [loadingIndicator]="walletHistoryList.showLoading"
                     [messages]="walletHistoryList.messages"
                     style="border-radius:1%; width: 98%; height: 310px; display: inline-block;" [sortType]="'multi'"
