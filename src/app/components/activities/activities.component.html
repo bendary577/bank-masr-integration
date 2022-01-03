@@ -233,7 +233,7 @@
     
     <div class="main">
 
-        <div *ngIf="transactionList.transactionData.length == 0">
+        <div *ngIf="!transactionList.showLoading && transactionList.transactionData.length == 0">
             <mat-card class="transaction-card">
                 <mat-card-content>
                     <div>
@@ -244,7 +244,7 @@
             </mat-card>
         </div>
 
-        <div *ngIf="transactionList.transactionData.length != 0">
+        <div *ngIf="transactionList.showLoading || (!transactionList.showLoading && transactionList.transactionData.length != 0)">
             <ngx-datatable class="material" [loadingIndicator]="transactionList.showLoading"
                 [messages]="transactionList.messages" style="width: 98%" [sortType]="'multi'" [columnMode]="'force'"
                 [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
