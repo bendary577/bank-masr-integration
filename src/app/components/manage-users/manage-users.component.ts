@@ -614,6 +614,14 @@ export class ManageUsersComponent implements OnInit {
     return this.sidNav.hasRole(reference)
   }
 
+  hasFeature(reference) {
+    return this.sidNav.hasFeature(reference)
+  }
+
+  getCurrency() {
+    return JSON.parse(localStorage.getItem('account')).currency
+  }
+
   resetPicker(event) {
     // if (event == 'fromDate') {
     this.fromDate = undefined

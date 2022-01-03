@@ -40,6 +40,11 @@ export class AddAppUserAccompiedComponent implements OnInit  {
       this.inUpdate = true;
       this.user = this.data["user"];
       this.selectedGroup = this.user.group.id;
+
+      if(this.user.accompaniedGuests == null){
+        this.user.accompaniedGuests = [];
+      }
+
       for(var i = 0 ; i < this.user.accompaniedGuests.length; i++){
         let accompiendForm:  FormGroup;
         accompiendForm = this.formBuilder.group({
