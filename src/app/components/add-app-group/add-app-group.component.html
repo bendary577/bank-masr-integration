@@ -2,7 +2,7 @@
 
     <span mat-dialog-title>New Group</span>
 
-    <div mat-dialog-content>
+    <div mat-dialog-content style="text-align: center;">
         <form [formGroup]="form" class="my-form">
             
                 <mat-form-field class="example-full-width creditForm" appearance="outline">
@@ -36,7 +36,7 @@
                     </mat-select>
                 </mat-form-field>
 
-            <div style="padding-top: 1%;">
+            <div style="padding-top: 1%;text-align: center;">
                     <input #csvInput hidden="true" type="file" onclick="this.value=null"
                         (change)="csvInputChange($event)" accept="image/*" formControlName="image"/>
                     <button class="form-button" mat-flat-button color="primary" (click)="csvInput.click()">

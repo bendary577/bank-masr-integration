@@ -2,7 +2,6 @@
 @import "../operations/opera-payments/opera-payments.component.scss";
 
 .dialog-body {
-    // height: 100%;
     border-radius: 20px;
 }
 
@@ -39,4 +38,9 @@
   
   ::ng-deep form {
     margin: 5px 0 0  !important;
+}
+
+::ng-deep .mat-dialog-container {
+    // height: 720px !important;
+    border-radius: 15px;
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { MatDialog, MatSnackBar } from '@angular/material'
+import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material'
 import { Router } from '@angular/router'
 import { Constants } from 'src/app/models/constants'
 import { Data } from 'src/app/models/data'
@@ -141,10 +141,17 @@ export class ManageGroupsComponent implements OnInit {
   }
 
   addGroupDialog() {
-    const dialogRef = this.dialog.open(AddAppGroupComponent, {
-      width: '420px',
-      data: { inParent: this.inParent },
-    })
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+        title:  "Add Group",
+        inParent: this.inParent 
+    };
+    dialogConfig.width = '420px';
+    dialogConfig.maxHeight = '350px';
+    dialogConfig.autoFocus = true;
+
+    const dialogRef = this.dialog.open(AddAppGroupComponent, dialogConfig)
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
@@ -200,10 +207,18 @@ export class ManageGroupsComponent implements OnInit {
   }
 
   updateGroupDialog() {
-    const dialogRef = this.dialog.open(AddAppGroupComponent, {
-      width: '420px',
-      data: { inParent: this.inParent, group: this.groupsList.selected[0] },
-    })
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+        title:  "Update Group",
+        inParent: this.inParent,
+        group: this.groupsList.selected[0] 
+    };
+    dialogConfig.width = '420px';
+    dialogConfig.maxHeight = '350px';
+    dialogConfig.autoFocus = true;
+
+    const dialogRef = this.dialog.open(AddAppGroupComponent, dialogConfig)
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {

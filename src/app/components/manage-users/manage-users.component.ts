@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
-import { MatDialog, MatSnackBar } from '@angular/material'
+import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material'
 import { ErrorMessages } from 'src/app/models/ErrorMessages'
 import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser'
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service'
@@ -309,12 +309,17 @@ export class ManageUsersComponent implements OnInit {
 
     if (type) {
       isGeneric = true
-      dialogRef = this.dialog.open(AddAppUserAccompiedComponent, {
-        width: '420px',
-        data: {
+
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {
+          title:  "Add Guest",
           generic: genericGroup
-        },
-      })
+      };
+      dialogConfig.width = '420px';
+      dialogConfig.autoFocus = true;
+
+      dialogRef = this.dialog.open(AddAppUserAccompiedComponent, dialogConfig)
     } else {
       dialogRef = this.dialog.open(AddAppUserComponent, {
         width: '420px'

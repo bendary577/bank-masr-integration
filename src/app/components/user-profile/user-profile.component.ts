@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { Data } from 'src/app/models/data'
 import { Transactions } from '../opi-transactions/transactions'
 import { Location } from '@angular/common'
-import { MatDialog, MatSnackBar } from '@angular/material'
+import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material'
 import { EditWalletComponent } from '../edit-wallet/edit-wallet.component'
 import { SideNaveComponent } from '../side-nave/side-nave.component'
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service'
@@ -340,12 +340,16 @@ export class UserProfileComponent implements OnInit {
   }
 
   updateUserDialog() {
-    const dialogRef = this.dialog.open(AddAppUserAccompiedComponent, {
-      width: '800px',
-      data: {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+        title:  "Add Guest",
         user: this.user,
-      },
-    })
+    };
+    dialogConfig.width = '420px';
+    dialogConfig.autoFocus = true;
+    
+    const dialogRef = this.dialog.open(AddAppUserAccompiedComponent, dialogConfig)
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         this.spinner.show()
