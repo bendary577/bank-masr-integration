@@ -201,10 +201,10 @@
 
             <ngx-datatable-column name="State" [width]="90">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    <label *ngIf="!row.deleted && !lessThanOrEqualZero(row.expire) && !row.suspended" class="active-state">Active</label>
-                    <label *ngIf="!row.deleted && !lessThanOrEqualZero(row.expire) && row.suspended" style="color: #1661a3;">Suspended</label>
+                    <label *ngIf="!row.deleted && !lessThanOrEqualZero(row) && !row.suspended" class="active-state">Active</label>
+                    <label *ngIf="!row.deleted && !lessThanOrEqualZero(row) && row.suspended" style="color: #1661a3;">Suspended</label>
                     <label *ngIf="row.deleted" class="deleted-state">Deleted</label>
-                    <label *ngIf="!row.deleted && lessThanOrEqualZero(row.expire)" style="color: #1661a3;">Expired</label>
+                    <label *ngIf="!row.deleted && lessThanOrEqualZero(row)" style="color: #1661a3;">Expired</label>
                 </ng-template>
             </ngx-datatable-column>
 

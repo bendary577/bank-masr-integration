@@ -615,8 +615,10 @@ export class ManageUsersComponent implements OnInit {
     return credit
   }
 
-  lessThanOrEqualZero(expireHours): Boolean {
-    if (expireHours > 0) {
+  lessThanOrEqualZero(user): Boolean {
+    var now  = new Date().getTime();
+    let distance = new Date(user.expiryDate).getTime() - now;
+    if (distance > 0) {
       return false
     }
     return true
