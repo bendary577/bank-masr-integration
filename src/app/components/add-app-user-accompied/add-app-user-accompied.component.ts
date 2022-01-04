@@ -49,6 +49,7 @@ export class AddAppUserAccompiedComponent implements OnInit  {
     }
   
     if (this.data != undefined && this.data["user"] != null){
+      this.isGeneric = false;
       this.inUpdate = true;
       this.user = this.data["user"];
       this.selectedGroup = this.user.group.id;
@@ -66,7 +67,6 @@ export class AddAppUserAccompiedComponent implements OnInit  {
         })
         this.accompiendForms.push(accompiendForm);
       }
-
       this.form = this.formBuilder.group({
         name: [this.user.name, [Validators.maxLength]], 
         email: [this.user.email, [Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
@@ -91,6 +91,10 @@ export class AddAppUserAccompiedComponent implements OnInit  {
         });
     }
     this.swipe();
+  }
+
+  currentDate(){
+    return new Date().toISOString()
   }
 
   calculateParams(){

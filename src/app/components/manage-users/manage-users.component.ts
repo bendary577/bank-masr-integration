@@ -177,7 +177,7 @@ export class ManageUsersComponent implements OnInit {
               guest.cardCode,
               guest.mobile,
               guest.balance,
-              +guest.expire + res.hours,
+              res.expiryDate,
               false,
               false,
               guest.points,
