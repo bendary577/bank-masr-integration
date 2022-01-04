@@ -10,15 +10,15 @@
                 <div mat-dialog-content class="main-guest">
                     <form [formGroup]="form" class="my-form">
                         <mat-form-field class="example-full-width creditForm" appearance="outline">
-                            <input matInput placeholder="Expire" formControlName="expire" maxlength="3" required>
-                            <mat-label>Expire</mat-label>
-                            <mat-error *ngIf="form.controls.expire.hasError('required')">
+                            <input matInput placeholder="Expiry Date" type="datetime-local" name="expiryDate" id="expiryDate"
+                            formControlName="expiryDate" required>
+                            <mat-error *ngIf="form.controls.expiryDate.hasError('required')">
                                 Expiration Date is required.
                             </mat-error>
-                            <mat-error *ngIf="form.controls.expire.hasError('maxlength')">
+                            <mat-error *ngIf="form.controls.expiryDate.hasError('maxlength')">
                                 Expiration Date to long.
                             </mat-error>
-                            <mat-error *ngIf="form.controls.expire.hasError('pattern')">
+                            <mat-error *ngIf="form.controls.expiryDate.hasError('pattern')">
                                 Expiration Date must be well formed.
                             </mat-error>
                         </mat-form-field>
@@ -74,9 +74,6 @@
 
                         <mat-form-field class="example-full-width creditForm" appearance="outline">
                             <input matInput placeholder="Email" formControlName="email">
-                            <mat-error *ngIf="form.controls.email.hasError('required')">
-                                Email is required.
-                            </mat-error>
                             <mat-error *ngIf="form.controls.email.hasError('pattern')">
                                 Email must be well formed.
                             </mat-error>
@@ -84,9 +81,6 @@
 
                         <mat-form-field class="example-full-width creditForm" appearance="outline">
                             <input matInput placeholder="Moblie" formControlName="mobile" maxlength="11">
-                            <mat-error *ngIf="form.controls.mobile.hasError('required')">
-                                Moblie is required.
-                            </mat-error>
                             <mat-error *ngIf="form.controls.mobile.hasError('maxlength')">
                                 Moblie is to long.
                             </mat-error>

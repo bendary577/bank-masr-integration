@@ -187,11 +187,11 @@
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="Expires In" *ngIf="hasRole('show_expiration')" [width]="90">
+            <!-- <ngx-datatable-column name="Expires In" *ngIf="hasRole('show_expiration')" [width]="90">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.expire}} Hour
                 </ng-template>
-            </ngx-datatable-column>
+            </ngx-datatable-column> -->
 
             <ngx-datatable-column name="Discount Rate" *ngIf="hasRole('show_discount')" [width]="90">
                 <ng-template let-row="row" ngx-datatable-cell-template>
@@ -211,6 +211,12 @@
             <ngx-datatable-column name="Creation Time" [width]="90">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.creationDate | date: 'dd/MM/yyyy HH:mm:ss' }}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Expiry Date" [width]="90" *ngIf="hasFeature('entry_system')">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.expiryDate | date: 'dd/MM/yyyy HH:mm:ss' }}
                 </ng-template>
             </ngx-datatable-column>
 

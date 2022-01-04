@@ -14,6 +14,7 @@ import { AddAppUserAccompiedComponent } from '../add-app-user-accompied/add-app-
 import { ExtendExpiryDateComponent } from '../extend-expiry-date/extend-expiry-date.component'
 import { ExcelService } from 'src/app/services/excel/excel.service'
 import { saveAs } from 'file-saver'
+import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser'
 
 @Component({
   selector: 'app-user-profile',
@@ -33,8 +34,11 @@ export class UserProfileComponent implements OnInit {
   voucherHistory = new VoucherHistory()
   simphonyDiscount
   group
-  user
+  user: ApplicationUser
   revenueCenters: RevenueCenter[] = []
+
+  distance = 0;
+  expiryDateCounter: string;
 
   walletHistoryList = {
     paginateData: true as boolean,
@@ -79,6 +83,29 @@ export class UserProfileComponent implements OnInit {
       this.getApplicationUser()
     }
   }
+
+  
+  x = setInterval(() => {
+    if(this.distance < 0){
+      clearInterval(this.x);
+    }
+    if(this.user && this.user.expiryDate != null ){
+      var now  = new Date().getTime();
+      this.distance = new Date(this.user.expiryDate).getTime() - now;
+      if(this.distance < 0){
+        this.expiryDateCounter = "0d 0h 0m 0s"
+      }else{
+        var days = Math.floor(this.distance / (1000*60*60*24));
+        var hours = Math.floor((this.distance % (1000*60*60*24)) / (1000*60*60));
+        var minutes = Math.floor((this.distance % (1000*60*60)) / (1000*60));
+        var seconds = Math.floor((this.distance % (1000*60)) / (1000));
+        this.expiryDateCounter = days + "d " + hours + "h " + minutes + "m " + seconds + "s"
+      }
+    }else{
+      this.expiryDateCounter = "0d 0h 0m 0s"
+    }
+
+  })
 
   getApplicationUser() {
     this.walletHistoryList.showLoading = true
@@ -136,8 +163,8 @@ export class UserProfileComponent implements OnInit {
   }
 
 
-  lessThanOrEqualZero(expireHours): Boolean {
-    if (expireHours > 0) {
+  lessThanOrEqualZero(): Boolean {
+    if (this.distance > 0) {
       return false
     }
     return true

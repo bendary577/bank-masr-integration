@@ -3,19 +3,25 @@ import { Group } from './Group'
 
 export class ApplicationUser {
   public id: string
+  public code
   public name: string
   public email: String
-  public moblie: String
+  public mobile: String
+  public logoUrl: String
+
   public group: Group
-  public creationDate: string
-  public lastUpdate: string
   public deleted: boolean
-  public expire
+  public expire: boolean
+  public suspended: boolean
+  public generic: boolean
   public wallet
-  public mobile
-  public code
+
   public points
   public accompaniedGuests: AccompiendGuest[]
+
+  public creationDate: string
+  public lastUpdate: string
+  public expiryDate: string
 
   public constructor() {}
 }

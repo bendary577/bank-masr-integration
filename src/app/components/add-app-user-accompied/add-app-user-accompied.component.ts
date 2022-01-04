@@ -38,6 +38,8 @@ export class AddAppUserAccompiedComponent implements OnInit  {
  
   ngOnInit() {
     if (this.data != undefined && this.data["generic"] != null){
+      console.log(this.data["generic"]);
+
       if(this.data["generic"]){
         this.getGenericGroup();
       }else{
@@ -71,22 +73,22 @@ export class AddAppUserAccompiedComponent implements OnInit  {
         mobile: [this.user.mobile, [Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
         group: this.group,
         balance:[this.user.wallet.price],
-        expire: [this.user.expire],
+        expiryDate: [this.user.expiryDate],
         cardNum: [this.user.code],
         accompanied:[this.user.accompaniedGuests.length],
       });
       this.calculateParams();
     }else{
       this.form = this.formBuilder.group({
-      group: this.group,
-      balance:[100, [Validators.required, Validators.maxLength, Validators.pattern('[- +()0-9]+')]],
-      expire:[24, [Validators.required, Validators.maxLength, Validators.pattern('[- +()0-9]+')]],
-      name: ["", [Validators.maxLength]],
-      email: ["", [Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"), Validators.maxLength]],
-      mobile: ["", [Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
-      cardNum: ["", [Validators.required, Validators.maxLength]],
-      accompanied:[0],
-      });
+        group: this.group,
+        balance:[100, [Validators.required, Validators.maxLength, Validators.pattern('[- +()0-9]+')]],
+        expiryDate:["", [Validators.required]],
+        cardNum: ["", [Validators.required, Validators.maxLength]],
+        name: ["", [Validators.maxLength]],
+        email: ["", [Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"), Validators.maxLength]],
+        mobile: ["", [Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
+        accompanied:[0],
+        });
     }
     this.swipe();
   }
@@ -170,14 +172,16 @@ export class AddAppUserAccompiedComponent implements OnInit  {
         this.accompiendGuests.push(accompiendGuest);
       }
 
-      this.group.id = this.form.controls.group.value;
-
+      if(!this.isGeneric){
+        this.group.id = this.form.controls.group.value;
+      }
+    
       this.dialogRef.close({
         name: this.form.controls.name.value,
         email: this.form.controls.email.value,
         mobile: this.form.controls.mobile.value,
         balance: this.form.controls.balance.value,
-        expire: this.form.controls.expire.value,
+        expiryDate: this.form.controls.expiryDate.value,
         group: this.group.id,
         image: this.srcResult,
         points:0,
@@ -208,9 +212,6 @@ export class AddAppUserAccompiedComponent implements OnInit  {
     }
   }
 
-  hasRole(role){
-    
-  }
 
   tabClick(tab){
     if(tab.index == 1 && this.accompiedNumber  == 0){

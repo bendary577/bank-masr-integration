@@ -138,7 +138,7 @@ export class LoyaltyService {
     formData.append('cardCode', cardCode)
     formData.append('mobile', mobile)
     formData.append('balance', balance)
-    formData.append('expire', expire)
+    formData.append('expiryDate', expire)
     formData.append('sendEmail', sendEmail)
     formData.append('sendSMS', sendSMS)
     formData.append('points', points)

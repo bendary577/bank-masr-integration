@@ -52,12 +52,12 @@
                                 <td class="title" style="float: left;">Status </td>
                                 <td> </td>
                                 <td class="res" style="float: right;">
-                                    <label *ngIf="!user.deleted && !lessThanOrEqualZero(user.expire) && !user.suspended "
+                                    <label *ngIf="!user.deleted && !lessThanOrEqualZero() && !user.suspended "
                                         class="active-state">Active</label>
-                                    <label *ngIf="!user.deleted && !lessThanOrEqualZero(user.expire) && user.suspended"
+                                    <label *ngIf="!user.deleted && !lessThanOrEqualZero() && user.suspended"
                                          style="color: #1661a3;">Suspended</label>
                                     <label *ngIf="user.deleted" class="deleted-state">Deleted</label>
-                                    <label *ngIf="!user.deleted && lessThanOrEqualZero(user.expire)"
+                                    <label *ngIf="!user.deleted && lessThanOrEqualZero()"
                                         style="color: #1661a3;">Expired</label>
                                 </td>
                             </tr>
@@ -65,13 +65,19 @@
                             <tr *ngIf="user">
                                 <td class="title" style="float: left;">Expire In </td>
                                 <td> </td>
-                                <td class="res" style="float: right;">{{user.expire}} H</td>
+                                <td class="res" style="float: right;">{{expiryDateCounter}}</td>
                             </tr>
                             <hr class="hrClass" *ngIf="user">
                             <tr *ngIf="user">
                                 <td class="title" style="float: left;">Creation Time </td>
                                 <td> </td>
                                 <td class="res" style="float: right;">{{user.creationDate | date: 'dd/MM/yyyy' }}</td>
+                            </tr>
+                            <hr class="hrClass" *ngIf="user">
+                            <tr *ngIf="user">
+                                <td class="title" style="float: left;">Expiry Date </td>
+                                <td> </td>
+                                <td class="res" style="float: right;">{{user.expiryDate | date: 'dd/MM/yyyy' }}</td>
                             </tr>
                             <hr class="hrClass" *ngIf="user && user.lastUpdate">
                             <tr *ngIf="user && user.lastUpdate">
@@ -113,10 +119,10 @@
                                 </div>
                             </h3>
                             <button class="filter-btn" (click)="chargeWallet('add')" 
-                            [disabled]="user && (user.deleted || lessThanOrEqualZero(user.expire) || user.suspended)"
+                            [disabled]="user && (user.deleted || lessThanOrEqualZero() || user.suspended)"
                              mat-raised-button>Charge</button>
                             <button class="filter-btn" (click)="deductWallet('deduct')"
-                            [disabled]="user && (user.deleted || lessThanOrEqualZero(user.expire) || user.suspended)"
+                            [disabled]="user && (user.deleted || lessThanOrEqualZero() || user.suspended)"
                                 mat-raised-button>Deduct</button>
                         </div>
 
