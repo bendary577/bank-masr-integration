@@ -268,10 +268,10 @@ export class LoyaltyService {
     )
   }
 
-  suspendGuest(guest, susFlag) {
+  suspendGuest(guestId: string, susFlag) {
     this.token = localStorage.getItem('auth_token')
     return this.http
-      .post(Constants.SUSPEND_GEUST_URL + '?susFlag=' + susFlag, guest, {
+      .post(Constants.SUSPEND_GEUST_URL + '?susFlag=' + susFlag + '&userId=' + guestId, {}, {
         headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),
       })
       .toPromise()

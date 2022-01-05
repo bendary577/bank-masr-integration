@@ -261,11 +261,11 @@ export class ManageUsersComponent implements OnInit {
       })
   }
 
-  suspendGuest(guest, susFlag) {
+  suspendGuest(guestId, susFlag) {
     this.usersList.showLoading = true
     this,
       this.loyaltyService
-        .suspendGuest(guest, susFlag)
+        .suspendGuest(guestId, susFlag)
         .then((res: any) => {
           this.usersList.selected = []
           this.getUsers()
