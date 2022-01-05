@@ -317,6 +317,7 @@ export class ManageUsersComponent implements OnInit {
           generic: genericGroup
       };
       dialogConfig.width = '420px';
+      dialogConfig.maxWidth = '420px';
       dialogConfig.autoFocus = true;
 
       dialogRef = this.dialog.open(AddAppUserAccompiedComponent, dialogConfig)

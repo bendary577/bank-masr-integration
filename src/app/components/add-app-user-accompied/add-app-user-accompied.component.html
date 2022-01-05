@@ -100,17 +100,15 @@
                                 <label> Print </label>
                             </mat-checkbox>
                         </div> -->
-
-                        <div style="padding-top: 1%;text-align: center;">
-                            <input #csvInput hidden="true" type="file" onclick="this.value=null"
-                                (change)="csvInputChange($event)" accept="image/*" />
-                            <button class="form-button" mat-flat-button color="primary" (click)="csvInput.click()">
-                                <img class="form-b-img" src="../../../assets/photos.png">
-                                Choose Image</button>
-                            <div [hidden]="!imageUploded">Image uploaded successfully.</div>
-                        </div>
-
                     </form>
+                    <div style="padding-top: 1%;text-align: center;">
+                        <input #csvInput hidden="true" type="file" onclick="this.value=null"
+                            (change)="csvInputChange($event)" accept="image/*" />
+                        <button class="form-button" mat-flat-button color="primary" (click)="csvInput.click()">
+                            <img class="form-b-img" src="../../../assets/photos.png">
+                            Choose Image</button>
+                        <div [hidden]="!imageUploded">Image uploaded successfully.</div>
+                    </div>
                 </div>
             </mat-tab>
             <mat-tab label="Accompanied Guests" (click)="addAccompiend()">
@@ -157,19 +155,6 @@
                 </div>
             </mat-tab>
         </mat-tab-group>
-
-        <!-- <div class="two-column cardSide" style="padding-top: 60px;">
-            <div class="card-div">
-                <div>
-                    <img class="image_style" src="../../../assets/1200px-Universal_Contactless_Card_Symbol.svg.png">
-                </div>
-            </div>
-        </div> -->
-
-        <!-- <div class="two-column formSide" style=" margin-left: 30px; height:90%">
-
-
-        </div> -->
     </div>
     <div class="buttons-div" *ngIf="!inAccompiendView">
         <div mat-dialog-actions>
