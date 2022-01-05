@@ -44,9 +44,9 @@ export class AddAppUserAccompiedComponent implements OnInit  {
         this.getGenericGroup();
       }else{
         this.isGeneric = false;
-        this.getGroups();
       }
     }
+    this.getGroups();
   
     if (this.data != undefined && this.data["user"] != null){
       this.isGeneric = false;
@@ -71,7 +71,7 @@ export class AddAppUserAccompiedComponent implements OnInit  {
         name: [this.user.name, [Validators.maxLength]], 
         email: [this.user.email, [Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
         mobile: [this.user.mobile, [Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
-        group: this.group,
+        group: [this.user.group.id],
         balance:[this.user.wallet.price],
         expiryDate: [this.user.expiryDate],
         cardNum: [this.user.code],
