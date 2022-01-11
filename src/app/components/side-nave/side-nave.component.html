@@ -150,6 +150,9 @@
           <li class="nav-item" *ngIf="hasFeature('entry_system') && !hasFeature('loyalty')">
              <a class="nav-link" routerLink="/entrySystem" routerLinkActive="active" translate>Entry System</a>
           </li>
+          <li class="nav-item" *ngIf="hasFeature('reward_points')">
+            <a class="nav-link" routerLink="/rewardPoints" routerLinkActive="active" translate>Reward Points</a>
+         </li>
 
           <!-- <li class="nav-item" *ngFor="let application of applications"> <a class="nav-link"
               routerLink={{application.endPoint}} routerLinkActive="active" translate>{{application.name}}</a></li> -->
@@ -185,8 +188,6 @@
         </span>
         <span class="menu-title" translate>Operations</span>
         <i class="menu-arrow"></i>
-        <!-- <i class="mdi mdi-arrow-up-bold" *ngIf="!opeBasicCollapsed"></i>
-          <i class="mdi mdi-arrow-down-bold" *ngIf="opeBasicCollapsed"></i> -->
       </a>
       <div class="collapse" id="ui-basic" [ngbCollapse]="!opeBasicCollapsed">
         <ul class="nav flex-column sub-menu">
@@ -240,7 +241,7 @@
       </a>
       <div class="collapse" id="auth" [ngbCollapse]="!userPagesCollapsed">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item" *ngIf="hasRole('see_users')"><a class="nav-link" routerLink="/users">Users</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/users">Users</a></li>
         </ul>
       </div>
     </li>

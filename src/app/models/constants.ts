@@ -313,6 +313,7 @@ export class Constants {
   //////////////////////////////////////////////// Manage Application  //////////////////////////////////////////////
 
   static GET_LOYALTY_PAGE = 'loyalty'
+  static REWARD_POINTS_PAGE = 'rewardPoints'
   static MANAGE_COMPANIES = 'manageCompanies'
   static MANAGE_GROUPS = 'manageGroups'
   static MANAGE_SUB_GROUPS = 'manageSubGroups'
