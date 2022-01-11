@@ -4,3 +4,16 @@
 .card-title{
     margin-right: 10px;
 }
+
+form {
+    .form-input {
+        label {
+            font-size: .8125rem;
+        }
+        .form-control {
+            background: transparent;
+            border-radius: 0;
+            font-size: .9375rem;
+        }
+    }
+}
