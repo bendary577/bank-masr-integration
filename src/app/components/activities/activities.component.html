@@ -308,7 +308,7 @@
                     </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="Points Redeemed" [width]="90" *ngIf="hasRole('view_reward_points')">
+                <ngx-datatable-column name="Points Redeemed" [width]="90" *ngIf="hasFeature('reward_points')">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{row.pointsRedeemed}}
                     </ng-template>

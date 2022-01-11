@@ -7,18 +7,44 @@
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            Point Calculation Settings
+                            <mat-icon aria-hidden="false" aria-label="Example attach_money icon"
+                            style="font-size: 19px;">attach_money</mat-icon>
+                            <strong>
+                                Earning Reward Points and Spending Calculation
+                            </strong>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
+                    <p>
+                        The Loyalty Program allows customers to earn points for certain actions they take on the site,
+                         Points are awarded based on making purchases and customer actions such as registration.
+                    </p>
 
                     <div>
-                        <strong>Reward Points:</strong>
+                        <strong class="card-title">Reward Points:</strong>
                         <input matInput placeholder="10" type="number" min="0"  [(ngModel)]="generalSettings.pointReward"/> %
                     </div>
                     <br>
                     <div>
-                        <strong>Points Redemption 1$ = </strong> 
+                        <strong class="card-title">Points Redemption 1$ = </strong> 
                         <input matInput placeholder="1" type="number" min="0" [(ngModel)]="generalSettings.pointsRedemption" /> Points
+                    </div>
+                </mat-expansion-panel>
+
+                <!-- Birthday Settings -->
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <mat-icon aria-hidden="false" aria-label="Example card_giftcard icon"
+                            style="font-size: 19px;">card_giftcard</mat-icon>
+                            Birthday Gifts
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <p>As a birthday present, give your valued customer more points.</p>
+
+                    <div>
+                        <strong class="card-title">Birthday Points:</strong>
+                        <input matInput placeholder="10" type="number" min="0"  [(ngModel)]="generalSettings.pointReward"/> %
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>
