@@ -169,6 +169,9 @@ import { TaxAnalysisConfigrutionComponent } from './components/configuration/tax
 import { RevenueByAgentComponent } from './components/Reports/revenue-by-agent/revenue-by-agent.component'
 import { ExtendExpiryDateComponent } from './components/extend-expiry-date/extend-expiry-date.component';
 import { ViewInvokerComponent } from './components/view-invoker/view-invoker.component';
+import { RewardPointsComponent } from './components/reward-points/reward-points.component';
+import { ManageRewardPointsUsersComponent } from './components/RewardPoints/manage-reward-points-users/manage-reward-points-users.component';
+import { AddRewardPointsUserComponent } from './components/RewardPoints/add-reward-points-user/add-reward-points-user.component';
 
 @NgModule({
   declarations: [
@@ -295,6 +298,9 @@ import { ViewInvokerComponent } from './components/view-invoker/view-invoker.com
     RevenueByAgentComponent,
     ExtendExpiryDateComponent,
     ViewInvokerComponent,
+    RewardPointsComponent,
+    ManageRewardPointsUsersComponent,
+    AddRewardPointsUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -386,6 +392,9 @@ import { ViewInvokerComponent } from './components/view-invoker/view-invoker.com
     DeleteAppGroupComponent,
     EditWalletComponent,
     ExtendExpiryDateComponent,
+
+    // ==> Reward Points System
+    AddRewardPointsUserComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

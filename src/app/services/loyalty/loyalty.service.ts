@@ -111,6 +111,23 @@ export class LoyaltyService {
     })
   }
 
+  addRewardPointsUser(
+    image,
+    user
+  ) {
+    this.token = localStorage.getItem('auth_token')
+    const formData: FormData = new FormData()
+    formData.append('image', image)
+    formData.append('user', JSON.stringify(user))
+    return this.http
+      .post(
+        Constants.ADD_RP_USER_URL,
+        formData,
+        { headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }) },
+      )
+      .toPromise()
+  }
+
   addApplicationUser(
     flage,
     isGeneric,
@@ -126,7 +143,6 @@ export class LoyaltyService {
     expire,
     sendEmail,
     sendSMS,
-    points,
   ) {
     this.token = localStorage.getItem('auth_token')
     const formData: FormData = new FormData()
@@ -141,7 +157,6 @@ export class LoyaltyService {
     formData.append('expiryDate', expire)
     formData.append('sendEmail', sendEmail)
     formData.append('sendSMS', sendSMS)
-    formData.append('points', points)
     formData.append('accompaniedGuests', JSON.stringify(accompiendUsers))
     return this.http
       .post(

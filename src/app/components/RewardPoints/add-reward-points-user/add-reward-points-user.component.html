@@ -24,11 +24,18 @@
 
             <mat-form-field class="example-full-width creditForm" appearance="outline">
                 <mat-select matInput id="groups" name="groups" placeholder="Group" formControlName="group">
-                    <mat-option></mat-option>
-                    <mat-option [value]=c.id *ngFor="let c of groups">{{c.name}}</mat-option>
+                    <mat-option [value]=c *ngFor="let c of groups">{{c.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
-            
+
+            <!-- Reward Points -->
+            <mat-form-field class="example-full-width creditForm" appearance="outline" *ngIf="hasFeature('reward_points')">
+                <input matInput placeholder="Birth Date" type="date" formControlName="birthDate">
+            </mat-form-field>
+            <mat-form-field class="example-full-width creditForm" appearance="outline" *ngIf="hasFeature('reward_points')">
+                <input matInput placeholder="Add welcome points" type="number" min="0" formControlName="points">
+            </mat-form-field>
+
             <div>
                 <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="csvInputChange($event)"
                     accept="image/*" />
@@ -45,9 +52,6 @@
                 </button>
                 <button mat-button (click)="onNoClick()" class="groups-buttons">Cancel</button>
             </div>
-
-
         </form>
-
     </div>
 </div>

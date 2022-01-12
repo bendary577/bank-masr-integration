@@ -336,6 +336,8 @@ export class Constants {
   static GET_APP_USERS_URL = environment.apiHost + '/getApplicationUsers'
   static GET_APP_USER = environment.apiHost + '/applicationUsers'
   static ADD_APP_USER_URL = environment.apiHost + '/addApplicationUser'
+  static ADD_RP_USER_URL = environment.apiHost + '/addRewardPointsUser'
+
   static RESEND_QR_CODE = environment.apiHost + '/resendQRCode'
   static Delete_APP_USERS_URL = environment.apiHost + '/deleteApplicationUsers'
   static GET_TRANSACTION_URL =

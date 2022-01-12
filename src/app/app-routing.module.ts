@@ -75,6 +75,7 @@ import { SimphonyCheckConfigurationComponent } from './components/simphony-check
 import { SimphonyPaymentComponent } from './components/operations/simphony-payment/simphony-payment.component';
 import { RevenueByAgentComponent } from './components/Reports/revenue-by-agent/revenue-by-agent.component';
 import { WebServiceInvokerConfigurationComponent } from './components/configuration/web-service-invoker-configuration/web-service-invoker-configuration.component';
+import { RewardPointsComponent } from './components/reward-points/reward-points.component';
 
 
 const routes: Routes = [
@@ -102,10 +103,12 @@ const routes: Routes = [
 
   // Loyalty Views
   { path: Constants.GET_LOYALTY_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
-  { path: Constants.REWARD_POINTS_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
   { path: Constants.GET_WALLET_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
   { path: Constants.GET_VOUCHER_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
   {path: "transPagin", component:TestPaginationComponent, canActivate:[AuthGuardService]},
+
+  // Reward Points
+  { path: Constants.REWARD_POINTS_PAGE, component: RewardPointsComponent ,canActivate:[AuthGuardService]},
 
   { path: Constants.MANAGE_GROUPS, component: ManageGroupsComponent ,canActivate:[AuthGuardService]},
 
