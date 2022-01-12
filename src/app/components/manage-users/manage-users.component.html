@@ -130,12 +130,20 @@
 
             <ngx-datatable-column name="Card Number" [width]="180" *ngIf="hasRole('show_card_number')">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    <a class="user-link" (click)="openUserProfile(row)">
+                    <div *ngIf="!hasRole('show_user_profile')">
                         <div style="float: left;"><img class="profile-img" src="../../../assets/profile.png"
-                                alt="image"> </div>
+                            alt="image"> </div>
                         <div *ngIf="hasRole('show_card_number')"
                             style="float: left; color: black; margin-top: 3px; margin-left: 5px;">{{row.code}}</div>
-                    </a>
+                    </div>
+                    <div *ngIf="hasRole('show_user_profile')">
+                        <a class="user-link" (click)="openUserProfile(row)">
+                            <div style="float: left;"><img class="profile-img" src="../../../assets/profile.png"
+                                    alt="image"> </div>
+                            <div *ngIf="hasRole('show_card_number')"
+                                style="float: left; color: black; margin-top: 3px; margin-left: 5px;">{{row.code}}</div>
+                        </a>
+                    </div>
                 </ng-template>
             </ngx-datatable-column>
 
