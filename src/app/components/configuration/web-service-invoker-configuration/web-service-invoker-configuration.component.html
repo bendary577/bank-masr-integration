@@ -16,5 +16,19 @@
                 <input matInput placeholder="Password" [(ngModel)]="row.password">
             </ng-template>
         </ngx-datatable-column>
+
+        <ngx-datatable-column name="Status">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <label *ngIf="!row.deleted" class="active-state">Active</label>
+                <label *ngIf="row.deleted" class="deleted-state">Deleted</label>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <!-- <ngx-datatable-column name="Roles">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <button mat-flat-button (click)="viewInvokerRolesDialog(row)">View</button>
+            </ng-template>
+        </ngx-datatable-column> -->
+
     </ngx-datatable>
 </div>

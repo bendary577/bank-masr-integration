@@ -167,7 +167,8 @@ import { SimphonyCheckConfigurationComponent } from './components/simphony-check
 import { ViewUserComponent } from './components/view-user/view-user.component'
 import { TaxAnalysisConfigrutionComponent } from './components/configuration/tax-analysis-configrution/tax-analysis-configrution.component'
 import { RevenueByAgentComponent } from './components/Reports/revenue-by-agent/revenue-by-agent.component'
-import { ExtendExpiryDateComponent } from './components/extend-expiry-date/extend-expiry-date.component'
+import { ExtendExpiryDateComponent } from './components/extend-expiry-date/extend-expiry-date.component';
+import { ViewInvokerComponent } from './components/view-invoker/view-invoker.component';
 
 @NgModule({
   declarations: [
@@ -293,6 +294,7 @@ import { ExtendExpiryDateComponent } from './components/extend-expiry-date/exten
     ViewUserComponent,
     RevenueByAgentComponent,
     ExtendExpiryDateComponent,
+    ViewInvokerComponent,
   ],
   imports: [
     BrowserModule,
@@ -366,6 +368,7 @@ import { ExtendExpiryDateComponent } from './components/extend-expiry-date/exten
     AddTenderChildComponent,
     AddSimphonyLocationComponent,
     AddWebServiceInvokerComponent,
+    ViewInvokerComponent,
     AddLocationComponent,
     AddMajorGroupChildComponent,
     AddSalesStatisticsComponent,

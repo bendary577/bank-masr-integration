@@ -74,6 +74,7 @@ import { SimphonyCheckComponent } from './components/simphony-check/simphony-che
 import { SimphonyCheckConfigurationComponent } from './components/simphony-check-configuration/simphony-check-configuration.component';
 import { SimphonyPaymentComponent } from './components/operations/simphony-payment/simphony-payment.component';
 import { RevenueByAgentComponent } from './components/Reports/revenue-by-agent/revenue-by-agent.component';
+import { WebServiceInvokerConfigurationComponent } from './components/configuration/web-service-invoker-configuration/web-service-invoker-configuration.component';
 
 
 const routes: Routes = [
@@ -94,6 +95,7 @@ const routes: Routes = [
   { path: Constants.SIMPHONY_DISCOUNT_MAP_TABLE, component: SimphonyDiscountMapingComponent ,canActivate:[AuthGuardService]},
   { path: Constants.POS_MACHINE_MAP_TABLE, component: PosMachineMappingComponent ,canActivate:[AuthGuardService]},
   { path: Constants.REWORD_PORINTS_SETTINGS, component: RewardPointsSettingsComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.WEB_INVOKERS_PAGE, component: WebServiceInvokerConfigurationComponent ,canActivate:[AuthGuardService]},
 
   // OPERA Views
   { path: Constants.OPERA_BOOKING_DASHBOARD_PAGE, component: OperaBookingDashBoardComponent ,canActivate:[AuthGuardService]},

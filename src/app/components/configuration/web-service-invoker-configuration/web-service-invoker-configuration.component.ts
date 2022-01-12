@@ -1,11 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { AddWebServiceInvokerComponent } from '../../add-web-service-invoker/add-web-service-invoker.component';
 import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
 import { User } from '../../../models/user'
 import { UserService } from 'src/app/services/user/user.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ViewInvokerComponent } from '../../view-invoker/view-invoker.component';
+import { InvokerUser } from 'src/app/models/InvokerUser';
 
 @Component({
   selector: 'app-web-service-invoker-configuration',
@@ -15,12 +18,13 @@ import { UserService } from 'src/app/services/user/user.service';
 export class WebServiceInvokerConfigurationComponent implements OnInit {
   loading = false;
 
-  newInvoker : User = new User();  
+  newInvoker : InvokerUser = new InvokerUser();  
   invokers = [];
 
   @Input() syncJobType: SyncJobType;
 
   constructor(private sidNav: SidenavResponsive, public snackBar: MatSnackBar,
+    private spinner: NgxSpinnerService,
      public dialog: MatDialog, public userService: UserService) { }
 
   ngOnInit() {
@@ -28,9 +32,17 @@ export class WebServiceInvokerConfigurationComponent implements OnInit {
   }
 
   getInvokerUsers(){
-    this.userService.getInvokerUser(this.syncJobType.id).toPromise().then(result => {
+    this.spinner.show()
+    let typeId = ""
+    if(this.syncJobType != null){
+      typeId = this.syncJobType.id
+    }
+    this.userService.getInvokerUser(typeId).toPromise().then(result => {
       this.invokers = result as User[];
-    }).catch(err => {});
+      this.spinner.hide();
+    }).catch(err => {
+      this.spinner.hide();
+    });
   }
 
   openInvokerDialog(){
@@ -50,7 +62,7 @@ export class WebServiceInvokerConfigurationComponent implements OnInit {
             panelClass:"my-snack-bar-success"
           });
           
-          this.newInvoker = new User();
+          this.newInvoker = new InvokerUser();
           this.getInvokerUsers();
           this.loading = false;
         }).catch(err => {
@@ -59,6 +71,53 @@ export class WebServiceInvokerConfigurationComponent implements OnInit {
               err: err
             }
           )
+          this.loading = false;
+
+          let message = "";
+          if(err.status === 401){
+            message = ErrorMessages.SESSION_EXPIRED;
+            this.sidNav.Logout();
+          } else if (err.error){
+            message = err.error;
+          } else {
+            message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
+          }
+    
+          this.snackBar.open(message , null, {
+            duration: 3000,
+            horizontalPosition: 'center',
+            panelClass:"my-snack-bar-fail"
+          });
+        });
+      }
+    });
+  }
+
+  viewInvokerRolesDialog(row){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+        title:  "Invoker User Roles",
+        invoker: row
+    };
+    dialogConfig.width = '420px';
+    dialogConfig.maxWidth = '420px';
+    dialogConfig.autoFocus = true;
+
+    const dialogRef = this.dialog.open(ViewInvokerComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.userService.updateInvokerUser(this.newInvoker).toPromise().then(result => {
+          this.snackBar.open("Web service invoker updated successfully.", null, {
+            duration: 2000,
+            horizontalPosition: 'center',
+            panelClass:"my-snack-bar-success"
+          });
+          
+          this.getInvokerUsers();
+          this.loading = false;
+        }).catch(err => {
           this.loading = false;
 
           let message = "";
