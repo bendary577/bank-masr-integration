@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { Data, Router } from '@angular/router';
-import { Constants } from 'src/app/models/constants';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser';
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
-import { AddAppUserComponent } from '../../add-app-user/add-app-user.component';
+import { RewardPointsService } from 'src/app/services/RewardPoints/reward-points.service';
 import { SideNaveComponent } from '../../side-nave/side-nave.component';
 import { AddRewardPointsUserComponent } from '../add-reward-points-user/add-reward-points-user.component';
 
@@ -15,31 +13,12 @@ import { AddRewardPointsUserComponent } from '../add-reward-points-user/add-rewa
   styleUrls: ['./manage-reward-points-users.component.scss']
 })
 export class ManageRewardPointsUsersComponent implements OnInit {
-
   loading = false
   newUser: ApplicationUser = new ApplicationUser()
   updatedUser: ApplicationUser = new ApplicationUser()
-  role = true
 
   styleProps = { 'background-color': '#e07d93' }
   styleProps2 = { 'background-color': '#ffb560' }
-
-  noFilter = true
-  selectedGuest = ''
-  guestNames = []
-  expiration = 0
-  palance = 0
-  cardNumber = 0
-  accompanied = 2
-  selectedGroupId = ''
-  selectedRevenue = ''
-  selectedGuestName = ''
-  selectedCardNum = ''
-  selectedCardStatues = ''
-  statues = ['Active', 'Expired', 'Deleted']
-  fromDate = ''
-  toDate = ''
-  isEntrySys = true
 
   usersList = {
     paginateData: true as boolean,
@@ -62,6 +41,7 @@ export class ManageRewardPointsUsersComponent implements OnInit {
 
   constructor(
     private loyaltyService: LoyaltyService,
+    private rewardPointsService: RewardPointsService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
     private sidNav: SideNaveComponent,
@@ -239,7 +219,7 @@ export class ManageRewardPointsUsersComponent implements OnInit {
         this.newUser.birthDate = res.birthDate
 
         this.usersList.showLoading = true
-        this.loyaltyService
+        this.rewardPointsService
           .addRewardPointsUser(
             res.image,
             this.newUser
@@ -282,6 +262,8 @@ export class ManageRewardPointsUsersComponent implements OnInit {
       }
     })
   }
+
+  updateUserDialog(){}
 
 
   send(process) {

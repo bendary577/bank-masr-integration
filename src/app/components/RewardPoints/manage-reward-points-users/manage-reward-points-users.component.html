@@ -1,7 +1,7 @@
 <div *ngIf="usersList.allGuestsBeforeFilter.length != 0 ||usersList.usersData.length != 0 || usersList.showLoading" class="header">
     <button mat-flat-button class="groups-buttons" (click)="addRewardPointsUser()">Add Guest</button>
-    <!-- <button mat-flat-button class="groups-buttons" (click)="updateUserDialog()" [disabled]="validateUpdateUser()">Update
-        Guest</button> -->
+    <button mat-flat-button class="groups-buttons" (click)="updateUserDialog()" [disabled]="validateUpdateUser()">Update
+        Guest</button>
     <button mat-flat-button class="groups-buttons" (click)="resendQRCode()"
         [disabled]="usersList.selected.length != 1" *ngIf="hasRole('resend_QR_code')">Resend QR Code</button>
     <button mat-flat-button class="groups-buttons" (click)="send('Email')"
@@ -85,6 +85,12 @@
                     <label *ngIf="!row.deleted && !row.suspended" class="active-state">Active</label>
                     <label *ngIf="!row.deleted && row.suspended" style="color: #1661a3;">Suspended</label>
                     <label *ngIf="row.deleted" class="deleted-state">Deleted</label>
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Birth Date" [width]="90">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.birthDate | date: 'dd/MM/yyyy' }}
                 </ng-template>
             </ngx-datatable-column>
 
