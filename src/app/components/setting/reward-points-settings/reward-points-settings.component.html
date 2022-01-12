@@ -57,11 +57,19 @@
                     </div>
 
                     <form [formGroup]="birthdayForm" class="my-form">
-                        <div class="form-input">
+                        <!-- <div class="form-input">
                             <strong class="card-title">Birthday Item ID:</strong>
                             <mat-form-field appearance="outline">
                                 <input matInput placeholder="0" type="number" formControlName="itemId"
                                 [(ngModel)]="generalSettings.birthdayGift.itemId">
+                            </mat-form-field>
+                        </div> -->
+
+                        <div class="form-input">
+                            <strong class="card-title">Birthday Points:</strong>
+                            <mat-form-field appearance="outline">
+                                <input matInput placeholder="0" type="number" formControlName="addedPoints"
+                                [(ngModel)]="generalSettings.birthdayGift.addedPoints">
                             </mat-form-field>
                         </div>
 
