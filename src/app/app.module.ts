@@ -168,6 +168,7 @@ import { ViewUserComponent } from './components/view-user/view-user.component'
 import { TaxAnalysisConfigrutionComponent } from './components/configuration/tax-analysis-configrution/tax-analysis-configrution.component'
 import { RevenueByAgentComponent } from './components/Reports/revenue-by-agent/revenue-by-agent.component'
 import { ExtendExpiryDateComponent } from './components/extend-expiry-date/extend-expiry-date.component'
+import { CostOfGoodsOhraConfigComponent } from './components/cost-of-goods-ohra-config/cost-of-goods-ohra-config.component'
 
 @NgModule({
   declarations: [
@@ -240,6 +241,7 @@ import { ExtendExpiryDateComponent } from './components/extend-expiry-date/exten
     PaymentVoucherConfigComponent,
     ZealVoucherConfigComponent,
     OhraConfigurationComponent,
+    CostOfGoodsOhraConfigComponent,
     AddSalesStatisticsComponent,
     OperaPaymentConfigurationComponent,
     SupplierMappingComponent,
