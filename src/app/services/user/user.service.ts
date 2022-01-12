@@ -28,10 +28,21 @@ export class UserService {
       .toPromise()
   }
 
+  // ==> Web Service Invokers 
+
   addInvokerUser(user, syncJobTypeID: string) {
     this.token = localStorage.getItem('auth_token')
     return this.http.post(
       Constants.ADD_INVOKER_USER + '?syncJobTypeId=' + syncJobTypeID,
+      user,
+      { headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }) },
+    )
+  }
+
+  updateInvokerUser(user) {
+    this.token = localStorage.getItem('auth_token')
+    return this.http.post(
+      Constants.UPDATE_INVOKER_USER,
       user,
       { headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }) },
     )

@@ -37,9 +37,10 @@ export class RewardPointsSettingsComponent implements OnInit {
     })
 
     this.birthdayForm = this.formBuilder.group({
-      itemId: [0, [Validators.required]],
+      // itemId: [0, [Validators.required]],
       offsetBefore: [0, [Validators.required]],
       offsetAfter: [0, [Validators.required]],
+      addedPoints: [0, [Validators.required]]
     })
   }
 

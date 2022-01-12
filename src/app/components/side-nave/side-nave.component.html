@@ -223,6 +223,7 @@
           <li class="nav-item" *ngIf="hasRole('see_general_setting')"><a class="nav-link" routerLink="/setting">General Settings</a>
             <li class="nav-item" *ngIf="hasRole('see_pos_mapping')"><a class="nav-link" routerLink="/posMachinMapping">PAX Mapping</a>
             </li>
+          <li class="nav-item" *ngIf="hasRole('manage_invokers')"><a class="nav-link" routerLink="/webServiceInvokers">Manage Invokers</a></li>
         </ul>
       </div>
     </li>

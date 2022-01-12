@@ -27,6 +27,7 @@ export class Constants {
   static SUSPEND_GEUST_URL = environment.apiHost + '/suspendApplicationUsers'
 
   static ADD_INVOKER_USER = environment.apiHost + '/addInvokerUser'
+  static UPDATE_INVOKER_USER = environment.apiHost + '/updateInvokerUser'
   static GET_INVOKER_USERS = environment.apiHost + '/getInvokerUser'
 
   static VENDOR_URL = environment.apiHost + '/getVendors'
@@ -125,6 +126,7 @@ export class Constants {
   static WELCOME_PAGE = 'welcomePage'
   static HOME_PAGE = 'home'
   static SIDE_NAV = 'sidenav'
+  static WEB_INVOKERS_PAGE = 'webServiceInvokers'
 
   static SUPPLIERS_PAGE = 'suppliers'
   static SUPPLIERS_CONFIG_PAGE = 'suppliersConfig'

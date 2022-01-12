@@ -130,12 +130,20 @@
 
             <ngx-datatable-column name="Card Number" [width]="180" *ngIf="hasRole('show_card_number')">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    <a class="user-link" (click)="openUserProfile(row)">
+                    <div *ngIf="!hasRole('show_user_profile')">
                         <div style="float: left;"><img class="profile-img" src="../../../assets/profile.png"
-                                alt="image"> </div>
+                            alt="image"> </div>
                         <div *ngIf="hasRole('show_card_number')"
                             style="float: left; color: black; margin-top: 3px; margin-left: 5px;">{{row.code}}</div>
-                    </a>
+                    </div>
+                    <div *ngIf="hasRole('show_user_profile')">
+                        <a class="user-link" (click)="openUserProfile(row)">
+                            <div style="float: left;"><img class="profile-img" src="../../../assets/profile.png"
+                                    alt="image"> </div>
+                            <div *ngIf="hasRole('show_card_number')"
+                                style="float: left; color: black; margin-top: 3px; margin-left: 5px;">{{row.code}}</div>
+                        </a>
+                    </div>
                 </ng-template>
             </ngx-datatable-column>
 
@@ -174,7 +182,7 @@
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="Points" *ngIf="hasRole('reward_points')" [width]="90">
+            <ngx-datatable-column name="Points" *ngIf="hasFeature('reward_points')" [width]="90">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.points}}
                 </ng-template>
@@ -228,9 +236,9 @@
                         <button *ngIf="row.suspended" class="menue-btn-choi" mat-menu-item (click)="suspendGuest(row.id, false)">Active</button>
                         <button *ngIf="!row.deleted" class="menue-btn-choi" mat-menu-item (click)="deleteOneUsers(row, 'true')">Delete Guest</button>
                         <button *ngIf="row.deleted" class="menue-btn-choi" mat-menu-item (click)="deleteOneUsers(row, 'false')">Restore Guest</button>
-                        <button *ngIf="!row.deleted" class="menue-btn-choi" mat-menu-item (click)="extendExpiryDate(row)">
+                        <button *ngIf="hasFeature('entry_system') && !row.deleted" class="menue-btn-choi" mat-menu-item (click)="extendExpiryDate(row)">
                             Extend Expiry Date</button>
-                        <button class="menue-btn-choi" mat-menu-item (click)="openUserProfile(row)">Preview</button>
+                        <button *ngIf="hasFeature('entry_system')" class="menue-btn-choi" mat-menu-item (click)="openUserProfile(row)">Preview</button>
                     </mat-menu>
                 </ng-template>
             </ngx-datatable-column>

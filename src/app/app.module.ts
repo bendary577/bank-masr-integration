@@ -167,8 +167,9 @@ import { SimphonyCheckConfigurationComponent } from './components/simphony-check
 import { ViewUserComponent } from './components/view-user/view-user.component'
 import { TaxAnalysisConfigrutionComponent } from './components/configuration/tax-analysis-configrution/tax-analysis-configrution.component'
 import { RevenueByAgentComponent } from './components/Reports/revenue-by-agent/revenue-by-agent.component'
-import { ExtendExpiryDateComponent } from './components/extend-expiry-date/extend-expiry-date.component'
 import { CostOfGoodsOhraConfigComponent } from './components/cost-of-goods-ohra-config/cost-of-goods-ohra-config.component'
+import { ExtendExpiryDateComponent } from './components/extend-expiry-date/extend-expiry-date.component';
+import { ViewInvokerComponent } from './components/view-invoker/view-invoker.component';
 
 @NgModule({
   declarations: [
@@ -295,6 +296,7 @@ import { CostOfGoodsOhraConfigComponent } from './components/cost-of-goods-ohra-
     ViewUserComponent,
     RevenueByAgentComponent,
     ExtendExpiryDateComponent,
+    ViewInvokerComponent,
   ],
   imports: [
     BrowserModule,
@@ -368,6 +370,7 @@ import { CostOfGoodsOhraConfigComponent } from './components/cost-of-goods-ohra-
     AddTenderChildComponent,
     AddSimphonyLocationComponent,
     AddWebServiceInvokerComponent,
+    ViewInvokerComponent,
     AddLocationComponent,
     AddMajorGroupChildComponent,
     AddSalesStatisticsComponent,
