@@ -149,7 +149,7 @@ export class ManageSubGroupComponent implements OnInit {
         this.groupsList.selected = [];
         this.newGroup = new Group();
         this.getGroups(this.inParent, this.groupId);
-        this.snackBar.open("Supgroup Added successfully.", null, {
+        this.snackBar.open("Subgroup Added successfully.", null, {
           duration: 2000,
           horizontalPosition: 'center',
           panelClass:"my-snack-bar-success"
@@ -200,7 +200,7 @@ export class ManageSubGroupComponent implements OnInit {
         this.groupsList.selected = [];
         this.newGroup = new Group();
         this.getGroups(this.inParent, this.groupId);
-        this.snackBar.open("Supgroup updated successfully.", null, {
+        this.snackBar.open("Subgroup updated successfully.", null, {
           duration: 2000,
           horizontalPosition: 'center',
           panelClass:"my-snack-bar-success"

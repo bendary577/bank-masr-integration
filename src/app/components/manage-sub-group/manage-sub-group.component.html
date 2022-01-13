@@ -6,13 +6,13 @@
 
         <!-- <div *ngIf="!inParent" class="parentGroupName">Parent Group : {{parentGroupName}} </div> -->
 
-        <button mat-flat-button (click)="addSubGroupDialog()" class="groups-buttons">Add Supgroup</button>
+        <button mat-flat-button (click)="addSubGroupDialog()" class="groups-buttons">Add Subgroup</button>
         <button mat-flat-button (click)="updateSubGroupDialog()" [disabled]="validateUpdateGroup()"
-            class="groups-buttons">Update Supgroup</button>
+            class="groups-buttons">Update Suvgroup</button>
         <button mat-flat-button (click)="deleteGroups('true')" [disabled]="validateDeleteGroup()"
-            class="groups-buttons">Delete Supgroup</button>
+            class="groups-buttons">Delete Subgroup</button>
         <button mat-flat-button (click)="deleteGroups('false')" [disabled]="validateRestoreGroup()"
-            class="groups-buttons">Restore Supgroup</button>
+            class="groups-buttons">Restore Subgroup</button>
     </div>
 
     <div class="trans-tabel">

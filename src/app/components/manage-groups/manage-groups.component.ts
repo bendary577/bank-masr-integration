@@ -57,7 +57,7 @@ export class ManageGroupsComponent implements OnInit {
     location.reload()
   }
 
-  openSupGroup(group: Group) {
+  openSubGroup(group: Group) {
     if (this.inParent) {
       this.data.storage = group
       this.router.navigate([Constants.MANAGE_SUB_GROUPS])
