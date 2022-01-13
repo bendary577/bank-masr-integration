@@ -170,6 +170,7 @@ import { RevenueByAgentComponent } from './components/Reports/revenue-by-agent/r
 import { CostOfGoodsOhraConfigComponent } from './components/cost-of-goods-ohra-config/cost-of-goods-ohra-config.component'
 import { ExtendExpiryDateComponent } from './components/extend-expiry-date/extend-expiry-date.component';
 import { ViewInvokerComponent } from './components/view-invoker/view-invoker.component';
+import { VoucherListComponent } from './components/voucher-list/voucher-list.component'
 
 @NgModule({
   declarations: [
@@ -297,6 +298,7 @@ import { ViewInvokerComponent } from './components/view-invoker/view-invoker.com
     RevenueByAgentComponent,
     ExtendExpiryDateComponent,
     ViewInvokerComponent,
+    VoucherListComponent
   ],
   imports: [
     BrowserModule,

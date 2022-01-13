@@ -284,4 +284,10 @@ export class LoyaltyService {
       })
       .toPromise()
   }
+
+  getVouchers() {
+    return this.http.get(Constants.GET_VOUCHER_PAGES + '?page=' + 0 + '&size=' + 10, {
+        headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),
+      });
+  }
 }
