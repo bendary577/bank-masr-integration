@@ -226,16 +226,25 @@ export class ManageRewardPointsUsersComponent implements OnInit {
           )
           .then((result: any) => {
             this.loading = true
-            this.getUsers()
             this.newUser = new ApplicationUser()
             this.usersList.showLoading = false
             this.usersList.selected = []
 
-            this.snackBar.open('User added successfully.', null, {
-              duration: 2000,
-              horizontalPosition: 'center',
-              panelClass: 'my-snack-bar-success',
-            })
+            if (result["success"]) { 
+              this.getUsers()
+
+              this.snackBar.open(result["message"], null, {
+                duration: 2000,
+                horizontalPosition: 'center',
+                panelClass: 'my-snack-bar-success',
+              })
+            }else{
+              this.snackBar.open(result["message"], null, {
+                duration: 3000,
+                horizontalPosition: 'center',
+                panelClass: 'my-snack-bar-fail',
+              })
+            }
           })
           .catch((err) => {
             this.newUser = new ApplicationUser()
@@ -292,16 +301,26 @@ export class ManageRewardPointsUsersComponent implements OnInit {
           )
           .then((result: any) => {
             this.loading = true
-            this.getUsers()
             this.newUser = new ApplicationUser()
             this.usersList.showLoading = false
             this.usersList.selected = []
 
-            this.snackBar.open('User added successfully.', null, {
-              duration: 2000,
-              horizontalPosition: 'center',
-              panelClass: 'my-snack-bar-success',
-            })
+             if (result["success"]) { 
+              this.getUsers()
+
+              this.snackBar.open(result["message"], null, {
+                duration: 2000,
+                horizontalPosition: 'center',
+                panelClass: 'my-snack-bar-success',
+              })
+            }else{
+              this.snackBar.open(result["message"], null, {
+                duration: 3000,
+                horizontalPosition: 'center',
+                panelClass: 'my-snack-bar-fail',
+              })
+            }
+
           })
           .catch((err) => {
             this.newUser = new ApplicationUser()
