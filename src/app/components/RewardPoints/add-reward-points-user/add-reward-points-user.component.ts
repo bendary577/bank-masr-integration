@@ -47,7 +47,7 @@ export class AddRewardPointsUserComponent implements OnInit {
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
       group: ['', Validators.required],
-      points: [0],
+      points: [''],
       birthDate: ['1999-01-01']
       });
     }
