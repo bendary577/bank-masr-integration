@@ -5,6 +5,7 @@ import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser';
 import { Group } from 'src/app/models/loyalty/Group';
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
 import { SideNaveComponent } from '../../side-nave/side-nave.component';
+import * as moment from 'moment/moment';
 
 @Component({
   selector: 'app-add-reward-points-user',
@@ -28,16 +29,18 @@ export class AddRewardPointsUserComponent implements OnInit {
  
   ngOnInit() {
     this.getGroups();
+
     if (this.data != undefined && this.data["user"] != null){
       this.inUpdate = true;
       this.newUser = this.data["user"];
       this.selectedGroup = this.newUser.group.id;
+      let birthdateString = moment(this.newUser.birthDate).format('YYYY-MM-DD');
       this.form = this.formBuilder.group({
         name: [this.newUser.name, Validators.required],        
         email: [this.newUser.email, [Validators.required, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
-        group: [this.newUser.group.id, Validators.required],
+        group: [this.newUser.group, Validators.required],
         points: [this.newUser.points],
-        birthDate: [this.newUser.birthDate]
+        birthDate: [birthdateString]
       });
     }else{
       this.form = this.formBuilder.group({
@@ -45,7 +48,7 @@ export class AddRewardPointsUserComponent implements OnInit {
       email: ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
       group: ['', Validators.required],
       points: [0],
-      birthDate: ['']
+      birthDate: ['1999-01-01']
       });
     }
   }

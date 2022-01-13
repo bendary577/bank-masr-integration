@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser';
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
@@ -263,7 +263,71 @@ export class ManageRewardPointsUsersComponent implements OnInit {
     })
   }
 
-  updateUserDialog(){}
+  updateUserDialog(){
+    this.newUser = this.usersList.selected[0];
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+        title:  "Update Guest",
+        user: this.newUser
+    };
+    dialogConfig.maxWidth = '420px';
+
+    let dialogRef = this.dialog.open(AddRewardPointsUserComponent, dialogConfig)
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.newUser.name = res.name
+        this.newUser.email = res.email
+        this.newUser.group = res.group
+        this.newUser.points = res.points
+        this.newUser.birthDate = res.birthDate
+
+        this.usersList.showLoading = true
+        this.rewardPointsService
+          .updateRewardPointsUser(
+            res.image,
+            this.newUser
+          )
+          .then((result: any) => {
+            this.loading = true
+            this.getUsers()
+            this.newUser = new ApplicationUser()
+            this.usersList.showLoading = false
+            this.usersList.selected = []
+
+            this.snackBar.open('User added successfully.', null, {
+              duration: 2000,
+              horizontalPosition: 'center',
+              panelClass: 'my-snack-bar-success',
+            })
+          })
+          .catch((err) => {
+            this.newUser = new ApplicationUser()
+            this.usersList.showLoading = false
+
+            this.usersList.selected = []
+            let message = ''
+            if (err.status === 401) {
+              message = ErrorMessages.SESSION_EXPIRED
+              this.sidNav.Logout()
+            } else if (err.error.message) {
+              message = err.error.message
+            } else if (err.message) {
+              message = err.message
+            } else {
+              message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+            }
+            this.snackBar.open(message, null, {
+              duration: 3000,
+              horizontalPosition: 'center',
+              panelClass: 'my-snack-bar-fail',
+            })
+          })
+      }
+    })
+  }
 
 
   send(process) {
