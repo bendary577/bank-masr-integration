@@ -342,7 +342,7 @@ export class Constants {
   static GET_TRANSACTION_URL =
     environment.apiHost + '/transaction/getTransactions'
   static GET_TRANSACTION_COUNT_URL =
-  environment.apiHost + '/transaction/getTransactionsCount'
+    environment.apiHost + '/transaction/getTransactionsCount'
   static GET_TOP_USERS_URL = environment.apiHost + '/getTopUser'
   static GET_TOP_Groups_URL = environment.apiHost + '/getTopGroups'
   static GET_TOTAL_SPEND_URL =
@@ -389,9 +389,13 @@ export class Constants {
   static EXPORT_TRANSACTION_EXCEL_SHEET =
     environment.apiHost + '/transaction/exportExcelSheet'
 
+  // ==> Reward Points System
+  static EXPORT_RP_TRANSACTION_EXCEL_SHEET =
+    environment.apiHost + '/transaction/rewardPoints/exportExcelSheet'
+
   // ==> Entry System
   static EXPORT_AGENT_ACTIONS_EXCEL_SHEET =
-    environment.apiHost + '/exportAgentActionToExcel';
+    environment.apiHost + '/exportAgentActionToExcel'
 
   static EXPORT_WALLET_HISTORY_EXCEL_SHEET =
     environment.apiHost + '/wallet/exportWalletHistoryToExcel'

@@ -64,6 +64,12 @@ export class ExcelService {
     return this.http.post(Constants.EXPORT_TRANSACTION_EXCEL_SHEET ,transactionData , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token}), responseType: 'blob'});
   }
 
+  // ==> Reward Points System
+  exportRPActivitiesExcel(transactionData: any[]) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.post(Constants.EXPORT_RP_TRANSACTION_EXCEL_SHEET ,transactionData , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token}), responseType: 'blob'});
+  }
+
   // ==> Entry System
   exportAgentActionExcel(
     userId: string,

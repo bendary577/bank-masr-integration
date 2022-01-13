@@ -332,7 +332,7 @@ export class RewardPointsActivitiesComponent implements OnInit {
   extractExcelFile() {
     this.spinner.show()
     this.excelService
-      .exporttransactionExcel(this.transactionList.transactionData)
+      .exportRPActivitiesExcel(this.transactionList.transactionData)
       .subscribe(
         (res) => {
           const blob = new Blob([res], { type: 'application/vnd.ms.excel' })

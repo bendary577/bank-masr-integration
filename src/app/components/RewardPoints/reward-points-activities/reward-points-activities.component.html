@@ -152,19 +152,13 @@
                     </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="Status" [width]="90">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.status}}
-                    </ng-template>
-                </ngx-datatable-column>
-
                 <ngx-datatable-column name="Group" [width]="90">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{row.group.name}}
                     </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="RVC" *ngIf="hasRole('show_revenue_center')" [width]="90">
+                <ngx-datatable-column name="RVC" [width]="90">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{row.revenueCentreName}}
                     </ng-template>
@@ -176,9 +170,21 @@
                     </ng-template>
                 </ngx-datatable-column>
 
+                <ngx-datatable-column name="Operation" [width]="90">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.transactionType.name}}
+                    </ng-template>
+                </ngx-datatable-column>
+
                 <ngx-datatable-column name="Points Redeemed" [width]="90" *ngIf="hasFeature('reward_points')">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{row.pointsRedeemed}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Points Collected" [width]="90" *ngIf="hasFeature('reward_points')">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.pointsReward}}
                     </ng-template>
                 </ngx-datatable-column>
 
