@@ -173,6 +173,7 @@ import { ViewInvokerComponent } from './components/view-invoker/view-invoker.com
 import { RewardPointsComponent } from './components/reward-points/reward-points.component';
 import { ManageRewardPointsUsersComponent } from './components/RewardPoints/manage-reward-points-users/manage-reward-points-users.component';
 import { AddRewardPointsUserComponent } from './components/RewardPoints/add-reward-points-user/add-reward-points-user.component';
+import { RewardPointsActivitiesComponent } from './components/RewardPoints/reward-points-activities/reward-points-activities.component';
 
 @NgModule({
   declarations: [
@@ -303,6 +304,7 @@ import { AddRewardPointsUserComponent } from './components/RewardPoints/add-rewa
     RewardPointsComponent,
     ManageRewardPointsUsersComponent,
     AddRewardPointsUserComponent,
+    RewardPointsActivitiesComponent,
   ],
   imports: [
     BrowserModule,
