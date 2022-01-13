@@ -8,7 +8,7 @@
 
         <button mat-flat-button (click)="addSubGroupDialog()" class="groups-buttons">Add Subgroup</button>
         <button mat-flat-button (click)="updateSubGroupDialog()" [disabled]="validateUpdateGroup()"
-            class="groups-buttons">Update Suvgroup</button>
+            class="groups-buttons">Update Subgroup</button>
         <button mat-flat-button (click)="deleteGroups('true')" [disabled]="validateDeleteGroup()"
             class="groups-buttons">Delete Subgroup</button>
         <button mat-flat-button (click)="deleteGroups('false')" [disabled]="validateRestoreGroup()"
@@ -29,7 +29,8 @@
                 </mat-card-content>
             </mat-card>
         </div>
-        <div *ngIf="groupsList.groupsData.length != 0">            <ngx-datatable class="material" [loadingIndicator]="groupsList.showLoading" [messages]="groupsList.messages"
+        <div *ngIf="groupsList.groupsData.length != 0">            
+            <ngx-datatable class="material" [loadingIndicator]="groupsList.showLoading" [messages]="groupsList.messages"
                 [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
                 [scrollbarV]="true" [scrollbarH]="true" [rows]="groupsList.groupsData" [selected]="groupsList.selected"
                 [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" (select)='onSelect($event)'
@@ -56,7 +57,7 @@
                     </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="Simphony Discount ID">
+                <ngx-datatable-column name="Simphony Discount ID" *ngIf="hasFeature('loyalty')">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{row.simphonyDiscount.discountId}}
                     </ng-template>

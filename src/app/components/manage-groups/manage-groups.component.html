@@ -40,13 +40,13 @@
                 </ng-template>  
             </ngx-datatable-column>
             
-            <ngx-datatable-column name="Simphony Discount ID">
+            <ngx-datatable-column name="Simphony Discount ID" *ngIf="hasFeature('loyalty')">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.simphonyDiscount.discountId}}
                 </ng-template>
             </ngx-datatable-column>
     
-            <ngx-datatable-column name="Discount Rate">
+            <ngx-datatable-column name="Discount Rate" *ngIf="hasFeature('loyalty')">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.simphonyDiscount.discountRate}} %
                 </ng-template>

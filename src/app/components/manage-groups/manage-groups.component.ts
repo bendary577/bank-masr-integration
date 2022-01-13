@@ -7,9 +7,9 @@ import { ErrorMessages } from 'src/app/models/ErrorMessages'
 import { Group } from 'src/app/models/loyalty/Group'
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service'
 import { AddAppGroupComponent } from '../add-app-group/add-app-group.component'
-import { SidenavResponsive } from '../sidenav/sidenav-responsive'
 import { Location } from '@angular/common'
 import { DeleteAppGroupComponent } from '../delete-app-group/delete-app-group.component'
+import { SideNaveComponent } from '../side-nave/side-nave.component'
 
 @Component({
   selector: 'app-manage-groups',
@@ -40,7 +40,7 @@ export class ManageGroupsComponent implements OnInit {
 
   constructor(
     public snackBar: MatSnackBar,
-    private sidNav: SidenavResponsive,
+    private sidNav: SideNaveComponent,
     public dialog: MatDialog,
     private _location: Location,
     private loyaltyService: LoyaltyService,
@@ -141,15 +141,15 @@ export class ManageGroupsComponent implements OnInit {
   }
 
   addGroupDialog() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.autoFocus = true
     dialogConfig.data = {
-        title:  "Add Group",
-        inParent: this.inParent 
-    };
-    dialogConfig.width = '420px';
-    dialogConfig.maxHeight = '350px';
-    dialogConfig.autoFocus = true;
+      title: 'Add Group',
+      inParent: this.inParent,
+    }
+    dialogConfig.width = '420px'
+    dialogConfig.maxHeight = '350px'
+    dialogConfig.autoFocus = true
 
     const dialogRef = this.dialog.open(AddAppGroupComponent, dialogConfig)
 
@@ -207,16 +207,16 @@ export class ManageGroupsComponent implements OnInit {
   }
 
   updateGroupDialog() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.autoFocus = true
     dialogConfig.data = {
-        title:  "Update Group",
-        inParent: this.inParent,
-        group: this.groupsList.selected[0] 
-    };
-    dialogConfig.width = '420px';
-    dialogConfig.maxHeight = '350px';
-    dialogConfig.autoFocus = true;
+      title: 'Update Group',
+      inParent: this.inParent,
+      group: this.groupsList.selected[0],
+    }
+    dialogConfig.width = '420px'
+    dialogConfig.maxHeight = '350px'
+    dialogConfig.autoFocus = true
 
     const dialogRef = this.dialog.open(AddAppGroupComponent, dialogConfig)
 
@@ -329,5 +329,9 @@ export class ManageGroupsComponent implements OnInit {
 
   hasRole(reference) {
     return this.sidNav.hasRole(reference)
+  }
+
+  hasFeature(reference) {
+    return this.sidNav.hasFeature(reference)
   }
 }
