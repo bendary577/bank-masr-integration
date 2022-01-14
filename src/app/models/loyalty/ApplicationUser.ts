@@ -22,6 +22,7 @@ export class ApplicationUser {
   public creationDate: string
   public lastUpdate: string
   public expiryDate: string
-
+  public birthDate: string
+  
   public constructor() {}
 }

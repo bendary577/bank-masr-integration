@@ -329,9 +329,7 @@ export class UserProfileComponent implements OnInit {
               guest.balance,
               res.expiryDate,
               false,
-              false,
-              guest.points,
-            )
+              false)
             .then((result: any) => {
               this.getApplicationUser()
               this.spinner.hide()
@@ -396,7 +394,6 @@ export class UserProfileComponent implements OnInit {
             res.expiryDate,
             res.sendEmail,
             res.sendSMS,
-            res.points,
           )
           .then((result: any) => {
             this.getApplicationUser()

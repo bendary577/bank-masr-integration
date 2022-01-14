@@ -171,6 +171,10 @@ import { CostOfGoodsOhraConfigComponent } from './components/cost-of-goods-ohra-
 import { ExtendExpiryDateComponent } from './components/extend-expiry-date/extend-expiry-date.component';
 import { ViewInvokerComponent } from './components/view-invoker/view-invoker.component';
 import { VoucherListComponent } from './components/voucher-list/voucher-list.component'
+import { RewardPointsComponent } from './components/reward-points/reward-points.component';
+import { ManageRewardPointsUsersComponent } from './components/RewardPoints/manage-reward-points-users/manage-reward-points-users.component';
+import { AddRewardPointsUserComponent } from './components/RewardPoints/add-reward-points-user/add-reward-points-user.component';
+import { RewardPointsActivitiesComponent } from './components/RewardPoints/reward-points-activities/reward-points-activities.component';
 
 @NgModule({
   declarations: [
@@ -299,6 +303,10 @@ import { VoucherListComponent } from './components/voucher-list/voucher-list.com
     ExtendExpiryDateComponent,
     ViewInvokerComponent,
     VoucherListComponent
+    RewardPointsComponent,
+    ManageRewardPointsUsersComponent,
+    AddRewardPointsUserComponent,
+    RewardPointsActivitiesComponent,
   ],
   imports: [
     BrowserModule,
@@ -390,6 +398,9 @@ import { VoucherListComponent } from './components/voucher-list/voucher-list.com
     DeleteAppGroupComponent,
     EditWalletComponent,
     ExtendExpiryDateComponent,
+
+    // ==> Reward Points System
+    AddRewardPointsUserComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
