@@ -3,7 +3,7 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "~@swimlane/ngx-datatable/assets/app.css";
 @import "~@swimlane/ngx-datatable/themes/material.css";
-// @import "~@swimlane/ngx-datatable/assets/icons.css";
+
 html {
     height: 100%;
 }
@@ -34,12 +34,7 @@ body {
     padding-bottom: 5%;
 //    border: 2px solid #5e5b5b;
 }
-.divetable2 {
-    align-items: center;
-    height: 15%;
-    margin-top: 5%;
- //   border: 2px solid #7a7a7a;
-}
+
 .mat-tab-group.mat-primary .mat-ink-bar,
 .mat-tab-nav-bar.mat-primary .mat-ink-bar {
     background-color: #1976d3;
@@ -175,14 +170,15 @@ span.italic {
 @import "./assets/scss/mixins/no-ui-slider";
 
 /* === Core Styles === */
-@import "./assets/scss/background";
+// @import "./assets/scss/background";
 @import "./assets/scss/typography";
 @import "./assets/scss/reset";
 @import "./assets/scss/responsive";
 @import "./assets/scss/misc";
 @import "./assets/scss/utilities";
-@import "./assets/scss/demo";
+// @import "./assets/scss/demo";
 @import "./assets/scss/spinner";
+@import "./assets/scss/syncs.scss";
 
 /* === Components === */
 @import "./assets/scss/components/forms";
@@ -206,29 +202,6 @@ span.italic {
 
 @import "./assets/scss/components/landing-screens/auth";
 
-// /* === Plugin styles === */
-// @import "~morris.js/morris.css";
-// @import "~chartist/dist/chartist.min.css";
-// @import '~dragula/dist/dragula.min.css';
-// @import "~nouislider/distribute/nouislider.min.css";
-// @import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
-// @import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
-// @import '~select2/dist/css/select2.min.css';
-// @import '~ngx-bar-rating/themes/br-default-theme';
-// @import '~ngx-bar-rating/themes/br-bootstrap-theme';
-// @import '~ngx-bar-rating/themes/br-fontawesome-theme';
-// @import '~ngx-bar-rating/themes/br-fontawesome-o-theme';
-// @import '~ngx-bar-rating/themes/br-horizontal-theme';
-// @import '~ngx-bar-rating/themes/br-vertical-theme';
-// @import '~ngx-bar-rating/themes/br-stars-theme';
-// @import '~ngx-bar-rating/themes/br-movie-theme';
-// @import '~ngx-bar-rating/themes/br-square-theme';
-// @import '~summernote/dist/summernote-lite.css';
-// @import '~codemirror/lib/codemirror.css';
-// @import '~codemirror/theme/dracula.css';
-// @import '~datatables.net-dt/css/jquery.dataTables.css';
-// @import '~ngx-toastr/toastr-bs4-alert';
-// @import "~@ng-select/ng-select/themes/default.theme.css";
 
 /* === Plugin Overrides === */
 @import "./assets/scss/components/plugin-overrides/owl-carousel";

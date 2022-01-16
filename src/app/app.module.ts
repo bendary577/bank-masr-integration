@@ -100,7 +100,6 @@ import { ZealVoucherComponent } from './components/zeal-voucher/zeal-voucher.com
 import { PaymentVoucherConfigComponent } from './components/payment-voucher-config/payment-voucher-config.component'
 import { ZealVoucherConfigComponent } from './components/zeal-voucher-config/zeal-voucher-config.component'
 import { DriveService } from './services/drive/drive.service'
-import { ZealPaymentService } from './services/zealPayment/zeal-payment.service'
 import { OperationService } from './services/operation/operation.service'
 import { OhraConfigurationComponent } from './components/configuration/ohra-configuration/ohra-configuration.component'
 import { AddSalesStatisticsComponent } from './components/add-sales-statistics/add-sales-statistics.component'
