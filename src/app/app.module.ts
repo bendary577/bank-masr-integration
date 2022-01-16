@@ -139,7 +139,6 @@ import { CostOfGoodsConfigComponent } from './components/cost-of-goods-config/co
 import { DeleteAppGroupComponent } from './components/delete-app-group/delete-app-group.component'
 import { AddConsumptionLocationComponent } from './components/add-consumption-location/add-consumption-location.component'
 import { AddConsumptionLocationItemsComponent } from './components/add-consumption-location-items/add-consumption-location-items.component'
-import { AmazonComponent } from './components/amazon/amazon.component'
 import { HotelOpiComponent } from './components/hotel-opi/hotel-opi.component'
 import { OpiActivitiesComponent } from './components/opi-activities/opi-activities.component'
 import { OpiTransactionsComponent } from './components/opi-transactions/opi-transactions.component'
@@ -151,7 +150,6 @@ import { FilterComponent } from './components/filter/filter.component'
 import { UserProfileComponent } from './components/user-profile/user-profile.component'
 import { EditWalletComponent } from './components/edit-wallet/edit-wallet.component'
 import { ToastrModule } from 'ngx-toastr'
-import { GestCardsComponent } from './components/gest-cards/gest-cards.component'
 import { AddAppUserAccompiedComponent } from './components/add-app-user-accompied/add-app-user-accompied.component'
 import { SideNaveComponent } from './components/side-nave/side-nave.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
@@ -181,7 +179,6 @@ import { VoucherTransactionsComponent } from './components/voucher-transactions/
 
 @NgModule({
   declarations: [
-    GestCardsComponent,
     AppComponent,
     LoginComponent,
     SuppliersComponent,
@@ -285,7 +282,6 @@ import { VoucherTransactionsComponent } from './components/voucher-transactions/
     CostOfGoodsConfigComponent,
     AddConsumptionLocationComponent,
     AddConsumptionLocationItemsComponent,
-    AmazonComponent,
     HotelOpiComponent,
     OpiActivitiesComponent,
     OpiTransactionsComponent,

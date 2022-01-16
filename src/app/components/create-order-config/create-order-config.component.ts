@@ -6,7 +6,7 @@ import { Constants } from 'src/app/models/constants';
 import { OperationTypesService } from 'src/app/services/OperationTypes/operation-types.service';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { SidenavResponsive } from '../sidenav/sidenav-responsive';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-create-order-config',
@@ -20,7 +20,7 @@ export class CreateOrderConfigComponent implements OnInit {
 
   constructor( private operationService:OperationTypesService,
    private router:Router, public snackBar: MatSnackBar,
-   private spinner: NgxSpinnerService, private sidNav: SidenavResponsive) { }
+   private spinner: NgxSpinnerService, private sidNav: SideNaveComponent) { }
 
  ngOnInit() {
    this.getOperationType();

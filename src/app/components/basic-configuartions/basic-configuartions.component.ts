@@ -6,9 +6,8 @@ import { Router } from '@angular/router';
 import { Constants } from 'src/app/models/constants';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJobType } from 'src/app/models/SyncJobType';
-import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
-import { SidenavResponsive } from '../sidenav/sidenav-responsive';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-basic-configuartions',
@@ -29,7 +28,7 @@ export class BasicConfiguartionsComponent implements OnInit {
   analysis = []
   constructor(private spinner: NgxSpinnerService, private invoiceService:InvoiceService,
     private router:Router, public snackBar: MatSnackBar, private syncJobService:SyncJobService,
-    private sidNav: SidenavResponsive) {
+    private sidNav: SideNaveComponent) {
   }
 
 

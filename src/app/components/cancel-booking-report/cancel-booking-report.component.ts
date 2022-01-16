@@ -7,7 +7,7 @@ import { SyncJob } from 'src/app/models/SyncJob';
 import { NewBookingReportService } from 'src/app/services/newBookingReport/new-booking-report.service';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { DilogServiceService } from '../dialog/dilog-service.service';
-import { SidenavResponsive } from '../sidenav/sidenav-responsive';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-cancel-booking-report',
@@ -41,7 +41,7 @@ export class CancelBookingReportComponent implements OnInit {
 
 
   constructor(private spinner: NgxSpinnerService, public snackBar: MatSnackBar,
-    private sidNav: SidenavResponsive, public dialogService: DilogServiceService,
+    private sidNav: SideNaveComponent, public dialogService: DilogServiceService,
     private syncJobService: SyncJobService,
     private newBookingService: NewBookingReportService) { }
 

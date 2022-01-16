@@ -5,7 +5,7 @@ import { SimphonyLocation } from 'src/app/models/SimphonyLocation';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { MenuItemsService } from 'src/app/services/menuItems/menu-items.service';
 import { AddSimphonyLocationComponent } from '../../add-simphony-location/add-simphony-location.component';
-import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
+import { SideNaveComponent } from '../../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-simphony-location-configuration',
@@ -21,7 +21,7 @@ export class SimphonyLocationConfigurationComponent implements OnInit {
 
   @Input() syncJobType: SyncJobType;
 
-  constructor(private sidNav: SidenavResponsive, public snackBar: MatSnackBar, public dialog: MatDialog,
+  constructor(private sidNav: SideNaveComponent, public snackBar: MatSnackBar, public dialog: MatDialog,
     public simphonyService: MenuItemsService) { }
 
   ngOnInit() {

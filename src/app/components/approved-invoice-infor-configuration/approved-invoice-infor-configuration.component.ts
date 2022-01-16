@@ -7,8 +7,8 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
-import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import { JournalService } from 'src/app/services/journal/journal.service';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-approved-invoice-infor-configuration',
@@ -34,7 +34,7 @@ export class ApprovedInvoiceInforConfigurationComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService, private journalService:JournalService,
     private router:Router, public snackBar: MatSnackBar, private syncJobService:SyncJobService,
-     private accSyncTypeService:AccSyncTypeService, private sidNav: SidenavResponsive) {
+     private accSyncTypeService:AccSyncTypeService, private sidNav: SideNaveComponent) {
   }
 
   ngOnInit() {

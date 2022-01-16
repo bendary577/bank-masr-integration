@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
-import { InvoiceService } from 'src/app/services/invoice/invoice.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { Constants } from 'src/app/models/constants';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
-import { Data } from 'src/app/models/data';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
-import { SidenavResponsive } from '../sidenav/sidenav-responsive';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-credit-notes-infor-configuration',
@@ -31,7 +29,7 @@ export class CreditNotesInforConfigurationComponent implements OnInit {
   analysis = [];
   accountERD;
 
-  constructor(private spinner: NgxSpinnerService, private sidNav: SidenavResponsive,
+  constructor(private spinner: NgxSpinnerService, private sidNav: SideNaveComponent,
     private router:Router, public snackBar: MatSnackBar, private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService) {
   }
 

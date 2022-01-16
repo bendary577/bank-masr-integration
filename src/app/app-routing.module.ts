@@ -62,7 +62,6 @@ import { ManageSubGroupComponent } from './components/manage-sub-group/manage-su
 import { SimphonyDiscountMapingComponent } from './components/simphony-discount-maping/simphony-discount-maping.component';
 import { CostOfGoodsComponent } from './components/cost-of-goods/cost-of-goods.component';
 import { CostOfGoodsConfigComponent } from './components/cost-of-goods-config/cost-of-goods-config.component';
-import { AmazonComponent } from './components/amazon/amazon.component';
 import { HotelOpiComponent } from './components/hotel-opi/hotel-opi.component';
 import { OperaPaymentsComponent } from './components/operations/opera-payments/opera-payments.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
@@ -108,7 +107,6 @@ const routes: Routes = [
   { path: Constants.GET_WALLET_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
   { path: Constants.GET_VOUCHER_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
   { path: Constants.REDEEM_VOUCHER, component: VoucherListComponent ,canActivate:[AuthGuardService]},
-  { path: Constants.VOUCHER_TRANSACTION, component: VoucherTransactionsComponent ,canActivate:[AuthGuardService]},
 
   {path: "transPagin", component:TestPaginationComponent, canActivate:[AuthGuardService]},
 
@@ -210,8 +208,6 @@ const routes: Routes = [
 
   { path : Constants.SUPPORT , component: SupportComponent, canActivate:[AuthGuardService]},
   
-  { path: "amazon" , component: AmazonComponent ,canActivate:[AuthGuardService]},
-
   // Error Page
   {path:'**', component: ErrorComponentComponent }
 

@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { JournalService } from 'src/app/services/journal/journal.service';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
-import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
+import { SideNaveComponent } from '../../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-booked-production-configuration',
@@ -42,7 +42,7 @@ export class BookedProductionConfigurationComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService, private syncJobService:SyncJobService,  private journalService:JournalService,
     private accSyncTypeService:AccSyncTypeService, private router:Router, public snackBar: MatSnackBar,
-    private sidNav: SidenavResponsive) {
+    private sidNav: SideNaveComponent) {
       this.costCenters = [];
       this.overGroups = [];
   }
