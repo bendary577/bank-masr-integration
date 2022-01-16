@@ -268,8 +268,7 @@ export class LoyaltyService {
 
   suspendGuest(guestId: string, susFlag) {
     this.token = localStorage.getItem('auth_token')
-    return this.http
-      .post(Constants.SUSPEND_GEUST_URL + '?susFlag=' + susFlag + '&userId=' + guestId, {}, {
+    return this.http.post(Constants.SUSPEND_GEUST_URL + '?susFlag=' + susFlag + '&userId=' + guestId, {}, {
         headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),
       })
       .toPromise()
@@ -288,4 +287,23 @@ export class LoyaltyService {
         headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),
       });
   }
+
+  addVoucher(voucher) {
+    this.token = localStorage.getItem('auth_token')
+    return this.http.post(Constants.ADD_VOUCHER_PAGES , voucher, {
+        headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),}).toPromise()
+  }
+
+  updateVoucher(voucher) {
+    this.token = localStorage.getItem('auth_token')
+    return this.http.put(Constants.UPDATE_VOUCHER_PAGES , voucher, {
+        headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),}).toPromise()
+  }
+
+  deleteVoucher(voucher) {
+    this.token = localStorage.getItem('auth_token')
+    return this.http.put(Constants.MARK_VOUCHER_DELETE_PAGES , voucher, {
+        headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),}).toPromise()
+  }
+
 }

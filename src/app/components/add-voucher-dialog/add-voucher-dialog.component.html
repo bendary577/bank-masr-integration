@@ -1,0 +1,70 @@
+<div class="dialog-body">
+
+    <span mat-dialog-title>New Voucher</span>
+
+    <div mat-dialog-content style="text-align: center;">
+        <form [formGroup]="form" class="my-form">
+            
+                <mat-form-field class="example-full-width creditForm" appearance="outline">
+                    <input matInput required placeholder="Name" formControlName="name" maxlength="25">
+                    <mat-error *ngIf="form.controls.name.hasError('required')">
+                        Name is required.
+                    </mat-error>
+                    <mat-error *ngIf="form.controls.name.hasError('maxlength')">
+                        Name is to long.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width creditForm" appearance="outline">
+                    <input matInput required placeholder="Quota" formControlName="redeemQuota" maxlength="5">
+                    <mat-error *ngIf="form.controls.redeemQuota.hasError('required')">
+                        Quota is required.
+                    </mat-error>
+                    <mat-error *ngIf="form.controls.redeemQuota.hasError('maxlength')">
+                        Quota is to long.
+                    </mat-error>
+                    <mat-error *ngIf="form.controls.redeemQuota.hasError('pattern')">
+                        Quota must be number.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width creditForm" appearance="outline">
+                    <input matInput style="max-width: 100%;" placeholder="Start Date" type="date" formControlName="startDate"
+                        id="startDate">
+                    <mat-error *ngIf="form.controls.name.hasError('required')">
+                        Start Date is required.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width creditForm" appearance="outline">
+                    <input matInput style="max-width: 100%;" placeholder="End Date" type="date" formControlName="endDate"
+                        id="endDate">
+                    <mat-error *ngIf="form.controls.name.hasError('required')">
+                        End Date Date is required.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width creditForm" appearance="outline" *ngIf="hasFeature('loyalty')">
+                    <mat-select matInput required id="discountId" name="simphonyDiscountId" [value]="slectedDiscount" 
+                        placeholder="Simphony Discount Id" formControlName="simphonyDiscountId">
+                        <mat-option></mat-option>
+                        <mat-option [value]=discountRate.discountId *ngFor="let discountRate of discountRates">
+                            {{discountRate.discountId}} - {{discountRate.discountRate}}%</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="form.controls.simphonyDiscountId.hasError('required')">
+                        Simphony Discount is required.
+                    </mat-error>
+
+                </mat-form-field>
+
+        </form>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button cdkFocusInitial (click)="onSaveClick()" class="groups-buttons">
+            <label [hidden]="inUpdate">Save</label>
+            <label [hidden]="!inUpdate">Update</label>
+        </button>
+        <button mat-button (click)="onNoClick()" class="groups-buttons">Cancel</button>
+    </div>
+
+</div>

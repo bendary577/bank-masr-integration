@@ -77,6 +77,7 @@ import { RevenueByAgentComponent } from './components/Reports/revenue-by-agent/r
 import { WebServiceInvokerConfigurationComponent } from './components/configuration/web-service-invoker-configuration/web-service-invoker-configuration.component';
 import { VoucherListComponent } from './components/voucher-list/voucher-list.component';
 import { RewardPointsComponent } from './components/reward-points/reward-points.component';
+import { VoucherTransactionsComponent } from './components/voucher-transactions/voucher-transactions.component';
 
 
 const routes: Routes = [
@@ -107,6 +108,8 @@ const routes: Routes = [
   { path: Constants.GET_WALLET_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
   { path: Constants.GET_VOUCHER_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
   { path: Constants.REDEEM_VOUCHER, component: VoucherListComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.VOUCHER_TRANSACTION, component: VoucherTransactionsComponent ,canActivate:[AuthGuardService]},
+
   {path: "transPagin", component:TestPaginationComponent, canActivate:[AuthGuardService]},
 
   // Reward Points
