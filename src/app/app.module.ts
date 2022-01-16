@@ -8,30 +8,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { CookieService } from 'ngx-cookie-service'
 import { AngularMaterialModule } from './angular-material.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { NgxDatatableModule } from '@swimlane/ngx-datatable'
-import { NgxSpinnerModule } from 'ngx-spinner'
 import { SuppliersComponent } from './components/suppliers/suppliers.component'
 
-import {
-  MatToolbarModule,
-  MatIconModule,
-  MatSidenavModule,
-  MatListModule,
-  MatButtonModule,
-  MatPaginatorModule,
-  MatDatepickerModule,
-  MatFormFieldModule,
-  MatNativeDateModule,
-  MatSelectModule,
-  MatCheckboxModule,
-  MatCardModule,
-  MatRippleModule,
-  MatProgressBarModule,
-  MatMenuModule,
-  MatBadgeModule,
-} from '@angular/material'
 import { ConfigurationComponent } from './components/setting/configuration/configuration.component'
-import { MatExpansionModule } from '@angular/material/expansion'
 import { UsersComponent } from './components/setting/users/users.component'
 import { AuthService } from './services/auth/auth.service'
 import { InvoiceService } from './services/invoice/invoice.service'
@@ -108,13 +87,12 @@ import { SupplierMappingComponent } from './components/setting/supllier-mapping/
 import { AddSupplierComponent } from './components/add-supplier/add-supplier.component'
 import { ExportedFileConfigurationComponent } from './components/configuration/exported-file-configuration/exported-file-configuration.component'
 import { CreateOrderComponent } from './components/create-order/create-order.component'
-import { ManageGroupsComponent } from './components/manage-groups/manage-groups.component'
-import { ManageUsersComponent } from './components/manage-users/manage-users.component'
-import { LoyaltyComponent } from './components/loyalty/loyalty.component'
+// import { ManageGroupsComponent } from './components/manage-groups/manage-groups.component'
+// import { ManageUsersComponent } from './components/manage-users/manage-users.component'
+// import { LoyaltyComponent } from './components/loyalty/loyalty.component'
 import { AddAppCompanyComponent } from './components/add-app-company/add-app-company.component'
 import { AddAppGroupComponent } from './components/add-app-group/add-app-group.component'
 import { AddAppUserComponent } from './components/add-app-user/add-app-user.component'
-import { ActivitiesComponent } from './components/activities/activities.component'
 import { WlsIntegrationConfigComponent } from './components/wls-integration-config/wls-integration-config.component'
 import { WlsIntegrationComponent } from './components/wls-integration/wls-integration.component'
 import { DialogComponent } from './components/dialog/dialog.component'
@@ -138,10 +116,8 @@ import { DeleteAppGroupComponent } from './components/delete-app-group/delete-ap
 import { AddConsumptionLocationComponent } from './components/add-consumption-location/add-consumption-location.component'
 import { AddConsumptionLocationItemsComponent } from './components/add-consumption-location-items/add-consumption-location-items.component'
 import { HotelOpiComponent } from './components/hotel-opi/hotel-opi.component'
-import { OpiActivitiesComponent } from './components/opi-activities/opi-activities.component'
 import { OpiTransactionsComponent } from './components/opi-transactions/opi-transactions.component'
 import { OperaPaymentsComponent } from './components/operations/opera-payments/opera-payments.component'
-import { ChartsModule } from 'ng2-charts'
 import { AngularDropdownModule } from 'angular-dropdown'
 import { NgWormholeModule } from 'ng-wormhole'
 import { FilterComponent } from './components/filter/filter.component'
@@ -172,7 +148,8 @@ import { AddRewardPointsUserComponent } from './components/RewardPoints/add-rewa
 import { RewardPointsActivitiesComponent } from './components/RewardPoints/reward-points-activities/reward-points-activities.component';
 import { AddVoucherDialogComponent } from './components/add-voucher-dialog/add-voucher-dialog.component'
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component'
-import { VoucherTransactionsComponent } from './components/voucher-transactions/voucher-transactions.component'
+import { VoucherTransactionsComponent } from './components/voucher-transactions/voucher-transactions.component';
+import { SharedModule } from './shared/shared.module'
 
 @NgModule({
   declarations: [
@@ -249,16 +226,15 @@ import { VoucherTransactionsComponent } from './components/voucher-transactions/
     SupplierMappingComponent,
     AddSupplierComponent,
     ExportedFileConfigurationComponent,
-    ManageGroupsComponent,
-    ManageUsersComponent,
+    // ManageGroupsComponent,
+    // ManageUsersComponent,
     ManageSubGroupComponent,
-    LoyaltyComponent,
+    // LoyaltyComponent,
     AddAppCompanyComponent,
     AddAppGroupComponent,
     AddAppUserComponent,
     AddAppUserAccompiedComponent,
     DeleteAppGroupComponent,
-    ActivitiesComponent,
     WlsIntegrationConfigComponent,
     WlsIntegrationComponent,
     DialogComponent,
@@ -278,7 +254,6 @@ import { VoucherTransactionsComponent } from './components/voucher-transactions/
     AddConsumptionLocationComponent,
     AddConsumptionLocationItemsComponent,
     HotelOpiComponent,
-    OpiActivitiesComponent,
     OpiTransactionsComponent,
     OperaPaymentsComponent,
     FilterComponent,
@@ -311,37 +286,15 @@ import { VoucherTransactionsComponent } from './components/voucher-transactions/
     HttpClientModule,
     HttpModule,
     AngularMaterialModule,
-    NgxDatatableModule,
-    NgxSpinnerModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatMenuModule,
-    MatBadgeModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule,
-    MatButtonModule,
-    MatIconModule,
-    MatExpansionModule,
-    MatPaginatorModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatNativeDateModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatCardModule,
-    MatRippleModule,
-    BrowserModule,
-    FormsModule,
-    MatProgressBarModule,
     NgxJsonViewerModule,
-    ChartsModule,
     AngularDropdownModule,
     NgWormholeModule,
     ToastrModule,
     NgbModule,
-    FormsModule,
     NgxDaterangepickerMd.forRoot(),
+    SharedModule,
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
@@ -381,11 +334,12 @@ import { VoucherTransactionsComponent } from './components/voucher-transactions/
     AddSalesStatisticsComponent,
     AddSupplierComponent,
     DriveService,
+
     // ==> Consumption Sync Job Type
     AddConsumptionLocationComponent,
     AddConsumptionLocationItemsComponent,
-    // ==> Loyalty
 
+    // ==> Loyalty
     AddAppCompanyComponent,
     AddAppGroupComponent,
     AddAppUserComponent,

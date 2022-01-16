@@ -198,7 +198,8 @@ const routes: Routes = [
   { path: Constants.SIMPHONY_CHECK_CONFIG_PAGE , component: SimphonyCheckConfigurationComponent ,canActivate:[AuthGuardService]},
 
   { path : Constants.SUPPORT , component: SupportComponent, canActivate:[AuthGuardService]},
-  
+  { path: 'loyalty', loadChildren: () => import('./components/loyalty/loyalty.module').then(m => m.LoyaltyModule) },
+
   // Error Page
   {path:'**', component: ErrorComponentComponent }
 
