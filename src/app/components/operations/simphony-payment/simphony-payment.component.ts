@@ -1,11 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
-import { MatSnackBar } from '@angular/material'
-import { NgxSpinnerService } from 'ngx-spinner'
-import { ErrorMessages } from 'src/app/models/ErrorMessages'
-import { OperaPaymentService } from 'src/app/services/operaPayment/opera-payment.service'
-import { SidenavResponsive } from '../../sidenav/sidenav-responsive'
 import { DateAdapter } from '@angular/material/core';
-import * as moment from 'moment';
 import { Data } from 'src/app/models/data'
 
 @Component({
@@ -26,10 +20,7 @@ export class SimphonyPaymentComponent implements OnInit {
   totalTransactionAmount = 0;
 
   constructor(
-    private spinner: NgxSpinnerService, private dateAdapter: DateAdapter<Date>,
-    private sidNav: SidenavResponsive,
-    private operaPaymentService: OperaPaymentService,
-    private snackBar: MatSnackBar,
+    private dateAdapter: DateAdapter<Date>,
     public data: Data
   ) {
     this.dateAdapter.setLocale('en-GB');

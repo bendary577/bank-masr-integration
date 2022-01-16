@@ -3,13 +3,11 @@ import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { Data } from 'src/app/models/data'
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
-import { SidenavResponsive } from '../sidenav/sidenav-responsive';
-import { Location } from '@angular/common'
 import { AddVoucherDialogComponent } from '../add-voucher-dialog/add-voucher-dialog.component';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
-import { ToastrModule } from 'ngx-toastr';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { Constants } from 'src/app/models/constants';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-voucher-list',
@@ -27,8 +25,9 @@ export class VoucherListComponent implements OnInit {
      inputSearch: '' as string,  voucherData: [] , offset: 0 ,    paginateData: true as boolean,
   }
 
-  constructor(public snackBar: MatSnackBar, private sidNav: SidenavResponsive, public dialog: MatDialog, 
-    private _location: Location, private loyaltyService: LoyaltyService, private router: Router, public data: Data,) {
+  constructor(public snackBar: MatSnackBar, private sidNav: SideNaveComponent, 
+    public dialog: MatDialog, 
+     private loyaltyService: LoyaltyService, private router: Router, public data: Data,) {
      }
 
   ngOnInit() {

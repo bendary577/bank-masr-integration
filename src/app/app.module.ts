@@ -30,7 +30,6 @@ import {
   MatMenuModule,
   MatBadgeModule,
 } from '@angular/material'
-import { SidenavResponsive } from './components/sidenav/sidenav-responsive'
 import { ConfigurationComponent } from './components/setting/configuration/configuration.component'
 import { MatExpansionModule } from '@angular/material/expansion'
 import { UsersComponent } from './components/setting/users/users.component'
@@ -181,7 +180,6 @@ import { VoucherTransactionsComponent } from './components/voucher-transactions/
     AppComponent,
     LoginComponent,
     SuppliersComponent,
-    SidenavResponsive,
     ConfigurationComponent,
     UsersComponent,
     SyncJobsconfigComponent,
@@ -354,7 +352,6 @@ import { VoucherTransactionsComponent } from './components/voucher-transactions/
     AlertsService,
     Data,
     AuthGuardService,
-    SidenavResponsive,
     SideNaveComponent,
     NavBarComponent,
     ExcelService,

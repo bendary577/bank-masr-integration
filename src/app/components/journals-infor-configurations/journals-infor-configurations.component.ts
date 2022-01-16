@@ -8,17 +8,13 @@ import { FormGroup } from '@angular/forms';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 import { AccountSyncType } from 'src/app/models/AccountSyncType';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
-import { SidenavResponsive } from '../sidenav/sidenav-responsive';
-import { AddMajorGroupComponent } from '../addMajorGroup/add-major-group.component';
-import { ItemGroup } from 'src/app/models/ItemGroup';
-import { AddMajorGroupChildComponent } from '../addMajorGroupChild/add-major-group-child.component';
-import { PosSalesService } from '../../services/posSales/pos-sales.service';
 import { AddConsumptionLocationComponent } from '../add-consumption-location/add-consumption-location.component';
 import { ConsumptionLocation } from 'src/app/models/ConsumptionLocation';
 import { GeneralSettings } from 'src/app/models/GeneralSettings';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 import { JournalService } from 'src/app/services/journal/journal.service';
 import { AddConsumptionLocationItemsComponent } from '../add-consumption-location-items/add-consumption-location-items.component';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-journals-infor-configurations',
@@ -46,9 +42,10 @@ export class JournalsInforConfigurationsComponent implements OnInit {
 
   generalSettings = new GeneralSettings();
 
-  constructor(private spinner: NgxSpinnerService, private sidNav: SidenavResponsive,
+  constructor(private spinner: NgxSpinnerService,
+    private sidNav: SideNaveComponent,
     public dialog: MatDialog, private syncJobService:SyncJobService, 
-    private generalSettingsService: GeneralSettingsService, private salesService:PosSalesService,
+    private generalSettingsService: GeneralSettingsService,
     private consumptionService: JournalService,
     private accSyncTypeService:AccSyncTypeService, private router:Router,
     public snackBar: MatSnackBar) {

@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { Constants } from './models/constants';
 import { LoginComponent } from './components/login/login.component';
 import { SuppliersComponent } from './components/suppliers/suppliers.component';
-import { SidenavResponsive } from './components/sidenav/sidenav-responsive';
 import { ConfigurationComponent } from './components/setting/configuration/configuration.component';
 import { UsersComponent } from './components/setting/users/users.component';
 import { SyncJobsconfigComponent } from './components/setting/syncJob/syncJobsconfig.component';
@@ -79,7 +78,6 @@ import { RewardPointsComponent } from './components/reward-points/reward-points.
 
 const routes: Routes = [
   { path: '', redirectTo: Constants.LOGIN_PAGE, pathMatch: 'full'},
-  { path: Constants.SIDE_NAV, component: SidenavResponsive  ,canActivate:[AuthGuardService]},
   {
     path: Constants.SETTING, component: ConfigurationComponent ,
     children: []

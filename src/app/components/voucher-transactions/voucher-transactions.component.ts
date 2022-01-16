@@ -1,14 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { MatSnackBar } from '@angular/material'
 import { NgxSpinnerService } from 'ngx-spinner'
 import { ErrorMessages } from 'src/app/models/ErrorMessages'
 import { OperaPaymentService } from 'src/app/services/operaPayment/opera-payment.service'
-import { SidenavResponsive } from '../sidenav/sidenav-responsive'
 import { DateAdapter } from '@angular/material/core';
 import * as moment from 'moment';
 import { Data } from 'src/app/models/data'
-import { Router } from '@angular/router'
-import { Constants } from 'src/app/models/constants'
+import { SideNaveComponent } from '../side-nave/side-nave.component'
 
 @Component({
   selector: 'app-voucher-transactions',
@@ -53,11 +51,10 @@ export class VoucherTransactionsComponent implements OnInit {
 
   constructor(
     private spinner: NgxSpinnerService, private dateAdapter: DateAdapter<Date>,
-    private sidNav: SidenavResponsive,
+    private sidNav: SideNaveComponent,
     private operaPaymentService: OperaPaymentService,
     private snackBar: MatSnackBar,
     public data: Data,
-    private router: Router
   ) {
     this.dateAdapter.setLocale('en-GB');
   }

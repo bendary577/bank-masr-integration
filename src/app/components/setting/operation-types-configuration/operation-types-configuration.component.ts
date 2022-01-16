@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SyncJobType } from 'src/app/models/SyncJobType';
-import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
 import { Constants } from 'src/app/models/constants';
 import { Router } from '@angular/router';
 import { OperationTypesService } from 'src/app/services/OperationTypes/operation-types.service';
-import { ErrorMessages } from 'src/app/models/ErrorMessages';
-import { MatSnackBar } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -17,8 +14,9 @@ export class OperationTypesConfigurationComponent implements OnInit {
   operationTypes: SyncJobType[] = [];
   loading = true;
 
-  constructor(private sidNav: SidenavResponsive, private router: Router,
-    private snackBar: MatSnackBar, private spinner: NgxSpinnerService,
+  constructor(
+     private router: Router,
+     private spinner: NgxSpinnerService,
      private operationTypeService: OperationTypesService) { }
 
   ngOnInit() {

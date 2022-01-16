@@ -6,7 +6,7 @@ import { AccountSyncType } from 'src/app/models/AccountSyncType';
 import { Constants } from 'src/app/models/constants';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { OperationTypesService } from 'src/app/services/OperationTypes/operation-types.service';
-import { SidenavResponsive } from '../sidenav/sidenav-responsive';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-opera-payment-configuration',
@@ -20,7 +20,7 @@ export class OperaPaymentConfigurationComponent implements OnInit {
 
   constructor( private operationService:OperationTypesService,
    private router:Router, public snackBar: MatSnackBar,
-   private spinner: NgxSpinnerService, private sidNav: SidenavResponsive) { }
+   private spinner: NgxSpinnerService, private sidNav: SideNaveComponent) { }
 
  ngOnInit() {
    this.getOperationType();
