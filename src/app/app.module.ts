@@ -302,7 +302,7 @@ import { RewardPointsActivitiesComponent } from './components/RewardPoints/rewar
     RevenueByAgentComponent,
     ExtendExpiryDateComponent,
     ViewInvokerComponent,
-    VoucherListComponent
+    VoucherListComponent,
     RewardPointsComponent,
     ManageRewardPointsUsersComponent,
     AddRewardPointsUserComponent,
