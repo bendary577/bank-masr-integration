@@ -10,6 +10,7 @@ import { ManageRewardPointsUsersComponent } from '../RewardPoints/manage-reward-
 import { RewardPointsActivitiesComponent } from '../RewardPoints/reward-points-activities/reward-points-activities.component';
 import { AddRewardPointsUserComponent } from '../RewardPoints/add-reward-points-user/add-reward-points-user.component';
 import { RewardPointsSettingsComponent } from '../setting/reward-points-settings/reward-points-settings.component';
+import { BasicModule } from 'src/app/shared/basic.module';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { RewardPointsSettingsComponent } from '../setting/reward-points-settings
     CommonModule,
     RewardPointsRoutingModule,
     MatTabsModule,
+    BasicModule,
     SharedModule,
     AngularMaterialModule,
   ],

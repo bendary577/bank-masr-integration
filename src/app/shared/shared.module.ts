@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import {
   MatToolbarModule,
   MatIconModule,
-  MatSidenavModule,
   MatListModule,
   MatPaginatorModule,
   MatDatepickerModule,
@@ -18,26 +16,31 @@ import {
   MatMenuModule,
   MatBadgeModule,
   MatExpansionModule,
+  MatDialogModule,
+  MatTableModule,
 } from '@angular/material'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
+import { AppRoutingModule } from '../app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import { AngularDropdownModule } from 'angular-dropdown';
+import { NgWormholeModule } from 'ng-wormhole';
+import { ToastrModule } from 'ngx-toastr';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule
   ],
-  exports:[
-    // Loading
-    NgxSpinnerModule,
-    
+  exports:[    
     // Data Tables
     NgxDatatableModule,
 
-    // Forms
-    FormsModule,
-    ReactiveFormsModule,
-
+    MatTableModule,
+    MatDialogModule,
     MatMenuModule,
     MatBadgeModule,
     MatToolbarModule,
@@ -52,6 +55,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatCardModule,
     MatRippleModule,
     MatProgressBarModule,
+
+
+    CommonModule,
+    NgxJsonViewerModule,
+    AngularDropdownModule,
+    NgWormholeModule,
+    ToastrModule,
+    NgbModule,
+    // NgxDaterangepickerMd.forRoot(),
   ]
 })
 export class SharedModule { }

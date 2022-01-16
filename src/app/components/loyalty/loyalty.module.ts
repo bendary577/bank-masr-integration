@@ -10,6 +10,7 @@ import { ManageUsersComponent } from '../manage-users/manage-users.component';
 import { AngularMaterialModule } from 'src/app/angular-material.module';
 import { ManageGroupsComponent } from '../manage-groups/manage-groups.component';
 import { MatTabsModule } from '@angular/material';
+import { BasicModule } from 'src/app/shared/basic.module';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { MatTabsModule } from '@angular/material';
     LoyaltyRoutingModule,
     MatTabsModule,
     ChartsModule,
+    BasicModule,
     SharedModule,
     AngularMaterialModule,
   ]
