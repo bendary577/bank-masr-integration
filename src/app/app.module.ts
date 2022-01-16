@@ -356,8 +356,7 @@ import { VoucherTransactionsComponent } from './components/voucher-transactions/
     ExcelService,
     CsvService,
     OperationService,
-    DriveService,
-    DriveService,
+    DriveService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
