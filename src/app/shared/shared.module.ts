@@ -19,7 +19,7 @@ import {
   MatBadgeModule,
   MatExpansionModule,
 } from '@angular/material'
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -28,16 +28,19 @@ import { FormsModule } from '@angular/forms';
     CommonModule
   ],
   exports:[
+    // Loading
     NgxSpinnerModule,
+    
+    // Data Tables
     NgxDatatableModule,
 
-    // Common
+    // Forms
     FormsModule,
+    ReactiveFormsModule,
 
     MatMenuModule,
     MatBadgeModule,
     MatToolbarModule,
-    MatSidenavModule,
     MatListModule,
     MatIconModule,
     MatExpansionModule,

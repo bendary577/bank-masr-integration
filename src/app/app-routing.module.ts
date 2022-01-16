@@ -43,7 +43,6 @@ import { SupplierMappingComponent } from './components/setting/supllier-mapping/
 import { CreateOrderComponent } from './components/create-order/create-order.component';
 import { ManageGroupsComponent } from './components/manage-groups/manage-groups.component';
 import { ManageUsersComponent } from './components/manage-users/manage-users.component';
-import { LoyaltyComponent } from './components/loyalty/loyalty.component';
 import { ActivitiesComponent } from './components/activities/activities.component';
 import { WlsIntegrationComponent } from './components/wls-integration/wls-integration.component';
 import { WlsIntegrationConfigComponent } from './components/wls-integration-config/wls-integration-config.component';
@@ -98,10 +97,6 @@ const routes: Routes = [
   // OPERA Views
   { path: Constants.OPERA_BOOKING_DASHBOARD_PAGE, component: OperaBookingDashBoardComponent ,canActivate:[AuthGuardService]},
 
-  // Loyalty Views
-  { path: Constants.GET_LOYALTY_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
-  { path: Constants.GET_WALLET_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
-  { path: Constants.GET_VOUCHER_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
   { path: Constants.REDEEM_VOUCHER, component: VoucherListComponent ,canActivate:[AuthGuardService]},
 
   // Reward Points
@@ -198,7 +193,14 @@ const routes: Routes = [
   { path: Constants.SIMPHONY_CHECK_CONFIG_PAGE , component: SimphonyCheckConfigurationComponent ,canActivate:[AuthGuardService]},
 
   { path : Constants.SUPPORT , component: SupportComponent, canActivate:[AuthGuardService]},
-  { path: 'loyalty', loadChildren: () => import('./components/loyalty/loyalty.module').then(m => m.LoyaltyModule) },
+
+  // ==> Modules
+  // Loyalty Views
+  { path: Constants.GET_LOYALTY_PAGE, loadChildren: () => import('./components/loyalty/loyalty.module').then(m => m.LoyaltyModule) },
+  { path: Constants.GET_WALLET_PAGE, loadChildren: () => import('./components/loyalty/loyalty.module').then(m => m.LoyaltyModule) },
+  { path: Constants.GET_VOUCHER_PAGE, loadChildren: () => import('./components/loyalty/loyalty.module').then(m => m.LoyaltyModule) },
+
+  { path: 'rewardPoints', loadChildren: () => import('./components/reward-points/reward-points.module').then(m => m.RewardPointsModule) },
 
   // Error Page
   {path:'**', component: ErrorComponentComponent }

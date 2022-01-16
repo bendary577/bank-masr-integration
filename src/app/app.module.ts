@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { LoginComponent } from './components/login/login.component'
 import { HttpClientModule } from '@angular/common/http'
-import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { CookieService } from 'ngx-cookie-service'
 import { AngularMaterialModule } from './angular-material.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -87,9 +86,6 @@ import { SupplierMappingComponent } from './components/setting/supllier-mapping/
 import { AddSupplierComponent } from './components/add-supplier/add-supplier.component'
 import { ExportedFileConfigurationComponent } from './components/configuration/exported-file-configuration/exported-file-configuration.component'
 import { CreateOrderComponent } from './components/create-order/create-order.component'
-// import { ManageGroupsComponent } from './components/manage-groups/manage-groups.component'
-// import { ManageUsersComponent } from './components/manage-users/manage-users.component'
-// import { LoyaltyComponent } from './components/loyalty/loyalty.component'
 import { AddAppCompanyComponent } from './components/add-app-company/add-app-company.component'
 import { AddAppGroupComponent } from './components/add-app-group/add-app-group.component'
 import { AddAppUserComponent } from './components/add-app-user/add-app-user.component'
@@ -132,7 +128,6 @@ import { SupportComponent } from './components/support/support.component'
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material'
 import { PosMachineMappingComponent } from './components/setting/pos-machine-mapping/pos-machine-mapping.component'
 import { SimphonyPaymentComponent } from './components/operations/simphony-payment/simphony-payment.component'
-import { RewardPointsSettingsComponent } from './components/setting/reward-points-settings/reward-points-settings.component'
 import { SimphonyCheckComponent } from './components/simphony-check/simphony-check.component'
 import { SimphonyCheckConfigurationComponent } from './components/simphony-check-configuration/simphony-check-configuration.component'
 import { ViewUserComponent } from './components/view-user/view-user.component'
@@ -142,10 +137,6 @@ import { CostOfGoodsOhraConfigComponent } from './components/cost-of-goods-ohra-
 import { ExtendExpiryDateComponent } from './components/extend-expiry-date/extend-expiry-date.component';
 import { ViewInvokerComponent } from './components/view-invoker/view-invoker.component';
 import { VoucherListComponent } from './components/voucher-list/voucher-list.component'
-import { RewardPointsComponent } from './components/reward-points/reward-points.component';
-import { ManageRewardPointsUsersComponent } from './components/RewardPoints/manage-reward-points-users/manage-reward-points-users.component';
-import { AddRewardPointsUserComponent } from './components/RewardPoints/add-reward-points-user/add-reward-points-user.component';
-import { RewardPointsActivitiesComponent } from './components/RewardPoints/reward-points-activities/reward-points-activities.component';
 import { AddVoucherDialogComponent } from './components/add-voucher-dialog/add-voucher-dialog.component'
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component'
 import { VoucherTransactionsComponent } from './components/voucher-transactions/voucher-transactions.component';
@@ -226,10 +217,7 @@ import { SharedModule } from './shared/shared.module'
     SupplierMappingComponent,
     AddSupplierComponent,
     ExportedFileConfigurationComponent,
-    // ManageGroupsComponent,
-    // ManageUsersComponent,
     ManageSubGroupComponent,
-    // LoyaltyComponent,
     AddAppCompanyComponent,
     AddAppGroupComponent,
     AddAppUserComponent,
@@ -266,23 +254,17 @@ import { SharedModule } from './shared/shared.module'
     SimphonyPaymentComponent,
     SimphonyCheckComponent,
     SimphonyCheckConfigurationComponent,
-    RewardPointsSettingsComponent,
     ViewUserComponent,
     RevenueByAgentComponent,
     ExtendExpiryDateComponent,
     ViewInvokerComponent,
     VoucherListComponent,
-    RewardPointsComponent,
-    ManageRewardPointsUsersComponent,
-    AddRewardPointsUserComponent,
-    RewardPointsActivitiesComponent,
     AddVoucherDialogComponent,
     ConfirmationDialogComponent,
     VoucherTransactionsComponent
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule,
     HttpClientModule,
     HttpModule,
     AngularMaterialModule,
@@ -348,10 +330,8 @@ import { SharedModule } from './shared/shared.module'
     EditWalletComponent,
     ExtendExpiryDateComponent,
     AddVoucherDialogComponent,
-    
-    // ==> Reward Points System
-    AddRewardPointsUserComponent,
     ConfirmationDialogComponent
+  
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

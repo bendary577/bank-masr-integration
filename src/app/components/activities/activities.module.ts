@@ -3,9 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { ActivitiesRoutingModule } from './activities-routing.module';
 import { ActivitiesComponent } from './activities.component';
-import { ChartsModule } from 'ng2-charts';
-import { SharedModule } from 'src/app/shared/shared.module';
-
 
 @NgModule({
   declarations: [
@@ -14,8 +11,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     ActivitiesRoutingModule,
-    ChartsModule,
-    SharedModule,
   ]
 })
 export class ActivitiesModule { }
