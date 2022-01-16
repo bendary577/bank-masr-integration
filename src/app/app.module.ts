@@ -175,6 +175,9 @@ import { RewardPointsComponent } from './components/reward-points/reward-points.
 import { ManageRewardPointsUsersComponent } from './components/RewardPoints/manage-reward-points-users/manage-reward-points-users.component';
 import { AddRewardPointsUserComponent } from './components/RewardPoints/add-reward-points-user/add-reward-points-user.component';
 import { RewardPointsActivitiesComponent } from './components/RewardPoints/reward-points-activities/reward-points-activities.component';
+import { AddVoucherDialogComponent } from './components/add-voucher-dialog/add-voucher-dialog.component'
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component'
+import { VoucherTransactionsComponent } from './components/voucher-transactions/voucher-transactions.component'
 
 @NgModule({
   declarations: [
@@ -302,11 +305,14 @@ import { RewardPointsActivitiesComponent } from './components/RewardPoints/rewar
     RevenueByAgentComponent,
     ExtendExpiryDateComponent,
     ViewInvokerComponent,
-    VoucherListComponent
+    VoucherListComponent,
     RewardPointsComponent,
     ManageRewardPointsUsersComponent,
     AddRewardPointsUserComponent,
     RewardPointsActivitiesComponent,
+    AddVoucherDialogComponent,
+    ConfirmationDialogComponent,
+    VoucherTransactionsComponent
   ],
   imports: [
     BrowserModule,
@@ -398,9 +404,11 @@ import { RewardPointsActivitiesComponent } from './components/RewardPoints/rewar
     DeleteAppGroupComponent,
     EditWalletComponent,
     ExtendExpiryDateComponent,
-
+    AddVoucherDialogComponent,
+    
     // ==> Reward Points System
-    AddRewardPointsUserComponent
+    AddRewardPointsUserComponent,
+    ConfirmationDialogComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
