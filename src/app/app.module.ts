@@ -178,6 +178,7 @@ import { RewardPointsActivitiesComponent } from './components/RewardPoints/rewar
 import { AddVoucherDialogComponent } from './components/add-voucher-dialog/add-voucher-dialog.component'
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component'
 import { VoucherTransactionsComponent } from './components/voucher-transactions/voucher-transactions.component'
+import { PDFServiceService } from './services/pdf-service/pdfservice.service'
 
 @NgModule({
   declarations: [
@@ -364,6 +365,7 @@ import { VoucherTransactionsComponent } from './components/voucher-transactions/
     SideNaveComponent,
     NavBarComponent,
     ExcelService,
+    PDFServiceService,
     CsvService,
     OperationService,
     DriveService,

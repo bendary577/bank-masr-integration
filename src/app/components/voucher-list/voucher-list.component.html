@@ -1,11 +1,12 @@
-<div class="main" style="padding-top: 70px;">
+<h3>Simphony Vouchers</h3>
+<div class="main">
 
     <div *ngIf="voucherList.voucherData.length != 0 || voucherList.showLoading" class="header">
         <button mat-flat-button (click)="addVoucherDialog()" [disabled]="validateAddVoucher()" class="groups-buttons"><span
                 class="mob-text">Add Voucher</span></button>
         <button mat-flat-button (click)="updateVoucherDialog()" [disabled]="validateUpdateVoucher()"
             class="groups-buttons"><span class="mob-text">Update Voucher</span></button>
-            <button mat-flat-button (click)="openConfirmationDeleteRestore(true)" [disabled]="validateDeleteVoucher()"
+            <button mat-flat-button (click)="extractVoucherCodePDF()" [disabled]="validateDeleteVoucher()"
             class="groups-buttons"><span class="mob-text">Export PDF</span></button>
         <button mat-flat-button (click)="openConfirmationDeleteRestore(false)" [disabled]="validateDeleteVoucher()"
             class="groups-buttons"><span class="mob-text">Delete Voucher</span></button>
@@ -102,5 +103,6 @@
 
         </ngx-datatable>
     </div>
+    <ngx-spinner></ngx-spinner>
 
 </div>

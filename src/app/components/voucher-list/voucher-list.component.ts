@@ -7,9 +7,11 @@ import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import { Location } from '@angular/common'
 import { AddVoucherDialogComponent } from '../add-voucher-dialog/add-voucher-dialog.component';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
-import { ToastrModule } from 'ngx-toastr';
+import { saveAs } from 'file-saver'
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { Constants } from 'src/app/models/constants';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { PDFServiceService } from 'src/app/services/pdf-service/pdfservice.service';
 
 @Component({
   selector: 'app-voucher-list',
@@ -28,7 +30,8 @@ export class VoucherListComponent implements OnInit {
   }
 
   constructor(public snackBar: MatSnackBar, private sidNav: SidenavResponsive, public dialog: MatDialog, 
-    private _location: Location, private loyaltyService: LoyaltyService, private router: Router, public data: Data,) {
+    private _location: Location, private loyaltyService: LoyaltyService, private router: Router, public data: Data,
+    private spinner: NgxSpinnerService,private pdfService: PDFServiceService) {
      }
 
   ngOnInit() {
@@ -40,7 +43,8 @@ export class VoucherListComponent implements OnInit {
   }
 
   openVoucherTransactions(voucher) {
-      this.data.storage = voucher
+      // this.data.storage = voucher
+      localStorage.setItem("currentVoucherId", voucher.id);
       this.router.navigate([Constants.VOUCHER_TRANSACTION])
   }
 
@@ -217,6 +221,36 @@ export class VoucherListComponent implements OnInit {
           })
        }
     });
+  }
+
+  extractVoucherCodePDF() {
+    this.spinner.show()
+    this.pdfService.exportVoucherCode(this.voucherList.selected[0])
+      .subscribe(
+        (res) => {
+          const blob = new Blob([res], { type: 'application/pdf' })
+          const file = new File([blob], this.voucherList.selected[0].name + ' Code' + '.pdf', {
+            type: 'application/pdf',
+          })
+          saveAs(file)
+
+          this.snackBar.open('Export Successfully', null, {
+            duration: 2000,
+            horizontalPosition: 'center',
+            panelClass: 'my-snack-bar-success',
+          })
+          this.spinner.hide()
+        },
+        (err) => {
+          this.spinner.hide()
+          console.error(err)
+          this.snackBar.open('Fail to export, Please try agian', null, {
+            duration: 2000,
+            horizontalPosition: 'center',
+            panelClass: 'my-snack-bar-fail',
+          })
+        },
+      )
   }
 
   validateUpdateVoucher() {
