@@ -157,7 +157,6 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component'
 import { SupportComponent } from './components/support/support.component'
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material'
 import { PosMachineMappingComponent } from './components/setting/pos-machine-mapping/pos-machine-mapping.component'
-import { TestPaginationComponent } from './components/test-pagination/test-pagination.component'
 import { SimphonyPaymentComponent } from './components/operations/simphony-payment/simphony-payment.component'
 import { RewardPointsSettingsComponent } from './components/setting/reward-points-settings/reward-points-settings.component'
 import { SimphonyCheckComponent } from './components/simphony-check/simphony-check.component'
@@ -263,7 +262,6 @@ import { VoucherTransactionsComponent } from './components/voucher-transactions/
     AddAppUserAccompiedComponent,
     DeleteAppGroupComponent,
     ActivitiesComponent,
-    TestPaginationComponent,
     WlsIntegrationConfigComponent,
     WlsIntegrationComponent,
     DialogComponent,

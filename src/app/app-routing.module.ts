@@ -67,7 +67,6 @@ import { OperaPaymentsComponent } from './components/operations/opera-payments/o
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { SupportComponent } from './components/support/support.component';
 import { PosMachineMappingComponent } from './components/setting/pos-machine-mapping/pos-machine-mapping.component';
-import { TestPaginationComponent } from './components/test-pagination/test-pagination.component';
 import { RewardPointsSettingsComponent } from './components/setting/reward-points-settings/reward-points-settings.component';
 import { SimphonyCheckComponent } from './components/simphony-check/simphony-check.component';
 import { SimphonyCheckConfigurationComponent } from './components/simphony-check-configuration/simphony-check-configuration.component';
@@ -76,7 +75,6 @@ import { RevenueByAgentComponent } from './components/Reports/revenue-by-agent/r
 import { WebServiceInvokerConfigurationComponent } from './components/configuration/web-service-invoker-configuration/web-service-invoker-configuration.component';
 import { VoucherListComponent } from './components/voucher-list/voucher-list.component';
 import { RewardPointsComponent } from './components/reward-points/reward-points.component';
-import { VoucherTransactionsComponent } from './components/voucher-transactions/voucher-transactions.component';
 
 
 const routes: Routes = [
@@ -108,8 +106,6 @@ const routes: Routes = [
   { path: Constants.GET_VOUCHER_PAGE, component: LoyaltyComponent ,canActivate:[AuthGuardService]},
   { path: Constants.REDEEM_VOUCHER, component: VoucherListComponent ,canActivate:[AuthGuardService]},
 
-  {path: "transPagin", component:TestPaginationComponent, canActivate:[AuthGuardService]},
-
   // Reward Points
   { path: Constants.REWARD_POINTS_PAGE, component: RewardPointsComponent ,canActivate:[AuthGuardService]},
 
@@ -119,16 +115,13 @@ const routes: Routes = [
   { path: Constants.MANAGE_USERS, component: ManageUsersComponent ,canActivate:[AuthGuardService]},
   { path: Constants.USER_PROFILE, component: UserProfileComponent ,canActivate:[AuthGuardService]},
   { path: Constants.MANAGE_ACTIVITIES, component: ActivitiesComponent ,canActivate:[AuthGuardService]},
-  // { path: Constants.ACCOUNT_CONFIGURATION, component: ConfigurationComponent ,canActivate:[AuthGuardService]},
 
   // Entry System Views
   { path: Constants.REVENUE_BY_AGENT_PAGE, component: RevenueByAgentComponent ,canActivate:[AuthGuardService]},
 
   // Hotel OPI Views
   { path: Constants.GET_HOTEL_OPI_PAGE, component: HotelOpiComponent ,canActivate:[AuthGuardService]},
-  // { path: Constants.MANAGE_GROUPS, component: ManageGroupsComponent ,canActivate:[AuthGuardService]},
-  // { path: Constants.MANAGE_ACTIVITIES, component: ActivitiesComponent ,canActivate:[AuthGuardService]},
-  
+
   // Pages
   { path: Constants.LOGIN_PAGE, component: LoginComponent},
   { path: Constants.WELCOME_PAGE, component: WelcomePageComponent , canActivate:[AuthGuardService]},
