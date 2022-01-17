@@ -73,6 +73,7 @@ import { RevenueByAgentComponent } from '../components/Reports/revenue-by-agent/
 import { WebServiceInvokerConfigurationComponent } from '../components/configuration/web-service-invoker-configuration/web-service-invoker-configuration.component';
 import { VoucherListComponent } from '../components/voucher-list/voucher-list.component';
 import { RewardPointsComponent } from '../components/reward-points/reward-points.component';
+import { VoucherTransactionsComponent } from '../components/voucher-transactions/voucher-transactions.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -97,6 +98,7 @@ const routes: Routes = [
   { path: Constants.OPERA_BOOKING_DASHBOARD_PAGE, component: OperaBookingDashBoardComponent ,canActivate:[AuthGuardService]},
 
   { path: Constants.REDEEM_VOUCHER, component: VoucherListComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.VOUCHER_TRANSACTION, component: VoucherTransactionsComponent ,canActivate:[AuthGuardService]},
 
   // Reward Points
   { path: Constants.REWARD_POINTS_PAGE, component: RewardPointsComponent ,canActivate:[AuthGuardService]},

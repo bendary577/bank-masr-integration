@@ -237,10 +237,6 @@ import { SideNaveComponent } from '../components/side-nave/side-nave.component';
     RevenueByAgentComponent,
     ExtendExpiryDateComponent,
     ViewInvokerComponent,
-    VoucherListComponent,
-    AddVoucherDialogComponent,
-    ConfirmationDialogComponent,
-    VoucherTransactionsComponent,
   ],
   imports: [
     CommonModule,

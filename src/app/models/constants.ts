@@ -219,7 +219,7 @@ export class Constants {
 
   //////////////////////////////////////////////// Simphony Payment  ////////////////////////////////////////////////////////
 
-  static SIMPHONY_PAYMENT_PAGE = 'simphonyPayment'
+  static SIMPHONY_PAYMENT_PAGE = 'main/simphonyPayment'
   static SIMPHONY_PAYMENT_CONFIG_PAGE = 'simphonyPaymentConfig'
 
   static SIMPHONY_CHECK_PAGE = 'simphonyCheck'

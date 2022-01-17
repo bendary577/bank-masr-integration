@@ -177,16 +177,19 @@ export class VoucherListComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
     var message = "";
     if(restorefalge){
-    this.voucherList.selected[0].deleted = false;
     dialogRef.componentInstance.confirmMessage = "Are you sure you want to restore selected vouchers ?"
-    message = "Voucher restored successfully."
     }else{
-      this.voucherList.selected[0].deleted = true;
       dialogRef.componentInstance.confirmMessage = "Are you sure you want to delete selected vouchers ?"
-      message = "Voucher deleted successfully."
     }
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
+        if(restorefalge){
+          this.voucherList.selected[0].deleted = false;
+          message = "Voucher restored successfully."
+          }else{
+            this.voucherList.selected[0].deleted = true;
+            message = "Voucher deleted successfully."
+          }
         this.voucherList.showLoading = true
         this.loyaltyService.deleteVoucher(this.voucherList.selected[0]).then((result: any) => {
             this.voucherList.showLoading = false

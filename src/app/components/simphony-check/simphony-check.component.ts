@@ -165,7 +165,7 @@ export class SimphonyCheckComponent implements OnInit {
   openCheckPayment(row){
     if(this.inParent){
       this.data.storage = row;
-      this.router.navigate([Constants.SIMPHONY_PAYMENT_PAGE]);
+      this.router.navigate(["main/simphonyPayment"]);
       }
   }
   deleteOneUsers(row, flag){
