@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: Constants.GET_LOYALTY_PAGE, loadChildren: () => import('./components/loyalty/loyalty.module').then(m => m.LoyaltyModule) },
   { path: Constants.GET_WALLET_PAGE, loadChildren: () => import('./components/loyalty/loyalty.module').then(m => m.LoyaltyModule) },
   { path: Constants.GET_VOUCHER_PAGE, loadChildren: () => import('./components/loyalty/loyalty.module').then(m => m.LoyaltyModule) },
+  { path: 'redeemVoucher', loadChildren: () => import('./components/voucher-list/voucher.module').then(m => m.VoucherModule) },
 
   { path: 'rewardPoints', loadChildren: () => import('./components/reward-points/reward-points.module').then(m => m.RewardPointsModule) },
   { path: 'main', loadChildren: () => import('./main/main.module').then(m => m.MainModule) },

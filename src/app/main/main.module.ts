@@ -208,10 +208,6 @@ import { SharedModule } from '../shared/shared.module';
     RevenueByAgentComponent,
     ExtendExpiryDateComponent,
     ViewInvokerComponent,
-    VoucherListComponent,
-    AddVoucherDialogComponent,
-    ConfirmationDialogComponent,
-    VoucherTransactionsComponent,
   ],
   imports: [
     MainRoutingModule,

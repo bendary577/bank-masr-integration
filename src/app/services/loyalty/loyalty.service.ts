@@ -305,5 +305,9 @@ export class LoyaltyService {
     return this.http.put(Constants.MARK_VOUCHER_DELETE_PAGES , voucher, {
         headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),}).toPromise()
   }
-
+  simphonyVoucherTrans(voucherId, page, size) {
+    return this.http.get(Constants.GET_VOUCHER_TRANSACTION_PAGES + '?page=' + 0 + '&size=' + 10 + '&voucherId=' + voucherId, {
+        headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),
+      });
+  }
 }

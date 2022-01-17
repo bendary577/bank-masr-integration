@@ -219,7 +219,7 @@ export class Constants {
 
   //////////////////////////////////////////////// Simphony Payment  ////////////////////////////////////////////////////////
 
-  static SIMPHONY_PAYMENT_PAGE = 'simphonyPayment'
+  static SIMPHONY_PAYMENT_PAGE = 'main/simphonyPayment'
   static SIMPHONY_PAYMENT_CONFIG_PAGE = 'simphonyPaymentConfig'
 
   static SIMPHONY_CHECK_PAGE = 'simphonyCheck'
@@ -358,6 +358,7 @@ export class Constants {
   static ADD_VOUCHER_PAGES = environment.apiHost + '/simphonyLoyalty/vouchers/add'
   static UPDATE_VOUCHER_PAGES = environment.apiHost + '/simphonyLoyalty/vouchers/update'
   static MARK_VOUCHER_DELETE_PAGES = environment.apiHost + '/simphonyLoyalty/vouchers/markDeleted'
+  static GET_VOUCHER_TRANSACTION_PAGES = environment.apiHost + '/simphonyLoyalty/voucherTransactions/getTotalVoucherTrans'
 
   //////////////////////////////////////////////// Entry System Application  ///////////////////////////////////
 
@@ -378,6 +379,10 @@ export class Constants {
   static GET_HOTEL_OPI_PAGE = 'hotelOpi'
 
   // static GET_APP_GROUPS_URL = environment.apiHost + '/getApplicationGroups';
+
+    //////////////////////////////////////////////// Export To PDF //////////////////////////////////////////////
+
+    static EXPORT_VOUCHER_CODE_PDF = environment.apiHost + '/simphonyLoyalty/vouchers/exportCodePDF'
 
   //////////////////////////////////////////////// Export To Excel //////////////////////////////////////////////
 

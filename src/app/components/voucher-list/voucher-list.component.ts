@@ -5,9 +5,13 @@ import { Data } from 'src/app/models/data'
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
 import { AddVoucherDialogComponent } from '../add-voucher-dialog/add-voucher-dialog.component';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
+import { saveAs } from 'file-saver'
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { Constants } from 'src/app/models/constants';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { PDFServiceService } from 'src/app/services/pdf-service/pdfservice.service';
 import { SideNaveComponent } from '../side-nave/side-nave.component';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-voucher-list',
@@ -25,9 +29,9 @@ export class VoucherListComponent implements OnInit {
      inputSearch: '' as string,  voucherData: [] , offset: 0 ,    paginateData: true as boolean,
   }
 
-  constructor(public snackBar: MatSnackBar, private sidNav: SideNaveComponent, 
-    public dialog: MatDialog, 
-     private loyaltyService: LoyaltyService, private router: Router, public data: Data,) {
+  constructor(public snackBar: MatSnackBar, private sidNav: SideNaveComponent, public dialog: MatDialog, 
+    private _location: Location, private loyaltyService: LoyaltyService, private router: Router, public data: Data,
+    private spinner: NgxSpinnerService,private pdfService: PDFServiceService) {
      }
 
   ngOnInit() {
@@ -39,7 +43,8 @@ export class VoucherListComponent implements OnInit {
   }
 
   openVoucherTransactions(voucher) {
-      this.data.storage = voucher
+      // this.data.storage = voucher
+      localStorage.setItem("currentVoucherId", voucher.id);
       this.router.navigate([Constants.VOUCHER_TRANSACTION])
   }
 
@@ -172,16 +177,19 @@ export class VoucherListComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
     var message = "";
     if(restorefalge){
-    this.voucherList.selected[0].deleted = false;
     dialogRef.componentInstance.confirmMessage = "Are you sure you want to restore selected vouchers ?"
-    message = "Voucher restored successfully."
     }else{
-      this.voucherList.selected[0].deleted = true;
       dialogRef.componentInstance.confirmMessage = "Are you sure you want to delete selected vouchers ?"
-      message = "Voucher deleted successfully."
     }
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
+        if(restorefalge){
+          this.voucherList.selected[0].deleted = false;
+          message = "Voucher restored successfully."
+          }else{
+            this.voucherList.selected[0].deleted = true;
+            message = "Voucher deleted successfully."
+          }
         this.voucherList.showLoading = true
         this.loyaltyService.deleteVoucher(this.voucherList.selected[0]).then((result: any) => {
             this.voucherList.showLoading = false
@@ -216,6 +224,36 @@ export class VoucherListComponent implements OnInit {
           })
        }
     });
+  }
+
+  extractVoucherCodePDF() {
+    this.spinner.show()
+    this.pdfService.exportVoucherCode(this.voucherList.selected[0])
+      .subscribe(
+        (res) => {
+          const blob = new Blob([res], { type: 'application/pdf' })
+          const file = new File([blob], this.voucherList.selected[0].name + ' Code' + '.pdf', {
+            type: 'application/pdf',
+          })
+          saveAs(file)
+
+          this.snackBar.open('Export Successfully', null, {
+            duration: 2000,
+            horizontalPosition: 'center',
+            panelClass: 'my-snack-bar-success',
+          })
+          this.spinner.hide()
+        },
+        (err) => {
+          this.spinner.hide()
+          console.error(err)
+          this.snackBar.open('Fail to export, Please try agian', null, {
+            duration: 2000,
+            horizontalPosition: 'center',
+            panelClass: 'my-snack-bar-fail',
+          })
+        },
+      )
   }
 
   validateUpdateVoucher() {
