@@ -5,6 +5,7 @@ import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser';
 import { AccompiendGuest } from 'src/app/models/loyalty/AccompiendGuest';
 import { Group } from 'src/app/models/loyalty/Group';
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-add-app-user-accompied',
@@ -73,16 +74,20 @@ export class AddAppUserAccompiedComponent implements OnInit  {
         mobile: [this.user.mobile, [Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
         group: [this.user.group.id],
         balance:[this.user.wallet.price],
-        expiryDate: [this.user.expiryDate],
+        expiryDate: [moment(this.user.expiryDate).format('YYYY-MM-DDTHH:MM')],
         cardNum: [this.user.code],
         accompanied:[this.user.accompaniedGuests.length],
       });
       this.calculateParams();
     }else{
+      var nextDay = new Date();
+      nextDay.setDate(nextDay.getDate() + 1);
+
+      let defaultExpirationDate = moment(nextDay).format('YYYY-MM-DDT00:00');
       this.form = this.formBuilder.group({
         group: this.group,
         balance:[0, [Validators.required, Validators.maxLength, Validators.pattern('[- +()0-9]+')]],
-        expiryDate:["", [Validators.required]],
+        expiryDate:[defaultExpirationDate, [Validators.required]],
         cardNum: ["", [Validators.required, Validators.maxLength]],
         name: ["", [Validators.maxLength]],
         email: ["", [Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"), Validators.maxLength]],
