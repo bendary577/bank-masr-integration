@@ -68,13 +68,16 @@ export class AddAppUserAccompiedComponent implements OnInit  {
         })
         this.accompiendForms.push(accompiendForm);
       }
+
+      let expirationDate = moment(this.user.expiryDate).format('YYYY-MM-DDT00:00');
+
       this.form = this.formBuilder.group({
         name: [this.user.name, [Validators.maxLength]], 
         email: [this.user.email, [Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
         mobile: [this.user.mobile, [Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
         group: [this.user.group.id],
         balance:[this.user.wallet.price],
-        expiryDate: [moment(this.user.expiryDate).format('YYYY-MM-DDTHH:MM')],
+        expiryDate: [expirationDate],
         cardNum: [this.user.code],
         accompanied:[this.user.accompaniedGuests.length],
       });
@@ -96,10 +99,6 @@ export class AddAppUserAccompiedComponent implements OnInit  {
         });
     }
     this.swipe();
-  }
-
-  currentDate(){
-    return new Date().toISOString()
   }
 
   calculateParams(){
@@ -184,7 +183,7 @@ export class AddAppUserAccompiedComponent implements OnInit  {
       if(!this.isGeneric){
         this.group.id = this.form.controls.group.value;
       }
-    
+  
       this.dialogRef.close({
         name: this.form.controls.name.value,
         email: this.form.controls.email.value,
