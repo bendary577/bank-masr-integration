@@ -45,7 +45,7 @@ export class VoucherListComponent implements OnInit {
   openVoucherTransactions(voucher) {
       // this.data.storage = voucher
       localStorage.setItem("currentVoucherId", voucher.id);
-      this.router.navigate([Constants.VOUCHER_TRANSACTION])
+      this.router.navigate(["main/voucherTransaction"])
   }
 
   onSelect({ selected }) {
