@@ -111,7 +111,6 @@ import { AddSupplierComponent } from '../components/add-supplier/add-supplier.co
 import { ExportedFileConfigurationComponent } from '../components/configuration/exported-file-configuration/exported-file-configuration.component';
 import { WlsIntegrationConfigComponent } from '../components/wls-integration-config/wls-integration-config.component';
 import { DeleteAppGroupComponent } from '../components/delete-app-group/delete-app-group.component';
-import { AddAppUserAccompiedComponent } from '../components/add-app-user-accompied/add-app-user-accompied.component';
 import { AddAppUserComponent } from '../components/add-app-user/add-app-user.component';
 import { AddAppGroupComponent } from '../components/add-app-group/add-app-group.component';
 import { AddAppCompanyComponent } from '../components/add-app-company/add-app-company.component';
@@ -120,9 +119,6 @@ import { ManageSubGroupComponent } from '../components/manage-sub-group/manage-s
 import { AngularMaterialModule } from '../angular-material.module';
 import { BasicModule } from '../shared/basic.module';
 import { SharedModule } from '../shared/shared.module';
-import { MatTabsModule } from '@angular/material';
-import { SideNaveComponent } from '../components/side-nave/side-nave.component';
-
 
 @NgModule({
   declarations: [
@@ -202,7 +198,6 @@ import { SideNaveComponent } from '../components/side-nave/side-nave.component';
     AddAppCompanyComponent,
     AddAppGroupComponent,
     AddAppUserComponent,
-    AddAppUserAccompiedComponent,
     DeleteAppGroupComponent,
     WlsIntegrationConfigComponent,
     WlsIntegrationComponent,
@@ -245,10 +240,10 @@ import { SideNaveComponent } from '../components/side-nave/side-nave.component';
   imports: [
     CommonModule,
     MainRoutingModule,
+
     BasicModule,
     SharedModule,
     AngularMaterialModule,
-    MatTabsModule,
   ],
   entryComponents: [
     AddUserComponent,

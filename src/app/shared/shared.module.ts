@@ -37,22 +37,17 @@ import { AngularDropdownModule } from 'angular-dropdown';
     MatListModule,
     MatIconModule,
     MatExpansionModule,
-    // MatPaginatorModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
     MatCheckboxModule,
     MatCardModule,
-    // MatRippleModule,
     MatProgressBarModule,
 
 
     CommonModule,
     NgxJsonViewerModule,
     AngularDropdownModule,
-    // NgWormholeModule,
-    // ToastrModule,
-    // NgxDaterangepickerMd.forRoot(),
   ],
 
 })
