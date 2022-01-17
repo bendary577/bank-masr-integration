@@ -5,13 +5,11 @@ import {
   MatToolbarModule,
   MatIconModule,
   MatListModule,
-  MatPaginatorModule,
   MatDatepickerModule,
   MatNativeDateModule,
   MatSelectModule,
   MatCheckboxModule,
   MatCardModule,
-  MatRippleModule,
   MatProgressBarModule,
   MatMenuModule,
   MatBadgeModule,
@@ -21,8 +19,6 @@ import {
 } from '@angular/material'
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { AngularDropdownModule } from 'angular-dropdown';
-import { NgWormholeModule } from 'ng-wormhole';
-import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [],
@@ -41,21 +37,21 @@ import { ToastrModule } from 'ngx-toastr';
     MatListModule,
     MatIconModule,
     MatExpansionModule,
-    MatPaginatorModule,
+    // MatPaginatorModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
     MatCheckboxModule,
     MatCardModule,
-    MatRippleModule,
+    // MatRippleModule,
     MatProgressBarModule,
 
 
     CommonModule,
     NgxJsonViewerModule,
     AngularDropdownModule,
-    NgWormholeModule,
-    ToastrModule,
+    // NgWormholeModule,
+    // ToastrModule,
     // NgxDaterangepickerMd.forRoot(),
   ],
 

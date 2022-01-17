@@ -1,6 +1,6 @@
 
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatExpansionPanel, MatPaginator, MatSnackBar, MatDialog} from "@angular/material";
+import {Component, OnInit} from '@angular/core';
+import {MatExpansionPanel, MatSnackBar, MatDialog} from "@angular/material";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {User} from "../../../models/user";
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -40,8 +40,6 @@ export class UsersComponent implements OnInit {
   };
   panelOpenState = true;
   displayedColumns: string[] = ['firstName', 'username', 'lastName'];
-
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private spinner: NgxSpinnerService, public snackBar: MatSnackBar, private authService:AuthService,
     public dialog: MatDialog, private sidNav: SideNaveComponent) { }
