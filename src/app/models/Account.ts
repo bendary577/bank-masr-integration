@@ -12,6 +12,7 @@ export class Account {
   public creationDate: string;
   public apiKey?: string;
   public clientId?: string;
+  public imageUrl?: string;
   public deleted: boolean;
   public features: [];
   public emailConfig: AccountEmailConfig;
