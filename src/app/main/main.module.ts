@@ -7,7 +7,6 @@ import { SuppliersComponent } from '../components/suppliers/suppliers.component'
 import { SupplierDetailsComponent } from '../components/supplier-details/supplier-details.component';
 import { ConfigurationComponent } from '../components/setting/configuration/configuration.component';
 import { UsersComponent } from '../components/setting/users/users.component';
-import { SyncJobsconfigComponent } from '../components/setting/syncJob/syncJobsconfig.component';
 import { AddUserComponent } from '../components/add-vendor/add-vendor.component';
 import { SuppliersConfiguartionComponent } from '../components/suppliers-configuartion/suppliers-configuartion.component';
 import { SchedulerConfigurationComponent } from '../components/scheduler-configuration/scheduler-configuration.component';
@@ -15,38 +14,22 @@ import { BookedTransferDetailsComponent } from '../components/booked-transfer-de
 import { ErrorComponentComponent } from '../components/error-component/error-component.component';
 import { PosSalesComponent } from '../components/pos-sales/pos-sales.component';
 import { WelcomePageComponent } from '../components/welcome-page/welcome-page.component';
-import { PosSalesConfigurationComponent } from '../components/pos-sales-configuration/pos-sales-configuration.component';
 import { AddAccountComponent } from '../components/add-account/add-account.component';
-import { ApprovedInvoiceInforConfigurationComponent } from '../components/approved-invoice-infor-configuration/approved-invoice-infor-configuration.component';
-import { JournalsInforConfigurationsComponent } from '../components/journals-infor-configurations/journals-infor-configurations.component';
-import { SuppliersInforConfigurationComponent } from '../components/suppliers-infor-configuration/suppliers-infor-configuration.component';
 import { BookedTransferInforComponent } from '../components/booked-transfer-infor/booked-transfer-infor.component';
 import { JournalInforComponent } from '../components/journal-infor/journal-infor.component';
-import { BookedTransferInforConfigurationComponent } from '../components/booked-transfer-infor-configuration/booked-transfer-infor-configuration.component';
 import { ApprovedInvoicesInforComponent } from '../components/approved-invoices-infor/approved-invoices-infor.component';
 import { CreditNotesInforComponent } from '../components/credit-notes-infor/credit-notes-infor.component';
 import { CostCenterLocationMappingComponent } from '../components/setting/cost-center-location-mapping/cost-center-location-mapping.component';
 import { WastageInforComponent } from '../components/wastage-infor/wastage-infor.component';
-import { WastageInforConfigurationComponent } from '../components/wastage-infor-configuration/wastage-infor-configuration.component';
-import { CreditNotesInforConfigurationComponent } from '../components/credit-notes-infor-configuration/credit-notes-infor-configuration.component';
 import { BasicConfiguartionsComponent } from '../components/basic-configuartions/basic-configuartions.component';
 import { IncludedOverGroupsComponent } from '../components/setting/included-over-groups/included-over-groups.component';
 import { CostCenterAccountMappingComponent } from '../components/setting/cost-center-account-mapping/cost-center-account-mapping.component';
 import { PosSalesInforComponent } from '../components/pos-sales-infor/pos-sales-infor.component';
-import { PosSalesInforConfigurationComponent } from '../components/pos-sales-infor-configuration/pos-sales-infor-configuration.component';
 import { AddMajorGroupComponent } from '../components/addMajorGroup/add-major-group.component';
 import { ConsumptionMajorGroupChildComponent } from '../components/consumption-major-group-child/consumption-major-group-child.component';
-import { AddTenderComponent } from '../components/add-tender/add-tender.component';
 import { BookedProductionComponent } from '../components/BookedProduction/booked-production/booked-production.component';
-import { BookedProductionConfigurationComponent } from '../components/BookedProductionConfiguration/booked-production-configuration/booked-production-configuration.component';
-import { AddTaxComponent } from '../components/add-tax/add-tax.component';
-import { AddDiscountComponent } from '../components/add-discount/add-discount.component';
 import { AddRevenueCenterComponent } from '../components/add-revenue-center/add-revenue-center.component';
 import { AddServiceChargeComponent } from '../components/add-service-charge/add-service-charge.component';
-import { AnalysisConfigurationComponent } from '../components/configuration/analysis-configuration/analysis-configuration.component';
-import { InforSystemConfigurationComponent } from '../components/configuration/infor-system-configuration/infor-system-configuration.component';
-import { TaxAnalysisConfigrutionComponent } from '../components/configuration/tax-analysis-configrution/tax-analysis-configrution.component';
-import { TenderConfigurationComponent } from '../components/configuration/tender-configuration/tender-configuration.component';
 import { AddTenderChildComponent } from '../components/add-tender-child/add-tender-child.component';
 import { MenuItemsComponent } from '../components/menu-items/menu-items.component';
 import { MenuItemsConfigurationComponent } from '../components/menu-items-configuration/menu-items-configuration.component';
@@ -77,7 +60,6 @@ import { OpiTransactionsComponent } from '../components/opi-transactions/opi-tra
 import { HotelOpiComponent } from '../components/hotel-opi/hotel-opi.component';
 import { AddConsumptionLocationItemsComponent } from '../components/add-consumption-location-items/add-consumption-location-items.component';
 import { AddConsumptionLocationComponent } from '../components/add-consumption-location/add-consumption-location.component';
-import { CostOfGoodsConfigComponent } from '../components/cost-of-goods-config/cost-of-goods-config.component';
 import { CostOfGoodsComponent } from '../components/cost-of-goods/cost-of-goods.component';
 import { SimphonyDiscountMapingComponent } from '../components/simphony-discount-maping/simphony-discount-maping.component';
 import { ExpensesDetailsReportConfigComponent } from '../components/expenses-details-report-config/expenses-details-report-config.component';
@@ -101,13 +83,10 @@ import { NewBookingReportComponent } from '../components/new-booking-report/new-
 import { DialogComponent } from '../components/dialog/dialog.component';
 import { WlsIntegrationComponent } from '../components/wls-integration/wls-integration.component';
 import { ZealVoucherConfigComponent } from '../components/zeal-voucher-config/zeal-voucher-config.component';
-import { OhraConfigurationComponent } from '../components/configuration/ohra-configuration/ohra-configuration.component';
-import { CostOfGoodsOhraConfigComponent } from '../components/cost-of-goods-ohra-config/cost-of-goods-ohra-config.component';
 import { OperaPaymentConfigurationComponent } from '../components/opera-payment-configuration/opera-payment-configuration.component';
 import { AddSalesStatisticsComponent } from '../components/add-sales-statistics/add-sales-statistics.component';
 import { SupplierMappingComponent } from '../components/setting/supllier-mapping/supllier-mapping.component';
 import { AddSupplierComponent } from '../components/add-supplier/add-supplier.component';
-import { ExportedFileConfigurationComponent } from '../components/configuration/exported-file-configuration/exported-file-configuration.component';
 import { WlsIntegrationConfigComponent } from '../components/wls-integration-config/wls-integration-config.component';
 import { DeleteAppGroupComponent } from '../components/delete-app-group/delete-app-group.component';
 import { AddAppUserComponent } from '../components/add-app-user/add-app-user.component';
@@ -121,53 +100,48 @@ import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
-    WelcomePageComponent,
     MainComponent,
-    SuppliersComponent,
-    ConfigurationComponent,
-    UsersComponent,
-    SyncJobsconfigComponent,
-    AddUserComponent,
-    SuppliersConfiguartionComponent,
-    SchedulerConfigurationComponent,
-    BookedTransferDetailsComponent,
+    WelcomePageComponent,
     ErrorComponentComponent,
-    SupplierDetailsComponent,
-    PosSalesComponent,
-    PosSalesConfigurationComponent,
+
+    AddUserComponent,
+    UsersComponent,
+    ViewUserComponent,
     AddAccountComponent,
-    ApprovedInvoiceInforConfigurationComponent,
-    JournalsInforConfigurationsComponent,
-    SuppliersInforConfigurationComponent,
-    BookedTransferInforComponent,
-    BookedTransferInforConfigurationComponent,
-    JournalInforComponent,
-    JournalsInforConfigurationsComponent,
-    ApprovedInvoicesInforComponent,
-    CreditNotesInforComponent,
-    AddAccountComponent,
-    CostCenterLocationMappingComponent,
-    WastageInforComponent,
-    WastageInforConfigurationComponent,
-    CreditNotesInforConfigurationComponent,
+    ConfigurationComponent,
     BasicConfiguartionsComponent,
     IncludedOverGroupsComponent,
+    CostCenterLocationMappingComponent,
     CostCenterAccountMappingComponent,
+
+    SchedulerConfigurationComponent,
+
+    SuppliersComponent,
+    SupplierDetailsComponent,
+    SuppliersConfiguartionComponent,
+
+    PosSalesComponent,
+    CreditNotesInforComponent,
+    ApprovedInvoicesInforComponent,
+
+
+    BookedTransferInforComponent,
+    BookedTransferDetailsComponent,
+
+    JournalInforComponent,
+
+    WastageInforComponent,
+
     PosSalesInforComponent,
-    PosSalesInforConfigurationComponent,
+
+    BookedProductionComponent,
+
     AddMajorGroupComponent,
     ConsumptionMajorGroupChildComponent,
-    AddTenderComponent,
-    BookedProductionComponent,
-    BookedProductionConfigurationComponent,
-    AddTaxComponent,
-    AddDiscountComponent,
+
     AddRevenueCenterComponent,
     AddServiceChargeComponent,
-    AnalysisConfigurationComponent,
-    InforSystemConfigurationComponent,
-    TaxAnalysisConfigrutionComponent,
-    TenderConfigurationComponent,
+
     AddTenderChildComponent,
     MenuItemsComponent,
     MenuItemsConfigurationComponent,
@@ -181,18 +155,19 @@ import { SharedModule } from '../shared/shared.module';
     CreateOrderComponent,
     AddMajorGroupChildComponent,
     SyncExportedFilesComponent,
+
     ZealPaymentComponent,
     ZealPaymentConfigComponent,
     ZealVoucherComponent,
-    PaymentVoucherConfigComponent,
     ZealVoucherConfigComponent,
-    OhraConfigurationComponent,
-    CostOfGoodsOhraConfigComponent,
+
+    PaymentVoucherConfigComponent,
+
     AddSalesStatisticsComponent,
     OperaPaymentConfigurationComponent,
     SupplierMappingComponent,
     AddSupplierComponent,
-    ExportedFileConfigurationComponent,
+
     ManageSubGroupComponent,
     AddAppCompanyComponent,
     AddAppGroupComponent,
@@ -201,19 +176,22 @@ import { SharedModule } from '../shared/shared.module';
     WlsIntegrationConfigComponent,
     WlsIntegrationComponent,
     DialogComponent,
+
     NewBookingReportComponent,
     CancelBookingReportComponent,
     OccupancyUpdateReportComponent,
+    ExpensesDetailsReportComponent,
+
     NewBookingReportConfigComponent,
     CancelBookingReportConfigComponent,
     OccupancyUpdateReportConfigComponent,
+    ExpensesDetailsReportConfigComponent,
+
     OperaReportMapTablesComponent,
     OperaBookingDashBoardComponent,
-    ExpensesDetailsReportComponent,
-    ExpensesDetailsReportConfigComponent,
+
     SimphonyDiscountMapingComponent,
     CostOfGoodsComponent,
-    CostOfGoodsConfigComponent,
     AddConsumptionLocationComponent,
     AddConsumptionLocationItemsComponent,
     HotelOpiComponent,
@@ -227,7 +205,6 @@ import { SharedModule } from '../shared/shared.module';
     SimphonyPaymentComponent,
     SimphonyCheckComponent,
     SimphonyCheckConfigurationComponent,
-    ViewUserComponent,
     RevenueByAgentComponent,
     ExtendExpiryDateComponent,
     ViewInvokerComponent,
@@ -249,9 +226,6 @@ import { SharedModule } from '../shared/shared.module';
     AddAccountComponent,
     AddMajorGroupComponent,
     ConsumptionMajorGroupChildComponent,
-    AddTenderComponent,
-    AddTaxComponent,
-    AddDiscountComponent,
     AddRevenueCenterComponent,
     AddServiceChargeComponent,
     SuppliersConfiguartionComponent,

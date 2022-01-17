@@ -62,87 +62,87 @@ export class SyncJobsconfigComponent implements OnInit {
 
     if (syncJobType.name == Constants.SUPPLIERS_SYNC) {
       if (this.accountERD == Constants.SUN_ERD || this.accountERD == Constants.EXPORT_TO_SUN_ERD ) {
-        this.router.navigate([Constants.SUPPLIERS_SUN_CONFIG_PAGE]);
+        this.router.navigate([ "syncjobs/" + Constants.SUPPLIERS_SUN_CONFIG_PAGE]);
       }
       else{
-        this.router.navigate([Constants.SUPPLIERS_CONFIG_PAGE]);
+        this.router.navigate([ "syncjobs/" + Constants.SUPPLIERS_CONFIG_PAGE]);
       }
     }
     else if (syncJobType.name == Constants.APPROVED_INVOICES_SYNC) {
       console.log(this.accountERD);
 
       if (this.accountERD == Constants.SUN_ERD || this.accountERD == Constants.EXPORT_TO_SUN_ERD) {
-        this.router.navigate([Constants.APPROVED_INVOICES_SUN_CONFIG_PAGE]);
+        this.router.navigate([ "syncjobs/" + Constants.APPROVED_INVOICES_SUN_CONFIG_PAGE]);
       }
       else{
-        this.router.navigate([Constants.APPROVED_INVOICES_CONFIG_PAGE]);
+        this.router.navigate([ "syncjobs/" + Constants.APPROVED_INVOICES_CONFIG_PAGE]);
       }
     }
     else if (syncJobType.name == Constants.CREDIT_NOTE_SYNC) {
       if (this.accountERD == Constants.SUN_ERD || this.accountERD == Constants.EXPORT_TO_SUN_ERD) {
-        this.router.navigate([Constants.CREDIT_NOTE_INFOR_CONFIG_PAGE]);
+        this.router.navigate([ "syncjobs/" + Constants.CREDIT_NOTE_INFOR_CONFIG_PAGE]);
       }
       else{
-        this.router.navigate([Constants.APPROVED_INVOICES_CONFIG_PAGE]);
+        this.router.navigate([ "syncjobs/" + Constants.APPROVED_INVOICES_CONFIG_PAGE]);
       }
     }
     else if (syncJobType.name == Constants.CONSUMPTION_SYNC) {
       if (this.accountERD == Constants.SUN_ERD || this.accountERD == Constants.EXPORT_TO_SUN_ERD) {
-        this.router.navigate([Constants.CONSUMPTION_SUN_CONFIG_PAGE]);
+        this.router.navigate([ "syncjobs/" + Constants.CONSUMPTION_SUN_CONFIG_PAGE]);
       }
       else{
-        this.router.navigate([Constants.CONSUMPTION_CONFIG_PAGE]);
+        this.router.navigate([ "syncjobs/" + Constants.CONSUMPTION_CONFIG_PAGE]);
       }
     }
     else if (syncJobType.name == Constants.COST_OF_GOODS_SYNC) {
-        this.router.navigate([Constants.COST_OF_GOODS_CONFIG_PAGE]);
+        this.router.navigate([ "syncjobs/" + Constants.COST_OF_GOODS_CONFIG_PAGE]);
     }
     else if (syncJobType.name == Constants.BOOKED_TRANSFER_SYNC) {
       if (this.accountERD == Constants.SUN_ERD || this.accountERD == Constants.EXPORT_TO_SUN_ERD) {
-        this.router.navigate([Constants.BOOKED_TRANSFER_INFOR_CONFIG_PAGE]);
+        this.router.navigate([ "syncjobs/" + Constants.BOOKED_TRANSFER_INFOR_CONFIG_PAGE]);
       }
       else{
-        this.router.navigate([Constants.CONSUMPTION_CONFIG_PAGE]);
+        this.router.navigate([ "syncjobs/" + Constants.CONSUMPTION_CONFIG_PAGE]);
       }
     }
     else if (syncJobType.name == Constants.POS_SALES_SYNC) {
       if (this.accountERD == Constants.SUN_ERD || this.accountERD == Constants.EXPORT_TO_SUN_ERD) {
-        this.router.navigate([Constants.POS_SALES_INFOR_CONFIG_PAGE]);
+        this.router.navigate([ "syncjobs/" + Constants.POS_SALES_INFOR_CONFIG_PAGE]);
       }
       else{
-        this.router.navigate([Constants.POS_SALES_CONFIG_PAGE]);
+        this.router.navigate([ "syncjobs/" + Constants.POS_SALES_CONFIG_PAGE]);
       }
     }
     else if (syncJobType.name == Constants.WASTARGE_SYNC) {
       if (this.accountERD == Constants.SUN_ERD || this.accountERD == Constants.EXPORT_TO_SUN_ERD) {
-        this.router.navigate([Constants.WASTARGE_INFOR_CONFIG_PAGE]);
+        this.router.navigate([ "syncjobs/" + Constants.WASTARGE_INFOR_CONFIG_PAGE]);
       }
       else{
-        this.router.navigate([Constants.WASTARGE_CONFIG_PAGE]);
+        this.router.navigate([ "syncjobs/" + Constants.WASTARGE_CONFIG_PAGE]);
       }
     }
     else if (syncJobType.name == Constants.BOOKED_PRODUCTION_SYNC) {
       if (this.accountERD == Constants.SUN_ERD || this.accountERD == Constants.EXPORT_TO_SUN_ERD) {
-        this.router.navigate([Constants.BOOKED_PRODUCTION_INFOR_CONFIG_PAGE]);
+        this.router.navigate([ "syncjobs/" + Constants.BOOKED_PRODUCTION_INFOR_CONFIG_PAGE]);
       }
       else{
-        this.router.navigate([Constants.BOOKED_PRODUCTION_CONFIG_PAGE]);
+        this.router.navigate([ "syncjobs/" + Constants.BOOKED_PRODUCTION_CONFIG_PAGE]);
       }
     }
     else if (syncJobType.name == Constants.MENU_ITEMS_SYNC) {
-        this.router.navigate([Constants.MENU_ITEMS_CONFIG_PAGE]);
+        this.router.navigate([ "syncjobs/" + Constants.MENU_ITEMS_CONFIG_PAGE]);
     }
     else if (syncJobType.name == Constants.NEW_BOOKING_REPORT_SYNC) {
-      this.router.navigate([Constants.NEW_BOOKING_REPORT_CONFIG_PAGE]);
+      this.router.navigate([ "syncjobs/" + Constants.NEW_BOOKING_REPORT_CONFIG_PAGE]);
     }
     else if (syncJobType.name == Constants.CANCEL_BOOKING_REPORT_SYNC) {
-      this.router.navigate([Constants.CANCEL_BOOKING_REPORT_CONFIG_PAGE]);
+      this.router.navigate([ "syncjobs/" + Constants.CANCEL_BOOKING_REPORT_CONFIG_PAGE]);
     }
     else if (syncJobType.name == Constants.OCCUPANCY_UPDATE_REPORT_SYNC) {
-      this.router.navigate([Constants.OCCUPANCY_UPDATE_REPORT_CONFIG_PAGE]);
+      this.router.navigate([ "syncjobs/" + Constants.OCCUPANCY_UPDATE_REPORT_CONFIG_PAGE]);
     }
     else if (syncJobType.name == Constants.EXPENSES_DETAILS_REPORT_SYNC) {
-      this.router.navigate([Constants.EXPENSES_DETAILS_REPORT_CONFIG_PAGE]);
+      this.router.navigate([ "syncjobs/" + Constants.EXPENSES_DETAILS_REPORT_CONFIG_PAGE]);
     }
     else{
       this.snackBar.open("This sync job has not configuration yet.", null, {
@@ -156,7 +156,7 @@ export class SyncJobsconfigComponent implements OnInit {
 
   openSyncFiles(syncJobType) {
     this.data.storage = syncJobType
-    this.router.navigate([Constants.EXPORTED_FILES_PAGE]);
+    this.router.navigate([ "syncjobs/" + Constants.EXPORTED_FILES_PAGE]);
   }
 
   clearSyncJobData(){

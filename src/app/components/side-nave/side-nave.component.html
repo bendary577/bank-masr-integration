@@ -213,7 +213,7 @@
       </a>
       <div class="collapse" id="ui-basic" [ngbCollapse]="!setBasicCollapsed">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item" *ngIf="hasRole('see_syncs_config')"><a class="nav-link settingLink" routerLink="/main/syncjobs"
+          <li class="nav-item" *ngIf="hasRole('see_syncs_config')"><a class="nav-link settingLink" routerLink="/syncjobs"
               *ngIf="syncJobTypes.length > 0">Sync Configuration</a> </li>
           <li class="nav-item" *ngIf="hasRole('see_oper_config')"><a class="nav-link" routerLink="/main/operationTypesConfiguration">Operation Configuration</a>
           </li>
