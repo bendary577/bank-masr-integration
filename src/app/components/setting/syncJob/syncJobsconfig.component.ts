@@ -1,6 +1,6 @@
 
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatExpansionPanel, MatPaginator, MatTableDataSource, MatDialog, MatSnackBar} from "@angular/material";
+import {Component, OnInit} from '@angular/core';
+import {MatExpansionPanel, MatTableDataSource, MatDialog, MatSnackBar} from "@angular/material";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {User} from "../../../models/user";
 import {Data} from "../../../models/data";
@@ -29,7 +29,6 @@ export class SyncJobsconfigComponent implements OnInit {
   loading = true;
   accountERD = "";
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   constructor(private syncJobService: SyncJobService,  public dialog: MatDialog,
      public snackBar: MatSnackBar, private spinner: NgxSpinnerService, private router: Router,
      private data: Data, private sidNav: SideNaveComponent) {

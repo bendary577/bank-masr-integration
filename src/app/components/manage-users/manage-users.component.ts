@@ -425,7 +425,7 @@ export class ManageUsersComponent implements OnInit {
             res.cardCode,
             res.mobile,
             res.balance,
-            res.expire,
+            res.expiryDate,
             res.sendEmail,
             res.sendSMS,
 

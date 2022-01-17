@@ -113,7 +113,7 @@ export class LoginComponent implements OnInit {
         this.side.getOperationTypes()
         this.side.getApplication()
         this.router.navigate(["main/" + Constants.WELCOME_PAGE])
-        this.spinner.hide()
+        // this.spinner.hide()
       })
       .catch((err) => {
         console.log(err)
