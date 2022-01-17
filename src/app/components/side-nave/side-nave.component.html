@@ -111,7 +111,7 @@
       </a>
       <div class="collapse" id="ui-basic" [ngbCollapse]="!uiBasicCollapsed">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item" *ngFor="let type of syncJobTypes"> <a class="nav-link" routerLink={{type.endPoint}}
+          <li class="nav-item" *ngFor="let type of syncJobTypes"> <a class="nav-link" routerLink="/main/{{type.endPoint}}" 
               routerLinkActive="active" translate>{{type.name}}</a></li>
         </ul>
       </div>
