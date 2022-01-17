@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material'
 import { ErrorMessages } from 'src/app/models/ErrorMessages'
 import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser'
@@ -90,7 +90,7 @@ export class ManageUsersComponent implements OnInit {
 
   openUserProfile(user: ApplicationUser) {
     this.data.storage = user
-    this.router.navigate([Constants.USER_PROFILE])
+    this.router.navigate(["main/" + Constants.USER_PROFILE])
   }
 
   getUsers() {
