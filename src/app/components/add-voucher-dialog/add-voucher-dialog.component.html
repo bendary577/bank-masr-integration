@@ -29,17 +29,17 @@
                 </mat-form-field>
 
                 <mat-form-field class="example-full-width creditForm" appearance="outline">
-                    <input matInput style="max-width: 100%;" placeholder="Start Date" type="date" formControlName="startDate"
+                    <input matInput required style="max-width: 100%;" placeholder="Start Date" type="date" formControlName="startDate"
                         id="startDate">
-                    <mat-error *ngIf="form.controls.name.hasError('required')">
+                    <mat-error *ngIf="form.controls.startDate.hasError('required')">
                         Start Date is required.
                     </mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="example-full-width creditForm" appearance="outline">
-                    <input matInput style="max-width: 100%;" placeholder="End Date" type="date" formControlName="endDate"
+                    <input matInput required style="max-width: 100%;" placeholder="End Date" type="date" formControlName="endDate"
                         id="endDate">
-                    <mat-error *ngIf="form.controls.name.hasError('required')">
+                    <mat-error *ngIf="form.controls.endDate.hasError('required')">
                         End Date Date is required.
                     </mat-error>
                 </mat-form-field>

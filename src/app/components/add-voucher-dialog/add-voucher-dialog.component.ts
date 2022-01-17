@@ -43,8 +43,8 @@ export class AddVoucherDialogComponent implements OnInit {
       this.form = this.formBuilder.group({
         id: this.voucher.id,
         name: [this.voucher.name, [Validators.maxLength, Validators.required]],
-        startDate: [this.voucher.startDate],
-        endDate: [this.voucher.endDate],
+        startDate: [this.voucher.startDate, [Validators.required]],
+        endDate: [this.voucher.endDate, [Validators.required]],
         redeemQuota: [this.voucher.redeemQuota, [Validators.maxLength, Validators.required, Validators.pattern("^[0-9]*$")]],
         simphonyDiscountId: [this.voucher.simphonyDiscount.discountId, [Validators.required]],
       })
@@ -52,8 +52,8 @@ export class AddVoucherDialogComponent implements OnInit {
       this.form = this.formBuilder.group({
         id: 0,
         name: ['', [Validators.maxLength, Validators.required]],
-        startDate: [''],
-        endDate: [''],
+        startDate: ['', [Validators.required]],
+        endDate: ['', [Validators.required]],
         redeemQuota: ['', [Validators.maxLength, Validators.required, Validators.pattern("^[0-9]*$")]],
         simphonyDiscountId: ['', [Validators.required]],
       })
