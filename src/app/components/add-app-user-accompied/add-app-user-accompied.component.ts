@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser';
@@ -81,7 +81,7 @@ export class AddAppUserAccompiedComponent implements OnInit  {
     }else{
       this.form = this.formBuilder.group({
         group: this.group,
-        balance:[100, [Validators.required, Validators.maxLength, Validators.pattern('[- +()0-9]+')]],
+        balance:[0, [Validators.required, Validators.maxLength, Validators.pattern('[- +()0-9]+')]],
         expiryDate:["", [Validators.required]],
         cardNum: ["", [Validators.required, Validators.maxLength]],
         name: ["", [Validators.maxLength]],

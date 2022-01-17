@@ -7,8 +7,8 @@ import { Response } from 'src/app/models/Response';
 import { Supplier } from 'src/app/models/supplier';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 import { AddSupplierComponent } from '../../add-supplier/add-supplier.component';
-import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
 import { SupplierService } from '../../../services/supplier/supplier.service'
+import { SideNaveComponent } from '../../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-supllier-mapping',
@@ -24,7 +24,7 @@ export class SupplierMappingComponent implements OnInit {
   generalSettings: GeneralSettings;
 
   constructor(private spinner: NgxSpinnerService, public snackBar: MatSnackBar,  public dialog: MatDialog,
-    private generalSettingsService:GeneralSettingsService, private sidNav: SidenavResponsive,
+    private generalSettingsService:GeneralSettingsService, private sidNav: SideNaveComponent,
     private supplierService: SupplierService) {
   }
 

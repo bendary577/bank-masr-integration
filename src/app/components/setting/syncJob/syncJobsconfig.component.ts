@@ -11,7 +11,7 @@ import { SchedulerConfigurationComponent } from '../../scheduler-configuration/s
 import { Router } from '@angular/router';
 import { Constants } from 'src/app/models/constants';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
-import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
+import { SideNaveComponent } from '../../side-nave/side-nave.component';
 
 
 /**
@@ -32,7 +32,7 @@ export class SyncJobsconfigComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   constructor(private syncJobService: SyncJobService,  public dialog: MatDialog,
      public snackBar: MatSnackBar, private spinner: NgxSpinnerService, private router: Router,
-     private data: Data, private sidNav: SidenavResponsive) {
+     private data: Data, private sidNav: SideNaveComponent) {
   }
 
   ngOnInit() {

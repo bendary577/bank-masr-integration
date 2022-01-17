@@ -3,12 +3,12 @@ import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { AddWebServiceInvokerComponent } from '../../add-web-service-invoker/add-web-service-invoker.component';
-import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
 import { User } from '../../../models/user'
 import { UserService } from 'src/app/services/user/user.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ViewInvokerComponent } from '../../view-invoker/view-invoker.component';
 import { InvokerUser } from 'src/app/models/InvokerUser';
+import { SideNaveComponent } from '../../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-web-service-invoker-configuration',
@@ -23,7 +23,7 @@ export class WebServiceInvokerConfigurationComponent implements OnInit {
 
   @Input() syncJobType: SyncJobType;
 
-  constructor(private sidNav: SidenavResponsive, public snackBar: MatSnackBar,
+  constructor(private sidNav: SideNaveComponent, public snackBar: MatSnackBar,
     private spinner: NgxSpinnerService,
      public dialog: MatDialog, public userService: UserService) { }
 

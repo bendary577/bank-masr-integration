@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { MatSnackBar } from '@angular/material'
 import { NgxSpinnerService } from 'ngx-spinner'
 import { ErrorMessages } from 'src/app/models/ErrorMessages'
 import { OperaPaymentService } from 'src/app/services/operaPayment/opera-payment.service'
-import { SidenavResponsive } from '../../sidenav/sidenav-responsive'
 import { DateAdapter } from '@angular/material/core';
-import * as moment from 'moment';
+import { SideNaveComponent } from '../../side-nave/side-nave.component'
 
 @Component({
   selector: 'app-opera-payments',
@@ -26,7 +25,7 @@ export class OperaPaymentsComponent implements OnInit {
 
   constructor(
     private spinner: NgxSpinnerService, private dateAdapter: DateAdapter<Date>,
-    private sidNav: SidenavResponsive,
+    private sidNav: SideNaveComponent,
     private operaPaymentService: OperaPaymentService,
     private snackBar: MatSnackBar
   ) {
@@ -108,7 +107,7 @@ export class OperaPaymentsComponent implements OnInit {
         panelClass: "my-snack-bar-fail"
       });
       this.spinner.hide();
-    } else if (this.fromDate != undefined && this.toDate != undefined && (moment(this.toDate.toString()).diff(moment(this.fromDate.toString()), 'day') < 0)) {
+    } else if (this.fromDate != undefined && this.toDate != undefined) {
       this.snackBar.open("Configure start date and end date correctly, \n start date can't be after end date.", null, {
         duration: 3000,
         horizontalPosition: 'center',

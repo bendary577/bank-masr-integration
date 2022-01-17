@@ -6,7 +6,9 @@ const DISCOVERY_DOCS = [
 var SCOPES = "https://www.googleapis.com/auth/drive";
 declare var UploaderForGoogleDrive;
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class DriveService {
   googleAuth: gapi.auth2.GoogleAuth;
 

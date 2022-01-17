@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { AuthService } from 'src/app/services/auth/auth.service'
@@ -8,7 +8,6 @@ import { NgxSpinnerService } from 'ngx-spinner'
 import { User } from '../../models/user'
 import { AccountService } from 'src/app/services/account/account.service'
 import { Account } from '../../models/Account'
-import { ErrorMessages } from 'src/app/models/ErrorMessages'
 import { SideNaveComponent } from '../side-nave/side-nave.component'
 
 @Component({
@@ -23,7 +22,6 @@ export class LoginComponent implements OnInit {
   submitted = false
   returnUrl: string
   side: SideNaveComponent
-  // sideNav : SideNaveComponent;
   account: Account
 
   constructor(
@@ -41,7 +39,7 @@ export class LoginComponent implements OnInit {
     this.side.shouldRun = false
 
     if (localStorage.getItem('auth_token')) {
-      this.router.navigate([Constants.WELCOME_PAGE])
+      this.router.navigate(["main/" + Constants.WELCOME_PAGE])
     }
   }
 
@@ -114,7 +112,7 @@ export class LoginComponent implements OnInit {
         this.side.getSyncJobTypes()
         this.side.getOperationTypes()
         this.side.getApplication()
-        this.router.navigate([Constants.WELCOME_PAGE])
+        this.router.navigate(["main/" + Constants.WELCOME_PAGE])
         this.spinner.hide()
       })
       .catch((err) => {

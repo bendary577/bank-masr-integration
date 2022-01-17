@@ -9,7 +9,6 @@ import { AccountSyncType } from 'src/app/models/AccountSyncType';
 import { PosSalesService } from '../../services/posSales/pos-sales.service';
 import { AddMajorGroupComponent } from '../addMajorGroup/add-major-group.component';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
-import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import { AddTaxComponent } from '../add-tax/add-tax.component';
 import { AddDiscountComponent } from '../add-discount/add-discount.component';
 import { AddServiceChargeComponent } from '../add-service-charge/add-service-charge.component';
@@ -20,6 +19,7 @@ import { GeneralSettingsService } from 'src/app/services/generalSettings/general
 import { ServiceCharge } from 'src/app/models/ServiceCharge';
 import { SalesStatistics } from 'src/app/models/SalesStatistics';
 import { AddSalesStatisticsComponent } from '../add-sales-statistics/add-sales-statistics.component';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 
 @Component({
@@ -61,7 +61,7 @@ export class PosSalesInforConfigurationComponent implements OnInit {
   generalSettings: GeneralSettings;
 
   constructor(private spinner: NgxSpinnerService, private salesService:PosSalesService,
-    private sidNav: SidenavResponsive, private generalSettingsService: GeneralSettingsService,
+    private sidNav: SideNaveComponent, private generalSettingsService: GeneralSettingsService,
      private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService,
     private router:Router, public snackBar: MatSnackBar, public dialog: MatDialog) { }
 

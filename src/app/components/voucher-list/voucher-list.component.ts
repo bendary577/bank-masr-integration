@@ -3,8 +3,6 @@ import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { Data } from 'src/app/models/data'
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
-import { SidenavResponsive } from '../sidenav/sidenav-responsive';
-import { Location } from '@angular/common'
 import { AddVoucherDialogComponent } from '../add-voucher-dialog/add-voucher-dialog.component';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { saveAs } from 'file-saver'
@@ -12,6 +10,8 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 import { Constants } from 'src/app/models/constants';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PDFServiceService } from 'src/app/services/pdf-service/pdfservice.service';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-voucher-list',
@@ -29,7 +29,7 @@ export class VoucherListComponent implements OnInit {
      inputSearch: '' as string,  voucherData: [] , offset: 0 ,    paginateData: true as boolean,
   }
 
-  constructor(public snackBar: MatSnackBar, private sidNav: SidenavResponsive, public dialog: MatDialog, 
+  constructor(public snackBar: MatSnackBar, private sidNav: SideNaveComponent, public dialog: MatDialog, 
     private _location: Location, private loyaltyService: LoyaltyService, private router: Router, public data: Data,
     private spinner: NgxSpinnerService,private pdfService: PDFServiceService) {
      }

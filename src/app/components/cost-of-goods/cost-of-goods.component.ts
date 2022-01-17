@@ -8,7 +8,6 @@ import { CsvService } from 'src/app/services/csv/csv.service';
 import { ExcelService } from 'src/app/services/excel/excel.service';
 import { JournalService } from 'src/app/services/journal/journal.service';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
-import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import { saveAs } from 'file-saver';
 import { SideNaveComponent } from '../side-nave/side-nave.component'
 

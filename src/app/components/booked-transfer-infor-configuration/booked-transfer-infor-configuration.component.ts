@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
-import { InvoiceService } from 'src/app/services/invoice/invoice.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { Constants } from 'src/app/models/constants';
@@ -11,7 +10,7 @@ import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.s
 import { AccountSyncType } from 'src/app/models/AccountSyncType';
 import { CostCenter } from 'src/app/models/CostCenter';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
-import { SidenavResponsive } from '../sidenav/sidenav-responsive';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-booked-transfer-infor-configuration',
@@ -41,7 +40,7 @@ export class BookedTransferInforConfigurationComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService, private syncJobService:SyncJobService, private journalService:JournalService,
     private accSyncTypeService:AccSyncTypeService, private router:Router, public snackBar: MatSnackBar,
-    private sidNav: SidenavResponsive) {
+    private sidNav: SideNaveComponent) {
       this.costCenters = [];
       this.overGroups = [];
   }

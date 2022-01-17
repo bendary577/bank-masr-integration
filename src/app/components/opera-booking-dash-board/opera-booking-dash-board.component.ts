@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { DilogServiceService } from '../dialog/dilog-service.service';
-import { SidenavResponsive } from '../sidenav/sidenav-responsive';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-opera-booking-dash-board',
@@ -52,8 +51,10 @@ export class OperaBookingDashBoardComponent implements OnInit {
     bookingData: [] 
   };
 
-  constructor(private spinner: NgxSpinnerService, public snackBar: MatSnackBar,
-    private sidNav: SidenavResponsive, public dialogService: DilogServiceService,
+  constructor(
+    public snackBar: MatSnackBar,
+    private sidNav: SideNaveComponent,
+    public dialogService: DilogServiceService,
     private syncJobService: SyncJobService) { }
 
   ngOnInit(): void {

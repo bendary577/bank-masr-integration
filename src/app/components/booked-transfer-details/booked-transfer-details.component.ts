@@ -5,7 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Constants } from 'src/app/models/constants';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { MatSnackBar } from '@angular/material';
-import { SidenavResponsive } from '../sidenav/sidenav-responsive';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-booked-transfer-details',
@@ -17,7 +17,7 @@ export class BookedTransferDetailsComponent implements OnInit {
   transferDetailsLink = "";
   transferDetails = [];
 
-  constructor(private route:ActivatedRoute, private spinner: NgxSpinnerService, private sidNav: SidenavResponsive,
+  constructor(private route:ActivatedRoute, private spinner: NgxSpinnerService, private sidNav: SideNaveComponent,
      private transferService: TransferService, private router:Router, public snackBar: MatSnackBar) { }
 
   ngOnInit() {

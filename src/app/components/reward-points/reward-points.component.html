@@ -1,7 +1,7 @@
 <mat-tab-group>
-    <mat-tab label="Groups" *ngIf="hasRole('show_groups')"> 
+    <!-- <mat-tab label="Groups" *ngIf="hasRole('show_groups')"> 
         <app-manage-groups></app-manage-groups>
-    </mat-tab>
+    </mat-tab> -->
     <mat-tab label="Guest" *ngIf="hasRole('show_guests')"> 
         <app-manage-reward-points-users></app-manage-reward-points-users>
     </mat-tab>

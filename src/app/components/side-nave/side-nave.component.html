@@ -3,7 +3,8 @@
 <nav class="sidebar sidebar-offcanvas active" id="sidebar" >
   <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
     <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="assets/image2vector(1).svg" alt="logo" /></a>
-    <a class="sidebar-brand brand-logo" href="index.html"><img src="assets/images/Anywarelogo.png" alt="logo" /></a>
+    <a *ngIf="account.imageUrl && account.imageUrl != ''" class="sidebar-brand brand-logo" href="index.html"><img src={{account.imageUrl}} alt="logo" /></a>
+    <a *ngIf="!account.imageUrl || account.imageUrl == ''" class="sidebar-brand brand-logo" href="index.html"><img src="assets/images/Anywarelogo.png" alt="logo" /></a>
     <!-- <a class="sidebar-brand brand-logo" href="index.html"><img src="assets/63.svg" alt="logo" /></a> -->
   </div>
   <ul class="nav" #snav>
@@ -111,7 +112,7 @@
       </a>
       <div class="collapse" id="ui-basic" [ngbCollapse]="!uiBasicCollapsed">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item" *ngFor="let type of syncJobTypes"> <a class="nav-link" routerLink={{type.endPoint}}
+          <li class="nav-item" *ngFor="let type of syncJobTypes"> <a class="nav-link" routerLink="/main/{{type.endPoint}}" 
               routerLinkActive="active" translate>{{type.name}}</a></li>
         </ul>
       </div>
@@ -129,7 +130,7 @@
       <div class="collapse" id="ui-basic" [ngbCollapse]="!uiBasicCollapsed">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"> 
-            <a class="nav-link" routerLink="/support" routerLinkActive="active" translate>Reports Generator</a></li>
+            <a class="nav-link" routerLink="/main/support" routerLinkActive="active" translate>Reports Generator</a></li>
         </ul>
       </div>
     </li>
@@ -174,9 +175,9 @@
       </a>
       <div class="collapse" id="ui-basic" [ngbCollapse]="!repBasicCollapsed">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item" *ngIf="hasRole('booking_report')"> <a class="nav-link" routerLink="/operaBookingDashboard" routerLinkActive="active"
+          <li class="nav-item" *ngIf="hasRole('booking_report')"> <a class="nav-link" routerLink="/main/operaBookingDashboard" routerLinkActive="active"
               translate>Booking Report</a></li>
-          <li class="nav-item" *ngIf="hasRole('revenue_by_agent_report')"> <a class="nav-link" routerLink="/revenueByAgent" routerLinkActive="active"
+          <li class="nav-item" *ngIf="hasRole('revenue_by_agent_report')"> <a class="nav-link" routerLink="/main/revenueByAgent" routerLinkActive="active"
               translate>Revenue by Agent</a>
           </li>
         </ul>
@@ -212,21 +213,21 @@
       </a>
       <div class="collapse" id="ui-basic" [ngbCollapse]="!setBasicCollapsed">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item" *ngIf="hasRole('see_syncs_config')"><a class="nav-link settingLink" routerLink="/syncjobs"
+          <li class="nav-item" *ngIf="hasRole('see_syncs_config')"><a class="nav-link settingLink" routerLink="/main/syncjobs"
               *ngIf="syncJobTypes.length > 0">Sync Configuration</a> </li>
-          <li class="nav-item" *ngIf="hasRole('see_oper_config')"><a class="nav-link" routerLink="/operationTypesConfiguration">Operation Configuration</a>
+          <li class="nav-item" *ngIf="hasRole('see_oper_config')"><a class="nav-link" routerLink="/main/operationTypesConfiguration">Operation Configuration</a>
           </li>
-          <li class="nav-item" *ngIf="hasRole('see_cost_mapping')"><a class="nav-link" routerLink="/costCenterAccountMapping">Costcenter Mapping</a></li>
-          <li class="nav-item" *ngIf="hasRole('see_sup_mapping')"><a class="nav-link" routerLink="/suppliersMapping">Suppliers Mapping</a></li>
-          <li class="nav-item" *ngIf="hasRole('see_groups_mapping')"><a class="nav-link" routerLink="/includedOverGroups">Included Groups</a> </li>
-          <li class="nav-item" *ngIf="hasRole('see_opera_mapping')"><a class="nav-link" routerLink="/operaReportMapTables">Opera Mapping</a> </li>
-          <li class="nav-item" *ngIf="hasRole('see_locationMapping')"><a class="nav-link" routerLink="/costCenterLocationMapping">Location Mapping</a> </li>
-          <li class="nav-item" *ngIf="hasRole('see_simphony_discountmapping')"><a class="nav-link" routerLink="/simphonyDiscountMaping">Discount Mapping</a> </li>
-          <li class="nav-item" *ngIf="hasRole('reward_points_settings')"><a class="nav-link" routerLink="/rewardPointsSettings">Points Settings</a>
-          <li class="nav-item" *ngIf="hasRole('see_general_setting')"><a class="nav-link" routerLink="/setting">General Settings</a>
-            <li class="nav-item" *ngIf="hasRole('see_pos_mapping')"><a class="nav-link" routerLink="/posMachinMapping">PAX Mapping</a>
+          <li class="nav-item" *ngIf="hasRole('see_cost_mapping')"><a class="nav-link" routerLink="/main/costCenterAccountMapping">Costcenter Mapping</a></li>
+          <li class="nav-item" *ngIf="hasRole('see_sup_mapping')"><a class="nav-link" routerLink="/main/suppliersMapping">Suppliers Mapping</a></li>
+          <li class="nav-item" *ngIf="hasRole('see_groups_mapping')"><a class="nav-link" routerLink="/main/includedOverGroups">Included Groups</a> </li>
+          <li class="nav-item" *ngIf="hasRole('see_opera_mapping')"><a class="nav-link" routerLink="/main/operaReportMapTables">Opera Mapping</a> </li>
+          <li class="nav-item" *ngIf="hasRole('see_locationMapping')"><a class="nav-link" routerLink="/main/costCenterLocationMapping">Location Mapping</a> </li>
+          <li class="nav-item" *ngIf="hasRole('see_simphony_discountmapping')"><a class="nav-link" routerLink="/main/simphonyDiscountMaping">Discount Mapping</a> </li>
+          <li class="nav-item" *ngIf="hasRole('reward_points_settings')"><a class="nav-link" routerLink="/main/rewardPointsSettings">Points Settings</a>
+          <li class="nav-item" *ngIf="hasRole('see_general_setting')"><a class="nav-link" routerLink="/main/setting">General Settings</a>
+            <li class="nav-item" *ngIf="hasRole('see_pos_mapping')"><a class="nav-link" routerLink="/main/posMachinMapping">PAX Mapping</a>
             </li>
-          <li class="nav-item" *ngIf="hasRole('manage_invokers')"><a class="nav-link" routerLink="/webServiceInvokers">Manage Invokers</a></li>
+          <li class="nav-item" *ngIf="hasRole('manage_invokers')"><a class="nav-link" routerLink="/main/webServiceInvokers">Manage Invokers</a></li>
         </ul>
       </div>
     </li>
@@ -245,7 +246,7 @@
       </a>
       <div class="collapse" id="auth" [ngbCollapse]="!userPagesCollapsed">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"><a class="nav-link" routerLink="/users">Users</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/main/users">Users</a></li>
         </ul>
       </div>
     </li>
