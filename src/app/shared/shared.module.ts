@@ -21,9 +21,7 @@ import { AngularDropdownModule } from 'angular-dropdown';
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule
-  ],
+  imports: [],
   exports:[    
     // Data Tables
     NgxDatatableModule,

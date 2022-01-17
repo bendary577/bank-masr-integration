@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { RewardPointsRoutingModule } from './reward-points-routing.module';
 import { RewardPointsComponent } from './reward-points.component';
@@ -24,7 +23,6 @@ import { ApplicationModule } from 'src/app/shared/application.module';
     RewardPointsSettingsComponent,
   ],
   imports: [
-    CommonModule,
     RewardPointsRoutingModule,
 
     BasicModule,

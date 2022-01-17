@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { LoyaltyRoutingModule } from './loyalty-routing.module';
 import { LoyaltyComponent } from './loyalty.component';
@@ -30,7 +29,6 @@ import { AddAppUserAccompiedComponent } from '../add-app-user-accompied/add-app-
     ManageGroupsComponent
   ],
   imports: [
-    CommonModule,
     LoyaltyRoutingModule,
 
     BasicModule,
