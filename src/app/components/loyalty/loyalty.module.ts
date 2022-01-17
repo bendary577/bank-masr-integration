@@ -11,6 +11,14 @@ import { AngularMaterialModule } from 'src/app/angular-material.module';
 import { ManageGroupsComponent } from '../manage-groups/manage-groups.component';
 import { MatTabsModule } from '@angular/material';
 import { BasicModule } from 'src/app/shared/basic.module';
+import { AddAppCompanyComponent } from '../add-app-company/add-app-company.component';
+import { AddAppGroupComponent } from '../add-app-group/add-app-group.component';
+import { AddAppUserComponent } from '../add-app-user/add-app-user.component';
+import { DialogComponent } from '../dialog/dialog.component';
+import { DeleteAppGroupComponent } from '../delete-app-group/delete-app-group.component';
+import { EditWalletComponent } from '../edit-wallet/edit-wallet.component';
+import { AddVoucherDialogComponent } from '../add-voucher-dialog/add-voucher-dialog.component';
+import { ExtendExpiryDateComponent } from '../extend-expiry-date/extend-expiry-date.component';
 
 
 @NgModule({
@@ -28,6 +36,18 @@ import { BasicModule } from 'src/app/shared/basic.module';
     BasicModule,
     SharedModule,
     AngularMaterialModule,
+  ],
+  entryComponents: [
+    // ==> Loyalty
+    AddAppCompanyComponent,
+    AddAppGroupComponent,
+    AddAppUserComponent,
+    DialogComponent,
+    DeleteAppGroupComponent,
+    EditWalletComponent,
+    ExtendExpiryDateComponent,
+    AddVoucherDialogComponent,
   ]
+
 })
 export class LoyaltyModule { }

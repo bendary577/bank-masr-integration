@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ErrorComponentComponent } from './components/error-component/error-component.component';
+import { LoginComponent } from './components/login/login.component';
 import { ConfigurationComponent } from './components/setting/configuration/configuration.component';
 import { Constants } from './models/constants';
 
@@ -11,7 +12,8 @@ const routes: Routes = [
     path: Constants.SETTING, component: ConfigurationComponent ,
     children: []
   },
-  
+  { path: Constants.LOGIN_PAGE, component: LoginComponent },
+
   // ==> Modules
   // Loyalty Views
   { path: Constants.GET_LOYALTY_PAGE, loadChildren: () => import('./components/loyalty/loyalty.module').then(m => m.LoyaltyModule) },
@@ -19,7 +21,6 @@ const routes: Routes = [
   { path: Constants.GET_VOUCHER_PAGE, loadChildren: () => import('./components/loyalty/loyalty.module').then(m => m.LoyaltyModule) },
 
   { path: 'rewardPoints', loadChildren: () => import('./components/reward-points/reward-points.module').then(m => m.RewardPointsModule) },
-  { path: Constants.LOGIN_PAGE, loadChildren: () => import('./components/login/login.module').then(m => m.LoginModule) },
   { path: 'main', loadChildren: () => import('./main/main.module').then(m => m.MainModule) },
 
   // Error Page

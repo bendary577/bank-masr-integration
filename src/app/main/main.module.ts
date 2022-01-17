@@ -70,7 +70,6 @@ import { SimphonyCheckComponent } from '../components/simphony-check/simphony-ch
 import { SimphonyPaymentComponent } from '../components/operations/simphony-payment/simphony-payment.component';
 import { PosMachineMappingComponent } from '../components/setting/pos-machine-mapping/pos-machine-mapping.component';
 import { SupportComponent } from '../components/support/support.component';
-import { NavBarComponent } from '../components/nav-bar/nav-bar.component';
 import { EditWalletComponent } from '../components/edit-wallet/edit-wallet.component';
 import { UserProfileComponent } from '../components/user-profile/user-profile.component';
 import { FilterComponent } from '../components/filter/filter.component';
@@ -122,10 +121,12 @@ import { AngularMaterialModule } from '../angular-material.module';
 import { BasicModule } from '../shared/basic.module';
 import { SharedModule } from '../shared/shared.module';
 import { MatTabsModule } from '@angular/material';
+import { SideNaveComponent } from '../components/side-nave/side-nave.component';
 
 
 @NgModule({
   declarations: [
+    WelcomePageComponent,
     MainComponent,
     SuppliersComponent,
     ConfigurationComponent,
@@ -138,7 +139,6 @@ import { MatTabsModule } from '@angular/material';
     ErrorComponentComponent,
     SupplierDetailsComponent,
     PosSalesComponent,
-    WelcomePageComponent,
     PosSalesConfigurationComponent,
     AddAccountComponent,
     ApprovedInvoiceInforConfigurationComponent,
@@ -228,7 +228,6 @@ import { MatTabsModule } from '@angular/material';
     FilterComponent,
     UserProfileComponent,
     EditWalletComponent,
-    NavBarComponent,
     SupportComponent,
     PosMachineMappingComponent,
     SimphonyPaymentComponent,
@@ -250,6 +249,35 @@ import { MatTabsModule } from '@angular/material';
     SharedModule,
     AngularMaterialModule,
     MatTabsModule,
-  ]
+  ],
+  entryComponents: [
+    AddUserComponent,
+    ViewUserComponent,
+    AddAccountComponent,
+    AddMajorGroupComponent,
+    ConsumptionMajorGroupChildComponent,
+    AddTenderComponent,
+    AddTaxComponent,
+    AddDiscountComponent,
+    AddRevenueCenterComponent,
+    AddServiceChargeComponent,
+    SuppliersConfiguartionComponent,
+    SchedulerConfigurationComponent,
+    AddTenderChildComponent,
+    AddSimphonyLocationComponent,
+    AddWebServiceInvokerComponent,
+    ViewInvokerComponent,
+    AddLocationComponent,
+    AddMajorGroupChildComponent,
+    AddSalesStatisticsComponent,
+    AddSupplierComponent,
+
+    // ==> Consumption Sync Job Type
+    AddConsumptionLocationComponent,
+    AddConsumptionLocationItemsComponent,
+
+    ConfirmationDialogComponent
+  
+  ],
 })
 export class MainModule { }

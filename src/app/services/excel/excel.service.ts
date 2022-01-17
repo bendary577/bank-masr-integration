@@ -2,7 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Constants } from 'src/app/models/constants';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ExcelService {
 
   token = localStorage.getItem('auth_token');

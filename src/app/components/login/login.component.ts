@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     this.side.shouldRun = false
 
     if (localStorage.getItem('auth_token')) {
-      this.router.navigate([Constants.WELCOME_PAGE])
+      this.router.navigate(["main/" + Constants.WELCOME_PAGE])
     }
   }
 
@@ -112,7 +112,7 @@ export class LoginComponent implements OnInit {
         this.side.getSyncJobTypes()
         this.side.getOperationTypes()
         this.side.getApplication()
-        this.router.navigate([Constants.WELCOME_PAGE])
+        this.router.navigate(["main/" + Constants.WELCOME_PAGE])
         this.spinner.hide()
       })
       .catch((err) => {

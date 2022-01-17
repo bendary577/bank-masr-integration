@@ -19,16 +19,10 @@ import {
   MatDialogModule,
   MatTableModule,
 } from '@angular/material'
-import { HttpClientModule } from '@angular/common/http';
-import { HttpModule } from '@angular/http';
-import { AppRoutingModule } from '../app-routing.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { AngularDropdownModule } from 'angular-dropdown';
 import { NgWormholeModule } from 'ng-wormhole';
 import { ToastrModule } from 'ngx-toastr';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 @NgModule({
   declarations: [],
@@ -62,8 +56,8 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
     AngularDropdownModule,
     NgWormholeModule,
     ToastrModule,
-    NgbModule,
     // NgxDaterangepickerMd.forRoot(),
-  ]
+  ],
+
 })
 export class SharedModule { }
