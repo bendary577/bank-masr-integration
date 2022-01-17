@@ -130,12 +130,12 @@
 
                 <ngx-datatable-column name="Options" *ngIf="hasRole('show_option')" [width]="90">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        <button class="menue-btn" [matMenuTriggerFor]="menu"><i class="mdi mdi-dots-vertical"></i></button>
-                        <mat-menu #menu="matMenu">
-                            <!-- <button *ngIf="!row.deleted" class="menue-btn-choi" mat-menu-item (click)="deleteOneUsers(row, 'true')">Delete Check</button> -->
-                            <!-- <button *ngIf="row.deleted" class="menue-btn-choi" mat-menu-item (click)="deleteOneUsers(row, 'false')">Restore Check</button> -->
-                            <button class="menue-btn-choi" mat-menu-item (click)="openCheckPayment(row)">Preview Payments</button>
-                        </mat-menu>
+                        <button class="menue-btn-choi" mat-menu-item (click)="openCheckPayment(row)">Preview Payments</button>
+                        <!-- <tton class="menue-btn" [matMenuTriggerFor]="menu"><i class="mdi mdi-dots-vertical"></i></button> -->
+                        <!-- <mat-menu #menu="matMenu">
+                            <button *ngIf="!row.deleted" class="menue-btn-choi" mat-menu-item (click)="deleteOneUsers(row, 'true')">Delete Check</button>
+                            <button *ngIf="row.deleted" class="menue-btn-choi" mat-menu-item (click)="deleteOneUsers(row, 'false')">Restore Check</button>
+                        </mat-menu> -->
                     </ng-template>
                 </ngx-datatable-column>
 

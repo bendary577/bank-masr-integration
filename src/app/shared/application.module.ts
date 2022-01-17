@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatTabsModule } from '@angular/material';
+import { MatMenuModule, MatTabsModule } from '@angular/material';
 import { ChartsModule } from 'ng2-charts';
 
 
@@ -13,6 +13,7 @@ import { ChartsModule } from 'ng2-charts';
   exports:[
     ChartsModule,
     MatTabsModule,
+    MatMenuModule,
   ]
 })
 export class ApplicationModule { }

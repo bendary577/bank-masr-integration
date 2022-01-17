@@ -11,7 +11,6 @@ import {
   MatCheckboxModule,
   MatCardModule,
   MatProgressBarModule,
-  MatMenuModule,
   MatBadgeModule,
   MatExpansionModule,
   MatDialogModule,
@@ -31,7 +30,6 @@ import { AngularDropdownModule } from 'angular-dropdown';
 
     MatTableModule,
     MatDialogModule,
-    MatMenuModule,
     MatBadgeModule,
     MatToolbarModule,
     MatListModule,
