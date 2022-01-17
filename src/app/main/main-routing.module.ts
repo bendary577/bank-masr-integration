@@ -76,6 +76,10 @@ import { RewardPointsComponent } from '../components/reward-points/reward-points
 
 const routes: Routes = [
   { path: '', component: MainComponent },
+  {
+    path: Constants.SETTING, component: ConfigurationComponent ,
+    children: []
+  },
   { path: Constants.USERS_CONFIGURATION, component: UsersComponent,canActivate:[AuthGuardService] },
   { path: Constants.SYNC_JOBS, component: SyncJobsconfigComponent ,canActivate:[AuthGuardService]},
   { path: Constants.COST_CENTER_LOCATION_MAPPING, component: CostCenterLocationMappingComponent ,canActivate:[AuthGuardService]},

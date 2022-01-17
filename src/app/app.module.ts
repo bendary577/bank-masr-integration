@@ -23,7 +23,7 @@ import { LoginComponent } from './components/login/login.component'
   declarations: [
     AppComponent,
     LoginComponent,
-  SideNaveComponent,
+    SideNaveComponent,
     NavBarComponent,
   ],
   imports: [

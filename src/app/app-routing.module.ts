@@ -10,7 +10,6 @@ const routes: Routes = [
   { path: '', redirectTo: Constants.LOGIN_PAGE, pathMatch: 'full'},
   {
     path: Constants.SETTING, component: ConfigurationComponent ,
-    children: []
   },
   { path: Constants.LOGIN_PAGE, component: LoginComponent },
 
