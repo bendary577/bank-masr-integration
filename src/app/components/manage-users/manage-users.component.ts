@@ -387,12 +387,17 @@ export class ManageUsersComponent implements OnInit {
     let dialogRef
     let isGeneric = this.usersList.selected[0].generic
     if (isGeneric) {
-      dialogRef = this.dialog.open(AddAppUserAccompiedComponent, {
-        width: '710px',
-        data: {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {
+          title:  "Update Guest",
           user: this.usersList.selected[0],
-        },
-      })
+      };
+      dialogConfig.width = '420px';
+      dialogConfig.maxWidth = '420px';
+      dialogConfig.autoFocus = true;
+
+      dialogRef = this.dialog.open(AddAppUserAccompiedComponent, dialogConfig)
     } else {
       dialogRef = this.dialog.open(AddAppUserComponent, {
         width: '420px',
