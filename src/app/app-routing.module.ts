@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { ErrorComponentComponent } from './components/error-component/error-component.component';
 import { LoginComponent } from './components/login/login.component';
 import { ConfigurationComponent } from './components/setting/configuration/configuration.component';
@@ -31,7 +31,9 @@ const routes: Routes = [
 
 @NgModule({
 
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes,
+     { preloadingStrategy: PreloadAllModules, 
+      relativeLinkResolution: 'legacy' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
