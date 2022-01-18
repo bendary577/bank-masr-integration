@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth/auth.service'
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service'
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service'
 import { SideNaveComponent } from '../side-nave/side-nave.component'
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-add-voucher-dialog',
@@ -43,8 +44,8 @@ export class AddVoucherDialogComponent implements OnInit {
       this.form = this.formBuilder.group({
         id: this.voucher.id,
         name: [this.voucher.name, [Validators.maxLength, Validators.required]],
-        startDate: [this.voucher.startDate, [Validators.required]],
-        endDate: [this.voucher.endDate, [Validators.required]],
+        startDate: [moment(this.voucher.startDate ).format('YYYY-MM-DDT00:00'), [Validators.required]],
+        endDate: [moment(this.voucher.endDate ).format('YYYY-MM-DDT00:00'), [Validators.required]],
         redeemQuota: [this.voucher.redeemQuota, [Validators.maxLength, Validators.required, Validators.pattern("^[0-9]*$")]],
         simphonyDiscountId: [this.voucher.simphonyDiscount.discountId, [Validators.required]],
       })
