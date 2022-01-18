@@ -61,14 +61,14 @@ export class VoucherTransactionsComponent implements OnInit {
   ngOnInit(): void {
     if(localStorage.getItem('currentVoucherId') != null){
       var currentVoucherId = localStorage.getItem('currentVoucherId')
-      this.getVOucherTransactions(currentVoucherId, 1, 10)
+      this.getVOucherTransactions(currentVoucherId)
     }  
   }
 
-  getVOucherTransactions(currentVoucherId, page, size) {
+  getVOucherTransactions(currentVoucherId) {
     this.loading = true
     this.spinner.show()
-    this.loyaltyService.simphonyVoucherTrans(currentVoucherId, page, size).toPromise().then((res: any) => {
+    this.loyaltyService.simphonyVoucherTrans(currentVoucherId, this.transactionList.pageNumber, this.transactionList.limit).toPromise().then((res: any) => {
         if(res["transactions"] !=  undefined || res["transactions"] != null){
           this.transactionList.transactionData = res["transactions"];
           this.succeedTransactionCount = res['succeedTransactionCount']
@@ -97,12 +97,12 @@ export class VoucherTransactionsComponent implements OnInit {
 
   changePage(pageInfo) {
     this.transactionList.pageNumber = pageInfo.page
-    // this.getTransactions();
+     this.getVOucherTransactions(localStorage.getItem('currentVoucherId'));
   }
 
   onLimitChange(limit) {
     this.transactionList.limit = limit
-    // this.getTransactions();
+    this.getVOucherTransactions(localStorage.getItem('currentVoucherId'));
   }
   deleteOneUsers(row, flag){
   }
