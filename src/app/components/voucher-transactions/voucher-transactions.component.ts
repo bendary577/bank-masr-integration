@@ -6,6 +6,7 @@ import { DateAdapter } from '@angular/material/core';
 import { Data } from 'src/app/models/data'
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service'
 import { SideNaveComponent } from '../side-nave/side-nave.component';
+import { Thread } from 'igniteui-angular-core';
 
 @Component({
   selector: 'app-voucher-transactions',
@@ -14,17 +15,10 @@ import { SideNaveComponent } from '../side-nave/side-nave.component';
 })
 export class VoucherTransactionsComponent implements OnInit {
 
-
-  loading = false
-  fromDate = '';
-  toDate = '';
-  cardNumber = '';
-  inParent = true;
-
   // Transaction Stat
+  totalSpend = 0;
   succeedTransactionCount = 0;
   failedTransactionCount = 0;
-  totalTransactionAmount = 0;
 
   transactionList = {
     paginateData: true as boolean,
@@ -33,9 +27,7 @@ export class VoucherTransactionsComponent implements OnInit {
       emptyMessage: `
     <div >
       <span style="font-size: 25px;text-align: center;">There are no reports yet.</span>
-    </div>
-  `,
-    },
+    </div> `,  },
     selected: [],
     pageNumber: 1 as number,
     limit: 10 as number,
@@ -43,45 +35,73 @@ export class VoucherTransactionsComponent implements OnInit {
     pagesFilter: [10, 25, 50, 75, 100],
     showLoading: true,
     inputSearch: '' as string,
-    transactionData: [],
+    transactionData: [] = [],
     allTransactionDataBeforeFilter: [],
     firstTime: true,
   }
 
-  constructor(
-    private spinner: NgxSpinnerService, private dateAdapter: DateAdapter<Date>,
-    private sidNav: SideNaveComponent,
-    private loyaltyService: LoyaltyService,
-    private snackBar: MatSnackBar,
-    public data: Data,
-  ) {
+  constructor( private spinner: NgxSpinnerService, private dateAdapter: DateAdapter<Date>, public data: Data,
+    private sidNav: SideNaveComponent, private loyaltyService: LoyaltyService, private snackBar: MatSnackBar) {
     this.dateAdapter.setLocale('en-GB');
   }
 
   ngOnInit(): void {
     if(localStorage.getItem('currentVoucherId') != null){
       var currentVoucherId = localStorage.getItem('currentVoucherId')
-      this.getVOucherTransactions(currentVoucherId)
+      this.getVoucherTransactions(currentVoucherId)
+      this.getVoucherStatic(currentVoucherId)
+
     }  
   }
 
-  getVOucherTransactions(currentVoucherId) {
-    this.loading = true
+  getVoucherTransactions(currentVoucherId) {
     this.spinner.show()
     this.loyaltyService.simphonyVoucherTrans(currentVoucherId, this.transactionList.pageNumber, this.transactionList.limit).toPromise().then((res: any) => {
         if(res["transactions"] !=  undefined || res["transactions"] != null){
-          this.transactionList.transactionData = res["transactions"];
-          this.succeedTransactionCount = res['succeedTransactionCount']
-          this.failedTransactionCount = res['failedTransactionCount']
-          this.totalTransactionAmount = res['totalSpend']
+          this.spinner.hide()
+          var transacionOld  = this.transactionList.transactionData;
+          this.transactionList.transactionData = [];
+          this.delay(1000, transacionOld, res);
         }
 
-        this.spinner.hide()
-        this.loading = false
       }).catch((err) => {
         console.error(err)
         this.spinner.hide()
-        this.loading = false
+
+        let message = ''
+        if (err.status === 401) {
+          message = ErrorMessages.SESSION_EXPIRED
+          this.sidNav.Logout()
+        }
+      })
+  }
+
+  async delay(ms: number, transactionOld, res: any) {
+      await new Promise(resolve => setTimeout(()=> this.getTransacrion(transactionOld, res), ms)).then(()=>console.log("fired"));
+  }
+
+  getTransacrion(transactionOld, res: any) {
+    var transactionNew = (res["transactions"]) as []; 
+    transactionOld.push(...transactionNew);
+    this.transactionList.transactionData = transactionOld;
+    }
+
+  getVoucherStatic(currentVoucherId) {
+    this.spinner.show()
+    this.loyaltyService.getVoucherStatic(currentVoucherId).toPromise().then((res: any) => {
+      try{
+          this.transactionList.transactionCount = res['totalTransactions'];
+          this.totalSpend = res['totalSpend'];
+          this.succeedTransactionCount = res['succeedTransactionCount'];
+          this.failedTransactionCount = res['failedTransactionCount'];
+        }catch(error){
+          console.log(error)
+        }
+
+        this.spinner.hide()
+      }).catch((err) => {
+        console.error(err)
+        this.spinner.hide()
 
         let message = ''
         if (err.status === 401) {
@@ -97,15 +117,14 @@ export class VoucherTransactionsComponent implements OnInit {
 
   changePage(pageInfo) {
     this.transactionList.pageNumber = pageInfo.page
-     this.getVOucherTransactions(localStorage.getItem('currentVoucherId'));
+     this.getVoucherTransactions(localStorage.getItem('currentVoucherId'));
   }
 
   onLimitChange(limit) {
     this.transactionList.limit = limit
-    this.getVOucherTransactions(localStorage.getItem('currentVoucherId'));
+    this.getVoucherTransactions(localStorage.getItem('currentVoucherId'));
   }
-  deleteOneUsers(row, flag){
-  }
+ 
   hasRole(role){
     return true;
   }

@@ -359,6 +359,7 @@ export class Constants {
   static UPDATE_VOUCHER_PAGES = environment.apiHost + '/simphonyLoyalty/vouchers/update'
   static MARK_VOUCHER_DELETE_PAGES = environment.apiHost + '/simphonyLoyalty/vouchers/markDeleted'
   static GET_VOUCHER_TRANSACTION_PAGES = environment.apiHost + '/simphonyLoyalty/voucherTransactions/getTotalVoucherTrans'
+  static GET_VOUCHER_TRANSACTION_STATISTICS = environment.apiHost + '/simphonyLoyalty/voucherTransactions/getVoucherTransStatistics'
 
   //////////////////////////////////////////////// Entry System Application  ///////////////////////////////////
 

@@ -306,8 +306,15 @@ export class LoyaltyService {
         headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),}).toPromise()
   }
   simphonyVoucherTrans(voucherId, page, size) {
-    return this.http.get(Constants.GET_VOUCHER_TRANSACTION_PAGES + '?page=' + 0 + '&size=' + 10 + '&voucherId=' + voucherId, {
+    return this.http.get(Constants.GET_VOUCHER_TRANSACTION_PAGES + '?page=' + page + '&size=' + size + '&voucherId=' + voucherId, {
         headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),
       });
   }
+
+  getVoucherStatic(voucherId) {
+    return this.http.get(Constants.GET_VOUCHER_TRANSACTION_STATISTICS +'?voucherId=' + voucherId, {
+        headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),
+      });
+  }
+
 }
