@@ -10,6 +10,7 @@ import { AddRewardPointsUserComponent } from '../RewardPoints/add-reward-points-
 import { RewardPointsSettingsComponent } from '../setting/reward-points-settings/reward-points-settings.component';
 import { BasicModule } from 'src/app/shared/basic.module';
 import { ApplicationModule } from 'src/app/shared/application.module';
+import { LoyaltyModule } from '../loyalty/loyalty.module';
 
 
 @NgModule({
@@ -25,10 +26,7 @@ import { ApplicationModule } from 'src/app/shared/application.module';
   imports: [
     RewardPointsRoutingModule,
 
-    BasicModule,
-    SharedModule,
-    ApplicationModule,
-    AngularMaterialModule,
+    LoyaltyModule,
   ],
   entryComponents:[
     AddRewardPointsUserComponent,
