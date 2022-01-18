@@ -2,15 +2,15 @@
 <div class="main">
 
     <div *ngIf="voucherList.voucherData.length != 0 || voucherList.showLoading" class="header">
-        <button mat-flat-button (click)="addVoucherDialog()" [disabled]="validateAddVoucher()" class="groups-buttons"><span
+        <button *ngIf="hasRole('add_voucher')" mat-flat-button (click)="addVoucherDialog()" [disabled]="validateAddVoucher()" class="groups-buttons"><span
                 class="mob-text">Add Voucher</span></button>
-        <button mat-flat-button (click)="updateVoucherDialog()" [disabled]="validateUpdateVoucher()"
+        <button *ngIf="hasRole('add_voucher')" mat-flat-button (click)="updateVoucherDialog()" [disabled]="validateUpdateVoucher()"
             class="groups-buttons"><span class="mob-text">Update Voucher</span></button>
             <button mat-flat-button (click)="extractVoucherCodePDF()" [disabled]="validateDeleteVoucher()"
             class="groups-buttons"><span class="mob-text">Export PDF</span></button>
-        <button mat-flat-button (click)="openConfirmationDeleteRestore(false)" [disabled]="validateDeleteVoucher()"
+        <button *ngIf="hasRole('delete_voucher')" mat-flat-button (click)="openConfirmationDeleteRestore(false)" [disabled]="validateDeleteVoucher()"
             class="groups-buttons"><span class="mob-text">Delete Voucher</span></button>
-        <button mat-flat-button (click)="openConfirmationDeleteRestore(true)" [disabled]="validateRestoreVoucher()"
+        <button *ngIf="hasRole('delete_voucher')" mat-flat-button (click)="openConfirmationDeleteRestore(true)" [disabled]="validateRestoreVoucher()"
             class="groups-buttons"><span class="mob-text">Restore Voucher</span></button>
     </div>
 
