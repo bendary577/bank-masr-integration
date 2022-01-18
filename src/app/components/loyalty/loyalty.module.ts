@@ -36,6 +36,13 @@ import { AddAppUserAccompiedComponent } from '../add-app-user-accompied/add-app-
     ApplicationModule,
     AngularMaterialModule,
   ],
+  exports:[
+    ManageGroupsComponent,
+    BasicModule,
+    SharedModule,
+    ApplicationModule,
+    AngularMaterialModule,
+  ],
   entryComponents: [
     // ==> Loyalty
     AddAppCompanyComponent,
