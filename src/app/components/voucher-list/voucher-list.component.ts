@@ -12,6 +12,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { PDFServiceService } from 'src/app/services/pdf-service/pdfservice.service';
 import { SideNaveComponent } from '../side-nave/side-nave.component';
 import { Location } from '@angular/common'
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-voucher-list',
@@ -183,15 +184,9 @@ export class VoucherListComponent implements OnInit {
     }
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        if(restorefalge){
-          this.voucherList.selected[0].deleted = false;
-          message = "Voucher restored successfully."
-          }else{
-            this.voucherList.selected[0].deleted = true;
-            message = "Voucher deleted successfully."
-          }
+        message = this.setDeleted(restorefalge);
         this.voucherList.showLoading = true
-        this.loyaltyService.deleteVoucher(this.voucherList.selected[0]).then((result: any) => {
+        this.loyaltyService.deleteVoucher(this.voucherList.selected).then((result: any) => {
             this.voucherList.showLoading = false
             this.voucherList.selected = []
             this.getVoucherList()
@@ -202,6 +197,7 @@ export class VoucherListComponent implements OnInit {
             })
           })
           .catch((err) => {
+            this.setDeleted(restorefalge);
             this.voucherList.showLoading = false
             this.voucherList.selected = []
             this.getVoucherList()
@@ -226,13 +222,24 @@ export class VoucherListComponent implements OnInit {
     });
   }
 
+  setDeleted(flag){
+    var message;
+    this.voucherList.selected.forEach(voucher => voucher.deleted = !voucher.deleted)
+    if(flag){
+      message = "Voucher restored successfully."
+      }else{
+        message = "Voucher deleted successfully."
+      }
+      return message;
+  }
+
   extractVoucherCodePDF() {
     this.spinner.show()
-    this.pdfService.exportVoucherCode(this.voucherList.selected[0])
+    this.pdfService.exportVoucherCode(this.voucherList.selected)
       .subscribe(
         (res) => {
           const blob = new Blob([res], { type: 'application/pdf' })
-          const file = new File([blob], this.voucherList.selected[0].name + ' Code' + '.pdf', {
+          const file = new File([blob], "voucher"+ ' Code' + '.pdf', {
             type: 'application/pdf',
           })
           saveAs(file)
@@ -277,7 +284,7 @@ export class VoucherListComponent implements OnInit {
   }
 
   validateDeleteVoucher() {
-    if (this.voucherList.selected.length != 1) {
+    if (this.voucherList.selected.length == 0) {
       return true
     }
 

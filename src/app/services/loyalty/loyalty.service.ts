@@ -300,9 +300,9 @@ export class LoyaltyService {
         headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),}).toPromise()
   }
 
-  deleteVoucher(voucher) {
+  deleteVoucher(vouchers: any[]) {
     this.token = localStorage.getItem('auth_token')
-    return this.http.put(Constants.MARK_VOUCHER_DELETE_PAGES , voucher, {
+    return this.http.put(Constants.MARK_VOUCHER_DELETE_PAGES , vouchers, {
         headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),}).toPromise()
   }
   simphonyVoucherTrans(voucherId, page, size) {
