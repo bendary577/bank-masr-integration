@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser';
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
 import { RewardPointsService } from 'src/app/services/RewardPoints/reward-points.service';
 import { SideNaveComponent } from '../../side-nave/side-nave.component';
 import { AddRewardPointsUserComponent } from '../add-reward-points-user/add-reward-points-user.component';
+import { saveAs } from 'file-saver'
 
 @Component({
   selector: 'app-manage-reward-points-users',
@@ -42,6 +44,7 @@ export class ManageRewardPointsUsersComponent implements OnInit {
   constructor(
     private loyaltyService: LoyaltyService,
     private rewardPointsService: RewardPointsService,
+    private spinner: NgxSpinnerService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
     private sidNav: SideNaveComponent,
@@ -470,6 +473,36 @@ export class ManageRewardPointsUsersComponent implements OnInit {
       }
       return false
     }
+  }
+
+  exportToExcel(){
+    this.spinner.show()
+    this.rewardPointsService.exportQRCode(this.usersList.selected)
+      .subscribe(
+        (res) => {
+          const blob = new Blob([res], { type: 'application/pdf' })
+          const file = new File([blob], "Guest QR Codes.pdf", {
+            type: 'application/pdf',
+          })
+          saveAs(file)
+
+          this.snackBar.open('Export Successfully', null, {
+            duration: 2000,
+            horizontalPosition: 'center',
+            panelClass: 'my-snack-bar-success',
+          })
+          this.spinner.hide()
+        },
+        (err) => {
+          this.spinner.hide()
+          console.error(err)
+          this.snackBar.open('Fail to export, Please try agian', null, {
+            duration: 2000,
+            horizontalPosition: 'center',
+            panelClass: 'my-snack-bar-fail',
+          })
+        },
+      )
   }
 
 
