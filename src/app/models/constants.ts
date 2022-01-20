@@ -381,9 +381,10 @@ export class Constants {
 
   // static GET_APP_GROUPS_URL = environment.apiHost + '/getApplicationGroups';
 
-    //////////////////////////////////////////////// Export To PDF //////////////////////////////////////////////
+  //////////////////////////////////////////////// Export To PDF //////////////////////////////////////////////
 
-    static EXPORT_VOUCHER_CODE_PDF = environment.apiHost + '/simphonyLoyalty/vouchers/exportCodePDF'
+  static EXPORT_VOUCHER_CODE_PDF = environment.apiHost + '/simphonyLoyalty/vouchers/exportCodePDF'
+  static EXPORT_USER_QR_CODE_PDF = environment.apiHost + '/exportQRCodePDF'
 
   //////////////////////////////////////////////// Export To Excel //////////////////////////////////////////////
 

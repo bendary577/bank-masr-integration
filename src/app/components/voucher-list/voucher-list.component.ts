@@ -7,12 +7,10 @@ import { AddVoucherDialogComponent } from '../add-voucher-dialog/add-voucher-dia
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { saveAs } from 'file-saver'
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
-import { Constants } from 'src/app/models/constants';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PDFServiceService } from 'src/app/services/pdf-service/pdfservice.service';
 import { SideNaveComponent } from '../side-nave/side-nave.component';
 import { Location } from '@angular/common'
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-voucher-list',

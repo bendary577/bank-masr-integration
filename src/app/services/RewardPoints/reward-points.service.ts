@@ -44,4 +44,10 @@ export class RewardPointsService {
       )
       .toPromise()
   }
+
+  exportQRCode(users: any[]) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.post(Constants.EXPORT_USER_QR_CODE_PDF ,users ,
+       { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token}), responseType: 'blob'});
+  }
 }
