@@ -32,7 +32,7 @@ export class VoucherListComponent implements OnInit {
 
   constructor(public snackBar: MatSnackBar, private sidNav: SideNaveComponent, public dialog: MatDialog, 
     private _location: Location, private loyaltyService: LoyaltyService, private router: Router, public data: Data,
-    private spinner: NgxSpinnerService,private pdfService: PDFServiceService) {
+    private spinner: NgxSpinnerService,private pdfService: PDFServiceService ) {
      }
 
   ngOnInit() {
@@ -44,9 +44,8 @@ export class VoucherListComponent implements OnInit {
   }
 
   openVoucherTransactions(voucher) {
-      // this.data.storage = voucher
       localStorage.setItem("currentVoucherId", voucher.id);
-      this.router.navigate(["main/voucherTransaction"])
+      this.router.navigate(["main/uniqueVoucherTransaction"])
   }
 
   onSelect({ selected }) {
@@ -235,11 +234,11 @@ export class VoucherListComponent implements OnInit {
 
   extractVoucherCodePDF() {
     this.spinner.show()
-    this.pdfService.exportVoucherCode(this.voucherList.selected)
+    this.pdfService.exportVoucherCode(this.voucherList.selected[0])
       .subscribe(
         (res) => {
           const blob = new Blob([res], { type: 'application/pdf' })
-          const file = new File([blob], "voucher"+ ' Code' + '.pdf', {
+          const file = new File([blob], "Voucher"+ ' Code' + '.pdf', {
             type: 'application/pdf',
           })
           saveAs(file)
@@ -261,6 +260,11 @@ export class VoucherListComponent implements OnInit {
           })
         },
       )
+  }
+
+  getUniqueVoucher(row){
+    var list : [] = row.uniqueVouchers
+    return list.length;
   }
 
   validateUpdateVoucher() {

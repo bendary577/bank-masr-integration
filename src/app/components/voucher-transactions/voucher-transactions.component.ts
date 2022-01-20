@@ -46,17 +46,18 @@ export class VoucherTransactionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(localStorage.getItem('currentVoucherId') != null){
+    if(localStorage.getItem('currentVoucherCode') != null){
+      var currentVoucherCode = localStorage.getItem('currentVoucherCode')
       var currentVoucherId = localStorage.getItem('currentVoucherId')
-      this.getVoucherTransactions(currentVoucherId)
-      this.getVoucherStatic(currentVoucherId)
+      this.getVoucherTransactions(currentVoucherId, currentVoucherCode)
+      this.getVoucherStatic(currentVoucherId, currentVoucherCode)
 
     }  
   }
 
-  getVoucherTransactions(currentVoucherId) {
+  getVoucherTransactions(currentVoucherId, currentVoucherCode) {
     this.spinner.show()
-    this.loyaltyService.simphonyVoucherTrans(currentVoucherId, this.transactionList.pageNumber, this.transactionList.limit).toPromise().then((res: any) => {
+    this.loyaltyService.simphonyVoucherTrans(currentVoucherId, currentVoucherCode, this.transactionList.pageNumber, this.transactionList.limit).toPromise().then((res: any) => {
         if(res["transactions"] !=  undefined || res["transactions"] != null){
           this.spinner.hide()
           var transacionOld  = this.transactionList.transactionData;
@@ -86,9 +87,9 @@ export class VoucherTransactionsComponent implements OnInit {
     this.transactionList.transactionData = transactionOld;
     }
 
-  getVoucherStatic(currentVoucherId) {
+  getVoucherStatic(currentVoucherId, currentVoucherCode) {
     this.spinner.show()
-    this.loyaltyService.getVoucherStatic(currentVoucherId).toPromise().then((res: any) => {
+    this.loyaltyService.getVoucherStatic(currentVoucherId, currentVoucherCode).toPromise().then((res: any) => {
       try{
           this.transactionList.transactionCount = res['totalTransactions'];
           this.totalSpend = res['totalSpend'];
@@ -117,12 +118,12 @@ export class VoucherTransactionsComponent implements OnInit {
 
   changePage(pageInfo) {
     this.transactionList.pageNumber = pageInfo.page
-     this.getVoucherTransactions(localStorage.getItem('currentVoucherId'));
+     this.getVoucherTransactions(localStorage.getItem('currentVoucherId'), localStorage.getItem('currentVoucherCode'));
   }
 
   onLimitChange(limit) {
     this.transactionList.limit = limit
-    this.getVoucherTransactions(localStorage.getItem('currentVoucherId'));
+    this.getVoucherTransactions(localStorage.getItem('currentVoucherId'), localStorage.getItem('currentVoucherCode'));
   }
  
   hasRole(role){

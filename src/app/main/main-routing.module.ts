@@ -64,6 +64,7 @@ import { WebServiceInvokerConfigurationComponent } from '../components/configura
 import { VoucherListComponent } from '../components/voucher-list/voucher-list.component';
 import { RewardPointsComponent } from '../components/reward-points/reward-points.component';
 import { VoucherTransactionsComponent } from '../components/voucher-transactions/voucher-transactions.component';
+import { UniqueVoucherComponent } from '../components/unique-voucher/unique-voucher.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -88,6 +89,7 @@ const routes: Routes = [
 
   { path: Constants.REDEEM_VOUCHER, component: VoucherListComponent ,canActivate:[AuthGuardService]},
   { path: Constants.VOUCHER_TRANSACTION, component: VoucherTransactionsComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.UNIQUE_VOUCHER_TRANSACTION, component: UniqueVoucherComponent ,canActivate:[AuthGuardService]},
 
   // Reward Points
   { path: Constants.REWARD_POINTS_PAGE, component: RewardPointsComponent ,canActivate:[AuthGuardService]},

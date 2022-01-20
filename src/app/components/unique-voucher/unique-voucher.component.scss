@@ -1,0 +1,55 @@
+@import "../../components/activities/activities.component.scss";
+
+.header{
+    margin: 20px ;
+    margin-right: 0px ;
+    margin-bottom: 40px ;
+    display: block;
+    padding: 0px;
+}
+
+.groups-buttons{
+    width: 150px;
+    height: 35px;
+    background-color: #fecc90;
+    color: black;
+    border-radius: 28px;
+    box-shadow: 0 4px 14px rgba(black, 0.35) !important;
+    margin-right: 5px;
+    &:disabled{
+        background-color: #ffe7cb;
+        color: rgb(53, 53, 53);
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .mob-text{
+        top:10px;
+    }
+    .groups-buttons{
+        width: 100px;
+        height: 25px;
+        margin: 5px;
+        font-size:10px ;
+        font-weight: bold;
+    }
+}
+
+
+.voucher{
+    .h3 {
+        background-color: #f1f1f1!important;
+        font-weight: bolder !important;
+        margin-top: 70px !important;
+        margin-bottom: 28px !important;
+        height: 64px !important;
+        color:#f47920;
+        border-left: 1px solid;
+    }
+    
+    .details{
+        font-size: 20px;
+        font-weight: 400;
+    }
+}
+

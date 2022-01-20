@@ -18,10 +18,8 @@ export class AddVoucherDialogComponent implements OnInit {
 
   public form: FormGroup
   voucher: any 
-  slectedDiscount: number
-  discountRates = []
-  groupsLoader = true
   inUpdate = false
+  discountRates = []
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,13 +38,14 @@ export class AddVoucherDialogComponent implements OnInit {
     if (this.data['voucher'] != null && this.data != undefined) {
       this.voucher = this.data['voucher'];
       this.inUpdate = true;
-
+      var uniqueVouchers: [] = this.voucher.uniqueVouchers
       this.form = this.formBuilder.group({
         id: this.voucher.id,
         name: [this.voucher.name, [Validators.maxLength, Validators.required]],
         startDate: [moment(this.voucher.startDate ).format('YYYY-MM-DDT00:00'), [Validators.required]],
         endDate: [moment(this.voucher.endDate ).format('YYYY-MM-DDT00:00'), [Validators.required]],
-        redeemQuota: [this.voucher.redeemQuota, [Validators.maxLength, Validators.required, Validators.pattern("^[0-9]*$")]],
+        uniqueVouchers: [uniqueVouchers.length, [Validators.maxLength, Validators.required, Validators.pattern("^[0-9]*$")]],
+        redemption: [this.voucher.redemption, [Validators.maxLength, Validators.required, Validators.pattern("^[0-9]*$")]],
         simphonyDiscountId: [this.voucher.simphonyDiscount.discountId, [Validators.required]],
       })
     } else {
@@ -55,7 +54,8 @@ export class AddVoucherDialogComponent implements OnInit {
         name: ['', [Validators.maxLength, Validators.required]],
         startDate: ['', [Validators.required]],
         endDate: ['', [Validators.required]],
-        redeemQuota: ['', [Validators.maxLength, Validators.required, Validators.pattern("^[0-9]*$")]],
+        uniqueVouchers: ['', [Validators.maxLength, Validators.required, Validators.pattern("^[0-9]*$")]],
+        redemption: ['', [Validators.maxLength, Validators.required, Validators.pattern("^[0-9]*$")]],
         simphonyDiscountId: ['', [Validators.required]],
       })
     }
@@ -104,7 +104,8 @@ export class AddVoucherDialogComponent implements OnInit {
           startDate: this.form.controls.startDate.value,
           endDate: this.form.controls.endDate.value,
           simphonyDiscountId: this.form.controls.simphonyDiscountId.value,
-          redeemQuota: this.form.controls.redeemQuota.value,
+          redemption: this.form.controls.redemption.value,
+          uniqueVouchers: this.form.controls.uniqueVouchers.value,
         })
     }
   }
@@ -117,5 +118,4 @@ export class AddVoucherDialogComponent implements OnInit {
     var isFeature =  this.sidNav.hasFeature(reference)
     return isFeature;
   }
-
 }

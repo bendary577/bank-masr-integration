@@ -323,6 +323,7 @@ export class Constants {
   static MANAGE_ACTIVITIES = 'managActivities'
   static REDEEM_VOUCHER = 'redeemVoucher'
   static VOUCHER_TRANSACTION = 'voucherTransaction'
+  static UNIQUE_VOUCHER_TRANSACTION = 'uniqueVoucherTransaction'
   static SIMPHONY_DISCOUNT_MAP_TABLE = 'simphonyDiscountMaping'
   static POS_MACHINE_MAP_TABLE = 'posMachinMapping'
   static REWORD_PORINTS_SETTINGS = 'rewardPointsSettings'
@@ -355,6 +356,7 @@ export class Constants {
   static GET_TRANSACTION_PAGINATED =
     environment.apiHost + '/transaction/transactionPagination'
   static GET_VOUCHER_PAGES = environment.apiHost + '/simphonyLoyalty/vouchers'
+  static GET_VOUCHER_BY_ID = environment.apiHost + '/simphonyLoyalty/vouchers/getByID'
   static ADD_VOUCHER_PAGES = environment.apiHost + '/simphonyLoyalty/vouchers/add'
   static UPDATE_VOUCHER_PAGES = environment.apiHost + '/simphonyLoyalty/vouchers/update'
   static MARK_VOUCHER_DELETE_PAGES = environment.apiHost + '/simphonyLoyalty/vouchers/markDeleted'

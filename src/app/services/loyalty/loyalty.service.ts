@@ -6,6 +6,7 @@ import { Constants } from 'src/app/models/constants'
   providedIn: 'root',
 })
 export class LoyaltyService {
+
   token = localStorage.getItem('auth_token')
 
   constructor(private http: HttpClient) {}
@@ -288,6 +289,12 @@ export class LoyaltyService {
       });
   }
 
+  getVoucherByID(parentVoucherId) {
+    return this.http.get(Constants.GET_VOUCHER_BY_ID + "?voucherId=" + parentVoucherId, {
+      headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),
+    });
+    }
+
   addVoucher(voucher) {
     this.token = localStorage.getItem('auth_token')
     return this.http.post(Constants.ADD_VOUCHER_PAGES , voucher, {
@@ -305,14 +312,15 @@ export class LoyaltyService {
     return this.http.put(Constants.MARK_VOUCHER_DELETE_PAGES , vouchers, {
         headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),}).toPromise()
   }
-  simphonyVoucherTrans(voucherId, page, size) {
-    return this.http.get(Constants.GET_VOUCHER_TRANSACTION_PAGES + '?page=' + page + '&size=' + size + '&voucherId=' + voucherId, {
+  simphonyVoucherTrans(voucherId, currentVoucherCode, page, size) {
+    return this.http.get(Constants.GET_VOUCHER_TRANSACTION_PAGES + '?page=' + page + '&size=' + size + '&voucherId=' +
+     voucherId + '&voucherCode=' + currentVoucherCode, {
         headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),
       });
   }
 
-  getVoucherStatic(voucherId) {
-    return this.http.get(Constants.GET_VOUCHER_TRANSACTION_STATISTICS +'?voucherId=' + voucherId, {
+  getVoucherStatic(voucherId, currentVoucherCode) {
+    return this.http.get(Constants.GET_VOUCHER_TRANSACTION_STATISTICS +'?voucherCode=' + currentVoucherCode + '&voucherId=' + voucherId, {
         headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),
       });
   }

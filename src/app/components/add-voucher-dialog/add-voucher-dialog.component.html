@@ -16,15 +16,28 @@
                 </mat-form-field>
 
                 <mat-form-field class="example-full-width creditForm" appearance="outline">
-                    <input matInput required placeholder="Quota" formControlName="redeemQuota" maxlength="5">
-                    <mat-error *ngIf="form.controls.redeemQuota.hasError('required')">
-                        Quota is required.
+                    <input matInput required placeholder="Number OF Unique Vouchers" formControlName="uniqueVouchers" maxlength="5">
+                    <mat-error *ngIf="form.controls.uniqueVouchers.hasError('required')">
+                        Number OF Unique Vouchers is required.
                     </mat-error>
-                    <mat-error *ngIf="form.controls.redeemQuota.hasError('maxlength')">
-                        Quota is to long.
+                    <mat-error *ngIf="form.controls.uniqueVouchers.hasError('maxlength')">
+                        Number OF Unique Vouchers is to long.
                     </mat-error>
-                    <mat-error *ngIf="form.controls.redeemQuota.hasError('pattern')">
-                        Quota must be number.
+                    <mat-error *ngIf="form.controls.uniqueVouchers.hasError('pattern')">
+                        Number OF Unique Vouchers must be number.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width creditForm" appearance="outline">
+                    <input matInput required placeholder="Number Of Redemptions" formControlName="redemption" maxlength="5">
+                    <mat-error *ngIf="form.controls.redemption.hasError('required')">
+                        Number Of Redemptions is required.
+                    </mat-error>
+                    <mat-error *ngIf="form.controls.redemption.hasError('maxlength')">
+                        Number Of Redemptions is to long.
+                    </mat-error>
+                    <mat-error *ngIf="form.controls.redemption.hasError('pattern')">
+                        Number Of Redemptions must be number.
                     </mat-error>
                 </mat-form-field>
 
@@ -45,7 +58,7 @@
                 </mat-form-field>
 
                 <mat-form-field class="example-full-width creditForm" appearance="outline" *ngIf="hasFeature('loyalty')">
-                    <mat-select matInput required id="discountId" name="simphonyDiscountId" [value]="slectedDiscount" 
+                    <mat-select matInput required id="discountId" name="simphonyDiscountId" 
                         placeholder="Simphony Discount Id" formControlName="simphonyDiscountId">
                         <mat-option></mat-option>
                         <mat-option [value]=discountRate.discountId *ngFor="let discountRate of discountRates">

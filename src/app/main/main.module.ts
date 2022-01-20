@@ -97,6 +97,7 @@ import { ManageSubGroupComponent } from '../components/manage-sub-group/manage-s
 import { AngularMaterialModule } from '../angular-material.module';
 import { BasicModule } from '../shared/basic.module';
 import { SharedModule } from '../shared/shared.module';
+import { UniqueVoucherComponent } from '../components/unique-voucher/unique-voucher.component';
 
 @NgModule({
   declarations: [
@@ -208,6 +209,7 @@ import { SharedModule } from '../shared/shared.module';
     RevenueByAgentComponent,
     ExtendExpiryDateComponent,
     ViewInvokerComponent,
+    UniqueVoucherComponent
   ],
   imports: [
     MainRoutingModule,

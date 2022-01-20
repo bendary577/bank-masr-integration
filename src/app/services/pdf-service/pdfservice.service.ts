@@ -11,7 +11,7 @@ export class PDFServiceService {
 
   constructor(private http: HttpClient) { }
   
-  exportVoucherCode(vouchers: any[]) {
+  exportVoucherCode(vouchers: any) {
     this.token = localStorage.getItem('auth_token');
     return this.http.post(Constants.EXPORT_VOUCHER_CODE_PDF ,vouchers ,
        { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token}), responseType: 'blob'});

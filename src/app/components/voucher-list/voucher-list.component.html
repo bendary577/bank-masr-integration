@@ -6,7 +6,7 @@
                 class="mob-text">Add Voucher</span></button>
         <button *ngIf="hasRole('add_voucher')" mat-flat-button (click)="updateVoucherDialog()" [disabled]="validateUpdateVoucher()"
             class="groups-buttons"><span class="mob-text">Update Voucher</span></button>
-            <button mat-flat-button (click)="extractVoucherCodePDF()" [disabled]="validateDeleteVoucher()"
+            <button mat-flat-button (click)="extractVoucherCodePDF()" [disabled]="validateUpdateVoucher()"
             class="groups-buttons"><span class="mob-text">Export PDF</span></button>
         <button *ngIf="hasRole('delete_voucher')" mat-flat-button (click)="openConfirmationDeleteRestore(false)" [disabled]="validateDeleteVoucher()"
             class="groups-buttons"><span class="mob-text">Delete Voucher</span></button>
@@ -52,15 +52,15 @@
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="Quota" [width]="25">
+            <ngx-datatable-column name="Number Of Unique Vouchers" >
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.redeemQuota}}
+                    {{getUniqueVoucher(row)}}
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="Quota Redemptions" [width]="25">
+            <ngx-datatable-column name="Number Of Redemption" >
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.numberOfRedemption}}
+                    {{row.redemption}}
                 </ng-template>
             </ngx-datatable-column>
 
@@ -88,19 +88,19 @@
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="Creation Time" [width]="50">
+            <ngx-datatable-column name="Creation Time" >
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.creationDate | date: 'dd/MM/yyyy HH:mm:ss' }}
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="Last Update time" [width]="50">
+            <ngx-datatable-column name="Last Update time">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.lastUpdate | date: 'dd/MM/yyyy HH:mm:ss' }}
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="State" [width]="25">
+            <ngx-datatable-column name="State" >
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     <label *ngIf="!row.deleted" class="active-state">active</label>
                     <label *ngIf="row.deleted" class="deleted-state">deleted</label>
