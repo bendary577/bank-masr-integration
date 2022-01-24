@@ -39,10 +39,7 @@ import { WebServiceInvokerConfigurationComponent } from '../components/configura
 import { AddWebServiceInvokerComponent } from '../components/add-web-service-invoker/add-web-service-invoker.component';
 import { AddLocationComponent } from '../components/add-location/add-location.component';
 import { OperationTypesConfigurationComponent } from '../components/setting/operation-types-configuration/operation-types-configuration.component';
-import { VoucherTransactionsComponent } from '../components/voucher-transactions/voucher-transactions.component';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
-import { AddVoucherDialogComponent } from '../components/add-voucher-dialog/add-voucher-dialog.component';
-import { VoucherListComponent } from '../components/voucher-list/voucher-list.component';
 import { ViewInvokerComponent } from '../components/view-invoker/view-invoker.component';
 import { ExtendExpiryDateComponent } from '../components/extend-expiry-date/extend-expiry-date.component';
 import { RevenueByAgentComponent } from '../components/Reports/revenue-by-agent/revenue-by-agent.component';
@@ -241,7 +238,8 @@ import { UniqueVoucherComponent } from '../components/unique-voucher/unique-vouc
     AddConsumptionLocationComponent,
     AddConsumptionLocationItemsComponent,
 
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    DialogComponent
   
   ],
 })
