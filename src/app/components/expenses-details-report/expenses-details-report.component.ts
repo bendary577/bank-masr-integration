@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Constants } from 'src/app/models/constants';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SyncJob } from 'src/app/models/SyncJob';
 import { NewBookingReportService } from 'src/app/services/newBookingReport/new-booking-report.service';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
-import { DilogServiceService } from '../dialog/dilog-service.service';
+import { DialogComponent } from '../dialog/dialog.component';
 import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 @Component({
@@ -41,7 +41,7 @@ export class ExpensesDetailsReportComponent implements OnInit {
 
 
   constructor(private spinner: NgxSpinnerService, public snackBar: MatSnackBar,
-    private sidNav: SideNaveComponent, public dialogService: DilogServiceService,
+    private sidNav: SideNaveComponent, public dialog: MatDialog,
     private syncJobService: SyncJobService, private newBookingService: NewBookingReportService) { }
 
   ngOnInit(): void {
@@ -132,6 +132,15 @@ export class ExpensesDetailsReportComponent implements OnInit {
   }
 
   viewJSON(row){
-    this.dialogService.newBookingModal(row);
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+        title:  "Occupancy Updates",
+        message: row
+    };
+    dialogConfig.minWidth = 400;
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {});
   }
 }
