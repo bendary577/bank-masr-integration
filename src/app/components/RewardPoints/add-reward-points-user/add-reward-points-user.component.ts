@@ -40,7 +40,8 @@ export class AddRewardPointsUserComponent implements OnInit {
         email: [this.newUser.email, [Validators.required, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
         group: [this.newUser.group, Validators.required],
         points: [this.newUser.points],
-        birthDate: [birthdateString]
+        birthDate: [birthdateString],
+        code: [this.newUser.code]
       });
     }else{
       this.form = this.formBuilder.group({
@@ -48,7 +49,8 @@ export class AddRewardPointsUserComponent implements OnInit {
       email: ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
       group: ['', Validators.required],
       points: [''],
-      birthDate: ['1999-01-01']
+      birthDate: ['1999-01-01'],
+      code: ['']
       });
     }
   }
@@ -99,6 +101,7 @@ export class AddRewardPointsUserComponent implements OnInit {
         points: this.form.controls.points.value,
         birthDate: this.form.controls.birthDate.value,
         image: this.srcResult,
+        code: this.form.controls.code.value,
       });
     }
   }
