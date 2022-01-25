@@ -5,61 +5,64 @@
     <div class="header">
       <button mat-flat-button (click)="addAccountDialog()"  class="filterButton table-btn" style="width:150px; float:right" *ngIf="hasRole('show_add_account')">Add Account</button>
       <button mat-flat-button (click)="updateAccount()"  class="filterButton table-btn" style="width:150px; float:right" *ngIf="hasRole('show_update_account')">Update Account</button>
-      <button mat-flat-button (click)="updateAccountSyncTypes()"  class="filterButton table-btn" style="width:200px; float:right"> Update Account Sync Types</button>
+      <button mat-flat-button (click)="updateAccountSyncTypes()"  class="filterButton table-btn" style="width:200px; float:right" *ngIf="hasRole('oracle_accounts_settings')"> Update Account Sync Types</button>
     </div>
     <br />
     <div *ngIf="account.accountCredentials">
       <mat-accordion multi>
         <!-- Oracle Hospitality Inventory Management -->
-        <mat-expansion-panel *ngFor="let accountCredential of accountCredentials">
-          <form class="my-form" *ngIf="accountCredential.account == 'HospitalityOHRA'">
-            <div>
-              <mat-form-field class="example-full-width">
-                <mat-select matInput id="microsVersion" name="microsVersion"
-                  placeholder="Oracle Micros Simphony Version" [(ngModel)]="account.microsVersion">
-                  <mat-option value="version1">Version 1</mat-option>
-                  <mat-option value="version2">Version 2</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-          </form>
+        <div *ngIf="hasRole('oracle_accounts_settings')">
+          <mat-expansion-panel *ngFor="let accountCredential of accountCredentials">
+            <form class="my-form" *ngIf="accountCredential.account == 'HospitalityOHRA'">
+              <div>
+                <mat-form-field class="example-full-width">
+                  <mat-select matInput id="microsVersion" name="microsVersion"
+                    placeholder="Oracle Micros Simphony Version" [(ngModel)]="account.microsVersion">
+                    <mat-option value="version1">Version 1</mat-option>
+                    <mat-option value="version2">Version 2</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </form>
+  
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ accountCredential.account }}
+              </mat-panel-title>
+              <mat-panel-description> </mat-panel-description>
+            </mat-expansion-panel-header>
+  
+            <mat-form-field>
+              <input matInput placeholder="Username" [(ngModel)]="accountCredential.username" />
+            </mat-form-field>
+  
+            <mat-form-field>
+              <!-- showHideInput -->
+              <input id="{{ accountCredential.username }}" type="password" placeholder="Password" matInput
+                [(ngModel)]="accountCredential.password" />
+  
+              <!-- <i matSuffix class="material-icons" showHideTrigger={{accountCredential.username}}
+             [showHideStatus]="{ materialIcon: true, id: accountCredential.username }"></i> -->
+            </mat-form-field>
+            <mat-form-field *ngIf="accountCredential.account != 'Sun'">
+              <input matInput placeholder="Company" [(ngModel)]="accountCredential.company" />
+            </mat-form-field>
+            <mat-form-field *ngIf="accountCredential.account != 'Sun'">
+              <input matInput placeholder="Link" [(ngModel)]="accountCredential.link" />
+            </mat-form-field>
+  
+            <!-- Sun System Connect -->
+            <mat-form-field *ngIf="accountCredential.account == 'Sun'">
+              <input matInput placeholder="Host IP" [(ngModel)]="accountCredential.host" />
+            </mat-form-field>
+            <mat-form-field *ngIf="accountCredential.account == 'Sun'">
+              <input matInput placeholder="Port" [(ngModel)]="accountCredential.port" />
+            </mat-form-field>
+          </mat-expansion-panel>
+  
+        </div>
 
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              {{ accountCredential.account }}
-            </mat-panel-title>
-            <mat-panel-description> </mat-panel-description>
-          </mat-expansion-panel-header>
-
-          <mat-form-field>
-            <input matInput placeholder="Username" [(ngModel)]="accountCredential.username" />
-          </mat-form-field>
-
-          <mat-form-field>
-            <!-- showHideInput -->
-            <input id="{{ accountCredential.username }}" type="password" placeholder="Password" matInput
-              [(ngModel)]="accountCredential.password" />
-
-            <!-- <i matSuffix class="material-icons" showHideTrigger={{accountCredential.username}}
-           [showHideStatus]="{ materialIcon: true, id: accountCredential.username }"></i> -->
-          </mat-form-field>
-          <mat-form-field *ngIf="accountCredential.account != 'Sun'">
-            <input matInput placeholder="Company" [(ngModel)]="accountCredential.company" />
-          </mat-form-field>
-          <mat-form-field *ngIf="accountCredential.account != 'Sun'">
-            <input matInput placeholder="Link" [(ngModel)]="accountCredential.link" />
-          </mat-form-field>
-
-          <!-- Sun System Connect -->
-          <mat-form-field *ngIf="accountCredential.account == 'Sun'">
-            <input matInput placeholder="Host IP" [(ngModel)]="accountCredential.host" />
-          </mat-form-field>
-          <mat-form-field *ngIf="accountCredential.account == 'Sun'">
-            <input matInput placeholder="Port" [(ngModel)]="accountCredential.port" />
-          </mat-form-field>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel>
+        <mat-expansion-panel *ngIf="hasRole('oracle_accounts_settings')">
           <mat-expansion-panel-header>
             <mat-panel-title> Methods for sending files </mat-panel-title>
           </mat-expansion-panel-header>
@@ -83,32 +86,47 @@
             Authenticate your Drive Account
           </button>
         </mat-expansion-panel>
-
-        <!-- Email Settings -->
-        <mat-expansion-panel *ngIf="hasRole('edit_email_configuration') && emailConfig != null">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Email Configuration
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          
-          <mat-form-field>
-            <input matInput placeholder="Host" [(ngModel)]="emailConfig.host" />
-          </mat-form-field>
-          <mat-form-field>
-            <input type="number" min="0" placeholder="Port" matInput [(ngModel)]="emailConfig.port" />
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="Username" [(ngModel)]="emailConfig.username" />
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="Password" [(ngModel)]="emailConfig.password" />
-          </mat-form-field>
-
-        </mat-expansion-panel>
       </mat-accordion>
-      <ngx-spinner></ngx-spinner>
     </div>
-  </div>
+    
+    <!-- Email Settings -->
+    <mat-expansion-panel *ngIf="hasRole('edit_email_configuration') && emailConfig != null">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Email Configuration
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      
+      <mat-form-field>
+        <input matInput placeholder="Host" [(ngModel)]="emailConfig.host" />
+      </mat-form-field>
+      <mat-form-field>
+        <input type="number" min="0" placeholder="Port" matInput [(ngModel)]="emailConfig.port" />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Username" [(ngModel)]="emailConfig.username" />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Password" [(ngModel)]="emailConfig.password" />
+      </mat-form-field>
 
+      <div id="emailHeder">
+        <p style="font-size: 16px;">
+          <strong>Email Header</strong>
+        </p>
+        <quill-editor [styles]="editorStyle" placeholder="Enter QR Code Email Header" [(ngModel)]="emailConfig.emailHeader">
+        </quill-editor>
+      </div>
+
+      <div id="quill">
+        <p style="font-size: 16px;">
+          <strong>Email Footer</strong>
+        </p>
+        <quill-editor [styles]="editorStyle" placeholder="Enter QR Code Email Footer" [(ngModel)]="emailConfig.emailFooter">
+        </quill-editor>
+      </div>
+
+    </mat-expansion-panel>
+  </div>
+  <ngx-spinner></ngx-spinner>
 </div>

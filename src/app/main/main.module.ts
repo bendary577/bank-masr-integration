@@ -96,6 +96,7 @@ import { BasicModule } from '../shared/basic.module';
 import { SharedModule } from '../shared/shared.module';
 import { UniqueVoucherComponent } from '../components/unique-voucher/unique-voucher.component';
 import { TalabatOrdersComponent } from '../components/talabat-orders/talabat-orders.component';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -216,6 +217,7 @@ import { TalabatOrdersComponent } from '../components/talabat-orders/talabat-ord
     BasicModule,
     SharedModule,
     AngularMaterialModule,
+    QuillModule.forRoot()
   ],
   entryComponents: [
     AddUserComponent,

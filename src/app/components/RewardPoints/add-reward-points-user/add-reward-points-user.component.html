@@ -22,6 +22,21 @@
                 </mat-error>
             </mat-form-field>
 
+            <mat-form-field class="example-full-width creditForm" appearance="outline" *ngIf="hasRole('magnetic_card')">
+                <input matInput placeholder="Card Number" formControlName="code" maxlength="20">
+
+                <mat-error *ngIf="form.controls.code.hasError('required')">
+                    Card Number is required.
+                </mat-error>
+                <mat-error *ngIf="form.controls.code.hasError('maxlength')">
+                    Card Number to long.
+                </mat-error>
+                <mat-error *ngIf="form.controls.code.hasError('pattern')">
+                    Card Number must be well formed.
+                </mat-error>
+            </mat-form-field>
+            <h6 style="text-align: left;" *ngIf="hasRole('magnetic_card')">Please swipe the card</h6>
+            
             <mat-form-field class="example-full-width creditForm" appearance="outline">
                 <mat-select matInput id="groups" name="groups" placeholder="Group" formControlName="group">
                     <mat-option [value]=c *ngFor="let c of groups">{{c.name}}</mat-option>
@@ -29,10 +44,10 @@
             </mat-form-field>
 
             <!-- Reward Points -->
-            <mat-form-field class="example-full-width creditForm" appearance="outline" *ngIf="hasFeature('reward_points')">
+            <mat-form-field class="example-full-width creditForm" appearance="outline">
                 <input matInput placeholder="Birth Date" type="date" formControlName="birthDate">
             </mat-form-field>
-            <mat-form-field class="example-full-width creditForm" appearance="outline" *ngIf="hasFeature('reward_points')">
+            <mat-form-field class="example-full-width creditForm" appearance="outline">
                 <input matInput placeholder="Add welcome points" type="number" min="0" formControlName="points">
             </mat-form-field>
 

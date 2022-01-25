@@ -220,6 +220,7 @@ export class ManageRewardPointsUsersComponent implements OnInit {
         this.newUser.group = res.group
         this.newUser.points = res.points
         this.newUser.birthDate = res.birthDate
+        this.newUser.code = res.code
 
         this.usersList.showLoading = true
         this.rewardPointsService
