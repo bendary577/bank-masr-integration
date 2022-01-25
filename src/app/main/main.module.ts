@@ -95,6 +95,7 @@ import { AngularMaterialModule } from '../angular-material.module';
 import { BasicModule } from '../shared/basic.module';
 import { SharedModule } from '../shared/shared.module';
 import { UniqueVoucherComponent } from '../components/unique-voucher/unique-voucher.component';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -214,6 +215,7 @@ import { UniqueVoucherComponent } from '../components/unique-voucher/unique-vouc
     BasicModule,
     SharedModule,
     AngularMaterialModule,
+    QuillModule.forRoot()
   ],
   entryComponents: [
     AddUserComponent,

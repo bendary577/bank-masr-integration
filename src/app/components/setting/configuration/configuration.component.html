@@ -108,6 +108,22 @@
             <input matInput placeholder="Password" [(ngModel)]="emailConfig.password" />
           </mat-form-field>
 
+          <div id="emailHeder">
+            <p style="font-size: 16px;">
+              <strong>Email Header</strong>
+            </p>
+            <quill-editor [styles]="editorStyle" placeholder="Enter QR Code Email Header" [(ngModel)]="emailConfig.emailHeader">
+            </quill-editor>
+          </div>
+
+          <div id="quill">
+            <p style="font-size: 16px;">
+              <strong>Email Footer</strong>
+            </p>
+            <quill-editor [styles]="editorStyle" placeholder="Enter QR Code Email Footer" [(ngModel)]="emailConfig.emailFooter">
+            </quill-editor>
+          </div>
+
         </mat-expansion-panel>
       </mat-accordion>
       <ngx-spinner></ngx-spinner>
