@@ -450,5 +450,11 @@ export class Constants {
 
   static SUPPORT = 'support'
 
+  static TALABAT_ORDERS  = "talabatOrders"
+  static GET_TALABAT_ORDERS =  environment.apiHost + "/talabat";
+  static GET_TALABAT_ORDER_DETAILS =  environment.apiHost + "/talabat/order";
+  static GET_TALABAT_BRANCH_ORDERS =  environment.apiHost + "/talabat/branch";
+
+
   ///////////////////////////////////////////////
 }

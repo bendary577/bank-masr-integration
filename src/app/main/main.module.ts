@@ -95,6 +95,7 @@ import { AngularMaterialModule } from '../angular-material.module';
 import { BasicModule } from '../shared/basic.module';
 import { SharedModule } from '../shared/shared.module';
 import { UniqueVoucherComponent } from '../components/unique-voucher/unique-voucher.component';
+import { TalabatOrdersComponent } from '../components/talabat-orders/talabat-orders.component';
 
 @NgModule({
   declarations: [
@@ -206,7 +207,8 @@ import { UniqueVoucherComponent } from '../components/unique-voucher/unique-vouc
     RevenueByAgentComponent,
     ExtendExpiryDateComponent,
     ViewInvokerComponent,
-    UniqueVoucherComponent
+    UniqueVoucherComponent,
+    TalabatOrdersComponent
   ],
   imports: [
     MainRoutingModule,
