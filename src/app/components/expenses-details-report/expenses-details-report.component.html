@@ -1,147 +1,149 @@
 <div class="sync-body">
-<h3>Expenses Details Detailes</h3>
+    <h3>Expenses Details Detailes</h3>
 
-<div class="header">
-    <span class="history"> Sync Job History </span>
 
-    <select class="custom-select" (change)="getSyncJobData()" [(ngModel)]="selectedJob">
-        <option [ngValue]="job" *ngFor="let job of jobs">
-            {{job.creationDate | date:'dd-MM-yyyy H:MM:SS'}} - {{job.status}}</option>
-    </select>
-    <button mat-flat-button (click)="syncExpensesDetails()">Sync Expenses Details</button>
+    <div class="header">
+        <span class="history"> Sync Job History </span>
 
-</div>
+        <mat-form-field appearance="outline" class="history-dropdown">
+            <mat-select required class="form-controls" id="sync" placeholder="Sync Job"
+            (ngModelChange)="getSyncJobData()" [(ngModel)]="selectedJob">
+                <mat-option [value]="job" *ngFor="let job of jobs">{{job.creationDate | date:'dd-MM-yyyy H:MM:SS'}} -
+                    {{job.status}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
 
-<br>
+        <button mat-flat-button  class="filterButton" (click)="syncExpensesDetails()">Sync Expenses Details</button>
 
-<div *ngIf="selectedJob">
-    <mat-card class="example-card">
-        <mat-card-header>
-            <mat-card-title class="title">Sync Details</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <mat-list-item>
-                <span class="key">Sync Number: </span>
-                <span class="value" *ngIf="selectedJob.id">{{selectedJob.id}}</span>
-                <span class="value" *ngIf="!selectedJob.id">No Info</span>
-            </mat-list-item>
-            <mat-list-item>
-                <span class="key">Sync status: </span>
-                <span class="value" *ngIf="selectedJob.status">{{selectedJob.status}}</span>
-                <span class="value" *ngIf="!selectedJob.status">No Info</span>
-            </mat-list-item>
-            <mat-list-item>
-                <span class="key">Start Date: </span>
-                <span class="value" *ngIf="selectedJob.creationDate">{{selectedJob.creationDate | date:'dd-MM-yyyy
-                    H:MM:SS'}}</span>
-                <span class="value" *ngIf="!selectedJob.creationDate">No Info</span>
-            </mat-list-item>
-            <mat-list-item>
-                <span class="key">End Date: </span>
-                <span class="value" *ngIf="selectedJob.endDate">{{selectedJob.endDate | date:'dd-MM-yyyy
-                    H:MM:SS'}}</span>
-                <span class="value" *ngIf="!selectedJob.endDate">No Info</span>
-            </mat-list-item>
-            <mat-list-item>
-                <span class="key">Reason: </span>
-                <span class="value" *ngIf="selectedJob.reason">{{selectedJob.reason}}</span>
-                <span class="value" *ngIf="!selectedJob.reason">No Info</span>
-            </mat-list-item>
-            <mat-list-item *ngIf="!transactionList.transactionData.length">
-                <span>
-                    There was no new data to sync in this job, You can sync Cancel Booking Detailes now from <a
-                        (click)="syncExpensesDetails()">here</a>
-                </span>
-            </mat-list-item>
-        </mat-card-content>
-    </mat-card>
-</div>
-<br>
+    </div>
+    <br>
 
-<div>
+    <div *ngIf="selectedJob">
+        <mat-card class="example-card">
+            <h2 class="cardHeader">Sync Details</h2>
+            <mat-card-content>
+                <mat-list-item>
+                    <span class="key">Sync Number: </span>
+                    <span class="value" *ngIf="selectedJob.id">{{selectedJob.id}}</span>
+                    <span class="value" *ngIf="!selectedJob.id">No Info</span>
+                </mat-list-item>
+                <mat-list-item>
+                    <span class="key">Sync status: </span>
+                    <span class="value" *ngIf="selectedJob.status">{{selectedJob.status}}</span>
+                    <span class="value" *ngIf="!selectedJob.status">No Info</span>
+                </mat-list-item>
+                <mat-list-item>
+                    <span class="key">Start Date: </span>
+                    <span class="value" *ngIf="selectedJob.creationDate">{{selectedJob.creationDate | date:'dd-MM-yyyy
+                        H:MM:SS'}}</span>
+                    <span class="value" *ngIf="!selectedJob.creationDate">No Info</span>
+                </mat-list-item>
+                <mat-list-item>
+                    <span class="key">End Date: </span>
+                    <span class="value" *ngIf="selectedJob.endDate">{{selectedJob.endDate | date:'dd-MM-yyyy
+                        H:MM:SS'}}</span>
+                    <span class="value" *ngIf="!selectedJob.endDate">No Info</span>
+                </mat-list-item>
+                <mat-list-item>
+                    <span class="key">Reason: </span>
+                    <span class="value" *ngIf="selectedJob.reason">{{selectedJob.reason}}</span>
+                    <span class="value" *ngIf="!selectedJob.reason">No Info</span>
+                </mat-list-item>
+                <mat-list-item *ngIf="!transactionList.transactionData.length">
+                    <span>
+                        There was no new data to sync in this job, You can sync Expenses Details now from <a
+                            (click)="syncExpensesDetails()">here</a>
+                    </span>
+                </mat-list-item>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <br>
+
     <div>
-        <div *ngIf="!jobs.length">
-            <mat-card class="example-card">
-                <mat-card-header>
-                    <mat-card-title>No Data</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <p>
-                        There was no new data to sync in this job, You can sync Expenses Details now from
-                        <a (click)="syncExpensesDetails()">here</a>
-                    </p>
-                </mat-card-content>
-            </mat-card>
+        <div>
+            <div *ngIf="!jobs.length">
+                <mat-card class="example-card">
+                    <h2 class="cardHeader">No Data</h2>
+                    <mat-card-content>
+                        <p style="padding:20px;">
+                            There was no new data to sync in this job, You can sync Expenses Details now from
+                            <a (click)="syncExpensesDetails()">here</a>
+                        </p>
+                    </mat-card-content>
+                </mat-card>
 
-            <br>
+                <br>
+            </div>
         </div>
+
+        <div *ngIf="jobs.length || transactionList.showLoading">
+            <ngx-datatable style="max-width: 98%;" class="material" [loadingIndicator]="transactionList.showLoading"
+                [messages]="transactionList.messages" [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50"
+                [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+                [rows]="transactionList.transactionData" [selected]="transactionList.selected"
+                [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" (select)='onSelect($event)'
+                [scrollbarH]="true">
+
+                <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false"
+                    [resizeable]="true">
+                    <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
+                        let-selectFn="selectFn">
+                        <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected"
+                            (change)="selectFn(!allRowsSelected)" />
+                    </ng-template>
+
+                    <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected"
+                        let-onCheckboxChangeFn="onCheckboxChangeFn">
+                        <input class="regular-checkbox" type="checkbox" [checked]="isSelected"
+                            (change)="onCheckboxChangeFn($event)" />
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Status">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.status}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Reason">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.reason}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Transaction Id">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.transactionId}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Booking Number">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.bookingNo}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Room Number">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.roomNo}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Expense Item Count">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.data.items.length}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="View JSON">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <button mat-flat-button (click)="viewJSON(row.data)">JSON</button>
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </div>
+
+        <ngx-spinner></ngx-spinner>
     </div>
-
-    <div *ngIf="jobs.length || transactionList.showLoading">
-        <ngx-datatable style="max-width: 98%;" class="material" [loadingIndicator]="transactionList.showLoading"
-            [messages]="transactionList.messages" [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50"
-            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-            [rows]="transactionList.transactionData" [selected]="transactionList.selected" [selectionType]="'checkbox'"
-            [selectAllRowsOnPage]="false" (select)='onSelect($event)' [scrollbarH]="true">
-
-            <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
-                <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
-                    let-selectFn="selectFn">
-                    <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected"
-                        (change)="selectFn(!allRowsSelected)" />
-                </ng-template>
-
-                <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected"
-                    let-onCheckboxChangeFn="onCheckboxChangeFn">
-                    <input class="regular-checkbox" type="checkbox" [checked]="isSelected"
-                        (change)="onCheckboxChangeFn($event)" />
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Status">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.status}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Reason">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.reason}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Transaction Id">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.transactionId}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Booking Number">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.bookingNo}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Room Number">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.roomNo}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Expense Item Count">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.data.items.length}}
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="View JSON">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <button mat-flat-button (click)="viewJSON(row.data)">JSON</button>
-                </ng-template>
-            </ngx-datatable-column>
-        </ngx-datatable>
-    </div>
-
-    <ngx-spinner></ngx-spinner>
-</div>
 </div>

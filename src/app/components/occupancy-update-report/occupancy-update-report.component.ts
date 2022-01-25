@@ -7,7 +7,6 @@ import { SyncJob } from 'src/app/models/SyncJob';
 import { NewBookingReportService } from 'src/app/services/newBookingReport/new-booking-report.service';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { DialogComponent } from '../dialog/dialog.component';
-import { DilogServiceService } from '../dialog/dilog-service.service';
 import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 @Component({
