@@ -95,6 +95,7 @@ import { AngularMaterialModule } from '../angular-material.module';
 import { BasicModule } from '../shared/basic.module';
 import { SharedModule } from '../shared/shared.module';
 import { UniqueVoucherComponent } from '../components/unique-voucher/unique-voucher.component';
+import { TalabatOrdersComponent } from '../components/talabat-orders/talabat-orders.component';
 import { QuillModule } from 'ngx-quill';
 
 @NgModule({
@@ -207,7 +208,8 @@ import { QuillModule } from 'ngx-quill';
     RevenueByAgentComponent,
     ExtendExpiryDateComponent,
     ViewInvokerComponent,
-    UniqueVoucherComponent
+    UniqueVoucherComponent,
+    TalabatOrdersComponent
   ],
   imports: [
     MainRoutingModule,

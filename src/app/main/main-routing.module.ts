@@ -65,6 +65,7 @@ import { VoucherListComponent } from '../components/voucher-list/voucher-list.co
 import { RewardPointsComponent } from '../components/reward-points/reward-points.component';
 import { VoucherTransactionsComponent } from '../components/voucher-transactions/voucher-transactions.component';
 import { UniqueVoucherComponent } from '../components/unique-voucher/unique-voucher.component';
+import { TalabatOrdersComponent } from '../components/talabat-orders/talabat-orders.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -174,6 +175,8 @@ const routes: Routes = [
   { path: Constants.SIMPHONY_CHECK_CONFIG_PAGE , component: SimphonyCheckConfigurationComponent ,canActivate:[AuthGuardService]},
 
   { path : Constants.SUPPORT , component: SupportComponent, canActivate:[AuthGuardService]},
+
+  { path : Constants.TALABAT_ORDERS , component: TalabatOrdersComponent, canActivate:[AuthGuardService]},
 ];
 
 @NgModule({

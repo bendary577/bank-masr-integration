@@ -157,7 +157,9 @@
           <li class="nav-item" *ngIf="hasFeature('redeem_voucher')">
             <a class="nav-link" routerLink="main/redeemVoucher" routerLinkActive="active" translate>Vouchers Generator</a>
          </li>
-
+         <li class="nav-item" *ngIf="hasFeature('talabat-orders')">
+          <a class="nav-link" routerLink="/main/talabatOrders" routerLinkActive="active" translate>Talabat Integration</a>
+       </li>
           <!-- <li class="nav-item" *ngFor="let application of applications"> <a class="nav-link"
               routerLink={{application.endPoint}} routerLinkActive="active" translate>{{application.name}}</a></li> -->
         </ul>
