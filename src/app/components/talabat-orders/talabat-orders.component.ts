@@ -101,7 +101,7 @@ export class TalabatOrdersComponent implements OnInit {
     this.orders = [];
 
     this.talabatService.getTalabatBranchOrders(this.selectedBranch).toPromise().then((res: any) => {
-      this.orders = res["data"]["orders"];
+      this.delay(500, res);
       console.log(this.orders)
       this.spinner.hide();
       this.loading = false;
@@ -111,7 +111,13 @@ export class TalabatOrdersComponent implements OnInit {
     });
   }
 
+  async delay(ms: number, res: any) {
+      await new Promise(resolve => setTimeout(()=> this.getTransacrion(res), ms)).then(()=>console.log("fired"));
+  }
 
+  getTransacrion(res) {
+        this.orders = res["data"]["orders"];
+    }
   // getPOSSales() {
   //   this.spinner.show();
   //   this.syncJobService.getSyncJobData(Constants.POS_SALES_SYNC).toPromise().then((res) => {
