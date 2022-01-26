@@ -133,16 +133,16 @@ export class SyncJobsconfigComponent implements OnInit {
         this.router.navigate([ "syncjobs/" + Constants.MENU_ITEMS_CONFIG_PAGE]);
     }
     else if (syncJobType.name == Constants.NEW_BOOKING_REPORT_SYNC) {
-      this.router.navigate([ "syncjobs/" + Constants.NEW_BOOKING_REPORT_CONFIG_PAGE]);
+      this.router.navigate([ "main/" + Constants.NEW_BOOKING_REPORT_CONFIG_PAGE]);
     }
     else if (syncJobType.name == Constants.CANCEL_BOOKING_REPORT_SYNC) {
-      this.router.navigate([ "syncjobs/" + Constants.CANCEL_BOOKING_REPORT_CONFIG_PAGE]);
+      this.router.navigate([ "main/" + Constants.CANCEL_BOOKING_REPORT_CONFIG_PAGE]);
     }
     else if (syncJobType.name == Constants.OCCUPANCY_UPDATE_REPORT_SYNC) {
-      this.router.navigate([ "syncjobs/" + Constants.OCCUPANCY_UPDATE_REPORT_CONFIG_PAGE]);
+      this.router.navigate([ "main/" + Constants.OCCUPANCY_UPDATE_REPORT_CONFIG_PAGE]);
     }
     else if (syncJobType.name == Constants.EXPENSES_DETAILS_REPORT_SYNC) {
-      this.router.navigate([ "syncjobs/" + Constants.EXPENSES_DETAILS_REPORT_CONFIG_PAGE]);
+      this.router.navigate([ "main/" + Constants.EXPENSES_DETAILS_REPORT_CONFIG_PAGE]);
     }
     else{
       this.snackBar.open("This sync job has not configuration yet.", null, {
