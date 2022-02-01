@@ -7,7 +7,7 @@ import { Tender } from 'src/app/models/Tender';
 import { PosSalesService } from 'src/app/services/posSales/pos-sales.service';
 import { AddTenderChildComponent } from '../../add-tender-child/add-tender-child.component';
 import { AddTenderComponent } from '../../add-tender/add-tender.component';
-import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
+import { SideNaveComponent } from '../../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-tender-configuration',
@@ -23,7 +23,7 @@ export class TenderConfigurationComponent implements OnInit {
   @Input() generalSettings: GeneralSettings;
 
   constructor(private salesService:PosSalesService,
-     private sidNav: SidenavResponsive,
+     private sidNav: SideNaveComponent,
      public snackBar: MatSnackBar, public dialog: MatDialog) { }
 
   ngOnInit() {}

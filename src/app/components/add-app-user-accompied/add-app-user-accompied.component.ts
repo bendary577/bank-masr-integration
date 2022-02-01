@@ -1,10 +1,11 @@
-import { Component, Inject, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser';
 import { AccompiendGuest } from 'src/app/models/loyalty/AccompiendGuest';
 import { Group } from 'src/app/models/loyalty/Group';
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-add-app-user-accompied',
@@ -15,12 +16,13 @@ export class AddAppUserAccompiedComponent implements OnInit  {
   public form: FormGroup;
   public accompiendForms: FormGroup[] = [];
   accompiendGuests= [];
+  groups: Group[] = [];
   user = new ApplicationUser();
   selectedGroup: String;
   srcResult: any;
   imageUploded: boolean = false;
   inUpdate = false;
-  group: Group;
+  group: Group = new Group();
   qrcodeMethod = ["Email", "SMS", "Print"];
   swiped = true;
   cardNumber = 0;
@@ -28,18 +30,35 @@ export class AddAppUserAccompiedComponent implements OnInit  {
   sendSMS = false;
   sendEmail = false;
   inAccompiendView = false;
-  // @ViewChild('ChildViewComponent') accompiedNumber = 2 ;
+  isGeneric = true;
+
   @Input() accompiedNumber = 0 ;
   constructor(private formBuilder: FormBuilder, public snackBar: MatSnackBar, 
     public dialogRef: MatDialogRef<AddAppUserAccompiedComponent>, private loyaltyService: LoyaltyService,
     @Inject(MAT_DIALOG_DATA) public data) { }
  
   ngOnInit() {
-    this.getGenericGroup();
+    if (this.data != undefined && this.data["generic"] != null){
+      console.log(this.data["generic"]);
+
+      if(this.data["generic"]){
+        this.getGenericGroup();
+      }else{
+        this.isGeneric = false;
+      }
+    }
+    this.getGroups();
+  
     if (this.data != undefined && this.data["user"] != null){
+      this.isGeneric = false;
       this.inUpdate = true;
       this.user = this.data["user"];
       this.selectedGroup = this.user.group.id;
+
+      if(this.user.accompaniedGuests == null){
+        this.user.accompaniedGuests = [];
+      }
+
       for(var i = 0 ; i < this.user.accompaniedGuests.length; i++){
         let accompiendForm:  FormGroup;
         accompiendForm = this.formBuilder.group({
@@ -50,28 +69,34 @@ export class AddAppUserAccompiedComponent implements OnInit  {
         this.accompiendForms.push(accompiendForm);
       }
 
+      let expirationDate = moment(this.user.expiryDate).format('YYYY-MM-DDT00:00');
+
       this.form = this.formBuilder.group({
         name: [this.user.name, [Validators.maxLength]], 
         email: [this.user.email, [Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
         mobile: [this.user.mobile, [Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
-        group: this.group,
+        group: [this.user.group.id],
         balance:[this.user.wallet.price],
-        expire: [this.user.expire],
+        expiryDate: [expirationDate],
         cardNum: [this.user.code],
         accompanied:[this.user.accompaniedGuests.length],
       });
       this.calculateParams();
     }else{
+      var nextDay = new Date();
+      nextDay.setDate(nextDay.getDate() + 1);
+
+      let defaultExpirationDate = moment(nextDay).format('YYYY-MM-DDT00:00');
       this.form = this.formBuilder.group({
-      group: this.group,
-      balance:[100, [Validators.required, Validators.maxLength, Validators.pattern('[- +()0-9]+')]],
-      expire:[24, [Validators.required, Validators.maxLength, Validators.pattern('[- +()0-9]+')]],
-      name: ["", [Validators.maxLength]],
-      email: ["", [Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"), Validators.maxLength]],
-      mobile: ["", [Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
-      cardNum: ["", [Validators.required, Validators.maxLength]],
-      accompanied:[0],
-      });
+        group: this.group,
+        balance:[0, [Validators.required, Validators.maxLength, Validators.pattern('[- +()0-9]+')]],
+        expiryDate:[defaultExpirationDate, [Validators.required]],
+        cardNum: ["", [Validators.required, Validators.maxLength]],
+        name: ["", [Validators.maxLength]],
+        email: ["", [Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"), Validators.maxLength]],
+        mobile: ["", [Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
+        accompanied:[0],
+        });
     }
     this.swipe();
   }
@@ -83,6 +108,18 @@ export class AddAppUserAccompiedComponent implements OnInit  {
       credit = credit + balance[i]["amount"];
     }
     this.credit = credit;
+  }
+
+  getGroups(){
+    this.loyaltyService.getAllAppGroups(1).toPromise().then((res: any) => {
+      this.groups = res;
+    }).catch(err => {
+      this.snackBar.open("Can't fetch group, Please try agian.", null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-success"
+      });
+    });
   }
 
   getGenericGroup(){
@@ -142,12 +179,17 @@ export class AddAppUserAccompiedComponent implements OnInit  {
         accompiendGuest.mobile =  this.accompiendForms[i].controls.mobile.value;
         this.accompiendGuests.push(accompiendGuest);
       }
+
+      if(!this.isGeneric){
+        this.group.id = this.form.controls.group.value;
+      }
+  
       this.dialogRef.close({
         name: this.form.controls.name.value,
         email: this.form.controls.email.value,
         mobile: this.form.controls.mobile.value,
         balance: this.form.controls.balance.value,
-        expire: this.form.controls.expire.value,
+        expiryDate: this.form.controls.expiryDate.value,
         group: this.group.id,
         image: this.srcResult,
         points:0,
@@ -178,9 +220,6 @@ export class AddAppUserAccompiedComponent implements OnInit  {
     }
   }
 
-  hasRole(role){
-    
-  }
 
   tabClick(tab){
     if(tab.index == 1 && this.accompiedNumber  == 0){

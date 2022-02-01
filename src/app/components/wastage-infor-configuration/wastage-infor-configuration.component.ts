@@ -9,9 +9,9 @@ import { AccountSyncType } from 'src/app/models/AccountSyncType'
 import { WastageService } from 'src/app/services/wastage/wastage.service'
 import { JournalService } from 'src/app/services/journal/journal.service'
 import { ErrorMessages } from 'src/app/models/ErrorMessages'
-import { SidenavResponsive } from '../sidenav/sidenav-responsive'
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service'
 import { GeneralSettings } from 'src/app/models/GeneralSettings'
+import { SideNaveComponent } from '../side-nave/side-nave.component'
 
 @Component({
   selector: 'app-wastage-infor-configuration',
@@ -48,7 +48,7 @@ export class WastageInforConfigurationComponent implements OnInit {
     private accSyncTypeService: AccSyncTypeService,
     private router: Router,
     public snackBar: MatSnackBar,
-    private sidNav: SidenavResponsive,
+    private sidNav: SideNaveComponent,
     private generalSettingsService:GeneralSettingsService
   ) {}
 

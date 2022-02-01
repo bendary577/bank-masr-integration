@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { SupplierService } from 'src/app/services/supplier/supplier.service';
 import { Constants } from 'src/app/models/constants';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
-import {Data} from "../../models/data";
-import { SyncJobType } from 'src/app/models/SyncJobType';
 import { AccSyncTypeService } from 'src/app/services/accSyncType/acc-sync-type.service';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
-import { SidenavResponsive } from '../sidenav/sidenav-responsive';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 
 @Component({
@@ -29,9 +27,9 @@ export class SuppliersConfiguartionComponent implements OnInit {
   taxes = []
   groups = []
 
-  constructor(private formBuilder: FormBuilder, private sidNav: SidenavResponsive,
+  constructor(private sidNav: SideNaveComponent,
     private spinner: NgxSpinnerService, public snackBar: MatSnackBar,
-    private syncJobService:SyncJobService, private data: Data,
+    private syncJobService:SyncJobService,
     private router: Router,  private supplierService: SupplierService, private accSyncTypeService:AccSyncTypeService) {
 
   }

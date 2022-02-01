@@ -1,0 +1,124 @@
+<div *ngIf="usersList.allGuestsBeforeFilter.length != 0 ||usersList.usersData.length != 0 || usersList.showLoading" class="header">
+    <button mat-flat-button class="groups-buttons" (click)="addRewardPointsUser()">Add Guest</button>
+    <button mat-flat-button class="groups-buttons" (click)="updateUserDialog()" [disabled]="validateUpdateUser()">Update
+        Guest</button>
+    <button mat-flat-button class="groups-buttons" (click)="resendQRCode()"
+        [disabled]="usersList.selected.length != 1" *ngIf="hasRole('resend_QR_code')">Resend QR Code</button>
+    <button mat-flat-button class="groups-buttons" (click)="send('Email')"
+        [disabled]="usersList.selected.length != 1" *ngIf="hasRole('resend_email')">Resend Email</button>
+    <button mat-flat-button class="groups-buttons" (click)="deleteUsers('true')"
+        [disabled]="validateDeleteUsers()">Delete Guest</button>
+    <button mat-flat-button class="groups-buttons" (click)="deleteUsers('false')"
+        [disabled]="validateRestoreUsers()">Restore Guest</button>
+    <button mat-flat-button class="groups-buttons" (click)="exportToExcel()"
+        [disabled]="usersList.selected.length == 0">Export to PDF</button>
+</div>
+
+<div class="main">
+
+    <div *ngIf="usersList.usersData.length == 0 && !usersList.showLoading" style="text-align: center;">
+        <div *ngIf="usersList.allGuestsBeforeFilter.length != 0">
+            <img style="max-width: 300px; margin-top: 100px;" src="../../../assets/no-user.png" alt="image">
+            <p class="user-name">There is no guests in this date time range!</p>
+        </div>
+        <div *ngIf="usersList.allGuestsBeforeFilter.length == 0">
+        <img style="max-width: 300px; margin-top: 100px;" src="../../../assets/no-user.png" alt="image">
+        <p class="user-name">You haven't added any guest yet!</p>
+
+        <!-- Add Loyalty User -->
+        <button mat-flat-button class="groups-buttons" (click)="addRewardPointsUser()">Add Guest</button>
+        </div>
+    </div>
+
+    <div *ngIf="usersList.usersData.length != 0 || usersList.showLoading">
+        <ngx-datatable class="material" [loadingIndicator]="usersList.showLoading" [messages]="usersList.messages"
+            [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+            [scrollbarV]="true" [scrollbarH]="true" [rows]="usersList.usersData" [selected]="usersList.selected"
+            [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" (select)='onSelect($event)' [scrollbarH]="true">
+
+            <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true"
+                [width]="5">
+                <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
+                    let-selectFn="selectFn">
+                    <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected"
+                        (change)="selectFn(!allRowsSelected)" />
+                </ng-template>
+
+                <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected"
+                    let-onCheckboxChangeFn="onCheckboxChangeFn">
+                    <input class="regular-checkbox" type="checkbox" [checked]="isSelected"
+                        (change)="onCheckboxChangeFn($event)" />
+                </ng-template>
+            </ngx-datatable-column>
+
+
+            <ngx-datatable-column name="Name" [width]="90">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.name}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="QR Code" [width]="90" *ngIf="hasRole('show_card_number')">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.code}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Email" [width]="90">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.email}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Group" *ngIf="hasRole('show_group')" [width]="90">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.group.name}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Points" [width]="90">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.points}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="State" [width]="90">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <label *ngIf="!row.deleted && !row.suspended" class="active-state">Active</label>
+                    <label *ngIf="!row.deleted && row.suspended" style="color: #1661a3;">Suspended</label>
+                    <label *ngIf="row.deleted" class="deleted-state">Deleted</label>
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Birth Date" [width]="90">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.birthDate | date: 'dd/MM/yyyy' }}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Creation Time" [width]="90">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.creationDate | date: 'dd/MM/yyyy HH:mm:ss' }}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Last Update" [width]="90">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.lastUpdate | date: 'dd/MM/yyyy HH:mm:ss' }}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Options" *ngIf="hasRole('show_option')" [width]="90">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <button class="menue-btn" mat-button [matMenuTriggerFor]="menu">...</button>
+                    <mat-menu #menu="matMenu">
+                        <button *ngIf="!row.suspended" class="menue-btn-choi" mat-menu-item (click)="suspendGuest(row.id, true)">Suspend</button>
+                        <button *ngIf="row.suspended" class="menue-btn-choi" mat-menu-item (click)="suspendGuest(row.id, false)">Activate</button>
+                        <button *ngIf="!row.deleted" class="menue-btn-choi" mat-menu-item (click)="deleteOneUsers(row, 'true')">Delete Guest</button>
+                        <button *ngIf="row.deleted" class="menue-btn-choi" mat-menu-item (click)="deleteOneUsers(row, 'false')">Restore Guest</button>
+                    </mat-menu>
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+    </div>
+</div>

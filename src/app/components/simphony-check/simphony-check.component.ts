@@ -1,14 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { MatSnackBar } from '@angular/material'
 import { NgxSpinnerService } from 'ngx-spinner'
 import { ErrorMessages } from 'src/app/models/ErrorMessages'
 import { OperaPaymentService } from 'src/app/services/operaPayment/opera-payment.service'
-import { SidenavResponsive } from '../sidenav/sidenav-responsive'
 import { DateAdapter } from '@angular/material/core';
-import * as moment from 'moment';
 import { Data } from 'src/app/models/data'
 import { Router } from '@angular/router'
 import { Constants } from 'src/app/models/constants'
+import { SideNaveComponent } from '../side-nave/side-nave.component'
 
 @Component({
   selector: 'app-simphony-check',
@@ -31,7 +30,7 @@ export class SimphonyCheckComponent implements OnInit {
 
   constructor(
     private spinner: NgxSpinnerService, private dateAdapter: DateAdapter<Date>,
-    private sidNav: SidenavResponsive,
+    private sidNav: SideNaveComponent,
     private operaPaymentService: OperaPaymentService,
     private snackBar: MatSnackBar,
     public data: Data,
@@ -120,7 +119,7 @@ export class SimphonyCheckComponent implements OnInit {
         panelClass: "my-snack-bar-fail"
       });
       this.spinner.hide();
-    } else if (this.fromDate != undefined && this.toDate != undefined && (moment(this.toDate.toString()).diff(moment(this.fromDate.toString()), 'day') < 0)) {
+    } else if (this.fromDate != undefined && this.toDate != undefined) {
       this.snackBar.open("Configure start date and end date correctly, \n start date can't be after end date.", null, {
         duration: 3000,
         horizontalPosition: 'center',
@@ -166,7 +165,7 @@ export class SimphonyCheckComponent implements OnInit {
   openCheckPayment(row){
     if(this.inParent){
       this.data.storage = row;
-      this.router.navigate([Constants.SIMPHONY_PAYMENT_PAGE]);
+      this.router.navigate(["main/simphonyPayment"]);
       }
   }
   deleteOneUsers(row, flag){

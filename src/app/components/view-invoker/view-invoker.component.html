@@ -1,0 +1,33 @@
+<div style="max-height: 600px;">
+    <!-- Select All Roles -->
+    <div >
+        <ngx-datatable class="material" [loadingIndicator]="invokerRolesList.showLoading" [messages]="invokerRolesList.messages" style="width : 95%;"
+        [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+         [rows]="invokerRolesList.data" [selected]="invokerRolesList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
+        (select)='onSelect($event)' [scrollbarH]="true">
+    
+            <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
+            <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+            <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
+            </ng-template>
+    
+            <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
+             <input class="regular-checkbox" type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
+            </ng-template>
+            </ngx-datatable-column>
+    
+            <ngx-datatable-column name="Role Id">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <span class="group-name">{{row}}</span>
+                </ng-template>
+            </ngx-datatable-column>
+            
+        </ngx-datatable>
+
+    </div>
+
+    <div mat-dialog-actions class="btns">
+        <button mat-button class="groups-buttons" (click)="onNoClick()" >Cancel</button>
+        <button mat-button class="groups-buttons" cdkFocusInitial (click)="onSaveClick()">Update</button>
+    </div>
+</div>

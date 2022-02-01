@@ -1,0 +1,114 @@
+<h3>Simphony Vouchers</h3>
+<div class="main">
+
+    <div *ngIf="voucherList.voucherData.length != 0 || voucherList.showLoading" class="header">
+        <button *ngIf="hasRole('add_voucher')" mat-flat-button (click)="addVoucherDialog()" [disabled]="validateAddVoucher()" class="groups-buttons"><span
+                class="mob-text">Add Voucher</span></button>
+        <button *ngIf="hasRole('add_voucher')" mat-flat-button (click)="updateVoucherDialog()" [disabled]="validateUpdateVoucher()"
+            class="groups-buttons"><span class="mob-text">Update Voucher</span></button>
+            <button mat-flat-button (click)="extractVoucherCodePDF()" [disabled]="validateUpdateVoucher()"
+            class="groups-buttons"><span class="mob-text">Export PDF</span></button>
+        <button *ngIf="hasRole('delete_voucher')" mat-flat-button (click)="openConfirmationDeleteRestore(false)" [disabled]="validateDeleteVoucher()"
+            class="groups-buttons"><span class="mob-text">Delete Voucher</span></button>
+        <button *ngIf="hasRole('delete_voucher')" mat-flat-button (click)="openConfirmationDeleteRestore(true)" [disabled]="validateRestoreVoucher()"
+            class="groups-buttons"><span class="mob-text">Restore Voucher</span></button>
+    </div>
+
+    <div *ngIf="voucherList.voucherData.length == 0 && !voucherList.showLoading" style="text-align: center;">
+        <img style="max-width: 300px; margin-top: 100px;" src="../../../assets/gift-card.png" alt="image">
+        <p class="user-name">You haven't added any Voucher yet!</p>
+        <button mat-flat-button (click)="addVoucherDialog()" class="groups-buttons">ADD Voucher</button>
+    </div>
+
+    <div *ngIf="voucherList.voucherData.length != 0 || voucherList.showLoading">
+        <ngx-datatable class="material" [loadingIndicator]="voucherList.showLoading" [messages]="voucherList.messages"
+            [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+            [scrollbarV]="true" [scrollbarH]="true" [rows]="voucherList.voucherData" [selected]="voucherList.selected"
+            [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" (select)='onSelect($event)' [scrollbarH]="true">
+
+            <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true"
+                [width]="7">
+                <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
+                    let-selectFn="selectFn">
+                    <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected"
+                        (change)="selectFn(!allRowsSelected)" />
+                </ng-template>
+
+                <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected"
+                    let-onCheckboxChangeFn="onCheckboxChangeFn">
+                    <input class="regular-checkbox" type="checkbox" [checked]="isSelected"
+                        (change)="onCheckboxChangeFn($event)" />
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Name">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div *ngIf="row.deleted">
+                        {{row.name}}
+                    </div>
+                    <div *ngIf="!row.deleted">
+                        <a class="group-name" (click)="openVoucherTransactions(row)">{{row.name}}</a>
+                    </div>
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Number Of Unique Vouchers" >
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{getUniqueVoucher(row)}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Number Of Redemption" >
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.redemption}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Simphony Discount ID" >
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.simphonyDiscount.discountId}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Discount Rate">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.simphonyDiscount.discountRate}} %
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Start Time">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.startDate | date: 'dd/MM/yyyy HH:mm:ss' }}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="End Time" >
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.endDate | date: 'dd/MM/yyyy HH:mm:ss' }}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Creation Time" >
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.creationDate | date: 'dd/MM/yyyy HH:mm:ss' }}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Last Update time">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.lastUpdate | date: 'dd/MM/yyyy HH:mm:ss' }}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="State" >
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <label *ngIf="!row.deleted" class="active-state">active</label>
+                    <label *ngIf="row.deleted" class="deleted-state">deleted</label>
+                </ng-template>
+            </ngx-datatable-column>
+
+        </ngx-datatable>
+    </div>
+    <ngx-spinner></ngx-spinner>
+
+</div>

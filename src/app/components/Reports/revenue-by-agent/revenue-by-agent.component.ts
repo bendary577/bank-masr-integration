@@ -7,8 +7,8 @@ import { Paginate } from 'src/app/models/Paginate'
 import { AuthService } from 'src/app/services/auth/auth.service'
 import { ExcelService } from 'src/app/services/excel/excel.service'
 import { UserService } from 'src/app/services/user/user.service'
-import { SidenavResponsive } from '../../sidenav/sidenav-responsive'
 import { saveAs } from 'file-saver'
+import { SideNaveComponent } from '../../side-nave/side-nave.component'
 
 @Component({
   selector: 'app-revenue-by-agent',
@@ -56,7 +56,7 @@ export class RevenueByAgentComponent implements OnInit {
   constructor(
     private spinner: NgxSpinnerService,
     public snackBar: MatSnackBar,
-    private sidNav: SidenavResponsive,
+    private sidNav: SideNaveComponent,
     private userService: UserService,
     private authService: AuthService,
     private excelService: ExcelService,

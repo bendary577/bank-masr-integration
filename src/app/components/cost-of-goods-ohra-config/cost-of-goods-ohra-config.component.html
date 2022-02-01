@@ -1,0 +1,56 @@
+<div class="container">
+    <form class="my-form">
+        <div>
+            <mat-checkbox id="singleFilePerDay" name="singleFilePerDay" class="example-margin"
+                [(ngModel)]="syncJobType.configuration.singleFilePerDay">Export single file per day.</mat-checkbox>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width">
+                <mat-select matInput id="consumptionPerGroup" name="consumptionPerGroup" placeholder="Sync per"
+                    [(ngModel)]="syncJobType.configuration.syncPerGroup">
+                    <mat-option value="OverGroups">Order Type</mat-option>
+                    <mat-option value="ItemGroups">Item Groups</mat-option>
+                    <mat-option value="majorGroup">MajorGroup</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div *ngIf="syncJobType.name == 'Wastage'">
+            <mat-form-field class="example-full-width">
+                <mat-select matInput id="wasteReport" name="wasteReport" placeholder="Sync Waste from"
+                    [(ngModel)]="syncJobType.configuration.wastageConfiguration.wasteReport">
+                    <mat-option value="Waste Reports">Waste Reports</mat-option>
+                    <mat-option value="Inventory Booked Waste">Inventory Booked Waste</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width">
+                <mat-select matInput id="timePeriod" name="timePeriod" placeholder="Business Dates"
+                    (selectionChange)="chooseTimePeriod()" [(ngModel)]="syncJobType.configuration.timePeriod">
+                    <mat-option value="Today">Today</mat-option>
+                    <mat-option value="Yesterday">Yesterday</mat-option>
+                    <mat-option value="Last Month">Last Month</mat-option>
+                    <mat-option value="UserDefined">User-defined</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div *ngIf="userDefinedFlag">
+            <p style="font-family: fantasy;">From</p>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Start Date" type="date" name="fromDate" id="fromDate"
+                    [(ngModel)]="syncJobType.configuration.fromDate">
+            </mat-form-field>
+
+            <p style="font-family: fantasy;">To</p>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="End Date" type="date" name="toDate" id="toDate"
+                    [(ngModel)]="syncJobType.configuration.toDate">
+            </mat-form-field>
+        </div>
+
+    </form>
+</div>

@@ -1,0 +1,83 @@
+<div class="dialog-body">
+
+    <span mat-dialog-title>New Voucher</span>
+
+    <div mat-dialog-content style="text-align: center;">
+        <form [formGroup]="form" class="my-form">
+            
+                <mat-form-field class="example-full-width creditForm" appearance="outline">
+                    <input matInput required placeholder="Name" formControlName="name" maxlength="25">
+                    <mat-error *ngIf="form.controls.name.hasError('required')">
+                        Name is required.
+                    </mat-error>
+                    <mat-error *ngIf="form.controls.name.hasError('maxlength')">
+                        Name is to long.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width creditForm" appearance="outline">
+                    <input matInput required placeholder="Number OF Unique Vouchers" formControlName="uniqueVouchers" maxlength="5">
+                    <mat-error *ngIf="form.controls.uniqueVouchers.hasError('required')">
+                        Number OF Unique Vouchers is required.
+                    </mat-error>
+                    <mat-error *ngIf="form.controls.uniqueVouchers.hasError('maxlength')">
+                        Number OF Unique Vouchers is to long.
+                    </mat-error>
+                    <mat-error *ngIf="form.controls.uniqueVouchers.hasError('pattern')">
+                        Number OF Unique Vouchers must be number.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width creditForm" appearance="outline">
+                    <input matInput required placeholder="Number Of Redemptions" formControlName="redemption" maxlength="5">
+                    <mat-error *ngIf="form.controls.redemption.hasError('required')">
+                        Number Of Redemptions is required.
+                    </mat-error>
+                    <mat-error *ngIf="form.controls.redemption.hasError('maxlength')">
+                        Number Of Redemptions is to long.
+                    </mat-error>
+                    <mat-error *ngIf="form.controls.redemption.hasError('pattern')">
+                        Number Of Redemptions must be number.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width creditForm" appearance="outline">
+                    <input matInput required style="max-width: 100%;" placeholder="Start Date" type="datetime-local" formControlName="startDate"
+                        id="startDate">
+                    <mat-error *ngIf="form.controls.startDate.hasError('required')">
+                        Start Date is required.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width creditForm" appearance="outline">
+                    <input matInput required style="max-width: 100%;" placeholder="End Date" type="datetime-local" formControlName="endDate"
+                        id="endDate">
+                    <mat-error *ngIf="form.controls.endDate.hasError('required')">
+                        End Date Date is required.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width creditForm" appearance="outline" *ngIf="hasFeature('loyalty')">
+                    <mat-select matInput required id="discountId" name="simphonyDiscountId" 
+                        placeholder="Simphony Discount Id" formControlName="simphonyDiscountId">
+                        <mat-option></mat-option>
+                        <mat-option [value]=discountRate.discountId *ngFor="let discountRate of discountRates">
+                            {{discountRate.discountId}} - {{discountRate.discountRate}}%</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="form.controls.simphonyDiscountId.hasError('required')">
+                        Simphony Discount is required.
+                    </mat-error>
+
+                </mat-form-field>
+
+        </form>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button cdkFocusInitial (click)="onSaveClick()" class="groups-buttons">
+            <label [hidden]="inUpdate">Save</label>
+            <label [hidden]="!inUpdate">Update</label>
+        </button>
+        <button mat-button (click)="onNoClick()" class="groups-buttons">Cancel</button>
+    </div>
+
+</div>

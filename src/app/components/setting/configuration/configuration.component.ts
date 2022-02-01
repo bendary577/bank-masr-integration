@@ -28,6 +28,11 @@ export class ConfigurationComponent implements OnInit {
   addRole = false
   hideAuthenticationBtn = false
 
+  // Email Settings
+  editorStyle = {
+    height: '200px'
+  };
+
   constructor(
     private spinner: NgxSpinnerService,
     private driveService: DriveService,

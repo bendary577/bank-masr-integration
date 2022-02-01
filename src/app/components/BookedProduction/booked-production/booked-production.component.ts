@@ -5,7 +5,6 @@ import { BookedProductionService } from 'src/app/services/BookedProduction/booke
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { SyncJob } from 'src/app/models/SyncJob';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
-import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
 import { ExcelService } from 'src/app/services/excel/excel.service';
 import { saveAs } from 'file-saver';
 import { Constants } from 'src/app/models/constants';

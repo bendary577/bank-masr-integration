@@ -27,6 +27,7 @@ export class Constants {
   static SUSPEND_GEUST_URL = environment.apiHost + '/suspendApplicationUsers'
 
   static ADD_INVOKER_USER = environment.apiHost + '/addInvokerUser'
+  static UPDATE_INVOKER_USER = environment.apiHost + '/updateInvokerUser'
   static GET_INVOKER_USERS = environment.apiHost + '/getInvokerUser'
 
   static VENDOR_URL = environment.apiHost + '/getVendors'
@@ -125,6 +126,7 @@ export class Constants {
   static WELCOME_PAGE = 'welcomePage'
   static HOME_PAGE = 'home'
   static SIDE_NAV = 'sidenav'
+  static WEB_INVOKERS_PAGE = 'webServiceInvokers'
 
   static SUPPLIERS_PAGE = 'suppliers'
   static SUPPLIERS_CONFIG_PAGE = 'suppliersConfig'
@@ -217,7 +219,7 @@ export class Constants {
 
   //////////////////////////////////////////////// Simphony Payment  ////////////////////////////////////////////////////////
 
-  static SIMPHONY_PAYMENT_PAGE = 'simphonyPayment'
+  static SIMPHONY_PAYMENT_PAGE = 'main/simphonyPayment'
   static SIMPHONY_PAYMENT_CONFIG_PAGE = 'simphonyPaymentConfig'
 
   static SIMPHONY_CHECK_PAGE = 'simphonyCheck'
@@ -313,12 +315,15 @@ export class Constants {
   //////////////////////////////////////////////// Manage Application  //////////////////////////////////////////////
 
   static GET_LOYALTY_PAGE = 'loyalty'
+  static REWARD_POINTS_PAGE = 'rewardPoints'
   static MANAGE_COMPANIES = 'manageCompanies'
   static MANAGE_GROUPS = 'manageGroups'
   static MANAGE_SUB_GROUPS = 'manageSubGroups'
   static MANAGE_USERS = 'manageUsers'
   static MANAGE_ACTIVITIES = 'managActivities'
-  static REDEEM_VOUCHER = 'Redeem Voucher'
+  static REDEEM_VOUCHER = 'redeemVoucher'
+  static VOUCHER_TRANSACTION = 'voucherTransaction'
+  static UNIQUE_VOUCHER_TRANSACTION = 'uniqueVoucherTransaction'
   static SIMPHONY_DISCOUNT_MAP_TABLE = 'simphonyDiscountMaping'
   static POS_MACHINE_MAP_TABLE = 'posMachinMapping'
   static REWORD_PORINTS_SETTINGS = 'rewardPointsSettings'
@@ -333,12 +338,13 @@ export class Constants {
   static GET_APP_USERS_URL = environment.apiHost + '/getApplicationUsers'
   static GET_APP_USER = environment.apiHost + '/applicationUsers'
   static ADD_APP_USER_URL = environment.apiHost + '/addApplicationUser'
+
   static RESEND_QR_CODE = environment.apiHost + '/resendQRCode'
   static Delete_APP_USERS_URL = environment.apiHost + '/deleteApplicationUsers'
   static GET_TRANSACTION_URL =
     environment.apiHost + '/transaction/getTransactions'
   static GET_TRANSACTION_COUNT_URL =
-  environment.apiHost + '/transaction/getTransactionsCount'
+    environment.apiHost + '/transaction/getTransactionsCount'
   static GET_TOP_USERS_URL = environment.apiHost + '/getTopUser'
   static GET_TOP_Groups_URL = environment.apiHost + '/getTopGroups'
   static GET_TOTAL_SPEND_URL =
@@ -349,6 +355,13 @@ export class Constants {
   static DEDUCT_WALLET = environment.apiHost + '/wallet/deductFromWallet'
   static GET_TRANSACTION_PAGINATED =
     environment.apiHost + '/transaction/transactionPagination'
+  static GET_VOUCHER_PAGES = environment.apiHost + '/simphonyLoyalty/vouchers'
+  static GET_VOUCHER_BY_ID = environment.apiHost + '/simphonyLoyalty/vouchers/getByID'
+  static ADD_VOUCHER_PAGES = environment.apiHost + '/simphonyLoyalty/vouchers/add'
+  static UPDATE_VOUCHER_PAGES = environment.apiHost + '/simphonyLoyalty/vouchers/update'
+  static MARK_VOUCHER_DELETE_PAGES = environment.apiHost + '/simphonyLoyalty/vouchers/markDeleted'
+  static GET_VOUCHER_TRANSACTION_PAGES = environment.apiHost + '/simphonyLoyalty/voucherTransactions/getTotalVoucherTrans'
+  static GET_VOUCHER_TRANSACTION_STATISTICS = environment.apiHost + '/simphonyLoyalty/voucherTransactions/getVoucherTransStatistics'
 
   //////////////////////////////////////////////// Entry System Application  ///////////////////////////////////
 
@@ -360,11 +373,20 @@ export class Constants {
   static GET_AGENT_ACTION_SUMMARY =
     environment.apiHost + '/getAgentActionsSummary'
 
+  // ==> Reward Points
+  static ADD_RP_USER_URL = environment.apiHost + '/addRewardPointsUser'
+  static UPDATE_RP_USER_URL = environment.apiHost + '/updateRewardPointsUser'
+
   //////////////////////////////////////////////// Manage Application  //////////////////////////////////////////
 
   static GET_HOTEL_OPI_PAGE = 'hotelOpi'
 
   // static GET_APP_GROUPS_URL = environment.apiHost + '/getApplicationGroups';
+
+  //////////////////////////////////////////////// Export To PDF //////////////////////////////////////////////
+
+  static EXPORT_VOUCHER_CODE_PDF = environment.apiHost + '/simphonyLoyalty/vouchers/exportCodePDF'
+  static EXPORT_USER_QR_CODE_PDF = environment.apiHost + '/exportQRCodePDF'
 
   //////////////////////////////////////////////// Export To Excel //////////////////////////////////////////////
 
@@ -381,8 +403,16 @@ export class Constants {
   static EXPORT_TRANSACTION_EXCEL_SHEET =
     environment.apiHost + '/transaction/exportExcelSheet'
 
+  // ==> Reward Points System
+  static EXPORT_RP_TRANSACTION_EXCEL_SHEET =
+    environment.apiHost + '/transaction/rewardPoints/exportExcelSheet'
+
+  // ==> Entry System
   static EXPORT_AGENT_ACTIONS_EXCEL_SHEET =
     environment.apiHost + '/exportAgentActionToExcel'
+
+  static EXPORT_WALLET_HISTORY_EXCEL_SHEET =
+    environment.apiHost + '/wallet/exportWalletHistoryToExcel'
 
   //////////////////////////////////////////////// Generate Custom Reports //////////////////////////////////////////////
 
@@ -419,6 +449,12 @@ export class Constants {
   /////////////////////////////////////////////// new Design /////////////////////////////////////////
 
   static SUPPORT = 'support'
+
+  static TALABAT_ORDERS  = "talabatOrders"
+  static GET_TALABAT_ORDERS =  environment.apiHost + "/talabat";
+  static GET_TALABAT_ORDER_DETAILS =  environment.apiHost + "/talabat/order";
+  static GET_TALABAT_BRANCH_ORDERS =  environment.apiHost + "/talabat/branch";
+
 
   ///////////////////////////////////////////////
 }

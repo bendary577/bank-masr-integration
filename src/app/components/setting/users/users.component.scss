@@ -1,7 +1,6 @@
 @import "../../setting/pos-machine-mapping/pos-machine-mapping.component.scss";
 
 .ngx-datatable.scroll-vertical {
-  // height: 100vh;
   width: 100%;
 }
 
@@ -17,40 +16,9 @@ h3 {
   height: 5vh;
 }
 
-button {
-  color: white;
-  background-color: #ffb560;
-  margin-right: 10px;
-}
 
-.header-btn {
-  text-align: end;
-  padding: 4px 16px 4px 16px;
-  height: 5vh;
-}
 .example-container {
   height: 400px;
   overflow: auto;
 }
 
-table {
-  width: 100%;
-}
-
-.active-state {
-  font-family: Nunito;
-  font-style: normal;
-  font-weight: normal;
-  line-height: normal;
-  // font-size: 13px;
-  color: #388e3c;
-}
-
-.deleted-state {
-  font-family: Nunito;
-  font-style: normal;
-  font-weight: normal;
-  line-height: normal;
-  // font-size: 13px;
-  color: #fc544b;
-}

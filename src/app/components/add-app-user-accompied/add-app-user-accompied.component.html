@@ -9,29 +9,18 @@
             <mat-tab label="Main Guest">
                 <div mat-dialog-content class="main-guest">
                     <form [formGroup]="form" class="my-form">
-
-                        <mat-form-field class="example-full-width creditForm" *ngIf="hasRole('show-form-groups')"
-                            appearance="outline">
-                            <input matInput placeholder="Group" formControlName="group" maxlength="50" required>
-                            <mat-label>Group</mat-label>
-                            <mat-error *ngIf="form.controls.name.hasError('required')">
-                                Frist Name is required.
-                            </mat-error>
-                            <mat-error *ngIf="form.controls.name.hasError('maxlength')">
-                                Frist Name is to long.
-                            </mat-error>
-                        </mat-form-field>
-
                         <mat-form-field class="example-full-width creditForm" appearance="outline">
-                            <input matInput placeholder="Expire" formControlName="expire" maxlength="3" required>
-                            <mat-label>Expire</mat-label>
-                            <mat-error *ngIf="form.controls.expire.hasError('required')">
+                            <input matInput placeholder="Expiry Date" type="datetime-local" name="expiryDate" id="expiryDate"
+                            formControlName="expiryDate" required>
+                            <mat-label>Expiration Date</mat-label>
+
+                            <mat-error *ngIf="form.controls.expiryDate.hasError('required')">
                                 Expiration Date is required.
                             </mat-error>
-                            <mat-error *ngIf="form.controls.expire.hasError('maxlength')">
+                            <mat-error *ngIf="form.controls.expiryDate.hasError('maxlength')">
                                 Expiration Date to long.
                             </mat-error>
-                            <mat-error *ngIf="form.controls.expire.hasError('pattern')">
+                            <mat-error *ngIf="form.controls.expiryDate.hasError('pattern')">
                                 Expiration Date must be well formed.
                             </mat-error>
                         </mat-form-field>
@@ -65,6 +54,13 @@
                             </mat-error>
                         </mat-form-field>
                         <p style="text-align: left;padding-left: 30px;">Please swipe the card</p>
+                        
+                        <mat-form-field class="example-full-width creditForm" appearance="outline" *ngIf="!isGeneric">
+                            <mat-select matInput id="groups" name="groups" placeholder="Group" formControlName="group">
+                                <mat-option></mat-option>
+                                <mat-option [value]=c.id *ngFor="let c of groups">{{c.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
 
                         <h4 mat-dialog-title style="text-align: left; font-size: small;">Optional Fields</h4>
 
@@ -80,9 +76,6 @@
 
                         <mat-form-field class="example-full-width creditForm" appearance="outline">
                             <input matInput placeholder="Email" formControlName="email">
-                            <mat-error *ngIf="form.controls.email.hasError('required')">
-                                Email is required.
-                            </mat-error>
                             <mat-error *ngIf="form.controls.email.hasError('pattern')">
                                 Email must be well formed.
                             </mat-error>
@@ -90,9 +83,6 @@
 
                         <mat-form-field class="example-full-width creditForm" appearance="outline">
                             <input matInput placeholder="Moblie" formControlName="mobile" maxlength="11">
-                            <mat-error *ngIf="form.controls.mobile.hasError('required')">
-                                Moblie is required.
-                            </mat-error>
                             <mat-error *ngIf="form.controls.mobile.hasError('maxlength')">
                                 Moblie is to long.
                             </mat-error>
@@ -112,17 +102,15 @@
                                 <label> Print </label>
                             </mat-checkbox>
                         </div> -->
-
-                        <div style="padding-top: 1%;text-align: center;">
-                            <input #csvInput hidden="true" type="file" onclick="this.value=null"
-                                (change)="csvInputChange($event)" accept="image/*" />
-                            <button class="form-button" mat-flat-button color="primary" (click)="csvInput.click()">
-                                <img class="form-b-img" src="../../../assets/photos.png">
-                                Choose Image</button>
-                            <div [hidden]="!imageUploded">Image uploaded successfully.</div>
-                        </div>
-
                     </form>
+                    <div style="padding-top: 1%;text-align: center;">
+                        <input #csvInput hidden="true" type="file" onclick="this.value=null"
+                            (change)="csvInputChange($event)" accept="image/*" />
+                        <button class="form-button" mat-flat-button color="primary" (click)="csvInput.click()">
+                            <img class="form-b-img" src="../../../assets/photos.png">
+                            Choose Image</button>
+                        <div [hidden]="!imageUploded">Image uploaded successfully.</div>
+                    </div>
                 </div>
             </mat-tab>
             <mat-tab label="Accompanied Guests" (click)="addAccompiend()">
@@ -169,19 +157,6 @@
                 </div>
             </mat-tab>
         </mat-tab-group>
-
-        <!-- <div class="two-column cardSide" style="padding-top: 60px;">
-            <div class="card-div">
-                <div>
-                    <img class="image_style" src="../../../assets/1200px-Universal_Contactless_Card_Symbol.svg.png">
-                </div>
-            </div>
-        </div> -->
-
-        <!-- <div class="two-column formSide" style=" margin-left: 30px; height:90%">
-
-
-        </div> -->
     </div>
     <div class="buttons-div" *ngIf="!inAccompiendView">
         <div mat-dialog-actions>

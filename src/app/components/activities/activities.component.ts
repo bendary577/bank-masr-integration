@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material'
 import { Constants } from 'src/app/models/constants'
 import { ErrorMessages } from 'src/app/models/ErrorMessages'
@@ -13,9 +13,10 @@ import { SideNaveComponent } from '../side-nave/side-nave.component'
 @Component({
   selector: 'app-activities',
   templateUrl: './activities.component.html',
-  styleUrls: ['./activities.component.scss'],
+  styleUrls: ['./activities.component.scss']
 })
 export class ActivitiesComponent implements OnInit {
+
   filterBy = 'Daily'
   imagePath = './src/assets/user.png'
 
@@ -345,6 +346,10 @@ export class ActivitiesComponent implements OnInit {
     return this.sidNav.hasRole(reference)
   }
 
+  hasFeature(reference) {
+    return this.sidNav.hasFeature(reference)
+  }
+
   filterTransactions(event) {
     const transactions = this.transactionList.allTransactionDataBeforeFilter
 
@@ -542,6 +547,5 @@ export class ActivitiesComponent implements OnInit {
 
   }
 
+
 }
-
-

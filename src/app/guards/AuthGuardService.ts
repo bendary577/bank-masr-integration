@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 import {AuthService} from "../services/auth/auth.service";
-import {SidenavResponsive} from "../components/sidenav/sidenav-responsive";
+import { SideNaveComponent } from '../components/side-nave/side-nave.component';
 
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
   auth_service:AuthService;
   routerd: Router;
-  side :SidenavResponsive;
+  side :SideNaveComponent;
   constructor(private router: Router,auth_service:AuthService) {
     this.routerd =router;
     this.auth_service=auth_service;

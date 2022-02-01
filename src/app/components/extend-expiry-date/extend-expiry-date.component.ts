@@ -21,13 +21,13 @@ export class ExtendExpiryDateComponent implements OnInit {
 
   onSaveClick(): void {
     this.dialogRef.close({
-      hours: this.form.controls.hours.value,
+      expiryDate: this.form.controls.expiryDate.value,
     })
   }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      hours: [0, Validators.required],
+      expiryDate: ["", Validators.required],
     })
   }
 }

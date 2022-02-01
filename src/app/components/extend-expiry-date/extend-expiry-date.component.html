@@ -2,8 +2,21 @@
 <div mat-dialog-content>
     <form [formGroup]="form" class="my-form">
         <div class="form-group">
-            <mat-form-field class="example-full-width">
+            <!-- <mat-form-field class="example-full-width">
                 <input matInput type="number" min="1" placeholder="Extended Hours" formControlName="hours">
+            </mat-form-field> -->
+            <mat-form-field class="example-full-width creditForm" appearance="outline">
+                <input matInput placeholder="Expiry Date" type="datetime-local" name="expiryDate" id="expiryDate"
+                formControlName="expiryDate" required>
+                <mat-error *ngIf="form.controls.expiryDate.hasError('required')">
+                    Expiration Date is required.
+                </mat-error>
+                <mat-error *ngIf="form.controls.expiryDate.hasError('maxlength')">
+                    Expiration Date to long.
+                </mat-error>
+                <mat-error *ngIf="form.controls.expiryDate.hasError('pattern')">
+                    Expiration Date must be well formed.
+                </mat-error>
             </mat-form-field>
         </div>
     </form>

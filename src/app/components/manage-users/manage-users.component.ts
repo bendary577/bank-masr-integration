@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
-import { MatDatepicker, MatDialog, MatSnackBar } from '@angular/material'
+import { Component, OnInit } from '@angular/core'
+import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material'
 import { ErrorMessages } from 'src/app/models/ErrorMessages'
 import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser'
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service'
-import { SidenavResponsive } from '../sidenav/sidenav-responsive'
 import { AddAppUserComponent } from '../../components/add-app-user/add-app-user.component'
 import { Group } from 'src/app/models/loyalty/Group'
 import { Location } from '@angular/common'
@@ -12,7 +11,6 @@ import { Data } from 'src/app/models/data'
 import { Constants } from 'src/app/models/constants'
 import { AddAppUserAccompiedComponent } from '../add-app-user-accompied/add-app-user-accompied.component'
 import { SideNaveComponent } from '../side-nave/side-nave.component'
-import { Moment } from 'moment'
 import { ExtendExpiryDateComponent } from '../extend-expiry-date/extend-expiry-date.component'
 
 @Component({
@@ -92,7 +90,7 @@ export class ManageUsersComponent implements OnInit {
 
   openUserProfile(user: ApplicationUser) {
     this.data.storage = user
-    this.router.navigate([Constants.USER_PROFILE])
+    this.router.navigate(["main/" + Constants.USER_PROFILE])
   }
 
   getUsers() {
@@ -112,8 +110,14 @@ export class ManageUsersComponent implements OnInit {
 
   deleteUsers(flage) {
     this.usersList.showLoading = true
+    let deletedId = []
+
+    for(var i = 0 ; i < this.usersList.selected.length; i++){
+      deletedId.push(this.usersList.selected[i].id)
+    }
+
     this.loyaltyService
-      .deleteAppUsers(flage, this.usersList.selected)
+      .deleteAppUsers(flage, deletedId)
       .then((res: any) => {
         this.getUsers()
         this.usersList.selected = []
@@ -173,10 +177,10 @@ export class ManageUsersComponent implements OnInit {
               guest.cardCode,
               guest.mobile,
               guest.balance,
-              +guest.expire + res.hours,
+              res.expiryDate,
               false,
               false,
-              guest.points,
+
             )
             .then((result: any) => {
               this.loading = false
@@ -217,7 +221,7 @@ export class ManageUsersComponent implements OnInit {
   deleteOneUsers(guest, flage) {
     this.usersList.showLoading = true
     this.loyaltyService
-      .deleteAppUsers(flage, [guest])
+      .deleteAppUsers(flage, [guest.id])
       .then((res: any) => {
         this.getUsers()
         this.usersList.selected = []
@@ -257,11 +261,11 @@ export class ManageUsersComponent implements OnInit {
       })
   }
 
-  suspendGuest(guest, susFlag) {
+  suspendGuest(guestId, susFlag) {
     this.usersList.showLoading = true
     this,
       this.loyaltyService
-        .suspendGuest(guest, susFlag)
+        .suspendGuest(guestId, susFlag)
         .then((res: any) => {
           this.usersList.selected = []
           this.getUsers()
@@ -299,15 +303,21 @@ export class ManageUsersComponent implements OnInit {
         })
   }
 
-  addUserDialog(type) {
+  addUserDialog(isGeneric, genericGroup) {
     let dialogRef
-    let isGeneric = false
 
-    if (type) {
-      isGeneric = true
-      dialogRef = this.dialog.open(AddAppUserAccompiedComponent, {
-        width: '420px',
-      })
+    if (isGeneric) {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {
+          title:  "Add Guest",
+          generic: genericGroup
+      };
+      dialogConfig.width = '420px';
+      dialogConfig.maxWidth = '420px';
+      dialogConfig.autoFocus = true;
+
+      dialogRef = this.dialog.open(AddAppUserAccompiedComponent, dialogConfig)
     } else {
       dialogRef = this.dialog.open(AddAppUserComponent, {
         width: '420px'
@@ -330,10 +340,9 @@ export class ManageUsersComponent implements OnInit {
             res.cardCode,
             res.mobile,
             res.balance,
-            res.expire,
+            res.expiryDate,
             res.sendEmail,
-            res.sendSMS,
-            res.points,
+            res.sendSMS
           )
           .then((result: any) => {
             this.loading = true
@@ -378,12 +387,17 @@ export class ManageUsersComponent implements OnInit {
     let dialogRef
     let isGeneric = this.usersList.selected[0].generic
     if (isGeneric) {
-      dialogRef = this.dialog.open(AddAppUserAccompiedComponent, {
-        width: '710px',
-        data: {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {
+          title:  "Update Guest",
           user: this.usersList.selected[0],
-        },
-      })
+      };
+      dialogConfig.width = '420px';
+      dialogConfig.maxWidth = '420px';
+      dialogConfig.autoFocus = true;
+
+      dialogRef = this.dialog.open(AddAppUserAccompiedComponent, dialogConfig)
     } else {
       dialogRef = this.dialog.open(AddAppUserComponent, {
         width: '420px',
@@ -411,10 +425,10 @@ export class ManageUsersComponent implements OnInit {
             res.cardCode,
             res.mobile,
             res.balance,
-            res.expire,
+            res.expiryDate,
             res.sendEmail,
             res.sendSMS,
-            res.points,
+
           )
           .then((result: any) => {
             this.loading = false
@@ -603,15 +617,25 @@ export class ManageUsersComponent implements OnInit {
     return credit
   }
 
-  lessThanOrEqualZero(expired): Boolean {
-    if (expired) {
-      return true
+  lessThanOrEqualZero(user): Boolean {
+    var now  = new Date().getTime();
+    let distance = new Date(user.expiryDate).getTime() - now;
+    if (distance > 0) {
+      return false
     }
-    return false
+    return true
   }
 
   hasRole(reference) {
     return this.sidNav.hasRole(reference)
+  }
+
+  hasFeature(reference) {
+    return this.sidNav.hasFeature(reference)
+  }
+
+  getCurrency() {
+    return JSON.parse(localStorage.getItem('account')).currency
   }
 
   resetPicker(event) {

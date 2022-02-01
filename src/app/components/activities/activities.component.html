@@ -72,7 +72,7 @@
                                  mat-raised-button>Last Month</button>
                             </div>
                             <div class="two-column">
-                                <h3 style="border-radius: 10px; text-align: center; height: 100%;display:flex;justify-content:center;align-items:center;">
+                                <h3 style="color: black !important;border-radius: 10px; text-align: center; height: 100%;display:flex;justify-content:center;align-items:center;">
     
                                     <div *ngIf="!totalSpendLoading">
                                         {{totalSpendM | number : '1.2-2'}} {{getCurrency()}}
@@ -107,7 +107,7 @@
                     <div style="display: block; width: 100%; height: 95%;">
                         <img src="../../../assets/group.png" class="people-img">
                         <img src="../../../assets/increase.png" class="chart-img">
-                        <h3 class="guest-chart">
+                        <h3 class="guest-chart" style="color: black !important;">
                             Average Number of Guests per day<br>
                             {{guestAverage}} Guests
                         </h3>
@@ -233,7 +233,7 @@
     
     <div class="main">
 
-        <div *ngIf="transactionList.transactionData.length == 0">
+        <div *ngIf="!transactionList.showLoading && transactionList.transactionData.length == 0">
             <mat-card class="transaction-card">
                 <mat-card-content>
                     <div>
@@ -244,7 +244,7 @@
             </mat-card>
         </div>
 
-        <div *ngIf="transactionList.transactionData.length != 0">
+        <div *ngIf="transactionList.showLoading || (!transactionList.showLoading && transactionList.transactionData.length != 0)">
             <ngx-datatable class="material" [loadingIndicator]="transactionList.showLoading"
                 [messages]="transactionList.messages" style="width: 98%" [sortType]="'multi'" [columnMode]="'force'"
                 [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
@@ -274,6 +274,12 @@
                     </ng-template>
                 </ngx-datatable-column>
 
+                <ngx-datatable-column name="Status" [width]="90">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.status}}
+                    </ng-template>
+                </ngx-datatable-column>
+
                 <ngx-datatable-column name="Card Status" [width]="90" *ngIf="hasRole('show_card_status')">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         <label *ngIf="!row.user.deleted && !lessThanOrEqualZero(row.user.expired) "
@@ -296,9 +302,21 @@
                     </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="Points Redeemed" [width]="90" *ngIf="hasRole('view_reward_points')">
+                <ngx-datatable-column name="Check #" [width]="90">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.checkNumber}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Points Redeemed" [width]="90" *ngIf="hasFeature('reward_points')">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{row.pointsRedeemed}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Partial Payment" [width]="90" *ngIf="hasFeature('partial_payment')">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.partialPayment}} {{getCurrency()}}
                     </ng-template>
                 </ngx-datatable-column>
 

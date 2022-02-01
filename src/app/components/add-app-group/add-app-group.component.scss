@@ -1,12 +1,6 @@
 @import "../add-tax/add-tax.component.scss";
 @import "../operations/opera-payments/opera-payments.component.scss";
 
-.dialog-body {
-    // height: 100%;
-    border-radius: 20px;
-}
-
-
 .form-button{
     width: 160px;
     border-radius: 15px;
@@ -24,7 +18,7 @@
     color: black;
     border-radius: 28px;
     // box-shadow: 0 4px 14px rgba(black, 0.35) !important;
-    margin: 20px;
+    // margin: 20px;
     margin-top: 0px;
     &:disabled{
         background-color: #ffe7cb;
@@ -39,4 +33,9 @@
   
   ::ng-deep form {
     margin: 5px 0 0  !important;
+}
+
+::ng-deep .mat-dialog-container {
+    // height: 720px !important;
+    border-radius: 15px;
 }

@@ -1,20 +1,43 @@
-<div class="back" style="margin-bottom: 15px;">
-    <button mat-flat-button (click)="openInvokerDialog()">Add</button>
+<div class="config-style">
+    <h3>Manage Webservice Invokers</h3>
+
+    <div class="header">
+        <div class="header-btn">
+            <button mat-flat-button (click)="openInvokerDialog()">Add</button>
+        </div>
+    </div>
+
+    <br>
+
+    <div *ngIf="invokers?.length > 0">
+        <ngx-datatable class="material" [rows]="invokers" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" 
+        [sortType]="'multi'">
+            <ngx-datatable-column name="Username">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <input matInput placeholder="Username" [(ngModel)]="row.username">
+                </ng-template>
+            </ngx-datatable-column>
+    
+            <ngx-datatable-column name="Password">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <input matInput placeholder="Password" [(ngModel)]="row.password">
+                </ng-template>
+            </ngx-datatable-column>
+    
+            <ngx-datatable-column name="Status">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <label *ngIf="!row.deleted" class="active-state">Active</label>
+                    <label *ngIf="row.deleted" class="deleted-state">Deleted</label>
+                </ng-template>
+            </ngx-datatable-column>
+    
+            <!-- <ngx-datatable-column name="Roles">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <button mat-flat-button (click)="viewInvokerRolesDialog(row)">View</button>
+                </ng-template>
+            </ngx-datatable-column> -->
+    
+        </ngx-datatable>
+    </div>
 </div>
 
-<div *ngIf="invokers?.length > 0">
-    <ngx-datatable class="material" [rows]="invokers" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" 
-    [sortType]="'multi'">
-        <ngx-datatable-column name="Username">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                <input matInput placeholder="Username" [(ngModel)]="row.username">
-            </ng-template>
-        </ngx-datatable-column>
-
-        <ngx-datatable-column name="Password">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                <input matInput placeholder="Password" [(ngModel)]="row.password">
-            </ng-template>
-        </ngx-datatable-column>
-    </ngx-datatable>
-</div>

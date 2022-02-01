@@ -7,8 +7,8 @@
             </button>
         </div>
         <div class="user-profile">
-            <mat-card class="user-card">
-                <mat-card-content>
+            <mat-card class="user-card" style="min-height: 100px;">
+                <mat-card-content style="min-height: 186px;">
                     <img class="user-img" src={{user.logoUrl}} alt="image" *ngIf="user">
                     <img class="user-img" src="../../../assets/defaultImage.jpg" alt="image" *ngIf="!user">
                     <span class="user-name" *ngIf="user">
@@ -30,7 +30,7 @@
                                 <td class="res" style="float: right;" style="float: right;"> {{user.mobile}}</td>
                             </tr>
                             <hr class="hrClass"  *ngIf="user && user.mobile">
-                            <tr *ngIf="group.name">
+                            <tr *ngIf="group && group.name">
                                 <td class="title" style="float: left;">Group </td>
                                 <td> </td>
                                 <td class="res" style="float: right;"> {{group.name}}</td>
@@ -52,20 +52,20 @@
                                 <td class="title" style="float: left;">Status </td>
                                 <td> </td>
                                 <td class="res" style="float: right;">
-                                    <label *ngIf="!user.deleted && !lessThanOrEqualZero(user.expired) && !user.suspended "
+                                    <label *ngIf="!user.deleted && !lessThanOrEqualZero() && !user.suspended "
                                         class="active-state">Active</label>
-                                    <label *ngIf="!user.deleted && !lessThanOrEqualZero(user.expired) && user.suspended"
+                                    <label *ngIf="!user.deleted && !lessThanOrEqualZero() && user.suspended"
                                          style="color: #1661a3;">Suspended</label>
                                     <label *ngIf="user.deleted" class="deleted-state">Deleted</label>
-                                    <label *ngIf="!user.deleted && lessThanOrEqualZero(user.expired)"
+                                    <label *ngIf="!user.deleted && lessThanOrEqualZero()"
                                         style="color: #1661a3;">Expired</label>
                                 </td>
                             </tr>
-                            <hr class="hrClass" *ngIf="user && user.expire">
+                            <hr class="hrClass" *ngIf="user">
                             <tr *ngIf="user">
                                 <td class="title" style="float: left;">Expire In </td>
                                 <td> </td>
-                                <td class="res" style="float: right;">{{user.expire}} H</td>
+                                <td class="res" style="float: right;">{{expiryDateCounter}}</td>
                             </tr>
                             <hr class="hrClass" *ngIf="user">
                             <tr *ngIf="user">
@@ -73,8 +73,14 @@
                                 <td> </td>
                                 <td class="res" style="float: right;">{{user.creationDate | date: 'dd/MM/yyyy' }}</td>
                             </tr>
-                            <hr class="hrClass" *ngIf="user.lastUpdate">
-                            <tr *ngIf="user.lastUpdate">
+                            <hr class="hrClass" *ngIf="user">
+                            <tr *ngIf="user">
+                                <td class="title" style="float: left;">Expiry Date </td>
+                                <td> </td>
+                                <td class="res" style="float: right;">{{user.expiryDate | date: 'dd/MM/yyyy' }}</td>
+                            </tr>
+                            <hr class="hrClass" *ngIf="user && user.lastUpdate">
+                            <tr *ngIf="user && user.lastUpdate">
                                 <td class="title" style="float: left;">Last Update</td>
                                 <td> </td>
                                 <td class="res" style="float: right;">{{user.lastUpdate | date: 'dd/MM/yyyy' }}</td>
@@ -83,10 +89,14 @@
                     </div>
                     <div class="user-btn-container">
                         <button class="user-btn" (click)="updateUserDialog()" mat-raised-button *ngIf="user">Update</button>
-                        <button class="user-btn" (click)="deleteUsers('true')" *ngIf="!user.deleted"
+                        <button class="user-btn" (click)="deleteUsers('true')" *ngIf="user && !user.deleted"
                             mat-raised-button>Delete</button>
-                        <button class="user-btn" (click)="deleteUsers('false')" *ngIf="user.deleted"
+                        <button class="user-btn" (click)="deleteUsers('false')" *ngIf="user && user.deleted"
                             mat-raised-button>Restore</button>
+                    </div>
+                    <div>
+                        <button class="user-btn" style="width: 210px;" (click)="extendExpiryDate(user)" mat-raised-button *ngIf="user" 
+                        [disabled]="user && user.deleted">Extend Expiry Date</button>
                     </div>
                 </mat-card-content>
             </mat-card>
@@ -108,8 +118,11 @@
                                     {{credit}} {{getCurrency()}}
                                 </div>
                             </h3>
-                            <button class="filter-btn" (click)="chargeWallet('add')" mat-raised-button>Charge</button>
+                            <button class="filter-btn" (click)="chargeWallet('add')" 
+                            [disabled]="user && (user.deleted || lessThanOrEqualZero() || user.suspended)"
+                             mat-raised-button>Charge</button>
                             <button class="filter-btn" (click)="deductWallet('deduct')"
+                            [disabled]="user && (user.deleted || lessThanOrEqualZero() || user.suspended)"
                                 mat-raised-button>Deduct</button>
                         </div>
 
@@ -124,7 +137,7 @@
                             <img class="rvc-img" src="../../../assets/restaurant.png" alt="image">
                             <p class="rvc-name">There Is No Revenue Centers</p>
                         </div> 
-                        <div class="list-group" *ngIf="revenueCenters">
+                        <div class="list-group" *ngIf="revenueCenters.length > 0">
                             <div class="list-group-item-header">
                                 Revenue Centers
                             </div>
@@ -155,10 +168,16 @@
             </div> -->
         </div>
         <div class="trans-tabel">
+            <div>
+                <button mat-flat-button (click)="extractExcelFile()"
+                    [disabled]="walletHistoryList.walletHistoryData.length == 0" class="filterButton" style="height: 30px; margin-top: 5px;">Export To
+                    Excel</button>
+            </div>
+
             <div class="title-card">
                 Card History
             </div>
-            <div *ngIf="!walletHistoryList || walletHistoryList.walletHistoryData.length == 0">
+            <div *ngIf="!walletHistoryList.showLoading && walletHistoryList.walletHistoryData.length == 0">
                 <mat-card class="transaction-card">
                     <mat-card-content>
                         <div style="text-align: center;">
@@ -168,7 +187,9 @@
                     </mat-card-content>
                 </mat-card>
             </div>
-            <div *ngIf="walletHistoryList.walletHistoryData.length != 0">
+
+            <div *ngIf="walletHistoryList.showLoading || 
+            (!walletHistoryList.showLoading && walletHistoryList.walletHistoryData.length != 0)">
                 <ngx-datatable class="material" [loadingIndicator]="walletHistoryList.showLoading"
                     [messages]="walletHistoryList.messages"
                     style="border-radius:1%; width: 98%; height: 310px; display: inline-block;" [sortType]="'multi'"

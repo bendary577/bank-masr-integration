@@ -35,21 +35,23 @@ export class AddAppUserComponent implements OnInit {
       this.form = this.formBuilder.group({
         name: [this.newUser.name, Validators.required],        
         email: [this.newUser.email, [Validators.required, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
-        group: [this.newUser.group.id, Validators.required],
-        points: [this.newUser.points]
+        group: [this.newUser.group.id, Validators.required]
       });
     }else{
       this.form = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
       group: ['', Validators.required],
-      points: [0]
       });
     }
   }
 
   hasRole(reference) {
     return this.sidNav.hasRole(reference)
+  }
+
+  hasFeature(reference) {
+    return this.sidNav.hasFeature(reference)
   }
 
   getGroups(){
@@ -87,7 +89,6 @@ export class AddAppUserComponent implements OnInit {
         name: this.form.controls.name.value,
         email: this.form.controls.email.value,
         group: this.form.controls.group.value,
-        points: this.form.controls.points.value,
         image: this.srcResult,
         cardCode: " ",
         mobile: " ",

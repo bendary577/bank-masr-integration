@@ -5,7 +5,6 @@ import { GeneralSettings } from 'src/app/models/GeneralSettings';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 import { Response } from 'src/app/models/Response';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
-import { SidenavResponsive } from '../../sidenav/sidenav-responsive';
 import { AddLocationComponent } from '../../add-location/add-location.component';
 import { CostCenter } from 'src/app/models/CostCenter';
 import { AddRevenueCenterComponent } from '../../add-revenue-center/add-revenue-center.component';
@@ -46,7 +45,7 @@ export class CostCenterLocationMappingComponent implements OnInit {
   };
 
   constructor(private spinner: NgxSpinnerService, public snackBar: MatSnackBar, private sideNav: SideNaveComponent,
-    private generalSettingsService:GeneralSettingsService, private sidNav: SidenavResponsive,
+    private generalSettingsService:GeneralSettingsService, private sidNav: SideNaveComponent,
     public dialog: MatDialog) {
   }
 

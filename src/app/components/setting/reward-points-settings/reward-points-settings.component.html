@@ -1,25 +1,95 @@
 <div class="config-style">
     <div>
         <h3>Reward Points Settings</h3>
-        <div *ngIf="generalSettings != null">
+        <div *ngIf="!loading && generalSettings != null">
             <mat-accordion multi>
                 <!-- Point Calculation Settings -->
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            Point Calculation Settings
+                            <mat-icon aria-hidden="false" aria-label="Example attach_money icon"
+                            style="font-size: 19px;">attach_money</mat-icon>
+                            <strong>
+                                Earning Reward Points and Spending Calculation
+                            </strong>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <p>
+                        The Loyalty Program allows customers to earn points for certain actions they take on the site,
+                         Points are awarded based on making purchases and customer actions such as registration.
+                    </p>
+
+                    <form [formGroup]="pointsForm" class="my-form">
+                        <div class="form-input">
+                            <strong class="card-title">Reward Points:</strong>
+                            <mat-form-field appearance="outline">
+                                <input matInput placeholder="10 %" type="number" formControlName="pointReward" [(ngModel)]="generalSettings.pointReward">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="form-input">
+                            <strong class="card-title">Points Redemption 1$ = </strong>
+                            <mat-form-field appearance="outline">
+                                <input matInput placeholder="10 Points" type="number" formControlName="pointsRedemption" [(ngModel)]="generalSettings.pointsRedemption">
+                            </mat-form-field>
+                        </div>
+                    </form>
+                </mat-expansion-panel>
+
+                <!-- Birthday Settings -->
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <mat-icon aria-hidden="false" aria-label="Example card_giftcard icon"
+                            style="font-size: 19px;">card_giftcard</mat-icon>
+                            <strong>
+                                Birthday Gifts
+                            </strong>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
 
+                    <p>As a birthday present, give your valued customer more points.</p>
+
                     <div>
-                        <strong>Reward Points:</strong>
-                        <input matInput placeholder="10" type="number" min="0"  [(ngModel)]="generalSettings.pointReward"/> %
+                        <mat-checkbox id="enabled" name="enabled" class="example-margin" [(ngModel)]="generalSettings.birthdayGift.enabled">
+                            <strong class="card-title">Enabled</strong>
+                        </mat-checkbox>
                     </div>
-                    <br>
-                    <div>
-                        <strong>Points Redemption 1$ = </strong> 
-                        <input matInput placeholder="1" type="number" min="0" [(ngModel)]="generalSettings.pointsRedemption" /> Points
-                    </div>
+
+                    <form [formGroup]="birthdayForm" class="my-form">
+                        <!-- <div class="form-input">
+                            <strong class="card-title">Birthday Item ID:</strong>
+                            <mat-form-field appearance="outline">
+                                <input matInput placeholder="0" type="number" formControlName="itemId"
+                                [(ngModel)]="generalSettings.birthdayGift.itemId">
+                            </mat-form-field>
+                        </div> -->
+
+                        <div class="form-input">
+                            <strong class="card-title">Birthday Points:</strong>
+                            <mat-form-field appearance="outline">
+                                <input matInput placeholder="0" type="number" formControlName="addedPoints"
+                                [(ngModel)]="generalSettings.birthdayGift.addedPoints">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="form-input">
+                            <strong class="card-title">Offset:</strong>
+                            <mat-form-field appearance="outline">
+                                <input matInput placeholder="0" type="number" formControlName="offsetBefore" 
+                                [(ngModel)]="generalSettings.birthdayGift.offsetBefore">
+                            </mat-form-field>
+                        </div>
+
+                        <!-- <div class="form-input">
+                            <strong class="card-title">Offset After:</strong>
+                            <mat-form-field appearance="outline">
+                                <input matInput placeholder="0" min="0" type="number" formControlName="offsetAfter"
+                                [(ngModel)]="generalSettings.birthdayGift.offsetAfter">
+                            </mat-form-field>
+                        </div>   -->
+                    </form>
+
                 </mat-expansion-panel>
             </mat-accordion>
 

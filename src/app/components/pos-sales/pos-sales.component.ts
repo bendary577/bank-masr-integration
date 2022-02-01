@@ -5,7 +5,7 @@ import { SyncJobService } from 'src/app/services/sync-job/sync-job.service'
 import { Constants } from 'src/app/models/constants'
 import { SyncJob } from 'src/app/models/SyncJob'
 import { PosSalesService } from 'src/app/services/posSales/pos-sales.service'
-import { SidenavResponsive } from '../sidenav/sidenav-responsive'
+import { SideNaveComponent } from '../side-nave/side-nave.component'
 
 @Component({
   selector: 'app-pos-sales',
@@ -26,7 +26,7 @@ export class PosSalesComponent implements OnInit {
     private syncJobService: SyncJobService,
     public snackBar: MatSnackBar,
     private posSalesService: PosSalesService,
-    private sidNav: SidenavResponsive,
+    private sidNav: SideNaveComponent,
   ) {}
 
   ngOnInit() {

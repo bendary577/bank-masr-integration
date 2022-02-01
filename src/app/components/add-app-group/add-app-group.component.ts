@@ -4,7 +4,6 @@ import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material'
 import { ErrorMessages } from 'src/app/models/ErrorMessages'
 import { GeneralSettings } from 'src/app/models/GeneralSettings'
 import { Group } from 'src/app/models/loyalty/Group'
-import { SimphonyDiscount } from 'src/app/models/loyalty/SimphonyDiscount'
 import { AuthService } from 'src/app/services/auth/auth.service'
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service'
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service'
@@ -55,6 +54,11 @@ export class AddAppGroupComponent implements OnInit {
       this.inUpdate = true
       this.group = this.data['group']
       this.slectedDiscount = this.group.simphonyDiscount.discountId
+
+      if (this.group.description == null || this.group.description == 'null') {
+        this.group.description = ''
+      }
+
       this.form = this.formBuilder.group({
         name: [this.group.name, [Validators.maxLength, Validators.required]],
         description: [this.group.description],
@@ -155,13 +159,13 @@ export class AddAppGroupComponent implements OnInit {
           parentGroup: this.form.controls.parentGroup.value,
           image: this.srcResult,
         })
-      } else if (this.hasFeature('entry_system')) {
+      } else{
         this.dialogRef.close({
           name: this.form.controls.name.value,
           description: this.form.controls.description.value,
-          discountId: 0,
+          discountId: "",
           discountRate: 0,
-          parentGroup: null,
+          parentGroup: this.form.controls.parentGroup.value,
           image: this.srcResult,
         })
       }

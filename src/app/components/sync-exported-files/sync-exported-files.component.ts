@@ -4,7 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SyncJobType } from 'src/app/models/SyncJobType';
 import { CsvService } from 'src/app/services/csv/csv.service';
-import { SidenavResponsive } from '../sidenav/sidenav-responsive';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-sync-exported-files',
@@ -33,7 +33,7 @@ export class SyncExportedFilesComponent implements OnInit {
   };
 
   constructor(private spinner: NgxSpinnerService, public snackBar: MatSnackBar,
-     private csvService: CsvService,  private sidNav: SidenavResponsive) { }
+     private csvService: CsvService,  private sidNav: SideNaveComponent) { }
 
   ngOnInit() {
     this.listSyncFiles();

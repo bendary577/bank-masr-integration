@@ -1,12 +1,9 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core'
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+import { Component, OnInit, ViewChild } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import * as moment from 'moment'
-import { Moment } from 'moment'
 import {
   DaterangepickerDirective,
-  LocaleConfig,
 } from 'ngx-daterangepicker-material'
 import { NgxSpinnerService } from 'ngx-spinner'
 import { ErrorMessages } from 'src/app/models/ErrorMessages'
@@ -26,13 +23,8 @@ export class SupportComponent implements OnInit {
   pickerDirective: DaterangepickerDirective
   public form: FormGroup
   generalSettings
-  moment = moment
-  calendarLocale: LocaleConfig
-  ranges: any
-  calendarPlaceholder: string
+
   // selectedRange
-  minDate: Moment
-  maxDate: Moment
   exportRequest = new ExportRequest()
   user
 
@@ -56,36 +48,6 @@ export class SupportComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService,
   ) {
-    this.calendarLocale = {
-      customRangeLabel: 'Pick a date...',
-      applyLabel: 'Apply',
-      format: 'DD/MM/YYYY',
-      daysOfWeek: ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'],
-      monthNames: [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-      ],
-      firstDay: 1,
-      direction: 'ltr',
-    }
-    this.ranges = {
-      Today: [moment(), moment()],
-      yesterday: [moment(), moment()],
-      'Current week': [moment().startOf('isoWeek'), moment().endOf('isoWeek')],
-    }
-    this.calendarPlaceholder = 'All'
-    this.minDate = moment()
-    this.maxDate = moment().clone().add(10, 'years')
   }
 
   ngOnInit() {
@@ -106,7 +68,6 @@ export class SupportComponent implements OnInit {
           Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
         ],
       ],
-      // dateRange: ['', [Validators.required]],
       startDate: ['', [Validators.required]],
       endDate: ['', [Validators.required]],
       module: [[], [Validators.required]],
@@ -215,26 +176,6 @@ export class SupportComponent implements OnInit {
             panelClass: 'my-snack-bar-fail',
           })
         })
-    }
-  }
-
-  private getNextSaturday() {
-    const dayINeed = 6 // for Saturday
-    const today = moment().isoWeekday()
-    if (today <= dayINeed) {
-      return moment().isoWeekday(dayINeed)
-    } else {
-      return moment().add(1, 'weeks').isoWeekday(dayINeed)
-    }
-  }
-
-  private getNextSunday() {
-    const dayINeed = 7 // for Sunday
-    const today = moment().isoWeekday()
-    if (today <= dayINeed) {
-      return moment().isoWeekday(dayINeed)
-    } else {
-      return moment().add(1, 'weeks').isoWeekday(dayINeed)
     }
   }
 

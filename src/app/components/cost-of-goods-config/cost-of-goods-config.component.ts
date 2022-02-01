@@ -12,7 +12,7 @@ import { JournalService } from 'src/app/services/journal/journal.service';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
 import { AddMajorGroupComponent } from '../addMajorGroup/add-major-group.component';
 import { ConsumptionMajorGroupChildComponent } from '../consumption-major-group-child/consumption-major-group-child.component';
-import { SidenavResponsive } from '../sidenav/sidenav-responsive';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-cost-of-goods-config',
@@ -36,7 +36,7 @@ export class CostOfGoodsConfigComponent implements OnInit {
   majorGroups = []
 
   columns = []
-  constructor(private spinner: NgxSpinnerService, private sidNav: SidenavResponsive,
+  constructor(private spinner: NgxSpinnerService, private sidNav: SideNaveComponent,
     private journalService: JournalService,public dialog: MatDialog,
     private syncJobService:SyncJobService, private accSyncTypeService:AccSyncTypeService,
     private router:Router, public snackBar: MatSnackBar) {

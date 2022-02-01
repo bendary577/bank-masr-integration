@@ -34,7 +34,7 @@
 
   .row{
     display: flex;
-    height: 60vh;
+    max-height: 65vh;
   }
 
 // .mat-dialog-content{
@@ -43,15 +43,6 @@
 
 .mat-tab-labels {
     background-color: rgb(182, 217, 248);
-}
-
-//  ::ng-deep .mat-dialog-container {
-//     height: 700px !important;
-// }
-
- ::ng-deep .mat-dialog-container {
-    height: 720px !important;
-    border-radius: 15px;
 }
 
 .form-group{

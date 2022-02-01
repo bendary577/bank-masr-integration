@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, ChangeDetectorRef, NgZone } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatSnackBar } from '@angular/material';
 import { SupplierService } from 'src/app/services/supplier/supplier.service';
@@ -7,7 +7,6 @@ import { Constants } from 'src/app/models/constants';
 import { Router } from '@angular/router';
 import { Data } from 'src/app/models/data';
 import { SyncJob } from 'src/app/models/SyncJob';
-import { SidenavResponsive } from '../sidenav/sidenav-responsive';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { SideNaveComponent } from '../side-nave/side-nave.component'
 

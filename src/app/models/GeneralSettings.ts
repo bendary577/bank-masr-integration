@@ -9,6 +9,7 @@ import { BookingType } from './operaReports/paymentTypes'
 import { RateCode } from './operaReports/RateCode'
 import { SimphonyDiscount } from './loyalty/SimphonyDiscount'
 import { PosMachineMap } from './operaPayment/posMachineMap'
+import { BirthdayGift } from './loyalty/BirthdayGift'
 
 export class GeneralSettings {
   id: string
@@ -44,6 +45,7 @@ export class GeneralSettings {
 
   pointReward: number
   pointsRedemption: number
+  birthdayGift: BirthdayGift
 
   creationDate: Date
   deleted: boolean
