@@ -95,6 +95,7 @@ export class Constants {
   static MAP_ITEM_GROUPS_URL = environment.apiHost + '/mapItems'
 
   static GET_POS_SALES_URL = environment.apiHost + '/getPOSSales'
+  static GET_POS_SALES_API_DAILY_URL = environment.apiHost + '/salesAPI/getPOSSales'
   static GET_POS_SALES_TENDERS_URL = environment.apiHost + '/getTenders'
   static ADD_POS_SALES_TENDER_URL = environment.apiHost + '/addTender'
   static ADD_POS_SALES_TAX_URL = environment.apiHost + '/addTax'
@@ -186,6 +187,14 @@ export class Constants {
   static POS_SALES_SYNC = 'POS Sales'
   static POS_SALES_CONFIG_PAGE = 'posSalesConfig'
   static POS_SALES_INFOR_CONFIG_PAGE = 'posSalesSunConfig'
+
+  static POS_SALES_API_DAILY_PAGE = 'posSalesAPIDaily'
+  static POS_SALES_API_DAILY_CONFIG_PAGE = 'posSalesAPIDailyConf'
+  static POS_SALES_API_DAILY_SYNC = 'POS Sales API Daily'
+
+  static POS_SALES_API_MONTHLY_PAGE = 'posSalesAPIMonthly'
+  static POS_SALES_API_MONTHLY_CONFIG_PAGE = 'posSalesAPIMonthlyConf'
+  static POS_SALES_API_MONTHLY_SYNC = 'POS Sales API Monthly'
 
   static WASTARGE_PAGE = 'wastage'
   static WASTARGE_INFOR_PAGE = 'wastageSun'

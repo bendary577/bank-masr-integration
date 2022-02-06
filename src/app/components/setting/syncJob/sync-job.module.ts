@@ -25,6 +25,8 @@ import { JournalsInforConfigurationsComponent } from '../../journals-infor-confi
 import { CostOfGoodsConfigComponent } from '../../cost-of-goods-config/cost-of-goods-config.component';
 import { CostOfGoodsOhraConfigComponent } from '../../cost-of-goods-ohra-config/cost-of-goods-ohra-config.component';
 import { AngularMaterialModule } from 'src/app/angular-material.module';
+import { SalesApiDailyConfigComponent } from '../../sales-api-daily-config/sales-api-daily-config.component';
+import { SalesApiMonthlyConfigComponent } from '../../sales-api-monthly-config/sales-api-monthly-config.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { AngularMaterialModule } from 'src/app/angular-material.module';
     
     TaxAnalysisConfigrutionComponent,
     TenderConfigurationComponent,
+    SalesApiDailyConfigComponent,
+    SalesApiMonthlyConfigComponent
   ],
   imports: [
     SyncJobRoutingModule,

@@ -66,6 +66,9 @@ import { RewardPointsComponent } from '../components/reward-points/reward-points
 import { VoucherTransactionsComponent } from '../components/voucher-transactions/voucher-transactions.component';
 import { UniqueVoucherComponent } from '../components/unique-voucher/unique-voucher.component';
 import { TalabatOrdersComponent } from '../components/talabat-orders/talabat-orders.component';
+import { SalesApiDailyComponent } from '../components/sales-api-daily/sales-api-daily.component';
+import { SalesApiDailyConfigComponent } from '../components/sales-api-daily-config/sales-api-daily-config.component';
+import { SalesApiMonthlyComponent } from '../components/sales-api-monthly/sales-api-monthly.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -126,6 +129,10 @@ const routes: Routes = [
   { path: Constants.COST_OF_GOODS_PAGE , component: CostOfGoodsComponent  , canActivate:[AuthGuardService]},
 
   { path: Constants.POS_SALES_INFOR_PAGE , component: PosSalesInforComponent  , canActivate:[AuthGuardService]},
+
+
+  { path: Constants.POS_SALES_API_DAILY_PAGE , component: SalesApiDailyComponent  , canActivate:[AuthGuardService]},
+  { path: Constants.POS_SALES_API_MONTHLY_PAGE , component: SalesApiMonthlyComponent  , canActivate:[AuthGuardService]},
 
   { path: Constants.WASTARGE_INFOR_PAGE , component: WastageInforComponent ,canActivate:[AuthGuardService]},
 

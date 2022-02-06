@@ -144,6 +144,13 @@ export class SyncJobsconfigComponent implements OnInit {
     else if (syncJobType.name == Constants.EXPENSES_DETAILS_REPORT_SYNC) {
       this.router.navigate([ "main/" + Constants.EXPENSES_DETAILS_REPORT_CONFIG_PAGE]);
     }
+    else if (syncJobType.name == Constants.POS_SALES_API_DAILY_SYNC) {
+      this.router.navigate([ "main/" + Constants.POS_SALES_API_DAILY_CONFIG_PAGE]);
+    }
+    else if (syncJobType.name == Constants.POS_SALES_API_MONTHLY_SYNC) {
+      this.router.navigate([ "main/" + Constants.POS_SALES_API_MONTHLY_CONFIG_PAGE]);
+    }
+
     else{
       this.snackBar.open("This sync job has not configuration yet.", null, {
         duration: 2000,

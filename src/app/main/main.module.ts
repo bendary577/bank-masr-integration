@@ -97,6 +97,8 @@ import { SharedModule } from '../shared/shared.module';
 import { UniqueVoucherComponent } from '../components/unique-voucher/unique-voucher.component';
 import { TalabatOrdersComponent } from '../components/talabat-orders/talabat-orders.component';
 import { QuillModule } from 'ngx-quill';
+import { SalesApiDailyComponent } from '../components/sales-api-daily/sales-api-daily.component';
+import { SalesApiMonthlyComponent } from '../components/sales-api-monthly/sales-api-monthly.component';
 
 @NgModule({
   declarations: [
@@ -209,7 +211,9 @@ import { QuillModule } from 'ngx-quill';
     ExtendExpiryDateComponent,
     ViewInvokerComponent,
     UniqueVoucherComponent,
-    TalabatOrdersComponent
+    TalabatOrdersComponent,
+    SalesApiDailyComponent,
+    SalesApiMonthlyComponent
   ],
   imports: [
     MainRoutingModule,
