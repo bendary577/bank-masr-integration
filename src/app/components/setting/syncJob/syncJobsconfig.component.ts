@@ -145,10 +145,10 @@ export class SyncJobsconfigComponent implements OnInit {
       this.router.navigate([ "main/" + Constants.EXPENSES_DETAILS_REPORT_CONFIG_PAGE]);
     }
     else if (syncJobType.name == Constants.POS_SALES_API_DAILY_SYNC) {
-      this.router.navigate([ "main/" + Constants.POS_SALES_API_DAILY_CONFIG_PAGE]);
+      this.router.navigate([ "syncjobs/" + Constants.POS_SALES_API_DAILY_CONFIG_PAGE]);
     }
     else if (syncJobType.name == Constants.POS_SALES_API_MONTHLY_SYNC) {
-      this.router.navigate([ "main/" + Constants.POS_SALES_API_MONTHLY_CONFIG_PAGE]);
+      this.router.navigate([ "syncjobs/" + Constants.POS_SALES_API_MONTHLY_CONFIG_PAGE]);
     }
 
     else{
