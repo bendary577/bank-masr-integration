@@ -69,6 +69,7 @@ import { TalabatOrdersComponent } from '../components/talabat-orders/talabat-ord
 import { SalesApiDailyComponent } from '../components/sales-api-daily/sales-api-daily.component';
 import { SalesApiDailyConfigComponent } from '../components/sales-api-daily-config/sales-api-daily-config.component';
 import { SalesApiMonthlyComponent } from '../components/sales-api-monthly/sales-api-monthly.component';
+import { TalabatMappingComponent } from '../components/talabat-mapping/talabat-mapping.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -85,6 +86,8 @@ const routes: Routes = [
   { path: Constants.OPERA_REPORT_MAP_TABLES, component: OperaReportMapTablesComponent ,canActivate:[AuthGuardService]},
   { path: Constants.SIMPHONY_DISCOUNT_MAP_TABLE, component: SimphonyDiscountMapingComponent ,canActivate:[AuthGuardService]},
   { path: Constants.POS_MACHINE_MAP_TABLE, component: PosMachineMappingComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.TALABAT_MAPPING_PAGE, component: TalabatMappingComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.REWORD_PORINTS_SETTINGS, component: TalabatMappingComponent ,canActivate:[AuthGuardService]},
   { path: Constants.REWORD_PORINTS_SETTINGS, component: RewardPointsSettingsComponent ,canActivate:[AuthGuardService]},
   { path: Constants.WEB_INVOKERS_PAGE, component: WebServiceInvokerConfigurationComponent ,canActivate:[AuthGuardService]},
 

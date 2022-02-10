@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
 import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
-import { Constants } from 'src/app/models/constants';
 import { ExcelService } from 'src/app/services/excel/excel.service';
-import { saveAs } from 'file-saver';
 import { CsvService } from 'src/app/services/csv/csv.service';
 import { SideNaveComponent } from '../side-nave/side-nave.component';
 import { TalabatService } from 'src/app/services/talabat/talabat.service';
@@ -54,13 +52,25 @@ export class TalabatOrdersComponent implements OnInit {
   getTalabatOrders() {
     this.spinner.show();
     this.talabatService.getTalabatOrders().toPromise().then((res: any) => {
+      this.spinner.hide();
       this.orders = res["data"]["orders"];
       console.log(this.orders)
-      this.spinner.hide();
       this.loading = false;
+      if (res.status) {
+        this.snackBar.open(res.message, null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
+        });
+      }
     }).catch(err => {
       this.spinner.hide();
       this.loading = false;
+      this.snackBar.open(err.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
     });
   }
 
@@ -105,6 +115,7 @@ export class TalabatOrdersComponent implements OnInit {
       console.log(this.orders)
       this.spinner.hide();
       this.loading = false;
+
     }).catch(err => {
       this.spinner.hide();
       this.loading = false;

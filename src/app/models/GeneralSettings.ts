@@ -49,4 +49,7 @@ export class GeneralSettings {
 
   creationDate: Date
   deleted: boolean
+  branchMappings: any
+  productsMappings: any
+  discountMappings: any
 }

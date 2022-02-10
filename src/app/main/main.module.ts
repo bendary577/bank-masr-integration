@@ -99,6 +99,7 @@ import { TalabatOrdersComponent } from '../components/talabat-orders/talabat-ord
 import { QuillModule } from 'ngx-quill';
 import { SalesApiDailyComponent } from '../components/sales-api-daily/sales-api-daily.component';
 import { SalesApiMonthlyComponent } from '../components/sales-api-monthly/sales-api-monthly.component';
+import { TalabatMappingComponent } from '../components/talabat-mapping/talabat-mapping.component';
 
 @NgModule({
   declarations: [
@@ -204,6 +205,8 @@ import { SalesApiMonthlyComponent } from '../components/sales-api-monthly/sales-
     EditWalletComponent,
     SupportComponent,
     PosMachineMappingComponent,
+    TalabatOrdersComponent,
+    TalabatMappingComponent,
     SimphonyPaymentComponent,
     SimphonyCheckComponent,
     SimphonyCheckConfigurationComponent,
