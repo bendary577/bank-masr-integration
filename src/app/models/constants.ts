@@ -108,6 +108,9 @@ export class Constants {
   static ADD_POS_SALES_STATISTICS_URL =
     environment.apiHost + '/addSalesStatistics'
 
+    static ADD_ORDER_TYPE_CHANNEL_URL =
+    environment.apiHost + '/salesAPI/addOrderTypeChannel'
+
   static GET_CURRENT_DAYS_URL = environment.apiHost + '/getCurrentDays'
 
   static GET_BOOKED_PRODUCTION_URL =

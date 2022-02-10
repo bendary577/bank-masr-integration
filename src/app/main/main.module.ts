@@ -99,6 +99,8 @@ import { TalabatOrdersComponent } from '../components/talabat-orders/talabat-ord
 import { QuillModule } from 'ngx-quill';
 import { SalesApiDailyComponent } from '../components/sales-api-daily/sales-api-daily.component';
 import { SalesApiMonthlyComponent } from '../components/sales-api-monthly/sales-api-monthly.component';
+import { AddOrderTypeComponent } from '../components/add-order-type/add-order-type.component';
+import { AddOrderTypeChannelComponent } from '../components/add-order-type-channel/add-order-type-channel.component';
 
 @NgModule({
   declarations: [
@@ -152,6 +154,8 @@ import { SalesApiMonthlyComponent } from '../components/sales-api-monthly/sales-
     WebServiceInvokerConfigurationComponent,
     AddWebServiceInvokerComponent,
     AddLocationComponent,
+    AddOrderTypeComponent,
+    AddOrderTypeChannelComponent,
     OperationTypesConfigurationComponent,
     CreateOrderConfigComponent,
     CreateOrderComponent,
@@ -238,6 +242,8 @@ import { SalesApiMonthlyComponent } from '../components/sales-api-monthly/sales-
     AddWebServiceInvokerComponent,
     ViewInvokerComponent,
     AddLocationComponent,
+    AddOrderTypeComponent,
+    AddOrderTypeChannelComponent,
     AddMajorGroupChildComponent,
     AddSalesStatisticsComponent,
     AddSupplierComponent,

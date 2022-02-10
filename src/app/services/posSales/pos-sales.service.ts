@@ -66,4 +66,10 @@ export class PosSalesService {
     this.token = localStorage.getItem('auth_token');
     return this.http.post(Constants.ADD_POS_SALES_STATISTICS_URL + "?syncJobTypeId=" + id, statistics, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
   }
+  
+    addOrderTypeChannel(orderTypeChannels, id:string) {
+      this.token = localStorage.getItem('auth_token');
+      return this.http.post(Constants.ADD_ORDER_TYPE_CHANNEL_URL + "?syncJobTypeId=" + id, orderTypeChannels, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
+    
+  }
 }

@@ -20,6 +20,7 @@ export class GeneralSettings {
   overGroups: Array<OverGroup> | any
   costCenterAccountMapping: Array<CostCenter> | any
   revenueCenters: Array<string> | any
+  orderTypes: any
   locations: Array<CostCenter> | any
   simphonyLocations: Array<SimphonyLocation> | any
   suppliers: Array<Supplier> | any

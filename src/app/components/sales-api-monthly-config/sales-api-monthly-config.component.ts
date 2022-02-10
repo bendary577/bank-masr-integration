@@ -20,6 +20,8 @@ import { ServiceCharge } from 'src/app/models/ServiceCharge';
 import { SalesStatistics } from 'src/app/models/SalesStatistics';
 import { AddSalesStatisticsComponent } from '../add-sales-statistics/add-sales-statistics.component';
 import { SideNaveComponent } from '../side-nave/side-nave.component';
+import { AddOrderTypeChannelComponent } from '../add-order-type-channel/add-order-type-channel.component';
+import { OrderTypeChannel } from 'src/app/models/order-type-channel';
 
 @Component({
   selector: 'app-sales-api-monthly-config',
@@ -33,6 +35,8 @@ export class SalesApiMonthlyConfigComponent implements OnInit {
   analysis = [];
   analysisCodes = ["1","2","3","4","5","6","7","8","9","10"];
   statistics: SalesStatistics[] = [];
+  orderTypeChannels = [];
+
   newStatistics : SalesStatistics = new SalesStatistics();
 
   newServiceCharge : ServiceCharge = new ServiceCharge();
@@ -43,6 +47,7 @@ export class SalesApiMonthlyConfigComponent implements OnInit {
   accountERD;
 
   generalSettings: GeneralSettings;
+  newOrderTypeChanel = new OrderTypeChannel;
 
   constructor(private spinner: NgxSpinnerService, private salesService:PosSalesService,
     private sidNav: SideNaveComponent, private generalSettingsService: GeneralSettingsService,
@@ -61,6 +66,7 @@ export class SalesApiMonthlyConfigComponent implements OnInit {
       this.syncJobType = res;
       this.apiKey = this.syncJobType.configuration.salesAPIConfig["apiKey"];
       this.statistics = this.syncJobType.configuration.salesAPIConfig["statistics"];
+      this.orderTypeChannels = this.syncJobType.configuration.salesAPIConfig["orderTypeChannels"]
 
       this.loading = false;
     }).catch(err => {
@@ -141,262 +147,64 @@ export class SalesApiMonthlyConfigComponent implements OnInit {
     });
   }
 
-  openTaxDialog(){
-  //   const dialogRef = this.dialog.open(AddTaxComponent, {
-  //     width: '550px'
-  //   });
+  
+  openOrderTypeDialog(){
+    const dialogRef = this.dialog.open(AddOrderTypeChannelComponent, {
+      width: '550px',
+      data: {generalSettings: this.generalSettings}
+    });
 
-  //   dialogRef.afterClosed().subscribe(res => {
-  //     if (res) {
-  //       this.spinner.show();
-  //       this.loading = true;
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.spinner.show();
+        this.loading = true;
 
+        this.newOrderTypeChanel.checked = true;
+        this.newOrderTypeChanel.orderType = res.orderType;
+        this.newOrderTypeChanel.channel = res.channel;
 
+        this.orderTypeChannels.push(this.newOrderTypeChanel);
 
-  //       this.salesService.addTax(this.taxes, this.syncJobType.id).toPromise().then(result => {
-  //         this.spinner.hide();
-  //         this.loading = false;
+        this.salesService.addOrderTypeChannel(this.orderTypeChannels, this.syncJobType.id).toPromise().then(result => {
+          this.newOrderTypeChanel = new OrderTypeChannel()
 
-  //         this.snackBar.open(result["message"], null, {
-  //           duration: 2000,
-  //           horizontalPosition: 'center',
-  //           panelClass:"my-snack-bar-success"
-  //         });
+          this.snackBar.open(result["message"], null, {
+            duration: 2000,
+            horizontalPosition: 'center',
+            panelClass:"my-snack-bar-success"
+          });
 
-  //       }).catch(err => {
-  //         this.spinner.hide();
-  //         this.loading = false;
+          this.spinner.hide();
+          this.loading = false;
 
-  //         this.tenders.pop();
+        }).catch(err => {
+          this.spinner.hide();
+          this.loading = false;
+          this.statistics.pop();
+          this.newOrderTypeChanel = new OrderTypeChannel()
 
-  //         let message = "";
-  //         if(err.status === 401){
-  //           message = ErrorMessages.SESSION_EXPIRED;
-  //           this.sidNav.Logout();
-  //         } else if (err.error.message){
-  //           message = err.error.message;
-  //         } else if (err.message){
-  //           message = err.message;
-  //         } else {
-  //           message = ErrorMessages.FAILED_TO_SYNC;
-  //         }
+          let message = "";
+          if(err.status === 401){
+             message = ErrorMessages.SESSION_EXPIRED;
+            this.sidNav.Logout();
+          } else if (err.error.message){
+            message = err.error.message;
+          } else if (err.message){
+            message = err.message;
+          } else {
+            message = 'Can not add new statistic now, please try again.';
+          }
 
-  //         this.snackBar.open(message , null, {
-  //           duration: 3000,
-  //           horizontalPosition: 'center',
-  //           panelClass:"my-snack-bar-fail"
-  //         });
-  //       });
-  //     }
-  //   });
+          this.snackBar.open(message , null, {
+            duration: 3000,
+            horizontalPosition: 'center',
+            panelClass:"my-snack-bar-fail"
+          });
+        });
+      }
+    });
   }
 
-  openMajorGroupDialog(){
-    // const dialogRef = this.dialog.open(AddMajorGroupComponent, {
-    //   width: '550px'
-    // });
-
-    // dialogRef.afterClosed().subscribe(res => {
-    //   if (res) {
-    //     this.spinner.show();
-    //     this.loading = true;
-    //     this.newMajorGroup = new MajorGroup();
-    //     this.newMajorGroup.checked = true;
-    //     this.newMajorGroup.majorGroup = res.name;
-    //     this.newMajorGroup.account = res.account;
-
-    //     this.majorGroups.push(this.newMajorGroup);
-
-    //     this.salesService.addMajorGroup(this.majorGroups, this.syncJobType.id).toPromise().then(result => {
-    //       this.snackBar.open(result["message"], null, {
-    //         duration: 2000,
-    //         horizontalPosition: 'center',
-    //         panelClass:"my-snack-bar-success"
-    //       });
-
-    //       this.spinner.hide();
-    //       this.loading = false;
-
-    //     }).catch(err => {
-    //       this.spinner.hide();
-    //       this.loading = false;
-    //       this.majorGroups.pop();
-
-    //       let message = "";
-    //       if(err.status === 401){
-    //          message = ErrorMessages.SESSION_EXPIRED;
-    //         this.sidNav.Logout();
-    //       } else if (err.error.message){
-    //         message = err.error.message;
-    //       } else if (err.message){
-    //         message = err.message;
-    //       } else {
-    //         message = 'Can not add major group now, please try again.';
-    //       }
-
-    //       this.snackBar.open(message , null, {
-    //         duration: 3000,
-    //         horizontalPosition: 'center',
-    //         panelClass:"my-snack-bar-fail"
-    //       });
-    //     });
-    //   }
-    // });
-  }
-
-   viewMajorGroupChildsDialog(majorGroup: MajorGroup){
-  //   const dialogRef = this.dialog.open(AddMajorGroupChildComponent, {
-  //     width: '550px',
-  //     // minHeight: '1000px',
-  //     data: {majorGroup: majorGroup}
-  //   });
-
-  //   dialogRef.afterClosed().subscribe(res => {
-  //     if (res) {
-  //       this.loading = true;
-  //       this.salesService.addMajorGroup(this.majorGroups, this.syncJobType.id).toPromise().then(result => {
-  //         this.loading = false;
-  //         this.snackBar.open(result["message"], null, {
-  //           duration: 2000,
-  //           horizontalPosition: 'center',
-  //           panelClass:"my-snack-bar-success"
-  //         });
-
-  //       }).catch(err => {
-  //         this.loading = false;
-  //         let message = "";
-  //         if(err.status === 401){
-  //           message = ErrorMessages.SESSION_EXPIRED;
-  //           this.sidNav.Logout();
-  //         } else if (err.error.message){
-  //           message = err.error.message;
-  //         } else if (err.message){
-  //           message = err.message;
-  //         } else {
-  //           message = ErrorMessages.FAILED_TO_SYNC;
-  //         }
-
-  //         this.snackBar.open(message , null, {
-  //           duration: 3000,
-  //           horizontalPosition: 'center',
-  //           panelClass:"my-snack-bar-fail"
-  //         });
-  //       });
-  //     }
-  //   });
-  }
-
-  openDiscountDialog(){
-    // const dialogRef = this.dialog.open(AddDiscountComponent, {
-    //   width: '550px'
-    // });
-
-    // dialogRef.afterClosed().subscribe(res => {
-    //   if (res) {
-    //     this.spinner.show();
-    //     this.loading = true;
-    //     this.newDiscount = {};
-    //     this.newDiscount.checked = true;
-    //     this.newDiscount.discount = res.name;
-    //     this.newDiscount.account = res.account;
-
-    //     this.discounts.push(this.newDiscount);
-
-    //     this.salesService.addDiscount(this.discounts, this.syncJobType.id).toPromise().then(result => {
-    //       this.snackBar.open(result["message"], null, {
-    //         duration: 2000,
-    //         horizontalPosition: 'center',
-    //         panelClass:"my-snack-bar-success"
-    //       });
-
-    //       this.spinner.hide();
-    //       this.loading = false;
-
-    //     }).catch(err => {
-    //       this.spinner.hide();
-    //       this.loading = false;
-    //       this.majorGroups.pop();
-
-    //       let message = "";
-    //       if(err.status === 401){
-    //          message = ErrorMessages.SESSION_EXPIRED;
-    //         this.sidNav.Logout();
-    //       } else if (err.error.message){
-    //         message = err.error.message;
-    //       } else if (err.message){
-    //         message = err.message;
-    //       } else {
-    //         message = 'Can not add discount now, please try again.';
-    //       }
-
-    //       this.snackBar.open(message , null, {
-    //         duration: 3000,
-    //         horizontalPosition: 'center',
-    //         panelClass:"my-snack-bar-fail"
-    //       });
-    //     });
-    //   }
-    // });
-  }
-
-   openServiceChargeDialog(){
-  //   const dialogRef = this.dialog.open(AddServiceChargeComponent, {
-  //     width: '550px',
-  //     data: {generalSettings: this.generalSettings}
-  //   });
-
-  //   dialogRef.afterClosed().subscribe(res => {
-  //     if (res) {
-  //       this.spinner.show();
-  //       this.loading = true;
-  //       this.newServiceCharge.checked = true;
-  //       this.newServiceCharge.serviceCharge = res.name;
-  //       this.newServiceCharge.account = res.account;
-
-  //       this.newServiceCharge.costCenter = res.location;
-  //       this.newServiceCharge.revenueCenter = res.revenueCenter;
-
-  //       this.serviceCharges.push(this.newServiceCharge);
-
-  //       this.salesService.addServiceCharge(this.serviceCharges, this.syncJobType.id).toPromise().then(result => {
-  //         this.newServiceCharge = new ServiceCharge()
-
-  //         this.snackBar.open(result["message"], null, {
-  //           duration: 2000,
-  //           horizontalPosition: 'center',
-  //           panelClass:"my-snack-bar-success"
-  //         });
-
-  //         this.spinner.hide();
-  //         this.loading = false;
-
-  //       }).catch(err => {
-  //         this.spinner.hide();
-  //         this.loading = false;
-  //         this.serviceCharges.pop();
-  //         this.newServiceCharge = new ServiceCharge();
-
-  //         let message = "";
-  //         if(err.status === 401){
-  //            message = ErrorMessages.SESSION_EXPIRED;
-  //           this.sidNav.Logout();
-  //         } else if (err.error.message){
-  //           message = err.error.message;
-  //         } else if (err.message){
-  //           message = err.message;
-  //         } else {
-  //           message = 'Can not add service charges now, please try again.';
-  //         }
-
-  //         this.snackBar.open(message , null, {
-  //           duration: 3000,
-  //           horizontalPosition: 'center',
-  //           panelClass:"my-snack-bar-fail"
-  //         });
-  //       });
-  //     }
-  //   });
-  }
 
   openStatisticsDialog(){
     const dialogRef = this.dialog.open(AddSalesStatisticsComponent, {
