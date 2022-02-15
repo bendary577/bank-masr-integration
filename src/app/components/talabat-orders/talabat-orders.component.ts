@@ -82,8 +82,6 @@ export class TalabatOrdersComponent implements OnInit {
 
       this.order = res["data"];
 
-      console.log(this.order)
-
       const dialogConfig = new MatDialogConfig();
       this.spinner.hide();
 

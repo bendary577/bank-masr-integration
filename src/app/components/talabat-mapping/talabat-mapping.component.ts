@@ -44,9 +44,9 @@ export class TalabatMappingComponent implements OnInit {
       console.log(this.generalSettings)
 
       this.generalSettings = res as GeneralSettings;
-      this.branchMappingData = this.generalSettings.branchMappings;
-      this.productsMappingData = this.generalSettings.productsMappings;
-      this.discountMappingData = this.generalSettings.discountMappings;
+      this.branchMappingData = this.generalSettings.talabatConfiguration.branchMappings;
+      this.productsMappingData = this.generalSettings.talabatConfiguration.productsMappings;
+      this.discountMappingData = this.generalSettings.talabatConfiguration.discountMappings;
 
       this.spinner.hide();
     }).catch(err => {
@@ -121,9 +121,9 @@ export class TalabatMappingComponent implements OnInit {
 
     try {
 
-      this.generalSettings.productsMappings = this.productsMappingData;
-      this.generalSettings.branchMappings = this.branchMappingData;
-      this.generalSettings.discountMappings = this.discountMappingData;
+      this.generalSettings.talabatConfiguration.productsMappings = this.productsMappingData;
+      this.generalSettings.talabatConfiguration.branchMappings = this.branchMappingData;
+      this.generalSettings.talabatConfiguration.discountMappings = this.discountMappingData;
 
       console.log(this.generalSettings)
 
