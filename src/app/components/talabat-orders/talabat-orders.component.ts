@@ -74,6 +74,32 @@ export class TalabatOrdersComponent implements OnInit {
     });
   }
 
+
+  sendTalabatOrders() {
+    this.spinner.show();
+    this.talabatService.sendTalabatOrders().toPromise().then((res: any) => {
+      this.spinner.hide();
+      this.orders = res["data"]["orders"];
+      console.log(this.orders)
+      this.loading = false;
+      if (res.status) {
+        this.snackBar.open(res.message, null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
+        });
+      }
+    }).catch(err => {
+      this.spinner.hide();
+      this.loading = false;
+      this.snackBar.open(err.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+    });
+  }
+
   openOrderDetails(row){
 
     this.spinner.show();
