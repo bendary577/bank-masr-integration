@@ -339,7 +339,8 @@ export class Constants {
   static SIMPHONY_DISCOUNT_MAP_TABLE = 'simphonyDiscountMaping'
   static POS_MACHINE_MAP_TABLE = 'posMachinMapping'
   static REWORD_PORINTS_SETTINGS = 'rewardPointsSettings'
-
+  static TALABAT_MAPPING_PAGE = 'talabatMapping'
+  
   static GET_APP_GROUPS_URL = environment.apiHost + '/getApplicationGroups'
   static GET_ALL_APP_GROUPS_URL =
     environment.apiHost + '/getAllApplicationGroups'
@@ -464,6 +465,8 @@ export class Constants {
 
   static TALABAT_ORDERS  = "talabatOrders"
   static GET_TALABAT_ORDERS =  environment.apiHost + "/talabat";
+  static SEND_TALABAT_ORDERS =  environment.apiHost + "/talabat/senToFoodics";
+
   static GET_TALABAT_ORDER_DETAILS =  environment.apiHost + "/talabat/order";
   static GET_TALABAT_BRANCH_ORDERS =  environment.apiHost + "/talabat/branch";
 

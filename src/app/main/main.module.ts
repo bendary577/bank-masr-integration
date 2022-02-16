@@ -101,6 +101,7 @@ import { SalesApiDailyComponent } from '../components/sales-api-daily/sales-api-
 import { SalesApiMonthlyComponent } from '../components/sales-api-monthly/sales-api-monthly.component';
 import { AddOrderTypeComponent } from '../components/add-order-type/add-order-type.component';
 import { AddOrderTypeChannelComponent } from '../components/add-order-type-channel/add-order-type-channel.component';
+import { TalabatMappingComponent } from '../components/talabat-mapping/talabat-mapping.component';
 
 @NgModule({
   declarations: [
@@ -208,6 +209,8 @@ import { AddOrderTypeChannelComponent } from '../components/add-order-type-chann
     EditWalletComponent,
     SupportComponent,
     PosMachineMappingComponent,
+    TalabatOrdersComponent,
+    TalabatMappingComponent,
     SimphonyPaymentComponent,
     SimphonyCheckComponent,
     SimphonyCheckConfigurationComponent,

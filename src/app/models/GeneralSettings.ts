@@ -10,6 +10,7 @@ import { RateCode } from './operaReports/RateCode'
 import { SimphonyDiscount } from './loyalty/SimphonyDiscount'
 import { PosMachineMap } from './operaPayment/posMachineMap'
 import { BirthdayGift } from './loyalty/BirthdayGift'
+import { TalabatConfiguration } from './talabat/talabat-configuration'
 
 export class GeneralSettings {
   id: string
@@ -50,4 +51,5 @@ export class GeneralSettings {
 
   creationDate: Date
   deleted: boolean
+  talabatConfiguration: TalabatConfiguration;
 }

@@ -17,6 +17,12 @@ export class TalabatService {
        { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
+  sendTalabatOrders() {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get(Constants.SEND_TALABAT_ORDERS,
+       { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
   getTalabatBranchOrders(branch) {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_TALABAT_BRANCH_ORDERS + "?branch=" + branch,
