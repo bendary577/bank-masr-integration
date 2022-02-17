@@ -1,0 +1,63 @@
+<div id="invoice-POS">
+
+	<div *ngIf="account" style="text-align: center;">
+		<img *ngIf="accountLogo != ''" class="max-width: 90%;" src={{accountLogo}} alt="logo" />
+		<br>
+		<p> {{account}} </p>
+
+    </div>
+	<br>
+
+	<div *ngIf="guest">
+        <h2 style="text-align: center;font-size: 1.1em;">Guest Info</h2>
+        <p> Name : {{guest.name}} </p>
+        <p> Code : {{guest.code}}</p>
+    </div>
+    
+
+	<div id="table" *ngIf="walletHistory">
+		<h2 style="text-align: center;font-size: 1.1em;">Transaction</h2>
+		<p> Transaction Date : {{walletHistory.date | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
+
+		<table style="width: 100%;border-collapse: collapse;">
+			<tr style="font-size: .5em;background: #EEE;">
+				<td style="width: 24mm;">
+					<h2 style="font-size: 1.1em;">Opreation Type</h2>
+				</td>
+				<td class="Rate">
+					<h2 style="font-size: 1.1em;">Amount</h2>
+				</td>
+			</tr>
+
+			<tr class="service">
+				<td style="font-size: .5em;"><p>{{walletHistory.operation}}</p></td>
+				<td style="font-size: .5em;"><p>{{walletHistory.amount}} {{getCurrency()}}</p></td>
+			</tr>
+
+
+			<tr style="font-size: .5em;background: #EEE;">
+				<td class="Rate"><h2 style="font-size: 1.1em;" >Previous Balance</h2></td>
+				<td class="payment"><h2 style="font-size: 1.1em;">{{walletHistory.previousBalance}} {{getCurrency()}}</h2></td>
+			</tr>
+
+			<tr style="font-size: .5em;background: #EEE;">
+				<td class="Rate"><h2 style="font-size: 1.1em;">Current Balance</h2></td>
+				<td class="payment"><h2 style="font-size: 1.1em;">{{walletHistory.newBalance}} {{getCurrency()}}</h2></td>
+			</tr>
+		</table>
+	</div>
+
+	<div style="margin-top: 5mm; text-align: center;">
+		<p>
+			<strong>*******Thank you*******</strong>
+		</p>
+	</div>
+
+  </div>
+
+<div mat-dialog-actions>
+    <button mat-button cdkFocusInitial printSectionId="invoice-POS" 
+	styleSheetFile='./view-receipt.component.css'
+	ngxPrint>print</button>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+</div>

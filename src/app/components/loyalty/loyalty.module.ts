@@ -19,6 +19,8 @@ import { ExtendExpiryDateComponent } from '../extend-expiry-date/extend-expiry-d
 import { ApplicationModule } from 'src/app/shared/application.module';
 import { AddAppUserAccompiedComponent } from '../add-app-user-accompied/add-app-user-accompied.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
+import { NgxPrintModule } from 'ngx-print';
+import { ViewReceiptComponent } from '../view-receipt/view-receipt.component';
 
 
 @NgModule({
@@ -29,6 +31,9 @@ import { UserProfileComponent } from '../user-profile/user-profile.component';
     AddAppUserAccompiedComponent,
     ManageGroupsComponent,
     UserProfileComponent,
+
+    ViewReceiptComponent,
+
   ],
   imports: [
     LoyaltyRoutingModule,
@@ -37,6 +42,8 @@ import { UserProfileComponent } from '../user-profile/user-profile.component';
     SharedModule,
     ApplicationModule,
     AngularMaterialModule,
+
+    NgxPrintModule
   ],
   exports:[
     ManageGroupsComponent,

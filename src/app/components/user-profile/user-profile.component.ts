@@ -15,6 +15,8 @@ import { ExtendExpiryDateComponent } from '../extend-expiry-date/extend-expiry-d
 import { ExcelService } from 'src/app/services/excel/excel.service'
 import { saveAs } from 'file-saver'
 import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser'
+import { ViewReceiptComponent } from '../view-receipt/view-receipt.component'
+import { WalletHistory } from 'src/app/models/wallet/wallet-history'
 
 @Component({
   selector: 'app-user-profile',
@@ -55,7 +57,7 @@ export class UserProfileComponent implements OnInit {
     pagesFilter: [10, 25, 50, 75, 100],
     showLoading: false,
     inputSearch: '' as string,
-    walletHistoryData: [] as Transactions[],
+    walletHistoryData: [] as WalletHistory[],
   }
 
   constructor(
@@ -185,6 +187,8 @@ export class UserProfileComponent implements OnInit {
             .chargeWallet(func, this.user.id, res)
             .toPromise()
             .then((result: any) => {
+              this.viewReceipt(result.data);
+
               this.walletHistoryList.showLoading = false
               this.getApplicationUser()
               this.spinner.hide()
@@ -235,6 +239,8 @@ export class UserProfileComponent implements OnInit {
             .deductWallet(func, this.user.id, res.amount)
             .toPromise()
             .then((result: any) => {
+              this.viewReceipt(result.data);
+              
               this.walletHistoryList.showLoading = false
               this.getApplicationUser()
               this.spinner.hide()
@@ -262,6 +268,15 @@ export class UserProfileComponent implements OnInit {
       }
     })
     this.walletHistoryList.showLoading = false
+  }
+
+  viewReceipt(guest) {
+    const dialogRef = this.dialog.open(ViewReceiptComponent, {
+      width: '302.36px', // 80mm 
+      data: {
+        guest: guest
+       },
+    })
   }
 
   addRevenueCenter() {
