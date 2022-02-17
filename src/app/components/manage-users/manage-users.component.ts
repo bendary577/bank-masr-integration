@@ -90,7 +90,7 @@ export class ManageUsersComponent implements OnInit {
 
   openUserProfile(user: ApplicationUser) {
     this.data.storage = user
-    this.router.navigate(["main/" + Constants.USER_PROFILE])
+    this.router.navigate(["entrySystem/" + Constants.USER_PROFILE])
   }
 
   getUsers() {

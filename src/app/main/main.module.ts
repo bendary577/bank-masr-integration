@@ -50,7 +50,6 @@ import { SimphonyPaymentComponent } from '../components/operations/simphony-paym
 import { PosMachineMappingComponent } from '../components/setting/pos-machine-mapping/pos-machine-mapping.component';
 import { SupportComponent } from '../components/support/support.component';
 import { EditWalletComponent } from '../components/edit-wallet/edit-wallet.component';
-import { UserProfileComponent } from '../components/user-profile/user-profile.component';
 import { FilterComponent } from '../components/filter/filter.component';
 import { OperaPaymentsComponent } from '../components/operations/opera-payments/opera-payments.component';
 import { OpiTransactionsComponent } from '../components/opi-transactions/opi-transactions.component';
@@ -205,7 +204,6 @@ import { TalabatMappingComponent } from '../components/talabat-mapping/talabat-m
     OpiTransactionsComponent,
     OperaPaymentsComponent,
     FilterComponent,
-    UserProfileComponent,
     EditWalletComponent,
     SupportComponent,
     PosMachineMappingComponent,
