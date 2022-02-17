@@ -51,9 +51,7 @@ import { HotelOpiComponent } from '../components/hotel-opi/hotel-opi.component';
 import { OperaPaymentsComponent } from '../components/operations/opera-payments/opera-payments.component';
 import { SupportComponent } from '../components/support/support.component';
 import { PosMachineMappingComponent } from '../components/setting/pos-machine-mapping/pos-machine-mapping.component';
-import { RewardPointsSettingsComponent } from '../components/setting/reward-points-settings/reward-points-settings.component';
 import { SimphonyCheckComponent } from '../components/simphony-check/simphony-check.component';
-import { SimphonyCheckConfigurationComponent } from '../components/simphony-check-configuration/simphony-check-configuration.component';
 import { SimphonyPaymentComponent } from '../components/operations/simphony-payment/simphony-payment.component';
 import { RevenueByAgentComponent } from '../components/Reports/revenue-by-agent/revenue-by-agent.component';
 import { WebServiceInvokerConfigurationComponent } from '../components/configuration/web-service-invoker-configuration/web-service-invoker-configuration.component';
@@ -168,13 +166,10 @@ const routes: Routes = [
 
 
   { path: Constants.OPERA_PAYMENT_PAGE , component: OperaPaymentsComponent ,canActivate:[AuthGuardService]},
-  { path: Constants.OPERA_PAYMENT_CONFIG_PAGE , component: OperaPaymentConfigurationComponent ,canActivate:[AuthGuardService]},
 
   { path: Constants.SIMPHONY_CHECK_PAGE , component: SimphonyCheckComponent ,canActivate:[AuthGuardService]},
-  { path: Constants.SIMPHONY_CHECK_CONFIG_PAGE , component: SimphonyCheckConfigurationComponent ,canActivate:[AuthGuardService]},
 
   { path: Constants.SIMPHONY_PAYMENT_PAGE , component: SimphonyPaymentComponent ,canActivate:[AuthGuardService]},
-  { path: Constants.SIMPHONY_CHECK_CONFIG_PAGE , component: SimphonyCheckConfigurationComponent ,canActivate:[AuthGuardService]},
 
   { path : Constants.SUPPORT , component: SupportComponent, canActivate:[AuthGuardService]},
 
