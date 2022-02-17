@@ -331,8 +331,6 @@ export class Constants {
   static MANAGE_COMPANIES = 'manageCompanies'
   static MANAGE_GROUPS = 'manageGroups'
   static MANAGE_SUB_GROUPS = 'manageSubGroups'
-  static MANAGE_USERS = 'manageUsers'
-  static MANAGE_ACTIVITIES = 'managActivities'
   static REDEEM_VOUCHER = 'redeemVoucher'
   static VOUCHER_TRANSACTION = 'voucherTransaction'
   static UNIQUE_VOUCHER_TRANSACTION = 'uniqueVoucherTransaction'
