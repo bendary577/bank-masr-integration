@@ -1,3 +1,4 @@
+import { Wallet } from '../wallet/wallet'
 import { AccompiendGuest } from './AccompiendGuest'
 import { Group } from './Group'
 
@@ -14,7 +15,7 @@ export class ApplicationUser {
   public expire: boolean
   public suspended: boolean
   public generic: boolean
-  public wallet
+  public wallet: Wallet
 
   public points
   public accompaniedGuests: AccompiendGuest[]

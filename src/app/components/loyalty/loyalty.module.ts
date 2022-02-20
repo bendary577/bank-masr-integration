@@ -18,6 +18,9 @@ import { AddVoucherDialogComponent } from '../add-voucher-dialog/add-voucher-dia
 import { ExtendExpiryDateComponent } from '../extend-expiry-date/extend-expiry-date.component';
 import { ApplicationModule } from 'src/app/shared/application.module';
 import { AddAppUserAccompiedComponent } from '../add-app-user-accompied/add-app-user-accompied.component';
+import { UserProfileComponent } from '../user-profile/user-profile.component';
+import { NgxPrintModule } from 'ngx-print';
+import { ViewReceiptComponent } from '../view-receipt/view-receipt.component';
 
 
 @NgModule({
@@ -26,7 +29,11 @@ import { AddAppUserAccompiedComponent } from '../add-app-user-accompied/add-app-
     ActivitiesComponent,
     ManageUsersComponent,
     AddAppUserAccompiedComponent,
-    ManageGroupsComponent
+    ManageGroupsComponent,
+    UserProfileComponent,
+
+    ViewReceiptComponent,
+
   ],
   imports: [
     LoyaltyRoutingModule,
@@ -35,6 +42,8 @@ import { AddAppUserAccompiedComponent } from '../add-app-user-accompied/add-app-
     SharedModule,
     ApplicationModule,
     AngularMaterialModule,
+
+    NgxPrintModule
   ],
   exports:[
     ManageGroupsComponent,

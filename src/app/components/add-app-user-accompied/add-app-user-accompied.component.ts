@@ -76,7 +76,7 @@ export class AddAppUserAccompiedComponent implements OnInit  {
         email: [this.user.email, [Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]],
         mobile: [this.user.mobile, [Validators.maxLength, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], 
         group: [this.user.group.id],
-        balance:[this.user.wallet.price],
+        balance:[0],
         expiryDate: [expirationDate],
         cardNum: [this.user.code],
         accompanied:[this.user.accompaniedGuests.length],

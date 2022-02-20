@@ -27,12 +27,24 @@ import { CostOfGoodsOhraConfigComponent } from '../../cost-of-goods-ohra-config/
 import { AngularMaterialModule } from 'src/app/angular-material.module';
 import { SalesApiDailyConfigComponent } from '../../sales-api-daily-config/sales-api-daily-config.component';
 import { SalesApiMonthlyConfigComponent } from '../../sales-api-monthly-config/sales-api-monthly-config.component';
+import { SchedulerConfigurationComponent } from '../../scheduler-configuration/scheduler-configuration.component';
+import { SuppliersConfiguartionComponent } from '../../suppliers-configuartion/suppliers-configuartion.component';
+import { AddServiceChargeComponent } from '../../add-service-charge/add-service-charge.component';
+import { AddConsumptionLocationComponent } from '../../add-consumption-location/add-consumption-location.component';
+import { AddConsumptionLocationItemsComponent } from '../../add-consumption-location-items/add-consumption-location-items.component';
+import { AddTenderChildComponent } from '../../add-tender-child/add-tender-child.component';
+import { AddSalesStatisticsComponent } from '../../add-sales-statistics/add-sales-statistics.component';
+import { AddMajorGroupChildComponent } from '../../addMajorGroupChild/add-major-group-child.component';
+import { AddMajorGroupComponent } from '../../addMajorGroup/add-major-group.component';
 
 @NgModule({
   declarations: [
     SyncJobsconfigComponent,
+    SchedulerConfigurationComponent,
 
+    SuppliersConfiguartionComponent,
     SuppliersInforConfigurationComponent,
+
     PosSalesConfigurationComponent,
     PosSalesInforConfigurationComponent,
     CreditNotesInforConfigurationComponent,
@@ -53,13 +65,23 @@ import { SalesApiMonthlyConfigComponent } from '../../sales-api-monthly-config/s
 
     // Sales Components
     AddTenderComponent,
+    AddTenderChildComponent,
+    AddMajorGroupComponent,
     AddTaxComponent,
     AddDiscountComponent,
+    AddServiceChargeComponent,
+    AddMajorGroupChildComponent,
+    AddSalesStatisticsComponent,
+
+    // ==> Consumption Sync Job Type
+    AddConsumptionLocationComponent,
+    AddConsumptionLocationItemsComponent,
     
     TaxAnalysisConfigrutionComponent,
     TenderConfigurationComponent,
     SalesApiDailyConfigComponent,
     SalesApiMonthlyConfigComponent
+
   ],
   imports: [
     SyncJobRoutingModule,

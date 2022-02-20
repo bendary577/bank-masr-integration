@@ -101,7 +101,6 @@ export class EditWalletComponent implements OnInit {
   }
 
   onSaveClick(): void {
-    console.log(this.revenueCenterList.selected)
     if (
       this.form.invalid ||
       (this.revenueCenterList.selected.length == 0 && !this.inDeduct)

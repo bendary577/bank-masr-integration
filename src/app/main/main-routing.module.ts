@@ -33,8 +33,6 @@ import { OperaPaymentConfigurationComponent } from '../components/opera-payment-
 import { SupplierMappingComponent } from '../components/setting/supllier-mapping/supllier-mapping.component';
 import { CreateOrderComponent } from '../components/create-order/create-order.component';
 import { ManageGroupsComponent } from '../components/manage-groups/manage-groups.component';
-import { ManageUsersComponent } from '../components/manage-users/manage-users.component';
-import { ActivitiesComponent } from '../components/activities/activities.component';
 import { WlsIntegrationComponent } from '../components/wls-integration/wls-integration.component';
 import { WlsIntegrationConfigComponent } from '../components/wls-integration-config/wls-integration-config.component';
 import { NewBookingReportComponent } from '../components/new-booking-report/new-booking-report.component';
@@ -47,17 +45,13 @@ import { OperaReportMapTablesComponent } from '../components/setting/opera-repor
 import { OperaBookingDashBoardComponent } from '../components/opera-booking-dash-board/opera-booking-dash-board.component';
 import { ExpensesDetailsReportComponent } from '../components/expenses-details-report/expenses-details-report.component';
 import { ExpensesDetailsReportConfigComponent } from '../components/expenses-details-report-config/expenses-details-report-config.component';
-import { ManageSubGroupComponent } from '../components/manage-sub-group/manage-sub-group.component';
 import { SimphonyDiscountMapingComponent } from '../components/simphony-discount-maping/simphony-discount-maping.component';
 import { CostOfGoodsComponent } from '../components/cost-of-goods/cost-of-goods.component';
 import { HotelOpiComponent } from '../components/hotel-opi/hotel-opi.component';
 import { OperaPaymentsComponent } from '../components/operations/opera-payments/opera-payments.component';
-import { UserProfileComponent } from '../components/user-profile/user-profile.component';
 import { SupportComponent } from '../components/support/support.component';
 import { PosMachineMappingComponent } from '../components/setting/pos-machine-mapping/pos-machine-mapping.component';
-import { RewardPointsSettingsComponent } from '../components/setting/reward-points-settings/reward-points-settings.component';
 import { SimphonyCheckComponent } from '../components/simphony-check/simphony-check.component';
-import { SimphonyCheckConfigurationComponent } from '../components/simphony-check-configuration/simphony-check-configuration.component';
 import { SimphonyPaymentComponent } from '../components/operations/simphony-payment/simphony-payment.component';
 import { RevenueByAgentComponent } from '../components/Reports/revenue-by-agent/revenue-by-agent.component';
 import { WebServiceInvokerConfigurationComponent } from '../components/configuration/web-service-invoker-configuration/web-service-invoker-configuration.component';
@@ -70,6 +64,7 @@ import { SalesApiDailyComponent } from '../components/sales-api-daily/sales-api-
 import { SalesApiDailyConfigComponent } from '../components/sales-api-daily-config/sales-api-daily-config.component';
 import { SalesApiMonthlyComponent } from '../components/sales-api-monthly/sales-api-monthly.component';
 import { TalabatMappingComponent } from '../components/talabat-mapping/talabat-mapping.component';
+import { ManageSubGroupComponent } from '../components/manage-sub-group/manage-sub-group.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -88,7 +83,6 @@ const routes: Routes = [
   { path: Constants.POS_MACHINE_MAP_TABLE, component: PosMachineMappingComponent ,canActivate:[AuthGuardService]},
   { path: Constants.TALABAT_MAPPING_PAGE, component: TalabatMappingComponent ,canActivate:[AuthGuardService]},
   { path: Constants.REWORD_PORINTS_SETTINGS, component: TalabatMappingComponent ,canActivate:[AuthGuardService]},
-  { path: Constants.REWORD_PORINTS_SETTINGS, component: RewardPointsSettingsComponent ,canActivate:[AuthGuardService]},
   { path: Constants.WEB_INVOKERS_PAGE, component: WebServiceInvokerConfigurationComponent ,canActivate:[AuthGuardService]},
 
   // OPERA Views
@@ -100,13 +94,9 @@ const routes: Routes = [
 
   // Reward Points
   { path: Constants.REWARD_POINTS_PAGE, component: RewardPointsComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.MANAGE_SUB_GROUPS, component: ManageSubGroupComponent ,canActivate:[AuthGuardService]},
 
   { path: Constants.MANAGE_GROUPS, component: ManageGroupsComponent ,canActivate:[AuthGuardService]},
-
-  { path: Constants.MANAGE_SUB_GROUPS, component: ManageSubGroupComponent ,canActivate:[AuthGuardService]},
-  { path: Constants.MANAGE_USERS, component: ManageUsersComponent ,canActivate:[AuthGuardService]},
-  { path: Constants.USER_PROFILE, component: UserProfileComponent ,canActivate:[AuthGuardService]},
-  { path: Constants.MANAGE_ACTIVITIES, component: ActivitiesComponent ,canActivate:[AuthGuardService]},
 
   // Entry System Views
   { path: Constants.REVENUE_BY_AGENT_PAGE, component: RevenueByAgentComponent ,canActivate:[AuthGuardService]},
@@ -176,13 +166,10 @@ const routes: Routes = [
 
 
   { path: Constants.OPERA_PAYMENT_PAGE , component: OperaPaymentsComponent ,canActivate:[AuthGuardService]},
-  { path: Constants.OPERA_PAYMENT_CONFIG_PAGE , component: OperaPaymentConfigurationComponent ,canActivate:[AuthGuardService]},
 
   { path: Constants.SIMPHONY_CHECK_PAGE , component: SimphonyCheckComponent ,canActivate:[AuthGuardService]},
-  { path: Constants.SIMPHONY_CHECK_CONFIG_PAGE , component: SimphonyCheckConfigurationComponent ,canActivate:[AuthGuardService]},
 
   { path: Constants.SIMPHONY_PAYMENT_PAGE , component: SimphonyPaymentComponent ,canActivate:[AuthGuardService]},
-  { path: Constants.SIMPHONY_CHECK_CONFIG_PAGE , component: SimphonyCheckConfigurationComponent ,canActivate:[AuthGuardService]},
 
   { path : Constants.SUPPORT , component: SupportComponent, canActivate:[AuthGuardService]},
 
