@@ -16,6 +16,7 @@ export class Account {
   public deleted: boolean;
   public features: [];
   public emailConfig: AccountEmailConfig;
+  public printReceiptConfig: any;
 
   public constructor() {}
 }

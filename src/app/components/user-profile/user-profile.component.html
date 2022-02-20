@@ -118,6 +118,7 @@
                                     {{credit}} {{getCurrency()}}
                                 </div>
                             </h3>
+
                             <button class="filter-btn" (click)="chargeWallet('add')" 
                             [disabled]="!user || (user && (user.deleted || lessThanOrEqualZero() || user.suspended))"
                              mat-raised-button>Charge</button>

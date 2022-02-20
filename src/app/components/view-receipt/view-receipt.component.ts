@@ -28,11 +28,26 @@ export class ViewReceiptComponent implements OnInit {
       if(this.guest.wallet.walletHistory.length > 0){
         this.walletHistory = this.guest.wallet.walletHistory[this.guest.wallet.walletHistory.length - 1]
       }
+
+      // if (this.data['autoPrint'] != null || this.data['autoPrint'] != undefined) {
+      //   if(this.data['autoPrint'] == true){
+      //     this.print();
+      //     // this.onNoClick();
+      //   }
+      // }
     }
   }
 
   getCurrency() {
     return JSON.parse(localStorage.getItem('account')).currency
+  }
+
+  print(){
+    const printContent = document.getElementById("invoice-POS");
+    window.document.write(printContent.innerHTML);
+    window.focus();
+    window.print();
+    window.close();
   }
 
   onNoClick(): void {

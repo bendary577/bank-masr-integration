@@ -88,6 +88,20 @@
         </mat-expansion-panel>
       </mat-accordion>
     </div>
+
+    <!-- Print Settings -->
+    <mat-expansion-panel *ngIf="hasRole('print_reciept_settings') && account.printReceiptConfig != null">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Print Reciept Configuration
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-checkbox class="example-margin" style="padding-right: 10px;" [(ngModel)]="account.printReceiptConfig.previewReceipt" >
+        <label> Preview Reciept </label>
+      </mat-checkbox>
+
+
+    </mat-expansion-panel>
     
     <!-- Email Settings -->
     <mat-expansion-panel *ngIf="hasRole('edit_email_configuration') && emailConfig != null">
