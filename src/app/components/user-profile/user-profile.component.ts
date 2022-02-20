@@ -239,6 +239,7 @@ export class UserProfileComponent implements OnInit {
             .deductWallet(func, this.user.id, res.amount)
             .toPromise()
             .then((result: any) => {
+              // Check config
               this.viewReceipt(result.data);
               
               this.walletHistoryList.showLoading = false
@@ -271,12 +272,14 @@ export class UserProfileComponent implements OnInit {
   }
 
   viewReceipt(guest) {
-    const dialogRef = this.dialog.open(ViewReceiptComponent, {
-      width: '302.36px', // 80mm 
-      data: {
-        guest: guest
-       },
-    })
+    if( JSON.parse(localStorage.getItem('account')).printReceiptConfig.previewReceipt){
+      const dialogRef = this.dialog.open(ViewReceiptComponent, {
+        width: '302.36px', // 80mm 
+        data: {
+          guest: guest,
+          },
+      })
+    }
   }
 
   addRevenueCenter() {
@@ -383,7 +386,7 @@ export class UserProfileComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
-        title:  "Add Guest",
+        title:  "Update Guest",
         user: this.user,
     };
     dialogConfig.width = '420px';
@@ -532,5 +535,10 @@ export class UserProfileComponent implements OnInit {
 
   hasRole(reference): Boolean {
     return this.sideNav.hasRole(reference)
+  }
+
+  hasFeature(reference) {
+    var isFeature =  this.sideNav.hasFeature(reference)
+    return isFeature;
   }
 }
