@@ -1,0 +1,85 @@
+<div id="invoice-POS" style="max-width: 300px;">
+
+	<div *ngIf="account" style="text-align: center;">
+		<img *ngIf="accountLogo != ''" class="max-width: 90%;" src={{accountLogo}} alt="logo" />
+		<br>
+		<p> {{account}} </p>
+
+    </div>
+	<br>
+
+	<div *ngIf="guest">
+        <h2 style="text-align: center;font-size: 1.1em;">Guest Info</h2>
+        <p> Name : {{guest.name}} </p>
+        <p> Code : {{guest.code}}</p>
+    </div>
+    
+	<div id="table" *ngIf="walletHistory">
+		<h2 style="text-align: center;font-size: 1.1em;">Transaction</h2>
+		<p> Transaction Date : {{walletHistory.date | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
+
+		<table style="width: 100%;border-collapse: collapse;">
+			<tr>
+				<td>
+					<h2 style="font-size: 12px;">Opreation Type</h2>
+				</td>
+				<td>
+					<h2 style="font-size: 12px;">Amount</h2>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<p style="text-align: center;">
+						<strong>-------------------------------------------</strong>
+					</p>
+				</td>
+			</tr>
+
+			<tr>
+				<td><p style="font-size: 12px;">{{walletHistory.operation}}</p></td>
+				<td><p style="font-size: 12px;">{{walletHistory.amount}} {{getCurrency()}}</p></td>
+			</tr>
+
+			<tr>
+				<td>
+					<p style="text-align: center;">
+						<strong>-------------------------------------------</strong>
+					</p>
+				</td>
+			</tr>
+
+			<tr >
+				<td><h2 style="font-size: 12px;">Previous Balance</h2></td>
+				<td><h2 style="font-size: 12px;">{{walletHistory.previousBalance}} {{getCurrency()}}</h2></td>
+			</tr>
+
+			<tr>
+				<td>
+					<p style="text-align: center;">
+						<strong>-------------------------------------------</strong>
+					</p>
+				</td>
+			</tr>
+
+			<tr>
+				<td><h2 style="font-size: 12px;">Current Balance</h2></td>
+				<td><h2 style="font-size: 12px;">{{walletHistory.newBalance}} {{getCurrency()}}</h2></td>
+			</tr>
+		</table>
+	</div>
+
+	<div style="margin-top: 5mm; text-align: center;">
+		<p>
+			<strong>*******Thank you*******</strong>
+		</p>
+	</div>
+
+  </div>
+
+<div mat-dialog-actions>
+    <button mat-button cdkFocusInitial printSectionId="invoice-POS" 
+	printTitle="Wallet System Receipt"  
+	ngxPrint>print</button>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+</div>

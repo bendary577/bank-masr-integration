@@ -55,6 +55,7 @@
     "ngx-daterangepicker-material": "^5.0.1",
     "ngx-json-viewer": "^3.0.2",
     "ngx-mat-daterange-picker": "0.0.2",
+    "ngx-print": "^1.2.1",
     "ngx-quill": "^16.1.1",
     "ngx-spinner": "^8.1.0",
     "ngx-toastr": "^13.2.1",

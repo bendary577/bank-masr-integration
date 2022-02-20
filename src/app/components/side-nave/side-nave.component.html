@@ -226,9 +226,9 @@
           <li class="nav-item" *ngIf="hasRole('see_locationMapping')"><a class="nav-link" routerLink="/main/costCenterLocationMapping">Location Mapping</a> </li>
           <li class="nav-item" *ngIf="hasRole('see_simphony_discountmapping')"><a class="nav-link" routerLink="/main/simphonyDiscountMaping">Discount Mapping</a> </li>
           <li class="nav-item" *ngIf="hasRole('reward_points_settings')"><a class="nav-link" routerLink="/main/rewardPointsSettings">Points Settings</a>
-          <li class="nav-item" *ngIf="hasRole('see_general_setting')"><a class="nav-link" routerLink="/main/setting">General Settings</a>
-            <li class="nav-item" *ngIf="hasRole('see_pos_mapping')"><a class="nav-link" routerLink="/main/posMachinMapping">PAX Mapping</a>
-            </li>
+          <li class="nav-item" *ngIf="hasRole('see_general_setting')"><a class="nav-link" routerLink="/main/setting">General Settings</a></li>
+          <li class="nav-item" *ngIf="hasRole('see_pos_mapping')"><a class="nav-link" routerLink="/main/posMachinMapping">PAX Mapping</a> </li>
+          <li class="nav-item" *ngIf="hasFeature('talabat-orders')"><a class="nav-link" routerLink="/main/talabatMapping">Talabat Mapping</a> </li>
           <li class="nav-item" *ngIf="hasRole('manage_invokers')"><a class="nav-link" routerLink="/main/webServiceInvokers">Manage Invokers</a></li>
         </ul>
       </div>

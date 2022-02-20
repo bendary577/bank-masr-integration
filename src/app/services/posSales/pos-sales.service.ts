@@ -22,6 +22,11 @@ export class PosSalesService {
     return this.http.get(Constants.GET_POS_SALES_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
+  getPOSSalesAPIDaily(endpoint) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get(Constants.GET_POS_SALES_API_DAILY_URL + "?endpoint=" + endpoint, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
   getTenders() {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(Constants.GET_POS_SALES_TENDERS_URL, { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
@@ -60,5 +65,11 @@ export class PosSalesService {
   addSalesStatistics(statistics: SalesStatistics[], id:string) {
     this.token = localStorage.getItem('auth_token');
     return this.http.post(Constants.ADD_POS_SALES_STATISTICS_URL + "?syncJobTypeId=" + id, statistics, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
+  }
+  
+    addOrderTypeChannel(orderTypeChannels, id:string) {
+      this.token = localStorage.getItem('auth_token');
+      return this.http.post(Constants.ADD_ORDER_TYPE_CHANNEL_URL + "?syncJobTypeId=" + id, orderTypeChannels, { headers: new HttpHeaders({'Authorization': 'Bearer ' + this.token})});
+    
   }
 }

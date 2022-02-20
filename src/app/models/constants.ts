@@ -95,6 +95,7 @@ export class Constants {
   static MAP_ITEM_GROUPS_URL = environment.apiHost + '/mapItems'
 
   static GET_POS_SALES_URL = environment.apiHost + '/getPOSSales'
+  static GET_POS_SALES_API_DAILY_URL = environment.apiHost + '/salesAPI/getPOSSales'
   static GET_POS_SALES_TENDERS_URL = environment.apiHost + '/getTenders'
   static ADD_POS_SALES_TENDER_URL = environment.apiHost + '/addTender'
   static ADD_POS_SALES_TAX_URL = environment.apiHost + '/addTax'
@@ -106,6 +107,9 @@ export class Constants {
     environment.apiHost + '/addRevenueCenter'
   static ADD_POS_SALES_STATISTICS_URL =
     environment.apiHost + '/addSalesStatistics'
+
+    static ADD_ORDER_TYPE_CHANNEL_URL =
+    environment.apiHost + '/salesAPI/addOrderTypeChannel'
 
   static GET_CURRENT_DAYS_URL = environment.apiHost + '/getCurrentDays'
 
@@ -186,6 +190,14 @@ export class Constants {
   static POS_SALES_SYNC = 'POS Sales'
   static POS_SALES_CONFIG_PAGE = 'posSalesConfig'
   static POS_SALES_INFOR_CONFIG_PAGE = 'posSalesSunConfig'
+
+  static POS_SALES_API_DAILY_PAGE = 'posSalesAPIDaily'
+  static POS_SALES_API_DAILY_CONFIG_PAGE = 'posSalesAPIDailyConf'
+  static POS_SALES_API_DAILY_SYNC = 'POS Sales API Daily'
+
+  static POS_SALES_API_MONTHLY_PAGE = 'posSalesAPIMonthly'
+  static POS_SALES_API_MONTHLY_CONFIG_PAGE = 'posSalesAPIMonthlyConf'
+  static POS_SALES_API_MONTHLY_SYNC = 'POS Sales API Monthly'
 
   static WASTARGE_PAGE = 'wastage'
   static WASTARGE_INFOR_PAGE = 'wastageSun'
@@ -319,15 +331,14 @@ export class Constants {
   static MANAGE_COMPANIES = 'manageCompanies'
   static MANAGE_GROUPS = 'manageGroups'
   static MANAGE_SUB_GROUPS = 'manageSubGroups'
-  static MANAGE_USERS = 'manageUsers'
-  static MANAGE_ACTIVITIES = 'managActivities'
   static REDEEM_VOUCHER = 'redeemVoucher'
   static VOUCHER_TRANSACTION = 'voucherTransaction'
   static UNIQUE_VOUCHER_TRANSACTION = 'uniqueVoucherTransaction'
   static SIMPHONY_DISCOUNT_MAP_TABLE = 'simphonyDiscountMaping'
   static POS_MACHINE_MAP_TABLE = 'posMachinMapping'
   static REWORD_PORINTS_SETTINGS = 'rewardPointsSettings'
-
+  static TALABAT_MAPPING_PAGE = 'talabatMapping'
+  
   static GET_APP_GROUPS_URL = environment.apiHost + '/getApplicationGroups'
   static GET_ALL_APP_GROUPS_URL =
     environment.apiHost + '/getAllApplicationGroups'
@@ -452,6 +463,8 @@ export class Constants {
 
   static TALABAT_ORDERS  = "talabatOrders"
   static GET_TALABAT_ORDERS =  environment.apiHost + "/talabat";
+  static SEND_TALABAT_ORDERS =  environment.apiHost + "/talabat/senToFoodics";
+
   static GET_TALABAT_ORDER_DETAILS =  environment.apiHost + "/talabat/order";
   static GET_TALABAT_BRANCH_ORDERS =  environment.apiHost + "/talabat/branch";
 

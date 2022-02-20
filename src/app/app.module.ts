@@ -18,7 +18,7 @@ import { SideNaveComponent } from './components/side-nave/side-nave.component'
 import { NavBarComponent } from './components/nav-bar/nav-bar.component'
 import { BasicModule } from './shared/basic.module'
 import { LoginComponent } from './components/login/login.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [

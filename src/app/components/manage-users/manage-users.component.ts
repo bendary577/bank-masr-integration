@@ -12,6 +12,7 @@ import { Constants } from 'src/app/models/constants'
 import { AddAppUserAccompiedComponent } from '../add-app-user-accompied/add-app-user-accompied.component'
 import { SideNaveComponent } from '../side-nave/side-nave.component'
 import { ExtendExpiryDateComponent } from '../extend-expiry-date/extend-expiry-date.component'
+import { ViewReceiptComponent } from '../view-receipt/view-receipt.component'
 
 @Component({
   selector: 'app-manage-users',
@@ -90,7 +91,7 @@ export class ManageUsersComponent implements OnInit {
 
   openUserProfile(user: ApplicationUser) {
     this.data.storage = user
-    this.router.navigate(["main/" + Constants.USER_PROFILE])
+    this.router.navigate(["entrySystem/" + Constants.USER_PROFILE])
   }
 
   getUsers() {
@@ -174,7 +175,7 @@ export class ManageUsersComponent implements OnInit {
               guest.image,
               guest.id,
               guest.accompiendUsers,
-              guest.cardCode,
+              guest.code,
               guest.mobile,
               guest.balance,
               res.expiryDate,
@@ -351,11 +352,24 @@ export class ManageUsersComponent implements OnInit {
             this.usersList.showLoading = false
             this.usersList.selected = []
 
-            this.snackBar.open('User added successfully.', null, {
-              duration: 2000,
-              horizontalPosition: 'center',
-              panelClass: 'my-snack-bar-success',
-            })
+            if(result.success){
+              // Print Receipt, When enterance amount greater than zero
+              if(isGeneric && res.balance > 0){
+                this.viewReceipt(result.data);
+              }
+
+              this.snackBar.open('User added successfully.', null, {
+                duration: 2000,
+                horizontalPosition: 'center',
+                panelClass: 'my-snack-bar-success',
+              })
+            }else{
+              this.snackBar.open(result.message, null, {
+                duration: 2000,
+                horizontalPosition: 'center',
+                panelClass: 'my-snack-bar-fail',
+              })
+            }
           })
           .catch((err) => {
             this.newUser = new ApplicationUser()
@@ -467,6 +481,17 @@ export class ManageUsersComponent implements OnInit {
           })
       }
     })
+  }
+
+  viewReceipt(guest) {
+    if(JSON.parse(localStorage.getItem('account')).printReceiptConfig.previewReceipt){
+      const dialogRef = this.dialog.open(ViewReceiptComponent, {
+        width: '302.36px', // 80mm 
+        data: {
+          guest: guest
+         },
+      })
+    }
   }
 
   send(process) {

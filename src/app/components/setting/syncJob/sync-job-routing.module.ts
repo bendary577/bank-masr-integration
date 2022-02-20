@@ -9,6 +9,8 @@ import { CostOfGoodsConfigComponent } from '../../cost-of-goods-config/cost-of-g
 import { CreditNotesInforConfigurationComponent } from '../../credit-notes-infor-configuration/credit-notes-infor-configuration.component';
 import { JournalsInforConfigurationsComponent } from '../../journals-infor-configurations/journals-infor-configurations.component';
 import { PosSalesInforConfigurationComponent } from '../../pos-sales-infor-configuration/pos-sales-infor-configuration.component';
+import { SalesApiDailyConfigComponent } from '../../sales-api-daily-config/sales-api-daily-config.component';
+import { SalesApiMonthlyConfigComponent } from '../../sales-api-monthly-config/sales-api-monthly-config.component';
 import { SuppliersInforConfigurationComponent } from '../../suppliers-infor-configuration/suppliers-infor-configuration.component';
 import { WastageInforConfigurationComponent } from '../../wastage-infor-configuration/wastage-infor-configuration.component';
 import { SyncJobsconfigComponent } from './syncJobsconfig.component';
@@ -25,6 +27,8 @@ const routes: Routes = [
   { path: Constants.CONSUMPTION_CONFIG_PAGE , component: JournalsInforConfigurationsComponent  , canActivate:[AuthGuardService]},
   { path: Constants.CONSUMPTION_SUN_CONFIG_PAGE , component: JournalsInforConfigurationsComponent  , canActivate:[AuthGuardService]},
   { path: Constants.COST_OF_GOODS_CONFIG_PAGE , component: CostOfGoodsConfigComponent  , canActivate:[AuthGuardService]},
+  { path: Constants.POS_SALES_API_DAILY_CONFIG_PAGE , component: SalesApiDailyConfigComponent  , canActivate:[AuthGuardService]},
+  { path: Constants.POS_SALES_API_MONTHLY_CONFIG_PAGE , component: SalesApiMonthlyConfigComponent  , canActivate:[AuthGuardService]},
 
 ];
 
