@@ -30,6 +30,7 @@ export class AddOrderTypeChannelComponent implements OnInit {
     this.dialogRef.close({
       orderType: this.form.controls.orderType.value,
       channel: this.form.controls.channel.value,
+      channelCount: this.form.controls.channelCount.value,
     });
   }
 
@@ -44,6 +45,7 @@ export class AddOrderTypeChannelComponent implements OnInit {
     this.form = this.formBuilder.group({
       orderType: ['', Validators.required],
       channel: ['', Validators.required],
+      channelCount: ['', Validators.required]
     });
   }
 }

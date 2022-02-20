@@ -13,7 +13,7 @@
                 </mat-expansion-panel-header>
                 <app-ohra-configuration [syncJobType]=syncJobType></app-ohra-configuration>
             </mat-expansion-panel>
-            
+
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     <mat-panel-title>
@@ -24,8 +24,7 @@
                 <div class="back" style="margin-bottom: 20px;">
 
                     <mat-form-field class="example-full-width" style="width: 306px !important;">
-                        <input matInput id="apiToken" name="apiToken" placeholder="API Token"
-                            [(ngModel)]="syncJobType.configuration.salesAPIConfig.apiKey">
+                        <input matInput id="apiToken" name="apiToken" placeholder="API Token" [(ngModel)]="syncJobType.configuration.salesAPIConfig.apiKey">
                     </mat-form-field>
 
                 </div>
@@ -33,8 +32,7 @@
                 <div class="back" style="margin-bottom: 20px;">
 
                     <mat-form-field class="example-full-width" style="width: 306px !important;">
-                        <input matInput id="apiToken" name="apiToken" placeholder="API Endpoint"
-                            [(ngModel)]="syncJobType.configuration.salesAPIConfig.apiEndpoint">
+                        <input matInput id="apiToken" name="apiToken" placeholder="API Endpoint" [(ngModel)]="syncJobType.configuration.salesAPIConfig.apiEndpoint">
                     </mat-form-field>
 
                 </div>
@@ -53,9 +51,7 @@
                 </div>
 
                 <div *ngIf="statistics?.length > 0">
-                    <ngx-datatable class="material" [rows]="statistics" [columnMode]="'force'" [headerHeight]="50"
-                        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-                        [sortType]="'multi'">
+                    <ngx-datatable class="material" [rows]="statistics" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
 
                         <ngx-datatable-column name="Location">
                             <ng-template let-row="row" ngx-datatable-cell-template>
@@ -103,9 +99,7 @@
                 </div>
 
                 <div *ngIf="orderTypeChannels?.length > 0">
-                    <ngx-datatable class="material" [rows]="orderTypeChannels" [columnMode]="'force'" [headerHeight]="50"
-                        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-                        [sortType]="'multi'">
+                    <ngx-datatable class="material" [rows]="orderTypeChannels" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
 
                         <ngx-datatable-column name="Order Type">
                             <ng-template let-row="row" ngx-datatable-cell-template>
@@ -115,11 +109,23 @@
                             </ng-template>
                         </ngx-datatable-column>
 
-                        <ngx-datatable-column name="Registered Name">
+                        <ngx-datatable-column name="channel Name">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                &nbsp;<input matInput placeholder="Channel" [(ngModel)]="row.channel">
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Channel Count">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                &nbsp;<input matInput placeholder="Channel Count" [(ngModel)]="row.channelCount">
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <!-- <ngx-datatable-column name="Delete">
                             <ng-template let-row="row" ngx-datatable-cell-template>
                                 &nbsp;<input matInput placeholder="No Guest Account" [(ngModel)]="row.channel">
                             </ng-template>
-                        </ngx-datatable-column>
+                        </ngx-datatable-column> -->
 
                     </ngx-datatable>
                 </div>
