@@ -28,7 +28,6 @@ import { AngularMaterialModule } from 'src/app/angular-material.module';
 import { SalesApiDailyConfigComponent } from '../../sales-api-daily-config/sales-api-daily-config.component';
 import { SalesApiMonthlyConfigComponent } from '../../sales-api-monthly-config/sales-api-monthly-config.component';
 import { SchedulerConfigurationComponent } from '../../scheduler-configuration/scheduler-configuration.component';
-import { SuppliersConfiguartionComponent } from '../../suppliers-configuartion/suppliers-configuartion.component';
 import { AddServiceChargeComponent } from '../../add-service-charge/add-service-charge.component';
 import { AddConsumptionLocationComponent } from '../../add-consumption-location/add-consumption-location.component';
 import { AddConsumptionLocationItemsComponent } from '../../add-consumption-location-items/add-consumption-location-items.component';
@@ -47,7 +46,6 @@ import { ExpensesDetailsReportConfigComponent } from '../../expenses-details-rep
     SyncJobsconfigComponent,
     SchedulerConfigurationComponent,
 
-    SuppliersConfiguartionComponent,
     SuppliersInforConfigurationComponent,
 
     PosSalesConfigurationComponent,

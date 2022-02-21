@@ -77,9 +77,6 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('auth_token', res.access_token)
         localStorage.setItem('refresh_token', res.refresh_token)
         this.saveAccountERD()
-        // localStorage.setItem('user',JSON.stringify(this.user));
-        // this.getFeatures();
-        // this.side.refresh();
       })
       .catch((err) => {
         localStorage.setItem('auth_token', '')
