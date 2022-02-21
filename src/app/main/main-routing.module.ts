@@ -5,9 +5,6 @@ import { MainComponent } from './main.component';
 
 import { SuppliersComponent } from '../components/suppliers/suppliers.component';
 import { ConfigurationComponent } from '../components/setting/configuration/configuration.component';
-import { UsersComponent } from '../components/setting/users/users.component';
-import { SuppliersConfiguartionComponent } from '../components/suppliers-configuartion/suppliers-configuartion.component';
-import { SupplierDetailsComponent } from '../components/supplier-details/supplier-details.component';
 import {AuthGuardService} from "../guards/AuthGuardService";
 import { WelcomePageComponent } from '../components/welcome-page/welcome-page.component';
 import { BookedTransferInforComponent } from '../components/booked-transfer-infor/booked-transfer-infor.component';
@@ -37,14 +34,10 @@ import { WlsIntegrationComponent } from '../components/wls-integration/wls-integ
 import { WlsIntegrationConfigComponent } from '../components/wls-integration-config/wls-integration-config.component';
 import { NewBookingReportComponent } from '../components/new-booking-report/new-booking-report.component';
 import { CancelBookingReportComponent } from '../components/cancel-booking-report/cancel-booking-report.component';
-import { NewBookingReportConfigComponent } from '../components/new-booking-report-config/new-booking-report-config.component';
-import { CancelBookingReportConfigComponent } from '../components/cancel-booking-report-config/cancel-booking-report-config.component';
 import { OccupancyUpdateReportComponent } from '../components/occupancy-update-report/occupancy-update-report.component';
-import { OccupancyUpdateReportConfigComponent } from '../components/occupancy-update-report-config/occupancy-update-report-config.component';
 import { OperaReportMapTablesComponent } from '../components/setting/opera-report-map-tables/opera-report-map-tables.component';
 import { OperaBookingDashBoardComponent } from '../components/opera-booking-dash-board/opera-booking-dash-board.component';
 import { ExpensesDetailsReportComponent } from '../components/expenses-details-report/expenses-details-report.component';
-import { ExpensesDetailsReportConfigComponent } from '../components/expenses-details-report-config/expenses-details-report-config.component';
 import { SimphonyDiscountMapingComponent } from '../components/simphony-discount-maping/simphony-discount-maping.component';
 import { CostOfGoodsComponent } from '../components/cost-of-goods/cost-of-goods.component';
 import { HotelOpiComponent } from '../components/hotel-opi/hotel-opi.component';
@@ -61,7 +54,6 @@ import { VoucherTransactionsComponent } from '../components/voucher-transactions
 import { UniqueVoucherComponent } from '../components/unique-voucher/unique-voucher.component';
 import { TalabatOrdersComponent } from '../components/talabat-orders/talabat-orders.component';
 import { SalesApiDailyComponent } from '../components/sales-api-daily/sales-api-daily.component';
-import { SalesApiDailyConfigComponent } from '../components/sales-api-daily-config/sales-api-daily-config.component';
 import { SalesApiMonthlyComponent } from '../components/sales-api-monthly/sales-api-monthly.component';
 import { TalabatMappingComponent } from '../components/talabat-mapping/talabat-mapping.component';
 import { ManageSubGroupComponent } from '../components/manage-sub-group/manage-sub-group.component';
@@ -72,7 +64,6 @@ const routes: Routes = [
     path: Constants.SETTING, component: ConfigurationComponent ,
     children: []
   },
-  { path: Constants.USERS_CONFIGURATION, component: UsersComponent,canActivate:[AuthGuardService] },
   { path: Constants.COST_CENTER_LOCATION_MAPPING, component: CostCenterLocationMappingComponent ,canActivate:[AuthGuardService]},
   { path: Constants.COST_CENTER_ACCOUNT_MAPPING, component: CostCenterAccountMappingComponent ,canActivate:[AuthGuardService]},
   { path: Constants.INCLUDED_OVER_GROUPS, component: IncludedOverGroupsComponent ,canActivate:[AuthGuardService]},
@@ -108,8 +99,6 @@ const routes: Routes = [
   { path: Constants.WELCOME_PAGE, component: WelcomePageComponent , canActivate:[AuthGuardService]},
 
   { path: Constants.SUPPLIERS_PAGE, component: SuppliersComponent , canActivate:[AuthGuardService]},
-  { path: Constants.SUPPLIERS_CONFIG_PAGE, component: SuppliersConfiguartionComponent  , canActivate:[AuthGuardService]},
-  { path: Constants.SUPPLIERS_DETAILS_PAGE, component: SupplierDetailsComponent  , canActivate:[AuthGuardService]},
 
   { path: Constants.APPROVED_INVOICES_INFOR_PAGE, component:  ApprovedInvoicesInforComponent, canActivate:[AuthGuardService]},
 
@@ -153,17 +142,9 @@ const routes: Routes = [
   { path: Constants.EXPORTED_FILES_PAGE , component: SyncExportedFilesComponent ,canActivate:[AuthGuardService]},
 
   { path: Constants.NEW_BOOKING_REPORT_PAGE , component: NewBookingReportComponent ,canActivate:[AuthGuardService]},
-  { path: Constants.NEW_BOOKING_REPORT_CONFIG_PAGE , component: NewBookingReportConfigComponent ,canActivate:[AuthGuardService]},
-
   { path: Constants.CANCEL_BOOKING_REPORT_PAGE , component: CancelBookingReportComponent ,canActivate:[AuthGuardService]},
-  { path: Constants.CANCEL_BOOKING_REPORT_CONFIG_PAGE , component: CancelBookingReportConfigComponent ,canActivate:[AuthGuardService]},
-
   { path: Constants.OCCUPANCY_UPDATE_REPORT_PAGE , component: OccupancyUpdateReportComponent ,canActivate:[AuthGuardService]},
-  { path: Constants.OCCUPANCY_UPDATE_REPORT_CONFIG_PAGE , component: OccupancyUpdateReportConfigComponent ,canActivate:[AuthGuardService]},
-
   { path: Constants.EXPENSES_DETAILS_REPORT_PAGE , component: ExpensesDetailsReportComponent ,canActivate:[AuthGuardService]},
-  { path: Constants.EXPENSES_DETAILS_REPORT_CONFIG_PAGE , component: ExpensesDetailsReportConfigComponent ,canActivate:[AuthGuardService]},
-
 
   { path: Constants.OPERA_PAYMENT_PAGE , component: OperaPaymentsComponent ,canActivate:[AuthGuardService]},
 

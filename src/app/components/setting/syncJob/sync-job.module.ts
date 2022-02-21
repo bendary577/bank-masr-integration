@@ -36,6 +36,11 @@ import { AddTenderChildComponent } from '../../add-tender-child/add-tender-child
 import { AddSalesStatisticsComponent } from '../../add-sales-statistics/add-sales-statistics.component';
 import { AddMajorGroupChildComponent } from '../../addMajorGroupChild/add-major-group-child.component';
 import { AddMajorGroupComponent } from '../../addMajorGroup/add-major-group.component';
+import { NewBookingReportConfigComponent } from '../../new-booking-report-config/new-booking-report-config.component';
+
+import { CancelBookingReportConfigComponent } from '../../cancel-booking-report-config/cancel-booking-report-config.component';
+import { OccupancyUpdateReportConfigComponent } from '../../occupancy-update-report-config/occupancy-update-report-config.component';
+import { ExpensesDetailsReportConfigComponent } from '../../expenses-details-report-config/expenses-details-report-config.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +85,13 @@ import { AddMajorGroupComponent } from '../../addMajorGroup/add-major-group.comp
     TaxAnalysisConfigrutionComponent,
     TenderConfigurationComponent,
     SalesApiDailyConfigComponent,
-    SalesApiMonthlyConfigComponent
+    SalesApiMonthlyConfigComponent,
+
+    // Opera Reports
+    NewBookingReportConfigComponent,
+    CancelBookingReportConfigComponent,
+    OccupancyUpdateReportConfigComponent,
+    ExpensesDetailsReportConfigComponent,
 
   ],
   imports: [
