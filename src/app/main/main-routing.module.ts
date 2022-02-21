@@ -5,7 +5,6 @@ import { MainComponent } from './main.component';
 
 import { SuppliersComponent } from '../components/suppliers/suppliers.component';
 import { ConfigurationComponent } from '../components/setting/configuration/configuration.component';
-import { UsersComponent } from '../components/setting/users/users.component';
 import {AuthGuardService} from "../guards/AuthGuardService";
 import { WelcomePageComponent } from '../components/welcome-page/welcome-page.component';
 import { BookedTransferInforComponent } from '../components/booked-transfer-infor/booked-transfer-infor.component';
@@ -65,7 +64,6 @@ const routes: Routes = [
     path: Constants.SETTING, component: ConfigurationComponent ,
     children: []
   },
-  { path: Constants.USERS_CONFIGURATION, component: UsersComponent,canActivate:[AuthGuardService] },
   { path: Constants.COST_CENTER_LOCATION_MAPPING, component: CostCenterLocationMappingComponent ,canActivate:[AuthGuardService]},
   { path: Constants.COST_CENTER_ACCOUNT_MAPPING, component: CostCenterAccountMappingComponent ,canActivate:[AuthGuardService]},
   { path: Constants.INCLUDED_OVER_GROUPS, component: IncludedOverGroupsComponent ,canActivate:[AuthGuardService]},

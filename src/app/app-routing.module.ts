@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'rewardPoints', loadChildren: () => import('./components/reward-points/reward-points.module').then(m => m.RewardPointsModule) },
   { path: 'main', loadChildren: () => import('./main/main.module').then(m => m.MainModule) },
   { path: Constants.SYNC_JOBS, loadChildren: () => import('./components/setting/syncJob/sync-job.module').then(m => m.SyncJobModule) },
+  { path: Constants.USERS_CONFIGURATION, loadChildren: () => import('./components/setting/admins/admins.module').then(m => m.AdminsModule) },
 
   // Error Page
   {path:'**', component: ErrorComponentComponent }

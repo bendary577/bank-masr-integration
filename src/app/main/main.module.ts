@@ -5,7 +5,6 @@ import { MainComponent } from './main.component';
 
 import { SuppliersComponent } from '../components/suppliers/suppliers.component';
 import { ConfigurationComponent } from '../components/setting/configuration/configuration.component';
-import { UsersComponent } from '../components/setting/users/users.component';
 import { AddUserComponent } from '../components/add-vendor/add-vendor.component';
 import { BookedTransferDetailsComponent } from '../components/booked-transfer-details/booked-transfer-details.component';
 import { ErrorComponentComponent } from '../components/error-component/error-component.component';
@@ -93,9 +92,6 @@ import { TalabatMappingComponent } from '../components/talabat-mapping/talabat-m
     WelcomePageComponent,
     ErrorComponentComponent,
 
-    AddUserComponent,
-    UsersComponent,
-    ViewUserComponent,
     AddAccountComponent,
     ConfigurationComponent,
     BasicConfiguartionsComponent,

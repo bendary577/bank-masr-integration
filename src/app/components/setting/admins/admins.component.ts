@@ -1,8 +1,6 @@
-
-import {Component, OnInit} from '@angular/core';
-import {MatExpansionPanel, MatSnackBar, MatDialog} from "@angular/material";
-import {animate, state, style, transition, trigger} from "@angular/animations";
-import {User} from "../../../models/user";
+import { Component, OnInit } from '@angular/core';
+import { MatSnackBar, MatDialog} from "@angular/material";
+import { User } from "../../../models/user";
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { AddUserComponent } from '../../add-vendor/add-vendor.component';
@@ -10,16 +8,14 @@ import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { ViewUserComponent } from '../../view-user/view-user.component';
 import { SideNaveComponent } from '../../side-nave/side-nave.component';
 
-/**
- * @title Basic expansion panel
- */
-@Component({
-  selector: 'users-config',
-  templateUrl: 'users.component.html',
-  styleUrls: ['users.component.scss'],
-})
 
-export class UsersComponent implements OnInit {
+@Component({
+  selector: 'app-admins',
+  templateUrl: './admins.component.html',
+  styleUrls: ['./admins.component.scss']
+})
+export class AdminsComponent implements OnInit {
+
   loading = true;
   success = null;
   usersList = {
@@ -294,19 +290,5 @@ export class UsersComponent implements OnInit {
     return false;
   }
 
+
 }
-const EXPANSION_PANEL_ANIMATION_TIMING = '500ms cubic-bezier(0.4,0.0,0.2,1)';
-MatExpansionPanel['decorators'][0].args[0].animations = [
-  trigger('bodyExpansion', [
-    state('collapsed, void', style({ height: '0px', visibility: 'hidden' })),
-    state('expanded', style({ height: '*', visibility: 'visible' })),
-    transition('expanded <=> collapsed, void => collapsed',
-      animate(EXPANSION_PANEL_ANIMATION_TIMING)),
-  ])];
-
-const ELEMENT_DATA: User[] = [
-/*
-  {id:0,password:"",firstName:"Admin", username: 'Admin', lastName:'test',token:""},
-*/
-
-];
