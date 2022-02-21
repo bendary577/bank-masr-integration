@@ -133,22 +133,22 @@ export class SyncJobsconfigComponent implements OnInit {
         this.router.navigate([ "syncjobs/" + Constants.MENU_ITEMS_CONFIG_PAGE]);
     }
     else if (syncJobType.name == Constants.NEW_BOOKING_REPORT_SYNC) {
-      this.router.navigate([ "main/" + Constants.NEW_BOOKING_REPORT_CONFIG_PAGE]);
+      this.router.navigate([ Constants.SYNC_JOBS + "/" + Constants.NEW_BOOKING_REPORT_CONFIG_PAGE]);
     }
     else if (syncJobType.name == Constants.CANCEL_BOOKING_REPORT_SYNC) {
-      this.router.navigate([ "main/" + Constants.CANCEL_BOOKING_REPORT_CONFIG_PAGE]);
+      this.router.navigate([ Constants.SYNC_JOBS + "/"  + Constants.CANCEL_BOOKING_REPORT_CONFIG_PAGE]);
     }
     else if (syncJobType.name == Constants.OCCUPANCY_UPDATE_REPORT_SYNC) {
-      this.router.navigate([ "main/" + Constants.OCCUPANCY_UPDATE_REPORT_CONFIG_PAGE]);
+      this.router.navigate([ Constants.SYNC_JOBS + "/"  + Constants.OCCUPANCY_UPDATE_REPORT_CONFIG_PAGE]);
     }
     else if (syncJobType.name == Constants.EXPENSES_DETAILS_REPORT_SYNC) {
-      this.router.navigate([ "main/" + Constants.EXPENSES_DETAILS_REPORT_CONFIG_PAGE]);
+      this.router.navigate([ Constants.SYNC_JOBS + "/"  + Constants.EXPENSES_DETAILS_REPORT_CONFIG_PAGE]);
     }
     else if (syncJobType.name == Constants.POS_SALES_API_DAILY_SYNC) {
-      this.router.navigate([ "syncjobs/" + Constants.POS_SALES_API_DAILY_CONFIG_PAGE]);
+      this.router.navigate([ Constants.SYNC_JOBS + "/" + Constants.POS_SALES_API_DAILY_CONFIG_PAGE]);
     }
     else if (syncJobType.name == Constants.POS_SALES_API_MONTHLY_SYNC) {
-      this.router.navigate([ "syncjobs/" + Constants.POS_SALES_API_MONTHLY_CONFIG_PAGE]);
+      this.router.navigate([ Constants.SYNC_JOBS + "/" + Constants.POS_SALES_API_MONTHLY_CONFIG_PAGE]);
     }
 
     else{

@@ -4,7 +4,6 @@ import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
 
 import { SuppliersComponent } from '../components/suppliers/suppliers.component';
-import { SupplierDetailsComponent } from '../components/supplier-details/supplier-details.component';
 import { ConfigurationComponent } from '../components/setting/configuration/configuration.component';
 import { UsersComponent } from '../components/setting/users/users.component';
 import { AddUserComponent } from '../components/add-vendor/add-vendor.component';
@@ -50,7 +49,6 @@ import { OpiTransactionsComponent } from '../components/opi-transactions/opi-tra
 import { HotelOpiComponent } from '../components/hotel-opi/hotel-opi.component';
 import { CostOfGoodsComponent } from '../components/cost-of-goods/cost-of-goods.component';
 import { SimphonyDiscountMapingComponent } from '../components/simphony-discount-maping/simphony-discount-maping.component';
-import { ExpensesDetailsReportConfigComponent } from '../components/expenses-details-report-config/expenses-details-report-config.component';
 import { ExpensesDetailsReportComponent } from '../components/expenses-details-report/expenses-details-report.component';
 import { OperaBookingDashBoardComponent } from '../components/opera-booking-dash-board/opera-booking-dash-board.component';
 import { OperaReportMapTablesComponent } from '../components/setting/opera-report-map-tables/opera-report-map-tables.component';
@@ -61,9 +59,6 @@ import { ZealPaymentComponent } from '../components/zeal-payment/zeal-payment.co
 import { ZealPaymentConfigComponent } from '../components/zeal-payment-config/zeal-payment-config.component';
 import { ZealVoucherComponent } from '../components/zeal-voucher/zeal-voucher.component';
 import { PaymentVoucherConfigComponent } from '../components/payment-voucher-config/payment-voucher-config.component';
-import { OccupancyUpdateReportConfigComponent } from '../components/occupancy-update-report-config/occupancy-update-report-config.component';
-import { CancelBookingReportConfigComponent } from '../components/cancel-booking-report-config/cancel-booking-report-config.component';
-import { NewBookingReportConfigComponent } from '../components/new-booking-report-config/new-booking-report-config.component';
 import { OccupancyUpdateReportComponent } from '../components/occupancy-update-report/occupancy-update-report.component';
 import { CancelBookingReportComponent } from '../components/cancel-booking-report/cancel-booking-report.component';
 import { NewBookingReportComponent } from '../components/new-booking-report/new-booking-report.component';
@@ -109,7 +104,6 @@ import { TalabatMappingComponent } from '../components/talabat-mapping/talabat-m
     CostCenterAccountMappingComponent,
 
     SuppliersComponent,
-    SupplierDetailsComponent,
 
     PosSalesComponent,
     CreditNotesInforComponent,
@@ -141,10 +135,10 @@ import { TalabatMappingComponent } from '../components/talabat-mapping/talabat-m
     SyncExportedFilesComponent,
 
     ZealPaymentComponent,
-    ZealPaymentConfigComponent,
     ZealVoucherComponent,
-    ZealVoucherConfigComponent,
 
+    ZealPaymentConfigComponent,
+    ZealVoucherConfigComponent,
     PaymentVoucherConfigComponent,
 
     OperaPaymentConfigurationComponent,
@@ -164,11 +158,6 @@ import { TalabatMappingComponent } from '../components/talabat-mapping/talabat-m
     CancelBookingReportComponent,
     OccupancyUpdateReportComponent,
     ExpensesDetailsReportComponent,
-
-    NewBookingReportConfigComponent,
-    CancelBookingReportConfigComponent,
-    OccupancyUpdateReportConfigComponent,
-    ExpensesDetailsReportConfigComponent,
 
     OperaReportMapTablesComponent,
     OperaBookingDashBoardComponent,
