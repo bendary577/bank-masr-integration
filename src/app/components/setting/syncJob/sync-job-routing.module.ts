@@ -15,7 +15,6 @@ import { OccupancyUpdateReportConfigComponent } from '../../occupancy-update-rep
 import { PosSalesInforConfigurationComponent } from '../../pos-sales-infor-configuration/pos-sales-infor-configuration.component';
 import { SalesApiDailyConfigComponent } from '../../sales-api-daily-config/sales-api-daily-config.component';
 import { SalesApiMonthlyConfigComponent } from '../../sales-api-monthly-config/sales-api-monthly-config.component';
-import { SuppliersConfiguartionComponent } from '../../suppliers-configuartion/suppliers-configuartion.component';
 import { SuppliersInforConfigurationComponent } from '../../suppliers-infor-configuration/suppliers-infor-configuration.component';
 import { WastageInforConfigurationComponent } from '../../wastage-infor-configuration/wastage-infor-configuration.component';
 import { SyncJobsconfigComponent } from './syncJobsconfig.component';
@@ -23,7 +22,6 @@ import { SyncJobsconfigComponent } from './syncJobsconfig.component';
 const routes: Routes = [
   { path: '', component: SyncJobsconfigComponent, canActivate:[AuthGuardService] },
   { path: Constants.SUPPLIERS_SUN_CONFIG_PAGE, component: SuppliersInforConfigurationComponent  , canActivate:[AuthGuardService]},
-  { path: Constants.SUPPLIERS_CONFIG_PAGE, component: SuppliersConfiguartionComponent  , canActivate:[AuthGuardService]},
   { path: Constants.POS_SALES_INFOR_CONFIG_PAGE , component: PosSalesInforConfigurationComponent  , canActivate:[AuthGuardService]},
   { path: Constants.CREDIT_NOTE_INFOR_CONFIG_PAGE , component: CreditNotesInforConfigurationComponent  , canActivate:[AuthGuardService]},
   { path: Constants.APPROVED_INVOICES_SUN_CONFIG_PAGE, component: ApprovedInvoiceInforConfigurationComponent  , canActivate:[AuthGuardService]},

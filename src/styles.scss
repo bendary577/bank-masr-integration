@@ -150,11 +150,11 @@ span.italic {
 @import "./assets/scss/functions";
 
 /* === Icon fonts === */
-@import "~ti-icons/css/themify-icons.css";
+// @import "~ti-icons/css/themify-icons.css";
 @import "~@mdi/font/scss/materialdesignicons";
-@import "~font-awesome/scss/font-awesome";
-@import "~flag-icon-css/sass/flag-icon";
-@import "~simple-line-icons/scss/simple-line-icons";
+// @import "~font-awesome/scss/font-awesome";
+// @import "~flag-icon-css/sass/flag-icon";
+// @import "~simple-line-icons/scss/simple-line-icons";
 
 
 /* === Template mixins === */
@@ -176,7 +176,6 @@ span.italic {
 @import "./assets/scss/responsive";
 @import "./assets/scss/misc";
 @import "./assets/scss/utilities";
-// @import "./assets/scss/demo";
 @import "./assets/scss/spinner";
 @import "./assets/scss/syncs.scss";
 
@@ -196,17 +195,8 @@ span.italic {
 @import "./assets/scss/components/bootstrap-progress";
 @import "./assets/scss/components/bootstrap-alerts";
 @import "./assets/scss/components/dropdowns";
-// @import "./assets/scss/components/pagination";
 @import "./assets/scss/components/loaders/loaders";
-@import "./assets/scss/components/todo-list";
 
-// @import "./assets/scss/components/landing-screens/auth";
-
-
-/* === Plugin Overrides === */
-@import "./assets/scss/components/plugin-overrides/owl-carousel";
-@import "./assets/scss/components/plugin-overrides/select2";
-@import "./assets/scss/components/plugin-overrides/toast";
 
 /* === Layout === */
 @import "./assets/scss/layout";
