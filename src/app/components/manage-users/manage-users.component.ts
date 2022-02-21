@@ -487,6 +487,7 @@ export class ManageUsersComponent implements OnInit {
     if(JSON.parse(localStorage.getItem('account')).printReceiptConfig.previewReceipt){
       const dialogRef = this.dialog.open(ViewReceiptComponent, {
         width: '302.36px', // 80mm 
+        disableClose: true ,
         data: {
           guest: guest
          },
