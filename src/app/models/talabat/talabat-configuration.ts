@@ -3,4 +3,6 @@ export class TalabatConfiguration {
     branchMappings: any
     productsMappings: any
     discountMappings: any
+  customerMappings: any[];
+  addressMappings: any[];
 }

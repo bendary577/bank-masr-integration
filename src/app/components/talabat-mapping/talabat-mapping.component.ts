@@ -4,7 +4,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { GeneralSettings } from 'src/app/models/GeneralSettings';
 import { Response } from 'src/app/models/Response';
+import { AddressMapping } from 'src/app/models/talabat/address-mapping';
 import { BranchMapping } from 'src/app/models/talabat/branch-mapping';
+import { CustomerMapping } from 'src/app/models/talabat/customer-mapping';
 import { DiscountMapping } from 'src/app/models/talabat/discount-mapping';
 import { ProductMapping } from 'src/app/models/talabat/product-mapping';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -20,9 +22,13 @@ export class TalabatMappingComponent implements OnInit {
   newProductMapping = new ProductMapping();
   newBranchMapping = new BranchMapping();
   newDiscountMapping = new DiscountMapping();
+  newCustomerMapping = new CustomerMapping();
+  newAddressMapping = new AddressMapping();
 
-  branchMappingData = []
+  branchMappingData   = []
   productsMappingData = []
+  customerMappingData = []
+  addressMappingData  = []
   discountMappingData = []
 
   showLoading: boolean;
@@ -46,6 +52,8 @@ export class TalabatMappingComponent implements OnInit {
       this.generalSettings = res as GeneralSettings;
       this.branchMappingData = this.generalSettings.talabatConfiguration.branchMappings;
       this.productsMappingData = this.generalSettings.talabatConfiguration.productsMappings;
+      this.customerMappingData = this.generalSettings.talabatConfiguration.customerMappings;
+      this.addressMappingData = this.generalSettings.talabatConfiguration.addressMappings;
       this.discountMappingData = this.generalSettings.talabatConfiguration.discountMappings;
 
       this.spinner.hide();
@@ -98,8 +106,6 @@ export class TalabatMappingComponent implements OnInit {
     }
   }
 
-
-
   addDiscountMappingData(){
     if(this.newDiscountMapping.discountId &&  this.newDiscountMapping.discountRate ){
       this.discountMappingData.push(this.newDiscountMapping);
@@ -115,6 +121,35 @@ export class TalabatMappingComponent implements OnInit {
     }
   }
 
+  addCustomerMappingData(){
+    if(this.newCustomerMapping.name &&  this.newCustomerMapping.foodicsId && this.newCustomerMapping.talabatId ){
+      this.customerMappingData.push(this.newCustomerMapping);
+      this.newCustomerMapping = new CustomerMapping();
+
+      this.customerMappingData = [...this.customerMappingData];
+    }else {
+      this.snackBar.open('Please fill all type fields.', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+    }
+  }
+
+    addAddressMappingData(){
+    if(this.newAddressMapping.customerFoodicsId &&  this.newAddressMapping.foodicsId && this.newAddressMapping.talabatId ){
+      this.addressMappingData.push(this.newAddressMapping);
+      this.newAddressMapping = new AddressMapping();
+
+      this.addressMappingData = [...this.addressMappingData];
+    }else {
+      this.snackBar.open('Please fill all type fields.', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+    }
+  }
 
   onSaveClick(){
     this.spinner.show();
@@ -123,7 +158,9 @@ export class TalabatMappingComponent implements OnInit {
 
       this.generalSettings.talabatConfiguration.productsMappings = this.productsMappingData;
       this.generalSettings.talabatConfiguration.branchMappings = this.branchMappingData;
+      this.generalSettings.talabatConfiguration.customerMappings = this.customerMappingData;
       this.generalSettings.talabatConfiguration.discountMappings = this.discountMappingData;
+      this.generalSettings.talabatConfiguration.addressMappings = this.addressMappingData;
 
       console.log(this.generalSettings)
 
@@ -133,7 +170,7 @@ export class TalabatMappingComponent implements OnInit {
         const response = result as Response;
         this.authService.generalSettings = this.generalSettings;
         if (response.success) {
-          this.snackBar.open('Save simphony discount rates successfully.', null, {
+          this.snackBar.open('Integration data saved successfully.', null, {
             duration: 2000,
             horizontalPosition: 'center',
             panelClass:"my-snack-bar-success"
