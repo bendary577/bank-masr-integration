@@ -1,38 +1,15 @@
 <div class="header">
-    <!-- <span class="history" style="margin-right: 20px;"> See live orders your restaurants are receiving</span> -->
-
-    <mat-form-field appearance="outline" class="history-dropdown" style="left: 30px !important">
-        <mat-select class="form-controls" id="sync" placeholder="All Branches" [(ngModel)]="selectedBranch"
-            (ngModelChange)="getSyncJobData()">
-            <mat-option [value]="'HF_EG;644819'"> Holmes, Heliopolis - Heliopolis Square</mat-option>
-            <mat-option [value]="'HF_EG;510702'"> Holmes, Roushdy </mat-option>
-            <mat-option [value]="'HF_EG;510703'"> Holmes, San Stefano </mat-option>
-            <mat-option [value]="'HF_EG;625008'"> Holmes, Tagammoa 5 - Banks Center </mat-option>
-            <mat-option [value]="'HF_EG;512662'"> Holmes, Hy El-Gamaa</mat-option>
-            <mat-option [value]="'HF_EG;510706'"> Holmes, Marina 4 </mat-option>
-            <mat-option [value]="'HF_EG;514803'"> Holmes, Restaurants1 Mansoura </mat-option>
-
-        </mat-select>
-    </mat-form-field>
-
-    <button mat-flat-button class="filterButton" (click)="getTalabatOrders()">synchronization Talabat Orders</button>
-    <button mat-flat-button class="filterButton" (click)="sendTalabatOrders()">Send Talabat Order To Foodics</button>
-
-</div>
-
-<br>
-<div id="myProgress">
-    <mat-progress-bar mode="indeterminate" *ngIf="staticgetPosSalesLoading"></mat-progress-bar>
+    <button mat-flat-button class="filterButton" (click)="getAggregatorsProducts()">Sync Products</button>
 </div>
 
 <br>
 
-<div *ngIf="!orders.length">
+<div *ngIf="!products.length">
     <mat-card class="example-card">
-        <h2 class="cardHeader">No Orders</h2>
+        <h2 class="cardHeader">No Products</h2>
         <mat-card-content>
-            <mat-list-item *ngIf="!orders.length">
-                <span>There was no new data to fetch</span>
+            <mat-list-item *ngIf="!products.length">
+                <span>There was no products to fetch</span>
             </mat-list-item>
         </mat-card-content>
     </mat-card>
@@ -40,8 +17,8 @@
 <br>
 <div>
     <div>
-        <div class="main" *ngIf="orders.length">
-            <ngx-datatable class="material" [rows]="orders" [columnMode]="'force'" [headerHeight]="50"
+        <div class="main" *ngIf="products.length">
+            <ngx-datatable class="material" [rows]="products" [columnMode]="'force'" [headerHeight]="50"
                 [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
 
                 <ngx-datatable-column name="App Type" [width]="90">
@@ -49,7 +26,7 @@
                         Talabat
                     </ng-template>
                 </ngx-datatable-column>
-
+                <!-- 
                 <ngx-datatable-column name="Order ID">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         <a class="group-name user-link" (click)="openOrderDetails(row)">{{row.order_id}}</a>
@@ -72,7 +49,7 @@
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{row.order_timestamp | date: 'dd/MM/yyyy HH:mm:ss'}}
                     </ng-template>
-                </ngx-datatable-column>
+                </ngx-datatable-column> -->
             </ngx-datatable>
         </div>
     </div>

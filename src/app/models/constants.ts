@@ -470,5 +470,8 @@ export class Constants {
 
   static AGGREGATOR_INTEGRATOR  = "aggregatorIntegrator"
 
-  ///////////////////////////////////////////////
+  /////////////////////////////////////////////// Aggregator Statics /////////////////////////////////
+
+  static GET_AGGREGATOR_PRODUCTS =  environment.apiHost + "/aggregator/products";
+
 }
