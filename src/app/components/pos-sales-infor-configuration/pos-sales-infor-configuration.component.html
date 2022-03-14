@@ -208,8 +208,8 @@
                         <mat-select matInput id="GrossDiscountSales" name="GrossDiscountSales"
                             placeholder="Sync sales gross/gross less discount"
                             [(ngModel)]="syncJobType.configuration.salesConfiguration.grossDiscountSales">
-                            <mat-option value="Gross">Sales Amount After Discount</mat-option>
-                            <mat-option value="Gross Less Discount">Sales Amount Before Discount</mat-option>
+                            <mat-option value="Gross">Sales Amount Before Applying Discount</mat-option>
+                            <mat-option value="Gross Less Discount">Sales Amount After Applying Discount</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
