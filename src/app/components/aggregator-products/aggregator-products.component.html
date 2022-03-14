@@ -1,0 +1,57 @@
+<!-- <div class="header">
+    <button mat-flat-button class="filterButton" (click)="getAggregatorsProducts()">Sync Products</button>
+</div>
+
+<br>
+
+<div *ngIf="!products.length">
+    <mat-card class="example-card">
+        <h2 class="cardHeader">No Products</h2>
+        <mat-card-content>
+            <mat-list-item *ngIf="!products.length">
+                <span>There was no products to fetch</span>
+            </mat-list-item>
+        </mat-card-content>
+    </mat-card>
+</div>
+<br>
+<div>
+    <div>
+        <div class="main" *ngIf="products.length">
+            <ngx-datatable class="material" [rows]="products" [columnMode]="'force'" [headerHeight]="50"
+                [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [sortType]="'multi'">
+
+                <ngx-datatable-column name="App Type" [width]="90">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        Talabat
+                    </ng-template>
+                </ngx-datatable-column>
+                <!-- 
+                <ngx-datatable-column name="Order ID">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <a class="group-name user-link" (click)="openOrderDetails(row)">{{row.order_id}}</a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Restaurant">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.vendor_name}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Status">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.order_status}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Order Placed at" [width]="90">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.order_timestamp | date: 'dd/MM/yyyy HH:mm:ss'}}
+                    </ng-template>
+                </ngx-datatable-column> 
+            </ngx-datatable>
+        </div>
+    </div>
+    <ngx-spinner></ngx-spinner>
+</div> -->

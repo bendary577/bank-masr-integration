@@ -1,5 +1,114 @@
 <div class="config-style">
-    <h3 mat-dialog-title>Update Talabat Integration Configuartion</h3>
+    <h3 mat-dialog-title>Aggregator Integrator Configuration</h3>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Foodics Account
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput id="accountName" name="accountName" placeholder="Account Name"
+                    [(ngModel)]="aggregatorConfiguration.foodicsAccountData.accountName">
+            </mat-form-field>
+        </div>
+ 
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput id="loginEmail" name="loginEmail" placeholder="Login Email"
+                    [(ngModel)]="aggregatorConfiguration.foodicsAccountData.loginEmail">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput id="loginEmail" name="loginEmail" placeholder="Login Email"
+                    [(ngModel)]="aggregatorConfiguration.foodicsAccountData.accountNumber">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput id="loginEmail" name="loginEmail" placeholder="Login Email"
+                    [(ngModel)]="aggregatorConfiguration.foodicsAccountData.loginPassword">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput id="loginEmail" name="loginEmail" placeholder="Login Email"
+                    [(ngModel)]="aggregatorConfiguration.foodicsAccountData.clientId">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput id="loginEmail" name="loginEmail" placeholder="Login Email"
+                    [(ngModel)]="aggregatorConfiguration.foodicsAccountData.clientSecret">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput id="loginEmail" name="loginEmail" placeholder="Login Email"
+                    [(ngModel)]="aggregatorConfiguration.foodicsAccountData.token">
+            </mat-form-field>
+        </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Simphony Account
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput id="accountName" name="accountName" placeholder="Account Name"
+                    [(ngModel)]="aggregatorConfiguration.SimphonyAccount.accountName">
+            </mat-form-field>
+        </div>
+ 
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput id="port" name="port" placeholder="Port"
+                    [(ngModel)]="aggregatorConfiguration.SimphonyAccount.port">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput id="loginEmail" name="loginEmail" placeholder="Login Email"
+                    [(ngModel)]="aggregatorConfiguration.SimphonyAccount.ip">
+            </mat-form-field>
+        </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Foodics Account Data
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput id="accountName" name="accountName" placeholder="Account Name"
+                    [(ngModel)]="aggregatorConfiguration.SimphonyAccount.accountName">
+            </mat-form-field>
+        </div>
+ 
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput id="port" name="port" placeholder="Port"
+                    [(ngModel)]="aggregatorConfiguration.SimphonyAccount.port">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput id="loginEmail" name="loginEmail" placeholder="Login Email"
+                    [(ngModel)]="aggregatorConfiguration.SimphonyAccount.ip">
+            </mat-form-field>
+        </div>
+    </mat-expansion-panel>
+
     <mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>

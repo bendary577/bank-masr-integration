@@ -1,0 +1,15 @@
+@import "../../components/activities/activities.component.scss";
+
+::ng-deep .redNoMatch
+{
+  color:white;
+  background: #727272 !important;
+}
+
+
+
+.sync-body{
+  h3{
+  margin-bottom: 0px !important;
+  }
+}

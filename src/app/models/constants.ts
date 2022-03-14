@@ -468,6 +468,10 @@ export class Constants {
   static GET_TALABAT_ORDER_DETAILS =  environment.apiHost + "/talabat/order";
   static GET_TALABAT_BRANCH_ORDERS =  environment.apiHost + "/talabat/branch";
 
+  static AGGREGATOR_INTEGRATOR  = "aggregatorIntegrator"
 
-  ///////////////////////////////////////////////
+  /////////////////////////////////////////////// Aggregator Statics /////////////////////////////////
+
+  static GET_AGGREGATOR_PRODUCTS =  environment.apiHost + "/aggregator/products";
+
 }

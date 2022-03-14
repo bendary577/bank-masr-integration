@@ -78,13 +78,17 @@ import { AngularMaterialModule } from '../angular-material.module';
 import { BasicModule } from '../shared/basic.module';
 import { SharedModule } from '../shared/shared.module';
 import { UniqueVoucherComponent } from '../components/unique-voucher/unique-voucher.component';
-import { TalabatOrdersComponent } from '../components/talabat-orders/talabat-orders.component';
 import { QuillModule } from 'ngx-quill';
 import { SalesApiDailyComponent } from '../components/sales-api-daily/sales-api-daily.component';
 import { SalesApiMonthlyComponent } from '../components/sales-api-monthly/sales-api-monthly.component';
 import { AddOrderTypeComponent } from '../components/add-order-type/add-order-type.component';
 import { AddOrderTypeChannelComponent } from '../components/add-order-type-channel/add-order-type-channel.component';
 import { TalabatMappingComponent } from '../components/talabat-mapping/talabat-mapping.component';
+import { TalabatOrdersComponent } from '../components/talabat-orders/talabat-orders.component';
+import { AggregatorIntegratorComponent } from '../components/aggregator-integrator/aggregator-integrator.component';
+import { AggregatorOrdersComponent } from '../components/aggregator-orders/aggregator-orders.component';
+import { AggregatorProductsComponent } from '../components/aggregator-products/aggregator-products.component';
+import { MatTabsModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -168,6 +172,9 @@ import { TalabatMappingComponent } from '../components/talabat-mapping/talabat-m
     SupportComponent,
     PosMachineMappingComponent,
     TalabatOrdersComponent,
+    AggregatorIntegratorComponent,
+    AggregatorOrdersComponent,
+    AggregatorProductsComponent,
     TalabatMappingComponent,
     SimphonyPaymentComponent,
     SimphonyCheckComponent,
@@ -175,12 +182,12 @@ import { TalabatMappingComponent } from '../components/talabat-mapping/talabat-m
     ExtendExpiryDateComponent,
     ViewInvokerComponent,
     UniqueVoucherComponent,
-    TalabatOrdersComponent,
     SalesApiDailyComponent,
     SalesApiMonthlyComponent
   ],
   imports: [
     MainRoutingModule,
+    MatTabsModule,
 
     BasicModule,
     SharedModule,

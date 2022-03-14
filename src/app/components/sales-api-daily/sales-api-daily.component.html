@@ -4,17 +4,11 @@
     <div class="header">
         <span class="history"> Sync Job History </span>
 
-        <!-- <select class="custom-select" (change)="getSyncJobData()" [(ngModel)]="selectedJob">
-        <option [ngValue]="job" *ngFor="let job of jobs">
-            {{job.creationDate | date:'dd-MM-yyyy H:MM:SS'}} - {{job.status}}</option>
-    </select> -->
-
         <mat-form-field appearance="outline" class="history-dropdown">
             <mat-select required class="form-controls" id="sync" placeholder="Sync Job"
             (ngModelChange)="getSyncJobData()" [(ngModel)]="selectedJob">
                 <mat-option [value]="job" *ngFor="let job of jobs">{{job.creationDate | date:'dd-MM-yyyy H:MM:SS'}} -
                     {{job.status}}
-                <!--    <p *ngIf="job.rowsFetched == 0">- No new data fetched.</p> -->
                 </mat-option>
             </mat-select>
         </mat-form-field>

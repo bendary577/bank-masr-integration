@@ -31,18 +31,15 @@ import { ViewReceiptComponent } from '../view-receipt/view-receipt.component';
     AddAppUserAccompiedComponent,
     ManageGroupsComponent,
     UserProfileComponent,
-
     ViewReceiptComponent,
 
   ],
   imports: [
     LoyaltyRoutingModule,
-
     BasicModule,
     SharedModule,
     ApplicationModule,
     AngularMaterialModule,
-
     NgxPrintModule
   ],
   exports:[

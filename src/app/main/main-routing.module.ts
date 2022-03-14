@@ -52,11 +52,12 @@ import { VoucherListComponent } from '../components/voucher-list/voucher-list.co
 import { RewardPointsComponent } from '../components/reward-points/reward-points.component';
 import { VoucherTransactionsComponent } from '../components/voucher-transactions/voucher-transactions.component';
 import { UniqueVoucherComponent } from '../components/unique-voucher/unique-voucher.component';
-import { TalabatOrdersComponent } from '../components/talabat-orders/talabat-orders.component';
 import { SalesApiDailyComponent } from '../components/sales-api-daily/sales-api-daily.component';
 import { SalesApiMonthlyComponent } from '../components/sales-api-monthly/sales-api-monthly.component';
 import { TalabatMappingComponent } from '../components/talabat-mapping/talabat-mapping.component';
 import { ManageSubGroupComponent } from '../components/manage-sub-group/manage-sub-group.component';
+import { TalabatOrdersComponent } from '../components/talabat-orders/talabat-orders.component';
+import { AggregatorIntegratorComponent } from '../components/aggregator-integrator/aggregator-integrator.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -155,6 +156,9 @@ const routes: Routes = [
   { path : Constants.SUPPORT , component: SupportComponent, canActivate:[AuthGuardService]},
 
   { path : Constants.TALABAT_ORDERS , component: TalabatOrdersComponent, canActivate:[AuthGuardService]},
+
+  { path : Constants.AGGREGATOR_INTEGRATOR , component: AggregatorIntegratorComponent, canActivate:[AuthGuardService]},
+
 ];
 
 @NgModule({
