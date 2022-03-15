@@ -80,6 +80,15 @@
                                     <mat-option [value]=code *ngFor="let code of analysisCodes">{{code}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
+
+                            <mat-form-field class="example-full-width">
+                                <mat-select matInput id="branchAnalysisCode" name="branchAnalysisCode"
+                                    placeholder="Location Analysis Code"
+                                    [(ngModel)]="syncJobType.configuration.branchAnalysisCode">
+                                    <mat-option [value]=code *ngFor="let code of analysisCodes">{{code}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
                             <mat-form-field class="example-full-width">
                                 <mat-select matInput id="tenderAnalysisCode" name="tenderAnalysisCode"
                                     placeholder="Tender Analysis Code"

@@ -18,20 +18,6 @@
                     [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true"
                     [scrollbarH]="true" [sortType]="'multi'">
 
-                    <!-- <ngx-datatable class="material" [loadingIndicator]="locationsList.showLoading" [messages]="locationsList.messages" 
-                    [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-                     [rows]="locationsList.locationsData" [selected]="locationsList.selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" 
-                    [displayCheck]="displayCheck" (select)='onSelect($event)' [scrollbarH]="true">
-                
-                        <ngx-datatable-column [width]="100" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true">
-                            <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
-                                <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
-                            </ng-template>
-                            <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
-                                <input class="regular-checkbox" type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
-                            </ng-template>
-                        </ngx-datatable-column> -->
-
 
                     <ngx-datatable-column name="Location">
                         <ng-template let-row="row" ngx-datatable-cell-template>
@@ -44,6 +30,12 @@
                     <ngx-datatable-column name="Account Code">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                             <input matInput placeholder="Account Code" [(ngModel)]="row.accountCode">
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Branch Code">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <input matInput placeholder="Branch Code" [(ngModel)]="row.branchCode">
                         </ng-template>
                     </ngx-datatable-column>
 
