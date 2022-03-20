@@ -167,6 +167,10 @@
       <span style="color: orange;"> API Configuration </span>
       <div>
         <mat-form-field>
+          <input matInput placeholder="URL" [(ngModel)]="generalSettings.aggregatorConfiguration.foodicsAccountData.url" />
+        </mat-form-field>
+
+        <mat-form-field>
           <input matInput placeholder="Client ID" [(ngModel)]="generalSettings.aggregatorConfiguration.foodicsAccountData.clientId" />
         </mat-form-field>
   

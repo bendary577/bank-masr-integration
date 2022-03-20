@@ -58,6 +58,7 @@ import { TalabatMappingComponent } from '../components/talabat-mapping/talabat-m
 import { ManageSubGroupComponent } from '../components/manage-sub-group/manage-sub-group.component';
 import { TalabatOrdersComponent } from '../components/talabat-orders/talabat-orders.component';
 import { AggregatorIntegratorComponent } from '../components/aggregator-integrator/aggregator-integrator.component';
+import { AggregatorsEndPoints } from '../models/deliveryAggregator/aggregatorsEndPoints';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -155,9 +156,9 @@ const routes: Routes = [
 
   { path : Constants.SUPPORT , component: SupportComponent, canActivate:[AuthGuardService]},
 
-  { path : Constants.TALABAT_ORDERS , component: TalabatOrdersComponent, canActivate:[AuthGuardService]},
+  { path : AggregatorsEndPoints.TALABAT_ORDERS , component: TalabatOrdersComponent, canActivate:[AuthGuardService]},
 
-  { path : Constants.AGGREGATOR_INTEGRATOR , component: AggregatorIntegratorComponent, canActivate:[AuthGuardService]},
+  { path : AggregatorsEndPoints.AGGREGATOR_INTEGRATOR , component: AggregatorIntegratorComponent, canActivate:[AuthGuardService]},
 
 ];
 

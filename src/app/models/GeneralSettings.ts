@@ -10,8 +10,8 @@ import { RateCode } from './operaReports/RateCode'
 import { SimphonyDiscount } from './loyalty/SimphonyDiscount'
 import { PosMachineMap } from './operaPayment/posMachineMap'
 import { BirthdayGift } from './loyalty/BirthdayGift'
-import { TalabatConfiguration } from './deliveryAggregatory/talabat-configuration'
-import { AggregatorConfiguration } from './deliveryAggregatory/aggregatorConfiguration'
+import { TalabatConfiguration } from './deliveryAggregator/talabat-configuration'
+import { AggregatorConfiguration } from './deliveryAggregator/aggregatorConfiguration'
 
 export class GeneralSettings {
   id: string
