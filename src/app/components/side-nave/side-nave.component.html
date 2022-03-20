@@ -157,13 +157,26 @@
           <li class="nav-item" *ngIf="hasFeature('redeem_voucher')">
             <a class="nav-link" routerLink="main/redeemVoucher" routerLinkActive="active" translate>Vouchers Generator</a>
          </li>
-         <li class="nav-item" *ngIf="hasFeature('talabat-orders')">
-          <!-- <a class="nav-link" routerLink="/main/talabatOrders" routerLinkActive="active" translate>Aggregator Integrator</a> -->
-          <a class="nav-link" routerLink="/main/aggregatorIntegrator" routerLinkActive="active" translate>Aggregator Integrator</a>
-
-       </li>
           <!-- <li class="nav-item" *ngFor="let application of applications"> <a class="nav-link"
               routerLink={{application.endPoint}} routerLinkActive="active" translate>{{application.name}}</a></li> -->
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-item menu-items" [ngClass]="{ 'active' : aggregatorCollapsed }" *ngIf="hasFeature('delivery_aggregators')">
+      <a class="nav-link" (click)=" titleOpened('aggregatorCollapsed');" [attr.aria-expanded]="uiBasicCollapsed"
+        aria-controls="ui-basic">
+        <span class="menu-icon">
+          <i class="mdi mdi-arrange-send-backward"></i>
+        </span>
+        <span class="menu-title" translate>Delivery Aggregator</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="ui-basic" [ngbCollapse]="!aggregatorCollapsed">
+        <ul class="nav flex-column sub-menu">
+         <li class="nav-item">
+          <a class="nav-link" routerLink="/main/aggregatorIntegrator" routerLinkActive="active" translate>Talabat Integrator</a>
+        </li>
         </ul>
       </div>
     </li>
@@ -228,9 +241,12 @@
           <li class="nav-item" *ngIf="hasRole('see_locationMapping')"><a class="nav-link" routerLink="/main/costCenterLocationMapping">Location Mapping</a> </li>
           <li class="nav-item" *ngIf="hasRole('see_simphony_discountmapping')"><a class="nav-link" routerLink="/main/simphonyDiscountMaping">Discount Mapping</a> </li>
           <li class="nav-item" *ngIf="hasRole('reward_points_settings')"><a class="nav-link" routerLink="/main/rewardPointsSettings">Points Settings</a>
+          
+          <!-- Delivery Aggregators -->
+          <li class="nav-item" *ngIf="hasFeature('delivery_aggregators')"><a class="nav-link" routerLink="/main/talabatMapping">Aggregators Mapping</a> </li>
+          
           <li class="nav-item" *ngIf="hasRole('see_general_setting')"><a class="nav-link" routerLink="/main/setting">General Settings</a></li>
           <li class="nav-item" *ngIf="hasRole('see_pos_mapping')"><a class="nav-link" routerLink="/main/posMachinMapping">PAX Mapping</a> </li>
-          <li class="nav-item" *ngIf="hasFeature('talabat-orders')"><a class="nav-link" routerLink="/main/talabatMapping">Talabat Mapping</a> </li>
           <li class="nav-item" *ngIf="hasRole('manage_invokers')"><a class="nav-link" routerLink="/main/webServiceInvokers">Manage Invokers</a></li>
         </ul>
       </div>
@@ -239,7 +255,7 @@
     <li class="nav-item nav-category" *ngIf="hasRole('see_user_pages')">
       <span class="nav-link" translate>More</span>
     </li>
-    <li class="nav-item menu-items" [ngClass]="{ 'active' : userPagesCollapsed }" *ngIf="hasRole('see_user_pages')">
+    <li class="nav-item menu-items" [ngClass]="{ 'active' : userPagesCollapsed }" >
       <a class="nav-link" (click)="titleOpened('userPagesCollapsed');" [attr.aria-expanded]="userPagesCollapsed"
         aria-controls="auth">
         <span class="menu-icon">

@@ -141,6 +141,45 @@
       </div>
 
     </mat-expansion-panel>
+
+    <!-- Delivery Aggregators -->
+    <mat-expansion-panel *ngIf="hasFeature('delivery_aggregators') && generalSettings">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Foodics Configuration
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Email" [(ngModel)]="generalSettings.aggregatorConfiguration.foodicsAccountData.loginEmail" />
+        </mat-form-field>
+  
+        <mat-form-field>
+          <input matInput placeholder="Account Number" [(ngModel)]="generalSettings.aggregatorConfiguration.foodicsAccountData.accountNumber" />
+        </mat-form-field>
+  
+        <mat-form-field>
+          <input matInput placeholder="Password" [(ngModel)]="generalSettings.aggregatorConfiguration.foodicsAccountData.loginPassword" />
+        </mat-form-field>
+      </div>
+
+      <span style="color: orange;"> API Configuration </span>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Client ID" [(ngModel)]="generalSettings.aggregatorConfiguration.foodicsAccountData.clientId" />
+        </mat-form-field>
+  
+        <mat-form-field>
+          <input matInput placeholder="Client Secret" [(ngModel)]="generalSettings.aggregatorConfiguration.foodicsAccountData.clientSecret" />
+        </mat-form-field>
+  
+        <mat-form-field>
+          <input matInput placeholder="Token" [(ngModel)]="generalSettings.aggregatorConfiguration.foodicsAccountData.token" />
+        </mat-form-field>
+      </div>
+
+    </mat-expansion-panel>
   </div>
   <ngx-spinner></ngx-spinner>
 </div>

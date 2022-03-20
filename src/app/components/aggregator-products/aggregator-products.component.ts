@@ -5,11 +5,11 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { GeneralSettings } from 'src/app/models/GeneralSettings';
 import { Response } from 'src/app/models/Response';
-import { AddressMapping } from 'src/app/models/talabat/address-mapping';
-import { BranchMapping } from 'src/app/models/talabat/branch-mapping';
-import { CustomerMapping } from 'src/app/models/talabat/customer-mapping';
-import { DiscountMapping } from 'src/app/models/talabat/discount-mapping';
-import { ProductMapping } from 'src/app/models/talabat/product-mapping';
+import { AddressMapping } from 'src/app/models/deliveryAggregatory/address-mapping';
+import { BranchMapping } from 'src/app/models/deliveryAggregatory/branch-mapping';
+import { CustomerMapping } from 'src/app/models/deliveryAggregatory/customer-mapping';
+import { DiscountMapping } from 'src/app/models/deliveryAggregatory/discount-mapping';
+import { ProductMapping } from 'src/app/models/deliveryAggregatory/product-mapping';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 

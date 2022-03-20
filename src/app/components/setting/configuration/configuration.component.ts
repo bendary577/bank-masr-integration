@@ -8,6 +8,10 @@ import { AccountService } from 'src/app/services/account/account.service'
 import { AddAccountComponent } from '../../add-account/add-account.component'
 import { SideNaveComponent } from '../../side-nave/side-nave.component'
 import { AccountEmailConfig } from 'src/app/models/AccountEmailConfig'
+import { GeneralSettings } from 'src/app/models/GeneralSettings'
+import { AuthService } from 'src/app/services/auth/auth.service'
+import { ErrorMessages } from 'src/app/models/ErrorMessages'
+import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service'
 
 /**
  * @title Basic expansion panel
@@ -27,6 +31,8 @@ export class ConfigurationComponent implements OnInit {
   addRole = false
   hideAuthenticationBtn = false
 
+  generalSettings: GeneralSettings
+
   // Email Settings
   editorStyle = {
     height: '200px'
@@ -39,10 +45,42 @@ export class ConfigurationComponent implements OnInit {
     public accountService: AccountService,
     public dialog: MatDialog,
     private sideNav: SideNaveComponent,
+    private authService: AuthService,
+    private generalSettingsService: GeneralSettingsService,
   ) {}
 
   ngOnInit() {
-    this.getAccount()
+    this.getAccount();
+    this.getGeneralSettings();
+  }
+
+  getGeneralSettings(){
+    if(this.authService.generalSettings == null || this.authService.generalSettings == undefined){
+      this.generalSettingsService
+      .getGeneralSettings()
+      .then((res) => {
+        this.authService.generalSettings = res as GeneralSettings
+        this.generalSettings = this.authService.generalSettings;
+      })
+      .catch((err) => {
+        let message = ''
+        if (err.error) {
+          message = err.error
+        } else if (err.message) {
+          message = err.message
+        } else {
+          message = ErrorMessages.FAILED_TO_GET_CONFIG
+        }
+  
+        this.snackBar.open(message, null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass: 'my-snack-bar-fail',
+        })
+      })
+    }else{
+      this.generalSettings = this.authService.generalSettings;
+    }
   }
 
   getAccount() {
@@ -199,6 +237,10 @@ export class ConfigurationComponent implements OnInit {
 
   hasRole(role): Boolean {
     return this.sideNav.hasRole(role)
+  }
+
+  hasFeature(reference) {
+    return this.sideNav.hasFeature(reference)
   }
 }
 const EXPANSION_PANEL_ANIMATION_TIMING = '500ms cubic-bezier(0.4,0.0,0.2,1)'

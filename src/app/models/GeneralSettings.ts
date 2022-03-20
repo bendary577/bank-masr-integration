@@ -10,7 +10,8 @@ import { RateCode } from './operaReports/RateCode'
 import { SimphonyDiscount } from './loyalty/SimphonyDiscount'
 import { PosMachineMap } from './operaPayment/posMachineMap'
 import { BirthdayGift } from './loyalty/BirthdayGift'
-import { TalabatConfiguration } from './talabat/talabat-configuration'
+import { TalabatConfiguration } from './deliveryAggregatory/talabat-configuration'
+import { AggregatorConfiguration } from './deliveryAggregatory/aggregatorConfiguration'
 
 export class GeneralSettings {
   id: string
@@ -39,12 +40,14 @@ export class GeneralSettings {
   expenseTypes: Array<BookingType> | any
 
   rateCodes: Array<RateCode> | any
-  // ==> END of OPERA Vribles
 
   // ==> Simphony Variables
   discountRates: Array<SimphonyDiscount> | any
-  // ==> END of Simphony Variables
 
+  // ==> Delivery Aggregators
+  aggregatorConfiguration: AggregatorConfiguration
+
+  // ==> Reward Points
   pointReward: number
   pointsRedemption: number
   birthdayGift: BirthdayGift

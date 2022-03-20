@@ -46,6 +46,7 @@ export class SideNaveComponent implements OnDestroy, OnInit {
   public uiBasicCollapsed = true
   public repBasicCollapsed = false
   public appBasicCollapsed = false
+  public aggregatorCollapsed = false
   public opeBasicCollapsed = false
   public tipPagesCollapsed = true
   public setBasicCollapsed = false
@@ -344,6 +345,7 @@ export class SideNaveComponent implements OnDestroy, OnInit {
       this.repBasicCollapsed = false
       this.appBasicCollapsed = false
       this.opeBasicCollapsed = false
+      this.aggregatorCollapsed = false
       this.userPagesCollapsed = false
       this.setBasicCollapsed = false
     } else if (title == 'repBasicCollapsed') {
@@ -351,6 +353,7 @@ export class SideNaveComponent implements OnDestroy, OnInit {
       this.uiBasicCollapsed = false
       this.appBasicCollapsed = false
       this.opeBasicCollapsed = false
+      this.aggregatorCollapsed = false
       this.userPagesCollapsed = false
       this.setBasicCollapsed = false
     } else if (title == 'appBasicCollapsed') {
@@ -358,6 +361,7 @@ export class SideNaveComponent implements OnDestroy, OnInit {
       this.uiBasicCollapsed = false
       this.repBasicCollapsed = false
       this.opeBasicCollapsed = false
+      this.aggregatorCollapsed = false
       this.userPagesCollapsed = false
       this.setBasicCollapsed = false
     } else if (title == 'opeBasicCollapsed') {
@@ -365,6 +369,7 @@ export class SideNaveComponent implements OnDestroy, OnInit {
       this.uiBasicCollapsed = false
       this.repBasicCollapsed = false
       this.appBasicCollapsed = false
+      this.aggregatorCollapsed = false
       this.userPagesCollapsed = false
       this.setBasicCollapsed = false
     } else if (title == 'userPagesCollapsed') {
@@ -372,10 +377,20 @@ export class SideNaveComponent implements OnDestroy, OnInit {
       this.uiBasicCollapsed = false
       this.repBasicCollapsed = false
       this.appBasicCollapsed = false
+      this.aggregatorCollapsed = false
       this.opeBasicCollapsed = false
       this.setBasicCollapsed = false
     } else if (title == 'setBasicCollapsed') {
       this.setBasicCollapsed = !this.setBasicCollapsed
+      this.uiBasicCollapsed = false
+      this.repBasicCollapsed = false
+      this.appBasicCollapsed = false
+      this.aggregatorCollapsed = false
+      this.opeBasicCollapsed = false
+      this.userPagesCollapsed = false
+    } else if (title == 'aggregatorCollapsed') {
+      this.aggregatorCollapsed = !this.aggregatorCollapsed
+      this.setBasicCollapsed = false
       this.uiBasicCollapsed = false
       this.repBasicCollapsed = false
       this.appBasicCollapsed = false
