@@ -78,9 +78,11 @@ export class UserProfileComponent implements OnInit {
       this.calculateParams(this.user)
       this.group = this.user['group']
       this.simphonyDiscount = this.group['simphonyDiscount']
-      this.walletHistoryList.walletHistoryData = this.user['wallet'][
-        'walletHistory'
-      ]
+      if(this.user['wallet'] != null){
+        this.walletHistoryList.walletHistoryData = this.user['wallet'][
+          'walletHistory'
+        ]
+      }
     } else {
       this.getApplicationUser()
     }
@@ -120,9 +122,12 @@ export class UserProfileComponent implements OnInit {
         this.calculateParams(this.user)
         this.group = this.user['group']
         this.simphonyDiscount = this.group['simphonyDiscount']
-        this.walletHistoryList.walletHistoryData = this.user['wallet'][
-          'walletHistory'
-        ]
+        if(this.user['wallet'] != null){
+          this.walletHistoryList.walletHistoryData = this.user['wallet'][
+            'walletHistory'
+          ]
+        }
+
       })
       .catch((err) => {
         let message = ''
@@ -143,13 +148,15 @@ export class UserProfileComponent implements OnInit {
 
   calculateParams(user) {
     this.credit = 0
-    let balance = user.wallet.balance
-    for (let i = 0; i < balance.length; i++) {
-      this.credit = this.credit + balance[i]['amount']
-      let revenueCenters = balance[i].revenueCenters
-      for (let j = 0; j < revenueCenters.length; j++) {
-        if (!this.checkExistance(revenueCenters[j])) {
-          this.revenueCenters.push(revenueCenters[j])
+    if(user.wallet != null){
+      let balance = user.wallet.balance
+      for (let i = 0; i < balance.length; i++) {
+        this.credit = this.credit + balance[i]['amount']
+        let revenueCenters = balance[i].revenueCenters
+        for (let j = 0; j < revenueCenters.length; j++) {
+          if (!this.checkExistance(revenueCenters[j])) {
+            this.revenueCenters.push(revenueCenters[j])
+          }
         }
       }
     }

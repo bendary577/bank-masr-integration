@@ -59,6 +59,7 @@ import { ManageSubGroupComponent } from '../components/manage-sub-group/manage-s
 import { TalabatOrdersComponent } from '../components/talabat-orders/talabat-orders.component';
 import { AggregatorIntegratorComponent } from '../components/aggregator-integrator/aggregator-integrator.component';
 import { AggregatorsEndPoints } from '../models/deliveryAggregator/aggregatorsEndPoints';
+import { RewardPointsSettingsComponent } from '../components/setting/reward-points-settings/reward-points-settings.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -75,7 +76,7 @@ const routes: Routes = [
   { path: Constants.SIMPHONY_DISCOUNT_MAP_TABLE, component: SimphonyDiscountMapingComponent ,canActivate:[AuthGuardService]},
   { path: Constants.POS_MACHINE_MAP_TABLE, component: PosMachineMappingComponent ,canActivate:[AuthGuardService]},
   { path: Constants.TALABAT_MAPPING_PAGE, component: TalabatMappingComponent ,canActivate:[AuthGuardService]},
-  { path: Constants.REWORD_PORINTS_SETTINGS, component: TalabatMappingComponent ,canActivate:[AuthGuardService]},
+  { path: Constants.REWORD_PORINTS_SETTINGS, component: RewardPointsSettingsComponent ,canActivate:[AuthGuardService]},
   { path: Constants.WEB_INVOKERS_PAGE, component: WebServiceInvokerConfigurationComponent ,canActivate:[AuthGuardService]},
 
   // OPERA Views

@@ -636,9 +636,11 @@ export class ManageUsersComponent implements OnInit {
 
   calculateParams(user): Number {
     let credit = 0
-    let balance = user.wallet.balance
-    for (let i = 0; i < balance.length; i++) {
-      credit = credit + balance[i]['amount']
+    if(user.wallet != null){
+      let balance = user.wallet.balance
+      for (let i = 0; i < balance.length; i++) {
+        credit = credit + balance[i]['amount']
+      }
     }
     return credit
   }

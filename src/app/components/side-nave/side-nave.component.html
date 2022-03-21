@@ -148,7 +148,7 @@
           <li class="nav-item" *ngIf="hasFeature('loyalty')">
              <a class="nav-link" routerLink="/loyalty" routerLinkActive="active" translate>Loyalty</a>
           </li>
-          <li class="nav-item" *ngIf="hasFeature('entry_system') && !hasFeature('loyalty')">
+          <li class="nav-item" *ngIf="hasFeature('entry_system')">
              <a class="nav-link" routerLink="/entrySystem" routerLinkActive="active" translate>Entry System</a>
           </li>
           <li class="nav-item" *ngIf="hasFeature('reward_points')">
@@ -169,7 +169,7 @@
         <span class="menu-icon">
           <i class="mdi mdi-arrange-send-backward"></i>
         </span>
-        <span class="menu-title" translate>Delivery Aggregator</span>
+        <span class="menu-title" translate>Aggregators</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="ui-basic" [ngbCollapse]="!aggregatorCollapsed">
