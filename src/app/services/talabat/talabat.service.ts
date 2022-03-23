@@ -11,6 +11,12 @@ export class TalabatService {
 
   constructor(private http: HttpClient) { }
 
+  getStoreOrders() {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get(AggregatorsEndPoints.GET_STORED_ORDERS,
+       { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
   getTalabatOrders() {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(AggregatorsEndPoints.GET_TALABAT_ORDERS,

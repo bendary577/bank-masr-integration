@@ -15,7 +15,7 @@
         </mat-select>
     </mat-form-field>
 
-    <button mat-flat-button class="filterButton" (click)="getTalabatOrders()">Synchronization Orders</button>
+    <button mat-flat-button class="filterButton" (click)="getTalabatOrders()">synchronize Orders</button>
     <button mat-flat-button class="filterButton" (click)="sendTalabatOrders()">Send Order</button>
 
 </div>
@@ -52,25 +52,25 @@
 
                 <ngx-datatable-column name="Order ID">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        <a class="group-name user-link" (click)="openOrderDetails(row)">{{row.order_id}}</a>
+                        <a class="group-name user-link" (click)="openOrderDetails(row)">{{row.talabatAdminOrder.externalId}}</a>
                     </ng-template>
                 </ngx-datatable-column>
 
                 <ngx-datatable-column name="Restaurant">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.vendor_name}}
+                        {{row.talabatAdminOrder.vendorName}}
                     </ng-template>
                 </ngx-datatable-column>
 
                 <ngx-datatable-column name="Status">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.order_status}}
+                        {{row.talabatAdminOrder.state}}
                     </ng-template>
                 </ngx-datatable-column>
 
                 <ngx-datatable-column name="Order Placed at" [width]="90">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{row.order_timestamp | date: 'dd/MM/yyyy HH:mm:ss'}}
+                        {{row.talabatAdminOrder.timestamp | date: 'dd/MM/yyyy HH:mm:ss'}}
                     </ng-template>
                 </ngx-datatable-column>
             </ngx-datatable>

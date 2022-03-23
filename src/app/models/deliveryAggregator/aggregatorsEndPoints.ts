@@ -7,6 +7,9 @@ export class AggregatorsEndPoints {
     static AGGREGATOR_INTEGRATOR  = "aggregatorIntegrator"
 
     // End Points
+    // Orders
+    static GET_STORED_ORDERS =  environment.apiHost + "/aggregator/storedOrders";
+
     // Talabat
     static GET_TALABAT_ORDERS =  environment.apiHost + "/talabat";
     static GET_TALABAT_ORDER_DETAILS =  environment.apiHost + "/talabat/order";

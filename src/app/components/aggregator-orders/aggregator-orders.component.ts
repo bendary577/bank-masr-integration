@@ -31,7 +31,8 @@ export class AggregatorOrdersComponent implements OnInit {
     ,private excelService: ExcelService, private sidNav: SideNaveComponent, private csvService: CsvService) { }
 
   ngOnInit() {
-    this.getTalabatOrders();
+    this.getStoredOrders();
+    // this.getTalabatOrders();
     // this.state = localStorage.getItem('staticGetTalabatOrdersLoading');
     // if (this.state == "true") {
     //   this.staticGetTalabatOrdersLoading = true;
@@ -47,6 +48,24 @@ export class AggregatorOrdersComponent implements OnInit {
 
   get staticgetPosSalesLoading() {
     return this.state;
+  }
+
+  getStoredOrders() {
+    this.spinner.show();
+    this.talabatService.getStoreOrders().toPromise().then((res: any) => {
+      this.spinner.hide();
+      this.orders = res["data"];
+   
+      this.loading = false;
+    }).catch(err => {
+      this.spinner.hide();
+      this.loading = false;
+      this.snackBar.open(err.message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+    });
   }
 
   
@@ -81,7 +100,7 @@ export class AggregatorOrdersComponent implements OnInit {
     this.talabatService.sendTalabatOrders().toPromise().then((res: any) => {
       this.spinner.hide();
       this.orders = res["data"]["orders"];
-      console.log(this.orders)
+      
       this.loading = false;
       if (res.status) {
         this.snackBar.open(res.message, null, {
