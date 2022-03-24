@@ -58,6 +58,7 @@ export class UserProfileComponent implements OnInit {
     showLoading: false,
     inputSearch: '' as string,
     walletHistoryData: [] as WalletHistory[],
+    showCashandEmployee : false as boolean
   }
 
   constructor(
@@ -82,6 +83,7 @@ export class UserProfileComponent implements OnInit {
         this.walletHistoryList.walletHistoryData = this.user['wallet'][
           'walletHistory'
         ]
+        //check if cach and employee are to be shown
       }
     } else {
       this.getApplicationUser()
@@ -549,4 +551,9 @@ export class UserProfileComponent implements OnInit {
     var isFeature =  this.sideNav.hasFeature(reference)
     return isFeature;
   }
+  
+  undoWalletAction(){
+    alert("hamada")
+  }
+  
 }
