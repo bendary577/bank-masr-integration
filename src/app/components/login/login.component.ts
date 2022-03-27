@@ -58,6 +58,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log("%%%%%%%%%%%%%%%%%%%%%%%%%% login submit");
     this.submitted = true;
     this.isValid();
   }
@@ -98,6 +99,7 @@ export class LoginComponent implements OnInit {
   }
 
   getRoles() {
+    console.log("%%%%%%%%%%%%%%%%%%%%%%%%%% login roles");
     this.accountService
       .getRoles("asfas", true)
       .then((res: any) => {
@@ -124,6 +126,7 @@ export class LoginComponent implements OnInit {
   }
 
   saveAccountERD() {
+    console.log("%%%%%%%%%%%%%%%%%%%%%%%%%% login erd");
     this.accountService
       .getAccount()
       .toPromise()

@@ -5,7 +5,6 @@ import { LoginComponent } from "./components/login/login.component";
 import { ConfigurationComponent } from "./components/setting/configuration/configuration.component";
 import { Constants } from "./models/constants";
 import { ForgetPasswordMailComponent } from "./components/forget-password-mail/forget-password-mail.component";
-import { ForgetPasswordUpdateComponent } from "./components/forget-password-update/forget-password-update.component";
 
 const routes: Routes = [
   { path: "", redirectTo: Constants.LOGIN_PAGE, pathMatch: "full" },
@@ -13,15 +12,11 @@ const routes: Routes = [
     path: Constants.SETTING,
     component: ConfigurationComponent,
   },
+  { path: Constants.LOGIN_PAGE, component: LoginComponent },
   {
     path: Constants.FORGET_PASSWORD_PAGE,
     component: ForgetPasswordMailComponent,
   },
-  {
-    path: Constants.RESET_PASSWORD_PAGE,
-    component: ForgetPasswordUpdateComponent,
-  },
-  { path: Constants.LOGIN_PAGE, component: LoginComponent },
 
   // ==> Modules
   // Loyalty Views
@@ -48,6 +43,7 @@ const routes: Routes = [
   },
   {
     path: "redeemVoucher",
+
     loadChildren: () =>
       import("./components/voucher-list/voucher.module").then(
         (m) => m.VoucherModule
