@@ -21,7 +21,7 @@ import { AddAppUserAccompiedComponent } from '../add-app-user-accompied/add-app-
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { NgxPrintModule } from 'ngx-print';
 import { ViewReceiptComponent } from '../view-receipt/view-receipt.component';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -40,6 +40,7 @@ import { ViewReceiptComponent } from '../view-receipt/view-receipt.component';
     SharedModule,
     ApplicationModule,
     AngularMaterialModule,
+    MatProgressSpinnerModule,
     NgxPrintModule
   ],
   exports:[

@@ -37,10 +37,18 @@
           <button mat-flat-button style="background-color: #f8b15f">
             Login
           </button>
+          <button
+            mat-flat-button
+            (click)="forgetPassword()"
+            style="background-color: #f8b15f; margin: 10px"
+          >
+            Forget Password
+          </button>
         </div>
       </div>
     </form>
   </div>
+  <!-- routerLink="/forgetPassword" -->
   <!-- (click)="forgetPassword()" -->
   <svg
     id="clouds"
@@ -62,10 +70,3 @@
   <ngx-spinner></ngx-spinner>
 </div>
 
-<button
-  mat-flat-button
-  routerLink="/forgetPassword"
-  style="background-color: #f8b15f; margin: 10px"
->
-  Forget Password
-</button>

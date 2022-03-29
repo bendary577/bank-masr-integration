@@ -1,3 +1,4 @@
+<div class="guests_body">
 <div *ngIf="usersList.allGuestsBeforeFilter.length != 0 ||usersList.usersData.length != 0 || usersList.showLoading" class="header">
     <button mat-flat-button class="groups-buttons" (click)="addUserDialog(true, true)" *ngIf="hasRole('show_G_U_button')">Add
         Generic Guest</button>
@@ -99,6 +100,77 @@
             Guest</button>
         </div>
     </div>
+
+    <!----------------------------------- Wallet Filtration  ----------------------->
+    
+
+    <div class="filter-container loyalty-style" style="text-align: center;">
+ 
+    <div class="filter-buttons">
+      <div class="five-column">
+        <mat-form-field
+          appearance="outline"
+          class="example-full-width"
+          style="max-width: 25%;margin-top: 20px;"
+        >
+          <input
+            matInput
+            style="max-width: 200px; "
+            placeholder="Start Date"
+            type="date"
+            formContrlName="fromDate"
+            id="fromDate"
+            [(ngModel)]="fromDate"
+            (ngModelChange)="getWalletsTotalRemaining()"
+          />
+        </mat-form-field>
+      </div>
+
+
+      <div class="five-column">
+        <mat-form-field
+          appearance="outline"
+          class="example-full-width"
+          style="max-width: 25%;margin-top: 20px;"
+        >
+          <input
+            matInput
+            style="max-width: 200px"
+            placeholder="Start Date"
+            type="date"
+            formContrlName="toDate"
+            id="toDate"
+            (ngModelChange)="getWalletsTotalRemaining()"
+            [(ngModel)]="toDate"
+          />
+        </mat-form-field>
+      </div>
+
+
+      <div class="five-column filterButtons" style="width: 333px">
+        <div
+          class="filterButton"
+          style="height: 60px;width:260px; margin-top: 10px; text-align: center;"
+        >
+            <div style="margin-top: 5px;text-align: center;">
+                Wallets Total Remaining 
+                 <div class="centering_div" *ngIf="walletsRemainingTotal.showLoading">
+                    <mat-spinner class="child_div" [diameter]="20"></mat-spinner>
+                 </div>
+                <div *ngIf="!walletsRemainingTotal.showLoading">
+                    {{ walletsRemainingTotalValue }}
+                </div>
+            </div>
+        
+        </div>
+      </div>
+	  
+	  
+    </div>
+  </div>
+  
+
+    <!----------------------------------- Wallet Filtration  ----------------------->
 
     <div *ngIf="usersList.usersData.length != 0 || usersList.showLoading">
         <ngx-datatable class="material" [loadingIndicator]="usersList.showLoading" [messages]="usersList.messages"
@@ -239,4 +311,5 @@
         </ngx-datatable>
     </div>
     <!-- <ngx-spinner></ngx-spinner> -->
+</div>
 </div>

@@ -368,6 +368,7 @@ export class Constants {
   static CHARGE_WALLET = environment.apiHost + "/wallet/chargeWallet";
   static DEDUCT_WALLET = environment.apiHost + "/wallet/deductFromWallet";
   static UNDO_WALLET_ACTION = environment.apiHost + "/wallet/undoWalletAction";
+  static GET_WALLETS_REMAINING_TOTAL = environment.apiHost + "/wallet/getWalletsRemainingTotal";
   static GET_TRANSACTION_PAGINATED =
     environment.apiHost + "/transaction/transactionPagination";
   static GET_VOUCHER_PAGES = environment.apiHost + "/simphonyLoyalty/vouchers";

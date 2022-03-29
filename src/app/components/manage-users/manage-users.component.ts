@@ -64,6 +64,18 @@ export class ManageUsersComponent implements OnInit {
     allGuestsBeforeFilter: [],
   }
 
+  walletsRemainingTotal = {
+    messages: {
+      emptyMessage: `
+    <div style="text-align: center;">
+      <p class="user-name">No wallets remaining total info </p>
+    </div>
+  `,
+    },
+    showLoading: false,
+  }
+  walletsRemainingTotalValue = '0.0'
+
   constructor(
     private loyaltyService: LoyaltyService,
     public dialog: MatDialog,
@@ -76,6 +88,7 @@ export class ManageUsersComponent implements OnInit {
 
   ngOnInit() {
     this.getUsers()
+    this.getWalletsTotalRemaining()
   }
 
   onSelect({ selected }) {
@@ -775,4 +788,19 @@ export class ManageUsersComponent implements OnInit {
   restFilters() {}
 
   extractExcelFile() {}
+
+  getWalletsTotalRemaining() {
+    this.walletsRemainingTotal.showLoading = true
+    this.loyaltyService
+      .getWalletsTotalRemaining(this.fromDate, this.toDate)
+      .toPromise()
+      .then((res: any) => {
+        this.walletsRemainingTotalValue = res.data
+        this.walletsRemainingTotal.showLoading = false
+      })
+      .catch((err) => {
+        this.walletsRemainingTotal.showLoading = false
+      })
+  }
+
 }

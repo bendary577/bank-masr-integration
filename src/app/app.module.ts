@@ -19,7 +19,7 @@ import { NavBarComponent } from "./components/nav-bar/nav-bar.component";
 import { BasicModule } from "./shared/basic.module";
 import { LoginComponent } from "./components/login/login.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { ForgetPasswordMailComponent } from './components/forget-password-mail/forget-password-mail.component';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +27,6 @@ import { ForgetPasswordMailComponent } from './components/forget-password-mail/f
     LoginComponent,
     SideNaveComponent,
     NavBarComponent,
-    ForgetPasswordMailComponent,
   ],
   imports: [
     AppRoutingModule,

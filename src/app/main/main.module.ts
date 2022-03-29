@@ -90,6 +90,7 @@ import { AggregatorOrdersComponent } from "../components/aggregator-orders/aggre
 import { AggregatorProductsComponent } from "../components/aggregator-products/aggregator-products.component";
 import { MatTabsModule } from "@angular/material";
 
+
 @NgModule({
   declarations: [
     MainComponent,
@@ -187,7 +188,6 @@ import { MatTabsModule } from "@angular/material";
   imports: [
     MainRoutingModule,
     MatTabsModule,
-
     BasicModule,
     SharedModule,
     AngularMaterialModule,
