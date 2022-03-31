@@ -52,12 +52,14 @@
                 <table class="table-latitude">
                       <thead>
                           <th>Revenue Center Name</th>
+                          <th>Reference</th>
                           <th>Account Code</th>
-                          <th>Discount Accoun</th>
+                          <th>Discount Account</th>
                     </thead>
                     <tbody>
                          <tr *ngFor="let row of majorGroup.revenueCenters">
                             <td style="text-align: center;">{{row.revenueCenter}}</td>
+                            <td style="text-align: center;">{{row.revenueCenterReference}}</td>
                             <td style="text-align: center;">{{row.accountCode}}</td>
                             <td style="text-align: center;">{{row.discountAccount}}</td>
                         </tr>
