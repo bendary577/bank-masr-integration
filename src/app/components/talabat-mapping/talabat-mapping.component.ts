@@ -47,8 +47,6 @@ export class TalabatMappingComponent implements OnInit {
     this.spinner.show();
 
     this.generalSettingsService.getGeneralSettings().then((res) => {
-      console.log(this.generalSettings)
-
       this.generalSettings = res as GeneralSettings;
       this.branchMappingData = this.generalSettings.talabatConfiguration.branchMappings;
       this.productsMappingData = this.generalSettings.talabatConfiguration.productsMappings;

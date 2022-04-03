@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
-import { SyncJobService } from 'src/app/services/sync-job/sync-job.service';
-import { ExcelService } from 'src/app/services/excel/excel.service';
-import { CsvService } from 'src/app/services/csv/csv.service';
 import { SideNaveComponent } from '../side-nave/side-nave.component';
 import { TalabatService } from 'src/app/services/talabat/talabat.service';
-import { DilogServiceService } from '../dialog/dilog-service.service';
 import { DialogComponent } from '../dialog/dialog.component';
+import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
+import { GeneralSettings } from 'src/app/models/GeneralSettings';
+import { ErrorMessages } from 'src/app/models/ErrorMessages';
 
 @Component({
   selector: 'app-aggregator-orders',
@@ -15,7 +14,9 @@ import { DialogComponent } from '../dialog/dialog.component';
   styleUrls: ['./aggregator-orders.component.scss']
 })
 export class AggregatorOrdersComponent implements OnInit {
+  generalSettings: GeneralSettings;
 
+  branches = [];
 
   loading = true;
   selectedBranch: any;
@@ -26,20 +27,13 @@ export class AggregatorOrdersComponent implements OnInit {
   order;
   state = "";
 
-  constructor(private spinner: NgxSpinnerService, private syncJobService: SyncJobService,
+  constructor(private spinner: NgxSpinnerService,
     public snackBar: MatSnackBar, private talabatService:TalabatService, public dialog: MatDialog
-    ,private excelService: ExcelService, private sidNav: SideNaveComponent, private csvService: CsvService) { }
+    , private sidNav: SideNaveComponent, private generalSettingsService: GeneralSettingsService) { }
 
   ngOnInit() {
+    this.getGeneralSettings();
     this.getStoredOrders();
-    // this.getTalabatOrders();
-    // this.state = localStorage.getItem('staticGetTalabatOrdersLoading');
-    // if (this.state == "true") {
-    //   this.staticGetTalabatOrdersLoading = true;
-    // }
-    // else{
-    //   this.staticGetTalabatOrdersLoading = false;
-    // }
   }
 
   hasRole(reference) {
@@ -173,5 +167,30 @@ export class AggregatorOrdersComponent implements OnInit {
 
   getTransacrion(res) {
         this.orders = res["data"]["orders"];
-    }
+  }
+
+  getGeneralSettings(){
+    this.generalSettingsService
+    .getGeneralSettings()
+    .then((res) => {
+      this.generalSettings = res as GeneralSettings
+      this.branches = this.generalSettings.talabatConfiguration.branchMappings;
+    })
+    .catch((err) => {
+      let message = ''
+      if (err.error) {
+        message = err.error
+      } else if (err.message) {
+        message = err.message
+      } else {
+        message = ErrorMessages.FAILED_TO_GET_CONFIG
+      }
+
+      this.snackBar.open(message, null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass: 'my-snack-bar-fail',
+      })
+    })
+  }
 }
