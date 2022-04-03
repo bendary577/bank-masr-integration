@@ -93,7 +93,7 @@ export class AggregatorOrdersComponent implements OnInit {
     this.spinner.show();
     this.talabatService.sendTalabatOrders().toPromise().then((res: any) => {
       this.spinner.hide();
-      // this.orders = res["data"]["orders"];
+
       this.getStoredOrders();
       
       this.loading = false;
