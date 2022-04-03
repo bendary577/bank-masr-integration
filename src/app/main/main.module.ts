@@ -84,7 +84,6 @@ import { SalesApiMonthlyComponent } from '../components/sales-api-monthly/sales-
 import { AddOrderTypeComponent } from '../components/add-order-type/add-order-type.component';
 import { AddOrderTypeChannelComponent } from '../components/add-order-type-channel/add-order-type-channel.component';
 import { TalabatMappingComponent } from '../components/talabat-mapping/talabat-mapping.component';
-import { TalabatOrdersComponent } from '../components/talabat-orders/talabat-orders.component';
 import { AggregatorIntegratorComponent } from '../components/aggregator-integrator/aggregator-integrator.component';
 import { AggregatorOrdersComponent } from '../components/aggregator-orders/aggregator-orders.component';
 import { AggregatorProductsComponent } from '../components/aggregator-products/aggregator-products.component';
@@ -171,7 +170,6 @@ import { MatTabsModule } from '@angular/material';
     EditWalletComponent,
     SupportComponent,
     PosMachineMappingComponent,
-    TalabatOrdersComponent,
     AggregatorIntegratorComponent,
     AggregatorOrdersComponent,
     AggregatorProductsComponent,

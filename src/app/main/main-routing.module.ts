@@ -56,7 +56,6 @@ import { SalesApiDailyComponent } from '../components/sales-api-daily/sales-api-
 import { SalesApiMonthlyComponent } from '../components/sales-api-monthly/sales-api-monthly.component';
 import { TalabatMappingComponent } from '../components/talabat-mapping/talabat-mapping.component';
 import { ManageSubGroupComponent } from '../components/manage-sub-group/manage-sub-group.component';
-import { TalabatOrdersComponent } from '../components/talabat-orders/talabat-orders.component';
 import { AggregatorIntegratorComponent } from '../components/aggregator-integrator/aggregator-integrator.component';
 import { AggregatorsEndPoints } from '../models/deliveryAggregator/aggregatorsEndPoints';
 import { RewardPointsSettingsComponent } from '../components/setting/reward-points-settings/reward-points-settings.component';
@@ -156,8 +155,6 @@ const routes: Routes = [
   { path: Constants.SIMPHONY_PAYMENT_PAGE , component: SimphonyPaymentComponent ,canActivate:[AuthGuardService]},
 
   { path : Constants.SUPPORT , component: SupportComponent, canActivate:[AuthGuardService]},
-
-  { path : AggregatorsEndPoints.TALABAT_ORDERS , component: TalabatOrdersComponent, canActivate:[AuthGuardService]},
 
   { path : AggregatorsEndPoints.AGGREGATOR_INTEGRATOR , component: AggregatorIntegratorComponent, canActivate:[AuthGuardService]},
 
