@@ -42,6 +42,7 @@ export class AddMajorGroupChildComponent implements OnInit {
 
     this.rcForm = this.formBuilder.group({
       rcName: ['', Validators.required],
+      rcRef: ['', Validators.required],
       rcAccountCode: ['', Validators.required],
       rcDiscountAccount: ['', Validators.required],
     })
@@ -73,6 +74,7 @@ export class AddMajorGroupChildComponent implements OnInit {
     }
     this.newRevenueCenter = new RevenueCenter()
     this.newRevenueCenter.revenueCenter = this.rcForm.controls.rcName.value
+    this.newRevenueCenter.revenueCenterReference = this.rcForm.controls.rcRef.value 
     this.newRevenueCenter.accountCode = this.rcForm.controls.rcAccountCode.value
     this.newRevenueCenter.discountAccount = this.rcForm.controls.rcDiscountAccount.value
 
