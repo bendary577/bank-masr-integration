@@ -63,15 +63,8 @@ export class ConfigurationComponent implements OnInit {
         this.generalSettings = this.authService.generalSettings;
       })
       .catch((err) => {
-        let message = ''
-        if (err.error) {
-          message = err.error
-        } else if (err.message) {
-          message = err.message
-        } else {
-          message = ErrorMessages.FAILED_TO_GET_CONFIG
-        }
-  
+        let message = ErrorMessages.FAILED_TO_GET_CONFIG
+      
         this.snackBar.open(message, null, {
           duration: 3000,
           horizontalPosition: 'center',
@@ -106,7 +99,6 @@ export class ConfigurationComponent implements OnInit {
         this.loading = false
       })
       .catch((err) => {
-        console.error(err)
         this.spinner.hide()
         this.loading = false
       })

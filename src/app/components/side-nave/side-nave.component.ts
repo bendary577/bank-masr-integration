@@ -35,7 +35,6 @@ export class SideNaveComponent implements OnDestroy, OnInit {
   public accountFeatures: []
   public static userRoles = []
   public static userFeature = []
-  public accountCredentials: [] = []
   simphonyLocations: []
   costCenterAccountMapping: []
   suppliers: []
@@ -119,14 +118,6 @@ export class SideNaveComponent implements OnDestroy, OnInit {
       this.getApplication()
       this.getSyncJobTypes()
       this.getOperationTypes()
-      this.getAccount()
-    }
-
-    if (
-      this.account != undefined &&
-      this.account.id == '5fe34649283cde246c2d7734'
-    ) {
-      this.admin = true
     }
 
     const body = document.querySelector('body')
@@ -189,20 +180,6 @@ export class SideNaveComponent implements OnDestroy, OnInit {
           horizontalPosition: 'center',
           panelClass: 'my-snack-bar-fail',
         })
-      })
-  }
-
-  getAccount() {
-    this.accountService
-      .getAccount()
-      .toPromise()
-      .then((res: any) => {
-        this.account = res
-        this.accountCredentials = this.account['accountCredentials']
-      })
-      .catch((err) => {
-        ''
-        console.error(err)
       })
   }
 

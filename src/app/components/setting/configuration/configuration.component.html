@@ -1,6 +1,20 @@
 <div class="config-style">
-  <div *ngIf="!loading">
-    <h3>General Settings</h3>
+  <h3>General Settings</h3>
+
+  <div *ngIf="!account" style="padding-top: 100px;">
+    <mat-card class="example-card">
+      <mat-card-header>
+          <mat-card-title>Connection Error</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+          <p>
+            Please try agian after few minutes, Or contact support team.
+          </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div *ngIf="!loading && account">
 
     <div class="header">
       <button mat-flat-button (click)="addAccountDialog()"  class="filterButton table-btn" style="width:150px; float:right" *ngIf="hasRole('show_add_account')">Add Account</button>
