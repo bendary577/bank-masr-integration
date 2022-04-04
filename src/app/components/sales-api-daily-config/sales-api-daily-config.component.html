@@ -11,13 +11,18 @@
                         Oracle Hospitality
                     </mat-panel-title>
                 </mat-expansion-panel-header>
+                <mat-checkbox id="taxIncluded" name="taxIncluded" class="example-margin"
+                    style="margin-left: 12px;"
+                    [(ngModel)]="syncJobType.configuration.salesAPIConfig.taxIncluded">Is tax is inclusive (Sales amount include tax value)
+                </mat-checkbox>
+
                 <app-ohra-configuration [syncJobType]=syncJobType></app-ohra-configuration>
             </mat-expansion-panel>
 
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        GCS Configuration
+                        API Configuration
                     </mat-panel-title>
                 </mat-expansion-panel-header>
 
