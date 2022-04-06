@@ -11,6 +11,7 @@ import { DiscountMapping } from 'src/app/models/deliveryAggregator/discount-mapp
 import { ProductMapping } from 'src/app/models/deliveryAggregator/product-mapping';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
+import { ModifierMapping } from 'src/app/models/deliveryAggregator/ModifierMapping';
 
 @Component({
   selector: 'app-talabat-mapping',
@@ -20,6 +21,7 @@ import { GeneralSettingsService } from 'src/app/services/generalSettings/general
 export class TalabatMappingComponent implements OnInit {
 
   newProductMapping = new ProductMapping();
+  newModifierMapping = new ModifierMapping();
   newBranchMapping = new BranchMapping();
   newDiscountMapping = new DiscountMapping();
   newCustomerMapping = new CustomerMapping();
@@ -27,6 +29,7 @@ export class TalabatMappingComponent implements OnInit {
 
   branchMappingData   = []
   productsMappingData = []
+  modifierOptionsMappingData = []
   customerMappingData = []
   addressMappingData  = []
   discountMappingData = []
@@ -50,9 +53,14 @@ export class TalabatMappingComponent implements OnInit {
       this.generalSettings = res as GeneralSettings;
       this.branchMappingData = this.generalSettings.talabatConfiguration.branchMappings;
       this.productsMappingData = this.generalSettings.talabatConfiguration.productsMappings;
+      this.modifierOptionsMappingData = this.generalSettings.talabatConfiguration.modifierMappings;
       this.customerMappingData = this.generalSettings.talabatConfiguration.customerMappings;
       this.addressMappingData = this.generalSettings.talabatConfiguration.addressMappings;
       this.discountMappingData = this.generalSettings.talabatConfiguration.discountMappings;
+
+      if(this.modifierOptionsMappingData == undefined){
+        this.modifierOptionsMappingData = [];
+      }
 
       this.spinner.hide();
     }).catch(err => {
@@ -82,6 +90,21 @@ export class TalabatMappingComponent implements OnInit {
       this.productsMappingData = [...this.productsMappingData];
     }else {
       this.snackBar.open('Please fill all type fields.', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+    }
+  }
+
+  addModifierMappingData(){
+    if(this.newModifierMapping.name &&  this.newModifierMapping.foodicsProductId && this.newModifierMapping.talabatProductId){
+      this.modifierOptionsMappingData.push(this.newModifierMapping);
+      this.newModifierMapping = new ModifierMapping();
+
+      this.modifierOptionsMappingData = [...this.modifierOptionsMappingData];
+    }else {
+      this.snackBar.open('Please fill all modifier fields.', null, {
         duration: 2000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
@@ -155,16 +178,13 @@ export class TalabatMappingComponent implements OnInit {
     try {
 
       this.generalSettings.talabatConfiguration.productsMappings = this.productsMappingData;
+      this.generalSettings.talabatConfiguration.modifierMappings = this.modifierOptionsMappingData;
       this.generalSettings.talabatConfiguration.branchMappings = this.branchMappingData;
       this.generalSettings.talabatConfiguration.customerMappings = this.customerMappingData;
       this.generalSettings.talabatConfiguration.discountMappings = this.discountMappingData;
       this.generalSettings.talabatConfiguration.addressMappings = this.addressMappingData;
 
-      console.log(this.generalSettings)
-
       this.generalSettingsService.updateGeneralSettings(this.generalSettings).then(result => {
-        console.log(this.generalSettings)
-
         const response = result as Response;
         this.authService.generalSettings = this.generalSettings;
         if (response.success) {
