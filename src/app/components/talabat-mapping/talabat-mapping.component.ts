@@ -12,6 +12,7 @@ import { ProductMapping } from 'src/app/models/deliveryAggregator/product-mappin
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 import { ModifierMapping } from 'src/app/models/deliveryAggregator/ModifierMapping';
+import { TalabatService } from 'src/app/services/talabat/talabat.service';
 
 @Component({
   selector: 'app-talabat-mapping',
@@ -40,7 +41,8 @@ export class TalabatMappingComponent implements OnInit {
   generalSettings: GeneralSettings = new GeneralSettings();
 
   constructor(public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
-    private generalSettingsService: GeneralSettingsService, private authService: AuthService) { }
+    private generalSettingsService: GeneralSettingsService, private authService: AuthService
+    , private talabatService: TalabatService) { }
 
   ngOnInit(): void {
     this.getGeneralSettings();
@@ -61,6 +63,31 @@ export class TalabatMappingComponent implements OnInit {
       if(this.modifierOptionsMappingData == undefined){
         this.modifierOptionsMappingData = [];
       }
+
+      this.spinner.hide();
+    }).catch(err => {
+      let message = "";
+      if (err.error){
+        message = err.error;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_GET_CONFIG;
+      }
+
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+      this.spinner.hide();
+    });
+  }
+
+  fetchProducts(){
+    this.spinner.show();
+
+    this.talabatService.getTalabatMenuItems().toPromise().then((res) => {
 
       this.spinner.hide();
     }).catch(err => {

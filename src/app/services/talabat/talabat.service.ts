@@ -39,4 +39,12 @@ export class TalabatService {
     this.token = localStorage.getItem('auth_token');
     return this.http.post(AggregatorsEndPoints.GET_TALABAT_ORDER_DETAILS, order ,
        { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
-  }}
+  }
+
+  getTalabatMenuItems() {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get(AggregatorsEndPoints.GET_TALABAT_MENU_ITEMS,
+       { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
+}

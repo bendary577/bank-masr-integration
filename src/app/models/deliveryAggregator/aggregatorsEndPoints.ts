@@ -15,6 +15,7 @@ export class AggregatorsEndPoints {
     static GET_TALABAT_ORDER_DETAILS =  environment.apiHost + "/talabat/order";
     static GET_TALABAT_BRANCH_ORDERS =  environment.apiHost + "/talabat/branch";
     static SEND_TALABAT_ORDERS =  environment.apiHost + "/aggregator/orders";
+    static GET_TALABAT_MENU_ITEMS =  environment.apiHost + "/talabat/menuItems";
   
     /////////////////////////////////////////////// Aggregator Statics /////////////////////////////////
   
