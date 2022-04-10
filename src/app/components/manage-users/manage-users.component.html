@@ -104,7 +104,7 @@
     <!----------------------------------- Wallet Filtration  ----------------------->
     
 
-    <div class="filter-container loyalty-style" style="text-align: center;">
+    <div *ngIf="hasRole('get_wallet_total_remaining')" class="filter-container loyalty-style" style="text-align: center;">
  
     <div class="filter-buttons">
       <div class="five-column">

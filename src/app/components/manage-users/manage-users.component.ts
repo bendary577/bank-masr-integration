@@ -88,7 +88,6 @@ export class ManageUsersComponent implements OnInit {
 
   ngOnInit() {
     this.getUsers()
-    this.getWalletsTotalRemaining()
   }
 
   onSelect({ selected }) {
@@ -104,10 +103,11 @@ export class ManageUsersComponent implements OnInit {
 
   openUserProfile(user: ApplicationUser) {
     this.data.storage = user
-    this.router.navigate(["entrySystem/" + Constants.USER_PROFILE])
+    this.router.navigate(['entrySystem/' + Constants.USER_PROFILE])
   }
 
   getUsers() {
+    console.log("%%%%%%%%%%%%%%%%%% in get users 1")
     this.usersList.showLoading = true
     this.loyaltyService
       .getAppUsers()
@@ -116,6 +116,7 @@ export class ManageUsersComponent implements OnInit {
         this.usersList.usersData = res
         this.usersList.allGuestsBeforeFilter = res
         this.usersList.showLoading = false
+        this.getWalletsTotalRemaining()
       })
       .catch((err) => {
         this.usersList.showLoading = false
@@ -126,7 +127,7 @@ export class ManageUsersComponent implements OnInit {
     this.usersList.showLoading = true
     let deletedId = []
 
-    for(var i = 0 ; i < this.usersList.selected.length; i++){
+    for (var i = 0; i < this.usersList.selected.length; i++) {
       deletedId.push(this.usersList.selected[i].id)
     }
 
@@ -194,7 +195,6 @@ export class ManageUsersComponent implements OnInit {
               res.expiryDate,
               false,
               false,
-
             )
             .then((result: any) => {
               this.loading = false
@@ -321,20 +321,20 @@ export class ManageUsersComponent implements OnInit {
     let dialogRef
 
     if (isGeneric) {
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.autoFocus = true;
+      const dialogConfig = new MatDialogConfig()
+      dialogConfig.autoFocus = true
       dialogConfig.data = {
-          title:  "Add Guest",
-          generic: genericGroup
-      };
-      dialogConfig.width = '420px';
-      dialogConfig.maxWidth = '420px';
-      dialogConfig.autoFocus = true;
+        title: 'Add Guest',
+        generic: genericGroup,
+      }
+      dialogConfig.width = '420px'
+      dialogConfig.maxWidth = '420px'
+      dialogConfig.autoFocus = true
 
       dialogRef = this.dialog.open(AddAppUserAccompiedComponent, dialogConfig)
     } else {
       dialogRef = this.dialog.open(AddAppUserComponent, {
-        width: '420px'
+        width: '420px',
       })
     }
 
@@ -356,7 +356,7 @@ export class ManageUsersComponent implements OnInit {
             res.balance,
             res.expiryDate,
             res.sendEmail,
-            res.sendSMS
+            res.sendSMS,
           )
           .then((result: any) => {
             this.loading = true
@@ -365,10 +365,10 @@ export class ManageUsersComponent implements OnInit {
             this.usersList.showLoading = false
             this.usersList.selected = []
 
-            if(result.success){
+            if (result.success) {
               // Print Receipt, When enterance amount greater than zero
-              if(isGeneric && res.balance > 0){
-                this.viewReceipt(result.data);
+              if (isGeneric && res.balance > 0) {
+                this.viewReceipt(result.data)
               }
 
               this.snackBar.open('User added successfully.', null, {
@@ -376,7 +376,7 @@ export class ManageUsersComponent implements OnInit {
                 horizontalPosition: 'center',
                 panelClass: 'my-snack-bar-success',
               })
-            }else{
+            } else {
               this.snackBar.open(result.message, null, {
                 duration: 2000,
                 horizontalPosition: 'center',
@@ -414,15 +414,15 @@ export class ManageUsersComponent implements OnInit {
     let dialogRef
     let isGeneric = this.usersList.selected[0].generic
     if (isGeneric) {
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.autoFocus = true;
+      const dialogConfig = new MatDialogConfig()
+      dialogConfig.autoFocus = true
       dialogConfig.data = {
-          title:  "Update Guest",
-          user: this.usersList.selected[0],
-      };
-      dialogConfig.width = '420px';
-      dialogConfig.maxWidth = '420px';
-      dialogConfig.autoFocus = true;
+        title: 'Update Guest',
+        user: this.usersList.selected[0],
+      }
+      dialogConfig.width = '420px'
+      dialogConfig.maxWidth = '420px'
+      dialogConfig.autoFocus = true
 
       dialogRef = this.dialog.open(AddAppUserAccompiedComponent, dialogConfig)
     } else {
@@ -455,7 +455,6 @@ export class ManageUsersComponent implements OnInit {
             res.expiryDate,
             res.sendEmail,
             res.sendSMS,
-
           )
           .then((result: any) => {
             this.loading = false
@@ -497,13 +496,16 @@ export class ManageUsersComponent implements OnInit {
   }
 
   viewReceipt(guest) {
-    if(JSON.parse(localStorage.getItem('account')).printReceiptConfig.previewReceipt){
+    if (
+      JSON.parse(localStorage.getItem('account')).printReceiptConfig
+        .previewReceipt
+    ) {
       const dialogRef = this.dialog.open(ViewReceiptComponent, {
-        width: '302.36px', // 80mm 
-        disableClose: true ,
+        width: '302.36px', // 80mm
+        disableClose: true,
         data: {
-          guest: guest
-         },
+          guest: guest,
+        },
       })
     }
   }
@@ -649,7 +651,7 @@ export class ManageUsersComponent implements OnInit {
 
   calculateParams(user): Number {
     let credit = 0
-    if(user.wallet != null){
+    if (user.wallet != null) {
       let balance = user.wallet.balance
       for (let i = 0; i < balance.length; i++) {
         credit = credit + balance[i]['amount']
@@ -659,8 +661,8 @@ export class ManageUsersComponent implements OnInit {
   }
 
   lessThanOrEqualZero(user): Boolean {
-    var now  = new Date().getTime();
-    let distance = new Date(user.expiryDate).getTime() - now;
+    var now = new Date().getTime()
+    let distance = new Date(user.expiryDate).getTime() - now
     if (distance > 0) {
       return false
     }
@@ -802,5 +804,4 @@ export class ManageUsersComponent implements OnInit {
         this.walletsRemainingTotal.showLoading = false
       })
   }
-
 }
