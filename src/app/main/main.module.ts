@@ -88,6 +88,7 @@ import { AggregatorIntegratorComponent } from '../components/aggregator-integrat
 import { AggregatorOrdersComponent } from '../components/aggregator-orders/aggregator-orders.component';
 import { AggregatorProductsComponent } from '../components/aggregator-products/aggregator-products.component';
 import { MatTabsModule } from '@angular/material';
+import { ViewProductModifiersComponent } from '../components/view-product-modifiers/view-product-modifiers.component';
 
 @NgModule({
   declarations: [
@@ -174,6 +175,8 @@ import { MatTabsModule } from '@angular/material';
     AggregatorOrdersComponent,
     AggregatorProductsComponent,
     TalabatMappingComponent,
+    ViewProductModifiersComponent,
+
     SimphonyPaymentComponent,
     SimphonyCheckComponent,
     RevenueByAgentComponent,

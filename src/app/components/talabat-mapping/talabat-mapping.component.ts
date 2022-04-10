@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { GeneralSettings } from 'src/app/models/GeneralSettings';
@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 import { ModifierMapping } from 'src/app/models/deliveryAggregator/ModifierMapping';
 import { TalabatService } from 'src/app/services/talabat/talabat.service';
+import { ViewProductModifiersComponent } from '../view-product-modifiers/view-product-modifiers.component';
 
 @Component({
   selector: 'app-talabat-mapping',
@@ -29,7 +30,7 @@ export class TalabatMappingComponent implements OnInit {
   newAddressMapping = new AddressMapping();
 
   branchMappingData   = []
-  productsMappingData = []
+  productsMappingData = [];
   modifierOptionsMappingData = []
   customerMappingData = []
   addressMappingData  = []
@@ -42,7 +43,7 @@ export class TalabatMappingComponent implements OnInit {
 
   constructor(public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService, private authService: AuthService
-    , private talabatService: TalabatService) { }
+    , private talabatService: TalabatService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getGeneralSettings();
@@ -122,6 +123,21 @@ export class TalabatMappingComponent implements OnInit {
         panelClass:"my-snack-bar-fail"
       });
     }
+  }
+
+  viewModifiersDialog(product){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {product: product};
+    dialogConfig.minWidth = 500;
+    dialogConfig.maxHeight = 500;
+
+    const dialogRef = this.dialog.open(ViewProductModifiersComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.onSaveClick();
+      }
+    });
   }
 
   addModifierMappingData(){

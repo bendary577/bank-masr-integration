@@ -122,6 +122,18 @@
                 </ng-template>
             </ngx-datatable-column>
 
+            <ngx-datatable-column name="Modifiers Count">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.modifiers.length}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Modifiers">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <button mat-flat-button (click)="viewModifiersDialog(row)" class="filterButton table-btn">View</button>
+                </ng-template>
+            </ngx-datatable-column>
+
         </ngx-datatable>
     </mat-expansion-panel>
 
