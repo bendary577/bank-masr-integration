@@ -20,6 +20,7 @@ import { BasicModule } from "./shared/basic.module";
 import { LoginComponent } from "./components/login/login.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
     SideNaveComponent,
     NavBarComponent,
     ForgetPasswordComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     AppRoutingModule,
