@@ -13,6 +13,8 @@ export class Constants {
   static LOGINAUTH = environment.apiHost + "/oauth/token";
   static CHECKAUTH = environment.apiHost + "/auth/getAccessToken";
   static LOGIN = environment.apiHost + "/login";
+  static FORGET_PASSWORD_API = environment.apiHost + "/forgetPasswordMail";
+  static RESET_PASSWORD_API = environment.apiHost + "/resetPassword";
 
   static GET_ACCOUNT = environment.apiHost + "/getAccount";
   static ADD_ACCOUNT = environment.apiHost + "/addAccount";

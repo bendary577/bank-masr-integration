@@ -28,6 +28,14 @@ export class AuthService {
     "&password=" + user.password + '&clientid=web-client',{},httpOptions);
   }
 
+  forgetPassword(email:String) {
+    return this.http.post(Constants.FORGET_PASSWORD_API + "?email=" + email , { headers: new HttpHeaders()});
+  }
+
+  resetPassword(password:String) {
+    return this.http.post(Constants.RESET_PASSWORD_API, password, { headers: new HttpHeaders()});
+  }
+
   checkToken() {
     return this.http.get(Constants.CHECKAUTH,{ headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})})
   }
