@@ -27,7 +27,7 @@
     <ngx-datatable class="material" 
          [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50"
         [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-        [rows]="modifiers" [selectAllRowsOnPage]="false" [scrollbarH]="true">
+        [rows]="product.modifiers" [selectAllRowsOnPage]="false" [scrollbarH]="true">
 
         <ngx-datatable-column name="Modifier Name">
             <ng-template let-row="row" ngx-datatable-cell-template>
@@ -47,4 +47,9 @@
             </ng-template>
         </ngx-datatable-column>
     </ngx-datatable>
+
+    <div mat-dialog-actions>
+        <button mat-button cdkFocusInitial (click)="onSaveClick()">Save</button>
+        <button mat-button (click)="onNoClick()">Cancel</button>
+    </div>
 </div>

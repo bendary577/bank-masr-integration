@@ -11,15 +11,13 @@ import { ProductMapping } from 'src/app/models/deliveryAggregator/product-mappin
 export class ViewProductModifiersComponent implements OnInit {
 
   product = new  ProductMapping()
-  modifiers = [];
   newModifierMapping = new ModifierMapping();
 
   constructor(public dialogRef: MatDialogRef<ViewProductModifiersComponent>,
     @Inject(MAT_DIALOG_DATA) public data, public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.product = this.data['product']
-    this.modifiers = this.product.modifiers;
+    this.product = this.data['product'];
   }
 
   onNoClick(): void {
@@ -37,10 +35,10 @@ export class ViewProductModifiersComponent implements OnInit {
 
   addModifierMappingData(){
     if(this.newModifierMapping.name &&  this.newModifierMapping.foodicsProductId && this.newModifierMapping.talabatProductId){
-      this.modifiers.push(this.newModifierMapping);
+      this.product.modifiers.push(this.newModifierMapping);
       this.newModifierMapping = new ModifierMapping();
 
-      this.modifiers = [...this.modifiers];
+      this.product.modifiers = [...this.product.modifiers];
     }else {
       this.snackBar.open('Please fill all modifier fields.', null, {
         duration: 2000,
