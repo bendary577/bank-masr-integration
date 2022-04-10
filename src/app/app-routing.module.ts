@@ -3,6 +3,7 @@ import { Routes, RouterModule, PreloadAllModules } from "@angular/router";
 import { ErrorComponentComponent } from "./components/error-component/error-component.component";
 import { LoginComponent } from "./components/login/login.component";
 import { ConfigurationComponent } from "./components/setting/configuration/configuration.component";
+import { ForgetPasswordComponent } from "./forget-password/forget-password.component";
 import { Constants } from "./models/constants";
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
     component: ConfigurationComponent,
   },
   { path: Constants.LOGIN_PAGE, component: LoginComponent },
+  { path: "forgetPassword", component: ForgetPasswordComponent },
   // ==> Modules
   // Loyalty Views
   {
