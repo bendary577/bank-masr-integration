@@ -4,6 +4,7 @@ import { ErrorComponentComponent } from "./components/error-component/error-comp
 import { LoginComponent } from "./components/login/login.component";
 import { ConfigurationComponent } from "./components/setting/configuration/configuration.component";
 import { ForgetPasswordComponent } from "./forget-password/forget-password.component";
+import { ResetPasswordComponent } from "./reset-password/reset-password.component";
 import { Constants } from "./models/constants";
 
 const routes: Routes = [
@@ -14,6 +15,8 @@ const routes: Routes = [
   },
   { path: Constants.LOGIN_PAGE, component: LoginComponent },
   { path: "forgetPassword", component: ForgetPasswordComponent },
+  { path: "resetPassword", component: ResetPasswordComponent },
+  
   // ==> Modules
   // Loyalty Views
   {

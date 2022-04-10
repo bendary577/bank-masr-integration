@@ -63,6 +63,8 @@ export class ForgetPasswordComponent implements OnInit {
       .forgetPassword(email)
       .toPromise()
       .then((res: any) => {
+        this.spinner.hide();
+        this.loading = false;
         this.successMessage = res.message;
         this.snackBar.open(this.successMessage, null, {
           duration: 2000,

@@ -32,8 +32,8 @@ export class AuthService {
     return this.http.post(Constants.FORGET_PASSWORD_API + "?email=" + email , { headers: new HttpHeaders()});
   }
 
-  resetPassword(password:String) {
-    return this.http.post(Constants.RESET_PASSWORD_API, password, { headers: new HttpHeaders()});
+  resetPassword(password:String, id : String) {
+    return this.http.post(Constants.RESET_PASSWORD_API + "?id=" + id , password, { headers: new HttpHeaders()});
   }
 
   checkToken() {
