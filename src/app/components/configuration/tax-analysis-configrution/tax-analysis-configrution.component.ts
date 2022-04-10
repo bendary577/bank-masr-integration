@@ -18,6 +18,9 @@ export class TaxAnalysisConfigrutionComponent implements OnInit {
 
   ngOnInit(): void {
     this.taxes = this.syncJobType.configuration.inforConfiguration.taxes;
+    console.log({
+      taxes: this.taxes
+    })
   }
 
 

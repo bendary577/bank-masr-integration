@@ -5,6 +5,11 @@
                 [(ngModel)]="syncJobType.configuration.singleFilePerDay">Export single file per day.</mat-checkbox>
         </div>
 
+        <div *ngIf="syncJobType.name == 'Approved Invoices' || syncJobType.name == 'Credit Notes'">
+            <mat-checkbox id="useMyInvDescription" name="useMyInvDescription" class="example-margin"
+                [(ngModel)]="syncJobType.configuration.invoiceConfiguration.useMyInvDescription">Use oracle hospitality description.</mat-checkbox>
+        </div>
+
         <div>
             <mat-form-field class="example-full-width">
                 <mat-select matInput id="consumptionPerGroup" name="consumptionPerGroup" placeholder="Sync per"
