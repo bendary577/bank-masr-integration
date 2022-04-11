@@ -24,7 +24,7 @@ export class AddUserComponent implements OnInit {
         id:[this.data.user.id],
         name: [this.data.user.name, [Validators.maxLength, Validators.required, Validators.minLength]],
         username: [this.data.user.username, [Validators.maxLength, Validators.required, Validators.minLength]],
-        email: [this.data.user.username, [Validators.required]],
+        email: [this.data.user.email, [Validators.required]],
         password: [this.data.user.password, [Validators.required, Validators.minLength]]
           });
     }else{
