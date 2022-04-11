@@ -150,15 +150,15 @@
       <div class="five-column filterButtons" style="width: 333px">
         <div
           class="filterButton"
-          style="height: 60px;width:260px; margin-top: 10px; text-align: center;"
+          style="height: 60px;width:275px; margin-top: 10px; text-align: center;"
         >
             <div style="margin-top: 5px;text-align: center;">
-                Wallets Total Remaining 
+                Wallets Total Remaining Balance 
                  <div class="centering_div" *ngIf="walletsRemainingTotal.showLoading">
                     <mat-spinner class="child_div" [diameter]="20"></mat-spinner>
                  </div>
                 <div *ngIf="!walletsRemainingTotal.showLoading">
-                    {{ walletsRemainingTotalValue }}
+                    {{ walletsRemainingTotalValue }} {{getCurrency()}}
                 </div>
             </div>
         
