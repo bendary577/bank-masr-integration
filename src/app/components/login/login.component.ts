@@ -58,7 +58,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("%%%%%%%%%%%%%%%%%%%%%%%%%% login submit");
     this.submitted = true;
     this.isValid();
   }
