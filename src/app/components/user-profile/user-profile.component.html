@@ -400,7 +400,7 @@
             <ng-template let-row="row" ngx-datatable-cell-template>
               <button
                 mat-flat-button
-                (click)="undoWalletAction()"
+                (click)="undoWalletAction(row)"
                 style="background-color: #f8b15f; margin-bottom: 15px"
               >
                 Undo
