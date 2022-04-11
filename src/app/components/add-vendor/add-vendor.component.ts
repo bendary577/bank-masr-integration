@@ -24,6 +24,7 @@ export class AddUserComponent implements OnInit {
         id:[this.data.user.id],
         name: [this.data.user.name, [Validators.maxLength, Validators.required, Validators.minLength]],
         username: [this.data.user.username, [Validators.maxLength, Validators.required, Validators.minLength]],
+        email: [this.data.user.username, [Validators.required]],
         password: [this.data.user.password, [Validators.required, Validators.minLength]]
           });
     }else{
@@ -31,6 +32,7 @@ export class AddUserComponent implements OnInit {
       id:[''],
       name: ['', [Validators.maxLength, Validators.required, Validators.minLength]],
       username: ['', [Validators.maxLength, Validators.required, Validators.minLength]],
+      email: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength]]
         });
       }
@@ -52,6 +54,7 @@ export class AddUserComponent implements OnInit {
       id: this.form.controls.id.value,
       name: this.form.controls.name.value,
       username: this.form.controls.username.value,
+      email: this.form.controls.email.value,
       password: this.form.controls.password.value,
     });
   }

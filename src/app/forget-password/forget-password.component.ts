@@ -67,7 +67,7 @@ export class ForgetPasswordComponent implements OnInit {
         this.loading = false
         this.successMessage = res.message
         this.snackBar.open(this.successMessage, null, {
-          duration: 2000,
+          duration: 6000,
           horizontalPosition: 'center',
           panelClass: 'my-snack-bar-success',
         })
@@ -82,7 +82,7 @@ export class ForgetPasswordComponent implements OnInit {
         this.spinner.hide()
         this.loading = false
         this.snackBar.open(this.failMessage, null, {
-          duration: 2000,
+          duration: 6000,
           horizontalPosition: 'center',
           panelClass: 'my-snack-bar-fail',
         })

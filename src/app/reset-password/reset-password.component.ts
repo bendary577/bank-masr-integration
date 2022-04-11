@@ -23,6 +23,7 @@ export class ResetPasswordComponent implements OnInit {
   account: Account
   failMessage: ''
   successMessage: ''
+  validationMessage : ""
 
   constructor(
     private formBuilder: FormBuilder,
@@ -45,6 +46,7 @@ export class ResetPasswordComponent implements OnInit {
     })
     this.successMessage = ''
     this.failMessage = ''
+    this.validationMessage = ''
   }
 
   onSubmit() {
@@ -52,18 +54,31 @@ export class ResetPasswordComponent implements OnInit {
     const password = this.resetPasswordForm.controls.password.value as string
     const passwordConfirmation = this.resetPasswordForm.controls
       .password_confirmation.value as string
-    if (password === passwordConfirmation) {
-      this.resetPassword(password)
-    } else {
+    let ValidationObject = this.validate(password, passwordConfirmation)
+    if(ValidationObject.status === false){
       this.spinner.hide()
       this.loading = false
-      let message = 'please make sure that passwords are equal'
-      this.snackBar.open(message, null, {
-        duration: 2000,
+      this.snackBar.open(ValidationObject.message, null, {
+        duration: 6000,
         horizontalPosition: 'center',
         panelClass: 'my-snack-bar-fail',
       })
+    }else{
+      this.resetPassword(password)
     }
+  }
+
+  validate(password, passwordConfirmation){
+    let ValidationObject = {status : true, message : ""}
+    if(password === '' || passwordConfirmation === ''){
+      ValidationObject.message = "please make sure that you have entered your required password and confirmed it";
+      ValidationObject.status = false;
+    }
+    if (password !== passwordConfirmation) {
+      ValidationObject.message = "please make sure that the passwords you have entered are identical";
+      ValidationObject.status = false;
+    } 
+    return ValidationObject;
   }
 
   resetPassword(password) {
@@ -74,12 +89,16 @@ export class ResetPasswordComponent implements OnInit {
         .resetPassword(password, user_id)
         .toPromise()
         .then((res: any) => {
-          localStorage.removeItem('user_id')
+          console.log("%%%%%%%%%%%%%%% res is" + res.message)
+          if(res.status === 200){
+            console.log("%%%%%%%%%%%%%%% in alert status")
+            localStorage.removeItem('user_id')
+          }
           this.successMessage = res.message
           this.spinner.hide()
           this.loading = false
           this.snackBar.open(this.successMessage, null, {
-            duration: 2000,
+            duration: 6000,
             horizontalPosition: 'center',
             panelClass: 'my-snack-bar-success',
           })
@@ -95,7 +114,7 @@ export class ResetPasswordComponent implements OnInit {
           this.spinner.hide()
           this.loading = false
           this.snackBar.open(this.failMessage, null, {
-            duration: 2000,
+            duration: 6000,
             horizontalPosition: 'center',
             panelClass: 'my-snack-bar-fail',
           })
@@ -107,7 +126,7 @@ export class ResetPasswordComponent implements OnInit {
         'Unknown User, please send forget password request to be able to reset your password',
         null,
         {
-          duration: 2000,
+          duration: 6000,
           horizontalPosition: 'center',
           panelClass: 'my-snack-bar-fail',
         },
