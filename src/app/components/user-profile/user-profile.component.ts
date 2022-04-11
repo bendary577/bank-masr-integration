@@ -555,9 +555,10 @@ export class UserProfileComponent implements OnInit {
     return isFeature;
   }
 
-  undoWalletAction() {
+  undoWalletAction(row) {
+   if(row.check !== null){
     this.loyaltyService
-      .undoWalletAction(this.user.id, "3650")
+      .undoWalletAction(this.user.id, row.check)
       .toPromise()
       .then((result: any) => {
         // Check config
@@ -586,5 +587,14 @@ export class UserProfileComponent implements OnInit {
           panelClass: "my-snack-bar-fail",
         });
       });
+   }else{
+    this.spinner.hide();
+    this.snackBar.open("Wa;;et action check id not found", null, {
+      duration: 3000,
+      horizontalPosition: "center",
+      panelClass: "my-snack-bar-fail",
+    });
+   }
+
   }
 }
