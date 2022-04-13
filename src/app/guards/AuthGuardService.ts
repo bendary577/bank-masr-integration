@@ -20,7 +20,6 @@ export class AuthGuardService implements CanActivate {
   }
 
   async requireLogin() {
-    console.log("%%%%%%%%%%%%%%%%% heeeeeeey 2")
     /*    return await new Promise(async (res, rej) => {
     await this.angularfireAuth.authState.subscribe(user => {
 
@@ -38,7 +37,6 @@ export class AuthGuardService implements CanActivate {
   }
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    console.log("%%%%%%%%%%%%%%%%% heeeeeeey 3")
     if (localStorage.getItem("auth_token")) {
       return true;
       // return await  this.auth_service.checkToken().toPromise().then((res: any) => {
@@ -55,7 +53,6 @@ export class AuthGuardService implements CanActivate {
       //     return true;
       //   });
     } else {
-      console.log("%%%%%%%%%%%%%%%%% heeeeeeey 4")
       this.routerd.navigate(["/"]);
       return false;
     }

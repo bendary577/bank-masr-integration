@@ -212,10 +212,10 @@ export class UserProfileComponent implements OnInit {
               if (err.status === 401) {
                 message = ErrorMessages.SESSION_EXPIRED;
                 this.sideNav.Logout();
-              } else if (err.error.message) {
+              } else if (err.error && err.error.message) {
                 message = err.error.message;
-              } else if (err.message) {
-                message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
+              } else {
+                message = ErrorMessages.WALLET_CHARGE_ERROR;
               }
               this.spinner.hide();
               this.snackBar.open(message, null, {
