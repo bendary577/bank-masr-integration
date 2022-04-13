@@ -100,7 +100,6 @@ export class SideNaveComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit() {
-    console.log("heeeeeeey 1")
     if (
       localStorage.getItem('user') != undefined ||
       localStorage.getItem('user') != null
