@@ -98,7 +98,6 @@ export class LoginComponent implements OnInit {
   }
 
   getRoles() {
-    console.log("%%%%%%%%%%%%%%%%%%%%%%%%%% login roles");
     this.accountService
       .getRoles("asfas", true)
       .then((res: any) => {
@@ -125,7 +124,6 @@ export class LoginComponent implements OnInit {
   }
 
   saveAccountERD() {
-    console.log("%%%%%%%%%%%%%%%%%%%%%%%%%% login erd");
     this.accountService
       .getAccount()
       .toPromise()
