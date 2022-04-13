@@ -56,7 +56,10 @@ export class ManageUsersComponent implements OnInit {
   `,
     },
     selected: [],
+    pageNumber: 1 as number,
+    limit: 10 as number,
     locationsCount: 0 as number,
+    usersCount: 0 as number,
     pagesFilter: [10, 25, 50, 75, 100],
     showLoading: true,
     inputSearch: '' as string,
@@ -90,6 +93,16 @@ export class ManageUsersComponent implements OnInit {
     this.getUsers()
   }
 
+  onLimitChange(limit) {
+    this.usersList.limit = limit
+    this.getUsers();
+  }
+
+  changePage(pageInfo) {
+    this.usersList.pageNumber = pageInfo.page
+    this.getUsers();
+  }
+
   onSelect({ selected }) {
     this.usersList.selected.splice(0, this.usersList.selected.length)
     this.usersList.selected.push(...selected)
@@ -107,10 +120,14 @@ export class ManageUsersComponent implements OnInit {
   }
 
   getUsers() {
+    this.getUsersCount();
     console.log("%%%%%%%%%%%%%%%%%% in get users 1")
     this.usersList.showLoading = true
     this.loyaltyService
-      .getAppUsers()
+      .getAppUsersPaginated(
+        this.usersList.pageNumber,
+        this.usersList.limit
+        )
       .toPromise()
       .then((res: any) => {
         this.usersList.usersData = res
@@ -120,6 +137,33 @@ export class ManageUsersComponent implements OnInit {
       })
       .catch((err) => {
         this.usersList.showLoading = false
+      })
+  }
+
+  getUsersCount() {
+    this.loyaltyService
+      .countUsers()
+      .toPromise()
+      .then((res: any) => {
+        this.usersList.usersCount = res
+      })
+      .catch((err) => {
+        let message = ''
+        if (err.status === 401) {
+          message = ErrorMessages.SESSION_EXPIRED
+          this.sidNav.Logout()
+        } else if (err.error.message) {
+          message = err.error.message
+        } else if (err.message) {
+          message = err.message
+        } else {
+          message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+        }
+        this.snackBar.open(message, null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass: 'my-snack-bar-fail',
+        })
       })
   }
 

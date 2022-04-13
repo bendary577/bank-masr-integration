@@ -356,10 +356,10 @@
             </ng-template>
           </ngx-datatable-column>
 
-          <ngx-datatable-column name="Check">
+          <ngx-datatable-column name="Status">
             <ng-template let-row="row" ngx-datatable-cell-template>
-              <p *ngIf="row.check">{{ row.check }}</p>
-              <p *ngIf="!row.check">NA</p>
+              <p *ngIf="row.deleted" style="color:red">deleted</p>
+              <p *ngIf="!row.deleted" style="color:green">active</p>
             </ng-template>
           </ngx-datatable-column>
 

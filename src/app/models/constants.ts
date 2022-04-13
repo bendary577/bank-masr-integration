@@ -352,6 +352,8 @@ export class Constants {
     environment.apiHost + "/deleteApplicationGroups";
   static UPDATE_APP_GROUP_URL = environment.apiHost + "/updateApplicationGroup";
   static GET_APP_USERS_URL = environment.apiHost + "/getApplicationUsers";
+  static GET_APP_USERS_PAGINATED_URL = environment.apiHost + "/getApplicationUsersPaginated";
+  static GET_USERS_COUNT_URL = environment.apiHost + "/getUsersCount";
   static GET_APP_USER = environment.apiHost + "/applicationUsers";
   static ADD_APP_USER_URL = environment.apiHost + "/addApplicationUser";
 

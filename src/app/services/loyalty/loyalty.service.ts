@@ -39,6 +39,14 @@ export class LoyaltyService {
     )
   }
 
+  countUsers() {
+    this.token = localStorage.getItem('auth_token')
+    return this.http.get(
+      Constants.GET_USERS_COUNT_URL,
+      { headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }) },
+    )
+  }
+
   getAppUser(id) {
     return this.http.get(Constants.GET_APP_USER + '/' + id, {
       headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }),
@@ -98,9 +106,18 @@ export class LoyaltyService {
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   getAppUsers() {
-    console.log('%%%%%%%%%%%%%%%%%% in get users 2')
     this.token = localStorage.getItem('auth_token')
-    return this.http.get(Constants.GET_APP_USERS_URL, {
+    return this.http.get(
+      Constants.GET_APP_USERS_URL,{
+      headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }),
+    })
+  }
+
+  getAppUsersPaginated(pageNumber, limit) {
+    this.token = localStorage.getItem('auth_token')
+    return this.http.get(
+      Constants.GET_APP_USERS_PAGINATED_URL+'?pageNumber='+pageNumber+'&limit='+limit,
+       {
       headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }),
     })
   }
@@ -258,10 +275,10 @@ export class LoyaltyService {
     )
   }
 
-  undoWalletAction(userId, check) {
+  undoWalletAction(userId, actionId) {
     let token = localStorage.getItem('auth_token')
     return this.http.post(
-      Constants.UNDO_WALLET_ACTION + '?userId=' + userId + '&check=' + check,
+      Constants.UNDO_WALLET_ACTION + '?userId=' + userId + '&actionId=' + actionId,
       {},
       { headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }) },
     )

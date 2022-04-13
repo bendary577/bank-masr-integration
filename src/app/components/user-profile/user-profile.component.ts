@@ -127,7 +127,8 @@ export class UserProfileComponent implements OnInit {
         this.simphonyDiscount = this.group["simphonyDiscount"];
         if (this.user["wallet"] != null) {
           this.walletHistoryList.walletHistoryData =
-            this.user["wallet"]["walletHistory"];
+            this.user["wallet"]["walletHistory"].reverse();
+            
         }
       })
       .catch((err) => {
@@ -195,7 +196,6 @@ export class UserProfileComponent implements OnInit {
             .toPromise()
             .then((result: any) => {
               this.viewReceipt(result.data);
-
               this.walletHistoryList.showLoading = false;
               this.getApplicationUser();
               this.spinner.hide();
@@ -204,10 +204,10 @@ export class UserProfileComponent implements OnInit {
                 horizontalPosition: "center",
                 panelClass: "my-snack-bar-success",
               });
+              // location.reload();
             })
             .catch((err) => {
               this.walletHistoryList.showLoading = false;
-
               let message = "";
               if (err.status === 401) {
                 message = ErrorMessages.SESSION_EXPIRED;
@@ -246,12 +246,11 @@ export class UserProfileComponent implements OnInit {
             .deductWallet(func, this.user.id, res.amount)
             .toPromise()
             .then((result: any) => {
-              // Check config
               this.viewReceipt(result.data);
-
               this.walletHistoryList.showLoading = false;
               this.getApplicationUser();
               this.spinner.hide();
+              // location.reload();
             })
             .catch((err) => {
               this.walletHistoryList.showLoading = false;
@@ -279,17 +278,19 @@ export class UserProfileComponent implements OnInit {
   }
 
   viewReceipt(guest) {
-    if (
-      JSON.parse(localStorage.getItem("account")).printReceiptConfig
-        .previewReceipt
-    ) {
-      const dialogRef = this.dialog.open(ViewReceiptComponent, {
-        width: "302.36px", // 80mm
-        disableClose: true,
-        data: {
-          guest: guest,
-        },
-      });
+    let account = JSON.parse(localStorage.getItem("account"));
+    if(account.printReceiptConfig !== null){
+        if(account.previewReceipt){
+        const dialogRef = this.dialog.open(ViewReceiptComponent, {
+          width: "302.36px", // 80mm
+          disableClose: true,
+          data: {
+            guest: guest,
+          },
+        });
+      }
+    }else{
+      return
     }
   }
 
@@ -556,17 +557,22 @@ export class UserProfileComponent implements OnInit {
   }
 
   undoWalletAction(row) {
-   if(row.check !== null){
+   if(row.actionId !== null || row.actionId !== ""){
+    this.spinner.show();
     this.loyaltyService
-      .undoWalletAction(this.user.id, row.check)
+      .undoWalletAction(this.user.id, row.actionId)
       .toPromise()
       .then((result: any) => {
-        // Check config
         this.viewReceipt(result.data);
-
         this.walletHistoryList.showLoading = false;
-        this.getApplicationUser();
         this.spinner.hide();
+        this.getApplicationUser();
+        this.snackBar.open("Wallet Action was Cancelled Successfully", null, {
+          duration: 3000,
+          horizontalPosition: "center",
+          panelClass: "my-snack-bar-success",
+        });
+        // location.reload();
       })
       .catch((err) => {
         this.walletHistoryList.showLoading = false;
@@ -589,7 +595,7 @@ export class UserProfileComponent implements OnInit {
       });
    }else{
     this.spinner.hide();
-    this.snackBar.open("Wa;;et action check id not found", null, {
+    this.snackBar.open("Sorry, wallet action id is not found", null, {
       duration: 3000,
       horizontalPosition: "center",
       panelClass: "my-snack-bar-fail",
