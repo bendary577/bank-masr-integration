@@ -105,7 +105,8 @@
     
 
     <div *ngIf="hasRole('wallet_remaining_balance')" class="filter-container loyalty-style" style="text-align: center;">
- 
+
+          
     <div class="filter-buttons">
       <div class="five-column">
         <mat-form-field
@@ -115,7 +116,7 @@
         >
           <input
             matInput
-            style="max-width: 200px; "
+            style="max-width: 150px; "
             placeholder="Start Date"
             type="date"
             formContrlName="fromDate"
@@ -135,7 +136,7 @@
         >
           <input
             matInput
-            style="max-width: 200px"
+            style="max-width: 150px;"
             placeholder="Start Date"
             type="date"
             formContrlName="toDate"
@@ -146,26 +147,30 @@
         </mat-form-field>
       </div>
 
+      <div class="filterButton"
+            style="height:40px;width:120px; margin-top: 15px; text-align: center;cursor:pointer;"
+        >
+            <div style="margin-top: 5px;text-align: center;" (click)="toggleGetActiveGuestsOnly()">
+                <p *ngIf="getActiveGuestsOnly">Active Guests</p>
+                <p *ngIf="!getActiveGuestsOnly">All Guests</p>
+            </div>
+        </div>
 
-      <div class="five-column filterButtons" style="width: 333px">
         <div
-          class="filterButton"
-          style="height: 60px;width:275px; margin-top: 10px; text-align: center;"
+        class="filterButton"
+        style="height: 60px;width: 275px; margin-top: 10px; text-align: center;margin-right: 25px;"
         >
             <div style="margin-top: 5px;text-align: center;">
                 Wallets Total Remaining Balance 
-                 <div class="centering_div" *ngIf="walletsRemainingTotal.showLoading">
+                <div class="centering_div" *ngIf="walletsRemainingTotal.showLoading">
                     <mat-spinner class="child_div" [diameter]="20"></mat-spinner>
-                 </div>
+                </div>
                 <div *ngIf="!walletsRemainingTotal.showLoading">
                     {{ walletsRemainingTotalValue }} {{getCurrency()}}
                 </div>
             </div>
-        
         </div>
-      </div>
-	  
-	  
+      
     </div>
   </div>
   
@@ -342,7 +347,7 @@
                     [pagerNextIcon]="'datatable-icon-skip'"
                     [page]="usersList.pageNumber"
                     [size]="usersList.limit"
-                    [count]="usersList.locationsCount"
+                    [count]="usersList.usersCount"
                     (change)="changePage($event)"
                   >
                   </datatable-pager>

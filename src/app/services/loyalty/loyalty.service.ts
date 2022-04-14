@@ -284,14 +284,16 @@ export class LoyaltyService {
     )
   }
 
-  getWalletsTotalRemaining(fromDate, toDate) {
+  getWalletsTotalRemaining(fromDate, toDate, getActiveGuestsOnly) {
     this.token = localStorage.getItem('auth_token')
     return this.http.get(
       Constants.GET_WALLETS_REMAINING_TOTAL +
         '?fromDate=' +
         fromDate +
         '&toDate=' +
-        toDate,
+        toDate +
+        '&getActiveGuestsOnly=' +
+        getActiveGuestsOnly,
       { headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }) },
     )
   }

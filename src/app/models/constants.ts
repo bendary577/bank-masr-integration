@@ -478,4 +478,9 @@ export class Constants {
   /////////////////////////////////////////////// new Design /////////////////////////////////////////
 
   static SUPPORT = "support";
+
+  /////////////////////////////////////////////// wallet operation /////////////////////////////////////////
+  static CHARGE_WALLET_ACTION = "Charge Wallet";
+  static DEDUCT_WALLET_ACTION = "Deduct From Wallet";
+  static ENTRANCE_AMOUNT_ACTION = "Entrance Amount";
 }

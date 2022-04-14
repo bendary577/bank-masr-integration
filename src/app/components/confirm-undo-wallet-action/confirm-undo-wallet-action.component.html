@@ -1,1 +1,20 @@
-<p>confirm-undo-wallet-action works!</p>
+<h1 mat-dialog-title>Confirm Undo Wallet Action</h1>
+<div mat-dialog-content>
+    Are you sure you want to undo the wallet action ?
+</div>
+<br>
+<div>
+    <div>Action Operation : {{data.operation}}</div>
+    <div>Action Amount : {{data.amount}}</div>
+</div>
+<br>
+<div>
+    <div *ngIf="charge">Your wallet will be deducted by {{data.amount}} {{getCurrency()}}</div>
+    <div *ngIf="deduct">Your wallet will be recharged by {{data.amount}} {{getCurrency()}}</div>
+    <div *ngIf="entrance">Your wallet will be charged by {{data.amount}} {{getCurrency()}}</div>
+</div>
+<br>
+<div mat-dialog-actions>
+    <button mat-button cdkFocusInitial (click)="onSaveClick()" class="button">Yes</button>
+    <button mat-button (click)="onNoClick()" class="button">Cancel</button>
+</div>

@@ -44,6 +44,7 @@ export class ManageUsersComponent implements OnInit {
   fromDate = ''
   toDate = ''
   isEntrySys = true
+  getActiveGuestsOnly = false
 
   usersList = {
     paginateData: true as boolean,
@@ -121,7 +122,6 @@ export class ManageUsersComponent implements OnInit {
 
   getUsers() {
     this.getUsersCount();
-    console.log("%%%%%%%%%%%%%%%%%% in get users 1")
     this.usersList.showLoading = true
     this.loyaltyService
       .getAppUsersPaginated(
@@ -166,6 +166,7 @@ export class ManageUsersComponent implements OnInit {
         })
       })
   }
+
 
   deleteUsers(flage) {
     this.usersList.showLoading = true
@@ -687,9 +688,6 @@ export class ManageUsersComponent implements OnInit {
   filterUsers(selectedGuest) {
     const strs = this.usersList.usersData
     const result = strs.filter((s) => s.code.includes(selectedGuest))
-    console.log(selectedGuest)
-    console.log(strs)
-    console.log(result)
     this.usersList.usersData = result
   }
 
@@ -722,7 +720,12 @@ export class ManageUsersComponent implements OnInit {
   }
 
   getCurrency() {
-    return JSON.parse(localStorage.getItem('account')).currency
+    let currency = JSON.parse(localStorage.getItem('account')).currency
+    if(currency !== null){
+        return currency;
+    }else{
+        return "JOD"
+    }
   }
 
   resetPicker(event) {
@@ -838,7 +841,7 @@ export class ManageUsersComponent implements OnInit {
   getWalletsTotalRemaining() {
     this.walletsRemainingTotal.showLoading = true
     this.loyaltyService
-      .getWalletsTotalRemaining(this.fromDate, this.toDate)
+      .getWalletsTotalRemaining(this.fromDate, this.toDate, this.getActiveGuestsOnly)
       .toPromise()
       .then((res: any) => {
         this.walletsRemainingTotalValue = res.data
@@ -848,4 +851,13 @@ export class ManageUsersComponent implements OnInit {
         this.walletsRemainingTotal.showLoading = false
       })
   }
+
+  toggleGetActiveGuestsOnly(){
+    if(this.getActiveGuestsOnly === true){
+      this.getActiveGuestsOnly = false
+    }else if(this.getActiveGuestsOnly === false){
+      this.getActiveGuestsOnly = true
+    }
+  }
+  
 }

@@ -17,7 +17,7 @@ import { saveAs } from 'file-saver'
 import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser'
 import { ViewReceiptComponent } from '../view-receipt/view-receipt.component'
 import { WalletHistory } from 'src/app/models/wallet/wallet-history'
-
+import {ConfirmUndoWalletActionComponent} from '../confirm-undo-wallet-action/confirm-undo-wallet-action.component'
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -82,7 +82,7 @@ export class UserProfileComponent implements OnInit {
       if (this.user['wallet'] != null) {
         this.walletHistoryList.walletHistoryData = this.user['wallet'][
           'walletHistory'
-        ]
+        ].reverse()
       }
     } else {
       this.getApplicationUser()
@@ -191,7 +191,6 @@ export class UserProfileComponent implements OnInit {
         this.walletHistoryList.showLoading = true
         this.spinner.show()
         if (res) {
-          console.log(res)
           this.loyaltyService
             .chargeWallet(func, this.user.id, res)
             .toPromise()
@@ -200,7 +199,7 @@ export class UserProfileComponent implements OnInit {
               this.walletHistoryList.showLoading = false
               this.getApplicationUser()
               this.spinner.hide()
-              this.snackBar.open('Wallet Charged Successfully.', null, {
+              this.snackBar.open('Wallet charged successfully.', null, {
                 duration: 2000,
                 horizontalPosition: 'center',
                 panelClass: 'my-snack-bar-success',
@@ -242,7 +241,6 @@ export class UserProfileComponent implements OnInit {
         this.walletHistoryList.showLoading = true
         this.spinner.show()
         if (res) {
-          console.log(res)
           this.loyaltyService
             .deductWallet(func, this.user.id, res.amount)
             .toPromise()
@@ -251,7 +249,7 @@ export class UserProfileComponent implements OnInit {
               this.walletHistoryList.showLoading = false
               this.getApplicationUser()
               this.spinner.hide()
-              this.snackBar.open('Wallet Deducted Successfully.', null, {
+              this.snackBar.open('Wallet deducted successfully.', null, {
                 duration: 2000,
                 horizontalPosition: 'center',
                 panelClass: 'my-snack-bar-success',
@@ -522,7 +520,6 @@ export class UserProfileComponent implements OnInit {
       },
       (err) => {
         this.spinner.hide()
-        console.error(err)
         this.snackBar.open('Fail to export, Please try agian', null, {
           duration: 2000,
           horizontalPosition: 'center',
@@ -563,41 +560,51 @@ export class UserProfileComponent implements OnInit {
 
   undoWalletAction(row) {
     if (row.actionId !== null || row.actionId !== '') {
-      this.spinner.show()
-      this.loyaltyService
-        .undoWalletAction(this.user.id, row.actionId)
-        .toPromise()
-        .then((result: any) => {
-          this.viewReceipt(result.data)
-          this.walletHistoryList.showLoading = false
-          this.spinner.hide()
-          this.getApplicationUser()
-          this.snackBar.open('Wallet Action was Cancelled Successfully', null, {
-            duration: 3000,
-            horizontalPosition: 'center',
-            panelClass: 'my-snack-bar-success',
-          })
-          // location.reload();
-        })
-        .catch((err) => {
-          this.walletHistoryList.showLoading = false
-          this.spinner.hide()
 
-          let message = ''
-          if (err.status === 401) {
-            message = ErrorMessages.SESSION_EXPIRED
-            this.sideNav.Logout()
-          } else if (err.error.message) {
-            message = err.error.message
-          } else if (err.message) {
-            message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+      const dialogRef = this.dialog.open(ConfirmUndoWalletActionComponent, {
+        width: '400px',
+        data : row
+      })
+      dialogRef.afterClosed().subscribe((res) => {
+          if (res.confirm) {
+            this.walletHistoryList.showLoading = true
+            this.spinner.show()
+            this.loyaltyService
+              .undoWalletAction(this.user.id, row.actionId)
+              .toPromise()
+              .then((result: any) => {
+                this.viewReceipt(result.data)
+                this.walletHistoryList.showLoading = false
+                this.spinner.hide()
+                this.getApplicationUser()
+                this.snackBar.open('Wallet Action was Cancelled Successfully', null, {
+                  duration: 3000,
+                  horizontalPosition: 'center',
+                  panelClass: 'my-snack-bar-success',
+                })
+                // location.reload();
+              })
+              .catch((err) => {
+                this.walletHistoryList.showLoading = false
+                this.spinner.hide()
+      
+                let message = ''
+                if (err.status === 401) {
+                  message = ErrorMessages.SESSION_EXPIRED
+                  this.sideNav.Logout()
+                } else if (err.error.message) {
+                  message = err.error.message
+                } else if (err.message) {
+                  message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+                }
+                this.snackBar.open(message, null, {
+                  duration: 3000,
+                  horizontalPosition: 'center',
+                  panelClass: 'my-snack-bar-fail',
+                })
+              })
           }
-          this.snackBar.open(message, null, {
-            duration: 3000,
-            horizontalPosition: 'center',
-            panelClass: 'my-snack-bar-fail',
-          })
-        })
+      })
     } else {
       this.spinner.hide()
       this.snackBar.open('Sorry, wallet action id is not found', null, {
