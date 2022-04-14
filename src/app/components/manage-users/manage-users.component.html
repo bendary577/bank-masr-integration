@@ -102,63 +102,63 @@
     </div>
 
     <!----------------------------------- Wallet Filtration  ----------------------->
-    
 
     <div *ngIf="hasRole('wallet_remaining_balance')" class="filter-container loyalty-style" style="text-align: center;">
+    
+        <div style="float: left;width: 66%;">
 
-          
-    <div class="filter-buttons">
-      <div class="five-column">
-        <mat-form-field
-          appearance="outline"
-          class="example-full-width"
-          style="max-width: 25%;margin-top: 20px;"
-        >
-          <input
-            matInput
-            style="max-width: 150px; "
-            placeholder="Start Date"
-            type="date"
-            formContrlName="fromDate"
-            id="fromDate"
-            [(ngModel)]="fromDate"
-            (ngModelChange)="getWalletsTotalRemaining()"
-          />
-        </mat-form-field>
-      </div>
+            <mat-form-field
+            appearance="outline"
+            class="example-full-width filter-buttons"
+            style="max-width: 25%;margin-top: 20px;float: left;"
+            >
+            <input
+                matInput
+                style="max-width: 100px; "
+                placeholder="Start Date"
+                type="date"
+                formContrlName="fromDate"
+                id="fromDate"
+                [(ngModel)]="fromDate"
+                (ngModelChange)="getWalletsTotalRemaining()"
+            />
+            </mat-form-field>
+    
+    
+            <mat-form-field
+            appearance="outline"
+            class="example-full-width"
+            style="max-width: 25%;margin-top: 20px;"
+          >
+            <input
+              matInput
+              style="max-width: 100px;"
+              placeholder="Start Date"
+              type="date"
+              formContrlName="toDate"
+              id="toDate"
+              (ngModelChange)="getWalletsTotalRemaining()"
+              [(ngModel)]="toDate"
+            />
+            
+            </mat-form-field>
 
+            <mat-form-field 
+                appearance="outline"
+                class="example-full-width"
+                style="max-width: 25%;margin-top: 20px;width: 230px;float: right;margin-right: 50px;">
+              <mat-select [(value)]="selected" (selectionChange)="toggleGetActiveGuestsOnly($event)" panelClass="" >
+                <mat-option value="User Status Filter" selected [disabled]="true">User Status Filter</mat-option>
+                <mat-option value="Active Guests">Active Guests</mat-option>
+                <mat-option value="All Guests">All Guests</mat-option>
+              </mat-select>
+            </mat-form-field>
 
-      <div class="five-column">
-        <mat-form-field
-          appearance="outline"
-          class="example-full-width"
-          style="max-width: 25%;margin-top: 20px;"
-        >
-          <input
-            matInput
-            style="max-width: 150px;"
-            placeholder="Start Date"
-            type="date"
-            formContrlName="toDate"
-            id="toDate"
-            (ngModelChange)="getWalletsTotalRemaining()"
-            [(ngModel)]="toDate"
-          />
-        </mat-form-field>
-      </div>
-
-      <div class="filterButton"
-            style="height:40px;width:120px; margin-top: 15px; text-align: center;cursor:pointer;"
-        >
-            <div style="margin-top: 5px;text-align: center;" (click)="toggleGetActiveGuestsOnly()">
-                <p *ngIf="getActiveGuestsOnly">Active Guests</p>
-                <p *ngIf="!getActiveGuestsOnly">All Guests</p>
-            </div>
         </div>
 
         <div
         class="filterButton"
-        style="height: 60px;width: 275px; margin-top: 10px; text-align: center;margin-right: 25px;"
+        style="height: 60px;width: 275px; margin-top: 10px; text-align: center;justify-content: center;margin-right: 25px;"
         >
             <div style="margin-top: 5px;text-align: center;">
                 Wallets Total Remaining Balance 
@@ -170,10 +170,9 @@
                 </div>
             </div>
         </div>
-      
+    
     </div>
-  </div>
-  
+
 
     <!----------------------------------- Wallet Filtration  ----------------------->
 

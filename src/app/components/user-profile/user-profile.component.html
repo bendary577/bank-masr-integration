@@ -398,8 +398,16 @@
 
           <ngx-datatable-column name="Action">
             <ng-template let-row="row" ngx-datatable-cell-template>
+              <div >
+
+              </div>
               <button
                 mat-flat-button
+                [disabled]="
+                  !user ||
+                  (user &&
+                    (user.deleted || lessThanOrEqualZero() || user.suspended))
+                "
                 (click)="undoWalletAction(row)"
                 style="background-color: #f8b15f; margin-bottom: 15px"
               >

@@ -42,7 +42,7 @@ export class ForgetPasswordComponent implements OnInit {
 
   ngOnInit() {
     this.forgetPasswordForm = this.formBuilder.group({
-      email: ['', Validators.required],
+      username: ['', Validators.required],
     })
     this.successMessage = ''
     this.failMessage = ''
@@ -55,13 +55,12 @@ export class ForgetPasswordComponent implements OnInit {
 
   isValid() {
     this.spinner.show()
-    const email = this.forgetPasswordForm.controls.email.value as string
+    const username = this.forgetPasswordForm.controls.username.value as string
 
     this.authenticationService
-      .forgetPassword(email)
+      .forgetPassword(username)
       .toPromise()
       .then((res: any) => {
-        console.log('%%%%%%%%%%%%%%% user id is ' + res.user_id)
         localStorage.setItem("user_id", res.user_id);
         this.spinner.hide()
         this.loading = false

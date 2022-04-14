@@ -13,6 +13,8 @@ import { AddAppUserAccompiedComponent } from '../add-app-user-accompied/add-app-
 import { SideNaveComponent } from '../side-nave/side-nave.component'
 import { ExtendExpiryDateComponent } from '../extend-expiry-date/extend-expiry-date.component'
 import { ViewReceiptComponent } from '../view-receipt/view-receipt.component'
+import {MatSelectModule} from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field'; 
 
 @Component({
   selector: 'app-manage-users',
@@ -45,6 +47,7 @@ export class ManageUsersComponent implements OnInit {
   toDate = ''
   isEntrySys = true
   getActiveGuestsOnly = false
+  selected = 'User Status Filter';
 
   usersList = {
     paginateData: true as boolean,
@@ -92,6 +95,7 @@ export class ManageUsersComponent implements OnInit {
 
   ngOnInit() {
     this.getUsers()
+    this.getWalletsTotalRemaining()
   }
 
   onLimitChange(limit) {
@@ -133,7 +137,6 @@ export class ManageUsersComponent implements OnInit {
         this.usersList.usersData = res
         this.usersList.allGuestsBeforeFilter = res
         this.usersList.showLoading = false
-        this.getWalletsTotalRemaining()
       })
       .catch((err) => {
         this.usersList.showLoading = false
@@ -852,12 +855,15 @@ export class ManageUsersComponent implements OnInit {
       })
   }
 
-  toggleGetActiveGuestsOnly(){
-    if(this.getActiveGuestsOnly === true){
-      this.getActiveGuestsOnly = false
-    }else if(this.getActiveGuestsOnly === false){
+  toggleGetActiveGuestsOnly(value){
+    if(value.value === 'Active Guests'){
       this.getActiveGuestsOnly = true
+    }else if(value.value === 'Expired Guests'){
+      this.getActiveGuestsOnly = false
+    }else if(value.value === 'All Guests'){
+      this.getActiveGuestsOnly = false
     }
+    this.getWalletsTotalRemaining()
   }
   
 }
