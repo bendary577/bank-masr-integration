@@ -89,6 +89,7 @@ import { AggregatorIntegratorComponent } from "../components/aggregator-integrat
 import { AggregatorOrdersComponent } from "../components/aggregator-orders/aggregator-orders.component";
 import { AggregatorProductsComponent } from "../components/aggregator-products/aggregator-products.component";
 import { MatTabsModule } from "@angular/material";
+import { ConfirmUndoWalletActionComponent } from '../components/confirm-undo-wallet-action/confirm-undo-wallet-action.component';
 
 
 @NgModule({
@@ -184,6 +185,7 @@ import { MatTabsModule } from "@angular/material";
     UniqueVoucherComponent,
     SalesApiDailyComponent,
     SalesApiMonthlyComponent,
+    ConfirmUndoWalletActionComponent,
   ],
   imports: [
     MainRoutingModule,
