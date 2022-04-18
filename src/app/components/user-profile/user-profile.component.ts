@@ -17,7 +17,7 @@ import { saveAs } from 'file-saver'
 import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser'
 import { ViewReceiptComponent } from '../view-receipt/view-receipt.component'
 import { WalletHistory } from 'src/app/models/wallet/wallet-history'
-
+import {ConfirmUndoWalletActionComponent} from '../confirm-undo-wallet-action/confirm-undo-wallet-action.component'
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -39,8 +39,8 @@ export class UserProfileComponent implements OnInit {
   user: ApplicationUser
   revenueCenters: RevenueCenter[] = []
 
-  distance = 0;
-  expiryDateCounter: string;
+  distance = 0
+  expiryDateCounter: string
 
   walletHistoryList = {
     paginateData: true as boolean,
@@ -58,6 +58,7 @@ export class UserProfileComponent implements OnInit {
     showLoading: false,
     inputSearch: '' as string,
     walletHistoryData: [] as WalletHistory[],
+    showCashandEmployee: false as boolean,
   }
 
   constructor(
@@ -78,37 +79,40 @@ export class UserProfileComponent implements OnInit {
       this.calculateParams(this.user)
       this.group = this.user['group']
       this.simphonyDiscount = this.group['simphonyDiscount']
-      if(this.user['wallet'] != null){
+      if (this.user['wallet'] != null) {
         this.walletHistoryList.walletHistoryData = this.user['wallet'][
           'walletHistory'
-        ]
+        ].reverse()
       }
     } else {
       this.getApplicationUser()
     }
   }
 
-  
   x = setInterval(() => {
-    if(this.distance < 0){
-      clearInterval(this.x);
+    if (this.distance < 0) {
+      clearInterval(this.x)
     }
-    if(this.user && this.user.expiryDate != null ){
-      var now  = new Date().getTime();
-      this.distance = new Date(this.user.expiryDate).getTime() - now;
-      if(this.distance < 0){
-        this.expiryDateCounter = "0d 0h 0m 0s"
-      }else{
-        var days = Math.floor(this.distance / (1000*60*60*24));
-        var hours = Math.floor((this.distance % (1000*60*60*24)) / (1000*60*60));
-        var minutes = Math.floor((this.distance % (1000*60*60)) / (1000*60));
-        var seconds = Math.floor((this.distance % (1000*60)) / (1000));
-        this.expiryDateCounter = days + "d " + hours + "h " + minutes + "m " + seconds + "s"
+    if (this.user && this.user.expiryDate != null) {
+      var now = new Date().getTime()
+      this.distance = new Date(this.user.expiryDate).getTime() - now
+      if (this.distance < 0) {
+        this.expiryDateCounter = '0d 0h 0m 0s'
+      } else {
+        var days = Math.floor(this.distance / (1000 * 60 * 60 * 24))
+        var hours = Math.floor(
+          (this.distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+        )
+        var minutes = Math.floor(
+          (this.distance % (1000 * 60 * 60)) / (1000 * 60),
+        )
+        var seconds = Math.floor((this.distance % (1000 * 60)) / 1000)
+        this.expiryDateCounter =
+          days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's'
       }
-    }else{
-      this.expiryDateCounter = "0d 0h 0m 0s"
+    } else {
+      this.expiryDateCounter = '0d 0h 0m 0s'
     }
-
   })
 
   getApplicationUser() {
@@ -122,12 +126,11 @@ export class UserProfileComponent implements OnInit {
         this.calculateParams(this.user)
         this.group = this.user['group']
         this.simphonyDiscount = this.group['simphonyDiscount']
-        if(this.user['wallet'] != null){
+        if (this.user['wallet'] != null) {
           this.walletHistoryList.walletHistoryData = this.user['wallet'][
             'walletHistory'
-          ]
+          ].reverse()
         }
-
       })
       .catch((err) => {
         let message = ''
@@ -148,7 +151,7 @@ export class UserProfileComponent implements OnInit {
 
   calculateParams(user) {
     this.credit = 0
-    if(user.wallet != null){
+    if (user.wallet != null) {
       let balance = user.wallet.balance
       for (let i = 0; i < balance.length; i++) {
         this.credit = this.credit + balance[i]['amount']
@@ -171,7 +174,6 @@ export class UserProfileComponent implements OnInit {
     return false
   }
 
-
   lessThanOrEqualZero(): Boolean {
     if (this.distance > 0) {
       return false
@@ -189,33 +191,31 @@ export class UserProfileComponent implements OnInit {
         this.walletHistoryList.showLoading = true
         this.spinner.show()
         if (res) {
-          console.log(res)
           this.loyaltyService
             .chargeWallet(func, this.user.id, res)
             .toPromise()
             .then((result: any) => {
-              this.viewReceipt(result.data);
-
+              this.viewReceipt(result.data)
               this.walletHistoryList.showLoading = false
               this.getApplicationUser()
               this.spinner.hide()
-              this.snackBar.open('Wallet Charged Successfully.', null, {
+              this.snackBar.open('Wallet charged successfully.', null, {
                 duration: 2000,
                 horizontalPosition: 'center',
                 panelClass: 'my-snack-bar-success',
               })
+              // location.reload();
             })
             .catch((err) => {
               this.walletHistoryList.showLoading = false
-
               let message = ''
               if (err.status === 401) {
                 message = ErrorMessages.SESSION_EXPIRED
                 this.sideNav.Logout()
-              } else if (err.error.message) {
+              } else if (err.error && err.error.message) {
                 message = err.error.message
-              } else if (err.message) {
-                message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+              } else {
+                message = ErrorMessages.WALLET_CHARGE_ERROR
               }
               this.spinner.hide()
               this.snackBar.open(message, null, {
@@ -241,17 +241,19 @@ export class UserProfileComponent implements OnInit {
         this.walletHistoryList.showLoading = true
         this.spinner.show()
         if (res) {
-          console.log(res)
           this.loyaltyService
             .deductWallet(func, this.user.id, res.amount)
             .toPromise()
             .then((result: any) => {
-              // Check config
-              this.viewReceipt(result.data);
-              
+              this.viewReceipt(result.data)
               this.walletHistoryList.showLoading = false
               this.getApplicationUser()
               this.spinner.hide()
+              this.snackBar.open('Wallet deducted successfully.', null, {
+                duration: 2000,
+                horizontalPosition: 'center',
+                panelClass: 'my-snack-bar-success',
+              })
             })
             .catch((err) => {
               this.walletHistoryList.showLoading = false
@@ -279,14 +281,19 @@ export class UserProfileComponent implements OnInit {
   }
 
   viewReceipt(guest) {
-    if( JSON.parse(localStorage.getItem('account')).printReceiptConfig.previewReceipt){
-      const dialogRef = this.dialog.open(ViewReceiptComponent, {
-        width: '302.36px', // 80mm 
-        disableClose: true ,
-        data: {
-          guest: guest,
+    let account = JSON.parse(localStorage.getItem('account'))
+    if (account.printReceiptConfig !== null) {
+      if (account.previewReceipt) {
+        const dialogRef = this.dialog.open(ViewReceiptComponent, {
+          width: '302.36px', // 80mm
+          disableClose: true,
+          data: {
+            guest: guest,
           },
-      })
+        })
+      }
+    } else {
+      return
     }
   }
 
@@ -339,7 +346,7 @@ export class UserProfileComponent implements OnInit {
       .afterClosed()
       .subscribe((res) => {
         if (res) {
-          this.spinner.show();
+          this.spinner.show()
           this.loyaltyService
             .addApplicationUser(
               false,
@@ -355,7 +362,8 @@ export class UserProfileComponent implements OnInit {
               guest.balance,
               res.expiryDate,
               false,
-              false)
+              false,
+            )
             .then((result: any) => {
               this.getApplicationUser()
               this.spinner.hide()
@@ -366,7 +374,7 @@ export class UserProfileComponent implements OnInit {
               })
             })
             .catch((err) => {
-              this.spinner.hide();
+              this.spinner.hide()
 
               let message = ''
               if (err.status === 401) {
@@ -391,16 +399,19 @@ export class UserProfileComponent implements OnInit {
   }
 
   updateUserDialog() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.autoFocus = true
     dialogConfig.data = {
-        title:  "Update Guest",
-        user: this.user,
-    };
-    dialogConfig.width = '420px';
-    dialogConfig.autoFocus = true;
-    
-    const dialogRef = this.dialog.open(AddAppUserAccompiedComponent, dialogConfig)
+      title: 'Update Guest',
+      user: this.user,
+    }
+    dialogConfig.width = '420px'
+    dialogConfig.autoFocus = true
+
+    const dialogRef = this.dialog.open(
+      AddAppUserAccompiedComponent,
+      dialogConfig,
+    )
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         this.spinner.show()
@@ -492,33 +503,30 @@ export class UserProfileComponent implements OnInit {
 
   extractExcelFile() {
     this.spinner.show()
-    this.excelService
-      .exportWalletHistoryExcel(this.user.id)
-      .subscribe(
-        (res) => {
-          const blob = new Blob([res], { type: 'application/vnd.ms.excel' })
-          const file = new File([blob], 'Wallet History' + '.xlsx', {
-            type: 'application/vnd.ms.excel',
-          })
-          saveAs(file)
+    this.excelService.exportWalletHistoryExcel(this.user.id).subscribe(
+      (res) => {
+        const blob = new Blob([res], { type: 'application/vnd.ms.excel' })
+        const file = new File([blob], 'Wallet History' + '.xlsx', {
+          type: 'application/vnd.ms.excel',
+        })
+        saveAs(file)
 
-          this.snackBar.open('Export Successfully', null, {
-            duration: 2000,
-            horizontalPosition: 'center',
-            panelClass: 'my-snack-bar-success',
-          })
-          this.spinner.hide()
-        },
-        (err) => {
-          this.spinner.hide()
-          console.error(err)
-          this.snackBar.open('Fail to export, Please try agian', null, {
-            duration: 2000,
-            horizontalPosition: 'center',
-            panelClass: 'my-snack-bar-fail',
-          })
-        },
-      )
+        this.snackBar.open('Export Successfully', null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass: 'my-snack-bar-success',
+        })
+        this.spinner.hide()
+      },
+      (err) => {
+        this.spinner.hide()
+        this.snackBar.open('Fail to export, Please try agian', null, {
+          duration: 2000,
+          horizontalPosition: 'center',
+          panelClass: 'my-snack-bar-fail',
+        })
+      },
+    )
   }
 
   backClicked() {
@@ -546,7 +554,64 @@ export class UserProfileComponent implements OnInit {
   }
 
   hasFeature(reference) {
-    var isFeature =  this.sideNav.hasFeature(reference)
-    return isFeature;
+    var isFeature = this.sideNav.hasFeature(reference)
+    return isFeature
+  }
+
+  undoWalletAction(row) {
+    if (row.actionId !== null || row.actionId !== '') {
+
+      const dialogRef = this.dialog.open(ConfirmUndoWalletActionComponent, {
+        width: '400px',
+        data : row
+      })
+      dialogRef.afterClosed().subscribe((res) => {
+          if (res.confirm) {
+            this.walletHistoryList.showLoading = true
+            this.spinner.show()
+            this.loyaltyService
+              .undoWalletAction(this.user.id, row.actionId)
+              .toPromise()
+              .then((result: any) => {
+                this.viewReceipt(result.data)
+                this.walletHistoryList.showLoading = false
+                this.spinner.hide()
+                this.getApplicationUser()
+                this.snackBar.open('Wallet Action was Cancelled Successfully', null, {
+                  duration: 3000,
+                  horizontalPosition: 'center',
+                  panelClass: 'my-snack-bar-success',
+                })
+                // location.reload();
+              })
+              .catch((err) => {
+                this.walletHistoryList.showLoading = false
+                this.spinner.hide()
+      
+                let message = ''
+                if (err.status === 401) {
+                  message = ErrorMessages.SESSION_EXPIRED
+                  this.sideNav.Logout()
+                } else if (err.error.message) {
+                  message = err.error.message
+                } else if (err.message) {
+                  message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+                }
+                this.snackBar.open(message, null, {
+                  duration: 3000,
+                  horizontalPosition: 'center',
+                  panelClass: 'my-snack-bar-fail',
+                })
+              })
+          }
+      })
+    } else {
+      this.spinner.hide()
+      this.snackBar.open('Sorry, wallet action id is not found', null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass: 'my-snack-bar-fail',
+      })
+    }
   }
 }

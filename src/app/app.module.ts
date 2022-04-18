@@ -1,24 +1,27 @@
-import { BrowserModule } from '@angular/platform-browser'
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core'
-import { AppRoutingModule } from './app-routing.module'
-import { AppComponent } from './app.component'
-import { HttpClientModule } from '@angular/common/http'
-import { CookieService } from 'ngx-cookie-service'
-import { AngularMaterialModule } from './angular-material.module'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { AuthService } from './services/auth/auth.service'
-import { HttpModule } from '@angular/http'
-import { AlertsService } from 'angular-alert-module'
-import { AuthGuardService } from './guards/AuthGuardService'
+import { BrowserModule } from "@angular/platform-browser";
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { HttpClientModule } from "@angular/common/http";
+import { CookieService } from "ngx-cookie-service";
+import { AngularMaterialModule } from "./angular-material.module";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AuthService } from "./services/auth/auth.service";
+import { HttpModule } from "@angular/http";
+import { AlertsService } from "angular-alert-module";
+import { AuthGuardService } from "./guards/AuthGuardService";
 
-import { HashLocationStrategy, LocationStrategy } from '@angular/common'
+import { HashLocationStrategy, LocationStrategy } from "@angular/common";
 
-import { Data } from './models/data'
-import { LoginComponent } from './components/login/login.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SideNaveComponent } from './components/side-nave/side-nave.component'
-import { NavBarComponent } from './components/nav-bar/nav-bar.component'
-import { BasicModule } from './shared/basic.module'
+import { Data } from "./models/data";
+import { SideNaveComponent } from "./components/side-nave/side-nave.component";
+import { NavBarComponent } from "./components/nav-bar/nav-bar.component";
+import { BasicModule } from "./shared/basic.module";
+import { LoginComponent } from "./components/login/login.component";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+
 
 @NgModule({
   declarations: [
@@ -26,6 +29,8 @@ import { BasicModule } from './shared/basic.module'
     LoginComponent,
     SideNaveComponent,
     NavBarComponent,
+    ForgetPasswordComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -33,10 +38,8 @@ import { BasicModule } from './shared/basic.module'
     BrowserAnimationsModule,
     HttpModule,
     HttpClientModule,
-
     // Used to open/close side menu
     NgbModule,
-
     BasicModule,
     AngularMaterialModule,
   ],
@@ -51,9 +54,7 @@ import { BasicModule } from './shared/basic.module'
     NavBarComponent,
   ],
   bootstrap: [AppComponent],
-  entryComponents: [
-  
-  ],
+  entryComponents: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

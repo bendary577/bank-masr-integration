@@ -13,6 +13,8 @@ import { AddAppUserAccompiedComponent } from '../add-app-user-accompied/add-app-
 import { SideNaveComponent } from '../side-nave/side-nave.component'
 import { ExtendExpiryDateComponent } from '../extend-expiry-date/extend-expiry-date.component'
 import { ViewReceiptComponent } from '../view-receipt/view-receipt.component'
+import {MatSelectModule} from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field'; 
 
 @Component({
   selector: 'app-manage-users',
@@ -44,6 +46,8 @@ export class ManageUsersComponent implements OnInit {
   fromDate = ''
   toDate = ''
   isEntrySys = true
+  getActiveGuestsOnly = false
+  selected = 'User Status Filter';
 
   usersList = {
     paginateData: true as boolean,
@@ -56,13 +60,28 @@ export class ManageUsersComponent implements OnInit {
   `,
     },
     selected: [],
+    pageNumber: 1 as number,
+    limit: 10 as number,
     locationsCount: 0 as number,
+    usersCount: 0 as number,
     pagesFilter: [10, 25, 50, 75, 100],
     showLoading: true,
     inputSearch: '' as string,
     usersData: [],
     allGuestsBeforeFilter: [],
   }
+
+  walletsRemainingTotal = {
+    messages: {
+      emptyMessage: `
+    <div style="text-align: center;">
+      <p class="user-name">No wallets remaining total info </p>
+    </div>
+  `,
+    },
+    showLoading: false,
+  }
+  walletsRemainingTotalValue = '0.0'
 
   constructor(
     private loyaltyService: LoyaltyService,
@@ -76,6 +95,17 @@ export class ManageUsersComponent implements OnInit {
 
   ngOnInit() {
     this.getUsers()
+    this.getWalletsTotalRemaining()
+  }
+
+  onLimitChange(limit) {
+    this.usersList.limit = limit
+    this.getUsers();
+  }
+
+  changePage(pageInfo) {
+    this.usersList.pageNumber = pageInfo.page
+    this.getUsers();
   }
 
   onSelect({ selected }) {
@@ -91,13 +121,17 @@ export class ManageUsersComponent implements OnInit {
 
   openUserProfile(user: ApplicationUser) {
     this.data.storage = user
-    this.router.navigate(["entrySystem/" + Constants.USER_PROFILE])
+    this.router.navigate(['entrySystem/' + Constants.USER_PROFILE])
   }
 
   getUsers() {
+    this.getUsersCount();
     this.usersList.showLoading = true
     this.loyaltyService
-      .getAppUsers()
+      .getAppUsersPaginated(
+        this.usersList.pageNumber,
+        this.usersList.limit
+        )
       .toPromise()
       .then((res: any) => {
         this.usersList.usersData = res
@@ -109,11 +143,39 @@ export class ManageUsersComponent implements OnInit {
       })
   }
 
+  getUsersCount() {
+    this.loyaltyService
+      .countUsers()
+      .toPromise()
+      .then((res: any) => {
+        this.usersList.usersCount = res
+      })
+      .catch((err) => {
+        let message = ''
+        if (err.status === 401) {
+          message = ErrorMessages.SESSION_EXPIRED
+          this.sidNav.Logout()
+        } else if (err.error.message) {
+          message = err.error.message
+        } else if (err.message) {
+          message = err.message
+        } else {
+          message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+        }
+        this.snackBar.open(message, null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass: 'my-snack-bar-fail',
+        })
+      })
+  }
+
+
   deleteUsers(flage) {
     this.usersList.showLoading = true
     let deletedId = []
 
-    for(var i = 0 ; i < this.usersList.selected.length; i++){
+    for (var i = 0; i < this.usersList.selected.length; i++) {
       deletedId.push(this.usersList.selected[i].id)
     }
 
@@ -181,7 +243,6 @@ export class ManageUsersComponent implements OnInit {
               res.expiryDate,
               false,
               false,
-
             )
             .then((result: any) => {
               this.loading = false
@@ -308,20 +369,20 @@ export class ManageUsersComponent implements OnInit {
     let dialogRef
 
     if (isGeneric) {
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.autoFocus = true;
+      const dialogConfig = new MatDialogConfig()
+      dialogConfig.autoFocus = true
       dialogConfig.data = {
-          title:  "Add Guest",
-          generic: genericGroup
-      };
-      dialogConfig.width = '420px';
-      dialogConfig.maxWidth = '420px';
-      dialogConfig.autoFocus = true;
+        title: 'Add Guest',
+        generic: genericGroup,
+      }
+      dialogConfig.width = '420px'
+      dialogConfig.maxWidth = '420px'
+      dialogConfig.autoFocus = true
 
       dialogRef = this.dialog.open(AddAppUserAccompiedComponent, dialogConfig)
     } else {
       dialogRef = this.dialog.open(AddAppUserComponent, {
-        width: '420px'
+        width: '420px',
       })
     }
 
@@ -343,7 +404,7 @@ export class ManageUsersComponent implements OnInit {
             res.balance,
             res.expiryDate,
             res.sendEmail,
-            res.sendSMS
+            res.sendSMS,
           )
           .then((result: any) => {
             this.loading = true
@@ -352,10 +413,10 @@ export class ManageUsersComponent implements OnInit {
             this.usersList.showLoading = false
             this.usersList.selected = []
 
-            if(result.success){
+            if (result.success) {
               // Print Receipt, When enterance amount greater than zero
-              if(isGeneric && res.balance > 0){
-                this.viewReceipt(result.data);
+              if (isGeneric && res.balance > 0) {
+                this.viewReceipt(result.data)
               }
 
               this.snackBar.open('User added successfully.', null, {
@@ -363,7 +424,7 @@ export class ManageUsersComponent implements OnInit {
                 horizontalPosition: 'center',
                 panelClass: 'my-snack-bar-success',
               })
-            }else{
+            } else {
               this.snackBar.open(result.message, null, {
                 duration: 2000,
                 horizontalPosition: 'center',
@@ -401,15 +462,15 @@ export class ManageUsersComponent implements OnInit {
     let dialogRef
     let isGeneric = this.usersList.selected[0].generic
     if (isGeneric) {
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.autoFocus = true;
+      const dialogConfig = new MatDialogConfig()
+      dialogConfig.autoFocus = true
       dialogConfig.data = {
-          title:  "Update Guest",
-          user: this.usersList.selected[0],
-      };
-      dialogConfig.width = '420px';
-      dialogConfig.maxWidth = '420px';
-      dialogConfig.autoFocus = true;
+        title: 'Update Guest',
+        user: this.usersList.selected[0],
+      }
+      dialogConfig.width = '420px'
+      dialogConfig.maxWidth = '420px'
+      dialogConfig.autoFocus = true
 
       dialogRef = this.dialog.open(AddAppUserAccompiedComponent, dialogConfig)
     } else {
@@ -442,7 +503,6 @@ export class ManageUsersComponent implements OnInit {
             res.expiryDate,
             res.sendEmail,
             res.sendSMS,
-
           )
           .then((result: any) => {
             this.loading = false
@@ -484,13 +544,16 @@ export class ManageUsersComponent implements OnInit {
   }
 
   viewReceipt(guest) {
-    if(JSON.parse(localStorage.getItem('account')).printReceiptConfig.previewReceipt){
+    if (
+      JSON.parse(localStorage.getItem('account')).printReceiptConfig
+        .previewReceipt
+    ) {
       const dialogRef = this.dialog.open(ViewReceiptComponent, {
-        width: '302.36px', // 80mm 
-        disableClose: true ,
+        width: '302.36px', // 80mm
+        disableClose: true,
         data: {
-          guest: guest
-         },
+          guest: guest,
+        },
       })
     }
   }
@@ -628,15 +691,12 @@ export class ManageUsersComponent implements OnInit {
   filterUsers(selectedGuest) {
     const strs = this.usersList.usersData
     const result = strs.filter((s) => s.code.includes(selectedGuest))
-    console.log(selectedGuest)
-    console.log(strs)
-    console.log(result)
     this.usersList.usersData = result
   }
 
   calculateParams(user): Number {
     let credit = 0
-    if(user.wallet != null){
+    if (user.wallet != null) {
       let balance = user.wallet.balance
       for (let i = 0; i < balance.length; i++) {
         credit = credit + balance[i]['amount']
@@ -646,8 +706,8 @@ export class ManageUsersComponent implements OnInit {
   }
 
   lessThanOrEqualZero(user): Boolean {
-    var now  = new Date().getTime();
-    let distance = new Date(user.expiryDate).getTime() - now;
+    var now = new Date().getTime()
+    let distance = new Date(user.expiryDate).getTime() - now
     if (distance > 0) {
       return false
     }
@@ -663,7 +723,12 @@ export class ManageUsersComponent implements OnInit {
   }
 
   getCurrency() {
-    return JSON.parse(localStorage.getItem('account')).currency
+    let currency = JSON.parse(localStorage.getItem('account')).currency
+    if(currency !== null){
+        return currency;
+    }else{
+        return "JOD"
+    }
   }
 
   resetPicker(event) {
@@ -775,4 +840,30 @@ export class ManageUsersComponent implements OnInit {
   restFilters() {}
 
   extractExcelFile() {}
+
+  getWalletsTotalRemaining() {
+    this.walletsRemainingTotal.showLoading = true
+    this.loyaltyService
+      .getWalletsTotalRemaining(this.fromDate, this.toDate, this.getActiveGuestsOnly)
+      .toPromise()
+      .then((res: any) => {
+        this.walletsRemainingTotalValue = res.data
+        this.walletsRemainingTotal.showLoading = false
+      })
+      .catch((err) => {
+        this.walletsRemainingTotal.showLoading = false
+      })
+  }
+
+  toggleGetActiveGuestsOnly(value){
+    if(value.value === 'Active Guests'){
+      this.getActiveGuestsOnly = true
+    }else if(value.value === 'Expired Guests'){
+      this.getActiveGuestsOnly = false
+    }else if(value.value === 'All Guests'){
+      this.getActiveGuestsOnly = false
+    }
+    this.getWalletsTotalRemaining()
+  }
+  
 }

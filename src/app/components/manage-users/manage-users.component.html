@@ -1,3 +1,4 @@
+<div class="guests_body">
 <div *ngIf="usersList.allGuestsBeforeFilter.length != 0 ||usersList.usersData.length != 0 || usersList.showLoading" class="header">
     <button mat-flat-button class="groups-buttons" (click)="addUserDialog(true, true)" *ngIf="hasRole('show_G_U_button')">Add
         Generic Guest</button>
@@ -99,6 +100,81 @@
             Guest</button>
         </div>
     </div>
+
+    <!----------------------------------- Wallet Filtration  ----------------------->
+
+    <div *ngIf="hasRole('wallet_remaining_balance')" class="filter-container loyalty-style" style="text-align: center;">
+    
+        <div style="float: left;width: 66%;">
+
+            <mat-form-field
+            appearance="outline"
+            class="example-full-width filter-buttons"
+            style="max-width: 25%;margin-top: 20px;float: left;"
+            >
+            <input
+                matInput
+                style="max-width: 100px; "
+                placeholder="Start Date"
+                type="date"
+                formContrlName="fromDate"
+                id="fromDate"
+                [(ngModel)]="fromDate"
+                (ngModelChange)="getWalletsTotalRemaining()"
+            />
+            </mat-form-field>
+    
+    
+            <mat-form-field
+            appearance="outline"
+            class="example-full-width"
+            style="max-width: 25%;margin-top: 20px;"
+          >
+            <input
+              matInput
+              style="max-width: 100px;"
+              placeholder="Start Date"
+              type="date"
+              formContrlName="toDate"
+              id="toDate"
+              (ngModelChange)="getWalletsTotalRemaining()"
+              [(ngModel)]="toDate"
+            />
+            
+            </mat-form-field>
+
+            <mat-form-field 
+                appearance="outline"
+                class="example-full-width"
+                style="max-width: 25%;margin-top: 20px;width: 230px;float: right;margin-right: 50px;">
+              <mat-select [(value)]="selected" (selectionChange)="toggleGetActiveGuestsOnly($event)" panelClass="" >
+                <mat-option value="User Status Filter" selected [disabled]="true">User Status Filter</mat-option>
+                <mat-option value="Active Guests">Active Guests</mat-option>
+                <mat-option value="All Guests">All Guests</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+        </div>
+
+        <div
+        class="filterButton"
+        style="height: 60px;width: 275px; margin-top: 10px; text-align: center;justify-content: center;margin-right: 25px;"
+        >
+            <div style="margin-top: 5px;text-align: center;">
+                Wallets Total Remaining Balance 
+                <div class="centering_div" *ngIf="walletsRemainingTotal.showLoading">
+                    <mat-spinner class="child_div" [diameter]="20"></mat-spinner>
+                </div>
+                <div *ngIf="!walletsRemainingTotal.showLoading">
+                    {{ walletsRemainingTotalValue }} {{getCurrency()}}
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+
+    <!----------------------------------- Wallet Filtration  ----------------------->
 
     <div *ngIf="usersList.usersData.length != 0 || usersList.showLoading">
         <ngx-datatable class="material" [loadingIndicator]="usersList.showLoading" [messages]="usersList.messages"
@@ -236,7 +312,49 @@
                     </mat-menu>
                 </ng-template>
             </ngx-datatable-column>
+
+            <ngx-datatable-footer>
+                <ng-template
+                  ngx-datatable-footer-template
+                  let-rowCount="rowCount"
+                  let-selectedCount="selectedCount"
+                  let-curPage="curPage"
+                  let-offset="offset"
+                  let-isVisible="isVisible"
+                >
+                  <div class="page-count">
+                    Showing {{ usersList.usersData.length }} of
+                    {{ usersList.usersCount }}
+                  </div>
+      
+                  <select
+                    (change)="onLimitChange($event.target.value)"
+                    style="width: 50px; position: inherit"
+                  >
+                    <option
+                      *ngFor="let option of usersList.pagesFilter"
+                      [value]="option"
+                    >
+                      {{ option }}
+                    </option>
+                  </select>
+      
+                  <datatable-pager
+                    [pagerLeftArrowIcon]="'datatable-icon-left'"
+                    [pagerRightArrowIcon]="'datatable-icon-right'"
+                    [pagerPreviousIcon]="'datatable-icon-prev'"
+                    [pagerNextIcon]="'datatable-icon-skip'"
+                    [page]="usersList.pageNumber"
+                    [size]="usersList.limit"
+                    [count]="usersList.usersCount"
+                    (change)="changePage($event)"
+                  >
+                  </datatable-pager>
+                </ng-template>
+              </ngx-datatable-footer>
+
         </ngx-datatable>
     </div>
     <!-- <ngx-spinner></ngx-spinner> -->
+</div>
 </div>

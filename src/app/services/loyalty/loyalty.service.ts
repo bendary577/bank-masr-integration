@@ -6,7 +6,6 @@ import { Constants } from 'src/app/models/constants'
   providedIn: 'root',
 })
 export class LoyaltyService {
-
   token = localStorage.getItem('auth_token')
 
   constructor(private http: HttpClient) {}
@@ -36,6 +35,14 @@ export class LoyaltyService {
         groupId +
         '&status=' +
         status,
+      { headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }) },
+    )
+  }
+
+  countUsers() {
+    this.token = localStorage.getItem('auth_token')
+    return this.http.get(
+      Constants.GET_USERS_COUNT_URL,
       { headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }) },
     )
   }
@@ -100,7 +107,17 @@ export class LoyaltyService {
 
   getAppUsers() {
     this.token = localStorage.getItem('auth_token')
-    return this.http.get(Constants.GET_APP_USERS_URL, {
+    return this.http.get(
+      Constants.GET_APP_USERS_URL,{
+      headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }),
+    })
+  }
+
+  getAppUsersPaginated(pageNumber, limit) {
+    this.token = localStorage.getItem('auth_token')
+    return this.http.get(
+      Constants.GET_APP_USERS_PAGINATED_URL+'?pageNumber='+pageNumber+'&limit='+limit,
+       {
       headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }),
     })
   }
@@ -183,7 +200,7 @@ export class LoyaltyService {
         '?transactionType=' +
         transactionType +
         '&fromDate=' +
-        fromDate + 
+        fromDate +
         '&toDate=' +
         toDate +
         '&group=' +
@@ -199,7 +216,7 @@ export class LoyaltyService {
         '?transactionType=' +
         transactionType +
         '&fromDate=' +
-        fromDate + 
+        fromDate +
         '&toDate=' +
         toDate +
         '&group=' +
@@ -258,6 +275,29 @@ export class LoyaltyService {
     )
   }
 
+  undoWalletAction(userId, actionId) {
+    let token = localStorage.getItem('auth_token')
+    return this.http.post(
+      Constants.UNDO_WALLET_ACTION + '?userId=' + userId + '&actionId=' + actionId,
+      {},
+      { headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }) },
+    )
+  }
+
+  getWalletsTotalRemaining(fromDate, toDate, getActiveGuestsOnly) {
+    this.token = localStorage.getItem('auth_token')
+    return this.http.get(
+      Constants.GET_WALLETS_REMAINING_TOTAL +
+        '?fromDate=' +
+        fromDate +
+        '&toDate=' +
+        toDate +
+        '&getActiveGuestsOnly=' +
+        getActiveGuestsOnly,
+      { headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }) },
+    )
+  }
+
   sendSmsOrEmail(user, process) {
     let token = localStorage.getItem('auth_token')
     return this.http.post(
@@ -269,9 +309,18 @@ export class LoyaltyService {
 
   suspendGuest(guestId: string, susFlag) {
     this.token = localStorage.getItem('auth_token')
-    return this.http.post(Constants.SUSPEND_GEUST_URL + '?susFlag=' + susFlag + '&userId=' + guestId, {}, {
-        headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),
-      })
+    return this.http
+      .post(
+        Constants.SUSPEND_GEUST_URL +
+          '?susFlag=' +
+          susFlag +
+          '&userId=' +
+          guestId,
+        {},
+        {
+          headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),
+        },
+      )
       .toPromise()
   }
 
@@ -284,45 +333,76 @@ export class LoyaltyService {
   }
 
   getVouchers() {
-    return this.http.get(Constants.GET_VOUCHER_PAGES + '?page=' + 0 + '&size=' + 10, {
+    return this.http.get(
+      Constants.GET_VOUCHER_PAGES + '?page=' + 0 + '&size=' + 10,
+      {
         headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),
-      });
+      },
+    )
   }
 
   getVoucherByID(parentVoucherId) {
-    return this.http.get(Constants.GET_VOUCHER_BY_ID + "?voucherId=" + parentVoucherId, {
-      headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),
-    });
-    }
+    return this.http.get(
+      Constants.GET_VOUCHER_BY_ID + '?voucherId=' + parentVoucherId,
+      {
+        headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),
+      },
+    )
+  }
 
   addVoucher(voucher) {
     this.token = localStorage.getItem('auth_token')
-    return this.http.post(Constants.ADD_VOUCHER_PAGES , voucher, {
-        headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),}).toPromise()
+    return this.http
+      .post(Constants.ADD_VOUCHER_PAGES, voucher, {
+        headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),
+      })
+      .toPromise()
   }
 
   updateVoucher(voucher) {
     this.token = localStorage.getItem('auth_token')
-    return this.http.put(Constants.UPDATE_VOUCHER_PAGES , voucher, {
-        headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),}).toPromise()
+    return this.http
+      .put(Constants.UPDATE_VOUCHER_PAGES, voucher, {
+        headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),
+      })
+      .toPromise()
   }
 
   deleteVoucher(vouchers: any[]) {
     this.token = localStorage.getItem('auth_token')
-    return this.http.put(Constants.MARK_VOUCHER_DELETE_PAGES , vouchers, {
-        headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),}).toPromise()
+    return this.http
+      .put(Constants.MARK_VOUCHER_DELETE_PAGES, vouchers, {
+        headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),
+      })
+      .toPromise()
   }
   simphonyVoucherTrans(voucherId, currentVoucherCode, page, size) {
-    return this.http.get(Constants.GET_VOUCHER_TRANSACTION_PAGES + '?page=' + page + '&size=' + size + '&voucherId=' +
-     voucherId + '&voucherCode=' + currentVoucherCode, {
+    return this.http.get(
+      Constants.GET_VOUCHER_TRANSACTION_PAGES +
+        '?page=' +
+        page +
+        '&size=' +
+        size +
+        '&voucherId=' +
+        voucherId +
+        '&voucherCode=' +
+        currentVoucherCode,
+      {
         headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),
-      });
+      },
+    )
   }
 
   getVoucherStatic(voucherId, currentVoucherCode) {
-    return this.http.get(Constants.GET_VOUCHER_TRANSACTION_STATISTICS +'?voucherCode=' + currentVoucherCode + '&voucherId=' + voucherId, {
+    return this.http.get(
+      Constants.GET_VOUCHER_TRANSACTION_STATISTICS +
+        '?voucherCode=' +
+        currentVoucherCode +
+        '&voucherId=' +
+        voucherId,
+      {
         headers: new HttpHeaders({ Authorization: 'Bearer' + this.token }),
-      });
+      },
+    )
   }
-
 }

@@ -23,7 +23,7 @@ export class AppComponent {
     router.events.subscribe((val) => {
       // see also
       if(val instanceof NavigationEnd) {
-      if (val.url == "/" || val.url == "/login")
+      if (val.url == "/" || val.url == "/login" || val.url == "/forgetPassword" || val.url == "/resetPassword")
       this.shouldRun = false;
       else
       this.shouldRun = true;

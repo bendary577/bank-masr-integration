@@ -1,28 +1,28 @@
-import { Component, OnInit } from '@angular/core'
-import { FormGroup, FormBuilder, Validators } from '@angular/forms'
-import { ActivatedRoute, Router } from '@angular/router'
-import { AuthService } from 'src/app/services/auth/auth.service'
-import { Constants } from 'src/app/models/constants'
-import { MatSnackBar } from '@angular/material'
-import { NgxSpinnerService } from 'ngx-spinner'
-import { User } from '../../models/user'
-import { AccountService } from 'src/app/services/account/account.service'
-import { Account } from '../../models/Account'
-import { SideNaveComponent } from '../side-nave/side-nave.component'
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AuthService } from "src/app/services/auth/auth.service";
+import { Constants } from "src/app/models/constants";
+import { MatSnackBar } from "@angular/material";
+import { NgxSpinnerService } from "ngx-spinner";
+import { User } from "../../models/user";
+import { AccountService } from "src/app/services/account/account.service";
+import { Account } from "../../models/Account";
+import { SideNaveComponent } from "../side-nave/side-nave.component";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
-  public user: User
-  public loginForm: FormGroup
-  loading = false
-  submitted = false
-  returnUrl: string
-  side: SideNaveComponent
-  account: Account
+  public user: User;
+  public loginForm: FormGroup;
+  loading = false;
+  submitted = false;
+  returnUrl: string;
+  side: SideNaveComponent;
+  account: Account;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,91 +32,95 @@ export class LoginComponent implements OnInit {
     private accountService: AccountService,
     public snackBar: MatSnackBar,
     side: SideNaveComponent,
-    private spinner: NgxSpinnerService,
+    private spinner: NgxSpinnerService
   ) {
-    this.side = side
+    this.side = side;
     // redirect to home if already logged in
-    this.side.shouldRun = false
+    this.side.shouldRun = false;
 
-    if (localStorage.getItem('auth_token')) {
-      this.router.navigate(["main/" + Constants.WELCOME_PAGE])
+    if (localStorage.getItem("auth_token")) {
+      this.router.navigate(["main/" + Constants.WELCOME_PAGE]);
     }
   }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-    })
+      username: ["", Validators.required],
+      password: ["", Validators.required],
+    });
 
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/'
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl || "/";
+  }
+
+  forgetPassword() {
+    this.router.navigateByUrl("/forgetPassword");
   }
 
   onSubmit() {
-    this.submitted = true
-    this.isValid()
+    this.submitted = true;
+    this.isValid();
   }
 
   isValid() {
-    this.spinner.show()
-    const username = this.loginForm.controls.username.value as string
-    const password = this.loginForm.controls.password.value as string
-    const domainName = username.split('@')
+    this.spinner.show();
+    const username = this.loginForm.controls.username.value as string;
+    const password = this.loginForm.controls.password.value as string;
+    const domainName = username.split("@");
 
     // if (domainName.length == 2) {
-    this.user = new User()
-    this.user.name = 'auth'
-    this.user.username = username
-    this.user.password = password
+    this.user = new User();
+    this.user.name = "auth";
+    this.user.username = username;
+    this.user.password = password;
 
     this.authenticationService
       .login(this.user)
       .toPromise()
       .then((res: any) => {
-        localStorage.setItem('auth_token', res.access_token)
-        localStorage.setItem('refresh_token', res.refresh_token)
-        this.saveAccountERD()
+        localStorage.setItem("auth_token", res.access_token);
+        localStorage.setItem("refresh_token", res.refresh_token);
+        this.saveAccountERD();
       })
       .catch((err) => {
-        localStorage.setItem('auth_token', '')
-        localStorage.setItem('user', '')
-        localStorage.setItem('accountERD', '')
+        localStorage.setItem("auth_token", "");
+        localStorage.setItem("user", "");
+        localStorage.setItem("accountERD", "");
 
-        this.spinner.hide()
-        this.loading = false
-        this.snackBar.open('Wrong Credentials.', null, {
+        this.spinner.hide();
+        this.loading = false;
+        this.snackBar.open("Wrong Credentials.", null, {
           duration: 2000,
-          horizontalPosition: 'center',
-        })
-        return
-      })
+          horizontalPosition: "center",
+        });
+        return;
+      });
   }
 
   getRoles() {
     this.accountService
-      .getRoles('asfas', true)
+      .getRoles("asfas", true)
       .then((res: any) => {
         if (res.data && res.data != null) {
-          localStorage.setItem('user', JSON.stringify(res.data))
+          localStorage.setItem("user", JSON.stringify(res.data));
           if (res.data && res.data.roles != null) {
-            localStorage.setItem('roles', JSON.stringify(res.data.roles))
+            localStorage.setItem("roles", JSON.stringify(res.data.roles));
           }
         }
-        this.loading = false
-        this.side.setshouldRun(true)
-        this.side.shouldRun = true
-        this.side.getSyncJobTypes()
-        this.side.getOperationTypes()
-        this.side.getApplication()
-        this.router.navigate(["main/" + Constants.WELCOME_PAGE])
+        this.loading = false;
+        this.side.setshouldRun(true);
+        this.side.shouldRun = true;
+        this.side.getSyncJobTypes();
+        this.side.getOperationTypes();
+        this.side.getApplication();
+        this.router.navigate(["main/" + Constants.WELCOME_PAGE]);
         // this.spinner.hide()
       })
       .catch((err) => {
-        console.log(err)
-        this.loading = false
-        this.spinner.hide()
-      })
+        console.log(err);
+        this.loading = false;
+        this.spinner.hide();
+      });
   }
 
   saveAccountERD() {
@@ -124,21 +128,21 @@ export class LoginComponent implements OnInit {
       .getAccount()
       .toPromise()
       .then((res: any) => {
-        this.account = res
+        this.account = res;
 
         if (res) {
-          localStorage.setItem('account', JSON.stringify(res))
+          localStorage.setItem("account", JSON.stringify(res));
           if (res.erd && res.erd != null) {
-            localStorage.setItem('accountERD', res.erd)
+            localStorage.setItem("accountERD", res.erd);
           }
           if (res.features && res.features != null) {
-            localStorage.setItem('features', JSON.stringify(res.features))
+            localStorage.setItem("features", JSON.stringify(res.features));
           }
         }
-        this.getRoles()
+        this.getRoles();
       })
       .catch((err) => {
-        console.error(err)
-      })
+        console.error(err);
+      });
   }
 }

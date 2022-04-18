@@ -38,8 +38,136 @@
 
 }
 
+.guests_body{
+        
+  mat-icon {
+    position: absolute;
+    float: right;
+    top: -1px !important;
+    cursor: pointer;
+    color: rgb(80 80 80 / 54%);
+    right: -60px;
+    font-size: medium;
+  }
+
+  display: inline;
+  ::ng-deep .mat-form-field-flex{
+    width: 140px !important;
+    height: 35px !important ;
+     .mat-form-field-outline-end {
+        background-color: #fdfdfd;
+     }
+     .mat-form-field-outline-start {
+        background-color: #fdfdfd;
+     }
+  }
+
+  ::ng-deep .mat-card-content{
+    margin:10px !important;
+  }
+
+  ::ng-deep .mat-form-field-label {
+    left: 20px !important;
+    padding-top: 10px !important;
+    color: hsl(0, 0%, 45%) !important;
+    margin: 50px !important;
+  }
+}
+
+
 .filterButtons{
     // padding-left: 30px;
   float: right;
-  width: 180px;
+}
+
+.loyalty-style{
+  ::ng-deep .mat-form-field-flex{
+   width: 180px !important;
+  }
+
+  .five-column {
+    width: 190px;
+  }
+}
+
+.filter-container{
+  // padding-left: 100px;
+  margin: 10px;
+  margin-left: 0px;
+  display: inline-block;
+  width: 95%;
+}
+
+.filter-buttons{
+  border-radius: 5px;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.five-column {
+  margin-bottom: 50px;
+  height: 20px;
+}
+
+.filteration{
+  box-shadow:0 1px 10px 0.5px #ababab;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+
+.menue-btn{
+  width: 15px;
+  background-color: white;
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.filter-btn{
+  width: 100px;
+  height: 32px;
+  margin-top: 5px;
+  background-color: white;
+  color: black;
+}
+
+.menue-btn-choi{
+  background-color: white;
+  color: black;
+  font-size: 20px;
+}
+
+.menue-btn :hover{
+  width: 15px;
+  background-color: white;
+  color: rgb(87, 87, 87);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.centering_div {
+  position: relative;
+}
+
+.child_div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+button {
+  color: rgb(0, 0, 0) !important;
+  background-color: #ffb560;
+  width: 100px;
+}
+
+
+.custom-select select {
+  width: 20%;
+}
+
+
+.matRole{
+  margin-left: 30px;
 }

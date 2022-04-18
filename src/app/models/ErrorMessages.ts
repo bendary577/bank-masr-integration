@@ -6,4 +6,7 @@ export class ErrorMessages {
     static FAILED_TO_SAVE_CONFIG = "Failed to save configuration now, Please try agian after few minutes.";
     static FAILED_TO_GET_CONFIG= "Failed to get configuration now, Please try agian after few minutes.";
     static ENTERNAL_SERVER_ERROR = "Enternal Server Error";
+
+    // ==> Entry System
+    static WALLET_CHARGE_ERROR = "Failed to charge guest's wallet.";
 }

@@ -30,6 +30,14 @@
             </mat-form-field>
         </div>
         <div class="form-group">
+          <mat-form-field class="example-full-width">
+              <input matInput placeholder="Email" formControlName="email" required maxlength="50" minlength="5">
+                <mat-error *ngIf="form.controls.email.hasError('required')">
+                  Email is required.
+                </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
             <mat-form-field class="example-full-width">
                 <input type="password" matInput placeholder="Password" formControlName="password" required minlength="7">
                 <mat-error *ngIf="form.controls.password.hasError('required')">
