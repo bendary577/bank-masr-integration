@@ -369,6 +369,14 @@ const routes: Routes = [
     component: AggregatorIntegratorComponent,
     canActivate: [AuthGuardService],
   },
+
+  {
+    path: Constants.SUPPORT,
+    component: SupportComponent,
+    canActivate: [AuthGuardService],
+  },
+
+
 ];
 
 @NgModule({
