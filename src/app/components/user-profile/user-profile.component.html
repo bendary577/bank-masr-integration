@@ -363,6 +363,13 @@
             </ng-template>
           </ngx-datatable-column>
 
+          <ngx-datatable-column name="Check">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <p *ngIf="row.check">{{ row.check }}</p>
+              <p *ngIf="!row.check">NA</p>
+            </ng-template>
+          </ngx-datatable-column>
+
           <ngx-datatable-column name="Employee">
             <ng-template let-row="row" ngx-datatable-cell-template>
               <p *ngIf="row.employee">{{ row.employee }}</p>

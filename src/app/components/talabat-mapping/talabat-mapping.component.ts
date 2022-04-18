@@ -141,11 +141,18 @@ export class TalabatMappingComponent implements OnInit {
   }
 
   addModifierMappingData(){
-    if(this.newModifierMapping.name &&  this.newModifierMapping.foodicsProductId && this.newModifierMapping.talabatProductId){
-      this.modifierOptionsMappingData.push(this.newModifierMapping);
-      this.newModifierMapping = new ModifierMapping();
+    if(this.newModifierMapping.name &&  this.newModifierMapping.foodicsProductId ){
 
+      this.modifierOptionsMappingData.push(this.newModifierMapping);
+      // let modifier = new ModifierMapping();
+      // modifier.name = this.newModifierMapping.name
+      // modifier.foodicsProductId = this.newModifierMapping.foodicsProductId
+      // modifier.secondFoodicsProductId = this.newModifierMapping.secondFoodicsProductId
+      // modifier.talabatProductId = this.newModifierMapping.talabatProductId
+      // this.modifierOptionsMappingData.push(modifier);
+      this.newModifierMapping = new ModifierMapping();
       this.modifierOptionsMappingData = [...this.modifierOptionsMappingData];
+
     }else {
       this.snackBar.open('Please fill all modifier fields.', null, {
         duration: 2000,

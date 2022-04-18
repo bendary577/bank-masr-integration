@@ -162,6 +162,11 @@
                             style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Modifier Options Foodics Id"
                             [(ngModel)]="newModifierMapping.foodicsProductId">
                     </mat-form-field>
+                    <mat-form-field appearance="outline" class="example-full-width dateForm">
+                        <input matInput id="ip2" name="ip2"
+                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Modifier Options Second Foodics Id"
+                            [(ngModel)]="newModifierMapping.secondFoodicsProductId">
+                    </mat-form-field>
                     <button mat-flat-button (click)="addModifierMappingData()" class="filterButton addButton">Add</button>
                 </div>
             </form>
@@ -187,6 +192,12 @@
             <ngx-datatable-column name="Modifier Foodics Id">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     <input matInput placeholder="eg. 12345" [(ngModel)]="row.foodicsProductId">
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Modifier Foodics Id">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <input matInput placeholder="eg. 12345" [(ngModel)]="row.secondFoodicsProductId">
                 </ng-template>
             </ngx-datatable-column>
         </ngx-datatable>
