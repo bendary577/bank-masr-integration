@@ -1,0 +1,66 @@
+<h1 mat-dialog-title>Modifiers of this Product</h1>
+<div>
+
+    <div class="container">
+        <form class="my-form">
+            <div>
+                <mat-form-field appearance="outline" class="example-full-width dateForm">
+                    <input matInput id="name" name="name"
+                        style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Modifier Name"
+                        [(ngModel)]="newModifierMapping.name">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="example-full-width dateForm">
+                    <input matInput id="port" name="port"
+                        style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Modifier Talabat Id"
+                        [(ngModel)]="newModifierMapping.talabatProductId">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="example-full-width dateForm">
+                    <input matInput id="port" name="port"
+                        style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Modifier Sec Talabat Id"
+                        [(ngModel)]="newModifierMapping.talabatSecProductId">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="example-full-width dateForm">
+                    <input matInput id="ip" name="ip"
+                        style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Modifier Foodics Id"
+                        [(ngModel)]="newModifierMapping.foodicsProductId">
+                </mat-form-field>
+                <button mat-flat-button (click)="addModifierMappingData()" class="filterButton addButton">Add</button>
+            </div>
+        </form>
+    </div>
+
+    <ngx-datatable class="material" 
+         [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50"
+        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+        [rows]="product.modifiers" [selectAllRowsOnPage]="false" [scrollbarH]="true">
+
+        <ngx-datatable-column name="Modifier Name">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <input matInput placeholder="Name" [(ngModel)]="row.name">
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Talabat Id">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <input matInput placeholder="eg. 12345" [(ngModel)]="row.talabatProductId">
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Talabat Second Id">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <input matInput placeholder="eg. 12345" [(ngModel)]="row.talabatSecProductId">
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="FoodIcs Id">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <input matInput placeholder="eg. 12345" [(ngModel)]="row.foodicsProductId">
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+
+    <div mat-dialog-actions>
+        <button mat-button cdkFocusInitial (click)="onSaveClick()">Save</button>
+        <button mat-button (click)="onNoClick()">Cancel</button>
+    </div>
+</div>
