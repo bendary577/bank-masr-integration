@@ -220,7 +220,7 @@ export class UserProfileComponent implements OnInit {
               }
               this.spinner.hide()
               this.snackBar.open(message, null, {
-                duration: 3000,
+                duration: 4000,
                 horizontalPosition: 'center',
                 panelClass: 'my-snack-bar-fail',
               })
@@ -271,7 +271,7 @@ export class UserProfileComponent implements OnInit {
                 message = err.message
               }
               this.snackBar.open(message, null, {
-                duration: 3000,
+                duration: 4000,
                 horizontalPosition: 'center',
                 panelClass: 'my-snack-bar-fail',
               })
@@ -601,7 +601,7 @@ export class UserProfileComponent implements OnInit {
                   message = err.message
                 }
                 this.snackBar.open(message, null, {
-                  duration: 3000,
+                  duration: 4000,
                   horizontalPosition: 'center',
                   panelClass: 'my-snack-bar-fail',
                 })

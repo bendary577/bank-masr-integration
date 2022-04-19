@@ -112,6 +112,7 @@
             class="example-full-width filter-buttons"
             style="max-width: 25%;margin-top: 20px;float: left;"
             >
+
             <input
                 matInput
                 style="width:160px;margin-bottom: 2px; "
@@ -129,7 +130,7 @@
             appearance="outline"
             class="example-full-width"
             style="max-width: 25%;margin-top: 20px;"
-          >
+            >
             <input
               matInput
               style="width:160px;margin-bottom: 2px; "
@@ -137,8 +138,8 @@
               type="date"
               formContrlName="toDate"
               id="toDate"
-              (ngModelChange)="getWalletsTotalRemaining()"
               [(ngModel)]="toDate"
+              (ngModelChange)="getWalletsTotalRemaining()"
             />
             
             </mat-form-field>
@@ -153,6 +154,8 @@
                 <mat-option value="All Guests">All Guests</mat-option>
               </mat-select>
             </mat-form-field>
+
+
 
         </div>
 

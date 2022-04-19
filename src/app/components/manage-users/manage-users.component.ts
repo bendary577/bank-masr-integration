@@ -841,6 +841,7 @@ export class ManageUsersComponent implements OnInit {
 
   extractExcelFile() {}
 
+
   getWalletsTotalRemaining() {
     this.walletsRemainingTotal.showLoading = true
     this.loyaltyService
