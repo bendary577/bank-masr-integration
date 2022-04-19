@@ -140,7 +140,8 @@ export class UserProfileComponent implements OnInit {
         } else if (err.error.message) {
           message = err.error.message
         } else if (err.message) {
-          message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+          // message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+          message = err.message
         }
       })
   }
@@ -266,7 +267,8 @@ export class UserProfileComponent implements OnInit {
               } else if (err.error.message) {
                 message = err.error.message
               } else if (err.message) {
-                message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+                // message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+                message = err.message
               }
               this.snackBar.open(message, null, {
                 duration: 3000,
@@ -595,7 +597,8 @@ export class UserProfileComponent implements OnInit {
                 } else if (err.error.message) {
                   message = err.error.message
                 } else if (err.message) {
-                  message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+                  // message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+                  message = err.message
                 }
                 this.snackBar.open(message, null, {
                   duration: 3000,

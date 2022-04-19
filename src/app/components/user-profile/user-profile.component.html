@@ -414,6 +414,7 @@
                   !user ||
                   (user &&
                     (user.deleted || lessThanOrEqualZero() || user.suspended))
+                    || !(row.operation==='Charge Wallet' || row.operation==='Deduct From Wallet') || row.deleted
                 "
                 (click)="undoWalletAction(row)"
                 style="background-color: #f8b15f; margin-bottom: 15px"
