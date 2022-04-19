@@ -15,6 +15,7 @@ import { ExtendExpiryDateComponent } from '../extend-expiry-date/extend-expiry-d
 import { ViewReceiptComponent } from '../view-receipt/view-receipt.component'
 import {MatSelectModule} from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field'; 
+import { NgxSpinnerService } from 'ngx-spinner'
 
 @Component({
   selector: 'app-manage-users',
@@ -87,6 +88,7 @@ export class ManageUsersComponent implements OnInit {
     private loyaltyService: LoyaltyService,
     public dialog: MatDialog,
     private _location: Location,
+    private spinner: NgxSpinnerService,
     public snackBar: MatSnackBar,
     private sidNav: SideNaveComponent,
     private router: Router,
@@ -844,15 +846,18 @@ export class ManageUsersComponent implements OnInit {
 
   getWalletsTotalRemaining() {
     this.walletsRemainingTotal.showLoading = true
+    this.spinner.show()
     this.loyaltyService
       .getWalletsTotalRemaining(this.fromDate, this.toDate, this.getActiveGuestsOnly)
       .toPromise()
       .then((res: any) => {
         this.walletsRemainingTotalValue = res.data
         this.walletsRemainingTotal.showLoading = false
+        this.spinner.hide()
       })
       .catch((err) => {
         this.walletsRemainingTotal.showLoading = false
+        this.spinner.hide()
       })
   }
 
