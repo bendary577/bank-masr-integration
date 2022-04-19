@@ -356,6 +356,18 @@
             </ng-template>
           </ngx-datatable-column>
 
+          <ngx-datatable-column name="Previous Balance">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row.previousBalance }} {{ getCurrency() }}
+            </ng-template>
+          </ngx-datatable-column>
+
+          <ngx-datatable-column name="New Balance">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row.newBalance }} {{ getCurrency() }}
+            </ng-template>
+          </ngx-datatable-column>
+          
           <ngx-datatable-column name="Status">
             <ng-template let-row="row" ngx-datatable-cell-template>
               <p *ngIf="row.deleted" style="color:red">deleted</p>
@@ -374,18 +386,6 @@
             <ng-template let-row="row" ngx-datatable-cell-template>
               <p *ngIf="row.employee">{{ row.employee }}</p>
               <p *ngIf="!row.employee">NA</p>
-            </ng-template>
-          </ngx-datatable-column>
-
-          <ngx-datatable-column name="Previous Balance">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-              {{ row.previousBalance }} {{ getCurrency() }}
-            </ng-template>
-          </ngx-datatable-column>
-
-          <ngx-datatable-column name="New Balance">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-              {{ row.newBalance }} {{ getCurrency() }}
             </ng-template>
           </ngx-datatable-column>
 

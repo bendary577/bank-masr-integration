@@ -561,8 +561,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   undoWalletAction(row) {
-    if (row.actionId !== null || row.actionId !== '') {
-
+    if (row.actionId !== null && row.actionId !== '') {
       const dialogRef = this.dialog.open(ConfirmUndoWalletActionComponent, {
         width: '400px',
         data : row
