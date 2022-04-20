@@ -12,7 +12,7 @@
                 </mat-expansion-panel-header>
                 <mat-checkbox id="taxIncluded" name="taxIncluded" class="example-margin"
                     style="margin-left: 12px;"
-                    [(ngModel)]="syncJobType.configuration.salesAPIConfig.taxIncluded">Is tax is inclusive (Sales amount include tax value)
+                    [(ngModel)]="syncJobType.configuration.salesAPIConfig.taxIncluded">Is tax inclusive (Sales amount include tax value)
                 </mat-checkbox>
 
                 <app-ohra-configuration [syncJobType]=syncJobType></app-ohra-configuration>
@@ -29,7 +29,7 @@
                 <div class="back" style="margin-bottom: 20px;">
 
                     <mat-form-field class="example-full-width" style="width: 306px !important;">
-                        <input matInput id="apiToken" name="apiToken" placeholder="API Token" [(ngModel)]="syncJobType.configuration.salesAPIConfig.apiKey">
+                        <input matInput id="apiToken" name="apiToken" placeholder="API Key" [(ngModel)]="syncJobType.configuration.salesAPIConfig.apiKey">
                     </mat-form-field>
 
                 </div>
@@ -38,6 +38,14 @@
 
                     <mat-form-field class="example-full-width" style="width: 306px !important;">
                         <input matInput id="apiToken" name="apiToken" placeholder="API Endpoint" [(ngModel)]="syncJobType.configuration.salesAPIConfig.apiEndpoint">
+                    </mat-form-field>
+
+                </div>
+
+                <div class="back" style="margin-bottom: 20px;">
+
+                    <mat-form-field class="example-full-width" style="width: 306px !important;">
+                        <input matInput id="apiURL" name="apiURL" placeholder="API URL" [(ngModel)]="syncJobType.configuration.salesAPIConfig.apiURL">
                     </mat-form-field>
 
                 </div>
