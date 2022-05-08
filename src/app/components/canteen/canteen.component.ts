@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-canteen',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CanteenComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _location: Location, private sideNav : SideNaveComponent) {   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+  }
+
+  backClicked() {
+    this._location.back();
+  }
+
+  hasRole(role): Boolean{
+   return this.sideNav.hasRole(role);
   }
 
 }
