@@ -23,6 +23,7 @@ import { NgxPrintModule } from 'ngx-print';
 import { ViewReceiptComponent } from '../view-receipt/view-receipt.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { CanteenConfigurationsComponent } from '../canteen-configurations/canteen-configurations.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { CanteenConfigurationsComponent } from '../canteen-configurations/cantee
     ApplicationModule,
     AngularMaterialModule,
     MatProgressSpinnerModule,
-    NgxPrintModule
+    NgxPrintModule,
+    MatCheckboxModule
   ],
   exports:[
     ManageGroupsComponent,
