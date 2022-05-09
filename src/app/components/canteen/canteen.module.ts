@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-
-import { LoyaltyRoutingModule } from './loyalty-routing.module';
-import { LoyaltyComponent } from './loyalty.component';
+import { CommonModule } from '@angular/common';
+import { CanteenRoutingModule } from './canteen-routing.module';
+import { CanteenComponent } from './canteen.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ActivitiesComponent } from '../activities/activities.component';
 import { ManageUsersComponent } from '../manage-users/manage-users.component';
@@ -22,30 +22,26 @@ import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { NgxPrintModule } from 'ngx-print';
 import { ViewReceiptComponent } from '../view-receipt/view-receipt.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { CanteenConfigurationsComponent } from '../canteen-configurations/canteen-configurations.component';
-import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
-    LoyaltyComponent,
+    CanteenComponent,
     ActivitiesComponent,
     ManageUsersComponent,
     AddAppUserAccompiedComponent,
     ManageGroupsComponent,
     UserProfileComponent,
     ViewReceiptComponent,
-    CanteenConfigurationsComponent,
-
   ],
   imports: [
-    LoyaltyRoutingModule,
+    CommonModule,
+    CanteenRoutingModule,
     BasicModule,
     SharedModule,
     ApplicationModule,
     AngularMaterialModule,
     MatProgressSpinnerModule,
-    NgxPrintModule,
-    MatCheckboxModule
+    NgxPrintModule
   ],
   exports:[
     ManageGroupsComponent,
@@ -65,6 +61,5 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     ExtendExpiryDateComponent,
     AddVoucherDialogComponent,
   ]
-
 })
-export class LoyaltyModule { }
+export class CanteenModule { }

@@ -1,0 +1,61 @@
+<div class="schedualer_view">
+    <h1 mat-dialog-title>Update Duration Configuartion</h1>
+    <div mat-dialog-content>
+        <div class="container" *ngIf="!loading">
+            <form class="my-form">
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <mat-select placeholder="Duration" name="duration"
+                            [(ngModel)]="this.data.group.canteenConfiguration.duration">
+                            <mat-option value="Daily">Daily</mat-option>
+                            <mat-option value="Weekly">Weekly</mat-option>
+                            <mat-option value="Monthly">Monthly</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div *ngIf="this.data.group.canteenConfiguration.duration == 'Weekly'">
+                    <mat-form-field>
+                        <mat-select placeholder="Week Day" name="dayName"
+                            [(ngModel)]="this.data.group.canteenConfiguration.dayName">
+                            <mat-option value={{name}} *ngFor="let name of daysName">
+                                {{name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div *ngIf="this.data.group.canteenConfiguration.duration == 'Monthly'">
+                    <mat-form-field>
+                        <mat-select placeholder="Day" name="day"
+                            [(ngModel)]="this.data.group.canteenConfiguration.day">
+                            <mat-option value={{day}} *ngFor="let day of days">
+                                {{day}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <input matInput type="time" id="appt" name="appt" min="01:00" max="23:59"
+                            [(ngModel)]="this.data.group.canteenConfiguration.hour">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <input matInput placeholder="Amount to be charged" value="{{this.data.group.canteenConfiguration.chargeAmount}}" [(ngModel)]="this.data.group.canteenConfiguration.chargeAmount">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-checkbox class="example-margin"  
+                        [(ngModel)]="this.data.group.canteenConfiguration.accumulate"
+                        [checked]="this.data.group.canteenConfiguration.accumulate === false ? false : true"
+                        (change)="changeAccumulate(this.data.group.canteenConfiguration.accumulate)">
+                        Accumulate Remaining Balance
+                    </mat-checkbox>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div mat-dialog-actions class="btns">
+        <button mat-button class="groups-buttons" (click)="onNoClick()" >Cancel</button>
+        <button mat-button class="groups-buttons" cdkFocusInitial (click)="onSaveClick()">Save</button>
+    </div>
+</div>
