@@ -333,6 +333,7 @@ export class Constants {
 
   static GET_LOYALTY_PAGE = "loyalty";
   static REWARD_POINTS_PAGE = "rewardPoints";
+  static GET_CANTEEN_PAGE = "canteen";
   static MANAGE_COMPANIES = "manageCompanies";
   static MANAGE_GROUPS = "manageGroups";
   static MANAGE_SUB_GROUPS = "manageSubGroups";

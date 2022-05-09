@@ -34,6 +34,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: Constants.GET_CANTEEN_PAGE,
+    loadChildren: () =>
+      import("./components/loyalty/loyalty.module").then(
+        (m) => m.LoyaltyModule
+      ),
+  },
+  {
     path: Constants.GET_VOUCHER_PAGE,
     loadChildren: () =>
       import("./components/loyalty/loyalty.module").then(
@@ -48,7 +55,6 @@ const routes: Routes = [
         (m) => m.VoucherModule
       ),
   },
-
   {
     path: "rewardPoints",
     loadChildren: () =>
