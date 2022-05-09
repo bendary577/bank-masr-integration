@@ -10,6 +10,7 @@ import { AddAppGroupComponent } from '../add-app-group/add-app-group.component'
 import { Location } from '@angular/common'
 import { DeleteAppGroupComponent } from '../delete-app-group/delete-app-group.component'
 import { SideNaveComponent } from '../side-nave/side-nave.component'
+import { CanteenConfigurationsComponent } from '../canteen-configurations/canteen-configurations.component'
 
 @Component({
   selector: 'app-manage-groups',
@@ -333,5 +334,47 @@ export class ManageGroupsComponent implements OnInit {
 
   hasFeature(reference) {
     return this.sidNav.hasFeature(reference)
+  }
+
+  openCanteenConfigurations(group) {
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.width = '420px'
+    dialogConfig.maxWidth = '420px'
+    dialogConfig.autoFocus = true
+    dialogConfig.data = {group : group}
+
+    let dialogRef = this.dialog.open(CanteenConfigurationsComponent, dialogConfig)
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.groupsList.showLoading = true
+        this.loyaltyService
+          .saveGroup(group)
+          .toPromise()
+          .then((result: any) => {
+            this.snackBar.open('Group Canteen Configuration Added successfully.', null, {
+              duration: 2000,
+              horizontalPosition: 'center',
+              panelClass: 'my-snack-bar-success',
+            })
+            this.groupsList.showLoading = false
+          }).catch((err) => {
+            this.groupsList.showLoading = false
+            let message = ''
+            if (err.status === 401) {
+              message = ErrorMessages.SESSION_EXPIRED
+            } else if (err.error && err.error.message) {
+              message = err.error.message
+            } else {
+              message = "Error while saving group configuration"
+            }
+            this.snackBar.open(message, null, {
+              duration: 4000,
+              horizontalPosition: 'center',
+              panelClass: 'my-snack-bar-fail',
+            })
+          })
+      }
+    })
   }
 }
