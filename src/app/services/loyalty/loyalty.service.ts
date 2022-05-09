@@ -18,6 +18,14 @@ export class LoyaltyService {
     )
   }
 
+  saveGroup(group) {
+    this.token = localStorage.getItem('auth_token')
+    return this.http.post(
+      Constants.SAVE_GROUP, group,
+      { headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }) },
+    )
+  }
+
   getGenericGroup() {
     this.token = localStorage.getItem('auth_token')
     return this.http.get(Constants.GET_GENERIC_GROUP, {

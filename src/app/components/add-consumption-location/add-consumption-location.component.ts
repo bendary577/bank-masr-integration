@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CostCenter } from 'src/app/models/CostCenter';
 import { GeneralSettings } from 'src/app/models/GeneralSettings';
+import { Account } from 'src/app/models/Account';
 
 @Component({
   selector: 'app-add-consumption-location',
