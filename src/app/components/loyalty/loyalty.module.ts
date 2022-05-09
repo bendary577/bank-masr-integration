@@ -22,6 +22,7 @@ import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { NgxPrintModule } from 'ngx-print';
 import { ViewReceiptComponent } from '../view-receipt/view-receipt.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { CanteenConfigurationsComponent } from '../canteen-configurations/canteen-configurations.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ManageGroupsComponent,
     UserProfileComponent,
     ViewReceiptComponent,
+    CanteenConfigurationsComponent,
 
   ],
   imports: [
