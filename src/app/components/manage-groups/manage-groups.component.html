@@ -71,10 +71,9 @@
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="Configurations">
+            
+            <ngx-datatable-column name="Configurations" *ngIf="hasRole('canteen')">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    <!-- <button class="button" mat-menu-item (click)="openCanteenConfigurations(row)">Edit</button>
-                     -->
                     <button mat-button class="button" (click)="openCanteenConfigurations(row)" >Edit</button>
                 </ng-template>
             </ngx-datatable-column>
