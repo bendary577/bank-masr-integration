@@ -16,7 +16,7 @@
 
                 <div *ngIf="this.data.group.canteenConfiguration.duration == 'Weekly'">
                     <mat-form-field>
-                        <mat-select placeholder="Week Day" name="dayName"
+                        <mat-select placeholder="Weekday" name="dayName"
                             [(ngModel)]="this.data.group.canteenConfiguration.dayName">
                             <mat-option value={{name}} *ngFor="let name of daysName">
                                 {{name}}</mat-option>
