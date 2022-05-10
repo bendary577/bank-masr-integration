@@ -1,5 +1,5 @@
 <div class="schedualer_view">
-    <h1 mat-dialog-title>Update Duration Configuartion</h1>
+    <h1 mat-dialog-title>Update Canteen Configuartion</h1>
     <div mat-dialog-content>
         <div class="container" *ngIf="!loading">
             <form class="my-form">
@@ -48,7 +48,7 @@
                         [(ngModel)]="this.data.group.canteenConfiguration.accumulate"
                         [checked]="this.data.group.canteenConfiguration.accumulate === false ? false : true"
                         (change)="changeAccumulate(this.data.group.canteenConfiguration.accumulate)">
-                        Accumulate Remaining Balance
+                        Enable accumulating ramaing balance
                     </mat-checkbox>
                 </div>
             </form>

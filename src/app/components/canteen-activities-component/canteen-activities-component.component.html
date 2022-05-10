@@ -1,0 +1,704 @@
+<div class="activity_body">
+  <div class="row">
+    <div class="column card-column">
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <h2>Top Guests</h2>
+          <div
+            *ngIf="users.length == 0 || !transactionList.transactionData.length"
+          >
+            <img
+              class="user-img"
+              src="../../../assets/defaultImage.jpg"
+              alt="image"
+            />
+            <p class="user-name">There is no Guests</p>
+          </div>
+          <div
+            class="row row-center"
+            *ngIf="users.length != 0 && transactionList.transactionData.length"
+          >
+            <div class="column" *ngFor="let user of users">
+              <img class="user-img" src="{{ user.logoUrl }}" alt="image" />
+              <p class="user-name" *ngIf="user.name != '- - - -'">
+                {{ user.name }}
+              </p>
+              <p class="user-name" *ngIf="user.name == '- - - -'">
+                {{ user.code }}
+              </p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="column card-column" *ngIf="hasRole('show_group')">
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <h2>Top Groups</h2>
+          <div
+            *ngIf="
+              topGroups.length == 0 || !transactionList.transactionData.length
+            "
+          >
+            <img
+              class="user-img"
+              src="../../../assets/defaultGroup.png"
+              alt="image"
+            />
+            <p class="user-name">There is no groups</p>
+          </div>
+          <div
+            class="row row-center"
+            *ngIf="
+              topGroups.length != 0 && transactionList.transactionData.length
+            "
+          >
+            <div class="column" *ngFor="let group of topGroups">
+              <img class="user-img" src="{{ group.logoUrl }}" alt="image" />
+              <p class="user-name">{{ group.name }}</p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="column card-column" *ngIf="hasRole('show_statistic')">
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <h2>Top Revenues</h2>
+          <div *ngIf="topRevenueCenters.length == 0">
+            <img
+              class="user-img"
+              src="../../../assets/restaurant.png"
+              alt="image"
+            />
+            <p class="user-name">There is no Revenue Centers</p>
+          </div>
+          <div class="row row-center">
+            <div class="column" *ngFor="let revenueCenter of topRevenueCenters">
+              <img
+                class="user-img"
+                src="../../../assets/restaurantImg.png"
+                alt="image"
+              />
+              <p class="user-name">{{ revenueCenter }}</p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="column card-column">
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <h2>Total Spend</h2>
+          <form class="my-form">
+            <div class="row">
+              <div class="two-column" style="text-align: left">
+                <button
+                  class="filter-btn"
+                  (click)="totalSpend('Total')"
+                  [disabled]="validateDateRange('Total')"
+                  mat-raised-button
+                >
+                  Total
+                </button>
+                <button
+                  class="filter-btn"
+                  (click)="totalSpend('Today')"
+                  [disabled]="validateDateRange('Today')"
+                  mat-raised-button
+                >
+                  Today
+                </button>
+                <button
+                  class="filter-btn"
+                  (click)="totalSpend('Last Week')"
+                  [disabled]="validateDateRange('Last Week')"
+                  mat-raised-button
+                >
+                  Last Week
+                </button>
+                <button
+                  class="filter-btn"
+                  (click)="totalSpend('Last Month')"
+                  [disabled]="validateDateRange('Last Month')"
+                  mat-raised-button
+                >
+                  Last Month
+                </button>
+              </div>
+              <div class="two-column">
+                <h3
+                  style="
+                    color: black !important;
+                    border-radius: 10px;
+                    text-align: center;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  "
+                >
+                  <div *ngIf="!totalSpendLoading">
+                    {{ totalSpendM | number: "1.2-2" }} {{ getCurrency() }}
+                  </div>
+                  <div class="loader" *ngIf="totalSpendLoading"></div>
+                </h3>
+              </div>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="hasRole('show_statistic')">
+    <div class="two-column" *ngIf="transactionList.transactionData.length">
+      <mat-card class="chart-card">
+        <mat-card-content>
+          <div
+            style="display: block"
+            *ngIf="transactionList.transactionData.length"
+          >
+            <canvas
+              baseChart
+              [datasets]="rvcBarChartData"
+              [labels]="rvcBarChartLabels"
+              [options]="barChartOptions"
+              [plugins]="rvcBarChartPlugins"
+              [legend]="rvcBarChartLegend"
+              [chartType]="rvcBarChartType"
+            >
+            </canvas>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="two-column" *ngIf="transactionList.transactionData.length">
+      <mat-card class="chart-card">
+        <mat-card-content>
+          <div style="display: block; width: 100%; height: 95%">
+            <img src="../../../assets/group.png" class="people-img" />
+            <img src="../../../assets/increase.png" class="chart-img" />
+            <h3 class="guest-chart" style="color: black !important">
+              Average Number of Guests per day<br />
+              {{ guestAverage }} Guests
+            </h3>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <!-- transactionList.transactionCount &&  -->
+  <!-- Loyalty Filtter -->
+  <div
+    class="filter-container loyalty-style"
+    *ngIf="hasRole('see_group_filter')"
+  >
+    <div class="filter-title">
+      <span
+        style="
+          display: inline-block;
+          font-size: 20px;
+          font-weight: bold;
+          color: black;
+        "
+        >Filter Transaction</span
+      >
+    </div>
+
+    <div class="filter-buttons">
+      <div class="five-column">
+        <mat-form-field
+          appearance="outline"
+          class="example-full-width"
+          style="max-width: 25%"
+        >
+          <input
+            matInput
+            style="max-width: 200px"
+            placeholder="Start Date"
+            type="date"
+            formContrlName="fromDate"
+            id="fromDate"
+            [(ngModel)]="fromDate"
+            (ngModelChange)="getTransactions()"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="five-column">
+        <mat-form-field
+          appearance="outline"
+          class="example-full-width"
+          style="max-width: 25%"
+        >
+          <input
+            matInput
+            style="max-width: 200px"
+            placeholder="Start Date"
+            type="date"
+            formContrlName="toDate"
+            id="toDate"
+            [(ngModel)]="toDate"
+            (ngModelChange)="getTransactions()"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="five-column">
+        <mat-form-field
+          appearance="outline"
+          class="example-full-width creditForm"
+        >
+          <mat-select
+            class="custom-select"
+            [(ngModel)]="selectedGroupId"
+            (ngModelChange)="getTransactions()"
+            style="padding-top: 0px; padding-bottom: 8px"
+          >
+            <mat-option value="" selected>All Groups</mat-option>
+            <mat-option value="{{ group.id }}" *ngFor="let group of groups">{{
+              group.name
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="five-column filterButtons" style="width: 333px">
+        <button
+          mat-flat-button
+          (click)="extractExcelFile()"
+          [disabled]="transactionList.transactionData.length == 0"
+          class="filterButton"
+          style="height: 30px; margin-top: 5px"
+        >
+          Export To Excel
+        </button>
+        <button
+          mat-stroked-button
+          (click)="resetFilter()"
+          class="filterButton"
+          style="height: 30px; margin-top: 5px"
+        >
+          Reset
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Entry System Filter -->
+  <div class="filter-container" *ngIf="!hasRole('see_group_filter')">
+    <div class="filter-title">
+      <span
+        style="
+          display: inline-block;
+          font-size: 20px;
+          font-weight: bold;
+          color: black;
+        "
+        >Filter Transaction</span
+      >
+    </div>
+    <div class="filter-buttons">
+      <div class="five-column">
+        <mat-form-field
+          appearance="outline"
+          class="example-full-width"
+          style="max-width: 25%"
+        >
+          <input
+            matInput
+            style="max-width: 200px"
+            placeholder="Start Date"
+            type="date"
+            formContrlName="fromDate"
+            id="fromDate"
+            [(ngModel)]="fromDate"
+            (ngModelChange)="getTransactions()"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="five-column">
+        <mat-form-field
+          appearance="outline"
+          class="example-full-width"
+          style="max-width: 25%"
+        >
+          <input
+            matInput
+            style="max-width: 200px"
+            placeholder="Start Date"
+            type="date"
+            formContrlName="toDate"
+            id="toDate"
+            [(ngModel)]="toDate"
+            (ngModelChange)="getTransactions()"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="five-column" *ngIf="hasRole('see_group_filter')">
+        <mat-form-field
+          appearance="outline"
+          class="example-full-width creditForm"
+        >
+          <mat-select
+            class="custom-select"
+            [(ngModel)]="selectedGroupId"
+            (ngModelChange)="getTransactions()"
+            style="padding-top: 0px; padding-bottom: 8px"
+          >
+            <mat-option value="" selected>All Groups</mat-option>
+            <mat-option value="{{ group.id }}" *ngFor="let group of groups">{{
+              group.name
+            }}</mat-option>
+          </mat-select>
+          <mat-label>Group</mat-label>
+        </mat-form-field>
+      </div>
+
+      <div class="five-column" *ngIf="hasRole('see_wallet_filter')">
+        <mat-form-field
+          appearance="outline"
+          class="example-full-width creditForm"
+        >
+          <input
+            matInput
+            (input)="filterTransactions($event)"
+            placeholder="Revenue Center"
+            formContrlName="revenue"
+            id="revenue"
+            [(ngModel)]="selectedRevenue"
+            style="padding-top: 0px; padding-bottom: 8px"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="five-column" *ngIf="hasRole('see_wallet_filter')">
+        <mat-form-field
+          appearance="outline"
+          class="example-full-width creditForm"
+        >
+          <input
+            matInput
+            (input)="filterTransactions($event)"
+            placeholder="Guest Name"
+            formContrlName="guestName"
+            id="guestName"
+            [(ngModel)]="selectedGuestName"
+            style="padding-top: 0px; padding-bottom: 8px"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="five-column" *ngIf="hasRole('see_wallet_filter')">
+        <mat-form-field
+          appearance="outline"
+          class="example-full-width creditForm"
+        >
+          <input
+            matInput
+            (input)="filterTransactions($event)"
+            placeholder="Card Number"
+            formContrlName="cardNumber"
+            id="cardNumber"
+            [(ngModel)]="selectedCardNum"
+            style="padding-top: 0px; padding-bottom: 8px"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="five-column" *ngIf="hasRole('see_wallet_filter')">
+        <mat-form-field
+          appearance="outline"
+          class="example-full-width creditForm"
+        >
+          <select
+            matNativeControl
+            class="custom-select"
+            [(ngModel)]="selectedCardStatues"
+            (ngModelChange)="filterTransactions($event)"
+            style="
+              padding-top: 0px;
+              padding-bottom: 8px;
+              position: absolute;
+              left: 0;
+              top: 4px;
+            "
+          >
+            <option value="" selected>All Statues</option>
+            <option value="{{ statue }}" *ngFor="let statue of statues">
+              {{ statue }}
+            </option>
+          </select>
+        </mat-form-field>
+      </div>
+
+      <div class="five-column filterButtons" style="width: 140px">
+        <button
+          mat-flat-button
+          (click)="extractExcelFile()"
+          [disabled]="transactionList.transactionData.length == 0"
+          class="filterButton"
+          style="height: 30px; margin-top: 5px"
+        >
+          Export To Excel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div
+      *ngIf="
+        !transactionList.showLoading &&
+        transactionList.transactionData.length == 0
+      "
+    >
+      <mat-card class="transaction-card">
+        <mat-card-content>
+          <div>
+            <img
+              src="../../../assets/empty-box.png"
+              alt="image"
+              class="empty-box"
+            />
+            <p>You do not have any activity.</p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div
+      *ngIf="
+        transactionList.showLoading ||
+        (!transactionList.showLoading &&
+          transactionList.transactionData.length != 0)
+      "
+    >
+      <ngx-datatable
+        class="material"
+        [loadingIndicator]="transactionList.showLoading"
+        [messages]="transactionList.messages"
+        style="width: 98%"
+        [sortType]="'multi'"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="50"
+        [scrollbarV]="true"
+        [scrollbarH]="true"
+        [rows]="transactionList.transactionData"
+        [selected]="transactionList.selected"
+        [sortType]="'multi'"
+        [selectionType]="'checkbox'"
+        [selectAllRowsOnPage]="false"
+        [scrollbarH]="true"
+      >
+        <ngx-datatable-column
+          name=""
+          *ngIf="!hasRole('show_card_number')"
+          [width]="25"
+        >
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <div style="float: left" *ngIf="hasRole('show_card_image')">
+              <img
+                class="profile-img"
+                src="../../../assets/profile.png"
+                alt="image"
+              />
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column
+          name="Card Number"
+          [width]="180"
+          *ngIf="hasRole('show_card_number')"
+        >
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <div style="float: left">
+              <img
+                class="profile-img"
+                src="../../../assets/profile.png"
+                alt="image"
+              />
+            </div>
+            <div
+              *ngIf="hasRole('show_card_number')"
+              style="
+                float: left;
+                color: black;
+                margin-top: 3px;
+                margin-left: 5px;
+              "
+            >
+              {{ row.user.code }}
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Guest Name" [width]="90">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.user.name }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Status" [width]="90">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.status }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column
+          name="Card Status"
+          [width]="90"
+          *ngIf="hasRole('show_card_status')"
+        >
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <label
+              *ngIf="
+                !row.user.deleted && !lessThanOrEqualZero(row.user.expired)
+              "
+              class="active-state"
+              >Active</label
+            >
+            <label *ngIf="row.user.deleted" class="deleted-state"
+              >Deleted</label
+            >
+            <label
+              *ngIf="!row.user.deleted && lessThanOrEqualZero(row.user.expired)"
+              style="color: #1661a3"
+              >Expired</label
+            >
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column
+          name="Group"
+          [width]="90"
+          *ngIf="hasRole('show_group')"
+        >
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.group.name }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column
+          name="RVC"
+          *ngIf="hasRole('show_revenue_center')"
+          [width]="90"
+        >
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.revenueCentreName }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Check #" [width]="90">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.checkNumber }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column
+          name="Points Redeemed"
+          [width]="90"
+          *ngIf="hasFeature('reward_points')"
+        >
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.pointsRedeemed }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column
+          name="Partial Payment"
+          [width]="90"
+          *ngIf="hasFeature('partial_payment')"
+        >
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.partialPayment.toPrecision(3) }} {{ getCurrency() }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Total Payment" [width]="90">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.totalPayment }} {{ getCurrency() }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column
+          name="Discount Rate"
+          [width]="90"
+          *ngIf="hasRole('show_discount')"
+        >
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.discountRate | number: "1.2-2" }} %
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column
+          name="After Discount"
+          [width]="90"
+          *ngIf="hasRole('show_discount')"
+        >
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.afterDiscount | number: "1.2-2" }} {{ getCurrency() }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Transaction Time" [width]="90">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.transactionDate | date: "dd/MM/yyyy HH:mm:ss" }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-footer>
+          <ng-template
+            ngx-datatable-footer-template
+            let-rowCount="rowCount"
+            let-selectedCount="selectedCount"
+            let-curPage="curPage"
+            let-offset="offset"
+            let-isVisible="isVisible"
+          >
+            <div class="page-count">
+              Showing {{ transactionList.transactionData.length }} of
+              {{ transactionList.transactionCount }}
+            </div>
+
+            <select
+              (change)="onLimitChange($event.target.value)"
+              style="width: 50px; position: inherit"
+            >
+              <option
+                *ngFor="let option of transactionList.pagesFilter"
+                [value]="option"
+              >
+                {{ option }}
+              </option>
+            </select>
+
+            <datatable-pager
+              [pagerLeftArrowIcon]="'datatable-icon-left'"
+              [pagerRightArrowIcon]="'datatable-icon-right'"
+              [pagerPreviousIcon]="'datatable-icon-prev'"
+              [pagerNextIcon]="'datatable-icon-skip'"
+              [page]="transactionList.pageNumber"
+              [size]="transactionList.limit"
+              [count]="transactionList.transactionCount"
+              (change)="changePage($event)"
+            >
+            </datatable-pager>
+          </ng-template>
+        </ngx-datatable-footer>
+      </ngx-datatable>
+    </div>
+  </div>
+  <ngx-spinner></ngx-spinner>
+</div>
