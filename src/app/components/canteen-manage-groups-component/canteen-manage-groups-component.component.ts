@@ -348,7 +348,6 @@ export class CanteenManageGroupsComponentComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
-        alert(group.canteenConfiguration.chargeAmount)
         this.groupsList.showLoading = true
         this.loyaltyService
           .saveGroup(group)
