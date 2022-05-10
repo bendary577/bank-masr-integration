@@ -43,7 +43,8 @@ export class CanteenConfigurationsComponent implements OnInit {
     return true
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   changeAccumulate(value){
     if(value === false){

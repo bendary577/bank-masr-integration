@@ -89,8 +89,7 @@
                   {{ simphonyDiscount.discountId }}
                 </td>
               </tr>
-              <hr class="hrClass" *ngIf="user" />
-              <hr class="hrClass" *ngIf="user" />
+
               <hr class="hrClass" *ngIf="user" />
               <tr *ngIf="user">
                 <td class="title" style="float: left">Creation Time</td>
@@ -134,18 +133,6 @@
               mat-raised-button
             >
               Restore
-            </button>
-          </div>
-          <div>
-            <button
-              class="user-btn"
-              style="width: 210px"
-              (click)="extendExpiryDate(user)"
-              mat-raised-button
-              *ngIf="user"
-              [disabled]="user && user.deleted"
-            >
-              Extend Expiry Date
             </button>
           </div>
         </mat-card-content>

@@ -348,12 +348,13 @@ export class CanteenManageGroupsComponentComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
+        alert(group.canteenConfiguration.chargeAmount)
         this.groupsList.showLoading = true
         this.loyaltyService
           .saveGroup(group)
           .toPromise()
           .then((result: any) => {
-            this.snackBar.open('Group Canteen Configuration Added successfully.', null, {
+            this.snackBar.open('Canteen configuration updated successfully.', null, {
               duration: 2000,
               horizontalPosition: 'center',
               panelClass: 'my-snack-bar-success',

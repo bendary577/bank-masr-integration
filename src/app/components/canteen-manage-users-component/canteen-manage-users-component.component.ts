@@ -123,7 +123,7 @@ export class CanteenManageUsersComponentComponent implements OnInit {
 
   openUserProfile(user: ApplicationUser) {
     this.data.storage = user
-    this.router.navigate(['entrySystem/' + Constants.USER_PROFILE])
+    this.router.navigate(['canteen/' + Constants.USER_PROFILE])
   }
 
   getUsers() {
