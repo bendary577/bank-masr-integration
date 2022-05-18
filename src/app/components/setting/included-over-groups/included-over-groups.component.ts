@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material'
 import { JournalService } from 'src/app/services/journal/journal.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
@@ -9,7 +9,7 @@ import { OverGroup } from 'src/app/models/OverGroup';
 import { Item } from 'src/app/models/Item';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { ItemGroup } from 'src/app/models/ItemGroup';
-
+import { MapCostCenterAccountCodeComponent } from '../../map-cost-center-account-code/map-cost-center-account-code.component'
 
 @Component({
   selector: 'app-included-over-groups',
@@ -20,6 +20,7 @@ export class IncludedOverGroupsComponent implements OnInit {
   groupLoading = true;
   saveLoading = true;
   itemLoading = true;
+  showLoading = false;
 
   generalSettings: GeneralSettings;
   overGroups: Array<OverGroup> = [];
@@ -28,7 +29,7 @@ export class IncludedOverGroupsComponent implements OnInit {
 
   mappedItems: Array<Item> = [];
 
-  constructor(private journalService:JournalService, public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
+  constructor(private journalService:JournalService, public dialog: MatDialog, public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService) { }
 
   ngOnInit() {
@@ -167,6 +168,24 @@ export class IncludedOverGroupsComponent implements OnInit {
       this.spinner.hide();
     }
 
+  }
+
+
+
+  openCostCenterAccountCodeMapping(overGroup) {
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.width = '420px'
+    dialogConfig.maxWidth = '420px'
+    dialogConfig.autoFocus = true
+    dialogConfig.data = {overGroup}
+
+    let dialogRef = this.dialog.open(MapCostCenterAccountCodeComponent, dialogConfig)
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.onSaveClick()
+      }
+    })
   }
 
 }
