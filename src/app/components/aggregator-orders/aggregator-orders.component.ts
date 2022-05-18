@@ -26,6 +26,27 @@ export class AggregatorOrdersComponent implements OnInit {
   orders = [];
   order;
   state = "";
+  ordersList = {
+    paginateData: true as boolean,
+    offset: 0,
+    messages: {
+      emptyMessage: `
+    <div style="text-align: center;">
+      <p class="user-name">No orders have been created yet</p>
+    </div>
+  `,
+    },
+    selected: [],
+    pageNumber: 1 as number,
+    limit: 10 as number,
+    locationsCount: 0 as number,
+    ordersCount: 0 as number,
+    pagesFilter: [10, 25, 50, 75, 100],
+    showLoading: true,
+    inputSearch: '' as string,
+    ordersData: [],
+    allOrdersBeforeFilter: [],
+  }
 
   constructor(private spinner: NgxSpinnerService,
     public snackBar: MatSnackBar, private talabatService:TalabatService, public dialog: MatDialog
@@ -46,7 +67,10 @@ export class AggregatorOrdersComponent implements OnInit {
 
   getStoredOrders() {
     this.spinner.show();
-    this.talabatService.getStoreOrders().toPromise().then((res: any) => {
+    this.talabatService.getStoreOrders(        
+      this.ordersList.pageNumber,
+      this.ordersList.limit
+      ).toPromise().then((res: any) => {
       this.spinner.hide();
       this.orders = res["data"];
    
