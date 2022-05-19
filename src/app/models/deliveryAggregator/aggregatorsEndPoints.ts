@@ -9,6 +9,7 @@ export class AggregatorsEndPoints {
     // End Points
     // Orders
     static GET_STORED_ORDERS =  environment.apiHost + "/aggregator/storedOrders";
+    static COUNT_ORDERS =  environment.apiHost + "/aggregator/getOrdersCount";
 
     // Talabat
     static GET_TALABAT_ORDERS =  environment.apiHost + "/talabat";

@@ -65,14 +65,54 @@ export class AggregatorOrdersComponent implements OnInit {
     return this.state;
   }
 
+  onLimitChange(limit) {
+    this.ordersList.limit = limit
+    this.getStoredOrders();
+  }
+
+  changePage(pageInfo) {
+    this.ordersList.pageNumber = pageInfo.page
+    this.getStoredOrders();
+  }
+
+
+  getOrdersCount() {
+    this.talabatService
+      .countOrders()
+      .toPromise()
+      .then((res: any) => {
+        this.ordersList.ordersCount = res
+      })
+      .catch((err) => {
+        let message = ''
+        if (err.status === 401) {
+          message = ErrorMessages.SESSION_EXPIRED
+          this.sidNav.Logout()
+        } else if (err.error.message) {
+          message = err.error.message
+        } else if (err.message) {
+          message = err.message
+        } else {
+          message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+        }
+        this.snackBar.open(message, null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass: 'my-snack-bar-fail',
+        })
+      })
+  }
+
   getStoredOrders() {
     this.spinner.show();
+    this.getOrdersCount();
     this.talabatService.getStoreOrders(        
       this.ordersList.pageNumber,
       this.ordersList.limit
       ).toPromise().then((res: any) => {
       this.spinner.hide();
       this.orders = res["data"];
+      this.ordersList.ordersData = res["data"];
    
       this.loading = false;
     }).catch(err => {
