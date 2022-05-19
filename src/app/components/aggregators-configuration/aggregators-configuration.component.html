@@ -1,1 +1,42 @@
-<p>aggregators-configuration works!</p>
+
+<div class="config-style">
+    <h3 mat-dialog-title>Grant Access Token</h3>
+
+    <br>
+
+    <!-- Cancel Reason -->
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Request Foodics Authorization
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <form class="my-form">
+            <div>
+                <div>
+                    
+                </div>
+                <mat-form-field class="example-full-width">
+                    <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Client Id" name="clientId" [(ngModel)]="newCancelReason.typeId">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Client Secret" name="clientSecret" [(ngModel)]="newCancelReason.type">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Redirect Url" name="redirectUrl" [(ngModel)]="newCancelReason.typeDescription">
+                </mat-form-field>
+                <button mat-flat-button>Authorize Foodics</button>
+            </div>
+        </form>
+
+        
+    </mat-expansion-panel>
+
+    <br>
+
+    <!-- <div class="card-back">
+        <button mat-flat-button (click)="onSaveClick()">Save</button>
+    </div> -->
+    <ngx-spinner></ngx-spinner>
+</div>

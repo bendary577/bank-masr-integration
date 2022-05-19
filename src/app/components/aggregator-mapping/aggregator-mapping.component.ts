@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { User } from 'src/app/models/user';
+import { SideNaveComponent } from '../side-nave/side-nave.component';
 
 @Component({
   selector: 'app-aggregator-mapping',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AggregatorMappingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _location: Location, private sideNav : SideNaveComponent) {   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+  }
+
+  backClicked() {
+    this._location.back();
+  }
+
+  hasRole(role): Boolean{
+   return this.sideNav.hasRole(role);
   }
 
 }

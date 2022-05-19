@@ -1,1 +1,22 @@
-<p>aggregator-mapping works!</p>
+<div class="sync-body">
+    <h3>Aggregator Mapping</h3>
+    <mat-tab-group>
+        <!-- *ngIf="hasRole('show_groups')" -->
+        <mat-tab label="Mapped Products">
+            <app-talabat-mapping></app-talabat-mapping>
+        </mat-tab>
+        <mat-tab label="UnMapped Products">
+            <app-talabat-mapping></app-talabat-mapping>
+        </mat-tab>
+        <mat-tab label="Needs Attention">
+            <app-talabat-mapping></app-talabat-mapping>
+        </mat-tab>
+        <mat-tab label="Branches">
+            <app-talabat-mapping></app-talabat-mapping>
+        </mat-tab>
+        <!-- *ngIf="hasRole('show_guests')" -->
+        <!-- <mat-tab label="Products">
+            <app-aggregator-products></app-aggregator-products>
+        </mat-tab> -->
+    </mat-tab-group>
+</div>
