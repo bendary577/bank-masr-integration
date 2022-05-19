@@ -59,6 +59,9 @@ import { ManageSubGroupComponent } from "../components/manage-sub-group/manage-s
 import { AggregatorIntegratorComponent } from "../components/aggregator-integrator/aggregator-integrator.component";
 import { AggregatorsEndPoints } from "../models/deliveryAggregator/aggregatorsEndPoints";
 import { RewardPointsSettingsComponent } from "../components/setting/reward-points-settings/reward-points-settings.component";
+import { AggregatorsConfigurationComponent } from "../components/aggregators-configuration/aggregators-configuration.component";
+import { AggregatorMappingComponent } from "../components/aggregator-mapping/aggregator-mapping.component";
+import { AggregatorBranchesMappingComponent } from "../components/aggregator-branches-mapping/aggregator-branches-mapping.component";
 
 const routes: Routes = [
   { path: "", component: MainComponent },
@@ -110,6 +113,21 @@ const routes: Routes = [
   {
     path: Constants.TALABAT_MAPPING_PAGE,
     component: TalabatMappingComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: Constants.BRANCHES_MAPPING_PAGE,
+    component: AggregatorBranchesMappingComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: Constants.AGGREGATORS_MAPPING_PAGE,
+    component: AggregatorMappingComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: Constants.AGGREGATORS_CONFIGURATIONS_PAGE,
+    component: AggregatorsConfigurationComponent,
     canActivate: [AuthGuardService],
   },
   {

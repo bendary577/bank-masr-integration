@@ -95,6 +95,9 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import {MatSelectModule} from '@angular/material/select';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MapCostCenterAccountCodeComponent } from "../components/map-cost-center-account-code/map-cost-center-account-code.component";
+import { AggregatorsConfigurationComponent } from "../components/aggregators-configuration/aggregators-configuration.component";
+import { AggregatorMappingComponent } from "../components/aggregator-mapping/aggregator-mapping.component";
+import { AggregatorBranchesMappingComponent } from "../components/aggregator-branches-mapping/aggregator-branches-mapping.component";
 
 @NgModule({
 
@@ -193,7 +196,10 @@ import { MapCostCenterAccountCodeComponent } from "../components/map-cost-center
     SalesApiDailyComponent,
     SalesApiMonthlyComponent,
     ConfirmUndoWalletActionComponent,
-    MapCostCenterAccountCodeComponent
+    MapCostCenterAccountCodeComponent,
+    AggregatorsConfigurationComponent,
+    AggregatorMappingComponent,
+    AggregatorBranchesMappingComponent
   ],
   imports: [
     MainRoutingModule,

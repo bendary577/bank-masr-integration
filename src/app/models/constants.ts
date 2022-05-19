@@ -344,6 +344,9 @@ export class Constants {
   static POS_MACHINE_MAP_TABLE = "posMachinMapping";
   static REWORD_PORINTS_SETTINGS = "rewardPointsSettings";
   static TALABAT_MAPPING_PAGE = "talabatMapping";
+  static AGGREGATORS_CONFIGURATIONS_PAGE = "aggregatorsConfigurations";
+  static AGGREGATORS_MAPPING_PAGE = "aggregatorsMapping";
+  static BRANCHES_MAPPING_PAGE = "branchesMapping";
 
   static GET_APP_GROUPS_URL = environment.apiHost + "/getApplicationGroups";
   static GET_ALL_APP_GROUPS_URL =

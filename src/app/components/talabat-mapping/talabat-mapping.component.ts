@@ -24,12 +24,10 @@ export class TalabatMappingComponent implements OnInit {
 
   newProductMapping = new ProductMapping();
   newModifierMapping = new ModifierMapping();
-  newBranchMapping = new BranchMapping();
   newDiscountMapping = new DiscountMapping();
   newCustomerMapping = new CustomerMapping();
   newAddressMapping = new AddressMapping();
 
-  branchMappingData   = []
   productsMappingData = [];
   modifierOptionsMappingData = []
   customerMappingData = []
@@ -54,7 +52,6 @@ export class TalabatMappingComponent implements OnInit {
 
     this.generalSettingsService.getGeneralSettings().then((res) => {
       this.generalSettings = res as GeneralSettings;
-      this.branchMappingData = this.generalSettings.talabatConfiguration.branchMappings;
       this.productsMappingData = this.generalSettings.talabatConfiguration.productsMappings;
       this.modifierOptionsMappingData = this.generalSettings.talabatConfiguration.modifierMappings;
       this.customerMappingData = this.generalSettings.talabatConfiguration.customerMappings;
@@ -162,20 +159,6 @@ export class TalabatMappingComponent implements OnInit {
     }
   }
 
-  addBranchMappingData(){
-    if(this.newBranchMapping.name &&  this.newBranchMapping.foodIcsBranchId && this.newBranchMapping.talabatBranchId){
-      this.branchMappingData.push(this.newBranchMapping);
-      this.newBranchMapping = new BranchMapping();
-
-      this.branchMappingData = [...this.branchMappingData];
-    }else {
-      this.snackBar.open('Please fill all type fields.', null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-    }
-  }
 
   addDiscountMappingData(){
     if(this.newDiscountMapping.discountId &&  this.newDiscountMapping.discountRate ){
@@ -229,7 +212,6 @@ export class TalabatMappingComponent implements OnInit {
 
       this.generalSettings.talabatConfiguration.productsMappings = this.productsMappingData;
       this.generalSettings.talabatConfiguration.modifierMappings = this.modifierOptionsMappingData;
-      this.generalSettings.talabatConfiguration.branchMappings = this.branchMappingData;
       this.generalSettings.talabatConfiguration.customerMappings = this.customerMappingData;
       this.generalSettings.talabatConfiguration.discountMappings = this.discountMappingData;
       this.generalSettings.talabatConfiguration.addressMappings = this.addressMappingData;
