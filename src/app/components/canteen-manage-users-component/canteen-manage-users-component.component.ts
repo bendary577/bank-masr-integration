@@ -152,7 +152,7 @@ export class CanteenManageUsersComponentComponent implements OnInit {
         if (err.status === 401) {
           message = ErrorMessages.SESSION_EXPIRED
           this.sidNav.Logout()
-        } else if (err.error.message) {
+        } else if (err.error && err.error.message) {
           message = err.error.message
         } else if (err.message) {
           message = err.message
@@ -699,15 +699,6 @@ export class CanteenManageUsersComponentComponent implements OnInit {
       }
     }
     return credit
-  }
-
-  lessThanOrEqualZero(user): Boolean {
-    var now = new Date().getTime()
-    let distance = new Date(user.expiryDate).getTime() - now
-    if (distance > 0) {
-      return false
-    }
-    return true
   }
 
   hasRole(reference) {
