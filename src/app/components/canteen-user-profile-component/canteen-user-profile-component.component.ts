@@ -176,13 +176,6 @@ export class CanteenUserProfileComponentComponent implements OnInit {
     return false
   }
 
-  lessThanOrEqualZero(): Boolean {
-    if (this.distance > 0) {
-      return false
-    }
-    return true
-  }
-
   chargeWallet(func) {
     const dialogRef = this.dialog.open(EditWalletComponent, {
       width: '400px',

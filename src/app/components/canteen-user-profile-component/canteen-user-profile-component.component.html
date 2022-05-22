@@ -160,7 +160,7 @@
                 [disabled]="
                   !user ||
                   (user &&
-                    (user.deleted || lessThanOrEqualZero() || user.suspended))
+                    (user.deleted || user.suspended))
                 "
                 mat-raised-button
               >
@@ -172,7 +172,7 @@
                 [disabled]="
                   !user ||
                   (user &&
-                    (user.deleted || lessThanOrEqualZero() || user.suspended))
+                    (user.deleted || user.suspended))
                 "
                 mat-raised-button
               >
@@ -201,29 +201,11 @@
                 *ngFor="let revenue of revenueCenters"
               >
                 {{ revenue.revenueCenter }}
-                <!-- <label style="float: right;">0.0</label> -->
               </label>
             </div>
           </mat-card-content>
         </mat-card>
       </div>
-      <!-- <div class="column">
-                <mat-card class="wallet-card">
-                    <mat-card-content>
-                        <h2>Guest Card</h2>
-                        <h3>
-                            <div>
-                                Card Number
-                            </div>
-                            <div style="font-size: larger;">
-                                {{user.code}}
-                            </div>
-                        </h3>
-                        <button class="filter-btn" (click)="send('Email')" mat-raised-button>Send Mail</button>
-                        <button class="filter-btn" (click)="send('SMS')" mat-raised-button>Send SMS</button>
-                    </mat-card-content>
-                </mat-card>
-            </div> -->
     </div>
     <div class="trans-tabel">
       <div>
@@ -297,19 +279,19 @@
 
           <ngx-datatable-column name="Operation Amount">
             <ng-template let-row="row" ngx-datatable-cell-template>
-              {{ row.amount }} {{ getCurrency() }}
+              {{ row.amount | number : '1.2-2'}} {{ getCurrency() }}
             </ng-template>
           </ngx-datatable-column>
 
           <ngx-datatable-column name="Previous Balance">
             <ng-template let-row="row" ngx-datatable-cell-template>
-              {{ row.previousBalance }} {{ getCurrency() }}
+              {{ row.previousBalance | number : '1.2-2' }} {{ getCurrency() }}
             </ng-template>
           </ngx-datatable-column>
 
           <ngx-datatable-column name="New Balance">
             <ng-template let-row="row" ngx-datatable-cell-template>
-              {{ row.newBalance }} {{ getCurrency() }}
+              {{ row.newBalance | number : '1.2-2' }} {{ getCurrency() }}
             </ng-template>
           </ngx-datatable-column>
           
@@ -358,7 +340,7 @@
                 [disabled]="
                   !user ||
                   (user &&
-                    (user.deleted || lessThanOrEqualZero() || user.suspended))
+                    (user.deleted || user.suspended))
                     || !(row.operation==='Charge Wallet' || row.operation==='Deduct From Wallet') || row.deleted
                 "
                 (click)="undoWalletAction(row)"
