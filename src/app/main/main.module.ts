@@ -98,6 +98,7 @@ import { MapCostCenterAccountCodeComponent } from "../components/map-cost-center
 import { AggregatorsConfigurationComponent } from "../components/aggregators-configuration/aggregators-configuration.component";
 import { AggregatorMappingComponent } from "../components/aggregator-mapping/aggregator-mapping.component";
 import { AggregatorBranchesMappingComponent } from "../components/aggregator-branches-mapping/aggregator-branches-mapping.component";
+import { AggregatorFoodicsProductsComponent } from "../components/aggregator-foodics-products/aggregator-foodics-products.component";
 
 @NgModule({
 
@@ -199,7 +200,8 @@ import { AggregatorBranchesMappingComponent } from "../components/aggregator-bra
     MapCostCenterAccountCodeComponent,
     AggregatorsConfigurationComponent,
     AggregatorMappingComponent,
-    AggregatorBranchesMappingComponent
+    AggregatorBranchesMappingComponent,
+    AggregatorFoodicsProductsComponent
   ],
   imports: [
     MainRoutingModule,

@@ -5,7 +5,6 @@ import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { GeneralSettings } from 'src/app/models/GeneralSettings';
 import { Response } from 'src/app/models/Response';
 import { AddressMapping } from 'src/app/models/deliveryAggregator/address-mapping';
-import { BranchMapping } from 'src/app/models/deliveryAggregator/branch-mapping';
 import { CustomerMapping } from 'src/app/models/deliveryAggregator/customer-mapping';
 import { DiscountMapping } from 'src/app/models/deliveryAggregator/discount-mapping';
 import { ProductMapping } from 'src/app/models/deliveryAggregator/product-mapping';

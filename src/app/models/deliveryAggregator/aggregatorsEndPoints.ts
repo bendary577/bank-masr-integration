@@ -5,6 +5,7 @@ export class AggregatorsEndPoints {
     // Pages
     static TALABAT_ORDERS  = "talabatOrders"
     static AGGREGATOR_INTEGRATOR  = "aggregatorIntegrator"
+    static AGGREGATOR_FOODICS_PRODUCTS  = "foodicsProduct"
 
     // End Points
     // Orders
