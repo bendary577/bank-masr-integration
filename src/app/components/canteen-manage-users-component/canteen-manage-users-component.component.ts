@@ -13,8 +13,6 @@ import { AddAppUserAccompiedComponent } from '../add-app-user-accompied/add-app-
 import { SideNaveComponent } from '../side-nave/side-nave.component'
 import { ExtendExpiryDateComponent } from '../extend-expiry-date/extend-expiry-date.component'
 import { ViewReceiptComponent } from '../view-receipt/view-receipt.component'
-import { MatSelectModule } from '@angular/material/select'
-import { MatFormFieldModule } from '@angular/material/form-field'
 import { NgxSpinnerService } from 'ngx-spinner'
 
 @Component({
@@ -692,7 +690,7 @@ export class CanteenManageUsersComponentComponent implements OnInit {
     this.usersList.usersData = result
   }
 
-  calculateParams(user): Number {
+  calculateParams(user): number {
     let credit = 0
     if (user.wallet != null) {
       let balance = user.wallet.balance
@@ -730,13 +728,9 @@ export class CanteenManageUsersComponentComponent implements OnInit {
   }
 
   resetPicker(event) {
-    // if (event == 'fromDate') {
     this.fromDate = undefined
-    // this.filterGuests(event)
-    // } else if (event == 'toDate') {
     this.toDate = undefined
     this.filterGuests(event)
-    // }
   }
 
   filterGuests(event) {

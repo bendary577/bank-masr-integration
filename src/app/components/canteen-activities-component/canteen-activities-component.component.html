@@ -622,7 +622,7 @@
           *ngIf="hasFeature('partial_payment')"
         >
           <ng-template let-row="row" ngx-datatable-cell-template>
-            {{ row.partialPayment.toPrecision(3) }} {{ getCurrency() }}
+            {{ row.partialPayment  | number : '1.2-2' }} {{ getCurrency() }}
           </ng-template>
         </ngx-datatable-column>
 
