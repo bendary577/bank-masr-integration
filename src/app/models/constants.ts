@@ -333,6 +333,7 @@ export class Constants {
 
   static GET_LOYALTY_PAGE = "loyalty";
   static REWARD_POINTS_PAGE = "rewardPoints";
+  static GET_CANTEEN_PAGE = "canteen";
   static MANAGE_COMPANIES = "manageCompanies";
   static MANAGE_GROUPS = "manageGroups";
   static MANAGE_SUB_GROUPS = "manageSubGroups";
@@ -343,11 +344,15 @@ export class Constants {
   static POS_MACHINE_MAP_TABLE = "posMachinMapping";
   static REWORD_PORINTS_SETTINGS = "rewardPointsSettings";
   static TALABAT_MAPPING_PAGE = "talabatMapping";
+  static AGGREGATORS_CONFIGURATIONS_PAGE = "aggregatorsConfigurations";
+  static AGGREGATORS_MAPPING_PAGE = "aggregatorsMapping";
+  static BRANCHES_MAPPING_PAGE = "branchesMapping";
 
   static GET_APP_GROUPS_URL = environment.apiHost + "/getApplicationGroups";
   static GET_ALL_APP_GROUPS_URL =
     environment.apiHost + "/getAllApplicationGroups";
   static ADD_APP_GROUP_URL = environment.apiHost + "/addApplicationGroup";
+  static SAVE_GROUP = environment.apiHost + "/saveGroup";
   static Delete_APP_GROUPS_URL =
     environment.apiHost + "/deleteApplicationGroups";
   static UPDATE_APP_GROUP_URL = environment.apiHost + "/updateApplicationGroup";

@@ -1,0 +1,11 @@
+<mat-tab-group>
+    <mat-tab label="Groups" *ngIf="hasRole('show_canteen_groups')"> 
+        <app-canteen-manage-groups-component></app-canteen-manage-groups-component>
+    </mat-tab>
+    <mat-tab label="Guest" *ngIf="hasRole('show_canteen_guests')"> 
+        <app-canteen-manage-users-component></app-canteen-manage-users-component>
+    </mat-tab>
+    <mat-tab label="Activities" *ngIf="hasRole('show_canteen_activities')">
+        <app-canteen-activities-component></app-canteen-activities-component>
+    </mat-tab>
+  </mat-tab-group>

@@ -352,19 +352,19 @@
 
           <ngx-datatable-column name="Operation Amount">
             <ng-template let-row="row" ngx-datatable-cell-template>
-              {{ row.amount }} {{ getCurrency() }}
+              {{ row.amount | number : '1.2-2'}} {{ getCurrency() }}
             </ng-template>
           </ngx-datatable-column>
 
           <ngx-datatable-column name="Previous Balance">
             <ng-template let-row="row" ngx-datatable-cell-template>
-              {{ row.previousBalance }} {{ getCurrency() }}
+              {{ row.previousBalance | number : '1.2-2' }} {{ getCurrency() }}
             </ng-template>
           </ngx-datatable-column>
 
           <ngx-datatable-column name="New Balance">
             <ng-template let-row="row" ngx-datatable-cell-template>
-              {{ row.newBalance }} {{ getCurrency() }}
+              {{ row.newBalance | number : '1.2-2'}} {{ getCurrency() }}
             </ng-template>
           </ngx-datatable-column>
           

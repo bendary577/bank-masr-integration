@@ -1,3 +1,5 @@
+import {CostCenterAccountCodeMapping} from './CostCenterAccountCodeMapping'
+
 export class OverGroup {
   id: string;
   checked: boolean;
@@ -7,4 +9,5 @@ export class OverGroup {
   inventoryAccount: string;
   expensesAccount: string;
   product: string;
+  costCenterAccountCodeMappingList : Array<CostCenterAccountCodeMapping>
 }

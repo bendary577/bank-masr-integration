@@ -1,0 +1,53 @@
+<div class="dialog-body">
+
+    <span mat-dialog-title>New User</span>
+
+    <div mat-dialog-content>
+        <form [formGroup]="form" class="my-form" style="text-align: center;">
+
+            <mat-form-field class="example-full-width creditForm" appearance="outline">
+                <input matInput placeholder="Name" formControlName="name" maxlength="25" required>
+                <mat-error *ngIf="form.controls.name.hasError('required')">
+                    Name is required.
+                </mat-error>
+                <mat-error *ngIf="form.controls.name.hasError('maxlength')">
+                    Name is to long.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width creditForm" appearance="outline">
+                <input matInput placeholder="Email" formControlName="email">
+                <mat-error *ngIf="form.controls.email.hasError('pattern')">
+                    Email must be well formed.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width creditForm" appearance="outline">
+                <mat-select matInput id="groups" name="groups" placeholder="Group" formControlName="group">
+                    <mat-option></mat-option>
+                    <mat-option [value]=c.id *ngFor="let c of groups">{{c.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+            <div>
+                <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="csvInputChange($event)"
+                    accept="image/*" />
+                <button class="form-button" mat-flat-button color="primary" (click)="csvInput.click()">
+                    <img class="form-b-img" src="../../../assets/photos.png">
+                    Choose Image</button>
+                <div [hidden]="!imageUploded">Image uploaded successfully.</div>
+            </div>
+
+            <div mat-dialog-actions class="mat-action-style">
+                <button mat-button cdkFocusInitial (click)="onSaveClick()" class="groups-buttons">
+                    <label [hidden]="inUpdate">Save</label>
+                    <label [hidden]="!inUpdate">Update</label>
+                </button>
+                <button mat-button (click)="onNoClick()" class="groups-buttons">Cancel</button>
+            </div>
+
+
+        </form>
+
+    </div>
+</div>

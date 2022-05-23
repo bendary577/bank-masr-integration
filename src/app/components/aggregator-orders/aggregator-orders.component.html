@@ -87,6 +87,47 @@
                         {{row.talabatAdminOrder.timestamp | date: 'dd/MM/yyyy HH:mm:ss'}}
                     </ng-template>
                 </ngx-datatable-column>
+
+                <ngx-datatable-footer>
+                    <ng-template
+                      ngx-datatable-footer-template
+                      let-rowCount="rowCount"
+                      let-selectedCount="selectedCount"
+                      let-curPage="curPage"
+                      let-offset="offset"
+                      let-isVisible="isVisible"
+                    >
+                      <div class="page-count">
+                        Showing {{ ordersList.ordersData.length }} of
+                        {{ ordersList.ordersCount }}
+                      </div>
+          
+                      <select
+                        (change)="onLimitChange($event.target.value)"
+                        style="width: 50px; position: inherit"
+                      >
+                        <option
+                          *ngFor="let option of ordersList.pagesFilter"
+                          [value]="option"
+                        >
+                          {{ option }}
+                        </option>
+                      </select>
+          
+                      <datatable-pager
+                        [pagerLeftArrowIcon]="'datatable-icon-left'"
+                        [pagerRightArrowIcon]="'datatable-icon-right'"
+                        [pagerPreviousIcon]="'datatable-icon-prev'"
+                        [pagerNextIcon]="'datatable-icon-skip'"
+                        [page]="ordersList.pageNumber"
+                        [size]="ordersList.limit"
+                        [count]="ordersList.ordersCount"
+                        (change)="changePage($event)"
+                      >
+                      </datatable-pager>
+                    </ng-template>
+                  </ngx-datatable-footer>
+
             </ngx-datatable>
         </div>
     </div>

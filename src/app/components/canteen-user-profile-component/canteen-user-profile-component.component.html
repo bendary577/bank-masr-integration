@@ -1,0 +1,358 @@
+<div style="margin-top: 80px">
+  <div class="right-col">
+    <div class="header">
+      <button
+        mat-flat-button
+        class="button-back filterButton"
+        (click)="backClicked()"
+      >
+        Go Back
+      </button>
+      <button class="refresh-btn-view" (click)="refresh()">
+        <img class="refresh-img" src="../../../assets/refresh.png" />
+      </button>
+    </div>
+    <div class="user-profile">
+      <mat-card class="user-card" style="min-height: 100px">
+        <mat-card-content style="min-height: 186px">
+          <img
+            class="user-img"
+            src="{{ user.logoUrl }}"
+            alt="image"
+            *ngIf="user"
+          />
+          <img
+            class="user-img"
+            src="../../../assets/defaultImage.jpg"
+            alt="image"
+            *ngIf="!user"
+          />
+          <span class="user-name" *ngIf="user">
+            {{ user.name }}
+          </span>
+          <span style="color: #1661a3" *ngIf="user">{{ user.email }}</span>
+          <hr />
+          <div class="user-data">
+            <table>
+              <tr *ngIf="user && user.code">
+                <td class="title" style="float: left" style="float: left">
+                  Guest Card
+                </td>
+                <td></td>
+                <td class="res" style="float: right" style="float: right">
+                  {{ user.code }}
+                </td>
+              </tr>
+              <hr class="hrClass" *ngIf="user && user.code" />
+              <tr *ngIf="user && user.mobile">
+                <td class="title" style="float: left" style="float: left">
+                  Mobile
+                </td>
+                <td></td>
+                <td class="res" style="float: right" style="float: right">
+                  {{ user.mobile }}
+                </td>
+              </tr>
+              <hr class="hrClass" *ngIf="user && user.mobile" />
+              <tr *ngIf="group && group.name">
+                <td class="title" style="float: left">Group</td>
+                <td></td>
+                <td class="res" style="float: right">{{ group.name }}</td>
+              </tr>
+              <hr
+                class="hrClass"
+                *ngIf="
+                  hasRole('show_discount') && simphonyDiscount.discountRate
+                "
+              />
+              <tr
+                *ngIf="
+                  hasRole('show_discount') && simphonyDiscount.discountRate
+                "
+              >
+                <td class="title" style="float: left">Discount</td>
+                <td></td>
+                <td class="res" style="float: right">
+                  {{ simphonyDiscount.discountRate }} %
+                </td>
+              </tr>
+              <hr
+                class="hrClass"
+                *ngIf="hasRole('show_discount') && simphonyDiscount.discountId"
+              />
+              <tr
+                *ngIf="hasRole('show_discount') && simphonyDiscount.discountId"
+              >
+                <td class="title" style="float: left">Discount ID</td>
+                <td></td>
+                <td class="res" style="float: right">
+                  {{ simphonyDiscount.discountId }}
+                </td>
+              </tr>
+
+              <hr class="hrClass" *ngIf="user" />
+              <tr *ngIf="user">
+                <td class="title" style="float: left">Creation Time</td>
+                <td></td>
+                <td class="res" style="float: right">
+                  {{ user.creationDate | date: "dd/MM/yyyy" }}
+                </td>
+              </tr>
+              <hr class="hrClass" *ngIf="user" />
+              <hr class="hrClass" *ngIf="user && user.lastUpdate" />
+              <tr *ngIf="user && user.lastUpdate">
+                <td class="title" style="float: left">Last Update</td>
+                <td></td>
+                <td class="res" style="float: right">
+                  {{ user.lastUpdate | date: "dd/MM/yyyy" }}
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="user-btn-container">
+            <button
+              class="user-btn"
+              (click)="updateUserDialog()"
+              mat-raised-button
+              *ngIf="user"
+            >
+              Update
+            </button>
+            <button
+              class="user-btn"
+              (click)="deleteUsers('true')"
+              *ngIf="user && !user.deleted"
+              mat-raised-button
+            >
+              Delete
+            </button>
+            <button
+              class="user-btn"
+              (click)="deleteUsers('false')"
+              *ngIf="user && user.deleted"
+              mat-raised-button
+            >
+              Restore
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="left-col">
+    <div class="wallet">
+      <div class="column">
+        <mat-card class="wallet-card">
+          <mat-card-content>
+            <h2>Guest Wallet</h2>
+            <div class="wallet-amount">
+              <h3>
+                <div>Wallet Credit</div>
+                <div style="font-size: larger">
+                  {{ credit }} {{ getCurrency() }}
+                </div>
+              </h3>
+
+              <button
+                class="filter-btn"
+                (click)="chargeWallet('add')"
+                [disabled]="
+                  !user ||
+                  (user &&
+                    (user.deleted || user.suspended))
+                "
+                mat-raised-button
+              >
+                Charge
+              </button>
+              <button
+                class="filter-btn"
+                (click)="deductWallet('deduct')"
+                [disabled]="
+                  !user ||
+                  (user &&
+                    (user.deleted || user.suspended))
+                "
+                mat-raised-button
+              >
+                Deduct
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="column">
+        <mat-card class="wallet-card wallet-revenue">
+          <mat-card-content>
+            <h2>Wallet Revenue Centers</h2>
+            <div [hidden]="revenueCenters.length" style="padding-bottom: 20px">
+              <img
+                class="rvc-img"
+                src="../../../assets/restaurant.png"
+                alt="image"
+              />
+              <p class="rvc-name">There Is No Revenue Centers</p>
+            </div>
+            <div class="list-group" *ngIf="revenueCenters.length > 0">
+              <div class="list-group-item-header">Revenue Centers</div>
+              <label
+                class="list-group-item"
+                *ngFor="let revenue of revenueCenters"
+              >
+                {{ revenue.revenueCenter }}
+              </label>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <div class="trans-tabel">
+      <div>
+        <button
+          mat-flat-button
+          (click)="extractExcelFile()"
+          [disabled]="walletHistoryList.walletHistoryData.length == 0"
+          class="filterButton"
+          style="height: 30px; margin-top: 5px"
+        >
+          Export To Excel
+        </button>
+      </div>
+
+      <div class="title-card">Card History</div>
+      <div
+        *ngIf="
+          !walletHistoryList.showLoading &&
+          walletHistoryList.walletHistoryData.length == 0
+        "
+      >
+        <mat-card class="transaction-card">
+          <mat-card-content>
+            <div style="text-align: center">
+              <img
+                src="../../../assets/empty-box.png"
+                alt="image"
+                class="empty-box"
+              /><br />
+              <span>You do not have any recent history.</span>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div
+        *ngIf="
+          walletHistoryList.showLoading ||
+          (!walletHistoryList.showLoading &&
+            walletHistoryList.walletHistoryData.length != 0)
+        "
+      >
+        <ngx-datatable
+          class="material"
+          [loadingIndicator]="walletHistoryList.showLoading"
+          [messages]="walletHistoryList.messages"
+          style="
+            border-radius: 1%;
+            width: 98%;
+            height: 310px;
+            display: inline-block;
+          "
+          [sortType]="'multi'"
+          [columnMode]="'force'"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          [rowHeight]="60"
+          [scrollbarV]="true"
+          [scrollbarH]="true"
+          [rows]="walletHistoryList.walletHistoryData"
+          [selected]="walletHistoryList.selected"
+          [selectionType]="'checkbox'"
+          [selectAllRowsOnPage]="false"
+          [scrollbarH]="true"
+        >
+          <ngx-datatable-column name="Opreation Type">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row.operation }}
+            </ng-template>
+          </ngx-datatable-column>
+
+          <ngx-datatable-column name="Operation Amount">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row.amount | number : '1.2-2'}} {{ getCurrency() }}
+            </ng-template>
+          </ngx-datatable-column>
+
+          <ngx-datatable-column name="Previous Balance">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row.previousBalance | number : '1.2-2' }} {{ getCurrency() }}
+            </ng-template>
+          </ngx-datatable-column>
+
+          <ngx-datatable-column name="New Balance">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row.newBalance | number : '1.2-2' }} {{ getCurrency() }}
+            </ng-template>
+          </ngx-datatable-column>
+          
+          <ngx-datatable-column name="Status">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <p *ngIf="row.deleted" style="color:red">deleted</p>
+              <p *ngIf="!row.deleted" style="color:green">active</p>
+            </ng-template>
+          </ngx-datatable-column>
+
+          <ngx-datatable-column name="Check">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <p *ngIf="row.check">{{ row.check }}</p>
+              <p *ngIf="!row.check">NA</p>
+            </ng-template>
+          </ngx-datatable-column>
+
+          <ngx-datatable-column name="Employee">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <p *ngIf="row.employee">{{ row.employee }}</p>
+              <p *ngIf="!row.employee">NA</p>
+            </ng-template>
+          </ngx-datatable-column>
+
+          <ngx-datatable-column name="Agent Name">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <li *ngIf="row.user">
+                {{ row.user.name }}
+              </li>
+            </ng-template>
+          </ngx-datatable-column>
+
+          <ngx-datatable-column name="Opreation Time">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row.date | date: "dd/MM/yyyy HH:mm:ss" }}
+            </ng-template>
+          </ngx-datatable-column>
+
+          <ngx-datatable-column name="Action">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <div >
+
+              </div>
+              <button
+                mat-flat-button
+                [disabled]="
+                  !user ||
+                  (user &&
+                    (user.deleted || user.suspended))
+                    || !(row.operation==='Charge Wallet' || row.operation==='Deduct From Wallet') || row.deleted
+                "
+                (click)="undoWalletAction(row)"
+                style="background-color: #f8b15f; margin-bottom: 15px"
+              >
+                Undo
+              </button>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </div>
+    </div>
+  </div>
+  <ngx-spinner></ngx-spinner>
+</div>

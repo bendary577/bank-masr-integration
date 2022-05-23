@@ -1,0 +1,334 @@
+<div class="guests_body">
+<div *ngIf="usersList.allGuestsBeforeFilter.length != 0 ||usersList.usersData.length != 0 || usersList.showLoading" class="header">
+    <button mat-flat-button class="groups-buttons" (click)="addUserDialog(true, true)" *ngIf="hasRole('show_G_U_button')">Add
+        Generic Guest</button>
+    <button mat-flat-button class="groups-buttons" (click)="addUserDialog(true, false)" *ngIf="hasRole('show_G_U_button')">Add
+            Guest</button>
+    <button mat-flat-button class="groups-buttons" (click)="updateUserDialog()" [disabled]="validateUpdateUser()">Update
+        Guest</button>
+    <button mat-flat-button class="groups-buttons" (click)="resendQRCode()"
+        [disabled]="usersList.selected.length != 1" *ngIf="hasRole('resend_QR_code')">Resend QR Code</button>
+    <button mat-flat-button class="groups-buttons" (click)="send('Email')"
+        [disabled]="usersList.selected.length != 1" *ngIf="hasRole('resend_email')">Resend Email</button>
+    <button mat-flat-button class="groups-buttons" (click)="deleteUsers('true')"
+        [disabled]="validateDeleteUsers()">Delete Guest</button>
+    <button mat-flat-button class="groups-buttons" (click)="deleteUsers('false')"
+        [disabled]="validateRestoreUsers()">Restore Guest</button>
+</div>
+
+<div class="filter-container" *ngIf="hasRole('see_wallet_filter')">
+
+    <div class="filter-title">
+        <span style="display: inline-block; font-size: 20px; font-weight: bold; color: black;">Filter Guests</span>
+    </div>
+
+    <div class="filter-buttons guestFilte">
+
+        <div class="five-column">
+            <mat-form-field appearance="outline" class="example-full-width creditForm">
+                <input matInput placeholder="Start Date" formContrlName="fromDate" id="fromDate" style="padding-top: 0px;padding-bottom: 8px;"
+                    [(ngModel)]="fromDate" [matDatepicker]="fromDatepicker" readonly (ngModelChange)="filterGuests($event)">
+                <mat-icon matDatepickerToggleIcon (click)="resetPicker('fromDate')" [hidden]="!fromDate">clear</mat-icon> 
+                <mat-datepicker-toggle matSuffix [for]="fromDatepicker"></mat-datepicker-toggle>
+                <mat-datepicker #fromDatepicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div class="five-column">
+            <mat-form-field appearance="outline" class="example-full-width creditForm">
+                <input matInput placeholder="End Date" formContrlName="toDate" id="toDate" [(ngModel)]="toDate"
+                    [matDatepicker]="toDatepicker" readonly (ngModelChange)="filterGuests($event)" style="padding-top: 0px;padding-bottom: 8px;">
+                    <mat-icon matDatepickerToggleIcon (click)="resetPicker('toDate')" [hidden]="!toDate">clear</mat-icon>
+                    <mat-datepicker-toggle matSuffix [for]="toDatepicker"></mat-datepicker-toggle>
+                <mat-datepicker #toDatepicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+
+        <div class="five-column" *ngIf="hasRole('see_wallet_filter')">
+            <mat-form-field appearance="outline" class="example-full-width creditForm">
+                <input matInput (input)="filterGuests($event)" placeholder="Guest Name" style="padding-top: 0px;padding-bottom: 8px;"
+                 formContrlName="guestName" id="guestName" [(ngModel)]= "selectedGuestName">
+            </mat-form-field>
+        </div>
+
+        <div class="five-column" *ngIf="hasRole('see_wallet_filter')">
+            <mat-form-field appearance="outline" class="example-full-width creditForm">
+                <input matInput (input)="filterGuests($event)" placeholder="Card Number" style="padding-top: 0px;padding-bottom: 8px;"
+                formContrlName="cardNumber" id="cardNumber" [(ngModel)]= "selectedCardNum">
+            </mat-form-field>
+        </div>
+
+        <div class="five-column" *ngIf="hasRole('see_wallet_filter')">
+            <mat-form-field appearance="outline" class="example-full-width creditForm">
+                <select matNativeControl class="custom-select" [(ngModel)]="selectedCardStatues" 
+                (ngModelChange)="filterGuests($event)" style="padding-top: 0px;padding-bottom: 8px;position: absolute;left: 0;top: 4px;">
+                    <option value="" selected>All Statues</option>
+                    <option value="{{statue}}" *ngFor="let statue of statues">{{statue}}</option>
+                  </select>
+            </mat-form-field>
+        </div>
+
+        <!-- <div class="five-column filterButtons">
+            <button mat-stroked-button (click)="filterGuests()" class="filterButton" *ngIf="hasRole('see_wallet_filter')">Filter</button>
+            <button mat-stroked-button (click)="resetFilter()" class="filterButton">Reset</button>
+        </div> -->
+    </div>
+</div>
+
+<div class="main">
+
+    <div *ngIf="usersList.usersData.length == 0 && !usersList.showLoading" style="text-align: center;">
+        <div *ngIf="usersList.allGuestsBeforeFilter.length != 0">
+            <img style="max-width: 300px; margin-top: 100px;" src="../../../assets/no-user.png" alt="image">
+            <p class="user-name">There is no guests in this date time range!</p>
+        </div>
+        <div *ngIf="usersList.allGuestsBeforeFilter.length == 0">
+        <img style="max-width: 300px; margin-top: 100px;" src="../../../assets/no-user.png" alt="image">
+        <p class="user-name">You haven't added any guest yet!</p>
+
+        <!-- Add Entry System user -->
+        <button mat-flat-button class="groups-buttons" (click)="addUserDialog(true, true)"
+            *ngIf="hasRole('show_G_U_button')">Add Generic Guest</button>
+        <button mat-flat-button class="groups-buttons" (click)="addUserDialog(true, false)" *ngIf="hasRole('show_G_U_button')">Add
+                Guest</button>
+        </div>
+    </div>
+
+    <!----------------------------------- Wallet Filtration  ----------------------->
+
+    <div *ngIf="hasRole('wallet_remaining_balance')" class="filter-container loyalty-style" style="text-align: center;">
+    
+        <div style="float: left;width: 66%;">
+
+            <mat-form-field
+            appearance="outline"
+            class="example-full-width filter-buttons"
+            style="max-width: 25%;margin-top: 20px;float: left;"
+            >
+
+            <input
+                matInput
+                style="width:160px;margin-bottom: 2px; "
+                placeholder="Start Date"
+                type="date"
+                formContrlName="fromDate"
+                id="fromDate"
+                [(ngModel)]="fromDate"
+                (ngModelChange)="getWalletsTotalRemaining()"
+            />
+            </mat-form-field>
+    
+    
+            <mat-form-field
+            appearance="outline"
+            class="example-full-width"
+            style="max-width: 25%;margin-top: 20px;"
+            >
+            <input
+              matInput
+              style="width:160px;margin-bottom: 2px; "
+              placeholder="Start Date"
+              type="date"
+              formContrlName="toDate"
+              id="toDate"
+              [(ngModel)]="toDate"
+              (ngModelChange)="getWalletsTotalRemaining()"
+            />
+            
+            </mat-form-field>
+
+            <mat-form-field 
+                appearance="outline"
+                class="example-full-width"
+                style="max-width: 25%;margin-top: 20px;width: 230px;float: right;margin-right: 50px;">
+              <mat-select [(value)]="selected" (selectionChange)="toggleGetActiveGuestsOnly($event)" panelClass="" >
+                <mat-option value="User Status Filter" selected [disabled]="true">User Status Filter</mat-option>
+                <mat-option value="Active Guests">Active Guests</mat-option>
+                <mat-option value="All Guests">All Guests</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+
+
+        </div>
+
+        <div
+        class="filterButton"
+        style="height: 60px;width: 275px; margin-top: 10px; text-align: center;justify-content: center;margin-right: 25px;"
+        >
+            <div style="margin-top: 5px;text-align: center;">
+                Wallets Total Remaining Balance 
+                <div class="centering_div" *ngIf="walletsRemainingTotal.showLoading">
+                    <mat-spinner class="child_div" [diameter]="20"></mat-spinner>
+                </div>
+                <div *ngIf="!walletsRemainingTotal.showLoading">
+                    {{ walletsRemainingTotalValue }} {{getCurrency()}}
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+
+    <!----------------------------------- Wallet Filtration  ----------------------->
+
+    <div *ngIf="usersList.usersData.length != 0 || usersList.showLoading">
+        <ngx-datatable class="material" [loadingIndicator]="usersList.showLoading" [messages]="usersList.messages"
+            [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+            [scrollbarV]="true" [scrollbarH]="true" [rows]="usersList.usersData" [selected]="usersList.selected"
+            [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" (select)='onSelect($event)' [scrollbarH]="true">
+
+            <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="true"
+                [width]="5">
+                <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
+                    let-selectFn="selectFn">
+                    <input class="regular-checkbox" type="checkbox" [checked]="allRowsSelected"
+                        (change)="selectFn(!allRowsSelected)" />
+                </ng-template>
+
+                <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected"
+                    let-onCheckboxChangeFn="onCheckboxChangeFn">
+                    <input class="regular-checkbox" type="checkbox" [checked]="isSelected"
+                        (change)="onCheckboxChangeFn($event)" />
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="" *ngIf="!hasRole('show_canteen_card_number')" [width]="25">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div style="float: left;" *ngIf="hasRole('show_canteen_card_image')"><img class="profile-img"
+                            src="../../../assets/profile.png" alt="image"> </div>
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Card Number" [width]="180" *ngIf="hasRole('show_canteen_card_number')">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div *ngIf="!hasRole('show_canteen_user_profile')">
+                        <div style="float: left;"><img class="profile-img" src="../../../assets/profile.png"
+                            alt="image"> </div>
+                        <div *ngIf="hasRole('show_canteen_card_number')"
+                            style="float: left; color: black; margin-top: 3px; margin-left: 5px;">{{row.code}}</div>
+                    </div>
+                    <div *ngIf="hasRole('show_canteen_user_profile')">
+                        <a class="user-link" (click)="openUserProfile(row)">
+                            <div style="float: left;"><img class="profile-img" src="../../../assets/profile.png"
+                                    alt="image"> </div>
+                            <div *ngIf="hasRole('show_canteen_card_number')"
+                                style="float: left; color: black; margin-top: 3px; margin-left: 5px;">{{row.code}}</div>
+                        </a>
+                    </div>
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Name" [width]="90">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div *ngIf="!hasRole('show_canteen_user_profile')">
+                        {{row.name}}
+                    </div>
+                    <div *ngIf="hasRole('show_canteen_user_profile')">
+                        <a class="group-name user-link" (click)="openUserProfile(row)">{{row.name}}</a>
+                    </div>
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Email" [width]="90">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.email}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Mobile" *ngIf="hasRole('show_mobile_number')" [width]="90">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.mobile}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Group" *ngIf="hasRole('show_canteen_groups')" [width]="90">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.group.name}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Balance" *ngIf="hasRole('canteen_show_balance')" [width]="90">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{calculateParams(row) | number : '1.2-2'}} {{getCurrency()}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="State" [width]="90" *ngIf="hasFeature('entry_system')">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <label *ngIf="!row.deleted && !row.suspended" class="active-state">Active</label>
+                    <label *ngIf="!row.deleted && row.suspended" style="color: #1661a3;">Suspended</label>
+                    <label *ngIf="row.deleted" class="deleted-state">Deleted</label>
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Creation Time" [width]="90">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.creationDate | date: 'dd/MM/yyyy HH:mm:ss' }}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Last Update" [width]="90">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.lastUpdate | date: 'dd/MM/yyyy HH:mm:ss' }}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Options" *ngIf="hasRole('show_option')" [width]="90">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <button class="menue-btn" mat-button [matMenuTriggerFor]="menu">...</button>
+                    <mat-menu #menu="matMenu">
+                        <button *ngIf="!row.suspended" class="menue-btn-choi" mat-menu-item (click)="suspendGuest(row.id, true)">Suspend</button>
+                        <button *ngIf="row.suspended" class="menue-btn-choi" mat-menu-item (click)="suspendGuest(row.id, false)">Active</button>
+                        <button *ngIf="!row.deleted" class="menue-btn-choi" mat-menu-item (click)="deleteOneUsers(row, 'true')">Delete Guest</button>
+                        <button *ngIf="row.deleted" class="menue-btn-choi" mat-menu-item (click)="deleteOneUsers(row, 'false')">Restore Guest</button>
+                        <button class="menue-btn-choi" mat-menu-item (click)="openUserProfile(row)">Preview</button>
+                    </mat-menu>
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-footer>
+                <ng-template
+                  ngx-datatable-footer-template
+                  let-rowCount="rowCount"
+                  let-selectedCount="selectedCount"
+                  let-curPage="curPage"
+                  let-offset="offset"
+                  let-isVisible="isVisible"
+                >
+                  <div class="page-count">
+                    Showing {{ usersList.usersData.length }} of
+                    {{ usersList.usersCount }}
+                  </div>
+      
+                  <select
+                    (change)="onLimitChange($event.target.value)"
+                    style="width: 50px; position: inherit"
+                  >
+                    <option
+                      *ngFor="let option of usersList.pagesFilter"
+                      [value]="option"
+                    >
+                      {{ option }}
+                    </option>
+                  </select>
+      
+                  <datatable-pager
+                    [pagerLeftArrowIcon]="'datatable-icon-left'"
+                    [pagerRightArrowIcon]="'datatable-icon-right'"
+                    [pagerPreviousIcon]="'datatable-icon-prev'"
+                    [pagerNextIcon]="'datatable-icon-skip'"
+                    [page]="usersList.pageNumber"
+                    [size]="usersList.limit"
+                    [count]="usersList.usersCount"
+                    (change)="changePage($event)"
+                  >
+                  </datatable-pager>
+                </ng-template>
+              </ngx-datatable-footer>
+
+        </ngx-datatable>
+    </div>
+</div>
+</div>

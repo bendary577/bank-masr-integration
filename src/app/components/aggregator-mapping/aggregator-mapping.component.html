@@ -1,0 +1,18 @@
+<div class="sync-body">
+    <h3>Aggregator Mapping</h3>
+    <mat-tab-group>
+        <!-- *ngIf="hasRole('show_groups')" -->
+        <mat-tab label="Mapped Products">
+            <app-talabat-mapping></app-talabat-mapping>
+        </mat-tab>
+        <mat-tab label="Unmapped Products">
+            <app-talabat-mapping></app-talabat-mapping>
+        </mat-tab>
+        <mat-tab label="Needs Attention">
+            <app-talabat-mapping></app-talabat-mapping>
+        </mat-tab>
+        <mat-tab label="Branches">
+            <app-aggregator-branches-mapping></app-aggregator-branches-mapping>
+        </mat-tab>
+    </mat-tab-group>
+</div>

@@ -90,9 +90,18 @@ import { AggregatorProductsComponent } from "../components/aggregator-products/a
 import { MatTabsModule } from "@angular/material";
 import { ConfirmUndoWalletActionComponent } from '../components/confirm-undo-wallet-action/confirm-undo-wallet-action.component';
 import { ViewProductModifiersComponent } from "../components/view-product-modifiers/view-product-modifiers.component";
-
+import {FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import {MatSelectModule} from '@angular/material/select';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { MapCostCenterAccountCodeComponent } from "../components/map-cost-center-account-code/map-cost-center-account-code.component";
+import { AggregatorsConfigurationComponent } from "../components/aggregators-configuration/aggregators-configuration.component";
+import { AggregatorMappingComponent } from "../components/aggregator-mapping/aggregator-mapping.component";
+import { AggregatorBranchesMappingComponent } from "../components/aggregator-branches-mapping/aggregator-branches-mapping.component";
 
 @NgModule({
+
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     MainComponent,
     WelcomePageComponent,
@@ -187,6 +196,10 @@ import { ViewProductModifiersComponent } from "../components/view-product-modifi
     SalesApiDailyComponent,
     SalesApiMonthlyComponent,
     ConfirmUndoWalletActionComponent,
+    MapCostCenterAccountCodeComponent,
+    AggregatorsConfigurationComponent,
+    AggregatorMappingComponent,
+    AggregatorBranchesMappingComponent
   ],
   imports: [
     MainRoutingModule,
@@ -194,7 +207,16 @@ import { ViewProductModifiersComponent } from "../components/view-product-modifi
     BasicModule,
     SharedModule,
     AngularMaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
     QuillModule.forRoot(),
+  ],
+  exports: [
+    AngularMaterialModule,
+    MapCostCenterAccountCodeComponent
   ],
   entryComponents: [
     AddUserComponent,

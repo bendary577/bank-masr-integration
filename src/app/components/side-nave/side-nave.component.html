@@ -157,6 +157,9 @@
           <li class="nav-item" *ngIf="hasFeature('redeem_voucher')">
             <a class="nav-link" routerLink="main/redeemVoucher" routerLinkActive="active" translate>Vouchers Generator</a>
          </li>
+         <li class="nav-item" *ngIf="hasFeature('canteen')">
+          <a class="nav-link" routerLink="/canteen" routerLinkActive="active" translate>Canteen</a>
+        </li>
           <!-- <li class="nav-item" *ngFor="let application of applications"> <a class="nav-link"
               routerLink={{application.endPoint}} routerLinkActive="active" translate>{{application.name}}</a></li> -->
         </ul>
@@ -243,7 +246,9 @@
           <li class="nav-item" *ngIf="hasRole('reward_points_settings')"><a class="nav-link" routerLink="/main/rewardPointsSettings">Points Settings</a>
           
           <!-- Delivery Aggregators -->
-          <li class="nav-item" *ngIf="hasFeature('delivery_aggregators')"><a class="nav-link" routerLink="/main/talabatMapping">Aggregators Mapping</a> </li>
+          <!-- <li class="nav-item" *ngIf="hasFeature('delivery_aggregators')"><a class="nav-link" routerLink="/main/talabatMapping">Aggregators Mapping</a> </li> -->
+          <li class="nav-item" *ngIf="hasFeature('delivery_aggregators')"><a class="nav-link" routerLink="/main/aggregatorsMapping">Aggregators Mapping</a> </li>
+          <li class="nav-item" *ngIf="hasFeature('delivery_aggregators')"><a class="nav-link" routerLink="/main/aggregatorsConfigurations">Aggregators Configurations</a> </li>
           
           <li class="nav-item" *ngIf="hasRole('see_general_setting')"><a class="nav-link" routerLink="/main/setting">General Settings</a></li>
           <li class="nav-item" *ngIf="hasRole('see_pos_mapping')"><a class="nav-link" routerLink="/main/posMachinMapping">PAX Mapping</a> </li>

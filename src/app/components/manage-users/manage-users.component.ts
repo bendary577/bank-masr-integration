@@ -13,8 +13,8 @@ import { AddAppUserAccompiedComponent } from '../add-app-user-accompied/add-app-
 import { SideNaveComponent } from '../side-nave/side-nave.component'
 import { ExtendExpiryDateComponent } from '../extend-expiry-date/extend-expiry-date.component'
 import { ViewReceiptComponent } from '../view-receipt/view-receipt.component'
-import {MatSelectModule} from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field'; 
+import { MatSelectModule } from '@angular/material/select'
+import { MatFormFieldModule } from '@angular/material/form-field'
 import { NgxSpinnerService } from 'ngx-spinner'
 
 @Component({
@@ -48,7 +48,7 @@ export class ManageUsersComponent implements OnInit {
   toDate = ''
   isEntrySys = true
   getActiveGuestsOnly = false
-  selected = 'User Status Filter';
+  selected = 'User Status Filter'
 
   usersList = {
     paginateData: true as boolean,
@@ -102,12 +102,12 @@ export class ManageUsersComponent implements OnInit {
 
   onLimitChange(limit) {
     this.usersList.limit = limit
-    this.getUsers();
+    this.getUsers()
   }
 
   changePage(pageInfo) {
     this.usersList.pageNumber = pageInfo.page
-    this.getUsers();
+    this.getUsers()
   }
 
   onSelect({ selected }) {
@@ -127,13 +127,10 @@ export class ManageUsersComponent implements OnInit {
   }
 
   getUsers() {
-    this.getUsersCount();
+    this.getUsersCount()
     this.usersList.showLoading = true
     this.loyaltyService
-      .getAppUsersPaginated(
-        this.usersList.pageNumber,
-        this.usersList.limit
-        )
+      .getAppUsersPaginated(this.usersList.pageNumber, this.usersList.limit)
       .toPromise()
       .then((res: any) => {
         this.usersList.usersData = res
@@ -171,7 +168,6 @@ export class ManageUsersComponent implements OnInit {
         })
       })
   }
-
 
   deleteUsers(flage) {
     this.usersList.showLoading = true
@@ -696,7 +692,7 @@ export class ManageUsersComponent implements OnInit {
     this.usersList.usersData = result
   }
 
-  calculateParams(user): Number {
+  calculateParams(user): number {
     let credit = 0
     if (user.wallet != null) {
       let balance = user.wallet.balance
@@ -726,10 +722,10 @@ export class ManageUsersComponent implements OnInit {
 
   getCurrency() {
     let currency = JSON.parse(localStorage.getItem('account')).currency
-    if(currency !== null){
-        return currency;
-    }else{
-        return "JOD"
+    if (currency !== null) {
+      return currency
+    } else {
+      return 'JOD'
     }
   }
 
@@ -843,12 +839,15 @@ export class ManageUsersComponent implements OnInit {
 
   extractExcelFile() {}
 
-
   getWalletsTotalRemaining() {
     this.walletsRemainingTotal.showLoading = true
     this.spinner.show()
     this.loyaltyService
-      .getWalletsTotalRemaining(this.fromDate, this.toDate, this.getActiveGuestsOnly)
+      .getWalletsTotalRemaining(
+        this.fromDate,
+        this.toDate,
+        this.getActiveGuestsOnly,
+      )
       .toPromise()
       .then((res: any) => {
         this.walletsRemainingTotalValue = res.data
@@ -861,15 +860,14 @@ export class ManageUsersComponent implements OnInit {
       })
   }
 
-  toggleGetActiveGuestsOnly(value){
-    if(value.value === 'Active Guests'){
+  toggleGetActiveGuestsOnly(value) {
+    if (value.value === 'Active Guests') {
       this.getActiveGuestsOnly = true
-    }else if(value.value === 'Expired Guests'){
+    } else if (value.value === 'Expired Guests') {
       this.getActiveGuestsOnly = false
-    }else if(value.value === 'All Guests'){
+    } else if (value.value === 'All Guests') {
       this.getActiveGuestsOnly = false
     }
     this.getWalletsTotalRemaining()
   }
-  
 }
