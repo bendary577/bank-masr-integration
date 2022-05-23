@@ -2,7 +2,7 @@
     <mat-tab label="Groups" *ngIf="hasRole('show_canteen_groups')"> 
         <app-canteen-manage-groups-component></app-canteen-manage-groups-component>
     </mat-tab>
-    <mat-tab label="Guest" *ngIf="hasRole('show_canteen_guests')"> 
+    <mat-tab label="Employees" *ngIf="hasRole('show_canteen_guests')"> 
         <app-canteen-manage-users-component></app-canteen-manage-users-component>
     </mat-tab>
     <mat-tab label="Activities" *ngIf="hasRole('show_canteen_activities')">

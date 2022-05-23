@@ -16,7 +16,8 @@
   }
 
 .groups-buttons{
-    width: 150px;
+    min-width: 150px;
+    width: fit-content;
     height: 35px;
     background-color: #fecc90;
     color: black;

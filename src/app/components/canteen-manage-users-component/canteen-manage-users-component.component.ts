@@ -14,6 +14,7 @@ import { SideNaveComponent } from '../side-nave/side-nave.component'
 import { ExtendExpiryDateComponent } from '../extend-expiry-date/extend-expiry-date.component'
 import { ViewReceiptComponent } from '../view-receipt/view-receipt.component'
 import { NgxSpinnerService } from 'ngx-spinner'
+import { AddCanteenUserComponent } from '../add-canteen-user/add-canteen-user.component'
 
 @Component({
   selector: 'app-canteen-manage-users-component',
@@ -361,26 +362,21 @@ export class CanteenManageUsersComponentComponent implements OnInit {
         })
   }
 
-  addUserDialog(isGeneric, genericGroup) {
+  addUserDialog(genericGroup) {
     let dialogRef
 
-    if (isGeneric) {
-      const dialogConfig = new MatDialogConfig()
-      dialogConfig.autoFocus = true
-      dialogConfig.data = {
-        title: 'Add Guest',
-        generic: genericGroup,
-      }
-      dialogConfig.width = '420px'
-      dialogConfig.maxWidth = '420px'
-      dialogConfig.autoFocus = true
-
-      dialogRef = this.dialog.open(AddAppUserAccompiedComponent, dialogConfig)
-    } else {
-      dialogRef = this.dialog.open(AddAppUserComponent, {
-        width: '420px',
-      })
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.autoFocus = true
+    dialogConfig.data = {
+      title: 'Add Guest',
+      generic: genericGroup,
     }
+    dialogConfig.width = '420px'
+    dialogConfig.maxWidth = '420px'
+    dialogConfig.autoFocus = true
+
+    dialogRef = this.dialog.open(AddCanteenUserComponent, dialogConfig)
+
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
@@ -388,7 +384,7 @@ export class CanteenManageUsersComponentComponent implements OnInit {
         this.loyaltyService
           .addApplicationUser(
             true,
-            isGeneric,
+            true,
             res.name,
             res.email,
             res.group,
@@ -411,7 +407,7 @@ export class CanteenManageUsersComponentComponent implements OnInit {
 
             if (result.success) {
               // Print Receipt, When enterance amount greater than zero
-              if (isGeneric && res.balance > 0) {
+              if (res.balance > 0) {
                 this.viewReceipt(result.data)
               }
 

@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core'
-import { CommonModule } from '@angular/common'
 import { CanteenRoutingModule } from './canteen-routing.module'
 import { CanteenComponent } from './canteen.component'
 import { SharedModule } from 'src/app/shared/shared.module'
@@ -16,21 +15,21 @@ import { NgxPrintModule } from 'ngx-print'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { CanteenManageUsersComponentComponent } from '../canteen-manage-users-component/canteen-manage-users-component.component'
 import { CanteenActivitiesComponentComponent } from '../canteen-activities-component/canteen-activities-component.component'
-import { CanteenAddAppUserAccompiedComponentComponent } from '../canteen-add-app-user-accompied-component/canteen-add-app-user-accompied-component.component'
 import { CanteenManageGroupsComponentComponent } from '../canteen-manage-groups-component/canteen-manage-groups-component.component'
 import { CanteenUserProfileComponentComponent } from '../canteen-user-profile-component/canteen-user-profile-component.component'
 import { CanteenConfigurationsComponentComponent } from '../canteen-configurations-component/canteen-configurations-component.component'
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { AddCanteenUserComponent } from '../add-canteen-user/add-canteen-user.component'
 
 @NgModule({
   declarations: [
     CanteenComponent,
     CanteenManageUsersComponentComponent,
     CanteenActivitiesComponentComponent,
-    CanteenAddAppUserAccompiedComponentComponent,
     CanteenManageGroupsComponentComponent,
     CanteenUserProfileComponentComponent,
     CanteenConfigurationsComponentComponent,
+    AddCanteenUserComponent,
   ],
   imports: [
     CanteenRoutingModule,

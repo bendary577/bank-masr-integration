@@ -1,0 +1,95 @@
+<div class="dialog-body">
+    <h1 mat-dialog-title>
+        <label [hidden]="inUpdate" style="margin-top:10px;">New Employee</label>
+        <label [hidden]="!inUpdate" style="margin-top:10px;">Update Employee</label>
+    </h1>
+
+    <div mat-dialog-content class="main-guest">
+        <form [formGroup]="form" class="my-form">
+            <mat-form-field class="example-full-width creditForm" appearance="outline">
+                <input matInput placeholder="Card Number" formControlName="cardNum" maxlength="20">
+
+                <mat-error *ngIf="form.controls.cardNum.hasError('required')">
+                    Card Number is required.
+                </mat-error>
+                <mat-error *ngIf="form.controls.cardNum.hasError('maxlength')">
+                    Card Number to long.
+                </mat-error>
+                <mat-error *ngIf="form.controls.cardNum.hasError('pattern')">
+                    Card Number must be well formed.
+                </mat-error>
+            </mat-form-field>
+            <p style="text-align: left;padding-left: 30px;">Please swipe the card</p>
+
+            <mat-form-field class="example-full-width creditForm" appearance="outline">
+                <input matInput placeholder="Balance" formControlName="balance" maxlength="10" *ngIf="!inUpdate" required>
+                <input matInput placeholder="Balance" formControlName="balance" maxlength="10" *ngIf="inUpdate" readonly
+                    [(ngModel)]="credit" required>
+                <mat-label>Balance</mat-label>
+                <mat-error *ngIf="form.controls.balance.hasError('required')">
+                    Balance is required.
+                </mat-error>
+                <mat-error *ngIf="form.controls.balance.hasError('maxlength')">
+                    Balance is to long.
+                </mat-error>
+                <mat-error *ngIf="form.controls.balance.hasError('pattern')">
+                    Balance must be well formed.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width creditForm" appearance="outline" *ngIf="!isGeneric">
+                <mat-select matInput id="groups" name="groups" placeholder="Group" formControlName="group">
+                    <mat-option></mat-option>
+                    <mat-option [value]=c.id *ngFor="let c of groups">{{c.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <h4 mat-dialog-title style="text-align: left; font-size: small;">Optional Fields</h4>
+
+            <mat-form-field class="example-full-width creditForm" appearance="outline">
+                <input matInput placeholder="Name" formControlName="name" maxlength="50">
+                <mat-error *ngIf="form.controls.name.hasError('required')">
+                    Frist Name is required.
+                </mat-error>
+                <mat-error *ngIf="form.controls.name.hasError('maxlength')">
+                    Frist Name is to long.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width creditForm" appearance="outline">
+                <input matInput placeholder="Email" formControlName="email">
+                <mat-error *ngIf="form.controls.email.hasError('pattern')">
+                    Email must be well formed.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width creditForm" appearance="outline">
+                <input matInput placeholder="Moblie" formControlName="mobile" maxlength="11">
+                <mat-error *ngIf="form.controls.mobile.hasError('maxlength')">
+                    Moblie is to long.
+                </mat-error>
+                <mat-error *ngIf="form.controls.mobile.hasError('pattern')">
+                    Mobile must be well formed.
+                </mat-error>
+            </mat-form-field>
+        </form>
+        <div style="padding-top: 1%;text-align: center;">
+            <input #csvInput hidden="true" type="file" onclick="this.value=null"
+                (change)="csvInputChange($event)" accept="image/*" />
+            <button class="form-button" mat-flat-button color="primary" (click)="csvInput.click()">
+                <img class="form-b-img" src="../../../assets/photos.png">
+                Choose Image</button>
+            <div [hidden]="!imageUploded">Image uploaded successfully.</div>
+        </div>
+    </div>
+
+    <div class="buttons-div">
+        <div mat-dialog-actions>
+            <button mat-button cdkFocusInitial (click)="onSaveClick()" class="groups-buttons">
+                <label [hidden]="inUpdate">Save</label>
+                <label [hidden]="!inUpdate">Update</label>
+            </button>
+            <button mat-button (click)="onNoClick()" class="groups-buttons">Cancel</button>
+        </div>
+    </div>
+</div>
