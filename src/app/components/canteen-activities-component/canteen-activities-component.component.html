@@ -3,7 +3,7 @@
     <div class="column card-column">
       <mat-card class="stat-card">
         <mat-card-content>
-          <h2>Top Guests</h2>
+          <h2>Top Employees</h2>
           <div
             *ngIf="users.length == 0 || !transactionList.transactionData.length"
           >
@@ -12,7 +12,7 @@
               src="../../../assets/defaultImage.jpg"
               alt="image"
             />
-            <p class="user-name">There is no Guests</p>
+            <p class="user-name">There is no Employees</p>
           </div>
           <div
             class="row row-center"
@@ -184,8 +184,8 @@
             <img src="../../../assets/group.png" class="people-img" />
             <img src="../../../assets/increase.png" class="chart-img" />
             <h3 class="guest-chart" style="color: black !important">
-              Average Number of Guests per day<br />
-              {{ guestAverage }} Guests
+              Average Number of Employees per day<br />
+              {{ guestAverage }} Employees
             </h3>
           </div>
         </mat-card-content>
@@ -388,7 +388,7 @@
           <input
             matInput
             (input)="filterTransactions($event)"
-            placeholder="Guest Name"
+            placeholder="Employee Name"
             formContrlName="guestName"
             id="guestName"
             [(ngModel)]="selectedGuestName"
@@ -544,7 +544,7 @@
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Guest Name" [width]="90">
+        <ngx-datatable-column name="Employee Name" [width]="90">
           <ng-template let-row="row" ngx-datatable-cell-template>
             {{ row.user.name }}
           </ng-template>

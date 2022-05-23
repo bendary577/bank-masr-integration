@@ -142,7 +142,8 @@ export class AddAppGroupComponent implements OnInit {
   onSaveClick(): void {
     if (
       this.form.invalid ||
-      (this.hasFeature('loyalty') && this.form.controls.discountId.value == '')
+      (this.hasFeature('loyalty') && 
+      this.form.controls.discountId.value == '')
     ) {
       this.snackBar.open('Please fill form values', null, {
         duration: 3000,
@@ -150,7 +151,7 @@ export class AddAppGroupComponent implements OnInit {
         panelClass: 'my-snack-bar-fail',
       })
     } else {
-      if (this.hasFeature('loyalty')) {
+      if (this.hasFeature('loyalty') || this.hasFeature('canteen')) {
         this.dialogRef.close({
           name: this.form.controls.name.value,
           description: this.form.controls.description.value,
