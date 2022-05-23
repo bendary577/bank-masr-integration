@@ -19,7 +19,7 @@
                     <input matInput placeholder="Description" formControlName="description" maxlength="50">
                 </mat-form-field>
 
-                <mat-form-field class="example-full-width creditForm" appearance="outline" *ngIf="hasFeature('loyalty')">
+                <mat-form-field class="example-full-width creditForm" appearance="outline" *ngIf="hasFeature('loyalty') || hasFeature('canteen')">
                     <mat-select matInput id="discountId" name="discountId" [value]="slectedDiscount"
                         placeholder="Simphony Discount Id" formControlName="discountId">
                         <mat-option></mat-option>
