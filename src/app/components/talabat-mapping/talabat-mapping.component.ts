@@ -14,11 +14,10 @@ import { ModifierMapping } from 'src/app/models/deliveryAggregator/ModifierMappi
 import { TalabatService } from 'src/app/services/talabat/talabat.service';
 import { FoodicsServiceService } from 'src/app/services/foodics-service.service';
 import { ViewProductModifiersComponent } from '../view-product-modifiers/view-product-modifiers.component';
-import {FormControl} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { FoodicsProduct } from 'src/app/models/deliveryAggregator/foodics-product';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-talabat-mapping',
@@ -50,6 +49,7 @@ export class TalabatMappingComponent implements OnInit {
   formControls : FormControl[] = []
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
+  tableForm = new FormGroup({});
 
   constructor(public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService, private authService: AuthService
@@ -59,13 +59,17 @@ export class TalabatMappingComponent implements OnInit {
     this.getGeneralSettings();
     this.getProductsMapping();
     this.getFoodicsProducts();
-    // for(let i=0; i < this.productsMappingData.length; i++){
-    //   console.log(this.productsMappingData[i].name)
-    //   let controlName = this.productsMappingData[i].id
-    //   let value = new FormControl();
-    //   eval("var "+controlName+" = '"+value+"';");
-    //   this.formControls.push(controlName)
-    // }
+  }
+
+  fillFormControls(){
+    if(this.productsMappingData.length > 0){
+      for(let i=0; i < this.productsMappingData.length; i++){
+        let controlName = this.getRowFormControlName(this.productsMappingData[i])
+        let value = new FormControl();
+        eval("var "+controlName+" = '"+value+"';");
+        this.tableForm.addControl(controlName,  new FormControl('', Validators.required));
+      }
+    }
   }
 
   private _filter(value: string): string[] {
@@ -75,7 +79,6 @@ export class TalabatMappingComponent implements OnInit {
 
   getGeneralSettings() {
     this.spinner.show();
-
     this.generalSettingsService.getGeneralSettings().then((res) => {
       this.generalSettings = res as GeneralSettings;
       // this.productsMappingData = this.generalSettings.talabatConfiguration.productsMappings;
@@ -115,6 +118,7 @@ export class TalabatMappingComponent implements OnInit {
       .toPromise()
       .then((res) => {
         this.productsMappingData = res['data'];
+        this.fillFormControls()
         this.spinner.hide();
     }).catch(err => {
       let message = "";
@@ -165,19 +169,13 @@ export class TalabatMappingComponent implements OnInit {
     for(let i=0; i < products.length; i++){
       this.foodicsProductsNames.push(products[i].name);
     }
-    // for(let i=0; i < this.formControls.length; i++){
-    //   console.log(this.formControls[i])
-    //   this.filteredOptions = this.formControls[i].valueChanges.pipe(
-    //     startWith(''),
-    //     map(value => this._filter(value)),
-    //   );
-    // }
-
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value)),
-    );
-    
+    Object.keys(this.tableForm.controls).forEach((key : string) => {
+      const abstractControl = this.tableForm.controls[key];
+      this.filteredOptions = abstractControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value)),
+      );
+    });
   }
 
   fetchProducts(){
@@ -203,6 +201,12 @@ export class TalabatMappingComponent implements OnInit {
       });
       this.spinner.hide();
     });
+  }
+
+  getRowFormControlName(productMapping){
+    //remove spaces from product mapping name
+    let formControlName = productMapping.name
+    return formControlName.replace(/[^A-Z0-9]+/ig, "")
   }
 
   addProductsMappingData(){

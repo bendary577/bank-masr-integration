@@ -14,8 +14,8 @@
 
             <ngx-datatable-column name="Product">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    <a *ngIf="row.image && row.image != ''" class="sidebar-brand brand-logo" href="index.html"><img style="border-radius: 50%; width: 40px;height: 40px;" src={{row.image}} alt="product_avatar" /></a>
-                    <a *ngIf="!row.image || row.image == ''" class="sidebar-brand brand-logo" href="index.html"><img style="border-radius: 50%; width: 40px;height: 40px;" src="assets/images/Anywarelogo.png" alt="logo" /></a>
+                    <a *ngIf="row.image && row.image != ''" (click)="viewProductDetails(row)" class="sidebar-brand brand-logo"><img style="border-radius: 50%; width: 40px;height: 40px;" src={{row.image}} alt="product_avatar" /></a>
+                    <a *ngIf="!row.image || row.image == ''" (click)="viewProductDetails(row)" class="sidebar-brand brand-logo"><img style="border-radius: 50%; width: 40px;height: 40px;" src="assets/images/aggregators/burger.jpg" alt="logo" /></a>
                     <input matInput placeholder="Name" [(ngModel)]="row.name" style="margin-left: 10px;margin-bottom: 10px;" readonly>
                 </ng-template>
             </ngx-datatable-column>

@@ -29,4 +29,15 @@ export class FoodicsServiceService {
        { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
+  authorizeFoodicsAccount(clientId, clientSecret, randomString) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.post(AggregatorsEndPoints.AUTHORIZE_FOODICS_ACCOUNT+ "?client_id=" + clientId+'&state='+randomString, {});
+  }
+
+  requestFoodicsAccessToken(body) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.post(AggregatorsEndPoints.REQUEST_FOODICS_ACCESS_TOKEN, body,
+    { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
 }

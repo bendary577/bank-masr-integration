@@ -13,6 +13,7 @@ import { GeneralSettingsService } from 'src/app/services/generalSettings/general
 import { ModifierMapping } from 'src/app/models/deliveryAggregator/ModifierMapping';
 import { FoodicsServiceService } from 'src/app/services/foodics-service.service';
 import { ViewProductModifiersComponent } from '../view-product-modifiers/view-product-modifiers.component';
+import { FoodicsProductDetailsComponent } from '../foodics-product-details/foodics-product-details.component';
 
 @Component({
   selector: 'app-aggregator-foodics-products',
@@ -67,6 +68,21 @@ export class AggregatorFoodicsProductsComponent implements OnInit {
     dialogConfig.maxHeight = 500;
 
     const dialogRef = this.dialog.open(ViewProductModifiersComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.onSaveClick();
+      }
+    });
+  }
+
+  viewProductDetails(product){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {product: product};
+    dialogConfig.minWidth = 500;
+    dialogConfig.maxHeight = 500;
+
+    const dialogRef = this.dialog.open(FoodicsProductDetailsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       if(result){
         this.onSaveClick();

@@ -100,7 +100,9 @@ import { AggregatorMappingComponent } from "../components/aggregator-mapping/agg
 import { AggregatorBranchesMappingComponent } from "../components/aggregator-branches-mapping/aggregator-branches-mapping.component";
 import { AggregatorFoodicsProductsComponent } from "../components/aggregator-foodics-products/aggregator-foodics-products.component";
 import { MatAutocompleteModule } from '@angular/material';
-
+import { FoodicsProductDetailsComponent } from "../components/foodics-product-details/foodics-product-details.component";
+import { TalabatUnmappedProductsComponent } from "../components/talabat-unmapped-products/talabat-unmapped-products.component";
+import { ProductsNeedsAttentionComponent } from "../components/products-needs-attention/products-needs-attention.component";
 @NgModule({
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -202,7 +204,10 @@ import { MatAutocompleteModule } from '@angular/material';
     AggregatorsConfigurationComponent,
     AggregatorMappingComponent,
     AggregatorBranchesMappingComponent,
-    AggregatorFoodicsProductsComponent
+    AggregatorFoodicsProductsComponent,
+    FoodicsProductDetailsComponent,
+    TalabatUnmappedProductsComponent,
+    ProductsNeedsAttentionComponent
   ],
   imports: [
     MainRoutingModule,

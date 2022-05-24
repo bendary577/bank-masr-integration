@@ -23,6 +23,8 @@ export class AggregatorsEndPoints {
     static GET_FOODICS_PRODUCTS =  environment.apiHost + "/aggregator/foodicsProducts/";
     static GET_MAPPED_PRODUCTS =  environment.apiHost + "/aggregator/getMappedProducts/";
     static GET_UNMAPPED_PRODUCTS =  environment.apiHost + "/aggregator/getUnMappedProducts/";
+    static AUTHORIZE_FOODICS_ACCOUNT = "https://console-sandbox.foodics.com/authorize";
+    static REQUEST_FOODICS_ACCESS_TOKEN = "https://api-sandbox.foodics.com/oauth/token";
   
     /////////////////////////////////////////////// Aggregator Statics /////////////////////////////////
   
