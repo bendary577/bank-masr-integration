@@ -11,7 +11,7 @@ import { ProductMapping } from 'src/app/models/deliveryAggregator/product-mappin
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 import { ModifierMapping } from 'src/app/models/deliveryAggregator/ModifierMapping';
-import { TalabatService } from 'src/app/services/talabat/talabat.service';
+import { FoodicsServiceService } from 'src/app/services/foodics-service.service';
 import { ViewProductModifiersComponent } from '../view-product-modifiers/view-product-modifiers.component';
 
 @Component({
@@ -21,47 +21,25 @@ import { ViewProductModifiersComponent } from '../view-product-modifiers/view-pr
 })
 export class AggregatorFoodicsProductsComponent implements OnInit {
 
-  newProductMapping = new ProductMapping();
-  newModifierMapping = new ModifierMapping();
-  newDiscountMapping = new DiscountMapping();
-  newCustomerMapping = new CustomerMapping();
-  newAddressMapping = new AddressMapping();
-
   productsMappingData = [];
-  modifierOptionsMappingData = []
-  customerMappingData = []
-  addressMappingData  = []
-  discountMappingData = []
-
   showLoading: boolean;
   message: 'No data yet';
 
-  generalSettings: GeneralSettings = new GeneralSettings();
-
-  constructor(public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
-    private generalSettingsService: GeneralSettingsService, private authService: AuthService
-    , private talabatService: TalabatService, public dialog: MatDialog) { }
+  constructor(public snackBar: MatSnackBar, private spinner: NgxSpinnerService, private authService: AuthService
+    , private foodicsService: FoodicsServiceService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.getGeneralSettings();
+    this.getFoodicsProducts();
   }
 
-  getGeneralSettings() {
+  getFoodicsProducts() {
     this.spinner.show();
-
-    this.generalSettingsService.getGeneralSettings().then((res) => {
-      this.generalSettings = res as GeneralSettings;
-      this.productsMappingData = this.generalSettings.talabatConfiguration.productsMappings;
-      this.modifierOptionsMappingData = this.generalSettings.talabatConfiguration.modifierMappings;
-      this.customerMappingData = this.generalSettings.talabatConfiguration.customerMappings;
-      this.addressMappingData = this.generalSettings.talabatConfiguration.addressMappings;
-      this.discountMappingData = this.generalSettings.talabatConfiguration.discountMappings;
-
-      if(this.modifierOptionsMappingData == undefined){
-        this.modifierOptionsMappingData = [];
-      }
-
-      this.spinner.hide();
+      this.foodicsService
+      .getFoodicsProducts(1,2)
+      .toPromise()
+      .then((res) => {
+        this.productsMappingData = res['data'];
+        this.spinner.hide();
     }).catch(err => {
       let message = "";
       if (err.error){
@@ -71,7 +49,6 @@ export class AggregatorFoodicsProductsComponent implements OnInit {
       } else {
         message = ErrorMessages.FAILED_TO_GET_CONFIG;
       }
-
       this.snackBar.open(message , null, {
         duration: 3000,
         horizontalPosition: 'center',
@@ -81,45 +58,6 @@ export class AggregatorFoodicsProductsComponent implements OnInit {
     });
   }
 
-  fetchProducts(){
-    this.spinner.show();
-
-    this.talabatService.getTalabatMenuItems().toPromise().then((res) => {
-
-      this.spinner.hide();
-    }).catch(err => {
-      let message = "";
-      if (err.error){
-        message = err.error;
-      } else if (err.message){
-        message = err.message;
-      } else {
-        message = ErrorMessages.FAILED_TO_GET_CONFIG;
-      }
-
-      this.snackBar.open(message , null, {
-        duration: 3000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-      this.spinner.hide();
-    });
-  }
-
-  addProductsMappingData(){
-    if(this.newProductMapping.name &&  this.newProductMapping.foodIcsProductId && this.newProductMapping.talabatProductId){
-      this.productsMappingData.push(this.newProductMapping);
-      this.newProductMapping = new ProductMapping();
-
-      this.productsMappingData = [...this.productsMappingData];
-    }else {
-      this.snackBar.open('Please fill all type fields.', null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-    }
-  }
 
   viewModifiersDialog(product){
     const dialogConfig = new MatDialogConfig();
@@ -136,120 +74,50 @@ export class AggregatorFoodicsProductsComponent implements OnInit {
     });
   }
 
-  addModifierMappingData(){
-    if(this.newModifierMapping.name &&  this.newModifierMapping.foodicsProductId ){
-
-      this.modifierOptionsMappingData.push(this.newModifierMapping);
-      // let modifier = new ModifierMapping();
-      // modifier.name = this.newModifierMapping.name
-      // modifier.foodicsProductId = this.newModifierMapping.foodicsProductId
-      // modifier.secondFoodicsProductId = this.newModifierMapping.secondFoodicsProductId
-      // modifier.talabatProductId = this.newModifierMapping.talabatProductId
-      // this.modifierOptionsMappingData.push(modifier);
-      this.newModifierMapping = new ModifierMapping();
-      this.modifierOptionsMappingData = [...this.modifierOptionsMappingData];
-
-    }else {
-      this.snackBar.open('Please fill all modifier fields.', null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-    }
-  }
 
 
-  addDiscountMappingData(){
-    if(this.newDiscountMapping.discountId &&  this.newDiscountMapping.discountRate ){
-      this.discountMappingData.push(this.newDiscountMapping);
-      this.newDiscountMapping = new DiscountMapping();
-
-      this.discountMappingData = [...this.discountMappingData];
-    }else {
-      this.snackBar.open('Please fill all type fields.', null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-    }
-  }
-
-  addCustomerMappingData(){
-    if(this.newCustomerMapping.name &&  this.newCustomerMapping.foodicsId && this.newCustomerMapping.talabatId ){
-      this.customerMappingData.push(this.newCustomerMapping);
-      this.newCustomerMapping = new CustomerMapping();
-
-      this.customerMappingData = [...this.customerMappingData];
-    }else {
-      this.snackBar.open('Please fill all type fields.', null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-    }
-  }
-
-    addAddressMappingData(){
-    if(this.newAddressMapping.customerFoodicsId &&  this.newAddressMapping.foodicsId && this.newAddressMapping.talabatId ){
-      this.addressMappingData.push(this.newAddressMapping);
-      this.newAddressMapping = new AddressMapping();
-
-      this.addressMappingData = [...this.addressMappingData];
-    }else {
-      this.snackBar.open('Please fill all type fields.', null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-    }
-  }
 
   onSaveClick(){
-    this.spinner.show();
+    // this.spinner.show();
 
-    try {
+    // try {
 
-      this.generalSettings.talabatConfiguration.productsMappings = this.productsMappingData;
-      this.generalSettings.talabatConfiguration.modifierMappings = this.modifierOptionsMappingData;
-      this.generalSettings.talabatConfiguration.customerMappings = this.customerMappingData;
-      this.generalSettings.talabatConfiguration.discountMappings = this.discountMappingData;
-      this.generalSettings.talabatConfiguration.addressMappings = this.addressMappingData;
+    //   this.generalSettingsService
+    //   .updateGeneralSettings(this.generalSettings)
+    //   .then(result => {
+    //     const response = result as Response;
+    //     if (response.success) {
+    //       this.snackBar.open('Integration data saved successfully.', null, {
+    //         duration: 2000,
+    //         horizontalPosition: 'center',
+    //         panelClass:"my-snack-bar-success"
+    //       });
+    //     }else{
+    //       this.snackBar.open('An error has occurred.', null, {
+    //         duration: 2000,
+    //         horizontalPosition: 'center',
+    //         panelClass:"my-snack-bar-fail"
+    //       });
+    //     }
+    //     this.spinner.hide();
+    //   }
+    //   ).catch(err => {
+    //     this.snackBar.open('An error has occurred.', null, {
+    //       duration: 2000,
+    //       horizontalPosition: 'center',
+    //       panelClass:"my-snack-bar-fail"
+    //     });
+    //     this.spinner.hide();
+    //   });
+    // } catch (e) {
+    //   this.snackBar.open('Failed to save simphony discount rates, Please try again.', null, {
+    //     duration: 2000,
+    //     horizontalPosition: 'center',
+    //     panelClass:"my-snack-bar-fail"
+    //   });
 
-      this.generalSettingsService.updateGeneralSettings(this.generalSettings).then(result => {
-        const response = result as Response;
-        this.authService.generalSettings = this.generalSettings;
-        if (response.success) {
-          this.snackBar.open('Integration data saved successfully.', null, {
-            duration: 2000,
-            horizontalPosition: 'center',
-            panelClass:"my-snack-bar-success"
-          });
-        }else{
-          this.snackBar.open('An error has occurred.', null, {
-            duration: 2000,
-            horizontalPosition: 'center',
-            panelClass:"my-snack-bar-fail"
-          });
-        }
-        this.spinner.hide();
-      }
-      ).catch(err => {
-        this.snackBar.open('An error has occurred.', null, {
-          duration: 2000,
-          horizontalPosition: 'center',
-          panelClass:"my-snack-bar-fail"
-        });
-        this.spinner.hide();
-      });
-    } catch (e) {
-      this.snackBar.open('Failed to save simphony discount rates, Please try again.', null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-
-      this.spinner.hide();
-    }
+    //   this.spinner.hide();
+    // }
   }
 
 }

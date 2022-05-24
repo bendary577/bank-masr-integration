@@ -99,6 +99,7 @@ import { AggregatorsConfigurationComponent } from "../components/aggregators-con
 import { AggregatorMappingComponent } from "../components/aggregator-mapping/aggregator-mapping.component";
 import { AggregatorBranchesMappingComponent } from "../components/aggregator-branches-mapping/aggregator-branches-mapping.component";
 import { AggregatorFoodicsProductsComponent } from "../components/aggregator-foodics-products/aggregator-foodics-products.component";
+import { MatAutocompleteModule } from '@angular/material';
 
 @NgModule({
 
@@ -214,6 +215,7 @@ import { AggregatorFoodicsProductsComponent } from "../components/aggregator-foo
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatAutocompleteModule,
     QuillModule.forRoot(),
   ],
   exports: [

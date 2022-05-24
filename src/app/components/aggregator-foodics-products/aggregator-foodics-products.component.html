@@ -3,69 +3,56 @@
     <mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>
-                Product Mapping
+                Foodics Products 
             </mat-panel-title>
         </mat-expansion-panel-header>
-
-        <div class="container">
-            <form class="my-form">
-                <div>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="name" name="name"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Product Name"
-                            [(ngModel)]="newProductMapping.name">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="port" name="port"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Product Talabat Id"
-                            [(ngModel)]="newProductMapping.talabatProductId">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="ip" name="ip"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Product FoodIcs Id"
-                            [(ngModel)]="newProductMapping.foodIcsProductId">
-                    </mat-form-field>
-                    <button mat-flat-button (click)="fetchProducts()" style="min-width: 125px;" class="filterButton addButton">Fetch Products</button>
-                    <button mat-flat-button (click)="addProductsMappingData()" class="filterButton addButton">Add</button>
-                </div>
-            </form>
-        </div>
 
         <ngx-datatable class="material" [loadingIndicator]="showLoading"
              [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50"
             [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
             [rows]="productsMappingData" [selectAllRowsOnPage]="false" [scrollbarH]="true">
 
-            <ngx-datatable-column name="Product Name">
+            <ngx-datatable-column name="Product">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="Name" [(ngModel)]="row.name">
+                    <a *ngIf="row.image && row.image != ''" class="sidebar-brand brand-logo" href="index.html"><img style="border-radius: 50%; width: 40px;height: 40px;" src={{row.image}} alt="product_avatar" /></a>
+                    <a *ngIf="!row.image || row.image == ''" class="sidebar-brand brand-logo" href="index.html"><img style="border-radius: 50%; width: 40px;height: 40px;" src="assets/images/Anywarelogo.png" alt="logo" /></a>
+                    <input matInput placeholder="Name" [(ngModel)]="row.name" style="margin-left: 10px;margin-bottom: 10px;" readonly>
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="Is Combo">
+            <ngx-datatable-column name="Price">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    <mat-checkbox class="example-margin" [(ngModel)]="row.combo">
-                    </mat-checkbox>
+                    <!-- <mat-checkbox class="example-margin" [(ngModel)]="row.price">
+                    </mat-checkbox> -->
+                    <input matInput placeholder="Name" [(ngModel)]="row.price" style="width:20%">
+                    EGP
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="Product Talabat Id">
+            <ngx-datatable-column name="Foodics ID">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="eg. 12345" [(ngModel)]="row.talabatProductId">
+                    <input matInput placeholder="ID" [(ngModel)]="row.id">
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="Product FoodIcs Id">
+            <ngx-datatable-column name="SKU">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="eg. 12345" [(ngModel)]="row.foodIcsProductId">
+                    <input matInput placeholder="SKU" [(ngModel)]="row.sku">
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="Modifiers Count">
+            <ngx-datatable-column name="Active">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.modifiers.length}}
+                    <input *ngIf="row.is_active" matInput placeholder="Is Active" [(ngModel)]="row.is_active" style="color:green;">
+                    <input *ngIf="!row.is_active" matInput placeholder="Is Active" [(ngModel)]="row.is_active" style="color: red;">
                 </ng-template>
             </ngx-datatable-column>
+
+            <!-- <ngx-datatable-column name="Modifiers Count">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <input matInput placeholder="Modifiers Count" [(ngModel)]="row.modifiers.length">
+                </ng-template>
+            </ngx-datatable-column> -->
 
             <ngx-datatable-column name="Modifiers">
                 <ng-template let-row="row" ngx-datatable-cell-template>
@@ -76,239 +63,5 @@
         </ngx-datatable>
     </mat-expansion-panel>
 
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Modifier Options Mapping
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <div class="container">
-            <form class="my-form">
-                <div>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="name" name="name"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Modifier Options Name"
-                            [(ngModel)]="newModifierMapping.name">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="port" name="port"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Modifier Options Talabat Id"
-                            [(ngModel)]="newModifierMapping.talabatProductId">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="ip" name="ip"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Modifier Options Foodics Id"
-                            [(ngModel)]="newModifierMapping.foodicsProductId">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="ip2" name="ip2"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Modifier Options Second Foodics Id"
-                            [(ngModel)]="newModifierMapping.secondFoodicsProductId">
-                    </mat-form-field>
-                    <button mat-flat-button (click)="addModifierMappingData()" class="filterButton addButton">Add</button>
-                </div>
-            </form>
-        </div>
-
-        <ngx-datatable class="material" [loadingIndicator]="showLoading"
-             [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50"
-            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-            [rows]="modifierOptionsMappingData" [selectAllRowsOnPage]="false" [scrollbarH]="true">
-
-            <ngx-datatable-column name="Modifier Name">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="Name" [(ngModel)]="row.name">
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Product">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <mat-checkbox class="example-margin" [(ngModel)]="row.product">
-                    </mat-checkbox>
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Modifier Talabat Id">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="eg. 12345" [(ngModel)]="row.talabatProductId">
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Modifier Foodics Id">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="eg. 12345" [(ngModel)]="row.foodicsProductId">
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Modifier Foodics Id">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="eg. 12345" [(ngModel)]="row.secondFoodicsProductId">
-                </ng-template>
-            </ngx-datatable-column>
-        </ngx-datatable>
-    </mat-expansion-panel>
-
-    <!-- <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Discount Mapping
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <div class="container">
-            <form class="my-form">
-                <div>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="name" name="name"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Discount Id"
-                            [(ngModel)]="newDiscountMapping.discountId">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="ip" name="ip"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="discount Rate"
-                            [(ngModel)]="newDiscountMapping.discountRate">
-                    </mat-form-field>
-                    <button mat-flat-button (click)="addDiscountMappingData()" class="filterButton addButton">Add</button>
-                </div>
-            </form>
-        </div>
-
-        <br>
-
-        <ngx-datatable class="material" [loadingIndicator]="showLoading"
-             [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50"
-            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-            [rows]="discountMappingData" [selectAllRowsOnPage]="false" [scrollbarH]="true">
-
-            <ngx-datatable-column name="Branch Name">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="Name" [(ngModel)]="row.discountId">
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Branch FoodIcs Id">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="eg. 5 %" [(ngModel)]="row.discountRate">
-                </ng-template>
-            </ngx-datatable-column>
-
-        </ngx-datatable>
-    </mat-expansion-panel> -->
-
-    <!-- <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Customer Mapping
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <div class="container">
-            <form class="my-form">
-                <div>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="name" name="name"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Customer Name"
-                            [(ngModel)]="newCustomerMapping.name">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="foodicsId" name="foodicsId"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Customer Foodics ID"
-                            [(ngModel)]="newCustomerMapping.foodicsId">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="talabatId" name="talabatId"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Customer Talabat ID"
-                            [(ngModel)]="newCustomerMapping.talabatId">
-                    </mat-form-field>
-                    <button mat-flat-button (click)="addCustomerMappingData()" class="filterButton addButton">Add</button>
-                </div>
-            </form> 
-        </div>
-
-        <ngx-datatable class="material" [loadingIndicator]="showLoading"
-             [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50"
-            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-            [rows]="customerMappingData" [selectAllRowsOnPage]="false" [scrollbarH]="true">
-
-            <ngx-datatable-column name="Customer Name">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="Name" [(ngModel)]="row.name">
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Customer FoodIcs Id">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="eg. 5 %" [(ngModel)]="row.foodicsId">
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Customer talabat Id">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="eg. 5 %" [(ngModel)]="row.talabatId">
-                </ng-template>
-            </ngx-datatable-column>
-        </ngx-datatable>
-    </mat-expansion-panel> -->
-
-    <!-- <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Address Mapping
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <div class="container">
-            <form class="my-form">
-                <div>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="customerId" name="customerId"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Customer ID"
-                            [(ngModel)]="newAddressMapping.customerFoodicsId">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="foodicsId" name="foodicsId"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Foodics ID"
-                            [(ngModel)]="newAddressMapping.foodicsId">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="talabatId" name="talabatId"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Talabat ID"
-                            [(ngModel)]="newAddressMapping.talabatId">
-                    </mat-form-field>
-                    <button mat-flat-button (click)="addAddressMappingData()" class="filterButton addButton">Add</button>
-                </div>
-            </form> 
-        </div>
-
-        <ngx-datatable class="material" [loadingIndicator]="showLoading"
-             [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50"
-            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-            [rows]="addressMappingData" [selectAllRowsOnPage]="false" [scrollbarH]="true">
-
-            <ngx-datatable-column name="Customer Id">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="Customer Foodics Id" [(ngModel)]="row.customerFoodicsId">
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Customer FoodIcs Id">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="eg. 5 %" [(ngModel)]="row.foodicsId">
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Customer talabat Id">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="eg. 5 %" [(ngModel)]="row.talabatId">
-                </ng-template>
-            </ngx-datatable-column>
-        </ngx-datatable>
-    </mat-expansion-panel> -->
-
-    <br>
-    <div class="card-back">
-        <button mat-flat-button (click)="onSaveClick()" class="filterButton saveButton">Save</button>
-    </div>
     <ngx-spinner></ngx-spinner>
 </div>
