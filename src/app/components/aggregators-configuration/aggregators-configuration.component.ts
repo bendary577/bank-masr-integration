@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 import { FoodicsServiceService } from 'src/app/services/foodics-service.service';
+import { GenerateFoodicsAccessTokenComponent } from '../generate-foodics-access-token/generate-foodics-access-token.component';
+import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material'
 
 @Component({
   selector: 'app-aggregators-configuration',
@@ -28,7 +29,7 @@ export class AggregatorsConfigurationComponent implements OnInit {
   codeValidationMessage = ''
   foodicsAccessToken = ''
 
-  constructor(public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
+  constructor(public dialog: MatDialog, public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService, private foodicsService : FoodicsServiceService) { }
 
   ngOnInit() {}
@@ -112,34 +113,55 @@ export class AggregatorsConfigurationComponent implements OnInit {
     return validation
   }
 
+  validateAuthCode(){
+    let validation = { message : 'validated', valid : true }
+    if(this.clientId === '' || this.clientId === undefined || this.clientId === null){
+      validation.message = 'Please provide a valid client ID'
+      validation.valid = false
+    }else if(this.clientSecret === '' || this.clientSecret === undefined || this.clientSecret === null){
+      validation.message = 'Please provide a valid client secret'
+      validation.valid = false
+    }else if(this.redirect_url === '' || this.redirect_url === undefined || this.redirect_url === null){
+      validation.message = 'Please provide a valid redirect URL'
+      validation.valid = false
+    }else if(this.authorizationCode === '' || this.authorizationCode === undefined || this.authorizationCode === null){
+      validation.message = 'Please enter authorization code'
+      validation.valid = false
+    }
+    return validation
+  }
+
   generateRandomString(){
     return Math.random().toString(36).slice(2, 7).toString();
   }
 
   generateFoodicsAccessToken(){
     this.validationMessage=""
-    let validationResult = this.validate();
+    let validationResult = this.validateAuthCode();
     if(validationResult.valid === false){
-      this.validationMessage = validationResult.message
+      this.codeValidationMessage = validationResult.message
     }else{
+      this.codeValidationMessage = ''
       this.loading = true;
       this.spinner.show();
       let body = {
-        grant_type : "authorization_code",
         code : this.authorizationCode,
-        client_id : this.clientId,
-        redirect_uri : this.redirect_url
+        clientId : this.clientId,
+        clientSecret : this.clientSecret,
+        redirect_url : this.redirect_url
       }
       this.foodicsService.requestFoodicsAccessToken(body)
       .toPromise()
       .then((res) => {
-        this.snackBar.open("Foodics account access token was generated successfully" , null, {
-          duration: 3000,
-          horizontalPosition: 'center',
-          panelClass:"my-snack-bar-success"
-        });
-        this.loading = false;
-        this.spinner.hide();
+        this.foodicsAccessToken = res['data'].access_token
+        // this.snackBar.open("Foodics account access token was generated successfully" , null, {
+        //   duration: 3000,
+        //   horizontalPosition: 'center',
+        //   panelClass:"my-snack-bar-success"
+        // });
+        // this.loading = false;
+        // this.spinner.hide();
+        this.openTokenDialog()
       }).catch(err => {
         let message = "";
         if (err.error){
@@ -158,6 +180,22 @@ export class AggregatorsConfigurationComponent implements OnInit {
         this.spinner.hide();
       });
     }
+  }
+
+
+  openTokenDialog(){
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.width = '420px'
+    dialogConfig.maxWidth = '420px'
+    dialogConfig.autoFocus = true
+    dialogConfig.data = {token : this.foodicsAccessToken}
+
+    let dialogRef = this.dialog.open(GenerateFoodicsAccessTokenComponent, dialogConfig)
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+      }
+    })
   }
 
   // onSaveClick(){

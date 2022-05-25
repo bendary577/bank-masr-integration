@@ -103,6 +103,8 @@ import { MatAutocompleteModule } from '@angular/material';
 import { FoodicsProductDetailsComponent } from "../components/foodics-product-details/foodics-product-details.component";
 import { TalabatUnmappedProductsComponent } from "../components/talabat-unmapped-products/talabat-unmapped-products.component";
 import { ProductsNeedsAttentionComponent } from "../components/products-needs-attention/products-needs-attention.component";
+import { GenerateFoodicsAccessTokenComponent } from "../components/generate-foodics-access-token/generate-foodics-access-token.component";
+
 @NgModule({
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -207,7 +209,8 @@ import { ProductsNeedsAttentionComponent } from "../components/products-needs-at
     AggregatorFoodicsProductsComponent,
     FoodicsProductDetailsComponent,
     TalabatUnmappedProductsComponent,
-    ProductsNeedsAttentionComponent
+    ProductsNeedsAttentionComponent,
+    GenerateFoodicsAccessTokenComponent
   ],
   imports: [
     MainRoutingModule,

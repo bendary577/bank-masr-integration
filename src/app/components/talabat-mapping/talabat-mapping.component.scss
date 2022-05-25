@@ -1,3 +1,16 @@
 @import "../../../assets/scss/syncs.scss";
 @import "../../components/operations/opera-payments/opera-payments.component.scss";
 @import "../../components/setting/pos-machine-mapping/pos-machine-mapping.component.scss";
+
+.parent {
+    display: flex;
+    flex-wrap: wrap;
+  }
+.right-child {
+    flex: 25%;
+    margin-bottom: 5px;
+}
+
+.left-child {
+    flex: 75%;
+}
