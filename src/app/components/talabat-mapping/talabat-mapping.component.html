@@ -64,14 +64,17 @@
                     <div style="width: 100%;">
                         <form class="example-form" id="form" [formGroup]="tableForm">
                             <mat-form-field class="example-full-width" appearance="fill" style="width:25px" id="foodics_product_form_field" name="foodics_product_form_field">
+                                <!-- <img style="border-radius: 50%; width: 25px;height: 25px;" src="assets/images/aggregators/burger.jpg" alt="logo" /> -->
                                 <mat-label>Foodics Products</mat-label>
                                 <input type="text"
                                         style="width:120px"
                                         id="products_input"
                                         name="products_input"
                                         placeholder="Pick one"
-                                        aria-label="Number"
                                         matInput
+                                        aria-label="Number"
+                                        ngModel 
+                                        (ngModelChange)="onChangeInputEvent($event, getRowFormControlName(row))"
                                         [formControlName]="getRowFormControlName(row)"
                                         [matAutocomplete]="auto">
                                 <mat-autocomplete #auto="matAutocomplete" name="products_autocomplete" id="products_autocomplete" (optionSelected)="changeFoodicsProductMapping($event.option.value, row)">

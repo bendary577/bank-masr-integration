@@ -73,6 +73,7 @@ export class TalabatMappingComponent implements OnInit {
   }
 
   private _filter(value: string): string[] {
+    console.log("filter " + value)
     const filterValue = value.toLowerCase();
     return this.foodicsProductsNames.filter(option => option.toLowerCase().includes(filterValue));
   }
@@ -170,11 +171,25 @@ export class TalabatMappingComponent implements OnInit {
       this.foodicsProductsNames.push(products[i].name);
     }
     Object.keys(this.tableForm.controls).forEach((key : string) => {
+      console.log("####### ")
       const abstractControl = this.tableForm.controls[key];
       this.filteredOptions = abstractControl.valueChanges.pipe(
         startWith(''),
         map(value => this._filter(value)),
       );
+    });
+  }
+
+  onChangeInputEvent(event: any, formControlName){
+    Object.keys(this.tableForm.controls).forEach((key : string) => {
+      if(formControlName === key){
+        console.log("event " + event)
+        const abstractControl = this.tableForm.controls[key];
+        this.filteredOptions = abstractControl.valueChanges.pipe(
+          startWith(''),
+          map(value => this._filter(value)),
+        );
+      }
     });
   }
 

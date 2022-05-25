@@ -17,17 +17,43 @@ export class AggregatorsConfigurationComponent implements OnInit {
 
   clientId : ''
   clientSecret : ''
-  randomString : ''
+  randomString : string = ""
   redirect_url : ''
+  authorizationCode : ''
   validationMessage = ''
-
+  clientIdMessage = ''
+  clientSecretMessage = ''
+  redirectURLMessage = ''
+  authorizationCodeMessage = ''
+  codeValidationMessage = ''
+  foodicsAccessToken = ''
 
   constructor(public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService, private foodicsService : FoodicsServiceService) { }
 
   ngOnInit() {}
 
+  clientIdInputClick() {
+    this.clientSecretMessage = ''
+    this.redirectURLMessage = ''
+    this.clientIdMessage = 'Please enter your client ID provided from your foodics account'
+  }
 
+  clientSecretInputClick() {
+    this.clientIdMessage = ''
+    this.redirectURLMessage = ''
+    this.clientSecretMessage = 'Please enter your client Secret provided from your foodics account'
+  }
+
+  redirectURLInputClick() {
+    this.clientIdMessage = ''
+    this.clientSecretMessage = ''
+    this.redirectURLMessage = 'Please enter redirect URL to return back after foodics account authorization'
+  }
+
+  authorizationCodeInputClick() {
+    this.authorizationCodeMessage = 'Please enter authorization code generated after foodics account authorization'
+  }
 
   authorizeFoodicsAccount(){
     this.validationMessage=""
@@ -37,7 +63,8 @@ export class AggregatorsConfigurationComponent implements OnInit {
     }else{
       this.loading = true;
       this.spinner.show();
-      this.foodicsService.authorizeFoodicsAccount(this.clientId, this.clientSecret, this.randomString)
+      this.randomString = this.generateRandomString()
+      this.foodicsService.authorizeFoodicsAccount(this.clientId, this.randomString)
       .toPromise()
       .then((res) => {
         this.snackBar.open("Your account was authenticated successfully by Foodics" , null, {
@@ -83,6 +110,54 @@ export class AggregatorsConfigurationComponent implements OnInit {
       validation.valid = false
     }
     return validation
+  }
+
+  generateRandomString(){
+    return Math.random().toString(36).slice(2, 7).toString();
+  }
+
+  generateFoodicsAccessToken(){
+    this.validationMessage=""
+    let validationResult = this.validate();
+    if(validationResult.valid === false){
+      this.validationMessage = validationResult.message
+    }else{
+      this.loading = true;
+      this.spinner.show();
+      let body = {
+        grant_type : "authorization_code",
+        code : this.authorizationCode,
+        client_id : this.clientId,
+        redirect_uri : this.redirect_url
+      }
+      this.foodicsService.requestFoodicsAccessToken(body)
+      .toPromise()
+      .then((res) => {
+        this.snackBar.open("Foodics account access token was generated successfully" , null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-success"
+        });
+        this.loading = false;
+        this.spinner.hide();
+      }).catch(err => {
+        let message = "";
+        if (err.error){
+          message = err.error;
+        } else if (err.message){
+          message = err.message;
+        } else {
+          message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
+        }
+        this.snackBar.open(message , null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+        this.loading = false;
+        this.spinner.hide();
+      });
+    }
   }
 
   // onSaveClick(){
