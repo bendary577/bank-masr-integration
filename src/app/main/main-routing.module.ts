@@ -62,6 +62,8 @@ import { RewardPointsSettingsComponent } from "../components/setting/reward-poin
 import { AggregatorsConfigurationComponent } from "../components/aggregators-configuration/aggregators-configuration.component";
 import { AggregatorMappingComponent } from "../components/aggregator-mapping/aggregator-mapping.component";
 import { AggregatorBranchesMappingComponent } from "../components/aggregator-branches-mapping/aggregator-branches-mapping.component";
+import { AggregatorFoodicsProductsComponent } from "../components/aggregator-foodics-products/aggregator-foodics-products.component";
+
 
 const routes: Routes = [
   { path: "", component: MainComponent },
@@ -385,6 +387,12 @@ const routes: Routes = [
   {
     path: AggregatorsEndPoints.AGGREGATOR_INTEGRATOR,
     component: AggregatorIntegratorComponent,
+    canActivate: [AuthGuardService],
+  },
+
+  {
+    path: AggregatorsEndPoints.AGGREGATOR_FOODICS_PRODUCTS,
+    component: AggregatorFoodicsProductsComponent,
     canActivate: [AuthGuardService],
   },
 

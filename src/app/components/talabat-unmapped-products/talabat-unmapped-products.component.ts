@@ -14,17 +14,17 @@ import { ModifierMapping } from 'src/app/models/deliveryAggregator/ModifierMappi
 import { TalabatService } from 'src/app/services/talabat/talabat.service';
 import { FoodicsServiceService } from 'src/app/services/foodics-service.service';
 import { ViewProductModifiersComponent } from '../view-product-modifiers/view-product-modifiers.component';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { FoodicsProduct } from 'src/app/models/deliveryAggregator/foodics-product';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'app-talabat-mapping',
-  templateUrl: './talabat-mapping.component.html',
-  styleUrls: ['./talabat-mapping.component.scss']
+  selector: 'app-talabat-unmapped-products',
+  templateUrl: './talabat-unmapped-products.component.html',
+  styleUrls: ['./talabat-unmapped-products.component.scss']
 })
-export class TalabatMappingComponent implements OnInit {
+export class TalabatUnmappedProductsComponent implements OnInit {
 
   newProductMapping = new ProductMapping();
   newModifierMapping = new ModifierMapping();
@@ -33,11 +33,8 @@ export class TalabatMappingComponent implements OnInit {
   newAddressMapping = new AddressMapping();
 
   productsMappingData = [];
-  unmappedProductsMappingData = [];
+  mappedProductsMappingData = [];
   modifierOptionsMappingData = []
-  customerMappingData = []
-  addressMappingData  = []
-  discountMappingData = []
 
   showLoading: boolean;
   message: 'No data yet';
@@ -59,16 +56,18 @@ export class TalabatMappingComponent implements OnInit {
   ngOnInit(): void {
     this.getGeneralSettings();
     this.getProductsMapping();
-    this.getUnmappedProductsMapping();
+    this.getMappedProductsMapping();
     this.getFoodicsProducts();
   }
 
   fillFormControls(){
+    console.log("in form control")
     if(this.productsMappingData.length > 0){
       for(let i=0; i < this.productsMappingData.length; i++){
         let controlName = this.getRowFormControlName(this.productsMappingData[i])
         let value = new FormControl();
         eval("var "+controlName+" = '"+value+"';");
+        console.log(controlName)
         this.tableForm.addControl(controlName,  new FormControl('', Validators.required));
       }
     }
@@ -79,37 +78,13 @@ export class TalabatMappingComponent implements OnInit {
     return this.foodicsProductsNames.filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  private setFormControlsDefaultOptions() {
-    this.productsMappingData.forEach((productMapping) => {
-        let productName = this.returnFoodicsProductNameById(productMapping.foodIcsProductId)
-        let controlName = this.getRowFormControlName(productMapping)
-        Object.keys(this.tableForm.controls).forEach((key : string) => {
-          if(controlName === key){
-            const abstractControl = this.tableForm.controls[key];
-            console.log(" form control product " + productName)
-            abstractControl.setValue(productName);
-          }
-        });
-    });
-  }
-
-  private returnFoodicsProductNameById(foodicsId){
-    for(let i=0; i < this.foodicsProducts.length; i++){
-      if(this.foodicsProducts[i].id === foodicsId){
-        return this.foodicsProducts[i].name
-      }
-    }
-  }
-
   getGeneralSettings() {
     this.spinner.show();
+
     this.generalSettingsService.getGeneralSettings().then((res) => {
       this.generalSettings = res as GeneralSettings;
       // this.productsMappingData = this.generalSettings.talabatConfiguration.productsMappings;
       this.modifierOptionsMappingData = this.generalSettings.talabatConfiguration.modifierMappings;
-      this.customerMappingData = this.generalSettings.talabatConfiguration.customerMappings;
-      this.addressMappingData = this.generalSettings.talabatConfiguration.addressMappings;
-      this.discountMappingData = this.generalSettings.talabatConfiguration.discountMappings;
 
       if(this.modifierOptionsMappingData == undefined){
         this.modifierOptionsMappingData = [];
@@ -138,7 +113,7 @@ export class TalabatMappingComponent implements OnInit {
   getProductsMapping() {
     this.spinner.show();
       this.foodicsService
-      .getMappedProducts()
+      .getUnMappedProducts()
       .toPromise()
       .then((res) => {
         this.productsMappingData = res['data'];
@@ -162,13 +137,13 @@ export class TalabatMappingComponent implements OnInit {
     });
   }
 
-  getUnmappedProductsMapping(){
+  getMappedProductsMapping() {
     this.spinner.show();
       this.foodicsService
-      .getUnMappedProducts()
+      .getMappedProducts()
       .toPromise()
       .then((res) => {
-        this.unmappedProductsMappingData = res['data'];
+        this.mappedProductsMappingData = res['data'];
         this.spinner.hide();
     }).catch(err => {
       let message = "";
@@ -196,7 +171,6 @@ export class TalabatMappingComponent implements OnInit {
       .then((res) => {
         this.foodicsProducts = res['data'];
         this.mapFoodicsProductsNames(this.foodicsProducts)
-        this.setFormControlsDefaultOptions()
         this.spinner.hide();
     }).catch(err => {
       let message = "";
@@ -216,11 +190,26 @@ export class TalabatMappingComponent implements OnInit {
     });
   }
 
+  getRowFormControlName(productMapping){
+    //remove spaces from product mapping name
+    let formControlName = productMapping.name
+    return formControlName.replace(/[^A-Z]+/ig, "")
+  }
+
+  private returnFoodicsProductNameById(foodicsId){
+    for(let i=0; i < this.foodicsProducts.length; i++){
+      if(this.foodicsProducts[i].id === foodicsId){
+        return this.foodicsProducts[i].name
+      }
+    }
+  }
+
   mapFoodicsProductsNames(products){
     for(let i=0; i < products.length; i++){
       this.foodicsProductsNames.push(products[i].name);
     }
     Object.keys(this.tableForm.controls).forEach((key : string) => {
+      console.log("####### ")
       const abstractControl = this.tableForm.controls[key];
       this.filteredOptions = abstractControl.valueChanges.pipe(
         startWith(''),
@@ -273,12 +262,6 @@ export class TalabatMappingComponent implements OnInit {
     });
   }
 
-  getRowFormControlName(productMapping){
-    //remove spaces from product mapping name
-    let formControlName = productMapping.name
-    return formControlName.replace(/[^A-Z0-9]+/ig, "")
-  }
-
   addProductsMappingData(){
     if(this.newProductMapping.name &&  this.newProductMapping.foodIcsProductId && this.newProductMapping.talabatProductId){
       this.productsMappingData.push(this.newProductMapping);
@@ -300,7 +283,7 @@ export class TalabatMappingComponent implements OnInit {
     dialogConfig.data = {product: product, foodicsProductDetails : false};
     dialogConfig.minWidth = 500;
     dialogConfig.maxHeight = 500;
-
+    
     const dialogRef = this.dialog.open(ViewProductModifiersComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       if(result){
@@ -332,61 +315,13 @@ export class TalabatMappingComponent implements OnInit {
   }
 
 
-  addDiscountMappingData(){
-    if(this.newDiscountMapping.discountId &&  this.newDiscountMapping.discountRate ){
-      this.discountMappingData.push(this.newDiscountMapping);
-      this.newDiscountMapping = new DiscountMapping();
-
-      this.discountMappingData = [...this.discountMappingData];
-    }else {
-      this.snackBar.open('Please fill all type fields.', null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-    }
-  }
-
-  addCustomerMappingData(){
-    if(this.newCustomerMapping.name &&  this.newCustomerMapping.foodicsId && this.newCustomerMapping.talabatId ){
-      this.customerMappingData.push(this.newCustomerMapping);
-      this.newCustomerMapping = new CustomerMapping();
-
-      this.customerMappingData = [...this.customerMappingData];
-    }else {
-      this.snackBar.open('Please fill all type fields.', null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-    }
-  }
-
-    addAddressMappingData(){
-    if(this.newAddressMapping.customerFoodicsId &&  this.newAddressMapping.foodicsId && this.newAddressMapping.talabatId ){
-      this.addressMappingData.push(this.newAddressMapping);
-      this.newAddressMapping = new AddressMapping();
-
-      this.addressMappingData = [...this.addressMappingData];
-    }else {
-      this.snackBar.open('Please fill all type fields.', null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-    }
-  }
-
   onSaveClick(){
     this.spinner.show();
 
     try {
-      let allProductsMapping = this.productsMappingData.concat(this.unmappedProductsMappingData);
+      let allProductsMapping = this.productsMappingData.concat(this.mappedProductsMappingData);
       this.generalSettings.talabatConfiguration.productsMappings = allProductsMapping;
       this.generalSettings.talabatConfiguration.modifierMappings = this.modifierOptionsMappingData;
-      this.generalSettings.talabatConfiguration.customerMappings = this.customerMappingData;
-      this.generalSettings.talabatConfiguration.discountMappings = this.discountMappingData;
-      this.generalSettings.talabatConfiguration.addressMappings = this.addressMappingData;
 
       this.generalSettingsService.updateGeneralSettings(this.generalSettings).then(result => {
         const response = result as Response;
@@ -430,7 +365,6 @@ export class TalabatMappingComponent implements OnInit {
     chosenFoodicsProduct = this.foodicsProducts.filter(function(foodicsProduct) {
       return foodicsProduct.name === value;
     });
-
     if(chosenFoodicsProduct != null && chosenFoodicsProduct.length > 0){
       productMapping.foodIcsProductId = chosenFoodicsProduct[0].id
     }
