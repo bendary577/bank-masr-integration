@@ -196,6 +196,14 @@ export class TalabatUnmappedProductsComponent implements OnInit {
     return formControlName.replace(/[^A-Z]+/ig, "")
   }
 
+  private returnFoodicsProductNameById(foodicsId){
+    for(let i=0; i < this.foodicsProducts.length; i++){
+      if(this.foodicsProducts[i].id === foodicsId){
+        return this.foodicsProducts[i].name
+      }
+    }
+  }
+
   mapFoodicsProductsNames(products){
     for(let i=0; i < products.length; i++){
       this.foodicsProductsNames.push(products[i].name);
@@ -210,15 +218,21 @@ export class TalabatUnmappedProductsComponent implements OnInit {
     });
   }
 
+  mapInputModel(productMapping){
+    return this.returnFoodicsProductNameById(productMapping.foodIcsProductId);
+  }
+
   onChangeInputEvent(event: any, formControlName){
+    console.log("change input " + formControlName + " " + event)
     Object.keys(this.tableForm.controls).forEach((key : string) => {
       if(formControlName === key){
-        console.log("event " + event)
         const abstractControl = this.tableForm.controls[key];
-        this.filteredOptions = abstractControl.valueChanges.pipe(
-          startWith(''),
-          map(value => this._filter(value)),
-        );
+        if(event !== "" && event !== '' && event !== undefined && event != null){
+          this.filteredOptions = abstractControl.valueChanges.pipe(
+            startWith(event),
+            map(value => this._filter(value)),
+          );
+        }
       }
     });
   }
@@ -266,10 +280,10 @@ export class TalabatUnmappedProductsComponent implements OnInit {
   viewModifiersDialog(product){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.data = {product: product};
+    dialogConfig.data = {product: product, foodicsProductDetails : false};
     dialogConfig.minWidth = 500;
     dialogConfig.maxHeight = 500;
-
+    
     const dialogRef = this.dialog.open(ViewProductModifiersComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       if(result){
@@ -352,7 +366,6 @@ export class TalabatUnmappedProductsComponent implements OnInit {
       return foodicsProduct.name === value;
     });
     if(chosenFoodicsProduct != null && chosenFoodicsProduct.length > 0){
-      alert(chosenFoodicsProduct[0].id)
       productMapping.foodIcsProductId = chosenFoodicsProduct[0].id
     }
     this.filteredOptions = this.myControl.valueChanges.pipe(

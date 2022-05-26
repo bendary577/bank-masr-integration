@@ -34,12 +34,14 @@ export class AggregatorFoodicsProductsComponent implements OnInit {
   }
 
   getFoodicsProducts() {
+    this.showLoading=true
     this.spinner.show();
       this.foodicsService
       .getFoodicsProducts(1,2)
       .toPromise()
       .then((res) => {
         this.productsMappingData = res['data'];
+        this.showLoading=false
         this.spinner.hide();
     }).catch(err => {
       let message = "";
@@ -55,6 +57,7 @@ export class AggregatorFoodicsProductsComponent implements OnInit {
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
+      this.showLoading=false
       this.spinner.hide();
     });
   }
@@ -63,7 +66,7 @@ export class AggregatorFoodicsProductsComponent implements OnInit {
   viewModifiersDialog(product){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.data = {product: product};
+    dialogConfig.data = {product: product, foodicsProductDetails : true};
     dialogConfig.minWidth = 500;
     dialogConfig.maxHeight = 500;
 

@@ -20,7 +20,7 @@ export class AggregatorsConfigurationComponent implements OnInit {
   clientSecret : ''
   randomString : string = ""
   redirect_url : ''
-  authorizationCode : ''
+  authorizationCode : string = ''
   validationMessage = ''
   clientIdMessage = ''
   clientSecretMessage = ''
@@ -28,6 +28,10 @@ export class AggregatorsConfigurationComponent implements OnInit {
   authorizationCodeMessage = ''
   codeValidationMessage = ''
   foodicsAccessToken = ''
+  foodicsTokenGenerated = false
+  foodicsCodeExpired = false
+  timeLeft: number = 600;
+  interval;
 
   constructor(public dialog: MatDialog, public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService, private foodicsService : FoodicsServiceService) { }
@@ -49,11 +53,16 @@ export class AggregatorsConfigurationComponent implements OnInit {
   redirectURLInputClick() {
     this.clientIdMessage = ''
     this.clientSecretMessage = ''
-    this.redirectURLMessage = 'Please enter redirect URL to return back after foodics account authorization'
+    this.redirectURLMessage = 'Please enter redirect URL provided from your foodics account'
   }
 
   authorizationCodeInputClick() {
     this.authorizationCodeMessage = 'Please enter authorization code generated after foodics account authorization'
+  }
+
+  authorizationCodeInputChange(value){
+    // this.foodicsTokenGenerated = true
+    // this.startTimer()
   }
 
   authorizeFoodicsAccount(){
@@ -62,39 +71,8 @@ export class AggregatorsConfigurationComponent implements OnInit {
     if(validationResult.valid === false){
       this.validationMessage = validationResult.message
     }else{
-      this.loading = true;
-      this.spinner.show();
       this.randomString = this.generateRandomString()
       this.foodicsService.authorizeFoodicsAccount(this.clientId, this.randomString)
-      .toPromise()
-      .then((res) => {
-        this.snackBar.open("Your account was authenticated successfully by Foodics" , null, {
-          duration: 3000,
-          horizontalPosition: 'center',
-          panelClass:"my-snack-bar-success"
-        });
-        this.loading = false;
-        this.spinner.hide();
-      }).catch(err => {
-        let message = "";
-        if (err.error){
-          message = err.error;
-        } else if (err.message){
-          message = err.message;
-        } else {
-          message = ErrorMessages.FAILED_TO_SAVE_CONFIG;
-        }
-  
-        this.snackBar.open(message , null, {
-          duration: 3000,
-          horizontalPosition: 'center',
-          panelClass:"my-snack-bar-fail"
-        });
-  
-        this.loading = false;
-        this.spinner.hide();
-  
-      });
     }
   }
 
@@ -115,7 +93,13 @@ export class AggregatorsConfigurationComponent implements OnInit {
 
   validateAuthCode(){
     let validation = { message : 'validated', valid : true }
-    if(this.clientId === '' || this.clientId === undefined || this.clientId === null){
+    if(this.foodicsCodeExpired === true){
+      validation.message = 'Sorry, the code is expired, you have to regenerate foodics authorization code'
+      validation.valid = false
+    }else if(!this.validURL(this.authorizationCode)){
+      validation.message = 'please enter a valid URL'
+      validation.valid = false
+    }else if(this.clientId === '' || this.clientId === undefined || this.clientId === null){
       validation.message = 'Please provide a valid client ID'
       validation.valid = false
     }else if(this.clientSecret === '' || this.clientSecret === undefined || this.clientSecret === null){
@@ -141,6 +125,12 @@ export class AggregatorsConfigurationComponent implements OnInit {
     if(validationResult.valid === false){
       this.codeValidationMessage = validationResult.message
     }else{
+      this.foodicsTokenGenerated = true
+      // this.foodicsCodeExpired = true
+      this.startTimer()
+      //cut the code from the url string
+      let url = new URL(this.authorizationCode);
+      this.authorizationCode = url.searchParams.get("code");
       this.codeValidationMessage = ''
       this.loading = true;
       this.spinner.show();
@@ -159,8 +149,8 @@ export class AggregatorsConfigurationComponent implements OnInit {
         //   horizontalPosition: 'center',
         //   panelClass:"my-snack-bar-success"
         // });
-        // this.loading = false;
-        // this.spinner.hide();
+        this.loading = false;
+        this.spinner.hide();
         this.openTokenDialog()
       }).catch(err => {
         let message = "";
@@ -192,10 +182,30 @@ export class AggregatorsConfigurationComponent implements OnInit {
 
     let dialogRef = this.dialog.open(GenerateFoodicsAccessTokenComponent, dialogConfig)
 
-    dialogRef.afterClosed().subscribe((res) => {
-      if (res) {
+    dialogRef.afterClosed().subscribe((res) => {})
+  }
+
+  startTimer() {
+    this.interval = setInterval(() => {
+      if(this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        this.timeLeft = 600;
+        this.foodicsTokenGenerated = false
+        this.foodicsCodeExpired = true
       }
-    })
+    },1000)
+  }
+
+
+  validURL(str) {
+    var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+      '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+    return !!pattern.test(str);
   }
 
   // onSaveClick(){

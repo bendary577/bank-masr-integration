@@ -32,8 +32,6 @@ export class FoodicsServiceService {
   authorizeFoodicsAccount(clientId, randomString) {
     window.open(AggregatorsEndPoints.AUTHORIZE_FOODICS_ACCOUNT+ "?client_id=" + clientId+'&state='+randomString,
                     "", "width=800, height=800");
-    // this.token = localStorage.getItem('auth_token');
-    return this.http.post(AggregatorsEndPoints.AUTHORIZE_FOODICS_ACCOUNT+ "?client_id=" + clientId+'&state='+randomString, {});
   }
 
   requestFoodicsAccessToken(body){

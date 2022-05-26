@@ -86,6 +86,7 @@ export class TalabatMappingComponent implements OnInit {
         Object.keys(this.tableForm.controls).forEach((key : string) => {
           if(controlName === key){
             const abstractControl = this.tableForm.controls[key];
+            console.log(" form control product " + productName)
             abstractControl.setValue(productName);
           }
         });
@@ -93,11 +94,8 @@ export class TalabatMappingComponent implements OnInit {
   }
 
   private returnFoodicsProductNameById(foodicsId){
-    console.log("returnFoodicsProductNameById")
-    console.log("xxxx" + this.foodicsProducts.length)
     for(let i=0; i < this.foodicsProducts.length; i++){
       if(this.foodicsProducts[i].id === foodicsId){
-        console.log("product namex is " + this.foodicsProducts[i].name)
         return this.foodicsProducts[i].name
       }
     }
@@ -223,7 +221,6 @@ export class TalabatMappingComponent implements OnInit {
       this.foodicsProductsNames.push(products[i].name);
     }
     Object.keys(this.tableForm.controls).forEach((key : string) => {
-      console.log("####### ")
       const abstractControl = this.tableForm.controls[key];
       this.filteredOptions = abstractControl.valueChanges.pipe(
         startWith(''),
@@ -232,15 +229,21 @@ export class TalabatMappingComponent implements OnInit {
     });
   }
 
+  mapInputModel(productMapping){
+    return this.returnFoodicsProductNameById(productMapping.foodIcsProductId);
+  }
+
   onChangeInputEvent(event: any, formControlName){
+    console.log("change input " + formControlName + " " + event)
     Object.keys(this.tableForm.controls).forEach((key : string) => {
       if(formControlName === key){
-        console.log("event " + event)
         const abstractControl = this.tableForm.controls[key];
-        this.filteredOptions = abstractControl.valueChanges.pipe(
-          startWith(''),
-          map(value => this._filter(value)),
-        );
+        if(event !== "" && event !== '' && event !== undefined && event != null){
+          this.filteredOptions = abstractControl.valueChanges.pipe(
+            startWith(event),
+            map(value => this._filter(value)),
+          );
+        }
       }
     });
   }
@@ -294,7 +297,7 @@ export class TalabatMappingComponent implements OnInit {
   viewModifiersDialog(product){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.data = {product: product};
+    dialogConfig.data = {product: product, foodicsProductDetails : false};
     dialogConfig.minWidth = 500;
     dialogConfig.maxHeight = 500;
 

@@ -11,6 +11,7 @@ import { ProductMapping } from 'src/app/models/deliveryAggregator/product-mappin
 export class ViewProductModifiersComponent implements OnInit {
 
   product = new  ProductMapping()
+  foodicsProduct = false
   newModifierMapping = new ModifierMapping();
 
   constructor(public dialogRef: MatDialogRef<ViewProductModifiersComponent>,
@@ -18,6 +19,7 @@ export class ViewProductModifiersComponent implements OnInit {
 
   ngOnInit(): void {
     this.product = this.data['product'];
+    this.foodicsProduct = this.data['foodicsProductDetails'];
   }
 
   onNoClick(): void {
