@@ -55,7 +55,7 @@ export class WebServiceInvokerConfigurationComponent implements OnInit {
         this.newInvoker.username = res.username;
         this.newInvoker.password = res.password;
 
-        this.userService.addInvokerUser(this.newInvoker, this.syncJobType.id).toPromise().then(result => {
+        this.userService.addInvokerUser(this.newInvoker).toPromise().then(result => {
           this.snackBar.open("Add web service invoker successfully.", null, {
             duration: 2000,
             horizontalPosition: 'center',
