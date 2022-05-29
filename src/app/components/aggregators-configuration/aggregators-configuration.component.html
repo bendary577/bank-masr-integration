@@ -5,38 +5,64 @@
     <br>
 
     <!-- Cancel Reason -->
-    <mat-expansion-panel>
+    <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
             <mat-panel-title>
-                Request Foodics Authorization
+                <h5>Step 1. Request Foodics Account Authorization</h5>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div>
+            <h6>Click on "Authorize My Foodics Account" and wait until the browser opens your redirect URL, please copy the url from the browser and paste it in "Authorization Code" field </h6>
+        </div>
+        <br>
+        <form class="my-form">
+            <div>
+                <p *ngIf="validationMessage != ''" style="color:red">{{validationMessage}}</p>
+                <h6 *ngIf="clientIdMessage != ''" style="color:black" style="margin-bottom: 10px;">{{clientIdMessage}}</h6>
+                <h6 *ngIf="clientSecretMessage != ''" style="color:black" style="margin-bottom: 10px;">{{clientSecretMessage}}</h6>
+                <h6 *ngIf="redirectURLMessage != ''" style="color:black" style="margin-bottom: 10px;">{{redirectURLMessage}}</h6>
+                <br>
+                <mat-form-field class="example-full-width">
+                    <input (click)="clientIdInputClick()" matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Client Id" name="clientId" [(ngModel)]="clientId">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input (click)="clientSecretInputClick()" matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Client Secret" name="clientSecret" [(ngModel)]="clientSecret">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input (click)="redirectURLInputClick()" matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Redirect Url" name="redirectUrl" [(ngModel)]="redirect_url">
+                </mat-form-field>
+                <button mat-flat-button (click)="authorizeFoodicsAccount()">Authorize My Foodics Account</button>
+            </div>
+        </form>
+
+    </mat-expansion-panel>
+
+    <br>
+
+    <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <h5>Step 2. Save code generated after foodics account authorization</h5>
             </mat-panel-title>
         </mat-expansion-panel-header>
 
         <form class="my-form">
             <div>
-                <div>
-                    
-                </div>
+                <p *ngIf="codeValidationMessage != ''" style="color:red">{{codeValidationMessage}}</p>
+                <h6 *ngIf="authorizationCodeMessage != ''" style="color:black" style="margin-bottom: 10px;">{{authorizationCodeMessage}}</h6>
+                <br>
                 <mat-form-field class="example-full-width">
-                    <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Client Id" name="clientId" [(ngModel)]="newCancelReason.typeId">
+                    <input (click)="authorizationCodeInputClick()" ngModel (ngModelChange)="authorizationCodeInputChange($event)" matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Authorization Code" name="authorizationCode" [(ngModel)]="authorizationCode">
                 </mat-form-field>
-                <mat-form-field class="example-full-width">
-                    <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Client Secret" name="clientSecret" [(ngModel)]="newCancelReason.type">
-                </mat-form-field>
-                <mat-form-field class="example-full-width">
-                    <input matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Redirect Url" name="redirectUrl" [(ngModel)]="newCancelReason.typeDescription">
-                </mat-form-field>
-                <button mat-flat-button>Authorize Foodics</button>
+                <!-- <mat-form-field *ngIf="foodicsTokenGenerated === true && foodicsCodeExpired === false" class="example-full-width">
+                    <h6 style="color:red">{{timeLeft}} Seconds left until code expiration...</h6>
+                </mat-form-field> -->
+                <button mat-flat-button (click)="generateFoodicsAccessToken()">Generate Access Token</button>
             </div>
         </form>
 
-        
     </mat-expansion-panel>
 
-    <br>
-
-    <!-- <div class="card-back">
-        <button mat-flat-button (click)="onSaveClick()">Save</button>
-    </div> -->
     <ngx-spinner></ngx-spinner>
 </div>

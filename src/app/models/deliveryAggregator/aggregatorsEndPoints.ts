@@ -5,6 +5,7 @@ export class AggregatorsEndPoints {
     // Pages
     static TALABAT_ORDERS  = "talabatOrders"
     static AGGREGATOR_INTEGRATOR  = "aggregatorIntegrator"
+    static AGGREGATOR_FOODICS_PRODUCTS  = "foodicsProduct"
 
     // End Points
     // Orders
@@ -17,6 +18,13 @@ export class AggregatorsEndPoints {
     static GET_TALABAT_BRANCH_ORDERS =  environment.apiHost + "/talabat/branch";
     static SEND_TALABAT_ORDERS =  environment.apiHost + "/aggregator/orders";
     static GET_TALABAT_MENU_ITEMS =  environment.apiHost + "/talabat/menuItems";
+
+     // Foodics
+    static GET_FOODICS_PRODUCTS =  environment.apiHost + "/aggregator/foodicsProducts/";
+    static GET_MAPPED_PRODUCTS =  environment.apiHost + "/aggregator/getMappedProducts/";
+    static GET_UNMAPPED_PRODUCTS =  environment.apiHost + "/aggregator/getUnMappedProducts/";
+    static AUTHORIZE_FOODICS_ACCOUNT = "https://console-sandbox.foodics.com/authorize";
+    static REQUEST_FOODICS_ACCESS_TOKEN = environment.apiHost + "/aggregator/getFoodicsAccessToken";
   
     /////////////////////////////////////////////// Aggregator Statics /////////////////////////////////
   

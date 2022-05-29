@@ -20,12 +20,13 @@ import {map, startWith} from 'rxjs/operators';
 import { FoodicsProduct } from 'src/app/models/deliveryAggregator/foodics-product';
 
 @Component({
-  selector: 'app-talabat-mapping',
-  templateUrl: './talabat-mapping.component.html',
-  styleUrls: ['./talabat-mapping.component.scss']
+  selector: 'app-products-needs-attention',
+  templateUrl: './products-needs-attention.component.html',
+  styleUrls: ['./products-needs-attention.component.scss']
 })
-export class TalabatMappingComponent implements OnInit {
+export class ProductsNeedsAttentionComponent implements OnInit {
 
+  
   newProductMapping = new ProductMapping();
   newModifierMapping = new ModifierMapping();
   newDiscountMapping = new DiscountMapping();
@@ -34,6 +35,7 @@ export class TalabatMappingComponent implements OnInit {
 
   productsMappingData = [];
   unmappedProductsMappingData = [];
+  productsMappingNeedsAttention = [];
   modifierOptionsMappingData = []
   customerMappingData = []
   addressMappingData  = []
@@ -86,7 +88,6 @@ export class TalabatMappingComponent implements OnInit {
         Object.keys(this.tableForm.controls).forEach((key : string) => {
           if(controlName === key){
             const abstractControl = this.tableForm.controls[key];
-            console.log(" form control product " + productName)
             abstractControl.setValue(productName);
           }
         });
@@ -105,7 +106,7 @@ export class TalabatMappingComponent implements OnInit {
     this.spinner.show();
     this.generalSettingsService.getGeneralSettings().then((res) => {
       this.generalSettings = res as GeneralSettings;
-      // this.productsMappingData = this.generalSettings.talabatConfiguration.productsMappings;
+      this.productsMappingNeedsAttention = this.generalSettings.talabatConfiguration.productsMappingNeedsAttention;
       this.modifierOptionsMappingData = this.generalSettings.talabatConfiguration.modifierMappings;
       this.customerMappingData = this.generalSettings.talabatConfiguration.customerMappings;
       this.addressMappingData = this.generalSettings.talabatConfiguration.addressMappings;
@@ -229,21 +230,14 @@ export class TalabatMappingComponent implements OnInit {
     });
   }
 
-  mapInputModel(productMapping){
-    return this.returnFoodicsProductNameById(productMapping.foodIcsProductId);
-  }
-
   onChangeInputEvent(event: any, formControlName){
-    console.log("change input " + formControlName + " " + event)
     Object.keys(this.tableForm.controls).forEach((key : string) => {
       if(formControlName === key){
         const abstractControl = this.tableForm.controls[key];
-        if(event !== "" && event !== '' && event !== undefined && event != null){
-          this.filteredOptions = abstractControl.valueChanges.pipe(
-            startWith(event),
-            map(value => this._filter(value)),
-          );
-        }
+        this.filteredOptions = abstractControl.valueChanges.pipe(
+          startWith(''),
+          map(value => this._filter(value)),
+        );
       }
     });
   }
@@ -297,7 +291,7 @@ export class TalabatMappingComponent implements OnInit {
   viewModifiersDialog(product){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.data = {product: product, foodicsProductDetails : false};
+    dialogConfig.data = {product: product};
     dialogConfig.minWidth = 500;
     dialogConfig.maxHeight = 500;
 

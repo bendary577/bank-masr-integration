@@ -4,22 +4,20 @@ import { ModifierMapping } from 'src/app/models/deliveryAggregator/ModifierMappi
 import { ProductMapping } from 'src/app/models/deliveryAggregator/product-mapping';
 
 @Component({
-  selector: 'app-view-product-modifiers',
-  templateUrl: './view-product-modifiers.component.html',
-  styleUrls: ['./view-product-modifiers.component.scss']
+  selector: 'app-foodics-product-details',
+  templateUrl: './foodics-product-details.component.html',
+  styleUrls: ['./foodics-product-details.component.scss']
 })
-export class ViewProductModifiersComponent implements OnInit {
+export class FoodicsProductDetailsComponent implements OnInit {
 
   product = new  ProductMapping()
-  foodicsProduct = false
   newModifierMapping = new ModifierMapping();
 
-  constructor(public dialogRef: MatDialogRef<ViewProductModifiersComponent>,
+  constructor(public dialogRef: MatDialogRef<FoodicsProductDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data, public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.product = this.data['product'];
-    this.foodicsProduct = this.data['foodicsProductDetails'];
   }
 
   onNoClick(): void {
