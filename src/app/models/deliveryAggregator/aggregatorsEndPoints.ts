@@ -20,6 +20,7 @@ export class AggregatorsEndPoints {
     static GET_TALABAT_MENU_ITEMS =  environment.apiHost + "/talabat/menuItems";
 
      // Foodics
+    static GET_FOODICS_BRANCHES = environment.apiHost + "/aggregator/getFoodicsBranches";
     static GET_FOODICS_PRODUCTS =  environment.apiHost + "/aggregator/foodicsProducts/";
     static GET_MAPPED_PRODUCTS =  environment.apiHost + "/aggregator/getMappedProducts/";
     static GET_UNMAPPED_PRODUCTS =  environment.apiHost + "/aggregator/getUnMappedProducts/";

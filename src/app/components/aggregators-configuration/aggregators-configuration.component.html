@@ -1,6 +1,6 @@
 
 <div class="config-style">
-    <h3 mat-dialog-title>Grant Access Token</h3>
+    <h3 mat-dialog-title>Foodics Account Integration</h3>
 
     <br>
 
@@ -13,29 +13,11 @@
         </mat-expansion-panel-header>
 
         <div>
-            <h6>Click on "Authorize My Foodics Account" and wait until the browser opens your redirect URL, please copy the url from the browser and paste it in "Authorization Code" field </h6>
+            <h6 style="color:gray">Through this step, you will authenticate your foodics account and get the code needed in generating foodics access token</h6>
+            <h6 style="color:red">*To perform this step, you need to communicate with foodics team to get the information needed to start the integration (client ID, client secret, redirect URL)*</h6>
         </div>
         <br>
-        <form class="my-form">
-            <div>
-                <p *ngIf="validationMessage != ''" style="color:red">{{validationMessage}}</p>
-                <h6 *ngIf="clientIdMessage != ''" style="color:black" style="margin-bottom: 10px;">{{clientIdMessage}}</h6>
-                <h6 *ngIf="clientSecretMessage != ''" style="color:black" style="margin-bottom: 10px;">{{clientSecretMessage}}</h6>
-                <h6 *ngIf="redirectURLMessage != ''" style="color:black" style="margin-bottom: 10px;">{{redirectURLMessage}}</h6>
-                <br>
-                <mat-form-field class="example-full-width">
-                    <input (click)="clientIdInputClick()" matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Client Id" name="clientId" [(ngModel)]="clientId">
-                </mat-form-field>
-                <mat-form-field class="example-full-width">
-                    <input (click)="clientSecretInputClick()" matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Client Secret" name="clientSecret" [(ngModel)]="clientSecret">
-                </mat-form-field>
-                <mat-form-field class="example-full-width">
-                    <input (click)="redirectURLInputClick()" matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Redirect Url" name="redirectUrl" [(ngModel)]="redirect_url">
-                </mat-form-field>
-                <button mat-flat-button (click)="authorizeFoodicsAccount()">Authorize My Foodics Account</button>
-            </div>
-        </form>
-
+        <button mat-flat-button (click)="openInstructionsDialog()">Get Code</button>
     </mat-expansion-panel>
 
     <br>
@@ -43,9 +25,14 @@
     <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
             <mat-panel-title>
-                <h5>Step 2. Save code generated after foodics account authorization</h5>
+                <h5>Step 2. Generate Foodics Access Token</h5>
             </mat-panel-title>
         </mat-expansion-panel-header>
+
+        <div>
+            <!-- <h6 style="color:gray">Save the URL generated from step 1</h6> -->
+            <h6 style="color:gray">Foodics access token is required to finish the integration process and be able to map talabat and foodics products</h6>
+        </div>
 
         <form class="my-form">
             <div>
@@ -53,7 +40,7 @@
                 <h6 *ngIf="authorizationCodeMessage != ''" style="color:black" style="margin-bottom: 10px;">{{authorizationCodeMessage}}</h6>
                 <br>
                 <mat-form-field class="example-full-width">
-                    <input (click)="authorizationCodeInputClick()" ngModel (ngModelChange)="authorizationCodeInputChange($event)" matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Authorization Code" name="authorizationCode" [(ngModel)]="authorizationCode">
+                    <input (click)="authorizationCodeInputClick()" ngModel (ngModelChange)="authorizationCodeInputChange($event)" matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Generated URL from step 1" name="URL" [(ngModel)]="authorizationCode">
                 </mat-form-field>
                 <!-- <mat-form-field *ngIf="foodicsTokenGenerated === true && foodicsCodeExpired === false" class="example-full-width">
                     <h6 style="color:red">{{timeLeft}} Seconds left until code expiration...</h6>

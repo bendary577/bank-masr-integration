@@ -8,6 +8,11 @@ import { BranchMapping } from 'src/app/models/deliveryAggregator/branch-mapping'
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 import { TalabatService } from 'src/app/services/talabat/talabat.service';
+import { FoodicsServiceService } from 'src/app/services/foodics-service.service';
+import {Observable} from 'rxjs';
+import { FoodicsBranch } from 'src/app/models/deliveryAggregator/foodics-branch';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-aggregator-branches-mapping',
@@ -25,12 +30,96 @@ export class AggregatorBranchesMappingComponent implements OnInit {
 
   generalSettings: GeneralSettings = new GeneralSettings();
 
+  foodicsBranches  : FoodicsBranch[] = [];
+  foodicsBranchesNames = [];
+  formControls : FormControl[] = []
+  myControl = new FormControl();
+  filteredOptions: Observable<string[]>;
+  tableForm = new FormGroup({});
+
   constructor(public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService, private authService: AuthService
-    , private talabatService: TalabatService, public dialog: MatDialog) { }
+    , private talabatService: TalabatService, private foodicsService : FoodicsServiceService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.getGeneralSettings();
+    
+  }
+
+  fillFormControls(){
+    if(this.branchMappingData.length > 0){
+      for(let i=0; i < this.branchMappingData.length; i++){
+        let controlName = this.getRowFormControlName(this.branchMappingData[i])
+        let value = new FormControl();
+        eval("var "+controlName+" = '"+value+"';");
+        this.tableForm.addControl(controlName,  new FormControl('', Validators.required));
+      }
+    }
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.foodicsBranchesNames.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  private setFormControlsDefaultOptions() {
+    this.branchMappingData.forEach((branchMapping) => {
+        let branchName = this.returnFoodicsBranchNameById(branchMapping.foodIcsBranchId)
+        let controlName = this.getRowFormControlName(branchMapping)
+        Object.keys(this.tableForm.controls).forEach((key : string) => {
+          if(controlName === key){
+            const abstractControl = this.tableForm.controls[key];
+            abstractControl.setValue(branchName);
+          }
+        });
+    });
+  }
+
+  getRowFormControlName(branchMapping){
+    //remove spaces from branch mapping name
+    let formControlName = branchMapping.name
+    return formControlName.replace(/[^A-Z0-9]+/ig, "")
+  }
+
+  private returnFoodicsBranchNameById(foodicsId){
+    for(let i=0; i < this.foodicsBranches.length; i++){
+      if(this.foodicsBranches[i].id === foodicsId){
+        return this.foodicsBranches[i].name
+      }
+    }
+  }
+
+  changeFoodicsBranchMapping(value, branchMapping) {
+    let chosenFoodicsBranch : FoodicsBranch[] = [];
+    chosenFoodicsBranch = this.foodicsBranches.filter(function(foodicsBranch) {
+      return foodicsBranch.name === value;
+    });
+
+    if(chosenFoodicsBranch != null && chosenFoodicsBranch.length > 0){
+      branchMapping.foodIcsBranchId = chosenFoodicsBranch[0].id
+    }
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value)),
+    );
+  }
+
+  onChangeInputEvent(event: any, formControlName){
+    console.log("change input " + formControlName + " " + event)
+    Object.keys(this.tableForm.controls).forEach((key : string) => {
+      if(formControlName === key){
+        const abstractControl = this.tableForm.controls[key];
+        if(event !== "" && event !== '' && event !== undefined && event != null){
+          this.filteredOptions = abstractControl.valueChanges.pipe(
+            startWith(event),
+            map(value => this._filter(value)),
+          );
+        }
+      }
+    });
+  }
+
+  mapInputModel(branchMapping){
+    return this.returnFoodicsBranchNameById(branchMapping.foodIcsBranchId);
   }
 
   getGeneralSettings() {
@@ -73,6 +162,31 @@ export class AggregatorBranchesMappingComponent implements OnInit {
         panelClass:"my-snack-bar-fail"
       });
     }
+  }
+
+  fetchBranches(){
+    this.spinner.show();
+
+    this.foodicsService.getFoodicsBranches(1,2).toPromise().then((res) => {
+      this.getGeneralSettings();
+      this.spinner.hide();
+    }).catch(err => {
+      let message = "";
+      if (err.error){
+        message = err.error;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_GET_CONFIG;
+      }
+
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+      this.spinner.hide();
+    });
   }
 
   onSaveClick(){

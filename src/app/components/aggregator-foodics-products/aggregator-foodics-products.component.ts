@@ -30,36 +30,48 @@ export class AggregatorFoodicsProductsComponent implements OnInit {
     , private foodicsService: FoodicsServiceService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.getFoodicsProducts();
+    // this.getFoodicsProducts();
   }
 
   getFoodicsProducts() {
-    this.showLoading=true
-    this.spinner.show();
-      this.foodicsService
-      .getFoodicsProducts(1,2)
-      .toPromise()
-      .then((res) => {
-        this.productsMappingData = res['data'];
+    let foodics_token_generated = localStorage.getItem('foodics_token_generated');
+    if(foodics_token_generated === 'true'){
+      this.showLoading=true
+      this.spinner.show();
+        this.foodicsService
+        .getFoodicsProducts(1,2)
+        .toPromise()
+        .then((res) => {
+          this.productsMappingData = res['data'];
+          localStorage.setItem('foodics_products_returned', 'true');
+          this.showLoading=false
+          this.spinner.hide();
+      }).catch(err => {
+        let message = "";
+        if (err.error){
+          message = err.error;
+        } else if (err.message){
+          message = err.message;
+        } else {
+          message = ErrorMessages.FAILED_TO_GET_CONFIG;
+        }
+        this.snackBar.open(message , null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
         this.showLoading=false
         this.spinner.hide();
-    }).catch(err => {
-      let message = "";
-      if (err.error){
-        message = err.error;
-      } else if (err.message){
-        message = err.message;
-      } else {
-        message = ErrorMessages.FAILED_TO_GET_CONFIG;
-      }
-      this.snackBar.open(message , null, {
-        duration: 3000,
+      });
+    }else{
+      this.snackBar.open('Please finish foodics account integration step before start getting products' , null, {
+        duration: 5000,
         horizontalPosition: 'center',
         panelClass:"my-snack-bar-fail"
       });
       this.showLoading=false
       this.spinner.hide();
-    });
+    }
   }
 
 

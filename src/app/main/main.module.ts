@@ -73,7 +73,7 @@ import { AddAppUserComponent } from "../components/add-app-user/add-app-user.com
 import { AddAppGroupComponent } from "../components/add-app-group/add-app-group.component";
 import { AddAppCompanyComponent } from "../components/add-app-company/add-app-company.component";
 import { ManageSubGroupComponent } from "../components/manage-sub-group/manage-sub-group.component";
-
+import {MatStepperModule} from '@angular/material/stepper';
 import { AngularMaterialModule } from "../angular-material.module";
 import { BasicModule } from "../shared/basic.module";
 import { SharedModule } from "../shared/shared.module";
@@ -104,6 +104,8 @@ import { FoodicsProductDetailsComponent } from "../components/foodics-product-de
 import { TalabatUnmappedProductsComponent } from "../components/talabat-unmapped-products/talabat-unmapped-products.component";
 import { ProductsNeedsAttentionComponent } from "../components/products-needs-attention/products-needs-attention.component";
 import { GenerateFoodicsAccessTokenComponent } from "../components/generate-foodics-access-token/generate-foodics-access-token.component";
+import { FoodicsAuthInstructionsComponent } from "../components/foodics-auth-instructions/foodics-auth-instructions.component";
+
 
 @NgModule({
 
@@ -210,7 +212,8 @@ import { GenerateFoodicsAccessTokenComponent } from "../components/generate-food
     FoodicsProductDetailsComponent,
     TalabatUnmappedProductsComponent,
     ProductsNeedsAttentionComponent,
-    GenerateFoodicsAccessTokenComponent
+    GenerateFoodicsAccessTokenComponent,
+    FoodicsAuthInstructionsComponent
   ],
   imports: [
     MainRoutingModule,
@@ -224,6 +227,7 @@ import { GenerateFoodicsAccessTokenComponent } from "../components/generate-food
     MatInputModule,
     MatSelectModule,
     MatAutocompleteModule,
+    MatStepperModule,
     QuillModule.forRoot(),
   ],
   exports: [
