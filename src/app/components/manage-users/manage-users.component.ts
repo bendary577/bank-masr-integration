@@ -841,7 +841,7 @@ export class ManageUsersComponent implements OnInit {
 
   getWalletsTotalRemaining() {
     this.walletsRemainingTotal.showLoading = true
-    this.spinner.show()
+    // this.spinner.show()
     this.loyaltyService
       .getWalletsTotalRemaining(
         this.fromDate,
@@ -852,11 +852,11 @@ export class ManageUsersComponent implements OnInit {
       .then((res: any) => {
         this.walletsRemainingTotalValue = res.data
         this.walletsRemainingTotal.showLoading = false
-        this.spinner.hide()
+        // this.spinner.hide()
       })
       .catch((err) => {
         this.walletsRemainingTotal.showLoading = false
-        this.spinner.hide()
+        // this.spinner.hide()
       })
   }
 
