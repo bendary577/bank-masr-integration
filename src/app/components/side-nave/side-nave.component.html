@@ -97,7 +97,6 @@
       </div>
     </div>
     <br>
-    <!-- *ngIf=" hasRole('see_syncs') || hasRole('see_applications') ||  hasRole('see_reports') || hasRole('see_operations') || hasRole('see_settings')" -->
     <li class="nav-item nav-category" *ngIf="hasFeature('main_feature')">
       <span class="nav-link" translate>Main Menu</span>
     </li>
@@ -145,7 +144,7 @@
       </a>
       <div class="collapse" id="ui-basic" [ngbCollapse]="!appBasicCollapsed">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item" *ngIf="hasFeature('loyalty')">
+          <!-- <li class="nav-item" *ngIf="hasFeature('loyalty')">
              <a class="nav-link" routerLink="/loyalty" routerLinkActive="active" translate>Loyalty</a>
           </li>
           <li class="nav-item" *ngIf="hasFeature('entry_system')">
@@ -159,9 +158,9 @@
          </li>
          <li class="nav-item" *ngIf="hasFeature('canteen')">
           <a class="nav-link" routerLink="/canteen" routerLinkActive="active" translate>Canteen</a>
-        </li>
-          <!-- <li class="nav-item" *ngFor="let application of applications"> <a class="nav-link"
-              routerLink={{application.endPoint}} routerLinkActive="active" translate>{{application.name}}</a></li> -->
+        </li> -->
+          <li class="nav-item" *ngFor="let application of applications"> <a class="nav-link"
+              routerLink={{application.endPoint}} routerLinkActive="active" translate>{{application.name}}</a></li>
         </ul>
       </div>
     </li>
