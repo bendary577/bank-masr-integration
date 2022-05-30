@@ -81,6 +81,8 @@ export class AggregatorFoodicsProductsComponent implements OnInit {
         let dialogRef = this.dialog.open(AggregatorIntegrationErrorComponent, dialogConfig)
     
         dialogRef.afterClosed().subscribe((res) => {})
+        this.showLoading=false
+        this.spinner.hide();
       });
   }
 

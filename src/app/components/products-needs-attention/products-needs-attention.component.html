@@ -7,6 +7,14 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
 
+        <div class="container">
+            <form class="my-form" >
+                <div>
+                    <button mat-flat-button (click)="getFoodicsProducts()" style="min-width: 125px;" class="filterButton addButton">Fetch Products</button>
+                </div>
+            </form>
+        </div>
+        
         <ngx-datatable class="material" [loadingIndicator]="showLoading"
              [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50"
             [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
