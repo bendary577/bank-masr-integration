@@ -1,0 +1,68 @@
+<div class="schedualer_view">
+    <h1 mat-dialog-title>Foodics Account Authorization</h1>
+    <div mat-dialog-content>
+      <div class="container">
+          <mat-horizontal-stepper [linear]="isLinear" >
+            <mat-step [stepControl]="clientIDFormGroup">
+              <form [formGroup]="clientIDFormGroup">
+                <ng-template matStepLabel>Fill out your client ID</ng-template>
+                <p>Foodics client id is provided through your foodics account</p>
+                <mat-form-field appearance="fill">
+                  <mat-label>Client ID</mat-label>
+                  <input matInput placeholder="Foodics Client ID" name="clientId" [(ngModel)]="clientId" formControlName="clientIDControl" required>
+                </mat-form-field>
+                <div>
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-button matStepperNext>Next</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step [stepControl]="clientSecretFormGroup" label="Fill out your client secret">
+              <p>Foodics client secret is provided through your foodics account</p>
+              <form [formGroup]="clientSecretFormGroup">
+                <mat-form-field appearance="fill">
+                  <mat-label>Client Secret</mat-label>
+                  <input matInput formControlName="clientSecretControl" placeholder="Client Secret" name="clientSecret" [(ngModel)]="clientSecret"
+                         required>
+                </mat-form-field>
+                <div>
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-button matStepperNext>Next</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step [stepControl]="redirectURLFormGroup" label="Fill out your client secret">
+              <p>Foodics redirect URL is provided through your foodics account</p>
+              <form [formGroup]="redirectURLFormGroup">
+                <mat-form-field appearance="fill">
+                  <mat-label>Client Secret</mat-label>
+                  <input matInput formControlName="redirectURLControl" placeholder="Client Secret" name="redirectUrl" [(ngModel)]="redirect_url"
+                         required>
+                </mat-form-field>
+                <div>
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-button matStepperNext>Next</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step>
+              <ng-template matStepLabel>Get Code</ng-template>
+              <!-- <h6>Now, press on Get Code button to authenticate your account, a new browser window will be opened, wait until it redirects to your redirect URL, <b>*Copy the URL*</b> and click save</h6> -->
+              <ul>
+                <h6>You are now done.</h6>
+                <li><h6>1 . press on Get Code button to authenticate your account</h6></li>
+                <li><h6>2 . a new browser window will be opened, wait until it redirects to your redirect URL</h6></li>
+                <li><h6><b>3 . *Copy the URL*</b></h6></li>
+                <li><h6>4 . click save</h6></li>
+              </ul>
+              <br>
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-flat-button (click)="authorizeFoodicsAccount()">Get Code</button>
+                <button mat-flat-button (click)="onSaveClick()">Save</button>
+              </div>
+            </mat-step>
+          </mat-horizontal-stepper>
+    </div>
+    </div>
+</div>

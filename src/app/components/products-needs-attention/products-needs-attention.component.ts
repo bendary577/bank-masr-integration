@@ -195,7 +195,7 @@ export class ProductsNeedsAttentionComponent implements OnInit {
       .getFoodicsProducts(1,2)
       .toPromise()
       .then((res) => {
-        this.foodicsProducts = res['data'];
+        this.foodicsProducts = res['data']['data'];
         this.mapFoodicsProductsNames(this.foodicsProducts)
         this.setFormControlsDefaultOptions()
         this.spinner.hide();
