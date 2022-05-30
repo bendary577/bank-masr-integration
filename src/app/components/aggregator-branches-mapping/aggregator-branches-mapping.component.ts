@@ -122,13 +122,26 @@ export class AggregatorBranchesMappingComponent implements OnInit {
     return this.returnFoodicsBranchNameById(branchMapping.foodIcsBranchId);
   }
 
+  mapFoodicsBranchesNames(branches){
+    for(let i=0; i < branches.length; i++){
+      this.foodicsBranchesNames.push(branches[i].name);
+    }
+    Object.keys(this.tableForm.controls).forEach((key : string) => {
+      const abstractControl = this.tableForm.controls[key];
+      this.filteredOptions = abstractControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value)),
+      );
+    });
+  }
+
   getGeneralSettings() {
     this.spinner.show();
 
     this.generalSettingsService.getGeneralSettings().then((res) => {
       this.generalSettings = res as GeneralSettings;
       this.branchMappingData = this.generalSettings.talabatConfiguration.branchMappings;
- 
+      this.fetchBranches();
       this.spinner.hide();
     }).catch(err => {
       let message = "";
@@ -166,9 +179,10 @@ export class AggregatorBranchesMappingComponent implements OnInit {
 
   fetchBranches(){
     this.spinner.show();
-
     this.foodicsService.getFoodicsBranches(1,2).toPromise().then((res) => {
-      this.getGeneralSettings();
+        this.foodicsBranches = res['data'];
+        this.mapFoodicsBranchesNames(this.foodicsBranches)
+        this.setFormControlsDefaultOptions()
       this.spinner.hide();
     }).catch(err => {
       let message = "";

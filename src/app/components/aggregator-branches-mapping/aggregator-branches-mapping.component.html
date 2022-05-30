@@ -16,15 +16,14 @@
                             [(ngModel)]="newBranchMapping.name">
                     </mat-form-field>
                     <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <!-- <input matInput id="ip" name="ip"
+                        <input matInput id="ip" name="ip"
                             style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Branch FoodIcs Id"
-                            [(ngModel)]="newBranchMapping.foodIcsBranchId"> -->
+                            [(ngModel)]="newBranchMapping.foodIcsBranchId">
 
-                            <ng-template let-row="row" ngx-datatable-cell-template> 
+                            <!-- <ng-template let-row="row" ngx-datatable-cell-template> 
                                 <div style="width: 100%;">
                                     <form class="example-form" id="form" [formGroup]="tableForm">
                                         <mat-form-field class="example-full-width" style="width: 130px;"appearance="fill" style="width:25px" id="foodics_product_form_field" name="foodics_product_form_field">
-                                            <!-- <mat-label>Foodics Products</mat-label> -->
                                             <div class='parent'>
                                                 <div class='right-child'>
                                                     <img style="border-radius: 50%; width: 25px;height: 25px;" src="assets/images/aggregators/burger.jpg" alt="logo" />
@@ -52,7 +51,7 @@
                                         </mat-form-field>
                                     </form>
                                 </div>
-                            </ng-template> 
+                            </ng-template>  -->
 
                     </mat-form-field>
                     <mat-form-field appearance="outline" class="example-full-width dateForm">
@@ -61,7 +60,7 @@
                             [(ngModel)]="newBranchMapping.talabatBranchId">
                     </mat-form-field>
                     <button mat-flat-button (click)="addBranchMappingData()" class="filterButton addButton">Add</button>
-                    <button mat-flat-button (click)="fetchBranches()" style="min-width: 125px;" class="filterButton addButton">Fetch Branches</button>
+                    <button mat-flat-button (click)="getGeneralSettings()" style="min-width: 125px;" class="filterButton addButton">Fetch Branches</button>
                 </div>
             </form>
         </div>
