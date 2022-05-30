@@ -11,9 +11,18 @@ export class FoodicsServiceService {
 
   constructor(private http: HttpClient) { }
 
-  getFoodicsProducts(pageNumber, limit) {
+  getFoodicsProducts(limit, pageNumber) {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(AggregatorsEndPoints.GET_FOODICS_PRODUCTS,
+       { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
+  getFoodicsProductsPaginated(requestAPI) {
+    this.token = localStorage.getItem('auth_token');
+    let body = {
+      requestAPI
+    }
+    return this.http.post(AggregatorsEndPoints.GET_FOODICS_PRODUCTS_PAGINATED, body,
        { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
@@ -26,6 +35,12 @@ export class FoodicsServiceService {
   getUnMappedProducts() {
     this.token = localStorage.getItem('auth_token');
     return this.http.get(AggregatorsEndPoints.GET_UNMAPPED_PRODUCTS,
+       { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
+  getFoodicsBranches(pageNumber, limit) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get(AggregatorsEndPoints.GET_FOODICS_BRANCHES,
        { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 

@@ -18,6 +18,7 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { FoodicsProduct } from 'src/app/models/deliveryAggregator/foodics-product';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { AggregatorIntegrationErrorComponent } from '../aggregator-integration-error/aggregator-integration-error.component';
 
 @Component({
   selector: 'app-talabat-unmapped-products',
@@ -54,10 +55,10 @@ export class TalabatUnmappedProductsComponent implements OnInit {
     , private talabatService: TalabatService,private foodicsService: FoodicsServiceService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.getGeneralSettings();
-    this.getProductsMapping();
-    this.getMappedProductsMapping();
-    this.getFoodicsProducts();
+    // this.getGeneralSettings();
+    // this.getProductsMapping();
+    // this.getMappedProductsMapping();
+    // this.getFoodicsProducts();
   }
 
   fillFormControls(){
@@ -169,23 +170,19 @@ export class TalabatUnmappedProductsComponent implements OnInit {
       .getFoodicsProducts(1,2)
       .toPromise()
       .then((res) => {
-        this.foodicsProducts = res['data'];
+        this.foodicsProducts = res['data']['data'];
+        this.init();
         this.mapFoodicsProductsNames(this.foodicsProducts)
         this.spinner.hide();
     }).catch(err => {
-      let message = "";
-      if (err.error){
-        message = err.error;
-      } else if (err.message){
-        message = err.message;
-      } else {
-        message = ErrorMessages.FAILED_TO_GET_CONFIG;
-      }
-      this.snackBar.open(message , null, {
-        duration: 3000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
+      const dialogConfig = new MatDialogConfig()
+      dialogConfig.width = '600px'
+      dialogConfig.maxWidth = '600px'
+      dialogConfig.autoFocus = true
+  
+      let dialogRef = this.dialog.open(AggregatorIntegrationErrorComponent, dialogConfig)
+  
+      dialogRef.afterClosed().subscribe((res) => {})
       this.spinner.hide();
     });
   }
@@ -237,11 +234,16 @@ export class TalabatUnmappedProductsComponent implements OnInit {
     });
   }
 
+  init(){
+    this.getGeneralSettings();
+    this.getProductsMapping();
+    this.getMappedProductsMapping();
+    this.fetchProducts();
+  }
+
   fetchProducts(){
     this.spinner.show();
-
     this.talabatService.getTalabatMenuItems().toPromise().then((res) => {
-
       this.spinner.hide();
     }).catch(err => {
       let message = "";
