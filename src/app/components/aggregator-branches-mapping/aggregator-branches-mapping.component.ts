@@ -58,13 +58,11 @@ export class AggregatorBranchesMappingComponent implements OnInit {
   }
 
   private _filter(value: string): string[] {
-    console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ filter")
     const filterValue = value.toLowerCase();
     return this.foodicsBranchesNames.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   private setFormControlsDefaultOptions() {
-    console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
     this.branchMappingData.forEach((branchMapping) => {
         let branchName = this.returnFoodicsBranchNameById(branchMapping.foodIcsBranchId)
         let controlName = this.getRowFormControlName(branchMapping)
