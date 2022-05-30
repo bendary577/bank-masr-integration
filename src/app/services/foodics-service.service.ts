@@ -29,6 +29,12 @@ export class FoodicsServiceService {
        { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
+  getFoodicsBranches(pageNumber, limit) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.get(AggregatorsEndPoints.GET_FOODICS_BRANCHES,
+       { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
   authorizeFoodicsAccount(clientId, randomString) {
     window.open(AggregatorsEndPoints.AUTHORIZE_FOODICS_ACCOUNT+ "?client_id=" + clientId+'&state='+randomString,
                     "", "width=800, height=800");

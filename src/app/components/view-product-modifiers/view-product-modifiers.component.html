@@ -31,7 +31,7 @@
 
     <ngx-datatable class="material" 
          [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50"
-        [footerHeight]="20" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+        [footerHeight]="10" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
         [rows]="product.modifiers" [selectAllRowsOnPage]="false" [scrollbarH]="true">
 
         <ngx-datatable-column name="Modifier Name">
@@ -57,6 +57,15 @@
                 <input matInput placeholder="eg. 12345" [(ngModel)]="row.foodicsProductId">
             </ng-template>
         </ngx-datatable-column>
+
+        <ngx-datatable-footer>
+            <ng-template
+              ngx-datatable-footer-template
+              let-isVisible="isVisible"
+            >
+            </ng-template>
+          </ngx-datatable-footer>
+
     </ngx-datatable>
 
     <div mat-dialog-actions>
