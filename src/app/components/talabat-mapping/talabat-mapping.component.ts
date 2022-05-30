@@ -65,7 +65,7 @@ export class TalabatMappingComponent implements OnInit {
     this.getGeneralSettings();
     this.getProductsMapping();
     this.getUnmappedProductsMapping();
-    this.getFoodicsProducts();
+    this.fetchProducts();
   }
 
   fillFormControls(){
@@ -148,6 +148,7 @@ export class TalabatMappingComponent implements OnInit {
       .then((res) => {
         this.productsMappingData = res['data'];
         this.fillFormControls()
+        this.setFormControlsDefaultOptions()
         this.spinner.hide();
     }).catch(err => {
       let message = "";
@@ -200,8 +201,8 @@ export class TalabatMappingComponent implements OnInit {
       .toPromise()
       .then((res) => {
         this.foodicsProducts = res['data']['data'];
+        this.init();
         this.mapFoodicsProductsNames(this.foodicsProducts)
-        this.setFormControlsDefaultOptions()
         this.spinner.hide();
     }).catch(err => {
       // let message = "";
@@ -226,6 +227,7 @@ export class TalabatMappingComponent implements OnInit {
       let dialogRef = this.dialog.open(AggregatorIntegrationErrorComponent, dialogConfig)
   
       dialogRef.afterClosed().subscribe((res) => {})
+      this.spinner.hide();
     });
   }
 
@@ -262,12 +264,9 @@ export class TalabatMappingComponent implements OnInit {
   }
 
   fetchProducts(){
-    let foodics_token_generated = localStorage.getItem('foodics_token_generated');
-    if(foodics_token_generated === 'true'){
       this.spinner.show();
       this.talabatService.getTalabatMenuItems().toPromise().then((res) => {
-        this.init();
-        // this.spinner.hide();
+        this.spinner.hide();
       }).catch(err => {
         let message = "";
         if (err.error){
@@ -282,18 +281,9 @@ export class TalabatMappingComponent implements OnInit {
           horizontalPosition: 'center',
           panelClass:"my-snack-bar-fail"
         });
+        this.showLoading=false
         this.spinner.hide();
       });
-    }else{
-      const dialogConfig = new MatDialogConfig()
-      dialogConfig.width = '600px'
-      dialogConfig.maxWidth = '600px'
-      dialogConfig.autoFocus = true
-  
-      let dialogRef = this.dialog.open(AggregatorIntegrationErrorComponent, dialogConfig)
-  
-      dialogRef.afterClosed().subscribe((res) => {})
-    }
   }
 
   getRowFormControlName(productMapping){

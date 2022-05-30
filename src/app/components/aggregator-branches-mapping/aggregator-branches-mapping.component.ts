@@ -144,68 +144,48 @@ export class AggregatorBranchesMappingComponent implements OnInit {
     this.spinner.show();
     this.foodicsService.getFoodicsBranches(1,2).toPromise().then((res) => {
         this.foodicsBranches = res['data'];
+        this.getGeneralSettings()
         this.mapFoodicsBranchesNames(this.foodicsBranches)
-        this.setFormControlsDefaultOptions()
       this.spinner.hide();
     }).catch(err => {
-      let message = "";
-      if (err.error){
-        message = err.error;
-      } else if (err.message){
-        message = err.message;
-      } else {
-        message = ErrorMessages.FAILED_TO_GET_CONFIG;
-      }
-
-      this.snackBar.open(message , null, {
-        duration: 3000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
+      const dialogConfig = new MatDialogConfig()
+      dialogConfig.width = '600px'
+      dialogConfig.maxWidth = '600px'
+      dialogConfig.autoFocus = true
+  
+      let dialogRef = this.dialog.open(AggregatorIntegrationErrorComponent, dialogConfig)
+  
+      dialogRef.afterClosed().subscribe((res) => {})
       this.spinner.hide();
     });
   }
 
   getGeneralSettings() {
-    let foodics_token_generated = localStorage.getItem('foodics_token_generated');
-    if(foodics_token_generated === 'true'){
       this.spinner.show();
-
       this.generalSettingsService.getGeneralSettings().then((res) => {
         this.generalSettings = res as GeneralSettings;
         this.branchMappingData = this.generalSettings.talabatConfiguration.branchMappings;
         this.fillFormControls()
-        this.fetchBranches();
+        this.setFormControlsDefaultOptions()
+        // this.fetchBranches();
         this.spinner.hide();
       }).catch(err => {
-        // let message = "";
-        // if (err.error){
-        //   message = err.error;
-        // } else if (err.message){
-        //   message = err.message;
-        // } else {
-        //   message = ErrorMessages.FAILED_TO_GET_CONFIG;
-        // }
+        let message = "";
+        if (err.error){
+          message = err.error;
+        } else if (err.message){
+          message = err.message;
+        } else {
+          message = ErrorMessages.FAILED_TO_GET_CONFIG;
+        }
   
-        // this.snackBar.open(message , null, {
-        //   duration: 3000,
-        //   horizontalPosition: 'center',
-        //   panelClass:"my-snack-bar-fail"
-        // });
-        // this.spinner.hide();
-        const dialogConfig = new MatDialogConfig()
-        dialogConfig.width = '600px'
-        dialogConfig.maxWidth = '600px'
-        dialogConfig.autoFocus = true
-    
-        let dialogRef = this.dialog.open(AggregatorIntegrationErrorComponent, dialogConfig)
-    
-        dialogRef.afterClosed().subscribe((res) => {})
+        this.snackBar.open(message , null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+        this.spinner.hide();
       });
-    }else{
-
-    }
-
   }
 
   addBranchMappingData(){
