@@ -22,6 +22,7 @@ export class AggregatorsEndPoints {
      // Foodics
     static GET_FOODICS_BRANCHES = environment.apiHost + "/aggregator/getFoodicsBranches";
     static GET_FOODICS_PRODUCTS =  environment.apiHost + "/aggregator/foodicsProducts/";
+    static GET_FOODICS_PRODUCTS_PAGINATED =  environment.apiHost + "/aggregator/foodicsProductsPaginated/";
     static GET_MAPPED_PRODUCTS =  environment.apiHost + "/aggregator/getMappedProducts/";
     static GET_UNMAPPED_PRODUCTS =  environment.apiHost + "/aggregator/getUnMappedProducts/";
     static AUTHORIZE_FOODICS_ACCOUNT = "https://console-sandbox.foodics.com/authorize";

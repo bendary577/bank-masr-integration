@@ -2,18 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
-import { GeneralSettings } from 'src/app/models/GeneralSettings';
-import { Response } from 'src/app/models/Response';
-import { AddressMapping } from 'src/app/models/deliveryAggregator/address-mapping';
-import { CustomerMapping } from 'src/app/models/deliveryAggregator/customer-mapping';
-import { DiscountMapping } from 'src/app/models/deliveryAggregator/discount-mapping';
-import { ProductMapping } from 'src/app/models/deliveryAggregator/product-mapping';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
-import { ModifierMapping } from 'src/app/models/deliveryAggregator/ModifierMapping';
 import { FoodicsServiceService } from 'src/app/services/foodics-service.service';
 import { ViewProductModifiersComponent } from '../view-product-modifiers/view-product-modifiers.component';
 import { FoodicsProductDetailsComponent } from '../foodics-product-details/foodics-product-details.component';
+import { AggregatorIntegrationErrorComponent } from '../aggregator-integration-error/aggregator-integration-error.component';
 
 @Component({
   selector: 'app-aggregator-foodics-products',
@@ -23,6 +16,16 @@ import { FoodicsProductDetailsComponent } from '../foodics-product-details/foodi
 export class AggregatorFoodicsProductsComponent implements OnInit {
 
   productsMappingData = [];
+  links = [];
+  nextLink = "";
+  prevLink = "";
+  firstLink = "";
+  lastLink = "";
+  total = 0;
+  perPage = 0;
+  curPage = 0;
+  requestAPI = "https://api-sandbox.foodics.com/v5/products?page=1";
+
   showLoading: boolean;
   message: 'No data yet';
 
@@ -34,46 +37,85 @@ export class AggregatorFoodicsProductsComponent implements OnInit {
   }
 
   getFoodicsProducts() {
-    let foodics_token_generated = localStorage.getItem('foodics_token_generated');
-    if(foodics_token_generated === 'true'){
+    // let foodics_token_generated = localStorage.getItem('foodics_token_generated');
+    // if(foodics_token_generated === 'true'){
       this.showLoading=true
       this.spinner.show();
         this.foodicsService
-        .getFoodicsProducts(1,2)
+        .getFoodicsProductsPaginated(this.requestAPI)
         .toPromise()
         .then((res) => {
-          this.productsMappingData = res['data'];
-          localStorage.setItem('foodics_products_returned', 'true');
+          this.productsMappingData = res['data']['data'];
+          this.nextLink = res['data']['links']['next'];
+          this.prevLink = res['data']['links']['prev'];
+          this.lastLink = res['data']['links']['last'];
+          this.firstLink = res['data']['links']['first'];
+          this.total = res['data']['meta']['total'];
+          this.perPage = res['data']['meta']['per_page'];
+          this.curPage = res['data']['meta']['current_page'];
+          console.log(this.prevLink)
+          this.mapPagination(this.nextLink, this.prevLink, this.lastLink, this.firstLink)
           this.showLoading=false
           this.spinner.hide();
       }).catch(err => {
-        let message = "";
-        if (err.error){
-          message = err.error;
-        } else if (err.message){
-          message = err.message;
-        } else {
-          message = ErrorMessages.FAILED_TO_GET_CONFIG;
-        }
-        this.snackBar.open(message , null, {
-          duration: 3000,
-          horizontalPosition: 'center',
-          panelClass:"my-snack-bar-fail"
-        });
-        this.showLoading=false
-        this.spinner.hide();
+        // let message = "";
+        // if (err.error){
+        //   message = err.error;
+        // } else if (err.message){
+        //   message = err.message;
+        // } else {
+        //   message = ErrorMessages.FAILED_TO_GET_CONFIG;
+        // }
+        // this.snackBar.open(message , null, {
+        //   duration: 3000,
+        //   horizontalPosition: 'center',
+        //   panelClass:"my-snack-bar-fail"
+        // });
+        // this.showLoading=false
+        // this.spinner.hide();
+        const dialogConfig = new MatDialogConfig()
+        dialogConfig.width = '600px'
+        dialogConfig.maxWidth = '600px'
+        dialogConfig.autoFocus = true
+    
+        let dialogRef = this.dialog.open(AggregatorIntegrationErrorComponent, dialogConfig)
+    
+        dialogRef.afterClosed().subscribe((res) => {})
       });
-    }else{
-      this.snackBar.open('Please finish foodics account integration step before start getting products' , null, {
-        duration: 5000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-      this.showLoading=false
-      this.spinner.hide();
+  }
+
+  mapPagination(next, prev, last, first){
+    if(this.links.length === 0){
+      if(first !== null){
+        this.links.push("first")
+      }
+      if(next !== null){
+        this.links.push("next")
+      }
+      if(prev !== null){
+        this.links.push("previous")
+      }
+      if(last !== null){
+        this.links.push("last")
+      }
+    }
+    if(this.links["previous"] === null && this.links.length !== 0){
+      this.links.push("previous")
     }
   }
 
+  onLimitChange(value) {
+    if(value==="next"){
+      this.requestAPI = this.nextLink
+    }else if(value==="previous"){
+      this.requestAPI = this.prevLink
+    }else if(value==="first"){
+      this.requestAPI = this.firstLink
+    }else if(value==="last"){
+      this.requestAPI = this.lastLink
+    }
+    this.getFoodicsProducts()
+  }
 
   viewModifiersDialog(product){
     const dialogConfig = new MatDialogConfig();

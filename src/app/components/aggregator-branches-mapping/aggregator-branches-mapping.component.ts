@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatSnackBar } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { GeneralSettings } from 'src/app/models/GeneralSettings';
@@ -13,6 +12,8 @@ import {Observable} from 'rxjs';
 import { FoodicsBranch } from 'src/app/models/deliveryAggregator/foodics-branch';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
+import { AggregatorIntegrationErrorComponent } from '../aggregator-integration-error/aggregator-integration-error.component';
+import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-aggregator-branches-mapping',
@@ -57,11 +58,13 @@ export class AggregatorBranchesMappingComponent implements OnInit {
   }
 
   private _filter(value: string): string[] {
+    console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ filter")
     const filterValue = value.toLowerCase();
     return this.foodicsBranchesNames.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   private setFormControlsDefaultOptions() {
+    console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
     this.branchMappingData.forEach((branchMapping) => {
         let branchName = this.returnFoodicsBranchNameById(branchMapping.foodIcsBranchId)
         let controlName = this.getRowFormControlName(branchMapping)
@@ -83,6 +86,7 @@ export class AggregatorBranchesMappingComponent implements OnInit {
   private returnFoodicsBranchNameById(foodicsId){
     for(let i=0; i < this.foodicsBranches.length; i++){
       if(this.foodicsBranches[i].id === foodicsId){
+        console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& filter"  + this.foodicsBranches[i].name)
         return this.foodicsBranches[i].name
       }
     }
@@ -135,47 +139,6 @@ export class AggregatorBranchesMappingComponent implements OnInit {
     });
   }
 
-  getGeneralSettings() {
-    this.spinner.show();
-
-    this.generalSettingsService.getGeneralSettings().then((res) => {
-      this.generalSettings = res as GeneralSettings;
-      this.branchMappingData = this.generalSettings.talabatConfiguration.branchMappings;
-      this.fetchBranches();
-      this.spinner.hide();
-    }).catch(err => {
-      let message = "";
-      if (err.error){
-        message = err.error;
-      } else if (err.message){
-        message = err.message;
-      } else {
-        message = ErrorMessages.FAILED_TO_GET_CONFIG;
-      }
-
-      this.snackBar.open(message , null, {
-        duration: 3000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-      this.spinner.hide();
-    });
-  }
-
-  addBranchMappingData(){
-    if(this.newBranchMapping.name &&  this.newBranchMapping.foodIcsBranchId && this.newBranchMapping.talabatBranchId){
-      this.branchMappingData.push(this.newBranchMapping);
-      this.newBranchMapping = new BranchMapping();
-
-      this.branchMappingData = [...this.branchMappingData];
-    }else {
-      this.snackBar.open('Please fill all type fields.', null, {
-        duration: 2000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-    }
-  }
 
   fetchBranches(){
     this.spinner.show();
@@ -201,6 +164,63 @@ export class AggregatorBranchesMappingComponent implements OnInit {
       });
       this.spinner.hide();
     });
+  }
+
+  getGeneralSettings() {
+    let foodics_token_generated = localStorage.getItem('foodics_token_generated');
+    if(foodics_token_generated === 'true'){
+      this.spinner.show();
+
+      this.generalSettingsService.getGeneralSettings().then((res) => {
+        this.generalSettings = res as GeneralSettings;
+        this.branchMappingData = this.generalSettings.talabatConfiguration.branchMappings;
+        this.fillFormControls()
+        this.fetchBranches();
+        this.spinner.hide();
+      }).catch(err => {
+        // let message = "";
+        // if (err.error){
+        //   message = err.error;
+        // } else if (err.message){
+        //   message = err.message;
+        // } else {
+        //   message = ErrorMessages.FAILED_TO_GET_CONFIG;
+        // }
+  
+        // this.snackBar.open(message , null, {
+        //   duration: 3000,
+        //   horizontalPosition: 'center',
+        //   panelClass:"my-snack-bar-fail"
+        // });
+        // this.spinner.hide();
+        const dialogConfig = new MatDialogConfig()
+        dialogConfig.width = '600px'
+        dialogConfig.maxWidth = '600px'
+        dialogConfig.autoFocus = true
+    
+        let dialogRef = this.dialog.open(AggregatorIntegrationErrorComponent, dialogConfig)
+    
+        dialogRef.afterClosed().subscribe((res) => {})
+      });
+    }else{
+
+    }
+
+  }
+
+  addBranchMappingData(){
+    if(this.newBranchMapping.name &&  this.newBranchMapping.foodIcsBranchId && this.newBranchMapping.talabatBranchId){
+      this.branchMappingData.push(this.newBranchMapping);
+      this.newBranchMapping = new BranchMapping();
+
+      this.branchMappingData = [...this.branchMappingData];
+    }else {
+      this.snackBar.open('Please fill all type fields.', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+    }
   }
 
   onSaveClick(){
