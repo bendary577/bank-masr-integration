@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material'
 import { Constants } from 'src/app/models/constants'
 import { ErrorMessages } from 'src/app/models/ErrorMessages'
@@ -16,14 +16,14 @@ import { SideNaveComponent } from '../side-nave/side-nave.component'
   styleUrls: ['./canteen-activities-component.component.scss']
 })
 export class CanteenActivitiesComponentComponent implements OnInit {
+  @Input() groups;
 
- filterBy = 'Daily'
+  filterBy = 'Daily'
   imagePath = './src/assets/user.png'
 
   totalSpendLoading = true;
   totalSpendM: any
   users = []
-  groups = []
   topGroups = []
   topRevenueCenters = []
   guests = []
@@ -81,7 +81,7 @@ export class CanteenActivitiesComponentComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getGroups()
+    // this.getGroups()
     this.getTopUsers()
     this.getTopGroups()
     this.totalSpend('Today')

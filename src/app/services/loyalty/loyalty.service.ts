@@ -47,10 +47,10 @@ export class LoyaltyService {
     )
   }
 
-  countUsers() {
+  countUsers(groupId) {
     this.token = localStorage.getItem('auth_token')
     return this.http.get(
-      Constants.GET_USERS_COUNT_URL,
+      Constants.GET_USERS_COUNT_URL+'?group=' + groupId ,
       { headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }) },
     )
   }
@@ -121,10 +121,10 @@ export class LoyaltyService {
     })
   }
 
-  getAppUsersPaginated(pageNumber, limit) {
+  getAppUsersPaginated(group, pageNumber, limit) {
     this.token = localStorage.getItem('auth_token')
     return this.http.get(
-      Constants.GET_APP_USERS_PAGINATED_URL+'?pageNumber='+pageNumber+'&limit='+limit,
+      Constants.GET_APP_USERS_PAGINATED_URL+'?group=' + group + '&pageNumber='+pageNumber+'&limit='+limit,
        {
       headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }),
     })

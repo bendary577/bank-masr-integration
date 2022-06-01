@@ -126,11 +126,16 @@ export class ManageUsersComponent implements OnInit {
     this.router.navigate(['entrySystem/' + Constants.USER_PROFILE])
   }
 
+  getUsersFiltered(){
+    this.usersList.pageNumber = 1;
+    this.getUsers();
+  }
+
   getUsers() {
     this.getUsersCount()
     this.usersList.showLoading = true
     this.loyaltyService
-      .getAppUsersPaginated(this.usersList.pageNumber, this.usersList.limit)
+      .getAppUsersPaginated(this.selectedGroupId, this.usersList.pageNumber, this.usersList.limit)
       .toPromise()
       .then((res: any) => {
         this.usersList.usersData = res
@@ -144,7 +149,7 @@ export class ManageUsersComponent implements OnInit {
 
   getUsersCount() {
     this.loyaltyService
-      .countUsers()
+      .countUsers(this.selectedGroupId)
       .toPromise()
       .then((res: any) => {
         this.usersList.usersCount = res
