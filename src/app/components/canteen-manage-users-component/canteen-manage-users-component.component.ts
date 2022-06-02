@@ -5,7 +5,6 @@ import { ApplicationUser } from 'src/app/models/loyalty/ApplicationUser'
 import { LoyaltyService } from 'src/app/services/loyalty/loyalty.service'
 import { AddAppUserComponent } from '../../components/add-app-user/add-app-user.component'
 import { Group } from 'src/app/models/loyalty/Group'
-import { Location } from '@angular/common'
 import { Router } from '@angular/router'
 import { Data } from 'src/app/models/data'
 import { Constants } from 'src/app/models/constants'
@@ -29,9 +28,6 @@ export class CanteenManageUsersComponentComponent implements OnInit {
   updatedUser: ApplicationUser = new ApplicationUser()
   role = true
 
-  styleProps = { 'background-color': '#e07d93' }
-  styleProps2 = { 'background-color': '#ffb560' }
-
   noFilter = true
   selectedGuest = ''
   guestNames = []
@@ -40,14 +36,12 @@ export class CanteenManageUsersComponentComponent implements OnInit {
   cardNumber = 0
   accompanied = 2
   selectedGroupId = ''
-  selectedRevenue = ''
   selectedGuestName = ''
   selectedCardNum = ''
   selectedCardStatues = ''
   statues = ['Active', 'Expired', 'Deleted']
   fromDate = ''
   toDate = ''
-  isEntrySys = true
   getActiveGuestsOnly = false
   selected = 'User Status Filter'
 
@@ -57,7 +51,7 @@ export class CanteenManageUsersComponentComponent implements OnInit {
     messages: {
       emptyMessage: `
     <div style="text-align: center;">
-      <p class="user-name">No users have been created yet</p>
+      <p class="user-name">No employees have been created yet</p>
     </div>
   `,
     },
@@ -137,7 +131,9 @@ export class CanteenManageUsersComponentComponent implements OnInit {
     this.getUsersCount()
     this.usersList.showLoading = true
     this.loyaltyService
-      .getAppUsersPaginated(this.selectedGroupId, this.usersList.pageNumber, this.usersList.limit)
+      .getAppUsersPaginated(this.selectedGroupId, 
+        this.selectedGuestName, this.selectedCardNum,
+        this.usersList.pageNumber, this.usersList.limit)
       .toPromise()
       .then((res: any) => {
         this.usersList.usersData = res
@@ -151,7 +147,7 @@ export class CanteenManageUsersComponentComponent implements OnInit {
 
   getUsersCount() {
     this.loyaltyService
-      .countUsers(this.selectedGroupId)
+      .countUsers(this.selectedGroupId, this.selectedGuestName, this.selectedCardNum)
       .toPromise()
       .then((res: any) => {
         this.usersList.usersCount = res
@@ -677,9 +673,6 @@ export class CanteenManageUsersComponentComponent implements OnInit {
       if (!usersList.deleted) {
         return true
       }
-      // if(usersList.group.deleted){
-      //   return true;
-      // }
       return false
     }
   }
@@ -813,7 +806,6 @@ export class CanteenManageUsersComponentComponent implements OnInit {
 
   resetFilter() {
     this.selectedGroupId = ''
-    this.selectedRevenue = ''
     this.selectedGuestName = ''
     this.selectedCardNum = ''
     this.selectedCardStatues = ''

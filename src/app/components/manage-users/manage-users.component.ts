@@ -135,7 +135,9 @@ export class ManageUsersComponent implements OnInit {
     this.getUsersCount()
     this.usersList.showLoading = true
     this.loyaltyService
-      .getAppUsersPaginated(this.selectedGroupId, this.usersList.pageNumber, this.usersList.limit)
+      .getAppUsersPaginated(this.selectedGroupId, 
+        this.selectedGuestName, this.selectedCardNum,
+        this.usersList.pageNumber, this.usersList.limit)
       .toPromise()
       .then((res: any) => {
         this.usersList.usersData = res
@@ -149,7 +151,7 @@ export class ManageUsersComponent implements OnInit {
 
   getUsersCount() {
     this.loyaltyService
-      .countUsers(this.selectedGroupId)
+      .countUsers(this.selectedGroupId, this.selectedGuestName, this.selectedCardNum)
       .toPromise()
       .then((res: any) => {
         this.usersList.usersCount = res
