@@ -1,3 +1,12 @@
 @import "../../../assets/scss/syncs.scss";
 @import "../../components/operations/opera-payments/opera-payments.component.scss";
 @import "../../components/setting/pos-machine-mapping/pos-machine-mapping.component.scss";
+
+
+.getbutton{
+    float: right;
+    height: 30px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 35%) !important;
+    width:180px;
+}

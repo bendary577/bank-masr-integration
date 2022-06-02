@@ -55,4 +55,10 @@ export class TalabatService {
        { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
+  authenticateTalabat(body) {
+    this.token = localStorage.getItem('auth_token');
+    return this.http.post(AggregatorsEndPoints.AUTHENTICATE_TALABAT, body ,
+       { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
 }

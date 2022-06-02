@@ -9,14 +9,14 @@
 
         
         <div class="container">
-            <button mat-flat-button (click)="getFoodicsProducts()" style="min-width: 125px;" class="filterButton addButton">Fetch Products</button>
+            <button mat-flat-button (click)="getFoodicsProducts()" style="min-width: 125px;" class="getbutton filterButton addButton">Get Foodics Products</button>
         </div>
  
         <ngx-datatable class="material" [loadingIndicator]="showLoading"
              [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50"
             [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
             [rows]="productsMappingData" [selectAllRowsOnPage]="false" [scrollbarH]="true">
-
+          
             <ngx-datatable-column name="Product">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     <a *ngIf="row.image && row.image != ''" (click)="viewProductDetails(row)" class="sidebar-brand brand-logo"><img style="border-radius: 50%; width: 40px;height: 40px;" src={{row.image}} alt="product_avatar" /></a>
@@ -63,6 +63,10 @@
                 <ng-template
                   ngx-datatable-footer-template
                   let-curPage="curPage"
+                  let-rowCount="rowCount"
+                  let-selectedCount="selectedCount"
+                  let-offset="offset"
+                  let-isVisible="isVisible"
                 >
                   <div class="page-count">
                     Showing {{ perPage }} of
@@ -86,6 +90,7 @@
                     [pagerRightArrowIcon]="'datatable-icon-right'"
                     [pagerPreviousIcon]="'datatable-icon-prev'"
                     [pagerNextIcon]="'datatable-icon-skip'"
+                    [page]="general"
                     [size]="total"
                     [count]="perPage"
                     (change)="getFoodicsProducts()"

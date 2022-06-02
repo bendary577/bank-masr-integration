@@ -55,10 +55,7 @@ export class TalabatUnmappedProductsComponent implements OnInit {
     , private talabatService: TalabatService,private foodicsService: FoodicsServiceService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    // this.getGeneralSettings();
-    // this.getProductsMapping();
-    // this.getMappedProductsMapping();
-    // this.getFoodicsProducts();
+    this.getGeneralSettings();
   }
 
   fillFormControls(){
@@ -84,13 +81,15 @@ export class TalabatUnmappedProductsComponent implements OnInit {
 
     this.generalSettingsService.getGeneralSettings().then((res) => {
       this.generalSettings = res as GeneralSettings;
-      // this.productsMappingData = this.generalSettings.talabatConfiguration.productsMappings;
+      this.productsMappingData = this.generalSettings.talabatConfiguration.unMappedProductsMappings;
+      this.mappedProductsMappingData = this.generalSettings.talabatConfiguration.productsMappings;
       this.modifierOptionsMappingData = this.generalSettings.talabatConfiguration.modifierMappings;
 
       if(this.modifierOptionsMappingData == undefined){
         this.modifierOptionsMappingData = [];
       }
-
+      this.mapFoodicsProductsNames(this.foodicsProducts);
+      this.fillFormControls()
       this.spinner.hide();
     }).catch(err => {
       let message = "";
@@ -111,81 +110,80 @@ export class TalabatUnmappedProductsComponent implements OnInit {
     });
   }
 
-  getProductsMapping() {
-    this.spinner.show();
-      this.foodicsService
-      .getUnMappedProducts()
-      .toPromise()
-      .then((res) => {
-        this.productsMappingData = res['data'];
-        this.fillFormControls()
-        this.spinner.hide();
-    }).catch(err => {
-      let message = "";
-      if (err.error){
-        message = err.error;
-      } else if (err.message){
-        message = err.message;
-      } else {
-        message = ErrorMessages.FAILED_TO_GET_CONFIG;
-      }
-      this.snackBar.open(message , null, {
-        duration: 3000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-      this.spinner.hide();
-    });
-  }
+  // getProductsMapping() {
+  //   this.spinner.show();
+  //     this.foodicsService
+  //     .getUnMappedProducts()
+  //     .toPromise()
+  //     .then((res) => {
+  //       this.productsMappingData = res['data'];
+  //       this.fillFormControls()
+  //       this.spinner.hide();
+  //   }).catch(err => {
+  //     let message = "";
+  //     if (err.error){
+  //       message = err.error;
+  //     } else if (err.message){
+  //       message = err.message;
+  //     } else {
+  //       message = ErrorMessages.FAILED_TO_GET_CONFIG;
+  //     }
+  //     this.snackBar.open(message , null, {
+  //       duration: 3000,
+  //       horizontalPosition: 'center',
+  //       panelClass:"my-snack-bar-fail"
+  //     });
+  //     this.spinner.hide();
+  //   });
+  // }
 
-  getMappedProductsMapping() {
-    this.spinner.show();
-      this.foodicsService
-      .getMappedProducts()
-      .toPromise()
-      .then((res) => {
-        this.mappedProductsMappingData = res['data'];
-        this.spinner.hide();
-    }).catch(err => {
-      let message = "";
-      if (err.error){
-        message = err.error;
-      } else if (err.message){
-        message = err.message;
-      } else {
-        message = ErrorMessages.FAILED_TO_GET_CONFIG;
-      }
-      this.snackBar.open(message , null, {
-        duration: 3000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
-      this.spinner.hide();
-    });
-  }
+  // getMappedProductsMapping() {
+  //   this.spinner.show();
+  //     this.foodicsService
+  //     .getMappedProducts()
+  //     .toPromise()
+  //     .then((res) => {
+  //       this.mappedProductsMappingData = res['data'];
+  //       this.spinner.hide();
+  //   }).catch(err => {
+  //     let message = "";
+  //     if (err.error){
+  //       message = err.error;
+  //     } else if (err.message){
+  //       message = err.message;
+  //     } else {
+  //       message = ErrorMessages.FAILED_TO_GET_CONFIG;
+  //     }
+  //     this.snackBar.open(message , null, {
+  //       duration: 3000,
+  //       horizontalPosition: 'center',
+  //       panelClass:"my-snack-bar-fail"
+  //     });
+  //     this.spinner.hide();
+  //   });
+  // }
 
-  getFoodicsProducts() {
-    this.spinner.show();
-      this.foodicsService
-      .getFoodicsProducts(1,2)
-      .toPromise()
-      .then((res) => {
-        this.foodicsProducts = res['data']['data'];
-        this.init();
-        this.mapFoodicsProductsNames(this.foodicsProducts)
-        this.spinner.hide();
-    }).catch(err => {
-      const dialogConfig = new MatDialogConfig()
-      dialogConfig.width = '600px'
-      dialogConfig.maxWidth = '600px'
-      dialogConfig.autoFocus = true
+  // getFoodicsProducts() {
+  //   this.spinner.show();
+  //     this.foodicsService
+  //     .getFoodicsProducts(1,2)
+  //     .toPromise()
+  //     .then((res) => {
+  //       this.foodicsProducts = res['data']['data'];
+
+  //       this.spinner.hide();
+  //   }).catch(err => {
+  //     const dialogConfig = new MatDialogConfig()
+  //     dialogConfig.width = '600px'
+  //     dialogConfig.maxWidth = '600px'
+  //     dialogConfig.autoFocus = true
   
-      let dialogRef = this.dialog.open(AggregatorIntegrationErrorComponent, dialogConfig)
+  //     let dialogRef = this.dialog.open(AggregatorIntegrationErrorComponent, dialogConfig)
   
-      dialogRef.afterClosed().subscribe((res) => {})
-      this.spinner.hide();
-    });
-  }
+  //     dialogRef.afterClosed().subscribe((res) => {})
+  //     this.spinner.hide();
+  //   });
+  // }
 
   getRowFormControlName(productMapping){
     //remove spaces from product mapping name
@@ -234,12 +232,12 @@ export class TalabatUnmappedProductsComponent implements OnInit {
     });
   }
 
-  init(){
-    this.getGeneralSettings();
-    this.getProductsMapping();
-    this.getMappedProductsMapping();
-    this.fetchProducts();
-  }
+  // init(){
+  //   this.getGeneralSettings();
+  //   this.getProductsMapping();
+  //   this.getMappedProductsMapping();
+  //   this.fetchProducts();
+  // }
 
   fetchProducts(){
     this.spinner.show();

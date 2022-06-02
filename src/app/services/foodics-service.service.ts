@@ -55,4 +55,10 @@ export class FoodicsServiceService {
        { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
+  saveUpdatesEmail(body){
+    this.token = localStorage.getItem('auth_token');
+    return this.http.post(AggregatorsEndPoints.SAVE_UPDATES_EMAIL,body,
+       { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
+  }
+
 }
