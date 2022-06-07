@@ -51,6 +51,14 @@
                         Enable accumulated remaining balance
                     </mat-checkbox>
                 </div>
+
+                <div>
+                    <mat-checkbox class="example-margin"  
+                        name="includeFees"
+                        [(ngModel)]="this.data.group.canteenConfiguration.includeFees">
+                        Include service charges and taxes in the employee's payment.
+                    </mat-checkbox>
+                </div>
             </form>
         </div>
     </div>

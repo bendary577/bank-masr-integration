@@ -8,25 +8,9 @@
         </mat-expansion-panel-header>
 
         <div class="container">
-            <form class="my-form">
+            <form class="my-form" >
                 <div>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="name" name="name"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Product Name"
-                            [(ngModel)]="newProductMapping.name">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="port" name="port"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Product Talabat Id"
-                            [(ngModel)]="newProductMapping.talabatProductId">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="ip" name="ip"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Product FoodIcs Id"
-                            [(ngModel)]="newProductMapping.foodIcsProductId">
-                    </mat-form-field>
-                    <button mat-flat-button (click)="fetchProducts()" style="min-width: 125px;" class="filterButton addButton">Fetch Products</button>
-                    <button mat-flat-button (click)="addProductsMappingData()" class="filterButton addButton">Add</button>
+                    <button mat-flat-button (click)="getFoodicsProducts()" style="min-width: 125px;" class="filterButton addButton">Fetch Products</button>
                 </div>
             </form>
         </div>

@@ -126,11 +126,18 @@ export class ManageUsersComponent implements OnInit {
     this.router.navigate(['entrySystem/' + Constants.USER_PROFILE])
   }
 
+  getUsersFiltered(){
+    this.usersList.pageNumber = 1;
+    this.getUsers();
+  }
+
   getUsers() {
     this.getUsersCount()
     this.usersList.showLoading = true
     this.loyaltyService
-      .getAppUsersPaginated(this.usersList.pageNumber, this.usersList.limit)
+      .getAppUsersPaginated(this.selectedGroupId, 
+        this.selectedGuestName, this.selectedCardNum,
+        this.usersList.pageNumber, this.usersList.limit)
       .toPromise()
       .then((res: any) => {
         this.usersList.usersData = res
@@ -144,7 +151,7 @@ export class ManageUsersComponent implements OnInit {
 
   getUsersCount() {
     this.loyaltyService
-      .countUsers()
+      .countUsers(this.selectedGroupId, this.selectedGuestName, this.selectedCardNum)
       .toPromise()
       .then((res: any) => {
         this.usersList.usersCount = res
@@ -841,7 +848,7 @@ export class ManageUsersComponent implements OnInit {
 
   getWalletsTotalRemaining() {
     this.walletsRemainingTotal.showLoading = true
-    this.spinner.show()
+    // this.spinner.show()
     this.loyaltyService
       .getWalletsTotalRemaining(
         this.fromDate,
@@ -852,11 +859,11 @@ export class ManageUsersComponent implements OnInit {
       .then((res: any) => {
         this.walletsRemainingTotalValue = res.data
         this.walletsRemainingTotal.showLoading = false
-        this.spinner.hide()
+        // this.spinner.hide()
       })
       .catch((err) => {
         this.walletsRemainingTotal.showLoading = false
-        this.spinner.hide()
+        // this.spinner.hide()
       })
   }
 

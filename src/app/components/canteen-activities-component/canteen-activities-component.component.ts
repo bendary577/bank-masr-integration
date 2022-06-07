@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material'
 import { Constants } from 'src/app/models/constants'
 import { ErrorMessages } from 'src/app/models/ErrorMessages'
@@ -16,14 +16,14 @@ import { SideNaveComponent } from '../side-nave/side-nave.component'
   styleUrls: ['./canteen-activities-component.component.scss']
 })
 export class CanteenActivitiesComponentComponent implements OnInit {
+  @Input() groups;
 
- filterBy = 'Daily'
+  filterBy = 'Daily'
   imagePath = './src/assets/user.png'
 
   totalSpendLoading = true;
   totalSpendM: any
   users = []
-  groups = []
   topGroups = []
   topRevenueCenters = []
   guests = []
@@ -81,6 +81,7 @@ export class CanteenActivitiesComponentComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // this.getGroups()
     this.getTopUsers()
     this.getTopGroups()
     this.totalSpend('Today')
@@ -271,8 +272,35 @@ export class CanteenActivitiesComponentComponent implements OnInit {
       .getTopGroups()
       .toPromise()
       .then((res: any) => {
-        this.groups = res
+        this.topGroups = res
         this.topGroups = this.groups.slice(0, 3)
+      })
+      .catch((err) => {
+        let message = ''
+        if (err.status === 401) {
+          message = ErrorMessages.SESSION_EXPIRED
+          this.sidNav.Logout()
+        } else if (err.error.message) {
+          message = err.error.message
+        } else if (err.message) {
+          message = err.message
+        } else {
+          message = ErrorMessages.FAILED_TO_SAVE_CONFIG
+        }
+        this.snackBar.open(message, null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass: 'my-snack-bar-fail',
+        })
+      })
+  }
+
+  getGroups() {
+    this.loyaltyService
+      .getAppGroups(true, "",2)
+      .toPromise()
+      .then((res: any) => {
+        this.groups = res
       })
       .catch((err) => {
         let message = ''
@@ -408,25 +436,6 @@ export class CanteenActivitiesComponentComponent implements OnInit {
         s.revenueCentreName.includes(this.selectedRevenue),
       )
       this.transactionList.transactionData = result
-    }
-
-    if (this.selectedCardStatues != '') {
-      if (this.selectedCardStatues == 'Deleted') {
-        const result = transactions.filter((s) => {
-          return s.user.deleted == 1
-        })
-        this.transactionList.transactionData = result
-      } else if (this.selectedCardStatues == 'Active') {
-        const result = transactions.filter((s) => {
-          return s.user.deleted == 0
-        })
-        this.transactionList.transactionData = result
-      } else if (this.selectedCardStatues == 'Expired') {
-        const result = transactions.filter((s) => {
-          return s.user.expire == 0
-        })
-        this.transactionList.transactionData = result
-      }
     }
 
     if (

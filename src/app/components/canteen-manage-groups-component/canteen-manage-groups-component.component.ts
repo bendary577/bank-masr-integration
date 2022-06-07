@@ -339,8 +339,7 @@ export class CanteenManageGroupsComponentComponent implements OnInit {
 
   openCanteenConfigurations(group) {
     const dialogConfig = new MatDialogConfig()
-    dialogConfig.width = '420px'
-    dialogConfig.maxWidth = '420px'
+    dialogConfig.width = 'fit-content'
     dialogConfig.autoFocus = true
     dialogConfig.data = {group : group}
 

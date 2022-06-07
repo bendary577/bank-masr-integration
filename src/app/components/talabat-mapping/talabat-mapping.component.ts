@@ -18,6 +18,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { FoodicsProduct } from 'src/app/models/deliveryAggregator/foodics-product';
+import { AggregatorIntegrationErrorComponent } from '../aggregator-integration-error/aggregator-integration-error.component';
 
 @Component({
   selector: 'app-talabat-mapping',
@@ -57,10 +58,14 @@ export class TalabatMappingComponent implements OnInit {
     , private talabatService: TalabatService,private foodicsService: FoodicsServiceService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+
+  }
+
+  init(){
     this.getGeneralSettings();
     this.getProductsMapping();
     this.getUnmappedProductsMapping();
-    this.getFoodicsProducts();
+    this.fetchProducts();
   }
 
   fillFormControls(){
@@ -143,6 +148,7 @@ export class TalabatMappingComponent implements OnInit {
       .then((res) => {
         this.productsMappingData = res['data'];
         this.fillFormControls()
+        this.setFormControlsDefaultOptions()
         this.spinner.hide();
     }).catch(err => {
       let message = "";
@@ -194,24 +200,33 @@ export class TalabatMappingComponent implements OnInit {
       .getFoodicsProducts(1,2)
       .toPromise()
       .then((res) => {
-        this.foodicsProducts = res['data'];
+        this.foodicsProducts = res['data']['data'];
+        this.init();
         this.mapFoodicsProductsNames(this.foodicsProducts)
-        this.setFormControlsDefaultOptions()
         this.spinner.hide();
     }).catch(err => {
-      let message = "";
-      if (err.error){
-        message = err.error;
-      } else if (err.message){
-        message = err.message;
-      } else {
-        message = ErrorMessages.FAILED_TO_GET_CONFIG;
-      }
-      this.snackBar.open(message , null, {
-        duration: 3000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
-      });
+      // let message = "";
+      // if (err.error){
+      //   message = err.error;
+      // } else if (err.message){
+      //   message = err.message;
+      // } else {
+      //   message = ErrorMessages.FAILED_TO_GET_CONFIG;
+      // }
+      // this.snackBar.open(message , null, {
+      //   duration: 3000,
+      //   horizontalPosition: 'center',
+      //   panelClass:"my-snack-bar-fail"
+      // });
+      // this.spinner.hide();
+      const dialogConfig = new MatDialogConfig()
+      dialogConfig.width = '600px'
+      dialogConfig.maxWidth = '600px'
+      dialogConfig.autoFocus = true
+  
+      let dialogRef = this.dialog.open(AggregatorIntegrationErrorComponent, dialogConfig)
+  
+      dialogRef.afterClosed().subscribe((res) => {})
       this.spinner.hide();
     });
   }
@@ -249,28 +264,26 @@ export class TalabatMappingComponent implements OnInit {
   }
 
   fetchProducts(){
-    this.spinner.show();
-
-    this.talabatService.getTalabatMenuItems().toPromise().then((res) => {
-
-      this.spinner.hide();
-    }).catch(err => {
-      let message = "";
-      if (err.error){
-        message = err.error;
-      } else if (err.message){
-        message = err.message;
-      } else {
-        message = ErrorMessages.FAILED_TO_GET_CONFIG;
-      }
-
-      this.snackBar.open(message , null, {
-        duration: 3000,
-        horizontalPosition: 'center',
-        panelClass:"my-snack-bar-fail"
+      this.spinner.show();
+      this.talabatService.getTalabatMenuItems().toPromise().then((res) => {
+        this.spinner.hide();
+      }).catch(err => {
+        let message = "";
+        if (err.error){
+          message = err.error;
+        } else if (err.message){
+          message = err.message;
+        } else {
+          message = ErrorMessages.FAILED_TO_GET_CONFIG;
+        }
+        this.snackBar.open(message , null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
+        this.showLoading=false
+        this.spinner.hide();
       });
-      this.spinner.hide();
-    });
   }
 
   getRowFormControlName(productMapping){

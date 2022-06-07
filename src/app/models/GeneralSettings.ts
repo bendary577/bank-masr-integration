@@ -43,7 +43,8 @@ export class GeneralSettings {
 
   // ==> Simphony Variables
   discountRates: Array<SimphonyDiscount> | any
-
+  discountAppliedAfterFess: boolean
+  
   // ==> Delivery Aggregators
   aggregatorConfiguration: AggregatorConfiguration
 

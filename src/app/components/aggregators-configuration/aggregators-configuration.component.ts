@@ -5,6 +5,7 @@ import { GeneralSettingsService } from 'src/app/services/generalSettings/general
 import { FoodicsServiceService } from 'src/app/services/foodics-service.service';
 import { GenerateFoodicsAccessTokenComponent } from '../generate-foodics-access-token/generate-foodics-access-token.component';
 import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material'
+import { FoodicsAuthInstructionsComponent } from '../foodics-auth-instructions/foodics-auth-instructions.component';
 
 @Component({
   selector: 'app-aggregators-configuration',
@@ -36,7 +37,9 @@ export class AggregatorsConfigurationComponent implements OnInit {
   constructor(public dialog: MatDialog, public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService, private foodicsService : FoodicsServiceService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // this.openInstructionsDialog()
+  }
 
   clientIdInputClick() {
     this.clientSecretMessage = ''
@@ -144,6 +147,7 @@ export class AggregatorsConfigurationComponent implements OnInit {
       .toPromise()
       .then((res) => {
         this.foodicsAccessToken = res['data'].access_token
+        localStorage.setItem('foodics_token_generated', 'true');
         // this.snackBar.open("Foodics account access token was generated successfully" , null, {
         //   duration: 3000,
         //   horizontalPosition: 'center',
@@ -207,6 +211,27 @@ export class AggregatorsConfigurationComponent implements OnInit {
       '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
     return !!pattern.test(str);
   }
+
+
+  openInstructionsDialog(){
+    const dialogConfig = new MatDialogConfig()
+    // dialogConfig.width = '420px'
+    // dialogConfig.maxWidth = '420px'
+    dialogConfig.autoFocus = true
+    // dialogConfig.data = {token : this.foodicsAccessToken}
+
+    let dialogRef = this.dialog.open(FoodicsAuthInstructionsComponent, dialogConfig)
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.clientId = res.clientId
+        this.clientSecret = res.clientSecret
+        this.redirect_url = res.redirect_url
+      }
+    })
+  }
+
+
 
   // onSaveClick(){
   //   this.spinner.show();

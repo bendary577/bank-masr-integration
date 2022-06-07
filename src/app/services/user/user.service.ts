@@ -30,10 +30,10 @@ export class UserService {
 
   // ==> Web Service Invokers 
 
-  addInvokerUser(user, syncJobTypeID: string) {
+  addInvokerUser(user) {
     this.token = localStorage.getItem('auth_token')
     return this.http.post(
-      Constants.ADD_INVOKER_USER + '?syncJobTypeId=' + syncJobTypeID,
+      Constants.ADD_INVOKER_USER,
       user,
       { headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token }) },
     )
