@@ -37,7 +37,8 @@ export class AggregatorBranchesMappingComponent implements OnInit {
   myControl = new FormControl();
   filteredOptions: Observable<string[]>;
   tableForm = new FormGroup({});
-
+  integrationComplete = false;
+  
   constructor(public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService, private authService: AuthService
     , private talabatService: TalabatService, private foodicsService : FoodicsServiceService, public dialog: MatDialog) { }
@@ -162,13 +163,16 @@ export class AggregatorBranchesMappingComponent implements OnInit {
       this.spinner.show();
       this.generalSettingsService.getGeneralSettings().then((res) => {
         this.generalSettings = res as GeneralSettings;
-        this.branchMappingData = this.generalSettings.talabatConfiguration.branchMappings;
-        this.foodicsBranches = this.generalSettings.talabatConfiguration.foodicsDropDownBranches;
-        console.log("branches size" + this.foodicsBranches.length)
-        this.mapFoodicsBranchesNames(this.foodicsBranches)
-        this.fillFormControls()
-        this.setFormControlsDefaultOptions()
-        this.spinner.hide();
+        if(this.generalSettings.talabatConfiguration.integrationStatus){
+          this.integrationComplete = true
+          this.branchMappingData = this.generalSettings.talabatConfiguration.branchMappings;
+          this.foodicsBranches = this.generalSettings.talabatConfiguration.foodicsDropDownBranches;
+          // console.log("branches size" + this.foodicsBranches.length)
+          this.mapFoodicsBranchesNames(this.foodicsBranches)
+          this.fillFormControls()
+          this.setFormControlsDefaultOptions()
+          this.spinner.hide();
+        }
         this.showLoading=false;
       }).catch(err => {
         let message = "";
