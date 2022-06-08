@@ -19,6 +19,7 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { FoodicsProduct } from 'src/app/models/deliveryAggregator/foodics-product';
 import { AggregatorIntegrationErrorComponent } from '../aggregator-integration-error/aggregator-integration-error.component';
+import { FoodicsModifier } from 'src/app/models/deliveryAggregator/foodics-modifier';
 
 @Component({
   selector: 'app-products-needs-attention',
@@ -47,6 +48,7 @@ export class ProductsNeedsAttentionComponent implements OnInit {
 
   generalSettings: GeneralSettings = new GeneralSettings();
 
+  foodicsModifiers  : FoodicsModifier[] = [];
   foodicsProducts  : FoodicsProduct[] = [];
   foodicsProductsNames = [];
   myControl = new FormControl();
@@ -54,6 +56,7 @@ export class ProductsNeedsAttentionComponent implements OnInit {
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
   tableForm = new FormGroup({});
+  integrationComplete=false;
 
   constructor(public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService, private authService: AuthService
@@ -80,7 +83,6 @@ export class ProductsNeedsAttentionComponent implements OnInit {
   }
 
   private setFormControlsDefaultOptions() {
-    console.log("********************************")
     this.productsMappingData.forEach((productMapping) => {
         let productName = this.returnFoodicsProductNameById(productMapping.foodIcsProductId)
         let controlName = this.getRowFormControlName(productMapping)
@@ -105,16 +107,16 @@ export class ProductsNeedsAttentionComponent implements OnInit {
     this.spinner.show();
     this.generalSettingsService.getGeneralSettings().then((res) => {
       this.generalSettings = res as GeneralSettings;
-      this.productsMappingNeedsAttention = this.generalSettings.talabatConfiguration.productsMappingNeedsAttention;
-      this.modifierOptionsMappingData = this.generalSettings.talabatConfiguration.modifierMappings;
-      this.customerMappingData = this.generalSettings.talabatConfiguration.customerMappings;
-      this.addressMappingData = this.generalSettings.talabatConfiguration.addressMappings;
-      this.discountMappingData = this.generalSettings.talabatConfiguration.discountMappings;
-
-      if(this.modifierOptionsMappingData == undefined){
-        this.modifierOptionsMappingData = [];
+      if(this.generalSettings.talabatConfiguration.integrationStatus){
+        this.integrationComplete=true;
+        this.productsMappingNeedsAttention = this.generalSettings.talabatConfiguration.productsMappingNeedsAttention;
+        this.modifierOptionsMappingData = this.generalSettings.talabatConfiguration.modifierMappings;
+        this.foodicsProducts = this.generalSettings.aggregatorConfiguration.foodicsDropDownProducts;
+        this.foodicsModifiers = this.generalSettings.aggregatorConfiguration.foodicsDropDownModifiers;
+        if(this.modifierOptionsMappingData == undefined){
+          this.modifierOptionsMappingData = [];
+        }
       }
-
       this.spinner.hide();
     }).catch(err => {
       let message = "";

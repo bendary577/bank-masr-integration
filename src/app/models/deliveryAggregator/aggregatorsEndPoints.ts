@@ -29,6 +29,7 @@ export class AggregatorsEndPoints {
     static AUTHORIZE_FOODICS_ACCOUNT = "https://console-sandbox.foodics.com/authorize";
     static REQUEST_FOODICS_ACCESS_TOKEN = environment.apiHost + "/aggregator/getFoodicsAccessToken";
     static SAVE_UPDATES_EMAIL = environment.apiHost + "/aggregator/saveUpdatesEmail";
+    static SEPARATE_PRODUCTS_MAPPING = environment.apiHost + "/aggregator/separateMapping";
   
     /////////////////////////////////////////////// Aggregator Statics /////////////////////////////////
   
