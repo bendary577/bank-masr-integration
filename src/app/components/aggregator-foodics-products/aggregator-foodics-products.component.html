@@ -1,6 +1,6 @@
 <div class="config-style">
 
-    <mat-expansion-panel>
+    <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 Foodics Products 
@@ -9,92 +9,93 @@
 
         
         <div class="container">
-            <button mat-flat-button (click)="getFoodicsProducts()" style="min-width: 125px;" class="filterButton addButton">Fetch Products</button>
+            <button mat-flat-button (click)="getFoodicsProducts()" style="min-width: 125px;" class="getbutton filterButton addButton">Get Foodics Products</button>
         </div>
  
+        <div *ngIf="productsMappingData.length > 0">
         <ngx-datatable class="material" [loadingIndicator]="showLoading"
-             [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50"
-            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-            [rows]="productsMappingData" [selectAllRowsOnPage]="false" [scrollbarH]="true">
+            [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50"
+           [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+           [rows]="productsMappingData" [selectAllRowsOnPage]="false" [scrollbarH]="true">
+         
+                <ngx-datatable-column name="Product">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <a *ngIf="row.image && row.image != ''" (click)="viewProductDetails(row)" class="sidebar-brand brand-logo"><img style="border-radius: 50%; width: 40px;height: 40px;" src={{row.image}} alt="product_avatar" /></a>
+                        <a *ngIf="!row.image || row.image == ''" (click)="viewProductDetails(row)" class="sidebar-brand brand-logo"><img style="border-radius: 50%; width: 40px;height: 40px;" src="assets/images/aggregators/burger.jpg" alt="logo" /></a>
+                        <input matInput placeholder="Name" [(ngModel)]="row.name" style="margin-left: 10px;margin-bottom: 10px;" readonly>
+                    </ng-template>
+                </ngx-datatable-column>
 
-            <ngx-datatable-column name="Product">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <a *ngIf="row.image && row.image != ''" (click)="viewProductDetails(row)" class="sidebar-brand brand-logo"><img style="border-radius: 50%; width: 40px;height: 40px;" src={{row.image}} alt="product_avatar" /></a>
-                    <a *ngIf="!row.image || row.image == ''" (click)="viewProductDetails(row)" class="sidebar-brand brand-logo"><img style="border-radius: 50%; width: 40px;height: 40px;" src="assets/images/aggregators/burger.jpg" alt="logo" /></a>
-                    <input matInput placeholder="Name" [(ngModel)]="row.name" style="margin-left: 10px;margin-bottom: 10px;" readonly>
-                </ng-template>
-            </ngx-datatable-column>
+                <ngx-datatable-column name="Price">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <!-- <mat-checkbox class="example-margin" [(ngModel)]="row.price">
+                        </mat-checkbox> -->
+                        <input matInput placeholder="Name" [(ngModel)]="row.price" style="width:20%">
+                        EGP
+                    </ng-template>
+                </ngx-datatable-column>
 
-            <ngx-datatable-column name="Price">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <!-- <mat-checkbox class="example-margin" [(ngModel)]="row.price">
-                    </mat-checkbox> -->
-                    <input matInput placeholder="Name" [(ngModel)]="row.price" style="width:20%">
-                    EGP
-                </ng-template>
-            </ngx-datatable-column>
+                <ngx-datatable-column name="Foodics ID">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <input matInput placeholder="ID" [(ngModel)]="row.id">
+                    </ng-template>
+                </ngx-datatable-column>
 
-            <ngx-datatable-column name="Foodics ID">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="ID" [(ngModel)]="row.id">
-                </ng-template>
-            </ngx-datatable-column>
+                <ngx-datatable-column name="Active">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <input *ngIf="row.is_active" matInput placeholder="Is Active" [(ngModel)]="row.is_active" style="color:green;">
+                        <input *ngIf="!row.is_active" matInput placeholder="Is Active" [(ngModel)]="row.is_active" style="color: red;">
+                    </ng-template>
+                </ngx-datatable-column>
 
-            <ngx-datatable-column name="Active">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input *ngIf="row.is_active" matInput placeholder="Is Active" [(ngModel)]="row.is_active" style="color:green;">
-                    <input *ngIf="!row.is_active" matInput placeholder="Is Active" [(ngModel)]="row.is_active" style="color: red;">
-                </ng-template>
-            </ngx-datatable-column>
+                <!-- <ngx-datatable-column name="Modifiers Count">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <input matInput placeholder="Modifiers Count" [(ngModel)]="row.modifiers.length">
+                    </ng-template>
+                </ngx-datatable-column> -->
 
-            <!-- <ngx-datatable-column name="Modifiers Count">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="Modifiers Count" [(ngModel)]="row.modifiers.length">
-                </ng-template>
-            </ngx-datatable-column> -->
+                <ngx-datatable-column name="Modifiers">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <button mat-flat-button (click)="viewModifiersDialog(row)" class="filterButton table-btn">View</button>
+                    </ng-template>
+                </ngx-datatable-column>
 
-            <ngx-datatable-column name="Modifiers">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <button mat-flat-button (click)="viewModifiersDialog(row)" class="filterButton table-btn">View</button>
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-footer>
-                <ng-template
-                  ngx-datatable-footer-template
-                  let-curPage="curPage"
-                >
-                  <div class="page-count">
-                    Showing {{ perPage }} of
-                    {{ total }}
-                  </div>
-      
-                  <select
-                    (change)="onLimitChange($event.target.value)"
-                    style="width: 50px; position: inherit"
-                  >
-                    <option
-                      *ngFor="let option of links"
-                      [value]="option"
+                <ngx-datatable-footer>
+                    <ng-template
+                        ngx-datatable-footer-template
+                        let-curPage="curPage"
+                        let-rowCount="rowCount"
+                        let-selectedCount="selectedCount"
+                        let-offset="offset"
+                        let-isVisible="isVisible"
                     >
-                      {{ option }}
-                    </option>
-                  </select>
-      
-                  <datatable-pager
-                    [pagerLeftArrowIcon]="'datatable-icon-left'"
-                    [pagerRightArrowIcon]="'datatable-icon-right'"
-                    [pagerPreviousIcon]="'datatable-icon-prev'"
-                    [pagerNextIcon]="'datatable-icon-skip'"
-                    [size]="total"
-                    [count]="perPage"
-                    (change)="getFoodicsProducts()"
-                  >
-                  </datatable-pager>
-                </ng-template>
-              </ngx-datatable-footer>
+                        <div class="page-count">
+                        Showing {{ to }} of
+                        {{ total }}
+                        </div>
+            
+            
+                        <datatable-pager
+                        [pagerLeftArrowIcon]="'datatable-icon-left'"
+                        [pagerRightArrowIcon]="'datatable-icon-right'"
+                        [pagerPreviousIcon]="'datatable-icon-prev'"
+                        [pagerNextIcon]="'datatable-icon-skip'"
+                        [page]="curPage"
+                        [size]="perPage"
+                        [count]="total"
+                        (change)="changePage($event)"
+                        >
+                        </datatable-pager>
+                    </ng-template>
+                    </ngx-datatable-footer>
 
-        </ngx-datatable>
+            </ngx-datatable>
+        </div>
+
+        <div *ngIf="productsMappingData.length === 0">
+            <h4>There is no foodics products saved currently</h4>
+        </div>
+
     </mat-expansion-panel>
 
     <ngx-spinner></ngx-spinner>

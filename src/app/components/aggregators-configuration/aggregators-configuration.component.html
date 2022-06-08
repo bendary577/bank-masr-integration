@@ -4,6 +4,23 @@
 
     <br>
 
+    <mat-expansion-panel *ngIf="showAuthenticatedPanel" [expanded]="true" [disabled]="true" class="integrationsuccessfull">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <h5 style="color: #008000;">Your integration is complete</h5>
+                <img style="border-radius: 50%; width: 20px;height: 20px;margin-left: 5px;" src="assets/images/auth/checked.png" alt="logo" />
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+    </mat-expansion-panel>
+
+    <br>
+
+    <!-- <div class="integrationsuccessfull2">
+        <h5 style="color: white;">Your integration is complete</h5>
+    </div> -->
+
+    <br>
+
     <!-- Cancel Reason -->
     <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
@@ -45,7 +62,69 @@
                 <!-- <mat-form-field *ngIf="foodicsTokenGenerated === true && foodicsCodeExpired === false" class="example-full-width">
                     <h6 style="color:red">{{timeLeft}} Seconds left until code expiration...</h6>
                 </mat-form-field> -->
-                <button mat-flat-button (click)="generateFoodicsAccessToken()">Generate Access Token</button>
+                <button mat-flat-button (click)="generateFoodicsAccessToken()" class="configButton">Generate Access Token</button>
+            </div>
+        </form>
+
+    </mat-expansion-panel>
+
+    <br>
+
+    <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <h5>Step 3. Talabat Integration</h5>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div>
+            <h6 style="color:gray">Enter your Talabat credentials (username, password)</h6>
+        </div>
+
+        <form class="my-form">
+            <div>
+                <p *ngIf="talabatValidationMessage != ''" style="color:red">{{talabatValidationMessage}}</p>
+                <br>
+                <mat-form-field class="example-full-width">
+                    <input ngModel matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Talabat Username" name="talabatUsername" [(ngModel)]="talabatUsername">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <input ngModel matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" type="password" placeholder="Talabat Password" name="talabatPassword" [(ngModel)]="talabatPassword">
+                </mat-form-field>
+
+                <button mat-flat-button (click)="authenticateTalabat()" class="configButton">Authenticate to Talabat</button>
+            </div>
+        </form>
+
+    </mat-expansion-panel>
+
+    <br>
+
+    <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <h5>Step 4. Configure Email for Updates</h5>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div>
+            <!-- <h6 style="color:gray">Save the URL generated from step 1</h6> -->
+            <h6 style="color:gray">Save your Email to receive notifications if any foodics product was updated </h6>
+        </div>
+
+        <form class="my-form">
+            <div>
+                <p *ngIf="emailValidationMessage != ''" style="color:red">{{emailValidationMessage}}</p>
+
+                <br>
+                <mat-form-field class="example-full-width">
+                    <input ngModel matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Email" name="email" [(ngModel)]="email">
+                </mat-form-field>
+                <!-- <mat-form-field *ngIf="foodicsTokenGenerated === true && foodicsCodeExpired === false" class="example-full-width">
+                    <h6 style="color:red">{{timeLeft}} Seconds left until code expiration...</h6>
+                </mat-form-field> -->
+                <button mat-flat-button (click)="saveEmail()" class="configButton">Save Email</button>
             </div>
         </form>
 

@@ -37,13 +37,14 @@ export class AggregatorBranchesMappingComponent implements OnInit {
   myControl = new FormControl();
   filteredOptions: Observable<string[]>;
   tableForm = new FormGroup({});
-
+  integrationComplete = false;
+  
   constructor(public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService, private authService: AuthService
     , private talabatService: TalabatService, private foodicsService : FoodicsServiceService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    
+    this.getGeneralSettings();
   }
 
   fillFormControls(){
@@ -138,35 +139,41 @@ export class AggregatorBranchesMappingComponent implements OnInit {
   }
 
 
-  fetchBranches(){
-    this.spinner.show();
-    this.foodicsService.getFoodicsBranches(1,2).toPromise().then((res) => {
-        this.foodicsBranches = res['data'];
-        this.getGeneralSettings()
-        this.mapFoodicsBranchesNames(this.foodicsBranches)
-      this.spinner.hide();
-    }).catch(err => {
-      const dialogConfig = new MatDialogConfig()
-      dialogConfig.width = '600px'
-      dialogConfig.maxWidth = '600px'
-      dialogConfig.autoFocus = true
+  // fetchBranches(){
+  //   this.spinner.show();
+  //   this.foodicsService.getFoodicsBranches(1,2).toPromise().then((res) => {
+  //       this.foodicsBranches = res['data'];
+  //       this.getGeneralSettings()
+  //     this.spinner.hide();
+  //   }).catch(err => {
+  //     const dialogConfig = new MatDialogConfig()
+  //     dialogConfig.width = '600px'
+  //     dialogConfig.maxWidth = '600px'
+  //     dialogConfig.autoFocus = true
   
-      let dialogRef = this.dialog.open(AggregatorIntegrationErrorComponent, dialogConfig)
+  //     let dialogRef = this.dialog.open(AggregatorIntegrationErrorComponent, dialogConfig)
   
-      dialogRef.afterClosed().subscribe((res) => {})
-      this.spinner.hide();
-    });
-  }
+  //     dialogRef.afterClosed().subscribe((res) => {})
+  //     this.spinner.hide();
+  //   });
+  // }
 
   getGeneralSettings() {
+      this.showLoading=true;
       this.spinner.show();
       this.generalSettingsService.getGeneralSettings().then((res) => {
         this.generalSettings = res as GeneralSettings;
-        this.branchMappingData = this.generalSettings.talabatConfiguration.branchMappings;
-        this.fillFormControls()
-        this.setFormControlsDefaultOptions()
-        // this.fetchBranches();
-        this.spinner.hide();
+        if(this.generalSettings.talabatConfiguration.integrationStatus){
+          this.integrationComplete = true
+          this.branchMappingData = this.generalSettings.talabatConfiguration.branchMappings;
+          this.foodicsBranches = this.generalSettings.talabatConfiguration.foodicsDropDownBranches;
+          // console.log("branches size" + this.foodicsBranches.length)
+          this.mapFoodicsBranchesNames(this.foodicsBranches)
+          this.fillFormControls()
+          this.setFormControlsDefaultOptions()
+          this.spinner.hide();
+        }
+        this.showLoading=false;
       }).catch(err => {
         let message = "";
         if (err.error){
@@ -182,6 +189,7 @@ export class AggregatorBranchesMappingComponent implements OnInit {
           horizontalPosition: 'center',
           panelClass:"my-snack-bar-fail"
         });
+        this.showLoading=false;
         this.spinner.hide();
       });
   }

@@ -7,6 +7,8 @@ import { FoodicsServiceService } from 'src/app/services/foodics-service.service'
 import { ViewProductModifiersComponent } from '../view-product-modifiers/view-product-modifiers.component';
 import { FoodicsProductDetailsComponent } from '../foodics-product-details/foodics-product-details.component';
 import { AggregatorIntegrationErrorComponent } from '../aggregator-integration-error/aggregator-integration-error.component';
+import { GeneralSettings } from 'src/app/models/GeneralSettings';
+import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
 
 @Component({
   selector: 'app-aggregator-foodics-products',
@@ -16,29 +18,64 @@ import { AggregatorIntegrationErrorComponent } from '../aggregator-integration-e
 export class AggregatorFoodicsProductsComponent implements OnInit {
 
   productsMappingData = [];
-  links = [];
-  nextLink = "";
-  prevLink = "";
-  firstLink = "";
-  lastLink = "";
   total = 0;
   perPage = 0;
   curPage = 0;
-  requestAPI = "https://api-sandbox.foodics.com/v5/products?page=1";
-
+  requestAPI = "https://api-sandbox.foodics.com/v5/products?page=";
+  generalSettings: GeneralSettings = new GeneralSettings();
   showLoading: boolean;
   message: 'No data yet';
+  integrationComplete = false;
+  from : 0;
+  to : 0;
 
-  constructor(public snackBar: MatSnackBar, private spinner: NgxSpinnerService, private authService: AuthService
-    , private foodicsService: FoodicsServiceService, public dialog: MatDialog) { }
+
+  constructor(public snackBar: MatSnackBar, private spinner: NgxSpinnerService, private authService: AuthService, private generalSettingsService: GeneralSettingsService, private foodicsService: FoodicsServiceService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    // this.getFoodicsProducts();
+    this.from = 0
+    this.to = 0
+    this.requestAPI = "https://api-sandbox.foodics.com/v5/products?page="+1;
+    this.getGeneralSettings();
+  }
+
+  getGeneralSettings() {
+    this.spinner.show();
+    this.generalSettingsService.getGeneralSettings().then((res) => {
+      this.generalSettings = res as GeneralSettings;
+      if(this.generalSettings.talabatConfiguration.integrationStatus){
+          this.integrationComplete=true;
+          this.getFoodicsProducts();
+      }else{
+          const dialogConfig = new MatDialogConfig()
+          dialogConfig.width = '600px'
+          dialogConfig.maxWidth = '600px'
+          dialogConfig.autoFocus = true
+          let dialogRef = this.dialog.open(AggregatorIntegrationErrorComponent, dialogConfig)
+          dialogRef.afterClosed().subscribe((res) => {})
+          this.showLoading=false
+          this.spinner.hide();
+      }
+      this.spinner.hide();
+    }).catch(err => {
+      let message = "";
+      if (err.error){
+        message = err.error;
+      } else if (err.message){
+        message = err.message;
+      } else {
+        message = ErrorMessages.FAILED_TO_GET_CONFIG;
+      }
+      this.snackBar.open(message , null, {
+        duration: 3000,
+        horizontalPosition: 'center',
+        panelClass:"my-snack-bar-fail"
+      });
+      this.spinner.hide();
+    });
   }
 
   getFoodicsProducts() {
-    // let foodics_token_generated = localStorage.getItem('foodics_token_generated');
-    // if(foodics_token_generated === 'true'){
       this.showLoading=true
       this.spinner.show();
         this.foodicsService
@@ -46,77 +83,35 @@ export class AggregatorFoodicsProductsComponent implements OnInit {
         .toPromise()
         .then((res) => {
           this.productsMappingData = res['data']['data'];
-          this.nextLink = res['data']['links']['next'];
-          this.prevLink = res['data']['links']['prev'];
-          this.lastLink = res['data']['links']['last'];
-          this.firstLink = res['data']['links']['first'];
           this.total = res['data']['meta']['total'];
+          this.from = res['data']['meta']['from'];
+          this.to = res['data']['meta']['to'];
           this.perPage = res['data']['meta']['per_page'];
           this.curPage = res['data']['meta']['current_page'];
-          console.log(this.prevLink)
-          this.mapPagination(this.nextLink, this.prevLink, this.lastLink, this.firstLink)
           this.showLoading=false
           this.spinner.hide();
       }).catch(err => {
-        // let message = "";
-        // if (err.error){
-        //   message = err.error;
-        // } else if (err.message){
-        //   message = err.message;
-        // } else {
-        //   message = ErrorMessages.FAILED_TO_GET_CONFIG;
-        // }
-        // this.snackBar.open(message , null, {
-        //   duration: 3000,
-        //   horizontalPosition: 'center',
-        //   panelClass:"my-snack-bar-fail"
-        // });
-        // this.showLoading=false
-        // this.spinner.hide();
-        const dialogConfig = new MatDialogConfig()
-        dialogConfig.width = '600px'
-        dialogConfig.maxWidth = '600px'
-        dialogConfig.autoFocus = true
-    
-        let dialogRef = this.dialog.open(AggregatorIntegrationErrorComponent, dialogConfig)
-    
-        dialogRef.afterClosed().subscribe((res) => {})
+        let message = "";
+        if (err.error){
+          message = err.error.message;
+        } else if (err.message){
+          message = err.message;
+        } else {
+          message = ErrorMessages.FAILED_TO_GET_CONFIG;
+        }
+        this.snackBar.open(message , null, {
+          duration: 3000,
+          horizontalPosition: 'center',
+          panelClass:"my-snack-bar-fail"
+        });
         this.showLoading=false
         this.spinner.hide();
       });
   }
 
-  mapPagination(next, prev, last, first){
-    if(this.links.length === 0){
-      if(first !== null){
-        this.links.push("first")
-      }
-      if(next !== null){
-        this.links.push("next")
-      }
-      if(prev !== null){
-        this.links.push("previous")
-      }
-      if(last !== null){
-        this.links.push("last")
-      }
-    }
-    if(this.links["previous"] === null && this.links.length !== 0){
-      this.links.push("previous")
-    }
-  }
-
-  onLimitChange(value) {
-    if(value==="next"){
-      this.requestAPI = this.nextLink
-    }else if(value==="previous"){
-      this.requestAPI = this.prevLink
-    }else if(value==="first"){
-      this.requestAPI = this.firstLink
-    }else if(value==="last"){
-      this.requestAPI = this.lastLink
-    }
-    this.getFoodicsProducts()
+  changePage(pageNumber){
+    this.requestAPI = "https://api-sandbox.foodics.com/v5/products?page="+pageNumber.page;
+    this.getFoodicsProducts();
   }
 
   viewModifiersDialog(product){
