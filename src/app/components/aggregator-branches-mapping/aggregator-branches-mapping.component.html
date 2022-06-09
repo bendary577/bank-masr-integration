@@ -10,6 +10,7 @@
         <div class="container">
             <form class="my-form">
                 <div>
+                    <p>Note. selecting a default branch is necessary to get talabat products</p>
                     <!-- <mat-form-field appearance="outline" class="example-full-width dateForm">
                         <input matInput id="name" name="name"
                             style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Branch Name"
@@ -104,6 +105,17 @@
                    <input matInput placeholder="password" [(ngModel)]="row.password">
                </ng-template>
            </ngx-datatable-column>
+
+           
+           <ngx-datatable-column name="Action">
+                <ng-template let-row="row" ngx-datatable-cell-template >
+                    <h6 *ngIf="row.defaultBranch" style="color:green; margin-left: 5px;">Default</h6>
+                    <button *ngIf="!row.defaultBranch" mat-flat-button (click)="setDefaultBranch(row)" class="filterButton table-btn">
+                        <img style="border-radius: 50%; width: 15px;height: 15px;" src="assets/images/aggregators/check.png" alt="logo" />
+                        Set Default
+                        </button>
+                </ng-template>
+            </ngx-datatable-column>
 
        </ngx-datatable>
         </div>

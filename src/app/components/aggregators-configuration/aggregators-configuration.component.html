@@ -78,7 +78,7 @@
         </mat-expansion-panel-header>
 
         <div>
-            <h6 style="color:gray">Enter your Talabat credentials (username, password)</h6>
+            <h6 style="color:gray">Add available talabat branches</h6>
         </div>
 
         <form class="my-form">
@@ -86,14 +86,22 @@
                 <p *ngIf="talabatValidationMessage != ''" style="color:red">{{talabatValidationMessage}}</p>
                 <br>
                 <mat-form-field class="example-full-width">
-                    <input ngModel matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Talabat Username" name="talabatUsername" [(ngModel)]="talabatUsername">
+                    <input ngModel matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Branch Name" name="branchName" [(ngModel)]="branchName">
                 </mat-form-field>
 
                 <mat-form-field class="example-full-width">
-                    <input ngModel matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" type="password" placeholder="Talabat Password" name="talabatPassword" [(ngModel)]="talabatPassword">
+                    <input ngModel matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Branch Username" name="branchUsername" [(ngModel)]="branchUsername">
                 </mat-form-field>
 
-                <button mat-flat-button (click)="authenticateTalabat()" class="configButton">Authenticate to Talabat</button>
+                <mat-form-field class="example-full-width">
+                    <input ngModel matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" type="password" placeholder="Branch Password" name="branchPassword" [(ngModel)]="branchPassword">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <input ngModel matInput style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Branch Talabat ID" name="branchTalabatId" [(ngModel)]="branchTalabatId">
+                </mat-form-field>
+
+                <button mat-flat-button (click)="authenticateTalabat()" class="configButton">Add Branch</button>
             </div>
         </form>
 

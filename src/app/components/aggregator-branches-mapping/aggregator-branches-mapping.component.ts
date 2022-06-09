@@ -206,6 +206,19 @@ export class AggregatorBranchesMappingComponent implements OnInit {
     }
   }
 
+
+  setDefaultBranch(branchMapping){
+    for(let i =0; i < this.branchMappingData.length; i++){
+      if(this.branchMappingData[i].talabatBranchId === branchMapping.talabatBranchId){
+        this.branchMappingData[i].defaultBranch = true
+      }else{
+        if(this.branchMappingData[i].defaultBranch === true){
+          this.branchMappingData[i].defaultBranch = false
+        }
+      }
+    }
+  }
+
   onSaveClick(){
     this.spinner.show();
 
