@@ -85,7 +85,6 @@ export class AggregatorBranchesMappingComponent implements OnInit {
   private returnFoodicsBranchNameById(foodicsId){
     for(let i=0; i < this.foodicsBranches.length; i++){
       if(this.foodicsBranches[i].id === foodicsId){
-        console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& filter"  + this.foodicsBranches[i].name)
         return this.foodicsBranches[i].name
       }
     }
@@ -107,7 +106,6 @@ export class AggregatorBranchesMappingComponent implements OnInit {
   }
 
   onChangeInputEvent(event: any, formControlName){
-    console.log("change input " + formControlName + " " + event)
     Object.keys(this.tableForm.controls).forEach((key : string) => {
       if(formControlName === key){
         const abstractControl = this.tableForm.controls[key];
@@ -167,7 +165,6 @@ export class AggregatorBranchesMappingComponent implements OnInit {
           this.integrationComplete = true
           this.branchMappingData = this.generalSettings.talabatConfiguration.branchMappings;
           this.foodicsBranches = this.generalSettings.talabatConfiguration.foodicsDropDownBranches;
-          // console.log("branches size" + this.foodicsBranches.length)
           this.mapFoodicsBranchesNames(this.foodicsBranches)
           this.fillFormControls()
           this.setFormControlsDefaultOptions()

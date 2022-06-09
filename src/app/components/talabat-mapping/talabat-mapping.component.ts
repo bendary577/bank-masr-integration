@@ -4,9 +4,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ErrorMessages } from 'src/app/models/ErrorMessages';
 import { GeneralSettings } from 'src/app/models/GeneralSettings';
 import { Response } from 'src/app/models/Response';
-import { AddressMapping } from 'src/app/models/deliveryAggregator/address-mapping';
-import { CustomerMapping } from 'src/app/models/deliveryAggregator/customer-mapping';
-import { DiscountMapping } from 'src/app/models/deliveryAggregator/discount-mapping';
 import { ProductMapping } from 'src/app/models/deliveryAggregator/product-mapping';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { GeneralSettingsService } from 'src/app/services/generalSettings/general-settings.service';
@@ -247,7 +244,6 @@ export class TalabatMappingComponent implements OnInit {
   }
 
   onChangeInputEventModifier(event: any, formControlName){
-    console.log("onChangeInputEventModifier")
     Object.keys(this.modifiersTableForm.controls).forEach((key : string) => {
       if(formControlName === key){
         const abstractControl = this.modifiersTableForm.controls[key];

@@ -7,7 +7,7 @@ export class AggregatorConfiguration {
     branchMappings: any
     productsMappings: any
     unMappedProductsMappings: any
-    productsMappingNeedsAttention: any
+    productsNeedsAttention: any
     modifierMappings: any[]
     discountMappings: any
     customerMappings: any[];
