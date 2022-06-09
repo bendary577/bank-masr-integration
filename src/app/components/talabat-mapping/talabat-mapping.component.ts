@@ -17,6 +17,9 @@ import {map, startWith} from 'rxjs/operators';
 import { FoodicsProduct } from 'src/app/models/deliveryAggregator/foodics-product';
 import { FoodicsModifier } from 'src/app/models/deliveryAggregator/foodics-modifier';
 import { AggregatorIntegrationErrorComponent } from '../aggregator-integration-error/aggregator-integration-error.component';
+import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
+import {ViewChild} from '@angular/core';
+
 
 @Component({
   selector: 'app-talabat-mapping',
@@ -48,7 +51,10 @@ export class TalabatMappingComponent implements OnInit {
   filteredModifiersOptions: Observable<string[]>;
   tableForm = new FormGroup({});
   modifiersTableForm = new FormGroup({});
+  modifiersSecondTableForm = new FormGroup({});
   integrationComplete;
+  // @ViewChild(MatAutocompleteTrigger) autocomplete: MatAutocompleteTrigger;
+  // @ViewChild(MatAutocompleteTrigger, { static: true }) trigger: MatAutocompleteTrigger;
 
   constructor(public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService, private authService: AuthService
@@ -64,11 +70,11 @@ export class TalabatMappingComponent implements OnInit {
       this.generalSettings = res as GeneralSettings;
       if(this.generalSettings.talabatConfiguration.integrationStatus){
           this.integrationComplete=true;
-          this.productsMappingData = this.generalSettings.aggregatorConfiguration.productsMappings;
-          this.unmappedProductsMappingData = this.generalSettings.aggregatorConfiguration.unMappedProductsMappings;
-          this.modifierOptionsMappingData = this.generalSettings.aggregatorConfiguration.modifierMappings;
-          this.foodicsProducts = this.generalSettings.aggregatorConfiguration.foodicsDropDownProducts;
-          this.foodicsModifiers = this.generalSettings.aggregatorConfiguration.foodicsDropDownModifiers;
+          this.productsMappingData = this.generalSettings.talabatConfiguration.productsMappings;
+          this.unmappedProductsMappingData = this.generalSettings.talabatConfiguration.unMappedProductsMappings;
+          this.modifierOptionsMappingData = this.generalSettings.talabatConfiguration.modifierMappings;
+          this.foodicsProducts = this.generalSettings.talabatConfiguration.foodicsDropDownProducts;
+          this.foodicsModifiers = this.generalSettings.talabatConfiguration.foodicsDropDownModifiers;
           if(this.modifierOptionsMappingData == undefined){
             this.modifierOptionsMappingData = [];
           }
@@ -135,6 +141,19 @@ export class TalabatMappingComponent implements OnInit {
     }
   }
 
+  fillFormControlsSecondModifiers(){
+    if(this.modifierOptionsMappingData.length > 0){
+      for(let i=0; i < this.modifierOptionsMappingData.length; i++){
+        let controlName = this.getRowFormControlNameModifier(this.modifierOptionsMappingData[i])
+        let value = new FormControl();
+        eval("var "+controlName+" = '"+value+"';");
+        this.modifiersSecondTableForm.addControl(controlName,  new FormControl('', Validators.required));
+      }
+      this.setFormControlsDefaultOptionsSecondModifiers()
+    }
+  }
+
+
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -172,6 +191,19 @@ export class TalabatMappingComponent implements OnInit {
     });
   }
 
+  private setFormControlsDefaultOptionsSecondModifiers() {
+    this.modifierOptionsMappingData.forEach((modifierMapping) => {
+        let modifierName = this.returnFoodicsModifierNameById(modifierMapping.secondFoodicsProductId)
+        let controlName = this.getRowFormControlNameModifier(modifierMapping)
+        Object.keys(this.modifiersSecondTableForm.controls).forEach((key : string) => {
+          if(controlName === key){
+            const abstractControl = this.modifiersSecondTableForm.controls[key];
+            abstractControl.setValue(modifierName);
+          }
+        });
+    });
+  }
+
   private returnFoodicsProductNameById(foodicsId){
     for(let i=0; i < this.foodicsProducts.length; i++){
       if(this.foodicsProducts[i].id === foodicsId){
@@ -189,9 +221,36 @@ export class TalabatMappingComponent implements OnInit {
     }
   }
 
-  productInputClick(event){
-    console.log("click")
+  productInputClick() {
+    Object.keys(this.tableForm.controls).forEach((key : string) => {
+      const abstractControl = this.tableForm.controls[key];
+      this.filteredOptions = abstractControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value)),
+      );
+    });
   }
+
+  modifierInputClick() {
+    Object.keys(this.modifiersTableForm.controls).forEach((key : string) => {
+      const abstractControl = this.modifiersTableForm.controls[key];
+      this.filteredOptions = abstractControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filterModifiers(value)),
+      );
+    });
+  }
+
+  secondModifierInputClick() {
+    Object.keys(this.modifiersSecondTableForm.controls).forEach((key : string) => {
+      const abstractControl = this.modifiersSecondTableForm.controls[key];
+      this.filteredOptions = abstractControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filterModifiers(value)),
+      );
+    });
+  }
+
 
   mapFoodicsProductsNames(products){
     for(let i=0; i < products.length; i++){
@@ -219,6 +278,7 @@ export class TalabatMappingComponent implements OnInit {
       );
     });
     this.fillFormControlsModifiers()
+    this.fillFormControlsSecondModifiers()
   }
 
   mapInputModel(productMapping){
@@ -257,6 +317,20 @@ export class TalabatMappingComponent implements OnInit {
     });
   }
 
+  onChangeInputEventSecondModifier(event: any, formControlName){
+    Object.keys(this.modifiersSecondTableForm.controls).forEach((key : string) => {
+      if(formControlName === key){
+        const abstractControl = this.modifiersSecondTableForm.controls[key];
+        if(event !== "" && event !== '' && event !== undefined && event != null){
+          this.filteredModifiersOptions = abstractControl.valueChanges.pipe(
+            startWith(event),
+            map(value => this._filterModifiers(value)),
+          );
+        }
+      }
+    });
+  }
+
   fetchProducts(){
     if(this.integrationComplete){
       this.spinner.show();
@@ -266,7 +340,7 @@ export class TalabatMappingComponent implements OnInit {
       }).catch(err => {
         let message = "";
         if (err.error){
-          message = err.error;
+          message = err.error.message;
         } else if (err.message){
           message = err.message;
         } else {
@@ -302,7 +376,6 @@ export class TalabatMappingComponent implements OnInit {
   }
 
 
-
   viewModifiersDialog(product){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
@@ -326,7 +399,6 @@ export class TalabatMappingComponent implements OnInit {
     });
 
     if(chosenFoodicsProduct != null && chosenFoodicsProduct.length > 0){
-      
       productMapping.foodIcsProductId = chosenFoodicsProduct[0].id
     }
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -343,6 +415,21 @@ export class TalabatMappingComponent implements OnInit {
 
     if(chosenFoodicsModifier != null && chosenFoodicsModifier.length > 0){
       modifierMapping.foodicsProductId = chosenFoodicsModifier[0].id
+    }
+    this.filteredModifiersOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterModifiers(value)),
+    );
+  }
+
+  changeSecondFoodicsModifierMapping(value, modifierMapping) {
+    let chosenFoodicsModifier : FoodicsModifier[] = [];
+    chosenFoodicsModifier = this.foodicsModifiers.filter(function(foodicsModifier) {
+      return foodicsModifier.name === value;
+    });
+
+    if(chosenFoodicsModifier != null && chosenFoodicsModifier.length > 0){
+      modifierMapping.secondFoodicsProductId = chosenFoodicsModifier[0].id
     }
     this.filteredModifiersOptions = this.myControl.valueChanges.pipe(
       startWith(''),

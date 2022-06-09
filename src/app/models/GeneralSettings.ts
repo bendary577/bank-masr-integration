@@ -47,7 +47,8 @@ export class GeneralSettings {
   
   // ==> Delivery Aggregators
   aggregatorConfiguration: AggregatorConfiguration
-
+  talabatConfiguration: TalabatConfiguration;
+  
   // ==> Reward Points
   pointReward: number
   pointsRedemption: number
@@ -55,5 +56,5 @@ export class GeneralSettings {
 
   creationDate: Date
   deleted: boolean
-  talabatConfiguration: TalabatConfiguration;
+
 }

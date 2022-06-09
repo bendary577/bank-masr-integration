@@ -4,6 +4,7 @@ export class TalabatConfiguration {
   productsMappings: any
   unMappedProductsMappings: any
   productsMappingNeedsAttention: any
+  productsNeedsAttention: any
   modifierMappings: any[]
   discountMappings: any
   customerMappings: any[];
@@ -13,6 +14,7 @@ export class TalabatConfiguration {
   foodicsDropDownBranches: any[];
   integrationStatus: any
   talabatIntegrationStatus: any
+  foodicsIntegrationStatus: any
   mailRequiredForUpdates: any  
 
 }

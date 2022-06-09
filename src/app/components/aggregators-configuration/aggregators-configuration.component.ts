@@ -290,7 +290,8 @@ export class AggregatorsConfigurationComponent implements OnInit {
       branchMapping.name = this.branchName
       branchMapping.username = this.branchUsername
       branchMapping.password = this.branchPassword
-      this.talabatService.configuraTalabatBranch(branchMapping)
+      branchMapping.defaultBranch = false;
+      this.talabatService.configureTalabatBranch(branchMapping)
       .toPromise()
       .then((res) => {
         this.snackBar.open("You have configured " + branchMapping.name + " branch successfully" , null, {

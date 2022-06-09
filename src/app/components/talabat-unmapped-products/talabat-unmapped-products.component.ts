@@ -196,6 +196,16 @@ export class TalabatUnmappedProductsComponent implements OnInit {
     });
   }
 
+  productInputClick() {
+    Object.keys(this.tableForm.controls).forEach((key : string) => {
+      const abstractControl = this.tableForm.controls[key];
+      this.filteredOptions = abstractControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value)),
+      );
+    });
+  }
+  
   addProductsMappingData(){
     if(this.newProductMapping.name &&  this.newProductMapping.foodIcsProductId && this.newProductMapping.talabatProductId){
       this.productsMappingData.push(this.newProductMapping);

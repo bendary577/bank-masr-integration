@@ -14,6 +14,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 import { AggregatorIntegrationErrorComponent } from '../aggregator-integration-error/aggregator-integration-error.component';
 import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
+import { NavigationEnd, Router } from '@angular/router'
 
 @Component({
   selector: 'app-aggregator-branches-mapping',
@@ -39,7 +40,7 @@ export class AggregatorBranchesMappingComponent implements OnInit {
   tableForm = new FormGroup({});
   integrationComplete = false;
   
-  constructor(public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
+  constructor(public snackBar: MatSnackBar,private router: Router, private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService, private authService: AuthService
     , private talabatService: TalabatService, private foodicsService : FoodicsServiceService, public dialog: MatDialog) { }
 
@@ -217,6 +218,20 @@ export class AggregatorBranchesMappingComponent implements OnInit {
         }
       }
     }
+  }
+
+  routeToConfigurations(){
+    this.router.navigate(['/main/aggregatorsConfigurations'])
+  }
+
+  branchInputClick() {
+    Object.keys(this.tableForm.controls).forEach((key : string) => {
+      const abstractControl = this.tableForm.controls[key];
+      this.filteredOptions = abstractControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value)),
+      );
+    });
   }
 
   onSaveClick(){

@@ -104,11 +104,11 @@ export class ProductsNeedsAttentionComponent implements OnInit {
       this.generalSettings = res as GeneralSettings;
       if(this.generalSettings.talabatConfiguration.integrationStatus){
         this.integrationComplete=true;
-        this.productsMappingNeedsAttention = this.generalSettings.aggregatorConfiguration.productsNeedsAttention;
-        this.productsMappingData = this.generalSettings.aggregatorConfiguration.productsMappings;
-        this.modifierOptionsMappingData = this.generalSettings.aggregatorConfiguration.modifierMappings;
-        this.foodicsProducts = this.generalSettings.aggregatorConfiguration.foodicsDropDownProducts;
-        this.foodicsModifiers = this.generalSettings.aggregatorConfiguration.foodicsDropDownModifiers;
+        this.productsMappingNeedsAttention = this.generalSettings.talabatConfiguration.productsNeedsAttention;
+        this.productsMappingData = this.generalSettings.talabatConfiguration.productsMappings;
+        this.modifierOptionsMappingData = this.generalSettings.talabatConfiguration.modifierMappings;
+        this.foodicsProducts = this.generalSettings.talabatConfiguration.foodicsDropDownProducts;
+        this.foodicsModifiers = this.generalSettings.talabatConfiguration.foodicsDropDownModifiers;
         if(this.modifierOptionsMappingData == undefined){
           this.modifierOptionsMappingData = [];
         }
@@ -184,8 +184,8 @@ export class ProductsNeedsAttentionComponent implements OnInit {
   onSaveClick(){
     this.spinner.show();
     try {
-      this.generalSettings.aggregatorConfiguration.productsNeedsAttention = this.productsMappingNeedsAttention;
-      this.generalSettings.aggregatorConfiguration.modifierMappings = this.modifierOptionsMappingData;
+      this.generalSettings.talabatConfiguration.productsNeedsAttention = this.productsMappingNeedsAttention;
+      this.generalSettings.talabatConfiguration.modifierMappings = this.modifierOptionsMappingData;
       this.generalSettingsService.updateGeneralSettings(this.generalSettings).then(result => {
         const response = result as Response;
         this.authService.generalSettings = this.generalSettings;
