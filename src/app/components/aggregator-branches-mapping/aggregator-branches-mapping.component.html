@@ -10,6 +10,7 @@
         <div class="container">
             <form class="my-form">
                 <div>
+                    <h6 style="float:left" *ngIf="branchMappingData.length > 0">Note. selecting a default branch is necessary to get talabat products</h6>
                     <!-- <mat-form-field appearance="outline" class="example-full-width dateForm">
                         <input matInput id="name" name="name"
                             style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Branch Name"
@@ -27,7 +28,8 @@
                             [(ngModel)]="newBranchMapping.talabatBranchId">
                     </mat-form-field> -->
                     <!-- <button mat-flat-button (click)="addBranchMappingData()" class="filterButton addButton">Add</button> -->
-                    <button mat-flat-button (click)="getGeneralSettings()" style="min-width: 125px;" class="filterButton addButton">Get Branches</button>
+                    <button *ngIf="branchMappingData.length > 0" mat-flat-button (click)="getGeneralSettings()" style="min-width: 125px;" class="filterButton addButton">Get Branches</button>
+                    <button *ngIf="branchMappingData.length === 0" mat-flat-button (click)="routeToConfigurations()" class="filterButton2 addButton">Configure Branches</button>
                 </div>
             </form>
         </div>
@@ -37,72 +39,95 @@
         </div>
 
         <div *ngIf="integrationComplete">
-            <ngx-datatable class="material" [loadingIndicator]="showLoading"
-            [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50"
-           [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-           [rows]="branchMappingData" [selectAllRowsOnPage]="false" [scrollbarH]="true">
 
-           <ngx-datatable-column name="Branch Name">
-               <ng-template let-row="row" ngx-datatable-cell-template>
-                   <input matInput placeholder="Name" [(ngModel)]="row.name">
-               </ng-template>
-           </ngx-datatable-column>
+            <div *ngIf="branchMappingData.length === 0">
+                <h4>Please configure at least one talabat branch </h4>
+            </div>
 
-           <ngx-datatable-column name="Branch FoodIcs Id">
-               <!-- <ng-template let-row="row" ngx-datatable-cell-template>
-                   <input matInput placeholder="eg. 5 %" [(ngModel)]="row.foodIcsBranchId">
-               </ng-template> -->
-               
-               <ng-template let-row="row" ngx-datatable-cell-template> 
-                   <div style="width: 100%;">
-                       <form class="example-form" id="form" [formGroup]="tableForm">
-                           <mat-form-field class="example-full-width" style="width: 130px;"appearance="fill" style="width:25px" id="foodics_product_form_field" name="foodics_product_form_field">
-                               <div class=''>
-                                   <div class=''>
-                                       <input type="text"
-                                       style="width:90px"
-                                       id="branches_input"
-                                       name="branches_input"
-                                       placeholder="Pick one"
-                                       matInput
-                                       aria-label="Number"
-                                       (ngModel)="mapInputModel(row)"
-                                       (ngModelChange)="onChangeInputEvent($event, getRowFormControlName(row))"
-                                       [formControlName]="getRowFormControlName(row)"
-                                       [matAutocomplete]="auto">
+            <div *ngIf="branchMappingData.length > 0">
+                <ngx-datatable class="material" [loadingIndicator]="showLoading"
+                [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50"
+               [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+               [rows]="branchMappingData" [selectAllRowsOnPage]="false" [scrollbarH]="true">
+    
+               <ngx-datatable-column name="Branch Name">
+                   <ng-template let-row="row" ngx-datatable-cell-template>
+                       <input matInput placeholder="Name" [(ngModel)]="row.name">
+                   </ng-template>
+               </ngx-datatable-column>
+    
+               <ngx-datatable-column name="Branch FoodIcs Id">
+                   <!-- <ng-template let-row="row" ngx-datatable-cell-template>
+                       <input matInput placeholder="eg. 5 %" [(ngModel)]="row.foodIcsBranchId">
+                   </ng-template> -->
+                   
+                   <ng-template let-row="row" ngx-datatable-cell-template> 
+                       <div style="width: 100%;">
+                           <form class="example-form" id="form" [formGroup]="tableForm">
+                               <mat-form-field class="example-full-width" style="width: 130px;"appearance="fill" style="width:25px" id="foodics_product_form_field" name="foodics_product_form_field">
+                                   <div class='parent'>
+                                       <div class='right-child'>
+                                            <img style="border-radius: 50%; width: 25px;height: 25px;" src="assets/images/aggregators/branch.png" alt="logo" />
+                                       </div>
+                                       <div class='left-child'>
+                                           <input type="text"
+                                           style="width:90px"
+                                           id="branches_input"
+                                           name="branches_input"
+                                           placeholder="Pick one"
+                                           matInput
+                                           (click)="branchInputClick()" 
+                                           aria-label="Number"
+                                           (ngModel)="mapInputModel(row)"
+                                           (ngModelChange)="onChangeInputEvent($event, getRowFormControlName(row))"
+                                           [formControlName]="getRowFormControlName(row)"
+                                           [matAutocomplete]="auto">
+                                       </div>
                                    </div>
-                               </div>
-                               <mat-autocomplete #auto="matAutocomplete" name="products_autocomplete" id="products_autocomplete" (optionSelected)="changeFoodicsBranchMapping($event.option.value, row)">
-                                   <mat-option *ngFor="let option of filteredOptions | async" [ngValue]="option" [value]="option" name="product_option" id="product_option">
-                                       <!-- <a class="sidebar-brand brand-logo" href="index.html"><img style="border-radius: 50%; width: 25px;height: 25px;" src="assets/images/aggregators/burger.jpg" alt="logo" /></a> -->
-                                       {{option}}
-                                   </mat-option>
-                               </mat-autocomplete>
-                           </mat-form-field>
-                       </form>
-                   </div>
-               </ng-template> 
-           </ngx-datatable-column>
+                                   <mat-autocomplete #auto="matAutocomplete" name="products_autocomplete" id="products_autocomplete" (optionSelected)="changeFoodicsBranchMapping($event.option.value, row)">
+                                       <mat-option *ngFor="let option of filteredOptions | async" [ngValue]="option" [value]="option" name="product_option" id="product_option">
+                                        <a class="sidebar-brand brand-logo" href="index.html"><img style="border-radius: 50%; width: 25px;height: 25px;" src="assets/images/aggregators/branch.png" alt="logo" /></a>
+                                           {{option}}
+                                       </mat-option>
+                                   </mat-autocomplete>
+                               </mat-form-field>
+                           </form>
+                       </div>
+                   </ng-template> 
+               </ngx-datatable-column>
+    
+               <ngx-datatable-column name="Branch Talabat Id">
+                   <ng-template let-row="row" ngx-datatable-cell-template>
+                       <input matInput placeholder="eg. 5 %" [(ngModel)]="row.talabatBranchId">
+                   </ng-template>
+               </ngx-datatable-column>
+    
+               <ngx-datatable-column name="Username">
+                   <ng-template let-row="row" ngx-datatable-cell-template>
+                       <input matInput placeholder="example@example.com" [(ngModel)]="row.username">
+                   </ng-template>
+               </ngx-datatable-column>
+    
+               <ngx-datatable-column name="Password">
+                   <ng-template let-row="row" ngx-datatable-cell-template>
+                       <input matInput placeholder="password" [(ngModel)]="row.password">
+                   </ng-template>
+               </ngx-datatable-column>
+    
+               
+               <ngx-datatable-column name="Action">
+                    <ng-template let-row="row" ngx-datatable-cell-template >
+                        <h6 *ngIf="row.defaultBranch" style="color:green; margin-left: 5px;">Default</h6>
+                        <button *ngIf="!row.defaultBranch" mat-flat-button (click)="setDefaultBranch(row)" class="filterButton table-btn">
+                            <img style="border-radius: 50%; width: 15px;height: 15px;" src="assets/images/aggregators/check.png" alt="logo" />
+                            Set Default
+                        </button>
+                    </ng-template>
+                </ngx-datatable-column>
+    
+                </ngx-datatable>
+            </div>
 
-           <ngx-datatable-column name="Branch Talabat Id">
-               <ng-template let-row="row" ngx-datatable-cell-template>
-                   <input matInput placeholder="eg. 5 %" [(ngModel)]="row.talabatBranchId">
-               </ng-template>
-           </ngx-datatable-column>
-
-           <ngx-datatable-column name="Username">
-               <ng-template let-row="row" ngx-datatable-cell-template>
-                   <input matInput placeholder="example@example.com" [(ngModel)]="row.username">
-               </ng-template>
-           </ngx-datatable-column>
-
-           <ngx-datatable-column name="Password">
-               <ng-template let-row="row" ngx-datatable-cell-template>
-                   <input matInput placeholder="password" [(ngModel)]="row.password">
-               </ng-template>
-           </ngx-datatable-column>
-
-       </ngx-datatable>
         </div>
 
 

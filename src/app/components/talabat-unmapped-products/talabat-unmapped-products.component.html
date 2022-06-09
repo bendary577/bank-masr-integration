@@ -10,7 +10,7 @@
         <div class="container">
             <form class="my-form" >
                 <div>
-                    <button mat-flat-button (click)="fetchProducts()" style="min-width: 125px;" class="getbutton filterButton addButton">Get Talabat Mapping</button>
+                    <!-- <button mat-flat-button (click)="fetchProducts()" style="min-width: 125px;" class="getbutton filterButton addButton">Get Talabat Mapping</button> -->
                 </div>
             </form>
         </div>
@@ -58,6 +58,7 @@
                                    <div class='left-child '>
                                        <input type="text"
                                        style="width:90px"
+                                       (click)="productInputClick()" 
                                        id="products_input"
                                        name="products_input"
                                        placeholder="Pick one"

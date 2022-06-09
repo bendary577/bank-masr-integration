@@ -33,7 +33,7 @@
                             style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Foodics Product"
                             [(ngModel)]="newProductMapping.foodIcsProductId">
                     </mat-form-field> -->
-                    <button mat-flat-button (click)="fetchProducts()" style="min-width: 125px;" class="getbutton filterButton addButton">Get Talabat Mapping</button>
+                    <button mat-flat-button (click)="fetchProducts()" style="min-width: 125px;" class="getbutton filterButton addButton">Get Talabat Products</button>
                     <!-- <button mat-flat-button (click)="addProductsMappingData()" class="filterButton addButton">Add</button> -->
                 </div>
             </form>
@@ -84,7 +84,8 @@
                                    </div>
                                    <div class='left-child '>
                                        <input type="text"
-                                       (click)="productInputClick($event)" 
+                                       #matAutocomplete
+                                       (click)="productInputClick()" 
                                        style="width:90px"
                                        id="products_input"
                                        name="products_input"
@@ -94,10 +95,10 @@
                                        (ngModel)="mapInputModel(row)"
                                        (ngModelChange)="onChangeInputEvent($event, getRowFormControlName(row))"
                                        [formControlName]="getRowFormControlName(row)"
-                                       [matAutocomplete]="auto">
+                                       [matAutocomplete]="autoName">
                                    </div>
                                </div>
-                               <mat-autocomplete autoActiveFirstOption #productfilter #auto="matAutocomplete" name="products_autocomplete" id="products_autocomplete" (optionSelected)="changeFoodicsProductMapping($event.option.value, row)">
+                               <mat-autocomplete #autoName="matAutocomplete" autoActiveFirstOption #productfilter name="products_autocomplete" id="products_autocomplete" (optionSelected)="changeFoodicsProductMapping($event.option.value, row)">
                                    <mat-option *ngFor="let option of filteredOptions | async" [ngValue]="option" [value]="option" name="product_option" id="product_option">
                                        <a class="sidebar-brand brand-logo" href="index.html"><img style="border-radius: 50%; width: 25px;height: 25px;" src="assets/images/aggregators/burger.jpg" alt="logo" /></a>
                                        {{option}}
@@ -204,10 +205,12 @@
                                 <!-- <mat-label>Foodics Products</mat-label> -->
                                 <div class='parent'>
                                     <div class='right-child'>
-                                        <img style="border-radius: 50%; width: 25px;height: 25px;" src="assets/images/aggregators/burger.jpg" alt="logo" />
+                                        <img style="border-radius: 50%; width: 25px;height: 25px;" src="assets/images/aggregators/modifier.png" alt="logo" />
                                     </div>
                                     <div class='left-child '>
                                         <input type="text"
+                                        #matAutocomplete
+                                        (click)="modifierInputClick()" 
                                         style="width:90px"
                                         id="modifier_input"
                                         name="modifier_input"
@@ -217,12 +220,12 @@
                                         (ngModel)="mapInputModelModifier(row)"
                                         (ngModelChange)="onChangeInputEventModifier($event, getRowFormControlNameModifier(row))"
                                         [formControlName]="getRowFormControlNameModifier(row)"
-                                        [matAutocomplete]="auto">
+                                        [matAutocomplete]="autoName">
                                     </div>
                                 </div>
-                                <mat-autocomplete #auto="matAutocomplete" name="modifiers_autocomplete" id="products_autocomplete" (optionSelected)="changeFoodicsModifierMapping($event.option.value, row)">
+                                <mat-autocomplete #autoName="matAutocomplete" name="modifiers_autocomplete" id="products_autocomplete" (optionSelected)="changeFoodicsModifierMapping($event.option.value, row)">
                                     <mat-option *ngFor="let option of filteredModifiersOptions | async" [ngValue]="option" [value]="option" name="modifier_option" id="modifier_option">
-                                        <a class="sidebar-brand brand-logo" href="index.html"><img style="border-radius: 50%; width: 25px;height: 25px;" src="assets/images/aggregators/burger.jpg" alt="logo" /></a>
+                                        <a class="sidebar-brand brand-logo" href="index.html"><img style="border-radius: 50%; width: 25px;height: 25px;" src="assets/images/aggregators/modifier.png" alt="logo" /></a>
                                         {{option}}
                                     </mat-option>
                                 </mat-autocomplete>
@@ -233,175 +236,50 @@
 
            </ngx-datatable-column>
 
-           <ngx-datatable-column name="Modifier Foodics Id">
-               <ng-template let-row="row" ngx-datatable-cell-template>
+           <ngx-datatable-column name="Modifier Foodics Id Option ">
+              <!-- <ng-template let-row="row" ngx-datatable-cell-template>
                    <input matInput placeholder="eg. 12345" [(ngModel)]="row.secondFoodicsProductId">
-               </ng-template>
+               </ng-template>  -->
+
+               <ng-template let-row="row" ngx-datatable-cell-template> 
+                <div style="width: 100%;">
+                    <form class="example-form" id="form" [formGroup]="modifiersSecondTableForm">
+                        <mat-form-field class="example-full-width" style="width: 130px;"appearance="fill" style="width:25px" id="foodics_product_form_field" name="foodics_product_form_field">
+                            <!-- <mat-label>Foodics Products</mat-label> -->
+                            <div class='parent'>
+                                <div class='right-child'>
+                                    <img style="border-radius: 50%; width: 25px;height: 25px;" src="assets/images/aggregators/modifier.png" alt="logo" />
+                                </div>
+                                <div class='left-child '>
+                                    <input type="text"
+                                    style="width:90px"
+                                    id="modifier_input"
+                                    name="modifier_input"
+                                    placeholder="Pick one"
+                                    (click)="secondModifierInputClick()" 
+                                    matInput
+                                    aria-label="Number"
+                                    (ngModel)="mapInputModelModifier(row)"
+                                    (ngModelChange)="onChangeInputEventSecondModifier($event, getRowFormControlNameModifier(row))"
+                                    [formControlName]="getRowFormControlNameModifier(row)"
+                                    [matAutocomplete]="auto">
+                                </div>
+                            </div>
+                            <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption name="modifiers_autocomplete" id="products_autocomplete" (optionSelected)="changeSecondFoodicsModifierMapping($event.option.value, row)">
+                                <mat-option *ngFor="let option of filteredModifiersOptions | async" [ngValue]="option" [value]="option" name="modifier_option" id="modifier_option">
+                                    <a class="sidebar-brand brand-logo" href="index.html"><img style="border-radius: 50%; width: 25px;height: 25px;" src="assets/images/aggregators/modifier.png" alt="logo" /></a>
+                                    {{option}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </form>
+                </div>
+            </ng-template> 
            </ngx-datatable-column>
         </ngx-datatable>
         </div>
 
-
-
-
     </mat-expansion-panel>
-
-    <!-- <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Discount Mapping
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <div class="container">
-            <form class="my-form">
-                <div>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="name" name="name"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Discount Id"
-                            [(ngModel)]="newDiscountMapping.discountId">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="ip" name="ip"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="discount Rate"
-                            [(ngModel)]="newDiscountMapping.discountRate">
-                    </mat-form-field>
-                    <button mat-flat-button (click)="addDiscountMappingData()" class="filterButton addButton">Add</button>
-                </div>
-            </form>
-        </div>
-
-        <br>
-
-        <ngx-datatable class="material" [loadingIndicator]="showLoading"
-             [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50"
-            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-            [rows]="discountMappingData" [selectAllRowsOnPage]="false" [scrollbarH]="true">
-
-            <ngx-datatable-column name="Branch Name">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="Name" [(ngModel)]="row.discountId">
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Branch FoodIcs Id">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="eg. 5 %" [(ngModel)]="row.discountRate">
-                </ng-template>
-            </ngx-datatable-column>
-
-        </ngx-datatable>
-    </mat-expansion-panel> -->
-
-    <!-- <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Customer Mapping
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <div class="container">
-            <form class="my-form">
-                <div>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="name" name="name"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Customer Name"
-                            [(ngModel)]="newCustomerMapping.name">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="foodicsId" name="foodicsId"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Customer Foodics ID"
-                            [(ngModel)]="newCustomerMapping.foodicsId">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="talabatId" name="talabatId"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Customer Talabat ID"
-                            [(ngModel)]="newCustomerMapping.talabatId">
-                    </mat-form-field>
-                    <button mat-flat-button (click)="addCustomerMappingData()" class="filterButton addButton">Add</button>
-                </div>
-            </form> 
-        </div>
-
-        <ngx-datatable class="material" [loadingIndicator]="showLoading"
-             [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50"
-            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-            [rows]="customerMappingData" [selectAllRowsOnPage]="false" [scrollbarH]="true">
-
-            <ngx-datatable-column name="Customer Name">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="Name" [(ngModel)]="row.name">
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Customer FoodIcs Id">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="eg. 5 %" [(ngModel)]="row.foodicsId">
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Customer talabat Id">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="eg. 5 %" [(ngModel)]="row.talabatId">
-                </ng-template>
-            </ngx-datatable-column>
-        </ngx-datatable>
-    </mat-expansion-panel> -->
-
-    <!-- <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Address Mapping
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <div class="container">
-            <form class="my-form">
-                <div>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="customerId" name="customerId"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Customer ID"
-                            [(ngModel)]="newAddressMapping.customerFoodicsId">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="foodicsId" name="foodicsId"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Foodics ID"
-                            [(ngModel)]="newAddressMapping.foodicsId">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="example-full-width dateForm">
-                        <input matInput id="talabatId" name="talabatId"
-                            style="margin-right: 10px;padding-top: 8px;padding-bottom: 8px;" placeholder="Talabat ID"
-                            [(ngModel)]="newAddressMapping.talabatId">
-                    </mat-form-field>
-                    <button mat-flat-button (click)="addAddressMappingData()" class="filterButton addButton">Add</button>
-                </div>
-            </form> 
-        </div>
-
-        <ngx-datatable class="material" [loadingIndicator]="showLoading"
-             [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50"
-            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-            [rows]="addressMappingData" [selectAllRowsOnPage]="false" [scrollbarH]="true">
-
-            <ngx-datatable-column name="Customer Id">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="Customer Foodics Id" [(ngModel)]="row.customerFoodicsId">
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Customer FoodIcs Id">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="eg. 5 %" [(ngModel)]="row.foodicsId">
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Customer talabat Id">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <input matInput placeholder="eg. 5 %" [(ngModel)]="row.talabatId">
-                </ng-template>
-            </ngx-datatable-column>
-        </ngx-datatable>
-    </mat-expansion-panel> -->
 
     <br>
     <div class="card-back">

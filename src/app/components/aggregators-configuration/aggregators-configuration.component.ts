@@ -8,6 +8,7 @@ import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material'
 import { FoodicsAuthInstructionsComponent } from '../foodics-auth-instructions/foodics-auth-instructions.component';
 import { TalabatService } from 'src/app/services/talabat/talabat.service';
 import { GeneralSettings } from 'src/app/models/GeneralSettings';
+import { BranchMapping } from 'src/app/models/deliveryAggregator/branch-mapping';
 
 @Component({
   selector: 'app-aggregators-configuration',
@@ -37,8 +38,10 @@ export class AggregatorsConfigurationComponent implements OnInit {
   interval;
 
   //talabat info
-  talabatUsername = ''
-  talabatPassword = ''
+  branchTalabatId = ''
+  branchName = ''
+  branchUsername= ''
+  branchPassword=''
   talabatValidationMessage = ''
 
   //talabat info
@@ -133,13 +136,19 @@ export class AggregatorsConfigurationComponent implements OnInit {
     return validation
   }
 
-  validateTalabatAuth(){
+  validateBranchConfiguration(){
     let validation = { message : 'validated', valid : true }
-    if(this.talabatUsername === ''){
-      validation.message = 'Please enter your Talabat username'
+    if(this.branchName === ''){
+      validation.message = 'Please enter branch name'
       validation.valid = false
-    }else if(this.talabatPassword === ''){
-      validation.message = 'Please enter your Talabat password'
+    }else if(this.branchUsername === ''){
+      validation.message = 'Please enter branch username'
+      validation.valid = false
+    }else if(this.branchPassword === ''){
+      validation.message = 'Please enter branch password'
+      validation.valid = false
+    }else if(this.branchTalabatId === ''){
+      validation.message = 'Please enter branch talabat ID'
       validation.valid = false
     }
     return validation
@@ -269,20 +278,23 @@ export class AggregatorsConfigurationComponent implements OnInit {
 
   authenticateTalabat(){
     this.validationMessage=""
-    let validationResult = this.validateTalabatAuth();
+    let validationResult = this.validateBranchConfiguration();
     if(validationResult.valid === false){
       this.talabatValidationMessage = validationResult.message
     }else{
       this.loading = true;
       this.spinner.show();
-      let body = {
-        taabatUsername : this.talabatUsername,
-        talabatPassword : this.talabatPassword,
-      }
-      this.talabatService.authenticateTalabat(body)
+      let branchMapping = new BranchMapping;
+      branchMapping.talabatBranchId = this.branchTalabatId
+      branchMapping.foodIcsBranchId = ""
+      branchMapping.name = this.branchName
+      branchMapping.username = this.branchUsername
+      branchMapping.password = this.branchPassword
+      branchMapping.defaultBranch = false;
+      this.talabatService.configureTalabatBranch(branchMapping)
       .toPromise()
       .then((res) => {
-        this.snackBar.open("Talabat account was authenticated successfully" , null, {
+        this.snackBar.open("You have configured " + branchMapping.name + " branch successfully" , null, {
           duration: 3000,
           horizontalPosition: 'center',
           panelClass:"my-snack-bar-success"

@@ -14,6 +14,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 import { AggregatorIntegrationErrorComponent } from '../aggregator-integration-error/aggregator-integration-error.component';
 import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
+import { NavigationEnd, Router } from '@angular/router'
 
 @Component({
   selector: 'app-aggregator-branches-mapping',
@@ -39,7 +40,7 @@ export class AggregatorBranchesMappingComponent implements OnInit {
   tableForm = new FormGroup({});
   integrationComplete = false;
   
-  constructor(public snackBar: MatSnackBar, private spinner: NgxSpinnerService,
+  constructor(public snackBar: MatSnackBar,private router: Router, private spinner: NgxSpinnerService,
     private generalSettingsService: GeneralSettingsService, private authService: AuthService
     , private talabatService: TalabatService, private foodicsService : FoodicsServiceService, public dialog: MatDialog) { }
 
@@ -85,7 +86,6 @@ export class AggregatorBranchesMappingComponent implements OnInit {
   private returnFoodicsBranchNameById(foodicsId){
     for(let i=0; i < this.foodicsBranches.length; i++){
       if(this.foodicsBranches[i].id === foodicsId){
-        console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& filter"  + this.foodicsBranches[i].name)
         return this.foodicsBranches[i].name
       }
     }
@@ -107,7 +107,6 @@ export class AggregatorBranchesMappingComponent implements OnInit {
   }
 
   onChangeInputEvent(event: any, formControlName){
-    console.log("change input " + formControlName + " " + event)
     Object.keys(this.tableForm.controls).forEach((key : string) => {
       if(formControlName === key){
         const abstractControl = this.tableForm.controls[key];
@@ -167,7 +166,6 @@ export class AggregatorBranchesMappingComponent implements OnInit {
           this.integrationComplete = true
           this.branchMappingData = this.generalSettings.talabatConfiguration.branchMappings;
           this.foodicsBranches = this.generalSettings.talabatConfiguration.foodicsDropDownBranches;
-          // console.log("branches size" + this.foodicsBranches.length)
           this.mapFoodicsBranchesNames(this.foodicsBranches)
           this.fillFormControls()
           this.setFormControlsDefaultOptions()
@@ -207,6 +205,33 @@ export class AggregatorBranchesMappingComponent implements OnInit {
         panelClass:"my-snack-bar-fail"
       });
     }
+  }
+
+
+  setDefaultBranch(branchMapping){
+    for(let i =0; i < this.branchMappingData.length; i++){
+      if(this.branchMappingData[i].talabatBranchId === branchMapping.talabatBranchId){
+        this.branchMappingData[i].defaultBranch = true
+      }else{
+        if(this.branchMappingData[i].defaultBranch === true){
+          this.branchMappingData[i].defaultBranch = false
+        }
+      }
+    }
+  }
+
+  routeToConfigurations(){
+    this.router.navigate(['/main/aggregatorsConfigurations'])
+  }
+
+  branchInputClick() {
+    Object.keys(this.tableForm.controls).forEach((key : string) => {
+      const abstractControl = this.tableForm.controls[key];
+      this.filteredOptions = abstractControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value)),
+      );
+    });
   }
 
   onSaveClick(){

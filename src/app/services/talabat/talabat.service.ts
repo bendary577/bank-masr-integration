@@ -55,9 +55,9 @@ export class TalabatService {
        { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
-  authenticateTalabat(body) {
+  configureTalabatBranch(body) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.post(AggregatorsEndPoints.AUTHENTICATE_TALABAT, body ,
+    return this.http.post(AggregatorsEndPoints.CONFIGURE_TALABAT_BRANCH, body ,
        { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token})});
   }
 
