@@ -116,7 +116,7 @@ export class SideNaveComponent implements OnDestroy, OnInit {
     if (this.shouldRun == true) {
       this.getGeneralSettings()
       this.getApplication()
-      this.getSyncJobTypes()
+      // this.getSyncJobTypes()
       this.getOperationTypes()
     }
 
