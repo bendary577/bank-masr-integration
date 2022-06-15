@@ -98,6 +98,10 @@ export class SideNaveComponent implements OnDestroy, OnInit {
     })
   }
 
+  goPayment(){
+    this.router.navigate(['main/Payments']); 
+  }
+
   ngOnInit() {
     if (
       localStorage.getItem('user') != undefined ||

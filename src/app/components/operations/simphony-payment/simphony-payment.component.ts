@@ -23,11 +23,11 @@ export class SimphonyPaymentComponent implements OnInit {
     private dateAdapter: DateAdapter<Date>,
     public data: Data
   ) {
+    
     this.dateAdapter.setLocale('en-GB');
   }
 
   ngOnInit(): void {
-
     if(this.data != null && this.data.storage != undefined){
        localStorage.setItem('currentCheck', JSON.stringify(this.data.storage.transactionResponses));
        this.transactions = this.data.storage.transactionResponses;

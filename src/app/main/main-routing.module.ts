@@ -369,18 +369,16 @@ const routes: Routes = [
     component: OperaPaymentsComponent,
     canActivate: [AuthGuardService],
   },
-
   {
     path: Constants.SIMPHONY_CHECK_PAGE,
     component: SimphonyCheckComponent,
     canActivate: [AuthGuardService],
   },
-
-  {
-    path: Constants.SIMPHONY_PAYMENT_PAGE,
-    component: SimphonyPaymentComponent,
-    canActivate: [AuthGuardService],
-  },
+  // {
+  //   path: Constants.SIMPHONY_PAYMENT_PAGE,
+  //   component: SimphonyPaymentComponent,
+  //   canActivate: [AuthGuardService],
+  // },
 
   { path : AggregatorsEndPoints.AGGREGATOR_INTEGRATOR , component: AggregatorIntegratorComponent, canActivate:[AuthGuardService]},
 

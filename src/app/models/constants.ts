@@ -225,7 +225,7 @@ export class Constants {
 
   //////////////////////////////////////////////// Opera Payment  ////////////////////////////////////////////////////////
 
-  static OPERA_PAYMENT_PAGE = "operaPayments";
+  static OPERA_PAYMENT_PAGE = "Payments";
   static OPERA_PAYMENT_CONFIG_PAGE = "operaPaymentConfig";
   static OPERA_PAYMENT_OPERATION = "Opera Payment";
   static LIST_OPERA_TRANSACTIONS_URL =

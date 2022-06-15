@@ -215,7 +215,7 @@
       <div class="collapse" id="ui-basic" [ngbCollapse]="!opeBasicCollapsed">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item" *ngFor="let operation of operationTypes"> <a class="nav-link"
-              routerLink={{operation.endPoint}} routerLinkActive="active" #dropdowns="routerLinkActive"
+            (click)="goPayment()" routerLinkActive="active" #dropdowns="routerLinkActive"
               translate>{{operation.name}}</a></li>
         </ul>
       </div>
