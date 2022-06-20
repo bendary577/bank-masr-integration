@@ -41,9 +41,14 @@ export class ExcelService {
     return this.http.get(Constants.EXPORT_BOOKED_PRODUCTION + '?syncJobId=' + syncJobID , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token}), responseType: 'blob'});
   }
 
-  exporttransactionExcel(transactionData: any[]) {
+
+  exporttransactionExcel(fromDate, toDate, group) {
     this.token = localStorage.getItem('auth_token');
-    return this.http.post(Constants.EXPORT_TRANSACTION_EXCEL_SHEET ,transactionData , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token}), responseType: 'blob'});
+    return this.http.get(Constants.EXPORT_TRANSACTION_EXCEL_SHEET 
+      + '?fromDate=' + fromDate 
+      + '&toDate=' + toDate
+      + '&group=' + group
+       , { headers: new HttpHeaders({Authorization: 'Bearer ' + this.token}), responseType: 'blob'});
   }
 
   // ==> Reward Points System

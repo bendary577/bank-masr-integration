@@ -434,8 +434,11 @@ export class Constants {
   static EXPORT_CONSUMPTION = environment.apiHost + "/consumption/export/excel";
   static EXPORT_WATAGE = environment.apiHost + "/wastage/export/excel";
   static EXPORT_SALES = environment.apiHost + "/sales/export/excel";
-  static EXPORT_TRANSACTION_EXCEL_SHEET =
-    environment.apiHost + "/transaction/exportExcelSheet";
+  // static EXPORT_TRANSACTION_EXCEL_SHEET =
+  //   environment.apiHost + "/transaction/exportExcelSheet";
+
+    static EXPORT_TRANSACTION_EXCEL_SHEET =
+    environment.apiHost + "/transaction/transactionsExportExcelSheet";
 
   // ==> Reward Points System
   static EXPORT_RP_TRANSACTION_EXCEL_SHEET =

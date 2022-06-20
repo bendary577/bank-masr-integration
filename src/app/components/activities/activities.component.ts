@@ -311,10 +311,41 @@ export class ActivitiesComponent implements OnInit {
     return JSON.parse(localStorage.getItem('account')).currency
   }
 
+  // extractExcelFile() {
+  //   this.spinner.show()
+  //   this.excelService
+  //     .exporttransactionExcel(this.transactionList.transactionData)
+  //     .subscribe(
+  //       (res) => {
+  //         const blob = new Blob([res], { type: 'application/vnd.ms.excel' })
+  //         const file = new File([blob], 'Transactions' + '.xlsx', {
+  //           type: 'application/vnd.ms.excel',
+  //         })
+  //         saveAs(file)
+
+  //         this.snackBar.open('Export Successfully', null, {
+  //           duration: 2000,
+  //           horizontalPosition: 'center',
+  //           panelClass: 'my-snack-bar-success',
+  //         })
+  //         this.spinner.hide()
+  //       },
+  //       (err) => {
+  //         this.spinner.hide()
+  //         console.error(err)
+  //         this.snackBar.open('Fail to export, Please try agian', null, {
+  //           duration: 2000,
+  //           horizontalPosition: 'center',
+  //           panelClass: 'my-snack-bar-fail',
+  //         })
+  //       },
+  //     )
+  // }
+
   extractExcelFile() {
     this.spinner.show()
     this.excelService
-      .exporttransactionExcel(this.transactionList.transactionData)
+      .exporttransactionExcel(this.fromDate, this.toDate, this.selectedGroupId)
       .subscribe(
         (res) => {
           const blob = new Blob([res], { type: 'application/vnd.ms.excel' })

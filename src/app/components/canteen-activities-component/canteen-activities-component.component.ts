@@ -342,7 +342,7 @@ export class CanteenActivitiesComponentComponent implements OnInit {
   extractExcelFile() {
     this.spinner.show()
     this.excelService
-      .exporttransactionExcel(this.transactionList.transactionData)
+      .exporttransactionExcel(this.fromDate, this.toDate, this.selectedGroupId)
       .subscribe(
         (res) => {
           const blob = new Blob([res], { type: 'application/vnd.ms.excel' })
